@@ -5,6 +5,7 @@
 	<title></title>
 
 	<link rel="stylesheet" type="text/css" href="/resources/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 
 	<script type="text/javascript" src="/resources/js/require-config.js"></script>
 
@@ -12,14 +13,23 @@
 
 </head>
 <body>
+	<div class="container-fluid">
 
-	<div class="login-container"></div>
+		<div class="row">
 
-	<script type="text/javascript">
-		require( [ 'jquery', 'public/js/login/login' ], function ( $, init ) {
-			init( $( '.login-container') );
-		} );
-	</script>
+			<div class="col-lg-2 text-center">
+
+				<div class="login-container"></div>
+
+				<script type="text/javascript">
+					require( [ 'jquery', 'public/js/login/login' ], function ( $, init ) {
+						init( $( '.login-container') );
+					} );
+				</script>
+
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

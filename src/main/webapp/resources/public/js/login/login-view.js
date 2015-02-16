@@ -17,9 +17,6 @@ define( function ( require ) {
 
 		render: function () {
 
-//			var modelJSON = this.model.toJSON();
-			console.log( this.model );
-
 			this.$el.html( this.template( {
 				 message: this.model.get( 'message' )
 			 } ) );
