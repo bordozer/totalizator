@@ -10,7 +10,9 @@
 	, "description": "Totalizator project"
 
 	, "dependencies": {
-		"requirejs": "latest"
+		"jquery": "latest"
+		, "jquery-ui": "latest"
+		, "requirejs": "latest"
 		, "backbone" : "latest"
 		, "underscore" : "latest"
 		, "text" : "latest"
