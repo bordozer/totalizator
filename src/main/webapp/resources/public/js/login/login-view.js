@@ -2,7 +2,9 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Template = require( 'text!.public/js/login/templates/login-template.html' );
+	var Backbone = require( 'backbone' );
+
+	var Template = require( 'text!public/js/login/templates/login-template.html' );
 
 	var LoginView = Backbone.View.extend( {
 
@@ -26,5 +28,5 @@ define( function ( require ) {
 		}
 	} );
 
-	return { PortalPageActivityStreamView: PortalPageActivityStreamView };
+	return { LoginView: LoginView };
 } );

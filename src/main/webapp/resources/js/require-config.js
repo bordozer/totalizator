@@ -1,6 +1,10 @@
-require.config( {
+var require = {
 
 	baseUrl: 'resources',
+
+	config: {
+
+	},
 
 	paths: {
 		jquery: "bower_components/jquery/dist/jquery.min"
@@ -32,6 +36,6 @@ require.config( {
 
 	, deps: [ "jquery", "backbone", "underscore", "text", 'bootstrap' ],
 
-	callback: function ( $, Backbone, _, text, core ) {
+	callback: function ( $, Backbone, _, text, bootstrap ) {
 	}
-} );
+};
