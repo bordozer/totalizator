@@ -172,7 +172,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>calories-tracker</finalName>
+		<finalName>totalizator</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
