@@ -10,6 +10,14 @@
 
 </head>
 <body>
-	T O T A L I Z A T O R . H T M L
+
+	<div class="login-container"></div>
+
+	<script type="text/javascript">
+		require( [ 'jquery', 'public/js/login/login' ], function ( $, init ) {
+			init( $( '.login-container') );
+		} );
+	</script>
+
 </body>
 </html>
