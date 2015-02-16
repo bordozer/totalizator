@@ -7,5 +7,9 @@
 	, "description": "Totalizator project"
 	, "dependencies": {
 		"requirejs": "2.1.16"
+		, "backbone" : "latest"
+		, "underscore" : "latest"
+		, "text" : "latest"
+		, "bootstrap" : "latest"
 	}
 }
