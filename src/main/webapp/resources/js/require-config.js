@@ -1,12 +1,14 @@
 require.config( {
 
+	baseUrl: 'resources',
+
 	paths: {
-		jquery: "resources/bower_components/jquery-2.1.0.min/index"
-		, jquery_ui: "resources/bower_components/jquery-ui/jquery-ui.min"
-		, underscore: "resources/bower_components/underscore/underscore-min"
-		, backbone: "resources/bower_components/backbone/backbone"
-		, text: "resources/bower_components/text/text"
-		, bootstrap: "resources/bower_components/bootstrap/dist/js/bootstrap.min"
+		jquery: "bower_components/jquery/dist/jquery.min"
+		, jquery_ui: "bower_components/jquery-ui/jquery-ui.min"
+		, underscore: "bower_components/underscore/underscore-min"
+		, backbone: "bower_components/backbone/backbone"
+		, text: "bower_components/text/text"
+		, bootstrap: "bower_components/bootstrap/dist/js/bootstrap.min"
 	},
 
 	shim: {
