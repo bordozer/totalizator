@@ -1,0 +1,11 @@
+{
+	"name": "totalizator"
+	, "version": "1.0"
+	, "authors": [
+		"bordozer@gmail.com"
+	]
+	, "description": "Totalizator project"
+	, "dependencies": {
+		"requirejs": "2.1.15"
+	}
+}
