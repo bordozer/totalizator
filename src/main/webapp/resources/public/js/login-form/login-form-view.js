@@ -44,7 +44,6 @@ define( function ( require ) {
 		_validate: function() {
 			this._bindData();
 			if ( this._validateLogin() && this._validatePassword() ) {
-				console.log( 'save' );
 				this.model.save();
 			}
 		},
