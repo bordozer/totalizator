@@ -1,21 +1,8 @@
 package totalizator.app.controllers.login;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class LoginDTO {
 
-	private String message;
-
-	public LoginDTO() {
-	}
-
-	public LoginDTO( final String message ) {
-		this.message = message;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage( final String message ) {
-		this.message = message;
-	}
 }

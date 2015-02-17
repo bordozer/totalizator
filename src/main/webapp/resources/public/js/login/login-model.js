@@ -3,7 +3,7 @@ define( ["backbone"], function ( Backbone ) {
 	var LoginModel = Backbone.Model.extend( {
 
 		initialize:function ( options ) {
-			this.url = 'login/?name=NiceGuy';
+			this.url = 'login/';
 		},
 
 		refresh: function() {

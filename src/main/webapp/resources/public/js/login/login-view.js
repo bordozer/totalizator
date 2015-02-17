@@ -16,9 +16,9 @@ define( function ( require ) {
 		},
 
 		render: function () {
-
+			console.log( this.model );
 			this.$el.html( this.template( {
-
+				model: this.model
 			 } ) );
 
 			return this.$el;

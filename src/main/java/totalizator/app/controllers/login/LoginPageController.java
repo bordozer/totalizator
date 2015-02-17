@@ -14,9 +14,7 @@ public class LoginPageController {
 	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )
 	@RequestMapping( method = RequestMethod.GET )
-	public LoginDTO test( final @RequestParam( value = "name", required = false ) String req ) {
-		final String message = String.format( "Hi, Mr. %s!", req );
-		LOGGER.debug( message );
-		return new LoginDTO( message );
+	public LoginDTO test() {
+		return new LoginDTO();
 	}
 }
