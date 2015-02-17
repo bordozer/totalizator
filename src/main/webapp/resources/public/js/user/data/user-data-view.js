@@ -18,6 +18,8 @@ define( function ( require ) {
 			'click .save-button': '_onSaveButtonClick'
 			, 'click .alert .close': '_onCloseErrorMessage'
 			, 'focusout .form-group.login': '_onLeaveLogin'
+			, 'focusout .form-group.name': '_onLeaveName'
+			, 'focusout .form-group.password, .form-group.password_confirmation': '_onLeavePassword'
 		},
 
 		initialize: function() {
@@ -37,7 +39,6 @@ define( function ( require ) {
 
 		_save: function() {
 			this._bindData();
-//			this._resetErrors();
 			this._validate();
 //			this.model.save();
 		},
@@ -56,16 +57,42 @@ define( function ( require ) {
 
 			var control = this.$( '.form-group.login' );
 			var errorContainer = this.$( '.login-errors' );
+
+			this._addErrors( control, errors, errorContainer );
+		},
+
+
+		_validateName: function() {
+			var errors = Validator.validateName( this.model );
+
+			var control = this.$( '.form-group.name' );
+			var errorContainer = this.$( '.name-errors' );
+
+			this._addErrors( control, errors, errorContainer );
+		},
+
+
+		validatePassword: function() {
+			var errors = Validator.validatePassword( this.model );
+
+			var control = this.$( '.form-group.password' );
+			var errorContainer = this.$( '.password-errors' );
+
+			this._addErrors( control, errors, errorContainer );
+		},
+
+
+		validatePasswordConfirmation: function() {
+			var errors = Validator.validatePasswordConfirmation( this.model );
+
+			var control = this.$( '.form-group.password_confirmation' );
+			var errorContainer = this.$( '.password_confirmation-errors' );
+
 			this._addErrors( control, errors, errorContainer );
 		},
 
 		_validate: function() {
 			this._validateLogin();
-			/*var errors = Validator.validate( this.model );
-
-			if ( errors.length > 0 ) {
-				this._addErrors( errors );
-			}*/
 		},
 
 		_addErrors: function( control, errors, messageContainer ) {
@@ -83,10 +110,10 @@ define( function ( require ) {
 
 			messageContainer.text( '' );
 			_.each( errors, function( error ) {
-				if( error.message ) {
-					messageContainer.append( '<div class="row">' + error.message + '</div>' );
+//				if( error.message ) {
+					messageContainer.append( '<li>' + error.message + '</li>' );
 					control.addClass( 'has-error' );
-				}
+//				}
 			});
 
 //			if ( messageContainer.text() != '' ) {
@@ -123,22 +150,28 @@ define( function ( require ) {
 			this._validateLogin();
 		},
 
+		_onLeaveName: function( evt ) {
+			evt.preventDefault();
+
+			this._bindData();
+
+			this._validateName();
+		},
+
+		_onLeavePassword: function( evt ) {
+			evt.preventDefault();
+
+			this._bindData();
+
+			this.validatePassword();
+			this.validatePasswordConfirmation();
+		},
+
 		_onSaveButtonClick: function( evt ) {
 			evt.preventDefault();
 
 			this._save();
 		},
-
-		/*_resetErrors: function() {
-			this.$( '.form-group.login' ).removeClass( 'has-error' );
-			this.$( '.form-group.name' ).removeClass( 'has-error' );
-			this.$( '.form-group.password' ).removeClass( 'has-error' );
-			this.$( '.form-group.password_confirmation' ).removeClass( 'has-error' );
-
-			this.$( '.alert .error-message' ).text( '' );
-
-			this.$( '.alert' ).hide();
-		},*/
 
 		_onCloseErrorMessage: function( evt ) {
 			evt.preventDefault();

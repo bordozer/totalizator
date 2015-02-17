@@ -42,6 +42,14 @@ define( [ 'jquery' ], function ( $ ) {
 				errors.push( {
 					message: 'Enter name'
 				} );
+
+				return errors;
+			}
+
+			if ( name.length < 3 ) {
+				errors.push( {
+					message: 'Name must have minimum 3 characters'
+				} );
 			}
 
 			return errors;
