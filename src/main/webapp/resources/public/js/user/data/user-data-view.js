@@ -41,7 +41,7 @@ define( function ( require ) {
 		_save: function() {
 			this._bindData();
 			this._validate();
-//			this.model.save();
+			this.model.save();
 		},
 
 		_bindData: function() {

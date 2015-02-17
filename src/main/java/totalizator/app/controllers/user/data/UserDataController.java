@@ -22,6 +22,6 @@ public class UserDataController {
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public UserDTO registerUser( final @RequestBody UserDTO userDTO ) {
-		return userDTO;
+		return userDTO; // TODO: create new user
 	}
 }
