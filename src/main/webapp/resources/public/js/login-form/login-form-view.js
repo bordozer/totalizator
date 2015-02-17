@@ -4,7 +4,7 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 
-	var Template = require( 'text!public/js/login/templates/login-template.html' );
+	var Template = require( 'text!public/js/login-form/templates/login-form-template.html' );
 
 	var LoginView = Backbone.View.extend( {
 

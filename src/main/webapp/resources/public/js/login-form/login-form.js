@@ -6,8 +6,8 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './login-model' );
-	var View = require( './login-view' );
+	var Model = require( './login-form-model' );
+	var View = require( './login-form-view' );
 
 	function init( container ) {
 		var model = new Model.LoginModel();
