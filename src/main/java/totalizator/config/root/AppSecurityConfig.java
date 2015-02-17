@@ -19,6 +19,8 @@ import totalizator.app.security.SecurityUserDetailsService;
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private static final String LOGIN_PAGE_URL = "/resources/index.html";
+
 	private static final Logger LOGGER = Logger.getLogger( AppSecurityConfig.class );
 
 	@Autowired
@@ -49,13 +51,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.usernameParameter( "login" )
 			.passwordParameter( "password" )
 			.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
-			.loginPage( "/resources/public/index.html" )
+			.loginPage( LOGIN_PAGE_URL )
 			.and()
 			.httpBasic()
 			.and()
 			.logout()
 			.logoutUrl( "/logout" )
-			.logoutSuccessUrl( "/resources/public/index.html" )
+			.logoutSuccessUrl( LOGIN_PAGE_URL )
 			.permitAll()
 		;
 		/*if ( "true".equals( System.getProperty( "httpsOnly" ) ) ) {
