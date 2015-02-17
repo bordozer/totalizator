@@ -3,21 +3,11 @@ package totalizator.app.controllers.user.data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class UserDTO {
+public class NewUserDTO {
 
-	private int id;
 	private String login;
 	private String name;
 	private String password;
-	private String password_confirmation;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId( final int id ) {
-		this.id = id;
-	}
 
 	public String getLogin() {
 		return login;
@@ -41,13 +31,5 @@ public class UserDTO {
 
 	public void setPassword( final String password ) {
 		this.password = password;
-	}
-
-	public String getPassword_confirmation() {
-		return password_confirmation;
-	}
-
-	public void setPassword_confirmation( final String password_confirmation ) {
-		this.password_confirmation = password_confirmation;
 	}
 }

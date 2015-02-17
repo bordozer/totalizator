@@ -11,7 +11,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize:function ( options ) {
-			this.url = 'user/data/';
+			this.url = 'user/create/';
 		},
 
 		refresh: function() {
