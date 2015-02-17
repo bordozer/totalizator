@@ -41,7 +41,7 @@ define( function ( require ) {
 		_save: function() {
 			this._bindData();
 			this._validate();
-			this.model.save( { data: { login: this.model.get( 'login' ), name: this.model.get( 'name' ), password: this.model.get( 'password' ) } } );
+			this.model.save(); //{ data: { login: this.model.get( 'login' ), name: this.model.get( 'name' ), password: this.model.get( 'password' ) } }
 		},
 
 		_bindData: function() {
@@ -50,6 +50,7 @@ define( function ( require ) {
 				, name: this.$( '#name' ).val()
 				, password: this.$( '#password' ).val()
 			} );
+			this.model.password_confirmation = this.$( '#password_confirmation' ).val();
 		},
 
 		_validateLogin: function() {
@@ -82,7 +83,7 @@ define( function ( require ) {
 		},
 
 		_validatePasswordConfirmation: function() {
-			var errors = Validator._validatePasswordConfirmation( this.model.get( 'password' ), this.model.get( 'password_confirmation' ) );
+			var errors = Validator._validatePasswordConfirmation( this.model.get( 'password' ), this.model.password_confirmation;
 
 			var control = this.$( '.form-group.password_confirmation' );
 			var errorContainer = this.$( '.password_confirmation-errors' );
