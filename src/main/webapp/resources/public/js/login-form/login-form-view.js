@@ -42,7 +42,7 @@ define( function ( require ) {
 			var login = this.$( '#login' ).val();
 			var password = this.$( '#password' ).val();
 
-			console.log( login, password);
+
 		},
 
 		_onLoginButtonClick: function( evt ) {
