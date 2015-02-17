@@ -202,7 +202,7 @@
 				<configuration>
 					<path>/</path>
 					<port>9091</port>
-					<httpsPort>8443</httpsPort>
+					<httpsPort>8447</httpsPort>
 					<keystoreFile>${basedir}/other/keystore.jks</keystoreFile>
 					<keystorePass>secret</keystorePass>
 				</configuration>
