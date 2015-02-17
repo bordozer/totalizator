@@ -105,42 +105,14 @@ define( function ( require ) {
 				return;
 			}
 
-//			var messageContainer = this.$( '.alert .error-message' );
-			var self = this;
-
 			messageContainer.text( '' );
 			_.each( errors, function( error ) {
-//				if( error.message ) {
-					messageContainer.append( '<li>' + error.message + '</li>' );
-					control.addClass( 'has-error' );
-//				}
+				messageContainer.append( '<li>' + error.message + '</li>' );
+				control.addClass( 'has-error' );
 			});
 
-//			if ( messageContainer.text() != '' ) {
-				messageContainer.show();
-//			}
+			messageContainer.show();
 		},
-
-		/*_getControl: function( field ) {
-
-			if ( field == 'login' ) {
-				return this.$( '.form-group.login' );
-			}
-
-			if ( field == 'name' ) {
-				return this.$( '.form-group.name' );
-			}
-
-			if ( field == 'password' ) {
-				return this.$( '.form-group.password' );
-			}
-
-			if ( field == 'password_confirmation' ) {
-				return this.$( '.form-group.password_confirmation' );
-			}
-
-			return null;
-		},*/
 
 		_onLeaveLogin: function( evt ) {
 			evt.preventDefault();
