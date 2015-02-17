@@ -42,24 +42,34 @@ define( function ( require ) {
 		},
 
 		_validate: function() {
-			this._validateLogin();
-			this._validatePassword();
+			this._bindData();
+			if ( this._validateLogin() && this._validatePassword() ) {
+				this.model.save();
+			}
+		},
+
+		_bindData: function() {
+			this.model.set( { login: this.$( '#login' ).val(), password: this.$( '#password' ).val() } );
 		},
 
 		_validateLogin: function() {
-			var login = this.$( '#login' ).val();
-			var loginErrors = Validator.validateLogin( this.model.get( 'login' ) );
+			var login = this.model.get( 'login' );
+			var loginErrors = Validator.validateLogin( login );
 			var loginControl = this.$( '.form-group.login' );
 			var loginErrorContainer = this.$( '.login-errors' );
 			FormValidation.addErrors( loginControl, loginErrors, loginErrorContainer );
+
+			return loginErrors.length > 0;
 		},
 
 		_validatePassword: function() {
-			var password = this.$( '#password' ).val();
-			var passwordErrors = Validator._validatePassword( this.model.get( 'password' ) );
+			var password = this.model.get( 'password' );
+			var passwordErrors = Validator._validatePassword( password );
 			var passwordControl = this.$( '.form-group.password' );
 			var passwordErrorContainer = this.$( '.password-errors' );
 			FormValidation.addErrors( passwordControl, passwordErrors, passwordErrorContainer );
+
+			return passwordErrors.length > 0;
 		},
 
 		_onLoginButtonClick: function( evt ) {

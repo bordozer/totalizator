@@ -25,7 +25,6 @@ define( function ( require ) {
 
 		initialize: function() {
 			this.model.on( 'sync', this.render, this );
-//			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
