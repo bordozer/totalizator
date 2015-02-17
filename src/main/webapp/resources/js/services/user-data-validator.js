@@ -2,17 +2,6 @@ define( [ 'jquery' ], function ( $ ) {
 
 	return {
 
-		/*validate: function( model ) {
-			var errors = [];
-
-			var loginErrors = this.validateLogin( model );
-			var nameErrors = this.validateName( model );
-			var passwordErrors = this.validatePassword( model );
-			var passwordConfirmationErrors = this.validatePasswordConfirmation( model );
-
-			return _.union( loginErrors, nameErrors, passwordErrors, passwordConfirmationErrors );
-		},*/
-
 		validateLogin: function( model ) {
 			var errors = [];
 
