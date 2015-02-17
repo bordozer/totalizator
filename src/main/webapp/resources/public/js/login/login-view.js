@@ -26,7 +26,8 @@ define( function ( require ) {
 		},
 
 		render: function () {
-			this._renderLoginForm();
+//			this._renderLoginForm();
+			this._renderNewUserForm();
 
 			return this.$el;
 		},

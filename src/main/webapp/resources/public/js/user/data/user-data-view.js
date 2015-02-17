@@ -41,7 +41,21 @@ define( function ( require ) {
 		_save: function() {
 			this._bindData();
 			this._validate();
-			this.model.save(); //{ data: { login: this.model.get( 'login' ), name: this.model.get( 'name' ), password: this.model.get( 'password' ) } }
+			this.model.save();
+
+			/*var data = { login: this.model.get( 'login' ), name: this.model.get( 'name' ), password: this.model.get( 'password' ) };
+			$.ajax( {
+				method: 'POST',
+				url: '/user/create/',
+				data: data,
+				headers: {
+					"Content-Type": "application/json",
+					"Accept": "text/plain"
+				},
+				success: function ( response ) {
+					console.log( response );
+				}
+			} );*/
 		},
 
 		_bindData: function() {

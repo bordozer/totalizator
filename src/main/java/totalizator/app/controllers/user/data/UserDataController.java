@@ -22,7 +22,7 @@ public class UserDataController {
 	}*/
 
 	@ResponseStatus( HttpStatus.OK )
-	@RequestMapping( method = RequestMethod.PUT, value = "/create/" )
+	@RequestMapping( method = RequestMethod.POST, value = "/create/" )
 	public void registerUser( final @RequestBody NewUserDTO newUserDTO ) {
 		// TODO: create new user
 		LOGGER.debug( String.format( "New user: %s, ( name: %s, password: %s )", newUserDTO.getName(), newUserDTO.getLogin(), newUserDTO.getPassword() ) );
