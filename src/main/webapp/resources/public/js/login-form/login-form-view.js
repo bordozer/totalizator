@@ -10,9 +10,12 @@ define( function ( require ) {
 
 		template:_.template( Template ),
 
+		events: {
+			'click .create-new-user-button': '_onCreateNewUserButtonClick'
+		},
+
 		initialize: function() {
 			this.model.on( 'sync', this.render, this );
-//			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
@@ -22,6 +25,12 @@ define( function ( require ) {
 			 } ) );
 
 			return this.$el;
+		},
+
+		_onCreateNewUserButtonClick: function( evt ) {
+			evt.preventDefault();
+
+			this.trigger( 'events:create_new_user_clicked' );
 		}
 	} );
 

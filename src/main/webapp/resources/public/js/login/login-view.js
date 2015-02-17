@@ -19,10 +19,13 @@ define( function ( require ) {
 			this.userDataModel = new UserDataModel.UserDataModel();
 			this.userDataView = new UserDataView.UserDataView( { model: this.userDataModel, el: this.$el } );
 
+			this.loginFormView.on( 'events:create_new_user_clicked', this._renderNewUserForm(), this );
+
 			this.render();
 		},
 
 		render: function () {
+//			this.$el.html( this._renderLoginForm().$el );
 			this._renderLoginForm();
 
 			return this.$el;
