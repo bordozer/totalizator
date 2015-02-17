@@ -2,10 +2,9 @@ define( [ 'jquery' ], function ( $ ) {
 
 	return {
 
-		validateLogin: function( model ) {
+		validateLogin: function( login ) {
 			var errors = [];
 
-			var login = model.get( 'login' );
 			if ( login == undefined || login == '' ) {
 				errors.push( {
 					message: 'Enter login'
@@ -23,10 +22,9 @@ define( [ 'jquery' ], function ( $ ) {
 			return errors;
 		},
 
-		validateName: function( model ) {
+		validateName: function( name ) {
 			var errors = [];
 
-			var name = model.get( 'name' );
 			if ( name == undefined || name == '' ) {
 				errors.push( {
 					message: 'Enter name'
@@ -44,10 +42,9 @@ define( [ 'jquery' ], function ( $ ) {
 			return errors;
 		},
 
-		_validatePassword: function( model ) {
+		_validatePassword: function( password ) {
 			var errors = [];
 
-			var password = model.get( 'password' );
 			if ( password == undefined || password == '' ) {
 				errors.push( {
 					message: 'Password can not be null'
@@ -57,11 +54,8 @@ define( [ 'jquery' ], function ( $ ) {
 			return errors;
 		},
 
-		_validatePasswordConfirmation: function( model ) {
+		_validatePasswordConfirmation: function( password, password_confirmation ) {
 			var errors = [];
-
-			var password = model.get( 'password' );
-			var password_confirmation = model.get( 'password_confirmation' );
 
 			if ( password_confirmation == undefined || password_confirmation == '' ) {
 				errors.push( {

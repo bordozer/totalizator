@@ -7,6 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var Validator = require( 'js/services/user-data-validator' );
+	var FormValidation = require( 'public/js/validationMessenger' );
 
 	var Template = require( 'text!public/js/user/data/templates/user-data-template.html' );
 
@@ -54,42 +55,41 @@ define( function ( require ) {
 		},
 
 		_validateLogin: function() {
-			var errors = Validator.validateLogin( this.model );
+			var errors = Validator.validateLogin( this.model.get( 'login' ) );
 
 			var control = this.$( '.form-group.login' );
 			var errorContainer = this.$( '.login-errors' );
 
-			this._addErrors( control, errors, errorContainer );
+			FormValidation.addErrors( control, errors, errorContainer );
 		},
 
 
 		_validateName: function() {
-			var errors = Validator.validateName( this.model );
+			var errors = Validator.validateName( this.model.get( 'name' ) );
 
 			var control = this.$( '.form-group.name' );
 			var errorContainer = this.$( '.name-errors' );
 
-			this._addErrors( control, errors, errorContainer );
+			FormValidation.addErrors( control, errors, errorContainer );
 		},
 
 
 		_validatePassword: function() {
-			var errors = Validator._validatePassword( this.model );
+			var errors = Validator._validatePassword( this.model.get( 'password' ) );
 
 			var control = this.$( '.form-group.password' );
 			var errorContainer = this.$( '.password-errors' );
 
-			this._addErrors( control, errors, errorContainer );
+			FormValidation.addErrors( control, errors, errorContainer );
 		},
 
-
 		_validatePasswordConfirmation: function() {
-			var errors = Validator._validatePasswordConfirmation( this.model );
+			var errors = Validator._validatePasswordConfirmation( this.model.get( 'password' ), this.model.get( 'password_confirmation' ) );
 
 			var control = this.$( '.form-group.password_confirmation' );
 			var errorContainer = this.$( '.password_confirmation-errors' );
 
-			this._addErrors( control, errors, errorContainer );
+			FormValidation.addErrors( control, errors, errorContainer );
 		},
 
 		_validate: function() {
@@ -97,25 +97,6 @@ define( function ( require ) {
 			this._validateName();
 			this._validatePassword();
 			this._validatePasswordConfirmation();
-		},
-
-		_addErrors: function( control, errors, messageContainer ) {
-
-			if ( errors.length == 0 ) {
-				control.removeClass( 'has-error' );
-				messageContainer.hide();
-				control.addClass( 'has-success' );
-
-				return;
-			}
-
-			messageContainer.text( '' );
-			_.each( errors, function( error ) {
-				messageContainer.append( '<li>' + error.message + '</li>' );
-				control.addClass( 'has-error' );
-			});
-
-			messageContainer.show();
 		},
 
 		_onLeaveLogin: function( evt ) {
