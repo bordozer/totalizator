@@ -12,6 +12,7 @@ define( function ( require ) {
 
 		events: {
 			'click .create-new-user-button': '_onCreateNewUserButtonClick'
+			, 'click .login-button': '_onLoginButtonClick'
 		},
 
 		initialize: function() {
@@ -31,6 +32,23 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this.trigger( 'events:create_new_user_clicked' );
+		},
+
+		_login: function() {
+			this._validate();
+		},
+
+		_validate: function() {
+			var login = this.$( '#login' ).val();
+			var password = this.$( '#password' ).val();
+
+			console.log( login, password);
+		},
+
+		_onLoginButtonClick: function( evt ) {
+			evt.preventDefault();
+
+			this._login();
 		}
 	} );
 
