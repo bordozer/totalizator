@@ -32,12 +32,11 @@ define( function ( require ) {
 		},
 
 		_renderLoginForm: function() {
-//			this.loginFormModel.fetch( { cache: false } );
 			this.loginFormView.render();
 		},
 
 		_renderNewUserForm: function() {
-			this.userDataModel.fetch( { cache: false } );
+			this.userDataView.render();
 		}
 	} );
 
