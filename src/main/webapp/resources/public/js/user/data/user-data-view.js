@@ -17,6 +17,7 @@ define( function ( require ) {
 		events: {
 			'click .save-button': '_onSaveButtonClick'
 			, 'click .alert .close': '_onCloseErrorMessage'
+			, 'focusout .form-group.login': '_onLeaveLogin'
 		},
 
 		initialize: function() {
@@ -36,7 +37,7 @@ define( function ( require ) {
 
 		_save: function() {
 			this._bindData();
-			this._resetErrors();
+//			this._resetErrors();
 			this._validate();
 //			this.model.save();
 		},
@@ -50,30 +51,50 @@ define( function ( require ) {
 			} );
 		},
 
-		_validate: function() {
-			var errors = Validator.validate( this.model );
+		_validateLogin: function() {
+			var errors = Validator.validateLogin( this.model );
 
-			if ( errors.length > 0 ) {
-				this._showError( errors );
-			}
+			var control = this.$( '.form-group.login' );
+			var errorContainer = this.$( '.login-errors' );
+			this._addErrors( control, errors, errorContainer );
 		},
 
-		_showError: function( errors ) {
+		_validate: function() {
+			this._validateLogin();
+			/*var errors = Validator.validate( this.model );
 
-			var errorMessage = this.$( '.alert .error-message' );
+			if ( errors.length > 0 ) {
+				this._addErrors( errors );
+			}*/
+		},
+
+		_addErrors: function( control, errors, messageContainer ) {
+
+			if ( errors.length == 0 ) {
+				control.removeClass( 'has-error' );
+				messageContainer.hide();
+				control.addClass( 'has-success' );
+
+				return;
+			}
+
+//			var messageContainer = this.$( '.alert .error-message' );
 			var self = this;
 
+			messageContainer.text( '' );
 			_.each( errors, function( error ) {
 				if( error.message ) {
-					errorMessage.append( '<div class="row">' + error.message + '</div>' );
-					self._getControl( error.field ).addClass( error.clazz );
+					messageContainer.append( '<div class="row">' + error.message + '</div>' );
+					control.addClass( 'has-error' );
 				}
 			});
 
-			this.$( '.alert' ).show();
+//			if ( messageContainer.text() != '' ) {
+				messageContainer.show();
+//			}
 		},
 
-		_getControl: function( field ) {
+		/*_getControl: function( field ) {
 
 			if ( field == 'login' ) {
 				return this.$( '.form-group.login' );
@@ -92,6 +113,14 @@ define( function ( require ) {
 			}
 
 			return null;
+		},*/
+
+		_onLeaveLogin: function( evt ) {
+			evt.preventDefault();
+
+			this._bindData();
+
+			this._validateLogin();
 		},
 
 		_onSaveButtonClick: function( evt ) {
@@ -100,7 +129,7 @@ define( function ( require ) {
 			this._save();
 		},
 
-		_resetErrors: function() {
+		/*_resetErrors: function() {
 			this.$( '.form-group.login' ).removeClass( 'has-error' );
 			this.$( '.form-group.name' ).removeClass( 'has-error' );
 			this.$( '.form-group.password' ).removeClass( 'has-error' );
@@ -109,7 +138,7 @@ define( function ( require ) {
 			this.$( '.alert .error-message' ).text( '' );
 
 			this.$( '.alert' ).hide();
-		},
+		},*/
 
 		_onCloseErrorMessage: function( evt ) {
 			evt.preventDefault();

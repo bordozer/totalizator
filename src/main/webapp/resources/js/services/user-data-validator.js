@@ -2,7 +2,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 	return {
 
-		validate: function( model ) {
+		/*validate: function( model ) {
 			var errors = [];
 
 			var loginErrors = this.validateLogin( model );
@@ -11,7 +11,7 @@ define( [ 'jquery' ], function ( $ ) {
 			var passwordConfirmationErrors = this.validatePasswordConfirmation( model );
 
 			return _.union( loginErrors, nameErrors, passwordErrors, passwordConfirmationErrors );
-		},
+		},*/
 
 		validateLogin: function( model ) {
 			var errors = [];
@@ -19,9 +19,15 @@ define( [ 'jquery' ], function ( $ ) {
 			var login = model.get( 'login' );
 			if ( login == undefined || login == '' ) {
 				errors.push( {
-					field: 'login'
-					, message: 'Enter login'
-					, clazz: 'has-error'
+					message: 'Enter login'
+				} );
+
+				return errors;
+			}
+
+			if ( login.length < 3 ) {
+				errors.push( {
+					message: 'Login must have minimum 3 characters'
 				} );
 			}
 
@@ -34,10 +40,7 @@ define( [ 'jquery' ], function ( $ ) {
 			var name = model.get( 'name' );
 			if ( name == undefined || name == '' ) {
 				errors.push( {
-					field: 'name'
-					, message: 'Enter name'
-//					, control: this.$( '.form-group.name' )
-					, clazz: 'has-error'
+					message: 'Enter name'
 				} );
 			}
 
@@ -50,10 +53,7 @@ define( [ 'jquery' ], function ( $ ) {
 			var password = model.get( 'password' );
 			if ( password == undefined || password == '' ) {
 				errors.push( {
-					field: 'password'
-					, message: 'Password can not be null'
-//					, control: this.$( '.form-group.password' )
-					, clazz: 'has-error'
+					message: 'Password can not be null'
 				} );
 			}
 
@@ -68,16 +68,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 			if ( password != password_confirmation ) {
 				errors.push( {
-				 	field: 'password'
-					, message: 'Entered passwords are not equal'
-//					, control: this.$( '.form-group.password_confirmation' )
-					, clazz: 'has-error'
-				} );
-				errors.push( {
-					field: 'password_confirmation'
-					, message: ''
-//					, control: this.$( '.form-group.password_confirmation' )
-					, clazz: 'has-error'
+					message: 'Entered passwords are not equal'
 				} );
 			}
 
