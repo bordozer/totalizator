@@ -1,3 +1,9 @@
+<style type="text/css">
+	td {
+		height: 60px;
+	}
+</style>
+
 <div class="panel panel-default">
 
 	<div class="panel-heading">
@@ -8,17 +14,28 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 150px;"><label for="login">Login</label></td>
-				<td><input type="text" id="login" name="login" class="form-control"></td>
+				<td>
+					<div class="form-group login">
+						<input type="text" id="login" name="login" class="form-control">
+					</div>
+					<ul class="small login-errors" style="display: none;"></ul>
+				</td>
 			</tr>
 			<tr>
 				<td><label for="password">Password</label></td>
-				<td><input type="password" id="password" name="password" class="form-control"></td>
+				<td>
+					<div class="form-group password">
+						<input type="password" id="password" name="password" class="form-control">
+					</div>
+					<ul class="small login-errors" style="display: none;"></ul>
+				</td>
 			</tr>
 		</table>
 	</div>
 
 	<div class="panel-footer text-left">
-		<button type="button" class="fa fa-user-plus create-new-user-button"> Create new user</button>
+		<button type="button" class="fa login-button"> Login</button>
+		<button type="button" class="fa fa-user-plus create-new-user-button" style="float: right"> Create new user</button>
 	</div>
 
 </div>
