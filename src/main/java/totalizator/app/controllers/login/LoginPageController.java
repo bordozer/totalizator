@@ -15,12 +15,12 @@ public class LoginPageController {
 
 	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )
-	@RequestMapping( method = RequestMethod.GET )
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public LoginDTO getDefaultLogin(  ) {
 		return new LoginDTO();
 	}
 
-	@RequestMapping( method = RequestMethod.PUT, value = "", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public LoginDTO doLogin( final @RequestBody LoginDTO loginDTO ) {
 		return loginDTO;

@@ -44,6 +44,7 @@ define( function ( require ) {
 		_validate: function() {
 			this._bindData();
 			if ( this._validateLogin() && this._validatePassword() ) {
+				console.log( 'save' );
 				this.model.save();
 			}
 		},
@@ -59,7 +60,7 @@ define( function ( require ) {
 			var loginErrorContainer = this.$( '.login-errors' );
 			FormValidation.addErrors( loginControl, loginErrors, loginErrorContainer );
 
-			return loginErrors.length > 0;
+			return loginErrors.length == 0;
 		},
 
 		_validatePassword: function() {
@@ -69,7 +70,7 @@ define( function ( require ) {
 			var passwordErrorContainer = this.$( '.password-errors' );
 			FormValidation.addErrors( passwordControl, passwordErrors, passwordErrorContainer );
 
-			return passwordErrors.length > 0;
+			return passwordErrors.length == 0;
 		},
 
 		_onLoginButtonClick: function( evt ) {
