@@ -16,7 +16,7 @@ define( function ( require ) {
 
 		events: {
 			'click .save-button': '_onSaveButtonClick'
-			, 'click .alert .close': '_onCloseErrorMessage'
+			, 'click .back-to-login-button': '_onBackToLoginClick'
 			, 'focusout .form-group.login': '_onLeaveLogin'
 			, 'focusout .form-group.name': '_onLeaveName'
 			, 'focusout .form-group.password, .form-group.password_confirmation': '_onLeavePassword'
@@ -31,6 +31,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				model: this.model
+				, isNewUserRegistration: this.model.get( 'id' ) == 0
 				, title: this.model.get( 'id' ) > 0 ? 'Edit data' : 'New user'
 			 } ) );
 
@@ -145,10 +146,10 @@ define( function ( require ) {
 			this._save();
 		},
 
-		_onCloseErrorMessage: function( evt ) {
+		_onBackToLoginClick: function( evt ) {
 			evt.preventDefault();
 
-			this._resetErrors();
+			this.trigger( 'events:back_to_login' );
 		}
 	} );
 

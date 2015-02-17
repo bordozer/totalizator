@@ -20,6 +20,7 @@ define( function ( require ) {
 			this.userDataView = new UserDataView.UserDataView( { model: this.userDataModel, el: this.$el } );
 
 			this.loginFormView.on( 'events:create_new_user_clicked', this._renderNewUserForm, this );
+			this.userDataView.on( 'events:back_to_login', this._renderLoginForm, this );
 
 			this.render();
 		},
