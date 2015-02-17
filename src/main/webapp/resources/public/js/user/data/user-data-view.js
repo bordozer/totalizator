@@ -74,7 +74,21 @@ define( function ( require ) {
 					message: 'Password can not be null'
 					, control: this.$( '.form-group.password' )
 					, clazz: 'has-error'
-					} );
+				} );
+			}
+
+			var password_confirmation = this.model.get( 'password_confirmation' );
+			if ( password != password_confirmation ) {
+				errors.push( {
+					message: 'Entered passwords are not equal'
+					, control: this.$( '.form-group.password_confirmation' )
+					, clazz: 'has-error'
+				} );
+				errors.push( {
+					message: ''
+					, control: this.$( '.form-group.password_confirmation' )
+					, clazz: 'has-error'
+				} );
 			}
 
 			if ( errors.length > 0 ) {
@@ -87,8 +101,10 @@ define( function ( require ) {
 			var errorMessage = this.$( '.alert .error-message' );
 
 			_.each( errors, function( error ) {
-				errorMessage.append( '<div class="row">' + error.message + '</div>' );
-				error.control.addClass( error.clazz );
+				if( error.message ) {
+					errorMessage.append( '<div class="row">' + error.message + '</div>' );
+					error.control.addClass( error.clazz );
+				}
 			});
 
 			this.$( '.alert' ).show();
