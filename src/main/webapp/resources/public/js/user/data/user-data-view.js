@@ -73,8 +73,8 @@ define( function ( require ) {
 		},
 
 
-		validatePassword: function() {
-			var errors = Validator.validatePassword( this.model );
+		_validatePassword: function() {
+			var errors = Validator._validatePassword( this.model );
 
 			var control = this.$( '.form-group.password' );
 			var errorContainer = this.$( '.password-errors' );
@@ -83,8 +83,8 @@ define( function ( require ) {
 		},
 
 
-		validatePasswordConfirmation: function() {
-			var errors = Validator.validatePasswordConfirmation( this.model );
+		_validatePasswordConfirmation: function() {
+			var errors = Validator._validatePasswordConfirmation( this.model );
 
 			var control = this.$( '.form-group.password_confirmation' );
 			var errorContainer = this.$( '.password_confirmation-errors' );
@@ -94,6 +94,9 @@ define( function ( require ) {
 
 		_validate: function() {
 			this._validateLogin();
+			this._validateName();
+			this._validatePassword();
+			this._validatePasswordConfirmation();
 		},
 
 		_addErrors: function( control, errors, messageContainer ) {
@@ -136,8 +139,8 @@ define( function ( require ) {
 
 			this._bindData();
 
-			this.validatePassword();
-			this.validatePasswordConfirmation();
+			this._validatePassword();
+			this._validatePasswordConfirmation();
 		},
 
 		_onSaveButtonClick: function( evt ) {

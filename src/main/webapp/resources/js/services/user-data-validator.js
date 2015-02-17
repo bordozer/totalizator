@@ -44,7 +44,7 @@ define( [ 'jquery' ], function ( $ ) {
 			return errors;
 		},
 
-		validatePassword: function( model ) {
+		_validatePassword: function( model ) {
 			var errors = [];
 
 			var password = model.get( 'password' );
@@ -57,11 +57,17 @@ define( [ 'jquery' ], function ( $ ) {
 			return errors;
 		},
 
-		validatePasswordConfirmation: function( model ) {
+		_validatePasswordConfirmation: function( model ) {
 			var errors = [];
 
 			var password = model.get( 'password' );
 			var password_confirmation = model.get( 'password_confirmation' );
+
+			if ( password_confirmation == undefined || password_confirmation == '' ) {
+				errors.push( {
+					message: 'Confirm password'
+				} );
+			}
 
 			if ( password != password_confirmation ) {
 				errors.push( {
