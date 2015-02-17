@@ -34,13 +34,15 @@ define( function ( require ) {
 
 		_save: function() {
 			this._bindData();
+			this._resetErrors();
 			this._validate();
 //			this.model.save();
 		},
 
 		_bindData: function() {
 			this.model.set( {
-				name: this.$( '#login' ).val()
+				login: this.$( '#login' ).val()
+				, name: this.$( '#name' ).val()
 				, password: this.$( '#password' ).val()
 				, password_confirmation: this.$( '#password_confirmation' ).val()
 			} );
@@ -48,11 +50,30 @@ define( function ( require ) {
 
 		_validate: function() {
 			var errors = [];
+
 			var login = this.model.get( 'login' );
 			if ( login == undefined || login == '' ) {
 				errors.push( {
 					message: 'Enter login'
-					, control: this.$( '#login' )
+					, control: this.$( '.form-group.login' )
+					, clazz: 'has-error'
+				} );
+			}
+			var name = this.model.get( 'name' );
+			if ( name == undefined || name == '' ) {
+				errors.push( {
+					message: 'Enter name'
+					, control: this.$( '.form-group.name' )
+					, clazz: 'has-error'
+				} );
+			}
+
+			var password = this.model.get( 'password' );
+			if ( password == undefined || password == '' ) {
+				errors.push( {
+					message: 'Password can not be null'
+					, control: this.$( '.form-group.password' )
+					, clazz: 'has-error'
 					} );
 			}
 
@@ -67,7 +88,7 @@ define( function ( require ) {
 
 			_.each( errors, function( error ) {
 				errorMessage.append( '<div class="row">' + error.message + '</div>' );
-				error.control.addClass( 'alert-danger' );
+				error.control.addClass( error.clazz );
 			});
 
 			this.$( '.alert' ).show();
@@ -79,14 +100,21 @@ define( function ( require ) {
 			this._save();
 		},
 
+		_resetErrors: function() {
+			this.$( '.form-group.login' ).removeClass( 'has-error' );
+			this.$( '.form-group.name' ).removeClass( 'has-error' );
+			this.$( '.form-group.password' ).removeClass( 'has-error' );
+			this.$( '.form-group.password_confirmation' ).removeClass( 'has-error' );
+
+			this.$( '.alert .error-message' ).text( '' );
+
+			this.$( '.alert' ).hide();
+		},
+
 		_onCloseErrorMessage: function( evt ) {
 			evt.preventDefault();
 
-			this.$( '#login' ).removeClass( 'alert-danger' );
-			this.$( '#password' ).removeClass( 'alert-danger' );
-			this.$( '#password_confirmation' ).removeClass( 'alert-danger' );
-
-			this.$( '.alert' ).hide();
+			this._resetErrors();
 		}
 	} );
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserDTO {
 
 	private int id;
+	private String login;
 	private String name;
 	private String password;
 	private String password_confirmation;
@@ -16,6 +17,14 @@ public class UserDTO {
 
 	public void setId( final int id ) {
 		this.id = id;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin( final String login ) {
+		this.login = login;
 	}
 
 	public String getName() {
