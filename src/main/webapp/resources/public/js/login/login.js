@@ -6,12 +6,12 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './user-data-model' );
-	var View = require( './user-data-view' );
+	var Model = require( './login-model' );
+	var View = require( './login-view' );
 
 	function init( container ) {
-		var model = new Model.UserDataModel();
-		var view = new View.UserDataView( { model: model, el: container } );
+		var model = new Model.LoginModel();
+		var view = new View.LoginCompositeView( { model: model, el: container } );
 	}
 
 	return init;

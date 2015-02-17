@@ -10,8 +10,8 @@ define( function( require ) {
 	var View = require( './login-form-view' );
 
 	function init( container ) {
-		var model = new Model.LoginModel();
-		var view = new View.LoginView( { model: model, el: container } );
+		var model = new Model.LoginFormModel();
+		var view = new View.LoginFormView( { model: model, el: container } );
 	}
 
 	return init;

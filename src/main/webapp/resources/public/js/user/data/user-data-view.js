@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/user/data/templates/user-data-template.html' );
 
-	var LoginView = Backbone.View.extend( {
+	var UserDataView = Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -152,5 +152,5 @@ define( function ( require ) {
 		}
 	} );
 
-	return { LoginView: LoginView };
+	return { UserDataView: UserDataView };
 } );

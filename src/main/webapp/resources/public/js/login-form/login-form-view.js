@@ -6,7 +6,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/login-form/templates/login-form-template.html' );
 
-	var LoginView = Backbone.View.extend( {
+	var LoginFormView = Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -25,5 +25,5 @@ define( function ( require ) {
 		}
 	} );
 
-	return { LoginView: LoginView };
+	return { LoginFormView: LoginFormView };
 } );

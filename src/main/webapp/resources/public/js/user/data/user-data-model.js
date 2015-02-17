@@ -1,6 +1,6 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var LoginModel = Backbone.Model.extend( {
+	var UserDataModel = Backbone.Model.extend( {
 
 		initialize:function ( options ) {
 			this.url = 'user/data/';
@@ -12,5 +12,5 @@ define( ["backbone"], function ( Backbone ) {
 
 	});
 
-	return { LoginModel: LoginModel };
+	return { UserDataModel: UserDataModel };
 } );
