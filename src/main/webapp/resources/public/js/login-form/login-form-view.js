@@ -19,7 +19,7 @@ define( function ( require ) {
 		},
 
 		initialize: function() {
-			this.model.on( 'sync', this.render, this );
+			this.model.on( 'sync', this._goToPortalPage, this );
 		},
 
 		render: function () {
@@ -31,13 +31,17 @@ define( function ( require ) {
 			return this.$el;
 		},
 
+		_goToPortalPage: function() {
+			document.location.href = '/resources/public/totalizator.html';
+		},
+
 		_onCreateNewUserButtonClick: function( evt ) {
 			evt.preventDefault();
 
 			this.trigger( 'events:create_new_user_clicked' );
 		},
 
-		_login: function() {
+		_processLogin: function() {
 			this._validate();
 		},
 
@@ -77,7 +81,7 @@ define( function ( require ) {
 		_onLoginButtonClick: function( evt ) {
 			evt.preventDefault();
 
-			this._login();
+			this._processLogin();
 		}
 	} );
 
