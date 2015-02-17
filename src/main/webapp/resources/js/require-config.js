@@ -1,6 +1,6 @@
 var require = {
 
-	baseUrl: 'resources',
+	baseUrl: '/resources',
 
 	config: {
 
