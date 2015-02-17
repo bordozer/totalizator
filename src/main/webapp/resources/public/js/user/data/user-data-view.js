@@ -49,7 +49,6 @@ define( function ( require ) {
 				login: this.$( '#login' ).val()
 				, name: this.$( '#name' ).val()
 				, password: this.$( '#password' ).val()
-				, password_confirmation: this.$( '#password_confirmation' ).val()
 			} );
 		},
 
