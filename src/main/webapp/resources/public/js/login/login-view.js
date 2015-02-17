@@ -18,7 +18,7 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( this.template( {
-				 message: this.model.get( 'message' )
+
 			 } ) );
 
 			return this.$el;
