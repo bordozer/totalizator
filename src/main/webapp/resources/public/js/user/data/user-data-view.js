@@ -83,7 +83,7 @@ define( function ( require ) {
 		},
 
 		_validatePasswordConfirmation: function() {
-			var errors = Validator._validatePasswordConfirmation( this.model.get( 'password' ), this.model.password_confirmation;
+			var errors = Validator._validatePasswordConfirmation( this.model.get( 'password' ), this.model.password_confirmation );
 
 			var control = this.$( '.form-group.password_confirmation' );
 			var errorContainer = this.$( '.password_confirmation-errors' );
