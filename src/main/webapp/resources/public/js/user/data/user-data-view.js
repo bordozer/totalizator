@@ -6,6 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var Validator = require( 'js/services/user-data-validator' );
+
 	var Template = require( 'text!public/js/user/data/templates/user-data-template.html' );
 
 	var LoginView = Backbone.View.extend( {
@@ -49,47 +51,7 @@ define( function ( require ) {
 		},
 
 		_validate: function() {
-			var errors = [];
-
-			var login = this.model.get( 'login' );
-			if ( login == undefined || login == '' ) {
-				errors.push( {
-					message: 'Enter login'
-					, control: this.$( '.form-group.login' )
-					, clazz: 'has-error'
-				} );
-			}
-			var name = this.model.get( 'name' );
-			if ( name == undefined || name == '' ) {
-				errors.push( {
-					message: 'Enter name'
-					, control: this.$( '.form-group.name' )
-					, clazz: 'has-error'
-				} );
-			}
-
-			var password = this.model.get( 'password' );
-			if ( password == undefined || password == '' ) {
-				errors.push( {
-					message: 'Password can not be null'
-					, control: this.$( '.form-group.password' )
-					, clazz: 'has-error'
-				} );
-			}
-
-			var password_confirmation = this.model.get( 'password_confirmation' );
-			if ( password != password_confirmation ) {
-				errors.push( {
-					message: 'Entered passwords are not equal'
-					, control: this.$( '.form-group.password_confirmation' )
-					, clazz: 'has-error'
-				} );
-				errors.push( {
-					message: ''
-					, control: this.$( '.form-group.password_confirmation' )
-					, clazz: 'has-error'
-				} );
-			}
+			var errors = Validator.validate( this.model );
 
 			if ( errors.length > 0 ) {
 				this._showError( errors );
@@ -99,15 +61,37 @@ define( function ( require ) {
 		_showError: function( errors ) {
 
 			var errorMessage = this.$( '.alert .error-message' );
+			var self = this;
 
 			_.each( errors, function( error ) {
 				if( error.message ) {
 					errorMessage.append( '<div class="row">' + error.message + '</div>' );
-					error.control.addClass( error.clazz );
+					self._getControl( error.field ).addClass( error.clazz );
 				}
 			});
 
 			this.$( '.alert' ).show();
+		},
+
+		_getControl: function( field ) {
+
+			if ( field == 'login' ) {
+				return this.$( '.form-group.login' );
+			}
+
+			if ( field == 'name' ) {
+				return this.$( '.form-group.name' );
+			}
+
+			if ( field == 'password' ) {
+				return this.$( '.form-group.password' );
+			}
+
+			if ( field == 'password_confirmation' ) {
+				return this.$( '.form-group.password_confirmation' );
+			}
+
+			return null;
 		},
 
 		_onSaveButtonClick: function( evt ) {
