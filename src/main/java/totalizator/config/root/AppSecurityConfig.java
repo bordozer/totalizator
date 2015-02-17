@@ -42,7 +42,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers( "/resources/public/**" ).permitAll()
 			.antMatchers( "/resources/img*//**" ).permitAll()
 			.antMatchers( "/resources/bower_components*//**" ).permitAll()
-			.antMatchers( HttpMethod.POST, "/user" ).permitAll() // /data
+			.antMatchers( "/resources/js//**" ).permitAll()
+			.antMatchers( HttpMethod.POST, "/user" ).permitAll() // create user
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()

@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Validator = require( 'js/services/user-data-validator' );
+	var Validator = require( 'public/js/user-data-validator' );
 	var FormValidation = require( 'public/js/validationMessenger' );
 
 	var Template = require( 'text!public/js/user/data/templates/user-data-template.html' );

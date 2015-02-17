@@ -4,7 +4,7 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 
-	var Validator = require( 'js/services/user-data-validator' );
+	var Validator = require( 'public/js/user-data-validator' );
 	var FormValidation = require( 'public/js/validationMessenger' );
 
 	var Template = require( 'text!public/js/login-form/templates/login-form-template.html' );
@@ -50,7 +50,7 @@ define( function ( require ) {
 			var isLoginOk = this._validateLogin();
 			var isPasswordOk = this._validatePassword();
 			if ( isLoginOk && isPasswordOk ) {
-				this.model.save();
+//				this.model.save();// TODO: authenticate here
 			}
 		},
 
