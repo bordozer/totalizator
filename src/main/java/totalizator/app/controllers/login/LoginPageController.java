@@ -14,7 +14,7 @@ public class LoginPageController {
 	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )
 	@RequestMapping( method = RequestMethod.GET )
-	public LoginDTO test() {
+	public LoginDTO getDefaultLogin() {
 		return new LoginDTO();
 	}
 }

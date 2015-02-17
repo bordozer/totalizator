@@ -17,5 +17,6 @@
 		, "underscore" : "latest"
 		, "text" : "latest"
 		, "bootstrap" : "latest"
+		, "fontawesome": "latest"
 	}
 }
