@@ -19,7 +19,7 @@ define( function ( require ) {
 		},
 
 		initialize: function() {
-			this.model.on( 'sync', this._goToPortalPage, this );
+			this.model.on( 'sync', this._authenticate, this );
 		},
 
 		render: function () {
@@ -31,8 +31,11 @@ define( function ( require ) {
 			return this.$el;
 		},
 
-		_goToPortalPage: function() {
-			document.location.href = '/resources/public/totalizator.html';
+		_authenticate: function() {
+//			document.location.href = '/resources/public/totalizator.html';
+			var data = { login: this.model.get( 'login' ), password: this.model.get( 'password' ) };
+			console.log( data );
+			this.trigger( 'events:authenticate', data );
 		},
 
 		_onCreateNewUserButtonClick: function( evt ) {
@@ -50,7 +53,8 @@ define( function ( require ) {
 			var isLoginOk = this._validateLogin();
 			var isPasswordOk = this._validatePassword();
 			if ( isLoginOk && isPasswordOk ) {
-//				this.model.save();// TODO: authenticate here
+//				this.model.save();
+				this._authenticate();
 			}
 		},
 

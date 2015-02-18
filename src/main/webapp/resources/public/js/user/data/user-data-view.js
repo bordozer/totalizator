@@ -24,7 +24,7 @@ define( function ( require ) {
 		},
 
 		initialize: function() {
-			this.model.on( 'sync', this.render, this );
+			this.model.on( 'sync', this._authenticate, this );
 		},
 
 		render: function () {
@@ -56,6 +56,12 @@ define( function ( require ) {
 					console.log( response );
 				}
 			} );*/
+		},
+
+		_authenticate: function() {
+			var data = { login: this.model.get( 'login' ), password: this.model.get( 'password' ) };
+			console.log( data );
+			this.trigger( 'events:authenticate', data );
 		},
 
 		_bindData: function() {
