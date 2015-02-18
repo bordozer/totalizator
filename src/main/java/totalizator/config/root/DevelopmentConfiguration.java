@@ -28,7 +28,7 @@ public class DevelopmentConfiguration {
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName( "org.postgresql.Driver" );
-		dataSource.setUrl( "jdbc:postgresql://localhost:5432/calorie-tracker?loglevel=0" );
+		dataSource.setUrl( "jdbc:postgresql://localhost:5432/totalizator?loglevel=0" );
 		dataSource.setUsername( "postgres" );
 		dataSource.setPassword( "postgres" );
 
@@ -49,6 +49,7 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( "hibernate.show_sql", "true" );
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
+//		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.PostgresPlusDialect" );// TODO ?
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
