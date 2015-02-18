@@ -34,7 +34,7 @@ define( function ( require ) {
 		_authenticate: function() {
 //			document.location.href = '/resources/public/totalizator.html';
 			var data = { login: this.model.get( 'login' ), password: this.model.get( 'password' ) };
-			console.log( data );
+//			console.log( data );
 			this.trigger( 'events:authenticate', data );
 		},
 

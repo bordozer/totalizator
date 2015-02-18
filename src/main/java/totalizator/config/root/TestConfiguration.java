@@ -39,7 +39,7 @@ public class TestConfiguration {
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource( dataSource );
-		entityManagerFactoryBean.setPackagesToScan( new String[]{ "totalizator.app.models" } );
+		entityManagerFactoryBean.setPackagesToScan( "totalizator.app.models" );
 		entityManagerFactoryBean.setLoadTimeWeaver( new InstrumentationLoadTimeWeaver() );
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 

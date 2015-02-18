@@ -27,10 +27,10 @@ public class DevelopmentConfiguration {
 	public DriverManagerDataSource dataSource() {
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName( "org.postgresql.Driver" );
-		dataSource.setUrl( "jdbc:postgresql://localhost:5432/totalizator?loglevel=0" );
-		dataSource.setUsername( "postgres" );
-		dataSource.setPassword( "postgres" );
+		dataSource.setDriverClassName( "com.mysql.jdbc.Driver" );
+		dataSource.setUrl( "jdbc:mysql://localhost:3306/totalizator" );
+		dataSource.setUsername( "root" );
+		dataSource.setPassword( "sm00hans" );
 
 		return dataSource;
 	}
@@ -40,7 +40,7 @@ public class DevelopmentConfiguration {
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource( dataSource );
-		entityManagerFactoryBean.setPackagesToScan( new String[]{ "totalizator.app.models" } );
+		entityManagerFactoryBean.setPackagesToScan( "totalizator.app.models" );
 		entityManagerFactoryBean.setLoadTimeWeaver( new InstrumentationLoadTimeWeaver() );
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
@@ -49,7 +49,7 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( "hibernate.show_sql", "true" );
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
-//		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.PostgresPlusDialect" );// TODO ?
+		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect" );// TODO ?
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
