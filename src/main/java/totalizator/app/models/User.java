@@ -1,19 +1,15 @@
 package totalizator.app.models;
 
-public class User {
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-	private int id;
+@Entity
+@Table(name = "USERS")
+public class User extends AbstractEntity {
+
 	private String login;
 	private String name;
 	private String password;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId( final int id ) {
-		this.id = id;
-	}
 
 	public String getLogin() {
 		return login;
@@ -41,6 +37,6 @@ public class User {
 
 	@Override
 	public String toString() {
-		return String.format( "#%d: %s ( %s )", id, login, name );
+		return String.format( "#%d: %s ( %s )", getId(), login, name );
 	}
 }
