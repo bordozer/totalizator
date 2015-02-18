@@ -1,5 +1,6 @@
 package totalizator.app.dao;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.User;
 
@@ -9,6 +10,8 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
+
+	private static final Logger LOGGER = Logger.getLogger( UserRepository.class );
 
 	@PersistenceContext
 	private EntityManager em;

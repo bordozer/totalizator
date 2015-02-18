@@ -18,10 +18,10 @@ import java.util.Map;
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
 
-	@Bean( initMethod = "init" )
+	/*@Bean( initMethod = "init" )
 	public TestDataInitializer initTestData() {
 		return new TestDataInitializer();
-	}
+	}*/
 
 	@Bean( name = "datasource" )
 	public DriverManagerDataSource dataSource() {
