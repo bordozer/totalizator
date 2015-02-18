@@ -31,7 +31,7 @@ public class UserDataController {
 
 		final UserDTO userDTO = new UserDTO();
 		userDTO.setLogin( user.getLogin() );
-		userDTO.setName( user.getName() );
+		userDTO.setName( user.getUsername() );
 
 		return userDTO;
 	}

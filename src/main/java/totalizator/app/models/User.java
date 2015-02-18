@@ -18,15 +18,15 @@ public class User extends AbstractEntity {
 	public static final String FIND_BY_USERNAME = "user.findByUserName";
 
 	private String login;
-	private String name;
+	private String username;
 	private String password;
 
 	public User() {
 	}
 
-	public User( final String login, final String name, final String password ) {
+	public User( final String login, final String username, final String password ) {
 		this.login = login;
-		this.name = name;
+		this.username = username;
 		this.password = password;
 	}
 
@@ -38,12 +38,12 @@ public class User extends AbstractEntity {
 		this.login = login;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName( final String name ) {
-		this.name = name;
+	public void setUsername( final String username ) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -56,6 +56,6 @@ public class User extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return String.format( "#%d: %s ( %s )", getId(), login, name );
+		return String.format( "#%d: %s ( %s )", getId(), login, username );
 	}
 }

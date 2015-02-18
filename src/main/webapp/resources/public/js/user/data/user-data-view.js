@@ -42,20 +42,6 @@ define( function ( require ) {
 			this._bindData();
 			this._validate();
 			this.model.save();
-
-			/*var data = { login: this.model.get( 'login' ), name: this.model.get( 'name' ), password: this.model.get( 'password' ) };
-			$.ajax( {
-				method: 'POST',
-				url: '/user/create/',
-				data: data,
-				headers: {
-					"Content-Type": "application/json",
-					"Accept": "text/plain"
-				},
-				success: function ( response ) {
-					console.log( response );
-				}
-			} );*/
 		},
 
 		_authenticate: function() {

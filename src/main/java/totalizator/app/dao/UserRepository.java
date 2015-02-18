@@ -17,9 +17,9 @@ public class UserRepository {
 		em.merge( user );
 	}
 
-	public User findUserByName( final String name ) {
+	public User findUserByName( final String username ) {
 		final List<User> users = em.createNamedQuery( User.FIND_BY_USERNAME, User.class )
-				.setParameter( "username", name )
+				.setParameter( "username", username )
 				.getResultList();
 
 		return users.size() == 1 ? users.get( 0 ) : null;

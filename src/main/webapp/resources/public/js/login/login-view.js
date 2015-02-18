@@ -3,6 +3,8 @@ define( function ( require ) {
 	'use strict';
 
 	var Backbone = require( 'backbone' );
+	var _ = require( 'underscore' );
+	var $ = require( 'jquery' );
 
 	var LoginFormModel = require( 'public/js/login-form/login-form-model' );
 	var LoginFormView = require( 'public/js/login-form/login-form-view' );
