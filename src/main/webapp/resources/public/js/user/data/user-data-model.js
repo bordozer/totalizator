@@ -12,7 +12,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize:function ( options ) {
-			this.url = '/user/create/'
+			this.url = '/users/create/'
 		},
 
 		refresh: function() {

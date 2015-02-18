@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
-@RequestMapping( "/user" )
+@RequestMapping( "/users" )
 public class UserDataController {
 
 	private static final Logger LOGGER = Logger.getLogger( UserDataController.class );
@@ -22,7 +22,7 @@ public class UserDataController {
 	}*/
 
 	@ResponseStatus( HttpStatus.OK )
-	@RequestMapping( method = RequestMethod.POST, value = "/create/" )
+	@RequestMapping( method = RequestMethod.PUT, value = "/create/" )
 	public void registerUser( final @RequestBody NewUserDTO newUserDTO ) {
 		// TODO: create new user
 		LOGGER.debug( String.format( "New user: %s, ( name: %s, password: %s )", newUserDTO.getName(), newUserDTO.getLogin(), newUserDTO.getPassword() ) );

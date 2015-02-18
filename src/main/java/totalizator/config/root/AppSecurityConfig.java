@@ -1,6 +1,5 @@
 package totalizator.config.root;
 
-import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.csrf.CsrfFilter;
 import totalizator.app.security.AjaxAuthenticationSuccessHandler;
 import totalizator.app.security.SecurityUserDetailsService;
 
@@ -34,16 +32,14 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure( HttpSecurity http ) throws Exception {
 
-		final CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
-		http.addFilterAfter( csrfTokenFilter, CsrfFilter.class );
-
 		http
+			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers( "/resources/public/**" ).permitAll()
 			.antMatchers( "/resources/img*//**" ).permitAll()
 			.antMatchers( "/resources/bower_components*//**" ).permitAll()
 			.antMatchers( "/resources/js//**" ).permitAll()
-			.antMatchers( HttpMethod.POST, "/user/create/" ).permitAll() // create user
+			.antMatchers( HttpMethod.PUT, "/users/create/" ).permitAll() // create user
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
