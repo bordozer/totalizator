@@ -10,7 +10,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-@ComponentScan( { "totalizator.app.security", "totalizator.app.dao", "totalizator.app.services", "totalizator.app.init" } )
+@ComponentScan( { "totalizator.app.services", "totalizator.app.dao", "totalizator.app.init", "totalizator.app.security" } )
 public class RootContextConfig {
 
 	@Bean( name = "transactionManager" )
