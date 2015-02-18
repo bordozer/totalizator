@@ -28,7 +28,7 @@ public class DevelopmentConfiguration {
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName( "com.mysql.jdbc.Driver" );
-		dataSource.setUrl( "jdbc:mysql://localhost:3306/totalizator" );
+		dataSource.setUrl( "jdbc:mysql://localhost:3306/totalizator1" );
 		dataSource.setUsername( "root" );
 		dataSource.setPassword( "sm00hans" );
 
@@ -45,7 +45,7 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
 		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
-		jpaProperties.put( "hibernate.hbm2ddl.auto", "create-drop" );
+//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create-drop" );
 		jpaProperties.put( "hibernate.show_sql", "true" );
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
