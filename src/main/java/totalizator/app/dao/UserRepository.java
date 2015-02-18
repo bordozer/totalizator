@@ -5,6 +5,7 @@ import totalizator.app.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -14,5 +15,13 @@ public class UserRepository {
 
 	public void save( final User user ) {
 		em.merge( user );
+	}
+
+	public User findUserByName( final String name ) {
+		final List<User> users = em.createNamedQuery( "select u.* from User u where username = :username", User.class )
+				.setParameter( "username", name )
+				.getResultList();
+
+		return users.size() == 1 ? users.get( 0 ) : null;
 	}
 }

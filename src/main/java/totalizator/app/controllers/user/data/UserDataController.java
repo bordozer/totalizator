@@ -4,11 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import totalizator.app.models.User;
 import totalizator.app.services.UserService;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping( "/users" )
@@ -19,12 +19,22 @@ public class UserDataController {
 	@Autowired
 	private UserService userService;
 
-	/*@ResponseBody
+	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public UserDTO getDefaultLogin() {
-		return new UserDTO();
-	}*/
+	public UserDTO getDefaultLogin( final Principal principal ) {
+		final User user = userService.findUserByName( principal.getName() );
+
+		if ( user == null ) {
+			return null; // TODO: exception?
+		}
+
+		final UserDTO userDTO = new UserDTO();
+		userDTO.setLogin( user.getLogin() );
+		userDTO.setName( user.getName() );
+
+		return userDTO;
+	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@RequestMapping( method = RequestMethod.PUT, value = "/create/" )
