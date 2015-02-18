@@ -18,7 +18,7 @@ public class UserRepository {
 	}
 
 	public User findUserByName( final String name ) {
-		final List<User> users = em.createNamedQuery( "select u.* from User u where username = :username", User.class )
+		final List<User> users = em.createNamedQuery( User.FIND_BY_USERNAME, User.class )
 				.setParameter( "username", name )
 				.getResultList();
 

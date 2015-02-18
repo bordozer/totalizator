@@ -22,10 +22,7 @@ public class UserServiceImpl implements UserService {
 
 		// TODO: validation
 
-		final User user = new User();
-		user.setLogin( login );
-		user.setName( name );
-		user.setPassword( encodePassword( password ) );
+		final User user = new User( login, name, encodePassword( password ) );
 
 		userRepository.save( user );
 
@@ -33,6 +30,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional( readOnly = true )
 	public User findUserByName( final String name ) {
 		return userRepository.findUserByName( name );
 	}
