@@ -6,7 +6,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 @NamedQueries({
 		@NamedQuery(
 				name = User.FIND_BY_USERNAME,
