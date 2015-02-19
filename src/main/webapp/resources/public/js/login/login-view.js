@@ -48,9 +48,11 @@ define( function ( require ) {
 					"X-Login-Ajax-call": 'true'
 				},
 				success: function ( response ) {
+					console.log( 'ok' );
 					window.location.replace( '/resources/totalizator.html' );
 				},
 				error: function() {
+					console.log( 'failed' );
 					alert( 'Access denied' ); // TODO
 				}
 			} )
