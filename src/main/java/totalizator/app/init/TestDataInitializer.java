@@ -24,7 +24,10 @@ public class TestDataInitializer {
 
 		final SessionFactory sessionFactory = entityManagerFactory.unwrap( SessionFactory.class );
 
+		LOGGER.debug( "========================== sessionFactory has been created ===========================" );
+
 		final Session session = sessionFactory.openSession();
+
 		final Transaction transaction = session.beginTransaction();
 
 		/*for ( int i = 0; i < 10; i++ ) {

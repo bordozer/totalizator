@@ -1,10 +1,9 @@
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `UUID` varchar(200) NOT NULL,
-  `version` int(11) DEFAULT NULL,
-  `login` varchar(20) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `UUID` varchar(255) DEFAULT NULL,
+  `version` bigint(20) DEFAULT NULL,
+  `login` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;

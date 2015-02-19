@@ -18,17 +18,17 @@ import java.util.Map;
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
 
-	/*@Bean( initMethod = "init" )
+	@Bean( initMethod = "init" )
 	public TestDataInitializer initTestData() {
 		return new TestDataInitializer();
-	}*/
+	}
 
 	@Bean( name = "datasource" )
 	public DriverManagerDataSource dataSource() {
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName( "com.mysql.jdbc.Driver" );
-		dataSource.setUrl( "jdbc:mysql://localhost:3306/totalizator1" );
+		dataSource.setUrl( "jdbc:mysql://localhost:3306/totalizator2" );
 		dataSource.setUsername( "root" );
 		dataSource.setPassword( "sm00hans" );
 
@@ -45,11 +45,11 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
 		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
-//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create-drop" );
+		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" );
 		jpaProperties.put( "hibernate.show_sql", "true" );
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
-		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect" );// TODO ?
+		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLDialect" );
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
