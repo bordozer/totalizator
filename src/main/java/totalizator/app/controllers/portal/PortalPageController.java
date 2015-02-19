@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import totalizator.app.models.User;
 import totalizator.app.services.UserService;
 
+import java.security.Principal;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -25,9 +27,9 @@ public class PortalPageController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public PortalPageDTO getDefaultLogin() {
+	public PortalPageDTO getDefaultLogin( final Principal principal ) {
 
-		final User user = userService.findUserByLogin( "hakeem" );
+		final User user = userService.findUserByLogin( principal.getName() );
 
 		final PortalPageDTO portalPageDTO = new PortalPageDTO();
 		portalPageDTO.setUserName( user.getUsername() );
