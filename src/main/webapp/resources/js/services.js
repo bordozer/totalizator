@@ -4,14 +4,17 @@ define( [ 'jquery' ], function ( $ ) {
 
 		logout: function () {
 			$.ajax( {
-				method: 'POST'
-				, url: '/logout'
-				, success: function ( response ) {
-					if ( response.status == 200 ) {
-						window.location.reload();
-					} else {
-						alert( 'Logout failed!' ); // TODO
-					}
+				method: 'POST',
+				url: '/logout',
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+					"X-Login-Ajax-call": 'true'
+				},
+				success: function ( response ) {
+					window.location.reload();
+				},
+				error: function() {
+					alert( 'Logout failed' ); // TODO
 				}
 			} )
 		}
