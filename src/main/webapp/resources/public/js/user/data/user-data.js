@@ -12,7 +12,7 @@ define( function( require ) {
 	function init( container ) {
 		var model = new Model.UserDataModel();
 		var view = new View.UserDataView( { model: model, el: container } );
-//		model.fetch( { cache: false } );
+
 		view.render();
 	}
 

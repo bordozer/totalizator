@@ -40,8 +40,9 @@ define( function ( require ) {
 
 		_save: function() {
 			this._bindData();
-			this._validate();
-			this.model.save();
+			if ( this._validate() ) {
+				this.model.save();
+			}
 		},
 
 		_authenticate: function() {
@@ -58,6 +59,15 @@ define( function ( require ) {
 			this.model.password_confirmation = this.$( '#password_confirmation' ).val();
 		},
 
+		_validate: function() {
+			var isValid = this._validateLogin();
+			isValid = this._validateName() && isValid;
+			isValid = this._validatePassword() && isValid;
+			isValid = this._validatePasswordConfirmation() && isValid;
+
+			return isValid;
+		},
+
 		_validateLogin: function() {
 			var errors = Validator.validateLogin( this.model.get( 'login' ) );
 
@@ -65,6 +75,8 @@ define( function ( require ) {
 			var errorContainer = this.$( '.login-errors' );
 
 			FormValidation.addErrors( control, errors, errorContainer );
+
+			return errors.length == 0
 		},
 
 
@@ -75,6 +87,8 @@ define( function ( require ) {
 			var errorContainer = this.$( '.name-errors' );
 
 			FormValidation.addErrors( control, errors, errorContainer );
+
+			return errors.length == 0
 		},
 
 
@@ -85,6 +99,8 @@ define( function ( require ) {
 			var errorContainer = this.$( '.password-errors' );
 
 			FormValidation.addErrors( control, errors, errorContainer );
+
+			return errors.length == 0
 		},
 
 		_validatePasswordConfirmation: function() {
@@ -94,13 +110,8 @@ define( function ( require ) {
 			var errorContainer = this.$( '.password_confirmation-errors' );
 
 			FormValidation.addErrors( control, errors, errorContainer );
-		},
 
-		_validate: function() {
-			this._validateLogin();
-			this._validateName();
-			this._validatePassword();
-			this._validatePasswordConfirmation();
+			return errors.length == 0
 		},
 
 		_onLeaveLogin: function( evt ) {
@@ -130,7 +141,6 @@ define( function ( require ) {
 
 		_onSaveButtonClick: function( evt ) {
 			evt.preventDefault();
-
 			this._save();
 		},
 
