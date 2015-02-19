@@ -37,8 +37,10 @@ public class UserDataController {
 	}
 
 	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/create/" )
-	public void registerUser( final @RequestBody NewUserDTO newUserDTO ) {
+	public NewUserDTO registerUser( final @RequestBody NewUserDTO newUserDTO ) {
 		userService.createUser( newUserDTO.getLogin(), newUserDTO.getName(), newUserDTO.getPassword() );
+		return newUserDTO;
 	}
 }
