@@ -27,4 +27,12 @@ public class UserRepository {
 
 		return users.size() == 1 ? users.get( 0 ) : null;
 	}
+
+	public User findUserByLogin( final String login ) {
+		final List<User> users = em.createNamedQuery( User.FIND_BY_LOGIN, User.class )
+				.setParameter( "login", login )
+				.getResultList();
+
+		return users.size() == 1 ? users.get( 0 ) : null;
+	}
 }

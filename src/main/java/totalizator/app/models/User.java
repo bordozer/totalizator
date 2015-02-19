@@ -11,11 +11,16 @@ import javax.persistence.Table;
 		@NamedQuery(
 				name = User.FIND_BY_USERNAME,
 				query = "select u from User u where username = :username"
+		),
+		@NamedQuery(
+				name = User.FIND_BY_LOGIN,
+				query = "select u from User u where login = :login"
 		)
 })
 public class User extends AbstractEntity {
 
 	public static final String FIND_BY_USERNAME = "user.findByUserName";
+	public static final java.lang.String FIND_BY_LOGIN = "user.findByUserLogin";
 
 	private String login;
 	private String username;

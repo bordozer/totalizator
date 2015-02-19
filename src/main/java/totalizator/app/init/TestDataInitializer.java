@@ -20,11 +20,7 @@ public class TestDataInitializer {
 
 	public void init() throws Exception {
 
-		LOGGER.debug( "========================== init ===========================" );
-
 		final SessionFactory sessionFactory = entityManagerFactory.unwrap( SessionFactory.class );
-
-		LOGGER.debug( "========================== sessionFactory has been created ===========================" );
 
 		final Session session = sessionFactory.openSession();
 

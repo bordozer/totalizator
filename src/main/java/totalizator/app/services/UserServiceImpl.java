@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByName( name );
 	}
 
+	@Override
+	public User findUserByLogin( final String login ) {
+		return userRepository.findUserByLogin( login );
+	}
+
 	private String encodePassword( final String password ) {
 		return new BCryptPasswordEncoder().encode( password );
 	}
