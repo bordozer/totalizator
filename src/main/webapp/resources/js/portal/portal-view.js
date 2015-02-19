@@ -19,13 +19,14 @@ define( function ( require ) {
 		},
 
 		initialize: function( options ) {
-
+			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
 
 			this.$el.html( this.template( {
-				model: this.model
+				userName: this.model.get( 'userName' )
 			 } ) );
 
 			return this.$el;

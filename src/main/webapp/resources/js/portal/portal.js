@@ -12,8 +12,6 @@ define( function( require ) {
 	function init( container ) {
 		var model = new Model.PortalPageModel();
 		var view = new View.PortalPageView( { model: model, el: container } );
-
-		view.render();
 	}
 
 	return init;

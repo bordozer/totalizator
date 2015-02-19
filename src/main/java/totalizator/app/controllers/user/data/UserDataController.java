@@ -10,6 +10,8 @@ import totalizator.app.services.UserService;
 
 import java.security.Principal;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @Controller
 @RequestMapping( "/users" )
 public class UserDataController {
@@ -21,7 +23,7 @@ public class UserDataController {
 
 	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public UserDTO getDefaultLogin( final Principal principal ) {
 		final User user = userService.findUserByName( principal.getName() );
 
@@ -38,7 +40,7 @@ public class UserDataController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/create/" )
+	@RequestMapping( method = RequestMethod.PUT, value = "/create/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public NewUserDTO registerUser( final @RequestBody NewUserDTO newUserDTO ) {
 		userService.createUser( newUserDTO.getLogin(), newUserDTO.getName(), newUserDTO.getPassword() );
 		return newUserDTO;
