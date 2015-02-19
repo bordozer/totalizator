@@ -6,10 +6,10 @@ define( [ 'jquery' ], function ( $ ) {
 			$.ajax( {
 				method: 'POST',
 				url: '/logout',
-				headers: {
+				/*headers: {
 					"Content-Type": "application/x-www-form-urlencoded",
 					"X-Login-Ajax-call": 'true'
-				},
+				},*/
 				success: function ( response ) {
 					window.location.reload();
 				},
