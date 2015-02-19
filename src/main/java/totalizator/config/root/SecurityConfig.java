@@ -15,11 +15,12 @@ import totalizator.app.security.SecurityUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String LOGIN_PAGE_URL = "/resources/index.html";
+	private static final String LOGIN_PAGE_URL = "/resources/public/login.html";
+	private static final String PORTAL_PAGE_URL = "/resources/totalizator.html";
 
-	private static final Logger LOGGER = Logger.getLogger( AppSecurityConfig.class );
+	private static final Logger LOGGER = Logger.getLogger( SecurityConfig.class );
 
 	@Autowired
 	private SecurityUserDetailsService userDetailsService;
@@ -43,7 +44,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
-			.defaultSuccessUrl( "/resources/totalizator.html" )
+			.defaultSuccessUrl( PORTAL_PAGE_URL )
 			.loginProcessingUrl( "/authenticate" )
 			.usernameParameter( "login" )
 			.passwordParameter( "password" )

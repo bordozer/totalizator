@@ -2,7 +2,7 @@ package totalizator.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import totalizator.config.root.AppSecurityConfig;
+import totalizator.config.root.SecurityConfig;
 import totalizator.config.root.DevelopmentConfiguration;
 import totalizator.config.root.RootContextConfig;
 import totalizator.config.root.TestConfiguration;
@@ -14,7 +14,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] {RootContextConfig.class, DevelopmentConfiguration.class, TestConfiguration.class, AppSecurityConfig.class };
+		return new Class<?>[] {RootContextConfig.class, DevelopmentConfiguration.class, TestConfiguration.class, SecurityConfig.class };
 	}
 
 	@Override

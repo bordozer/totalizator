@@ -7,7 +7,7 @@
 	<display-name>Web Application</display-name>
 
 	<welcome-file-list>
-		<welcome-file>/resources/index.html</welcome-file>
+		<welcome-file>/resources/public/login.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>
