@@ -40,8 +40,8 @@ public class TestDataInitializer {
 
 		transaction.commit();
 
-		LOGGER.debug( "=============================================================" );
-		LOGGER.debug( "=                         USER CREATED                      =" );
-		LOGGER.debug( "=============================================================" );
+		LOGGER.debug( "========================================================================" );
+		LOGGER.debug( "=                         USERS HAVE BEEN CREATED                      =" );
+		LOGGER.debug( "========================================================================" );
 	}
 }
