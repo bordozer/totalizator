@@ -1,6 +1,8 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<tags:page>
+<jsp:useBean id="portalPageModel" type="totalizator.app.controllers.ui.portal.PortalPageModel" scope="request"/>
+
+<tags:page userName="${portalPageModel.userName}">
 
 	<div class="container-fluid portal-page"></div>
 	<script type="text/javascript">

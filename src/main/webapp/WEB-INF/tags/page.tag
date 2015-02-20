@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ attribute name="userName" required="true" type="java.lang.String" %>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -17,7 +19,21 @@
 </head>
 <body>
 
-	<jsp:doBody/>
+	<div class="row" style="height: 50px; padding-top: 15px;">
+
+		<div class="col-lg-10">
+			<h3 class="panel-title text-center">TOTALIZATOR - ${userName}</h3>
+		</div>
+
+		<div class="col-lg-1 text-right fa fa-sign-out logout-link" style="float: right"><a href="#">Logout</a></div>
+		<div class="col-lg-1 text-right fa fa fa-cog admin-link" style="float: right"><a href="/admin/">Admin</a></div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<jsp:doBody/>
+		</div>
+	</div>
 
 </body>
 </html>
