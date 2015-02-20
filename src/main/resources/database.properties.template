@@ -1,0 +1,11 @@
+
+database.host=localhost
+
+database.port=3306
+
+database.name=totalizator2
+
+database.user.name=root
+
+database.user.password=ThePassword
+
