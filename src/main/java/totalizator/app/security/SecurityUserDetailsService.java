@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 import totalizator.app.dao.UserRepository;
 import totalizator.app.models.User;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
@@ -32,7 +33,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException( String.format( "Username not found: %s", login ) );
 		}
 
-		final List<GrantedAuthority> authorities = new ArrayList<>();
+		final List<GrantedAuthority> authorities = newArrayList();
 		authorities.add( new SimpleGrantedAuthority( "ROLE_USER" ) );
 
 		return new org.springframework.security.core.userdetails.User( login, user.getPassword(), authorities );
