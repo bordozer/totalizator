@@ -1,4 +1,4 @@
-package totalizator.app.controllers.login;
+package totalizator.app.controllers.rest.login;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

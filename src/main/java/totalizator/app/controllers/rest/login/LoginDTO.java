@@ -1,4 +1,4 @@
-package totalizator.app.controllers.login;
+package totalizator.app.controllers.rest.login;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

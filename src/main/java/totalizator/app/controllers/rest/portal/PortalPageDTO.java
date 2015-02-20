@@ -1,4 +1,4 @@
-package totalizator.app.controllers.portal;
+package totalizator.app.controllers.rest.portal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

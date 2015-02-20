@@ -1,4 +1,4 @@
-package totalizator.app.controllers.user.data;
+package totalizator.app.controllers.rest.user.data;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

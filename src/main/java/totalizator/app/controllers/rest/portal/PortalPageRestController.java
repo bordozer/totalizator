@@ -1,4 +1,4 @@
-package totalizator.app.controllers.portal;
+package totalizator.app.controllers.rest.portal;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/portal-page" )
-public class PortalPageController {
+public class PortalPageRestController {
 
-	private static final Logger LOGGER = Logger.getLogger( PortalPageController.class );
+	private static final Logger LOGGER = Logger.getLogger( PortalPageRestController.class );
 
 	@Autowired
 	private UserService userService;

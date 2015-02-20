@@ -1,4 +1,4 @@
-package totalizator.app.controllers.user.data;
+package totalizator.app.controllers.rest.user.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
