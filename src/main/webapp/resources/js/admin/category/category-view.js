@@ -66,6 +66,7 @@ define( function ( require ) {
 
 		events: {
 			'click .category-entry-name, .category-entry-edit': '_onCategoryEditClick'
+			, 'click .category-entry-save': '_onCategorySaveClick'
 			, 'click .category-entry-edit-cancel': '_onCategoryEditCancelClick'
 		},
 
@@ -96,10 +97,26 @@ define( function ( require ) {
 			this.renderEdit();
 		},
 
+		_saveCategory: function() {
+			this._bind();
+			this.model.save();
+			this.render();
+		},
+
+		_bind: function() {
+			this.model.set( { categoryName: this.$( '.entry-name' ).val() } );
+		},
+
 		_onCategoryEditClick: function( evt ) {
 			evt.preventDefault();
 
 			this._editCategory();
+		},
+
+		_onCategorySaveClick: function( evt ) {
+			evt.preventDefault();
+
+			this._saveCategory();
 		},
 
 		_onCategoryEditCancelClick: function( evt ) {
@@ -108,7 +125,7 @@ define( function ( require ) {
 				this.render();
 				return;
 			}
-//			this.model.destroy();
+			this.model.destroy();
 			this.remove();
 		}
 	} );
