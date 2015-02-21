@@ -6,7 +6,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		defaults: {
 			categoryId: 0
-			, categoryName: 'Basketball'
+			, categoryName: ''
 		},
 
 		initialize: function ( options ) {
