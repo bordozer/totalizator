@@ -49,7 +49,7 @@ public class CategoryController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.POST, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.PUT, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CategoryDTO edit( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
 		// TODO: check if name exists
 		final Category category = categoryService.load( categoryDTO.getCategoryId() );
