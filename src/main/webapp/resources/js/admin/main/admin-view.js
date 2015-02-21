@@ -10,11 +10,6 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var Translator = require( 'js/translator' );
-	var translator = new Translator( {
-		title: 'Totalizator'
-	});
-
 	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -32,7 +27,6 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				user: this.model.get( 'userDTO' )
-				, translator: translator
 			 } ) );
 
 			return this.$el;

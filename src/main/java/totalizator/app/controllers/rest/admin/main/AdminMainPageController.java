@@ -25,7 +25,7 @@ public class AdminMainPageController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public AdminMainPageDTO getDefaultLogin( final Principal principal ) {
+	public AdminMainPageDTO adminMainPage( final Principal principal ) {
 
 		final User user = userService.findUserByLogin( principal.getName() );
 
