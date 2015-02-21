@@ -6,16 +6,16 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!js/portal/templates/portal-template.html' );
+	var Template = require( 'text!js/admin/main/templates/admin-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
 
-	var Translator = require( '/resources/js/translator.js' );
+	var Translator = require( 'js/translator' );
 	var translator = new Translator( {
 		title: 'Totalizator'
 	});
 
-	var PortalPageView = Backbone.View.extend( {
+	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -31,7 +31,7 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( this.template( {
-				userName: this.model.get( 'userName' )
+				user: this.model.get( 'userDTO' )
 				, translator: translator
 			 } ) );
 
@@ -46,6 +46,6 @@ define( function ( require ) {
 
 	} );
 
-	return { PortalPageView: PortalPageView };
+	return { AdminView: AdminView };
 } );
 

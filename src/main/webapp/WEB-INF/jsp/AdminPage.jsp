@@ -4,6 +4,11 @@
 
 <tags:page userName="${adminModel.userName}">
 
-	Admin Page
+	<div class="admin-main-page"></div>
+	<script type="text/javascript">
+		require( [ 'jquery', 'js/admin/main/admin' ], function ( $, init ) {
+			init( $( '.admin-main-page' ) );
+		} );
+	</script>
 
 </tags:page>
