@@ -41,7 +41,11 @@ define( function ( require ) {
 				model: model
 			} );
 
-			return this.$( '.categories-container' ).append( view.renderEdit().$el );
+			if ( model.get( 'categoryId' ) == 0 ) {
+				return this.$( '.categories-container' ).append( view.renderEdit().$el );
+			}
+
+			return this.$( '.categories-container' ).append( view.render().$el );
 		},
 
 		_addCategory: function() {
@@ -137,7 +141,7 @@ define( function ( require ) {
 
 		_onCategoryEditCancelClick: function( evt ) {
 			evt.preventDefault();
-			if ( this.model.get( 'id' ) > 0 ) {
+			if ( this.model.get( 'categoryId' ) > 0 ) {
 				this.render();
 				return;
 			}
