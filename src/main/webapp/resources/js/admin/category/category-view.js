@@ -72,6 +72,7 @@ define( function ( require ) {
 			'click .category-entry-name, .category-entry-edit': '_onCategoryEditClick'
 			, 'click .category-entry-save': '_onCategorySaveClick'
 			, 'click .category-entry-edit-cancel': '_onCategoryEditCancelClick'
+			, 'click .category-entry-del': '_onCategoryDelClick'
 		},
 
 		initialize: function ( options ) {
@@ -100,6 +101,13 @@ define( function ( require ) {
 
 		_editCategory: function() {
 			this.renderEdit();
+		},
+
+		_deleteCategory: function() {
+			if ( confirm( "Delete category '" + this.model.get( 'categoryName' ) + "'?" ) ) {
+				this.model.destroy();
+				this.remove();
+			}
 		},
 
 		_saveCategory: function() {
@@ -137,6 +145,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._saveCategory();
+		},
+
+		_onCategoryDelClick: function( evt ) {
+			evt.preventDefault();
+
+			this._deleteCategory();
 		},
 
 		_onCategoryEditCancelClick: function( evt ) {

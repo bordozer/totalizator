@@ -21,11 +21,7 @@ public class CategoryRepository {
 	}
 
 	public Category load( final int id ) {
-		final List<Category> categories = em.createNamedQuery( Category.FIND_CATEGORY_BY_ID, Category.class )
-				.setParameter( "id", id )
-				.getResultList();
-
-		return categories.size() == 1 ? categories.get( 0 ) : null;
+		return em.find( Category.class, id );
 	}
 
 	public Category findByName( final String categoryName ) {
@@ -39,5 +35,9 @@ public class CategoryRepository {
 	public List<Category> loadAll() {
 		return em.createNamedQuery( Category.LOAD_ALL_CATEGORIES, Category.class )
 				.getResultList();
+	}
+
+	public void delete( final int id ) {
+		em.remove( load( id ) );
 	}
 }

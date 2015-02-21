@@ -5,6 +5,7 @@ import totalizator.app.models.Category;
 import java.util.List;
 
 public interface CategoryService {
+
 	void save( Category category );
 
 	Category load( final int id );
@@ -12,4 +13,6 @@ public interface CategoryService {
 	Category findByName( final String categoryName );
 
 	List<Category> loadAll();
+
+	void delete( final int id );
 }

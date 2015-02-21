@@ -62,8 +62,8 @@ public class CategoryController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.DELETE, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public CategoryDTO delete( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
-		return categoryDTO;
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{categoryId}" )
+	public void delete( final @PathVariable( "categoryId" ) int categoryId ) {
+		categoryService.delete( categoryId );
 	}
 }
