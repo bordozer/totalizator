@@ -17,7 +17,7 @@ import totalizator.app.security.SecurityUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	public static final String PORTAL_PAGE_URL = "/resources/totalizator.html";
+	public static final String PORTAL_PAGE_URL = "/totalizator/";
 
 	private static final String LOGIN_PAGE_URL = "/resources/public/login.html";
 

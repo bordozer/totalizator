@@ -49,7 +49,7 @@ define( function ( require ) {
 				},
 				success: function ( response ) {
 					if ( response == 'ok' ) {
-						window.location.replace( '/resources/totalizator.html' );
+						window.location.replace( '/totalizator/' );
 						return;
 					}
 					alert( 'Access denied' ); // TODO
