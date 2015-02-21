@@ -58,10 +58,10 @@ public class CategoryController {
 	@RequestMapping( method = RequestMethod.POST, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CategoryDTO edit( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
 		// TODO: check if name exists
-		/*final Category category = categoryService.load( categoryDTO.getCategoryId() );
+		final Category category = categoryService.load( categoryDTO.getCategoryId() );
 		category.setCategoryName( categoryDTO.getCategoryName() );
 
-		categoryService.save( category );*/
+		categoryService.save( category );
 
 		return categoryDTO;
 	}

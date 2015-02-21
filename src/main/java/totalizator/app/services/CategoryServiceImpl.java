@@ -16,10 +16,10 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryRepository.save( category );
 	}
 
-	/*@Override
+	@Override
 	public Category load( final int id ) {
 		return categoryRepository.load( id );
-	}*/
+	}
 
 	@Override
 	public Category findByName( final String categoryName ) {

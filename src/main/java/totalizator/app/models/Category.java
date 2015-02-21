@@ -5,6 +5,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import static totalizator.app.models.Category.FIND_CATEGORY_BY_ID;
 import static totalizator.app.models.Category.FIND_CATEGORY_BY_NAME;
 import static totalizator.app.models.Category.LOAD_ALL_CATEGORIES;
 
@@ -15,19 +16,19 @@ import static totalizator.app.models.Category.LOAD_ALL_CATEGORIES;
 				name = LOAD_ALL_CATEGORIES,
 				query = "select c from Category c order by categoryName"
 		),
-		/*@NamedQuery(
+		@NamedQuery(
 				name = FIND_CATEGORY_BY_ID,
-				query = "select c from Category c where id: id"
-		),*/
+				query = "select c from Category c where id= :id"
+		),
 		@NamedQuery(
 				name = FIND_CATEGORY_BY_NAME,
-				query = "select c from Category c where categoryName: categoryName"
+				query = "select c from Category c where categoryName= :categoryName"
 		)
 } )
 public class Category extends AbstractEntity {
 
 	public static final String LOAD_ALL_CATEGORIES = "categories.loadAllCategories";
-//	public static final String FIND_CATEGORY_BY_ID = "categories.findCategoryById";
+	public static final String FIND_CATEGORY_BY_ID = "categories.findCategoryById";
 	public static final String FIND_CATEGORY_BY_NAME = "categories.findCategoryByName";
 
 	private String categoryName;

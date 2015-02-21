@@ -20,13 +20,13 @@ public class CategoryRepository {
 		em.merge( category );
 	}
 
-	/*public Category load( final int id ) {
+	public Category load( final int id ) {
 		final List<Category> categories = em.createNamedQuery( Category.FIND_CATEGORY_BY_ID, Category.class )
 				.setParameter( "id", id )
 				.getResultList();
 
 		return categories.size() == 1 ? categories.get( 0 ) : null;
-	}*/
+	}
 
 	public Category findByName( final String categoryName ) {
 		final List<Category> categories = em.createNamedQuery( Category.FIND_CATEGORY_BY_NAME, Category.class )
