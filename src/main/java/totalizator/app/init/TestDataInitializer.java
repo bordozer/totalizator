@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import totalizator.app.models.Category;
 import totalizator.app.models.User;
 
 import javax.persistence.EntityManagerFactory;
@@ -40,10 +41,16 @@ public class TestDataInitializer {
 		final User user3 = new User( "patrick", "Patrick Aloysius Ewing", "$2a$10$daF6I2MzfIcmGg/pWNmc4ep8OLkjbDDRxRhnKhMpbTOyLNacpcMVO" );
 		session.persist( user3 );
 
+		final Category category1 = new Category( "Basketball" );
+		session.persist( category1 );
+
+		final Category category2 = new Category( "Football" );
+		session.persist( category2 );
+
 		transaction.commit();
 
 		LOGGER.debug( "========================================================================" );
-		LOGGER.debug( "=                         USERS HAVE BEEN CREATED                      =" );
+		LOGGER.debug( "=                          TEST DATA IS CREATED                        =" );
 		LOGGER.debug( "========================================================================" );
 	}
 }
