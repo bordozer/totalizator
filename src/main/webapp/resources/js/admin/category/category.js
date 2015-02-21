@@ -10,7 +10,7 @@ define( function( require ) {
 	var View = require( './category-view.js' );
 
 	function init( container ) {
-		var model = new Model.CategoryModel();
+		var model = new Model.CategoriesModel();
 		var view = new View.CategoryView( { model: model, el: container } );
 	}
 

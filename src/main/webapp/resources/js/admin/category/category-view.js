@@ -19,11 +19,12 @@ define( function ( require ) {
 		},
 
 		initialize: function( options ) {
-			this.model.on( 'sync', this.render, this );
+
+			this.model.on( 'add', this.renderEntry, this );
 
 			this.render();
 
-//			this.model.fetch( { cache: false } );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
@@ -31,6 +32,15 @@ define( function ( require ) {
 			this.$el.html( this.templateList( {
 				user: this.model.get( 'userDTO' )
 			 } ) );
+
+			return this.$el;
+		},
+
+		renderEntry: function ( model ) {
+			console.log( model );
+			/*this.$el.html( this.templateEntry( {
+				model: model
+			 } ) );*/
 
 			return this.$el;
 		}
