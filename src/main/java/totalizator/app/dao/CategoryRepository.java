@@ -35,4 +35,9 @@ public class CategoryRepository {
 
 		return categories.size() == 1 ? categories.get( 0 ) : null;
 	}
+
+	public List<Category> loadAll() {
+		return em.createNamedQuery( Category.LOAD_ALL_CATEGORIES, Category.class )
+				.getResultList();
+	}
 }

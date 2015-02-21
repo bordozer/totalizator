@@ -30,18 +30,12 @@ public class CategoryController {
 
 		final List<CategoryDTO> result = newArrayList();
 
-//		result.add( new CategoryDTO( 1, "Category 1" ) );
-//		result.add( new CategoryDTO( 2, "Category 2" ) );
+		for ( final Category category : categoryService.loadAll() ) {
+			result.add( new CategoryDTO( category.getId(), category.getCategoryName() ) );
+		}
 
 		return result;
 	}
-
-	/*@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE )
-	public CategoryDTO category( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
-		return categoryDTO;
-	}*/
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
