@@ -24,8 +24,8 @@ public class CategoryController {
 
 		final List<CategoryDTO> result = newArrayList();
 
-		result.add( new CategoryDTO( 1, "Category 1" ) );
-		result.add( new CategoryDTO( 2, "Category 2" ) );
+//		result.add( new CategoryDTO( 1, "Category 1" ) );
+//		result.add( new CategoryDTO( 2, "Category 2" ) );
 
 		return result;
 	}
@@ -41,6 +41,13 @@ public class CategoryController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CategoryDTO edit( final @RequestBody CategoryDTO categoryDTO ) {
+		return categoryDTO;
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.DELETE, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	public CategoryDTO delete( final @RequestBody CategoryDTO categoryDTO ) {
 		return categoryDTO;
 	}
 }

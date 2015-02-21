@@ -4,6 +4,11 @@ define( ["backbone"], function ( Backbone ) {
 
 		idAttribute: 'categoryId',
 
+		defaults: {
+			categoryId: 0
+			, categoryName: ''
+		},
+
 		initialize: function ( options ) {
 
 		}
