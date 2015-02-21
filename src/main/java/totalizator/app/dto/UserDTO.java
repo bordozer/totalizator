@@ -25,4 +25,9 @@ public class UserDTO {
 	public void setUserName( final String userName ) {
 		this.userName = userName;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "#%d: %s", userId, userName );
+	}
 }

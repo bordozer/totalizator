@@ -30,24 +30,31 @@ public class CategoryController {
 		return result;
 	}
 
+	/*@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE )
+	public CategoryDTO category( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
+		return categoryDTO;
+	}*/
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CategoryDTO create( final @RequestBody CategoryDTO categoryDTO ) {
 		return categoryDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public CategoryDTO edit( final @RequestBody CategoryDTO categoryDTO ) {
+	@RequestMapping( method = RequestMethod.POST, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	public CategoryDTO edit( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
 		return categoryDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.DELETE, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public CategoryDTO delete( final @RequestBody CategoryDTO categoryDTO ) {
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	public CategoryDTO delete( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
 		return categoryDTO;
 	}
 }

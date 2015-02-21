@@ -31,4 +31,9 @@ public class CategoryDTO {
 	public void setCategoryName( final String categoryName ) {
 		this.categoryName = categoryName;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "#%d: %s", categoryId, categoryName );
+	}
 }

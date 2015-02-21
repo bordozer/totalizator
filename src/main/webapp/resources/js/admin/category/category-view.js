@@ -71,6 +71,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.model.on( 'sync', this.render, this )
 		},
 
 		render: function () {
@@ -105,7 +106,6 @@ define( function ( require ) {
 			}
 
 			this.model.save();
-			this.render();
 		},
 
 		_bind: function() {
@@ -113,9 +113,14 @@ define( function ( require ) {
 		},
 
 		_validate: function() {
+
 			if ( this.model.get( 'categoryName' ).trim().length == 0 ) {
 				alert( 'Enter a name!' ); // TODO: translate
+
+				return false;
 			}
+
+			return true;
 		},
 
 		_onCategoryEditClick: function( evt ) {
