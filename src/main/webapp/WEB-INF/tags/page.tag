@@ -19,7 +19,11 @@
 </head>
 <body>
 
-	<jsp:doBody/>
+	<div class="container-fluid">
+
+		<jsp:doBody/>
+
+	</div>
 
 </body>
 </html>
