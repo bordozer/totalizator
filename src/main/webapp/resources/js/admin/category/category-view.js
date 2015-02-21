@@ -99,12 +99,23 @@ define( function ( require ) {
 
 		_saveCategory: function() {
 			this._bind();
+
+			if( ! this._validate() ){
+				return;
+			}
+
 			this.model.save();
 			this.render();
 		},
 
 		_bind: function() {
 			this.model.set( { categoryName: this.$( '.entry-name' ).val() } );
+		},
+
+		_validate: function() {
+			if ( this.model.get( 'categoryName' ).trim().length == 0 ) {
+				alert( 'Enter a name!' ); // TODO: translate
+			}
 		},
 
 		_onCategoryEditClick: function( evt ) {
