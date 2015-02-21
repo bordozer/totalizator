@@ -10,6 +10,11 @@ define( function ( require ) {
 
 	var Services = require( 'js/services.js' );
 
+	var Translator = require( 'js/translator' );
+	var translator = new Translator( {
+		title: 'Totalizator'
+	});
+
 	var PortalPageView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -27,6 +32,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )
+				, translator: translator
 			 } ) );
 
 			return this.$el;
