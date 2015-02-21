@@ -9,7 +9,7 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/category/templates/category-template.html' );
 	var TemplateList = require( 'text!js/admin/category/templates/categories-template.html' );
 
-	var CategoryView = Backbone.View.extend( {
+	var CategoriesView = Backbone.View.extend( {
 
 		templateEntry:_.template( TemplateEntry ),
 		templateList:_.template( TemplateList ),
@@ -46,6 +46,6 @@ define( function ( require ) {
 		}
 	} );
 
-	return { CategoryView: CategoryView };
+	return { CategoriesView: CategoriesView };
 } );
 

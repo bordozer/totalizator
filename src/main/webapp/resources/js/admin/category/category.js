@@ -11,7 +11,7 @@ define( function( require ) {
 
 	function init( container ) {
 		var model = new Model.CategoriesModel();
-		var view = new View.CategoryView( { model: model, el: container } );
+		var view = new View.CategoriesView( { model: model, el: container } );
 	}
 
 	return init;
