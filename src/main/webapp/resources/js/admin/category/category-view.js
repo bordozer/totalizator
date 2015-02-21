@@ -11,14 +11,14 @@ define( function ( require ) {
 
 	var CategoriesView = Backbone.View.extend( {
 
-		templateEntry:_.template( TemplateEntry ),
-		templateList:_.template( TemplateList ),
+
+		template: _.template( TemplateList ),
 
 		events: {
 //			'click .logout-link': '_logout'
 		},
 
-		initialize: function( options ) {
+		initialize: function ( options ) {
 
 			this.model.on( 'add', this.renderEntry, this );
 
@@ -29,20 +29,36 @@ define( function ( require ) {
 
 		render: function () {
 
-			this.$el.html( this.templateList( {
-				user: this.model.get( 'userDTO' )
-			 } ) );
+			this.$el.html( this.template( {
+			} ) );
 
 			return this.$el;
 		},
 
 		renderEntry: function ( model ) {
-			console.log( model );
-			/*this.$el.html( this.templateEntry( {
+			var view = new CategoryView( {
 				model: model
-			 } ) );*/
+			} );
 
-			return this.$el;
+			return this.$( '.categories-container' ).append( view.render().$el );
+		}
+	} );
+
+	var CategoryView = Backbone.View.extend( {
+
+		template: _.template( TemplateEntry ),
+
+		initialize: function ( options ) {
+		},
+
+		render: function () {
+			var modelJSON = this.model.toJSON();
+
+			this.$el.html( this.template( {
+				model: modelJSON
+			} ) );
+
+			return this;
 		}
 	} );
 

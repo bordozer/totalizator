@@ -24,8 +24,8 @@ public class CategoryController {
 
 		final List<CategoryDTO> result = newArrayList();
 
-//		final CategoryDTO dto = new CategoryDTO();
-//		dto.setCategoryId( categoryId ); // TODO: load category
+		result.add( new CategoryDTO( 1, "Category 1" ) );
+		result.add( new CategoryDTO( 2, "Category 2" ) );
 
 		return result;
 	}
