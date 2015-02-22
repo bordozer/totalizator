@@ -205,10 +205,7 @@
 			<version>1.2</version>
 		</dependency>
 
-
-
-
-		<!--<dependency>
+		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
@@ -218,10 +215,7 @@
 			<groupId>ecs</groupId>
 			<artifactId>ecs</artifactId>
 			<version>1.4.2</version>
-		</dependency>-->
-
-
-
+		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
