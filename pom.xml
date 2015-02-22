@@ -203,19 +203,20 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
-		</dependency>
+		</dependency>-->
 
-		<dependency>
+		<!--<dependency>
 			<groupId>ecs</groupId>
 			<artifactId>ecs</artifactId>
 			<version>1.4.2</version>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
