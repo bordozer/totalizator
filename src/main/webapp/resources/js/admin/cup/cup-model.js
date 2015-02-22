@@ -6,7 +6,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		defaults: {
 			cupId: 0
-			, cupName: 'NBA 2015'
+			, cupName: ''
 			, categoryDTO: { categoryId: 0
 							, categoryName: ''
 							}
