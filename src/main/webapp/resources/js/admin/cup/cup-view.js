@@ -26,13 +26,12 @@ define( function ( require ) {
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
 
-			this.model.fetch( { cache: false } );
-
 			this._loadCategories();
+
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
-			console.log( 'render', this.model );
 
 			this.$el.html( this.template( {
 				model: this.model
@@ -56,12 +55,10 @@ define( function ( require ) {
 			view.on( 'events:cups_changed', this._triggerCupsChanged, this );
 
 			var container = this.$( '.cups-container' );
-			if ( model.get( 'cupId' ) == 0 ) {
-				console.log( 'renderEntry - edit', model );
+			if ( model.get( 'isEditState' ) ) {
 				return container.append( view.renderEdit().$el );
 			}
 
-			console.log( 'renderEntry - view', model );
 			return container.append( view.render().$el );
 		},
 
@@ -76,12 +73,12 @@ define( function ( require ) {
 
 		_updateCategories: function() {
 			this._loadCategories();
-			this.model.refresh();
+			this.render();
 		},
 
 		_addEntry: function() {
 			this.listenToOnce( this.model, 'add', this.renderEntry );
-			this.model.add( {} );
+			this.model.add( { isEditState: true } );
 		},
 
 		_onAddClick: function( evt ) {
@@ -155,6 +152,8 @@ define( function ( require ) {
 				return;
 			}
 
+			this.model.set( { isEditState: false } );
+
 			var self = this;
 			this.model.save().then( function() {
 				self.trigger( 'events:caps_changed' );
@@ -192,7 +191,7 @@ define( function ( require ) {
 
 		_onEntryEditClick: function( evt ) {
 			evt.preventDefault();
-
+			this.model.set( { isEditState: true } );
 			this._editEntry();
 		},
 
@@ -211,6 +210,7 @@ define( function ( require ) {
 		_onEntryEditCancelClick: function( evt ) {
 			evt.preventDefault();
 			if ( this.model.get( 'cupId' ) > 0 ) {
+				this.model.set( { isEditState: false } );
 				this.render();
 				return;
 			}

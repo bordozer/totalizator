@@ -7,6 +7,7 @@ define( ["backbone"], function ( Backbone ) {
 		defaults: {
 			cupId: 0
 			, cupName: ''
+			, isEditState: false
 			, categoryDTO: { categoryId: 0
 							, categoryName: ''
 							}
