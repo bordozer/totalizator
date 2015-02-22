@@ -66,6 +66,9 @@ public class CategoryController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{categoryId}" )
 	public void delete( final @PathVariable( "categoryId" ) int categoryId ) {
+		if ( categoryId == 0 ) {
+			return;
+		}
 		categoryService.delete( categoryId );
 	}
 }
