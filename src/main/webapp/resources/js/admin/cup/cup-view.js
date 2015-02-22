@@ -102,6 +102,7 @@ define( function ( require ) {
 			, 'click .cup-entry-save': '_onEntrySaveClick'
 			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
 			, 'click .cup-entry-del': '_onEntryDelClick'
+			, 'change .entry-name, .entry-category-id': '_onChange'
 		},
 
 		initialize: function ( options ) {
@@ -187,6 +188,12 @@ define( function ( require ) {
 
 		_getCategoryId: function() {
 			return this.$( '.entry-category-id' ).val();
+		},
+
+		_onChange: function( evt ) {
+			evt.preventDefault();
+
+			this._bind();
 		},
 
 		_onEntryEditClick: function( evt ) {
