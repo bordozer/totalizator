@@ -22,8 +22,8 @@ public class CupServiceImpl implements CupService {
 
 	@Override
 	@Transactional
-	public void save( final Cup entry ) {
-		cupRepository.save( entry );
+	public Cup save( final Cup entry ) {
+		return cupRepository.save( entry );
 	}
 
 	@Override

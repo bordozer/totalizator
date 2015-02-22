@@ -22,8 +22,9 @@ public class CategoryRepository implements GenericService<Category> {
 				.getResultList();
 	}
 
-	public void save( final Category category ) {
-		em.merge( category );
+	@Override
+	public Category save( final Category entry ) {
+		return em.merge( entry );
 	}
 
 	public Category load( final int id ) {

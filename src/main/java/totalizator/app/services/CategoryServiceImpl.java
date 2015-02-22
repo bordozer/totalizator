@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CategoryRepository;
 import totalizator.app.models.Category;
+import totalizator.app.models.Cup;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	@Transactional
-	public void save( final Category category ) {
-		categoryRepository.save( category );
+	public Category save( final Category category ) {
+		return categoryRepository.save( category );
 	}
 
 	@Override

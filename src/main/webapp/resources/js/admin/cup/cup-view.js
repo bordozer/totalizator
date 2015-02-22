@@ -22,10 +22,9 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.model.on( 'add', this.renderEntry, this );
-			this.on( 'events:categories_changed', this._updateCategories, this );
+			this.model.on( 'sync', this.render, this );
 
-			this.render();
+			this.on( 'events:categories_changed', this._updateCategories, this );
 
 			this.model.fetch( { cache: false } );
 
@@ -33,15 +32,22 @@ define( function ( require ) {
 		},
 
 		render: function () {
+			console.log( 'render', this.model );
 
 			this.$el.html( this.template( {
 				model: this.model
 			} ) );
 
+			var self= this;
+			this.model.forEach( function( cup ) {
+				self.renderEntry( cup );
+			});
+
 			return this.$el;
 		},
 
 		renderEntry: function ( model ) {
+
 			var view = new CupView( {
 				model: model
 				, categories: this.categories
@@ -51,9 +57,11 @@ define( function ( require ) {
 
 			var container = this.$( '.cups-container' );
 			if ( model.get( 'cupId' ) == 0 ) {
+				console.log( 'renderEntry - edit', model );
 				return container.append( view.renderEdit().$el );
 			}
 
+			console.log( 'renderEntry - view', model );
 			return container.append( view.render().$el );
 		},
 
@@ -68,10 +76,11 @@ define( function ( require ) {
 
 		_updateCategories: function() {
 			this._loadCategories();
-			this.render();
+			this.model.refresh();
 		},
 
 		_addEntry: function() {
+			this.listenToOnce( this.model, 'add', this.renderEntry );
 			this.model.add( {} );
 		},
 

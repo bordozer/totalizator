@@ -24,8 +24,8 @@ public class CupRepository implements GenericService<Cup> {
 	}
 
 	@Override
-	public void save( final Cup entry ) {
-		em.merge( entry );
+	public Cup save( final Cup entry ) {
+		return em.merge( entry );
 	}
 
 	@Override

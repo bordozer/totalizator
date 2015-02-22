@@ -42,7 +42,9 @@ public class CategoryController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CategoryDTO create( final @RequestBody CategoryDTO categoryDTO ) {
 		// TODO: check if name exists
-		categoryService.save( new Category( categoryDTO.getCategoryName() ) );
+		final Category category = categoryService.save( new Category( categoryDTO.getCategoryName() ) );
+
+		categoryDTO.setCategoryId( category.getId() );
 
 		return categoryDTO;
 	}

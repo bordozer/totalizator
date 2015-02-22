@@ -8,7 +8,7 @@ public interface GenericService<T extends AbstractEntity> {
 
 	List<T> loadAll();
 
-	void save( T entry );
+	T save( T entry );
 
 	T load( final int id );
 
