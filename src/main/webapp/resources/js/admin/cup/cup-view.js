@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateList = require( 'text!js/admin/cup/templates/cup-template.html' );
+	var TemplateList = require( 'text!js/admin/cup/templates/cups-template.html' );
 	var TemplateEntry = require( 'text!js/admin/cup/templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/cup/templates/cup-edit-template.html' );
 
@@ -20,7 +20,6 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-
 			this.model.on( 'add', this.renderEntry, this );
 
 			this.render();
@@ -31,6 +30,7 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( this.template( {
+				model: this.model
 			} ) );
 
 			return this.$el;

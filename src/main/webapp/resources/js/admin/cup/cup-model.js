@@ -5,12 +5,11 @@ define( ["backbone"], function ( Backbone ) {
 		idAttribute: 'cupId',
 
 		defaults: {
-			categoryId: 0
-			, categoryName: ''
+			cupId: 0
+			, cupName: ''
 		},
 
 		initialize: function ( options ) {
-
 		}
 	});
 
