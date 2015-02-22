@@ -5,8 +5,13 @@
 <tags:page userName="${adminModel.userName}">
 
 	<style type="text/css">
-		.category-line {
-			height: 40px;
+		.admin-entry-line {
+			height: 41px;
+			padding-top: 3px;
+		}
+
+		.admin-entry-icon-cell {
+			padding-top: 5px;
 		}
 	</style>
 
