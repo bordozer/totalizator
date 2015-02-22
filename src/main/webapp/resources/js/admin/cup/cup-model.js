@@ -14,6 +14,14 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
+		},
+
+		setEditState: function() {
+			this.set( { isEditState: true } );
+		},
+
+		cancelEditState: function() {
+			this.set( { isEditState: false } );
 		}
 	});
 

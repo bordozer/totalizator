@@ -153,7 +153,7 @@ define( function ( require ) {
 				return;
 			}
 
-			this.model.set( { isEditState: false } );
+			this.model.cancelEditState();
 
 			var self = this;
 			this.model.save().then( function() {
@@ -198,7 +198,7 @@ define( function ( require ) {
 
 		_onEntryEditClick: function( evt ) {
 			evt.preventDefault();
-			this.model.set( { isEditState: true } );
+			this.model.setEditState();
 			this._editEntry();
 		},
 
@@ -217,7 +217,7 @@ define( function ( require ) {
 		_onEntryEditCancelClick: function( evt ) {
 			evt.preventDefault();
 			if ( this.model.get( 'cupId' ) > 0 ) {
-				this.model.set( { isEditState: false } );
+				this.model.cancelEditState();
 				this.render();
 				return;
 			}
