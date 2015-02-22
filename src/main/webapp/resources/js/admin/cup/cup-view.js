@@ -6,17 +6,17 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateList = require( 'text!js/admin/category/templates/categories-template.html' );
-	var TemplateEntry = require( 'text!js/admin/category/templates/category-template.html' );
-	var TemplateEntryEdit = require( 'text!js/admin/category/templates/category-edit-template.html' );
+	var TemplateList = require( 'text!js/admin/cup/templates/cup-template.html' );
+	var TemplateEntry = require( 'text!js/admin/cup/templates/cup-template.html' );
+	var TemplateEntryEdit = require( 'text!js/admin/cup/templates/cup-edit-template.html' );
 
-	var CategoriesView = Backbone.View.extend( {
+	var CupsView = Backbone.View.extend( {
 
 
 		template: _.template( TemplateList ),
 
 		events: {
-			'click .add-category-button': '_onAddClick'
+			'click .add-entry-button': '_onAddClick'
 		},
 
 		initialize: function ( options ) {
@@ -37,15 +37,16 @@ define( function ( require ) {
 		},
 
 		renderEntry: function ( model ) {
-			var view = new CategoryView( {
+			var view = new CupView( {
 				model: model
 			} );
 
-			if ( model.get( 'categoryId' ) == 0 ) {
-				return this.$( '.categories-container' ).append( view.renderEdit().$el );
+			var container = this.$( '.cups-container' );
+			if ( model.get( 'cupId' ) == 0 ) {
+				return container.append( view.renderEdit().$el );
 			}
 
-			return this.$( '.categories-container' ).append( view.render().$el );
+			return container.append( view.render().$el );
 		},
 
 		_addEntry: function() {
@@ -63,16 +64,16 @@ define( function ( require ) {
 
 
 
-	var CategoryView = Backbone.View.extend( {
+	var CupView = Backbone.View.extend( {
 
 		templateView: _.template( TemplateEntry ),
 		templateEdit: _.template( TemplateEntryEdit ),
 
 		events: {
-			'click .category-entry-name, .category-entry-edit': '_onCategoryEditClick'
-			, 'click .category-entry-save': '_onCategorySaveClick'
-			, 'click .category-entry-edit-cancel': '_onCategoryEditCancelClick'
-			, 'click .category-entry-del': '_onCategoryDelClick'
+			'click .cup-entry-name, .cup-entry-edit': '_onEntryEditClick'
+			, 'click .cup-entry-save': '_onEntrySaveClick'
+			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
+			, 'click .cup-entry-del': '_onEntryDelClick'
 		},
 
 		initialize: function ( options ) {
@@ -104,7 +105,7 @@ define( function ( require ) {
 		},
 
 		_deleteEntry: function() {
-			if ( confirm( "Delete category '" + this.model.get( 'categoryName' ) + "'?" ) ) {
+			if ( confirm( "Delete cup '" + this.model.get( 'cupName' ) + "'?" ) ) {
 				this.model.destroy();
 				this.remove();
 			}
@@ -121,13 +122,13 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
-			this.model.set( { categoryName: this.$( '.entry-name' ).val() } );
+			this.model.set( { cupName: this.$( '.entry-name' ).val() } );
 		},
 
 		_validate: function() {
 
-			if ( this.model.get( 'categoryName' ).trim().length == 0 ) {
-				alert( 'Enter a name!' ); // TODO: translate
+			if ( this.model.get( 'cupName' ).trim().length == 0 ) {
+				alert( 'Enter a name!' );
 
 				return false;
 			}
@@ -135,27 +136,27 @@ define( function ( require ) {
 			return true;
 		},
 
-		_onCategoryEditClick: function( evt ) {
+		_onEntryEditClick: function( evt ) {
 			evt.preventDefault();
 
 			this._editEntry();
 		},
 
-		_onCategorySaveClick: function( evt ) {
+		_onEntrySaveClick: function( evt ) {
 			evt.preventDefault();
 
 			this._saveEntry();
 		},
 
-		_onCategoryDelClick: function( evt ) {
+		_onEntryDelClick: function( evt ) {
 			evt.preventDefault();
 
 			this._deleteEntry();
 		},
 
-		_onCategoryEditCancelClick: function( evt ) {
+		_onEntryEditCancelClick: function( evt ) {
 			evt.preventDefault();
-			if ( this.model.get( 'categoryId' ) > 0 ) {
+			if ( this.model.get( 'cupId' ) > 0 ) {
 				this.render();
 				return;
 			}
@@ -164,6 +165,6 @@ define( function ( require ) {
 		}
 	} );
 
-	return { CategoriesView: CategoriesView };
+	return { CupsView: CupsView };
 } );
 

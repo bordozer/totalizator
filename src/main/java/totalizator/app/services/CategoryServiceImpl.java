@@ -15,6 +15,12 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Override
+	@Transactional( readOnly = true )
+	public List<Category> loadAll() {
+		return categoryRepository.loadAll();
+	}
+
+	@Override
 	@Transactional
 	public void save( final Category category ) {
 		categoryRepository.save( category );
@@ -27,20 +33,14 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	@Transactional( readOnly = true )
-	public Category findByName( final String categoryName ) {
-		return categoryRepository.findByName( categoryName );
-	}
-
-	@Override
-	@Transactional( readOnly = true )
-	public List<Category> loadAll() {
-		return categoryRepository.loadAll();
-	}
-
-	@Override
 	@Transactional
 	public void delete( final int id ) {
 		categoryRepository.delete( id );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public Category findByName( final String categoryName ) {
+		return categoryRepository.findByName( categoryName );
 	}
 }
