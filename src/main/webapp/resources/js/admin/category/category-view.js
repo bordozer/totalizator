@@ -31,6 +31,7 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( this.template( {
+				model: this.model
 			} ) );
 
 			return this.$el;

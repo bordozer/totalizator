@@ -49,7 +49,7 @@ public class CupController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CupDTO create( final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
-		cupService.save( new Cup( cupDTO.getCupName() ) );
+		cupService.save( new Cup( cupDTO.getCupName(), cupDTO.getCategoryDTO().getCategoryId() ) );
 
 		return cupDTO;
 	}
@@ -61,6 +61,7 @@ public class CupController {
 		// TODO: check if name exists
 		final Cup cup = cupService.load( cupDTO.getCupId() );
 		cup.setCupName( cupDTO.getCupName() );
+		cup.setCategoryId( cupDTO.getCategoryDTO().getCategoryId() );
 
 		cupService.save( cup );
 

@@ -32,8 +32,9 @@ public class Cup extends AbstractEntity {
 	public Cup() {
 	}
 
-	public Cup( final String cupName ) {
+	public Cup( final String cupName, final int categoryId ) {
 		this.cupName = cupName;
+		this.categoryId = categoryId;
 	}
 
 	public String getCupName() {

@@ -29,7 +29,7 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 
 			this.categories = new Categories.CategoriesModel();
-			this.categories.fetch( { cache: false } );
+			this.categories.fetch( { cache: false } ); // TODO: user when...then to be sure that categories and this.model are loaded
 		},
 
 		render: function () {
@@ -44,6 +44,7 @@ define( function ( require ) {
 		renderEntry: function ( model ) {
 			var view = new CupView( {
 				model: model
+				, categories: this.categories
 			} );
 
 			var container = this.$( '.cups-container' );
@@ -82,6 +83,11 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			var categories = this.categories = [];
+			options.categories.forEach( function( category ) {
+				categories.push( category.toJSON() );
+			});
+
 			this.model.on( 'sync', this.render, this )
 		},
 
@@ -128,18 +134,32 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
-			this.model.set( { cupName: this.$( '.entry-name' ).val() } );
+			var cupName = this._getCupName();
+			var categoryId = this._getCategoryId();
+			var categoryName = _.find( this.categories, function( category ) {
+				return category.categoryId == categoryId;
+			} ).categoryName;
+
+			this.model.set( { cupName: cupName, categoryDTO: { categoryId: categoryId, categoryName: categoryName } } );
 		},
 
 		_validate: function() {
 
-			if ( this.model.get( 'cupName' ).trim().length == 0 ) {
+			if ( this._getCupName().length == 0 ) {
 				alert( 'Enter a name!' );
 
 				return false;
 			}
 
 			return true;
+		},
+
+		_getCupName: function() {
+			return this.$( '.entry-name' ).val().trim();
+		},
+
+		_getCategoryId: function() {
+			return this.$( '.entry-category-id' ).val();
 		},
 
 		_onEntryEditClick: function( evt ) {

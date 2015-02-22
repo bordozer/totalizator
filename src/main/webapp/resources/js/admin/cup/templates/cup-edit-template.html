@@ -3,7 +3,7 @@
 	<div class="col-lg-1 fa fa-close cup-entry-edit-cancel admin-entry-icon-cell" title="Cancel editing"></div>
 	<div class="col-lg-5"><input class="form-control entry-name" id="" name="" value="<%=model.cupName%>"></div>
 	<div class="col-lg-5">
-		<select name="categoryId">
+		<select class="form-control entry-category-id">
 			<% _.each( categories, function( category ) { %>
 				<option value="<%=category.categoryId%>" <%= model.categoryDTO.categoryId == category.categoryId ? 'selected' : '' %>><%=category.categoryName%></option>
 			<% }) %>
