@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="/resources/bower_components/fontawesome/css/font-awesome.min.css">
 
+	<link rel="stylesheet" type="text/css" href="/resources/public/style.css">
+
 	<script type="text/javascript" src="/resources/public/js/require-config.js"></script>
 	<script type="text/javascript" src="/resources/bower_components/requirejs/require.js"></script>
 
@@ -16,21 +18,17 @@
 <body>
 	<div class="container-fluid">
 
-		<div class="page-header" style="padding-left: 15px; margin: 0;">
 
-			<div class="row">
+		<div class="header-container page-header-c"></div>
+		<div class="header-specific-container" style="display: none;"></div>
 
-				<div class="col-lg-2">
-					<img src="/resources/public/img/logo.png">
-				</div>
+		<script type="text/javascript">
+			require( [ 'jquery', 'public/js/header/header' ], function ( $, init ) {
+				init( $( '.header-container'), $( '.header-specific-container' ) );
+			} );
+		</script>
 
-				<div class="col-lg-10">
-					<h1>Totalizator</h1>
-				</div>
 
-			</div>
-
-		</div>
 
 		<div class="row" style="margin-top: 50px;">
 

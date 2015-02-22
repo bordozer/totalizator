@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/fontawesome/css/font-awesome.min.css" />">
 
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/public/style.css" />">
+
 	<script type="text/javascript" src="<c:url value="/resources/public/js/require-config.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/bower_components/requirejs/require.js" />"></script>
 
