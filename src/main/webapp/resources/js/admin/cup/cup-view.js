@@ -47,12 +47,18 @@ define( function ( require ) {
 				, categories: this.categories
 			} );
 
+			view.on( 'events:cups_changed', this._triggerCupsChanged, this );
+
 			var container = this.$( '.cups-container' );
 			if ( model.get( 'cupId' ) == 0 ) {
 				return container.append( view.renderEdit().$el );
 			}
 
 			return container.append( view.render().$el );
+		},
+
+		_triggerCupsChanged: function() {
+			this.trigger( 'events:categories_changed' );
 		},
 
 		_loadCategories: function() {

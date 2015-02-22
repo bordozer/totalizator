@@ -41,7 +41,7 @@ define( function ( require ) {
 			var view = new CategoryView( {
 				model: model
 			} );
-			view.on( 'events:categories_changed', this._updateCategories, this );
+			view.on( 'events:categories_changed', this._triggerCategoriesChanged, this );
 
 			if ( model.get( 'categoryId' ) == 0 ) {
 				return this.$( '.categories-container' ).append( view.renderEdit().$el );
@@ -50,7 +50,7 @@ define( function ( require ) {
 			return this.$( '.categories-container' ).append( view.render().$el );
 		},
 
-		_updateCategories: function() {
+		_triggerCategoriesChanged: function() {
 			this.trigger( 'events:categories_changed' );
 		},
 
