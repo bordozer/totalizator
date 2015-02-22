@@ -127,6 +127,9 @@ define( function ( require ) {
 			this.model.save().then( function() {
 				self.trigger( 'events:categories_changed' );
 			});
+			/*this.model.save( { success: function() {
+				self.trigger( 'events:categories_changed' );
+			} } );*/
 		},
 
 		_bind: function() {

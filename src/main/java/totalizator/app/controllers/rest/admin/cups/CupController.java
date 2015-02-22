@@ -39,7 +39,7 @@ public class CupController {
 			@Override
 			public CupDTO apply( final Cup cup ) {
 				final Category category = categoryService.load( cup.getCategoryId() );
-				return new CupDTO( cup.getId(), cup.getCupName(), new CategoryDTO( category.getId(), category.getCategoryName() ) );
+				return new CupDTO( cup.getId(), cup.getCupName(), category.getId() );
 			}
 		} );
 	}
@@ -49,7 +49,7 @@ public class CupController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CupDTO create( final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
-		final Cup cup = cupService.save( new Cup( cupDTO.getCupName(), cupDTO.getCategoryDTO().getCategoryId() ) );
+		final Cup cup = cupService.save( new Cup( cupDTO.getCupName(), cupDTO.getCategoryId() ) );
 
 		cupDTO.setCupId( cup.getId() );
 		return cupDTO;
@@ -62,7 +62,7 @@ public class CupController {
 		// TODO: check if name exists
 		final Cup cup = cupService.load( cupDTO.getCupId() );
 		cup.setCupName( cupDTO.getCupName() );
-		cup.setCategoryId( cupDTO.getCategoryDTO().getCategoryId() );
+		cup.setCategoryId( cupDTO.getCategoryId() );
 
 		cupService.save( cup );
 

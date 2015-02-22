@@ -7,16 +7,15 @@ public class CupDTO {
 
 	private int cupId;
 	private String cupName;
-
-	private CategoryDTO categoryDTO;
+	private int categoryId;
 
 	public CupDTO() {
 	}
 
-	public CupDTO( final int cupId, final String cupName, final CategoryDTO categoryDTO ) {
+	public CupDTO( final int cupId, final String cupName, final int categoryId ) {
 		this.cupId = cupId;
 		this.cupName = cupName;
-		this.categoryDTO = categoryDTO;
+		this.categoryId = categoryId;
 	}
 
 	public int getCupId() {
@@ -35,11 +34,11 @@ public class CupDTO {
 		this.cupName = cupName;
 	}
 
-	public CategoryDTO getCategoryDTO() {
-		return categoryDTO;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategoryDTO( final CategoryDTO categoryDTO ) {
-		this.categoryDTO = categoryDTO;
+	public void setCategoryId( final int categoryId ) {
+		this.categoryId = categoryId;
 	}
 }

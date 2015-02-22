@@ -55,7 +55,7 @@ define( function ( require ) {
 		},
 
 		_updateCategories: function() {
-			this.cupsView.trigger( 'events:cate```gories_changed' );
+			this.cupsView.trigger( 'events:categories_changed' );
 		},
 
 		_logout: function() {

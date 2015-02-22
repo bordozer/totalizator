@@ -63,7 +63,7 @@ define( function ( require ) {
 		},
 
 		_triggerCupsChanged: function() {
-			this.trigger( 'events:categories_changed' );
+			this.trigger( 'events:cups_changed' );
 		},
 
 		_loadCategories: function() {
@@ -115,10 +115,12 @@ define( function ( require ) {
 		},
 
 		render: function () {
+
 			var modelJSON = this.model.toJSON();
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
+				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) )
 			} ) );
 
 			return this;
@@ -133,6 +135,12 @@ define( function ( require ) {
 			} ) );
 
 			return this;
+		},
+
+		_getCategoryName: function( categoryId ) {
+			return _.find( this.categories, function( category ) {
+				return category.categoryId == categoryId;
+			} ).categoryName;
 		},
 
 		_editEntry: function() {
@@ -164,11 +172,8 @@ define( function ( require ) {
 		_bind: function() {
 			var cupName = this._getCupName();
 			var categoryId = this._getCategoryId();
-			var categoryName = _.find( this.categories, function( category ) {
-				return category.categoryId == categoryId;
-			} ).categoryName;
 
-			this.model.set( { cupName: cupName, categoryDTO: { categoryId: categoryId, categoryName: categoryName } } );
+			this.model.set( { cupName: cupName, categoryId: categoryId } );
 		},
 
 		_validate: function() {

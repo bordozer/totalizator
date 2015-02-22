@@ -8,9 +8,7 @@ define( ["backbone"], function ( Backbone ) {
 			cupId: 0
 			, cupName: ''
 			, isEditState: false
-			, categoryDTO: { categoryId: 0
-							, categoryName: ''
-							}
+			, categoryId: 0
 		},
 
 		initialize: function ( options ) {
