@@ -118,7 +118,9 @@ define( function ( require ) {
 				return;
 			}
 
-			this.model.save();
+			this.model.save().then( function() {
+				this.trigger( 'events:category_saved' );
+			});
 		},
 
 		_bind: function() {
