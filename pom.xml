@@ -206,54 +206,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-		</dependency>-->
-
-		<!--<dependency>
-			<groupId>ecs</groupId>
-			<artifactId>ecs</artifactId>
-			<version>1.4.2</version>
-		</dependency>-->
-
-		<!--<dependency>
-			<groupId>org.apache.taglibs</groupId>
-			<artifactId>taglibs-standard-spec</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.taglibs</groupId>
-			<artifactId>taglibs-standard-impl</artifactId>
-			<version>1.2.1</version>
-		</dependency>-->
-
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-maven-plugin</artifactId>
 			<version>9.3.0.M1</version>
 		</dependency>
-
-		<!--<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>9.3.0.M1</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-jsp</artifactId>
-			<version>9.3.0.M1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>apache-jstl</artifactId>
-			<version>9.3.0.M1</version>
-		</dependency>-->
 
 	</dependencies>
 
