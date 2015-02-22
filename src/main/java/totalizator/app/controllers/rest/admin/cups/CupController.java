@@ -71,6 +71,11 @@ public class CupController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{cupId}" )
 	public void delete( final @PathVariable( "cupId" ) int cupId ) {
+
+		if ( cupId == 0 ) {
+			return;
+		}
+
 		cupService.delete( cupId );
 	}
 }

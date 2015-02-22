@@ -10,6 +10,8 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/cup/templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/cup/templates/cup-edit-template.html' );
 
+	var Categories = require( '/resources/js/admin/category/category-model.js' );
+
 	var CupsView = Backbone.View.extend( {
 
 
@@ -25,6 +27,9 @@ define( function ( require ) {
 			this.render();
 
 			this.model.fetch( { cache: false } );
+
+			this.categories = new Categories.CategoriesModel();
+			this.categories.fetch( { cache: false } );
 		},
 
 		render: function () {
@@ -95,6 +100,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
+				, categories: this.categories
 			} ) );
 
 			return this;
