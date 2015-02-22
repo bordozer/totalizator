@@ -1,5 +1,7 @@
 package totalizator.app.controllers.rest.admin.cups;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,13 +30,12 @@ public class CupController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> entries() {
 
-		final List<CupDTO> result = newArrayList();
-
-		for ( final Cup cup : cupService.loadAll() ) {
-			result.add( new CupDTO( cup.getId(), cup.getCupName() ) );
-		}
-
-		return result;
+		return Lists.transform( cupService.loadAll(), new Function<Cup, CupDTO>() {
+			@Override
+			public CupDTO apply( final Cup cup ) {
+				return new CupDTO( cup.getId(), cup.getCupName() );
+			}
+		} );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

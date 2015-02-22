@@ -1,5 +1,7 @@
 package totalizator.app.controllers.rest.admin.categories;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,13 +30,12 @@ public class CategoryController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<CategoryDTO> categories() {
 
-		final List<CategoryDTO> result = newArrayList();
-
-		for ( final Category category : categoryService.loadAll() ) {
-			result.add( new CategoryDTO( category.getId(), category.getCategoryName() ) );
-		}
-
-		return result;
+		return Lists.transform( categoryService.loadAll(), new Function<Category, CategoryDTO>() {
+			@Override
+			public CategoryDTO apply( final Category category ) {
+				return new CategoryDTO( category.getId(), category.getCategoryName() );
+			}
+		} );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
