@@ -41,12 +41,17 @@ define( function ( require ) {
 			var view = new CategoryView( {
 				model: model
 			} );
+			view.on( 'events:categories_changed', this._updateCategories, this );
 
 			if ( model.get( 'categoryId' ) == 0 ) {
 				return this.$( '.categories-container' ).append( view.renderEdit().$el );
 			}
 
 			return this.$( '.categories-container' ).append( view.render().$el );
+		},
+
+		_updateCategories: function() {
+			this.trigger( 'events:categories_changed' );
 		},
 
 		_addEntry: function() {
@@ -118,8 +123,9 @@ define( function ( require ) {
 				return;
 			}
 
+			var self = this;
 			this.model.save().then( function() {
-				this.trigger( 'events:category_saved' );
+				self.trigger( 'events:categories_changed' );
 			});
 		},
 

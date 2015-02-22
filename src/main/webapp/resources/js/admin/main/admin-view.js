@@ -43,13 +43,20 @@ define( function ( require ) {
 		},
 
 		_renderCategories: function() {
-			var model = new CategoriesModel.CategoriesModel();
-			var view = new CategoriesView.CategoriesView( { model: model, el: this.$( '.admin-page-categories-container' ) } );
+			this.categoriesModel = new CategoriesModel.CategoriesModel();
+			this.categoriesView = new CategoriesView.CategoriesView( { model: this.categoriesModel, el: this.$( '.admin-page-categories-container' ) } );
+
+			this.categoriesView.on( 'events:categories_changed', this._updateCategories, this );
 		},
 
 		_renderCups: function() {
-			var model = new CupsModel.CupsModel();
-			var view = new CupsView.CupsView( { model: model, el: this.$( '.admin-page-cup-container' ) } );
+			this.cupsModel = new CupsModel.CupsModel();
+			this.cupsView = new CupsView.CupsView( { model: this.cupsModel, el: this.$( '.admin-page-cup-container' ) } );
+		},
+
+		_updateCategories: function() {
+			console.log( '_updateCategories' );
+			this.cupsView.trigger( 'events:categories_changed' );
 		},
 
 		_logout: function() {

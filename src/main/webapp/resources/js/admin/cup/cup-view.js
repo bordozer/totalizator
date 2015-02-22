@@ -23,13 +23,13 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.model.on( 'add', this.renderEntry, this );
+			this.on( 'events:categories_changed', this._updateCategories, this );
 
 			this.render();
 
 			this.model.fetch( { cache: false } );
 
-			this.categories = new Categories.CategoriesModel();
-			this.categories.fetch( { cache: false } ); // TODO: user when...then to be sure that categories and this.model are loaded
+			this._loadCategories();
 		},
 
 		render: function () {
@@ -53,6 +53,16 @@ define( function ( require ) {
 			}
 
 			return container.append( view.render().$el );
+		},
+
+		_loadCategories: function() {
+			this.categories = new Categories.CategoriesModel();
+			this.categories.fetch( { cache: false, async: false } );
+		},
+
+		_updateCategories: function() {
+			this._loadCategories();
+			this.render();
 		},
 
 		_addEntry: function() {
@@ -130,8 +140,9 @@ define( function ( require ) {
 				return;
 			}
 
+			var self = this;
 			this.model.save().then( function() {
-				this.trigger( 'events:cap_saved' );
+				self.trigger( 'events:caps_changed' );
 			});
 		},
 
