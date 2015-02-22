@@ -52,14 +52,14 @@ public class TestDataInitializer {
 
 
 
-		final Cup cup1 = new Cup( "NBA 2015 - regular" );
+		/*final Cup cup1 = new Cup( "NBA 2015 - regular" );
 		session.persist( cup1 );
 
 		final Cup cup2 = new Cup( "NBA 2015 - playoff" );
 		session.persist( cup2 );
 
 		final Cup cup3 = new Cup( "NCAA 2015" );
-		session.persist( cup3 );
+		session.persist( cup3 );*/
 
 
 

@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import totalizator.app.dto.CategoryDTO;
 import totalizator.app.dto.CupDTO;
+import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
+import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
 
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -22,6 +24,9 @@ public class CupController {
 
 	@Autowired
 	private CupService cupService;
+
+	@Autowired
+	private CategoryService categoryService;
 
 	private static final Logger LOGGER = Logger.getLogger( CupController.class );
 
@@ -33,7 +38,8 @@ public class CupController {
 		return Lists.transform( cupService.loadAll(), new Function<Cup, CupDTO>() {
 			@Override
 			public CupDTO apply( final Cup cup ) {
-				return new CupDTO( cup.getId(), cup.getCupName() );
+				final Category category = categoryService.load( cup.getCategoryId() );
+				return new CupDTO( cup.getId(), cup.getCupName(), new CategoryDTO( category.getId(), category.getCategoryName() ) );
 			}
 		} );
 	}

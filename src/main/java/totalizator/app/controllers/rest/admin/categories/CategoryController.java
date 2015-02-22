@@ -13,7 +13,6 @@ import totalizator.app.services.CategoryService;
 
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller

@@ -27,6 +27,7 @@ public class Cup extends AbstractEntity {
 	public static final String FIND_BY_NAME = "cups.findByName";
 
 	private String cupName;
+	private int categoryId;
 
 	public Cup() {
 	}
@@ -41,6 +42,14 @@ public class Cup extends AbstractEntity {
 
 	public void setCupName( final String cupName ) {
 		this.cupName = cupName;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId( final int categoryId ) {
+		this.categoryId = categoryId;
 	}
 
 	@Override
