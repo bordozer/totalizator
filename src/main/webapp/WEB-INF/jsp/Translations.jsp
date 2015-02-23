@@ -8,9 +8,9 @@
 	<div class="header-container page-header-c"></div>
 
 <div class="header-specific-container" style="display: none;">
-	<div class="col-lg-1 text-right fa fa-sign-out logout-link" style="float: right"><a href="#"> Logout</a></div>
+	<div class="col-lg-2 text-right fa fa-sign-out logout-link" style="float: right"><a href="#"> Logout</a></div>
 	<div class="col-lg-2 text-right fa fa-cog admin-link" style="float: right"><a href="/admin/"> Admin</a></div>
-	<div class="col-lg-2 text-right fa fa-cog admin-link" style="float: right"><a href="/totalizator/"> Admin</a></div>
+	<div class="col-lg-2 text-right fa fa-cog admin-link" style="float: right"><a href="/totalizator/"> Main page</a></div>
 </div>
 
 <script type="text/javascript">
