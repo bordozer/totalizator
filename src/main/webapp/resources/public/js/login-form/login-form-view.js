@@ -9,6 +9,11 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/login-form/templates/login-form-template.html' );
 
+	/*var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		login: "Login"
+	} );*/
+
 	var LoginFormView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -26,6 +31,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				model: this.model
+//				, translator: translator
 			 } ) );
 
 			return this.$el;

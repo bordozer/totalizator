@@ -10,10 +10,10 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var Translator = require( '/resources/js/translator.js' );
+	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
-		title: 'Totalizator'
-	});
+		portalPageTitle: "Portal page"
+	} );
 
 	var PortalPageView = Backbone.View.extend( {
 

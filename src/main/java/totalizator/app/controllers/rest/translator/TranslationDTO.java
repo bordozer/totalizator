@@ -2,16 +2,25 @@ package totalizator.app.controllers.rest.translator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Map;
+
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class TranslationDTO {
 
-	private String text;
+	private Map<String, String> translations;
 
-	public String getText() {
-		return text;
+	public TranslationDTO() {
 	}
 
-	public void setText( final String text ) {
-		this.text = text;
+	public TranslationDTO( final Map<String, String> translations ) {
+		this.translations = translations;
+	}
+
+	public Map<String, String> getTranslations() {
+		return translations;
+	}
+
+	public void setTranslations( final Map<String, String> translations ) {
+		this.translations = translations;
 	}
 }

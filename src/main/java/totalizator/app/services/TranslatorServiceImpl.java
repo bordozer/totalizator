@@ -7,6 +7,6 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	@Override
 	public String translate( final String nerd ) {
-		return String.format( "nerd(tm)" );
+		return String.format( "%s&#8482", nerd );
 	}
 }
