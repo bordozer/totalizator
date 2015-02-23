@@ -13,6 +13,8 @@ define( function ( require ) {
 		template:_.template( Template ),
 
 		initialize: function( options ) {
+			this.subtitle = options.subtitle;
+
 			this.render( options.specialContainer );
 		},
 
@@ -20,6 +22,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				model: this.model
+				, subtitle: this.subtitle
 			 } ) );
 
 			this.$( '.header-specific' ).html( specialContainer );
