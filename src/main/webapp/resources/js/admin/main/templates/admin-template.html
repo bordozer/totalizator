@@ -2,13 +2,13 @@
 
 <div class="header-specific-container" style="display: none;">
 	<small><%-user.userName%></small>
-	<div class="col-lg-1 text-right fa fa-sign-out logout-link" style="float: right"><a href="#"> Logout</a></div>
-	<div class="col-lg-2 text-right fa fa-backward admin-link" style="float: right"><a href="/totalizator/"> Back to site</a></div>
+	<div class="col-lg-1 text-right fa fa-sign-out logout-link" style="float: right"><a href="#"> <%=translator.logout%></a></div>
+	<div class="col-lg-2 text-right fa fa-backward admin-link" style="float: right"><a href="/totalizator/"> <%=translator.backToSite%></a></div>
 </div>
 
 <script type="text/javascript">
 	require( [ 'jquery', 'public/js/header/header' ], function ( $, init ) {
-		init( $( '.header-container'), $( '.header-specific-container' ), 'Admin' );
+		init( $( '.header-container'), $( '.header-specific-container' ), '<%=translator.pageTitle%>' );
 	} );
 </script>
 

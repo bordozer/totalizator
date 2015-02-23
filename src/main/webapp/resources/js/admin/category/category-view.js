@@ -10,6 +10,11 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/category/templates/category-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/category/templates/category-edit-template.html' );
 
+	var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		categoriesTitle: "Admin / Categories / Title: Categories"
+	} );
+
 	var CategoriesView = Backbone.View.extend( {
 
 
@@ -32,6 +37,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				model: this.model
+				, translator: translator
 			} ) );
 
 			return this.$el;

@@ -12,8 +12,12 @@ define( function ( require ) {
 
 	var Categories = require( '/resources/js/admin/category/category-model.js' );
 
-	var CupsView = Backbone.View.extend( {
+	var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		cupsTitle: "Admin / Cups / Title: Cups"
+	} );
 
+	var CupsView = Backbone.View.extend( {
 
 		template: _.template( TemplateList ),
 
@@ -35,6 +39,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				model: this.model
+				, translator: translator
 			} ) );
 
 			var self= this;

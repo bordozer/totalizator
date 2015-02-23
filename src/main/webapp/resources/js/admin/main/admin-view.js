@@ -16,6 +16,13 @@ define( function ( require ) {
 	var CupsModel = require( '/resources/js/admin/cup/cup-model.js' );
 	var CupsView = require( '/resources/js/admin/cup/cup-view.js' );
 
+	var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		pageTitle: 'Admin: Page Title'
+		, backToSite: 'Admin: Back to site'
+		, logout: 'Admin: Logout'
+	} );
+
 	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -33,6 +40,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				user: this.model.get( 'userDTO' )
+				, translator: translator
 			 } ) );
 
 			this._renderCategories();
