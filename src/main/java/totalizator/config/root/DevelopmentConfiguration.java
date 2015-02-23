@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import totalizator.app.init.TestDataInitializer;
 import totalizator.app.services.SystemVarsService;
 import totalizator.app.services.SystemVarsServiceImpl;
+import totalizator.app.translator.TranslatorServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,11 @@ public class DevelopmentConfiguration {
 	@Bean( name = "systemVarsService", initMethod = "init" )
 	public SystemVarsServiceImpl systemVarsService() {
 		return new SystemVarsServiceImpl();
+	}
+
+	@Bean( name = "translatorService", initMethod = "init" )
+	public TranslatorServiceImpl TranslatorService() {
+		return new TranslatorServiceImpl();
 	}
 
 	@Bean( name = "datasource" )

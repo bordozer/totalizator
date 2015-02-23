@@ -5,8 +5,12 @@ import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import totalizator.app.services.TranslatorService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import totalizator.app.translator.Language;
+import totalizator.app.translator.TranslatorService;
 
 import java.util.Map;
 
@@ -35,6 +39,6 @@ public class TranslatorController {
 	}
 
 	private String translate( final String text ) {
-		return translatorService.translate( text );
+		return translatorService.translate( text, Language.RU );
 	}
 }

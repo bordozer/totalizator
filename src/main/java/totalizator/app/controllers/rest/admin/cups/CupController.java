@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.CategoryDTO;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
