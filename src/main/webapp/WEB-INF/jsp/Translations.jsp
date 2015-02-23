@@ -26,7 +26,7 @@
 
 		<h4>${nerdKey.nerd}:</h4>
 		<c:forEach var="translation" items="${translationData.translations}">
-			${translation.language}: ${translation.value} <br />
+			<strong>${translation.language}</strong>: <small>${translation.value}</small> <br />
 		</c:forEach>
 
 		<br />

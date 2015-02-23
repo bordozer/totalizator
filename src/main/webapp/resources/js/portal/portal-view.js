@@ -12,7 +12,7 @@ define( function ( require ) {
 
 	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
-		portalPageTitle: "Portal page"
+		portalPageTitle: "Portal page title"
 	} );
 
 	var PortalPageView = Backbone.View.extend( {

@@ -3,8 +3,38 @@
 <translations>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Admin / Categories / Title: Categories</nerd>
+		<ru><![CDATA[Категории]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin: Page Title</nerd>
+		<ru><![CDATA[Администрирование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page title</nerd>
+		<ru><![CDATA[Главная страница]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System: Logout</nerd>
+		<ru><![CDATA[Выход]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin: Back to site</nerd>
+		<ru><![CDATA[Вернуться к сайту]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Cups / Title: Cups</nerd>
+		<ru><![CDATA[Чемпионаты]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin: Translations</nerd>
+		<ru><![CDATA[Переводы]]></ru>
 	</translation>
 
 	<translation>
