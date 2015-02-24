@@ -26,7 +26,6 @@ define( function ( require ) {
 		},
 
 		initialize: function() {
-//			this.model.on( 'sync', this._authenticate, this );
 		},
 
 		render: function () {
