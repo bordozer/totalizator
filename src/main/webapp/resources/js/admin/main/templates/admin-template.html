@@ -2,9 +2,21 @@
 
 <div class="header-specific-container" style="display: none;">
 	<small><%-user.userName%></small>
-	<div class="col-lg-2 text-right fa fa-sign-out logout-link" style="float: right"><a href="#"> <%=translator.logout%></a></div>
-	<div class="col-lg-2 text-right fa fa-language translations-link" style="float: right"><a href="/translations/"> <%=translator.translations%></a></div>
-	<div class="col-lg-2 text-right fa fa-backward admin-link" style="float: right"><a href="/totalizator/"> <%=translator.backToSite%></a></div>
+
+	<div class="col-lg-2 admin-menu-container" style="float: right"></div>
+
+	<script type="text/javascript">
+		require( [ 'jquery', 'js/admin/menu/admin-menu' ], function ( $, init ) {
+
+			var menus = [
+				{ selector: 'admin-link', 			icon: 'fa fa-backward', link: '/totalizator/', 				text: '<%=translator.backToSite%>' }
+				, { selector: 'translations-link', 	icon: 'fa fa-language', link: '/translations/', 	text: '<%=translator.translations%>' }
+				, { selector: 'logout-link', 		icon: 'fa fa-sign-out', link: '#', 	text: '<%=translator.logout%>' }
+			];
+
+			init( menus, $( '.admin-menu-container') );
+		} );
+	</script>
 </div>
 
 <script type="text/javascript">

@@ -1,0 +1,10 @@
+<div class="dropdown col-lg-2">
+	<button class="btn btn-default dropdown-toggle fa fa-list-alt" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+		<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		<% _.each( menus, function( menu ) { %>
+			<li role="presentation" style="height: 30px;"><a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" tabindex="-1" href="<%=menu.link%>"> <%=menu.text%></a></li>
+		<% }) %>
+	</ul>
+</div>
