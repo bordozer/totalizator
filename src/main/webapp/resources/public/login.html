@@ -23,8 +23,13 @@
 		<div class="header-specific-container" style="display: none;"></div>
 
 		<script type="text/javascript">
-			require( [ 'jquery', 'public/js/header/header' ], function ( $, init ) {
-				init( $( '.header-container'), $( '.header-specific-container' ), 'Login' );
+			require( [ 'jquery', 'public/js/header/header', 'public/js/translator' ], function ( $, init, Translator ) {
+
+				var translator = new Translator( {
+					loginPageTitleLabel: 'Login page title: Login'
+				} );
+
+				init( $( '.header-container'), $( '.header-specific-container' ), translator.loginPageTitleLabel );
 			} );
 		</script>
 

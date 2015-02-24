@@ -8,6 +8,11 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/header/templates/header-template.html' );
 
+	var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		projectNameLabel: 'Project name: Totalizator'
+	} );
+
 	var HeaderView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -23,6 +28,7 @@ define( function ( require ) {
 			this.$el.html( this.template( {
 				model: this.model
 				, subtitle: this.subtitle
+				, translator: translator
 			 } ) );
 
 			this.$( '.header-specific' ).html( specialContainer );
