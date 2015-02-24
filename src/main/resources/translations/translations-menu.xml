@@ -3,13 +3,23 @@
 <translations>
 
 	<translation>
-		<nerd>Admin: Page Title</nerd>
-		<ru><![CDATA[Администрирование]]></ru>
+		<nerd>Menu: Logout</nerd>
+		<ru><![CDATA[Выход]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Portal page title</nerd>
-		<ru><![CDATA[Главная страница]]></ru>
+		<nerd>Menu: Translations</nerd>
+		<ru><![CDATA[Переводы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Menu: Back to site</nerd>
+		<ru><![CDATA[Вернуться к сайту]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Menu: Admin</nerd>
+		<ru><![CDATA[Админка]]></ru>
 	</translation>
 
 	<translation>

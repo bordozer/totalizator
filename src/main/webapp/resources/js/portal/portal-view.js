@@ -13,8 +13,8 @@ define( function ( require ) {
 	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
 		portalPageTitle: "Portal page title"
-		, adminLinkTitle: "Portal page: Admin"
-		, logout: 'System: Logout'
+		, adminLinkTitle: "Menu: Admin"
+		, logout: 'Menu: Logout'
 	} );
 
 	var PortalPageView = Backbone.View.extend( {

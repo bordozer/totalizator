@@ -19,9 +19,9 @@ define( function ( require ) {
 	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
 		pageTitle: 'Admin: Page Title'
-		, translations: 'Admin: Translations'
-		, backToSite: 'Admin: Back to site'
-		, logout: 'System: Logout'
+		, translations: 'Menu: Translations'
+		, backToSite: 'Menu: Back to site'
+		, logout: 'Menu: Logout'
 	} );
 
 	var AdminView = Backbone.View.extend( {
