@@ -36,7 +36,8 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( this.template( {
-				untranslatedList: this.model.get( 'untranslatedList' )
+				userName: this.model.get( 'userName' )
+				, untranslatedList: this.model.get( 'untranslatedList' )
 				, translator: translator
 			 } ) );
 
