@@ -14,7 +14,7 @@ import static com.google.common.collect.Maps.newHashMap;
 @Service
 public class TranslatorServiceImpl implements TranslatorService {
 
-	public static final String TRANSLATIONS_PATH = "src/main/resources";
+	public static final String TRANSLATIONS_PATH = "src/main/resources/translations/";
 
 	private Translator translator;
 

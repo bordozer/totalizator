@@ -1,0 +1,34 @@
+<div class="header-container page-header-c"></div>
+
+<div class="header-specific-container" style="display: none;">
+	<div class="col-lg-2 text-right fa fa-sign-out logout-link" style="float: right"><a href="#"> Logout</a></div>
+	<div class="col-lg-2 text-right fa fa-cog admin-link" style="float: right"><a href="/admin/"> Admin</a></div>
+	<div class="col-lg-2 text-right fa fa-cog admin-link" style="float: right"><a href="/totalizator/"> Main page</a></div>
+</div>
+
+<script type="text/javascript">
+	require( [ 'jquery', 'public/js/header/header' ], function ( $, init ) {
+		init( $( '.header-container' ), $( '.header-specific-container' ), 'Translations' );
+	} );
+</script>
+
+<% _.each( untranslatedList, function( entry ) { %>
+	<div class="row">
+		<div class="col-lg-12">
+
+			<div class="row">
+				<h4><%=entry.nerd%></h4>
+			</div>
+
+			<% _.each( entry.translationEntries, function( translationEntry ) { %>
+				<div class="row">
+					<strong><%=translationEntry.language%></strong>: <small><%=translationEntry.nerd%></small>
+				</div>
+			<% }) %>
+		</div>
+	</div>
+<% }) %>
+
+
+
+
