@@ -13,6 +13,9 @@ define( function ( require ) {
 	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
 		pageTitle: 'Translations: Page Title'
+		, menuLogout: 'Menu: Logout'
+		, menuAdmin: 'Menu: Admin'
+		, menuPortalPage: 'Menu: Back to site'
 	} );
 
 	var AdminView = Backbone.View.extend( {
@@ -29,7 +32,6 @@ define( function ( require ) {
 		},
 
 		render: function () {
-			console.log( this.model );
 
 			this.$el.html( this.template( {
 				untranslatedList: this.model.get( 'untranslatedList' )
