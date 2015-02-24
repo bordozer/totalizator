@@ -12,23 +12,27 @@
 	} );
 </script>
 
-<% _.each( untranslatedList, function( entry ) { %>
-	<div class="row">
-		<div class="col-lg-12">
+<div class="col-lg-5">
 
-			<div class="row">
-				<h4><%=entry.nerd%></h4>
-			</div>
+	<% _.each( untranslatedList, function( entry ) { %>
 
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title text-center"><%=entry.nerd%></h3>
+		</div>
+		<div class="panel-body text-left">
 			<% _.each( entry.translationEntries, function( translationEntry ) { %>
-				<div class="row">
-					<strong><%=translationEntry.language%></strong>: <small><%=translationEntry.nerd%></small>
-				</div>
+			<div class="row">
+				<strong><%=translationEntry.language%></strong>:
+				<small><%=translationEntry.nerd%></small>
+			</div>
 			<% }) %>
 		</div>
+		<div class="panel-footer"></div>
 	</div>
-<% }) %>
 
+	<% }) %>
 
+</div>
 
 
