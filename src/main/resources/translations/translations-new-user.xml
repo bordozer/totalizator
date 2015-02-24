@@ -38,38 +38,38 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Create user validation message: Enter login</nerd>
+		<ru><![CDATA[Введите логин]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Create user validation message: Login must have minimum 3 characters</nerd>
+		<ru><![CDATA[Логин должен быть не менее 3-х символов]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Create user validation message: Enter name</nerd>
+		<ru><![CDATA[Введите имя]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Create user validation message: Name must have minimum 3 characters</nerd>
+		<ru><![CDATA[Имя должно быть не менее 3-х символов]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Create user validation message: Password can not be null</nerd>
+		<ru><![CDATA[Пароль не может быть пустым]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Create user validation message: Confirm password</nerd>
+		<ru><![CDATA[Введите подтверждение пароля]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Create user validation message: Entered passwords are not equal</nerd>
+		<ru><![CDATA[Введенные пароли не совпадают]]></ru>
 	</translation>
 
 	<translation>

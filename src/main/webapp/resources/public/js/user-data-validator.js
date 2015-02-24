@@ -1,4 +1,17 @@
-define( [ 'jquery' ], function ( $ ) {
+define( function ( require ) {
+
+	'use strict';
+
+	var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		validationEmptyLoginLabel: 'Create user validation message: Enter login'
+		, validationTooShortLoginLabel: 'Create user validation message: Login must have minimum 3 characters'
+		, validationEmptyNameLabel: 'Create user validation message: Enter name'
+		, validationTooShortNameLabel: 'Create user validation message: Name must have minimum 3 characters'
+		, validationEmptyPasswordLabel: 'Create user validation message: Password can not be null'
+		, validationConfirmPasswordLabel: 'Create user validation message: Confirm password'
+		, validationPasswordsDoNotMatchLabel: 'Create user validation message: Entered passwords are not equal'
+	} );
 
 	return {
 
@@ -7,7 +20,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 			if ( login == undefined || login == '' ) {
 				errors.push( {
-					message: 'Enter login'
+					message: translator.validationEmptyLoginLabel
 				} );
 
 				return errors;
@@ -15,7 +28,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 			if ( login.length < 3 ) {
 				errors.push( {
-					message: 'Login must have minimum 3 characters'
+					message: translator.validationTooShortLoginLabel
 				} );
 			}
 
@@ -27,7 +40,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 			if ( name == undefined || name == '' ) {
 				errors.push( {
-					message: 'Enter name'
+					message: translator.validationEmptyNameLabel
 				} );
 
 				return errors;
@@ -35,7 +48,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 			if ( name.length < 3 ) {
 				errors.push( {
-					message: 'Name must have minimum 3 characters'
+					message: translator.validationTooShortNameLabel
 				} );
 			}
 
@@ -47,7 +60,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 			if ( password == undefined || password == '' ) {
 				errors.push( {
-					message: 'Password can not be null'
+					message: translator.validationEmptyPasswordLabel
 				} );
 			}
 
@@ -59,13 +72,13 @@ define( [ 'jquery' ], function ( $ ) {
 
 			if ( password_confirmation == undefined || password_confirmation == '' ) {
 				errors.push( {
-					message: 'Confirm password'
+					message: translator.validationConfirmPasswordLabel
 				} );
 			}
 
 			if ( password != password_confirmation ) {
 				errors.push( {
-					message: 'Entered passwords are not equal'
+					message: translator.validationPasswordsDoNotMatchLabel
 				} );
 			}
 
