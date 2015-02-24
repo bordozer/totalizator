@@ -48,9 +48,7 @@ define( function ( require ) {
 		},
 
 		_logout: function() {
-//			if ( confirm( 'Logout?' ) ) {
-				Services.logout();
-//			}
+			Services.logout();
 		}
 
 	} );

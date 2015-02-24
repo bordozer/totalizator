@@ -1,8 +1,20 @@
-define( [ 'jquery' ], function ( $ ) {
+define( function ( require ) {
+
+	'use strict';
+
+	var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		logoutConfirmationLabel: 'Logout confirmation: Logout?'
+	} );
 
 	return {
 
 		logout: function () {
+
+			if ( ! confirm( translator.logoutConfirmationLabel ) ) {
+				return;
+			}
+
 			$.ajax( {
 				method: 'POST',
 				url: '/logout',
