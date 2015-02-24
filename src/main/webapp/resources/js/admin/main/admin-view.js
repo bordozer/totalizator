@@ -19,8 +19,9 @@ define( function ( require ) {
 	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
 		pageTitle: 'Admin: Page Title'
-		, translations: 'Menu: Translations'
 		, backToSite: 'Menu: Back to site'
+		, translations: 'Menu: Translations'
+		, reloadTranslations: 'Menu: Reload translations'
 		, logout: 'Menu: Logout'
 	} );
 

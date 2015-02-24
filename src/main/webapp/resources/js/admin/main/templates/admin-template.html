@@ -9,10 +9,11 @@
 		require( [ 'jquery', 'js/admin/menu/admin-menu' ], function ( $, init ) {
 
 			var menus = [
-				{ selector: '', 					icon: 'fa fa-backward', link: '/totalizator/', 		text: '<%=translator.backToSite%>' }
-				, { selector: '', 					icon: 'fa fa-language', link: '/translations/', 	text: '<%=translator.translations%>' }
+				{ selector: '', 							icon: 'fa fa-backward', link: '/totalizator/', 		text: '<%=translator.backToSite%>' }
 				, { selector: 'divider' }
-				, { selector: 'logout-link', 		icon: 'fa fa-sign-out', link: '#', 					text: '<%=translator.logout%>' }
+				, { selector: '', 							icon: 'fa fa-language', link: '/translations/', 	text: '<%=translator.translations%>' }
+				, { selector: 'divider' }
+				, { selector: 'logout-link', 				icon: 'fa fa-sign-out', link: '#', 					text: '<%=translator.logout%>' }
 			];
 
 			init( menus, $( '.admin-menu-container') );

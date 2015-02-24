@@ -13,9 +13,10 @@ define( function ( require ) {
 	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
 		pageTitle: 'Translations: Page Title'
-		, menuLogout: 'Menu: Logout'
-		, menuAdmin: 'Menu: Admin'
 		, menuPortalPage: 'Menu: Back to site'
+		, menuAdmin: 'Menu: Admin'
+		, reloadTranslations: 'Menu: Reload translations'
+		, menuLogout: 'Menu: Logout'
 	} );
 
 	var AdminView = Backbone.View.extend( {
