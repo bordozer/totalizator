@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/header/templates/header-template.html' );
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		projectNameLabel: 'Project name: Totalizator'
 	} );

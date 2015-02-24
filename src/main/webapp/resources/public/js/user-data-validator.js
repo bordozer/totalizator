@@ -2,7 +2,7 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		validationEmptyLoginLabel: 'Create user validation message: Enter login'
 		, validationTooShortLoginLabel: 'Create user validation message: Login must have minimum 3 characters'

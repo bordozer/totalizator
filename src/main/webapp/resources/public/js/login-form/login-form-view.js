@@ -9,7 +9,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/login-form/templates/login-form-template.html' );
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		loginLabel: 'Login page: Login'
 		, passwordLabel: 'Login page: Password'

@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Translations: Page Title'
 		, menuPortalPage: 'Menu: Back to site'

@@ -11,7 +11,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/user/data/templates/user-data-template.html' );
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		newUserDataTitleLabel: 'Create user: Create user'
 		, userDataLoginLabel: 'Create user: Login'

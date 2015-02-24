@@ -12,7 +12,7 @@ define( function ( require ) {
 
 	var Categories = require( '/resources/js/admin/category/category-model.js' );
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		cupsTitle: "Admin / Cups / Title: Cups"
 	} );

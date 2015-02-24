@@ -13,6 +13,7 @@ var require = {
 		, backbone: "bower_components/backbone/backbone"
 		, text: "bower_components/text/text"
 		, bootstrap: "bower_components/bootstrap/dist/js/bootstrap.min"
+		, translator: "public/js/translator"
 	},
 
 	shim: {
@@ -34,7 +35,7 @@ var require = {
 		}
 	}
 
-	, deps: [ "jquery", "backbone", "underscore", "text", 'bootstrap' ],
+	, deps: [ "jquery", "backbone", "underscore", "text", 'bootstrap', 'translator' ],
 
 	callback: function ( $, Backbone, _, text, bootstrap ) {
 	}

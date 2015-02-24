@@ -2,7 +2,7 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		logoutConfirmationLabel: 'Logout confirmation: Logout?'
 	} );

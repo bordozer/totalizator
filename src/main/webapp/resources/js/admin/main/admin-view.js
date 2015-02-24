@@ -16,7 +16,7 @@ define( function ( require ) {
 	var CupsModel = require( '/resources/js/admin/cup/cup-model.js' );
 	var CupsView = require( '/resources/js/admin/cup/cup-view.js' );
 
-	var Translator = require( 'public/js/translator' );
+	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Admin: Page Title'
 		, backToSite: 'Menu: Back to site'
