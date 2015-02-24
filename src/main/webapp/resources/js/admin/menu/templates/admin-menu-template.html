@@ -4,7 +4,15 @@
 	</button>
 	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 		<% _.each( menus, function( menu ) { %>
-			<li role="presentation" style="height: 30px;"><a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" tabindex="-1" href="<%=menu.link%>"> <%=menu.text%></a></li>
+
+			<% if( menu.selector != 'divider' ) { %>
+				<li role="presentation" style="height: 30px;"><a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" tabindex="-1" href="<%=menu.link%>"> <%=menu.text%></a></li>
+			<% } %>
+
+			<% if( menu.selector == 'divider' ) { %>
+				<li role="presentation" class="divider"></li>
+			<% } %>
+
 		<% }) %>
 	</ul>
 </div>
