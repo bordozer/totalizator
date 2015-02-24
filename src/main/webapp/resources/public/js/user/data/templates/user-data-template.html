@@ -7,13 +7,13 @@
 <div class="panel panel-info">
 
 	<div class="panel-heading">
-		<h3 class="panel-title text-center"><%=title%></h3>
+		<h3 class="panel-title text-center"><%=translator.newUserDataTitleLabel%></h3>
  	</div>
 
 	<div class="panel-body text-left">
 		<table style="width: 100%;">
 			<tr>
-				<td style="width: 150px;"><label for="login">Login</label></td>
+				<td style="width: 150px;"><label for="login"><%=translator.userDataLoginLabel%></label></td>
 				<td>
 					<div class="form-group login">
 						<input type="text" id="login" name="login" class="form-control" value="">
@@ -22,7 +22,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="width: 150px;"><label for="name">Name</label></td>
+				<td style="width: 150px;"><label for="name"><%=translator.userDataNameLabel%></label></td>
 				<td>
 					<div class="form-group name">
 						<input type="text" id="name" name="name" class="form-control" value="">
@@ -31,7 +31,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label for="password">Password</label></td>
+				<td><label for="password"><%=translator.userDataPasswordLabel%></label></td>
 				<td>
 					<div class="form-group password">
 						<input type="password" id="password" name="password" class="form-control" value="">
@@ -40,7 +40,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label for="password">Confirm password</label></td>
+				<td><label for="password"><%=translator.userDataConfirmPasswordLabel%></label></td>
 				<td>
 					<div class="form-group password_confirmation">
 						<input type="password" id="password_confirmation" name="password_confirmation" class="form-control"  value="">
@@ -52,10 +52,8 @@
 	</div>
 
 	<div class="panel-footer text-left">
-		<button type="button" class="fa fa-save save-button"> Save</button>
-		<%if( isNewUserRegistration ) {%>
-			<button type="button" class="fa fa-backward back-to-login-button" style="float: right"> Back to login</button>
-		<%}%>
+		<button type="button" class="fa fa-save save-button"> <%=translator.userDataSaveButtonLabel%></button>
+		<button type="button" class="fa fa-backward back-to-login-button" style="float: right"> <%=translator.userDataBackToLoginPageLabel%></button>
 	</div>
 
 </div>

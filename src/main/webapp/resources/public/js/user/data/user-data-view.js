@@ -11,6 +11,17 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/user/data/templates/user-data-template.html' );
 
+	var Translator = require( 'public/js/translator' );
+	var translator = new Translator( {
+		newUserDataTitleLabel: 'Create user: Create user'
+		, userDataLoginLabel: 'Create user: Login'
+		, userDataNameLabel: 'Create user: Name'
+		, userDataPasswordLabel: 'Create user: Password'
+		, userDataConfirmPasswordLabel: 'Create user: Confirm password'
+		, userDataBackToLoginPageLabel: 'Create user: Back to login'
+		, userDataSaveButtonLabel: 'Create user: Save data'
+	} );
+
 	var UserDataView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -31,8 +42,7 @@ define( function ( require ) {
 
 			this.$el.html( this.template( {
 				model: this.model
-				, isNewUserRegistration: this.model.get( 'id' ) == 0
-				, title: this.model.get( 'id' ) > 0 ? 'Edit data' : 'New user'
+				, translator: translator
 			 } ) );
 
 			return this.$el;

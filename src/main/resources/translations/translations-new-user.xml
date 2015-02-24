@@ -3,6 +3,61 @@
 <translations>
 
 	<translation>
+		<nerd>Create user: Create user</nerd>
+		<ru><![CDATA[Регистрация нового пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Create user: Login</nerd>
+		<ru><![CDATA[Логин]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Create user: Name</nerd>
+		<ru><![CDATA[Имя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Create user: Password</nerd>
+		<ru><![CDATA[Пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Create user: Confirm password</nerd>
+		<ru><![CDATA[Еще раз пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Create user: Back to login</nerd>
+		<ru><![CDATA[Вернуться]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Create user: Save data</nerd>
+		<ru><![CDATA[Зарегистрироваться]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
