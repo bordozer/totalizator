@@ -20,7 +20,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		pageTitle: 'Admin: Page Title'
 		, backToSite: 'Menu: Back to site'
-		, translations: 'Menu: Translations'
+		, untranslatedList: 'Menu: Untranslated list'
 		, reloadTranslations: 'Menu: Reload translations'
 		, logout: 'Menu: Logout'
 	} );

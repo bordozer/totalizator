@@ -24,7 +24,8 @@ define( function ( require ) {
 		template:_.template( Template ),
 
 		events: {
-			'click .logout-link': '_logout'
+			'click .admin-reload-translations': '_reloadTranslations'
+			, 'click .logout-link': '_logout'
 		},
 
 		initialize: function( options ) {
@@ -40,6 +41,10 @@ define( function ( require ) {
 			 } ) );
 
 			return this.$el;
+		},
+
+		_reloadTranslations: function() {
+			Services.reloadTranslations();
 		},
 
 		_logout: function() {

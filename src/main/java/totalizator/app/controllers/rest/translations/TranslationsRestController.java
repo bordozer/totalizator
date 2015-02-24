@@ -1,5 +1,6 @@
 package totalizator.app.controllers.rest.translations;
 
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class TranslationsRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public TranslationsModel getDefaultLogin() {
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/", produces = APPLICATION_JSON_VALUE )
+	public TranslationsModel untranslated() {
 
 		final TranslationsModel model = new TranslationsModel();
 
@@ -48,5 +49,11 @@ public class TranslationsRestController {
 		model.setUntranslatedList( untranslatedList );
 
 		return model;
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@RequestMapping( method = RequestMethod.GET, value = "/reload/" )
+	public void reloadTranslations() throws DocumentException {
+		translatorService.reloadTranslations();
 	}
 }

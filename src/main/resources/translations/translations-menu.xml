@@ -8,8 +8,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Menu: Translations</nerd>
-		<ru><![CDATA[Переводы]]></ru>
+		<nerd>Menu: Reload translations</nerd>
+		<ru><![CDATA[Перезагрузить переводы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Menu: Untranslated list</nerd>
+		<ru><![CDATA[Пропущенные переводы]]></ru>
 	</translation>
 
 	<translation>

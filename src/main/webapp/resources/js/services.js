@@ -13,6 +13,16 @@ define( [ 'jquery' ], function ( $ ) {
 					alert( 'Logout failed' ); // TODO
 				}
 			} )
+		},
+
+		reloadTranslations: function() {
+			$.ajax( {
+				method: 'GET',
+				url: '/admin/translations/reload/',
+				success: function ( response ) {
+					window.location.reload();
+				}
+			} )
 		}
 	}
 } );
