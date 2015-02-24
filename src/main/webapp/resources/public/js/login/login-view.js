@@ -59,6 +59,7 @@ define( function ( require ) {
 
 		_renderLoginForm: function() {
 			this.loginFormView.render();
+//			this.loginFormModel.fetch( { cache: false } );
 		},
 
 		_renderNewUserForm: function() {

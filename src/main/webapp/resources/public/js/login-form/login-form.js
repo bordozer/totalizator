@@ -12,7 +12,7 @@ define( function( require ) {
 	function init( container ) {
 		var model = new Model.LoginFormModel();
 		var view = new View.LoginFormView( { model: model, el: container } );
-//		model.fetch( { cache: false } );
+//		this.model.fetch( { cache: false } );
 		view.render();
 	}
 

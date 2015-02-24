@@ -8,13 +8,8 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize:function ( options ) {
-//			this.url = 'login/';
-		},
-
-		refresh: function() {
-			this.fetch( { reset: true } );
+//			this.url = '/login/';
 		}
-
 	});
 
 	return { LoginFormModel: LoginFormModel };

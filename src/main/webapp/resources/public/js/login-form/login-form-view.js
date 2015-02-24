@@ -9,10 +9,12 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/login-form/templates/login-form-template.html' );
 
-	/*var Translator = require( 'public/js/translator' );
+	var Translator = require( 'public/js/translator' );
 	var translator = new Translator( {
-		login: "Login"
-	} );*/
+		loginLabel: 'Login page: Login'
+		, passwordLabel: 'Login page: Password'
+		, createNewUserLabel: 'Login page: Create new user'
+	} );
 
 	var LoginFormView = Backbone.View.extend( {
 
@@ -24,14 +26,14 @@ define( function ( require ) {
 		},
 
 		initialize: function() {
-			this.model.on( 'sync', this._authenticate, this );
+//			this.model.on( 'sync', this._authenticate, this );
 		},
 
 		render: function () {
 
 			this.$el.html( this.template( {
 				model: this.model
-//				, translator: translator
+				, translator: translator
 			 } ) );
 
 			return this.$el;

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Login page: Login</nerd>
+		<ru><![CDATA[Логин]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Login page: Password</nerd>
+		<ru><![CDATA[Пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Login page: Create new user</nerd>
+		<ru><![CDATA[Регистрация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

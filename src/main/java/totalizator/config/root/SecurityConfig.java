@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers( "/resources/img*//**" ).permitAll()
 			.antMatchers( "/resources/bower_components*//**" ).permitAll()
 			.antMatchers( "/resources/js//**" ).permitAll()
+			.antMatchers( "/translator/" ).permitAll()
 			.antMatchers( HttpMethod.PUT, "/users/create/" ).permitAll() // create user
 			.anyRequest().authenticated()
 			.and()
