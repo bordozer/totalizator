@@ -9,14 +9,15 @@
 		require( [ 'jquery', 'js/admin/menu/admin-menu' ], function ( $, init ) {
 
 			var menus = [
-				{ selector: 'admin-link', 			icon: 'fa fa-backward', link: '/totalizator/', 				text: '<%=translator.backToSite%>' }
-				, { selector: 'translations-link', 	icon: 'fa fa-language', link: '/translations/', 	text: '<%=translator.translations%>' }
-				, { selector: 'logout-link', 		icon: 'fa fa-sign-out', link: '#', 	text: '<%=translator.logout%>' }
+				{ selector: '', 					icon: 'fa fa-backward', link: '/totalizator/', 		text: '<%=translator.backToSite%>' }
+				, { selector: '', 					icon: 'fa fa-language', link: '/translations/', 	text: '<%=translator.translations%>' }
+				, { selector: 'logout-link', 		icon: 'fa fa-sign-out', link: '#', 					text: '<%=translator.logout%>' }
 			];
 
 			init( menus, $( '.admin-menu-container') );
 		} );
 	</script>
+
 </div>
 
 <script type="text/javascript">
