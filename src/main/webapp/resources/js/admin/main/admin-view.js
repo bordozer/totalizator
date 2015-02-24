@@ -30,7 +30,8 @@ define( function ( require ) {
 		template:_.template( Template ),
 
 		events: {
-			'click .logout-link': '_logout'
+			'click .admin-reload-translations': '_reloadTranslations'
+			, 'click .logout-link': '_logout'
 		},
 
 		initialize: function( options ) {
@@ -66,6 +67,10 @@ define( function ( require ) {
 
 		_updateCategories: function() {
 			this.cupsView.trigger( 'events:categories_changed' );
+		},
+
+		_reloadTranslations: function() {
+			Services.reloadTranslations();
 		},
 
 		_logout: function() {

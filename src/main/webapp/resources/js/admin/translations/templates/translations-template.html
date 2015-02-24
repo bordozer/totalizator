@@ -2,19 +2,19 @@
 
 <div class="header-specific-container" style="display: none;">
 
-	<div class="col-lg-2 admin-menu-container" style="float: right"></div>
+	<div class="col-lg-3 admin-menu-container" style="float: right"></div>
 
 	<script type="text/javascript">
 		require( [ 'jquery', 'js/admin/menu/admin-menu' ], function ( $, init ) {
 
 			var menus = [
-				{ selector: '', 					icon: 'fa fa-backward', 		link: '/totalizator/', 	text: '<%=translator.menuPortalPage%>' }
+				{ selector: '', 							icon: 'fa fa-backward', 		link: '/totalizator/', 	text: '<%=translator.menuPortalPage%>' }
 				, { selector: 'divider' }
-				, { selector: '', 					icon: 'fa fa-cog', 				link: '/admin/', 		text: '<%=translator.menuAdmin%>' }
+				, { selector: '', 							icon: 'fa fa-cog', 				link: '/admin/', 		text: '<%=translator.menuAdmin%>' }
 				, { selector: 'divider' }
-				, { selector: 'admin-reload-translations', 	icon: 'fa fa-refresh', 	link: '#', 				text: '<%=translator.reloadTranslations%>' }
+				, { selector: 'admin-reload-translations', 	icon: 'fa fa-refresh', 			link: '#', 				text: '<%=translator.reloadTranslations%>' }
 				, { selector: 'divider' }
-				, { selector: 'logout-link', 		icon: 'fa fa-sign-out', 		link: '#',				text: '<%=translator.menuLogout%>' }
+				, { selector: 'logout-link', 				icon: 'fa fa-sign-out', 		link: '#',				text: '<%=translator.menuLogout%>' }
 			];
 
 			init( menus, $( '.admin-menu-container') );
