@@ -32,7 +32,7 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		renderPage: function () {
+		renderBody: function () {
 
 			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )

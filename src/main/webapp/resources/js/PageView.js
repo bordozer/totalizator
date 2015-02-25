@@ -16,14 +16,14 @@ define( function ( require ) {
 
 		render: function() {
 
-			var view = this.renderPage();
+			var view = this.renderBody();
 
 			this.renderMenu();
 
 			return view;
 		},
 
-		renderPage: function() {
+		renderBody: function() {
 
 		},
 

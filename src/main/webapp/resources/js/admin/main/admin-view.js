@@ -41,7 +41,7 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		renderPage: function () {
+		renderBody: function () {
 
 			this.$el.html( this.template( {
 				user: this.model.get( 'userDTO' )
