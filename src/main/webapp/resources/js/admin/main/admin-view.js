@@ -55,7 +55,7 @@ define( function ( require ) {
 			return this.$el;
 		},
 
-		menus: function() {
+		mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-backward', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }

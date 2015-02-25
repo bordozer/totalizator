@@ -28,7 +28,11 @@ define( function ( require ) {
 		},
 
 		renderMenu: function() {
-			mainMenu( this.menus(), this.$( '.main-menu-container') );
+			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
+		},
+
+		mainMenuItems: function() {
+			return [];
 		}
 	});
 } );
