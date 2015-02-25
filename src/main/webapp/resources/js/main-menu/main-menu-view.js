@@ -6,9 +6,9 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!js/admin/menu/templates/admin-menu-template.html' );
+	var Template = require( 'text!js/main-menu/templates/main-menu-template.html' );
 
-	var AdminMenuView = Backbone.View.extend( {
+	var MainMenuView = Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -28,6 +28,6 @@ define( function ( require ) {
 
 	} );
 
-	return { AdminMenuView: AdminMenuView };
+	return { MainMenuView: MainMenuView };
 } );
 

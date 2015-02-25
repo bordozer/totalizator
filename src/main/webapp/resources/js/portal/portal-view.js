@@ -13,8 +13,8 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		portalPageTitle: "Portal page title"
-		, adminLinkTitle: "Menu: Admin"
-		, logout: 'Menu: Logout'
+		, adminLinkLabel: "Menu: Admin"
+		, logoutLabel: 'Menu: Logout'
 	} );
 
 	var PortalPageView = Backbone.View.extend( {
@@ -32,12 +32,27 @@ define( function ( require ) {
 
 		render: function () {
 
+			this.renderHeader();
+
 			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, translator: translator
 			 } ) );
 
 			return this.$el;
+		},
+
+		renderHeader: function() {
+			var container = this.$( '.admin-menu-container');
+
+		},
+
+		menus: function() {
+			return [
+				{ selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.adminLinkLabel }
+				, { selector: 'divider' }
+				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.logoutLabel }
+			];
 		},
 
 		_logout: function() {
