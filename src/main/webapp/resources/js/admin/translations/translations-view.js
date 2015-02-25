@@ -10,13 +10,15 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
+	var mainMenu = require( 'js/main-menu/main-menu' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Translations: Page Title'
-		, menuPortalPage: 'Menu: Back to site'
-		, menuAdmin: 'Menu: Admin'
-		, reloadTranslations: 'Menu: Reload translations'
-		, menuLogout: 'Menu: Logout'
+		, menuPortalPageLabel: 'Menu: Back to site'
+		, menuAdminLabel: 'Menu: Admin'
+		, menuReloadTranslationsLabel: 'Menu: Reload translations'
+		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
 	var AdminView = Backbone.View.extend( {
@@ -41,7 +43,25 @@ define( function ( require ) {
 				, translator: translator
 			 } ) );
 
+			this.renderMenu();
+
 			return this.$el;
+		},
+
+		renderMenu: function() {
+			mainMenu( this.menus(), this.$( '.main-menu-container') );
+		},
+
+		menus: function() {
+			return [
+				{ selector: '', icon: 'fa fa-backward', link: '/totalizator/', text: translator.menuPortalPageLabel }
+				, { selector: 'divider' }
+				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
+				, { selector: 'divider' }
+				, { selector: 'admin-reload-translations', icon: 'fa fa-refresh', link: '#', text: translator.menuReloadTranslationsLabel }
+				, { selector: 'divider' }
+				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
+			];
 		},
 
 		_reloadTranslations: function() {
