@@ -5,6 +5,7 @@
 <tags:page userName="${portalPageModel.userName}">
 
 	<div class="portal-page"></div>
+
 	<script type="text/javascript">
 		require( [ 'jquery', 'js/portal/portal' ], function ( $, init ) {
 			init( $( '.portal-page' ) );

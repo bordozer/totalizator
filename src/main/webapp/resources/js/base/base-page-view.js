@@ -7,9 +7,12 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var pageHeader = require( 'public/js/header/header' );
-	var mainMenu = require( 'js/main-menu/main-menu' );
+
+	var Template = require( 'text!js/base/templates/base-page-template.html' );
 
 	return Backbone.View.extend( {
+
+		basePageTemplate:_.template( Template ),
 
 		initialize: function( options ) {
 
@@ -17,21 +20,18 @@ define( function ( require ) {
 
 		render: function() {
 
-			var view = this.renderBody();
+			this.$el.html( this.basePageTemplate( {
+			 } ) );
 
 			this.renderHeader();
 
-			this.renderMenu();
+			this.renderBody( this.$( '.body-container') );
 
-			return view;
+			return this;
 		},
 
 		renderHeader: function() {
-			pageHeader( this.$( '.header-container'), this.getPageSubTitle() );
-		},
-
-		renderMenu: function() {
-			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
+			pageHeader( this.$( '.header-container'), this.getPageSubTitle(), this.mainMenuItems() );
 		},
 
 		renderBody: function() {

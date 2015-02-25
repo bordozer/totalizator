@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var PageView = require( 'js/PageView' );
+	var PageView = require( 'js/base/base-page-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -39,15 +39,13 @@ define( function ( require ) {
 			return translator.pageTitle;
 		},
 
-		renderBody: function () {
+		renderBody: function ( el ) {
 
-			this.$el.html( this.template( {
+			el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, untranslatedList: this.model.get( 'untranslatedList' )
 				, translator: translator
 			 } ) );
-
-			this.renderMenu();
 
 			return this.$el;
 		},

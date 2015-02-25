@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var PageView = require( 'js/PageView' );
+	var PageView = require( 'js/base/base-page-view' );
 
 	var CategoriesModel = require( '/resources/js/admin/category/category-model.js' );
 	var CategoriesView = require( '/resources/js/admin/category/category-view.js' );
@@ -45,9 +45,9 @@ define( function ( require ) {
 			return translator.pageTitle;
 		},
 
-		renderBody: function () {
+		renderBody: function ( el ) {
 
-			this.$el.html( this.template( {
+			el.html( this.template( {
 				user: this.model.get( 'userDTO' )
 				, translator: translator
 			 } ) );

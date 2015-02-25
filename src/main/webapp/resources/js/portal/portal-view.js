@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/portal/templates/portal-template.html' );
 
-	var PageView = require( 'js/PageView' );
+	var PageView = require( 'js/base/base-page-view' );
 
 	var Services = require( '/resources/js/services.js' );
 
@@ -36,9 +36,8 @@ define( function ( require ) {
 			return translator.pageTitle;
 		},
 
-		renderBody: function () {
-
-			this.$el.html( this.template( {
+		renderBody: function ( el ) {
+			el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, translator: translator
 			 } ) );

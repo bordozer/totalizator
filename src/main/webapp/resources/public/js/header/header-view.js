@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var Template = require( 'text!public/js/header/templates/header-template.html' );
 
+	var mainMenu = require( 'js/main-menu/main-menu' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		projectNameLabel: 'Project name: Totalizator'
@@ -19,6 +21,7 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.subtitle = options.subtitle;
+			this.menuItems = options.menuItems;
 
 			this.render();
 		},
@@ -29,9 +32,14 @@ define( function ( require ) {
 				model: this.model
 				, subtitle: this.subtitle
 				, translator: translator
-			 } ) );
+			} ) );
 
-			return this.$el;
+			this.renderMenu();
+			return this;
+		},
+
+		renderMenu: function() {
+			mainMenu( this.menuItems, this.$( '.main-menu-container') );
 		}
 	} );
 
