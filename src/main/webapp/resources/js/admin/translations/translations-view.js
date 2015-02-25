@@ -15,7 +15,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Translations: Page Title'
-		, menuPortalPageLabel: 'Menu: Back to site'
+		, menuPortalPageLabel: 'Menu: Portal page'
 		, menuAdminLabel: 'Menu: Admin'
 		, menuReloadTranslationsLabel: 'Menu: Reload translations'
 		, menuLogoutLabel: 'Menu: Logout'
@@ -50,7 +50,7 @@ define( function ( require ) {
 
 		mainMenuItems: function() {
 			return [
-				{ selector: '', icon: 'fa fa-backward', link: '/totalizator/', text: translator.menuPortalPageLabel }
+				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
