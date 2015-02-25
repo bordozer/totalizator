@@ -14,8 +14,8 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		portalPageTitle: "Portal page title"
-		, adminLinkLabel: "Menu: Admin"
-		, logoutLabel: 'Menu: Logout'
+		, menuAdminLabel: "Menu: Admin"
+		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
 	var PortalPageView = Backbone.View.extend( {
@@ -49,9 +49,9 @@ define( function ( require ) {
 
 		menus: function() {
 			return [
-				{ selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.adminLinkLabel }
+				{ selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
-				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.logoutLabel }
+				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
 		},
 
