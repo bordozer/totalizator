@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var mainMenu = require( 'js/main-menu/main-menu' );
+	var PageView = require( 'js/PageView' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -21,7 +21,7 @@ define( function ( require ) {
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
-	var AdminView = Backbone.View.extend( {
+	var AdminView = PageView.extend( {
 
 		template:_.template( Template ),
 
@@ -35,7 +35,7 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
+		renderPage: function () {
 
 			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )
@@ -46,10 +46,6 @@ define( function ( require ) {
 			this.renderMenu();
 
 			return this.$el;
-		},
-
-		renderMenu: function() {
-			mainMenu( this.menus(), this.$( '.main-menu-container') );
 		},
 
 		menus: function() {

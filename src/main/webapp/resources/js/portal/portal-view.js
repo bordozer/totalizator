@@ -8,8 +8,9 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/portal/templates/portal-template.html' );
 
+	var PageView = require( 'js/PageView' );
+
 	var Services = require( '/resources/js/services.js' );
-	var mainMenu = require( 'js/main-menu/main-menu' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -18,7 +19,7 @@ define( function ( require ) {
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
-	var PortalPageView = Backbone.View.extend( {
+	var PortalPageView = PageView.extend( {
 
 		template:_.template( Template ),
 
@@ -31,20 +32,14 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
+		renderPage: function () {
 
 			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, translator: translator
 			 } ) );
 
-			this.renderMenu();
-
-			return this.$el;
-		},
-
-		renderMenu: function() {
-			mainMenu( this.menus(), this.$( '.main-menu-container') );
+			return this;
 		},
 
 		menus: function() {
