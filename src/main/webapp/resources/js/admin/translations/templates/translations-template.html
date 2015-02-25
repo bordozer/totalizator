@@ -5,22 +5,6 @@
 
 	<div class="col-lg-3 main-menu-container" style="float: right"></div>
 
-	<script type="text/javascript">
-		require( [ 'jquery', 'js/main-menu/main-menu' ], function ( $, init ) {
-
-			var menus = [
-				{ selector: '', 							icon: 'fa fa-backward', 		link: '/totalizator/', 	text: '<%=translator.menuPortalPage%>' }
-				, { selector: 'divider' }
-				, { selector: '', 							icon: 'fa fa-cog', 				link: '/admin/', 		text: '<%=translator.menuAdmin%>' }
-				, { selector: 'divider' }
-				, { selector: 'admin-reload-translations', 	icon: 'fa fa-refresh', 			link: '#', 				text: '<%=translator.reloadTranslations%>' }
-				, { selector: 'divider' }
-				, { selector: 'logout-link', 				icon: 'fa fa-sign-out', 		link: '#',				text: '<%=translator.menuLogout%>' }
-			];
-
-			init( menus, $( '.admin-menu-container') );
-		} );
-	</script>
 </div>
 
 <script type="text/javascript">
