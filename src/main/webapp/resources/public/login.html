@@ -20,7 +20,6 @@
 
 
 		<div class="header-container page-header-c"></div>
-		<div class="header-specific-container" style="display: none;"></div>
 
 		<script type="text/javascript">
 			require( [ 'jquery', 'public/js/header/header', 'translator' ], function ( $, init, Translator ) {
@@ -29,7 +28,7 @@
 					loginPageTitleLabel: 'Login page title: Login'
 				} );
 
-				init( $( '.header-container'), $( '.header-specific-container' ), translator.loginPageTitleLabel );
+				init( $( '.header-container'), translator.loginPageTitleLabel );
 			} );
 		</script>
 

@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var pageHeader = require( 'public/js/header/header' );
 
+	var mainMenu = require( 'js/main-menu/main-menu' );
+
 	var Template = require( 'text!js/base/templates/base-page-template.html' );
 
 	return Backbone.View.extend( {
@@ -25,13 +27,19 @@ define( function ( require ) {
 
 			this.renderHeader();
 
+			this.renderMenu();
+
 			this.renderBody( this.$( '.body-container') );
 
 			return this;
 		},
 
 		renderHeader: function() {
-			pageHeader( this.$( '.header-container'), this.getPageSubTitle(), this.mainMenuItems() );
+			pageHeader( this.$( '.header-container'), this.getPageSubTitle() );
+		},
+
+		renderMenu: function() {
+			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
 		},
 
 		renderBody: function() {
