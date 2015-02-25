@@ -3,20 +3,7 @@
 <div class="header-specific-container" style="display: none;">
 	<small><%-userName%></small>
 
-	<div class="col-lg-3 admin-menu-container" style="float: right"></div>
-
-	<script type="text/javascript">
-		require( [ 'jquery', 'js/main-menu/main-menu' ], function ( $, init ) {
-
-			var menus = [
-				{ selector: '', 					icon: 'fa fa-cog', link: '/admin/', text: '<%=translator.adminLinkLabel%>' }
-				, { selector: 'divider' }
-				, { selector: 'logout-link', 		icon: 'fa fa-sign-out', link: '#', 		text: '<%=translator.logoutLabel%>' }
-			];
-
-			init( menus, $( '.admin-menu-container') );
-		} );
-	</script>
+	<div class="col-lg-3 main-menu-container" style="float: right"></div>
 
 </div>
 

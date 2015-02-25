@@ -12,6 +12,8 @@ define( function( require ) {
 	function init( menus, container ) {
 		var model = new Model.MainMenuModel();
 		var view = new View.MainMenuView( { model: model, el: container, menus: menus } );
+
+		return view.render();
 	}
 
 	return init;

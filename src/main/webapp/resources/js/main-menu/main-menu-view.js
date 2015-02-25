@@ -13,17 +13,17 @@ define( function ( require ) {
 		template:_.template( Template ),
 
 		initialize: function( options ) {
-			this.render( options.menus );
+			this.menus = options.menus;
 		},
 
-		render: function ( menus ) {
+		render: function () {
 
 			this.$el.html( this.template( {
 				model: this.model.toJSON()
-				, menus: menus
+				, menus: this.menus
 			 } ) );
 
-			return this.$el;
+			return this;
 		}
 
 	} );
