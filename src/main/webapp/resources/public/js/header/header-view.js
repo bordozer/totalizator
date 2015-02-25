@@ -20,19 +20,16 @@ define( function ( require ) {
 		initialize: function( options ) {
 			this.subtitle = options.subtitle;
 
-			this.render( options.specialContainer );
+			this.render();
 		},
 
-		render: function ( specialContainer ) {
+		render: function () {
 
 			this.$el.html( this.template( {
 				model: this.model
 				, subtitle: this.subtitle
 				, translator: translator
 			 } ) );
-
-			this.$( '.header-specific' ).html( specialContainer );
-			specialContainer.show();
 
 			return this.$el;
 		}

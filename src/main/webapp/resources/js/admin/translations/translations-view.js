@@ -35,6 +35,10 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
+		getPageSubTitle: function() {
+			return translator.pageTitle;
+		},
+
 		renderBody: function () {
 
 			this.$el.html( this.template( {

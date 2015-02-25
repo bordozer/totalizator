@@ -6,6 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var pageHeader = require( 'public/js/header/header' );
 	var mainMenu = require( 'js/main-menu/main-menu' );
 
 	return Backbone.View.extend( {
@@ -18,17 +19,27 @@ define( function ( require ) {
 
 			var view = this.renderBody();
 
+			this.renderHeader();
+
 			this.renderMenu();
 
 			return view;
+		},
+
+		renderHeader: function() {
+			pageHeader( this.$( '.header-container'), this.getPageSubTitle() );
+		},
+
+		renderMenu: function() {
+			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
 		},
 
 		renderBody: function() {
 
 		},
 
-		renderMenu: function() {
-			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
+		getPageSubTitle: function() {
+			return '';
 		},
 
 		mainMenuItems: function() {
