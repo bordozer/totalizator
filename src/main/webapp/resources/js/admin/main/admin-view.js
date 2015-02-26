@@ -79,7 +79,7 @@ define( function ( require ) {
 
 		_renderCups: function() {
 			this.cupsModel = new CupsModel.CupsModel();
-			this.cupsView = new CupsView.CupsView( { model: this.cupsModel, el: this.$( '.admin-page-cup-container' ) } );
+			this.cupsView = new CupsView.CupsView( { model: this.cupsModel, el: this.$( '.admin-page-cups-container' ) } );
 		},
 
 		_updateCategories: function() {
