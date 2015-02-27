@@ -48,6 +48,7 @@ define( function ( require ) {
 				model: model
 			} );
 			view.on( 'events:categories_changed', this._triggerCategoriesChanged, this );
+			view.on( 'events:filter_by_category', this._triggerFilterByCategory, this );
 
 			if ( model.get( 'categoryId' ) == 0 ) {
 				return this.$( '.categories-container' ).append( view.renderEdit().$el );
@@ -58,6 +59,10 @@ define( function ( require ) {
 
 		_triggerCategoriesChanged: function() {
 			this.trigger( 'events:categories_changed' );
+		},
+
+		_triggerFilterByCategory: function( options ) {
+			this.trigger( 'events:filter_by_category', options );
 		},
 
 		_addEntry: function() {
@@ -81,7 +86,8 @@ define( function ( require ) {
 		templateEdit: _.template( TemplateEntryEdit ),
 
 		events: {
-			'click .category-entry-name, .category-entry-edit': '_onCategoryEditClick'
+			'click .category-entry-edit': '_onCategoryEditClick'
+			, 'click .category-entry-name': '_onCategoryNameClick'
 			, 'click .category-entry-save': '_onCategorySaveClick'
 			, 'click .category-entry-edit-cancel': '_onCategoryEditCancelClick'
 			, 'click .category-entry-del': '_onCategoryDelClick'
@@ -115,6 +121,10 @@ define( function ( require ) {
 			this.renderEdit();
 		},
 
+		_filterByCategory: function() {
+			this.trigger( 'events:filter_by_category', { categoryId: this.model.get( 'categoryId' ) } );
+		},
+
 		_deleteEntry: function() {
 			if ( confirm( "Delete category '" + this.model.get( 'categoryName' ) + "'?" ) ) {
 				this.model.destroy();
@@ -133,9 +143,6 @@ define( function ( require ) {
 			this.model.save().then( function() {
 				self.trigger( 'events:categories_changed' );
 			});
-			/*this.model.save( { success: function() {
-				self.trigger( 'events:categories_changed' );
-			} } );*/
 		},
 
 		_bind: function() {
@@ -157,6 +164,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._editEntry();
+		},
+
+		_onCategoryNameClick: function( evt ) {
+			evt.preventDefault();
+
+			this._filterByCategory();
 		},
 
 		_onCategorySaveClick: function( evt ) {

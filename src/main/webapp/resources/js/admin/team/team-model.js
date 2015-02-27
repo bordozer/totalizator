@@ -4,6 +4,8 @@ define( ["backbone"], function ( Backbone ) {
 
 		idAttribute: 'teamId',
 
+		filterByCategory: 0,
+
 		defaults: {
 			teamId: 0
 			, teamName: ''

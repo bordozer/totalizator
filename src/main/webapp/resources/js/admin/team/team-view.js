@@ -30,6 +30,7 @@ define( function ( require ) {
 			this.model.on( 'sync', this.render, this );
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
+			this.on( 'events:filter_by_category', this._filterByCategory, this );
 
 			this._loadCategories();
 
@@ -43,9 +44,12 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
+			var filterByCategory = this.model.filterByCategory;
 			var self= this;
 			this.model.forEach( function( team ) {
-				self.renderEntry( team );
+				if ( ! filterByCategory || self.model.filterByCategory == team.get( 'categoryId' ) ) {
+					self.renderEntry( team );
+				}
 			});
 
 			return this.$el;
@@ -79,6 +83,11 @@ define( function ( require ) {
 
 		_updateCategories: function() {
 			this._loadCategories();
+			this.render();
+		},
+
+		_filterByCategory: function( options ) {
+			this.model.filterByCategory = options.categoryId;
 			this.render();
 		},
 

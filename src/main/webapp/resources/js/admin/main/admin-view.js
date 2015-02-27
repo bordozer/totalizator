@@ -80,6 +80,7 @@ define( function ( require ) {
 			this.categoriesView = new CategoriesView.CategoriesView( { model: this.categoriesModel, el: this.$( '.admin-page-categories-container' ) } );
 
 			this.categoriesView.on( 'events:categories_changed', this._updateCategories, this );
+			this.categoriesView.on( 'events:filter_by_category', this._filterByCategory, this );
 		},
 
 		_renderCups: function() {
@@ -95,6 +96,11 @@ define( function ( require ) {
 		_updateCategories: function() {
 			this.cupsView.trigger( 'events:categories_changed' );
 			this.teamsView.trigger( 'events:categories_changed' );
+		},
+
+		_filterByCategory: function( options ) {
+			this.cupsView.trigger( 'events:filter_by_category', options );
+			this.teamsView.trigger( 'events:filter_by_category', options );
 		},
 
 		_reloadTranslations: function() {
