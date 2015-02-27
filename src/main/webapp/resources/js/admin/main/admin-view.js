@@ -18,6 +18,9 @@ define( function ( require ) {
 	var CupsModel = require( '/resources/js/admin/cup/cup-model.js' );
 	var CupsView = require( '/resources/js/admin/cup/cup-view.js' );
 
+	var TeamsModel = require( '/resources/js/admin/team/team-model.js' );
+	var TeamsView = require( '/resources/js/admin/team/team-view.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Admin: Page Title'
@@ -56,6 +59,8 @@ define( function ( require ) {
 
 			this._renderCups();
 
+			this._renderTeams();
+
 			return this.$el;
 		},
 
@@ -80,6 +85,11 @@ define( function ( require ) {
 		_renderCups: function() {
 			this.cupsModel = new CupsModel.CupsModel();
 			this.cupsView = new CupsView.CupsView( { model: this.cupsModel, el: this.$( '.admin-page-cups-container' ) } );
+		},
+
+		_renderTeams: function() {
+			this.teamsModel = new TeamsModel.TeamsModel();
+			this.teamsView = new TeamsView.TeamsView( { model: this.teamsModel, el: this.$( '.admin-page-teams-container' ) } );
 		},
 
 		_updateCategories: function() {

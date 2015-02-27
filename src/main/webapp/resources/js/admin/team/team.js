@@ -6,12 +6,12 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './cup-entry-model' );
-	var View = require( './cup-entry-view' );
+	var Model = require( './team-model' );
+	var View = require( './team-view' );
 
 	function init( container ) {
-		var model = new Model.AdminModel();
-		var view = new View.AdminView( { model: model, el: container } );
+		var model = new Model.TeamsModel();
+		var view = new View.TeamsView( { model: model, el: container } );
 	}
 
 	return init;
