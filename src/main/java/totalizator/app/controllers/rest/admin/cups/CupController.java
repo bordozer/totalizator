@@ -18,7 +18,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/admin/cup" )
+@RequestMapping( "/admin/cups" )
 public class CupController {
 
 	@Autowired
