@@ -14,7 +14,7 @@ import static totalizator.app.models.Team.LOAD_ALL;
 @NamedQueries( {
 		@NamedQuery(
 				name = LOAD_ALL,
-				query = "select c from Team c order by teamName"
+				query = "select c from Team c order by categoryId, teamName"
 		),
 		@NamedQuery(
 				name = FIND_BY_NAME,

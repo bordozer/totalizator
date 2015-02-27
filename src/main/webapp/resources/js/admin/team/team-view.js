@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/admin/team/templates/teams-template.html' );
 
-	var TemplateEntry = require( 'text!js/admin/team/templates/teams-template.html' );
+	var TemplateEntry = require( 'text!js/admin/team/templates/team-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/team/templates/team-edit-template.html' );
 
 	var Categories = require( '/resources/js/admin/category/category-model.js' );
@@ -124,6 +124,7 @@ define( function ( require ) {
 			this.$el.html( this.templateView( {
 				model: modelJSON
 				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) )
+				, translator: translator
 			} ) );
 
 			return this;

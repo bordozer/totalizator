@@ -94,6 +94,7 @@ define( function ( require ) {
 
 		_updateCategories: function() {
 			this.cupsView.trigger( 'events:categories_changed' );
+			this.teamsView.trigger( 'events:categories_changed' );
 		},
 
 		_reloadTranslations: function() {
