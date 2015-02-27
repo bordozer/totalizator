@@ -43,9 +43,12 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
+			var filterByCategory = this.model.filterByCategory;
 			var self= this;
 			this.model.forEach( function( cup ) {
-				self.renderEntry( cup );
+				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'categoryId' ) ) {
+					self.renderEntry( cup );
+				}
 			});
 
 			return this.$el;
@@ -83,9 +86,8 @@ define( function ( require ) {
 		},
 
 		_filterByCategory: function( options ) {
-//			console.log( options );
-//			this._loadCategories();
-//			this.render();
+			this.model.filterByCategory = options.categoryId;
+			this.render();
 		},
 
 		_addEntry: function() {
