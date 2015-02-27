@@ -93,7 +93,7 @@ define( function ( require ) {
 
 		_addEntry: function() {
 			this.listenToOnce( this.model, 'add', this.renderEntry );
-			this.model.add( { isEditState: true } );
+			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory } );
 		},
 
 		_onAddClick: function( evt ) {
