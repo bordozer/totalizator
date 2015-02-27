@@ -18,6 +18,8 @@ define( ["backbone"], function ( Backbone ) {
 
 		model: CategoryModel,
 
+		selectedCategoryId: 0,
+
 		initialize: function ( options ) {
 			this.url = '/admin/category/';
 		}

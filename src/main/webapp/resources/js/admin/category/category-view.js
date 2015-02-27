@@ -26,19 +26,26 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.model.on( 'add', this.renderEntry, this );
+			this.model.on( 'sync', this.render, this );
 
 			this.render();
 
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
+		render: function ( options ) {
+
+			this.model.selectedCategoryId = options ? options.selectedCategoryId : 0;
 
 			this.$el.html( this.template( {
 				model: this.model
 				, translator: translator
 			} ) );
+
+			var self = this;
+			this.model.forEach( function( category ) {
+				self.renderEntry( category );
+			});
 
 			return this.$el;
 		},
@@ -46,9 +53,12 @@ define( function ( require ) {
 		renderEntry: function ( model ) {
 			var view = new CategoryView( {
 				model: model
+				, isSelected: this.model.selectedCategoryId == model.get( 'categoryId' )
 			} );
 			view.on( 'events:categories_changed', this._triggerCategoriesChanged, this );
 			view.on( 'events:filter_by_category', this._triggerFilterByCategory, this );
+
+			this.listenTo( view, 'events:refresh', this.render );
 
 			if ( model.get( 'categoryId' ) == 0 ) {
 				return this.$( '.categories-container' ).append( view.renderEdit().$el );
@@ -66,6 +76,7 @@ define( function ( require ) {
 		},
 
 		_addEntry: function() {
+			this.listenToOnce( this.model, 'add', this.renderEntry );
 			this.model.add( {} );
 		},
 
@@ -94,7 +105,9 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.model.on( 'sync', this.render, this )
+			this.isSelected = options.isSelected;
+
+			this.model.on( 'sync', this.render, this );
 		},
 
 		render: function () {
@@ -102,7 +115,12 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
+				, isSelected: this.isSelected
 			} ) );
+
+			if ( this.isSelected ) {
+				this.$( '.admin-entry-line' ).addClass( 'bg-success' );
+			}
 
 			return this;
 		},
@@ -168,6 +186,8 @@ define( function ( require ) {
 
 		_onCategoryNameClick: function( evt ) {
 			evt.preventDefault();
+
+			this.trigger( 'events:refresh', { selectedCategoryId: this.model.get( 'categoryId' ) } );
 
 			this._filterByCategory();
 		},

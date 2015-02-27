@@ -83,7 +83,7 @@ define( function ( require ) {
 		},
 
 		_filterByCategory: function( options ) {
-			console.log( options );
+//			console.log( options );
 //			this._loadCategories();
 //			this.render();
 		},
