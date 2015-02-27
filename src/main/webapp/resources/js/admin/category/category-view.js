@@ -25,17 +25,11 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-
 			this.model.on( 'sync', this.render, this );
-
-			this.render();
-
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function ( options ) {
-
-			this.model.selectedCategoryId = options ? options.selectedCategoryId : 0;
+		render: function () {
 
 			this.$el.html( this.template( {
 				model: this.model
@@ -58,13 +52,18 @@ define( function ( require ) {
 			view.on( 'events:categories_changed', this._triggerCategoriesChanged, this );
 			view.on( 'events:filter_by_category', this._triggerFilterByCategory, this );
 
-			this.listenTo( view, 'events:refresh', this.render );
+			this.listenTo( view, 'events:refresh', this.reRender );
 
 			if ( model.get( 'categoryId' ) == 0 ) {
 				return this.$( '.categories-container' ).append( view.renderEdit().$el );
 			}
 
 			return this.$( '.categories-container' ).append( view.render().$el );
+		},
+
+		reRender: function( options ) {
+			this.model.selectedCategoryId = options.selectedCategoryId;
+			this.render();
 		},
 
 		_triggerCategoriesChanged: function() {
