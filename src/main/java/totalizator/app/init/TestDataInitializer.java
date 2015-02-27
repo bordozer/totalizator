@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
+import totalizator.app.models.Team;
 import totalizator.app.models.User;
 
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +17,10 @@ import javax.persistence.EntityManagerFactory;
 public class TestDataInitializer {
 
 	private static final Logger LOGGER = Logger.getLogger( TestDataInitializer.class );
+
+	private static final String CATEGORY_NBA = "NBA";
+	private static final String CATEGORY_NCAA = "NCAA";
+	private static final String CATEGORY_UEFA = "UEFA";
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
@@ -41,25 +46,76 @@ public class TestDataInitializer {
 
 
 
-		final Category category1 = new Category( "NBA" );
-		session.persist( category1 );
+		final Category nba = new Category( CATEGORY_NBA );
+		session.persist( nba );
 
-		final Category category2 = new Category( "NCAA" );
-		session.persist( category2 );
+		final Category ncaa = new Category( CATEGORY_NCAA );
+		session.persist( ncaa );
 
-		final Category category3 = new Category( "Football" );
-		session.persist( category3 );
+		final Category uefa = new Category( CATEGORY_UEFA );
+		session.persist( uefa );
 
 
 
-		/*final Cup cup1 = new Cup( "NBA 2015 - regular" );
-		session.persist( cup1 );
 
-		final Cup cup2 = new Cup( "NBA 2015 - playoff" );
-		session.persist( cup2 );
+		final Cup nba2015Regular = new Cup( "2015 - regular", nba.getId() );
+		session.persist( nba2015Regular );
 
-		final Cup cup3 = new Cup( "NCAA 2015" );
-		session.persist( cup3 );*/
+		final Cup nba2015PlayOff = new Cup( "2015 - playoff", nba.getId() );
+		session.persist( nba2015PlayOff );
+
+		final Cup ncaa2015 = new Cup( "2015", ncaa.getId() );
+		session.persist( ncaa2015 );
+
+		final Cup uefa2016Euro = new Cup( "Euro 2016", uefa.getId() );
+		session.persist( uefa2016Euro );
+
+		final Cup uefa2016WorldCup = new Cup( "World cup 2018", uefa.getId() );
+		session.persist( uefa2016WorldCup );
+
+
+
+		final Team oklahoma = new Team( "Oklahoma City Thunder", nba.getId() );
+		session.persist( oklahoma );
+
+		final Team chicago = new Team( "Chicago Bulls", nba.getId() );
+		session.persist( chicago );
+
+		final Team houston = new Team( "Houston Rockets", nba.getId() );
+		session.persist( houston );
+
+		final Team newYork = new Team( "New York Knicks", nba.getId() );
+		session.persist( newYork );
+
+		final Team clippers = new Team( "Los Angeles Clippers", nba.getId() );
+		session.persist( clippers );
+
+		final Team duke = new Team( "Duke", nba.getId() );
+		session.persist( duke );
+
+		final Team syracuse = new Team( "Syracuse", ncaa.getId() );
+		session.persist( syracuse );
+
+		final Team virginia = new Team( "Virginia", ncaa.getId() );
+		session.persist( virginia );
+
+		final Team mexico = new Team( "New Mexico", ncaa.getId() );
+		session.persist( mexico );
+
+
+
+		final Team spain = new Team( "Spain", uefa.getId() );
+		session.persist( spain );
+
+		final Team ukraine = new Team( "Ukraine", uefa.getId() );
+		session.persist( ukraine );
+
+		final Team switzerland = new Team( "Switzerland", uefa.getId() );
+		session.persist( switzerland );
+
+		final Team netherlands = new Team( "Netherlands", uefa.getId() );
+		session.persist( netherlands );
+
 
 
 
