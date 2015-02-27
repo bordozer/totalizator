@@ -41,7 +41,7 @@ public class CupRepository implements GenericService<Cup> {
 	@Override
 	public Cup findByName( final String name ) {
 		final List<Cup> cups = em.createNamedQuery( Cup.FIND_BY_NAME, Cup.class )
-				.setParameter( "categoryName", name )
+				.setParameter( "cupName", name )
 				.getResultList();
 
 		return cups.size() == 1 ? cups.get( 0 ) : null;
