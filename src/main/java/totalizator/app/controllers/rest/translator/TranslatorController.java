@@ -17,7 +17,7 @@ import java.util.Map;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/translator" )
+@RequestMapping( "/rest/translator" )
 public class TranslatorController {
 
 	@Autowired

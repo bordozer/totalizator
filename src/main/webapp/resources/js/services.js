@@ -30,7 +30,7 @@ define( function ( require ) {
 		reloadTranslations: function() {
 			$.ajax( {
 				method: 'GET',
-				url: '/admin/translations/reload/',
+				url: '/admin/rest/translations/reload/',
 				success: function ( response ) {
 					window.location.reload();
 				}

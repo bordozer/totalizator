@@ -14,8 +14,8 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/admin/matches" )
-public class MatchesController {
+@RequestMapping( "/admin/rest/matches" )
+public class MatchesRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody

@@ -16,6 +16,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		pageTitle: 'Translations: Page Title'
 		, menuPortalPageLabel: 'Menu: Portal page'
+		, menuMatchesLabel: 'Menu: Matches'
 		, menuAdminLabel: 'Menu: Admin'
 		, menuReloadTranslationsLabel: 'Menu: Reload translations'
 		, menuLogoutLabel: 'Menu: Logout'
@@ -53,6 +54,8 @@ define( function ( require ) {
 		mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
+				, { selector: 'divider' }
+				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }

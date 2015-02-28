@@ -30,7 +30,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: TeamModel,
 
 		initialize: function ( options ) {
-			this.url = '/admin/teams/';
+			this.url = '/admin/rest/teams/';
 		},
 
 		refresh: function() {

@@ -1,4 +1,4 @@
-package totalizator.app.controllers.ui.admin;
+package totalizator.app.controllers.ui.admin.main;
 
 public class AdminModel {
 

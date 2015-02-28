@@ -11,7 +11,7 @@ define( function ( require ) {
 			this._loadTranslations( nerds );
 		},
 
-		url: '/translator/',
+		url: '/rest/translator/',
 
 		defaults: {
 			translations: {}

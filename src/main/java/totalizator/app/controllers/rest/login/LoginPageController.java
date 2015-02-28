@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "login" )
+@RequestMapping( "/rest/login" )
 public class LoginPageController {
 
 	private final Logger LOGGER = Logger.getLogger( LoginPageController.class );

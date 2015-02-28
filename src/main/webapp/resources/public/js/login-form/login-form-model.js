@@ -8,7 +8,6 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize:function ( options ) {
-//			this.url = '/login/';
 		}
 	});
 

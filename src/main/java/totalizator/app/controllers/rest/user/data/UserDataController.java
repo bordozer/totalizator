@@ -13,7 +13,7 @@ import java.security.Principal;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/users" )
+@RequestMapping( "/rest/users" )
 public class UserDataController {
 
 	private static final Logger LOGGER = Logger.getLogger( UserDataController.class );

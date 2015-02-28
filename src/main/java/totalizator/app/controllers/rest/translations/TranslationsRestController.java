@@ -20,7 +20,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/admin/translations" )
+@RequestMapping( "/admin/rest/translations" )
 public class TranslationsRestController {
 
 	@Autowired

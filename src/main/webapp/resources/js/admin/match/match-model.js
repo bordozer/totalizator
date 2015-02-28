@@ -18,7 +18,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: MatchModel,
 
 		initialize: function ( options ) {
-			this.url = '/admin/matches/';
+			this.url = '/admin/rest/matches/';
 		}
 	});
 

@@ -1,7 +1,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="translationsModel" type="totalizator.app.controllers.ui.translations.TranslationsModel" scope="request"/>
+<jsp:useBean id="translationsModel" type="totalizator.app.controllers.ui.admin.translations.TranslationsModel" scope="request"/>
 
 <tags:page userName="TODO">
 

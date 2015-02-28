@@ -1,4 +1,4 @@
-package totalizator.app.controllers.ui.admin;
+package totalizator.app.controllers.ui.admin.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +29,24 @@ public class AdminController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String doLogin( final Principal principal, final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
 
-		final User user = userService.findUserByLogin( principal.getName() );
+		final User user = getUserByLogin( principal );
 
 		model.setUserName( user.getUsername() );
 
 		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/matches/" )
+	public String matches( final Principal principal, final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
+
+		final User user = getUserByLogin( principal );
+
+		model.setUserName( user.getUsername() );
+
+		return VIEW;
+	}
+
+	private User getUserByLogin( final Principal principal ) {
+		return userService.findUserByLogin( principal.getName() );
 	}
 }

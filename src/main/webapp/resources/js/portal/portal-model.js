@@ -8,7 +8,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
-			this.url = '/portal-page/';
+			this.url = '/rest/portal-page/';
 		}
 	});
 

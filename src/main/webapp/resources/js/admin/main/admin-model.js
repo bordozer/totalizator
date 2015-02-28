@@ -3,7 +3,7 @@ define( ["backbone"], function ( Backbone ) {
 	var AdminModel = Backbone.Model.extend( {
 
 		initialize: function ( options ) {
-			this.url = '/admin/';
+			this.url = '/admin/rest/';
 		}
 	});
 

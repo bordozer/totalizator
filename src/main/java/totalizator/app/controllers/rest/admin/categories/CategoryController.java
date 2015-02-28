@@ -16,7 +16,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/admin/category" )
+@RequestMapping( "/admin/rest/category" )
 public class CategoryController {
 
 	private static final Logger LOGGER = Logger.getLogger( CategoryController.class );

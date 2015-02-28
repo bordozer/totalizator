@@ -28,7 +28,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: CupModel,
 
 		initialize: function ( options ) {
-			this.url = '/admin/cups/';
+			this.url = '/admin/rest/cups/';
 		},
 
 		refresh: function() {

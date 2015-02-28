@@ -21,7 +21,7 @@ define( ["backbone"], function ( Backbone ) {
 		selectedCategoryId: 0,
 
 		initialize: function ( options ) {
-			this.url = '/admin/category/';
+			this.url = '/admin/rest/category/';
 		}
 	});
 

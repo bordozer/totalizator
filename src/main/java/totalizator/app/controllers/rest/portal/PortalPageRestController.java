@@ -16,7 +16,7 @@ import java.security.Principal;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/portal-page" )
+@RequestMapping( "/rest/portal-page" )
 public class PortalPageRestController {
 
 	private static final Logger LOGGER = Logger.getLogger( PortalPageRestController.class );
