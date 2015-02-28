@@ -122,6 +122,7 @@ define( function ( require ) {
 			, 'click .entry-edit-cancel': '_onEditCancelClick'
 			, 'click .entry-del': '_onDelClick'
 			, 'change .categories-select-box': '_onCategoryChange'
+			, 'change .cups-select-box': '_onCupChange'
 		},
 
 		initialize: function ( options ) {
@@ -204,10 +205,21 @@ define( function ( require ) {
 			this.renderEdit();
 		},
 
+		_changeCup: function( cupId ) {
+			this.model.set( { cupId: cupId } );
+			this.renderEdit();
+		},
+
 		_onCategoryChange: function( evt ) {
 			evt.preventDefault();
 
 			this._changeCategory( $( evt.target ).val() );
+		},
+
+		_onCupChange: function( evt ) {
+			evt.preventDefault();
+
+			this._changeCup( $( evt.target ).val() );
 		},
 
 		_onEditClick: function( evt ) {
