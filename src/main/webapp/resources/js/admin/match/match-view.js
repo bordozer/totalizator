@@ -126,7 +126,7 @@ define( function ( require ) {
 		},
 
 		_deleteEntry: function() {
-			if ( confirm( "Delete match '" + this.model.get( 'categoryName' ) + "'?" ) ) {
+			if ( confirm( "Delete match?" ) ) {
 				this.model.destroy();
 				this.remove();
 			}
@@ -141,7 +141,7 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
-//			this.model.set( { categoryName: this.$( '.entry-name' ).val() } ); // TODO
+//			this.model.set( { Name: this.$( '.entry-name' ).val() } ); // TODO
 		},
 
 		_validate: function() {
