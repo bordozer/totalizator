@@ -4,6 +4,8 @@ define( ["backbone"], function ( Backbone ) {
 
 		idAttribute: 'matchId',
 
+		categoryId: 0,
+
 		defaults: {
 			matchId: 0
 			, cupId: 0

@@ -3,7 +3,7 @@
 	<div class="admin-entry-icon fa fa-close entry-edit-cancel admin-entry-icon-cell" title="Cancel editing"></div>
 
 	<div class="col-lg-2 categories-container">
-		<select id="categories" class="form-control">
+		<select id="categories-select-box" class="form-control categories-select-box">
 			<option value="0"></option>
 		<% _.each( categories, function( category ) { %>
 			<option value="<%=category.categoryId%>"><%=category.categoryName%></option>
@@ -12,12 +12,14 @@
 	</div>
 
 	<div class="col-lg-3 cups-container">
-		<select id="cups" class="form-control">
-			<option value="0"></option>
-		<% _.each( cups, function( cup ) { %>
-			<option value="<%=cup.cupId%>"><%=cup.cupName%></option>
-		<% }) %>
-		</select>
+		<% if( cups.length > 0 ) { %>
+			<select id="cups-select-box" class="form-control">
+				<option value="0"></option>
+			<% _.each( cups, function( cup ) { %>
+				<option value="<%=cup.cupId%>"><%=cup.cupName%></option>
+			<% }) %>
+			</select>
+		<% } %>
 	</div>
 
 </div>

@@ -89,7 +89,7 @@ define( function ( require ) {
 
 			var result = [];
 			cups.forEach( function( cup ) {
-				result.push( { cupId: cup.get( 'cupId' ), cupName: cup.get( 'cupName' ) } );
+				result.push( { cupId: cup.get( 'cupId' ), categoryId: cup.get( 'categoryId' ), cupName: cup.get( 'cupName' ) } );
 			});
 
 			return result;
@@ -121,6 +121,7 @@ define( function ( require ) {
 			, 'click .entry-save': '_onSaveClick'
 			, 'click .entry-edit-cancel': '_onEditCancelClick'
 			, 'click .entry-del': '_onDelClick'
+			, 'change .categories-select-box': '_onCategoryChange'
 		},
 
 		initialize: function ( options ) {
@@ -150,10 +151,16 @@ define( function ( require ) {
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
 				, categories: this.categories
-				, cups: this.cups
+				, cups: this._categoryCups( this.model.categoryId  )
 			} ) );
 
 			return this;
+		},
+
+		_categoryCups: function( categoryId ) {
+			return _.filter( this.cups, function( cup ) {
+				return cup.categoryId == categoryId;
+			});
 		},
 
 		_editEntry: function() {
@@ -189,6 +196,17 @@ define( function ( require ) {
 			}*/
 
 			return true;
+		},
+
+		_changeCategory: function( categoryId ) {
+			this.model.categoryId = categoryId;
+			this.renderEdit();
+		},
+
+		_onCategoryChange: function( evt ) {
+			evt.preventDefault();
+
+			this._changeCategory( $( evt.target ).val() );
 		},
 
 		_onEditClick: function( evt ) {
