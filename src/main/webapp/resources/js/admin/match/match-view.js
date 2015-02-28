@@ -12,6 +12,9 @@ define( function ( require ) {
 
 	var AdminBasePageView = require( 'js/admin/admin-base-page-view' );
 
+	var Categories = require( 'js/admin/category/category-model' );
+	var Cups = require( 'js/admin/cup/cup-model' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Matches: Page Title'
@@ -27,6 +30,10 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+
+			this.categories = this._loadCategories();
+			this.cups = this._loadCups();
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -53,6 +60,8 @@ define( function ( require ) {
 		renderEntry: function ( model ) {
 			var view = new MatchView( {
 				model: model
+				, categories: this.categories
+				, cups: this.cups
 			} );
 
 			if ( model.get( 'matchId' ) == 0 ) {
@@ -60,6 +69,30 @@ define( function ( require ) {
 			}
 
 			return this.$( '.matches-container' ).append( view.render().$el );
+		},
+
+		_loadCategories: function() {
+			var categories = new Categories.CategoriesModel( [], {} );
+			categories.fetch( { cache: false, async: false } );
+
+			var result = [];
+			categories.forEach( function( category ) {
+				result.push( { categoryId: category.get( 'categoryId' ), categoryName: category.get( 'categoryName' ) } );
+			});
+
+			return result;
+		},
+
+		_loadCups: function() {
+			var cups = new Cups.CupsModel( [], {} );
+			cups.fetch( { cache: false, async: false } );
+
+			var result = [];
+			cups.forEach( function( cup ) {
+				result.push( { cupId: cup.get( 'cupId' ), cupName: cup.get( 'cupName' ) } );
+			});
+
+			return result;
 		},
 
 		_addEntry: function() {
@@ -91,7 +124,8 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.isSelected = options.isSelected;
+			this.categories = options.categories;
+			this.cups = options.cups;
 
 			this.model.on( 'sync', this.render, this );
 		},
@@ -101,7 +135,6 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
-				, isSelected: this.isSelected
 			} ) );
 
 			if ( this.isSelected ) {
@@ -116,6 +149,8 @@ define( function ( require ) {
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
+				, categories: this.categories
+				, cups: this.cups
 			} ) );
 
 			return this;

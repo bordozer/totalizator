@@ -4,7 +4,7 @@
 
 <tags:page userName="${adminModel.userName}">
 
-	<%--<style type="text/css">
+	<style type="text/css">
 		.admin-entry-line {
 			height: 41px;
 			padding-top: 3px;
@@ -13,7 +13,15 @@
 		.admin-entry-icon-cell {
 			padding-top: 5px;
 		}
-	</style>--%>
+
+		.admin-entry-icon {
+			float: left;
+			width: 20px;
+			height: 20px;
+			margin-top: 5px;
+			margin-left: 5px;
+		}
+	</style>
 
 	<div class="admin-matches-container"></div>
 	<script type="text/javascript">

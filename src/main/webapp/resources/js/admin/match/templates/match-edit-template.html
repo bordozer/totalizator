@@ -1,7 +1,25 @@
 <div class="row admin-entry-line bg-info">
-	<div class="col-lg-1 fa fa-save entry-save admin-entry-icon-cell" title="Save"></div>
-	<div class="col-lg-1 fa fa-close entry-edit-cancel admin-entry-icon-cell" title="Cancel editing"></div>
-	<div class="col-lg-9"><input class="form-control entry-name" id="" name="" value=""></div>
+	<div class="admin-entry-icon fa fa-save entry-save admin-entry-icon-cell" title="Save"></div>
+	<div class="admin-entry-icon fa fa-close entry-edit-cancel admin-entry-icon-cell" title="Cancel editing"></div>
+
+	<div class="col-lg-2 categories-container">
+		<select id="categories" class="form-control">
+			<option value="0"></option>
+		<% _.each( categories, function( category ) { %>
+			<option value="<%=category.categoryId%>"><%=category.categoryName%></option>
+		<% }) %>
+		</select>
+	</div>
+
+	<div class="col-lg-3 cups-container">
+		<select id="cups" class="form-control">
+			<option value="0"></option>
+		<% _.each( cups, function( cup ) { %>
+			<option value="<%=cup.cupId%>"><%=cup.cupName%></option>
+		<% }) %>
+		</select>
+	</div>
+
 </div>
 
 
