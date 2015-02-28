@@ -176,10 +176,12 @@ define( function ( require ) {
 
 		_onEditCancelClick: function( evt ) {
 			evt.preventDefault();
+
 			if ( this.model.get( 'matchId' ) > 0 ) {
 				this.render();
 				return;
 			}
+
 			this.model.destroy();
 			this.remove();
 		}

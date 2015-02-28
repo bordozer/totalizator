@@ -27,7 +27,7 @@ public class CategoryController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<CategoryDTO> categories() {
+	public List<CategoryDTO> entries() {
 
 		return Lists.transform( categoryService.loadAll(), new Function<Category, CategoryDTO>() {
 			@Override
