@@ -1,4 +1,4 @@
-package totalizator.app.controllers.ui.admin.main;
+package totalizator.app.controllers.ui.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,41 +24,28 @@ public class AdminController {
 	private UserService userService;
 
 	@ModelAttribute( MODEL_NAME )
-	public AdminModel preparePagingModel() {
-		return new AdminModel();
-	}
+	public AdminModel preparePagingModel( final Principal principal ) {
+		final AdminModel model = new AdminModel();
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String doLogin( final Principal principal, final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
-
-		final User user = getUserByLogin( principal );
+		final User user = userService.findUserByLogin( principal.getName() );
 
 		model.setUserName( user.getUsername() );
 
+		return model;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
+	public String doLogin( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
 		return VIEW_MAIN_PAGE;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/matches/" )
-	public String matches( final Principal principal, final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
-
-		final User user = getUserByLogin( principal );
-
-		model.setUserName( user.getUsername() );
-
+	public String matches( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
 		return VIEW_MATCHES;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/translations/" )
-	public String getDefaultLogin( final Principal principal, final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
-
-		final User user = getUserByLogin( principal );
-
-		model.setUserName( user.getUsername() );
-
+	public String getDefaultLogin( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
 		return VIEW_TRANSLATIONS;
-	}
-
-	private User getUserByLogin( final Principal principal ) {
-		return userService.findUserByLogin( principal.getName() );
 	}
 }
