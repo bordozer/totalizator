@@ -53,10 +53,9 @@ define( function ( require ) {
 		renderEntry: function ( model ) {
 			var view = new MatchView( {
 				model: model
-				, isSelected: this.model.selectedCategoryId == model.get( 'categoryId' )
 			} );
 
-			if ( model.get( 'categoryId' ) == 0 ) {
+			if ( model.get( 'matchId' ) == 0 ) {
 				return this.$( '.categories-container' ).append( view.renderEdit().$el );
 			}
 
@@ -85,11 +84,11 @@ define( function ( require ) {
 		templateEdit: _.template( TemplateEntryEdit ),
 
 		events: {
-			'click .category-entry-edit': '_onCategoryEditClick'
-			, 'click .category-entry-name': '_onCategoryNameClick'
-			, 'click .category-entry-save': '_onCategorySaveClick'
-			, 'click .category-entry-edit-cancel': '_onCategoryEditCancelClick'
-			, 'click .category-entry-del': '_onCategoryDelClick'
+			'click .entry-edit': '_onCategoryEditClick'
+			, 'click .entry-name': '_onCategoryNameClick'
+			, 'click .entry-save': '_onCategorySaveClick'
+			, 'click .entry-edit-cancel': '_onCategoryEditCancelClick'
+			, 'click .entry-del': '_onCategoryDelClick'
 		},
 
 		initialize: function ( options ) {
@@ -183,7 +182,7 @@ define( function ( require ) {
 
 		_onCategoryEditCancelClick: function( evt ) {
 			evt.preventDefault();
-			if ( this.model.get( 'categoryId' ) > 0 ) {
+			if ( this.model.get( 'matchId' ) > 0 ) {
 				this.render();
 				return;
 			}
