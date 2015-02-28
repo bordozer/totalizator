@@ -10,6 +10,8 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
 
+	var Multiselect = require( 'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect' );
+
 	var AdminBasePageView = require( 'js/admin/admin-base-page-view' );
 
 	var Categories = require( 'js/admin/category/category-model' );
@@ -20,6 +22,10 @@ define( function ( require ) {
 	var translator = new Translator( {
 		pageTitle: 'Matches: Page Title'
 		, matchesTitleLabel: "Admin / Matches / Title: Matches"
+		, validation_SelectCup_Label: "Admin / Teams / Validation: Select a cup"
+		, validation_SelectTeam1_Label: "Admin / Teams / Validation: Select team1"
+		, validation_SelectTeam2_Label: "Admin / Teams / Validation: Select team2"
+		, validation_SelectDifferentTeams_Label: "Admin / Teams / Validation: Select different teams"
 	} );
 
 	var MatchesView = AdminBasePageView.extend( {
@@ -175,6 +181,9 @@ define( function ( require ) {
 				, teams: this._categoryTeams( this.model.categoryId  )
 			} ) );
 
+			this.$( '#team1-select-box' ).multiselect();
+			this.$( '#team2-select-box' ).multiselect();
+
 			return this;
 		},
 
@@ -202,25 +211,40 @@ define( function ( require ) {
 		},
 
 		_saveEntry: function() {
-			this._bind();
+//			this._bind();
 
 			if( ! this._validate() ){
 				return;
 			}
+
+//			this.model.save();
 		},
 
-		_bind: function() {
+//		_bind: function() {
 //			this.model.set( { Name: this.$( '.entry-name' ).val() } ); // TODO
-		},
+//		},
 
 		_validate: function() {
 
-			/*TODO
-			if (  ) {
-				alert( 'Enter a name!' ); // TODO: translate
-
+			if ( this.model.get( 'cupId' ) == 0 ) {
+				alert( translator.validation_SelectCup_Label );
 				return false;
-			}*/
+			}
+
+			if ( this.model.get( 'team1Id' ) == 0 ) {
+				alert( translator.validation_SelectTeam1_Label );
+				return false;
+			}
+
+			if ( this.model.get( 'team2Id' ) == 0 ) {
+				alert( translator.validation_SelectTeam2_Label );
+				return false;
+			}
+
+			if ( this.model.get( 'team1Id' ) == this.model.get( 'team2Id' ) ) {
+				alert( translator.validation_SelectDifferentTeams_Label );
+				return false;
+			}
 
 			return true;
 		},

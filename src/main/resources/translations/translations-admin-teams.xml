@@ -8,6 +8,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Admin / Teams / Validation: Select a cup</nerd>
+		<ru><![CDATA[Выберите чемпионат]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Teams / Validation: Select team1</nerd>
+		<ru><![CDATA[Выберите команду 1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Teams / Validation: Select team2</nerd>
+		<ru><![CDATA[Выберите команду 2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Teams / Validation: Select different teams</nerd>
+		<ru><![CDATA[Команды не должны совпадать]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
