@@ -2,7 +2,7 @@
 
 <jsp:useBean id="adminModel" type="totalizator.app.controllers.ui.admin.main.AdminModel" scope="request"/>
 
-<tags:page userName="TODO">
+<tags:page userName="${adminModel.userName}">
 
 	<%--<style type="text/css">
 		.admin-entry-line {

@@ -18,6 +18,7 @@ public class AdminController {
 
 	private static final String VIEW_MAIN_PAGE = "/admin/AdminPage";
 	private static final String VIEW_MATCHES = "/admin/AdminMatches";
+	private static final String VIEW_TRANSLATIONS = "/admin/Translations";
 
 	@Autowired
 	private UserService userService;
@@ -45,6 +46,16 @@ public class AdminController {
 		model.setUserName( user.getUsername() );
 
 		return VIEW_MATCHES;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/translations/" )
+	public String getDefaultLogin( final Principal principal, final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
+
+		final User user = getUserByLogin( principal );
+
+		model.setUserName( user.getUsername() );
+
+		return VIEW_TRANSLATIONS;
 	}
 
 	private User getUserByLogin( final Principal principal ) {
