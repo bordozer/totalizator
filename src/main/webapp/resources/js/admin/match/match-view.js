@@ -23,7 +23,7 @@ define( function ( require ) {
 		template: _.template( TemplateList ),
 
 		events: {
-			'click .add-category-button': '_onAddClick'
+			'click .add-entry-button': '_onAddClick'
 		},
 
 		initialize: function ( options ) {
@@ -56,10 +56,10 @@ define( function ( require ) {
 			} );
 
 			if ( model.get( 'matchId' ) == 0 ) {
-				return this.$( '.categories-container' ).append( view.renderEdit().$el );
+				return this.$( '.matches-container' ).append( view.renderEdit().$el );
 			}
 
-			return this.$( '.categories-container' ).append( view.render().$el );
+			return this.$( '.matches-container' ).append( view.render().$el );
 		},
 
 		_addEntry: function() {
@@ -84,11 +84,10 @@ define( function ( require ) {
 		templateEdit: _.template( TemplateEntryEdit ),
 
 		events: {
-			'click .entry-edit': '_onCategoryEditClick'
-			, 'click .entry-name': '_onCategoryNameClick'
-			, 'click .entry-save': '_onCategorySaveClick'
-			, 'click .entry-edit-cancel': '_onCategoryEditCancelClick'
-			, 'click .entry-del': '_onCategoryDelClick'
+			'click .entry-edit': '_onEditClick'
+			, 'click .entry-save': '_onSaveClick'
+			, 'click .entry-edit-cancel': '_onEditCancelClick'
+			, 'click .entry-del': '_onDelClick'
 		},
 
 		initialize: function ( options ) {
@@ -139,15 +138,10 @@ define( function ( require ) {
 			if( ! this._validate() ){
 				return;
 			}
-
-			var self = this;
-			this.model.save().then( function() {
-				self.trigger( 'events:categories_changed' );
-			});
 		},
 
 		_bind: function() {
-			this.model.set( { categoryName: this.$( '.entry-name' ).val() } );
+//			this.model.set( { categoryName: this.$( '.entry-name' ).val() } ); // TODO
 		},
 
 		_validate: function() {
@@ -162,25 +156,25 @@ define( function ( require ) {
 			return true;
 		},
 
-		_onCategoryEditClick: function( evt ) {
+		_onEditClick: function( evt ) {
 			evt.preventDefault();
 
 			this._editEntry();
 		},
 
-		_onCategorySaveClick: function( evt ) {
+		_onSaveClick: function( evt ) {
 			evt.preventDefault();
 
 			this._saveEntry();
 		},
 
-		_onCategoryDelClick: function( evt ) {
+		_onDelClick: function( evt ) {
 			evt.preventDefault();
 
 			this._deleteEntry();
 		},
 
-		_onCategoryEditCancelClick: function( evt ) {
+		_onEditCancelClick: function( evt ) {
 			evt.preventDefault();
 			if ( this.model.get( 'matchId' ) > 0 ) {
 				this.render();
