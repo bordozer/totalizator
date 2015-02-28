@@ -151,6 +151,7 @@ define( function ( require ) {
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
 				, categories: this.categories
+				, categoryId: this.model.categoryId
 				, cups: this._categoryCups( this.model.categoryId  )
 			} ) );
 
