@@ -90,7 +90,7 @@ public class TestDataInitializer {
 		final Team clippers = new Team( "Los Angeles Clippers", nba.getId() );
 		session.persist( clippers );
 
-		final Team duke = new Team( "Duke", nba.getId() );
+		final Team duke = new Team( "Duke", ncaa.getId() );
 		session.persist( duke );
 
 		final Team syracuse = new Team( "Syracuse", ncaa.getId() );
