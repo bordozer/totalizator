@@ -6,8 +6,8 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './match-model.js' );
-	var View = require( './match-view.js' );
+	var Model = require( './match-model' );
+	var View = require( './match-view' );
 
 	function init( container ) {
 		var model = new Model.MatchesModel();

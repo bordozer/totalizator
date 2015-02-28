@@ -106,10 +106,6 @@ define( function ( require ) {
 			this.teamsView.trigger( 'events:filter_by_category', options );
 		},
 
-		_reloadTranslations: function() {
-			Services.reloadTranslations();
-		},
-
 		_logout: function() {
 			Services.logout();
 		}

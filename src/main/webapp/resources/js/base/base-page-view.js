@@ -12,6 +12,8 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/base/templates/base-page-template.html' );
 
+	var Services = require( '/resources/js/services.js' );
+
 	return Backbone.View.extend( {
 
 		basePageTemplate:_.template( Template ),
@@ -42,7 +44,7 @@ define( function ( require ) {
 			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
 		},
 
-		renderBody: function() {
+		renderBody: function( el ) {
 
 		},
 
@@ -52,6 +54,10 @@ define( function ( require ) {
 
 		mainMenuItems: function() {
 			return [];
+		},
+
+		_reloadTranslations: function() {
+			Services.reloadTranslations();
 		}
 	});
 } );

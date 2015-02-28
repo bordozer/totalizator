@@ -16,7 +16,8 @@ public class AdminController {
 
 	public static final String MODEL_NAME = "adminModel";
 
-	private static final String VIEW = "/AdminPage";
+	private static final String VIEW_MAIN_PAGE = "/admin/AdminPage";
+	private static final String VIEW_MATCHES = "/admin/AdminMatches";
 
 	@Autowired
 	private UserService userService;
@@ -33,7 +34,7 @@ public class AdminController {
 
 		model.setUserName( user.getUsername() );
 
-		return VIEW;
+		return VIEW_MAIN_PAGE;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/matches/" )
@@ -43,7 +44,7 @@ public class AdminController {
 
 		model.setUserName( user.getUsername() );
 
-		return VIEW;
+		return VIEW_MATCHES;
 	}
 
 	private User getUserByLogin( final Principal principal ) {

@@ -6,16 +6,19 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateList = require( 'text!js/admin/match/templates/match-template.html' );
+	var TemplateList = require( 'text!js/admin/match/templates/matches-template.html' );
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
 
+	var PageView = require( 'js/base/base-page-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		matchesTitleLabel: "Admin / Matches / Title: Matches"
+		pageTitle: 'Matches: Page Title'
+		, matchesTitleLabel: "Admin / Matches / Title: Matches"
 	} );
 
-	var MatchesView = Backbone.View.extend( {
+	var MatchesView = PageView.extend( {
 
 		template: _.template( TemplateList ),
 
@@ -28,9 +31,13 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
+		getPageSubTitle: function() {
+			return translator.pageTitle;
+		},
 
-			this.$el.html( this.template( {
+		renderBody: function ( el ) {
+
+			el.html( this.template( {
 				model: this.model
 				, translator: translator
 			} ) );
@@ -54,6 +61,20 @@ define( function ( require ) {
 			}
 
 			return this.$( '.categories-container' ).append( view.render().$el );
+		},
+
+		mainMenuItems: function() {
+			return [
+				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
+				, { selector: 'divider' }
+				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }
+				, { selector: 'divider' }
+				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
+				, { selector: 'divider' }
+				, { selector: 'admin-reload-translations', icon: 'fa fa-refresh', link: '#', text: translator.menuReloadTranslationsLabel }
+				, { selector: 'divider' }
+				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
+			];
 		},
 
 		_addEntry: function() {

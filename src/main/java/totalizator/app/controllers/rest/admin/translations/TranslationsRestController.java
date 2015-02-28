@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.translations;
+package totalizator.app.controllers.rest.admin.translations;
 
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;

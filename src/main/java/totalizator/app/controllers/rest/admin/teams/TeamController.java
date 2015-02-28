@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.teams;
+package totalizator.app.controllers.rest.admin.teams;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

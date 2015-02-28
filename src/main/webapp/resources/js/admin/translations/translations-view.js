@@ -65,10 +65,6 @@ define( function ( require ) {
 			];
 		},
 
-		_reloadTranslations: function() {
-			Services.reloadTranslations();
-		},
-
 		_logout: function() {
 			Services.logout();
 		}
