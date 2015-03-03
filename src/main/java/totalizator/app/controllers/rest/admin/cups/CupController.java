@@ -37,8 +37,7 @@ public class CupController {
 		return Lists.transform( cupService.loadAll(), new Function<Cup, CupDTO>() {
 			@Override
 			public CupDTO apply( final Cup cup ) {
-				final Category category = categoryService.load( cup.getCategoryId() );
-				return new CupDTO( cup.getId(), cup.getCupName(), category.getId() );
+				return new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
 			}
 		} );
 	}
@@ -48,7 +47,8 @@ public class CupController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CupDTO create( final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
-		final Cup cup = cupService.save( new Cup( cupDTO.getCupName(), cupDTO.getCategoryId() ) );
+		final Cup cup = new Cup( cupDTO.getCupName(), categoryService.load( cupDTO.getCategoryId() ) );
+		cupService.save( cup );
 
 		cupDTO.setCupId( cup.getId() );
 		return cupDTO;
@@ -61,7 +61,7 @@ public class CupController {
 		// TODO: check if name exists
 		final Cup cup = cupService.load( cupDTO.getCupId() );
 		cup.setCupName( cupDTO.getCupName() );
-		cup.setCategoryId( cupDTO.getCategoryId() );
+		cup.setCategory( categoryService.load( cupDTO.getCategoryId() ) );
 
 		cupService.save( cup );
 

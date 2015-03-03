@@ -58,19 +58,19 @@ public class TestDataInitializer {
 
 
 
-		final Cup nba2015Regular = new Cup( "2015 - regular", nba.getId() );
+		final Cup nba2015Regular = new Cup( "2015 - regular", nba );
 		session.persist( nba2015Regular );
 
-		final Cup nba2015PlayOff = new Cup( "2015 - playoff", nba.getId() );
+		final Cup nba2015PlayOff = new Cup( "2015 - playoff", nba );
 		session.persist( nba2015PlayOff );
 
-		final Cup ncaa2015 = new Cup( "2015", ncaa.getId() );
+		final Cup ncaa2015 = new Cup( "2015", ncaa );
 		session.persist( ncaa2015 );
 
-		final Cup uefa2016Euro = new Cup( "Euro 2016", uefa.getId() );
+		final Cup uefa2016Euro = new Cup( "Euro 2016", uefa );
 		session.persist( uefa2016Euro );
 
-		final Cup uefa2016WorldCup = new Cup( "World cup 2018", uefa.getId() );
+		final Cup uefa2016WorldCup = new Cup( "World cup 2018", uefa );
 		session.persist( uefa2016WorldCup );
 
 

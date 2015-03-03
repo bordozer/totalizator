@@ -11,7 +11,7 @@ import static totalizator.app.models.Cup.LOAD_ALL;
 @NamedQueries( {
 		@NamedQuery(
 				name = LOAD_ALL,
-				query = "select c from Cup c order by categoryId, cupName"
+				query = "select c from Cup c order by cupName"
 		),
 		@NamedQuery(
 				name = FIND_BY_NAME,
@@ -26,14 +26,16 @@ public class Cup extends AbstractEntity {
 	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
 	private String cupName;
 
-	private int categoryId;
+	@ManyToOne
+	@JoinColumn(name="categoryId")
+	private Category category;
 
 	public Cup() {
 	}
 
-	public Cup( final String cupName, final int categoryId ) {
+	public Cup( final String cupName, final Category category ) {
 		this.cupName = cupName;
-		this.categoryId = categoryId;
+		this.category = category;
 	}
 
 	public String getCupName() {
@@ -44,12 +46,12 @@ public class Cup extends AbstractEntity {
 		this.cupName = cupName;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId( final int categoryId ) {
-		this.categoryId = categoryId;
+	public void setCategory( final Category category ) {
+		this.category = category;
 	}
 
 	@Override
