@@ -19,5 +19,6 @@
 		, "bootstrap" : "latest"
 		, "fontawesome": "latest"
 		, "bootstrap-multiselect": "latest"
+		, "knockout": "latest"
 	}
 }

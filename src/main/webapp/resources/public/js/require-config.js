@@ -13,6 +13,7 @@ var require = {
 		, backbone: "bower_components/backbone/backbone"
 		, text: "bower_components/text/text"
 		, bootstrap: "bower_components/bootstrap/dist/js/bootstrap.min"
+		, knockout: "bower_components/knockout/dist/knockout"
 		, translator: "public/js/translator"
 	},
 
@@ -31,7 +32,7 @@ var require = {
 			deps: [ 'jquery' ]
 		},
 		bootstrap: {
-			deps: [ 'jquery' ]
+			deps: [ 'jquery', 'knockout' ]
 		}
 	}
 
