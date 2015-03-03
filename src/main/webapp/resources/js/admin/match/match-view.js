@@ -181,8 +181,12 @@ define( function ( require ) {
 				, teams: this._categoryTeams( this.model.categoryId  )
 			} ) );
 
-			this.$( '#team1-select-box' ).multiselect();
-			this.$( '#team2-select-box' ).multiselect();
+			var options = {
+				enableCaseInsensitiveFiltering: true
+			};
+
+			this.$( '#team1-select-box' ).multiselect( options );
+			this.$( '#team2-select-box' ).multiselect( options );
 
 			return this;
 		},
