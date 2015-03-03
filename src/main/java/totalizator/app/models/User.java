@@ -1,9 +1,6 @@
 package totalizator.app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -22,8 +19,13 @@ public class User extends AbstractEntity {
 	public static final String FIND_BY_USERNAME = "user.findByUserName";
 	public static final java.lang.String FIND_BY_LOGIN = "user.findByUserLogin";
 
+	@Column( unique = true, columnDefinition = "VARCHAR(20)" )
 	private String login;
+
+	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String username;
+
+	@Column( columnDefinition = "VARCHAR(255)" )
 	private String password;
 
 	public User() {

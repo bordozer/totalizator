@@ -1,9 +1,6 @@
 package totalizator.app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static totalizator.app.models.Team.FIND_BY_NAME;
 import static totalizator.app.models.Team.LOAD_ALL;
@@ -26,7 +23,9 @@ public class Team extends AbstractEntity {
 	public static final String LOAD_ALL = "teams.loadAll";
 	public static final String FIND_BY_NAME = "teams.findByName";
 
+	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
 	private String teamName;
+
 	private int categoryId;
 
 	public Team() {
