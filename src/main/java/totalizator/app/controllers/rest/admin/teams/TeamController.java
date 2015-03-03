@@ -37,7 +37,7 @@ public class TeamController {
 		return Lists.transform( teamService.loadAll(), new Function<Team, TeamDTO>() {
 			@Override
 			public TeamDTO apply( final Team team ) {
-				final Category category = categoryService.load( team.getCategoryId() );
+				final Category category = team.getCategory();
 				return new TeamDTO( team.getId(), team.getTeamName(), category.getId() );
 			}
 		} );
@@ -48,7 +48,7 @@ public class TeamController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamDTO create( final @RequestBody TeamDTO teamDTO ) {
 		// TODO: check if name exists
-		final Team team = teamService.save( new Team( teamDTO.getTeamName(), teamDTO.getCategoryId() ) );
+		final Team team = teamService.save( new Team( teamDTO.getTeamName(), categoryService.load( teamDTO.getCategoryId() ) ) );
 
 		teamDTO.setTeamId( team.getId() );
 		return teamDTO;
@@ -61,7 +61,7 @@ public class TeamController {
 		// TODO: check if name exists
 		final Team team = teamService.load( teamDTO.getTeamId() );
 		team.setTeamName( teamDTO.getTeamName() );
-		team.setCategoryId( teamDTO.getCategoryId() );
+		team.setCategory( categoryService.load( teamDTO.getCategoryId() ) );
 
 		teamService.save( team );
 

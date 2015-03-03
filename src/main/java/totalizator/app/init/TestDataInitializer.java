@@ -75,45 +75,45 @@ public class TestDataInitializer {
 
 
 
-		final Team oklahoma = new Team( "Oklahoma City Thunder", nba.getId() );
+		final Team oklahoma = new Team( "Oklahoma City Thunder", nba );
 		session.persist( oklahoma );
 
-		final Team chicago = new Team( "Chicago Bulls", nba.getId() );
+		final Team chicago = new Team( "Chicago Bulls", nba );
 		session.persist( chicago );
 
-		final Team houston = new Team( "Houston Rockets", nba.getId() );
+		final Team houston = new Team( "Houston Rockets", nba );
 		session.persist( houston );
 
-		final Team newYork = new Team( "New York Knicks", nba.getId() );
+		final Team newYork = new Team( "New York Knicks", nba );
 		session.persist( newYork );
 
-		final Team clippers = new Team( "Los Angeles Clippers", nba.getId() );
+		final Team clippers = new Team( "Los Angeles Clippers", nba );
 		session.persist( clippers );
 
-		final Team duke = new Team( "Duke", ncaa.getId() );
+		final Team duke = new Team( "Duke", ncaa );
 		session.persist( duke );
 
-		final Team syracuse = new Team( "Syracuse", ncaa.getId() );
+		final Team syracuse = new Team( "Syracuse", ncaa );
 		session.persist( syracuse );
 
-		final Team virginia = new Team( "Virginia", ncaa.getId() );
+		final Team virginia = new Team( "Virginia", ncaa );
 		session.persist( virginia );
 
-		final Team mexico = new Team( "New Mexico", ncaa.getId() );
+		final Team mexico = new Team( "New Mexico", ncaa );
 		session.persist( mexico );
 
 
 
-		final Team spain = new Team( "Spain", uefa.getId() );
+		final Team spain = new Team( "Spain", uefa );
 		session.persist( spain );
 
-		final Team ukraine = new Team( "Ukraine", uefa.getId() );
+		final Team ukraine = new Team( "Ukraine", uefa );
 		session.persist( ukraine );
 
-		final Team switzerland = new Team( "Switzerland", uefa.getId() );
+		final Team switzerland = new Team( "Switzerland", uefa );
 		session.persist( switzerland );
 
-		final Team netherlands = new Team( "Netherlands", uefa.getId() );
+		final Team netherlands = new Team( "Netherlands", uefa );
 		session.persist( netherlands );
 
 

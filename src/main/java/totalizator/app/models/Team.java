@@ -26,14 +26,16 @@ public class Team extends AbstractEntity {
 	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
 	private String teamName;
 
-	private int categoryId;
+	@ManyToOne
+	@JoinColumn(name="categoryId")
+	private Category category;
 
 	public Team() {
 	}
 
-	public Team( final String teamName, final int categoryId ) {
+	public Team( final String teamName, final Category category ) {
 		this.teamName = teamName;
-		this.categoryId = categoryId;
+		this.category = category;
 	}
 
 	public String getTeamName() {
@@ -44,12 +46,12 @@ public class Team extends AbstractEntity {
 		this.teamName = teamName;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId( final int categoryId ) {
-		this.categoryId = categoryId;
+	public void setCategory( final Category category ) {
+		this.category = category;
 	}
 
 	@Override
