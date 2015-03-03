@@ -11,7 +11,7 @@ import static totalizator.app.models.Cup.LOAD_ALL;
 @NamedQueries( {
 		@NamedQuery(
 				name = LOAD_ALL,
-				query = "select c from Cup c order by cupName"
+				query = "select c from Cup c order by categoryId, cupName"
 		),
 		@NamedQuery(
 				name = FIND_BY_NAME,
