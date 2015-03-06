@@ -229,12 +229,18 @@ define( function ( require ) {
 			if( ! this._validate() ){
 				return;
 			}
-
-//			this.model.save();
+			console.log( this.model );
+			this.model.save();
 		},
 
 		_bind: function() {
-//			this.model.set( { cupId: this.$( '.entry-name' ).val() } );
+			this.model.set( {
+				cupId: this.$( '.cups-select-box' ).val()
+				, team1Id: this.$( '.team1-select-box' ).val()
+				, score1Id: this.$( '#score1Id' ).val()
+				, team2Id: this.$( '.team2-select-box' ).val()
+				, score2Id: this.$( '#score2Id' ).val()
+			} );
 		},
 
 		_validate: function() {

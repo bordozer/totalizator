@@ -37,29 +37,7 @@ public class MatchesRestController {
 		return Lists.transform( matchService.loadAll(), new Function<Match, MatchDTO>() {
 			@Override
 			public MatchDTO apply( final Match match ) {
-
-				final MatchDTO dto = new MatchDTO();
-
-				dto.setMatchId( match.getId() );
-
-				dto.setCategoryId( match.getCup().getCategory().getId() );
-
-				dto.setCategoryName( match.getCup().getCategory().getCategoryName() );
-
-				dto.setCupId( match.getCup().getId() );
-				dto.setCupName( match.getCup().getCupName() );
-
-				dto.setTeam1Id( match.getTeam1().getId() );
-				dto.setTeam1Name( match.getTeam1().getTeamName() );
-				dto.setScore1Id( match.getScore1Id() );
-
-				dto.setTeam2Id( match.getTeam2().getId() );
-				dto.setTeam2Name( match.getTeam2().getTeamName() );
-				dto.setScore2Id( match.getScore2Id() );
-
-				dto.setLastBetTime( match.getLastBetTime() );
-
-				return dto;
+				return initDTOFromModel( match );
 			}
 		} );
 	}
@@ -72,7 +50,7 @@ public class MatchesRestController {
 
 		final Match match = new Match();
 
-		initFromDTO( matchDTO, match );
+		initModelFromDTO( matchDTO, match );
 
 		matchService.save( match );
 
@@ -88,11 +66,11 @@ public class MatchesRestController {
 		// TODO: check if name exists
 		final Match match = matchService.load( matchDTO.getCupId() );
 
-		initFromDTO( matchDTO, match );
+		initModelFromDTO( matchDTO, match );
 
 		matchService.save( match );
 
-		return matchDTO;
+		return initDTOFromModel( match );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -106,7 +84,7 @@ public class MatchesRestController {
 		matchService.delete( matchId );
 	}
 
-	private void initFromDTO( final MatchDTO matchDTO, final Match match ) {
+	private void initModelFromDTO( final MatchDTO matchDTO, final Match match ) {
 		match.setCup( cupService.load( matchDTO.getCupId() ) );
 
 		match.setTeam1( teamService.load( matchDTO.getTeam1Id() ) );
@@ -115,5 +93,29 @@ public class MatchesRestController {
 		match.setTeam2( teamService.load( matchDTO.getTeam2Id() ) );
 		match.setScore2Id( matchDTO.getScore2Id() );
 		match.setLastBetTime( matchDTO.getLastBetTime() );
+	}
+
+	private MatchDTO initDTOFromModel( final Match match ) {
+		final MatchDTO dto = new MatchDTO();
+
+		dto.setMatchId( match.getId() );
+
+		dto.setCategoryId( match.getCup().getCategory().getId() );
+
+		dto.setCategoryName( match.getCup().getCategory().getCategoryName() );
+
+		dto.setCupId( match.getCup().getId() );
+		dto.setCupName( match.getCup().getCupName() );
+
+		dto.setTeam1Id( match.getTeam1().getId() );
+		dto.setTeam1Name( match.getTeam1().getTeamName() );
+		dto.setScore1Id( match.getScore1Id() );
+
+		dto.setTeam2Id( match.getTeam2().getId() );
+		dto.setTeam2Name( match.getTeam2().getTeamName() );
+		dto.setScore2Id( match.getScore2Id() );
+
+		dto.setLastBetTime( match.getLastBetTime() );
+		return dto;
 	}
 }
