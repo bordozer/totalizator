@@ -12,14 +12,14 @@ define( function ( require ) {
 
 	var AdminBasePageView = require( 'js/admin/admin-base-page-view' );
 
-	var CategoriesModel = require( '/resources/js/admin/category/category-model.js' );
-	var CategoriesView = require( '/resources/js/admin/category/category-view.js' );
+	var CategoriesModel = require( 'js/admin/category/category-model' );
+	var CategoriesView = require( 'js/admin/category/category-view' );
 
-	var CupsModel = require( '/resources/js/admin/cup/cup-model.js' );
-	var CupsView = require( '/resources/js/admin/cup/cup-view.js' );
+	var CupsModel = require( 'js/admin/cup/cup-model' );
+	var CupsView = require( 'js/admin/cup/cup-view' );
 
-	var TeamsModel = require( '/resources/js/admin/team/team-model.js' );
-	var TeamsView = require( '/resources/js/admin/team/team-view.js' );
+	var TeamsModel = require( 'js/admin/team/team-model' );
+	var TeamsView = require( 'js/admin/team/team-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

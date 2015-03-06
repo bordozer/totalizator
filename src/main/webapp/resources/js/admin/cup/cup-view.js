@@ -10,7 +10,7 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/cup/templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/cup/templates/cup-edit-template.html' );
 
-	var Categories = require( '/resources/js/admin/category/category-model.js' );
+	var Services = require( '/resources/js/services.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -76,8 +76,7 @@ define( function ( require ) {
 		},
 
 		_loadCategories: function() {
-			this.categories = new Categories.CategoriesModel();
-			this.categories.fetch( { cache: false, async: false } );
+			this.categories = Services.loadCategories();
 		},
 
 		_updateCategories: function() {
@@ -120,10 +119,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			var categories = this.categories = [];
-			options.categories.forEach( function( category ) {
-				categories.push( category.toJSON() );
-			});
+			this.categories = options.categories;
 
 			this.model.on( 'sync', this.render, this )
 		},
@@ -152,9 +148,8 @@ define( function ( require ) {
 		},
 
 		_getCategoryName: function( categoryId ) {
-			return _.find( this.categories, function( category ) {
-				return category.categoryId == categoryId;
-			} ).categoryName;
+			var category = Services.getCategory( this.categories, categoryId );
+			return category.categoryName;
 		},
 
 		_editEntry: function() {
