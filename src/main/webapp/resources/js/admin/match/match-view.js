@@ -161,6 +161,12 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
+				, categoryName: modelJSON.categoryName
+				, cupName: modelJSON.cupName
+				, team1Name: modelJSON.team1Name
+				, team2Name: modelJSON.team2Name
+				, score1Id: modelJSON.score1Id
+				, score2Id: modelJSON.score2Id
 			} ) );
 
 			if ( this.isSelected ) {
@@ -176,11 +182,6 @@ define( function ( require ) {
 			var categoryId = this.model.get( 'categoryId' );
 			var cups = this._categoryCups( categoryId );
 			var teams = this._categoryTeams( categoryId );
-
-//			console.log( modelJSON );
-//			console.log( 'categoryId', categoryId );
-//			console.log( 'cups', cups );
-//			console.log( 'teams', teams );
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
