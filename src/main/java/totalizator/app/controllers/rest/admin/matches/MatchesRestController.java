@@ -51,9 +51,9 @@ public class MatchesRestController {
 
 		initModelFromDTO( matchDTO, match );
 
-		matchService.save( match );
+		final Match saved = matchService.save( match );
 
-		matchDTO.setMatchId( match.getId() );
+		matchDTO.setMatchId( saved.getId() );
 
 		return matchDTO;
 	}

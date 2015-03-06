@@ -245,7 +245,7 @@ define( function ( require ) {
 			if( ! this._validate() ){
 				return;
 			}
-			console.log( this.model );
+
 			this.model.save();
 		},
 
