@@ -158,7 +158,6 @@ define( function ( require ) {
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
-			console.log( modelJSON );
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
