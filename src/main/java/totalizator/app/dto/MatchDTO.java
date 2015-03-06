@@ -6,6 +6,7 @@ public class MatchDTO {
 
 	private int matchId;
 
+	private int categoryId;
 	private String categoryName;
 
 	private int cupId;
@@ -27,6 +28,14 @@ public class MatchDTO {
 
 	public void setMatchId( final int matchId ) {
 		this.matchId = matchId;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId( final int categoryId ) {
+		this.categoryId = categoryId;
 	}
 
 	public String getCategoryName() {

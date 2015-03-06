@@ -173,12 +173,21 @@ define( function ( require ) {
 		renderEdit: function () {
 			var modelJSON = this.model.toJSON();
 
+			var categoryId = this.model.get( 'categoryId' );
+			var cups = this._categoryCups( categoryId );
+			var teams = this._categoryTeams( categoryId );
+
+//			console.log( modelJSON );
+//			console.log( 'categoryId', categoryId );
+//			console.log( 'cups', cups );
+//			console.log( 'teams', teams );
+
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
 				, categories: this.categories
-				, categoryId: this.model.categoryId
-				, cups: this._categoryCups( this.model.categoryId  )
-				, teams: this._categoryTeams( this.model.categoryId  )
+				, categoryId: categoryId
+				, cups: cups
+				, teams: teams
 			} ) );
 
 			var options = {
@@ -215,7 +224,7 @@ define( function ( require ) {
 		},
 
 		_saveEntry: function() {
-//			this._bind();
+			this._bind();
 
 			if( ! this._validate() ){
 				return;
@@ -224,9 +233,9 @@ define( function ( require ) {
 //			this.model.save();
 		},
 
-//		_bind: function() {
-//			this.model.set( { Name: this.$( '.entry-name' ).val() } ); // TODO
-//		},
+		_bind: function() {
+//			this.model.set( { cupId: this.$( '.entry-name' ).val() } );
+		},
 
 		_validate: function() {
 
@@ -254,7 +263,7 @@ define( function ( require ) {
 		},
 
 		_changeCategory: function( categoryId ) {
-			this.model.categoryId = categoryId;
+			this.model.set( { categoryId: categoryId } );
 			this.renderEdit();
 		},
 

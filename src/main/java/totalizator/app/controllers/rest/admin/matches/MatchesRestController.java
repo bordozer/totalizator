@@ -42,6 +42,8 @@ public class MatchesRestController {
 
 				dto.setMatchId( match.getId() );
 
+				dto.setCategoryId( match.getCup().getCategory().getId() );
+
 				dto.setCategoryName( match.getCup().getCategory().getCategoryName() );
 
 				dto.setCupId( match.getCup().getId() );
