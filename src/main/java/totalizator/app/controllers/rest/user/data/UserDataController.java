@@ -25,7 +25,7 @@ public class UserDataController {
 	@ResponseStatus( HttpStatus.OK )
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public UserDTO getDefaultLogin( final Principal principal ) {
-		final User user = userService.findUserByName( principal.getName() );
+		final User user = userService.findByName( principal.getName() );
 
 		if ( user == null ) {
 			return null; // TODO: exception?

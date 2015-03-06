@@ -50,7 +50,7 @@ public class TranslationsRestController {
 		}
 
 		final TranslationsModel model = new TranslationsModel();
-		model.setUserName( userService.findUserByLogin( principal.getName() ).getUsername() );
+		model.setUserName( userService.findByLogin( principal.getName() ).getUsername() );
 		model.setUntranslatedList( untranslatedList );
 
 		return model;

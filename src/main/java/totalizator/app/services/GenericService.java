@@ -13,6 +13,4 @@ public interface GenericService<T extends AbstractEntity> {
 	T load( final int id );
 
 	void delete( final int id );
-
-	T findByName( final String name );
 }

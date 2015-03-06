@@ -27,7 +27,7 @@ public class AdminController {
 	public AdminModel preparePagingModel( final Principal principal ) {
 		final AdminModel model = new AdminModel();
 
-		final User user = userService.findUserByLogin( principal.getName() );
+		final User user = userService.findByLogin( principal.getName() );
 
 		model.setUserName( user.getUsername() );
 

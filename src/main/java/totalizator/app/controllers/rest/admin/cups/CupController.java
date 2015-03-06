@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
-import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;

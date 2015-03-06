@@ -4,13 +4,14 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.Category;
 import totalizator.app.services.GenericService;
+import totalizator.app.services.NamedEntityGenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CategoryRepository implements GenericService<Category> {
+public class CategoryRepository implements GenericService<Category>, NamedEntityGenericService<Category> {
 
 	private static final Logger LOGGER = Logger.getLogger( CategoryRepository.class );
 
@@ -35,6 +36,7 @@ public class CategoryRepository implements GenericService<Category> {
 		em.remove( load( id ) );
 	}
 
+	@Override
 	public Category findByName( final String categoryName ) {
 		final List<Category> categories = em.createNamedQuery( Category.FIND_BY_NAME, Category.class )
 				.setParameter( "categoryName", categoryName )

@@ -29,7 +29,7 @@ public class PortalPageRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public PortalPageDTO getDefaultLogin( final Principal principal ) {
 
-		final User user = userService.findUserByLogin( principal.getName() );
+		final User user = userService.findByLogin( principal.getName() );
 
 		final PortalPageDTO portalPageDTO = new PortalPageDTO();
 		portalPageDTO.setUserName( user.getUsername() );

@@ -1,33 +1,62 @@
 package totalizator.app.models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+import static totalizator.app.models.Match.*;
+
+@Entity
+@Table( name = "matches" )
+@NamedQueries( {
+		@NamedQuery(
+				name = LOAD_ALL,
+				query = "select c from Match c order by cupId"
+		),
+		@NamedQuery(
+				name = FIND_BY_CUP,
+				query = "select c from Match c where cupId= :cupId"
+		),
+		@NamedQuery(
+				name = FIND_BY_TEAMS,
+				query = "select c from Match c where team1Id= :team1Id and team2Id= :team2Id"
+		)
+} )
 public class Match extends AbstractEntity {
 
-	private int cupId;
+	public static final String LOAD_ALL = "matches.loadAll";
+	public static final String FIND_BY_CUP = "matches.findByCup";
+	public static final String FIND_BY_TEAMS = "matches.findByTeams";
 
-	private int team1Id;
+	@ManyToOne
+	@JoinColumn(name="cupId")
+	private Cup cup;
+
+	@ManyToOne
+	@JoinColumn(name="team1Id")
+	private Team team1;
 	private int score1Id;
 
-	private int team2Id;
+	@ManyToOne
+	@JoinColumn(name="team2Id")
+	private Team team2;
 	private int score2Id;
 
 	private Date lastBetTime;
 
-	public int getCupId() {
-		return cupId;
+	public Cup getCup() {
+		return cup;
 	}
 
-	public void setCupId( final int cupId ) {
-		this.cupId = cupId;
+	public void setCup( final Cup cup ) {
+		this.cup = cup;
 	}
 
-	public int getTeam1Id() {
-		return team1Id;
+	public Team getTeam1() {
+		return team1;
 	}
 
-	public void setTeam1Id( final int team1Id ) {
-		this.team1Id = team1Id;
+	public void setTeam1( final Team team1 ) {
+		this.team1 = team1;
 	}
 
 	public int getScore1Id() {
@@ -38,12 +67,12 @@ public class Match extends AbstractEntity {
 		this.score1Id = score1Id;
 	}
 
-	public int getTeam2Id() {
-		return team2Id;
+	public Team getTeam2() {
+		return team2;
 	}
 
-	public void setTeam2Id( final int team2Id ) {
-		this.team2Id = team2Id;
+	public void setTeam2( final Team team2 ) {
+		this.team2 = team2;
 	}
 
 	public int getScore2Id() {
@@ -64,6 +93,6 @@ public class Match extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return String.format( "%s - %s", team1Id, team2Id );
+		return String.format( "%s vs %s, %d : %d", team1, team2, score1Id, score2Id );
 	}
 }

@@ -4,13 +4,14 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.Team;
 import totalizator.app.services.GenericService;
+import totalizator.app.services.NamedEntityGenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class TeamRepository implements GenericService<Team> {
+public class TeamRepository implements GenericService<Team>, NamedEntityGenericService<Team> {
 
 	private static final Logger LOGGER = Logger.getLogger( TeamRepository.class );
 

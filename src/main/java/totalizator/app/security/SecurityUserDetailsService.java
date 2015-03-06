@@ -25,7 +25,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername( final String login ) throws UsernameNotFoundException {
-		final User user = userRepository.findUserByLogin( login );
+		final User user = userRepository.findByLogin( login ); // TODO: use service
 
 		if ( user == null ) {
 			LOGGER.debug ( String.format( "================================= User login not found: %s =================================", login ) );

@@ -2,9 +2,15 @@ package totalizator.app.models;
 
 import javax.persistence.*;
 
+import static totalizator.app.models.User.LOAD_ALL;
+
 @Entity
 @Table(name = "users")
 @NamedQueries({
+		@NamedQuery(
+				name = LOAD_ALL,
+				query = "select c from User c order by username"
+		),
 		@NamedQuery(
 				name = User.FIND_BY_USERNAME,
 				query = "select u from User u where username = :username"
@@ -16,6 +22,7 @@ import javax.persistence.*;
 })
 public class User extends AbstractEntity {
 
+	public static final String LOAD_ALL = "user.loadAll";
 	public static final String FIND_BY_USERNAME = "user.findByUserName";
 	public static final java.lang.String FIND_BY_LOGIN = "user.findByUserLogin";
 

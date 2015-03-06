@@ -30,7 +30,7 @@ public class PortalPageController {
 	@RequestMapping( method = RequestMethod.GET, value = "" )
 	public String portalPage( final Principal principal, final @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
 
-		final User user = userService.findUserByLogin( principal.getName() );
+		final User user = userService.findByLogin( principal.getName() );
 
 		model.setUserName( user.getUsername() );
 

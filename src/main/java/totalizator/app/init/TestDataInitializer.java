@@ -6,12 +6,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import totalizator.app.models.Category;
-import totalizator.app.models.Cup;
-import totalizator.app.models.Team;
-import totalizator.app.models.User;
+import totalizator.app.models.*;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.Date;
 
 @Component
 public class TestDataInitializer {
@@ -115,6 +113,25 @@ public class TestDataInitializer {
 
 		final Team netherlands = new Team( "Netherlands", uefa );
 		session.persist( netherlands );
+
+
+		final Match oklahomaVsHouston = new Match();
+		oklahomaVsHouston.setCup( nba2015Regular );
+		oklahomaVsHouston.setTeam1( oklahoma );
+		oklahomaVsHouston.setScore1Id( 100 );
+		oklahomaVsHouston.setTeam2( houston );
+		oklahomaVsHouston.setScore2Id( 99 );
+		oklahomaVsHouston.setLastBetTime( new Date() );
+		session.persist( oklahomaVsHouston );
+
+		final Match newYorkVsClippers = new Match();
+		newYorkVsClippers.setCup( nba2015Regular );
+		newYorkVsClippers.setTeam1( newYork );
+		newYorkVsClippers.setScore1Id( 89 );
+		newYorkVsClippers.setTeam2( clippers );
+		newYorkVsClippers.setScore2Id( 101 );
+		newYorkVsClippers.setLastBetTime( new Date() );
+		session.persist( newYorkVsClippers );
 
 
 

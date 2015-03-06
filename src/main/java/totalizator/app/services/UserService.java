@@ -2,11 +2,9 @@ package totalizator.app.services;
 
 import totalizator.app.models.User;
 
-public interface UserService {
+public interface UserService extends GenericService<User>, NamedEntityGenericService<User>{
 
 	void createUser( final String login, final String name, final String password );
 
-	User findUserByName( final String name );
-
-	User findUserByLogin( final String login );
+	User findByLogin( final String login );
 }

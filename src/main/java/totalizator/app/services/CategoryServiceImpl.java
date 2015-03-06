@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CategoryRepository;
 import totalizator.app.models.Category;
-import totalizator.app.models.Cup;
 
 import java.util.List;
 

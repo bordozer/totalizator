@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.UserRepository;
 import totalizator.app.models.User;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -31,13 +33,37 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional( readOnly = true )
-	public User findUserByName( final String name ) {
-		return userRepository.findUserByName( name );
+	public List<User> loadAll() {
+		return userRepository.loadAll();
 	}
 
 	@Override
-	public User findUserByLogin( final String login ) {
-		return userRepository.findUserByLogin( login );
+	@Transactional
+	public User save( final User entry ) {
+		return userRepository.save( entry );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public User load( final int id ) {
+		return userRepository.load( id );
+	}
+
+	@Override
+	@Transactional
+	public void delete( final int id ) {
+		userRepository.delete( id );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public User findByName( final String name ) {
+		return userRepository.findByName( name );
+	}
+
+	@Override
+	public User findByLogin( final String login ) {
+		return userRepository.findByLogin( login );
 	}
 
 	private String encodePassword( final String password ) {
