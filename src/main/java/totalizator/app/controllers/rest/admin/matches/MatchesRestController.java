@@ -98,20 +98,13 @@ public class MatchesRestController {
 		final MatchDTO dto = new MatchDTO();
 
 		dto.setMatchId( match.getId() );
-
 		dto.setCategoryId( match.getCup().getCategory().getId() );
-
-		dto.setCategoryName( match.getCup().getCategory().getCategoryName() );
-
 		dto.setCupId( match.getCup().getId() );
-		dto.setCupName( match.getCup().getCupName() );
 
 		dto.setTeam1Id( match.getTeam1().getId() );
-		dto.setTeam1Name( match.getTeam1().getTeamName() );
 		dto.setScore1Id( match.getScore1Id() );
 
 		dto.setTeam2Id( match.getTeam2().getId() );
-		dto.setTeam2Name( match.getTeam2().getTeamName() );
 		dto.setScore2Id( match.getScore2Id() );
 
 		dto.setLastBetTime( match.getLastBetTime() );

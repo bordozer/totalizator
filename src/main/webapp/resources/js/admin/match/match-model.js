@@ -9,16 +9,12 @@ define( ["backbone"], function ( Backbone ) {
 		defaults: {
 			matchId: 0
 			, categoryId: 0
-			, categoryName: ''
 			, cupId: 0
-			, cupName: ''
 			, team1Id: 0
-			, team1Name: ''
 			, score1Id: 0
 			, team2Id: 0
-			, team2Name: ''
 			, score2Id: 0
-			, lastBetTime: {}
+			, lastBetTime: new Date()
 		},
 
 		initialize: function ( options ) {
