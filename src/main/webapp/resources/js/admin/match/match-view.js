@@ -10,13 +10,11 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
 
+	var Services = require( '/resources/js/services.js' );
+
 	var Multiselect = require( 'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect' );
 
 	var AdminBasePageView = require( 'js/admin/admin-base-page-view' );
-
-	var Categories = require( 'js/admin/category/category-model' );
-	var Cups = require( 'js/admin/cup/cup-model' );
-	var Teams = require( 'js/admin/team/team-model' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -38,9 +36,9 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.categories = this._loadCategories();
-			this.cups = this._loadCups();
-			this.teams = this._loadTeams();
+			this.categories = Services.loadCategories();
+			this.cups = Services.loadCups();
+			this.teams = Services.loadTeams();
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -78,42 +76,6 @@ define( function ( require ) {
 			}
 
 			return this.$( '.matches-container' ).append( view.render().$el );
-		},
-
-		_loadCategories: function() {
-			var categories = new Categories.CategoriesModel( [], {} );
-			categories.fetch( { cache: false, async: false } );
-
-			var result = [];
-			categories.forEach( function( category ) {
-				result.push( { categoryId: category.get( 'categoryId' ), categoryName: category.get( 'categoryName' ) } );
-			});
-
-			return result;
-		},
-
-		_loadCups: function() {
-			var cups = new Cups.CupsModel( [], {} );
-			cups.fetch( { cache: false, async: false } );
-
-			var result = [];
-			cups.forEach( function( cup ) {
-				result.push( { cupId: cup.get( 'cupId' ), categoryId: cup.get( 'categoryId' ), cupName: cup.get( 'cupName' ) } );
-			});
-
-			return result;
-		},
-
-		_loadTeams: function() {
-			var cups = new Teams.TeamsModel( [], {} );
-			cups.fetch( { cache: false, async: false } );
-
-			var result = [];
-			cups.forEach( function( team ) {
-				result.push( { teamId: team.get( 'teamId' ), categoryId: team.get( 'categoryId' ), teamName: team.get( 'teamName' ) } );
-			});
-
-			return result;
 		},
 
 		_addEntry: function() {
@@ -161,12 +123,12 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
-				, categoryName: this._getCategory( modelJSON.categoryId ).categoryName
-				, cupName: this._getCup( modelJSON.cupId ).cupName
-				, team1Name: this._getTeam( modelJSON.team1Id ).teamName
-				, team2Name: this._getTeam( modelJSON.team2Id ).teamName
-				, score1Id: modelJSON.score1Id
-				, score2Id: modelJSON.score2Id
+				, categoryName: this._getCategory( this.categories, modelJSON.categoryId ).categoryName
+				, cupName: Services.getCup( this.cups, modelJSON.cupId ).cupName
+				, team1Name: Services.getTeam( this.teams, modelJSON.team1Id ).teamName
+				, team2Name: Services.getTeam( this.teams, modelJSON.team2Id ).teamName
+				, score1: modelJSON.score1
+				, score2: modelJSON.score2
 			} ) );
 
 			if ( this.isSelected ) {
@@ -184,8 +146,8 @@ define( function ( require ) {
 				model: modelJSON
 				, categories: this.categories
 				, categoryId: categoryId
-				, cups: this._categoryCups( categoryId )
-				, teams: this._categoryTeams( categoryId )
+				, cups: Services.categoryCups( this.cups, categoryId )
+				, teams: Services.categoryTeams( this.teams, categoryId )
 			} ) );
 
 			var options = {
@@ -196,36 +158,6 @@ define( function ( require ) {
 			this.$( '#team2-select-box' ).multiselect( options );
 
 			return this;
-		},
-
-		_getCategory: function( categoryId ) {
-			return _.find( this.categories, function( category ) {
-				return category.categoryId == categoryId;
-			} );
-		},
-
-		_getCup: function( cupId ) {
-			return _.find( this.cups, function( cup ) {
-				return cup.cupId == cupId;
-			} );
-		},
-
-		_getTeam: function( teamId ) {
-			return _.find( this.teams, function( team ) {
-				return team.teamId == teamId;
-			} );
-		},
-
-		_categoryCups: function( categoryId ) {
-			return _.filter( this.cups, function( cup ) {
-				return cup.categoryId == categoryId;
-			});
-		},
-
-		_categoryTeams: function( categoryId ) {
-			return _.filter( this.teams, function( team ) {
-				return team.categoryId == categoryId;
-			});
 		},
 
 		_editEntry: function() {
@@ -253,9 +185,9 @@ define( function ( require ) {
 			this.model.set( {
 				cupId: this.$( '.cups-select-box' ).val()
 				, team1Id: this.$( '.team1-select-box' ).val()
-				, score1Id: this.$( '#score1Id' ).val()
+				, score1: this.$( '#score1' ).val()
 				, team2Id: this.$( '.team2-select-box' ).val()
-				, score2Id: this.$( '#score2Id' ).val()
+				, score2: this.$( '#score2' ).val()
 			} );
 		},
 

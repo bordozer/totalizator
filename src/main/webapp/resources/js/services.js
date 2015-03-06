@@ -2,12 +2,82 @@ define( function ( require ) {
 
 	'use strict';
 
+	var Categories = require( 'js/admin/category/category-model' );
+	var Cups = require( 'js/admin/cup/cup-model' );
+	var Teams = require( 'js/admin/team/team-model' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		logoutConfirmationLabel: 'Logout confirmation: Logout?'
 	} );
 
 	return {
+
+		loadCategories: function() {
+			var categories = new Categories.CategoriesModel( [], {} );
+			categories.fetch( { cache: false, async: false } );
+
+			var result = [];
+			categories.forEach( function( category ) {
+				result.push( { categoryId: category.get( 'categoryId' ), categoryName: category.get( 'categoryName' ) } );
+			});
+
+			return result;
+		},
+
+		loadCups: function() {
+			var cups = new Cups.CupsModel( [], {} );
+			cups.fetch( { cache: false, async: false } );
+
+			var result = [];
+			cups.forEach( function( cup ) {
+				result.push( { cupId: cup.get( 'cupId' ), categoryId: cup.get( 'categoryId' ), cupName: cup.get( 'cupName' ) } );
+			});
+
+			return result;
+		},
+
+		loadTeams: function() {
+			var cups = new Teams.TeamsModel( [], {} );
+			cups.fetch( { cache: false, async: false } );
+
+			var result = [];
+			cups.forEach( function( team ) {
+				result.push( { teamId: team.get( 'teamId' ), categoryId: team.get( 'categoryId' ), teamName: team.get( 'teamName' ) } );
+			});
+
+			return result;
+		},
+
+		getCategory: function( categories, categoryId ) {
+			return _.find( categories, function( category ) {
+				return category.categoryId == categoryId;
+			} );
+		},
+
+		getCup: function( cups, cupId ) {
+			return _.find( cups, function( cup ) {
+				return cup.cupId == cupId;
+			} );
+		},
+
+		getTeam: function( teams, teamId ) {
+			return _.find( teams, function( team ) {
+				return team.teamId == teamId;
+			} );
+		},
+
+		categoryCups: function( cups, categoryId ) {
+			return _.filter( cups, function( cup ) {
+				return cup.categoryId == categoryId;
+			});
+		},
+
+		categoryTeams: function( teams, categoryId ) {
+			return _.filter( teams, function( team ) {
+				return team.categoryId == categoryId;
+			});
+		},
 
 		logout: function () {
 

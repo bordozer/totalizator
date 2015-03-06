@@ -10,6 +10,9 @@ define( function ( require ) {
 
 	var PageView = require( 'js/base/base-page-view' );
 
+	var MatchesModel = require( 'js/matches/matches-model' );
+	var MatchesView = require( 'js/matches/matches-view' );
+
 	var Services = require( '/resources/js/services.js' );
 
 	var Translator = require( 'translator' );
@@ -37,10 +40,13 @@ define( function ( require ) {
 		},
 
 		renderBody: function ( el ) {
+
 			el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, translator: translator
 			 } ) );
+
+			this._renderMatches();
 
 			return this;
 		},
@@ -51,6 +57,11 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
+		},
+
+		_renderMatches: function() {
+			var matchesModel = new MatchesModel.MatchesModel();
+			var matchesView = new MatchesView.MatchesView( { model: matchesModel, el: this.$( '.portal-page-matches-container' ) } );
 		},
 
 		_logout: function() {

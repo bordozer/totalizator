@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.models.Match;
-import totalizator.app.services.CupService;
 import totalizator.app.services.MatchService;
-import totalizator.app.services.TeamService;
 
 import java.util.List;
 
@@ -23,12 +21,6 @@ public class MatchesRestController {
 	@Autowired
 	private MatchService matchService;
 
-	@Autowired
-	private CupService cupService;
-
-	@Autowired
-	private TeamService teamService;
-
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -37,7 +29,7 @@ public class MatchesRestController {
 		return Lists.transform( matchService.loadAll(), new Function<Match, MatchDTO>() {
 			@Override
 			public MatchDTO apply( final Match match ) {
-				return initDTOFromModel( match );
+				return matchService.initDTOFromModel( match );
 			}
 		} );
 	}
@@ -49,7 +41,7 @@ public class MatchesRestController {
 
 		final Match match = new Match();
 
-		initModelFromDTO( matchDTO, match );
+		matchService.initModelFromDTO( matchDTO, match );
 
 		final Match saved = matchService.save( match );
 
@@ -65,11 +57,11 @@ public class MatchesRestController {
 
 		final Match match = matchService.load( matchDTO.getCupId() );
 
-		initModelFromDTO( matchDTO, match );
+		matchService.initModelFromDTO( matchDTO, match );
 
 		matchService.save( match );
 
-		return initDTOFromModel( match );
+		return matchService.initDTOFromModel( match );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -81,34 +73,5 @@ public class MatchesRestController {
 		}
 
 		matchService.delete( matchId );
-	}
-
-	private void initModelFromDTO( final MatchDTO matchDTO, final Match match ) {
-		match.setCup( cupService.load( matchDTO.getCupId() ) );
-
-		match.setTeam1( teamService.load( matchDTO.getTeam1Id() ) );
-		match.setScore1Id( matchDTO.getScore1Id() );
-
-		match.setTeam2( teamService.load( matchDTO.getTeam2Id() ) );
-		match.setScore2Id( matchDTO.getScore2Id() );
-		match.setLastBetTime( matchDTO.getLastBetTime() );
-	}
-
-	private MatchDTO initDTOFromModel( final Match match ) {
-		final MatchDTO dto = new MatchDTO();
-
-		dto.setMatchId( match.getId() );
-		dto.setCategoryId( match.getCup().getCategory().getId() );
-		dto.setCupId( match.getCup().getId() );
-
-		dto.setTeam1Id( match.getTeam1().getId() );
-		dto.setScore1Id( match.getScore1Id() );
-
-		dto.setTeam2Id( match.getTeam2().getId() );
-		dto.setScore2Id( match.getScore2Id() );
-
-		dto.setLastBetTime( match.getLastBetTime() );
-
-		return dto;
 	}
 }

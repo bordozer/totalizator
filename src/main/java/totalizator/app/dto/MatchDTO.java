@@ -11,10 +11,10 @@ public class MatchDTO {
 	private int cupId;
 
 	private int team1Id;
-	private int score1Id;
+	private int score1;
 
 	private int team2Id;
-	private int score2Id;
+	private int score2;
 
 	private Date lastBetTime;
 
@@ -50,12 +50,12 @@ public class MatchDTO {
 		this.team1Id = team1Id;
 	}
 
-	public int getScore1Id() {
-		return score1Id;
+	public int getScore1() {
+		return score1;
 	}
 
-	public void setScore1Id( final int score1Id ) {
-		this.score1Id = score1Id;
+	public void setScore1( final int score1 ) {
+		this.score1 = score1;
 	}
 
 	public int getTeam2Id() {
@@ -66,12 +66,12 @@ public class MatchDTO {
 		this.team2Id = team2Id;
 	}
 
-	public int getScore2Id() {
-		return score2Id;
+	public int getScore2() {
+		return score2;
 	}
 
-	public void setScore2Id( final int score2Id ) {
-		this.score2Id = score2Id;
+	public void setScore2( final int score2 ) {
+		this.score2 = score2;
 	}
 
 	public Date getLastBetTime() {

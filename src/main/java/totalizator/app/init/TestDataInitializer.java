@@ -159,18 +159,18 @@ public class TestDataInitializer {
 		final Match oklahomaVsHouston = new Match();
 		oklahomaVsHouston.setCup( nba2015Regular );
 		oklahomaVsHouston.setTeam1( oklahoma );
-		oklahomaVsHouston.setScore1Id( 100 );
+		oklahomaVsHouston.setScore1( 100 );
 		oklahomaVsHouston.setTeam2( houston );
-		oklahomaVsHouston.setScore2Id( 99 );
+		oklahomaVsHouston.setScore2( 99 );
 		oklahomaVsHouston.setLastBetTime( new Date() );
 		session.persist( oklahomaVsHouston );
 
 		final Match newYorkVsClippers = new Match();
 		newYorkVsClippers.setCup( nba2015Regular );
 		newYorkVsClippers.setTeam1( newYork );
-		newYorkVsClippers.setScore1Id( 89 );
+		newYorkVsClippers.setScore1( 89 );
 		newYorkVsClippers.setTeam2( clippers );
-		newYorkVsClippers.setScore2Id( 101 );
+		newYorkVsClippers.setScore2( 101 );
 		newYorkVsClippers.setLastBetTime( new Date() );
 		session.persist( newYorkVsClippers );
 

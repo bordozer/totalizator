@@ -4,8 +4,6 @@ define( ["backbone"], function ( Backbone ) {
 
 		idAttribute: 'matchId',
 
-		categoryId: 0,
-
 		defaults: {
 			matchId: 0
 			, categoryId: 0
@@ -18,7 +16,6 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
-
 		}
 	});
 
@@ -27,9 +24,14 @@ define( ["backbone"], function ( Backbone ) {
 		model: MatchModel,
 
 		initialize: function ( options ) {
-			this.url = '/admin/rest/matches/';
+			this.url = '/rest/matches/open/';
+		},
+
+		refresh: function() {
+			this.fetch( { cache: false, reset: true } );
 		}
 	});
 
-	return { MatchesModel: MatchesModel, MatchModel: MatchModel };
+	return { MatchModel: MatchModel, MatchesModel: MatchesModel };
 } );
+
