@@ -88,6 +88,47 @@ public class TestDataInitializer {
 		final Team clippers = new Team( "Los Angeles Clippers", nba );
 		session.persist( clippers );
 
+		final Team dallasMavericks = new Team( "Dallas Mavericks", nba );
+		session.persist( dallasMavericks );
+
+		final Team bostonCeltics = new Team( "Boston Celtics", nba );
+		session.persist( bostonCeltics );
+
+		final Team brooklynNets = new Team( "Brooklyn Nets", nba );
+		session.persist( brooklynNets );
+
+		final Team memphisGrizzlies = new Team( "Memphis Grizzlies", nba );
+		session.persist( memphisGrizzlies );
+
+		final Team sanAntonioSpurs = new Team( "San Antonio Spurs", nba );
+		session.persist( sanAntonioSpurs );
+
+		final Team clevelandCavaliers = new Team( "Cleveland Cavaliers", nba );
+		session.persist( clevelandCavaliers );
+
+		final Team indianaPacers = new Team( "Indiana Pacers", nba );
+		session.persist( indianaPacers );
+
+		final Team portlandTrailBlazers = new Team( "Portland Trail Blazers", nba );
+		session.persist( portlandTrailBlazers );
+
+		final Team atlantaHawks = new Team( "Atlanta Hawks", nba );
+		session.persist( atlantaHawks );
+
+		final Team goldenStateWarriors = new Team( "Golden State Warriors", nba );
+		session.persist( goldenStateWarriors );
+
+		final Team charlotteHornets = new Team( "Charlotte Hornets", nba );
+		session.persist( charlotteHornets );
+
+		final Team losAngelesLakers = new Team( "Los Angeles Lakers", nba );
+		session.persist( losAngelesLakers );
+
+		final Team orlandoMagic = new Team( "Orlando Magic", nba );
+		session.persist( orlandoMagic );
+
+
+
 		final Team duke = new Team( "Duke", ncaa );
 		session.persist( duke );
 
