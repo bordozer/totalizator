@@ -46,7 +46,6 @@ public class MatchesRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchDTO create( final @RequestBody MatchDTO matchDTO ) {
-		// TODO: check if name exists
 
 		final Match match = new Match();
 
@@ -63,7 +62,7 @@ public class MatchesRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/{matchId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchDTO edit( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchDTO matchDTO ) {
-		// TODO: check if name exists
+
 		final Match match = matchService.load( matchDTO.getCupId() );
 
 		initModelFromDTO( matchDTO, match );
@@ -116,6 +115,7 @@ public class MatchesRestController {
 		dto.setScore2Id( match.getScore2Id() );
 
 		dto.setLastBetTime( match.getLastBetTime() );
+
 		return dto;
 	}
 }
