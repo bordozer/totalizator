@@ -79,7 +79,7 @@ public class MatchesRestController {
 		if ( matchId == 0 ) {
 			return;
 		}
-		// delete
+
 		matchService.delete( matchId );
 	}
 
