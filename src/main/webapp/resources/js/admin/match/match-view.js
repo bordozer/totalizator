@@ -120,7 +120,6 @@ define( function ( require ) {
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
-			console.log( this.categories );
 
 			this.$el.html( this.templateView( {
 				model: modelJSON

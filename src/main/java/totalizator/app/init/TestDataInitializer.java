@@ -174,6 +174,24 @@ public class TestDataInitializer {
 		newYorkVsClippers.setLastBetTime( new Date() );
 		session.persist( newYorkVsClippers );
 
+		final Match clevelandCavaliersVsSanAntonioSpurs = new Match();
+		clevelandCavaliersVsSanAntonioSpurs.setCup( nba2015Regular );
+		clevelandCavaliersVsSanAntonioSpurs.setTeam1( clevelandCavaliers );
+		clevelandCavaliersVsSanAntonioSpurs.setScore1( 92 );
+		clevelandCavaliersVsSanAntonioSpurs.setTeam2( sanAntonioSpurs );
+		clevelandCavaliersVsSanAntonioSpurs.setScore2( 101 );
+		clevelandCavaliersVsSanAntonioSpurs.setLastBetTime( new Date() );
+		session.persist( clevelandCavaliersVsSanAntonioSpurs );
+
+		final Match dallasMavericksVsGoldenStateWarriors = new Match();
+		dallasMavericksVsGoldenStateWarriors.setCup( nba2015Regular );
+		dallasMavericksVsGoldenStateWarriors.setTeam1( dallasMavericks );
+		dallasMavericksVsGoldenStateWarriors.setScore1( 77 );
+		dallasMavericksVsGoldenStateWarriors.setTeam2( goldenStateWarriors );
+		dallasMavericksVsGoldenStateWarriors.setScore2( 110 );
+		dallasMavericksVsGoldenStateWarriors.setLastBetTime( new Date() );
+		session.persist( dallasMavericksVsGoldenStateWarriors );
+
 
 
 
