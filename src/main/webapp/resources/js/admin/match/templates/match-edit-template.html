@@ -1,13 +1,13 @@
 <div class="row admin-entry-line bg-info">
 
-	<div class="col-lg-1">
-		<div class="admin-entry-icon fa fa-save entry-save admin-entry-icon-cell" title="Save"></div>
-		<div class="admin-entry-icon fa fa-close entry-edit-cancel admin-entry-icon-cell" title="Cancel editing"></div>
+	<div class="admin-entry-icons">
+		<div class="fa fa-save entry-save admin-entry-icon-cell" title="Save"></div>
+		<div class="fa fa-close entry-edit-cancel admin-entry-icon-cell" title="Cancel editing"></div>
 	</div>
 
-	<div class="col-lg-5">
+	<div class="col-lg-3">
 
-		<div class="col-lg-3 categories-container">
+		<div class="col-lg-5 categories-container">
 			<select id="category-select-box" class="form-control categories-select-box">
 				<option value="0"></option>
 			<% _.each( categories, function( category ) { %>
@@ -16,7 +16,7 @@
 			</select>
 		</div>
 
-		<div class="col-lg-5 cups-container">
+		<div class="col-lg-7 cups-container">
 			<% if( cups.length > 0 ) { %>
 				<select id="cup-select-box" class="form-control cups-select-box">
 					<option value="0"></option>
@@ -28,11 +28,11 @@
 		</div>
 	</div>
 
-	<div class="col-lg-6">
+	<div class="col-lg-8">
 
 		<div class="col-lg-6">
 			<% if( teams.length > 0 && model.cupId > 0 ) { %>
-				<div class="col-lg-10">
+				<div class="col-lg-10 text-right">
 					<select id="team1-select-box" class="form-control team1-select-box">
 						<option value="0">&nbsp;</option>
 					<% _.each( teams, function( team ) { %>
@@ -48,7 +48,7 @@
 
 		<div class="col-lg-6">
 			<% if( teams.length > 0 && model.cupId > 0 ) { %>
-				<div class="col-lg-10">
+				<div class="col-lg-10 text-right">
 					<select id="team2-select-box" class="form-control team2-select-box">
 						<option value="0">&nbsp;</option>
 					<% _.each( teams, function( team ) { %>

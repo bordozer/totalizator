@@ -1,3 +1,7 @@
+div {
+	/*border: 1px dotted red;*/
+}
+
 .admin-entry-line {
 	height: 41px;
 	padding-top: 3px;
@@ -10,10 +14,8 @@
 	width: 20px;
 }
 
-.admin-entry-icon {
+.admin-entry-icons {
 	float: left;
-	width: 20px;
-	height: 20px;
-	margin-top: 5px;
-	margin-left: 5px;
+	width: 50px;
+	margin-left: 15px;
 }
