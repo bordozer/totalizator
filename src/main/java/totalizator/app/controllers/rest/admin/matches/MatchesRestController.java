@@ -41,7 +41,11 @@ public class MatchesRestController {
 				final MatchDTO dto = new MatchDTO();
 
 				dto.setMatchId( match.getId() );
+
+				dto.setCategoryName( match.getCup().getCategory().getCategoryName() );
+
 				dto.setCupId( match.getCup().getId() );
+				dto.setCupName( match.getCup().getCupName() );
 
 				dto.setTeam1Id( match.getTeam1().getId() );
 				dto.setTeam1Name( match.getTeam1().getTeamName() );

@@ -5,7 +5,11 @@ import java.util.Date;
 public class MatchDTO {
 
 	private int matchId;
+
+	private String categoryName;
+
 	private int cupId;
+	private String cupName;
 
 	private int team1Id;
 	private String team1Name;
@@ -25,12 +29,28 @@ public class MatchDTO {
 		this.matchId = matchId;
 	}
 
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName( final String categoryName ) {
+		this.categoryName = categoryName;
+	}
+
 	public int getCupId() {
 		return cupId;
 	}
 
 	public void setCupId( final int cupId ) {
 		this.cupId = cupId;
+	}
+
+	public String getCupName() {
+		return cupName;
+	}
+
+	public void setCupName( final String cupName ) {
+		this.cupName = cupName;
 	}
 
 	public int getTeam1Id() {
