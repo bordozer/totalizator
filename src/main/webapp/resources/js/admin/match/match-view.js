@@ -120,10 +120,11 @@ define( function ( require ) {
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
+			console.log( this.categories );
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
-				, categoryName: this._getCategory( this.categories, modelJSON.categoryId ).categoryName
+				, categoryName: Services.getCategory( this.categories, modelJSON.categoryId ).categoryName
 				, cupName: Services.getCup( this.cups, modelJSON.cupId ).cupName
 				, team1Name: Services.getTeam( this.teams, modelJSON.team1Id ).teamName
 				, team2Name: Services.getTeam( this.teams, modelJSON.team2Id ).teamName
