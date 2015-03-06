@@ -15,6 +15,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Portal page: Matches'
+		, betThisMatchLabel: 'Portal page: Bet this match'
 	} );
 
 	var MatchesView = Backbone.View.extend( {
@@ -80,7 +81,6 @@ define( function ( require ) {
 		renderMatchInfo: function () {
 
 			var modelJSON = this.model.toJSON();
-			console.log( modelJSON );
 
 			this.$el.html( this.templateMatch( {
 				model: modelJSON
@@ -88,6 +88,7 @@ define( function ( require ) {
 				, score1: modelJSON.score1
 				, team2Name: Services.getTeam( this.teams, modelJSON.team2Id ).teamName
 				, score2: modelJSON.score2
+				, translator: translator
 			} ) );
 
 			return this;
@@ -99,6 +100,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateBetForm( {
 				model: modelJSON
+				, translator: translator
 			} ) );
 
 			return this;
