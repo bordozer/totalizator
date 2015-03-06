@@ -161,10 +161,10 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
-				, categoryName: modelJSON.categoryName
-				, cupName: modelJSON.cupName
-				, team1Name: modelJSON.team1Name
-				, team2Name: modelJSON.team2Name
+				, categoryName: this._getCategory( modelJSON.categoryId ).categoryName
+				, cupName: this._getCup( modelJSON.cupId ).cupName
+				, team1Name: this._getTeam( modelJSON.team1Id ).teamName
+				, team2Name: this._getTeam( modelJSON.team2Id ).teamName
 				, score1Id: modelJSON.score1Id
 				, score2Id: modelJSON.score2Id
 			} ) );
@@ -178,17 +178,14 @@ define( function ( require ) {
 
 		renderEdit: function () {
 			var modelJSON = this.model.toJSON();
-
 			var categoryId = this.model.get( 'categoryId' );
-			var cups = this._categoryCups( categoryId );
-			var teams = this._categoryTeams( categoryId );
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
 				, categories: this.categories
 				, categoryId: categoryId
-				, cups: cups
-				, teams: teams
+				, cups: this._categoryCups( categoryId )
+				, teams: this._categoryTeams( categoryId )
 			} ) );
 
 			var options = {
@@ -199,6 +196,24 @@ define( function ( require ) {
 			this.$( '#team2-select-box' ).multiselect( options );
 
 			return this;
+		},
+
+		_getCategory: function( categoryId ) {
+			return _.find( this.categories, function( category ) {
+				return category.categoryId == categoryId;
+			} );
+		},
+
+		_getCup: function( cupId ) {
+			return _.find( this.cups, function( cup ) {
+				return cup.cupId == cupId;
+			} );
+		},
+
+		_getTeam: function( teamId ) {
+			return _.find( this.teams, function( team ) {
+				return team.teamId == teamId;
+			} );
 		},
 
 		_categoryCups: function( categoryId ) {
