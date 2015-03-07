@@ -4,6 +4,8 @@ define( ["backbone"], function ( Backbone ) {
 
 		idAttribute: 'matchId',
 
+		betMode: false,
+
 		defaults: {
 			matchId: 0
 			, categoryId: 0
@@ -16,6 +18,18 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
+		},
+
+		setModeBet: function() {
+			this.betMode = true;
+		},
+
+		setModeMatchInfo: function() {
+			this.betMode = false;
+		},
+
+		isBetMode: function() {
+			return this.betMode;
 		}
 	});
 

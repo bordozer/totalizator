@@ -56,9 +56,9 @@ define( function ( require ) {
 				, teams: this.teams
 			} );
 
-			/*if ( model.get( 'matchId' ) == 0 ) {
+			if ( model.isBetMode() ) {
 				return this.$( '.match-list-container' ).append( view.renderBetForm().$el );
-			}*/
+			}
 
 			return this.$( '.match-list-container' ).append( view.renderMatchInfo().$el );
 		}
@@ -68,6 +68,11 @@ define( function ( require ) {
 
 		templateMatch: _.template( TemplateMatch ),
 		templateBetForm: _.template( TemplateBetAMatch ),
+
+		events: {
+			'click .button-bet-match': '_onBetButtonClick'
+			, 'click .button-bet-discard': '_onDiscardButtonClick'
+		},
 
 		initialize: function ( options ) {
 
@@ -80,11 +85,23 @@ define( function ( require ) {
 
 		renderMatchInfo: function () {
 
-			var modelJSON = this.model.toJSON();
+			this.$el.html( this.templateMatch( this._getViewOptions( this.model ) ) );
 
+			return this;
+		},
+
+		renderBetForm: function () {
+
+			this.$el.html( this.templateBetForm( this._getViewOptions( this.model ) ) );
+
+			return this;
+		},
+
+		_getViewOptions: function( model ) {
+			var modelJSON = this.model.toJSON();
 			var winnerId = modelJSON.score1 > modelJSON.score2 ? modelJSON.team1Id : modelJSON.score1 < modelJSON.score2 ? modelJSON.team2Id : 0;
 
-			this.$el.html( this.templateMatch( {
+			return {
 				model: modelJSON
 				, team1Id: modelJSON.team1Id
 				, team1Name: Services.getTeam( this.teams, modelJSON.team1Id ).teamName
@@ -95,21 +112,31 @@ define( function ( require ) {
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
 				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
 				, translator: translator
-			} ) );
-
-			return this;
+			};
 		},
 
-		renderBetForm: function () {
+		_betMatch: function() {
+			this.model.setModeBet();
 
-			var modelJSON = this.model.toJSON();
+			this.renderBetForm();
+		},
 
-			this.$el.html( this.templateBetForm( {
-				model: modelJSON
-				, translator: translator
-			} ) );
+		_onBetButtonClick: function( evt ) {
+			evt.preventDefault();
 
-			return this;
+			this._betMatch();
+		},
+
+		_discardBet: function() {
+			this.model.setModeMatchInfo();
+
+			this.renderMatchInfo();
+		},
+
+		_onDiscardButtonClick: function( evt ) {
+			evt.preventDefault();
+
+			this._discardBet();
 		}
 	});
 
