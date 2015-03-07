@@ -1,25 +1,29 @@
 <div class="row" style="margin-bottom: 10px;">
 
-	<div class="col-lg-3" style="padding-top: 13px;">
-		<button title="<%=translator.betThisMatchButtonTitleLabel%>"><small><%=translator.betThisMatchButtonTextLabel%></small></button>
-	</div>
+	<div class="col-lg-10">
 
-	<div class="col-lg-9">
 		<div class="row">
-			<div class="col-lg-8 text-right">
+			<div class="col-lg-10 text-right <%=winnerId == team1Id ? 'text-success' : ''%>">
 				<small><%=team1Name%></small>
 			</div>
-			<div class="col-lg-4">
-				<small><%=score1%></small>
+			<div class="col-lg-2 <%=winnerId == team1Id ? 'text-success' : ''%>">
+				<%=score1%>
 			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-lg-8 text-right">
+			<div class="col-lg-10 text-right <%=winnerId == team2Id ? 'text-success' : ''%>">
 				<small><%=team2Name%></small>
 			</div>
-			<div class="col-lg-4">
-				<small><%=score2%></small>
+			<div class="col-lg-2 <%=winnerId == team2Id ? 'text-success' : ''%>">
+				<%=score2%>
 			</div>
 		</div>
+
 	</div>
+
+	<div class="col-lg-1" style="padding-top: 13px;">
+		<button class="fa fa-money" title="<%=team1Name%> vs <%=team2Name%> - <%=translator.betThisMatchButtonTitleLabel%>"></button>
+	</div>
+
 </div>
