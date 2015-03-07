@@ -8,7 +8,6 @@ define( function ( require ) {
 
 	var TemplateMatchList = require( 'text!js/matches/templates/matches-template.html' );
 	var TemplateMatch = require( 'text!js/matches/templates/match-template.html' );
-	var TemplateBetAMatch = require( 'text!js/matches/templates/bet-a-match-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
 
@@ -67,7 +66,6 @@ define( function ( require ) {
 	var MatchView = Backbone.View.extend( {
 
 		templateMatch: _.template( TemplateMatch ),
-		templateBetForm: _.template( TemplateBetAMatch ),
 
 		events: {
 			'click .button-bet-match': '_onBetButtonClick'
@@ -87,12 +85,23 @@ define( function ( require ) {
 
 			this.$el.html( this.templateMatch( this._getViewOptions( this.model ) ) );
 
+			this.$( '.result-1-cell' ).html( this.model.get( 'score1' ) );
+			this.$( '.result-2-cell' ).html( this.model.get( 'score1' ) );
+
+			this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
+
 			return this;
 		},
 
 		renderBetForm: function () {
 
-			this.$el.html( this.templateBetForm( this._getViewOptions( this.model ) ) );
+			this.$el.html( this.templateMatch( this._getViewOptions( this.model ) ) );
+
+			this.$( '.result-1-cell' ).html( "<input class='form-control' type='text' value='' size='2'>" );
+			this.$( '.result-2-cell' ).html( "<input class='form-control' type='text' value='' size='2'>" );
+
+			this.$( '.buttons-cell' ).html( "<button class='fa fa-save button-bet-save'></button>" );
+			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-bet-discard'></button>" );
 
 			return this;
 		},
