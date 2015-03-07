@@ -86,7 +86,7 @@ define( function ( require ) {
 			this.$el.html( this.templateMatch( this._getViewOptions( this.model ) ) );
 
 			this.$( '.result-1-cell' ).html( this.model.get( 'score1' ) );
-			this.$( '.result-2-cell' ).html( this.model.get( 'score1' ) );
+			this.$( '.result-2-cell' ).html( this.model.get( 'score2' ) );
 
 			this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
 
@@ -111,13 +111,8 @@ define( function ( require ) {
 			var winnerId = modelJSON.score1 > modelJSON.score2 ? modelJSON.team1Id : modelJSON.score1 < modelJSON.score2 ? modelJSON.team2Id : 0;
 
 			return {
-				model: modelJSON
-				, team1Id: modelJSON.team1Id
-				, team1Name: Services.getTeam( this.teams, modelJSON.team1Id ).teamName
-				, score1: modelJSON.score1
-				, team2Id: modelJSON.team2Id
+				team1Name: Services.getTeam( this.teams, modelJSON.team1Id ).teamName
 				, team2Name: Services.getTeam( this.teams, modelJSON.team2Id ).teamName
-				, score2: modelJSON.score2
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
 				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
 				, translator: translator
