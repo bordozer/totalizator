@@ -85,14 +85,27 @@ define( function ( require ) {
 		renderMatchInfo: function () {
 
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
-			console.log( this.model );
 
 			var match = this.model.get( 'match' );
 
 			this.$( '.result-1-cell' ).html( match.score1 );
 			this.$( '.result-2-cell' ).html( match.score2 );
 
-			this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
+			var bets = this.model.get( 'bets' );
+
+			var hasBets = bets.length == 0;
+			if( hasBets ) {
+				this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
+			}
+
+			if ( ! hasBets ) {
+				this.$( '.entry-container' ).addClass( 'bg-success' );
+				var container = this.$( '.bets-container' );
+				_.each( bets, function( bet ) {
+					var template = _.template( "<div class='col-lg-12 text-right'><%=bet.score1%> - <%=bet.score2%> <button class='cancel-bet-button fa fa-remove'></button></div>" );
+					container.append( template( { bet: bet } ) );
+				});
+			}
 
 			return this;
 		},
@@ -132,6 +145,8 @@ define( function ( require ) {
 			var score2 = this.$( '#score2' ).val();
 
 			Services.saveBet( match.matchId, score1, score2 );
+
+			this.model.refresh();
 
 			this._goMatchInfoMode();
 		},

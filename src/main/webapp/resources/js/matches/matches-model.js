@@ -13,6 +13,10 @@ define( ["backbone"], function ( Backbone ) {
 		initialize: function ( options ) {
 		},
 
+		refresh: function() {
+			this.fetch( { cache: false, async: false } );
+		},
+
 		setModeBet: function() {
 			this.betMode = true;
 		},
