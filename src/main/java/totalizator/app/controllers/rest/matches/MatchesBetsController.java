@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import totalizator.app.dto.BetDTO;
 import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.UserDTO;
+import totalizator.app.models.Match;
+import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
@@ -17,6 +20,7 @@ import totalizator.app.services.UserService;
 import java.security.Principal;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -37,10 +41,27 @@ public class MatchesBetsController {
 	@RequestMapping( method = RequestMethod.GET, value = "/open/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> openMatches( final Principal principal ) {
 
-//		final User user = userService.findByLogin( principal.getName() );
+		final User user = userService.findByLogin( principal.getName() );
 
-		final List<MatchDTO> matchDTOs = Lists.transform( matchService.loadOpen(), matchService::initDTOFromModel );
-		return Lists.transform( matchDTOs, MatchBetDTO::new );
+		final List<Match> matches = matchService.loadOpen();
+
+		final List<MatchBetDTO> result = newArrayList();
+		for ( final Match match : matches ) {
+
+			final MatchDTO matchDTO = matchService.initDTOFromModel( match );
+
+			final List<MatchBet> matchBets = matchBetsService.loadAll( user, match );
+			final List<BetDTO> matchBetDTOs = Lists.transform( matchBets, new Function<MatchBet, BetDTO>() {
+				@Override
+				public BetDTO apply( final MatchBet matchBet ) {
+					return new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
+				}
+			} );
+
+			result.add( new MatchBetDTO( matchDTO, matchBetDTOs ) );
+		}
+
+		return result;
 	}
 
 	@ResponseStatus( HttpStatus.OK )

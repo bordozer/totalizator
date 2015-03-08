@@ -11,4 +11,8 @@ public interface MatchBetsService extends GenericService<MatchBet>{
 	public List<MatchBet> loadAll( final User user );
 
 	public List<MatchBet> loadAll( final Match match );
+
+	public List<MatchBet> loadAll( final User user, final Match match );
+
+	public List<MatchBet> loadAll( final int userId, final int matchId );
 }

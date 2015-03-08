@@ -4,9 +4,7 @@ import javax.persistence.*;
 
 import java.util.Date;
 
-import static totalizator.app.models.MatchBet.LOAD_ALL;
-import static totalizator.app.models.MatchBet.LOAD_ALL_FOR_MATCH;
-import static totalizator.app.models.MatchBet.LOAD_ALL_FOR_USER;
+import static totalizator.app.models.MatchBet.*;
 
 @Entity
 @Table( name = "matchBets" )
@@ -16,19 +14,24 @@ import static totalizator.app.models.MatchBet.LOAD_ALL_FOR_USER;
 				query = "select mb from MatchBet mb order by betTime desc"
 		),
 		@NamedQuery(
-				name = LOAD_ALL_FOR_USER,
+				name = LOAD_FOR_USER,
 				query = "select mb from MatchBet mb where userId= :userId order by betTime desc"
 		),
 		@NamedQuery(
-				name = LOAD_ALL_FOR_MATCH,
+				name = LOAD_FOR_MATCH,
 				query = "select mb from MatchBet mb where matchId= :matchId order by betTime desc"
+		),
+		@NamedQuery(
+				name = LOAD_FOR_USER_AND_MATCH,
+				query = "select mb from MatchBet mb where userId= :userId and matchId= :matchId order by betTime desc"
 		)
 } )
 public class MatchBet extends AbstractEntity {
 
 	public static final String LOAD_ALL = "matchBets.loadAll";
-	public static final String LOAD_ALL_FOR_USER = "matchBets.loadAllForUser";
-	public static final String LOAD_ALL_FOR_MATCH = "matchBets.loadAllForMatch";
+	public static final String LOAD_FOR_USER = "matchBets.loadForUser";
+	public static final String LOAD_FOR_MATCH = "matchBets.loadForMatch";
+	public static final String LOAD_FOR_USER_AND_MATCH = "matchBets.loadForUserAndMatch";
 
 	@ManyToOne
 	@JoinColumn(name="matchId")

@@ -1,20 +1,34 @@
 package totalizator.app.dto;
 
+import java.util.List;
+
 public class MatchBetDTO {
 
+	private int matchId;
+
 	private MatchDTO match;
-	private BetDTO bet;
+	private List<BetDTO> bets;
 
 	public MatchBetDTO() {
 	}
 
 	public MatchBetDTO( final MatchDTO match ) {
+		this.matchId = match.getMatchId();
 		this.match = match;
 	}
 
-	public MatchBetDTO( final MatchDTO match, final BetDTO bet ) {
+	public MatchBetDTO( final MatchDTO match, final List<BetDTO> bets ) {
+		this.matchId = match.getMatchId();
 		this.match = match;
-		this.bet = bet;
+		this.bets = bets;
+	}
+
+	public int getMatchId() {
+		return matchId;
+	}
+
+	public void setMatchId( final int matchId ) {
+		this.matchId = matchId;
 	}
 
 	public MatchDTO getMatch() {
@@ -25,16 +39,16 @@ public class MatchBetDTO {
 		this.match = match;
 	}
 
-	public BetDTO getBet() {
-		return bet;
+	public List<BetDTO> getBets() {
+		return bets;
 	}
 
-	public void setBet( final BetDTO bet ) {
-		this.bet = bet;
+	public void setBets( final List<BetDTO> bets ) {
+		this.bets = bets;
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%s %s", match, bet );
+		return String.format( "%s %s", match, bets );
 	}
 }

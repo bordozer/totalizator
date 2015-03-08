@@ -26,13 +26,20 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 	}
 
 	public List<MatchBet> loadAll( final User user ) {
-		return em.createNamedQuery( MatchBet.LOAD_ALL_FOR_USER, MatchBet.class )
+		return em.createNamedQuery( MatchBet.LOAD_FOR_USER, MatchBet.class )
 				.setParameter( "userId", user.getId() )
 				.getResultList();
 	}
 
 	public List<MatchBet> loadAll( final Match match ) {
-		return em.createNamedQuery( MatchBet.LOAD_ALL_FOR_MATCH, MatchBet.class )
+		return em.createNamedQuery( MatchBet.LOAD_FOR_MATCH, MatchBet.class )
+				.setParameter( "matchId", match.getId() )
+				.getResultList();
+	}
+
+	public List<MatchBet> loadAll( final User user, final Match match ) {
+		return em.createNamedQuery( MatchBet.LOAD_FOR_USER_AND_MATCH, MatchBet.class )
+				.setParameter( "userId", user.getId() )
 				.setParameter( "matchId", match.getId() )
 				.getResultList();
 	}

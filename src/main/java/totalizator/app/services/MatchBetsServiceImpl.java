@@ -16,6 +16,12 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Autowired
 	private MatchBetRepository matchBetRepository;
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private MatchService matchService;
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll() {
@@ -32,6 +38,16 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll( final Match match ) {
 		return matchBetRepository.loadAll( match );
+	}
+
+	@Override
+	public List<MatchBet> loadAll( final User user, final Match match ) {
+		return matchBetRepository.loadAll( user, match );
+	}
+
+	@Override
+	public List<MatchBet> loadAll( final int userId, final int matchId ) {
+		return loadAll( userService.load( userId ), matchService.load( matchId ) );
 	}
 
 	@Override
