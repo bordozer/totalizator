@@ -69,6 +69,7 @@ define( function ( require ) {
 
 		events: {
 			'click .button-bet-match': '_onBetButtonClick'
+			, 'click .button-bet-save': '_onSaveBetButtonClick'
 			, 'click .button-bet-discard': '_onDiscardButtonClick'
 		},
 
@@ -122,28 +123,37 @@ define( function ( require ) {
 			};
 		},
 
-		_betMatch: function() {
-			this.model.setModeBet();
+		_saveBet: function() {
+			console.log( 'save' );
+			this._goMatchInfoMode();
+		},
 
+		_goBetMode: function() {
+			this.model.setModeBet();
 			this.renderBetForm();
+		},
+
+		_goMatchInfoMode: function() {
+			this.model.setModeMatchInfo();
+			this.renderMatchInfo();
 		},
 
 		_onBetButtonClick: function( evt ) {
 			evt.preventDefault();
 
-			this._betMatch();
+			this._goBetMode();
 		},
 
-		_discardBet: function() {
-			this.model.setModeMatchInfo();
+		_onSaveBetButtonClick: function( evt ) {
+			evt.preventDefault();
 
-			this.renderMatchInfo();
+			this._saveBet();
 		},
 
 		_onDiscardButtonClick: function( evt ) {
 			evt.preventDefault();
 
-			this._discardBet();
+			this._goMatchInfoMode();
 		}
 	});
 
