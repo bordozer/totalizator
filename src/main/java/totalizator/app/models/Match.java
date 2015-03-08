@@ -41,6 +41,7 @@ public class Match extends AbstractEntity {
 	private Team team2;
 	private int score2;
 
+	private Date beginningTime;
 	private Date lastBetTime;
 
 	public Cup getCup() {
@@ -81,6 +82,14 @@ public class Match extends AbstractEntity {
 
 	public void setScore2( final int score2 ) {
 		this.score2 = score2;
+	}
+
+	public Date getBeginningTime() {
+		return beginningTime;
+	}
+
+	public void setBeginningTime( final Date beginningTime ) {
+		this.beginningTime = beginningTime;
 	}
 
 	public Date getLastBetTime() {
