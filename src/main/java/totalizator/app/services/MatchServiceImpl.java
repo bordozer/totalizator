@@ -28,6 +28,12 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	@Transactional( readOnly = true )
+	public List<Match> loadOpen() {
+		return matchRepository.loadAll(); // TODO: filter finished
+	}
+
+	@Override
 	@Transactional
 	public Match save( final Match entry ) {
 		return matchRepository.save( entry );

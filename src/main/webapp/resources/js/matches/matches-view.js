@@ -85,8 +85,10 @@ define( function ( require ) {
 
 			this.$el.html( this.templateMatch( this._getViewOptions( this.model ) ) );
 
-			this.$( '.result-1-cell' ).html( this.model.get( 'score1' ) );
-			this.$( '.result-2-cell' ).html( this.model.get( 'score2' ) );
+			var match = this.model.get( 'match' );
+
+			this.$( '.result-1-cell' ).html( match.score1 );
+			this.$( '.result-2-cell' ).html( match.score2 );
 
 			this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
 
@@ -107,14 +109,15 @@ define( function ( require ) {
 		},
 
 		_getViewOptions: function( model ) {
-			var modelJSON = this.model.toJSON();
-			var winnerId = modelJSON.score1 > modelJSON.score2 ? modelJSON.team1Id : modelJSON.score1 < modelJSON.score2 ? modelJSON.team2Id : 0;
+			var match = this.model.get( 'match' );
+
+			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
 
 			return {
-				team1Name: Services.getTeam( this.teams, modelJSON.team1Id ).teamName
-				, team2Name: Services.getTeam( this.teams, modelJSON.team2Id ).teamName
-				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
-				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
+				team1Name: Services.getTeam( this.teams, match.team1Id ).teamName
+				, team2Name: Services.getTeam( this.teams, match.team2Id ).teamName
+				, style1: winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : ''
+				, style2: winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : ''
 				, translator: translator
 			};
 		},
