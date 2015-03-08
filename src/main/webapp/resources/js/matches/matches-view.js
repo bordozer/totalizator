@@ -15,6 +15,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: 'Portal page: Matches'
 		, betThisMatchButtonTitleLabel: 'Portal page / Matches: Bet this match button title'
+		, matchBetLabel: 'Portal page / Matches: user_s match bet label'
 	} );
 
 	var MatchesView = Backbone.View.extend( {
