@@ -8,6 +8,7 @@ define( function ( require ) {
 
 	var TemplateMatchList = require( 'text!js/matches/templates/matches-template.html' );
 	var TemplateMatch = require( 'text!js/matches/templates/match-template.html' );
+	var TemplateSettings = require( 'text!js/matches/templates/settings-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
 
@@ -21,6 +22,11 @@ define( function ( require ) {
 	var MatchesView = Backbone.View.extend( {
 
 		template: _.template( TemplateMatchList ),
+		templateSettings: _.template( TemplateSettings ),
+
+		events: {
+			'click .matches-settings': '_onSettingsClick'
+		},
 
 		initialize: function ( options ) {
 
@@ -61,6 +67,23 @@ define( function ( require ) {
 			}
 
 			return this.$( '.match-list-container' ).append( view.renderMatchInfo().$el );
+		},
+
+		_showSettings: function() {
+			this.$( '.match-list-container' ).html( this.templateSettings( {
+				categories: this.categories
+				, cups: this.cups
+				, teams: this.teams
+				, translator: translator
+			} ) );
+
+			return this;
+		},
+
+		_onSettingsClick: function( evt ) {
+			evt.preventDefault();
+
+			this._showSettings();
 		}
 	});
 

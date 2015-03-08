@@ -1,0 +1,44 @@
+<table>
+
+	<tr>
+		<td>User</td>
+		<td>
+			<select class="form-control" id="settings-user-id">
+				<option value="0"></option>
+				<% _.each( categories, function( category ) { %>
+					<option value="<%=category.categoryId%>"><%=category.categoryName%></option>
+				<% }) %>
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>Category</td>
+		<td>
+			<select class="form-control" id="settings-category-id">
+				<option value="0"></option>
+				<% _.each( categories, function( category ) { %>
+					<option value="<%=category.categoryId%>"><%=category.categoryName%></option>
+				<% }) %>
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>Cup</td>
+		<td>
+			<select class="form-control" id="settings-cup-id">
+				<option value="0"></option>
+				<% _.each( cups, function( cup ) { %>
+					<option value="<%=cup.cupId%>"><%=cup.cupName%></option>
+				<% }) %>
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td>Match</td>
+		<td></td>
+	</tr>
+
+</table>
