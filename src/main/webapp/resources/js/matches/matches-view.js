@@ -71,6 +71,7 @@ define( function ( require ) {
 			'click .button-bet-match': '_onBetButtonClick'
 			, 'click .button-bet-save': '_onSaveBetButtonClick'
 			, 'click .button-bet-discard': '_onDiscardButtonClick'
+			, 'click .button-edit-bet': '_onBetEditButtonClick'
 		},
 
 		initialize: function ( options ) {
@@ -87,12 +88,12 @@ define( function ( require ) {
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
 			if( this.model.get( 'bet' ) == null ) {
-				this.$( '.buttons-cell' ).html( "<button class='fa fa-plus button-bet-match'></button>" );
+				this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
 			} else {
 				var bet = this.model.get( 'bet' );
 				this.$( '.entry-container' ).addClass( 'bg-success' );
-				this.$( '.bet-1-cell' ).html( bet.score1 );
-				this.$( '.bet-2-cell' ).html( bet.score2 );
+				this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
+				this.$( '.buttons-cell' ).html( "<button class='fa fa-edit button-edit-bet'></button>" );
 			}
 
 			return this;
@@ -102,8 +103,12 @@ define( function ( require ) {
 
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
-			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='text' value='0'>" );
-			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='text' value='0'>" );
+			var bet = this.model.get( 'bet' );
+			var bet1 = bet != null ? bet.score1 : 0;
+			var bet2 = bet != null ? bet.score2 : 0;
+
+			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='text' value='" + bet1 + "'>" );
+			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='text' value='" + bet2 + "'>" );
 
 			this.$( '.buttons-cell' ).html( "<button class='fa fa-save button-bet-save'></button>" );
 			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-bet-discard'></button>" );
@@ -168,6 +173,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._goMatchInfoMode();
+		},
+
+		_onBetEditButtonClick: function( evt ) {
+			evt.preventDefault();
+
+			this._goBetMode();
 		}
 	});
 
