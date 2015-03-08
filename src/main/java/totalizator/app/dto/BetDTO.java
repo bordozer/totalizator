@@ -2,6 +2,8 @@ package totalizator.app.dto;
 
 public class BetDTO {
 
+	private int matchBetId;
+
 	private MatchDTO match;
 	private UserDTO user;
 
@@ -11,9 +13,18 @@ public class BetDTO {
 	public BetDTO() {
 	}
 
-	public BetDTO( final MatchDTO match, final UserDTO user ) {
+	public BetDTO( final int matchBetId, final MatchDTO match, final UserDTO user ) {
+		this.matchBetId = matchBetId;
 		this.match = match;
 		this.user = user;
+	}
+
+	public int getMatchBetId() {
+		return matchBetId;
+	}
+
+	public void setMatchBetId( final int matchBetId ) {
+		this.matchBetId = matchBetId;
 	}
 
 	public MatchDTO getMatch() {

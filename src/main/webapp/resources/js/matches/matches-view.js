@@ -84,7 +84,8 @@ define( function ( require ) {
 
 		renderMatchInfo: function () {
 
-			this.$el.html( this.templateMatch( this._getViewOptions( this.model ) ) );
+			this.$el.html( this.templateMatch( this._getViewOptions() ) );
+			console.log( this.model );
 
 			var match = this.model.get( 'match' );
 
@@ -98,10 +99,10 @@ define( function ( require ) {
 
 		renderBetForm: function () {
 
-			this.$el.html( this.templateMatch( this._getViewOptions( this.model ) ) );
+			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
-			this.$( '.result-1-cell' ).html( "<input class='form-control' type='text' value='' size='2'>" );
-			this.$( '.result-2-cell' ).html( "<input class='form-control' type='text' value='' size='2'>" );
+			this.$( '.result-1-cell' ).html( "<input class='form-control1' id='score1' name='score1' type='text' value='0' size='3'>" );
+			this.$( '.result-2-cell' ).html( "<input class='form-control1' id='score2' name='score2' type='text' value='0' size='3'>" );
 
 			this.$( '.buttons-cell' ).html( "<button class='fa fa-save button-bet-save'></button>" );
 			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-bet-discard'></button>" );
@@ -109,7 +110,7 @@ define( function ( require ) {
 			return this;
 		},
 
-		_getViewOptions: function( model ) {
+		_getViewOptions: function() {
 			var match = this.model.get( 'match' );
 
 			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
@@ -124,7 +125,14 @@ define( function ( require ) {
 		},
 
 		_saveBet: function() {
-			console.log( 'save' );
+			console.log( this.model );
+
+			var match = this.model.get( 'match' );
+			var score1 = this.$( '#score1' ).val();
+			var score2 = this.$( '#score2' ).val();
+
+			Services.saveBet( match.matchId, score1, score2 );
+
 			this._goMatchInfoMode();
 		},
 

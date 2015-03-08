@@ -18,6 +18,7 @@ import totalizator.app.services.MatchService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -54,7 +55,12 @@ public class MatchesBetsController {
 			final List<BetDTO> matchBetDTOs = Lists.transform( matchBets, new Function<MatchBet, BetDTO>() {
 				@Override
 				public BetDTO apply( final MatchBet matchBet ) {
-					return new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
+
+					final BetDTO betDTO = new BetDTO( matchBet.getId(), matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
+					betDTO.setScore1( matchBet.getBetScore1() );
+					betDTO.setScore2( matchBet.getBetScore2() );
+
+					return betDTO;
 				}
 			} );
 
@@ -65,6 +71,23 @@ public class MatchesBetsController {
 	}
 
 	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.POST, value = "/{matchId}/bet/{score1}/{score2}/", produces = APPLICATION_JSON_VALUE )
+	public void saveBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "score1" ) int score1, final @PathVariable( "score2" ) int score2 ) {
+
+		final User user = userService.findByLogin( principal.getName() );
+
+		final MatchBet matchBet = new MatchBet();
+		matchBet.setUser( user );
+		matchBet.setMatch( matchService.load( matchId ) );
+		matchBet.setBetScore1( score1 );
+		matchBet.setBetScore2( score2 );
+		matchBet.setBetTime( new Date() );
+
+		matchBetsService.save( matchBet );
+	}
+
+	/*@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/bets/users/{userId}/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchDTO> userBets( final @PathVariable( "userId" ) int userId ) {
@@ -95,5 +118,5 @@ public class MatchesBetsController {
 		}
 
 		matchBetsService.delete( matchBetId );
-	}
+	}*/
 }

@@ -13,6 +13,20 @@ define( function ( require ) {
 
 	return {
 
+		saveBet: function( matchId, score1, score2 ) {
+			console.log( matchId, score1, score2 );
+			$.ajax( {
+				method: 'POST',
+				url: '/rest/matches/' + matchId + '/bet/' + score1 + '/' + score2 + '/',
+				success: function ( response ) {
+
+				},
+				error: function() {
+					alert( 'Bet saving failed' ); // TODO
+				}
+			} )
+		},
+
 		loadCategories: function() {
 			var categories = new Categories.CategoriesModel( [], {} );
 			categories.fetch( { cache: false, async: false } );
