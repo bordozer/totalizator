@@ -96,9 +96,9 @@ define( function ( require ) {
 			var bets = this.model.get( 'bets' );
 
 			var hasBets = bets.length == 0;
-			if( hasBets ) {
+//			if( hasBets ) {
 				this.$( '.buttons-cell' ).html( "<button class='fa fa-plus button-bet-match'></button>" );
-			}
+//			}
 
 			if ( ! hasBets ) {
 				var self = this;
