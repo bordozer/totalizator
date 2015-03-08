@@ -8,6 +8,7 @@ define( function ( require ) {
 
 	var TemplateMatchList = require( 'text!js/matches/templates/matches-template.html' );
 	var TemplateMatch = require( 'text!js/matches/templates/match-template.html' );
+	var TemplateBet = require( 'text!js/matches/templates/bet-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
 
@@ -66,6 +67,7 @@ define( function ( require ) {
 	var MatchView = Backbone.View.extend( {
 
 		templateMatch: _.template( TemplateMatch ),
+		templateBet: _.template( TemplateBet ),
 
 		events: {
 			'click .button-bet-match': '_onBetButtonClick'
@@ -88,22 +90,24 @@ define( function ( require ) {
 
 			var match = this.model.get( 'match' );
 
-			this.$( '.result-1-cell' ).html( match.score1 );
-			this.$( '.result-2-cell' ).html( match.score2 );
+//			this.$( '.result-1-cell' ).html( match.score1 );
+//			this.$( '.result-2-cell' ).html( match.score2 );
 
 			var bets = this.model.get( 'bets' );
 
 			var hasBets = bets.length == 0;
 			if( hasBets ) {
-				this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
+				this.$( '.buttons-cell' ).html( "<button class='fa fa-plus button-bet-match'></button>" );
 			}
 
 			if ( ! hasBets ) {
+				var self = this;
 				this.$( '.entry-container' ).addClass( 'bg-success' );
 				var container = this.$( '.bets-container' );
 				_.each( bets, function( bet ) {
-					var template = _.template( "<div class='col-lg-12 text-right'><%=bet.score1%> - <%=bet.score2%> <button class='cancel-bet-button fa fa-remove'></button></div>" );
-					container.append( template( { bet: bet } ) );
+					container.append( self.templateBet( {
+						bet: bet
+					} ) );
 				});
 			}
 
@@ -133,6 +137,8 @@ define( function ( require ) {
 				, team2Name: Services.getTeam( this.teams, match.team2Id ).teamName
 				, style1: winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : ''
 				, style2: winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : ''
+				, score1: match.score1
+				, score2: match.score2
 				, translator: translator
 			};
 		},

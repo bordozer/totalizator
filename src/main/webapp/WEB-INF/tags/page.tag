@@ -15,7 +15,8 @@
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" />">
 
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/public/style.css" />">
+	<%--<link rel="stylesheet" type="text/css" href="<c:url value="/resources/public/style.css" />">--%>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
 
 	<script type="text/javascript" src="<c:url value="/resources/public/js/require-config.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/bower_components/requirejs/require.js" />"></script>

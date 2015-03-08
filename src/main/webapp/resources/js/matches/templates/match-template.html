@@ -4,29 +4,28 @@
 
 		<div class="row">
 
-			<div class="col-lg-10">
-
-				<div class="row">
-					<div class="col-lg-10 text-right <%=style1%>">
-						<small><%=team1Name%></small>
-					</div>
-					<div class="col-lg-2 result-1-cell <%=style1%>"></div>
+			<div class="col-lg-5" style="margin-right: 10px;">
+				<div class="row text-right <%=style1%>">
+					<small><%=team1Name%></small>
 				</div>
-
-				<div class="row">
-					<div class="col-lg-10 text-right <%=style2%>">
-						<small><%=team2Name%></small>
-					</div>
-					<div class="col-lg-2 result-2-cell <%=style2%>"></div>
-				</div>
-
+				<div class="row text-right <%=style1%>"><%=score1%></div>
+				<div class="row result-1-cell"></div>
 			</div>
 
-			<div class="col-lg-1 buttons-cell" style="padding-top: 13px;"></div>
+			<div class="col-lg-5">
+				<div class="row text-left <%=style2%>">
+					<small><%=team2Name%></small>
+				</div>
+				<div class="row text-left <%=style2%>"><%=score2%></div>
+				<div class="row result-2-cell"></div>
+			</div>
+
+			<div class="col-lg-1">
+				<div class="row text-right buttons-cell" style="padding-top: 3px;"></div>
+			</div>
 		</div>
 
-		<div class="row bets-container"></div>
-
+		<div class="bets-container"></div>
 	</div>
-
 </div>
+
