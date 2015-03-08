@@ -107,8 +107,8 @@ define( function ( require ) {
 			var bet1 = bet != null ? bet.score1 : 0;
 			var bet2 = bet != null ? bet.score2 : 0;
 
-			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='text' value='" + bet1 + "'>" );
-			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='text' value='" + bet2 + "'>" );
+			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
+			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
 			this.$( '.buttons-cell' ).html( "<button class='fa fa-save button-bet-save'></button>" );
 			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-bet-discard'></button>" );
