@@ -41,13 +41,13 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
-	public List<MatchBet> loadAll( final User user, final Match match ) {
-		return matchBetRepository.loadAll( user, match );
+	public MatchBet load( final User user, final Match match ) {
+		return matchBetRepository.load( user, match );
 	}
 
 	@Override
-	public List<MatchBet> loadAll( final int userId, final int matchId ) {
-		return loadAll( userService.load( userId ), matchService.load( matchId ) );
+	public MatchBet load( final int userId, final int matchId ) {
+		return load( userService.load( userId ), matchService.load( matchId ) );
 	}
 
 	@Override

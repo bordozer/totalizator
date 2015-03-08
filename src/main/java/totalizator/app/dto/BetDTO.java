@@ -13,8 +13,7 @@ public class BetDTO {
 	public BetDTO() {
 	}
 
-	public BetDTO( final int matchBetId, final MatchDTO match, final UserDTO user ) {
-		this.matchBetId = matchBetId;
+	public BetDTO( final MatchDTO match, final UserDTO user ) {
 		this.match = match;
 		this.user = user;
 	}

@@ -1,7 +1,5 @@
 package totalizator.app.controllers.rest.matches;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,7 +23,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/rest/matches" )
+@RequestMapping("/rest/matches")
 public class MatchesBetsController {
 
 	@Autowired
@@ -51,20 +49,19 @@ public class MatchesBetsController {
 
 			final MatchDTO matchDTO = matchService.initDTOFromModel( match );
 
-			final List<MatchBet> matchBets = matchBetsService.loadAll( user, match );
-			final List<BetDTO> matchBetDTOs = Lists.transform( matchBets, new Function<MatchBet, BetDTO>() {
-				@Override
-				public BetDTO apply( final MatchBet matchBet ) {
+			final MatchBet matchBet = matchBetsService.load( user, match );
 
-					final BetDTO betDTO = new BetDTO( matchBet.getId(), matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
-					betDTO.setScore1( matchBet.getBetScore1() );
-					betDTO.setScore2( matchBet.getBetScore2() );
+			if ( matchBet == null ) {
+				result.add( new MatchBetDTO( matchDTO ) );
+				continue;
+			}
 
-					return betDTO;
-				}
-			} );
+			final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
+			betDTO.setMatchBetId( matchBet.getId() );
+			betDTO.setScore1( matchBet.getBetScore1() );
+			betDTO.setScore2( matchBet.getBetScore2() );
 
-			result.add( new MatchBetDTO( matchDTO, matchBetDTOs ) );
+			result.add( new MatchBetDTO( matchDTO, betDTO ) );
 		}
 
 		return result;

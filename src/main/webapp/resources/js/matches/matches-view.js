@@ -8,7 +8,6 @@ define( function ( require ) {
 
 	var TemplateMatchList = require( 'text!js/matches/templates/matches-template.html' );
 	var TemplateMatch = require( 'text!js/matches/templates/match-template.html' );
-	var TemplateBet = require( 'text!js/matches/templates/bet-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
 
@@ -67,7 +66,6 @@ define( function ( require ) {
 	var MatchView = Backbone.View.extend( {
 
 		templateMatch: _.template( TemplateMatch ),
-		templateBet: _.template( TemplateBet ),
 
 		events: {
 			'click .button-bet-match': '_onBetButtonClick'
@@ -88,27 +86,13 @@ define( function ( require ) {
 
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
-			var match = this.model.get( 'match' );
-
-//			this.$( '.result-1-cell' ).html( match.score1 );
-//			this.$( '.result-2-cell' ).html( match.score2 );
-
-			var bets = this.model.get( 'bets' );
-
-			var hasBets = bets.length == 0;
-//			if( hasBets ) {
+			if( this.model.get( 'bet' ) == null ) {
 				this.$( '.buttons-cell' ).html( "<button class='fa fa-plus button-bet-match'></button>" );
-//			}
-
-			if ( ! hasBets ) {
-				var self = this;
+			} else {
+				var bet = this.model.get( 'bet' );
 				this.$( '.entry-container' ).addClass( 'bg-success' );
-				var container = this.$( '.bets-container' );
-				_.each( bets, function( bet ) {
-					container.append( self.templateBet( {
-						bet: bet
-					} ) );
-				});
+				this.$( '.bet-1-cell' ).html( bet.score1 );
+				this.$( '.bet-2-cell' ).html( bet.score2 );
 			}
 
 			return this;
@@ -118,8 +102,8 @@ define( function ( require ) {
 
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
-			this.$( '.result-1-cell' ).html( "<input class='form-control1' id='score1' name='score1' type='text' value='0' size='3'>" );
-			this.$( '.result-2-cell' ).html( "<input class='form-control1' id='score2' name='score2' type='text' value='0' size='3'>" );
+			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='text' value='0'>" );
+			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='text' value='0'>" );
 
 			this.$( '.buttons-cell' ).html( "<button class='fa fa-save button-bet-save'></button>" );
 			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-bet-discard'></button>" );
@@ -129,6 +113,7 @@ define( function ( require ) {
 
 		_getViewOptions: function() {
 			var match = this.model.get( 'match' );
+			var bet = this.model.get( 'bet' );
 
 			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
 

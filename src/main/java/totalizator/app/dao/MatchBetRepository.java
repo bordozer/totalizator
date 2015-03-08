@@ -37,11 +37,13 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 				.getResultList();
 	}
 
-	public List<MatchBet> loadAll( final User user, final Match match ) {
-		return em.createNamedQuery( MatchBet.LOAD_FOR_USER_AND_MATCH, MatchBet.class )
+	public MatchBet load( final User user, final Match match ) {
+		final List<MatchBet> bets = em.createNamedQuery( MatchBet.LOAD_FOR_USER_AND_MATCH, MatchBet.class )
 				.setParameter( "userId", user.getId() )
 				.setParameter( "matchId", match.getId() )
 				.getResultList();
+
+		return bets.size() == 1 ? bets.get( 0 ) : null;
 	}
 
 	@Override
