@@ -61,7 +61,11 @@ define( function ( require ) {
 
 		_renderMatches: function() {
 			var matchesModel = new MatchesModel.MatchesModel();
-			var matchesView = new MatchesView.MatchesView( { model: matchesModel, el: this.$( '.portal-page-matches-container' ) } );
+			var matchesView = new MatchesView.MatchesView( {
+				model: matchesModel
+				, el: this.$( '.portal-page-matches-container' )
+				, settings: { userId: this.model.get( 'userId' ) }
+			} );
 		},
 
 		_logout: function() {

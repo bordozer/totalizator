@@ -32,6 +32,7 @@ public class PortalPageRestController {
 		final User user = userService.findByLogin( principal.getName() );
 
 		final PortalPageDTO portalPageDTO = new PortalPageDTO();
+		portalPageDTO.setUserId( user.getId() );
 		portalPageDTO.setUserName( user.getUsername() );
 
 		return portalPageDTO;

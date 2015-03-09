@@ -7,6 +7,7 @@ public class PortalPageDTO {
 
 	private int id = 0;
 
+	private int userId;
 	private String userName;
 
 	public int getId() {
@@ -15,6 +16,14 @@ public class PortalPageDTO {
 
 	public void setId( final int id ) {
 		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId( final int userId ) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {

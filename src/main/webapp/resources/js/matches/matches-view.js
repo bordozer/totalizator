@@ -35,7 +35,7 @@ define( function ( require ) {
 			this.cups = Services.loadCups();
 			this.teams = Services.loadTeams();
 
-			this.settingsModel = new SettingsModel();
+			this.settingsModel = new SettingsModel( options.settings );
 			this.settingsView = new SettingsView( { model: this.settingsModel, el: this.$el } );
 			this.settingsView.on( 'events:setting_apply', this._applySettings, this );
 			this.settingsView.on( 'events:setting_cancel', this.render, this );
