@@ -19,6 +19,7 @@ define( function ( require ) {
 			$.ajax( {
 				method: 'POST',
 				url: '/rest/matches/' + matchId + '/bets/' + score1 + '/' + score2 + '/',
+				async: false,
 				success: function ( response ) {
 
 				},
@@ -37,6 +38,7 @@ define( function ( require ) {
 			$.ajax( {
 				method: 'DELETE',
 				url: '/rest/matches/' + matchId + '/bets/' + matchBetId + '/',
+				async: false,
 				success: function ( response ) {
 
 				},

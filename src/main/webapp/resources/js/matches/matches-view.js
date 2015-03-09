@@ -62,11 +62,9 @@ define( function ( require ) {
 				, teams: this.teams
 			} );
 
-			if ( model.isBetMode() ) {
-				return this.$( '.match-list-container' ).append( view.renderBetForm().$el );
-			}
+			view.on( 'events:refresh', this._refresh, this );
 
-			return this.$( '.match-list-container' ).append( view.renderMatchInfo().$el );
+			return this.$( '.match-list-container' ).append( view.render().$el );
 		},
 
 		_showSettings: function() {
@@ -78,6 +76,10 @@ define( function ( require ) {
 			} ) );
 
 			return this;
+		},
+
+		_refresh: function() {
+			this.model.refresh();
 		},
 
 		_onSettingsClick: function( evt ) {
@@ -106,6 +108,15 @@ define( function ( require ) {
 			this.teams = options.teams;
 
 			this.model.on( 'sync', this.render, this );
+		},
+
+		render: function() {
+
+			if ( this.model.isBetMode() ) {
+				return this.renderBetForm();
+			}
+
+			return this.renderMatchInfo();
 		},
 
 		renderMatchInfo: function () {
@@ -169,9 +180,9 @@ define( function ( require ) {
 
 			Services.saveBet( match.matchId, score1, score2 );
 
-//			this.model.refresh(); // TODO
+			this.model.setModeMatchInfo();
 
-			this._goMatchInfoMode();
+			this.trigger( 'events:refresh' );
 		},
 
 		_deleteBet: function() {
@@ -180,6 +191,10 @@ define( function ( require ) {
 			var bet = this.model.get( 'bet' );
 
 			Services.deleteBet( match.matchId, bet.matchBetId );
+
+			this.model.setModeMatchInfo();
+
+			this.trigger( 'events:refresh' );
 		},
 
 		_goBetMode: function() {
