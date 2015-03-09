@@ -36,6 +36,9 @@ define( function ( require ) {
 			this.teams = Services.loadTeams();
 
 			this.settingsModel = new SettingsModel();
+			this.settingsView = new SettingsView( { model: this.settingsModel, el: this.$el } );
+			this.settingsView.on( 'events:setting_apply', this._applySettings, this );
+			this.settingsView.on( 'events:setting_cancel', this.render, this );
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -48,10 +51,14 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this._renderSettings();
-//			this._renderMatches(); // TODO
+//			this._renderSettings();
+			this._renderMatches(); // TODO
 
 			return this;
+		},
+
+		_applySettings: function() {
+			this.render();
 		},
 
 		_renderMatches: function() {
@@ -80,8 +87,7 @@ define( function ( require ) {
 		},
 
 		_renderSettings: function() {
-			var settingsView = new SettingsView( { model: this.settingsModel, el: this.$( '.match-list-container' ) } );
-			settingsView.render();
+			this.settingsView.render();
 		},
 
 		_onSettingsClick: function( evt ) {

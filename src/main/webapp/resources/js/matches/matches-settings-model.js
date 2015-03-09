@@ -6,7 +6,7 @@ define( ["backbone"], function ( Backbone ) {
 			userId: 0
 			, categoryId: 0
 			, cupId: 0
-			, matchId: 0
+			, teamId: 0
 		},
 
 		initialize: function ( options ) {

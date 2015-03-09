@@ -13,7 +13,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: 'TODO'
+		title: 'Matches: Settings'
 	} );
 
 	return Backbone.View.extend( {
@@ -23,6 +23,8 @@ define( function ( require ) {
 		events: {
 			'change #settings-category-id': '_onCategoryChange'
 			, 'change #settings-cup-id': '_onCupChange'
+			, 'click .matches-settings-save': '_onSettingsSave'
+			, 'click .matches-settings-cancel': '_onSettingsCancel'
 		},
 
 		initialize: function ( options ) {
@@ -77,6 +79,18 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._cupChange( $( evt.target ).val() );
+		},
+
+		_onSettingsSave: function( evt ) {
+			evt.preventDefault();
+
+			this.trigger( 'events:setting_apply' );
+		},
+
+		_onSettingsCancel: function( evt ) {
+			evt.preventDefault();
+
+			this.trigger( 'events:setting_cancel' );
 		}
 	});
 } );
