@@ -8,7 +8,9 @@ define( function ( require ) {
 
 	var TemplateMatchList = require( 'text!js/matches/templates/matches-template.html' );
 	var TemplateMatch = require( 'text!js/matches/templates/match-template.html' );
-	var TemplateSettings = require( 'text!js/matches/templates/settings-template.html' );
+
+	var SettingsModel = require( 'js/matches/matches-settings-model' );
+	var SettingsView = require( 'js/matches/matches-settings-view' );
 
 	var Services = require( '/resources/js/services.js' );
 
@@ -22,7 +24,6 @@ define( function ( require ) {
 	var MatchesView = Backbone.View.extend( {
 
 		template: _.template( TemplateMatchList ),
-		templateSettings: _.template( TemplateSettings ),
 
 		events: {
 			'click .matches-settings': '_onSettingsClick'
@@ -30,7 +31,6 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.users = Services.loadUsers();
 			this.categories = Services.loadCategories();
 			this.cups = Services.loadCups();
 			this.teams = Services.loadTeams();
@@ -73,16 +73,9 @@ define( function ( require ) {
 		},
 
 		_showSettings: function() {
-
-			this.$( '.match-list-container' ).html( this.templateSettings( {
-				users: this.users
-				, categories: this.categories
-				, cups: this.cups
-				, teams: this.teams
-				, translator: translator
-			} ) );
-
-			return this;
+			var settingsModel = new SettingsModel();
+			var settingsView = new SettingsView( { model: settingsModel, el: this.$( '.match-list-container' ) } );
+			settingsView.render();
 		},
 
 		_onSettingsClick: function( evt ) {
