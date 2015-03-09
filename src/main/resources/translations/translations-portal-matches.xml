@@ -23,6 +23,26 @@
 	</translation>
 
 	<translation>
+		<nerd>Matches: Settings</nerd>
+		<ru><![CDATA[Матчи - настройки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Matches: Settings: cancel button</nerd>
+		<ru><![CDATA[Вернуться к отображению матчей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Matches: Settings: save button</nerd>
+		<ru><![CDATA[Применить настройки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

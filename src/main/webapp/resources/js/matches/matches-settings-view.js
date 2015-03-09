@@ -14,6 +14,8 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Matches: Settings'
+		, buttonSaveSettingsLabel: 'Matches: Settings: save button'
+		, buttonCancelSettingsLabel: 'Matches: Settings: cancel button'
 	} );
 
 	return Backbone.View.extend( {

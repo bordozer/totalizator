@@ -2,8 +2,8 @@
 
 	<div class="panel-heading">
 		<a href="#" onclick="return false;">
-			<div class="col-lg-1 fa fa-backward matches-settings-cancel"></div>
-			<div class="col-lg-1 fa fa-save matches-settings-save"></div>
+			<div class="col-lg-1 fa fa-backward matches-settings-cancel" title="<%=translator.buttonCancelSettingsLabel%>"></div>
+			<div class="col-lg-1 fa fa-save matches-settings-save" title="<%=translator.buttonSaveSettingsLabel%>"></div>
 		</a>
 
 		<h3 class="panel-title text-center"><%=translator.title%></h3>
@@ -17,7 +17,6 @@
 					<td>Category</td>
 					<td>
 						<select class="form-control" id="settings-category-id">
-							<!--<option value="0">&nbsp;</option>-->
 							<% _.each( categories, function( category ) { %>
 							<option value="<%=category.categoryId%>"
 							<%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
@@ -31,7 +30,6 @@
 					<td>
 						<% if( model.categoryId > 0 ) { %>
 						<select class="form-control" id="settings-cup-id">
-							<!--<option value="0">&nbsp;</option>-->
 							<% _.each( cups, function( cup ) { %>
 							<option value="<%=cup.cupId%>"
 							<%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
