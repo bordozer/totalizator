@@ -67,7 +67,12 @@ define( function ( require ) {
 			return this.$( '.match-list-container' ).append( view.render().$el );
 		},
 
+		_refresh: function() {
+			this.model.refresh();
+		},
+
 		_showSettings: function() {
+
 			this.$( '.match-list-container' ).html( this.templateSettings( {
 				categories: this.categories
 				, cups: this.cups
@@ -76,10 +81,6 @@ define( function ( require ) {
 			} ) );
 
 			return this;
-		},
-
-		_refresh: function() {
-			this.model.refresh();
 		},
 
 		_onSettingsClick: function( evt ) {
