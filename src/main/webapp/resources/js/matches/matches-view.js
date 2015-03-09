@@ -111,14 +111,17 @@ define( function ( require ) {
 
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
-			if( this.model.get( 'bet' ) == null ) {
+			var bet = this.model.get( 'bet' );
+			if( bet == null ) {
 				this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
-			} else {
-				var bet = this.model.get( 'bet' );
-				this.$( '.entry-container' ).addClass( 'bg-success' );
-				this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
-				this.$( '.buttons-cell' ).html( "<button class='fa fa-edit button-edit-bet'></button>" );
+
+				return this;
 			}
+
+			this.$( '.entry-container' ).addClass( 'bg-success' );
+			this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
+			this.$( '.buttons-cell' ).html( "<button class='fa fa-edit button-edit-bet'></button>" );
+			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-delete-bet'></button>" );
 
 			return this;
 		},
