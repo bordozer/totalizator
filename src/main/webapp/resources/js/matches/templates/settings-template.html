@@ -14,19 +14,6 @@
 			<table class="table">
 
 				<tr>
-					<td>User</td>
-					<td>
-						<select class="form-control" id="settings-user-id">
-							<option value="0">&nbsp;</option>
-							<% _.each( users, function( user ) { %>
-							<option value="<%=user.userId%>"
-							<%= model.userId == user.userId ? 'selected' : '' %> ><%=user.userName%></option>
-							<% }) %>
-						</select>
-					</td>
-				</tr>
-
-				<tr>
 					<td>Category</td>
 					<td>
 						<select class="form-control" id="settings-category-id">

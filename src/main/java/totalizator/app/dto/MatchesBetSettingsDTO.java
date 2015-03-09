@@ -2,18 +2,9 @@ package totalizator.app.dto;
 
 public class MatchesBetSettingsDTO {
 
-	private int userId;
 	private int categoryId;
 	private int cupId;
-	private int matchId;
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId( final int userId ) {
-		this.userId = userId;
-	}
+	private int teamId;
 
 	public int getCategoryId() {
 		return categoryId;
@@ -31,11 +22,11 @@ public class MatchesBetSettingsDTO {
 		this.cupId = cupId;
 	}
 
-	public int getMatchId() {
-		return matchId;
+	public int getTeamId() {
+		return teamId;
 	}
 
-	public void setMatchId( final int matchId ) {
-		this.matchId = matchId;
+	public void setTeamId( final int teamId ) {
+		this.teamId = teamId;
 	}
 }

@@ -59,32 +59,23 @@ public class MatchesBetsController {
 			} );
 		}
 
-		if ( dto.getMatchId() > 0 ) {
+		if ( dto.getTeamId() > 0 ) {
 			CollectionUtils.filter( matches, new Predicate<Match>() {
 				@Override
 				public boolean evaluate( final Match match ) {
-					return match.getId() == dto.getMatchId();
+					return match.getTeam1().getId() == dto.getTeamId() || match.getTeam2().getId() == dto.getTeamId();
 				}
 			} );
 		}
 
-		if ( dto.getMatchId() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return match.getId() == dto.getMatchId();
-				}
-			} );
-		}
-
-		return getMatchBetDTOs( userService.findByLogin( principal.getName() ), matches );
+		return getMatchBetDTOs( principal, matches );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/open/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> openMatches( final Principal principal ) {
-		return getMatchBetDTOs( userService.findByLogin( principal.getName() ), matchService.loadOpen() );
+		return getMatchBetDTOs( principal, matchService.loadOpen() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -126,7 +117,8 @@ public class MatchesBetsController {
 		matchBetsService.delete( matchBetId );
 	}
 
-	private List<MatchBetDTO> getMatchBetDTOs( final User user, final List<Match> matches ) {
+	private List<MatchBetDTO> getMatchBetDTOs( final Principal principal, final List<Match> matches ) {
+		final User user = userService.findByLogin( principal.getName() );
 		final List<MatchBetDTO> result = newArrayList();
 		for ( final Match match : matches ) {
 

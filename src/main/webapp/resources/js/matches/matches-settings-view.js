@@ -23,12 +23,12 @@ define( function ( require ) {
 		events: {
 			'change #settings-category-id': '_onCategoryChange'
 			, 'change #settings-cup-id': '_onCupChange'
+			, 'change #settings-team-id': '_onTeamChange'
 			, 'click .matches-settings-save': '_onSettingsSave'
 			, 'click .matches-settings-cancel': '_onSettingsCancel'
 		},
 
 		initialize: function ( options ) {
-			this.users = Services.loadUsers();
 			this.categories = Services.loadCategories();
 			this.cups = Services.loadCups();
 			this.teams = Services.loadTeams();
@@ -41,7 +41,6 @@ define( function ( require ) {
 
 			this.$el.html( this.templateSettings( {
 				model: model
-				, users: this.users
 				, categories: this.categories
 				, cups: Services.categoryCups( this.cups, categoryId )
 				, teams: Services.categoryTeams( this.teams, categoryId )
@@ -69,6 +68,11 @@ define( function ( require ) {
 			this.render();
 		},
 
+		_teamChange: function( teamId ) {
+			this.model.set( { teamId: teamId } );
+			this.render();
+		},
+
 		_onCategoryChange: function( evt ) {
 			evt.preventDefault();
 
@@ -79,6 +83,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._cupChange( $( evt.target ).val() );
+		},
+
+		_onTeamChange: function( evt ) {
+			evt.preventDefault();
+
+			this._teamChange( $( evt.target ).val() );
 		},
 
 		_onSettingsSave: function( evt ) {

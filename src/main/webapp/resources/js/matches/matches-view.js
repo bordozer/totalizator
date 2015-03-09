@@ -41,7 +41,7 @@ define( function ( require ) {
 			this.settingsView.on( 'events:setting_cancel', this.render, this );
 
 			this.model.on( 'sync', this.render, this );
-			this.model.fetch( { cache: false } );
+			this._refresh();
 		},
 
 		render: function() {
@@ -51,8 +51,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-//			this._renderSettings();
-			this._renderMatches(); // TODO
+			this._renderMatches();
 
 			return this;
 		},
