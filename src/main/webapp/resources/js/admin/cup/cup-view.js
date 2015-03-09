@@ -211,7 +211,7 @@ define( function ( require ) {
 		},
 
 		_getShowOnPortalPage: function() {
-			return this.$( '.show-on-portal-page-checkbox' ).val();
+			return this.$( '.show-on-portal-page-checkbox' ).is(':checked');
 		},
 
 		_onChange: function( evt ) {
