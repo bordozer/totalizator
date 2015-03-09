@@ -36,7 +36,10 @@ public class CupController {
 		return Lists.transform( cupService.loadAll(), new Function<Cup, CupDTO>() {
 			@Override
 			public CupDTO apply( final Cup cup ) {
-				return new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
+				final CupDTO cupDTO = new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
+				cupDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
+
+				return cupDTO;
 			}
 		} );
 	}
@@ -47,6 +50,8 @@ public class CupController {
 	public CupDTO create( final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
 		final Cup cup = new Cup( cupDTO.getCupName(), categoryService.load( cupDTO.getCategoryId() ) );
+		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
+
 		cupService.save( cup );
 
 		cupDTO.setCupId( cup.getId() );
@@ -61,6 +66,7 @@ public class CupController {
 		final Cup cup = cupService.load( cupDTO.getCupId() );
 		cup.setCupName( cupDTO.getCupName() );
 		cup.setCategory( categoryService.load( cupDTO.getCategoryId() ) );
+		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
 
 		cupService.save( cup );
 

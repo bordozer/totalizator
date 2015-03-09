@@ -8,6 +8,7 @@ public class CupDTO {
 	private int cupId;
 	private String cupName;
 	private int categoryId;
+	private boolean showOnPortalPage;
 
 	public CupDTO() {
 	}
@@ -40,5 +41,13 @@ public class CupDTO {
 
 	public void setCategoryId( final int categoryId ) {
 		this.categoryId = categoryId;
+	}
+
+	public boolean isShowOnPortalPage() {
+		return showOnPortalPage;
+	}
+
+	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
+		this.showOnPortalPage = showOnPortalPage;
 	}
 }

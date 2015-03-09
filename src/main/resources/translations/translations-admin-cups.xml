@@ -8,6 +8,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Admin / Cups / Edit: Category label</nerd>
+		<ru><![CDATA[Категория]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Cups / Edit: Cup name label</nerd>
+		<ru><![CDATA[Название]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Cups / Edit: Show on portal page label</nerd>
+		<ru><![CDATA[Показывать на главной странице]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

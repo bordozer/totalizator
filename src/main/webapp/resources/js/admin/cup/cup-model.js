@@ -9,6 +9,7 @@ define( ["backbone"], function ( Backbone ) {
 			, cupName: ''
 			, isEditState: false
 			, categoryId: 0
+			, showOnPortalPage: false
 		},
 
 		initialize: function ( options ) {

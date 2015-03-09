@@ -57,6 +57,7 @@ public class TestDataInitializer {
 
 
 		final Cup nba2015Regular = new Cup( "2015 - regular", nba );
+		nba2015Regular.setShowOnPortalPage( true );
 		session.persist( nba2015Regular );
 
 		final Cup nba2015PlayOff = new Cup( "2015 - playoff", nba );

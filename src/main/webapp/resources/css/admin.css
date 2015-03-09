@@ -3,7 +3,8 @@ div {
 }
 
 .admin-entry-line {
-	height: 41px;
+	height: auto;
+	min-height: 30px;
 	padding-top: 3px;
 }
 

@@ -15,6 +15,9 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		cupsTitle: "Admin / Cups / Title: Cups"
+		, entryEditCategoryLabel: "Admin / Cups / Edit: Category label"
+		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
+		, entryEditShowOnPortalPageLabel: "Admin / Cups / Edit: Show on portal page label"
 	} );
 
 	var CupsView = Backbone.View.extend( {
@@ -131,6 +134,7 @@ define( function ( require ) {
 			this.$el.html( this.templateView( {
 				model: modelJSON
 				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) )
+				, translator: translator
 			} ) );
 
 			return this;
@@ -142,6 +146,7 @@ define( function ( require ) {
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
 				, categories: this.categories
+				, translator: translator
 			} ) );
 
 			return this;
@@ -181,8 +186,9 @@ define( function ( require ) {
 		_bind: function() {
 			var cupName = this._getCupName();
 			var categoryId = this._getCategoryId();
+			var showOnPortalPage = this._getShowOnPortalPage();
 
-			this.model.set( { cupName: cupName, categoryId: categoryId } );
+			this.model.set( { cupName: cupName, categoryId: categoryId, showOnPortalPage: showOnPortalPage } );
 		},
 
 		_validate: function() {
@@ -202,6 +208,10 @@ define( function ( require ) {
 
 		_getCategoryId: function() {
 			return this.$( '.entry-category-id' ).val();
+		},
+
+		_getShowOnPortalPage: function() {
+			return this.$( '.show-on-portal-page-checkbox' ).val();
 		},
 
 		_onChange: function( evt ) {

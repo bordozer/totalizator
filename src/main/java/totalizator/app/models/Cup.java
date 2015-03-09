@@ -30,6 +30,8 @@ public class Cup extends AbstractEntity {
 	@JoinColumn(name="categoryId")
 	private Category category;
 
+	private boolean showOnPortalPage;
+
 	public Cup() {
 	}
 
@@ -52,6 +54,14 @@ public class Cup extends AbstractEntity {
 
 	public void setCategory( final Category category ) {
 		this.category = category;
+	}
+
+	public boolean isShowOnPortalPage() {
+		return showOnPortalPage;
+	}
+
+	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
+		this.showOnPortalPage = showOnPortalPage;
 	}
 
 	@Override
