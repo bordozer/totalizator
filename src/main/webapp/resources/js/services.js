@@ -8,21 +8,40 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		logoutConfirmationLabel: 'Logout confirmation: Logout?'
+		deleteBetConfirmationLabel: 'Delete bet confirmation: Delete bet?'
+		, logoutConfirmationLabel: 'Logout confirmation: Logout?'
 	} );
 
 	return {
 
 		saveBet: function( matchId, score1, score2 ) {
-			console.log( matchId, score1, score2 );
+
 			$.ajax( {
 				method: 'POST',
-				url: '/rest/matches/' + matchId + '/bet/' + score1 + '/' + score2 + '/',
+				url: '/rest/matches/' + matchId + '/bets/' + score1 + '/' + score2 + '/',
 				success: function ( response ) {
 
 				},
 				error: function() {
 					alert( 'Bet saving failed' ); // TODO
+				}
+			} )
+		},
+
+		deleteBet: function( matchId, matchBetId ) {
+
+			if ( ! confirm( translator.deleteBetConfirmationLabel ) ) {
+				return;
+			}
+
+			$.ajax( {
+				method: 'DELETE',
+				url: '/rest/matches/' + matchId + '/bets/' + matchBetId + '/',
+				success: function ( response ) {
+
+				},
+				error: function() {
+					alert( 'Bet deletion failed' ); // TODO
 				}
 			} )
 		},

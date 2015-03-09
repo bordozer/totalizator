@@ -69,19 +69,41 @@ public class MatchesBetsController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.POST, value = "/{matchId}/bet/{score1}/{score2}/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.POST, value = "/{matchId}/bets/{score1}/{score2}/", produces = APPLICATION_JSON_VALUE )
 	public void saveBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "score1" ) int score1, final @PathVariable( "score2" ) int score2 ) {
 
 		final User user = userService.findByLogin( principal.getName() );
 
+		final Match match = matchService.load( matchId );
+		final MatchBet savedMatchBet = matchBetsService.load( user, match );
+		if ( savedMatchBet != null ) {
+			savedMatchBet.setBetScore1( score1 );
+			savedMatchBet.setBetScore2( score2 );
+			matchBetsService.save( savedMatchBet );
+
+			return;
+		}
+
 		final MatchBet matchBet = new MatchBet();
 		matchBet.setUser( user );
-		matchBet.setMatch( matchService.load( matchId ) );
+		matchBet.setMatch( match );
 		matchBet.setBetScore1( score1 );
 		matchBet.setBetScore2( score2 );
 		matchBet.setBetTime( new Date() );
 
 		matchBetsService.save( matchBet );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{matchId}/bets/{matchBetId}" )
+	public void deleteBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "matchBetId" ) int matchBetId ) {
+
+		if ( matchBetId == 0 ) {
+			return;
+		}
+
+		matchBetsService.delete( matchBetId );
 	}
 
 	/*@ResponseStatus( HttpStatus.OK )

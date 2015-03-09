@@ -96,6 +96,7 @@ define( function ( require ) {
 			, 'click .button-bet-save': '_onSaveBetButtonClick'
 			, 'click .button-bet-discard': '_onDiscardButtonClick'
 			, 'click .button-edit-bet': '_onBetEditButtonClick'
+			, 'click .button-delete-bet': '_onBetDeleteButtonClick'
 		},
 
 		initialize: function ( options ) {
@@ -161,7 +162,6 @@ define( function ( require ) {
 		},
 
 		_saveBet: function() {
-			console.log( this.model );
 
 			var match = this.model.get( 'match' );
 			var score1 = this.$( '#score1' ).val();
@@ -169,9 +169,17 @@ define( function ( require ) {
 
 			Services.saveBet( match.matchId, score1, score2 );
 
-			this.model.refresh();
+//			this.model.refresh(); // TODO
 
 			this._goMatchInfoMode();
+		},
+
+		_deleteBet: function() {
+
+			var match = this.model.get( 'match' );
+			var bet = this.model.get( 'bet' );
+
+			Services.deleteBet( match.matchId, bet.matchBetId );
 		},
 
 		_goBetMode: function() {
@@ -194,6 +202,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._saveBet();
+		},
+
+		_onBetDeleteButtonClick: function( evt ) {
+			evt.preventDefault();
+
+			this._deleteBet();
 		},
 
 		_onDiscardButtonClick: function( evt ) {
