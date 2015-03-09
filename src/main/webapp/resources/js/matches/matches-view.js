@@ -51,7 +51,7 @@ define( function ( require ) {
 
 			var filterByCategoryText = Services.getCategory( this.categories, categoryId ).categoryName;
 			var filterByCupText = Services.getCup( this.cups, cupId ).cupName;
-			var title = translator.title + ': ' + filterByCategoryText + ' - ' + filterByCupText;
+			var title = translator.title + ': ' + filterByCategoryText + ' / ' + filterByCupText;
 
 			this.$el.html( this.template( {
 				model: this.model
