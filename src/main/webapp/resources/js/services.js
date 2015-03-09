@@ -2,6 +2,7 @@ define( function ( require ) {
 
 	'use strict';
 
+	var Users = require( 'js/users/users-model' );
 	var Categories = require( 'js/admin/category/category-model' );
 	var Cups = require( 'js/admin/cup/cup-model' );
 	var Teams = require( 'js/admin/team/team-model' );
@@ -46,6 +47,18 @@ define( function ( require ) {
 					alert( 'Bet deletion failed' ); // TODO
 				}
 			} )
+		},
+
+		loadUsers: function() {
+			var users = new Users.UsersModel( [], {} );
+			users.fetch( { cache: false, async: false } );
+
+			var result = [];
+			users.forEach( function( user ) {
+				result.push( { userId: user.get( 'userId' ), userName: user.get( 'userName' ) } );
+			});
+
+			return result;
 		},
 
 		loadCategories: function() {

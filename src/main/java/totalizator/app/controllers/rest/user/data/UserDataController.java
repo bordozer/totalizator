@@ -13,7 +13,6 @@ import totalizator.app.services.UserService;
 import java.security.Principal;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -29,7 +28,12 @@ public class UserDataController {
 	@ResponseStatus( HttpStatus.OK )
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<UserDTO> getUsers() {
-		return Lists.transform( userService.loadAll(), this::getUserDTO );
+		return Lists.transform( userService.loadAll(), new Function<User, UserDTO>() {
+			@Override
+			public UserDTO apply( final User user ) {
+				return getUserDTO( user );
+			}
+		} );
 	}
 
 	@ResponseBody
@@ -55,9 +59,12 @@ public class UserDataController {
 	}
 
 	private UserDTO getUserDTO( final User user ) {
+
 		final UserDTO userDTO = new UserDTO();
+		userDTO.setUserId( user.getId() );
 		userDTO.setLogin( user.getLogin() );
-		userDTO.setName( user.getUsername() );
+		userDTO.setUserName( user.getUsername() );
+
 		return userDTO;
 	}
 }

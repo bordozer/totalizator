@@ -30,6 +30,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
+			this.users = Services.loadUsers();
 			this.categories = Services.loadCategories();
 			this.cups = Services.loadCups();
 			this.teams = Services.loadTeams();
@@ -74,7 +75,8 @@ define( function ( require ) {
 		_showSettings: function() {
 
 			this.$( '.match-list-container' ).html( this.templateSettings( {
-				categories: this.categories
+				users: this.users
+				, categories: this.categories
 				, cups: this.cups
 				, teams: this.teams
 				, translator: translator

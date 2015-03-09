@@ -5,8 +5,8 @@
 		<td>
 			<select class="form-control" id="settings-user-id">
 				<option value="0"></option>
-				<% _.each( categories, function( category ) { %>
-					<option value="<%=category.categoryId%>"><%=category.categoryName%></option>
+				<% _.each( users, function( user ) { %>
+					<option value="<%=user.userId%>"><%=user.userName%></option>
 				<% }) %>
 			</select>
 		</td>
