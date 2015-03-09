@@ -58,7 +58,7 @@ define( function ( require ) {
 		},
 
 		_applySettings: function() {
-			this.render();
+			this._refresh();
 		},
 
 		_renderMatches: function() {
@@ -83,7 +83,8 @@ define( function ( require ) {
 		},
 
 		_refresh: function() {
-			this.model.refresh();
+			var data = this.settingsModel.toJSON();
+			this.model.refresh( data );
 		},
 
 		_renderSettings: function() {

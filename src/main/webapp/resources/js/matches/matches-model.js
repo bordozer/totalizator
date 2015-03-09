@@ -13,10 +13,6 @@ define( ["backbone"], function ( Backbone ) {
 		initialize: function ( options ) {
 		},
 
-		refresh: function() {
-			this.fetch( { cache: false, async: false } );
-		},
-
 		setModeBet: function() {
 			this.betMode = true;
 		},
@@ -35,11 +31,11 @@ define( ["backbone"], function ( Backbone ) {
 		model: MatchModel,
 
 		initialize: function ( options ) {
-			this.url = '/rest/matches/open/';
+			this.url = '/rest/matches/';
 		},
 
-		refresh: function() {
-			this.fetch( { cache: false, reset: true } );
+		refresh: function( data ) {
+			this.fetch( { data: data, cache: false, reset: true } );
 		}
 	});
 
