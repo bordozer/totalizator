@@ -59,12 +59,12 @@ define( function ( require ) {
 		},
 
 		_categoryChange: function( categoryId ) {
-			this.model.set( { categoryId: categoryId } );
+			this.model.set( { categoryId: categoryId, cupId: 0, teamId: 0 } );
 			this.render();
 		},
 
 		_cupChange: function( cupId ) {
-			this.model.set( { cupId: cupId } );
+			this.model.set( { cupId: cupId, teamId: 0 } );
 			this.render();
 		},
 
