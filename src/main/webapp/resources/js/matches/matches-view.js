@@ -35,6 +35,8 @@ define( function ( require ) {
 			this.cups = Services.loadCups();
 			this.teams = Services.loadTeams();
 
+			this.settingsModel = new SettingsModel();
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -46,12 +48,17 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
+			this._renderSettings();
+//			this._renderMatches(); // TODO
+
+			return this;
+		},
+
+		_renderMatches: function() {
 			var self = this;
 			this.model.forEach( function( match ) {
 				self.renderEntry( match );
 			});
-
-			return this;
 		},
 
 		renderEntry: function ( model ) {
@@ -72,16 +79,15 @@ define( function ( require ) {
 			this.model.refresh();
 		},
 
-		_showSettings: function() {
-			var settingsModel = new SettingsModel();
-			var settingsView = new SettingsView( { model: settingsModel, el: this.$( '.match-list-container' ) } );
+		_renderSettings: function() {
+			var settingsView = new SettingsView( { model: this.settingsModel, el: this.$( '.match-list-container' ) } );
 			settingsView.render();
 		},
 
 		_onSettingsClick: function( evt ) {
 			evt.preventDefault();
 
-			this._showSettings();
+			this._renderSettings();
 		}
 	});
 

@@ -1,13 +1,12 @@
 package totalizator.app.controllers.rest.matches;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.BetDTO;
-import totalizator.app.dto.MatchBetDTO;
-import totalizator.app.dto.MatchDTO;
-import totalizator.app.dto.UserDTO;
+import totalizator.app.dto.*;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
@@ -37,34 +36,55 @@ public class MatchesBetsController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/open/", produces = APPLICATION_JSON_VALUE )
-	public List<MatchBetDTO> openMatches( final Principal principal ) {
+	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	public List<MatchBetDTO> matchesAndBets( final Principal principal, final @RequestBody MatchesBetSettingsDTO dto ) {
 
-		final User user = userService.findByLogin( principal.getName() );
+		final List<Match> matches = matchService.loadAll();
 
-		final List<Match> matches = matchService.loadOpen();
-
-		final List<MatchBetDTO> result = newArrayList();
-		for ( final Match match : matches ) {
-
-			final MatchDTO matchDTO = matchService.initDTOFromModel( match );
-
-			final MatchBet matchBet = matchBetsService.load( user, match );
-
-			if ( matchBet == null ) {
-				result.add( new MatchBetDTO( matchDTO ) );
-				continue;
-			}
-
-			final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
-			betDTO.setMatchBetId( matchBet.getId() );
-			betDTO.setScore1( matchBet.getBetScore1() );
-			betDTO.setScore2( matchBet.getBetScore2() );
-
-			result.add( new MatchBetDTO( matchDTO, betDTO ) );
+		if ( dto.getCategoryId() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getCup().getCategory().getId() == dto.getCategoryId();
+				}
+			} );
 		}
 
-		return result;
+		if ( dto.getCupId() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getCup().getId() == dto.getCupId();
+				}
+			} );
+		}
+
+		if ( dto.getMatchId() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getId() == dto.getMatchId();
+				}
+			} );
+		}
+
+		if ( dto.getMatchId() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getId() == dto.getMatchId();
+				}
+			} );
+		}
+
+		return getMatchBetDTOs( userService.findByLogin( principal.getName() ), matches );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/open/", produces = APPLICATION_JSON_VALUE )
+	public List<MatchBetDTO> openMatches( final Principal principal ) {
+		return getMatchBetDTOs( userService.findByLogin( principal.getName() ), matchService.loadOpen() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -106,36 +126,27 @@ public class MatchesBetsController {
 		matchBetsService.delete( matchBetId );
 	}
 
-	/*@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/bets/users/{userId}/", produces = APPLICATION_JSON_VALUE )
-	public List<MatchDTO> userBets( final @PathVariable( "userId" ) int userId ) {
-		return Lists.transform( matchService.loadAll(), matchService::initDTOFromModel );
-	}
+	private List<MatchBetDTO> getMatchBetDTOs( final User user, final List<Match> matches ) {
+		final List<MatchBetDTO> result = newArrayList();
+		for ( final Match match : matches ) {
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/bets/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public MatchDTO betMatch( final @RequestBody MatchDTO matchDTO ) {
-		return matchDTO;
-	}
+			final MatchDTO matchDTO = matchService.initDTOFromModel( match );
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/{matchBetId}/bets/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public MatchDTO editBet( final @PathVariable( "matchBetId" ) int matchBetId, final @RequestBody MatchDTO matchDTO ) {
-		return matchDTO;
-	}
+			final MatchBet matchBet = matchBetsService.load( user, match );
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.DELETE, value = "/{matchBetId}" )
-	public void deleteBet( final @PathVariable( "matchBetId" ) int matchBetId ) {
+			if ( matchBet == null ) {
+				result.add( new MatchBetDTO( matchDTO ) );
+				continue;
+			}
 
-		if ( matchBetId == 0 ) {
-			return;
+			final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
+			betDTO.setMatchBetId( matchBet.getId() );
+			betDTO.setScore1( matchBet.getBetScore1() );
+			betDTO.setScore2( matchBet.getBetScore2() );
+
+			result.add( new MatchBetDTO( matchDTO, betDTO ) );
 		}
 
-		matchBetsService.delete( matchBetId );
-	}*/
+		return result;
+	}
 }
