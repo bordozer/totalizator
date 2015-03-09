@@ -47,8 +47,10 @@ define( function ( require ) {
 		render: function() {
 
 			var categoryId = this.settingsModel.get( 'categoryId' );
-			var filterByCategoryText = categoryId > 0 ? Services.getCategory( this.categories, categoryId ) : '';
-			var title = translator.title + ': ' + filterByCategoryText;
+			var cupId = this.settingsModel.get( 'cupId' );
+			var filterByCategoryText = Services.getCategory( this.categories, categoryId ).categoryName;
+			var filterByCupText = Services.getCategory( this.cups, cupId ).cupName;
+			var title = translator.title + ': ' + filterByCategoryText + ' - ' + filterByCupText;
 
 			this.$el.html( this.template( {
 				model: this.model

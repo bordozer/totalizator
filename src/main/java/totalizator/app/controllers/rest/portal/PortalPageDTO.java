@@ -1,6 +1,9 @@
 package totalizator.app.controllers.rest.portal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import totalizator.app.dto.CupDTO;
+
+import java.util.List;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class PortalPageDTO {
@@ -10,8 +13,7 @@ public class PortalPageDTO {
 	private int userId;
 	private String userName;
 
-	private int categoryId;
-	private int cupId;
+	private List<CupDTO> cupsShowTo;
 
 	public int getId() {
 		return id;
@@ -37,19 +39,11 @@ public class PortalPageDTO {
 		this.userName = userName;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public List<CupDTO> getCupsShowTo() {
+		return cupsShowTo;
 	}
 
-	public void setCategoryId( final int categoryId ) {
-		this.categoryId = categoryId;
-	}
-
-	public int getCupId() {
-		return cupId;
-	}
-
-	public void setCupId( final int cupId ) {
-		this.cupId = cupId;
+	public void setCupsShowTo( final List<CupDTO> cupsShowTo ) {
+		this.cupsShowTo = cupsShowTo;
 	}
 }

@@ -60,16 +60,22 @@ define( function ( require ) {
 		},
 
 		_renderMatches: function() {
-			console.log( this.model );
-			var matchesModel = new MatchesModel.MatchesModel();
-			var matchesView = new MatchesView.MatchesView( {
-				model: matchesModel
-				, el: this.$( '.portal-page-matches-container' )
-				, settings: {
-					userId: this.model.get( 'userId' )
-					, categoryId: this.model.get( 'categoryId' )
-					, cupId: this.model.get( 'cupId' )
-				}
+
+			var el = this.$( '.portal-page-matches-container' );
+
+			_.each( this.model.get( 'cupsShowTo' ), function( cup ) {
+				var container = $( '<div></div>' );
+				el.append( container );
+
+				var matchesModel = new MatchesModel.MatchesModel();
+				var matchesView = new MatchesView.MatchesView( {
+					model: matchesModel
+					, el: container
+					, settings: {
+						categoryId: cup.categoryId
+						, cupId: cup.cupId
+					}
+				} );
 			} );
 		},
 

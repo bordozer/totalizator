@@ -1,5 +1,9 @@
 package totalizator.app.controllers.rest.portal;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import totalizator.app.dto.CupDTO;
+import totalizator.app.models.Cup;
 import totalizator.app.models.User;
-import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -25,9 +31,6 @@ public class PortalPageRestController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private CategoryService categoryService;
 
 	@Autowired
 	private CupService cupService;
@@ -44,8 +47,20 @@ public class PortalPageRestController {
 		portalPageDTO.setUserId( user.getId() );
 		portalPageDTO.setUserName( user.getUsername() );
 
-		portalPageDTO.setCategoryId( categoryService.findByName( "NBA" ).getId() ); // TODO: read category from settings
-		portalPageDTO.setCupId( cupService.findByName( "2015 - regular" ).getId() );// TODO: read cup from settings
+		final List<Cup> portalPageCups = cupService.loadAll();
+		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
+			@Override
+			public boolean evaluate( final Cup cup ) {
+				return cup.isShowOnPortalPage();
+			}
+		} );
+
+		portalPageDTO.setCupsShowTo( Lists.transform( portalPageCups, new Function<Cup, CupDTO>() {
+			@Override
+			public CupDTO apply( final Cup cup ) {
+				return new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
+			}
+		} ) );
 
 		return portalPageDTO;
 	}
