@@ -64,6 +64,7 @@ define( function ( require ) {
 			var el = this.$( '.portal-page-matches-container' );
 
 			_.each( this.model.get( 'cupsShowTo' ), function( cup ) {
+
 				var container = $( '<div></div>' );
 				el.append( container );
 

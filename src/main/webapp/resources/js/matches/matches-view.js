@@ -48,8 +48,9 @@ define( function ( require ) {
 
 			var categoryId = this.settingsModel.get( 'categoryId' );
 			var cupId = this.settingsModel.get( 'cupId' );
+
 			var filterByCategoryText = Services.getCategory( this.categories, categoryId ).categoryName;
-			var filterByCupText = Services.getCategory( this.cups, cupId ).cupName;
+			var filterByCupText = Services.getCup( this.cups, cupId ).cupName;
 			var title = translator.title + ': ' + filterByCategoryText + ' - ' + filterByCupText;
 
 			this.$el.html( this.template( {
