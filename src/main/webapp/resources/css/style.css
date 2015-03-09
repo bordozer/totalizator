@@ -2,6 +2,10 @@
 	/*border: 1px dotted red;*/
 }
 
+.button-icon {
+	width: 30px;
+}
+
 .debug {
 	border: 1px dotted red;
 }

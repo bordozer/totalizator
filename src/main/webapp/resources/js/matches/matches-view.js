@@ -125,15 +125,15 @@ define( function ( require ) {
 
 			var bet = this.model.get( 'bet' );
 			if( bet == null ) {
-				this.$( '.buttons-cell' ).html( "<button class='fa fa-money button-bet-match'></button>" );
+				this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match'></button>" );
 
 				return this;
 			}
 
 			this.$( '.entry-container' ).addClass( 'bg-success' );
 			this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
-			this.$( '.buttons-cell' ).html( "<button class='fa fa-edit button-edit-bet'></button>" );
-			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-delete-bet'></button>" );
+			this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
+			this.$( '.buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet'></button>" );
 
 			return this;
 		},
@@ -149,8 +149,8 @@ define( function ( require ) {
 			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
 			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
-			this.$( '.buttons-cell' ).html( "<button class='fa fa-save button-bet-save'></button>" );
-			this.$( '.buttons-cell' ).append( "<button class='fa fa-close button-bet-discard'></button>" );
+			this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save'></button>" );
+			this.$( '.buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard'></button>" );
 
 			return this;
 		},
