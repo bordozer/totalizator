@@ -60,11 +60,16 @@ define( function ( require ) {
 		},
 
 		_renderMatches: function() {
+			console.log( this.model );
 			var matchesModel = new MatchesModel.MatchesModel();
 			var matchesView = new MatchesView.MatchesView( {
 				model: matchesModel
 				, el: this.$( '.portal-page-matches-container' )
-				, settings: { userId: this.model.get( 'userId' ) }
+				, settings: {
+					userId: this.model.get( 'userId' )
+					, categoryId: this.model.get( 'categoryId' )
+					, cupId: this.model.get( 'cupId' )
+				}
 			} );
 		},
 

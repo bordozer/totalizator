@@ -46,8 +46,13 @@ define( function ( require ) {
 
 		render: function() {
 
+			var categoryId = this.settingsModel.get( 'categoryId' );
+			var filterByCategoryText = categoryId > 0 ? Services.getCategory( this.categories, categoryId ) : '';
+			var title = translator.title + ': ' + filterByCategoryText;
+
 			this.$el.html( this.template( {
 				model: this.model
+				, title: title
 				, translator: translator
 			} ) );
 

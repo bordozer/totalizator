@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import totalizator.app.models.User;
+import totalizator.app.services.CategoryService;
+import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
@@ -24,6 +26,12 @@ public class PortalPageRestController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private CategoryService categoryService;
+
+	@Autowired
+	private CupService cupService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -32,8 +40,12 @@ public class PortalPageRestController {
 		final User user = userService.findByLogin( principal.getName() );
 
 		final PortalPageDTO portalPageDTO = new PortalPageDTO();
+
 		portalPageDTO.setUserId( user.getId() );
 		portalPageDTO.setUserName( user.getUsername() );
+
+		portalPageDTO.setCategoryId( categoryService.findByName( "NBA" ).getId() ); // TODO: read category from settings
+		portalPageDTO.setCupId( cupService.findByName( "2015 - regular" ).getId() );// TODO: read cup from settings
 
 		return portalPageDTO;
 	}

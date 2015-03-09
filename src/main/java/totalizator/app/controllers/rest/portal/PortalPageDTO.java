@@ -10,6 +10,9 @@ public class PortalPageDTO {
 	private int userId;
 	private String userName;
 
+	private int categoryId;
+	private int cupId;
+
 	public int getId() {
 		return id;
 	}
@@ -32,5 +35,21 @@ public class PortalPageDTO {
 
 	public void setUserName( final String userName ) {
 		this.userName = userName;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId( final int categoryId ) {
+		this.categoryId = categoryId;
+	}
+
+	public int getCupId() {
+		return cupId;
+	}
+
+	public void setCupId( final int cupId ) {
+		this.cupId = cupId;
 	}
 }
