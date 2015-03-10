@@ -19,6 +19,8 @@ define( function ( require ) {
 		title: 'Portal page: Matches'
 		, betThisMatchButtonTitleLabel: 'Portal page / Matches: Bet this match button title'
 		, matchBetLabel: 'Portal page / Matches: user_s match bet label'
+		, allCategoriesLabel: 'Portal page / Matches: All categories label'
+		, allCupsLabel: 'Portal page / Matches: All cups label'
 	} );
 
 	var MatchesView = Backbone.View.extend( {
@@ -49,9 +51,9 @@ define( function ( require ) {
 			var categoryId = this.settingsModel.get( 'categoryId' );
 			var cupId = this.settingsModel.get( 'cupId' );
 
-			var filterByCategoryText = Services.getCategory( this.categories, categoryId ).categoryName;
-			var filterByCupText = Services.getCup( this.cups, cupId ).cupName;
-			var title = translator.title + ': ' + filterByCategoryText + ' / ' + filterByCupText;
+			var filterByCategoryText = categoryId > 0 ? Services.getCategory( this.categories, categoryId ).categoryName : translator.allCategoriesLabel;
+			var filterByCupText = cupId > 0 ? Services.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
+			var title = translator.title + ' / ' + filterByCategoryText + ' / ' + filterByCupText;
 
 			this.$el.html( this.template( {
 				model: this.model
