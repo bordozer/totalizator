@@ -126,6 +126,8 @@ define( function ( require ) {
 		render: function () {
 			var modelJSON = this.model.toJSON();
 
+			var winnerId = modelJSON.score1 > modelJSON.score2 ? modelJSON.team1Id : modelJSON.score1 < modelJSON.score2 ? modelJSON.team2Id : 0;
+
 			this.$el.html( this.templateView( {
 				model: modelJSON
 				, categoryName: Services.getCategory( this.categories, modelJSON.categoryId ).categoryName
@@ -134,6 +136,8 @@ define( function ( require ) {
 				, team2Name: Services.getTeam( this.teams, modelJSON.team2Id ).teamName
 				, score1: modelJSON.score1
 				, score2: modelJSON.score2
+				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
+				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
 			} ) );
 
 			if ( this.isSelected ) {
