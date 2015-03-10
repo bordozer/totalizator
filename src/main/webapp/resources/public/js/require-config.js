@@ -14,6 +14,7 @@ var require = {
 		, text: "bower_components/text/text"
 		, bootstrap: "bower_components/bootstrap/dist/js/bootstrap.min"
 		, knockout: "bower_components/knockout/dist/knockout"
+		, chosen: "bower_components/chosen_v1.4.0/chosen.jquery"
 		, translator: "public/js/translator"
 	},
 
@@ -33,6 +34,9 @@ var require = {
 		},
 		bootstrap: {
 			deps: [ 'jquery', 'knockout' ]
+		},
+		chosen: {
+			deps: [ 'jquery']
 		}
 	}
 

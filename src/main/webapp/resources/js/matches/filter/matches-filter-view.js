@@ -9,7 +9,7 @@ define( function ( require ) {
 	var TemplateSettings = require( 'text!js/matches/filter/templates/matches-filter-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
-	var Multiselect = require( 'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect' );
+	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -52,10 +52,10 @@ define( function ( require ) {
 			var options = {
 				enableCaseInsensitiveFiltering: true
 			};
-			this.$( '#settings-user-id' ).multiselect( options );
-			this.$( '#settings-category-id' ).multiselect( options );
-			this.$( '#settings-cup-id' ).multiselect( options );
-			this.$( '#settings-team-id' ).multiselect( options );
+			this.$( '#settings-user-id' ).chosen( options );
+			this.$( '#settings-category-id' ).chosen( options );
+			this.$( '#settings-cup-id' ).chosen( options );
+			this.$( '#settings-team-id' ).chosen( options );
 
 			return this;
 		},

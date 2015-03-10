@@ -14,7 +14,7 @@
 				<tr>
 					<td>Category</td>
 					<td>
-						<select class="form-control" id="settings-category-id">
+						<select class="chosen-select" id="settings-category-id">
 							<option value="0">&nbsp;</option>
 							<% _.each( categories, function( category ) { %>
 							<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
@@ -27,7 +27,7 @@
 					<td>Cup</td>
 					<td>
 						<% if( model.categoryId > 0 ) { %>
-						<select class="form-control" id="settings-cup-id">
+						<select class="chosen-select" id="settings-cup-id">
 							<option value="0">&nbsp;</option>
 							<% _.each( cups, function( cup ) { %>
 							<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
@@ -41,7 +41,7 @@
 					<td>Team</td>
 					<td>
 						<% if( model.categoryId > 0 ) { %>
-						<select class="form-control" id="settings-team-id">
+						<select class="chosen-select" id="settings-team-id">
 							<option value="0">&nbsp;</option>
 							<% _.each( teams, function( team ) { %>
 							<option value="<%=team.teamId%>" <%= model.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>

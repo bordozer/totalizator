@@ -15,7 +15,7 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var Multiselect = require( 'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect' );
+	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -186,11 +186,12 @@ define( function ( require ) {
 			} ) );
 
 			var options = {
-				enableCaseInsensitiveFiltering: true
 			};
 
-			this.$( '#team1-select-box' ).multiselect( options );
-			this.$( '#team2-select-box' ).multiselect( options );
+			this.$( '#category-select-box' ).chosen( options );
+			this.$( '#cup-select-box' ).chosen( options );
+			this.$( '#team1-select-box' ).chosen( options );
+			this.$( '#team2-select-box' ).chosen( options );
 
 			return this;
 		},
