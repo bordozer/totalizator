@@ -14,8 +14,6 @@ define( function ( require ) {
 
 	var Multiselect = require( 'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect' );
 
-	var AdminBasePageView = require( 'js/admin/admin-base-page-view' );
-
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Matches: Page Title'

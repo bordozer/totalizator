@@ -10,14 +10,12 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var AdminBasePageView = require( 'js/admin/admin-base-page-view' );
-
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		pageTitle: 'Translations: Page Title'
 	} );
 
-	var AdminView = AdminBasePageView.extend( {
+	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -30,9 +28,9 @@ define( function ( require ) {
 			return translator.pageTitle;
 		},
 
-		renderBody: function ( el ) {
+		render: function () {
 
-			el.html( this.template( {
+			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, untranslatedList: this.model.get( 'untranslatedList' )
 				, translator: translator

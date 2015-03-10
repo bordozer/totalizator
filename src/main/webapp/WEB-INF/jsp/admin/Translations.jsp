@@ -7,8 +7,9 @@
 
 	<div class="translations-container"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/translations/translations' ], function ( $, init ) {
-			init( $( '.translations-container') );
+		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/translations/translations' ], function ( $, Admin, translations ) {
+			var adminView = new Admin( { el: $( '.translations-container' ), view: translations } );
+			adminView.render();
 		} );
 	</script>
 
