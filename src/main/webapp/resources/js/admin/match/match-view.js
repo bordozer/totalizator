@@ -30,7 +30,7 @@ define( function ( require ) {
 		, validation_SelectDifferentTeams_Label: "Admin / Teams / Validation: Select different teams"
 	} );
 
-	var MatchesView = AdminBasePageView.extend( {
+	var MatchesView = Backbone.View.extend( {
 
 		template: _.template( TemplateList ),
 
@@ -52,9 +52,9 @@ define( function ( require ) {
 			return translator.pageTitle;
 		},
 
-		renderBody: function ( el ) {
+		render: function () {
 
-			el.html( this.template( {
+			this.$el.html( this.template( {
 				model: this.model
 				, translator: translator
 			} ) );

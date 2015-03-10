@@ -28,7 +28,11 @@ define( function ( require ) {
 		},
 
 		initialize: function( options ) {
+			this.view = options.view;
+		},
 
+		renderBody: function() {
+			this.view( this.$( '.body-container' ) );
 		},
 
 		_mainMenuItems: function() {

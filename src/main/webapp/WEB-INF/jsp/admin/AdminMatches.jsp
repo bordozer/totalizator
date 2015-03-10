@@ -9,8 +9,9 @@
 
 	<div class="admin-matches-container"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/match/match' ], function ( $, init ) {
-			init( $( '.admin-matches-container' ) );
+		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/match/match' ], function ( $, Admin, match ) {
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), view: match } );
+			adminView.render();
 		} );
 	</script>
 
