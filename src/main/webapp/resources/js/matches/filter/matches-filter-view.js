@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateSettings = require( 'text!js/matches/templates/settings-template.html' );
+	var TemplateSettings = require( 'text!js/matches/filter/templates/matches-filter-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
 	var Multiselect = require( 'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect' );

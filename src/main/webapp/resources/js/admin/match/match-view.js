@@ -10,6 +10,9 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
 
+	var SettingsModel = require( 'js/matches/filter/matches-filter-model' );
+	var SettingsView = require( 'js/matches/filter/matches-filter-view' );
+
 	var Services = require( '/resources/js/services.js' );
 
 	var Multiselect = require( 'bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect' );
@@ -34,6 +37,7 @@ define( function ( require ) {
 
 		events: {
 			'click .add-entry-button': '_onAddClick'
+			, 'click .matches-settings': '_onSettingsClick'
 		},
 
 		initialize: function ( options ) {
@@ -41,6 +45,11 @@ define( function ( require ) {
 			this.categories = Services.loadCategories();
 			this.cups = Services.loadCups();
 			this.teams = Services.loadTeams();
+
+			this.settingsModel = new SettingsModel( options.settings );
+			this.settingsView = new SettingsView( { model: this.settingsModel, el: this.$el } );
+			this.settingsView.on( 'events:setting_apply', this._applySettings, this );
+			this.settingsView.on( 'events:setting_cancel', this.render, this );
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -89,6 +98,20 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._addEntry();
+		},
+
+		_applySettings: function() {
+			this._refresh();
+		},
+
+		_renderSettings: function() {
+			this.settingsView.render();
+		},
+
+		_onSettingsClick: function( evt ) {
+			evt.preventDefault();
+
+			this._renderSettings();
 		}
 	} );
 
