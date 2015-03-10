@@ -9,8 +9,9 @@
 
 	<div class="admin-main-page"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/main/admin' ], function ( $, init ) {
-			init( $( '.admin-main-page' ) );
+		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/main/admin' ], function ( $, Admin, adminMainPage ) {
+			var adminView = new Admin( { el: $( '.admin-main-page' ), view: adminMainPage } );
+			adminView.render();
 		} );
 	</script>
 

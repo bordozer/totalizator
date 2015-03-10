@@ -10,8 +10,6 @@ define( function ( require ) {
 
 	var Services = require( '/resources/js/services.js' );
 
-	var AdminBasePageView = require( 'js/admin/admin-base-page-view' );
-
 	var CategoriesModel = require( 'js/admin/category/category-model' );
 	var CategoriesView = require( 'js/admin/category/category-view' );
 
@@ -26,7 +24,7 @@ define( function ( require ) {
 		pageTitle: 'Admin: Page Title'
 	} );
 
-	var AdminView = AdminBasePageView.extend( {
+	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -39,9 +37,9 @@ define( function ( require ) {
 			return translator.pageTitle;
 		},
 
-		renderBody: function ( el ) {
+		render: function () {
 
-			el.html( this.template( {
+			this.$el.html( this.template( {
 				user: this.model.get( 'userDTO' )
 				, translator: translator
 			 } ) );
