@@ -2,6 +2,10 @@ define( function ( require ) {
 
 	'use strict';
 
+	var Backbone = require( 'backbone' );
+	var _ = require( 'underscore' );
+	var $ = require( 'jquery' );
+
 	var PageView = require( 'js/base/base-page-view' );
 
 	var Services = require( '/resources/js/services.js' );
@@ -47,5 +51,4 @@ define( function ( require ) {
 			Services.reloadTranslations();
 		}
 	});
-
 } );

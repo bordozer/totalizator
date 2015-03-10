@@ -18,19 +18,6 @@ define( function ( require ) {
 
 		basePageTemplate:_.template( Template ),
 
-		/*builtinEvents: {
-			'click .admin-reload-translations': '_reloadTranslations'
-			, 'click .logout-link': '_logout'
-		},*/
-
-		/*constructor: function ( options ) {
-
-		},*/
-
-		initialize: function( options ) {
-
-		},
-
 		render: function() {
 
 			this.$el.html( this.basePageTemplate( {

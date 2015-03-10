@@ -30,9 +30,12 @@ define( function ( require ) {
 			'click .logout-link': 'logout'
 		},
 
-		initialize: function( options ) {
+		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
+			Backbone.View.apply( this, [ options ] );
+		},
 
+		initialize: function( options ) {
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
