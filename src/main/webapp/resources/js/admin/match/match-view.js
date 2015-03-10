@@ -186,6 +186,7 @@ define( function ( require ) {
 			} ) );
 
 			var options = {
+				width: "100%"
 			};
 
 			this.$( '#category-select-box' ).chosen( options );

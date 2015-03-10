@@ -50,7 +50,7 @@ define( function ( require ) {
 			} ) );
 
 			var options = {
-				enableCaseInsensitiveFiltering: true
+				width: "100%"
 			};
 			this.$( '#settings-user-id' ).chosen( options );
 			this.$( '#settings-category-id' ).chosen( options );
