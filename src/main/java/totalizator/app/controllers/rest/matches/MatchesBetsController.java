@@ -38,37 +38,7 @@ public class MatchesBetsController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) { //@RequestBody
-
-		final List<Match> matches = matchService.loadAll();
-
-		if ( dto.getCategoryId() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return match.getCup().getCategory().getId() == dto.getCategoryId();
-				}
-			} );
-		}
-
-		if ( dto.getCupId() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return match.getCup().getId() == dto.getCupId();
-				}
-			} );
-		}
-
-		if ( dto.getTeamId() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return match.getTeam1().getId() == dto.getTeamId() || match.getTeam2().getId() == dto.getTeamId();
-				}
-			} );
-		}
-
-		return getMatchBetDTOs( principal, matches );
+		return getMatchBetDTOs( principal, matchService.loadAll( dto ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

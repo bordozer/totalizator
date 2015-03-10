@@ -1,10 +1,13 @@
 package totalizator.app.services;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.MatchRepository;
 import totalizator.app.dto.MatchDTO;
+import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 
 import java.util.List;
@@ -31,6 +34,40 @@ public class MatchServiceImpl implements MatchService {
 	@Transactional( readOnly = true )
 	public List<Match> loadOpen() {
 		return matchRepository.loadAll(); // TODO: filter finished
+	}
+
+	@Override
+	public List<Match> loadAll( final MatchesBetSettingsDTO dto ) {
+
+		final List<Match> matches = loadAll();
+
+		if ( dto.getCategoryId() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getCup().getCategory().getId() == dto.getCategoryId();
+				}
+			} );
+		}
+
+		if ( dto.getCupId() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getCup().getId() == dto.getCupId();
+				}
+			} );
+		}
+
+		if ( dto.getTeamId() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getTeam1().getId() == dto.getTeamId() || match.getTeam2().getId() == dto.getTeamId();
+				}
+			} );
+		}
+		return matches;
 	}
 
 	@Override

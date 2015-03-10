@@ -28,6 +28,10 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize: function ( options ) {
 			this.url = '/admin/rest/matches/';
+		},
+
+		refresh: function( data ) {
+			this.fetch( { data: data, cache: false, reset: true } );
 		}
 	});
 

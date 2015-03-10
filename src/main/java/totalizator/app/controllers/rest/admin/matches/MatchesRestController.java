@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchDTO;
+import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 import totalizator.app.services.MatchService;
 
+import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -24,9 +26,9 @@ public class MatchesRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<MatchDTO> entries() {
+	public List<MatchDTO> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
-		return Lists.transform( matchService.loadAll(), new Function<Match, MatchDTO>() {
+		return Lists.transform( matchService.loadAll( dto ), new Function<Match, MatchDTO>() {
 			@Override
 			public MatchDTO apply( final Match match ) {
 				return matchService.initDTOFromModel( match );

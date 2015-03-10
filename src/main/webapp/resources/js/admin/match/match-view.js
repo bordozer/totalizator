@@ -52,7 +52,7 @@ define( function ( require ) {
 			this.settingsView.on( 'events:setting_cancel', this.render, this );
 
 			this.model.on( 'sync', this.render, this );
-			this.model.fetch( { cache: false } );
+			this._refresh();
 		},
 
 		getPageSubTitle: function() {
@@ -87,6 +87,11 @@ define( function ( require ) {
 			}
 
 			return this.$( '.matches-container' ).append( view.render().$el );
+		},
+
+		_refresh: function() {
+			var data = this.settingsModel.toJSON();
+			this.model.refresh( data );
 		},
 
 		_addEntry: function() {
