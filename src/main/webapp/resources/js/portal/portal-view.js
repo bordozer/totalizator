@@ -51,7 +51,7 @@ define( function ( require ) {
 			return this;
 		},
 
-		mainMenuItems: function() {
+		_mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }

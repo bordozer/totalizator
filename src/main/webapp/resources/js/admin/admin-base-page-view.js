@@ -31,7 +31,7 @@ define( function ( require ) {
 
 		},
 
-		mainMenuItems: function() {
+		_mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }

@@ -28,32 +28,32 @@ define( function ( require ) {
 			this.$el.html( this.basePageTemplate( {
 			 } ) );
 
-			this.renderHeader();
+			this._renderHeader();
 
-			this.renderMenu();
+			this._renderMenu();
 
 			this.renderBody( this.$( '.body-container') );
 
 			return this;
 		},
 
-		renderHeader: function() {
+		renderBody: function( el ) {
+
+		},
+
+		_renderHeader: function() {
 			pageHeader( this.$( '.header-container'), this.getPageSubTitle() );
 		},
 
-		renderMenu: function() {
-			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
-		},
-
-		renderBody: function( el ) {
-
+		_renderMenu: function() {
+			mainMenu( this._mainMenuItems(), this.$( '.main-menu-container') );
 		},
 
 		getPageSubTitle: function() {
 			return '';
 		},
 
-		mainMenuItems: function() {
+		_mainMenuItems: function() {
 			return [];
 		},
 
