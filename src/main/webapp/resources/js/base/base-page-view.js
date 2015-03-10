@@ -18,6 +18,11 @@ define( function ( require ) {
 
 		basePageTemplate:_.template( Template ),
 
+		constructor: function ( options ) {
+			this.events = _.extend( this.builtinEvents, this.events );
+			Backbone.View.apply( this, [ options ] );
+		},
+
 		render: function() {
 
 			this.$el.html( this.basePageTemplate( {

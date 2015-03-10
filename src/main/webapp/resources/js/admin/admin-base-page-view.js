@@ -27,9 +27,8 @@ define( function ( require ) {
 			, 'click .logout-link': 'logout'
 		},
 
-		constructor: function ( options ) {
-			this.events = _.extend( this.builtinEvents, this.events );
-			Backbone.View.apply( this, [ options ] );
+		initialize: function( options ) {
+
 		},
 
 		mainMenuItems: function() {
