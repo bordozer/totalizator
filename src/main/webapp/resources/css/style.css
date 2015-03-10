@@ -6,6 +6,13 @@
 	width: 30px;
 }
 
+.header-icon {
+	float: left;
+	padding-top: 5px;
+	padding-left: 5px;
+	width: 20px;
+}
+
 .debug {
 	border: 1px dotted red;
 }
