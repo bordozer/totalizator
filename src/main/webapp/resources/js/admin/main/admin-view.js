@@ -30,11 +30,6 @@ define( function ( require ) {
 
 		template:_.template( Template ),
 
-		events: {
-			'click .admin-reload-translations': '_reloadTranslations'
-			, 'click .logout-link': '_logout'
-		},
-
 		initialize: function( options ) {
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -86,10 +81,6 @@ define( function ( require ) {
 		_filterByCategory: function( options ) {
 			this.cupsView.trigger( 'events:filter_by_category', options );
 			this.teamsView.trigger( 'events:filter_by_category', options );
-		},
-
-		_logout: function() {
-			Services.logout();
 		}
 
 	} );

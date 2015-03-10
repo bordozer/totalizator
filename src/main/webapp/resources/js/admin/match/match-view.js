@@ -36,7 +36,6 @@ define( function ( require ) {
 
 		events: {
 			'click .add-entry-button': '_onAddClick'
-			, 'click .logout-link': '_logout'
 		},
 
 		initialize: function ( options ) {
@@ -92,10 +91,6 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._addEntry();
-		},
-
-		_logout: function() {
-			Services.logout();
 		}
 	} );
 

@@ -4,6 +4,8 @@ define( function ( require ) {
 
 	var PageView = require( 'js/base/base-page-view' );
 
+	var Services = require( '/resources/js/services.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuPortalPageLabel: 'Menu: Portal page'
@@ -15,6 +17,16 @@ define( function ( require ) {
 	} );
 
 	return PageView.extend( {
+
+		builtinEvents: {
+			'click .admin-reload-translations': '_reloadTranslations'
+			, 'click .logout-link': 'logout'
+		},
+
+		constructor: function ( options ) {
+			this.events = _.extend( this.builtinEvents, this.events );
+			Backbone.View.apply( this, [ options ] );
+		},
 
 		mainMenuItems: function() {
 			return [
@@ -29,8 +41,11 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
-		}
+		},
 
+		_reloadTranslations: function() {
+			Services.reloadTranslations();
+		}
 	});
 
 } );

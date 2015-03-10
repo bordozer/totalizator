@@ -18,6 +18,15 @@ define( function ( require ) {
 
 		basePageTemplate:_.template( Template ),
 
+		/*builtinEvents: {
+			'click .admin-reload-translations': '_reloadTranslations'
+			, 'click .logout-link': '_logout'
+		},*/
+
+		/*constructor: function ( options ) {
+
+		},*/
+
 		initialize: function( options ) {
 
 		},
@@ -56,8 +65,8 @@ define( function ( require ) {
 			return [];
 		},
 
-		_reloadTranslations: function() {
-			Services.reloadTranslations();
+		logout: function() {
+			Services.logout();
 		}
 	});
 } );

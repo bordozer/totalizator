@@ -21,11 +21,6 @@ define( function ( require ) {
 
 		template:_.template( Template ),
 
-		events: {
-			'click .admin-reload-translations': '_reloadTranslations'
-			, 'click .logout-link': '_logout'
-		},
-
 		initialize: function( options ) {
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -44,12 +39,7 @@ define( function ( require ) {
 			 } ) );
 
 			return this.$el;
-		},
-
-		_logout: function() {
-			Services.logout();
 		}
-
 	} );
 
 	return { AdminView: AdminView };

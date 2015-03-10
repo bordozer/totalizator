@@ -26,11 +26,13 @@ define( function ( require ) {
 
 		template:_.template( Template ),
 
-		events: {
-			'click .logout-link': '_logout'
+		builtinEvents: {
+			'click .logout-link': 'logout'
 		},
 
 		initialize: function( options ) {
+			this.events = _.extend( this.builtinEvents, this.events );
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -78,12 +80,7 @@ define( function ( require ) {
 					}
 				} );
 			} );
-		},
-
-		_logout: function() {
-			Services.logout();
 		}
-
 	} );
 
 	return { PortalPageView: PortalPageView };
