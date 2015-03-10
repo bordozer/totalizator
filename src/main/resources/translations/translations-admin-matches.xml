@@ -13,6 +13,26 @@
 	</translation>
 
 	<translation>
+		<nerd>Admin / Matches / Settings</nerd>
+		<ru><![CDATA[Настройки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Add entry</nerd>
+		<ru><![CDATA[Добавить]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Edit entry</nerd>
+		<ru><![CDATA[Редактировать]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Delete entry</nerd>
+		<ru><![CDATA[Удалить]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

@@ -20,6 +20,10 @@ define( function ( require ) {
 	var translator = new Translator( {
 		pageTitle: 'Matches: Page Title'
 		, matchesTitleLabel: "Admin / Matches / Title: Matches"
+		, matchSettingsLabel: "Admin / Matches / Settings"
+		, matchAddLabel: "Admin / Matches / Add entry"
+		, matchEditLabel: "Admin / Matches / Edit entry"
+		, matchDeleteLabel: "Admin / Matches / Delete entry"
 		, validation_SelectCup_Label: "Admin / Teams / Validation: Select a cup"
 		, validation_SelectTeam1_Label: "Admin / Teams / Validation: Select team1"
 		, validation_SelectTeam2_Label: "Admin / Teams / Validation: Select team2"
@@ -138,6 +142,7 @@ define( function ( require ) {
 				, score2: modelJSON.score2
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
 				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
+				, translator: translator
 			} ) );
 
 			if ( this.isSelected ) {
