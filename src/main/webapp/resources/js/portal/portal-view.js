@@ -15,8 +15,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		pageTitle: "Portal page title"
-		, menuAdminLabel: "Menu: Admin"
+		menuAdminLabel: "Menu: Admin"
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
@@ -31,10 +30,6 @@ define( function ( require ) {
 		initialize: function( options ) {
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
-		},
-
-		getPageSubTitle: function() {
-			return translator.pageTitle;
 		},
 
 		render: function () {

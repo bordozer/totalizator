@@ -27,14 +27,6 @@ define( function ( require ) {
 			, 'click .logout-link': 'logout'
 		},
 
-		/*initialize: function( options ) {
-			this.view = options.view;
-		},*/
-
-		/*renderBody: function() {
-			this.view( this.$( '.body-container' ) );
-		},*/
-
 		_mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }

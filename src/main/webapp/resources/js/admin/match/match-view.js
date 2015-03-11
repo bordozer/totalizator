@@ -19,8 +19,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		pageTitle: 'Matches: Page Title'
-		, matchesTitleLabel: "Admin / Matches / Title: Matches"
+		matchesTitleLabel: "Admin / Matches / Title: Matches"
 		, matchSettingsLabel: "Admin / Matches / Settings"
 		, matchAddLabel: "Admin / Matches / Add entry"
 		, matchEditLabel: "Admin / Matches / Edit entry"
@@ -53,10 +52,6 @@ define( function ( require ) {
 
 			this.model.on( 'sync', this.render, this );
 			this._refresh();
-		},
-
-		getPageSubTitle: function() {
-			return translator.pageTitle;
 		},
 
 		render: function () {

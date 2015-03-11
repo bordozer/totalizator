@@ -7,8 +7,13 @@
 
 	<div class="translations-container"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/translations/translations' ], function ( $, Admin, translations ) {
-			var adminView = new Admin( { el: $( '.translations-container' ), view: translations } );
+		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/translations/translations', 'translator' ], function ( $, Admin, translations, Translator ) {
+
+			var translator = new Translator( {
+				title: 'Admin / Translations: Page Title'
+			} );
+
+			var adminView = new Admin( { el: $( '.translations-container' ), view: translations, title: translator.title } );
 			adminView.render();
 		} );
 	</script>

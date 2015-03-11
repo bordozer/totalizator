@@ -20,7 +20,7 @@ define( function ( require ) {
 
 		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
-//			this.title = options.title;
+			this.title = options.title;
 			this.view = options.view;
 
 			Backbone.View.apply( this, [ options ] );
@@ -45,15 +45,15 @@ define( function ( require ) {
 		},
 
 		_renderHeader: function() {
-			pageHeader( this.$( '.header-container'), this.getPageSubTitle() );
+			pageHeader( this.$( '.header-container'), this._getPageSubTitle() );
 		},
 
 		_renderMenu: function() {
 			mainMenu( this._mainMenuItems(), this.$( '.main-menu-container') );
 		},
 
-		getPageSubTitle: function() {
-			return '';
+		_getPageSubTitle: function() {
+			return this.title;
 		},
 
 		_mainMenuItems: function() {

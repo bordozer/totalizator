@@ -8,13 +8,6 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/admin/translations/templates/translations-template.html' );
 
-	var Services = require( '/resources/js/services.js' );
-
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		pageTitle: 'Translations: Page Title'
-	} );
-
 	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -24,16 +17,11 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		getPageSubTitle: function() {
-			return translator.pageTitle;
-		},
-
 		render: function () {
 
 			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, untranslatedList: this.model.get( 'untranslatedList' )
-				, translator: translator
 			 } ) );
 
 			return this.$el;

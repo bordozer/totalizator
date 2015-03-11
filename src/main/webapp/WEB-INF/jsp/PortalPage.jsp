@@ -7,8 +7,13 @@
 	<div class="portal-page-container"></div>
 
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/user-base-page-view', 'js/portal/portal' ], function ( $, Page, portal ) {
-			var pageView = new Page( { el: $( '.portal-page-container' ), view: portal } );
+		require( [ 'jquery', 'js/user-base-page-view', 'js/portal/portal', 'translator' ], function ( $, Page, portal, Translator ) {
+
+			var translator = new Translator( {
+				title: 'Portal page title'
+			} );
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), view: portal, title: translator.title } );
 			pageView.render();
 		} );
 	</script>

@@ -10,8 +10,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		pageTitle: "Portal page title"
-		, menuAdminLabel: "Menu: Admin"
+		menuAdminLabel: "Menu: Admin"
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 

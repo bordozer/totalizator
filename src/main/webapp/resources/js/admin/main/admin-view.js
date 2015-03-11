@@ -19,11 +19,6 @@ define( function ( require ) {
 	var TeamsModel = require( 'js/admin/team/team-model' );
 	var TeamsView = require( 'js/admin/team/team-view' );
 
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		pageTitle: 'Admin: Page Title'
-	} );
-
 	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -33,15 +28,10 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		getPageSubTitle: function() {
-			return translator.pageTitle;
-		},
-
 		render: function () {
 
 			this.$el.html( this.template( {
 				user: this.model.get( 'userDTO' )
-				, translator: translator
 			 } ) );
 
 			this._renderCategories();
