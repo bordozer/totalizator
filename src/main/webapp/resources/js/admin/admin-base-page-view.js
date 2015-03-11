@@ -44,7 +44,8 @@ define( function ( require ) {
 
 		_reloadTranslations: function() {
 			Services.reloadTranslations();
-			this.bodyView.render();
+//			this.bodyView.render();
+			window.location.reload();
 		}
 	});
 } );

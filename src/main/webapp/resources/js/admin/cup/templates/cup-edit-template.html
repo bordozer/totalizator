@@ -13,7 +13,7 @@
 				<tr>
 					<td><%=translator.entryEditCategoryLabel%></td>
 					<td>
-						<select class="form-control entry-category-id">
+						<select class="chosen-select entry-category-id">
 							<% _.each( categories, function( category ) { %>
 							<option value="<%=category.categoryId%>"
 							<%= model.categoryId == category.categoryId ? 'selected' : '' %>><%=category.categoryName%></option>

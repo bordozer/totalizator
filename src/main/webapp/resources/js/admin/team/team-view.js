@@ -12,6 +12,7 @@ define( function ( require ) {
 	var TemplateEntryEdit = require( 'text!js/admin/team/templates/team-edit-template.html' );
 
 	var Services = require( '/resources/js/services.js' );
+	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -142,6 +143,8 @@ define( function ( require ) {
 				model: modelJSON
 				, categories: this.categories
 			} ) );
+
+			this.$( '.entry-category-id' ).chosen( {} );
 
 			return this;
 		},
