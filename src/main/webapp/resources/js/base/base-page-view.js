@@ -20,6 +20,9 @@ define( function ( require ) {
 
 		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
+//			this.title = options.title;
+			this.view = options.view;
+
 			Backbone.View.apply( this, [ options ] );
 		},
 
@@ -32,13 +35,13 @@ define( function ( require ) {
 
 			this._renderMenu();
 
-			this.renderBody( this.$( '.body-container') );
+			this.renderBody();
 
 			return this;
 		},
 
-		renderBody: function( el ) {
-
+		renderBody: function() {
+			this.view( this.$( '.body-container' ) );
 		},
 
 		_renderHeader: function() {

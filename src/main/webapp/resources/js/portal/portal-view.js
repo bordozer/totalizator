@@ -8,8 +8,6 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/portal/templates/portal-template.html' );
 
-	var PageView = require( 'js/base/base-page-view' );
-
 	var MatchesModel = require( 'js/matches/matches-model' );
 	var MatchesView = require( 'js/matches/matches-view' );
 
@@ -22,7 +20,7 @@ define( function ( require ) {
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
-	var PortalPageView = PageView.extend( {
+	var PortalPageView = Backbone.View.extend( {
 
 		template:_.template( Template ),
 
@@ -39,9 +37,9 @@ define( function ( require ) {
 			return translator.pageTitle;
 		},
 
-		renderBody: function ( el ) {
+		render: function () {
 
-			el.html( this.template( {
+			this.$el.html( this.template( {
 				userName: this.model.get( 'userName' )
 				, translator: translator
 			 } ) );
@@ -49,14 +47,6 @@ define( function ( require ) {
 			this._renderMatches();
 
 			return this;
-		},
-
-		_mainMenuItems: function() {
-			return [
-				{ selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
-				, { selector: 'divider' }
-				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
-			];
 		},
 
 		_renderMatches: function() {

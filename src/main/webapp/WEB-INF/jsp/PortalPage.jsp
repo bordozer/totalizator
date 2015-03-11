@@ -4,11 +4,12 @@
 
 <tags:page userName="${portalPageModel.userName}">
 
-	<div class="portal-page"></div>
+	<div class="portal-page-container"></div>
 
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/portal/portal' ], function ( $, init ) {
-			init( $( '.portal-page' ) );
+		require( [ 'jquery', 'js/user-base-page-view', 'js/portal/portal' ], function ( $, Page, portal ) {
+			var pageView = new Page( { el: $( '.portal-page-container' ), view: portal } );
+			pageView.render();
 		} );
 	</script>
 

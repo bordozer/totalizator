@@ -27,13 +27,13 @@ define( function ( require ) {
 			, 'click .logout-link': 'logout'
 		},
 
-		initialize: function( options ) {
+		/*initialize: function( options ) {
 			this.view = options.view;
-		},
+		},*/
 
-		renderBody: function() {
+		/*renderBody: function() {
 			this.view( this.$( '.body-container' ) );
-		},
+		},*/
 
 		_mainMenuItems: function() {
 			return [
