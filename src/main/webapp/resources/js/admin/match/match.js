@@ -10,8 +10,20 @@ define( function( require ) {
 	var View = require( './match-view' );
 
 	function init( container ) {
+
 		var model = new Model.MatchesModel();
 		var view = new View.MatchesView( { model: model, el: container } );
+
+		return {
+
+			model: function() {
+				return model;
+			},
+
+			view: function() {
+				return view;
+			}
+		}
 	}
 
 	return init;

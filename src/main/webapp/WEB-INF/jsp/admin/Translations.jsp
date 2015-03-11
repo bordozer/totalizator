@@ -13,7 +13,7 @@
 				title: 'Admin / Translations: Page Title'
 			} );
 
-			var adminView = new Admin( { el: $( '.translations-container' ), view: translations, title: translator.title } );
+			var adminView = new Admin( { el: $( '.translations-container' ), bodyRenderer: translations, title: translator.title } );
 			adminView.render();
 		} );
 	</script>

@@ -10,8 +10,20 @@ define( function( require ) {
 	var View = require( './portal-view' );
 
 	function init( container ) {
+
 		var model = new Model.PortalPageModel();
 		var view = new View.PortalPageView( { model: model, el: container } );
+
+		return {
+
+			model: function() {
+				return model;
+			},
+
+			view: function() {
+				return view;
+			}
+		}
 	}
 
 	return init;

@@ -10,8 +10,20 @@ define( function( require ) {
 	var View = require( './translations-view' );
 
 	function init( container ) {
+
 		var model = new Model.TranslationsModel();
 		var view = new View.AdminView( { model: model, el: container } );
+
+		return {
+
+			model: function() {
+				return model;
+			},
+
+			view: function() {
+				return view;
+			}
+		}
 	}
 
 	return init;

@@ -15,7 +15,7 @@
 				title: 'Admin / Matches: Page Title'
 			} );
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), view: match, title: translator.title } );
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, title: translator.title } );
 			adminView.render();
 		} );
 	</script>

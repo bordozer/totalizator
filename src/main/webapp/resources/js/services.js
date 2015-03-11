@@ -150,7 +150,7 @@ define( function ( require ) {
 				method: 'GET',
 				url: '/admin/rest/translations/reload/',
 				success: function ( response ) {
-					window.location.reload();
+//					window.location.reload();
 				}
 			} )
 		}
