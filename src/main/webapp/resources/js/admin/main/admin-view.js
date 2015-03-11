@@ -24,6 +24,11 @@ define( function ( require ) {
 		template:_.template( Template ),
 
 		initialize: function( options ) {
+
+			this.categoriesModel = new CategoriesModel.CategoriesModel();
+			this.cupsModel = new CupsModel.CupsModel();
+			this.teamsModel = new TeamsModel.TeamsModel();
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -35,16 +40,13 @@ define( function ( require ) {
 			 } ) );
 
 			this._renderCategories();
-
 			this._renderCups();
-
 			this._renderTeams();
 
 			return this.$el;
 		},
 
 		_renderCategories: function() {
-			this.categoriesModel = new CategoriesModel.CategoriesModel();
 			this.categoriesView = new CategoriesView.CategoriesView( { model: this.categoriesModel, el: this.$( '.admin-page-categories-container' ) } );
 
 			this.categoriesView.on( 'events:categories_changed', this._updateCategories, this );
@@ -52,12 +54,10 @@ define( function ( require ) {
 		},
 
 		_renderCups: function() {
-			this.cupsModel = new CupsModel.CupsModel();
 			this.cupsView = new CupsView.CupsView( { model: this.cupsModel, el: this.$( '.admin-page-cups-container' ) } );
 		},
 
 		_renderTeams: function() {
-			this.teamsModel = new TeamsModel.TeamsModel();
 			this.teamsView = new TeamsView.TeamsView( { model: this.teamsModel, el: this.$( '.admin-page-teams-container' ) } );
 		},
 
