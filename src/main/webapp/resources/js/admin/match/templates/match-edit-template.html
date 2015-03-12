@@ -30,7 +30,7 @@
 
 	<div class="col-lg-8">
 
-		<div class="col-lg-6">
+		<div class="col-lg-5">
 			<% if( teams.length > 0 && model.cupId > 0 ) { %>
 				<div class="col-lg-10 text-right">
 					<select id="team1-select-box" class="chosen-select team1-select-box">
@@ -46,7 +46,7 @@
 			<% } %>
 		</div>
 
-		<div class="col-lg-6">
+		<div class="col-lg-5">
 			<% if( teams.length > 0 && model.cupId > 0 ) { %>
 				<div class="col-lg-10 text-right">
 					<select id="team2-select-box" class="form-control team2-select-box">
@@ -60,6 +60,11 @@
 					<input class="form-control col-xs-1" id="score2" name="score2" value="<%=model.score2%>" style="width: 50px;" >
 				</div>
 			<% } %>
+		</div>
+
+		<div class="col-lg-2 match-beginning-time">
+			<!--<input type='text' class="form-control" />-->
+			<!--<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>-->
 		</div>
 
 	</div>

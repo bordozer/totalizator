@@ -6,6 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var moment = require( 'moment' );
+
 	var TemplateList = require( 'text!js/admin/match/templates/matches-template.html' );
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
@@ -13,6 +15,7 @@ define( function ( require ) {
 	var SettingsModel = require( 'js/matches/filter/matches-filter-model' );
 	var SettingsView = require( 'js/matches/filter/matches-filter-view' );
 
+	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var Services = require( '/resources/js/services.js' );
 
 	var chosen = require( 'chosen' );
@@ -158,6 +161,7 @@ define( function ( require ) {
 				, score2: modelJSON.score2
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
 				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
+				, beginningTime: dateTimeService.formatDateTime( modelJSON.beginningTime )
 				, translator: translator
 			} ) );
 
@@ -188,6 +192,8 @@ define( function ( require ) {
 			this.$( '#cup-select-box' ).chosen( options );
 			this.$( '#team1-select-box' ).chosen( options );
 			this.$( '#team2-select-box' ).chosen( options );
+
+			dateTimeService.datetimepicker( this.$( '.match-beginning-time' ) );
 
 			return this;
 		},

@@ -16,6 +16,7 @@ public class MatchDTO {
 	private int team2Id;
 	private int score2;
 
+	private Date beginningTime;
 	private Date lastBetTime;
 
 	public int getMatchId() {
@@ -72,6 +73,14 @@ public class MatchDTO {
 
 	public void setScore2( final int score2 ) {
 		this.score2 = score2;
+	}
+
+	public Date getBeginningTime() {
+		return beginningTime;
+	}
+
+	public void setBeginningTime( final Date beginningTime ) {
+		this.beginningTime = beginningTime;
 	}
 
 	public Date getLastBetTime() {

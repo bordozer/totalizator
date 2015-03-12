@@ -15,6 +15,8 @@ var require = {
 		, bootstrap: "bower_components/bootstrap/dist/js/bootstrap.min"
 		, knockout: "bower_components/knockout/dist/knockout"
 		, chosen: "bower_components/chosen_v1.4.0/chosen.jquery"
+		, datetimepicker: "bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min"
+		, moment: "bower_components/moment/min/moment-with-locales.min"
 		, translator: "public/js/translator"
 	},
 
@@ -37,6 +39,9 @@ var require = {
 		},
 		chosen: {
 			deps: [ 'jquery']
+		},
+		datetimepicker: {
+			deps: [ 'jquery', 'moment' ]
 		}
 	}
 

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/fontawesome/css/font-awesome.min.css" />">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />">
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/chosen_v1.4.0/chosen.css" />">

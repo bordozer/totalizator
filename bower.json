@@ -17,6 +17,7 @@
 		, "underscore" : "latest"
 		, "text" : "latest"
 		, "bootstrap" : "latest"
+		, "eonasdan-bootstrap-datetimepicker": "latest"
 		, "fontawesome": "latest"
 		, "knockout": "latest"
 	}
