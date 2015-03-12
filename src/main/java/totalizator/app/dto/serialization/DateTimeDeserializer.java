@@ -21,8 +21,7 @@ public class DateTimeDeserializer extends JsonDeserializer<Date> {
 	public Date deserialize( final JsonParser jp, final DeserializationContext ctxt ) throws IOException, JsonProcessingException {
 		final SimpleDateFormat formatter = new SimpleDateFormat( DATE_TIME_FORMAT );
 		try {
-			final Date date = formatter.parse( "1970/01/01 " + jp.getText() );
-			return new Date( date.getTime() );
+			return formatter.parse( jp.getText() );
 		} catch ( ParseException e ) {
 			LOGGER.error( String.format( "Can not deserialize date: '%s'", jp.getText() ) );
 		}
