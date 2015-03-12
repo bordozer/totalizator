@@ -32,7 +32,8 @@ define( function ( require ) {
 			} ) );
 
 			var dtp = this.$( '.date-time-picker-container' ).datetimepicker( {
-				locale: 'ru'
+				format: 'D/M/YYYY'
+				, locale: 'ru'
 			} );
 
 			return this;
@@ -43,6 +44,7 @@ define( function ( require ) {
 		},
 
 		getValue: function() {
+//			console.log( this.$( SELECTOR ).val() );
 			return new Date( this.$( SELECTOR ).val() );
 		}
 	});

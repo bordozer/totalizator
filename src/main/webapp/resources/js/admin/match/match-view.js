@@ -221,12 +221,12 @@ define( function ( require ) {
 			if( ! this._validate() ){
 				return;
 			}
-
+			console.log( this.model );
 			this.model.save();
 		},
 
 		_bind: function() {
-
+			console.log( this.dateTimePickerView.getValue() );
 			this.model.set( {
 				cupId: this.$( '.cups-select-box' ).val()
 				, team1Id: this.$( '.team1-select-box' ).val()
@@ -234,6 +234,7 @@ define( function ( require ) {
 				, team2Id: this.$( '.team2-select-box' ).val()
 				, score2: this.$( '#score2' ).val()
 				, beginningTime: this.dateTimePickerView.getValue()
+				, lastBetTime: this.dateTimePickerView.getValue()
 			} );
 		},
 

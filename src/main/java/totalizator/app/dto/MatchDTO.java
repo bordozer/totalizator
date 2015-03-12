@@ -1,5 +1,11 @@
 package totalizator.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.dto.serialization.DateTimeDeserializer;
+import totalizator.app.dto.serialization.DateTimeSerializer;
+
 import java.util.Date;
 
 public class MatchDTO {
@@ -16,7 +22,14 @@ public class MatchDTO {
 	private int team2Id;
 	private int score2;
 
+//	@JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "CET")
+	@JsonSerialize(using = DateTimeSerializer.class)
+	@JsonDeserialize(using = DateTimeDeserializer.class)
 	private Date beginningTime;
+
+//	@JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "CET")
+	@JsonSerialize(using = DateTimeSerializer.class)
+	@JsonDeserialize(using = DateTimeDeserializer.class)
 	private Date lastBetTime;
 
 	public int getMatchId() {
