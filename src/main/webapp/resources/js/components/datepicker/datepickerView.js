@@ -1,30 +1,34 @@
 define( function ( require ) {
 
+	'use strict';
+
 	// http://eonasdan.github.io/bootstrap-datetimepicker/Functions/
+
+	var SELECTOR = '.datepicker-template.html';
 
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	'use strict';
-
-	var TemplateList = require( 'text!./templates/datepicker-template.html' );
-
 	var datetimepicker = require( 'datetimepicker' );
+
+	var Template = require( 'text!./templates/datepicker-template.html' );
+
+	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 
 	return Backbone.View.extend( {
 
-		template: _.template( TemplateList ),
+		template: _.template( Template ),
 
 		initialize: function ( options ) {
 			this.model = new Backbone.Model();
-
-			this.render();
+			this.render( options.initialValue );
 		},
 
-		render: function() {
+		render: function( time ) {
 
 			this.$el.html( this.template( {
+				time: time
 			} ) );
 
 			this.$( '.date-time-picker-container' ).datetimepicker( {
@@ -34,12 +38,24 @@ define( function ( require ) {
 			return this;
 		},
 
-		dateTime: function( datetime ) {
-			if ( datetime === undefined ) {
-				return this.$( '.datepicker-template.html' ).val();
-			}
+		setValue: function( datetime ) {
+			return this.$( SELECTOR ).val( dateTimeService.formatDateTime( datetime ) );
+		},
 
-			return this.$( '.datepicker-template.html' ).val( datetime );
+		getDate: function( datetime ) {
+			return dateTimeService.formatDate( this._getValueStr() );
+		},
+
+		getTime: function( datetime ) {
+			return dateTimeService.formatTime( this._getValueStr() );
+		},
+
+		getDateTime: function( datetime ) {
+			return dateTimeService.formatDateTime( this._getValueStr() );
+		},
+
+		_getValueStr: function() {
+			return this.$( SELECTOR ).val();
 		}
 	});
 } );

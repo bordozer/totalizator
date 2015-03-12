@@ -5,7 +5,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 	var ui = require( 'jquery_ui' );
 
-	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
+//	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
 	return {
 
@@ -19,10 +19,10 @@ define( function ( require ) {
 
 		formatDateTime: function ( time ) {
 			return this.formatDate( time ) + ' ' + this.formatTime( time );
-		},
-
-		datetimepicker: function( el ) {
-			return new DateTimePickerView( { el: el } );
 		}
+
+		/*createDateTimePickerView: function( el, time ) {
+			return new DateTimePickerView( { el: el, initialValue: time } );
+		}*/
 	}
 } );

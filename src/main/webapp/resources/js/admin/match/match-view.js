@@ -7,6 +7,10 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var moment = require( 'moment' );
+	var chosen = require( 'chosen' );
+
+	var dateTimeService = require( '/resources/js/dateTimeService.js' );
+	var service = require( '/resources/js/services.js' );
 
 	var TemplateList = require( 'text!js/admin/match/templates/matches-template.html' );
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
@@ -15,10 +19,7 @@ define( function ( require ) {
 	var SettingsModel = require( 'js/matches/filter/matches-filter-model' );
 	var SettingsView = require( 'js/matches/filter/matches-filter-view' );
 
-	var dateTimeService = require( '/resources/js/dateTimeService.js' );
-	var Services = require( '/resources/js/services.js' );
-
-	var chosen = require( 'chosen' );
+	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -44,9 +45,9 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.categories = Services.loadCategories();
-			this.cups = Services.loadCups();
-			this.teams = Services.loadTeams();
+			this.categories = service.loadCategories();
+			this.cups = service.loadCups();
+			this.teams = service.loadTeams();
 
 			this.settingsModel = new SettingsModel( options.settings );
 			this.settingsView = new SettingsView( { model: this.settingsModel, el: this.$el } );
@@ -79,10 +80,6 @@ define( function ( require ) {
 				, cups: this.cups
 				, teams: this.teams
 			} );
-
-			if ( model.get( 'matchId' ) == 0 ) {
-				return this.$( '.matches-container' ).append( view.renderEdit().$el );
-			}
 
 			return this.$( '.matches-container' ).append( view.render().$el );
 		},
@@ -146,17 +143,26 @@ define( function ( require ) {
 			this.model.on( 'sync', this.render, this );
 		},
 
-		render: function () {
+		render: function() {
+
+			if ( this.model.get( 'matchId' ) == 0 ) {
+				return this.renderEdit();
+			}
+
+			return this.renderInfo();
+		},
+
+		renderInfo: function () {
 			var modelJSON = this.model.toJSON();
 
 			var winnerId = modelJSON.score1 > modelJSON.score2 ? modelJSON.team1Id : modelJSON.score1 < modelJSON.score2 ? modelJSON.team2Id : 0;
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
-				, categoryName: Services.getCategory( this.categories, modelJSON.categoryId ).categoryName
-				, cupName: Services.getCup( this.cups, modelJSON.cupId ).cupName
-				, team1Name: Services.getTeam( this.teams, modelJSON.team1Id ).teamName
-				, team2Name: Services.getTeam( this.teams, modelJSON.team2Id ).teamName
+				, categoryName: service.getCategory( this.categories, modelJSON.categoryId ).categoryName
+				, cupName: service.getCup( this.cups, modelJSON.cupId ).cupName
+				, team1Name: service.getTeam( this.teams, modelJSON.team1Id ).teamName
+				, team2Name: service.getTeam( this.teams, modelJSON.team2Id ).teamName
 				, score1: modelJSON.score1
 				, score2: modelJSON.score2
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
@@ -180,8 +186,8 @@ define( function ( require ) {
 				model: modelJSON
 				, categories: this.categories
 				, categoryId: categoryId
-				, cups: Services.categoryCups( this.cups, categoryId )
-				, teams: Services.categoryTeams( this.teams, categoryId )
+				, cups: service.categoryCups( this.cups, categoryId )
+				, teams: service.categoryTeams( this.teams, categoryId )
 			} ) );
 
 			var options = {
@@ -193,7 +199,7 @@ define( function ( require ) {
 			this.$( '#team1-select-box' ).chosen( options );
 			this.$( '#team2-select-box' ).chosen( options );
 
-			dateTimeService.datetimepicker( this.$( '.match-beginning-time' ) );
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: modelJSON.beginningTime } );
 
 			return this;
 		},
