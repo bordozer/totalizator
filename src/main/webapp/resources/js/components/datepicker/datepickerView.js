@@ -4,7 +4,7 @@ define( function ( require ) {
 
 	// http://eonasdan.github.io/bootstrap-datetimepicker/Functions/
 
-	var SELECTOR = '.datepicker-template.html';
+	var SELECTOR = '.date-picker-input';
 
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
@@ -28,10 +28,10 @@ define( function ( require ) {
 		render: function( time ) {
 
 			this.$el.html( this.template( {
-				time: time
+				time: dateTimeService.formatDateTime( time )
 			} ) );
 
-			this.$( '.date-time-picker-container' ).datetimepicker( {
+			var dtp = this.$( '.date-time-picker-container' ).datetimepicker( {
 				locale: 'ru'
 			} );
 
@@ -42,20 +42,8 @@ define( function ( require ) {
 			return this.$( SELECTOR ).val( dateTimeService.formatDateTime( datetime ) );
 		},
 
-		getDate: function( datetime ) {
-			return dateTimeService.formatDate( this._getValueStr() );
-		},
-
-		getTime: function( datetime ) {
-			return dateTimeService.formatTime( this._getValueStr() );
-		},
-
-		getDateTime: function( datetime ) {
-			return dateTimeService.formatDateTime( this._getValueStr() );
-		},
-
-		_getValueStr: function() {
-			return this.$( SELECTOR ).val();
+		getValue: function() {
+			return new Date( this.$( SELECTOR ).val() );
 		}
 	});
 } );
