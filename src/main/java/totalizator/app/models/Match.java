@@ -10,7 +10,7 @@ import static totalizator.app.models.Match.*;
 @NamedQueries( {
 		@NamedQuery(
 				name = LOAD_ALL,
-				query = "select c from Match c order by beginningTime desc"
+				query = "select c from Match c order by cupId, beginningTime desc"
 		),
 		@NamedQuery(
 				name = FIND_BY_CUP,
