@@ -97,8 +97,9 @@ public class MatchServiceImpl implements MatchService {
 
 		match.setTeam2( teamService.load( matchDTO.getTeam2Id() ) );
 		match.setScore2( matchDTO.getScore2() );
-		match.setLastBetTime( matchDTO.getLastBetTime() );
+
 		match.setBeginningTime( matchDTO.getBeginningTime() );
+		match.setLastBetTime( matchDTO.getLastBetTime() );
 	}
 
 	@Override

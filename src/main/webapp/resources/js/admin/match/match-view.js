@@ -159,6 +159,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
+				, matchId: modelJSON.matchId
 				, categoryName: service.getCategory( this.categories, modelJSON.categoryId ).categoryName
 				, cupName: service.getCup( this.cups, modelJSON.cupId ).cupName
 				, team1Name: service.getTeam( this.teams, modelJSON.team1Id ).teamName
@@ -184,6 +185,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
+				, matchId: modelJSON.matchId
 				, categories: this.categories
 				, categoryId: categoryId
 				, cups: service.categoryCups( this.cups, categoryId )

@@ -57,7 +57,7 @@ public class MatchesRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/{matchId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchDTO edit( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchDTO matchDTO ) {
 
-		final Match match = matchService.load( matchDTO.getCupId() );
+		final Match match = matchService.load( matchDTO.getMatchId() );
 
 		matchService.initModelFromDTO( matchDTO, match );
 
