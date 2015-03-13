@@ -1,9 +1,10 @@
 package totalizator.app.services.utils;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public interface DateTimeService {
+
+	Date getNow();
 
 	Date offset( final int measure, final int offset );
 

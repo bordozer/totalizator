@@ -144,12 +144,16 @@ define( function ( require ) {
 
 			var bet = this.model.get( 'bet' );
 			if( bet == null ) {
-				this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match'></button>" );
+
+				if ( this.model.isBettingAllowed() ) {
+					this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match'></button>" );
+				}
 
 				return this;
 			}
 
 			this.$( '.entry-container' ).addClass( 'bg-success' );
+			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
 			this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
@@ -170,10 +174,13 @@ define( function ( require ) {
 			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
 			this.$( '.entry-container' ).addClass( 'bg-success' );
-			this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
+
+			if( bet != null ) {
+				this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
+			}
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save'></button>" );
-			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-close button-bet-discard'></button>" );
+			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard'></button>" );
 
 			return this;
 		},
@@ -185,7 +192,8 @@ define( function ( require ) {
 			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
 
 			return {
-				team1Name: service.getTeam( this.teams, match.team1Id ).teamName
+				matchId: match.matchId
+				, team1Name: service.getTeam( this.teams, match.team1Id ).teamName
 				, team2Name: service.getTeam( this.teams, match.team2Id ).teamName
 				, style1: winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : ''
 				, style2: winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : ''

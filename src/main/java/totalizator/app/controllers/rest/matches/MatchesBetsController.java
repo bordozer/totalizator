@@ -93,10 +93,13 @@ public class MatchesBetsController {
 
 			final MatchDTO matchDTO = matchService.initDTOFromModel( match );
 
+			final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
+			matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
+
 			final MatchBet matchBet = matchBetsService.load( user, match );
 
 			if ( matchBet == null ) {
-				result.add( new MatchBetDTO( matchDTO ) );
+				result.add( matchBetDTO );
 				continue;
 			}
 
@@ -105,8 +108,7 @@ public class MatchesBetsController {
 			betDTO.setScore1( matchBet.getBetScore1() );
 			betDTO.setScore2( matchBet.getBetScore2() );
 
-			final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO, betDTO );
-			matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
+			matchBetDTO.setBet( betDTO );
 
 			result.add( matchBetDTO );
 		}

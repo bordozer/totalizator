@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class MatchBetsServiceImpl implements MatchBetsService {
 
-	public static final int STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN = -15; // TODO: settings
+	public static final int STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN = -120; // TODO: settings
 
 	@Autowired
 	private MatchBetRepository matchBetRepository;
@@ -79,6 +79,6 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	public boolean isBettingAllowed( final Match match, final User user ) {
 		final Date bettingIsAllowedTill = dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN );
-		return match.getBeginningTime().getTime() > bettingIsAllowedTill.getTime();
+		return dateTimeService.getNow().getTime() < bettingIsAllowedTill.getTime();
 	}
 }

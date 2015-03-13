@@ -8,6 +8,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		defaults: {
 			matchId: 0
+			, bettingAllowed: false
 		},
 
 		initialize: function ( options ) {
@@ -23,6 +24,10 @@ define( ["backbone"], function ( Backbone ) {
 
 		isBetMode: function() {
 			return this.betMode;
+		},
+
+		isBettingAllowed: function() {
+			return this.get( 'bettingAllowed' );
 		}
 	});
 

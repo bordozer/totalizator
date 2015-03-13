@@ -10,6 +10,11 @@ import java.util.Date;
 public class DateTimeServiceImpl implements DateTimeService {
 
 	@Override
+	public Date getNow() {
+		return new Date();
+	}
+
+	@Override
 	public Date offset( final int measure, final int offset ) {
 		return offset( new Date(), measure, offset );
 	}
