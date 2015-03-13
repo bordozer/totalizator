@@ -1,6 +1,5 @@
 package totalizator.app.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
@@ -23,7 +22,6 @@ public class MatchDTO {
 	private int score2;
 
 	private Date beginningTime;
-
 	private Date lastBetTime;
 
 	public int getMatchId() {

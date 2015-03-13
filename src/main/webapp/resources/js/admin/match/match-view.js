@@ -168,7 +168,7 @@ define( function ( require ) {
 				, score2: modelJSON.score2
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
 				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
-				, beginningTime: modelJSON.beginningTime
+				, beginningTime: dateTimeService.formatDateDisplay( modelJSON.beginningTime )
 				, translator: translator
 			} ) );
 

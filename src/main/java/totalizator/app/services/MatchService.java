@@ -12,7 +12,7 @@ public interface MatchService extends GenericService<Match>{
 
 	List<Match> loadAll( final MatchesBetSettingsDTO dto );
 
-	void initModelFromDTO( MatchDTO matchDTO, Match match );
+	void initModelFromDTO( final MatchDTO matchDTO, final Match match );
 
-	MatchDTO initDTOFromModel( Match match );
+	MatchDTO initDTOFromModel( final Match match );
 }
