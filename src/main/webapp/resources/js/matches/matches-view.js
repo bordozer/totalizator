@@ -73,8 +73,8 @@ define( function ( require ) {
 
 		_renderMatches: function() {
 			var self = this;
-			this.model.forEach( function( match ) {
-				self.renderEntry( match );
+			this.model.forEach( function( matchBet ) {
+				self.renderEntry( matchBet );
 			});
 		},
 
