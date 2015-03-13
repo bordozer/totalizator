@@ -28,24 +28,25 @@ define( function ( require ) {
 		render: function( time ) {
 
 			this.$el.html( this.template( {
-				time: dateTimeService.formatDateTime( time )
+				time: '' //dateTimeService.formatDateTime( time )
 			} ) );
 
-			var dtp = this.$( '.date-time-picker-container' ).datetimepicker( {
-				format: 'D/M/YYYY'
+			this.dtp = this.$( '.date-time-picker-container' ).datetimepicker( {
+				format: 'D/M/YYYY HH:mm'
 				, locale: 'ru'
 			} );
+			this.picker = this.dtp.data( "DateTimePicker" );
 
 			return this;
 		},
 
 		setValue: function( datetime ) {
-			return this.$( SELECTOR ).val( dateTimeService.formatDateTime( datetime ) );
+			this.picker.date( datetime );
 		},
 
 		getValue: function() {
-//			console.log( this.$( SELECTOR ).val() );
-			return new Date( this.$( SELECTOR ).val() );
+			var datetime = this.picker.date();
+			return new Date( datetime.valueOf() );
 		}
 	});
 } );

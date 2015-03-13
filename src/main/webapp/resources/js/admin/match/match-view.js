@@ -167,7 +167,7 @@ define( function ( require ) {
 				, score2: modelJSON.score2
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
 				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
-				, beginningTime: dateTimeService.formatDateTime( modelJSON.beginningTime )
+				, beginningTime: '' //dateTimeService.formatDateTime( modelJSON.beginningTime )
 				, translator: translator
 			} ) );
 
@@ -221,21 +221,22 @@ define( function ( require ) {
 			if( ! this._validate() ){
 				return;
 			}
-			console.log( this.model );
+
 			this.model.save();
 		},
 
 		_bind: function() {
-			console.log( this.dateTimePickerView.getValue() );
+			var beginningTime = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
 			this.model.set( {
 				cupId: this.$( '.cups-select-box' ).val()
 				, team1Id: this.$( '.team1-select-box' ).val()
 				, score1: this.$( '#score1' ).val()
 				, team2Id: this.$( '.team2-select-box' ).val()
 				, score2: this.$( '#score2' ).val()
-				, beginningTime: this.dateTimePickerView.getValue()
-				, lastBetTime: this.dateTimePickerView.getValue()
+				, beginningTime: beginningTime
+				, lastBetTime: beginningTime
 			} );
+//			console.log( this.model );
 		},
 
 		_validate: function() {
