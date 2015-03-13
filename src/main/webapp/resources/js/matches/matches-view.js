@@ -170,14 +170,12 @@ define( function ( require ) {
 			var bet1 = bet != null ? bet.score1 : 0;
 			var bet2 = bet != null ? bet.score2 : 0;
 
-			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
-			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
-
 			this.$( '.entry-container' ).addClass( 'bg-success' );
 
-			if( bet != null ) {
-				this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
-			}
+			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
+
+			this.$( '.bet-cell' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
+			this.$( '.bet-cell' ).append( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard'></button>" );
