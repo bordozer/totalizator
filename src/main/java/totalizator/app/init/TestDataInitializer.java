@@ -7,8 +7,10 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.*;
+import totalizator.app.services.utils.DateTimeService;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -22,6 +24,9 @@ public class TestDataInitializer {
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	public void init() throws Exception {
 
@@ -163,7 +168,7 @@ public class TestDataInitializer {
 		oklahomaVsHouston.setScore1( 100 );
 		oklahomaVsHouston.setTeam2( houston );
 		oklahomaVsHouston.setScore2( 99 );
-		oklahomaVsHouston.setLastBetTime( new Date() );
+		oklahomaVsHouston.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -10 ) );
 		session.persist( oklahomaVsHouston );
 
 		final Match newYorkVsClippers = new Match();
@@ -172,7 +177,7 @@ public class TestDataInitializer {
 		newYorkVsClippers.setScore1( 89 );
 		newYorkVsClippers.setTeam2( clippers );
 		newYorkVsClippers.setScore2( 101 );
-		newYorkVsClippers.setLastBetTime( new Date() );
+		newYorkVsClippers.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -48 ) );
 		session.persist( newYorkVsClippers );
 
 		final Match clevelandCavaliersVsSanAntonioSpurs = new Match();
@@ -181,7 +186,7 @@ public class TestDataInitializer {
 		clevelandCavaliersVsSanAntonioSpurs.setScore1( 92 );
 		clevelandCavaliersVsSanAntonioSpurs.setTeam2( sanAntonioSpurs );
 		clevelandCavaliersVsSanAntonioSpurs.setScore2( 101 );
-		clevelandCavaliersVsSanAntonioSpurs.setLastBetTime( new Date() );
+		clevelandCavaliersVsSanAntonioSpurs.setBeginningTime( dateTimeService.offset( Calendar.HOUR, 5 ) );
 		session.persist( clevelandCavaliersVsSanAntonioSpurs );
 
 		final Match dallasMavericksVsGoldenStateWarriors = new Match();
@@ -190,7 +195,7 @@ public class TestDataInitializer {
 		dallasMavericksVsGoldenStateWarriors.setScore1( 77 );
 		dallasMavericksVsGoldenStateWarriors.setTeam2( goldenStateWarriors );
 		dallasMavericksVsGoldenStateWarriors.setScore2( 110 );
-		dallasMavericksVsGoldenStateWarriors.setLastBetTime( new Date() );
+		dallasMavericksVsGoldenStateWarriors.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -1 ) );
 		session.persist( dallasMavericksVsGoldenStateWarriors );
 
 

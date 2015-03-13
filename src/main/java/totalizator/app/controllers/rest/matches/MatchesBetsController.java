@@ -41,12 +41,12 @@ public class MatchesBetsController {
 		return getMatchBetDTOs( principal, matchService.loadAll( dto ) );
 	}
 
-	@ResponseStatus( HttpStatus.OK )
+	/*@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/open/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> openMatches( final Principal principal ) {
 		return getMatchBetDTOs( principal, matchService.loadOpen() );
-	}
+	}*/
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
