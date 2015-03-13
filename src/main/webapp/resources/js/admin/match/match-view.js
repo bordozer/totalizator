@@ -228,14 +228,13 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
-			var beginningTime = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
 			this.model.set( {
 				cupId: this.$( '.cups-select-box' ).val()
 				, team1Id: this.$( '.team1-select-box' ).val()
 				, score1: this.$( '#score1' ).val()
 				, team2Id: this.$( '.team2-select-box' ).val()
 				, score2: this.$( '#score2' ).val()
-				, beginningTime: beginningTime
+				, beginningTime: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
 			} );
 		},
 

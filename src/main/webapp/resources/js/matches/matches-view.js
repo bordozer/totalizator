@@ -12,7 +12,8 @@ define( function ( require ) {
 	var SettingsModel = require( 'js/matches/filter/matches-filter-model' );
 	var SettingsView = require( 'js/matches/filter/matches-filter-view' );
 
-	var Services = require( '/resources/js/services.js' );
+	var dateTimeService = require( '/resources/js/dateTimeService.js' );
+	var service = require( '/resources/js/services.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -33,9 +34,9 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.categories = Services.loadCategories();
-			this.cups = Services.loadCups();
-			this.teams = Services.loadTeams();
+			this.categories = service.loadCategories();
+			this.cups = service.loadCups();
+			this.teams = service.loadTeams();
 
 			this.settingsModel = new SettingsModel( options.settings );
 			this.settingsView = new SettingsView( { model: this.settingsModel, el: this.$el } );
@@ -51,8 +52,8 @@ define( function ( require ) {
 			var categoryId = this.settingsModel.get( 'categoryId' );
 			var cupId = this.settingsModel.get( 'cupId' );
 
-			var filterByCategoryText = categoryId > 0 ? Services.getCategory( this.categories, categoryId ).categoryName : translator.allCategoriesLabel;
-			var filterByCupText = cupId > 0 ? Services.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
+			var filterByCategoryText = categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.allCategoriesLabel;
+			var filterByCupText = cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
 			var title = translator.title + ' / ' + filterByCategoryText + ' / ' + filterByCupText;
 
 			this.$el.html( this.template( {
@@ -180,12 +181,13 @@ define( function ( require ) {
 			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
 
 			return {
-				team1Name: Services.getTeam( this.teams, match.team1Id ).teamName
-				, team2Name: Services.getTeam( this.teams, match.team2Id ).teamName
+				team1Name: service.getTeam( this.teams, match.team1Id ).teamName
+				, team2Name: service.getTeam( this.teams, match.team2Id ).teamName
 				, style1: winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : ''
 				, style2: winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : ''
 				, score1: match.score1
 				, score2: match.score2
+				, beginningTime: dateTimeService.formatDateDisplay( match.beginningTime )
 				, translator: translator
 			};
 		},
@@ -196,7 +198,7 @@ define( function ( require ) {
 			var score1 = this.$( '#score1' ).val();
 			var score2 = this.$( '#score2' ).val();
 
-			Services.saveBet( match.matchId, score1, score2 );
+			service.saveBet( match.matchId, score1, score2 );
 
 			this.model.setModeMatchInfo();
 
@@ -208,7 +210,7 @@ define( function ( require ) {
 			var match = this.model.get( 'match' );
 			var bet = this.model.get( 'bet' );
 
-			Services.deleteBet( match.matchId, bet.matchBetId );
+			service.deleteBet( match.matchId, bet.matchBetId );
 
 			this.model.setModeMatchInfo();
 
