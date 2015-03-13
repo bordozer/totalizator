@@ -6,7 +6,10 @@ define( function ( require ) {
 	var DATE_TIME_DISPLAY_FORMAT = 'D MMM HH:mm';
 
 	var $ = require( 'jquery' );
+
 	var moment = require( 'moment' );
+	moment.locale( 'ru', {
+	} );
 
 	return {
 
