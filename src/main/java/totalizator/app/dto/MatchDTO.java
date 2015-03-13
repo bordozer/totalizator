@@ -22,7 +22,6 @@ public class MatchDTO {
 	private int score2;
 
 	private Date beginningTime;
-	private Date lastBetTime;
 
 	public int getMatchId() {
 		return matchId;
@@ -90,13 +89,8 @@ public class MatchDTO {
 		this.beginningTime = beginningTime;
 	}
 
-	@JsonSerialize(using = DateTimeSerializer.class)
-	public Date getLastBetTime() {
-		return lastBetTime;
-	}
-
-	@JsonDeserialize(using = DateTimeDeserializer.class)
-	public void setLastBetTime( final Date lastBetTime ) {
-		this.lastBetTime = lastBetTime;
+	@Override
+	public String toString() {
+		return String.format( "%d vs %d ( %d : %d )", team1Id, team2Id, score1, score2 );
 	}
 }

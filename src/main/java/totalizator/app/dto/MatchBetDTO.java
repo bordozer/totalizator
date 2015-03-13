@@ -6,6 +6,7 @@ public class MatchBetDTO {
 
 	private MatchDTO match;
 	private BetDTO bet;
+	private boolean bettingAllowed;
 
 	public MatchBetDTO() {
 	}
@@ -43,6 +44,14 @@ public class MatchBetDTO {
 
 	public void setBet( final BetDTO bet ) {
 		this.bet = bet;
+	}
+
+	public boolean isBettingAllowed() {
+		return bettingAllowed;
+	}
+
+	public void setBettingAllowed( final boolean bettingAllowed ) {
+		this.bettingAllowed = bettingAllowed;
 	}
 
 	@Override

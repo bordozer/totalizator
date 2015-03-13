@@ -1,7 +1,5 @@
 package totalizator.app.controllers.rest.matches;
 
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -89,6 +87,7 @@ public class MatchesBetsController {
 
 	private List<MatchBetDTO> getMatchBetDTOs( final Principal principal, final List<Match> matches ) {
 		final User user = userService.findByLogin( principal.getName() );
+
 		final List<MatchBetDTO> result = newArrayList();
 		for ( final Match match : matches ) {
 
@@ -106,7 +105,10 @@ public class MatchesBetsController {
 			betDTO.setScore1( matchBet.getBetScore1() );
 			betDTO.setScore2( matchBet.getBetScore2() );
 
-			result.add( new MatchBetDTO( matchDTO, betDTO ) );
+			final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO, betDTO );
+			matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
+
+			result.add( matchBetDTO );
 		}
 
 		return result;

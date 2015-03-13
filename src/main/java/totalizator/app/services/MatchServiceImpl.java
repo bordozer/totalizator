@@ -10,15 +10,11 @@ import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
-import totalizator.app.services.utils.DateTimeService;
 
-import java.util.Calendar;
 import java.util.List;
 
 @Service
 public class MatchServiceImpl implements MatchService {
-
-	public static final int BET_STOP_DELAY = -15; // TODO: settings
 
 	@Autowired
 	private MatchRepository matchRepository;
@@ -28,9 +24,6 @@ public class MatchServiceImpl implements MatchService {
 
 	@Autowired
 	private TeamService teamService;
-
-	@Autowired
-	private DateTimeService dateTimeService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -128,7 +121,6 @@ public class MatchServiceImpl implements MatchService {
 		dto.setTeam2Id( match.getTeam2().getId() );
 		dto.setScore2( match.getScore2() );
 
-		dto.setLastBetTime( dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, BET_STOP_DELAY ) );
 		dto.setBeginningTime( match.getBeginningTime() );
 
 		return dto;

@@ -14,8 +14,6 @@ define( function ( require ) {
 
 	var Template = require( 'text!./templates/datepicker-template.html' );
 
-//	var dateTimeService = require( '/resources/js/dateTimeService.js' );
-
 	return Backbone.View.extend( {
 
 		template: _.template( Template ),

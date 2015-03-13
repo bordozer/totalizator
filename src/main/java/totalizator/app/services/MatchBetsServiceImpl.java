@@ -7,11 +7,16 @@ import totalizator.app.dao.MatchBetRepository;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
+import totalizator.app.services.utils.DateTimeService;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class MatchBetsServiceImpl implements MatchBetsService {
+
+	public static final int STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN = -15; // TODO: settings
 
 	@Autowired
 	private MatchBetRepository matchBetRepository;
@@ -21,6 +26,9 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 	@Autowired
 	private MatchService matchService;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -66,5 +74,11 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Transactional
 	public void delete( final int id ) {
 		matchBetRepository.delete( id );
+	}
+
+	@Override
+	public boolean isBettingAllowed( final Match match, final User user ) {
+		final Date bettingIsAllowedTill = dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN );
+		return match.getBeginningTime().getTime() > bettingIsAllowedTill.getTime();
 	}
 }

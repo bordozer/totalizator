@@ -236,7 +236,6 @@ define( function ( require ) {
 				, team2Id: this.$( '.team2-select-box' ).val()
 				, score2: this.$( '#score2' ).val()
 				, beginningTime: beginningTime
-				, lastBetTime: beginningTime
 			} );
 		},
 
