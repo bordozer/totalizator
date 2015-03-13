@@ -22,14 +22,8 @@ public class MatchDTO {
 	private int team2Id;
 	private int score2;
 
-//	@JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "CET")
-	@JsonSerialize(using = DateTimeSerializer.class)
-	@JsonDeserialize(using = DateTimeDeserializer.class)
 	private Date beginningTime;
 
-//	@JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "CET")
-	@JsonSerialize(using = DateTimeSerializer.class)
-	@JsonDeserialize(using = DateTimeDeserializer.class)
 	private Date lastBetTime;
 
 	public int getMatchId() {
@@ -88,18 +82,22 @@ public class MatchDTO {
 		this.score2 = score2;
 	}
 
+	@JsonSerialize(using = DateTimeSerializer.class)
 	public Date getBeginningTime() {
 		return beginningTime;
 	}
 
+	@JsonDeserialize(using = DateTimeDeserializer.class)
 	public void setBeginningTime( final Date beginningTime ) {
 		this.beginningTime = beginningTime;
 	}
 
+	@JsonSerialize(using = DateTimeSerializer.class)
 	public Date getLastBetTime() {
 		return lastBetTime;
 	}
 
+	@JsonDeserialize(using = DateTimeDeserializer.class)
 	public void setLastBetTime( final Date lastBetTime ) {
 		this.lastBetTime = lastBetTime;
 	}

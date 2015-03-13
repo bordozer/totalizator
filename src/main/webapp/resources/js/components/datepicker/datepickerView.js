@@ -14,7 +14,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!./templates/datepicker-template.html' );
 
-	var dateTimeService = require( '/resources/js/dateTimeService.js' );
+//	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 
 	return Backbone.View.extend( {
 
@@ -28,7 +28,6 @@ define( function ( require ) {
 		render: function( time ) {
 
 			this.$el.html( this.template( {
-				time: '' //dateTimeService.formatDateTime( time )
 			} ) );
 
 			this.dtp = this.$( '.date-time-picker-container' ).datetimepicker( {
@@ -36,6 +35,7 @@ define( function ( require ) {
 				, locale: 'ru'
 			} );
 			this.picker = this.dtp.data( "DateTimePicker" );
+			this.setValue( time );
 
 			return this;
 		},

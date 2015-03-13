@@ -167,7 +167,7 @@ define( function ( require ) {
 				, score2: modelJSON.score2
 				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
 				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
-				, beginningTime: '' //dateTimeService.formatDateTime( modelJSON.beginningTime )
+				, beginningTime: modelJSON.beginningTime
 				, translator: translator
 			} ) );
 
@@ -199,7 +199,7 @@ define( function ( require ) {
 			this.$( '#team1-select-box' ).chosen( options );
 			this.$( '#team2-select-box' ).chosen( options );
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: modelJSON.beginningTime } );
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: dateTimeService.parseDate( modelJSON.beginningTime ) } );
 
 			return this;
 		},
@@ -236,7 +236,6 @@ define( function ( require ) {
 				, beginningTime: beginningTime
 				, lastBetTime: beginningTime
 			} );
-//			console.log( this.model );
 		},
 
 		_validate: function() {
