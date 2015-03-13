@@ -10,16 +10,19 @@ define( function ( require ) {
 
 	return {
 
+		// date => str formatted
 		formatDate: function ( time ) {
 			return moment( time ).format( DATE_TIME_FORMAT );
 		},
 
+		// str => srt formatted for displaying
 		formatDateDisplay: function ( time ) {
 			return moment( this.parseDate( time ) ).format( DATE_TIME_DISPLAY_FORMAT );
 		},
 
+		// str => date
 		parseDate: function( time ) {
-			return new Date( moment( time, DATE_TIME_FORMAT ).valueOf() );
+			return moment( time, DATE_TIME_FORMAT ).toDate();
 		}
 	}
 } );
