@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.TeamRepository;
+import totalizator.app.models.Category;
+import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 
 import java.util.List;
@@ -18,6 +20,11 @@ public class TeamServiceImpl implements TeamService {
 	@Transactional( readOnly = true )
 	public List<Team> loadAll() {
 		return teamRepository.loadAll();
+	}
+
+	@Override
+	public List<Team> loadAll( final Category category ) {
+		return teamRepository.loadAll( category );
 	}
 
 	@Override

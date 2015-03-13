@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.MatchRepository;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.MatchesBetSettingsDTO;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.services.utils.DateTimeService;
 
@@ -42,6 +43,11 @@ public class MatchServiceImpl implements MatchService {
 	public List<Match> loadOpen() {
 		return matchRepository.loadAll(); // TODO: filter finished
 	}*/
+
+	@Override
+	public List<Match> loadAll( final Cup cup ) {
+		return matchRepository.loadAll( cup );
+	}
 
 	@Override
 	public List<Match> loadAll( final MatchesBetSettingsDTO dto ) {

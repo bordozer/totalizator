@@ -7,11 +7,12 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.*;
+import totalizator.app.services.TeamService;
 import totalizator.app.services.utils.DateTimeService;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 @Component
 public class TestDataInitializer {
@@ -27,6 +28,9 @@ public class TestDataInitializer {
 
 	@Autowired
 	private DateTimeService dateTimeService;
+
+	@Autowired
+	private TeamService teamService;
 
 	public void init() throws Exception {
 
@@ -74,8 +78,8 @@ public class TestDataInitializer {
 		final Cup uefa2016Euro = new Cup( "Euro 2016", uefa );
 		session.persist( uefa2016Euro );
 
-		final Cup uefa2016WorldCup = new Cup( "World cup 2018", uefa );
-		session.persist( uefa2016WorldCup );
+		final Cup uefa2018WorldCup = new Cup( "World cup 2018", uefa );
+		session.persist( uefa2018WorldCup );
 
 
 
@@ -161,50 +165,70 @@ public class TestDataInitializer {
 		final Team netherlands = new Team( "Netherlands", uefa );
 		session.persist( netherlands );
 
-
-		final Match oklahomaVsHouston = new Match();
-		oklahomaVsHouston.setCup( nba2015Regular );
-		oklahomaVsHouston.setTeam1( oklahoma );
-		oklahomaVsHouston.setScore1( 100 );
-		oklahomaVsHouston.setTeam2( houston );
-		oklahomaVsHouston.setScore2( 99 );
-		oklahomaVsHouston.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -10 ) );
-		session.persist( oklahomaVsHouston );
-
-		final Match newYorkVsClippers = new Match();
-		newYorkVsClippers.setCup( nba2015Regular );
-		newYorkVsClippers.setTeam1( newYork );
-		newYorkVsClippers.setScore1( 89 );
-		newYorkVsClippers.setTeam2( clippers );
-		newYorkVsClippers.setScore2( 101 );
-		newYorkVsClippers.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -48 ) );
-		session.persist( newYorkVsClippers );
-
-		final Match clevelandCavaliersVsSanAntonioSpurs = new Match();
-		clevelandCavaliersVsSanAntonioSpurs.setCup( nba2015Regular );
-		clevelandCavaliersVsSanAntonioSpurs.setTeam1( clevelandCavaliers );
-		clevelandCavaliersVsSanAntonioSpurs.setScore1( 92 );
-		clevelandCavaliersVsSanAntonioSpurs.setTeam2( sanAntonioSpurs );
-		clevelandCavaliersVsSanAntonioSpurs.setScore2( 101 );
-		clevelandCavaliersVsSanAntonioSpurs.setBeginningTime( dateTimeService.offset( Calendar.HOUR, 5 ) );
-		session.persist( clevelandCavaliersVsSanAntonioSpurs );
-
-		final Match dallasMavericksVsGoldenStateWarriors = new Match();
-		dallasMavericksVsGoldenStateWarriors.setCup( nba2015Regular );
-		dallasMavericksVsGoldenStateWarriors.setTeam1( dallasMavericks );
-		dallasMavericksVsGoldenStateWarriors.setScore1( 77 );
-		dallasMavericksVsGoldenStateWarriors.setTeam2( goldenStateWarriors );
-		dallasMavericksVsGoldenStateWarriors.setScore2( 110 );
-		dallasMavericksVsGoldenStateWarriors.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -1 ) );
-		session.persist( dallasMavericksVsGoldenStateWarriors );
-
-
-
-
 		transaction.commit();
+
+		final Transaction transaction1 = session.beginTransaction();
+
+
+		generateMatches( nba2015Regular, 10, session );
+		generateMatches( nba2015PlayOff, 10, session );
+		generateMatches( ncaa2015, 5, session );
+		generateMatches( uefa2016Euro, 4, session );
+		generateMatches( uefa2018WorldCup, 5, session );
+
+		transaction1.commit();
 
 		LOGGER.debug( "========================================================================" );
 		LOGGER.debug( "=                          TEST DATA IS CREATED                        =" );
 		LOGGER.debug( "========================================================================" );
+	}
+
+	private void generateMatches( final Cup cup, final int count, final Session session ) {
+
+		final Category category = cup.getCategory();
+
+		for ( int i = 0; i < count; i++ ) {
+			final Team team1 = getRandomTeam( category );
+			final Team team2 = getRandomTeam( category );
+
+			if ( team1.getId() == team2.getId() ) {
+				continue;
+			}
+
+			session.persist( generateNBAMatch( cup, team1, team2 ) );
+		}
+	}
+
+	private Match generateNBAMatch( final Cup cup, final Team team1, final Team team2 ) {
+
+		final Match match = new Match();
+
+		match.setCup( cup );
+		match.setTeam1( team1 );
+		match.setScore1( getRandomInt( 80, 115 ) );
+		match.setTeam2( team2 );
+		match.setScore2( getRandomInt( 80, 115 ) );
+		match.setBeginningTime( dateTimeService.offset( Calendar.HOUR, - getRandomInt( 1, 512 ) ) );
+
+		return match;
+	}
+
+	public int getRandomInt( final int minValue, final int maxValue ) {
+
+		if ( maxValue == 0 ) {
+			return 0;
+		}
+
+		return minValue + ( int ) ( Math.random() * ( maxValue - minValue + 1 ) );
+	}
+
+	public  Team getRandomTeam( final Category category ) {
+		final List<Team> teams = teamService.loadAll( category );
+
+		if ( teams == null || teams.size() == 0 ) {
+			return null;
+		}
+
+		return teams.get( getRandomInt( 0, teams.size() - 1 ) );
 	}
 }

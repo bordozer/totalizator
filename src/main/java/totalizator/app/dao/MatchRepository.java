@@ -2,6 +2,7 @@ package totalizator.app.dao;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.services.GenericService;
 
@@ -20,6 +21,12 @@ public class MatchRepository implements GenericService<Match> {
 	@Override
 	public List<Match> loadAll() {
 		return em.createNamedQuery( Match.LOAD_ALL, Match.class )
+				.getResultList();
+	}
+
+	public List<Match> loadAll( final Cup cup ) {
+		return em.createNamedQuery( Match.FIND_BY_CUP, Match.class )
+				.setParameter( "cupId", cup.getId() )
 				.getResultList();
 	}
 

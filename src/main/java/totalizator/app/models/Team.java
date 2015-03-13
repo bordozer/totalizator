@@ -2,6 +2,7 @@ package totalizator.app.models;
 
 import javax.persistence.*;
 
+import static totalizator.app.models.Team.FIND_BY_CATEGORY;
 import static totalizator.app.models.Team.FIND_BY_NAME;
 import static totalizator.app.models.Team.LOAD_ALL;
 
@@ -14,6 +15,10 @@ import static totalizator.app.models.Team.LOAD_ALL;
 				query = "select c from Team c order by categoryId, teamName"
 		),
 		@NamedQuery(
+				name = FIND_BY_CATEGORY,
+				query = "select c from Team c where categoryId= :categoryId order by teamName"
+		),
+		@NamedQuery(
 				name = FIND_BY_NAME,
 				query = "select c from Team c where teamName= :teamName"
 		)
@@ -21,6 +26,7 @@ import static totalizator.app.models.Team.LOAD_ALL;
 public class Team extends AbstractEntity {
 
 	public static final String LOAD_ALL = "teams.loadAll";
+	public static final String FIND_BY_CATEGORY = "matches.findByCategory";
 	public static final String FIND_BY_NAME = "teams.findByName";
 
 	@Column( unique = true, columnDefinition = "VARCHAR(255)" )

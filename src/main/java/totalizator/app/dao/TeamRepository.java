@@ -2,6 +2,7 @@ package totalizator.app.dao;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 import totalizator.app.services.GenericService;
 import totalizator.app.services.NamedEntityGenericService;
@@ -21,6 +22,12 @@ public class TeamRepository implements GenericService<Team>, NamedEntityGenericS
 	@Override
 	public List<Team> loadAll() {
 		return em.createNamedQuery( Team.LOAD_ALL, Team.class )
+				.getResultList();
+	}
+
+	public List<Team> loadAll( final Category category ) {
+		return em.createNamedQuery( Team.FIND_BY_CATEGORY, Team.class )
+				.setParameter( "categoryId", category.getId() )
 				.getResultList();
 	}
 
