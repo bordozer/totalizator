@@ -1,4 +1,4 @@
-<div class="row entry-container" style="margin-bottom: 10px;">
+<div class="row entry-container">
 
 	<div class="col-lg-2">
 		<small><%=beginningTime%></small>
@@ -6,23 +6,25 @@
 
 	<div class="col-lg-4" style="margin-right: 10px;">
 		<div class="row text-right <%=style1%>">
-			<small><%=team1Name%></small>
-			<span class="<%=style1%>"><%=score1%></span>
+			<div class="col-lg-10"><small><%=team1Name%></small></div>
+			<div class="col-lg-2 result-1-cell"><%=score1%></div>
 		</div>
-		<div class="row result-1-cell"></div>
 	</div>
 
 	<div class="col-lg-4">
 		<div class="row text-left <%=style2%>">
-			<span class="<%=style2%>"><%=score2%></span>
-			<small><%=team2Name%></small>
+			<div class="col-lg-2 result-2-cell"><%=score2%></div>
+			<div class="col-lg-10"><small><%=team2Name%></small></div>
 		</div>
-		<div class="row result-2-cell"></div>
 	</div>
-
-	<div class="col-lg-1 text-center bet-cell" title="<%=translator.matchBetLabel%>"></div>
 
 	<div class="col-lg-1 buttons-cell"></div>
 
+</div>
+
+<div class="row entry-container" style="margin-bottom: 10px;">
+	<div class="col-lg-4"><small><%=translator.matchBetLabel%></small></div>
+	<div class="col-lg-3 bet-cell"></div>
+	<div class="col-lg-3 bet-buttons-cell"></div>
 </div>
 

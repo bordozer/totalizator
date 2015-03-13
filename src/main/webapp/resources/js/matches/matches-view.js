@@ -151,8 +151,9 @@ define( function ( require ) {
 
 			this.$( '.entry-container' ).addClass( 'bg-success' );
 			this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
-			this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
-			this.$( '.buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet'></button>" );
+
+			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
+			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet'></button>" );
 
 			return this;
 		},
@@ -168,8 +169,11 @@ define( function ( require ) {
 			this.$( '.result-1-cell' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
 			this.$( '.result-2-cell' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
-			this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save'></button>" );
-			this.$( '.buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard'></button>" );
+			this.$( '.entry-container' ).addClass( 'bg-success' );
+			this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
+
+			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save'></button>" );
+			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-close button-bet-discard'></button>" );
 
 			return this;
 		},
