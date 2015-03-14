@@ -14,6 +14,8 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Component
 public class TestDataInitializer {
 
@@ -83,7 +85,8 @@ public class TestDataInitializer {
 
 
 
-		final Team oklahoma = new Team( "Oklahoma City Thunder", nba );
+
+		/*final Team oklahoma = new Team( "Oklahoma City Thunder", nba );
 		session.persist( oklahoma );
 
 		final Team chicago = new Team( "Chicago Bulls", nba );
@@ -135,7 +138,7 @@ public class TestDataInitializer {
 		session.persist( losAngelesLakers );
 
 		final Team orlandoMagic = new Team( "Orlando Magic", nba );
-		session.persist( orlandoMagic );
+		session.persist( orlandoMagic );*/
 
 
 

@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+
+<teams>
+
+	<!-- Eastern Conference -->
+
+	<!-- Atlantic -->
+
+	<team>
+		<name>Boston Celtics</name>
+		<shortName></shortName>
+		<logoImageName>bos</logoImageName>
+	</team>
+
+	<team>
+	<team>
+		<name>Brooklyn Nets</name>
+		<shortName></shortName>
+		<logoImageName>nets</logoImageName>
+	</team>
+
+	<team>
+		<name>New York Knicks</name>
+		<shortName></shortName>
+		<logoImageName>nyk</logoImageName>
+	</team>
+
+	<team>
+		<name>Philadelphia 76ers</name>
+		<shortName></shortName>
+		<logoImageName>phi</logoImageName>
+	</team>
+
+	<team>
+		<name>Toronto Raptors</name>
+		<shortName></shortName>
+		<logoImageName>raptors</logoImageName>
+
+		<!-- / Atlantic -->
+	</team>
+
+	<!-- Central -->
+
+	<team>
+		<name>Chicago Bulls</name>
+		<shortName></shortName>
+		<logoImageName>chi</logoImageName>
+	</team>
+
+	<team>
+		<name>Cleveland Cavaliers</name>
+		<shortName></shortName>
+		<logoImageName>cavaliers</logoImageName>
+	</team>
+
+	<team>
+		<name>Detroit Pistons</name>
+		<shortName></shortName>
+		<logoImageName>pistons</logoImageName>
+	</team>
+
+	<team>
+		<name>Indiana Pacers</name>
+		<shortName></shortName>
+		<logoImageName>ind</logoImageName>
+	</team>
+
+	<team>
+		<name>Milwaukee Bucks</name>
+		<shortName></shortName>
+		<logoImageName>bucks</logoImageName>
+	</team>
+
+	<!-- / Central -->
+
+	<!-- Southeast -->
+
+	<team>
+		<name>Atlanta Hawks</name>
+		<shortName></shortName>
+		<logoImageName>hawks</logoImageName>
+	</team>
+
+	<team>
+		<name>Charlotte Hornets</name>
+		<shortName></shortName>
+		<logoImageName>cha_hornets</logoImageName>
+	</team>
+
+	<team>
+		<name>Miami Heat</name>
+		<shortName></shortName>
+		<logoImageName>heat</logoImageName>
+	</team>
+
+	<team>
+		<name>Orlando Magic</name>
+		<shortName></shortName>
+		<logoImageName>magic</logoImageName>
+	</team>
+
+	<team>
+		<name>Washington Wizards</name>
+		<shortName></shortName>
+		<logoImageName>wizards</logoImageName>
+	</team>
+
+	<!-- / Southeast -->
+
+	<!-- Western Conference -->
+
+	<!-- Southwest -->
+
+	<team>
+		<name>Dallas Mavericks</name>
+		<shortName></shortName>
+		<logoImageName>dal</logoImageName>
+	</team>
+
+	<team>
+		<name>Houston Rockets</name>
+		<shortName></shortName>
+		<logoImageName>rockets</logoImageName>
+	</team>
+
+	<team>
+		<name>Memphis Grizzlies</name>
+		<shortName></shortName>
+		<logoImageName>mem</logoImageName>
+	</team>
+
+	<team>
+		<name>New Orleans Pelicans</name>
+		<shortName></shortName>
+		<logoImageName>pelicans</logoImageName>
+	</team>
+
+	<team>
+		<name>San Antonio Spurs</name>
+		<shortName></shortName>
+		<logoImageName>spurs</logoImageName>
+	</team>
+
+	<!-- / Southwest -->
+
+	<!-- Northwest -->
+
+	<team>
+		<name>Denver Nuggets</name>
+		<shortName></shortName>
+		<logoImageName>nuggets</logoImageName>
+	</team>
+
+	<team>
+		<name>Minnesota Timberwolves</name>
+		<shortName></shortName>
+		<logoImageName>min</logoImageName>
+	</team>
+
+	<team>
+		<name>Oklahoma City Thunder</name>
+		<shortName></shortName>
+		<logoImageName>okc</logoImageName>
+	</team>
+
+	<team>
+		<name>Portland Trail Blazers</name>
+		<shortName></shortName>
+		<logoImageName>por</logoImageName>
+	</team>
+
+	<team>
+		<name>Utah Jazz</name>
+		<shortName></shortName>
+		<logoImageName>uth</logoImageName>
+	</team>
+
+	<!-- /Northwest -->
+
+	<!-- Pacific -->
+
+	<team>
+		<name>Golden State Warriors</name>
+		<shortName></shortName>
+		<logoImageName>warriors</logoImageName>
+	</team>
+
+	<team>
+		<name>Los Angeles Clippers</name>
+		<shortName></shortName>
+		<logoImageName>clippers</logoImageName>
+	</team>
+
+	<team>
+		<name>Los Angeles Lakers</name>
+		<shortName></shortName>
+		<logoImageName>lakers</logoImageName>
+	</team>
+
+	<team>
+		<name>Phoenix Suns</name>
+		<shortName></shortName>
+		<logoImageName>suns</logoImageName>
+	</team>
+
+	<team>
+		<name>Sacramento Kings</name>
+		<shortName></shortName>
+		<logoImageName>kings</logoImageName>
+	</team>
+
+	<!-- / Pacific -->
+
+</teams>
