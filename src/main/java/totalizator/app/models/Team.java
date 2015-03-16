@@ -29,7 +29,7 @@ public class Team extends AbstractEntity {
 	public static final String FIND_BY_CATEGORY = "matches.findByCategory";
 	public static final String FIND_BY_NAME = "teams.findByName";
 
-	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
+	@Column( unique = false, columnDefinition = "VARCHAR(255)" )
 	private String teamName;
 
 	@ManyToOne

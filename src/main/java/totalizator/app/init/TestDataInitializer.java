@@ -90,22 +90,9 @@ public class TestDataInitializer {
 
 		createNBATeams( session, nba );
 
-		createNCAATeams( session, nba );
+		createNCAATeams( session, ncaa );
 
-		createUEFATeams( session, nba );
-
-
-		final Team spain = new Team( "Spain", uefa );
-		session.persist( spain );
-
-		final Team ukraine = new Team( "Ukraine", uefa );
-		session.persist( ukraine );
-
-		final Team switzerland = new Team( "Switzerland", uefa );
-		session.persist( switzerland );
-
-		final Team netherlands = new Team( "Netherlands", uefa );
-		session.persist( netherlands );
+		createUEFATeams( session, uefa );
 
 		transaction.commit();
 

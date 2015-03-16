@@ -4,14 +4,17 @@
 
 	<team>
 		<name>Czech Republic</name>
+		<logoImageName></logoImageName>
 	</team>
 
 	<team>
 		<name>Iceland</name>
+		<logoImageName></logoImageName>
 	</team>
 
 	<team>
 		<name>Netherlands</name>
+		<logoImageName></logoImageName>
 	</team>
 
 	<team>
@@ -171,7 +174,7 @@
 	</team>
 
 	<team>
-		<name>Moldova</name>
+		<name>Croatia</name>
 	</team>
 
 	<team>
