@@ -4,217 +4,267 @@
 
 	<team>
 		<name>Czech Republic</name>
-		<logoImageName></logoImageName>
+		<flag>Czech_Re.jpg</flag>
 	</team>
 
 	<team>
 		<name>Iceland</name>
-		<logoImageName></logoImageName>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Netherlands</name>
-		<logoImageName></logoImageName>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Turkey</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Latvia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Kazakhstan</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Israel</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Wales</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Cyprus</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Belgium</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Bosnia and Herzegovina</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Andorra</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Slovakia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Spain</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Ukraine</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>FYR Macedonia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Belarus</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Luxembourg</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Poland</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Germany</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Scotland</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Republic of Ireland</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Georgia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Gibraltar</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>England</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Slovenia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Switzerland</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Lithuania</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Estonia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>San Marino</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Romania</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Northern Ireland</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Hungary</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Finland</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Faroe Islands</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Greece</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Austria</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Sweden</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Russia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Montenegro</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Liechtenstein</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Moldova</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Croatia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Italy</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Norway</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Bulgaria</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Malta</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Azerbaijan</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Denmark</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Portugal</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Albania</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Serbia</name>
+		<flag></flag>
 	</team>
 
 	<team>
 		<name>Armenia</name>
+		<flag></flag>
 	</team>
 
 </teams>
