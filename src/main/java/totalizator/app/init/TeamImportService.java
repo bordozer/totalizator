@@ -17,10 +17,20 @@ import static com.google.common.collect.Lists.newArrayList;
 @Component
 class TeamImportService {
 
-	static final String NBA = "src/main/java/totalizator/app/init/teams/nba/teams.xml";
+	private static final String NBA = "src/main/java/totalizator/app/init/teams/nba/teams.xml";
+	private static final String NCAA = "src/main/java/totalizator/app/init/teams/ncaa/teams.xml";
+	private static final String UEFA = "src/main/java/totalizator/app/init/teams/uefa/teams.xml";
 
 	List<Team> importNBA( final Category category ) throws DocumentException {
 		return doImport( NBA, category );
+	}
+
+	List<Team> importNCAA( final Category category ) throws DocumentException {
+		return doImport( NCAA, category );
+	}
+
+	List<Team> importUEFA( final Category category ) throws DocumentException {
+		return doImport( UEFA, category );
 	}
 
 	private List<Team> doImport( final String file, final Category category ) throws DocumentException {

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<teams>
+
+	<team>
+		<name>Duke</name>
+	</team>
+
+	<team>
+		<name>Syracuse</name>
+	</team>
+
+	<team>
+		<name>Virginia</name>
+	</team>
+
+	<team>
+		<name>New Mexico</name>
+	</team>
+
+	<team>
+		<name>Albany</name>
+	</team>
+
+	<team>
+		<name>Cincinnati</name>
+	</team>
+
+	<team>
+		<name>Houston</name>
+	</team>
+
+	<team>
+		<name>Memphis</name>
+	</team>
+
+	<team>
+		<name>Louisville</name>
+	</team>
+
+	<team>
+		<name>Miami (FL)</name>
+	</team>
+
+	<team>
+		<name>Jacksonville</name>
+	</team>
+
+	<team>
+		<name>Oklahoma St</name>
+	</team>
+
+	<team>
+		<name>Oregon</name>
+	</team>
+
+</teams>

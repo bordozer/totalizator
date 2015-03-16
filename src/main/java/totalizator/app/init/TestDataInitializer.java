@@ -90,19 +90,9 @@ public class TestDataInitializer {
 
 		createNBATeams( session, nba );
 
+		createNCAATeams( session, nba );
 
-		final Team duke = new Team( "Duke", ncaa );
-		session.persist( duke );
-
-		final Team syracuse = new Team( "Syracuse", ncaa );
-		session.persist( syracuse );
-
-		final Team virginia = new Team( "Virginia", ncaa );
-		session.persist( virginia );
-
-		final Team mexico = new Team( "New Mexico", ncaa );
-		session.persist( mexico );
-
+		createUEFATeams( session, nba );
 
 
 		final Team spain = new Team( "Spain", uefa );
@@ -135,8 +125,22 @@ public class TestDataInitializer {
 		LOGGER.debug( "========================================================================" );
 	}
 
-	private void createNBATeams( final Session session, final Category nba ) throws DocumentException {
-		final List<Team> teams = teamImportService.importNBA( nba );
+	private void createNBATeams( final Session session, final Category category ) throws DocumentException {
+		final List<Team> teams = teamImportService.importNBA( category );
+		for ( final Team team : teams ) {
+			session.persist( team );
+		}
+	}
+
+	private void createNCAATeams( final Session session, final Category category ) throws DocumentException {
+		final List<Team> teams = teamImportService.importNCAA( category );
+		for ( final Team team : teams ) {
+			session.persist( team );
+		}
+	}
+
+	private void createUEFATeams( final Session session, final Category category ) throws DocumentException {
+		final List<Team> teams = teamImportService.importUEFA( category );
 		for ( final Team team : teams ) {
 			session.persist( team );
 		}
