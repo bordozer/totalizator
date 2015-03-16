@@ -99,10 +99,10 @@ public class TestDataInitializer {
 		final Transaction transaction1 = session.beginTransaction();
 
 
-		generateMatches( nba2015Regular, 10, session );
-		generateMatches( nba2015PlayOff, 10, session );
+		generateMatches( nba2015Regular, 100, session );
+		generateMatches( nba2015PlayOff, 25, session );
 		generateMatches( ncaa2015, 5, session );
-		generateMatches( uefa2016Euro, 4, session );
+		generateMatches( uefa2016Euro, 20, session );
 		generateMatches( uefa2018WorldCup, 5, session );
 
 		transaction1.commit();
