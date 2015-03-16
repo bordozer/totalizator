@@ -1,6 +1,7 @@
 package totalizator.app.init;
 
 import org.apache.log4j.Logger;
+import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -33,6 +34,9 @@ public class TestDataInitializer {
 
 	@Autowired
 	private TeamService teamService;
+
+	@Autowired
+	private TeamImportService teamImportService;
 
 	public void init() throws Exception {
 
@@ -84,62 +88,7 @@ public class TestDataInitializer {
 		session.persist( uefa2018WorldCup );
 
 
-
-
-		/*final Team oklahoma = new Team( "Oklahoma City Thunder", nba );
-		session.persist( oklahoma );
-
-		final Team chicago = new Team( "Chicago Bulls", nba );
-		session.persist( chicago );
-
-		final Team houston = new Team( "Houston Rockets", nba );
-		session.persist( houston );
-
-		final Team newYork = new Team( "New York Knicks", nba );
-		session.persist( newYork );
-
-		final Team clippers = new Team( "Los Angeles Clippers", nba );
-		session.persist( clippers );
-
-		final Team dallasMavericks = new Team( "Dallas Mavericks", nba );
-		session.persist( dallasMavericks );
-
-		final Team bostonCeltics = new Team( "Boston Celtics", nba );
-		session.persist( bostonCeltics );
-
-		final Team brooklynNets = new Team( "Brooklyn Nets", nba );
-		session.persist( brooklynNets );
-
-		final Team memphisGrizzlies = new Team( "Memphis Grizzlies", nba );
-		session.persist( memphisGrizzlies );
-
-		final Team sanAntonioSpurs = new Team( "San Antonio Spurs", nba );
-		session.persist( sanAntonioSpurs );
-
-		final Team clevelandCavaliers = new Team( "Cleveland Cavaliers", nba );
-		session.persist( clevelandCavaliers );
-
-		final Team indianaPacers = new Team( "Indiana Pacers", nba );
-		session.persist( indianaPacers );
-
-		final Team portlandTrailBlazers = new Team( "Portland Trail Blazers", nba );
-		session.persist( portlandTrailBlazers );
-
-		final Team atlantaHawks = new Team( "Atlanta Hawks", nba );
-		session.persist( atlantaHawks );
-
-		final Team goldenStateWarriors = new Team( "Golden State Warriors", nba );
-		session.persist( goldenStateWarriors );
-
-		final Team charlotteHornets = new Team( "Charlotte Hornets", nba );
-		session.persist( charlotteHornets );
-
-		final Team losAngelesLakers = new Team( "Los Angeles Lakers", nba );
-		session.persist( losAngelesLakers );
-
-		final Team orlandoMagic = new Team( "Orlando Magic", nba );
-		session.persist( orlandoMagic );*/
-
+		createNBATeams( session, nba );
 
 
 		final Team duke = new Team( "Duke", ncaa );
@@ -184,6 +133,13 @@ public class TestDataInitializer {
 		LOGGER.debug( "========================================================================" );
 		LOGGER.debug( "=                          TEST DATA IS CREATED                        =" );
 		LOGGER.debug( "========================================================================" );
+	}
+
+	private void createNBATeams( final Session session, final Category nba ) throws DocumentException {
+		final List<Team> teams = teamImportService.importNBA( nba );
+		for ( final Team team : teams ) {
+			session.persist( team );
+		}
 	}
 
 	private void generateMatches( final Cup cup, final int count, final Session session ) {
