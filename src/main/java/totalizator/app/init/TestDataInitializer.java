@@ -15,8 +15,6 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 @Component
 public class TestDataInitializer {
 
