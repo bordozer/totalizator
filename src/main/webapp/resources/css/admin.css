@@ -5,7 +5,7 @@ div {
 .admin-entry-line {
 	height: auto;
 	min-height: 30px;
-	padding-top: 3px;
+	padding: 5px;
 }
 
 .admin-entry-icons {

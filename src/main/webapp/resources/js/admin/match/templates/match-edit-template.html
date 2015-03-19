@@ -1,68 +1,121 @@
-<div class="row admin-entry-line bg-info">
+<div class="row admin-entry-line">
 
-	<div class="admin-entry-icons">
-		<div class="fa fa-save entry-save header-icon" title="Save"></div>
-		<div class="fa fa-close entry-edit-cancel header-icon" title="Cancel editing"></div>
-	</div>
+	<div class="bg-info" style="width: 500px; margin-left: auto; margin-right: auto; padding: 10px;">
 
-	<div class="col-lg-3">
-
-		<div class="col-lg-5 categories-container">
-			<select id="category-select-box" class="chosen-select categories-select-box">
-				<option value="0"></option>
-			<% _.each( categories, function( category ) { %>
-				<option value="<%=category.categoryId%>" <%= category.categoryId == categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
-			<% }) %>
-			</select>
+		<div class="row" style="margin-bottom: 5px;">
+			<div class="col-lg-12">
+				<div class="btn-group pull-right">
+					<button class="btn btn-default fa fa-save entry-save" title="<%=translator.buttonSaveLabel%>"></button> <!-- TODO: translate -->
+					<button class="btn btn-default fa fa-close entry-edit-cancel" title="<%=translator.buttonCancelEditingLabel%>"></button> <!-- TODO: translate -->
+				</div>
+			</div>
 		</div>
 
-		<div class="col-lg-7 cups-container">
-			<% if( cups.length > 0 ) { %>
-				<select id="cup-select-box" class="chosen-select cups-select-box">
+		<div class="row">
+
+			<div class="col-lg-6 text-right">
+				<%=translator.matchEdit_Category%>
+			</div>
+			<div class="col-lg-6 categories-container">
+				<select id="category-select-box" class="chosen-select categories-select-box">
 					<option value="0"></option>
-				<% _.each( cups, function( cup ) { %>
-					<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
+				<% _.each( categories, function( category ) { %>
+					<option value="<%=category.categoryId%>" <%= category.categoryId == categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
 				<% }) %>
 				</select>
-			<% } %>
+			</div>
+
 		</div>
-	</div>
 
-	<div class="col-lg-8">
+		<div class="row">
 
-		<div class="col-lg-5">
-			<% if( teams.length > 0 && model.cupId > 0 ) { %>
-				<div class="col-lg-10 text-right">
-					<select id="team1-select-box" class="chosen-select team1-select-box">
-						<option value="0">&nbsp;</option>
-					<% _.each( teams, function( team ) { %>
-						<option value="<%=team.teamId%>" <%= model.team1Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+			<div class="col-lg-6 text-right">
+				<%=translator.matchEdit_Cup%>
+			</div>
+			<div class="col-lg-6 cups-container">
+				<% if( cups.length > 0 ) { %>
+					<select id="cup-select-box" class="chosen-select cups-select-box">
+						<option value="0"></option>
+					<% _.each( cups, function( cup ) { %>
+						<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
 					<% }) %>
 					</select>
-				</div>
-				<div class="col-lg-2">
-					<input class="form-control" id="score1" name="score1" value="<%=model.score1%>" style="width: 50px;" >
-				</div>
-			<% } %>
+				<% } %>
+			</div>
+
 		</div>
 
-		<div class="col-lg-5">
-			<% if( teams.length > 0 && model.cupId > 0 ) { %>
-				<div class="col-lg-10 text-right">
-					<select id="team2-select-box" class="form-control team2-select-box">
-						<option value="0">&nbsp;</option>
-					<% _.each( teams, function( team ) { %>
-						<option value="<%=team.teamId%>" <%= model.team2Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
-					<% }) %>
-					</select>
-				</div>
-				<div class="col-lg-2">
-					<input class="form-control col-xs-1" id="score2" name="score2" value="<%=model.score2%>" style="width: 50px;" >
-				</div>
-			<% } %>
+		<div class="row">
+
+			<div class="col-lg-6">
+
+				<% if( teams.length > 0 && model.cupId > 0 ) { %>
+					<div class="row">
+						<div class="col-lg-12 text-right">
+							<%=translator.matchEdit_Team%> 1
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-12 text-right">
+							<select id="team1-select-box" class="chosen-select team1-select-box">
+								<option value="0">&nbsp;</option>
+							<% _.each( teams, function( team ) { %>
+								<option value="<%=team.teamId%>" <%= model.team1Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+							<% }) %>
+							</select>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-4 pull-right">
+							<input class="form-control" id="score1" name="score1" value="<%=model.score1%>" >
+						</div>
+					</div>
+				<% } %>
+
+			</div>
+
+			<div class="col-lg-6">
+
+				<% if( teams.length > 0 && model.cupId > 0 ) { %>
+					<div class="row">
+						<div class="col-lg-12">
+							<%=translator.matchEdit_Team%> 2
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-12">
+							<select id="team2-select-box" class="form-control team2-select-box">
+								<option value="0">&nbsp;</option>
+							<% _.each( teams, function( team ) { %>
+								<option value="<%=team.teamId%>" <%= model.team2Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+							<% }) %>
+							</select>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-4">
+							<input class="form-control col-xs-1" id="score2" name="score2" value="<%=model.score2%>" >
+						</div>
+					</div>
+				<% } %>
+
+			</div>
+
 		</div>
 
-		<div class="col-lg-2 match-beginning-time"></div>
+		<div class="row">
+
+			<div class="col-lg-6 text-right">
+				<%=translator.matchEdit_BeginningTime%>
+			</div>
+			<div class="col-lg-6">
+				<div class="match-beginning-time"></div>
+			</div>
+		</div>
 
 	</div>
 

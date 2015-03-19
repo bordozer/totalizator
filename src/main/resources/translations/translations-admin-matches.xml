@@ -33,6 +33,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Admin / Matches / Button save</nerd>
+		<ru><![CDATA[Сохранить]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Button cancel editing</nerd>
+		<ru><![CDATA[Отменить редактирование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Edit: Category</nerd>
+		<ru><![CDATA[Категория]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Edit: Cup</nerd>
+		<ru><![CDATA[Чемпионат]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Edit: Team</nerd>
+		<ru><![CDATA[Команда]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Matches / Edit: Match beginning time</nerd>
+		<ru><![CDATA[Время начала матча]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

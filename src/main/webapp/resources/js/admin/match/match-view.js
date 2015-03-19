@@ -28,6 +28,14 @@ define( function ( require ) {
 		, matchAddLabel: "Admin / Matches / Add entry"
 		, matchEditLabel: "Admin / Matches / Edit entry"
 		, matchDeleteLabel: "Admin / Matches / Delete entry"
+
+		, buttonSaveLabel: "Admin / Matches / Button save"
+		, buttonCancelEditingLabel: "Admin / Matches / Button cancel editing"
+		, matchEdit_Category: "Admin / Matches / Edit: Category"
+		, matchEdit_Cup: "Admin / Matches / Edit: Cup"
+		, matchEdit_Team: "Admin / Matches / Edit: Team"
+		, matchEdit_BeginningTime: "Admin / Matches / Edit: Match beginning time"
+
 		, validation_SelectCup_Label: "Admin / Teams / Validation: Select a cup"
 		, validation_SelectTeam1_Label: "Admin / Teams / Validation: Select team1"
 		, validation_SelectTeam2_Label: "Admin / Teams / Validation: Select team2"
@@ -190,6 +198,7 @@ define( function ( require ) {
 				, categoryId: categoryId
 				, cups: service.categoryCups( this.cups, categoryId )
 				, teams: service.categoryTeams( this.teams, categoryId )
+				, translator: translator
 			} ) );
 
 			var options = {
