@@ -8,52 +8,51 @@
 	</div>
 
 	<div class="panel-body text-left">
-		<div class="col-lg-12">
-			<table class="table">
 
-				<tr>
-					<td>Category</td>
-					<td>
-						<select class="chosen-select" id="settings-category-id">
-							<option value="0">&nbsp;</option>
-							<% _.each( categories, function( category ) { %>
-							<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
-							<% }) %>
-						</select>
-					</td>
-				</tr>
+		<div style="width: 500px; margin-left: auto; margin-right: auto; padding: 10px;">
 
-				<tr>
-					<td>Cup</td>
-					<td>
-						<% if( model.categoryId > 0 ) { %>
+			<div class="row">
+				<div class="col-lg-6 text-right">Category</div>
+				<div class="col-lg-6">
+					<select class="chosen-select" id="settings-category-id">
+						<option value="0">&nbsp;</option>
+						<% _.each( categories, function( category ) { %>
+						<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
+						<% }) %>
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-6 text-right">Cup</div>
+				<div class="col-lg-6">
+					<% if( model.categoryId > 0 ) { %>
 						<select class="chosen-select" id="settings-cup-id">
 							<option value="0">&nbsp;</option>
 							<% _.each( cups, function( cup ) { %>
 							<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
 							<% }) %>
 						</select>
-						<% } %>
-					</td>
-				</tr>
+					<% } %>
+				</div>
+			</div>
 
-				<tr>
-					<td>Team</td>
-					<td>
-						<% if( model.categoryId > 0 ) { %>
+			<div class="row">
+				<div class="col-lg-6 text-right">Team</div>
+				<div class="col-lg-6">
+					<% if( model.categoryId > 0 ) { %>
 						<select class="chosen-select" id="settings-team-id">
 							<option value="0">&nbsp;</option>
 							<% _.each( teams, function( team ) { %>
 							<option value="<%=team.teamId%>" <%= model.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
 							<% }) %>
 						</select>
-						<% } %>
-					</td>
-				</tr>
-
-			</table>
+					<% } %>
+				</div>
+			</div>
 
 		</div>
+
 	</div>
 
 	<div class="panel-footer"></div>
