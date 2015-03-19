@@ -29,6 +29,7 @@ define( function ( require ) {
 		, matchEditLabel: "Admin / Matches / Edit entry"
 		, matchDeleteLabel: "Admin / Matches / Delete entry"
 
+		, newEntryEditFormTitle: "Admin / Matches / Edit: New entry edit form title"
 		, buttonSaveLabel: "Admin / Matches / Button save"
 		, buttonCancelEditingLabel: "Admin / Matches / Button cancel editing"
 		, matchEdit_Category: "Admin / Matches / Edit: Category"
@@ -193,6 +194,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
+				, title: modelJSON.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, modelJSON.team1Id ).teamName + ' - ' + service.getTeam( this.teams, modelJSON.team2Id ).teamName
 				, matchId: modelJSON.matchId
 				, categories: this.categories
 				, categoryId: categoryId
