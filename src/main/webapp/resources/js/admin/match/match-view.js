@@ -273,7 +273,7 @@ define( function ( require ) {
 		},
 
 		_changeCategory: function( categoryId ) {
-			this.model.set( { categoryId: categoryId } );
+			this.model.set( { categoryId: categoryId, cupId: 0, team1Id: 0, team2Id: 0 } );
 			this.renderEdit();
 		},
 
