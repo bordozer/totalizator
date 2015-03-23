@@ -24,10 +24,10 @@ public class DevelopmentConfiguration {
 
 	private static final Logger LOGGER = Logger.getLogger( DevelopmentConfiguration.class );
 
-	@Bean( initMethod = "init" )
+	/*@Bean( initMethod = "init" )
 	public TestDataInitializer initTestData() {
 		return new TestDataInitializer();
-	}
+	}*/
 
 	@Bean( name = "systemVarsService", initMethod = "init" )
 	public SystemVarsServiceImpl systemVarsService() {
@@ -71,7 +71,7 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
 		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
-		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" );
+//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" );
 		jpaProperties.put( "hibernate.show_sql", "true" );
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );

@@ -13,6 +13,7 @@ import totalizator.app.services.utils.DateTimeService;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -92,12 +93,25 @@ public class TestDataInitializer {
 
 		final Transaction transaction1 = session.beginTransaction();
 
+		final MatchBeginningTimeGenerateStrategy pastMatchesStrategy = new MatchBeginningTimeGenerateStrategy() {
+			@Override
+			Date generate( final DateTimeService dateTimeService ) {
+				return dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) );
+			}
+		};
+		generateMatches( nba2015Regular, 100, session, pastMatchesStrategy );
+		generateMatches( nba2015PlayOff, 25, session, pastMatchesStrategy );
+		generateMatches( ncaa2015, 5, session, pastMatchesStrategy );
+		generateMatches( uefa2016Euro, 20, session, pastMatchesStrategy );
+		generateMatches( uefa2018WorldCup, 5, session, pastMatchesStrategy );
 
-		generateMatches( nba2015Regular, 100, session );
-		generateMatches( nba2015PlayOff, 25, session );
-		generateMatches( ncaa2015, 5, session );
-		generateMatches( uefa2016Euro, 20, session );
-		generateMatches( uefa2018WorldCup, 5, session );
+		final MatchBeginningTimeGenerateStrategy futureMatchesStrategy = new MatchBeginningTimeGenerateStrategy() {
+			@Override
+			Date generate( final DateTimeService dateTimeService ) {
+				return dateTimeService.offset( Calendar.HOUR, getRandomInt( 1, 168 ) );
+			}
+		};
+		generateMatches( nba2015Regular, 10, session, futureMatchesStrategy );
 
 		transaction1.commit();
 
@@ -127,7 +141,7 @@ public class TestDataInitializer {
 		}
 	}
 
-	private void generateMatches( final Cup cup, final int count, final Session session ) {
+	private void generateMatches( final Cup cup, final int count, final Session session, final MatchBeginningTimeGenerateStrategy strategy ) {
 
 		final Category category = cup.getCategory();
 
@@ -139,11 +153,11 @@ public class TestDataInitializer {
 				continue;
 			}
 
-			session.persist( generateNBAMatch( cup, team1, team2 ) );
+			session.persist( generateNBAMatch( cup, team1, team2, strategy ) );
 		}
 	}
 
-	private Match generateNBAMatch( final Cup cup, final Team team1, final Team team2 ) {
+	private Match generateNBAMatch( final Cup cup, final Team team1, final Team team2, final MatchBeginningTimeGenerateStrategy strategy ) {
 
 		final Match match = new Match();
 
@@ -152,7 +166,7 @@ public class TestDataInitializer {
 		match.setScore1( getRandomInt( 80, 115 ) );
 		match.setTeam2( team2 );
 		match.setScore2( getRandomInt( 80, 115 ) );
-		match.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) ) );
+		match.setBeginningTime( strategy.generate( dateTimeService ) );
 
 		return match;
 	}
@@ -174,5 +188,9 @@ public class TestDataInitializer {
 		}
 
 		return teams.get( getRandomInt( 0, teams.size() - 1 ) );
+	}
+
+	private abstract class MatchBeginningTimeGenerateStrategy {
+		abstract Date generate( DateTimeService dateTimeService );
 	}
 }
