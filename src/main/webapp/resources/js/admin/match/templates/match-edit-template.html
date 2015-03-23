@@ -114,12 +114,20 @@
 				</div>
 
 				<div class="row">
-
 					<div class="col-lg-6 text-right">
 						<%=translator.matchEdit_BeginningTime%>
 					</div>
 					<div class="col-lg-6">
 						<div class="match-beginning-time"></div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-6 text-right">
+						<%=translator.matchEdit_MatchFinished%>
+					</div>
+					<div class="col-lg-6">
+						<input type="checkbox" class="js-match-finished" value="true" <%=model.matchFinished ? 'checked' : ''%> >
 					</div>
 				</div>
 

@@ -15,6 +15,7 @@ define( ["backbone"], function ( Backbone ) {
 			, team2Id: 0
 			, score2: 0
 			, beginningTime: new Date()
+			, matchFinished: false
 		},
 
 		initialize: function ( options ) {

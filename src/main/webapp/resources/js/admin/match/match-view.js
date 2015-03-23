@@ -36,6 +36,7 @@ define( function ( require ) {
 		, matchEdit_Cup: "Admin / Matches / Edit: Cup"
 		, matchEdit_Team: "Admin / Matches / Edit: Team"
 		, matchEdit_BeginningTime: "Admin / Matches / Edit: Match beginning time"
+		, matchEdit_MatchFinished: "Admin / Matches / Edit: Match finished"
 
 		, validation_SelectCup_Label: "Admin / Teams / Validation: Select a cup"
 		, validation_SelectTeam1_Label: "Admin / Teams / Validation: Select team1"
@@ -246,6 +247,7 @@ define( function ( require ) {
 				, team2Id: this.$( '.team2-select-box' ).val()
 				, score2: this.$( '#score2' ).val()
 				, beginningTime: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
+				, matchFinished: this.$( '.js-match-finished' ).is(':checked')
 			} );
 		},
 

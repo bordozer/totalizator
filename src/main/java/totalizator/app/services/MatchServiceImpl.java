@@ -105,6 +105,8 @@ public class MatchServiceImpl implements MatchService {
 		match.setScore2( matchDTO.getScore2() );
 
 		match.setBeginningTime( matchDTO.getBeginningTime() );
+
+		match.setMatchFinished( matchDTO.isMatchFinished() );
 	}
 
 	@Override
@@ -122,6 +124,8 @@ public class MatchServiceImpl implements MatchService {
 		dto.setScore2( match.getScore2() );
 
 		dto.setBeginningTime( match.getBeginningTime() );
+
+		dto.setMatchFinished( match.isMatchFinished() );
 
 		return dto;
 	}

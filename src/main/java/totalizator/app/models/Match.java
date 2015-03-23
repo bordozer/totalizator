@@ -42,6 +42,7 @@ public class Match extends AbstractEntity {
 	private int score2;
 
 	private Date beginningTime;
+	private boolean matchFinished;
 
 	public Cup getCup() {
 		return cup;
@@ -89,6 +90,14 @@ public class Match extends AbstractEntity {
 
 	public void setBeginningTime( final Date beginningTime ) {
 		this.beginningTime = beginningTime;
+	}
+
+	public boolean isMatchFinished() {
+		return matchFinished;
+	}
+
+	public void setMatchFinished( final boolean matchFinished ) {
+		this.matchFinished = matchFinished;
 	}
 
 	@Override

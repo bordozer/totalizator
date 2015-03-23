@@ -22,6 +22,7 @@ public class MatchDTO {
 	private int score2;
 
 	private Date beginningTime;
+	private boolean matchFinished;
 
 	public int getMatchId() {
 		return matchId;
@@ -87,6 +88,14 @@ public class MatchDTO {
 	@JsonDeserialize(using = DateTimeDeserializer.class)
 	public void setBeginningTime( final Date beginningTime ) {
 		this.beginningTime = beginningTime;
+	}
+
+	public boolean isMatchFinished() {
+		return matchFinished;
+	}
+
+	public void setMatchFinished( final boolean matchFinished ) {
+		this.matchFinished = matchFinished;
 	}
 
 	@Override
