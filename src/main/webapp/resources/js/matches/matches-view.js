@@ -152,9 +152,10 @@ define( function ( require ) {
 				return this;
 			}
 
-			this.$( '.entry-container' ).addClass( 'bg-success' );
+			this.$( '.js-match-container' ).addClass( 'bg-success' );
 			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
-			this.$( '.bet-cell' ).html( bet.score1 + ' - ' + bet.score2 );
+			this.$( '.js-bet-team1' ).html( bet.score1 );
+			this.$( '.js-bet-team2' ).html( bet.score2 );
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet'></button>" );
@@ -170,12 +171,12 @@ define( function ( require ) {
 			var bet1 = bet != null ? bet.score1 : 0;
 			var bet2 = bet != null ? bet.score2 : 0;
 
-			this.$( '.entry-container' ).addClass( 'bg-success' );
+			this.$( '.js-match-container' ).addClass( 'bg-success' );
 
 			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
 
-			this.$( '.bet-cell' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
-			this.$( '.bet-cell' ).append( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
+			this.$( '.js-bet-team1' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
+			this.$( '.js-bet-team2' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard'></button>" );

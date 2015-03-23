@@ -1,30 +1,49 @@
-<div class="row entry-container">
+<div class="row js-match-container">
 
-	<div class="col-lg-3">
-		<small>#<%=matchId%> <strong><%=beginningTime%></strong></small>
-	</div>
+	<div class="col-lg-12">
 
-	<div class="col-lg-4" style="margin-right: 10px;">
-		<div class="row text-right <%=style1%>">
-			<div class="col-lg-10"><small><%=team1Name%></small></div>
-			<div class="col-lg-2 result-1-cell"><%=score1%></div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="pull-right buttons-cell"></div>
+				<strong><%=beginningTime%></strong>
+			</div>
 		</div>
-	</div>
 
-	<div class="col-lg-4">
-		<div class="row text-left <%=style2%>">
-			<div class="col-lg-2 result-2-cell"><%=score2%></div>
-			<div class="col-lg-10"><small><%=team2Name%></small></div>
+		<div class="row">
+
+			<div class="col-lg-6 text-right <%=style1%>">
+				<div class="row">
+					<div class="col-lg-12"><small><%=team1Name%></small></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 text-right result-1-cell"><%=score1%></div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 <%=style2%>">
+				<div class="row">
+					<div class="col-lg-12"><small><%=team2Name%></small></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 result-2-cell"><%=score2%></div>
+				</div>
+			</div>
+
 		</div>
-	</div>
 
-	<div class="buttons-cell" style="float: right;"></div>
+		<div class="row">
+			<div class="col-lg-3 bet-label-cell"></div>
+			<div class="col-lg-9 bet-buttons-cell"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6 js-bet-team1 text-right"></div>
+			<div class="col-lg-6 js-bet-team2"></div>
+		</div>
+
+	</div>
 
 </div>
 
-<div class="row entry-container" style="margin-bottom: 10px;">
-	<div class="col-lg-4 bet-label-cell"></div>
-	<div class="col-lg-3 bet-cell"></div>
-	<div class="col-lg-3 bet-buttons-cell"></div>
-</div>
+<hr />
 

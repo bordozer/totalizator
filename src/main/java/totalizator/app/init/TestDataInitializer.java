@@ -93,10 +93,20 @@ public class TestDataInitializer {
 
 		final Transaction transaction1 = session.beginTransaction();
 
-		final MatchBeginningTimeGenerateStrategy pastMatchesStrategy = new MatchBeginningTimeGenerateStrategy() {
+		final MatchDataGenerationStrategy pastMatchesStrategy = new MatchDataGenerationStrategy() {
 			@Override
-			Date generate( final DateTimeService dateTimeService ) {
+			Date generateBeginningTime( final DateTimeService dateTimeService ) {
 				return dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) );
+			}
+
+			@Override
+			int generateScore() {
+				return getRandomInt( 80, 115 );
+			}
+
+			@Override
+			boolean isFinished() {
+				return true;
 			}
 		};
 		generateMatches( nba2015Regular, 100, session, pastMatchesStrategy );
@@ -105,10 +115,20 @@ public class TestDataInitializer {
 		generateMatches( uefa2016Euro, 20, session, pastMatchesStrategy );
 		generateMatches( uefa2018WorldCup, 5, session, pastMatchesStrategy );
 
-		final MatchBeginningTimeGenerateStrategy futureMatchesStrategy = new MatchBeginningTimeGenerateStrategy() {
+		final MatchDataGenerationStrategy futureMatchesStrategy = new MatchDataGenerationStrategy() {
 			@Override
-			Date generate( final DateTimeService dateTimeService ) {
+			Date generateBeginningTime( final DateTimeService dateTimeService ) {
 				return dateTimeService.offset( Calendar.HOUR, getRandomInt( 1, 168 ) );
+			}
+
+			@Override
+			int generateScore() {
+				return 0;
+			}
+
+			@Override
+			boolean isFinished() {
+				return false;
 			}
 		};
 		generateMatches( nba2015Regular, 10, session, futureMatchesStrategy );
@@ -141,7 +161,7 @@ public class TestDataInitializer {
 		}
 	}
 
-	private void generateMatches( final Cup cup, final int count, final Session session, final MatchBeginningTimeGenerateStrategy strategy ) {
+	private void generateMatches( final Cup cup, final int count, final Session session, final MatchDataGenerationStrategy strategy ) {
 
 		final Category category = cup.getCategory();
 
@@ -157,16 +177,17 @@ public class TestDataInitializer {
 		}
 	}
 
-	private Match generateNBAMatch( final Cup cup, final Team team1, final Team team2, final MatchBeginningTimeGenerateStrategy strategy ) {
+	private Match generateNBAMatch( final Cup cup, final Team team1, final Team team2, final MatchDataGenerationStrategy strategy ) {
 
 		final Match match = new Match();
 
 		match.setCup( cup );
 		match.setTeam1( team1 );
-		match.setScore1( getRandomInt( 80, 115 ) );
+		match.setScore1( strategy.generateScore() );
 		match.setTeam2( team2 );
-		match.setScore2( getRandomInt( 80, 115 ) );
-		match.setBeginningTime( strategy.generate( dateTimeService ) );
+		match.setScore2( strategy.generateScore() );
+		match.setBeginningTime( strategy.generateBeginningTime( dateTimeService ) );
+		match.setMatchFinished( strategy.isFinished() );
 
 		return match;
 	}
@@ -190,7 +211,12 @@ public class TestDataInitializer {
 		return teams.get( getRandomInt( 0, teams.size() - 1 ) );
 	}
 
-	private abstract class MatchBeginningTimeGenerateStrategy {
-		abstract Date generate( DateTimeService dateTimeService );
+	private abstract class MatchDataGenerationStrategy {
+
+		abstract Date generateBeginningTime( final DateTimeService dateTimeService );
+
+		abstract int generateScore();
+
+		abstract boolean isFinished();
 	}
 }
