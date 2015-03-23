@@ -45,7 +45,6 @@ public class TestDataInitializer {
 		final Transaction transaction = session.beginTransaction();
 
 
-
 		final User user1 = new User( "kareem", "Kareem Abdul Jabbar", "$2a$10$11.wSzimtc3ALjbjokULr.LLJb4A/iDh3P6rw0..nI9JcpTpwN6M6" );
 		session.persist( user1 );
 
@@ -56,7 +55,6 @@ public class TestDataInitializer {
 		session.persist( user3 );
 
 
-
 		final Category nba = new Category( CATEGORY_NBA );
 		session.persist( nba );
 
@@ -65,8 +63,6 @@ public class TestDataInitializer {
 
 		final Category uefa = new Category( CATEGORY_UEFA );
 		session.persist( uefa );
-
-
 
 
 		final Cup nba2015Regular = new Cup( "2015 - regular", nba );
@@ -156,12 +152,12 @@ public class TestDataInitializer {
 		match.setScore1( getRandomInt( 80, 115 ) );
 		match.setTeam2( team2 );
 		match.setScore2( getRandomInt( 80, 115 ) );
-		match.setBeginningTime( dateTimeService.offset( Calendar.HOUR, - getRandomInt( 1, 512 ) ) );
+		match.setBeginningTime( dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) ) );
 
 		return match;
 	}
 
-	public int getRandomInt( final int minValue, final int maxValue ) {
+	private int getRandomInt( final int minValue, final int maxValue ) {
 
 		if ( maxValue == 0 ) {
 			return 0;
@@ -170,7 +166,7 @@ public class TestDataInitializer {
 		return minValue + ( int ) ( Math.random() * ( maxValue - minValue + 1 ) );
 	}
 
-	public  Team getRandomTeam( final Category category ) {
+	private Team getRandomTeam( final Category category ) {
 		final List<Team> teams = teamService.loadAll( category );
 
 		if ( teams == null || teams.size() == 0 ) {
