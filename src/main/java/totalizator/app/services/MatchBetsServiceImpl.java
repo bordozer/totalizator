@@ -78,6 +78,11 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 	@Override
 	public boolean isBettingAllowed( final Match match, final User user ) {
+
+		if ( match.isMatchFinished() ) {
+			return false;
+		}
+
 		final Date bettingIsAllowedTill = dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN );
 		return dateTimeService.getNow().getTime() < bettingIsAllowedTill.getTime();
 	}
