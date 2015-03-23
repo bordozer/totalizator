@@ -15,18 +15,22 @@
 				<div class="row">
 					<div class="col-lg-12"><small><%=team1Name%></small></div>
 				</div>
-				<div class="row">
-					<div class="col-lg-12 text-right result-1-cell"><%=score1%></div>
-				</div>
+				<% if( matchFinished ) { %>
+					<div class="row">
+						<div class="col-lg-12 text-right result-1-cell"><%=score1%></div>
+					</div>
+				<% } %>
 			</div>
 
 			<div class="col-lg-6 <%=style2%>">
 				<div class="row">
 					<div class="col-lg-12"><small><%=team2Name%></small></div>
 				</div>
-				<div class="row">
-					<div class="col-lg-12 result-2-cell"><%=score2%></div>
-				</div>
+				<% if( matchFinished ) { %>
+					<div class="row">
+						<div class="col-lg-12 result-2-cell"><%=score2%></div>
+					</div>
+				<% } %>
 			</div>
 
 		</div>

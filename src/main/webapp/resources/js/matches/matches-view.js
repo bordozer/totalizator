@@ -142,6 +142,11 @@ define( function ( require ) {
 
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
+			var match = this.model.get( 'match' );
+			if ( match.matchFinished ) {
+				this.$( '.js-match-container' ).addClass( 'bg-info' );
+			}
+
 			var bet = this.model.get( 'bet' );
 			if( bet == null ) {
 
@@ -199,6 +204,7 @@ define( function ( require ) {
 				, score1: match.score1
 				, score2: match.score2
 				, beginningTime: dateTimeService.formatDateDisplay( match.beginningTime )
+				, matchFinished: match.matchFinished
 				, translator: translator
 			};
 		},
