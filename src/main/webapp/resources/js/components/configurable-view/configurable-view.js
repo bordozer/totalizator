@@ -78,7 +78,6 @@ define( function ( require ) {
 
 		_getTitle: function() {
 			var filter = this.settingsModel.toJSON();
-			console.log( filter );
 
 			var categoryId = filter.categoryId;
 			var cupId = filter.cupId;
