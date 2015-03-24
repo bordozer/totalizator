@@ -16,3 +16,12 @@
 .debug {
 	border: 1px dotted red;
 }
+
+.match-team-name {
+	font-weight: bold;
+}
+
+.match-score {
+	font-size: 20px;
+	font-weight: bold;
+}

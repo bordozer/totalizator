@@ -17,6 +17,7 @@ import java.io.*;
 public class ResourcesController {
 
 	private static final String CONTENT_TYPE = "image/jpeg";
+	private static final File IMAGE_NOT_FOUND_FILE = new File( "src/main/webapp/resources/img/image-not-found.png" );
 
 	@Autowired
 	private TeamService teamService;
@@ -34,7 +35,7 @@ public class ResourcesController {
 
 	private void downloadFile( final File beingDownloadedFile, final HttpServletResponse response ) throws IOException {
 
-		final File file = beingDownloadedFile == null || ! beingDownloadedFile.isFile() || ! beingDownloadedFile.exists() ? new File( "/resources/img/image-not-found.png" ) : beingDownloadedFile;
+		final File file = beingDownloadedFile == null || ! beingDownloadedFile.isFile() || ! beingDownloadedFile.exists() ? IMAGE_NOT_FOUND_FILE : beingDownloadedFile;
 
 		response.setContentLength( ( int ) file.length() );
 		response.setContentType( CONTENT_TYPE );
