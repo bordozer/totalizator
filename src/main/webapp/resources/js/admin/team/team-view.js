@@ -144,7 +144,7 @@ define( function ( require ) {
 				, categories: this.categories
 			} ) );
 
-			this.$( '.entry-category-id' ).chosen( {} );
+			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
 
 			return this;
 		},
