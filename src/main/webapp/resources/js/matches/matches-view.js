@@ -147,13 +147,11 @@ define( function ( require ) {
 
 		renderMatchInfo: function () {
 
-//			console.log( this.model );
-
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
-				this.$( '.js-match-container' ).addClass( 'bg-info' );
+				this.$( '.js-panel-footer' ).append( "<div class='row'><div class='col-lg-12'>" + translator.matchFinishedLabel + "</div></div>" );
 			}
 
 			var bet = this.model.get( 'bet' );
@@ -163,10 +161,6 @@ define( function ( require ) {
 					this._setMatchContainerClass( 'panel-warning' );
 					this.$( '.js-panel-footer' ).append( "<div class='col-lg-8'>" + translator.noMatchBetLabel + "</div>" );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
-				}
-
-				if ( match.matchFinished ) {
-					this.$( '.js-panel-footer' ).append( "<div class='row'><div class='col-lg-12'>" + translator.matchFinishedLabel + "</div></div>" );
 				}
 
 				return this;
