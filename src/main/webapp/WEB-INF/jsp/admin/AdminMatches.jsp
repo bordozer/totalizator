@@ -9,7 +9,7 @@
 
 	<div class="admin-matches-container"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/match/match', 'translator' ], function ( $, Admin, match, Translator ) {
+		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/match/admin-matches', 'translator' ], function ( $, Admin, match, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Admin / Matches: Page Title'

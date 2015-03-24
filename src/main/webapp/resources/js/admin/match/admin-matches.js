@@ -8,8 +8,8 @@ define( function( require ) {
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
-	var Model = require( './match-model' );
-	var View = require( './match-view' );
+	var Model = require( './admin-matches-model' );
+	var View = require( './admin-matches-view' );
 
 	function init( container ) {
 
