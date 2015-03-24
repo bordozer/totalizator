@@ -135,7 +135,7 @@ define( function ( require ) {
 
 		renderBetForm: function () {
 
-			this.$el.html( this.templateMatch( this._getViewOptions() ) );
+			this.$el.html( templateMatch( this._getViewOptions() ) );
 
 			var bet = this.model.get( 'bet' );
 			var bet1 = bet != null ? bet.score1 : 0;
