@@ -14,7 +14,17 @@
 
 	<translation>
 		<nerd>Portal page / Matches: user_s match bet label</nerd>
-		<ru><![CDATA[Ваша ставка на матч]]></ru>
+		<ru><![CDATA[Ваша ставка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page / Matches: no match bet yet label</nerd>
+		<ru><![CDATA[Ставка отсутствует]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page / Matches: Match finished</nerd>
+		<ru><![CDATA[Матч завершен]]></ru>
 	</translation>
 
 	<translation>

@@ -1,50 +1,60 @@
-<div class="row js-match-container">
+<div class="panel panel-default js-match-container">
 
-	<div class="col-lg-12">
+	<div class="panel-heading">
+		#<%=matchId%> &nbsp; <strong><%=beginningTime%></strong>
+	</div>
 
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="pull-right buttons-cell"></div>
-				#<%=matchId%> &nbsp; <strong><%=beginningTime%></strong>
-			</div>
-		</div>
+	<div class="panel-body js-panel-body">
 
-		<div class="row">
+		<div class="col-lg-12">
 
-			<div class="col-lg-6 text-right <%=style1%>">
-				<div class="row">
-					<div class="col-lg-12 match-team-name"><%=team1Name%> <img src="<%=team1Logo%>" title="<%=team1Name%>"></div>
-				</div>
-				<% if( matchFinished ) { %>
+			<div class="row">
+
+				<div class="col-lg-6 text-center <%=style1%>">
 					<div class="row">
-						<div class="col-lg-12 text-right match-score result-1-cell"><%=score1%></div>
+						<div class="col-lg-12 match-team-name">
+							<%=team1Name%>
+						</div>
 					</div>
-				<% } %>
-			</div>
-
-			<div class="col-lg-6 <%=style2%>">
-				<div class="row">
-					<div class="col-lg-12 match-team-name"><img src="<%=team2Logo%>" title="<%=team2Name%>"> <%=team2Name%></div>
-				</div>
-				<% if( matchFinished ) { %>
 					<div class="row">
-						<div class="col-lg-12 match-score result-2-cell"><%=score2%></div>
+						<div class="col-lg-12"><img src="<%=team1Logo%>" title="<%=team1Name%>"></div>
 					</div>
-				<% } %>
+					<% if( matchFinished ) { %>
+						<div class="row">
+							<div class="col-lg-12 match-score result-1-cell"><%=score1%></div>
+						</div>
+					<% } %>
+				</div>
+
+				<div class="col-lg-6 text-center <%=style2%>">
+					<div class="row">
+						<div class="col-lg-12 match-team-name">
+							<%=team2Name%>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12"><img src="<%=team2Logo%>" title="<%=team2Name%>"></div>
+					</div>
+					<% if( matchFinished ) { %>
+						<div class="row">
+							<div class="col-lg-12 match-score result-2-cell"><%=score2%></div>
+						</div>
+					<% } %>
+				</div>
+
 			</div>
 
-		</div>
-
-		<div class="row">
-			<div class="col-lg-4 bet-label-cell"></div>
-			<div class="col-lg-2 js-bet-team1 text-right"></div>
-			<div class="col-lg-2 js-bet-team2"></div>
-			<div class="col-lg-4 bet-buttons-cell text-right"></div>
 		</div>
 
 	</div>
 
+	<div class="clearfix panel-footer js-panel-footer">
+		<div class="col-lg-3 bet-label-cell" style="font-size: small;"></div>
+		<div class="col-lg-3 js-bet-team1 text-right" style="font-size: small;"></div>
+		<div class="col-lg-3 js-bet-team2" style="font-size: small;"></div>
+		<div class="col-lg-3 bet-buttons-cell text-right"></div>
+	</div>
+
 </div>
 
-<hr />
 

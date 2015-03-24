@@ -20,6 +20,8 @@ define( function ( require ) {
 		title: 'Portal page: Matches'
 		, betThisMatchButtonTitleLabel: 'Portal page / Matches: Bet this match button title'
 		, matchBetLabel: 'Portal page / Matches: user_s match bet label'
+		, noMatchBetLabel: 'Portal page / Matches: no match bet yet label'
+		, matchFinishedLabel: 'Portal page / Matches: Match finished'
 		, allCategoriesLabel: 'Portal page / Matches: All categories label'
 		, allCupsLabel: 'Portal page / Matches: All cups label'
 		, createBetButtonHint: 'Portal page / Matches: Create bet button hint'
@@ -158,13 +160,20 @@ define( function ( require ) {
 			if( bet == null ) {
 
 				if ( this.model.isBettingAllowed() ) {
-					this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
+					this._setMatchContainerClass( 'panel-warning' );
+					this.$( '.bet-label-cell' ).html( translator.noMatchBetLabel );
+					this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
+				}
+
+				if ( match.matchFinished ) {
+					this.$( '.js-panel-footer' ).html( translator.matchFinishedLabel );
 				}
 
 				return this;
 			}
 
-			this.$( '.js-match-container' ).addClass( 'bg-success' );
+			this._setMatchContainerClass( 'panel-success' );
+
 			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
 			this.$( '.js-bet-team1' ).html( bet.score1 );
 			this.$( '.js-bet-team2' ).html( bet.score2 );
@@ -185,7 +194,7 @@ define( function ( require ) {
 			var bet1 = bet != null ? bet.score1 : 0;
 			var bet2 = bet != null ? bet.score2 : 0;
 
-			this.$( '.js-match-container' ).addClass( 'bg-success' );
+			this._setMatchContainerClass( 'panel-success' );
 
 			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
 
@@ -196,6 +205,11 @@ define( function ( require ) {
 			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
 
 			return this;
+		},
+
+		_setMatchContainerClass: function( clazz ) {
+			this.$( '.js-match-container' ).removeClass( 'panel-default' );
+			this.$( '.js-match-container' ).addClass( clazz );
 		},
 
 		_getViewOptions: function() {
