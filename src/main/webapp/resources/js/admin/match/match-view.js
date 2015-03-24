@@ -16,15 +16,11 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
 
-	var SettingsModel = require( 'js/components/filter/matches-filter-model' );
-	var SettingsView = require( 'js/components/filter/matches-filter-view' );
-
 	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		matchesTitleLabel: "Admin / Matches / Title: Matches"
-		, matchSettingsLabel: "Admin / Matches / Settings"
 		, matchAddLabel: "Admin / Matches / Add entry"
 		, matchEditLabel: "Admin / Matches / Edit entry"
 		, matchDeleteLabel: "Admin / Matches / Delete entry"
@@ -48,42 +44,39 @@ define( function ( require ) {
 
 		template: _.template( TemplateList ),
 
-		events: {
+		/*events: {
 			'click .add-entry-button': '_onAddClick'
-			, 'click .matches-settings': '_onSettingsClick'
-		},
+		},*/
 
 		initialize: function ( options ) {
 
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
-
-			this.settingsModel = new SettingsModel( options.settings );
-			this.settingsView = new SettingsView( { model: this.settingsModel, el: this.$el } );
-			this.settingsView.on( 'events:setting_apply', this._applySettings, this );
-			this.settingsView.on( 'events:setting_cancel', this.render, this );
-
-			this.model.on( 'sync', this.render, this );
-			this._refresh();
 		},
 
-		render: function () {
+		render: function ( filter ) {
+
+			this.model.refresh( filter );
 
 			this.$el.html( this.template( {
 				model: this.model
 				, translator: translator
 			} ) );
 
-			var self = this;
-			this.model.forEach( function( match ) {
-				self.renderEntry( match );
-			});
+			this._renderMatches();
 
-			return this.$el;
+			return this;
 		},
 
-		renderEntry: function ( model ) {
+		_renderMatches: function() {
+			var self = this;
+			this.model.forEach( function( match ) {
+				self._renderEntry( match );
+			});
+		},
+
+		_renderEntry: function ( model ) {
 			var view = new MatchView( {
 				model: model
 				, categories: this.categories
@@ -92,11 +85,6 @@ define( function ( require ) {
 			} );
 
 			return this.$( '.matches-container' ).append( view.render().$el );
-		},
-
-		_refresh: function() {
-			var data = this.settingsModel.toJSON();
-			this.model.refresh( data );
 		},
 
 		_addEntry: function() {
@@ -108,20 +96,6 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._addEntry();
-		},
-
-		_applySettings: function() {
-			this._refresh();
-		},
-
-		_renderSettings: function() {
-			this.settingsView.render();
-		},
-
-		_onSettingsClick: function( evt ) {
-			evt.preventDefault();
-
-			this._renderSettings();
 		}
 	} );
 

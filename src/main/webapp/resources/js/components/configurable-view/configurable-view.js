@@ -37,9 +37,12 @@ define( function ( require ) {
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
+
+			this.render();
 		},
 
 		render: function() {
+
 			this.$el.html( template( {
 				title: this._getTitle()
 			} ) );

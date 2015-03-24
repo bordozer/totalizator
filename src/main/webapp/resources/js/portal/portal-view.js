@@ -68,7 +68,7 @@ define( function ( require ) {
 						, cupId: cup.cupId
 					}
 				} );
-				configurableView.render();
+//				configurableView.render();
 			} );
 		}
 	} );

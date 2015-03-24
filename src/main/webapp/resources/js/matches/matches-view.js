@@ -6,8 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateMatchList = require( 'text!js/matches/templates/matches-template.html' );
-	var TemplateMatch = require( 'text!js/matches/templates/match-template.html' );
+	var template = _.template( require( 'text!js/matches/templates/matches-template.html' ) );
+	var templateMatch = _.template( require( 'text!js/matches/templates/match-template.html' ) );
 
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );
@@ -30,49 +30,18 @@ define( function ( require ) {
 
 	var MatchesView = Backbone.View.extend( {
 
-		template: _.template( TemplateMatchList ),
-
-		/*events: {
-			'click .matches-settings': '_onSettingsClick'
-		},*/
-
 		initialize: function ( options ) {
-
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
-
-//			this.settingsModel = new ConfigurableView( options.settings );
-//			this.settingsView = new SettingsView( { model: this.settingsModel, el: this.$el } );
-//			this.settingsView.on( 'events:setting_apply', this._applySettings, this );
-//			this.settingsView.on( 'events:setting_cancel', this.render, this );
-
-//			this.model.on( 'sync', this.render, this );
-//			this.refresh();
 		},
-
-		/*refresh: function( filter ) {
-//			var filter = this.settingsModel.toJSON();
-			this.filter = filter.toJSON();
-			console.log( this.filter );
-
-			this.model.refresh( this.filter );
-		},*/
 
 		render: function( filter ) {
 
 			this.model.refresh( filter );
 
-//			var categoryId = filter.categoryId;
-//			var cupId = filter.cupId;
-
-//			var filterByCategoryText = categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.allCategoriesLabel;
-//			var filterByCupText = cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
-//			var title = translator.title + ' / ' + filterByCategoryText + ' / ' + filterByCupText;
-
-			this.$el.html( this.template( {
+			this.$el.html( template( {
 				model: this.model
-//				, title: title
 				, translator: translator
 			} ) );
 
@@ -81,18 +50,14 @@ define( function ( require ) {
 			return this;
 		},
 
-		/*_applySettings: function() {
-			this._refresh();
-		},*/
-
 		_renderMatches: function() {
 			var self = this;
 			this.model.forEach( function( matchBet ) {
-				self.renderEntry( matchBet );
+				self._renderEntry( matchBet );
 			});
 		},
 
-		renderEntry: function ( model ) {
+		_renderEntry: function ( model ) {
 
 			var view = new MatchView( {
 				model: model
@@ -105,21 +70,9 @@ define( function ( require ) {
 
 			return this.$( '.match-list-container' ).append( view.render().$el );
 		}
-
-		/*_renderSettings: function() {
-			this.settingsView.render();
-		},*/
-
-		/*_onSettingsClick: function( evt ) {
-			evt.preventDefault();
-
-			this._renderSettings();
-		}*/
 	});
 
 	var MatchView = Backbone.View.extend( {
-
-		templateMatch: _.template( TemplateMatch ),
 
 		events: {
 			'click .button-bet-match': '_onBetButtonClick'
@@ -149,7 +102,7 @@ define( function ( require ) {
 
 		renderMatchInfo: function () {
 
-			this.$el.html( this.templateMatch( this._getViewOptions() ) );
+			this.$el.html( templateMatch( this._getViewOptions() ) );
 
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {

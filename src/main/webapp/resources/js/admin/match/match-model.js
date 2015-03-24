@@ -32,7 +32,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		refresh: function( data ) {
-			this.fetch( { data: data, cache: false, reset: true } );
+			this.fetch( { data: data, cache: false, reset: true, async: false } );
 		}
 	});
 
