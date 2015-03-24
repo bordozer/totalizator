@@ -80,9 +80,13 @@ define( function ( require ) {
 				, cups: this.cups
 				, teams: this.teams
 			} );
-			view.on( 'matches:render', this.render, this );
+			view.on( 'matches:render', this._triggerRender, this );
 
 			return view.render().$el;
+		},
+
+		_triggerRender: function() {
+			this.trigger( 'view:render' );
 		},
 
 		_renderNewEntry: function( model ) {

@@ -33,6 +33,7 @@ define( function ( require ) {
 			this.settingsView = new FilterView( { model: this.settingsModel } );
 
 			this.view = options.view;
+			this.view.on( 'view:render', this.render, this );
 
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
