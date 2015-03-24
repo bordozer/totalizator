@@ -84,7 +84,7 @@ define( function ( require ) {
 				, teams: this.teams
 			} );
 
-			return this.$( '.matches-container' ).append( view.render().$el );
+			return this.$( '.match-list-container' ).append( view.render().$el );
 		},
 
 		_addEntry: function() {
