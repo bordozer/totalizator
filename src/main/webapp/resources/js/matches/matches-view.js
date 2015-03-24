@@ -9,8 +9,8 @@ define( function ( require ) {
 	var TemplateMatchList = require( 'text!js/matches/templates/matches-template.html' );
 	var TemplateMatch = require( 'text!js/matches/templates/match-template.html' );
 
-	var SettingsModel = require( 'js/matches/filter/matches-filter-model' );
-	var SettingsView = require( 'js/matches/filter/matches-filter-view' );
+	var SettingsModel = require( 'js/components/filter/matches-filter-model' );
+	var SettingsView = require( 'js/components/filter/matches-filter-view' );
 
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );

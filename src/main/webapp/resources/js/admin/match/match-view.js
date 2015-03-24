@@ -16,8 +16,8 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
 
-	var SettingsModel = require( 'js/matches/filter/matches-filter-model' );
-	var SettingsView = require( 'js/matches/filter/matches-filter-view' );
+	var SettingsModel = require( 'js/components/filter/matches-filter-model' );
+	var SettingsView = require( 'js/components/filter/matches-filter-view' );
 
 	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
