@@ -186,6 +186,10 @@ public class TestDataInitializer {
 			final Team team1 = getRandomTeam( category );
 			final Team team2 = getRandomTeam( category );
 
+			if ( team1 == null || team2 == null ) {
+				continue;
+			}
+
 			if ( team1.getId() == team2.getId() ) {
 				continue;
 			}
