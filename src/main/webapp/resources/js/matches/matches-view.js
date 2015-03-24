@@ -166,7 +166,7 @@ define( function ( require ) {
 				}
 
 				if ( match.matchFinished ) {
-					this.$( '.js-panel-footer' ).html( translator.matchFinishedLabel );
+					this.$( '.js-panel-footer' ).append( "<div class='row'><div class='col-lg-12'>" + translator.matchFinishedLabel + "</div></div>" );
 				}
 
 				return this;
