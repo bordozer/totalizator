@@ -162,7 +162,7 @@ define( function ( require ) {
 				if ( this.model.isBettingAllowed() ) {
 					this._setMatchContainerClass( 'panel-warning' );
 					this.$( '.bet-label-cell' ).html( translator.noMatchBetLabel );
-					this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
+					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
 				}
 
 				if ( match.matchFinished ) {
@@ -179,8 +179,8 @@ define( function ( require ) {
 			this.$( '.js-bet-team2' ).html( bet.score2 );
 
 			if ( ! match.matchFinished ) {
-				this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet' title='" + translator.editBetButtonHint + "'></button>" );
-				this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet' title='" + translator.deleteBetButtonHint + "'></button>" );
+				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.editBetButtonHint + "'></button>" );
+				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.deleteBetButtonHint + "'></button>" );
 			}
 
 			return this;
@@ -201,8 +201,8 @@ define( function ( require ) {
 			this.$( '.js-bet-team1' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
 			this.$( '.js-bet-team2' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
-			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
-			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
+			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
+			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
 
 			return this;
 		},
