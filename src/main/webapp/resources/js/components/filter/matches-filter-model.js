@@ -9,6 +9,14 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
+		},
+
+		reset: function() {
+			this.set( {
+				categoryId: 0
+				, cupId: 0
+				, teamId: 0
+			} );
 		}
 	});
 });

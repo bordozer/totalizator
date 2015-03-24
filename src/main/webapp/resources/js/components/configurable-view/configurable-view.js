@@ -24,6 +24,7 @@ define( function ( require ) {
 
 		events: {
 			'click .js-settings-button': '_onSettingsClick'
+			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
 		},
@@ -82,6 +83,14 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._renderSettings();
+		},
+
+		_onResetFilterClick: function( evt ) {
+			evt.preventDefault();
+
+			this.settingsModel.reset();
+
+			this.render();
 		},
 
 		_onSaveSettingsClick: function( evt ) {
