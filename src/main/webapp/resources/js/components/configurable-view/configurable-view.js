@@ -48,6 +48,7 @@ define( function ( require ) {
 			} ) );
 
 			this.$( '.js-view-container' ).html( this.view.render( this.settingsModel.toJSON() ).$el );
+			this.view.delegateEvents();
 
 			return this;
 		},

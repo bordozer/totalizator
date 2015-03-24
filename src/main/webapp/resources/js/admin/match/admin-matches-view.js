@@ -42,12 +42,11 @@ define( function ( require ) {
 
 	var MatchesView = Backbone.View.extend( {
 
-		/*events: {
-			'click .add-entry-button': '_onAddClick'
-		},*/
+		events: {
+			'click .js-add-entry-button': '_onAddClick'
+		},
 
 		initialize: function ( options ) {
-
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
@@ -86,7 +85,7 @@ define( function ( require ) {
 		},
 
 		_addEntry: function() {
-			this.listenToOnce( this.model, 'add', this.renderEntry );
+			this.listenToOnce( this.model, 'add', this._renderEntry );
 			this.model.add( {} );
 		},
 
