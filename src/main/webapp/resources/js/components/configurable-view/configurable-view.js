@@ -20,6 +20,9 @@ define( function ( require ) {
 		, settingsLabel: 'Configurable view: Matches: settings'
 		, settingsButtonHint: 'Configurable view: Matches: settings button hint'
 		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'
+		, allCategoriesLabel: 'Portal page / Matches: All categories label'
+		, allCupsLabel: 'Portal page / Matches: All cups label'
+		, allTeamsLabel: 'Portal page / Matches: All teams label'
 	} );
 
 	return Backbone.View.extend( {
@@ -75,14 +78,17 @@ define( function ( require ) {
 
 		_getTitle: function() {
 			var filter = this.settingsModel.toJSON();
+			console.log( filter );
 
 			var categoryId = filter.categoryId;
 			var cupId = filter.cupId;
+			var teamId = filter.teamId;
 
 			var filterByCategoryText = categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.allCategoriesLabel;
 			var filterByCupText = cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
+			var filterByTeamText = teamId > 0 ? service.getTeam( this.teams, teamId ).teamName : translator.allTeamsLabel;
 
-			return translator.title + ' / ' + filterByCategoryText + ' / ' + filterByCupText;
+			return translator.title + ' / ' + filterByCategoryText + ' / ' + filterByCupText + ' / ' + filterByTeamText;
 		},
 
 		_onSettingsClick: function( evt ) {

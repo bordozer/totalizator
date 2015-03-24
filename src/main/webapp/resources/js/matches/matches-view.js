@@ -19,8 +19,6 @@ define( function ( require ) {
 		, matchBetLabel: 'Portal page / Matches: user_s match bet label'
 		, noMatchBetLabel: 'Portal page / Matches: no match bet yet label'
 		, matchFinishedLabel: 'Portal page / Matches: Match finished'
-		, allCategoriesLabel: 'Portal page / Matches: All categories label'
-		, allCupsLabel: 'Portal page / Matches: All cups label'
 		, createBetButtonHint: 'Portal page / Matches: Create bet button hint'
 		, editBetButtonHint: 'Portal page / Matches: Edit bet button hint'
 		, deleteBetButtonHint: 'Portal page / Matches: Delete bet button hint'
