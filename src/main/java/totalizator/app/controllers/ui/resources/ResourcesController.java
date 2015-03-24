@@ -17,7 +17,7 @@ import java.io.*;
 public class ResourcesController {
 
 	private static final String CONTENT_TYPE = "image/jpeg";
-	private static final File IMAGE_NOT_FOUND_FILE = new File( "src/main/webapp/resources/img/image-not-found.png" );
+	private static final File IMAGE_NOT_FOUND_FILE = new File( "src/main/webapp/resources/img/team-logo-not-found.png" );
 
 	@Autowired
 	private TeamService teamService;
