@@ -1,0 +1,68 @@
+package totalizator.app.controllers.ui.resources;
+
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import totalizator.app.models.Team;
+import totalizator.app.services.TeamLogoService;
+import totalizator.app.services.TeamService;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+
+@Controller
+@RequestMapping( "/resources" )
+public class ResourcesController {
+
+	private static final String CONTENT_TYPE = "image/jpeg";
+
+	@Autowired
+	private TeamService teamService;
+
+	@Autowired
+	private TeamLogoService teamLogoService;
+
+	@RequestMapping( "team/{teamId}/logo/" )
+	public void downloadUserPhoto( final @PathVariable( "teamId" ) int teamId, final HttpServletResponse response ) throws IOException {
+
+		final Team team = teamService.load( teamId );
+
+		downloadFile( teamLogoService.getTeamLogoFile( team ), response );
+	}
+
+	private void downloadFile( final File beingDownloadedFile, final HttpServletResponse response ) throws IOException {
+
+		final File file = beingDownloadedFile == null || ! beingDownloadedFile.isFile() || ! beingDownloadedFile.exists() ? new File( "/resources/img/image-not-found.png" ) : beingDownloadedFile;
+
+		response.setContentLength( ( int ) file.length() );
+		response.setContentType( CONTENT_TYPE );
+
+		final OutputStream outputStream = response.getOutputStream();
+
+		response.setHeader( "Content-Disposition", contentDisposition( file ) );
+
+		pipe( file, outputStream );
+		outputStream.close();
+	}
+
+	private static String contentDisposition( final File file ) {
+		return String.format( "filename=\"%s\"", file.getName() );
+	}
+
+	private static int pipe( final File file, final OutputStream out ) throws IOException {
+		final FileInputStream fis = new FileInputStream( file );
+		int total = pipe( fis, out );
+		fis.close();
+		return total;
+	}
+
+	private static int pipe( final InputStream inputStream, final OutputStream outputStream ) throws IOException {
+		final long copied = IOUtils.copyLarge( inputStream, outputStream );
+		if ( copied >= 0 ) {
+			return 1;
+		}
+		return -1;
+	}
+}

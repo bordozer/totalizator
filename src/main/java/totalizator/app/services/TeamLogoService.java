@@ -11,7 +11,11 @@ public interface TeamLogoService {
 
 	void createLogosDir() throws IOException;
 
-	void uploadLogo( Team team, File file ) throws IOException;
+	void uploadLogo( final Team team, final File file ) throws IOException;
 
-	File getTeamLogoFile( Team team ) throws IOException;
+	void deleteLogo( final Team team ) throws IOException;
+
+	File getTeamLogoFile( final Team team ) throws IOException;
+
+	String getTeamLogoURL( final Team team );
 }

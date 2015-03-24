@@ -11,8 +11,10 @@ import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 import totalizator.app.services.CategoryService;
+import totalizator.app.services.TeamLogoService;
 import totalizator.app.services.TeamService;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -26,6 +28,9 @@ public class TeamController {
 
 	@Autowired
 	private CategoryService categoryService;
+
+	@Autowired
+	private TeamLogoService teamLogoService;
 
 	private static final Logger LOGGER = Logger.getLogger( TeamController.class );
 
@@ -71,12 +76,15 @@ public class TeamController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{teamId}" )
-	public void delete( final @PathVariable( "teamId" ) int teamId ) {
+	public void delete( final @PathVariable( "teamId" ) int teamId ) throws IOException {
 
 		if ( teamId == 0 ) {
 			return;
 		}
 
+		final Team team = teamService.load( teamId );
+
 		teamService.delete( teamId );
+		teamLogoService.deleteLogo( team );
 	}
 }

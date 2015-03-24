@@ -35,7 +35,7 @@ public class MatchesBetsController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) { //@RequestBody
+	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 		return getMatchBetDTOs( principal, matchService.loadAll( dto ) );
 	}
 

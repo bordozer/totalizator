@@ -140,6 +140,8 @@ define( function ( require ) {
 
 		renderMatchInfo: function () {
 
+//			console.log( this.model );
+
 			this.$el.html( this.templateMatch( this._getViewOptions() ) );
 
 			var match = this.model.get( 'match' );
@@ -205,6 +207,8 @@ define( function ( require ) {
 				, style2: winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : ''
 				, score1: match.score1
 				, score2: match.score2
+				, team1Logo: match.team1Logo
+				, team2Logo: match.team2Logo
 				, beginningTime: dateTimeService.formatDateDisplay( match.beginningTime )
 				, matchFinished: match.matchFinished
 				, translator: translator

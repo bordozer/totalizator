@@ -31,6 +31,14 @@ public class TeamLogoServiceImpl implements TeamLogoService {
 	}
 
 	@Override
+	public void deleteLogo( final Team team ) throws IOException {
+		final File logoFile = getTeamLogoFile( team );
+		if ( logoFile.exists() ) {
+			FileUtils.fileDelete( logoFile.getPath() );
+		}
+	}
+
+	@Override
 	public File getTeamLogoFile( final Team team ) throws IOException {
 
 		final File categoryLogosDir = getCategoryLogosDir( team.getCategory() );
@@ -38,6 +46,11 @@ public class TeamLogoServiceImpl implements TeamLogoService {
 		assertDirExists( categoryLogosDir );
 
 		return new File( categoryLogosDir, team.getLogoFileName() );
+	}
+
+	@Override
+	public String getTeamLogoURL( final Team team ) {
+		return String.format( "/resources/team/%d/logo/", team.getId() );
 	}
 
 	private File getCategoryLogosDir( final Category category ) {

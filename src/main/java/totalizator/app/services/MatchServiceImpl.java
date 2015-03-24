@@ -2,6 +2,7 @@ package totalizator.app.services;
 
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -24,6 +26,11 @@ public class MatchServiceImpl implements MatchService {
 
 	@Autowired
 	private TeamService teamService;
+
+	@Autowired
+	private TeamLogoService teamLogoService;
+
+	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
 	@Override
 	@Transactional( readOnly = true )
@@ -119,9 +126,11 @@ public class MatchServiceImpl implements MatchService {
 
 		dto.setTeam1Id( match.getTeam1().getId() );
 		dto.setScore1( match.getScore1() );
+		dto.setTeam1Logo( teamLogoService.getTeamLogoURL( match.getTeam1() ) );
 
 		dto.setTeam2Id( match.getTeam2().getId() );
 		dto.setScore2( match.getScore2() );
+		dto.setTeam2Logo( teamLogoService.getTeamLogoURL( match.getTeam2() ) );
 
 		dto.setBeginningTime( match.getBeginningTime() );
 
