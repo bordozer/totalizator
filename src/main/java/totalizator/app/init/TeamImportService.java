@@ -1,5 +1,6 @@
 package totalizator.app.init;
 
+import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -17,37 +18,56 @@ import static com.google.common.collect.Lists.newArrayList;
 @Component
 class TeamImportService {
 
-	private static final String NBA = "src/main/java/totalizator/app/init/teams/nba/teams.xml";
-	private static final String NCAA = "src/main/java/totalizator/app/init/teams/ncaa/teams.xml";
-	private static final String UEFA = "src/main/java/totalizator/app/init/teams/uefa/teams.xml";
+	private static final File RESOURCES_DIR = new File( "src/main/java/totalizator/app/init/teams/" );
+	private static final String TEAMS_XML = "teams.xml";
+	private static final String LOGOS_DIR_NAME = "logos";
 
-	List<Team> importNBA( final Category category ) throws DocumentException {
+	private static final String NBA = "nba";
+	private static final String NCAA = "ncaa";
+	private static final String UEFA = "uefa";
+
+	List<TeamData> importNBA( final Category category ) throws DocumentException {
 		return doImport( NBA, category );
 	}
 
-	List<Team> importNCAA( final Category category ) throws DocumentException {
+	List<TeamData> importNCAA( final Category category ) throws DocumentException {
 		return doImport( NCAA, category );
 	}
 
-	List<Team> importUEFA( final Category category ) throws DocumentException {
+	List<TeamData> importUEFA( final Category category ) throws DocumentException {
 		return doImport( UEFA, category );
 	}
 
-	private List<Team> doImport( final String file, final Category category ) throws DocumentException {
+	private List<TeamData> doImport( final String file, final Category category ) throws DocumentException {
 
 		final SAXReader reader = new SAXReader( false );
-		final Document document = reader.read( new File( file ) );
+		final String path = String.format( "%s/%s", RESOURCES_DIR, file );
+		final Document document = reader.read( new File( path, TEAMS_XML ) );
 
-		final List<Team> result = newArrayList();
+		final List<TeamData> result = newArrayList();
 
 		final Iterator iterator = document.getRootElement().elementIterator( "team" );
 		while ( iterator.hasNext() ) {
 
 			final Element teamElement = ( Element ) iterator.next();
-			final String name = teamElement.element( "name" ).getText();
-//			final String logoImageName = teamElement.element( "logoImageName" ).getText();
+			final String teamName = teamElement.element( "name" ).getText();
 
-			result.add( new Team( name, category ) );
+			final Team team = new Team( teamName, category );
+
+			final Element logoElement = teamElement.element( "logo" );
+			if ( logoElement == null ) {
+				continue;
+			}
+
+			File logo = null;
+			final String logoFileName = logoElement.getText();
+			if ( StringUtils.isNotEmpty( logoFileName ) ) {
+				final File logosDir = new File( path, LOGOS_DIR_NAME );
+				logo = new File( logosDir, logoFileName );
+				team.setLogoFileName( logoFileName );
+			}
+
+			result.add( new TeamData( team, logo ) );
 		}
 
 		return result;

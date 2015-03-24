@@ -36,6 +36,8 @@ public class Team extends AbstractEntity {
 	@JoinColumn(name="categoryId")
 	private Category category;
 
+	private String logoFileName;
+
 	public Team() {
 	}
 
@@ -58,6 +60,14 @@ public class Team extends AbstractEntity {
 
 	public void setCategory( final Category category ) {
 		this.category = category;
+	}
+
+	public String getLogoFileName() {
+		return logoFileName;
+	}
+
+	public void setLogoFileName( final String logoFileName ) {
+		this.logoFileName = logoFileName;
 	}
 
 	@Override

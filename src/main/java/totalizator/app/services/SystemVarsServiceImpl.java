@@ -23,6 +23,7 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 		final List<String> propertyFiles = newArrayList();
 		propertyFiles.add( "database" );
+		propertyFiles.add( "system" );
 
 		config.clear();
 
@@ -66,6 +67,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	@Override
 	public String getDatabaseUserPassword() {
 		return config.getString( "database.user.password" );
+	}
+
+	@Override
+	public String getLogosPath() {
+		return config.getString( "system.logos.path" );
 	}
 
 	private File getPropertyFile( final String fileName ) {

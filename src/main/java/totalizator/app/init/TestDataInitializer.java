@@ -1,6 +1,7 @@
 package totalizator.app.init;
 
 import org.apache.log4j.Logger;
+import org.codehaus.plexus.util.FileUtils;
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,10 +9,14 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.*;
+import totalizator.app.services.SystemVarsService;
+import totalizator.app.services.TeamLogoService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.utils.DateTimeService;
 
 import javax.persistence.EntityManagerFactory;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +41,9 @@ public class TestDataInitializer {
 
 	@Autowired
 	private TeamImportService teamImportService;
+
+	@Autowired
+	private TeamLogoService teamLogoService;
 
 	public void init() throws Exception {
 
@@ -82,6 +90,8 @@ public class TestDataInitializer {
 		final Cup uefa2018WorldCup = new Cup( "World cup 2018", uefa );
 		session.persist( uefa2018WorldCup );
 
+		teamLogoService.deleteLogosDir();
+		teamLogoService.createLogosDir();
 
 		createNBATeams( session, nba );
 
@@ -140,24 +150,31 @@ public class TestDataInitializer {
 		LOGGER.debug( "========================================================================" );
 	}
 
-	private void createNBATeams( final Session session, final Category category ) throws DocumentException {
-		final List<Team> teams = teamImportService.importNBA( category );
-		for ( final Team team : teams ) {
-			session.persist( team );
-		}
+	private void createNBATeams( final Session session, final Category category ) throws DocumentException, IOException {
+		final List<TeamData> teams = teamImportService.importNBA( category );
+		createTeams( session, teams );
 	}
 
-	private void createNCAATeams( final Session session, final Category category ) throws DocumentException {
-		final List<Team> teams = teamImportService.importNCAA( category );
-		for ( final Team team : teams ) {
-			session.persist( team );
-		}
+	private void createNCAATeams( final Session session, final Category category ) throws DocumentException, IOException {
+		final List<TeamData> teams = teamImportService.importNCAA( category );
+		createTeams( session, teams );
 	}
 
-	private void createUEFATeams( final Session session, final Category category ) throws DocumentException {
-		final List<Team> teams = teamImportService.importUEFA( category );
-		for ( final Team team : teams ) {
+	private void createUEFATeams( final Session session, final Category category ) throws DocumentException, IOException {
+		final List<TeamData> teams = teamImportService.importUEFA( category );
+		createTeams( session, teams );
+	}
+
+	private void createTeams( final Session session, final List<TeamData> teams ) throws IOException {
+		for ( final TeamData teamData : teams ) {
+
+			final Team team = teamData.getTeam();
+
 			session.persist( team );
+
+			if ( teamData.getLogo() != null ) {
+				teamLogoService.uploadLogo( team, teamData.getLogo() );
+			}
 		}
 	}
 

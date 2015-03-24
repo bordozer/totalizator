@@ -8,27 +8,27 @@
 
 	<team>
 		<name>Boston Celtics</name>
-		<logoImageName>bos</logoImageName>
+		<logo>bos.gif</logo>
 	</team>
 
 	<team>
 		<name>Brooklyn Nets</name>
-		<logoImageName>nets</logoImageName>
+		<logo>nets.gif</logo>
 	</team>
 
 	<team>
 		<name>New York Knicks</name>
-		<logoImageName>nyk</logoImageName>
+		<logo>nyk.gif</logo>
 	</team>
 
 	<team>
 		<name>Philadelphia 76ers</name>
-		<logoImageName>phi</logoImageName>
+		<logo>phi.gif</logo>
 	</team>
 
 	<team>
 		<name>Toronto Raptors</name>
-		<logoImageName>raptors</logoImageName>
+		<logo>raptors.gif</logo>
 	</team>
 
 	<!-- / Atlantic -->
@@ -37,27 +37,27 @@
 
 	<team>
 		<name>Chicago Bulls</name>
-		<logoImageName>chi</logoImageName>
+		<logo>chi.gif</logo>
 	</team>
 
 	<team>
 		<name>Cleveland Cavaliers</name>
-		<logoImageName>cavaliers</logoImageName>
+		<logo>cavaliers.gif</logo>
 	</team>
 
 	<team>
 		<name>Detroit Pistons</name>
-		<logoImageName>pistons</logoImageName>
+		<logo>pistons.gif</logo>
 	</team>
 
 	<team>
 		<name>Indiana Pacers</name>
-		<logoImageName>ind</logoImageName>
+		<logo>ind.gif</logo>
 	</team>
 
 	<team>
 		<name>Milwaukee Bucks</name>
-		<logoImageName>bucks</logoImageName>
+		<logo>bucks.gif</logo>
 	</team>
 
 	<!-- / Central -->
@@ -66,27 +66,27 @@
 
 	<team>
 		<name>Atlanta Hawks</name>
-		<logoImageName>hawks</logoImageName>
+		<logo>hawks.gif</logo>
 	</team>
 
 	<team>
 		<name>Charlotte Hornets</name>
-		<logoImageName>cha_hornets</logoImageName>
+		<logo>cha_hornets.gif</logo>
 	</team>
 
 	<team>
 		<name>Miami Heat</name>
-		<logoImageName>heat</logoImageName>
+		<logo>heat.gif</logo>
 	</team>
 
 	<team>
 		<name>Orlando Magic</name>
-		<logoImageName>magic</logoImageName>
+		<logo>magic.gif</logo>
 	</team>
 
 	<team>
 		<name>Washington Wizards</name>
-		<logoImageName>wizards</logoImageName>
+		<logo>wizards.gif</logo>
 	</team>
 
 	<!-- / Southeast -->
@@ -97,27 +97,27 @@
 
 	<team>
 		<name>Dallas Mavericks</name>
-		<logoImageName>dal</logoImageName>
+		<logo>dal.gif</logo>
 	</team>
 
 	<team>
 		<name>Houston Rockets</name>
-		<logoImageName>rockets</logoImageName>
+		<logo>rockets.gif</logo>
 	</team>
 
 	<team>
 		<name>Memphis Grizzlies</name>
-		<logoImageName>mem</logoImageName>
+		<logo>mem.gif</logo>
 	</team>
 
 	<team>
 		<name>New Orleans Pelicans</name>
-		<logoImageName>pelicans</logoImageName>
+		<logo>pelicans.gif</logo>
 	</team>
 
 	<team>
 		<name>San Antonio Spurs</name>
-		<logoImageName>spurs</logoImageName>
+		<logo>spurs.gif</logo>
 	</team>
 
 	<!-- / Southwest -->
@@ -126,27 +126,27 @@
 
 	<team>
 		<name>Denver Nuggets</name>
-		<logoImageName>nuggets</logoImageName>
+		<logo>nuggets.gif</logo>
 	</team>
 
 	<team>
 		<name>Minnesota Timberwolves</name>
-		<logoImageName>min</logoImageName>
+		<logo>min.gif</logo>
 	</team>
 
 	<team>
 		<name>Oklahoma City Thunder</name>
-		<logoImageName>okc</logoImageName>
+		<logo>okc.gif</logo>
 	</team>
 
 	<team>
 		<name>Portland Trail Blazers</name>
-		<logoImageName>por</logoImageName>
+		<logo>por.gif</logo>
 	</team>
 
 	<team>
 		<name>Utah Jazz</name>
-		<logoImageName>uth</logoImageName>
+		<logo>uth.gif</logo>
 	</team>
 
 	<!-- /Northwest -->
@@ -155,27 +155,27 @@
 
 	<team>
 		<name>Golden State Warriors</name>
-		<logoImageName>warriors</logoImageName>
+		<logo>warriors.gif</logo>
 	</team>
 
 	<team>
 		<name>Los Angeles Clippers</name>
-		<logoImageName>clippers</logoImageName>
+		<logo>clippers.gif</logo>
 	</team>
 
 	<team>
 		<name>Los Angeles Lakers</name>
-		<logoImageName>lakers</logoImageName>
+		<logo>lakers.gif</logo>
 	</team>
 
 	<team>
 		<name>Phoenix Suns</name>
-		<logoImageName>suns</logoImageName>
+		<logo>suns.gif</logo>
 	</team>
 
 	<team>
 		<name>Sacramento Kings</name>
-		<logoImageName>kings</logoImageName>
+		<logo>kings.gif</logo>
 	</team>
 
 	<!-- / Pacific -->
