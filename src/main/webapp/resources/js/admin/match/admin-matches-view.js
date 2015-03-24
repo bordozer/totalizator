@@ -12,9 +12,9 @@ define( function ( require ) {
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );
 
-	var templateList = _.template( require( 'text!js/admin/match/templates/matches-template.html' ) );
-	var templateEntry = _.template( require( 'text!js/admin/match/templates/match-template.html' ) );
-	var templateEntryEdit = _.template( require( 'text!js/admin/match/templates/match-edit-template.html' ) );
+	var templateList = _.template( require( 'text!js/admin/match/templates/admin-matches-template.html' ) );
+	var templateEntry = _.template( require( 'text!js/admin/match/templates/admin-match-info-template.html' ) );
+	var templateEntryEdit = _.template( require( 'text!js/admin/match/templates/admin-match-edit-template.html' ) );
 
 	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
