@@ -194,7 +194,7 @@ define( function ( require ) {
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
-			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
+			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
 
 			return this;
