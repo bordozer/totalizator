@@ -161,7 +161,7 @@ define( function ( require ) {
 
 				if ( this.model.isBettingAllowed() ) {
 					this._setMatchContainerClass( 'panel-warning' );
-					this.$( '.bet-label-cell' ).html( translator.noMatchBetLabel );
+					this.$( '.js-panel-footer' ).append( "<div class='col-lg-8'>" + translator.noMatchBetLabel + "</div>" );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
 				}
 
@@ -174,9 +174,9 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-success' );
 
-			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
-			this.$( '.js-bet-team1' ).html( bet.score1 );
-			this.$( '.js-bet-team2' ).html( bet.score2 );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.matchBetLabel + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'>" + bet.score1 + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + bet.score2 + "</div>" );
 
 			if ( ! match.matchFinished ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.editBetButtonHint + "'></button>" );
@@ -194,12 +194,11 @@ define( function ( require ) {
 			var bet1 = bet != null ? bet.score1 : 0;
 			var bet2 = bet != null ? bet.score2 : 0;
 
-			this._setMatchContainerClass( 'panel-success' );
+			this._setMatchContainerClass( 'panel-danger' );
 
-			this.$( '.bet-label-cell' ).html( translator.matchBetLabel );
-
-			this.$( '.js-bet-team1' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
-			this.$( '.js-bet-team2' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.matchBetLabel + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
