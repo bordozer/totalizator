@@ -120,8 +120,8 @@ define( function ( require ) {
 			this._setMatchContainerClass( 'panel-success' );
 
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.matchBetLabel + "</div>" );
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'>" + bet.score1 + "</div>" );
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + bet.score2 + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
 			if ( ! match.matchFinished ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.editBetButtonHint + "'></button>" );
