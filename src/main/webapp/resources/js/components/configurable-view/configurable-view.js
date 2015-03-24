@@ -18,6 +18,8 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: 'Portal page: Matches'
 		, settingsLabel: 'Configurable view: Matches: settings'
+		, settingsButtonHint: 'Configurable view: Matches: settings button hint'
+		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'
 	} );
 
 	return Backbone.View.extend( {
@@ -31,7 +33,9 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.settingsModel = new FilterModel( options.settings );
-			this.settingsView = new FilterView( { model: this.settingsModel } );
+			this.settingsView = new FilterView( {
+				model: this.settingsModel
+			} );
 
 			this.view = options.view;
 			this.view.on( 'view:render', this.render, this );
@@ -47,6 +51,7 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				title: this._getTitle()
+				, translator: translator
 			} ) );
 
 			this.$( '.js-view-container' ).html( this.view.render( this.settingsModel.toJSON() ).$el );
@@ -59,6 +64,7 @@ define( function ( require ) {
 
 			this.$el.html( templateSettings( {
 				title: translator.settingsLabel
+				, translator: translator
 			} ) );
 
 			this.$( '.js-category-cup-team-filter' ).html( this.settingsView.render().$el );
