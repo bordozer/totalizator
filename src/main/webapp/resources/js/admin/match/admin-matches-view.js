@@ -69,7 +69,7 @@ define( function ( require ) {
 		_renderMatches: function() {
 			var self = this;
 			this.model.forEach( function( match ) {
-				self._renderEntry( match );
+				self.$( '.match-list-container' ).append( self._renderEntry( match ) );
 			});
 		},
 
@@ -80,12 +80,17 @@ define( function ( require ) {
 				, cups: this.cups
 				, teams: this.teams
 			} );
+			view.on( 'matches:render', this.render, this );
 
-			return this.$( '.match-list-container' ).append( view.render().$el );
+			return view.render().$el;
+		},
+
+		_renderNewEntry: function( model ) {
+			this.$( '.match-list-container' ).html( this._renderEntry( model ) );
 		},
 
 		_addEntry: function() {
-			this.listenToOnce( this.model, 'add', this._renderEntry );
+			this.listenToOnce( this.model, 'add', this._renderNewEntry );
 			this.model.add( {} );
 		},
 
@@ -204,7 +209,10 @@ define( function ( require ) {
 				return;
 			}
 
-			this.model.save();
+			var rend = _.bind( function() {
+				this.trigger( 'matches:render' );
+			}, this );
+			this.model.save().then( rend );
 		},
 
 		_bind: function() {
@@ -314,6 +322,8 @@ define( function ( require ) {
 
 			this.model.destroy();
 			this.remove();
+
+			this.trigger( 'matches:render' );
 		}
 	} );
 
