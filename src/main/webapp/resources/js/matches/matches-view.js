@@ -185,7 +185,6 @@ define( function ( require ) {
 			var score2 = this.$( '#score2' ).val();
 
 			var bet = service.saveBet( match.matchId, score1, score2 );
-			console.log( bet );
 
 			this.model.set( { bet: bet } );
 			this.model.setModeMatchInfo();
