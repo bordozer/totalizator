@@ -48,6 +48,51 @@
 	</translation>
 
 	<translation>
+		<nerd>Portal page / Matches: Create bet button hint</nerd>
+		<ru><![CDATA[Сделать ставку на матч]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page / Matches: Edit bet button hint</nerd>
+		<ru><![CDATA[Изменить ставку]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page / Matches: Delete bet button hint</nerd>
+		<ru><![CDATA[Отменить ставку]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page / Matches: Bet editing save button hint</nerd>
+		<ru><![CDATA[Сохранить изменения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Portal page / Matches: Bet editing cancel button hint</nerd>
+		<ru><![CDATA[Отменить изменения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

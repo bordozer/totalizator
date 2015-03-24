@@ -22,6 +22,11 @@ define( function ( require ) {
 		, matchBetLabel: 'Portal page / Matches: user_s match bet label'
 		, allCategoriesLabel: 'Portal page / Matches: All categories label'
 		, allCupsLabel: 'Portal page / Matches: All cups label'
+		, createBetButtonHint: 'Portal page / Matches: Create bet button hint'
+		, editBetButtonHint: 'Portal page / Matches: Edit bet button hint'
+		, deleteBetButtonHint: 'Portal page / Matches: Delete bet button hint'
+		, betEditingSaveButtonHint: 'Portal page / Matches: Bet editing save button hint'
+		, betEditingCancelButtonHint: 'Portal page / Matches: Bet editing cancel button hint'
 	} );
 
 	var MatchesView = Backbone.View.extend( {
@@ -153,7 +158,7 @@ define( function ( require ) {
 			if( bet == null ) {
 
 				if ( this.model.isBettingAllowed() ) {
-					this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match'></button>" );
+					this.$( '.buttons-cell' ).html( "<button class='button-icon fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
 				}
 
 				return this;
@@ -165,8 +170,8 @@ define( function ( require ) {
 			this.$( '.js-bet-team2' ).html( bet.score2 );
 
 			if ( ! match.matchFinished ) {
-				this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
-				this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet'></button>" );
+				this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet' title='" + translator.editBetButtonHint + "'></button>" );
+				this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet' title='" + translator.deleteBetButtonHint + "'></button>" );
 			}
 
 			return this;
@@ -187,8 +192,8 @@ define( function ( require ) {
 			this.$( '.js-bet-team1' ).html( "<input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'>" );
 			this.$( '.js-bet-team2' ).html( "<input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'>" );
 
-			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save'></button>" );
-			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard'></button>" );
+			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
+			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
 
 			return this;
 		},
