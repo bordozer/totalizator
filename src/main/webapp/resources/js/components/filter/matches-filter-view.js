@@ -16,6 +16,9 @@ define( function ( require ) {
 		title: 'Matches: Settings'
 		, buttonSaveSettingsLabel: 'Matches: Settings: save button'
 		, buttonCancelSettingsLabel: 'Matches: Settings: cancel button'
+		, categoryLabel: 'Configurable view / Filter: Category'
+		, cupLabel: 'Configurable view / Filter: Cup'
+		, teamLabel: 'Configurable view / Filter: Team'
 	} );
 
 	return Backbone.View.extend( {

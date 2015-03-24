@@ -1,7 +1,7 @@
 <div class="row">
 
 	<div class="row">
-		<div class="col-lg-6 text-right">Category</div>
+		<div class="col-lg-5 text-right"><%=translator.categoryLabel%></div>
 		<div class="col-lg-6">
 			<select class="chosen-select" id="settings-category-id">
 				<option value="0">&nbsp;</option>
@@ -13,7 +13,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-6 text-right">Cup</div>
+		<div class="col-lg-5 text-right"><%=translator.cupLabel%></div>
 		<div class="col-lg-6">
 			<% if( model.categoryId > 0 ) { %>
 				<select class="chosen-select" id="settings-cup-id">
@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-6 text-right">Team</div>
+		<div class="col-lg-5 text-right"><%=translator.teamLabel%></div>
 		<div class="col-lg-6">
 			<% if( model.categoryId > 0 ) { %>
 				<select class="chosen-select" id="settings-team-id">

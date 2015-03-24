@@ -17,6 +17,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Portal page: Matches'
+		, settingsLabel: 'Configurable view: Matches: settings'
 	} );
 
 	return Backbone.View.extend( {
@@ -40,10 +41,9 @@ define( function ( require ) {
 
 		render: function() {
 			this.$el.html( template( {
-				title: this._getTitle( 'View' )
+				title: this._getTitle()
 			} ) );
 
-//			console.log( this.settingsModel.toJSON() );
 			this.$( '.js-view-container' ).html( this.view.render( this.settingsModel.toJSON() ).$el );
 
 			return this;
@@ -52,7 +52,7 @@ define( function ( require ) {
 		_renderSettings: function() {
 
 			this.$el.html( templateSettings( {
-				title: this._getTitle( 'Settings' )
+				title: translator.settingsLabel
 			} ) );
 
 			this.$( '.js-category-cup-team-filter' ).html( this.settingsView.render().$el );
@@ -61,7 +61,7 @@ define( function ( require ) {
 			return this;
 		},
 
-		_getTitle: function( text ) {
+		_getTitle: function() {
 			var filter = this.settingsModel.toJSON();
 
 			var categoryId = filter.categoryId;
@@ -70,7 +70,7 @@ define( function ( require ) {
 			var filterByCategoryText = categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.allCategoriesLabel;
 			var filterByCupText = cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
 
-			return translator.title + ' / ' + filterByCategoryText + ' / ' + filterByCupText + ' - ' + text;
+			return translator.title + ' / ' + filterByCategoryText + ' / ' + filterByCupText;
 		},
 
 		_onSettingsClick: function( evt ) {
