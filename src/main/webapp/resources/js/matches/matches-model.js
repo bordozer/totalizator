@@ -28,6 +28,10 @@ define( ["backbone"], function ( Backbone ) {
 
 		isBettingAllowed: function() {
 			return this.get( 'bettingAllowed' );
+		},
+
+		resetBet: function() {
+			this.set( { bet: null } );
 		}
 	});
 

@@ -49,18 +49,18 @@ public class MatchesBetsController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.POST, value = "/{matchId}/bets/{score1}/{score2}/", produces = APPLICATION_JSON_VALUE )
-	public void saveBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "score1" ) int score1, final @PathVariable( "score2" ) int score2 ) {
+	public BetDTO saveBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "score1" ) int score1, final @PathVariable( "score2" ) int score2 ) {
 
 		final User user = userService.findByLogin( principal.getName() );
 
 		final Match match = matchService.load( matchId );
-		final MatchBet savedMatchBet = matchBetsService.load( user, match );
-		if ( savedMatchBet != null ) {
-			savedMatchBet.setBetScore1( score1 );
-			savedMatchBet.setBetScore2( score2 );
-			matchBetsService.save( savedMatchBet );
+		final MatchBet existingBet = matchBetsService.load( user, match );
+		if ( existingBet != null ) {
+			existingBet.setBetScore1( score1 );
+			existingBet.setBetScore2( score2 );
+			matchBetsService.save( existingBet );
 
-			return;
+			return getBetDTO( existingBet, user );
 		}
 
 		final MatchBet matchBet = new MatchBet();
@@ -70,7 +70,9 @@ public class MatchesBetsController {
 		matchBet.setBetScore2( score2 );
 		matchBet.setBetTime( new Date() );
 
-		matchBetsService.save( matchBet );
+		final MatchBet result = matchBetsService.save( matchBet );
+
+		return getBetDTO( result, user );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -103,10 +105,7 @@ public class MatchesBetsController {
 				continue;
 			}
 
-			final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
-			betDTO.setMatchBetId( matchBet.getId() );
-			betDTO.setScore1( matchBet.getBetScore1() );
-			betDTO.setScore2( matchBet.getBetScore2() );
+			final BetDTO betDTO = getBetDTO( matchBet, user );
 
 			matchBetDTO.setBet( betDTO );
 
@@ -114,5 +113,15 @@ public class MatchesBetsController {
 		}
 
 		return result;
+	}
+
+	private BetDTO getBetDTO( final MatchBet matchBet, final User user ) {
+		final MatchDTO matchDTO = matchService.initDTOFromModel( matchBet.getMatch() );
+		final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
+		betDTO.setMatchBetId( matchBet.getId() );
+		betDTO.setScore1( matchBet.getBetScore1() );
+		betDTO.setScore2( matchBet.getBetScore2() );
+
+		return betDTO;
 	}
 }

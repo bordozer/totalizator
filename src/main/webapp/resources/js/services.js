@@ -16,18 +16,20 @@ define( function ( require ) {
 	return {
 
 		saveBet: function( matchId, score1, score2 ) {
-
+			var result = {};
 			$.ajax( {
 				method: 'POST',
 				url: '/rest/matches/' + matchId + '/bets/' + score1 + '/' + score2 + '/',
 				async: false,
 				success: function ( response ) {
-
+					result = response;
 				},
 				error: function() {
 					alert( 'Bet saving failed' ); // TODO
 				}
-			} )
+			} );
+
+			return result;
 		},
 
 		deleteBet: function( matchId, matchBetId ) {

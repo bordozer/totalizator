@@ -64,8 +64,6 @@ define( function ( require ) {
 				, teams: this.teams
 			} );
 
-			view.on( 'events:refresh', this._refresh, this );
-
 			return this.$( '.match-list-container' ).append( view.render().$el );
 		}
 	});
@@ -186,11 +184,13 @@ define( function ( require ) {
 			var score1 = this.$( '#score1' ).val();
 			var score2 = this.$( '#score2' ).val();
 
-			service.saveBet( match.matchId, score1, score2 );
+			var bet = service.saveBet( match.matchId, score1, score2 );
+			console.log( bet );
 
+			this.model.set( { bet: bet } );
 			this.model.setModeMatchInfo();
 
-			this.trigger( 'events:refresh' );
+			this.render();
 		},
 
 		_deleteBet: function() {
@@ -201,8 +201,9 @@ define( function ( require ) {
 			service.deleteBet( match.matchId, bet.matchBetId );
 
 			this.model.setModeMatchInfo();
+			this.model.resetBet();
 
-			this.trigger( 'events:refresh' );
+			this.render();
 		},
 
 		_goBetMode: function() {
