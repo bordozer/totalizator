@@ -12,9 +12,9 @@ define( function ( require ) {
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );
 
-	var TemplateList = require( 'text!js/admin/match/templates/matches-template.html' );
-	var TemplateEntry = require( 'text!js/admin/match/templates/match-template.html' );
-	var TemplateEntryEdit = require( 'text!js/admin/match/templates/match-edit-template.html' );
+	var templateList = _.template( require( 'text!js/admin/match/templates/matches-template.html' ) );
+	var templateEntry = _.template( require( 'text!js/admin/match/templates/match-template.html' ) );
+	var templateEntryEdit = _.template( require( 'text!js/admin/match/templates/match-edit-template.html' ) );
 
 	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
@@ -42,8 +42,6 @@ define( function ( require ) {
 
 	var MatchesView = Backbone.View.extend( {
 
-		template: _.template( TemplateList ),
-
 		/*events: {
 			'click .add-entry-button': '_onAddClick'
 		},*/
@@ -59,7 +57,7 @@ define( function ( require ) {
 
 			this.model.refresh( filter );
 
-			this.$el.html( this.template( {
+			this.$el.html( templateList( {
 				model: this.model
 				, translator: translator
 			} ) );
@@ -105,9 +103,6 @@ define( function ( require ) {
 
 	var MatchView = Backbone.View.extend( {
 
-		templateView: _.template( TemplateEntry ),
-		templateEdit: _.template( TemplateEntryEdit ),
-
 		events: {
 			'click .entry-edit': '_onEditClick'
 			, 'click .entry-save': '_onSaveClick'
@@ -141,7 +136,7 @@ define( function ( require ) {
 
 			var winnerId = modelJSON.score1 > modelJSON.score2 ? modelJSON.team1Id : modelJSON.score1 < modelJSON.score2 ? modelJSON.team2Id : 0;
 
-			this.$el.html( this.templateView( {
+			this.$el.html( templateEntry( {
 				model: modelJSON
 				, matchId: modelJSON.matchId
 				, categoryName: service.getCategory( this.categories, modelJSON.categoryId ).categoryName
@@ -167,7 +162,7 @@ define( function ( require ) {
 			var modelJSON = this.model.toJSON();
 			var categoryId = this.model.get( 'categoryId' );
 
-			this.$el.html( this.templateEdit( {
+			this.$el.html( templateEntryEdit( {
 				model: modelJSON
 				, title: modelJSON.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, modelJSON.team1Id ).teamName + ' - ' + service.getTeam( this.teams, modelJSON.team2Id ).teamName
 				, matchId: modelJSON.matchId
