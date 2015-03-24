@@ -162,8 +162,10 @@ define( function ( require ) {
 			this.$( '.js-bet-team1' ).html( bet.score1 );
 			this.$( '.js-bet-team2' ).html( bet.score2 );
 
-			this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
-			this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet'></button>" );
+			if ( ! match.matchFinished ) {
+				this.$( '.bet-buttons-cell' ).html( "<button class='button-icon fa fa-edit button-edit-bet'></button>" );
+				this.$( '.bet-buttons-cell' ).append( "<button class='button-icon fa fa-close button-delete-bet'></button>" );
+			}
 
 			return this;
 		},
