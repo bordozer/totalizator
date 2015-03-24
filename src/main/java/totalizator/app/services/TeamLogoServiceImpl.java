@@ -1,5 +1,6 @@
 package totalizator.app.services;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.plexus.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,13 @@ public class TeamLogoServiceImpl implements TeamLogoService {
 
 		assertDirExists( categoryLogosDir );
 
-		return new File( categoryLogosDir, team.getLogoFileName() );
+		final String logoFileName = team.getLogoFileName();
+
+		if ( StringUtils.isNoneEmpty( logoFileName ) ) {
+			return new File( categoryLogosDir, logoFileName );
+		}
+
+		return null;
 	}
 
 	@Override

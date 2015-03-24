@@ -56,6 +56,7 @@ class TeamImportService {
 
 			final Element logoElement = teamElement.element( "logo" );
 			if ( logoElement == null ) {
+				result.add( new TeamData( team ) );
 				continue;
 			}
 
