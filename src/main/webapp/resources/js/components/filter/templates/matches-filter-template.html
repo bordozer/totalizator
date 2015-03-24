@@ -1,61 +1,43 @@
-<div class="panel panel-info">
+<div class="row">
 
-	<div class="panel-heading clearfix">
-		<div class="btn-group  pull-right">
-			<button type="button" class="btn btn-primary fa fa-check matches-settings-save" title="<%=translator.buttonSaveSettingsLabel%>"></button>
-			<button type="button" class="btn btn-default fa fa-close matches-settings-cancel" title="<%=translator.buttonCancelSettingsLabel%>"></button>
+	<div class="row">
+		<div class="col-lg-6 text-right">Category</div>
+		<div class="col-lg-6">
+			<select class="chosen-select" id="settings-category-id">
+				<option value="0">&nbsp;</option>
+				<% _.each( categories, function( category ) { %>
+				<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
+				<% }) %>
+			</select>
 		</div>
-		<h3 class="panel-title text-center"><%=translator.title%></h3>
 	</div>
 
-	<div class="panel-body text-left">
-
-		<div style="margin-left: auto; margin-right: auto; padding: 10px;">
-
-			<div class="row">
-				<div class="col-lg-6 text-right">Category</div>
-				<div class="col-lg-6">
-					<select class="chosen-select" id="settings-category-id">
-						<option value="0">&nbsp;</option>
-						<% _.each( categories, function( category ) { %>
-						<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
-						<% }) %>
-					</select>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-6 text-right">Cup</div>
-				<div class="col-lg-6">
-					<% if( model.categoryId > 0 ) { %>
-						<select class="chosen-select" id="settings-cup-id">
-							<option value="0">&nbsp;</option>
-							<% _.each( cups, function( cup ) { %>
-							<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
-							<% }) %>
-						</select>
-					<% } %>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-6 text-right">Team</div>
-				<div class="col-lg-6">
-					<% if( model.categoryId > 0 ) { %>
-						<select class="chosen-select" id="settings-team-id">
-							<option value="0">&nbsp;</option>
-							<% _.each( teams, function( team ) { %>
-							<option value="<%=team.teamId%>" <%= model.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
-							<% }) %>
-						</select>
-					<% } %>
-				</div>
-			</div>
-
+	<div class="row">
+		<div class="col-lg-6 text-right">Cup</div>
+		<div class="col-lg-6">
+			<% if( model.categoryId > 0 ) { %>
+				<select class="chosen-select" id="settings-cup-id">
+					<option value="0">&nbsp;</option>
+					<% _.each( cups, function( cup ) { %>
+					<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
+					<% }) %>
+				</select>
+			<% } %>
 		</div>
-
 	</div>
 
-	<div class="panel-footer"></div>
+	<div class="row">
+		<div class="col-lg-6 text-right">Team</div>
+		<div class="col-lg-6">
+			<% if( model.categoryId > 0 ) { %>
+				<select class="chosen-select" id="settings-team-id">
+					<option value="0">&nbsp;</option>
+					<% _.each( teams, function( team ) { %>
+					<option value="<%=team.teamId%>" <%= model.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+					<% }) %>
+				</select>
+			<% } %>
+		</div>
+	</div>
 
 </div>

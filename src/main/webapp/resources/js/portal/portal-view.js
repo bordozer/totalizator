@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/portal/templates/portal-template.html' );
 
+	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
+
 	var MatchesModel = require( 'js/matches/matches-model' );
 	var MatchesView = require( 'js/matches/matches-view' );
 
@@ -56,12 +58,17 @@ define( function ( require ) {
 				var matchesModel = new MatchesModel.MatchesModel();
 				var matchesView = new MatchesView.MatchesView( {
 					model: matchesModel
-					, el: container
+				} );
+
+				var configurableView = new ConfigurableView( {
+					el: container
+					, view: matchesView
 					, settings: {
 						categoryId: cup.categoryId
 						, cupId: cup.cupId
 					}
 				} );
+				configurableView.render();
 			} );
 		}
 	} );
