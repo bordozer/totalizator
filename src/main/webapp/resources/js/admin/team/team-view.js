@@ -110,10 +110,10 @@ define( function ( require ) {
 		templateEdit: _.template( TemplateEntryEdit ),
 
 		events: {
-			'click .cup-entry-name, .cup-entry-edit': '_onEntryEditClick'
-			, 'click .cup-entry-save': '_onEntrySaveClick'
-			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
-			, 'click .cup-entry-del': '_onEntryDelClick'
+			'click .cup-entry-name, .team-entry-edit': '_onEntryEditClick'
+			, 'click .team-entry-del': '_onEntryDelClick'
+			, 'click .team-entry-save': '_onEntrySaveClick'
+			, 'click .team-entry-edit-cancel': '_onEntryEditCancelClick'
 			, 'change .entry-name, .entry-category-id': '_onChange'
 		},
 

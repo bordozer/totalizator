@@ -3,8 +3,7 @@
 		<button type="button" class="btn btn-default fa fa-edit cup-entry-edit"></button>
 		<button type="button" class="btn btn-default fa fa-recycle cup-entry-del"></button>
 	</div>
-	<div class="col-lg-1 <%=model.showOnPortalPage ? 'fa fa-eye' : ''%>  header-icon" title="<%=translator.entryEditShowOnPortalPageLabel%>"></div>
-	<div class="col-lg-7 cup-entry-name" title="#<%=model.cupId%>"><%=model.cupName%></div>
+	<div class="col-lg-7 cup-entry-name" title="#<%=model.cupId%>"><span class="<%=model.showOnPortalPage ? 'fa fa-eye' : ''%>" title="<%=translator.entryEditShowOnPortalPageLabel%>" ></span> <%=model.cupName%></div>
 	<div class="col-lg-2"><%=categoryName%></div>
 </div>
 

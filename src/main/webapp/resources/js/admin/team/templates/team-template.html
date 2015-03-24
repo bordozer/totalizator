@@ -1,6 +1,8 @@
 <div class="row admin-entry-line">
-	<div class="col-lg-1 fa fa-edit cup-entry-edit header-icon" title="Edit"></div>
-	<div class="col-lg-1 fa fa-recycle cup-entry-del header-icon" title="Delete"></div>
+	<div class="btn-group pull-right">
+		<button type="button" class="btn btn-default fa fa-edit team-entry-edit"></button>
+		<button type="button" class="btn btn-default fa fa-recycle team-entry-del"></button>
+	</div>
 	<div class="col-lg-7 cup-entry-name" title="#<%=model.cupId%>"><%=model.teamName%></div>
 	<div class="col-lg-2"><%=categoryName%></div>
 </div>
