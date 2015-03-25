@@ -13,6 +13,7 @@ define( function ( require ) {
 
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );
+	var mainMenu = require( 'js/main-menu/main-menu' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -26,6 +27,7 @@ define( function ( require ) {
 		, deleteBetButtonHint: 'Portal page / Matches: Delete bet button hint'
 		, betEditingSaveButtonHint: 'Portal page / Matches: Bet editing save button hint'
 		, betEditingCancelButtonHint: 'Portal page / Matches: Bet editing cancel button hint'
+		, menuStandOffHistory: 'Portal page / Matches / Menu: StandOff history'
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
@@ -45,7 +47,17 @@ define( function ( require ) {
 
 			this._renderMatches();
 
+			this._renderDropDownMenuItems();
+
 			return this;
+		},
+
+		_renderDropDownMenuItems: function() {
+			var menuItems = [
+				{ selector: 'js-menu-standoff-history', icon: 'fa fa-plus', link: '#', text: translator.menuStandOffHistory }
+			];
+
+			mainMenu( menuItems, this.$( '.js-drop-down-menu') );
 		},
 
 		_renderMatches: function() {
