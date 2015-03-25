@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!js/portal/templates/portal-template.html' ) );
 
+	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
@@ -15,10 +17,6 @@ define( function ( require ) {
 	} );
 
 	var PortalPageView = Backbone.View.extend( {
-
-		builtinEvents: {
-			'click .logout-link': 'logout'
-		},
 
 		initialize: function( options ) {
 			this.model.on( 'sync', this.render, this );
@@ -28,9 +26,11 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( template( {
-				cupsShowTo: this.model.get( 'cupsShowTo' )
-				, translator: translator
+				translator: translator
 			 } ) );
+
+			var selectedCupId = 0;
+			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
 
 			return this;
 		}

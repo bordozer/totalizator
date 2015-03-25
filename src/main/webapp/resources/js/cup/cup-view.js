@@ -11,6 +11,8 @@ define( function ( require ) {
 	var MatchesModel = require( 'js/matches/matches-model' );
 	var MatchesView = require( 'js/matches/matches-view' );
 
+	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
@@ -30,6 +32,8 @@ define( function ( require ) {
 				translator: translator
 			 } ) );
 
+			var cupsNaviView = new CupsNaviView( this._getCup().cupId, this.$( '.js-cups-navi' ) );
+
 			this._renderCupMatches();
 
 			return this;
@@ -42,7 +46,7 @@ define( function ( require ) {
 			var container = $( '<div></div>' );
 			el.append( container );
 
-			var cup = this.model.get( 'cup' );
+			var cup = this._getCup();
 
 			var matchesModel = new MatchesModel.MatchesModel();
 
@@ -56,6 +60,10 @@ define( function ( require ) {
 				}
 				, menuItems: []
 			} );
+		},
+
+		_getCup: function() {
+			return this.model.get( 'cup' );
 		}
 	} );
 

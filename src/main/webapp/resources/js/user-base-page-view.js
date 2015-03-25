@@ -17,6 +17,7 @@ define( function ( require ) {
 	return PageView.extend( {
 
 		builtinEvents: {
+			'click .logout-link': 'logout'
 		},
 
 		mainMenuItems: function() {
