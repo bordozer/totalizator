@@ -47,17 +47,7 @@ define( function ( require ) {
 
 			this._renderMatches();
 
-			this._renderDropDownMenuItems();
-
 			return this;
-		},
-
-		_renderDropDownMenuItems: function() {
-			var menuItems = [
-				{ selector: 'js-menu-standoff-history', icon: 'fa fa-plus', link: '#', text: translator.menuStandOffHistory }
-			];
-
-			mainMenu( menuItems, this.$( '.js-drop-down-menu') );
 		},
 
 		_renderMatches: function() {
@@ -140,6 +130,8 @@ define( function ( require ) {
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.deleteBetButtonHint + "'></button>" );
 			}
 
+			this._renderDropDownMenuItems();
+
 			return this;
 		},
 
@@ -160,7 +152,17 @@ define( function ( require ) {
 			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
 
+			this._renderDropDownMenuItems();
+
 			return this;
+		},
+
+		_renderDropDownMenuItems: function() {
+			var menuItems = [
+				{ selector: 'js-menu-standoff-history', icon: 'fa fa-plus', link: '#', text: translator.menuStandOffHistory }
+			];
+
+			mainMenu( menuItems, 'fa-caret-square-o-down', this.$( '.js-match-drop-down-menu') );
 		},
 
 		_setMatchContainerClass: function( clazz ) {

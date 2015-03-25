@@ -86,7 +86,7 @@ define( function ( require ) {
 				items = this.menuItems.concat( baseItems );
 			}
 
-			mainMenu( items, this.$( '.js-drop-down-menu') );
+			mainMenu( items, 'fa-list-alt', this.$( '.js-drop-down-menu') );
 		},
 
 		_renderSettings: function() {

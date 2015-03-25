@@ -9,9 +9,10 @@ define( function( require ) {
 	var Model = require( './main-menu-model' );
 	var View = require( './main-menu-view' );
 
-	function init( menus, container ) {
+	function init( menus, icon, container ) {
+
 		var model = new Model.MainMenuModel();
-		var view = new View.MainMenuView( { model: model, el: container, menus: menus } );
+		var view = new View.MainMenuView( { model: model, el: container, icon: icon, menus: menus } );
 
 		return view.render();
 	}

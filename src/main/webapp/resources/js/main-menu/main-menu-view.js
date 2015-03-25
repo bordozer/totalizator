@@ -14,12 +14,14 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.menus = options.menus;
+			this.icon = options.icon;
 		},
 
 		render: function () {
 
 			this.$el.html( this.template( {
 				model: this.model.toJSON()
+				, icon: this.icon
 				, menus: this.menus
 			 } ) );
 

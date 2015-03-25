@@ -47,7 +47,7 @@ define( function ( require ) {
 		},
 
 		_renderMenu: function() {
-			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
+			mainMenu( this.mainMenuItems(), 'fa-list-alt', this.$( '.main-menu-container') );
 		},
 
 		_getPageSubTitle: function() {
