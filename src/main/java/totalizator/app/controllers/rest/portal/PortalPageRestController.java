@@ -42,10 +42,10 @@ public class PortalPageRestController {
 
 		final User user = userService.findByLogin( principal.getName() );
 
-		final PortalPageDTO portalPageDTO = new PortalPageDTO();
+		final PortalPageDTO result = new PortalPageDTO();
 
-		portalPageDTO.setUserId( user.getId() );
-		portalPageDTO.setUserName( user.getUsername() );
+		result.setUserId( user.getId() );
+		result.setUserName( user.getUsername() );
 
 		final List<Cup> portalPageCups = cupService.loadAll();
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
@@ -55,13 +55,13 @@ public class PortalPageRestController {
 			}
 		} );
 
-		portalPageDTO.setCupsShowTo( Lists.transform( portalPageCups, new Function<Cup, CupDTO>() {
+		result.setCupsShowTo( Lists.transform( portalPageCups, new Function<Cup, CupDTO>() {
 			@Override
 			public CupDTO apply( final Cup cup ) {
 				return new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
 			}
 		} ) );
 
-		return portalPageDTO;
+		return result;
 	}
 }

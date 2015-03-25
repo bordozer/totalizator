@@ -17,9 +17,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/admin/rest/category" )
-public class CategoryController {
+public class AdminCategoryController {
 
-	private static final Logger LOGGER = Logger.getLogger( CategoryController.class );
+	private static final Logger LOGGER = Logger.getLogger( AdminCategoryController.class );
 
 	@Autowired
 	private CategoryService categoryService;

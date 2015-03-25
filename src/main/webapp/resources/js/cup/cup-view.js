@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!js/portal/templates/portal-template.html' ) );
+	var template = _.template( require( 'text!./templates/cup-template.html' ) );
 
 	var MatchesModel = require( 'js/matches/matches-model' );
 	var MatchesView = require( 'js/matches/matches-view' );
@@ -19,15 +19,7 @@ define( function ( require ) {
 
 	var CupPageView = Backbone.View.extend( {
 
-		cupId: 0,
-
-		builtinEvents: {
-			'click .logout-link': 'logout'
-		},
-
 		initialize: function( options ) {
-			this.cupId = options.options.cupId;
-
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -38,32 +30,31 @@ define( function ( require ) {
 				translator: translator
 			 } ) );
 
-			this._renderMatches();
+			this._renderCupMatches();
 
 			return this;
 		},
 
-		_renderMatches: function() {
+		_renderCupMatches: function() {
 
-			var el = this.$( '.js-cup-page-matches' );
+			var el = this.$( '.js-cup-matches-and-bets' );
 
-			_.each( this.model.get( 'cupsShowTo' ), function( cup ) {
+			var container = $( '<div></div>' );
+			el.append( container );
 
-				var container = $( '<div></div>' );
-				el.append( container );
+			var cup = this.model.get( 'cup' );
 
-				var matchesModel = new MatchesModel.MatchesModel();
+			var matchesModel = new MatchesModel.MatchesModel();
 
-				var matchesView = new MatchesView.MatchesView( {
-					model: matchesModel
-					, el: container
-					, settings: {
-						categoryId: cup.categoryId
-						, cupId: cup.cupId
-						, teamId: 0
-					}
-					, menuItems: []
-				} );
+			var matchesView = new MatchesView.MatchesView( {
+				model: matchesModel
+				, el: container
+				, settings: {
+					categoryId: cup.categoryId
+					, cupId: cup.cupId
+					, teamId: 0
+				}
+				, menuItems: []
 			} );
 		}
 	} );

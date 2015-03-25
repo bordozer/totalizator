@@ -18,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/admin/rest/matches" )
-public class MatchesRestController {
+public class AdminMatchesRestController {
 
 	@Autowired
 	private MatchService matchService;

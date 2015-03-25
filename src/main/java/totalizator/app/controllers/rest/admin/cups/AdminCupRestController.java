@@ -18,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/admin/rest/cups" )
-public class CupRestController {
+public class AdminCupRestController {
 
 	@Autowired
 	private CupService cupService;
@@ -26,7 +26,7 @@ public class CupRestController {
 	@Autowired
 	private CategoryService categoryService;
 
-	private static final Logger LOGGER = Logger.getLogger( CupRestController.class );
+	private static final Logger LOGGER = Logger.getLogger( AdminCupRestController.class );
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody

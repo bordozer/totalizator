@@ -46,12 +46,12 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this._renderMatches();
+			this._renderCupMatches();
 
 			return this;
 		},
 
-		_renderMatches: function() {
+		_renderCupMatches: function() {
 			var self = this;
 			this.model.forEach( function( matchBet ) {
 				self._renderEntry( matchBet );

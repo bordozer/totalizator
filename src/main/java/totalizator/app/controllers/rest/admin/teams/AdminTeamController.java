@@ -21,7 +21,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/admin/rest/teams" )
-public class TeamController {
+public class AdminTeamController {
 
 	@Autowired
 	private TeamService teamService;
@@ -32,7 +32,7 @@ public class TeamController {
 	@Autowired
 	private TeamLogoService teamLogoService;
 
-	private static final Logger LOGGER = Logger.getLogger( TeamController.class );
+	private static final Logger LOGGER = Logger.getLogger( AdminTeamController.class );
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
