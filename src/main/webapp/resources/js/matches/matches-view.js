@@ -5,6 +5,7 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
+//	var ui = require( 'jquery_ui' );
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
@@ -101,6 +102,7 @@ define( function ( require ) {
 		renderMatchInfo: function () {
 
 			this.$el.html( templateMatch( this._getViewOptions() ) );
+			this._fadeIn();
 
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
@@ -138,6 +140,7 @@ define( function ( require ) {
 		renderBetForm: function () {
 
 			this.$el.html( templateMatch( this._getViewOptions() ) );
+			this._fadeIn();
 
 			var bet = this.model.get( 'bet' );
 			var bet1 = bet != null ? bet.score1 : 0;
@@ -155,6 +158,10 @@ define( function ( require ) {
 			this._renderDropDownMenuItems();
 
 			return this;
+		},
+
+		_fadeIn: function() {
+			this.$( '.js-match-container' ).fadeIn( 500, "swing" );
 		},
 
 		_renderDropDownMenuItems: function() {
