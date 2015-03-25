@@ -8,9 +8,6 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!js/portal/templates/portal-template.html' ) );
 
-	var MatchesModel = require( 'js/matches/matches-model' );
-	var MatchesView = require( 'js/matches/matches-view' );
-
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
@@ -31,37 +28,11 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( template( {
-				userName: this.model.get( 'userName' )
+				cupsShowTo: this.model.get( 'cupsShowTo' )
 				, translator: translator
 			 } ) );
 
-			this._renderMatches();
-
 			return this;
-		},
-
-		_renderMatches: function() {
-
-			var el = this.$( '.portal-page-matches-container' );
-
-			_.each( this.model.get( 'cupsShowTo' ), function( cup ) {
-
-				var container = $( '<div></div>' );
-				el.append( container );
-
-				var matchesModel = new MatchesModel.MatchesModel();
-
-				var matchesView = new MatchesView.MatchesView( {
-					model: matchesModel
-					, el: container
-					, settings: {
-						categoryId: cup.categoryId
-						, cupId: cup.cupId
-						, teamId: 0
-					}
-					, menuItems: []
-				} );
-			} );
 		}
 	} );
 

@@ -9,17 +9,12 @@ define( function( require ) {
 	var Model = require( './portal-model' );
 	var View = require( './portal-view' );
 
-	function init( container ) {
+	function init( container, options ) {
 
-		var model = new Model.PortalPageModel();
-		var view = new View.PortalPageView( { model: model, el: container } );
+		var model = new Model.PortalPageModel( { options: options } );
+		var view = new View.PortalPageView( { model: model, el: container, options: options } );
 
 		return {
-
-			model: function() {
-				return model;
-			},
-
 			view: function() {
 				return view;
 			}

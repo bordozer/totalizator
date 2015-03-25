@@ -18,7 +18,9 @@ define( function ( require ) {
 
 		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
+
 			this.title = options.title;
+			this.options = options.options;
 			this.bodyRenderer = options.bodyRenderer;
 
 			Backbone.View.apply( this, [ options ] );
@@ -39,7 +41,7 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
-			this.bodyView = this.bodyRenderer( this.$( '.body-container' ) ).view();
+			this.bodyView = this.bodyRenderer( this.$( '.body-container' ), this.options ).view();
 		},
 
 		_renderHeader: function() {

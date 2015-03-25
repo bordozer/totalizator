@@ -10,6 +10,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
+			this.options = options.options;
 			this.url = '/rest/portal-page/';
 		}
 	});
