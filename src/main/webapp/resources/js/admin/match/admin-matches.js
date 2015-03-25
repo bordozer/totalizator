@@ -6,8 +6,6 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
-
 	var Model = require( './admin-matches-model' );
 	var View = require( './admin-matches-view' );
 
@@ -17,31 +15,29 @@ define( function( require ) {
 	} );
 
 	function init( container ) {
+		console.log(container);
 
 		var matchesModel = new Model.MatchesModel();
-		var matchesView = new View.MatchesView( {
-			model: matchesModel
-		} );
 
 		var menuItems = [
 			{ selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel }
 			, { selector: 'divider' }
 		];
 
-		var configurableView = new ConfigurableView( {
-			el: container
-			, view: matchesView
+		var matchesView = new View.MatchesView( {
+			model: matchesModel
+			, el: container
 			, settings: {
 				categoryId: 0
 				, cupId: 0
+				, teamId: 0
 			}
 			, menuItems: menuItems
 		} );
 
 		return {
-
 			view: function() {
-				return configurableView;
+				return matchesView;
 			}
 		}
 	}

@@ -6,6 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
+
 	var template = _.template( require( 'text!js/matches/templates/matches-template.html' ) );
 	var templateMatch = _.template( require( 'text!js/matches/templates/match-template.html' ) );
 
@@ -26,19 +28,17 @@ define( function ( require ) {
 		, betEditingCancelButtonHint: 'Portal page / Matches: Bet editing cancel button hint'
 	} );
 
-	var MatchesView = Backbone.View.extend( {
+	var MatchesView = ConfigurableView.extend( {
 
 		initialize: function ( options ) {
-			this.categories = service.loadCategories();
-			this.cups = service.loadCups();
-			this.teams = service.loadTeams();
+			this.render();
 		},
 
-		render: function( filter ) {
+		renderInnerView: function ( el, filter ) {
 
 			this.model.refresh( filter );
 
-			this.$el.html( template( {
+			el.html( template( {
 				model: this.model
 				, translator: translator
 			} ) );

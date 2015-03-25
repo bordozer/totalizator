@@ -12,6 +12,8 @@ define( function ( require ) {
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );
 
+	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
+
 	var templateList = _.template( require( 'text!js/admin/match/templates/admin-matches-template.html' ) );
 	var templateEntry = _.template( require( 'text!js/admin/match/templates/admin-match-info-template.html' ) );
 	var templateEntryEdit = _.template( require( 'text!js/admin/match/templates/admin-match-edit-template.html' ) );
@@ -39,23 +41,21 @@ define( function ( require ) {
 		, validation_SelectDifferentTeams_Label: "Admin / Teams / Validation: Select different teams"
 	} );
 
-	var MatchesView = Backbone.View.extend( {
+	var MatchesView = ConfigurableView.extend( {
 
 		events: {
 			'click .js-add-entry-button': '_onAddClick'
 		},
 
 		initialize: function ( options ) {
-			this.categories = service.loadCategories();
-			this.cups = service.loadCups();
-			this.teams = service.loadTeams();
+			this.render();
 		},
 
-		render: function ( filter ) {
+		renderInnerView: function ( el, filter ) {
 
 			this.model.refresh( filter );
 
-			this.$el.html( templateList( {
+			el.html( templateList( {
 				model: this.model
 				, translator: translator
 			} ) );

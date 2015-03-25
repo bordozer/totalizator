@@ -28,21 +28,21 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		events: {
+		builtinEvents: {
 			'click .js-settings-button': '_onSettingsClick'
 			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
 		},
 
-		initialize: function ( options ) {
+		constructor: function ( options ) {
+
 			this.settingsModel = new FilterModel( options.settings );
 			this.settingsView = new FilterView( {
 				model: this.settingsModel
 			} );
 
-			this.view = options.view;
-			this.view.on( 'view:render', this.render, this );
+			this.on( 'view:render', this.render, this );
 
 			this.menuItems = options.menuItems || [];
 
@@ -50,7 +50,8 @@ define( function ( require ) {
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
 
-			this.render();
+			this.events = _.extend( this.builtinEvents, this.events );
+			Backbone.View.apply( this, [ options ] );
 		},
 
 		render: function() {
@@ -62,11 +63,15 @@ define( function ( require ) {
 
 			this._renderDropDownMenuItems();
 
-			this.$( '.js-view-container' ).html( this.view.render( this.settingsModel.toJSON() ).$el );
+			this.renderInnerView( this.$( '.js-view-container' ), this.settingsModel.toJSON() );
 
-			this.view.delegateEvents();
+			this.delegateEvents();
 
 			return this;
+		},
+
+		renderInnerView: function( filter ) {
+			return $( "<div class='row'>No inner view was supplied...</div>" );
 		},
 
 		_renderDropDownMenuItems: function() {
