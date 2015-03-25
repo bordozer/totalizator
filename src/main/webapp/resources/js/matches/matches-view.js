@@ -159,10 +159,10 @@ define( function ( require ) {
 
 		_renderDropDownMenuItems: function() {
 			var menuItems = [
-				{ selector: 'js-menu-standoff-history', icon: 'fa fa-plus', link: '#', text: translator.menuStandOffHistory }
+				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '#', text: translator.menuStandOffHistory }
 			];
 
-			mainMenu( menuItems, 'fa-caret-square-o-down', this.$( '.js-match-drop-down-menu') );
+			mainMenu( menuItems, 'fa-list', this.$( '.js-match-drop-down-menu') );
 		},
 
 		_setMatchContainerClass: function( clazz ) {
