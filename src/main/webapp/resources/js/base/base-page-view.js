@@ -47,14 +47,14 @@ define( function ( require ) {
 		},
 
 		_renderMenu: function() {
-			mainMenu( this._mainMenuItems(), this.$( '.main-menu-container') );
+			mainMenu( this.mainMenuItems(), this.$( '.main-menu-container') );
 		},
 
 		_getPageSubTitle: function() {
 			return this.title;
 		},
 
-		_mainMenuItems: function() {
+		mainMenuItems: function() {
 			return [];
 		},
 

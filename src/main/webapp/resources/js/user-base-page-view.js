@@ -19,7 +19,7 @@ define( function ( require ) {
 		builtinEvents: {
 		},
 
-		_mainMenuItems: function() {
+		mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }

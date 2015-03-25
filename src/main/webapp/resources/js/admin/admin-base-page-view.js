@@ -27,7 +27,7 @@ define( function ( require ) {
 			, 'click .logout-link': 'logout'
 		},
 
-		_mainMenuItems: function() {
+		mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }

@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!public/js/header/templates/header-template.html' );
+	var template = _.template( require( 'text!public/js/header/templates/header-template.html' ) );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -14,8 +14,6 @@ define( function ( require ) {
 	} );
 
 	var HeaderView = Backbone.View.extend( {
-
-		template:_.template( Template ),
 
 		initialize: function( options ) {
 			this.subtitle = options.subtitle;
@@ -25,7 +23,7 @@ define( function ( require ) {
 
 		render: function () {
 
-			this.$el.html( this.template( {
+			this.$el.html( template( {
 				model: this.model
 				, subtitle: this.subtitle
 				, translator: translator

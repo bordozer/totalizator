@@ -9,6 +9,7 @@ define( function ( require ) {
 	var FilterModel = require( 'js/components/filter/matches-filter-model' );
 	var FilterView = require( 'js/components/filter/matches-filter-view' );
 
+	var mainMenu = require( 'js/main-menu/main-menu' );
 	var service = require( '/resources/js/services.js' );
 
 	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
@@ -57,10 +58,20 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
+			mainMenu( this._dropDownMenuItems(), this.$( '.js-drop-down-menu') );
+
 			this.$( '.js-view-container' ).html( this.view.render( this.settingsModel.toJSON() ).$el );
 			this.view.delegateEvents();
 
 			return this;
+		},
+
+		_dropDownMenuItems: function() {
+			return [
+				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
+				, { selector: 'divider' }
+				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
+			];
 		},
 
 		_renderSettings: function() {
