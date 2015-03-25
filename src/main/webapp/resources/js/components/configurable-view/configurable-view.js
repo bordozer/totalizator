@@ -44,6 +44,8 @@ define( function ( require ) {
 			this.view = options.view;
 			this.view.on( 'view:render', this.render, this );
 
+			this.menuItems = options.menuItems || [];
+
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
@@ -61,17 +63,24 @@ define( function ( require ) {
 			this._renderDropDownMenuItems();
 
 			this.$( '.js-view-container' ).html( this.view.render( this.settingsModel.toJSON() ).$el );
+
 			this.view.delegateEvents();
 
 			return this;
 		},
 
 		_renderDropDownMenuItems: function() {
-			var items = [
+
+			var baseItems = [
 				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
-				, { selector: 'divider' }
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
 			];
+
+			var items = baseItems;
+			if ( this.menuItems && this.menuItems.length > 0 ) {
+				items = this.menuItems.concat( baseItems );
+			}
+
 			mainMenu( items, this.$( '.js-drop-down-menu') );
 		},
 

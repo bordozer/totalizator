@@ -11,12 +11,22 @@ define( function( require ) {
 	var Model = require( './admin-matches-model' );
 	var View = require( './admin-matches-view' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		addMatchLabel: "Admin / Matches / Add entry"
+	} );
+
 	function init( container ) {
 
 		var matchesModel = new Model.MatchesModel();
 		var matchesView = new View.MatchesView( {
 			model: matchesModel
 		} );
+
+		var menuItems = [
+			{ selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel }
+			, { selector: 'divider' }
+		];
 
 		var configurableView = new ConfigurableView( {
 			el: container
@@ -25,6 +35,7 @@ define( function( require ) {
 				categoryId: 0
 				, cupId: 0
 			}
+			, menuItems: menuItems
 		} );
 
 		return {

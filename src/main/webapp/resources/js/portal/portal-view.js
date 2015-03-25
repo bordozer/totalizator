@@ -6,14 +6,12 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!js/portal/templates/portal-template.html' );
+	var template = _.template( require( 'text!js/portal/templates/portal-template.html' ) );
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
 	var MatchesModel = require( 'js/matches/matches-model' );
 	var MatchesView = require( 'js/matches/matches-view' );
-
-	var Services = require( '/resources/js/services.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -22,8 +20,6 @@ define( function ( require ) {
 	} );
 
 	var PortalPageView = Backbone.View.extend( {
-
-		template:_.template( Template ),
 
 		builtinEvents: {
 			'click .logout-link': 'logout'
@@ -36,7 +32,7 @@ define( function ( require ) {
 
 		render: function () {
 
-			this.$el.html( this.template( {
+			this.$el.html( template( {
 				userName: this.model.get( 'userName' )
 				, translator: translator
 			 } ) );
@@ -66,9 +62,9 @@ define( function ( require ) {
 					, settings: {
 						categoryId: cup.categoryId
 						, cupId: cup.cupId
+						, teamId: 0
 					}
 				} );
-//				configurableView.render();
 			} );
 		}
 	} );
