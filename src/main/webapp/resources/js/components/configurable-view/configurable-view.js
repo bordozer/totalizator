@@ -58,7 +58,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			mainMenu( this._dropDownMenuItems(), this.$( '.js-drop-down-menu') );
+			this._renderDropDownMenuItems();
 
 			this.$( '.js-view-container' ).html( this.view.render( this.settingsModel.toJSON() ).$el );
 			this.view.delegateEvents();
@@ -66,12 +66,13 @@ define( function ( require ) {
 			return this;
 		},
 
-		_dropDownMenuItems: function() {
-			return [
+		_renderDropDownMenuItems: function() {
+			var items = [
 				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
 				, { selector: 'divider' }
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
 			];
+			mainMenu( items, this.$( '.js-drop-down-menu') );
 		},
 
 		_renderSettings: function() {
