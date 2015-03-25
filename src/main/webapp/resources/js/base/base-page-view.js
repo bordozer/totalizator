@@ -10,13 +10,11 @@ define( function ( require ) {
 
 	var mainMenu = require( 'js/main-menu/main-menu' );
 
-	var Template = require( 'text!js/base/templates/base-page-template.html' );
+	var template = _.template( require( 'text!js/base/templates/base-page-template.html' ) );
 
 	var Services = require( '/resources/js/services.js' );
 
 	return Backbone.View.extend( {
-
-		basePageTemplate:_.template( Template ),
 
 		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
@@ -28,7 +26,7 @@ define( function ( require ) {
 
 		render: function() {
 
-			this.$el.html( this.basePageTemplate( {
+			this.$el.html( template( {
 			 } ) );
 
 			this._renderHeader();
