@@ -6,7 +6,9 @@
 		<% _.each( menus, function( menu ) { %>
 
 			<% if( menu.selector != 'divider' ) { %>
-				<li role="presentation" style="height: 30px;"><a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" tabindex="-1" href="<%=menu.link%>"> <%=menu.text%></a></li>
+				<li role="presentation" style="height: 30px;">
+					<a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" tabindex="-1" href="<%=menu.link%>" onclick="return false;"> <%=menu.text%></a>
+				</li>
 			<% } %>
 
 			<% if( menu.selector == 'divider' ) { %>

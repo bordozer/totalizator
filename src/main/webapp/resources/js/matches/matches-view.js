@@ -5,7 +5,6 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
-//	var ui = require( 'jquery_ui' );
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
@@ -18,17 +17,23 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: 'Portal page: Matches'
-		, betThisMatchButtonTitleLabel: 'Portal page / Matches: Bet this match button title'
-		, matchBetLabel: 'Portal page / Matches: user_s match bet label'
-		, noMatchBetLabel: 'Portal page / Matches: no match bet yet label'
-		, matchFinishedLabel: 'Portal page / Matches: Match finished'
-		, createBetButtonHint: 'Portal page / Matches: Create bet button hint'
-		, editBetButtonHint: 'Portal page / Matches: Edit bet button hint'
-		, deleteBetButtonHint: 'Portal page / Matches: Delete bet button hint'
-		, betEditingSaveButtonHint: 'Portal page / Matches: Bet editing save button hint'
-		, betEditingCancelButtonHint: 'Portal page / Matches: Bet editing cancel button hint'
-		, menuStandOffHistory: 'Portal page / Matches / Menu: StandOff history'
+		title: 'Match and Bets: Page title'
+
+		, actionMatchBetAdd: 'Match and Bets: Add bet'
+		, actionMatchBetEdit: 'Match and Bets: Edit bet'
+		, actionMatchBetSave: 'Match and Bets: save bet'
+		, actionCancelBetEditing: 'Match and Bets: Cancel bet editing'
+		, actionMatchBetDelete: 'Match and Bets: Delete bet'
+
+		, deleteBetConfirmationLabel: 'Match and Bets: Delete bet confirmation: Delete bet?'
+
+		, actionAllMatchBet: 'Portal page / Matches / Menu: All bets'
+
+		, actionStandOffHistory: 'Portal page / Matches / Menu: StandOff history'
+
+		, footer_YourBetLabel: 'Match and Bets / Footer: Your bet'
+		, footer_NoBetYetLabel: 'Match and Bets / Footer: no bet yet'
+		, footer_MatchFinishedLabel: 'Match and Bets / Footer: Match finished'
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
@@ -74,11 +79,11 @@ define( function ( require ) {
 	var MatchView = Backbone.View.extend( {
 
 		events: {
-			'click .button-bet-match': '_onBetButtonClick'
+			'click .button-bet-match, .js-menu-match-bet-add': '_onBetButtonClick'
 			, 'click .button-bet-save': '_onSaveBetButtonClick'
 			, 'click .button-bet-discard': '_onDiscardButtonClick'
-			, 'click .button-edit-bet': '_onBetEditButtonClick'
-			, 'click .button-delete-bet': '_onBetDeleteButtonClick'
+			, 'click .button-edit-bet, .js-menu-match-bet-edit': '_onBetEditButtonClick'
+			, 'click .button-delete-bet, .js-menu-match-bet-delete': '_onBetDeleteButtonClick'
 		},
 
 		initialize: function ( options ) {
@@ -108,7 +113,7 @@ define( function ( require ) {
 
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
-				this.$( '.js-panel-footer' ).append( "<div class='row'><div class='col-lg-12'>" + translator.matchFinishedLabel + "</div></div>" );
+				this.$( '.js-panel-footer' ).append( "<div class='row'><div class='col-lg-12'>" + translator.footer_MatchFinishedLabel + "</div></div>" );
 			}
 
 			var bet = this.model.get( 'bet' );
@@ -116,8 +121,8 @@ define( function ( require ) {
 
 				if ( this.model.isBettingAllowed() ) {
 					this._setMatchContainerClass( 'panel-warning' );
-					this.$( '.js-panel-footer' ).append( "<div class='col-lg-8'>" + translator.noMatchBetLabel + "</div>" );
-					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.createBetButtonHint + "'></button>" );
+					this.$( '.js-panel-footer' ).append( "<div class='col-lg-8'>" + translator.footer_NoBetYetLabel + "</div>" );
+					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
 				}
 
 				return this;
@@ -125,13 +130,13 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-success' );
 
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.matchBetLabel + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.footer_YourBetLabel + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
 			if ( ! match.matchFinished ) {
-				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.editBetButtonHint + "'></button>" );
-				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.deleteBetButtonHint + "'></button>" );
+				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
+				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
 			}
 
 			return this;
@@ -150,12 +155,12 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-danger' );
 
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.matchBetLabel + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.footer_YourBetLabel + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
-			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
-			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
+			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.actionMatchBetSave + "'></button>" );
+			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
 
 			return this;
 		},
@@ -166,8 +171,20 @@ define( function ( require ) {
 
 		_renderDropDownMenuItems: function() {
 			var menuItems = [
-				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '#', text: translator.menuStandOffHistory }
+				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '#', text: translator.actionStandOffHistory }
+				, { selector: 'divider' }
 			];
+
+			var bet = this.model.get( 'bet' );
+			if ( bet == null ) {
+				menuItems.push( { selector: 'js-menu-match-bet-add', icon: 'fa fa-plus', link: '#', text: translator.actionMatchBetAdd } );
+			} else {
+				menuItems.push( { selector: 'js-menu-match-bet-edit', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetEdit } );
+				menuItems.push( { selector: 'js-menu-match-bet-delete', icon: 'fa fa-close', link: '#', text: translator.actionMatchBetDelete } );
+				menuItems.push( { selector: 'divider' } );
+			}
+
+			menuItems.push( { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '#', text: translator.actionAllMatchBet } );
 
 			mainMenu( menuItems, 'fa-list', this.$( '.js-match-drop-down-menu') );
 		},
@@ -214,6 +231,10 @@ define( function ( require ) {
 		},
 
 		_deleteBet: function() {
+
+			if ( ! confirm( translator.deleteBetConfirmationLabel ) ) {
+				return;
+			}
 
 			var match = this.model.get( 'match' );
 			var bet = this.model.get( 'bet' );

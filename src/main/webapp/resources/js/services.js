@@ -9,8 +9,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		deleteBetConfirmationLabel: 'Delete bet confirmation: Delete bet?'
-		, logoutConfirmationLabel: 'Logout confirmation: Logout?'
+		logoutConfirmationLabel: 'Logout confirmation: Logout?'
 	} );
 
 	return {
@@ -33,10 +32,6 @@ define( function ( require ) {
 		},
 
 		deleteBet: function( matchId, matchBetId ) {
-
-			if ( ! confirm( translator.deleteBetConfirmationLabel ) ) {
-				return;
-			}
 
 			$.ajax( {
 				method: 'DELETE',
