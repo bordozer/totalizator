@@ -104,6 +104,8 @@ define( function ( require ) {
 			this.$el.html( templateMatch( this._getViewOptions() ) );
 			this._fadeIn();
 
+			this._renderDropDownMenuItems();
+
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
 				this.$( '.js-panel-footer' ).append( "<div class='row'><div class='col-lg-12'>" + translator.matchFinishedLabel + "</div></div>" );
@@ -132,8 +134,6 @@ define( function ( require ) {
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.deleteBetButtonHint + "'></button>" );
 			}
 
-			this._renderDropDownMenuItems();
-
 			return this;
 		},
 
@@ -141,6 +141,8 @@ define( function ( require ) {
 
 			this.$el.html( templateMatch( this._getViewOptions() ) );
 			this._fadeIn();
+
+			this._renderDropDownMenuItems();
 
 			var bet = this.model.get( 'bet' );
 			var bet1 = bet != null ? bet.score1 : 0;
@@ -154,8 +156,6 @@ define( function ( require ) {
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.betEditingSaveButtonHint + "'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.betEditingCancelButtonHint + "'></button>" );
-
-			this._renderDropDownMenuItems();
 
 			return this;
 		},
