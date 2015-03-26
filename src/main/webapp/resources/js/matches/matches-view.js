@@ -80,8 +80,8 @@ define( function ( require ) {
 
 		events: {
 			'click .button-bet-match, .js-menu-match-bet-add': '_onBetButtonClick'
-			, 'click .button-bet-save': '_onSaveBetButtonClick'
-			, 'click .button-bet-discard': '_onDiscardButtonClick'
+			, 'click .button-bet-save, .js-menu-match-bet-save': '_onSaveBetButtonClick'
+			, 'click .button-bet-discard, .js-menu-match-bet-cancel-editing': '_onDiscardButtonClick'
 			, 'click .button-edit-bet, .js-menu-match-bet-edit': '_onBetEditButtonClick'
 			, 'click .button-delete-bet, .js-menu-match-bet-delete': '_onBetDeleteButtonClick'
 		},
@@ -176,14 +176,27 @@ define( function ( require ) {
 			];
 
 			var bet = this.model.get( 'bet' );
-			if ( bet == null ) {
-				menuItems.push( { selector: 'js-menu-match-bet-add', icon: 'fa fa-plus', link: '#', text: translator.actionMatchBetAdd } );
-			} else {
-				menuItems.push( { selector: 'js-menu-match-bet-edit', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetEdit } );
-				menuItems.push( { selector: 'js-menu-match-bet-delete', icon: 'fa fa-close', link: '#', text: translator.actionMatchBetDelete } );
-				menuItems.push( { selector: 'divider' } );
+			var isBetEditingMode = this.model.isBetMode();
+
+			if ( isBetEditingMode ) {
+				menuItems.push( { selector: 'js-menu-match-bet-save', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetSave } );
+				menuItems.push( { selector: 'js-menu-match-bet-cancel-editing', icon: 'fa fa-close', link: '#', text: translator.actionCancelBetEditing} );
 			}
 
+			if ( bet == null ) {
+
+				if ( this.model.isBettingAllowed() && !isBetEditingMode ) {
+					menuItems.push( { selector: 'js-menu-match-bet-add', icon: 'fa fa-plus', link: '#', text: translator.actionMatchBetAdd } );
+				}
+			} else {
+
+				if ( ! isBetEditingMode ) {
+					menuItems.push( { selector: 'js-menu-match-bet-edit', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetEdit } );
+					menuItems.push( { selector: 'js-menu-match-bet-delete', icon: 'fa fa-close', link: '#', text: translator.actionMatchBetDelete } );
+				}
+			}
+
+			menuItems.push( { selector: 'divider' } );
 			menuItems.push( { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '#', text: translator.actionAllMatchBet } );
 
 			mainMenu( menuItems, 'fa-list', this.$( '.js-match-drop-down-menu') );
