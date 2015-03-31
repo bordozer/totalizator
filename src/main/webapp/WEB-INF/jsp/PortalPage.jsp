@@ -13,7 +13,11 @@
 				title: 'Portal page title'
 			} );
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, title: translator.title, options: {} } );
+			var breadcrumbs = [
+				{ link: '#', title: translator.title }
+			];
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: {} } );
 			pageView.render();
 		} );
 	</script>

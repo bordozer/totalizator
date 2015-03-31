@@ -15,7 +15,11 @@
 				title: 'Admin: Page Title'
 			} );
 
-			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, title: translator.title } );
+			var breadcrumbs = [
+				{ link: '#', title: translator.title }
+			];
+
+			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs } );
 			adminView.render();
 		} );
 	</script>

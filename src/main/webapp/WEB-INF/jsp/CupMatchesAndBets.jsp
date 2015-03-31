@@ -18,7 +18,12 @@
 
 			var title = "${cupMatchesAndBetsModel.cupName} / " + translator.title;
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, title: title, options: { cupId: cupId } } );
+			var breadcrumbs = [
+				{ link: '#', title: "${cupMatchesAndBetsModel.cupName}" }
+				, { link: '#', title: translator.title }
+			];
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId } } );
 			pageView.render();
 		} );
 	</script>

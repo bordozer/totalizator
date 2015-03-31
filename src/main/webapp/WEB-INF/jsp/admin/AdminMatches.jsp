@@ -15,7 +15,11 @@
 				title: 'Admin / Matches: Page Title'
 			} );
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, title: translator.title } );
+			var breadcrumbs = [
+				{ link: '#', title: translator.title }
+			];
+
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs } );
 			adminView.render();
 		} );
 	</script>
