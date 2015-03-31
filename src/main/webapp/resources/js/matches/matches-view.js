@@ -113,7 +113,7 @@ define( function ( require ) {
 
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
-				this.$( '.js-panel-footer' ).append( "<div class='row'><div class='col-lg-12'>" + translator.footer_MatchFinishedLabel + "</div></div>" );
+				this.$( '.js-panel-footer' ).html( translator.footer_MatchFinishedLabel );
 			}
 
 			var bet = this.model.get( 'bet' );
