@@ -19,7 +19,7 @@ define( function ( require ) {
 		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
 
-			this.title = options.title;
+			this.breadcrumbs = options.breadcrumbs;
 			this.options = options.options;
 			this.bodyRenderer = options.bodyRenderer;
 
@@ -45,15 +45,11 @@ define( function ( require ) {
 		},
 
 		_renderHeader: function() {
-			pageHeader( this.$( '.header-container'), this._getPageSubTitle() );
+			pageHeader( this.$( '.header-container'), this.breadcrumbs );
 		},
 
 		_renderMenu: function() {
 			mainMenu( this.mainMenuItems(), 'fa-list-alt', this.$( '.js-main-menu-container') );
-		},
-
-		_getPageSubTitle: function() {
-			return this.title;
 		},
 
 		mainMenuItems: function() {

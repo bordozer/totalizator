@@ -28,7 +28,11 @@
 					loginPageTitleLabel: 'Login page title: Login'
 				} );
 
-				init( $( '.header-container'), translator.loginPageTitleLabel );
+				var breadcrumbs = [
+					{ link: '#', title: translator.loginPageTitleLabel }
+				];
+
+				init( $( '.header-container'), breadcrumbs );
 			} );
 		</script>
 

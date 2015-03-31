@@ -16,16 +16,19 @@ define( function ( require ) {
 	var HeaderView = Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.subtitle = options.subtitle;
+			this.breadcrumbs = options.breadcrumbs;
 
 			this.render();
 		},
 
 		render: function () {
 
+			var title = this.breadcrumbs[ this.breadcrumbs.length - 1 ].title;
+
 			this.$el.html( template( {
 				model: this.model
-				, subtitle: this.subtitle
+				, title: title
+				, breadcrumbs: this.breadcrumbs
 				, translator: translator
 			} ) );
 
