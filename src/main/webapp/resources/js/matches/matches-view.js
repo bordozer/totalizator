@@ -124,7 +124,7 @@ define( function ( require ) {
 					this._setMatchContainerClass( 'panel-warning' );
 					this.$( '.js-panel-footer' ).append( "<div class='col-lg-8'>" + translator.footer_NoBetYetLabel + "</div>" );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
-				} else {
+				} else if( ! match.matchFinished ) {
 					this.$( '.js-panel-footer' ).append( translator.footer_BettingFinishedLabel );
 				}
 
