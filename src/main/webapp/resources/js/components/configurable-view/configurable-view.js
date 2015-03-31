@@ -70,7 +70,7 @@ define( function ( require ) {
 			return this;
 		},
 
-		renderInnerView: function( filter ) {
+		renderInnerView: function( el, filter ) {
 			return $( "<div class='row'>No inner view was supplied...</div>" );
 		},
 
