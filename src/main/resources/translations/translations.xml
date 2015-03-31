@@ -33,13 +33,33 @@
 	</translation>
 
 	<translation>
+		<nerd>Categories</nerd>
+		<ru><![CDATA[Категории]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Cup</nerd>
 		<ru><![CDATA[Чемпионат]]></ru>
 	</translation>
 
 	<translation>
+		<nerd>Cups</nerd>
+		<ru><![CDATA[Чемпионаты]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Team</nerd>
 		<ru><![CDATA[Команда]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Teams</nerd>
+		<ru><![CDATA[Команды]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Matches</nerd>
+		<ru><![CDATA[Матчи]]></ru>
 	</translation>
 
 	<translation>

@@ -12,7 +12,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		categoriesTitle: "Admin / Categories / Title: Categories"
+		categoriesTitle: "Categories"
 	} );
 
 	var CategoriesView = Backbone.View.extend( {

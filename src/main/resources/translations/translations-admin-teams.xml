@@ -3,11 +3,6 @@
 <translations>
 
 	<translation>
-		<nerd>Admin / Teams / Title: Teams</nerd>
-		<ru><![CDATA[Команды]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Admin / Teams / Validation: Select a cup</nerd>
 		<ru><![CDATA[Выберите чемпионат]]></ru>
 	</translation>

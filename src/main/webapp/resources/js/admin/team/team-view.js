@@ -16,7 +16,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		teamTitleLabel: "Admin / Teams / Title: Teams"
+		teamTitleLabel: "Teams"
 	} );
 
 	var TeamsView = Backbone.View.extend( {

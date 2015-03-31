@@ -17,7 +17,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: 'Portal page: Matches'
+		title: 'Matches'
 		, settingsLabel: 'Configurable view: Matches: settings'
 		, settingsButtonHint: 'Configurable view: Matches: settings button hint'
 		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'

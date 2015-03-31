@@ -15,7 +15,6 @@ define( function( require ) {
 	} );
 
 	function init( container ) {
-		console.log(container);
 
 		var matchesModel = new Model.MatchesModel();
 
