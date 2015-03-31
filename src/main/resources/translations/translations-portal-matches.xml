@@ -3,46 +3,6 @@
 <translations>
 
 	<translation>
-		<nerd>Match and Bets: Page title</nerd>
-		<ru><![CDATA[Матчи и ставки]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets: Add bet</nerd>
-		<ru><![CDATA[Сделать ставку на матч]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets: Edit bet</nerd>
-		<ru><![CDATA[Изменить ставку ставку на матч]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets: Delete bet</nerd>
-		<ru><![CDATA[Отменить ставку на матч]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets / Footer: Your bet</nerd>
-		<ru><![CDATA[Ставка]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets / Footer: no bet yet</nerd>
-		<ru><![CDATA[Ставки нет]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets / Footer: Match finished</nerd>
-		<ru><![CDATA[Матч завершен]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets: Delete bet confirmation: Delete bet?</nerd>
-		<ru><![CDATA[Отменить ставку на матч?]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Matches: Settings</nerd>
 		<ru><![CDATA[Матчи - настройки]]></ru>
 	</translation>
@@ -70,16 +30,6 @@
 	<translation>
 		<nerd>Portal page / Matches: All teams label</nerd>
 		<ru><![CDATA[Все команды]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets: save bet</nerd>
-		<ru><![CDATA[Сохранить ставку]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Match and Bets: Cancel bet editing</nerd>
-		<ru><![CDATA[Отменить изменения]]></ru>
 	</translation>
 
 	<translation>

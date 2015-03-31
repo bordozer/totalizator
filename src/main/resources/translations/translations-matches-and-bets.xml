@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Matches and bets: page title</nerd>
+		<ru><![CDATA[Матчи и ставки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets: Page title</nerd>
+		<ru><![CDATA[Матчи и ставки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets: Add bet</nerd>
+		<ru><![CDATA[Сделать ставку на матч]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets: Edit bet</nerd>
+		<ru><![CDATA[Изменить ставку ставку на матч]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets: Delete bet</nerd>
+		<ru><![CDATA[Отменить ставку на матч]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets / Footer: Your bet</nerd>
+		<ru><![CDATA[Ставка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets / Footer: no bet yet</nerd>
+		<ru><![CDATA[Ставки нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets / Footer: Match finished</nerd>
+		<ru><![CDATA[Матч завершен]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets: Delete bet confirmation: Delete bet?</nerd>
+		<ru><![CDATA[Отменить ставку на матч?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets: save bet</nerd>
+		<ru><![CDATA[Сохранить ставку]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match and Bets: Cancel bet editing</nerd>
+		<ru><![CDATA[Отменить изменения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
+

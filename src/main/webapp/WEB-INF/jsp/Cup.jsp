@@ -13,7 +13,7 @@
 			var cupId = ${cupModel.cupId};
 
 			var translator = new Translator( {
-				title: 'Cup page title'
+				title: 'Matches and bets: page title'
 			} );
 
 			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, title: translator.title, options: { cupId: cupId } } );
