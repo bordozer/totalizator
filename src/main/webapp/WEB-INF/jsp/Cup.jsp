@@ -1,8 +1,8 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="cupModel" type="totalizator.app.controllers.ui.cups.CupModel" scope="request"/>
+<jsp:useBean id="cupMatchesAndBetsModel" type="totalizator.app.controllers.ui.cups.CupMatchesAndBetsModel" scope="request"/>
 
-<tags:page userName="${cupModel.userName}">
+<tags:page userName="${cupMatchesAndBetsModel.userName}">
 
 	<div class="portal-page-container"></div>
 
@@ -10,13 +10,15 @@
 
 		require( [ 'jquery', 'js/user-base-page-view', 'js/cup/cup', 'translator' ], function ( $, Page, cup, Translator ) {
 
-			var cupId = ${cupModel.cupId};
+			var cupId = ${cupMatchesAndBetsModel.cupId};
 
 			var translator = new Translator( {
 				title: 'Matches and bets: page title'
 			} );
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, title: translator.title, options: { cupId: cupId } } );
+			var title = "${cupMatchesAndBetsModel.cupName} / " + translator.title;
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, title: title, options: { cupId: cupId } } );
 			pageView.render();
 		} );
 	</script>

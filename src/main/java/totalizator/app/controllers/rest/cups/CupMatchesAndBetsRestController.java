@@ -19,7 +19,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/rest/cups" )
-public class CupMatchesAndBetsController {
+public class CupMatchesAndBetsRestController {
 
 	@Autowired
 	private CupService cupService;
