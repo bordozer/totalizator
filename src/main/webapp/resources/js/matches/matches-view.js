@@ -33,6 +33,7 @@ define( function ( require ) {
 
 		, footer_YourBetLabel: 'Match and Bets / Footer: Your bet'
 		, footer_NoBetYetLabel: 'Match and Bets / Footer: no bet yet'
+		, footer_BettingFinishedLabel: 'Match and Bets / Footer: betting finished'
 		, footer_MatchFinishedLabel: 'Match and Bets / Footer: Match finished'
 	} );
 
@@ -123,6 +124,8 @@ define( function ( require ) {
 					this._setMatchContainerClass( 'panel-warning' );
 					this.$( '.js-panel-footer' ).append( "<div class='col-lg-8'>" + translator.footer_NoBetYetLabel + "</div>" );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
+				} else {
+					this.$( '.js-panel-footer' ).append( translator.footer_BettingFinishedLabel );
 				}
 
 				return this;
