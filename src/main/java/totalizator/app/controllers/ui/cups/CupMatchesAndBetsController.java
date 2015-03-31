@@ -19,7 +19,7 @@ public class CupMatchesAndBetsController {
 
 	public static final String MODEL_NAME = "cupMatchesAndBetsModel";
 
-	private static final String VIEW = "/Cup";
+	private static final String VIEW = "/CupMatchesAndBets";
 
 	@Autowired
 	private UserService userService;

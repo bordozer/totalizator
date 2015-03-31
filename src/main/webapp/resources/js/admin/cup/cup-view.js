@@ -16,7 +16,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		cupsTitle: "Admin / Cups / Title: Cups"
-		, entryEditCategoryLabel: "Admin / Cups / Edit: Category label"
+		, entryEditCategoryLabel: "Category"
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
 		, entryEditShowOnPortalPageLabel: "Admin / Cups / Edit: Show on portal page label"
 	} );

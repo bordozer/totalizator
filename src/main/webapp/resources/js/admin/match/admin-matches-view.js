@@ -29,9 +29,9 @@ define( function ( require ) {
 		, newEntryEditFormTitle: "Admin / Matches / Edit: New entry edit form title"
 		, buttonSaveLabel: "Admin / Matches / Button save"
 		, buttonCancelEditingLabel: "Admin / Matches / Button cancel editing"
-		, matchEdit_Category: "Admin / Matches / Edit: Category"
-		, matchEdit_Cup: "Admin / Matches / Edit: Cup"
-		, matchEdit_Team: "Admin / Matches / Edit: Team"
+		, matchEdit_Category: "Category"
+		, matchEdit_Cup: "Cup"
+		, matchEdit_Team: "Team"
 		, matchEdit_BeginningTime: "Admin / Matches / Edit: Match beginning time"
 		, matchEdit_MatchFinished: "Admin / Matches / Edit: Match finished"
 
