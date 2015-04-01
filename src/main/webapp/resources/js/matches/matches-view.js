@@ -191,12 +191,10 @@ define( function ( require ) {
 			}
 
 			if ( bet == null ) {
-
 				if ( this.model.isBettingAllowed() && !isBetEditingMode ) {
 					menuItems.push( { selector: 'js-menu-match-bet-add', icon: 'fa fa-plus', link: '#', text: translator.actionMatchBetAdd } );
 				}
 			} else {
-
 				if ( ! isBetEditingMode ) {
 					menuItems.push( { selector: 'js-menu-match-bet-edit', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetEdit } );
 					menuItems.push( { selector: 'js-menu-match-bet-delete', icon: 'fa fa-close', link: '#', text: translator.actionMatchBetDelete } );
