@@ -114,7 +114,7 @@ define( function ( require ) {
 
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
-				this.$( '.js-panel-footer' ).html( translator.footer_MatchFinishedLabel );
+				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', translator.footer_MatchFinishedLabel ) );
 			}
 
 			var bet = this.model.get( 'bet' );
@@ -122,10 +122,10 @@ define( function ( require ) {
 
 				if ( this.model.isBettingAllowed() ) {
 					this._setMatchContainerClass( 'panel-warning' );
-					this.$( '.js-panel-footer' ).append( "<div class='col-lg-8'>" + translator.footer_NoBetYetLabel + "</div>" );
+					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_NoBetYetLabel, true ) );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
 				} else if( ! match.matchFinished ) {
-					this.$( '.js-panel-footer' ).append( translator.footer_BettingFinishedLabel );
+					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel ) );
 				}
 
 				return this;
@@ -133,7 +133,7 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-success' );
 
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.footer_YourBetLabel + "</div>" );
+			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel ) );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
@@ -158,7 +158,7 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-danger' );
 
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'>" + translator.footer_YourBetLabel + "</div>" );
+			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel ) );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
@@ -166,6 +166,10 @@ define( function ( require ) {
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
 
 			return this;
+		},
+
+		_renderIcon: function( icon, title, disabled ) {
+			return "<div class='col-lg-3 fa " + icon + " fa-2x' title='" + title + "' " + ( disabled ? "style='opacity: 0.2;'" : "")  + "></div>";
 		},
 
 		_fadeIn: function() {
