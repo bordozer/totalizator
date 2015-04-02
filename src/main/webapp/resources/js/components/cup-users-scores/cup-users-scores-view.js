@@ -11,13 +11,15 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.render();
+			this.listenTo( this.model, 'sync', this.render );
+			this.model.fetch( { cache: false} );
 		},
 
 		render: function () {
 
-			this.$el.html( template( {
-			} ) );
+			var data = _.extend( {}, this.model.toJSON() );
+
+			this.$el.html( template( data ) );
 
 			return this;
 		}

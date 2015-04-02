@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	return Backbone.Collection.extend( {
+	return Backbone.Model.extend( {
 
 		cupId: 0,
 
