@@ -11,7 +11,7 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/team/templates/team-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/team/templates/team-edit-template.html' );
 
-	var Services = require( '/resources/js/services/services.js' );
+	var Services = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );

@@ -12,7 +12,7 @@ define( function ( require ) {
 	var templateMatch = _.template( require( 'text!./templates/matches-and-bets-entry-template.html' ) );
 
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
-	var service = require( '/resources/js/services/services.js' );
+	var service = require( '/resources/js/services/service.js' );
 	var mainMenu = require( 'js/components/main-menu/main-menu' );
 
 	var Translator = require( 'translator' );

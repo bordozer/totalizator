@@ -10,7 +10,7 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/cup/templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/cup/templates/cup-edit-template.html' );
 
-	var Services = require( '/resources/js/services/services.js' );
+	var Services = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );

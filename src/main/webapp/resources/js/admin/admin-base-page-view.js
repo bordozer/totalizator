@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var PageView = require( 'js/base/base-page-view' );
 
-	var Services = require( '/resources/js/services/services.js' );
+	var Services = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
