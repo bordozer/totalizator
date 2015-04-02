@@ -11,6 +11,9 @@ define( function ( require ) {
 	var MatchesModel = require( 'js/components/matches-and-bets/matches-and-bets-model' );
 	var MatchesView = require( 'js/components/matches-and-bets/matches-and-bets-view' );
 
+	var CupScoresModel = require( 'js/components/cup-users-scores/cup-users-scores-model' );
+	var CupScoresView = require( 'js/components/cup-users-scores/cup-users-scores-view' );
+
 	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
 	var Translator = require( 'translator' );
@@ -32,11 +35,30 @@ define( function ( require ) {
 				translator: translator
 			 } ) );
 
-			var cupsNaviView = new CupsNaviView( this._getCup().cupId, this.$( '.js-cups-navi' ) );
+			this._renderNavigation();
+
+			this._renderCupScores();
 
 			this._renderCupMatches();
 
 			return this;
+		},
+
+		_renderNavigation: function() {
+			var view = new CupsNaviView( this._getCup().cupId, this.$( '.js-cups-navi' ) );
+		},
+
+		_renderCupScores: function() {
+			var el = this.$( '.js-cup-scores' );
+
+			var cup = this._getCup();
+
+			var model = new CupScoresModel( { cupId: cup.cupId } );
+
+			var view = new CupScoresView( {
+				model: model
+				, el: el
+			} );
 		},
 
 		_renderCupMatches: function() {
@@ -48,10 +70,10 @@ define( function ( require ) {
 
 			var cup = this._getCup();
 
-			var matchesModel = new MatchesModel.MatchesModel();
+			var model = new MatchesModel.MatchesModel();
 
-			var matchesView = new MatchesView.MatchesView( {
-				model: matchesModel
+			var view = new MatchesView.MatchesView( {
+				model: model
 				, el: container
 				, settings: {
 					categoryId: cup.categoryId
