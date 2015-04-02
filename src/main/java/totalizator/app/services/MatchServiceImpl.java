@@ -80,6 +80,16 @@ public class MatchServiceImpl implements MatchService {
 				}
 			} );
 		}
+
+		if ( !dto.isShowFinished() ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return ! match.isMatchFinished();
+				}
+			} );
+		}
+
 		return matches;
 	}
 

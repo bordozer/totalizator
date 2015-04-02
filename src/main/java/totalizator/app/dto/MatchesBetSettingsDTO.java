@@ -5,6 +5,7 @@ public class MatchesBetSettingsDTO {
 	private int categoryId;
 	private int cupId;
 	private int teamId;
+	private boolean showFinished;
 
 	public int getCategoryId() {
 		return categoryId;
@@ -28,5 +29,18 @@ public class MatchesBetSettingsDTO {
 
 	public void setTeamId( final int teamId ) {
 		this.teamId = teamId;
+	}
+
+	public boolean isShowFinished() {
+		return showFinished;
+	}
+
+	public void setShowFinished( final boolean showFinished ) {
+		this.showFinished = showFinished;
+	}
+
+	@Override
+	public String toString() {
+		return String.format( "Category: %d; cup: %d; team: %d", categoryId, cupId, teamId );
 	}
 }

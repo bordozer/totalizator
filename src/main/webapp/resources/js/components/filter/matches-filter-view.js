@@ -19,6 +19,7 @@ define( function ( require ) {
 		, categoryLabel: 'Category'
 		, cupLabel: 'Configurable view / Filter: Cup'
 		, teamLabel: 'Team'
+		, showFinishedLabel: 'Configurable view / Filter: Show finished matches'
 	} );
 
 	return Backbone.View.extend( {
@@ -27,6 +28,7 @@ define( function ( require ) {
 			'change #settings-category-id': '_onCategoryChange'
 			, 'change #settings-cup-id': '_onCupChange'
 			, 'change #settings-team-id': '_onTeamChange'
+			, 'change #settings-show-finished': '_onShowFinishedChange'
 			, 'click .matches-settings-save': '_onSettingsSave'
 			, 'click .matches-settings-cancel': '_onSettingsCancel'
 		},
@@ -47,6 +49,7 @@ define( function ( require ) {
 				, categories: this.categories
 				, cups: Services.categoryCups( this.cups, categoryId )
 				, teams: Services.categoryTeams( this.teams, categoryId )
+				, showFinished: model.showFinished
 				, translator: translator
 			} ) );
 
@@ -76,6 +79,10 @@ define( function ( require ) {
 			this.render();
 		},
 
+		_showFinishedChange: function( val ) {
+			this.model.set( { showFinished: val } );
+		},
+
 		_onCategoryChange: function( evt ) {
 			evt.preventDefault();
 
@@ -92,6 +99,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._teamChange( $( evt.target ).val() );
+		},
+
+		_onShowFinishedChange: function( evt ) {
+			evt.preventDefault();
+
+			this._showFinishedChange( this.$( '#settings-show-finished' ).is(':checked') );
 		},
 
 		_onSettingsSave: function( evt ) {

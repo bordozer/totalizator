@@ -21,7 +21,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping("/rest/matches")
-public class MatchesBetsController {
+public class MatchesAndBetsController {
 
 	@Autowired
 	private MatchService matchService;
