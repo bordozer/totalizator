@@ -63,7 +63,7 @@ define( function ( require ) {
 		},
 
 		_getCup: function() {
-			return this.model.get( 'cup' );
+			return this.model.toJSON();
 		}
 	} );
 

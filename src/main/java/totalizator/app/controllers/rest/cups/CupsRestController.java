@@ -27,15 +27,11 @@ public class CupsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/", produces = APPLICATION_JSON_VALUE )
-	public CupMatchesAndBetsDTO getDefaultLogin( final Principal principal, final @PathVariable( "cupId" ) int cupId ) {
+	public CupDTO getDefaultLogin( final Principal principal, final @PathVariable( "cupId" ) int cupId ) {
 
 		final Cup cup = cupService.load( cupId );
 
-		final CupMatchesAndBetsDTO result = new CupMatchesAndBetsDTO();
-
-		final CupDTO dto = new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
-		result.setCup( dto );
-		return result;
+		return new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
