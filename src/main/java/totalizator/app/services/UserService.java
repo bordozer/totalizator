@@ -7,4 +7,6 @@ public interface UserService extends GenericService<User>, NamedEntityGenericSer
 	void createUser( final String login, final String name, final String password );
 
 	User findByLogin( final String login );
+
+	String encodePassword( String password );
 }

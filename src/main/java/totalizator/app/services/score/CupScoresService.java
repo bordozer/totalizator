@@ -8,4 +8,6 @@ import java.util.List;
 public interface CupScoresService {
 
 	List<UserPoints> getUsersScores( final Cup cup );
+
+	List<UserPoints> getUsersScoresSummary( Cup cup );
 }

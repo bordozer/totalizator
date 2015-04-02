@@ -9,17 +9,15 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.*;
-import totalizator.app.services.SystemVarsService;
-import totalizator.app.services.TeamLogoService;
-import totalizator.app.services.TeamService;
+import totalizator.app.services.*;
 import totalizator.app.services.utils.DateTimeService;
 
 import javax.persistence.EntityManagerFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Component
 public class TestDataInitializer {
@@ -29,6 +27,9 @@ public class TestDataInitializer {
 	private static final String CATEGORY_NBA = "NBA";
 	private static final String CATEGORY_NCAA = "NCAA";
 	private static final String CATEGORY_UEFA = "UEFA";
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
@@ -45,6 +46,24 @@ public class TestDataInitializer {
 	@Autowired
 	private TeamLogoService teamLogoService;
 
+	@Autowired
+	private MatchService matchService;
+
+	@Autowired
+	private MatchBetsService matchBetsService;
+
+	private final List<UserData> userDatas = newArrayList();
+
+	{
+		userDatas.add( new UserData( "Kareem", "Abdul", "Jabbar" ) );
+		userDatas.add( new UserData( "Hakeem", "Olajuwon" ) );
+		userDatas.add( new UserData( "Patrick", "Aloysius", "Ewing" ) );
+		userDatas.add( new UserData( "Clyde", "Austin", "Drexler" ) );
+		userDatas.add( new UserData( "Shaquille", "Rashaun", "O'Neal" ) );
+		userDatas.add( new UserData( "Michael", "Jeffrey", "Jordan" ) );
+		userDatas.add( new UserData( "Dennis", "Keith", "Rodman" ) );
+	}
+
 	public void init() throws Exception {
 
 		final SessionFactory sessionFactory = entityManagerFactory.unwrap( SessionFactory.class );
@@ -53,16 +72,14 @@ public class TestDataInitializer {
 
 		final Transaction transaction = session.beginTransaction();
 
-
-		final User user1 = new User( "kareem", "Kareem Abdul Jabbar", "$2a$10$11.wSzimtc3ALjbjokULr.LLJb4A/iDh3P6rw0..nI9JcpTpwN6M6" );
-		session.persist( user1 );
-
-		final User user2 = new User( "hakeem", "Hakeem Olajuwon", "$2a$10$VNleCLXwo0TNYCcb4m1rWOjx2SU1qs6hyav04Ip8Zq0eZu3/Al1aS" );
-		session.persist( user2 );
-
-		final User user3 = new User( "patrick", "Patrick Aloysius Ewing", "$2a$10$daF6I2MzfIcmGg/pWNmc4ep8OLkjbDDRxRhnKhMpbTOyLNacpcMVO" );
-		session.persist( user3 );
-
+		for ( final UserData userData : userDatas ) {
+			final String login = userData.firstName.toLowerCase();
+			final User user1 = new User( login
+					, String.format( "%s %s %s", userData.firstName, userData.lastName, userData.thirdName )
+					, userService.encodePassword( login )
+			);
+			session.persist( user1 );
+		}
 
 		final Category nba = new Category( CATEGORY_NBA );
 		session.persist( nba );
@@ -99,11 +116,16 @@ public class TestDataInitializer {
 
 		createUEFATeams( session, uefa );
 
+
+
 		transaction.commit();
+
+
 
 		final Transaction transaction1 = session.beginTransaction();
 
 		final MatchDataGenerationStrategy pastMatchesStrategy = new MatchDataGenerationStrategy() {
+
 			@Override
 			Date generateBeginningTime( final DateTimeService dateTimeService ) {
 				return dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) );
@@ -125,6 +147,20 @@ public class TestDataInitializer {
 		generateMatches( uefa2016Euro, 20, session, pastMatchesStrategy );
 		generateMatches( uefa2018WorldCup, 5, session, pastMatchesStrategy );
 
+
+
+		transaction1.commit();
+
+
+
+		final Transaction transaction2 = session.beginTransaction();
+
+		generateBets( nba2015Regular, pastMatchesStrategy );
+		generateBets( nba2015PlayOff, pastMatchesStrategy );
+		generateBets( ncaa2015, pastMatchesStrategy );
+		generateBets( uefa2016Euro, pastMatchesStrategy );
+		generateBets( uefa2018WorldCup, pastMatchesStrategy );
+
 		final MatchDataGenerationStrategy futureMatchesStrategy = new MatchDataGenerationStrategy() {
 			@Override
 			Date generateBeginningTime( final DateTimeService dateTimeService ) {
@@ -143,11 +179,50 @@ public class TestDataInitializer {
 		};
 		generateMatches( nba2015Regular, 10, session, futureMatchesStrategy );
 
-		transaction1.commit();
+		transaction2.commit();
 
 		LOGGER.debug( "========================================================================" );
 		LOGGER.debug( "=                          TEST DATA IS CREATED                        =" );
 		LOGGER.debug( "========================================================================" );
+	}
+
+	private void generateBets( final Cup cup, final MatchDataGenerationStrategy strategy ) {
+
+		final List<User> users = userService.loadAll();
+
+		final List<Match> cupMatches = matchService.loadAll( cup );
+
+		for ( final User user : users ) {
+
+			final int betsCountGenerateTo = getRandomInt( 0, cupMatches.size() - 1 );
+
+			if ( betsCountGenerateTo == 0 ) {
+				continue;
+			}
+
+			final List<Match> matches = newArrayList( cupMatches );
+			final Iterator<Match> iterator = matches.iterator();
+
+			int i = 0;
+			while ( iterator.hasNext() ) {
+				final Match match = iterator.next();
+
+				final MatchBet bet = new MatchBet();
+				bet.setMatch( cupMatches.get( getRandomInt( 0, matches.size() - 1 ) ) );
+				bet.setUser( user );
+				bet.setBetScore1( strategy.generateScore() );
+				bet.setBetScore2( strategy.generateScore() );
+				bet.setBetTime( dateTimeService.offset( match.getBeginningTime(), Calendar.HOUR, getRandomInt( 1, 12 ) ) );
+
+				matchBetsService.save( bet );
+
+				i++;
+
+				if ( i >= betsCountGenerateTo ) {
+					break;
+				}
+			}
+		}
 	}
 
 	private void createNBATeams( final Session session, final Category category ) throws DocumentException, IOException {
@@ -230,6 +305,25 @@ public class TestDataInitializer {
 		}
 
 		return teams.get( getRandomInt( 0, teams.size() - 1 ) );
+	}
+
+	private class UserData {
+
+		UserData( final String firstName, final String lastName ) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.thirdName = "";
+		}
+
+		UserData( final String firstName, final String lastName, final String thirdName ) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.thirdName = thirdName;
+		}
+
+		final String firstName;
+		final String lastName;
+		final String thirdName;
 	}
 
 	private abstract class MatchDataGenerationStrategy {

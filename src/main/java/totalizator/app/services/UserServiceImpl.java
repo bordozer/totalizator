@@ -66,7 +66,8 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByLogin( login );
 	}
 
-	private String encodePassword( final String password ) {
+	@Override
+	public String encodePassword( final String password ) {
 		return new BCryptPasswordEncoder().encode( password );
 	}
 }

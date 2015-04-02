@@ -69,6 +69,30 @@ public class User extends AbstractEntity {
 	}
 
 	@Override
+	public int hashCode() {
+		return 31 * getId();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+
+		if ( obj == null ) {
+			return false;
+		}
+
+		if ( obj == this ) {
+			return true;
+		}
+
+		if ( !( obj instanceof User ) ) {
+			return false;
+		}
+
+		final User user = ( User ) obj;
+		return user.getId() == getId();
+	}
+
+	@Override
 	public String toString() {
 		return String.format( "#%d: %s ( %s )", getId(), login, username );
 	}

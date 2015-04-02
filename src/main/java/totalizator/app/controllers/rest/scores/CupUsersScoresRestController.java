@@ -51,7 +51,7 @@ public class CupUsersScoresRestController {
 
 	private List<UserPointsDTO> getUsersScores( final Cup cup ) {
 
-		return Lists.transform( cupScoresService.getUsersScores( cup ), new Function<UserPoints, UserPointsDTO>() {
+		return Lists.transform( cupScoresService.getUsersScoresSummary( cup ), new Function<UserPoints, UserPointsDTO>() {
 			@Override
 			public UserPointsDTO apply( final UserPoints userPoints ) {
 				return new UserPointsDTO( new UserDTO( userPoints.getUser().getId(), userPoints.getUser().getUsername() ), userPoints.getPoints()  );

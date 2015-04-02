@@ -58,4 +58,35 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 		return result;
 	}
+
+	@Override
+	public List<UserPoints> getUsersScoresSummary( final Cup cup ) {
+		final List<UserPoints> usersScores = getUsersScores( cup );
+
+		final List<UserPoints> result = newArrayList();
+		for ( final UserPoints usersScore : usersScores ) {
+
+			final UserPoints userPoints = getUserPoints( result, usersScore.getUser() );
+
+			if ( userPoints == null ) {
+				result.add( new UserPoints( usersScore.getUser(), usersScore.getPoints() ) );
+				continue;
+			}
+
+			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
+		}
+
+		return result;
+	}
+
+	private UserPoints getUserPoints( List<UserPoints> usersScores, final User user ) {
+
+		for ( final UserPoints usersScore : usersScores ) {
+			if ( usersScore.getUser().equals( user ) ) {
+				return usersScore;
+			}
+		}
+
+		return null;
+	}
 }
