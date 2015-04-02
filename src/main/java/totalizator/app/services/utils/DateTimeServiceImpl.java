@@ -1,4 +1,4 @@
-package totalizator.app.services;
+package totalizator.app.services.utils;
 
 import org.springframework.stereotype.Service;
 import totalizator.app.services.utils.DateTimeService;

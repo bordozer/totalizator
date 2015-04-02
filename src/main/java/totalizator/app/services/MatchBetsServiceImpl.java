@@ -1,9 +1,12 @@
 package totalizator.app.services;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.MatchBetRepository;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
@@ -46,6 +49,22 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll( final Match match ) {
 		return matchBetRepository.loadAll( match );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public List<MatchBet> loadAll( final Cup cup, final User user ) {
+
+		final List<MatchBet> bets = matchBetRepository.loadAll( user );
+
+		CollectionUtils.filter( bets, new Predicate<MatchBet>() {
+			@Override
+			public boolean evaluate( final MatchBet matchBet ) {
+				return matchBet.getMatch().getCup().equals( cup );
+			}
+		} );
+
+		return bets;
 	}
 
 	@Override

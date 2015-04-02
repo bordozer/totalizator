@@ -65,6 +65,30 @@ public class Cup extends AbstractEntity {
 	}
 
 	@Override
+	public int hashCode() {
+		return 31 * getId();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+
+		if ( obj == null ) {
+			return false;
+		}
+
+		if ( obj == this ) {
+			return true;
+		}
+
+		if ( !( obj instanceof Cup ) ) {
+			return false;
+		}
+
+		final Cup cup = ( Cup ) obj;
+		return cup.getId() == getId();
+	}
+
+	@Override
 	public String toString() {
 		return String.format( "#%d: '%s'", getId(), cupName );
 	}
