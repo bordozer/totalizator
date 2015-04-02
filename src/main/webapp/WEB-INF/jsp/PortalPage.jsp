@@ -7,7 +7,7 @@
 	<div class="portal-page-container"></div>
 
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/user-base-page-view', 'js/portal/portal', 'translator' ], function ( $, Page, portal, Translator ) {
+		require( [ 'jquery', 'js/user-base-page-view', 'js/pages/portal/portal', 'translator' ], function ( $, Page, portal, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Portal page title'
