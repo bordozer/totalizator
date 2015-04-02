@@ -11,7 +11,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/matches-and-bets-template.html' ) );
 	var templateMatch = _.template( require( 'text!./templates/matches-and-bets-entry-template.html' ) );
 
-	var dateTimeService = require( '/resources/js/dateTimeService.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 	var service = require( '/resources/js/services/service.js' );
 	var mainMenu = require( 'js/components/main-menu/main-menu' );
 

@@ -9,7 +9,7 @@ define( function ( require ) {
 	var moment = require( 'moment' );
 	var chosen = require( 'chosen' );
 
-	var dateTimeService = require( '/resources/js/dateTimeService.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 	var service = require( '/resources/js/services/service.js' );
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
