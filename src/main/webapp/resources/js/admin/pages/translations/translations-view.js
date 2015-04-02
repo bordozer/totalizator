@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!js/admin/translations/templates/translations-template.html' );
+	var Template = require( 'text!./templates/translations-template.html' );
 
 	var AdminView = Backbone.View.extend( {
 
