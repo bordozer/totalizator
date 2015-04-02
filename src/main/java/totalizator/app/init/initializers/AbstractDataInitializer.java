@@ -22,10 +22,6 @@ public abstract class AbstractDataInitializer {
 
 	protected abstract List<Team> generateTeams( final Category category, final Session session ) throws DocumentException, IOException;
 
-//	protected abstract List<Match> generateMatches( final Cup cup, final List<Team> teams, final Session session, final MatchDataGenerationStrategy strategy );
-
-//	protected abstract List<MatchBet> generateBets( final Match match, final User user, final Session session );
-
 	protected abstract MatchDataGenerationStrategy pastStrategy();
 
 	protected abstract MatchDataGenerationStrategy futureStrategy();

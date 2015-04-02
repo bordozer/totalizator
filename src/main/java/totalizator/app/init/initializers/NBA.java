@@ -42,17 +42,6 @@ public class NBA extends AbstractDataInitializer {
 		return createTeams( teamImportService.importNBA( category ), session );
 	}
 
-	/*@Override
-	protected List<Match> generateMatches( final Cup cup, final List<Team> teams, final Session session, final MatchDataGenerationStrategy strategy ) {
-		return generateMatches( cup, strategy, session );
-
-	}*/
-
-	/*@Override
-	protected List<MatchBet> generateBets( final Match match, final User user, final Session session ) {
-		return null;
-	}*/
-
 	@Override
 	protected MatchDataGenerationStrategy pastStrategy() {
 		return MatchDataGenerationStrategy.nbaPastStrategy();

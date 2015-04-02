@@ -41,16 +41,6 @@ public class UEFA extends AbstractDataInitializer {
 		return createTeams( teamImportService.importUEFA( category ), session );
 	}
 
-	/*@Override
-	protected List<Match> generateMatches( final Cup cup, final List<Team> teams, final Session session, final MatchDataGenerationStrategy strategy ) {
-		return null;
-	}*/
-
-	/*@Override
-	protected List<MatchBet> generateBets( final Match match, final User user, final Session session ) {
-		return null;
-	}*/
-
 	@Override
 	protected MatchDataGenerationStrategy pastStrategy() {
 		return MatchDataGenerationStrategy.uefaPastStrategy();
