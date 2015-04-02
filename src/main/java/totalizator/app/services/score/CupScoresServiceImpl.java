@@ -1,5 +1,7 @@
 package totalizator.app.services.score;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.beans.UserPoints;
@@ -39,6 +41,13 @@ public class CupScoresServiceImpl implements CupScoresService {
 				result.add( new UserPoints( user, calculationStrategy.getPoints( bet ) ) );
 			}
 		}
+
+		CollectionUtils.filter( result, new Predicate<UserPoints>() {
+			@Override
+			public boolean evaluate( final UserPoints userPoints ) {
+				return userPoints.getPoints() > 0;
+			}
+		} );
 
 		Collections.sort( result, new Comparator<UserPoints>() {
 			@Override

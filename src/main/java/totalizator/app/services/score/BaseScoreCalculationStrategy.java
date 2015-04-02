@@ -11,6 +11,10 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 	@Override
 	int getPoints( final MatchBet bet ) {
 
+		if ( ! bet.getMatch().isMatchFinished() ) {
+			return 0;
+		}
+
 		final Match match = bet.getMatch();
 
 		final int score1 = match.getScore1();
