@@ -45,6 +45,7 @@ define( function ( require ) {
 
 		events: {
 			'click .js-add-entry-button': '_onAddClick'
+			, 'click .js-finish-selected-matches-button': '_onFinishSelectedMatchesClick'
 		},
 
 		initialize: function ( options ) {
@@ -92,15 +93,39 @@ define( function ( require ) {
 			this.$( '.match-list-container' ).html( this._renderEntry( model ) );
 		},
 
+		_getSelectedMatchIds: function() {
+			var result = [];
+			this.model.forEach( function( model ) {
+				if ( model.selected() ) {
+					result.push( model );
+				}
+			});
+			return result;
+		},
+
 		_addEntry: function() {
 			this.listenToOnce( this.model, 'add', this._renderNewEntry );
 			this.model.add( {} );
+		},
+
+		_finishSelectedMatchesClick: function() {
+			var matches = this._getSelectedMatchIds();
+			_.each( matches, function( match ) {
+				match.finish();
+			});
+			this._triggerRender();
 		},
 
 		_onAddClick: function( evt ) {
 			evt.preventDefault();
 
 			this._addEntry();
+		},
+
+		_onFinishSelectedMatchesClick: function( evt ) {
+			evt.preventDefault();
+
+			this._finishSelectedMatchesClick();
 		}
 	} );
 
@@ -119,6 +144,7 @@ define( function ( require ) {
 			, 'change .cups-select-box': '_onCupChange'
 			, 'change .team1-select-box': '_onTeam1Change'
 			, 'change .team2-select-box': '_onTeam2Change'
+			, 'change .js-group-checkbox': '_onGroupCheckboxChange'
 		},
 
 		initialize: function ( options ) {
@@ -327,6 +353,10 @@ define( function ( require ) {
 			this.remove();
 
 			this.trigger( 'matches:render' );
+		},
+
+		_onGroupCheckboxChange: function() {
+			this.model.selected( this.$( '.js-group-checkbox' ).is(':checked') );
 		}
 	} );
 

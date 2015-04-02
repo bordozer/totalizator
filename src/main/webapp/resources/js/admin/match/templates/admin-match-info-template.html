@@ -5,7 +5,11 @@
 		<button type="button" class="btn btn-default fa fa-recycle entry-del" title="<%=translator.matchDeleteLabel%>"></button>
 	</div>
 
-	<div class="col-lg-3"><strong>#<%=matchId%></strong> <%=categoryName%> / <%=cupName%></div>
+	<div class="col-lg-3">
+		<input type="checkbox" class="js-group-checkbox" value="true">
+		<strong>#<%=matchId%></strong>
+		<%=categoryName%> / <%=cupName%>
+	</div>
 
 	<div class="col-lg-3 text-right <%=style1%>"><%=team1Name%></div>
 	<div class="col-lg-3 <%=style2%>"><%=team2Name%></div>

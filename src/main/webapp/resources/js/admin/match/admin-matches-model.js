@@ -5,6 +5,7 @@ define( ["backbone"], function ( Backbone ) {
 		idAttribute: 'matchId',
 
 		categoryId: 0,
+		_selected: false,
 
 		defaults: {
 			matchId: 0
@@ -20,6 +21,20 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize: function ( options ) {
 
+		},
+
+		selected: function( val ) {
+
+			if ( val == undefined ) {
+				return this._selected;
+			}
+
+			this._selected = val;
+		},
+
+		finish: function() {
+			this.set( { matchFinished: true } );
+			this.save( { async: false } );
 		}
 	});
 

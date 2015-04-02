@@ -12,6 +12,7 @@ define( function( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		addMatchLabel: "Admin / Matches / Add entry"
+		, finishSelectedMatchesLabel: "Admin / Matches / Finish selected matches"
 	} );
 
 	function init( container ) {
@@ -20,6 +21,7 @@ define( function( require ) {
 
 		var menuItems = [
 			{ selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel }
+			, { selector: 'js-finish-selected-matches-button', icon: 'fa fa-flag-checkered', link: '#', text: translator.finishSelectedMatchesLabel }
 			, { selector: 'divider' }
 		];
 
