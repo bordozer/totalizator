@@ -6,10 +6,10 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!js/admin/team/templates/teams-template.html' );
+	var Template = require( 'text!./templates/teams-template.html' );
 
-	var TemplateEntry = require( 'text!js/admin/team/templates/team-template.html' );
-	var TemplateEntryEdit = require( 'text!js/admin/team/templates/team-edit-template.html' );
+	var TemplateEntry = require( 'text!./templates/team-template.html' );
+	var TemplateEntryEdit = require( 'text!./templates/team-edit-template.html' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );

@@ -14,8 +14,8 @@ define( function ( require ) {
 	var CupsModel = require( 'js/admin/components/cup/cup-model' );
 	var CupsView = require( 'js/admin/components/cup/cup-view' );
 
-	var TeamsModel = require( 'js/admin/team/team-model' );
-	var TeamsView = require( 'js/admin/team/team-view' );
+	var TeamsModel = require( 'js/admin/components/team/team-model' );
+	var TeamsView = require( 'js/admin/components/team/team-view' );
 
 	var AdminView = Backbone.View.extend( {
 

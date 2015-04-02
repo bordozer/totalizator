@@ -5,7 +5,7 @@ define( function ( require ) {
 	var Users = require( 'js/services/users-model' );
 	var Categories = require( 'js/admin/components/category/category-model' );
 	var Cups = require( 'js/admin/components/cup/cup-model' );
-	var Teams = require( 'js/admin/team/team-model' );
+	var Teams = require( 'js/admin/components/team/team-model' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
