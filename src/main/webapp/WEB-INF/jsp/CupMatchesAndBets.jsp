@@ -8,7 +8,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/user-base-page-view', 'js/cup/cup', 'translator' ], function ( $, Page, cup, Translator ) {
+		require( [ 'jquery', 'js/user-base-page-view', 'js/pages/cup/cup', 'translator' ], function ( $, Page, cup, Translator ) {
 
 			var cupId = ${cupMatchesAndBetsModel.cupId};
 
