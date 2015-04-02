@@ -1,4 +1,8 @@
-define( ["backbone"], function ( Backbone ) {
+define( function ( require ) {
+
+	'use strict';
+
+	var Backbone = require( 'backbone' );
 
 	var TranslationsModel = Backbone.Model.extend( {
 
