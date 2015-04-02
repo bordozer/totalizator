@@ -33,7 +33,7 @@ public class NCAA extends AbstractDataInitializer {
 	}
 
 	@Override
-	protected List<Team> generateTeams( final Category category, final Session session ) throws DocumentException, IOException {
+	protected List<Team> loadTeamsData( final Category category, final Session session ) throws DocumentException, IOException {
 		return createTeams( teamImportService.importNCAA( category ), session );
 	}
 

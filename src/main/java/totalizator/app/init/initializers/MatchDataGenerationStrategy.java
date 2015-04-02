@@ -1,12 +1,11 @@
 package totalizator.app.init.initializers;
 
-import totalizator.app.init.TestDataInitializer;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public abstract class MatchDataGenerationStrategy {
+abstract class MatchDataGenerationStrategy {
 
 	public abstract Date generateBeginningTime( final DateTimeService dateTimeService );
 

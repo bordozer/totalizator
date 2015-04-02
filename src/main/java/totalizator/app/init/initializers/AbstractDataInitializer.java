@@ -20,7 +20,7 @@ public abstract class AbstractDataInitializer {
 
 	protected abstract List<Cup> generateCups( final Category category, final Session session );
 
-	protected abstract List<Team> generateTeams( final Category category, final Session session ) throws DocumentException, IOException;
+	protected abstract List<Team> loadTeamsData( final Category category, final Session session ) throws DocumentException, IOException;
 
 	protected abstract MatchDataGenerationStrategy pastStrategy();
 
@@ -41,10 +41,7 @@ public abstract class AbstractDataInitializer {
 
 		final List<Cup> cups = generateCups( category, session );
 
-		teamLogoService.deleteLogosDir();
-		teamLogoService.createLogosDir();
-
-		final List<Team> teams = generateTeams( category, session );
+		final List<Team> teams = loadTeamsData( category, session );
 
 		for ( final Cup cup : cups ) {
 
@@ -72,7 +69,6 @@ public abstract class AbstractDataInitializer {
 
 			result.add( team );
 		}
-
 
 		return result;
 	}
