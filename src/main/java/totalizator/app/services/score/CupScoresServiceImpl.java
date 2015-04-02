@@ -49,13 +49,6 @@ public class CupScoresServiceImpl implements CupScoresService {
 			}
 		} );
 
-		Collections.sort( result, new Comparator<UserPoints>() {
-			@Override
-			public int compare( final UserPoints o1, final UserPoints o2 ) {
-				return ( ( Integer ) o1.getPoints() ).compareTo( o2.getPoints() );
-			}
-		} );
-
 		return result;
 	}
 
@@ -75,6 +68,13 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
 		}
+
+		Collections.sort( result, new Comparator<UserPoints>() {
+			@Override
+			public int compare( final UserPoints o1, final UserPoints o2 ) {
+				return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
+			}
+		} );
 
 		return result;
 	}

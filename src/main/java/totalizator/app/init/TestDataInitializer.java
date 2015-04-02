@@ -1,7 +1,6 @@
 package totalizator.app.init;
 
 import org.apache.log4j.Logger;
-import org.codehaus.plexus.util.FileUtils;
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +12,6 @@ import totalizator.app.services.*;
 import totalizator.app.services.utils.DateTimeService;
 
 import javax.persistence.EntityManagerFactory;
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -72,15 +70,12 @@ public class TestDataInitializer {
 
 		final Transaction transaction = session.beginTransaction();
 
-		for ( final UserData userData : userDatas ) {
-			final String login = userData.firstName.toLowerCase();
-			final User user1 = new User( login
-					, String.format( "%s %s %s", userData.firstName, userData.lastName, userData.thirdName )
-					, userService.encodePassword( login )
-			);
-			session.persist( user1 );
-		}
 
+		generateUsers( session );
+
+
+
+		// categories -->
 		final Category nba = new Category( CATEGORY_NBA );
 		session.persist( nba );
 
@@ -89,24 +84,34 @@ public class TestDataInitializer {
 
 		final Category uefa = new Category( CATEGORY_UEFA );
 		session.persist( uefa );
+		// categories <--
 
 
+
+		// cups -->
 		final Cup nba2015Regular = new Cup( "2015 - regular", nba );
 		nba2015Regular.setShowOnPortalPage( true );
 		session.persist( nba2015Regular );
 
 		final Cup nba2015PlayOff = new Cup( "2015 - playoff", nba );
+		nba2015PlayOff.setShowOnPortalPage( true );
 		session.persist( nba2015PlayOff );
 
 		final Cup ncaa2015 = new Cup( "2015", ncaa );
+		ncaa2015.setShowOnPortalPage( true );
 		session.persist( ncaa2015 );
 
 		final Cup uefa2016Euro = new Cup( "Euro 2016", uefa );
+		uefa2016Euro.setShowOnPortalPage( true );
 		session.persist( uefa2016Euro );
 
 		final Cup uefa2018WorldCup = new Cup( "World cup 2018", uefa );
 		session.persist( uefa2018WorldCup );
+		// cups <--
 
+
+
+		// teams -->
 		teamLogoService.deleteLogosDir();
 		teamLogoService.createLogosDir();
 
@@ -115,75 +120,72 @@ public class TestDataInitializer {
 		createNCAATeams( session, ncaa );
 
 		createUEFATeams( session, uefa );
+		// teams <--
 
 
-
-		transaction.commit();
-
-
-
+		transaction.commit(); // - = commit = -
 		final Transaction transaction1 = session.beginTransaction();
 
-		final MatchDataGenerationStrategy pastMatchesStrategy = new MatchDataGenerationStrategy() {
 
-			@Override
-			Date generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) );
-			}
 
-			@Override
-			int generateScore() {
-				return getRandomInt( 80, 115 );
-			}
+		// past matches -->
+		final MatchDataGenerationStrategy nbaPastStrategy = MatchDataGenerationStrategy.nbaPastStrategy();
+		final MatchDataGenerationStrategy ncaaPastStrategy = MatchDataGenerationStrategy.ncaaPastStrategy();
+		final MatchDataGenerationStrategy uefaPastStrategy = MatchDataGenerationStrategy.uefaPastStrategy();
 
-			@Override
-			boolean isFinished() {
-				return true;
-			}
-		};
-		generateMatches( nba2015Regular, 100, session, pastMatchesStrategy );
-		generateMatches( nba2015PlayOff, 25, session, pastMatchesStrategy );
-		generateMatches( ncaa2015, 5, session, pastMatchesStrategy );
-		generateMatches( uefa2016Euro, 20, session, pastMatchesStrategy );
-		generateMatches( uefa2018WorldCup, 5, session, pastMatchesStrategy );
+		generateMatches( nba2015Regular, 100, session, nbaPastStrategy );
+		generateMatches( nba2015PlayOff, 25, session, nbaPastStrategy );
+		generateMatches( ncaa2015, 5, session, ncaaPastStrategy );
+		generateMatches( uefa2016Euro, 20, session, uefaPastStrategy );
+		generateMatches( uefa2018WorldCup, 5, session, uefaPastStrategy );
 
 
 
-		transaction1.commit();
+		generateBets( nba2015Regular, nbaPastStrategy );
+		generateBets( nba2015PlayOff, nbaPastStrategy );
+		generateBets( ncaa2015, ncaaPastStrategy );
+		generateBets( uefa2016Euro, uefaPastStrategy );
+		generateBets( uefa2018WorldCup, uefaPastStrategy );
+		// past matches <--
 
 
 
-		final Transaction transaction2 = session.beginTransaction();
+		// future matches -->
+		final MatchDataGenerationStrategy nbaFutureStrategy = MatchDataGenerationStrategy.nbaFutureStrategy();
+		final MatchDataGenerationStrategy ncaaFutureStrategy = MatchDataGenerationStrategy.ncaaFutureStrategy();
+		final MatchDataGenerationStrategy uefaFutureStrategy = MatchDataGenerationStrategy.uefaFutureStrategy();
 
-		generateBets( nba2015Regular, pastMatchesStrategy );
-		generateBets( nba2015PlayOff, pastMatchesStrategy );
-		generateBets( ncaa2015, pastMatchesStrategy );
-		generateBets( uefa2016Euro, pastMatchesStrategy );
-		generateBets( uefa2018WorldCup, pastMatchesStrategy );
+		generateMatches( nba2015Regular, 10, session, nbaFutureStrategy );
+		generateMatches( nba2015PlayOff, 10, session, nbaFutureStrategy );
+		generateMatches( ncaa2015, 20, session, ncaaFutureStrategy );
+		generateMatches( uefa2016Euro, 64, session, uefaFutureStrategy );
 
-		final MatchDataGenerationStrategy futureMatchesStrategy = new MatchDataGenerationStrategy() {
-			@Override
-			Date generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, getRandomInt( 1, 168 ) );
-			}
 
-			@Override
-			int generateScore() {
-				return 0;
-			}
+		generateBets( nba2015Regular, nbaFutureStrategy );
+		generateBets( nba2015PlayOff, nbaFutureStrategy );
+		generateBets( ncaa2015, ncaaFutureStrategy );
+		generateBets( uefa2016Euro, uefaFutureStrategy );
+		// future matches <--
 
-			@Override
-			boolean isFinished() {
-				return false;
-			}
-		};
-		generateMatches( nba2015Regular, 10, session, futureMatchesStrategy );
 
-		transaction2.commit();
+		transaction1.commit(); // - = commit = -
+
+
 
 		LOGGER.debug( "========================================================================" );
 		LOGGER.debug( "=                          TEST DATA IS CREATED                        =" );
 		LOGGER.debug( "========================================================================" );
+	}
+
+	private void generateUsers( final Session session ) {
+		for ( final UserData userData : userDatas ) {
+			final String login = userData.firstName.toLowerCase();
+			final User user1 = new User( login
+					, String.format( "%s %s %s", userData.firstName, userData.lastName, userData.thirdName )
+					, userService.encodePassword( login )
+			);
+			session.persist( user1 );
+		}
 	}
 
 	private void generateBets( final Cup cup, final MatchDataGenerationStrategy strategy ) {
@@ -288,7 +290,7 @@ public class TestDataInitializer {
 		return match;
 	}
 
-	private int getRandomInt( final int minValue, final int maxValue ) {
+	static int getRandomInt( final int minValue, final int maxValue ) {
 
 		if ( maxValue == 0 ) {
 			return 0;
@@ -324,14 +326,5 @@ public class TestDataInitializer {
 		final String firstName;
 		final String lastName;
 		final String thirdName;
-	}
-
-	private abstract class MatchDataGenerationStrategy {
-
-		abstract Date generateBeginningTime( final DateTimeService dateTimeService );
-
-		abstract int generateScore();
-
-		abstract boolean isFinished();
 	}
 }

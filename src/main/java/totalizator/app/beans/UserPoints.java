@@ -23,4 +23,9 @@ public class UserPoints {
 	public void setPoints( final int points ) {
 		this.points = points;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: %d", user, points );
+	}
 }
