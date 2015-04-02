@@ -50,7 +50,8 @@ public class CupsRestController {
 		return Lists.transform( portalPageCups, new Function<Cup, CupDTO>() {
 			@Override
 			public CupDTO apply( final Cup cup ) {
-				return new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
+				final String cupName = String.format( "%s: %s", cup.getCategory().getCategoryName(), cup.getCupName() ); // TODO: hack with category name
+				return new CupDTO( cup.getId(), cupName, cup.getCategory().getId() );
 			}
 		} );
 	}

@@ -25,7 +25,6 @@ define( function ( require ) {
 		render: function () {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
-			console.log( data );
 
 			this.$el.html( template( data ) );
 
