@@ -7,7 +7,7 @@
 
 	<div class="translations-container"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/pages/translations/translations', 'translator' ], function ( $, Admin, translations, Translator ) {
+		require( [ 'jquery', 'js/admin/components/base-view/admin-base-page-view', 'js/admin/pages/translations/translations', 'translator' ], function ( $, Admin, translations, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Admin / Translations: Page Title'

@@ -9,7 +9,7 @@
 
 	<div class="admin-main-page"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/admin-base-page-view', 'js/admin/pages/main/admin', 'translator' ], function ( $, Admin, adminMainPage, Translator ) {
+		require( [ 'jquery', 'js/admin/components/base-view/admin-base-page-view', 'js/admin/pages/main/admin', 'translator' ], function ( $, Admin, adminMainPage, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Admin: Page Title'
