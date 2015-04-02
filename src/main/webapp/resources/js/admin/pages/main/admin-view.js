@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!js/admin/main/templates/admin-template.html' );
+	var Template = require( 'text!./templates/admin-template.html' );
 
 	var CategoriesModel = require( 'js/admin/category/category-model' );
 	var CategoriesView = require( 'js/admin/category/category-view' );
