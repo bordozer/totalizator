@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var PageView = require( 'js/base/base-page-view' );
+	var PageView = require( 'js/components/base-view/base-page-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

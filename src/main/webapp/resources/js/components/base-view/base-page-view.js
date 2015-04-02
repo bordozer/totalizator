@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var mainMenu = require( 'js/components/main-menu/main-menu' );
 
-	var template = _.template( require( 'text!js/base/templates/base-page-template.html' ) );
+	var template = _.template( require( 'text!./templates/base-page-template.html' ) );
 
 	var service = require( '/resources/js/services/service.js' );
 
