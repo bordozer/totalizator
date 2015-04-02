@@ -8,8 +8,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-template.html' ) );
 
-	var MatchesModel = require( 'js/matches/matches-model' );
-	var MatchesView = require( 'js/matches/matches-view' );
+	var MatchesModel = require( 'js/matches-and-bets/matches-and-bets-model' );
+	var MatchesView = require( 'js/matches-and-bets/matches-and-bets-view' );
 
 	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
