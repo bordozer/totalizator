@@ -155,7 +155,7 @@ public class TestDataInitializer {
 
 
 
-		transaction.commit(); // - = commit = -
+		transaction1.commit(); // - = commit = -
 		final Transaction transaction2 = session.beginTransaction();
 
 
