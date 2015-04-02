@@ -10,7 +10,7 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!js/admin/cup/templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!js/admin/cup/templates/cup-edit-template.html' );
 
-	var Services = require( '/resources/js/services/service.js' );
+	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
@@ -80,7 +80,7 @@ define( function ( require ) {
 		},
 
 		_loadCategories: function() {
-			this.categories = Services.loadCategories();
+			this.categories = service.loadCategories();
 		},
 
 		_updateCategories: function() {
@@ -156,7 +156,7 @@ define( function ( require ) {
 		},
 
 		_getCategoryName: function( categoryId ) {
-			var category = Services.getCategory( this.categories, categoryId );
+			var category = service.getCategory( this.categories, categoryId );
 			return category.categoryName;
 		},
 

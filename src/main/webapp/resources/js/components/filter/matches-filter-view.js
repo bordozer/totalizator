@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!js/components/filter/templates/matches-filter-template.html' ) );
 
-	var Services = require( '/resources/js/services/service.js' );
+	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
@@ -34,9 +34,9 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.categories = Services.loadCategories();
-			this.cups = Services.loadCups();
-			this.teams = Services.loadTeams();
+			this.categories = service.loadCategories();
+			this.cups = service.loadCups();
+			this.teams = service.loadTeams();
 		},
 
 		render: function() {
@@ -47,8 +47,8 @@ define( function ( require ) {
 			this.$el.html( template( {
 				model: model
 				, categories: this.categories
-				, cups: Services.categoryCups( this.cups, categoryId )
-				, teams: Services.categoryTeams( this.teams, categoryId )
+				, cups: service.categoryCups( this.cups, categoryId )
+				, teams: service.categoryTeams( this.teams, categoryId )
 				, showFinished: model.showFinished
 				, translator: translator
 			} ) );
