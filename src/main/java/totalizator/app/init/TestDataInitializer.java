@@ -138,14 +138,6 @@ public class TestDataInitializer {
 		generateMatches( ncaa2015, 5, session, ncaaPastStrategy );
 		generateMatches( uefa2016Euro, 20, session, uefaPastStrategy );
 		generateMatches( uefa2018WorldCup, 5, session, uefaPastStrategy );
-
-
-
-		generateBets( nba2015Regular, nbaPastStrategy );
-		generateBets( nba2015PlayOff, nbaPastStrategy );
-		generateBets( ncaa2015, ncaaPastStrategy );
-		generateBets( uefa2016Euro, uefaPastStrategy );
-		generateBets( uefa2018WorldCup, uefaPastStrategy );
 		// past matches <--
 
 
@@ -159,16 +151,35 @@ public class TestDataInitializer {
 		generateMatches( nba2015PlayOff, 10, session, nbaFutureStrategy );
 		generateMatches( ncaa2015, 20, session, ncaaFutureStrategy );
 		generateMatches( uefa2016Euro, 64, session, uefaFutureStrategy );
+		// future matches <--
 
 
+
+		transaction.commit(); // - = commit = -
+		final Transaction transaction2 = session.beginTransaction();
+
+
+
+		// past matches bets -->
+		generateBets( nba2015Regular, nbaPastStrategy );
+		generateBets( nba2015PlayOff, nbaPastStrategy );
+		generateBets( ncaa2015, ncaaPastStrategy );
+		generateBets( uefa2016Euro, uefaPastStrategy );
+		generateBets( uefa2018WorldCup, uefaPastStrategy );
+		// past matches bets -->
+
+
+
+		// future matches bets -->
 		generateBets( nba2015Regular, nbaFutureStrategy );
 		generateBets( nba2015PlayOff, nbaFutureStrategy );
 		generateBets( ncaa2015, ncaaFutureStrategy );
 		generateBets( uefa2016Euro, uefaFutureStrategy );
-		// future matches <--
+		// future matches bets <--
 
 
-		transaction1.commit(); // - = commit = -
+
+		transaction2.commit(); // - = commit = -
 
 
 
