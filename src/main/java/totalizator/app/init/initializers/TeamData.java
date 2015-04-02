@@ -1,4 +1,4 @@
-package totalizator.app.init;
+package totalizator.app.init.initializers;
 
 import totalizator.app.models.Team;
 

@@ -23,7 +23,7 @@ public class Cup extends AbstractEntity {
 	public static final String LOAD_ALL = "cups.loadAll";
 	public static final String FIND_BY_NAME = "cups.findByName";
 
-	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
+	@Column( columnDefinition = "VARCHAR(255)" ) //unique = true,
 	private String cupName;
 
 	@ManyToOne

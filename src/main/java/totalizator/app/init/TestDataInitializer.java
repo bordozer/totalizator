@@ -1,18 +1,17 @@
 package totalizator.app.init;
 
 import org.apache.log4j.Logger;
-import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import totalizator.app.init.initializers.*;
 import totalizator.app.models.*;
 import totalizator.app.services.*;
 import totalizator.app.services.utils.DateTimeService;
 
 import javax.persistence.EntityManagerFactory;
-import java.io.IOException;
 import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -22,9 +21,9 @@ public class TestDataInitializer {
 
 	private static final Logger LOGGER = Logger.getLogger( TestDataInitializer.class );
 
-	private static final String CATEGORY_NBA = "NBA";
-	private static final String CATEGORY_NCAA = "NCAA";
-	private static final String CATEGORY_UEFA = "UEFA";
+//	private static final String CATEGORY_NBA = "NBA";
+//	private static final String CATEGORY_NCAA = "NCAA";
+//	private static final String CATEGORY_UEFA = "UEFA";
 
 	@Autowired
 	private UserService userService;
@@ -32,7 +31,7 @@ public class TestDataInitializer {
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
-	@Autowired
+/*	@Autowired
 	private DateTimeService dateTimeService;
 
 	@Autowired
@@ -48,7 +47,9 @@ public class TestDataInitializer {
 	private MatchService matchService;
 
 	@Autowired
-	private MatchBetsService matchBetsService;
+	private MatchBetsService matchBetsService;*/
+
+	private final List<AbstractDataInitializer> initializers = newArrayList();
 
 	private final List<UserData> userDatas = newArrayList();
 
@@ -62,6 +63,15 @@ public class TestDataInitializer {
 		userDatas.add( new UserData( "Dennis", "Keith", "Rodman" ) );
 	}
 
+	@Autowired
+	private NBA nba;
+
+	@Autowired
+	private NCAA ncaa;
+
+	@Autowired
+	private UEFA uefa;
+
 	public void init() throws Exception {
 
 		final SessionFactory sessionFactory = entityManagerFactory.unwrap( SessionFactory.class );
@@ -70,116 +80,118 @@ public class TestDataInitializer {
 
 		final Transaction transaction = session.beginTransaction();
 
+		final List<User> users = generateUsers( session );
 
-		generateUsers( session );
+		initializers.add( nba );
+		initializers.add( ncaa );
+		initializers.add( uefa );
+		for ( final AbstractDataInitializer initializer : initializers ) {
+			initializer.generate( users, session );
+		}
+
+
+
 
 
 
 		// categories -->
-		final Category nba = new Category( CATEGORY_NBA );
+		/*final Category nba = new Category( CATEGORY_NBA );
 		session.persist( nba );
 
 		final Category ncaa = new Category( CATEGORY_NCAA );
 		session.persist( ncaa );
 
 		final Category uefa = new Category( CATEGORY_UEFA );
-		session.persist( uefa );
+		session.persist( uefa );*/
 		// categories <--
 
 
 
 		// cups -->
-		final Cup nba2015Regular = new Cup( "2015 - regular", nba );
+		/*final Cup nba2015Regular = new Cup( "2015 - regular", nba );
 		nba2015Regular.setShowOnPortalPage( true );
 		session.persist( nba2015Regular );
 
 		final Cup nba2015PlayOff = new Cup( "2015 - playoff", nba );
 		nba2015PlayOff.setShowOnPortalPage( true );
-		session.persist( nba2015PlayOff );
+		session.persist( nba2015PlayOff );*/
 
-		final Cup ncaa2015 = new Cup( "2015", ncaa );
+		/*final Cup ncaa2015 = new Cup( "2015", ncaa );
 		ncaa2015.setShowOnPortalPage( true );
-		session.persist( ncaa2015 );
+		session.persist( ncaa2015 );*/
 
-		final Cup uefa2016Euro = new Cup( "Euro 2016", uefa );
+		/*final Cup uefa2016Euro = new Cup( "Euro 2016", uefa );
 		uefa2016Euro.setShowOnPortalPage( true );
-		session.persist( uefa2016Euro );
+		session.persist( uefa2016Euro );*/
 
-		final Cup uefa2018WorldCup = new Cup( "World cup 2018", uefa );
-		session.persist( uefa2018WorldCup );
+		/*final Cup uefa2018WorldCup = new Cup( "World cup 2018", uefa );
+		session.persist( uefa2018WorldCup );*/
 		// cups <--
 
 
 
 		// teams -->
-		teamLogoService.deleteLogosDir();
-		teamLogoService.createLogosDir();
+//		teamLogoService.deleteLogosDir();
+//		teamLogoService.createLogosDir();
 
-		createNBATeams( session, nba );
-
-		createNCAATeams( session, ncaa );
-
-		createUEFATeams( session, uefa );
+//		createNBATeams( session, nba );
+//		createNCAATeams( session, ncaa );
+//		createUEFATeams( session, uefa );
 		// teams <--
 
 
-		transaction.commit(); // - = commit = -
-		final Transaction transaction1 = session.beginTransaction();
 
 
 
 		// past matches -->
-		final MatchDataGenerationStrategy nbaPastStrategy = MatchDataGenerationStrategy.nbaPastStrategy();
-		final MatchDataGenerationStrategy ncaaPastStrategy = MatchDataGenerationStrategy.ncaaPastStrategy();
-		final MatchDataGenerationStrategy uefaPastStrategy = MatchDataGenerationStrategy.uefaPastStrategy();
+//		final MatchDataGenerationStrategy nbaPastStrategy = MatchDataGenerationStrategy.nbaPastStrategy();
+//		final MatchDataGenerationStrategy ncaaPastStrategy = MatchDataGenerationStrategy.ncaaPastStrategy();
+//		final MatchDataGenerationStrategy uefaPastStrategy = MatchDataGenerationStrategy.uefaPastStrategy();
 
-		generateMatches( nba2015Regular, 100, session, nbaPastStrategy );
-		generateMatches( nba2015PlayOff, 25, session, nbaPastStrategy );
-		generateMatches( ncaa2015, 5, session, ncaaPastStrategy );
-		generateMatches( uefa2016Euro, 20, session, uefaPastStrategy );
-		generateMatches( uefa2018WorldCup, 5, session, uefaPastStrategy );
+//		generateMatches( nba2015Regular, 100, session, nbaPastStrategy );
+//		generateMatches( nba2015PlayOff, 25, session, nbaPastStrategy );
+//		generateMatches( ncaa2015, 5, session, ncaaPastStrategy );
+//		generateMatches( uefa2016Euro, 20, session, uefaPastStrategy );
+//		generateMatches( uefa2018WorldCup, 5, session, uefaPastStrategy );
 		// past matches <--
 
 
 
 		// future matches -->
-		final MatchDataGenerationStrategy nbaFutureStrategy = MatchDataGenerationStrategy.nbaFutureStrategy();
-		final MatchDataGenerationStrategy ncaaFutureStrategy = MatchDataGenerationStrategy.ncaaFutureStrategy();
-		final MatchDataGenerationStrategy uefaFutureStrategy = MatchDataGenerationStrategy.uefaFutureStrategy();
+//		final MatchDataGenerationStrategy nbaFutureStrategy = MatchDataGenerationStrategy.nbaFutureStrategy();
+//		final MatchDataGenerationStrategy ncaaFutureStrategy = MatchDataGenerationStrategy.ncaaFutureStrategy();
+//		final MatchDataGenerationStrategy uefaFutureStrategy = MatchDataGenerationStrategy.uefaFutureStrategy();
 
-		generateMatches( nba2015Regular, 10, session, nbaFutureStrategy );
-		generateMatches( nba2015PlayOff, 10, session, nbaFutureStrategy );
-		generateMatches( ncaa2015, 20, session, ncaaFutureStrategy );
-		generateMatches( uefa2016Euro, 64, session, uefaFutureStrategy );
+//		generateMatches( nba2015Regular, 10, session, nbaFutureStrategy );
+//		generateMatches( nba2015PlayOff, 10, session, nbaFutureStrategy );
+//		generateMatches( ncaa2015, 20, session, ncaaFutureStrategy );
+//		generateMatches( uefa2016Euro, 64, session, uefaFutureStrategy );
 		// future matches <--
 
 
 
-		transaction1.commit(); // - = commit = -
-		final Transaction transaction2 = session.beginTransaction();
-
 
 
 		// past matches bets -->
-		generateBets( nba2015Regular, nbaPastStrategy );
-		generateBets( nba2015PlayOff, nbaPastStrategy );
-		generateBets( ncaa2015, ncaaPastStrategy );
-		generateBets( uefa2016Euro, uefaPastStrategy );
-		generateBets( uefa2018WorldCup, uefaPastStrategy );
+//		generateBets( nba2015Regular, nbaPastStrategy );
+//		generateBets( nba2015PlayOff, nbaPastStrategy );
+//		generateBets( ncaa2015, ncaaPastStrategy );
+//		generateBets( uefa2016Euro, uefaPastStrategy );
+//		generateBets( uefa2018WorldCup, uefaPastStrategy );
 		// past matches bets -->
 
 
 
 		// future matches bets -->
-		generateBets( nba2015Regular, nbaFutureStrategy );
-		generateBets( nba2015PlayOff, nbaFutureStrategy );
-		generateBets( ncaa2015, ncaaFutureStrategy );
-		generateBets( uefa2016Euro, uefaFutureStrategy );
+//		generateBets( nba2015Regular, nbaFutureStrategy );
+//		generateBets( nba2015PlayOff, nbaFutureStrategy );
+//		generateBets( ncaa2015, ncaaFutureStrategy );
+//		generateBets( uefa2016Euro, uefaFutureStrategy );
 		// future matches bets <--
 
 
 
-		transaction2.commit(); // - = commit = -
+		transaction.commit(); // - = commit = -
 
 
 
@@ -188,18 +200,27 @@ public class TestDataInitializer {
 		LOGGER.debug( "========================================================================" );
 	}
 
-	private void generateUsers( final Session session ) {
+	private List<User> generateUsers( final Session session ) {
+
+		final List<User> result = newArrayList();
+
 		for ( final UserData userData : userDatas ) {
+
 			final String login = userData.firstName.toLowerCase();
-			final User user1 = new User( login
+			final User user = new User( login
 					, String.format( "%s %s %s", userData.firstName, userData.lastName, userData.thirdName )
 					, userService.encodePassword( login )
 			);
-			session.persist( user1 );
+			session.persist( user );
+
+			result.add( user );
 		}
+
+
+		return result;
 	}
 
-	private void generateBets( final Cup cup, final MatchDataGenerationStrategy strategy ) {
+	/*private void generateBets( final Cup cup, final MatchDataGenerationStrategy strategy ) {
 
 		final List<User> users = userService.loadAll();
 
@@ -236,24 +257,24 @@ public class TestDataInitializer {
 				}
 			}
 		}
-	}
+	}*/
 
-	private void createNBATeams( final Session session, final Category category ) throws DocumentException, IOException {
+	/*private void createNBATeams( final Session session, final Category category ) throws DocumentException, IOException {
 		final List<TeamData> teams = teamImportService.importNBA( category );
 		createTeams( session, teams );
-	}
+	}*/
 
-	private void createNCAATeams( final Session session, final Category category ) throws DocumentException, IOException {
+	/*private void createNCAATeams( final Session session, final Category category ) throws DocumentException, IOException {
 		final List<TeamData> teams = teamImportService.importNCAA( category );
 		createTeams( session, teams );
-	}
+	}*/
 
-	private void createUEFATeams( final Session session, final Category category ) throws DocumentException, IOException {
+	/*private void createUEFATeams( final Session session, final Category category ) throws DocumentException, IOException {
 		final List<TeamData> teams = teamImportService.importUEFA( category );
 		createTeams( session, teams );
-	}
+	}*/
 
-	private void createTeams( final Session session, final List<TeamData> teams ) throws IOException {
+	/*private void createTeams( final Session session, final List<TeamData> teams ) throws IOException {
 		for ( final TeamData teamData : teams ) {
 
 			final Team team = teamData.getTeam();
@@ -264,9 +285,9 @@ public class TestDataInitializer {
 				teamLogoService.uploadLogo( team, teamData.getLogo() );
 			}
 		}
-	}
+	}*/
 
-	private void generateMatches( final Cup cup, final int count, final Session session, final MatchDataGenerationStrategy strategy ) {
+	/*private void generateMatches( final Cup cup, final int count, final Session session, final MatchDataGenerationStrategy strategy ) {
 
 		final Category category = cup.getCategory();
 
@@ -299,18 +320,18 @@ public class TestDataInitializer {
 		match.setMatchFinished( strategy.isFinished() );
 
 		return match;
-	}
+	}*/
 
-	static int getRandomInt( final int minValue, final int maxValue ) {
+	/*public static int getRandomInt( final int minValue, final int maxValue ) {
 
 		if ( maxValue == 0 ) {
 			return 0;
 		}
 
 		return minValue + ( int ) ( Math.random() * ( maxValue - minValue + 1 ) );
-	}
+	}*/
 
-	private Team getRandomTeam( final Category category ) {
+	/*private Team getRandomTeam( final Category category ) {
 		final List<Team> teams = teamService.loadAll( category );
 
 		if ( teams == null || teams.size() == 0 ) {
@@ -318,7 +339,7 @@ public class TestDataInitializer {
 		}
 
 		return teams.get( getRandomInt( 0, teams.size() - 1 ) );
-	}
+	}*/
 
 	private class UserData {
 

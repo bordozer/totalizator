@@ -1,4 +1,4 @@
-package totalizator.app.init;
+package totalizator.app.init.initializers;
 
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
@@ -6,6 +6,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Component;
+import totalizator.app.init.initializers.TeamData;
 import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 
@@ -16,7 +17,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 @Component
-class TeamImportService {
+public class TeamImportService {
 
 	private static final File RESOURCES_DIR = new File( "src/main/java/totalizator/app/init/teams/" );
 	private static final String TEAMS_XML = "teams.xml";
@@ -26,15 +27,15 @@ class TeamImportService {
 	private static final String NCAA = "ncaa";
 	private static final String UEFA = "uefa";
 
-	List<TeamData> importNBA( final Category category ) throws DocumentException {
+	public List<TeamData> importNBA( final Category category ) throws DocumentException {
 		return doImport( NBA, category );
 	}
 
-	List<TeamData> importNCAA( final Category category ) throws DocumentException {
+	public List<TeamData> importNCAA( final Category category ) throws DocumentException {
 		return doImport( NCAA, category );
 	}
 
-	List<TeamData> importUEFA( final Category category ) throws DocumentException {
+	public List<TeamData> importUEFA( final Category category ) throws DocumentException {
 		return doImport( UEFA, category );
 	}
 
