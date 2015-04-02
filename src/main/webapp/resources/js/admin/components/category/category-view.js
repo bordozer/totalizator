@@ -6,9 +6,9 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateList = require( 'text!js/admin/category/templates/categories-template.html' );
-	var TemplateEntry = require( 'text!js/admin/category/templates/category-template.html' );
-	var TemplateEntryEdit = require( 'text!js/admin/category/templates/category-edit-template.html' );
+	var TemplateList = require( 'text!./templates/categories-template.html' );
+	var TemplateEntry = require( 'text!./templates/category-template.html' );
+	var TemplateEntryEdit = require( 'text!./templates/category-edit-template.html' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
