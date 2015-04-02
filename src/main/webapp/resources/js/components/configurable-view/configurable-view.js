@@ -113,7 +113,7 @@ define( function ( require ) {
 			var filterByCupText = cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
 			var filterByTeamText = teamId > 0 ? service.getTeam( this.teams, teamId ).teamName : translator.allTeamsLabel;
 
-			return filterByCategoryText + ': ' + filterByCupText + ' / ' + filterByTeamText;
+			return translator.title + ': ' + filterByCategoryText + ' / ' + filterByCupText + ' / ' + filterByTeamText;
 		},
 
 		_onSettingsClick: function( evt ) {
