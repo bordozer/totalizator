@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var pageHeader = require( 'public/js/header/header' );
 
-	var mainMenu = require( 'js/main-menu/main-menu' );
+	var mainMenu = require( 'js/components/main-menu/main-menu' );
 
 	var template = _.template( require( 'text!js/base/templates/base-page-template.html' ) );
 

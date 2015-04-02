@@ -13,7 +13,7 @@ define( function ( require ) {
 
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );
-	var mainMenu = require( 'js/main-menu/main-menu' );
+	var mainMenu = require( 'js/components/main-menu/main-menu' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
