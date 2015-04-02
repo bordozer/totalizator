@@ -8,8 +8,8 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
-	var template = _.template( require( 'text!js/matches/templates/matches-template.html' ) );
-	var templateMatch = _.template( require( 'text!js/matches/templates/match-template.html' ) );
+	var template = _.template( require( 'text!./templates/matches-template.html' ) );
+	var templateMatch = _.template( require( 'text!./templates/match-template.html' ) );
 
 	var dateTimeService = require( '/resources/js/dateTimeService.js' );
 	var service = require( '/resources/js/services.js' );
