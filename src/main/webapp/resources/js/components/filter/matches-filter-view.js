@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateSettings = require( 'text!js/components/filter/templates/matches-filter-template.html' );
+	var template = _.template( require( 'text!js/components/filter/templates/matches-filter-template.html' ) );
 
 	var Services = require( '/resources/js/services.js' );
 	var chosen = require( 'chosen' );
@@ -22,8 +22,6 @@ define( function ( require ) {
 	} );
 
 	return Backbone.View.extend( {
-
-		templateSettings: _.template( TemplateSettings ),
 
 		events: {
 			'change #settings-category-id': '_onCategoryChange'
@@ -44,7 +42,7 @@ define( function ( require ) {
 
 			var categoryId = this.model.get( 'categoryId' );
 
-			this.$el.html( this.templateSettings( {
+			this.$el.html( template( {
 				model: model
 				, categories: this.categories
 				, cups: Services.categoryCups( this.cups, categoryId )
