@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var Template = require( 'text!js/admin/main/templates/admin-template.html' );
 
-	var Services = require( '/resources/js/services.js' );
+	var Services = require( '/resources/js/services/services.js' );
 
 	var CategoriesModel = require( 'js/admin/category/category-model' );
 	var CategoriesView = require( 'js/admin/category/category-view' );

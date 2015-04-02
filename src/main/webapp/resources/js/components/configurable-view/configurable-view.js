@@ -10,7 +10,7 @@ define( function ( require ) {
 	var FilterView = require( 'js/components/filter/matches-filter-view' );
 
 	var mainMenu = require( 'js/components/main-menu/main-menu' );
-	var service = require( '/resources/js/services.js' );
+	var service = require( '/resources/js/services/services.js' );
 
 	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );

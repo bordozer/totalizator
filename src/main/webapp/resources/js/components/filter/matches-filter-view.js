@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!js/components/filter/templates/matches-filter-template.html' ) );
 
-	var Services = require( '/resources/js/services.js' );
+	var Services = require( '/resources/js/services/services.js' );
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );

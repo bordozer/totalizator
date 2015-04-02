@@ -12,7 +12,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!js/base/templates/base-page-template.html' ) );
 
-	var service = require( '/resources/js/services.js' );
+	var service = require( '/resources/js/services/services.js' );
 
 	return Backbone.View.extend( {
 
