@@ -33,8 +33,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		finish: function() {
-			this.set( { matchFinished: true } );
-			this.save( { async: false } );
+			this.save( { matchFinished: true }, { async: false } );
 		}
 	});
 
