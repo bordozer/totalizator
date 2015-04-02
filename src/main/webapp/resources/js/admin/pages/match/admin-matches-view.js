@@ -14,9 +14,9 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
-	var templateList = _.template( require( 'text!js/admin/match/templates/admin-matches-template.html' ) );
-	var templateEntry = _.template( require( 'text!js/admin/match/templates/admin-match-info-template.html' ) );
-	var templateEntryEdit = _.template( require( 'text!js/admin/match/templates/admin-match-edit-template.html' ) );
+	var templateList = _.template( require( 'text!./templates/admin-matches-template.html' ) );
+	var templateEntry = _.template( require( 'text!./templates/admin-match-info-template.html' ) );
+	var templateEntryEdit = _.template( require( 'text!./templates/admin-match-edit-template.html' ) );
 
 	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
