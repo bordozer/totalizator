@@ -8,6 +8,13 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-users-scores-template.html' ) );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		title: 'Cup users scores: Scores'
+		, userColumn: 'Cup users scores: User name'
+		, pointsColumn: 'Cup users scores: Points'
+	} );
+
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
@@ -17,7 +24,8 @@ define( function ( require ) {
 
 		render: function () {
 
-			var data = _.extend( {}, this.model.toJSON() );
+			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			console.log( data );
 
 			this.$el.html( template( data ) );
 

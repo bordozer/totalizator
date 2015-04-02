@@ -9,7 +9,9 @@ import totalizator.app.models.User;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -29,6 +31,19 @@ public class CupUsersScoresRestController {
 		final CupUsersScoresDTO result = new CupUsersScoresDTO();
 
 		result.setCurrentUser( new UserDTO( user.getId(), user.getUsername() ) );
+
+		result.setUserPoints( getUserPoints() );
+
+		return result;
+	}
+
+	private List<UserPointsDTO> getUserPoints() {
+
+		final List<UserPointsDTO> result = newArrayList();
+
+		result.add( new UserPointsDTO( new UserDTO( 1, "User 1" ), 15 ) );
+		result.add( new UserPointsDTO( new UserDTO( 2, "User 2" ), 13 ) );
+		result.add( new UserPointsDTO( new UserDTO( 3, "User 3" ), 9 ) );
 
 		return result;
 	}

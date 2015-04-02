@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Cup users scores: Scores</nerd>
+		<ru><![CDATA[Рейтинг]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: User name</nerd>
+		<ru><![CDATA[Пользователь]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: Points</nerd>
+		<ru><![CDATA[Баллы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
