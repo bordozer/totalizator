@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!js/components/filter/templates/matches-filter-template.html' ) );
+	var template = _.template( require( 'text!./templates/matches-filter-template.html' ) );
 
 	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );

@@ -6,8 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var FilterModel = require( 'js/components/filter/matches-filter-model' );
-	var FilterView = require( 'js/components/filter/matches-filter-view' );
+	var FilterModel = require( 'js/components/matches-filter/matches-filter-model' );
+	var FilterView = require( 'js/components/matches-filter/matches-filter-view' );
 
 	var mainMenu = require( 'js/components/main-menu/main-menu' );
 	var service = require( '/resources/js/services/service.js' );
