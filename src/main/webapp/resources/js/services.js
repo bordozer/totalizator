@@ -2,7 +2,7 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Users = require( 'js/users/users-model' );
+	var Users = require( 'js/services/users-model' );
 	var Categories = require( 'js/admin/category/category-model' );
 	var Cups = require( 'js/admin/cup/cup-model' );
 	var Teams = require( 'js/admin/team/team-model' );
