@@ -46,10 +46,10 @@ public abstract class AbstractDataInitializer {
 		for ( final Cup cup : cups ) {
 
 			final List<Match> finishedCupMatches = generateMatches( cup, teams, pastStrategy(), session );
-			generateBets( users, finishedCupMatches, pastStrategy(), session );
+			generateBets( users, finishedCupMatches, session );
 
 			final List<Match> futureCupMatches = generateMatches( cup, teams, futureStrategy(), session );
-			generateBets( users, futureCupMatches, futureStrategy(), session );
+			generateBets( users, futureCupMatches, session );
 		}
 	}
 
@@ -102,7 +102,7 @@ public abstract class AbstractDataInitializer {
 		return result;
 	}
 
-	private void generateBets( final List<User> users, final List<Match> cupMatches, final MatchDataGenerationStrategy strategy, final Session session ) {
+	private void generateBets( final List<User> users, final List<Match> cupMatches, final Session session ) {
 
 		for ( final User user : users ) {
 
@@ -122,8 +122,8 @@ public abstract class AbstractDataInitializer {
 				final MatchBet bet = new MatchBet();
 				bet.setMatch( cupMatches.get( getRandomInt( 0, matches.size() - 1 ) ) );
 				bet.setUser( user );
-				bet.setBetScore1( strategy.generateScore() );
-				bet.setBetScore2( strategy.generateScore() );
+				bet.setBetScore1( pastStrategy().generateScore() );
+				bet.setBetScore2( pastStrategy().generateScore() );
 				bet.setBetTime( dateTimeService.offset( match.getBeginningTime(), Calendar.HOUR, getRandomInt( 1, 12 ) ) );
 
 				session.persist( bet );
