@@ -14,6 +14,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Cup users scores: Scores'
+		, loadingLabel: 'Loading...'
 		, userColumn: 'Cup users scores: User name'
 		, pointsColumn: 'Cup users scores: Points'
 	} );
@@ -24,6 +25,8 @@ define( function ( require ) {
 			this.listenTo( this.model, 'sync', this.renderScores );
 			this.model.fetch( { cache: false} );
 
+			this.progress = new ProgressView();
+
 			this.render();
 		},
 
@@ -33,7 +36,7 @@ define( function ( require ) {
 
 			this.$el.html( template( data ) );
 
-			this.progress = new ProgressView( { el: this.$( '.js-progress' ) } );
+			this.progress.render( this.$( '.js-window-icon' ), 'fa-bar-chart' );
 
 			return this;
 		},
@@ -43,6 +46,8 @@ define( function ( require ) {
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
 			this.progress.close();
+
+			this.$( '.js-loading-label' ).remove();
 			this.$( '.js-scores-table' ).append( templateTable( data ) );
 
 			return this;

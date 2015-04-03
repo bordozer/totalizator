@@ -54,6 +54,8 @@ define( function ( require ) {
 
 			this._renderCupMatches();
 
+			this.trigger( 'inner-view-rendered' );
+
 			return this;
 		},
 

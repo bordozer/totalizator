@@ -6,26 +6,27 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!./templates/progress-template.html' ) );
-
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		loadingLabel: 'Loading...'
-	} );
-
 	return Backbone.View.extend({
 
 		initialize: function( options ) {
-			this.render();
 		},
 
-		render: function () {
-			this.$el.html( template( translator ) );
+		render: function ( el, defaultIconClass ) {
+
+			this.el = el;
+			this.defaultIconClass = defaultIconClass;
+
+			this.el.removeClass( defaultIconClass );
+			this.el.addClass( 'fa-spinner fa-spin' );
+
 			return this;
 		},
 
 		close: function() {
-			this.remove();
+			this.el.removeClass( 'fa-spin' );
+			this.el.removeClass( 'fa-spinner' );
+
+			this.el.addClass( this.defaultIconClass );
 		}
 	});
 } );

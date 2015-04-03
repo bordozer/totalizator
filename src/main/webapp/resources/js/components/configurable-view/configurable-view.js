@@ -45,6 +45,7 @@ define( function ( require ) {
 			} );
 
 			this.on( 'view:render', this.render, this );
+			this.on( 'inner-view-rendered', this._onInnerViewRender, this );
 
 			this.menuItems = options.menuItems || [];
 
@@ -53,6 +54,9 @@ define( function ( require ) {
 			this.teams = service.loadTeams();
 
 			this.events = _.extend( this.builtinEvents, this.events );
+
+			this.progress = new ProgressView();
+
 			Backbone.View.apply( this, [ options ] );
 		},
 
@@ -63,7 +67,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.progress = new ProgressView( { el: this.$( '.js-view-container' ) } );
+			this._showProgress();
 
 			this._renderDropDownMenuItems();
 
@@ -72,6 +76,18 @@ define( function ( require ) {
 			this.delegateEvents();
 
 			return this;
+		},
+
+		_showProgress: function() {
+			this.progress.render( this.$( '.js-window-icon' ), 'fa-futbol-o' );
+		},
+
+		_hideProgress: function() {
+			this.progress.close();
+		},
+
+		_onInnerViewRender: function() {
+			this._hideProgress();
 		},
 
 		renderInnerView: function( el, filter ) {
