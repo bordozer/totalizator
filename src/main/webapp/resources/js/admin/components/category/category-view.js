@@ -27,7 +27,7 @@ define( function ( require ) {
 
 			var menuItems =  [
 				{ selector: 'divider' }
-				,{ selector: 'js-new-category-button', icon: 'fa fa-refresh', link: '#', text: translator.newCategoryLabel }
+				,{ selector: 'js-new-category-button', icon: 'fa fa-plus', link: '#', text: translator.newCategoryLabel }
 			];
 			this.addMenuItems( menuItems );
 

@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Template = require( 'text!./templates/teams-template.html' );
+	var WindowView = require( 'js/components/window/window-view' );
 
 	var TemplateEntry = require( 'text!./templates/team-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/team-edit-template.html' );
@@ -16,18 +16,24 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		teamTitleLabel: "Teams"
+		title: "Teams"
+		, newTeamLabel: "Admin / Teams: New team"
 	} );
 
-	var TeamsView = Backbone.View.extend( {
-
-		template: _.template( Template ),
+	var TeamsView = WindowView.extend( {
 
 		events: {
-			'click .add-entry-button': '_onAddClick'
+			'click .js-new-team-button': '_onAddClick'
 		},
 
 		initialize: function( options ) {
+
+			var menuItems =  [
+				{ selector: 'divider' }
+				,{ selector: 'js-new-team-button', icon: 'fa fa-plus', link: '#', text: translator.newTeamLabel }
+			];
+			this.addMenuItems( menuItems );
+
 			this.model.on( 'sync', this.render, this );
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
@@ -38,12 +44,9 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function() {
+		renderBody: function() {
 
-			this.$el.html( this.template( {
-				model: this.model
-				, translator: translator
-			} ) );
+			this.$( this.windowBodyContainerSelector ).empty();
 
 			var filterByCategory = this.model.filterByCategory;
 			var self= this;
@@ -53,7 +56,7 @@ define( function ( require ) {
 				}
 			});
 
-			return this.$el;
+			this.trigger( 'inner-view-rendered' );
 		},
 
 		renderEntry: function ( model ) {
@@ -65,12 +68,20 @@ define( function ( require ) {
 
 			view.on( 'events:teams_changed', this._triggerTeamsChanged, this );
 
-			var container = this.$( '.teams-container' );
+			var container = this.$( this.windowBodyContainerSelector );
 			if ( model.get( 'isEditState' ) ) {
 				return container.append( view.renderEdit().$el );
 			}
 
 			return container.append( view.render().$el );
+		},
+
+		getTitle: function () {
+			return translator.title;
+		},
+
+		getIcon: function () {
+			return 'fa-users';
 		},
 
 		_triggerTeamsChanged: function() {
