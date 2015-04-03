@@ -12,6 +12,8 @@
 		</div>
 	</div>
 
+	<hr />
+
 	<div class="row">
 		<div class="col-lg-5 text-right"><%=translator.categoryLabel%></div>
 		<div class="col-lg-6">
@@ -49,6 +51,15 @@
 					<% }) %>
 				</select>
 			<% } %>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row">
+		<div class="col-lg-5 text-right"><%=translator.showFutureMatchesLabel%></div>
+		<div class="col-lg-6">
+			<input type="checkbox" id="settings-show-future-matches" name="settings-show-future-matches" value="true" <%= showFutureMatches ? "checked='checked'" : ''%> >
 		</div>
 	</div>
 

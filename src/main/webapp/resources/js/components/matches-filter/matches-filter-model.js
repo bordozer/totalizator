@@ -11,6 +11,7 @@ define( function ( require ) {
 			, categoryId: 0
 			, cupId: 0
 			, teamId: 0
+			, showFutureMatches: true
 			, showFinished: false
 		},
 
@@ -23,6 +24,7 @@ define( function ( require ) {
 				, categoryId: 0
 				, cupId: 0
 				, teamId: 0
+				, showFutureMatches: true
 				, showFinished: false
 			} );
 		}

@@ -66,6 +66,8 @@ define( function ( require ) {
 					, categoryId: 1
 					, cupId: 2
 					, teamId: 0
+					, showFutureMatches: false
+					, showFinished: true
 				}
 				, menuItems: []
 			} );
