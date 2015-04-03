@@ -9,6 +9,8 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/cup-users-scores-template.html' ) );
 	var templateTable = _.template( require( 'text!./templates/cup-users-scores-table-template.html' ) );
 
+	var ProgressView = require( 'js/components/progress/progress' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Cup users scores: Scores'
@@ -31,6 +33,10 @@ define( function ( require ) {
 
 			this.$el.html( template( data ) );
 
+			this.progress = new ProgressView( { el: this.$( '.js-progress' ) } );
+
+//			this.$( '.js-progress' ).html( this.progress.render().$el );
+
 			return this;
 		},
 
@@ -38,7 +44,7 @@ define( function ( require ) {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
-			this.$( '.js-progress' ).remove();
+			this.progress.close();
 			this.$( '.js-scores-table' ).append( templateTable( data ) );
 
 			return this;
