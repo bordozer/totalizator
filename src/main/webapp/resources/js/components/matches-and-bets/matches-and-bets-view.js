@@ -8,7 +8,6 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
-	var template = _.template( require( 'text!./templates/matches-and-bets-template.html' ) );
 	var templateMatch = _.template( require( 'text!./templates/matches-and-bets-entry-template.html' ) );
 
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -42,11 +41,6 @@ define( function ( require ) {
 			this.model.refresh( filter );
 
 			var el = $( '<div></div>' );
-
-			el.html( template( {
-				model: this.model
-				, translator: translator
-			} ) );
 
 			this._renderCupMatches( el );
 
