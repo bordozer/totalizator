@@ -7,6 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/cup-users-scores-template.html' ) );
+	var templateTable = _.template( require( 'text!./templates/cup-users-scores-table-template.html' ) );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -18,8 +19,10 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.listenTo( this.model, 'sync', this.render );
+			this.listenTo( this.model, 'sync', this.renderScores );
 			this.model.fetch( { cache: false} );
+
+			this.render();
 		},
 
 		render: function () {
@@ -27,6 +30,16 @@ define( function ( require ) {
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
 			this.$el.html( template( data ) );
+
+			return this;
+		},
+
+		renderScores: function() {
+
+			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+
+			this.$( '.js-progress' ).remove();
+			this.$( '.js-scores-table' ).append( templateTable( data ) );
 
 			return this;
 		}

@@ -1,25 +1,9 @@
-<div class="panel panel-default">
+<div class="panel panel-default js-scores-table">
 
 	<div class="panel-heading"><%=translator.title%></div>
 
-	<table class="table table-striped table-bordered table-hover">
-
-		<thead>
-			<td><%=translator.userColumn%></td>
-			<td><%=translator.pointsColumn%></td>
-		</thead>
-
-		<tbody>
-
-			<% _.each( userPoints, function( userPoint ) { %>
-				<tr <%=currentUser.userId == userPoint.user.userId ? "class='bg-info'" : '' %> >
-					<td><%-userPoint.user.userName%></td>
-					<td><%-userPoint.points%></td>
-				</tr>
-			<% })%>
-
-		</tbody>
-
-	</table>
+	<div class="panel-body text-center js-progress">
+		<img src="/resources/img/progress.gif" class="js-spinning-wheel">
+	</div>
 
 </div>

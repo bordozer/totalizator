@@ -1,0 +1,19 @@
+<table class="table table-striped table-bordered table-hover">
+
+	<thead>
+		<td><%=translator.userColumn%></td>
+		<td><%=translator.pointsColumn%></td>
+	</thead>
+
+	<tbody>
+
+		<% _.each( userPoints, function( userPoint ) { %>
+			<tr <%=currentUser.userId == userPoint.user.userId ? "class='scores-current-user'" : '' %> >
+				<td><%-userPoint.user.userName%></td>
+				<td><%-userPoint.points%></td>
+			</tr>
+		<% })%>
+
+	</tbody>
+
+</table>
