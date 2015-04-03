@@ -23,6 +23,7 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.userId = options.options.userId;
+			this.username = options.options.username;
 
 			this.render();
 		},

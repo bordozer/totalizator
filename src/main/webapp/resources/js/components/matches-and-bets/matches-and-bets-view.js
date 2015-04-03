@@ -37,9 +37,7 @@ define( function ( require ) {
 	var MatchesView = ConfigurableView.extend( {
 
 		renderInnerView: function ( filter ) {
-
 			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
-
 			this.model.refresh( filter );
 		},
 
