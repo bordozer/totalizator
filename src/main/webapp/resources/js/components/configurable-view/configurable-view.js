@@ -63,7 +63,7 @@ define( function ( require ) {
 
 		renderBody: function() {
 
-			this.setBody( this.renderInnerView( this.settingsModel.toJSON() ) );
+			this.renderInnerView( this.settingsModel.toJSON() );
 
 			return this;
 		},

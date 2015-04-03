@@ -19,6 +19,7 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		progressIcon: 'fa-spinner fa-spin',
+		windowBodyContainerSelector: '.js-window-container',
 
 		builtinEvents: {
 			'click .js-menu-refresh': '_onMenuRefreshClick'
@@ -69,7 +70,7 @@ define( function ( require ) {
 		},
 
 		setBody: function( context ) {
-			this.$( '.js-window-container' ).html( context );
+			this.$( this.windowBodyContainerSelector ).html( context );
 		},
 
 		showProgress: function() {

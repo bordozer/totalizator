@@ -38,26 +38,25 @@ define( function ( require ) {
 
 		renderInnerView: function ( filter ) {
 
+			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
+
 			this.model.refresh( filter );
-
-			var el = $( '<div></div>' );
-
-			this._renderCupMatches( el );
-
-			this.trigger( 'inner-view-rendered' );
-
-			return el;
 		},
 
 		getIcon: function() {
 			return 'fa-futbol-o';
 		},
 
-		_renderCupMatches: function( el ) {
+		_renderCupMatches: function() {
+
+			var el = this.$( this.windowBodyContainerSelector );
+
 			var self = this;
 			this.model.forEach( function( matchBet ) {
 				self._renderEntry( matchBet, el );
 			});
+
+			this.trigger( 'inner-view-rendered' );
 		},
 
 		_renderEntry: function ( model, el ) {

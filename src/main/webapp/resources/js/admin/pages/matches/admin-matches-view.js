@@ -51,7 +51,7 @@ define( function ( require ) {
 
 			this.model.refresh( filter );
 
-			var el = $( '<div></div>' );
+			var el = this.$( this.windowBodyContainerSelector );
 
 			el.html( templateList( {
 				model: this.model
