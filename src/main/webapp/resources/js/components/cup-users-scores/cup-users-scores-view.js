@@ -35,8 +35,6 @@ define( function ( require ) {
 
 			this.progress = new ProgressView( { el: this.$( '.js-progress' ) } );
 
-//			this.$( '.js-progress' ).html( this.progress.render().$el );
-
 			return this;
 		},
 

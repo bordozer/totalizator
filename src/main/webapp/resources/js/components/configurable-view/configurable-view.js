@@ -15,6 +15,8 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
 
+	var ProgressView = require( 'js/components/progress/progress' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Matches'
@@ -60,6 +62,8 @@ define( function ( require ) {
 				title: this._getTitle()
 				, translator: translator
 			} ) );
+
+			this.progress = new ProgressView( { el: this.$( '.js-view-container' ) } );
 
 			this._renderDropDownMenuItems();
 

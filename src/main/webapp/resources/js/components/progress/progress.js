@@ -8,6 +8,11 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/progress-template.html' ) );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		loadingLabel: 'Loading...'
+	} );
+
 	return Backbone.View.extend({
 
 		initialize: function( options ) {
@@ -15,7 +20,7 @@ define( function ( require ) {
 		},
 
 		render: function () {
-			this.$el.html( template() );
+			this.$el.html( template( translator ) );
 			return this;
 		},
 
