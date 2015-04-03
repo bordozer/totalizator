@@ -22,7 +22,7 @@ define( function ( require ) {
 
 		mainMenuItems: function() {
 			return [
-				{ selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
+				{ selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
 				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
