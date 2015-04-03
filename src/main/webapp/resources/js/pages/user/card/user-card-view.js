@@ -27,6 +27,18 @@ define( function ( require ) {
 			this.$el.html( template( {
 				translator: translator
 			} ) );
+
+			this._renderUserStatistics();
+
+			this._renderUserBets();
+		},
+
+		_renderUserStatistics: function() {
+			this.$( '.js-user-statistics' ).html( "User's statistics are going to be here..." );
+		},
+
+		_renderUserBets: function() {
+			this.$( '.js-user-bets' ).html( '' );
 		}
 	});
 } );
