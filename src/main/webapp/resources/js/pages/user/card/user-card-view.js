@@ -57,7 +57,7 @@ define( function ( require ) {
 			el.append( container );
 
 			var model = new MatchesModel.MatchesModel();
-
+			// TODO: SET CORRECT CATEGORY/CUP/TEAM
 			var view = new MatchesView.MatchesView( {
 				model: model
 				, el: container
