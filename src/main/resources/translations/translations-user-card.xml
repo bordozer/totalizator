@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>User card: Statistics</nerd>
+		<ru><![CDATA[Статистика пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: User bets</nerd>
+		<ru><![CDATA[Ставки пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

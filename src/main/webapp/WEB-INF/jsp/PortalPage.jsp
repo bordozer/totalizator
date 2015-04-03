@@ -5,11 +5,10 @@
 
 <tags:page userName="${portalPageModel.userName}">
 
-	<c:set var="cupsToShowJSON" value="{ cupsToShow: 'hahaha' }" />
-
 	<div class="portal-page-container"></div>
 
 	<script type="text/javascript">
+
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/portal/portal', 'translator' ], function ( $, Page, portal, Translator ) {
 
 			var translator = new Translator( {
