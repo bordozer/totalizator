@@ -50,6 +50,7 @@ define( function ( require ) {
 		_renderCupMatches: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
+			el.empty();
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
@@ -63,13 +64,12 @@ define( function ( require ) {
 
 			var view = new MatchView( {
 				model: model
-				, el: el
 				, categories: this.categories
 				, cups: this.cups
 				, teams: this.teams
 			} );
 
-			return this.$( '.match-list-container' ).append( view.render().$el );
+			return el.append( view.render().$el );
 		}
 	});
 
