@@ -8,7 +8,7 @@
 	<tbody>
 
 		<% _.each( userPoints, function( userPoint ) { %>
-			<tr <%=currentUser.userId == userPoint.user.userId ? "class='scores-current-user'" : '' %> >
+			<tr <%=currentUser.userId == userPoint.user.userId ? "class='scores-current-user text-primary'" : '' %> >
 				<td><%-userPoint.user.userName%></td>
 				<td><%-userPoint.points%></td>
 			</tr>
