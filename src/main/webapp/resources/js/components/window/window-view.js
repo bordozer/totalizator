@@ -51,7 +51,7 @@ define( function ( require ) {
 
 			this._renderDropDownMenu();
 
-//			this.renderBody();
+			this.renderBody();
 
 			this.delegateEvents();
 		},

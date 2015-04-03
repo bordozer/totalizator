@@ -9,10 +9,8 @@ define( function ( require ) {
 	var FilterModel = require( 'js/components/matches-filter/matches-filter-model' );
 	var FilterView = require( 'js/components/matches-filter/matches-filter-view' );
 
-	var mainMenu = require( 'js/components/main-menu/main-menu' );
 	var service = require( '/resources/js/services/service.js' );
 
-	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
 
 	var WindowView = require( 'js/components/window/window-view' );
@@ -59,20 +57,13 @@ define( function ( require ) {
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
 			];
 			this.addMenuItems( configurableViewMenuItems );
-//			console.log( this.menuItems );
 
 			this.render();
 		},
 
 		renderBody: function() {
 
-			this.$el.html( template( {
-				title: this._getTitle()
-				, icon: this.getIcon()
-				, translator: translator
-			} ) );
-
-			this.setBody( this.renderInnerView( this.$( '.js-view-container' ), this.settingsModel.toJSON() ) );
+			this.setBody( this.renderInnerView( this.settingsModel.toJSON() ) );
 
 			return this;
 		},
@@ -82,7 +73,7 @@ define( function ( require ) {
 		},
 
 		renderInnerView: function( el, filter ) {
-			this.$( '.js-view-container' ).html( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
+			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
 
 		_renderSettings: function() {

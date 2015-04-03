@@ -39,37 +39,40 @@ define( function ( require ) {
 
 	var MatchesView = ConfigurableView.extend( {
 
-		renderInnerView: function ( el, filter ) {
+		renderInnerView: function ( filter ) {
 
 			this.model.refresh( filter );
+
+			var el = $( '<div></div>' );
 
 			el.html( template( {
 				model: this.model
 				, translator: translator
 			} ) );
 
-			this._renderCupMatches();
+			this._renderCupMatches( el );
 
 			this.trigger( 'inner-view-rendered' );
 
-			return this;
+			return el;
 		},
 
 		getIcon: function() {
 			return 'fa-futbol-o';
 		},
 
-		_renderCupMatches: function() {
+		_renderCupMatches: function( el ) {
 			var self = this;
 			this.model.forEach( function( matchBet ) {
-				self._renderEntry( matchBet );
+				self._renderEntry( matchBet, el );
 			});
 		},
 
-		_renderEntry: function ( model ) {
+		_renderEntry: function ( model, el ) {
 
 			var view = new MatchView( {
 				model: model
+				, el: el
 				, categories: this.categories
 				, cups: this.cups
 				, teams: this.teams

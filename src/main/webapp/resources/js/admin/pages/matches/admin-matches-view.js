@@ -48,30 +48,32 @@ define( function ( require ) {
 			, 'click .js-finish-selected-matches-button': '_onFinishSelectedMatchesClick'
 		},
 
-		renderInnerView: function ( el, filter ) {
+		renderInnerView: function ( filter ) {
 
 			this.model.refresh( filter );
+
+			var el = $( '<div></div>' );
 
 			el.html( templateList( {
 				model: this.model
 				, translator: translator
 			} ) );
 
-			this._renderCupMatches();
+			this._renderCupMatches( el );
 
 			this.trigger( 'inner-view-rendered' );
 
-			return this;
+			return el;
 		},
 
 		getIcon: function() {
 			return 'fa-futbol-o';
 		},
 
-		_renderCupMatches: function() {
+		_renderCupMatches: function( el ) {
 			var self = this;
 			this.model.forEach( function( match ) {
-				self.$( '.match-list-container' ).append( self._renderEntry( match ) );
+				el.append( self._renderEntry( match ) );
 			});
 		},
 
