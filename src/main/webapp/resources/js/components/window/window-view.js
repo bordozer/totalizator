@@ -26,6 +26,9 @@ define( function ( require ) {
 
 		constructor: function ( options ) {
 
+			this.menuItems =  [
+				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
+			];
 			this.addMenuItems( options.menuItems );
 
 			this.events = _.extend( this.builtinEvents, this.events );
@@ -48,7 +51,7 @@ define( function ( require ) {
 
 			this._renderDropDownMenu();
 
-			this.renderBody();
+//			this.renderBody();
 
 			this.delegateEvents();
 		},
@@ -82,11 +85,6 @@ define( function ( require ) {
 		},
 
 		addMenuItems: function( menuItems ) {
-
-			this.menuItems =  [
-				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
-			];
-
 			if ( menuItems && menuItems.length > 0 ) {
 				this.menuItems = this.menuItems.concat( menuItems );
 			}

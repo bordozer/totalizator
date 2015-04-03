@@ -72,13 +72,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-//			this.showProgress();
-
-//			this._renderDropDownMenuItems();
-
-			this.renderInnerView( this.$( '.js-view-container' ), this.settingsModel.toJSON() );
-
-//			this.delegateEvents();
+			this.setBody( this.renderInnerView( this.$( '.js-view-container' ), this.settingsModel.toJSON() ) );
 
 			return this;
 		},
@@ -90,21 +84,6 @@ define( function ( require ) {
 		renderInnerView: function( el, filter ) {
 			this.$( '.js-view-container' ).html( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
-
-		/*_renderDropDownMenuItems: function() {
-
-			var baseItems = [
-				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
-				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
-			];
-
-			var items = baseItems;
-			if ( this.menuItems && this.menuItems.length > 0 ) {
-				items = this.menuItems.concat( baseItems );
-			}
-
-			mainMenu( items, 'fa-list-alt', this.$( '.js-drop-down-menu') );
-		},*/
 
 		_renderSettings: function() {
 
