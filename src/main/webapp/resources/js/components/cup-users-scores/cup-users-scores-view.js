@@ -40,7 +40,7 @@ define( function ( require ) {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
-			this.element().html( template( data ) );
+			this.setBody( template( data ) );
 
 			this.trigger( 'inner-view-rendered' );
 

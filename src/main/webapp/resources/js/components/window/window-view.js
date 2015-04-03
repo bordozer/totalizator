@@ -71,8 +71,8 @@ define( function ( require ) {
 			el.addClass( this.getIcon() );
 		},
 
-		element: function() {
-			return this.$( '.js-view-container' );
+		setBody: function( context ) {
+			this.$( '.js-view-container' ).html( context );
 		},
 
 		_onInnerViewRendered: function() {
