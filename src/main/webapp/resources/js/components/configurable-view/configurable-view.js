@@ -47,8 +47,6 @@ define( function ( require ) {
 
 			this.on( 'view:render', this.render, this );
 
-			this.menuItems = options.menuItems || [];
-
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();

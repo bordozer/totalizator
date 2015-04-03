@@ -8,10 +8,12 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/window-template.html' ) );
 
+	var mainMenu = require( 'js/components/main-menu/main-menu' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		loadingLabel: 'Loading...'
-		, noInnerViewLabel: 'No inner view was supplied...'
+		, menuItemRefreshLabel: 'Menu item: Refresh'
 	} );
 
 	return Backbone.View.extend( {
@@ -19,10 +21,13 @@ define( function ( require ) {
 		progressIcon: 'fa-spinner fa-spin',
 
 		builtinEvents: {
-
+			'click .js-menu-refresh': '_onMenuRefreshClick'
 		},
 
 		constructor: function ( options ) {
+
+			this.menuItems = options.menuItems || [];
+			console.log( this.menuItems );
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
@@ -42,6 +47,8 @@ define( function ( require ) {
 
 			this.showProgress();
 
+			this._renderDropDownMenu();
+
 			this.renderBody();
 
 			this.delegateEvents();
@@ -56,7 +63,11 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
-			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
+
+		},
+
+		setBody: function( context ) {
+			this.$( '.js-window-container' ).html( context );
 		},
 
 		showProgress: function() {
@@ -71,8 +82,18 @@ define( function ( require ) {
 			el.addClass( this.getIcon() );
 		},
 
-		setBody: function( context ) {
-			this.$( '.js-window-container' ).html( context );
+		_renderDropDownMenu: function() {
+
+			var baseItems = [
+				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
+			];
+
+			var items = baseItems;
+			if ( this.menuItems && this.menuItems.length > 0 ) {
+				items = this.menuItems.concat( baseItems );
+			}
+
+			mainMenu( items, 'fa-list-alt', this.$( '.js-drop-down-menu') );
 		},
 
 		_onInnerViewRendered: function() {
@@ -81,6 +102,10 @@ define( function ( require ) {
 
 		_getIconEl: function() {
 			return this.$( '.js-window-icon' );
+		},
+
+		_onMenuRefreshClick: function() {
+			this.render();
 		}
 	});
 } );
