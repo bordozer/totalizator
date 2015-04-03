@@ -31,14 +31,14 @@ define( function ( require ) {
 
 	return WindowView.extend( {
 
-		builtinEvents: {
+		configurableViewEvents: {
 			'click .js-settings-button': '_onSettingsClick'
 			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
 		},
 
-		constructor: function ( options ) {
+		initialize: function ( options ) {
 
 			this.settingsModel = new FilterModel( options.settings );
 			this.settingsView = new FilterView( {
@@ -53,9 +53,11 @@ define( function ( require ) {
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
 
-			this.events = _.extend( this.builtinEvents, this.events );
+			this.events = _.extend( this.configurableViewEvents, this.events );
 
-			Backbone.View.apply( this, [ options ] );
+			this.render();
+
+//			Backbone.View.apply( this, [ options ] );
 		},
 
 		renderBody: function() {

@@ -48,9 +48,9 @@ define( function ( require ) {
 			, 'click .js-finish-selected-matches-button': '_onFinishSelectedMatchesClick'
 		},
 
-		initialize: function ( options ) {
+		/*initialize: function ( options ) {
 			this.render();
-		},
+		},*/
 
 		renderInnerView: function ( el, filter ) {
 
