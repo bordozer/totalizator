@@ -9,7 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/cup-users-scores-template.html' ) );
 	var templateTable = _.template( require( 'text!./templates/cup-users-scores-table-template.html' ) );
 
-//	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
+	var WindowView = require( 'js/components/window/window-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -19,33 +19,37 @@ define( function ( require ) {
 		, pointsColumn: 'Cup users scores: Points'
 	} );
 
-	return Backbone.View.extend( {
+	return WindowView.extend( {
 
 		initialize: function( options ) {
 			this.listenTo( this.model, 'sync', this.renderScores );
 			this.model.fetch( { cache: false} );
 
-//			this.progress = new ProgressView();
-
 			this.render();
 		},
 
-		render: function () {
+		renderInnerView: function () {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
 			this.$el.html( template( data ) );
 
-//			this.progress.render( this.$( '.js-window-icon' ), 'fa-bar-chart' );
+			this.trigger( 'inner-view-rendered' );
 
 			return this;
+		},
+
+		getTitle: function() {
+			return translator.title;
+		},
+
+		getIcon: function() {
+			return 'fa-bar-chart';
 		},
 
 		renderScores: function() {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
-
-//			this.progress.close();
 
 			this.$( '.js-loading-label' ).remove();
 			this.$( '.js-scores-table' ).append( templateTable( data ) );

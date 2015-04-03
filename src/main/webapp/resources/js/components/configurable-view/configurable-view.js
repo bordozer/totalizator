@@ -15,7 +15,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
 
-	var WindowIconView = require( 'js/components/configurable-view/window-icon-view' );
+//	var WindowIconView = require( 'js/components/configurable-view/window-icon-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -55,7 +55,7 @@ define( function ( require ) {
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
-			this.iconView = new WindowIconView();
+//			this.iconView = new WindowIconView();
 
 			Backbone.View.apply( this, [ options ] );
 		},
@@ -68,7 +68,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this._showProgressIcon();
+			this.showProgress();
 
 			this._renderDropDownMenuItems();
 
@@ -87,16 +87,16 @@ define( function ( require ) {
 			return $( "<div class='row'>No inner view was supplied...</div>" );
 		},
 
-		_showProgressIcon: function() {
-			this.iconView.render( this.$( '.js-window-icon' ), this.getIcon() );
+		showProgress: function() {
+//			this.iconView.render( this.$( '.js-window-icon' ), this.getIcon() );
 		},
 
-		_showDefaultIcon: function() {
-			this.iconView.close();
+		hideProgress: function() {
+//			this.iconView.close();
 		},
 
 		_onInnerViewRender: function() {
-			this._showDefaultIcon();
+			this.hideProgress();
 		},
 
 		_renderDropDownMenuItems: function() {
