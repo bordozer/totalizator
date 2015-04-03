@@ -26,8 +26,7 @@ define( function ( require ) {
 
 		constructor: function ( options ) {
 
-			this.menuItems = options.menuItems || [];
-			console.log( this.menuItems );
+			this.addMenuItems( options.menuItems );
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
@@ -82,18 +81,19 @@ define( function ( require ) {
 			el.addClass( this.getIcon() );
 		},
 
-		_renderDropDownMenu: function() {
+		addMenuItems: function( menuItems ) {
 
-			var baseItems = [
+			this.menuItems =  [
 				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
 			];
 
-			var items = baseItems;
-			if ( this.menuItems && this.menuItems.length > 0 ) {
-				items = this.menuItems.concat( baseItems );
+			if ( menuItems && menuItems.length > 0 ) {
+				this.menuItems = this.menuItems.concat( menuItems );
 			}
+		},
 
-			mainMenu( items, 'fa-list-alt', this.$( '.js-drop-down-menu') );
+		_renderDropDownMenu: function() {
+			mainMenu( this.menuItems, 'fa-list-alt', this.$( '.js-window-drop-down-menu') );
 		},
 
 		_onInnerViewRendered: function() {

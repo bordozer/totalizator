@@ -53,6 +53,13 @@ define( function ( require ) {
 
 			this.events = _.extend( this.configurableViewEvents, this.events );
 
+			var configurableViewMenuItems = [
+				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
+				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
+			];
+//			console.log( 'init', this.menuItems );
+			this.menuItems = this.menuItems.concat( configurableViewMenuItems );
+
 			this.render();
 		},
 
@@ -64,13 +71,13 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.showProgress();
+//			this.showProgress();
 
-			this._renderDropDownMenuItems();
+//			this._renderDropDownMenuItems();
 
 			this.renderInnerView( this.$( '.js-view-container' ), this.settingsModel.toJSON() );
 
-			this.delegateEvents();
+//			this.delegateEvents();
 
 			return this;
 		},
@@ -80,10 +87,10 @@ define( function ( require ) {
 		},
 
 		renderInnerView: function( el, filter ) {
-			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
+			this.$( '.js-view-container' ).html( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
 
-		_renderDropDownMenuItems: function() {
+		/*_renderDropDownMenuItems: function() {
 
 			var baseItems = [
 				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
@@ -96,7 +103,7 @@ define( function ( require ) {
 			}
 
 			mainMenu( items, 'fa-list-alt', this.$( '.js-drop-down-menu') );
-		},
+		},*/
 
 		_renderSettings: function() {
 
