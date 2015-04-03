@@ -40,7 +40,7 @@ define( function ( require ) {
 
 			this.showProgress();
 
-			this.renderInnerView( this.$( '.js-view-container' ) );
+			this.renderInnerView();
 
 			this.delegateEvents();
 		},
@@ -67,6 +67,10 @@ define( function ( require ) {
 			var el = this._getIconEl();
 			el.removeClass( this.progressIcon );
 			el.addClass( this.getIcon() );
+		},
+
+		element: function() {
+			return this.$( '.js-view-container' );
 		},
 
 		_onInnerViewRendered: function() {
