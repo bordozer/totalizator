@@ -16,6 +16,7 @@ define( function ( require ) {
 		title: 'Matches: Settings'
 		, buttonSaveSettingsLabel: 'Matches: Settings: save button'
 		, buttonCancelSettingsLabel: 'Matches: Settings: cancel button'
+		, userLabel: 'User'
 		, categoryLabel: 'Category'
 		, cupLabel: 'Configurable view / Filter: Cup'
 		, teamLabel: 'Team'
@@ -37,6 +38,7 @@ define( function ( require ) {
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
+			this.users = service.loadUsers();
 		},
 
 		render: function() {
@@ -46,6 +48,7 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				model: model
+				, users: this.users
 				, categories: this.categories
 				, cups: service.categoryCups( this.cups, categoryId )
 				, teams: service.categoryTeams( this.teams, categoryId )

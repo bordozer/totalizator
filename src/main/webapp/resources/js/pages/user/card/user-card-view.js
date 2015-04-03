@@ -23,7 +23,6 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.userId = options.options.userId;
-			this.username = options.options.username;
 
 			this.render();
 		},
@@ -63,7 +62,8 @@ define( function ( require ) {
 				model: model
 				, el: container
 				, settings: {
-					categoryId: 1
+					userId: this.userId
+					, categoryId: 1
 					, cupId: 2
 					, teamId: 0
 				}
