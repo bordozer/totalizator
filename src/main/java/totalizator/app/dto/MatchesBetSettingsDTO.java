@@ -2,10 +2,19 @@ package totalizator.app.dto;
 
 public class MatchesBetSettingsDTO {
 
+	private int userId;
 	private int categoryId;
 	private int cupId;
 	private int teamId;
 	private boolean showFinished;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId( final int userId ) {
+		this.userId = userId;
+	}
 
 	public int getCategoryId() {
 		return categoryId;
@@ -41,6 +50,6 @@ public class MatchesBetSettingsDTO {
 
 	@Override
 	public String toString() {
-		return String.format( "Category: %d; cup: %d; team: %d", categoryId, cupId, teamId );
+		return String.format( "User: %d, Category: %d; cup: %d; team: %d", userId, categoryId, cupId, teamId );
 	}
 }

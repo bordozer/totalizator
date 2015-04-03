@@ -1,5 +1,7 @@
 package totalizator.app.controllers.rest.matches;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -36,7 +38,25 @@ public class MatchesAndBetsController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
-		return getMatchBetDTOs( principal, matchService.loadAll( dto ) );
+
+		final List<MatchBetDTO> matchBetDTOs = getMatchBetDTOs( principal, matchService.loadAll( dto ) );
+
+		if ( dto.getUserId() > 0 ) {
+			CollectionUtils.filter( matchBetDTOs, new Predicate<MatchBetDTO>() {
+				@Override
+				public boolean evaluate( final MatchBetDTO matchBetDTO ) {
+					final BetDTO bet = matchBetDTO.getBet();
+
+					if ( bet == null ) {
+						return false;
+					}
+
+					return bet.getUser().getUserId() == dto.getUserId();
+				}
+			} );
+		}
+
+		return matchBetDTOs;
 	}
 
 	/*@ResponseStatus( HttpStatus.OK )
