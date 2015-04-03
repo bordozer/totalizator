@@ -55,7 +55,7 @@ define( function ( require ) {
 			return 'fa-windows';
 		},
 
-		renderInnerView: function( el ) {
+		renderBody: function() {
 			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
 
@@ -76,6 +76,7 @@ define( function ( require ) {
 		},
 
 		_onInnerViewRendered: function() {
+			console.log( '_onInnerViewRendered' );
 			this.hideProgress();
 		},
 

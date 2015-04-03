@@ -15,11 +15,12 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
 
-//	var WindowIconView = require( 'js/components/configurable-view/window-icon-view' );
+	var WindowView = require( 'js/components/window/window-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Matches'
+		, noInnerViewLabel: 'No inner view was supplied...'
 		, settingsLabel: 'Configurable view: Matches: settings'
 		, settingsButtonHint: 'Configurable view: Matches: settings button hint'
 		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'
@@ -28,7 +29,7 @@ define( function ( require ) {
 		, allTeamsLabel: 'Portal page / Matches: All teams label'
 	} );
 
-	return Backbone.View.extend( {
+	return WindowView.extend( {
 
 		builtinEvents: {
 			'click .js-settings-button': '_onSettingsClick'
@@ -45,7 +46,6 @@ define( function ( require ) {
 			} );
 
 			this.on( 'view:render', this.render, this );
-			this.on( 'inner-view-rendered', this._onInnerViewRender, this );
 
 			this.menuItems = options.menuItems || [];
 
@@ -55,12 +55,10 @@ define( function ( require ) {
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
-//			this.iconView = new WindowIconView();
-
 			Backbone.View.apply( this, [ options ] );
 		},
 
-		render: function() {
+		renderBody: function() {
 
 			this.$el.html( template( {
 				title: this._getTitle()
@@ -84,19 +82,7 @@ define( function ( require ) {
 		},
 
 		renderInnerView: function( el, filter ) {
-			return $( "<div class='row'>No inner view was supplied...</div>" );
-		},
-
-		showProgress: function() {
-//			this.iconView.render( this.$( '.js-window-icon' ), this.getIcon() );
-		},
-
-		hideProgress: function() {
-//			this.iconView.close();
-		},
-
-		_onInnerViewRender: function() {
-			this.hideProgress();
+			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
 
 		_renderDropDownMenuItems: function() {
