@@ -1,8 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <jsp:useBean id="portalPageModel" type="totalizator.app.controllers.ui.portal.PortalPageModel" scope="request"/>
 
 <tags:page userName="${portalPageModel.userName}">
+
+	<c:set var="cupsToShowJSON" value="{ cupsToShow: 'hahaha' }" />
 
 	<div class="portal-page-container"></div>
 
@@ -17,7 +20,9 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: {} } );
+			var cupsToShow = ${portalPageModel.cupsToShowJSON};
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: { cupsToShow: cupsToShow } } );
 			pageView.render();
 		} );
 	</script>

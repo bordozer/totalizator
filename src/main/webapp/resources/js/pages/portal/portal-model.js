@@ -10,7 +10,6 @@ define( function ( require ) {
 			id: 0
 			, userId: 0
 			, userName: ''
-			, cupsShowTo: []
 		},
 
 		initialize: function ( options ) {

@@ -1,5 +1,7 @@
 package totalizator.app.services;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +44,20 @@ public class CupServiceImpl implements CupService {
 	@Transactional( readOnly = true )
 	public Cup findByName( final String name ) {
 		return cupRepository.findByName( name );
+	}
+
+	@Override
+	public List<Cup> portalPageCups() {
+
+		final List<Cup> portalPageCups = loadAll();
+
+		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
+			@Override
+			public boolean evaluate( final Cup cup ) {
+				return cup.isShowOnPortalPage();
+			}
+		} );
+
+		return portalPageCups;
 	}
 }

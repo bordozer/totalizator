@@ -1,9 +1,6 @@
 package totalizator.app.controllers.rest.cups;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -38,21 +35,6 @@ public class CupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/navi/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> cupsToShow() {
-
-		final List<Cup> portalPageCups = cupService.loadAll();
-		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
-			@Override
-			public boolean evaluate( final Cup cup ) {
-				return cup.isShowOnPortalPage();
-			}
-		} );
-
-		return Lists.transform( portalPageCups, new Function<Cup, CupDTO>() {
-			@Override
-			public CupDTO apply( final Cup cup ) {
-				final String cupName = String.format( "%s: %s", cup.getCategory().getCategoryName(), cup.getCupName() ); // TODO: hack with category name
-				return new CupDTO( cup.getId(), cupName, cup.getCategory().getId() );
-			}
-		} );
+		return Lists.transform( cupService.portalPageCups(), CupService.CUP_DTO_FUNCTION );
 	}
 }

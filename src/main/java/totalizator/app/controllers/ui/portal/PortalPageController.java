@@ -1,11 +1,14 @@
 package totalizator.app.controllers.ui.portal;
 
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.models.User;
+import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
 import totalizator.config.root.SecurityConfig;
 
@@ -22,6 +25,9 @@ public class PortalPageController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private CupService cupService;
+
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel preparePagingModel() {
 		return new PortalPageModel();
@@ -33,6 +39,9 @@ public class PortalPageController {
 		final User user = userService.findByLogin( principal.getName() );
 
 		model.setUserName( user.getUsername() );
+		model.setCupsToShow( Lists.transform( cupService.portalPageCups(), CupService.CUP_DTO_FUNCTION ) );
+
+		model.setCupsToShowJSON( new Gson().toJson( model.getCupsToShow() ) );
 
 		return VIEW;
 	}
