@@ -49,7 +49,16 @@ define( function ( require ) {
 
 		renderInnerView: function ( filter ) {
 
+			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
+
 			this.model.refresh( filter );
+		},
+
+		getIcon: function() {
+			return 'fa-futbol-o';
+		},
+
+		_renderCupMatches: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
 
@@ -58,22 +67,12 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this._renderCupMatches( el );
-
-			this.trigger( 'inner-view-rendered' );
-
-			return el;
-		},
-
-		getIcon: function() {
-			return 'fa-futbol-o';
-		},
-
-		_renderCupMatches: function( el ) {
 			var self = this;
 			this.model.forEach( function( match ) {
 				el.append( self._renderEntry( match ) );
 			});
+
+			this.trigger( 'inner-view-rendered' );
 		},
 
 		_renderEntry: function ( model ) {
