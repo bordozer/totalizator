@@ -24,7 +24,7 @@ define( function ( require ) {
 			this.render();
 		},
 
-		renderInnerView: function () {
+		renderBody: function () {
 			this.model.fetch( { cache: false } );
 		},
 

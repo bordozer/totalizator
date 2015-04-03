@@ -10,7 +10,8 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		noInnerViewLabel: 'No inner view was supplied...'
+		loadingLabel: 'Loading...'
+		, noInnerViewLabel: 'No inner view was supplied...'
 	} );
 
 	return Backbone.View.extend( {
@@ -36,11 +37,12 @@ define( function ( require ) {
 			this.$el.html( template( {
 				title: this.getTitle()
 				, icon: this.getIcon()
+				, translator: translator
 			} ) );
 
 			this.showProgress();
 
-			this.renderInnerView();
+			this.renderBody();
 
 			this.delegateEvents();
 		},
