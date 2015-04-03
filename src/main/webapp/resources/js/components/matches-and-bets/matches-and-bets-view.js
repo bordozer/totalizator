@@ -59,6 +59,10 @@ define( function ( require ) {
 			return this;
 		},
 
+		getIcon: function() {
+			return 'fa-futbol-o';
+		},
+
 		_renderCupMatches: function() {
 			var self = this;
 			this.model.forEach( function( matchBet ) {

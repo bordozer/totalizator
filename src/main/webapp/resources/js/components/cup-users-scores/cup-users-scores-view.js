@@ -9,7 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/cup-users-scores-template.html' ) );
 	var templateTable = _.template( require( 'text!./templates/cup-users-scores-table-template.html' ) );
 
-	var ProgressView = require( 'js/components/progress/progress' );
+//	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -25,7 +25,7 @@ define( function ( require ) {
 			this.listenTo( this.model, 'sync', this.renderScores );
 			this.model.fetch( { cache: false} );
 
-			this.progress = new ProgressView();
+//			this.progress = new ProgressView();
 
 			this.render();
 		},
@@ -36,7 +36,7 @@ define( function ( require ) {
 
 			this.$el.html( template( data ) );
 
-			this.progress.render( this.$( '.js-window-icon' ), 'fa-bar-chart' );
+//			this.progress.render( this.$( '.js-window-icon' ), 'fa-bar-chart' );
 
 			return this;
 		},
@@ -45,7 +45,7 @@ define( function ( require ) {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
-			this.progress.close();
+//			this.progress.close();
 
 			this.$( '.js-loading-label' ).remove();
 			this.$( '.js-scores-table' ).append( templateTable( data ) );

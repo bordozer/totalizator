@@ -15,7 +15,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
 
-	var ProgressView = require( 'js/components/progress/progress' );
+	var WindowIconView = require( 'js/components/configurable-view/window-icon-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -55,7 +55,7 @@ define( function ( require ) {
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
-			this.progress = new ProgressView();
+			this.iconView = new WindowIconView();
 
 			Backbone.View.apply( this, [ options ] );
 		},
@@ -64,10 +64,11 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				title: this._getTitle()
+				, icon: this.getIcon()
 				, translator: translator
 			} ) );
 
-			this._showProgress();
+			this._showProgressIcon();
 
 			this._renderDropDownMenuItems();
 
@@ -78,20 +79,24 @@ define( function ( require ) {
 			return this;
 		},
 
-		_showProgress: function() {
-			this.progress.render( this.$( '.js-window-icon' ), 'fa-futbol-o' );
-		},
-
-		_hideProgress: function() {
-			this.progress.close();
-		},
-
-		_onInnerViewRender: function() {
-			this._hideProgress();
+		getIcon: function() {
+			return 'fa-windows';
 		},
 
 		renderInnerView: function( el, filter ) {
 			return $( "<div class='row'>No inner view was supplied...</div>" );
+		},
+
+		_showProgressIcon: function() {
+			this.iconView.render( this.$( '.js-window-icon' ), this.getIcon() );
+		},
+
+		_showDefaultIcon: function() {
+			this.iconView.close();
+		},
+
+		_onInnerViewRender: function() {
+			this._showDefaultIcon();
 		},
 
 		_renderDropDownMenuItems: function() {
