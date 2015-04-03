@@ -92,7 +92,7 @@ define( function ( require ) {
 		},
 
 		_renderDropDownMenu: function() {
-			mainMenu( this.menuItems, 'fa-list-alt', this.$( '.js-window-drop-down-menu') );
+			mainMenu( this.menuItems, 'fa-th-list', this.$( '.js-window-drop-down-menu') );
 		},
 
 		_onInnerViewRendered: function() {
