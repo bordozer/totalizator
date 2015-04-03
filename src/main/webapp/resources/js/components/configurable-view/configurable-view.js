@@ -54,11 +54,12 @@ define( function ( require ) {
 			this.events = _.extend( this.configurableViewEvents, this.events );
 
 			var configurableViewMenuItems = [
-				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
+				{ selector: 'divider' }
+				, { selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
 			];
-//			console.log( 'init', this.menuItems );
-			this.menuItems = this.menuItems.concat( configurableViewMenuItems );
+			this.addMenuItems( configurableViewMenuItems );
+//			console.log( this.menuItems );
 
 			this.render();
 		},
