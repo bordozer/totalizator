@@ -72,11 +72,10 @@ define( function ( require ) {
 		},
 
 		setBody: function( context ) {
-			this.$( '.js-view-container' ).html( context );
+			this.$( '.js-window-container' ).html( context );
 		},
 
 		_onInnerViewRendered: function() {
-			console.log( '_onInnerViewRendered' );
 			this.hideProgress();
 		},
 

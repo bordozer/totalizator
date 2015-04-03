@@ -39,10 +39,6 @@ define( function ( require ) {
 
 	var MatchesView = ConfigurableView.extend( {
 
-		/*initialize: function ( options ) {
-			this.render();
-		},*/
-
 		renderInnerView: function ( el, filter ) {
 
 			this.model.refresh( filter );

@@ -56,8 +56,6 @@ define( function ( require ) {
 			this.events = _.extend( this.configurableViewEvents, this.events );
 
 			this.render();
-
-//			Backbone.View.apply( this, [ options ] );
 		},
 
 		renderBody: function() {
