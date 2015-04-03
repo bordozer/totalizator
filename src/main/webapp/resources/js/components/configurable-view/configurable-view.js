@@ -68,10 +68,6 @@ define( function ( require ) {
 			return this;
 		},
 
-		getIcon: function() {
-			return 'fa-windows';
-		},
-
 		renderInnerView: function( el, filter ) {
 			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
@@ -89,7 +85,7 @@ define( function ( require ) {
 			return this;
 		},
 
-		_getTitle: function() {
+		getTitle: function() {
 			var filter = this.settingsModel.toJSON();
 
 			var categoryId = filter.categoryId;

@@ -22,8 +22,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		matchesTitleLabel: "Matches"
-		, matchEditLabel: "Admin / Matches / Edit entry"
+		matchEditLabel: "Admin / Matches / Edit entry"
 		, matchDeleteLabel: "Admin / Matches / Delete entry"
 
 		, newEntryEditFormTitle: "Admin / Matches / Edit: New entry edit form title"
