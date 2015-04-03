@@ -25,6 +25,7 @@ define( function ( require ) {
 		, allCategoriesLabel: 'Portal page / Matches: All categories label'
 		, allCupsLabel: 'Portal page / Matches: All cups label'
 		, allTeamsLabel: 'Portal page / Matches: All teams label'
+		, settingsFilterLabel: 'Configurable view / Settings: Filter'
 	} );
 
 	return WindowView.extend( {
@@ -74,7 +75,7 @@ define( function ( require ) {
 
 		_renderSettings: function() {
 
-			this.$el.html( templateSettings( {
+			this.$( this.windowBodyContainerSelector ).html( templateSettings( {
 				title: translator.settingsLabel
 				, translator: translator
 			} ) );
