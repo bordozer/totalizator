@@ -6,42 +6,53 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateList = require( 'text!./templates/categories-template.html' );
+	var WindowView = require( 'js/components/window/window-view' );
+
 	var TemplateEntry = require( 'text!./templates/category-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/category-edit-template.html' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		categoriesTitle: "Categories"
+		title: "Categories"
+		, newCategoryLabel: "Admin / Categories: New category"
 	} );
 
-	var CategoriesView = Backbone.View.extend( {
-
-
-		template: _.template( TemplateList ),
+	var CategoriesView = WindowView.extend( {
 
 		events: {
-			'click .add-category-button': '_onAddClick'
+			'click .js-new-category-button': '_onAddClick'
 		},
 
 		initialize: function ( options ) {
+
+			var menuItems =  [
+				{ selector: 'divider' }
+				,{ selector: 'js-new-category-button', icon: 'fa fa-refresh', link: '#', text: translator.newCategoryLabel }
+			];
+			this.addMenuItems( menuItems );
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
+		renderBody: function () {
 
-			this.$el.html( this.template( {
-				model: this.model
-				, translator: translator
-			} ) );
+			this.$( this.windowBodyContainerSelector ).empty();
 
 			var self = this;
 			this.model.forEach( function( category ) {
 				self.renderEntry( category );
 			});
 
-			return this.$el;
+			this.trigger( 'inner-view-rendered' );
+		},
+
+		getTitle: function () {
+			return translator.title;
+		},
+
+		getIcon: function () {
+			return 'fa-sitemap';
 		},
 
 		renderEntry: function ( model ) {
@@ -58,7 +69,7 @@ define( function ( require ) {
 				return this.$( '.categories-container' ).append( view.renderEdit().$el );
 			}
 
-			return this.$( '.categories-container' ).append( view.render().$el );
+			return this.$( this.windowBodyContainerSelector ).append( view.render().$el );
 		},
 
 		reRender: function( options ) {
