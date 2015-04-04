@@ -89,12 +89,12 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
+			this.filter = options.filter;
+			this.currentUser = options.currentUser;
+
 			this.categories = options.categories;
 			this.cups = options.cups;
 			this.teams = options.teams;
-
-			this.filter = options.filter;
-			this.currentUser = options.currentUser;
 
 			this.model.on( 'sync', this.render, this );
 		},

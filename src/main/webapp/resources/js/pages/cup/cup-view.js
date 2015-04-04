@@ -80,7 +80,8 @@ define( function ( require ) {
 				model: model
 				, el: container
 				, settings: {
-					categoryId: cup.categoryId
+					userId: 0
+					, categoryId: cup.categoryId
 					, cupId: cup.cupId
 					, teamId: 0
 				}
