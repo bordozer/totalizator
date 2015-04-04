@@ -117,11 +117,19 @@ define( function ( require ) {
 
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
-				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', translator.footer_MatchFinishedLabel ) );
+				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', translator.footer_MatchFinishedLabel, false ) );
 			}
 
-			if ( this.filter.userId && this.currentUser.userId != this.filter.userId ) {
-				console.log( this.currentUser.userId, this.filter.userId );
+			var isFilterByAnotherUserBets = this.filter.userId && this.currentUser.userId != this.filter.userId;
+			if ( isFilterByAnotherUserBets ) {
+
+				var userBet = this.model.get( 'bet' );
+
+				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
+				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
+				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
+
+				return this;
 			}
 
 			var bet = this.model.get( 'bet' );
@@ -132,7 +140,7 @@ define( function ( require ) {
 					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_NoBetYetLabel, true ) );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
 				} else if( ! match.matchFinished ) {
-					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel ) );
+					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel, false ) );
 				}
 
 				return this;
@@ -142,7 +150,7 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-success' );
 
-			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel ) );
+			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
