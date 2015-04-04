@@ -21,7 +21,7 @@
 
 			var cupsToShow = ${portalPageModel.cupsToShowJSON};
 
-			var currentUser = { userId: ${portalPageModel.currentUser.id}, userName: '${portalPageModel.currentUser.username}' };
+			var currentUser = ${portalPageModel.currentUserJSON};
 
 			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: { cupsToShow: cupsToShow, currentUser: currentUser } } );
 			pageView.render();

@@ -24,7 +24,7 @@
 				, { link: '#', title: translator.title }
 			];
 
-			var currentUser = { userId: ${cupMatchesAndBetsModel.currentUser.id}, userName: '${cupMatchesAndBetsModel.currentUser.username}' };
+			var currentUser = ${cupMatchesAndBetsModel.currentUserJSON};
 
 			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
 			pageView.render();

@@ -140,7 +140,7 @@ public class MatchesAndBetsController {
 
 	private BetDTO getBetDTO( final MatchBet matchBet, final User user ) {
 		final MatchDTO matchDTO = matchService.initDTOFromModel( matchBet.getMatch() );
-		final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user.getId(), user.getUsername() ) );
+		final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user ) );
 		betDTO.setMatchBetId( matchBet.getId() );
 		betDTO.setScore1( matchBet.getBetScore1() );
 		betDTO.setScore2( matchBet.getBetScore2() );

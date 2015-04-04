@@ -30,7 +30,7 @@ public class AdminMainPageController {
 		final User user = userService.findByLogin( principal.getName() );
 
 		final AdminMainPageDTO dto = new AdminMainPageDTO();
-		dto.setUserDTO( new UserDTO( user.getId(), user.getUsername() ) );
+		dto.setUserDTO( new UserDTO( user ) );
 
 		return dto;
 	}

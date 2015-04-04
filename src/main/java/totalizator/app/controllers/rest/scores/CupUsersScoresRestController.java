@@ -42,7 +42,7 @@ public class CupUsersScoresRestController {
 
 		final CupUsersScoresDTO result = new CupUsersScoresDTO();
 
-		result.setCurrentUser( new UserDTO( user.getId(), user.getUsername() ) );
+		result.setCurrentUser( new UserDTO( user ) );
 
 		result.setUserPoints( getUsersScores( cup ) );
 
@@ -54,7 +54,7 @@ public class CupUsersScoresRestController {
 		return Lists.transform( cupScoresService.getUsersScoresSummary( cup ), new Function<UserPoints, UserPointsDTO>() {
 			@Override
 			public UserPointsDTO apply( final UserPoints userPoints ) {
-				return new UserPointsDTO( new UserDTO( userPoints.getUser().getId(), userPoints.getUser().getUsername() ), userPoints.getPoints()  );
+				return new UserPointsDTO( new UserDTO( userPoints.getUser() ), userPoints.getPoints()  );
 			}
 		} );
 	}

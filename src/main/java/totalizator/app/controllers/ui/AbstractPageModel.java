@@ -1,6 +1,7 @@
 package totalizator.app.controllers.ui;
 
 import com.google.gson.Gson;
+import totalizator.app.dto.UserDTO;
 import totalizator.app.models.User;
 
 public abstract class AbstractPageModel {
@@ -16,6 +17,6 @@ public abstract class AbstractPageModel {
 	}
 
 	public String getCurrentUserJSON() {
-		return new Gson().toJson( currentUser );
+		return new Gson().toJson( new UserDTO( currentUser ) );
 	}
 }

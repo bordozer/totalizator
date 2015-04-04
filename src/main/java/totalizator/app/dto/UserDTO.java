@@ -1,9 +1,16 @@
 package totalizator.app.dto;
 
+import totalizator.app.models.User;
+
 public class UserDTO {
 
 	private int userId;
 	private String userName;
+
+	public UserDTO( final User user ) {
+		this.userId = user.getId();
+		this.userName = user.getUsername();
+	}
 
 	public UserDTO( final int id, final String username ) {
 		this.userId = id;
