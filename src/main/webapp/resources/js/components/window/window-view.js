@@ -44,6 +44,7 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				title: this.getTitle()
+				, titleHint: this.getTitleHint()
 				, icon: this.getIcon()
 				, translator: translator
 			} ) );
@@ -59,6 +60,10 @@ define( function ( require ) {
 
 		getTitle: function() {
 			return '...';
+		},
+
+		getTitleHint: function() {
+
 		},
 
 		getIcon: function() {

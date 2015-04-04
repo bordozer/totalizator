@@ -73,6 +73,11 @@
 	</translation>
 
 	<translation>
+		<nerd>User</nerd>
+		<ru><![CDATA[Пользователь]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Users</nerd>
 		<ru><![CDATA[Пользователи]]></ru>
 	</translation>
@@ -85,6 +90,16 @@
 	<translation>
 		<nerd>no</nerd>
 		<ru><![CDATA[нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Plural all</nerd>
+		<ru><![CDATA[все]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

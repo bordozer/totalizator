@@ -19,14 +19,16 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: 'Matches'
 		, matches: 'Matches'
+		, filteredBy: 'Filtered by'
+		, category: 'Category'
+		, cup: 'Cup'
+		, team: 'Team'
+		, user: 'User'
 		, noInnerViewLabel: 'No inner view was supplied...'
 		, settingsLabel: 'Configurable view: Matches: settings'
 		, settingsButtonHint: 'Configurable view: Matches: settings button hint'
 		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'
-		, allCategoriesLabel: 'Portal page / Matches: All categories label'
-		, allCupsLabel: 'Portal page / Matches: All cups label'
-		, allTeamsLabel: 'Portal page / Matches: All teams label'
-		, allUsersLabel: 'Portal page / Matches: All users label'
+		, pluralAll: 'Plural all'
 		, settingsFilterLabel: 'Configurable view / Settings: Filter'
 		, futureMatchesAreShownLabel: 'Configurable view / Future matches are shown'
 		, finishedMatchesAreShownLabel: 'Configurable view / Finished matches are shown'
@@ -95,6 +97,10 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
+			return translator.title;
+		},
+
+		getTitleHint: function() {
 			var filter = this.settingsModel.toJSON();
 
 			var userId = filter.userId;
@@ -104,17 +110,16 @@ define( function ( require ) {
 			var showFutureMatches = filter.showFutureMatches;
 			var showFinished = filter.showFinished;
 
-			var filterByCategoryText = categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.allCategoriesLabel;
-			var filterByCupText = cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.allCupsLabel;
-			var filterByTeamText = teamId > 0 ? service.getTeam( this.teams, teamId ).teamName : translator.allTeamsLabel;
-			var filterByUserText = userId > 0 ? service.getUser( this.users, userId ).userName : translator.allUsersLabel;
+			var filterByCategoryText = translator.category + ': ' + ( categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.pluralAll );
+			var filterByCupText = translator.cup + ': ' + ( cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.pluralAll );
+			var filterByTeamText = translator.team + ': ' + ( teamId > 0 ? service.getTeam( this.teams, teamId ).teamName : translator.pluralAll );
+			var filterByUserText = translator.user + ': ' + ( userId > 0 ? service.getUser( this.users, userId ).userName : translator.pluralAll );
 
-			return translator.title + ': ' + filterByCategoryText + ' / ' + filterByCupText + ' / ' + filterByTeamText + ' / ' + filterByUserText
-					+ ' ( ' + translator.matches + ': '
-					+ translator.futureMatchesAreShownLabel + ': ' + ( showFutureMatches ? translator.yes : translator.no )
+			return translator.filteredBy + ': ' + filterByCategoryText + ', ' + filterByCupText + ', ' + filterByTeamText + ', ' + filterByUserText
+					+ ', ' + translator.matches + ': '
+					+ translator.futureMatchesAreShownLabel + ' - ' + ( showFutureMatches ? translator.yes : translator.no )
 					+ ', '
-					+ translator.finishedMatchesAreShownLabel + ': ' + ( showFinished ? translator.yes : translator.no ) +
-					' ) ';
+					+ translator.finishedMatchesAreShownLabel + ' - ' + ( showFinished ? translator.yes : translator.no );
 		},
 
 		_onSettingsClick: function( evt ) {
