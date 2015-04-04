@@ -50,7 +50,7 @@ define( function ( require ) {
 		},
 
 		refresh: function( data ) {
-			this.fetch( { data: data, cache: false, reset: true, async: false } );
+			this.fetch( { data: data, cache: false, reset: true } );
 		}
 	});
 

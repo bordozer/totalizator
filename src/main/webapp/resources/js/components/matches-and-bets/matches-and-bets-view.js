@@ -8,7 +8,6 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
-	var template = _.template( require( 'text!./templates/matches-and-bets-template.html' ) );
 	var templateMatch = _.template( require( 'text!./templates/matches-and-bets-entry-template.html' ) );
 
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -17,9 +16,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: 'Match and Bets: Page title'
-
-		, actionMatchBetAdd: 'Match and Bets: Add bet'
+		actionMatchBetAdd: 'Match and Bets: Add bet'
 		, actionMatchBetEdit: 'Match and Bets: Edit bet'
 		, actionMatchBetSave: 'Match and Bets: save bet'
 		, actionCancelBetEditing: 'Match and Bets: Cancel bet editing'
@@ -39,32 +36,29 @@ define( function ( require ) {
 
 	var MatchesView = ConfigurableView.extend( {
 
-		initialize: function ( options ) {
-			this.render();
+		renderInnerView: function ( filter ) {
+			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
+			this.model.refresh( filter );
 		},
 
-		renderInnerView: function ( el, filter ) {
-
-			this.model.refresh( filter );
-
-			el.html( template( {
-				model: this.model
-				, translator: translator
-			} ) );
-
-			this._renderCupMatches();
-
-			return this;
+		getIcon: function() {
+			return 'fa-futbol-o';
 		},
 
 		_renderCupMatches: function() {
+
+			var el = this.$( this.windowBodyContainerSelector );
+			el.empty();
+
 			var self = this;
 			this.model.forEach( function( matchBet ) {
-				self._renderEntry( matchBet );
+				self._renderEntry( matchBet, el );
 			});
+
+			this.trigger( 'inner-view-rendered' );
 		},
 
-		_renderEntry: function ( model ) {
+		_renderEntry: function ( model, el ) {
 
 			var view = new MatchView( {
 				model: model
@@ -73,7 +67,7 @@ define( function ( require ) {
 				, teams: this.teams
 			} );
 
-			return this.$( '.match-list-container' ).append( view.render().$el );
+			return el.append( view.render().$el );
 		}
 	});
 

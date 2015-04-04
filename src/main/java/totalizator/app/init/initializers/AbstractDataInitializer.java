@@ -45,10 +45,10 @@ public abstract class AbstractDataInitializer {
 
 		for ( final Cup cup : cups ) {
 
-			final List<Match> finishedCupMatches = generateMatches( cup, teams, pastStrategy(), session );
+			final List<Match> finishedCupMatches = generateMatches( cup, teams, pastStrategy(), 100, session );
 			generateBets( users, finishedCupMatches, session );
 
-			final List<Match> futureCupMatches = generateMatches( cup, teams, futureStrategy(), session );
+			final List<Match> futureCupMatches = generateMatches( cup, teams, futureStrategy(), 10, session );
 			generateBets( users, futureCupMatches, session );
 		}
 	}
@@ -73,13 +73,9 @@ public abstract class AbstractDataInitializer {
 		return result;
 	}
 
-	protected List<Match> generateMatches( final Cup cup, final List<Team> teams, final MatchDataGenerationStrategy strategy, final Session session ) {
-
-		final int count = 100;
+	protected List<Match> generateMatches( final Cup cup, final List<Team> teams, final MatchDataGenerationStrategy strategy, final int count, final Session session ) {
 
 		final List<Match> result = newArrayList();
-
-		final Category category = cup.getCategory();
 
 		for ( int i = 0; i < count; i++ ) {
 			final Team team1 = getRandomTeam( teams );

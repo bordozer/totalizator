@@ -9,33 +9,35 @@ define( function ( require ) {
 	var FilterModel = require( 'js/components/matches-filter/matches-filter-model' );
 	var FilterView = require( 'js/components/matches-filter/matches-filter-view' );
 
-	var mainMenu = require( 'js/components/main-menu/main-menu' );
 	var service = require( '/resources/js/services/service.js' );
 
-	var template = _.template( require( 'text!./templates/configurable-view-template.html' ) );
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
+
+	var WindowView = require( 'js/components/window/window-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Matches'
+		, noInnerViewLabel: 'No inner view was supplied...'
 		, settingsLabel: 'Configurable view: Matches: settings'
 		, settingsButtonHint: 'Configurable view: Matches: settings button hint'
 		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'
 		, allCategoriesLabel: 'Portal page / Matches: All categories label'
 		, allCupsLabel: 'Portal page / Matches: All cups label'
 		, allTeamsLabel: 'Portal page / Matches: All teams label'
+		, settingsFilterLabel: 'Configurable view / Settings: Filter'
 	} );
 
-	return Backbone.View.extend( {
+	return WindowView.extend( {
 
-		builtinEvents: {
+		configurableViewEvents: {
 			'click .js-settings-button': '_onSettingsClick'
 			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
 		},
 
-		constructor: function ( options ) {
+		initialize: function ( options ) {
 
 			this.settingsModel = new FilterModel( options.settings );
 			this.settingsView = new FilterView( {
@@ -44,54 +46,36 @@ define( function ( require ) {
 
 			this.on( 'view:render', this.render, this );
 
-			this.menuItems = options.menuItems || [];
-
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
 
-			this.events = _.extend( this.builtinEvents, this.events );
-			Backbone.View.apply( this, [ options ] );
+			this.events = _.extend( this.configurableViewEvents, this.events );
+
+			var configurableViewMenuItems = [
+				{ selector: 'divider' }
+				, { selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
+				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
+			];
+			this.addMenuItems( configurableViewMenuItems );
+
+			this.render();
 		},
 
-		render: function() {
+		renderBody: function() {
 
-			this.$el.html( template( {
-				title: this._getTitle()
-				, translator: translator
-			} ) );
-
-			this._renderDropDownMenuItems();
-
-			this.renderInnerView( this.$( '.js-view-container' ), this.settingsModel.toJSON() );
-
-			this.delegateEvents();
+			this.renderInnerView( this.settingsModel.toJSON() );
 
 			return this;
 		},
 
 		renderInnerView: function( el, filter ) {
-			return $( "<div class='row'>No inner view was supplied...</div>" );
-		},
-
-		_renderDropDownMenuItems: function() {
-
-			var baseItems = [
-				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
-				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
-			];
-
-			var items = baseItems;
-			if ( this.menuItems && this.menuItems.length > 0 ) {
-				items = this.menuItems.concat( baseItems );
-			}
-
-			mainMenu( items, 'fa-list-alt', this.$( '.js-drop-down-menu') );
+			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
 
 		_renderSettings: function() {
 
-			this.$el.html( templateSettings( {
+			this.$( this.windowBodyContainerSelector ).html( templateSettings( {
 				title: translator.settingsLabel
 				, translator: translator
 			} ) );
@@ -102,7 +86,7 @@ define( function ( require ) {
 			return this;
 		},
 
-		_getTitle: function() {
+		getTitle: function() {
 			var filter = this.settingsModel.toJSON();
 
 			var categoryId = filter.categoryId;

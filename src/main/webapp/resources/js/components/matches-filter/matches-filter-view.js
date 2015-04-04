@@ -16,18 +16,22 @@ define( function ( require ) {
 		title: 'Matches: Settings'
 		, buttonSaveSettingsLabel: 'Matches: Settings: save button'
 		, buttonCancelSettingsLabel: 'Matches: Settings: cancel button'
+		, userLabel: 'User'
 		, categoryLabel: 'Category'
 		, cupLabel: 'Configurable view / Filter: Cup'
 		, teamLabel: 'Team'
+		, showFutureMatchesLabel: 'Configurable view / Filter: Show future matches'
 		, showFinishedLabel: 'Configurable view / Filter: Show finished matches'
 	} );
 
 	return Backbone.View.extend( {
 
 		events: {
-			'change #settings-category-id': '_onCategoryChange'
+			'change #settings-user-id': '_onUserChange'
+			, 'change #settings-category-id': '_onCategoryChange'
 			, 'change #settings-cup-id': '_onCupChange'
 			, 'change #settings-team-id': '_onTeamChange'
+			, 'change #settings-show-future-matches': '_onShowFutureChange'
 			, 'change #settings-show-finished': '_onShowFinishedChange'
 			, 'click .matches-settings-save': '_onSettingsSave'
 			, 'click .matches-settings-cancel': '_onSettingsCancel'
@@ -37,6 +41,7 @@ define( function ( require ) {
 			this.categories = service.loadCategories();
 			this.cups = service.loadCups();
 			this.teams = service.loadTeams();
+			this.users = service.loadUsers();
 		},
 
 		render: function() {
@@ -46,9 +51,11 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				model: model
+				, users: this.users
 				, categories: this.categories
 				, cups: service.categoryCups( this.cups, categoryId )
 				, teams: service.categoryTeams( this.teams, categoryId )
+				, showFutureMatches: model.showFutureMatches
 				, showFinished: model.showFinished
 				, translator: translator
 			} ) );
@@ -62,6 +69,11 @@ define( function ( require ) {
 			this.$( '#settings-team-id' ).chosen( options );
 
 			return this;
+		},
+
+		_userChange: function( userId ) {
+			this.model.set( { userId: userId } );
+			this.render();
 		},
 
 		_categoryChange: function( categoryId ) {
@@ -79,8 +91,18 @@ define( function ( require ) {
 			this.render();
 		},
 
+		_showFutureChange: function( val ) {
+			this.model.set( { showFutureMatches: val } );
+		},
+
 		_showFinishedChange: function( val ) {
 			this.model.set( { showFinished: val } );
+		},
+
+		_onUserChange: function( evt ) {
+			evt.preventDefault();
+
+			this._userChange( $( evt.target ).val() );
 		},
 
 		_onCategoryChange: function( evt ) {
@@ -99,6 +121,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._teamChange( $( evt.target ).val() );
+		},
+
+		_onShowFutureChange: function( evt ) {
+			evt.preventDefault();
+
+			this._showFutureChange( this.$( '#settings-show-future-matches' ).is(':checked') );
 		},
 
 		_onShowFinishedChange: function( evt ) {

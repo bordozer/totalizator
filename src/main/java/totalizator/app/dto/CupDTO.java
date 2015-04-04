@@ -50,4 +50,9 @@ public class CupDTO {
 	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
 		this.showOnPortalPage = showOnPortalPage;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "#%d %s", cupId, cupName );
+	}
 }

@@ -22,8 +22,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		matchesTitleLabel: "Matches"
-		, matchEditLabel: "Admin / Matches / Edit entry"
+		matchEditLabel: "Admin / Matches / Edit entry"
 		, matchDeleteLabel: "Admin / Matches / Delete entry"
 
 		, newEntryEditFormTitle: "Admin / Matches / Edit: New entry edit form title"
@@ -48,29 +47,32 @@ define( function ( require ) {
 			, 'click .js-finish-selected-matches-button': '_onFinishSelectedMatchesClick'
 		},
 
-		initialize: function ( options ) {
-			this.render();
-		},
+		renderInnerView: function ( filter ) {
 
-		renderInnerView: function ( el, filter ) {
+			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
 
 			this.model.refresh( filter );
+		},
+
+		getIcon: function() {
+			return 'fa-futbol-o';
+		},
+
+		_renderCupMatches: function() {
+
+			var el = this.$( this.windowBodyContainerSelector );
 
 			el.html( templateList( {
 				model: this.model
 				, translator: translator
 			} ) );
 
-			this._renderCupMatches();
-
-			return this;
-		},
-
-		_renderCupMatches: function() {
 			var self = this;
 			this.model.forEach( function( match ) {
-				self.$( '.match-list-container' ).append( self._renderEntry( match ) );
+				el.append( self._renderEntry( match ) );
 			});
+
+			this.trigger( 'inner-view-rendered' );
 		},
 
 		_renderEntry: function ( model ) {

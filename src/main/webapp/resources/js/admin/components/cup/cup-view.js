@@ -6,7 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var TemplateList = require( 'text!./templates/cups-template.html' );
+	var WindowView = require( 'js/components/window/window-view' );
+
 	var TemplateEntry = require( 'text!./templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/cup-edit-template.html' );
 
@@ -15,21 +16,27 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		cupsTitle: "Cups"
+		title: "Cups"
+		, newCupLabel: "Admin / Cups: New cup"
 		, entryEditCategoryLabel: "Category"
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
 		, entryEditShowOnPortalPageLabel: "Admin / Cups / Edit: Show on portal page label"
 	} );
 
-	var CupsView = Backbone.View.extend( {
-
-		template: _.template( TemplateList ),
+	var CupsView = WindowView.extend( {
 
 		events: {
-			'click .add-entry-button': '_onAddClick'
+			'click .js-new-cup-button': '_onAddClick'
 		},
 
 		initialize: function ( options ) {
+
+			var menuItems =  [
+				{ selector: 'divider' }
+				,{ selector: 'js-new-cup-button', icon: 'fa fa-plus', link: '#', text: translator.newCupLabel }
+			];
+			this.addMenuItems( menuItems );
+
 			this.model.on( 'sync', this.render, this );
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
@@ -40,12 +47,9 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
+		renderBody: function () {
 
-			this.$el.html( this.template( {
-				model: this.model
-				, translator: translator
-			} ) );
+			this.$( this.windowBodyContainerSelector ).empty();
 
 			var filterByCategory = this.model.filterByCategory;
 			var self= this;
@@ -54,6 +58,8 @@ define( function ( require ) {
 					self.renderEntry( cup );
 				}
 			});
+
+			this.trigger( 'inner-view-rendered' );
 
 			return this.$el;
 		},
@@ -67,12 +73,20 @@ define( function ( require ) {
 
 			view.on( 'events:cups_changed', this._triggerCupsChanged, this );
 
-			var container = this.$( '.cups-container' );
+			var container = this.$( this.windowBodyContainerSelector );
 			if ( model.get( 'isEditState' ) ) {
 				return container.append( view.renderEdit().$el );
 			}
 
 			return container.append( view.render().$el );
+		},
+
+		getTitle: function () {
+			return translator.title;
+		},
+
+		getIcon: function () {
+			return 'fa-cubes';
 		},
 
 		_triggerCupsChanged: function() {

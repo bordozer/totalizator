@@ -7,9 +7,11 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		defaults: {
-			categoryId: 0
+			userId: 0
+			, categoryId: 0
 			, cupId: 0
 			, teamId: 0
+			, showFutureMatches: true
 			, showFinished: false
 		},
 
@@ -18,9 +20,11 @@ define( function ( require ) {
 
 		reset: function() {
 			this.set( {
-				categoryId: 0
+				userId: 0
+				, categoryId: 0
 				, cupId: 0
 				, teamId: 0
+				, showFutureMatches: true
 				, showFinished: false
 			} );
 		}

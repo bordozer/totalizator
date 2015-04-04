@@ -1,6 +1,20 @@
 <div class="row">
 
 	<div class="row">
+		<div class="col-lg-5 text-right"><%=translator.userLabel%></div>
+		<div class="col-lg-6">
+			<select class="chosen-select" id="settings-user-id">
+				<option value="0">&nbsp;</option>
+				<% _.each( users, function( user ) { %>
+				<option value="<%=user.userId%>" <%= model.userId == user.userId ? 'selected' : '' %> ><%=user.userName%></option>
+				<% }) %>
+			</select>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row">
 		<div class="col-lg-5 text-right"><%=translator.categoryLabel%></div>
 		<div class="col-lg-6">
 			<select class="chosen-select" id="settings-category-id">
@@ -37,6 +51,15 @@
 					<% }) %>
 				</select>
 			<% } %>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row">
+		<div class="col-lg-5 text-right"><%=translator.showFutureMatchesLabel%></div>
+		<div class="col-lg-6">
+			<input type="checkbox" id="settings-show-future-matches" name="settings-show-future-matches" value="true" <%= showFutureMatches ? "checked='checked'" : ''%> >
 		</div>
 	</div>
 

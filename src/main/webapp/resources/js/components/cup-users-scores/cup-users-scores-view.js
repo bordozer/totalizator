@@ -6,7 +6,9 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!./templates/cup-users-scores-template.html' ) );
+	var template = _.template( require( 'text!./templates/cup-users-scores-table-template.html' ) );
+
+	var WindowView = require( 'js/components/window/window-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -15,18 +17,32 @@ define( function ( require ) {
 		, pointsColumn: 'Cup users scores: Points'
 	} );
 
-	return Backbone.View.extend( {
+	return WindowView.extend( {
 
-		initialize: function( options ) {
-			this.listenTo( this.model, 'sync', this.render );
-			this.model.fetch( { cache: false} );
+		initialize: function ( options ) {
+			this.listenTo( this.model, 'sync', this._renderScores );
+			this.render();
 		},
 
-		render: function () {
+		renderBody: function () {
+			this.model.fetch( { cache: false } );
+		},
+
+		getTitle: function () {
+			return translator.title;
+		},
+
+		getIcon: function () {
+			return 'fa-bar-chart';
+		},
+
+		_renderScores: function () {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
-			this.$el.html( template( data ) );
+			this.setBody( template( data ) );
+
+			this.trigger( 'inner-view-rendered' );
 
 			return this;
 		}

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <jsp:useBean id="cupMatchesAndBetsModel" type="totalizator.app.controllers.ui.cups.CupMatchesAndBetsModel" scope="request"/>

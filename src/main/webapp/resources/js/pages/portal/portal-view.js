@@ -10,6 +10,9 @@ define( function ( require ) {
 
 	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
+	var MatchesModel = require( 'js/components/matches-and-bets/matches-and-bets-model' );
+	var MatchesView = require( 'js/components/matches-and-bets/matches-and-bets-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
@@ -19,6 +22,8 @@ define( function ( require ) {
 	var PortalPageView = Backbone.View.extend( {
 
 		initialize: function( options ) {
+			this.cupsToShow = options.options.cupsToShow;
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -29,10 +34,40 @@ define( function ( require ) {
 				translator: translator
 			 } ) );
 
-			var selectedCupId = 0;
-			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
+			this._renderNavigation();
+
+			this._renderMatches();
 
 			return this;
+		},
+
+		_renderNavigation: function() {
+			var selectedCupId = 0;
+			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
+		},
+
+		_renderMatches: function() {
+
+			var el = this.$( '.js-portal-page-container' );
+
+			_.each( this.cupsToShow, function( cup ) {
+
+				var container = $( '<div class="col-lg-5"></div>' );
+				el.append( container );
+
+				var model = new MatchesModel.MatchesModel();
+
+				var view = new MatchesView.MatchesView( {
+					model: model
+					, el: container
+					, settings: {
+						categoryId: cup.categoryId
+						, cupId: cup.cupId
+						, teamId: 0
+					}
+					, menuItems: []
+				} );
+			} );
 		}
 	} );
 

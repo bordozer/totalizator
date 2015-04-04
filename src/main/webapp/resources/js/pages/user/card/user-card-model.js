@@ -3,8 +3,10 @@ define( function ( require ) {
 	'use strict';
 
 	var Backbone = require( 'backbone' );
+	var _ = require( 'underscore' );
+	var $ = require( 'jquery' );
 
-	var PortalPageModel = Backbone.Model.extend( {
+	return Backbone.Model.extend( {
 
 		defaults: {
 			id: 0
@@ -14,9 +16,10 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.options = options.options;
-			this.url = '/rest/portal-page/';
+		},
+
+		url: function() {
+			return '/rest/user/' + this.options.userId + '/';
 		}
 	});
-
-	return { PortalPageModel: PortalPageModel };
 } );

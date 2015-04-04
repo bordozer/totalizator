@@ -23,13 +23,18 @@
 	</translation>
 
 	<translation>
-		<nerd>Configurable view / Filter: Show finished matches</nerd>
-		<ru><![CDATA[Показывать завершенные]]></ru>
+		<nerd>Configurable view / Filter: Show future matches</nerd>
+		<ru><![CDATA[Будущие]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Configurable view / Filter: Show finished matches</nerd>
+		<ru><![CDATA[Завершенные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Configurable view / Settings: Filter</nerd>
+		<ru><![CDATA[Фильтр]]></ru>
 	</translation>
 
 	<translation>

@@ -20,9 +20,9 @@ define( function( require ) {
 		var matchesModel = new Model.MatchesModel();
 
 		var menuItems = [
-			{ selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel }
+			{ selector: 'divider' }
+			, { selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel }
 			, { selector: 'js-finish-selected-matches-button', icon: 'fa fa-flag-checkered', link: '#', text: translator.finishSelectedMatchesLabel }
-			, { selector: 'divider' }
 		];
 
 		var matchesView = new View.MatchesView( {
