@@ -125,7 +125,7 @@ define( function ( require ) {
 
 				var userBet = this.model.get( 'bet' );
 
-				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
+//				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
 
@@ -175,7 +175,7 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-danger' );
 
-			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel ) );
+//			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
