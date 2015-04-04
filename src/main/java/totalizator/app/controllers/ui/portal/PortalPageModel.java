@@ -1,21 +1,18 @@
 package totalizator.app.controllers.ui.portal;
 
+import totalizator.app.controllers.ui.AbstractPageModel;
 import totalizator.app.dto.CupDTO;
+import totalizator.app.models.User;
 
 import java.util.List;
 
-public class PortalPageModel {
+public class PortalPageModel extends AbstractPageModel {
 
-	private String userName;
 	private List<CupDTO> cupsToShow;
 	private String cupsToShowJSON;
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName( final String userName ) {
-		this.userName = userName;
+	protected PortalPageModel( final User currentUser ) {
+		super( currentUser );
 	}
 
 	public List<CupDTO> getCupsToShow() {

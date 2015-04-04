@@ -3,7 +3,7 @@
 
 <jsp:useBean id="userCardModel" type="totalizator.app.controllers.ui.user.card.UserCardModel" scope="request"/>
 
-<tags:page userName="${userCardModel.userName}">
+<tags:page currentUser="${userCardModel.currentUser}">
 
 	<div class="js-user-card-container"></div>
 

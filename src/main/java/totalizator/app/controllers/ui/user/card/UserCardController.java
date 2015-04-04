@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import totalizator.app.models.User;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
@@ -24,20 +23,11 @@ public class UserCardController {
 
 	@ModelAttribute( MODEL_NAME )
 	public UserCardModel preparePagingModel( final Principal principal, final @PathVariable( "userId" ) int userId ) {
-
-		final UserCardModel model = new UserCardModel( userService.load( userId ) );
-
-		final User user = userService.findByLogin( principal.getName() );
-		model.setUserName( user.getUsername() );
-
-		return model;
+		return new UserCardModel( userService.load( userId ), userService.findByLogin( principal.getName() ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "" )
 	public String portalPage( final @ModelAttribute( MODEL_NAME ) UserCardModel model ) {
-
-
-
 		return VIEW;
 	}
 }

@@ -3,7 +3,7 @@
 
 <jsp:useBean id="cupMatchesAndBetsModel" type="totalizator.app.controllers.ui.cups.CupMatchesAndBetsModel" scope="request"/>
 
-<tags:page userName="${cupMatchesAndBetsModel.userName}">
+<tags:page currentUser="${cupMatchesAndBetsModel.currentUser}">
 
 	<div class="portal-page-container"></div>
 

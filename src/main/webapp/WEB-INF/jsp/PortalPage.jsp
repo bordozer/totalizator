@@ -3,7 +3,7 @@
 
 <jsp:useBean id="portalPageModel" type="totalizator.app.controllers.ui.portal.PortalPageModel" scope="request"/>
 
-<tags:page userName="${portalPageModel.userName}">
+<tags:page currentUser="${portalPageModel.currentUser}">
 
 	<div class="portal-page-container"></div>
 

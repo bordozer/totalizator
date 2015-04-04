@@ -1,17 +1,15 @@
 package totalizator.app.controllers.ui.cups;
 
-public class CupMatchesAndBetsModel {
+import totalizator.app.controllers.ui.AbstractPageModel;
+import totalizator.app.models.User;
 
-	private String userName;
+public class CupMatchesAndBetsModel extends AbstractPageModel {
+
 	private int cupId;
 	private String cupName;
 
-	public void setUserName( final String userName ) {
-		this.userName = userName;
-	}
-
-	public String getUserName() {
-		return userName;
+	protected CupMatchesAndBetsModel( final User user ) {
+		super( user );
 	}
 
 	public void setCupId( final int cupId ) {

@@ -3,7 +3,7 @@
 
 <jsp:useBean id="adminModel" type="totalizator.app.controllers.ui.admin.AdminModel" scope="request"/>
 
-<tags:page userName="${adminModel.userName}">
+<tags:page currentUser="${adminModel.currentUser}">
 
 	<div class="translations-container"></div>
 	<script type="text/javascript">

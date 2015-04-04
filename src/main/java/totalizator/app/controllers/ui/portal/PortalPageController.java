@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import totalizator.app.models.User;
 import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
 import totalizator.config.root.SecurityConfig;
@@ -29,16 +28,13 @@ public class PortalPageController {
 	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
-	public PortalPageModel preparePagingModel() {
-		return new PortalPageModel();
+	public PortalPageModel preparePagingModel( final Principal principal ) {
+		return new PortalPageModel( userService.findByLogin( principal.getName() ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "" )
-	public String portalPage( final Principal principal, final @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
+	public String portalPage( final @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
 
-		final User user = userService.findByLogin( principal.getName() );
-
-		model.setUserName( user.getUsername() );
 		model.setCupsToShow( Lists.transform( cupService.portalPageCups(), CupService.CUP_DTO_FUNCTION ) );
 
 		model.setCupsToShowJSON( new Gson().toJson( model.getCupsToShow() ) );

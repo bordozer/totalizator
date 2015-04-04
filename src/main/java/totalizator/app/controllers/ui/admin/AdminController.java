@@ -25,13 +25,7 @@ public class AdminController {
 
 	@ModelAttribute( MODEL_NAME )
 	public AdminModel preparePagingModel( final Principal principal ) {
-		final AdminModel model = new AdminModel();
-
-		final User user = userService.findByLogin( principal.getName() );
-
-		model.setUserName( user.getUsername() );
-
-		return model;
+		return new AdminModel( userService.findByLogin( principal.getName() ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
