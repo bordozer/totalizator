@@ -39,7 +39,9 @@ public class MatchesAndBetsController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
-		final List<MatchBetDTO> matchBetDTOs = getMatchBetDTOs( principal, matchService.loadAll( dto ) );
+		final User user = userService.findByLogin( principal.getName() );
+
+		final List<MatchBetDTO> matchBetDTOs = getMatchBetDTOs( matchService.loadAll( dto ), user );
 
 		if ( dto.getUserId() > 0 ) {
 			CollectionUtils.filter( matchBetDTOs, new Predicate<MatchBetDTO>() {
@@ -58,13 +60,6 @@ public class MatchesAndBetsController {
 
 		return matchBetDTOs;
 	}
-
-	/*@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/open/", produces = APPLICATION_JSON_VALUE )
-	public List<MatchBetDTO> openMatches( final Principal principal ) {
-		return getMatchBetDTOs( principal, matchService.loadOpen() );
-	}*/
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
@@ -107,8 +102,7 @@ public class MatchesAndBetsController {
 		matchBetsService.delete( matchBetId );
 	}
 
-	private List<MatchBetDTO> getMatchBetDTOs( final Principal principal, final List<Match> matches ) {
-		final User user = userService.findByLogin( principal.getName() );
+	private List<MatchBetDTO> getMatchBetDTOs( final List<Match> matches, final User user ) {
 
 		final List<MatchBetDTO> result = newArrayList();
 		for ( final Match match : matches ) {
