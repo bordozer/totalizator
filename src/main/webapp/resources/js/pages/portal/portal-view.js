@@ -23,6 +23,7 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.cupsToShow = options.options.cupsToShow;
+			this.currentUser = options.options.currentUser;
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -48,6 +49,8 @@ define( function ( require ) {
 
 		_renderMatches: function() {
 
+			var currentUser = this.currentUser;
+
 			var el = this.$( '.js-portal-page-container' );
 
 			_.each( this.cupsToShow, function( cup ) {
@@ -66,6 +69,7 @@ define( function ( require ) {
 						, teamId: 0
 					}
 					, menuItems: []
+					, currentUser: currentUser
 				} );
 			} );
 		}

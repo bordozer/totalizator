@@ -25,6 +25,8 @@ define( function ( require ) {
 	var CupPageView = Backbone.View.extend( {
 
 		initialize: function( options ) {
+			this.currentUser = options.options.currentUser;
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -63,6 +65,8 @@ define( function ( require ) {
 
 		_renderCupMatches: function() {
 
+			var currentUser = this.currentUser;
+
 			var el = this.$( '.js-cup-matches-and-bets' );
 
 			var container = $( '<div></div>' );
@@ -81,6 +85,7 @@ define( function ( require ) {
 					, teamId: 0
 				}
 				, menuItems: []
+				, currentUser: currentUser
 			} );
 		},
 

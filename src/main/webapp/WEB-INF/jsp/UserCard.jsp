@@ -22,7 +22,9 @@
 
 			var userId = ${userCardModel.user.id};
 
-			var pageView = new Page( { el: $( '.js-user-card-container' ), bodyRenderer: userCard, breadcrumbs: breadcrumbs, options: { userId: userId } } );
+			var currentUser = { userId: ${userCardModel.currentUser.id}, userName: '${userCardModel.currentUser.username}' };
+
+			var pageView = new Page( { el: $( '.js-user-card-container' ), bodyRenderer: userCard, breadcrumbs: breadcrumbs, options: { userId: userId, currentUser: currentUser } } );
 			pageView.render();
 		} );
 

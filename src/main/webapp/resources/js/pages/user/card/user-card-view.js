@@ -23,6 +23,7 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.userId = options.options.userId;
+			this.currentUser = options.options.currentUser;
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -53,6 +54,7 @@ define( function ( require ) {
 		_renderUserBets: function() {
 
 			var userId = this.userId;
+			var currentUser = this.currentUser;
 
 			var el = this.$( '.js-user-bets' );
 
@@ -76,6 +78,7 @@ define( function ( require ) {
 						, showFinished: true
 					}
 					, menuItems: []
+					, currentUser: currentUser
 				} );
 			});
 		}

@@ -38,6 +38,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.options = options;
 
 			this.settingsModel = new FilterModel( options.settings );
 			this.settingsView = new FilterView( {

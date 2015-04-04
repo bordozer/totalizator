@@ -21,7 +21,9 @@
 
 			var cupsToShow = ${portalPageModel.cupsToShowJSON};
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: { cupsToShow: cupsToShow } } );
+			var currentUser = { userId: ${portalPageModel.currentUser.id}, userName: '${portalPageModel.currentUser.username}' };
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: { cupsToShow: cupsToShow, currentUser: currentUser } } );
 			pageView.render();
 		} );
 	</script>

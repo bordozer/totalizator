@@ -24,7 +24,9 @@
 				, { link: '#', title: translator.title }
 			];
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId } } );
+			var currentUser = { userId: ${cupMatchesAndBetsModel.currentUser.id}, userName: '${cupMatchesAndBetsModel.currentUser.username}' };
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
 			pageView.render();
 		} );
 	</script>

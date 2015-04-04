@@ -39,6 +39,8 @@ define( function ( require ) {
 		renderInnerView: function ( filter ) {
 			this.filter = filter;
 
+			this.currentUser = this.options.currentUser;
+
 			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
 			this.model.refresh( filter );
 		},
@@ -68,6 +70,7 @@ define( function ( require ) {
 				, cups: this.cups
 				, teams: this.teams
 				, filter: this.filter
+				, currentUser: this.currentUser
 			} );
 
 			return el.append( view.render().$el );
@@ -91,6 +94,7 @@ define( function ( require ) {
 			this.teams = options.teams;
 
 			this.filter = options.filter;
+			this.currentUser = options.currentUser;
 
 			this.model.on( 'sync', this.render, this );
 		},
@@ -114,6 +118,10 @@ define( function ( require ) {
 			var match = this.model.get( 'match' );
 			if ( match.matchFinished ) {
 				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', translator.footer_MatchFinishedLabel ) );
+			}
+
+			if ( this.filter.userId && this.currentUser.userId != this.filter.userId ) {
+				console.log( this.currentUser.userId, this.filter.userId );
 			}
 
 			var bet = this.model.get( 'bet' );
