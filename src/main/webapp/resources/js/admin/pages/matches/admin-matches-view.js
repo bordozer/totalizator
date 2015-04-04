@@ -58,6 +58,10 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
+		getTitle: function() {
+			return this.getTitleHint();
+		},
+
 		_renderCupMatches: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
