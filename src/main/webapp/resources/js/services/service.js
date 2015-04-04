@@ -94,6 +94,12 @@ define( function ( require ) {
 			return result;
 		},
 
+		getUser: function( users, userId ) {
+			return _.find( users, function( user ) {
+				return user.userId == userId;
+			} );
+		},
+
 		getCategory: function( categories, categoryId ) {
 			return _.find( categories, function( category ) {
 				return category.categoryId == categoryId;

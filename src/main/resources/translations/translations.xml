@@ -78,6 +78,16 @@
 	</translation>
 
 	<translation>
+		<nerd>yes</nerd>
+		<ru><![CDATA[да]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>no</nerd>
+		<ru><![CDATA[нет]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

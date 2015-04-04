@@ -33,6 +33,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Portal page / Matches: All users label</nerd>
+		<ru><![CDATA[Все пользователи]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Portal page / Matches / Menu: StandOff history</nerd>
 		<ru><![CDATA[История противостояний]]></ru>
 	</translation>
@@ -43,13 +48,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Configurable view / Finished matches are shown</nerd>
+		<ru><![CDATA[завершенные]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Configurable view / Future matches are shown</nerd>
+		<ru><![CDATA[будущие]]></ru>
 	</translation>
 
 	<translation>
