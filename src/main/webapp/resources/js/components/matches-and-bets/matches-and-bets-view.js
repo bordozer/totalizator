@@ -37,6 +37,8 @@ define( function ( require ) {
 	var MatchesView = ConfigurableView.extend( {
 
 		renderInnerView: function ( filter ) {
+			this.filter = filter;
+
 			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
 			this.model.refresh( filter );
 		},
@@ -65,6 +67,7 @@ define( function ( require ) {
 				, categories: this.categories
 				, cups: this.cups
 				, teams: this.teams
+				, filter: this.filter
 			} );
 
 			return el.append( view.render().$el );
@@ -86,6 +89,8 @@ define( function ( require ) {
 			this.categories = options.categories;
 			this.cups = options.cups;
 			this.teams = options.teams;
+
+			this.filter = options.filter;
 
 			this.model.on( 'sync', this.render, this );
 		},
@@ -124,6 +129,8 @@ define( function ( require ) {
 
 				return this;
 			}
+
+			var betUserId = bet.user.userId;
 
 			this._setMatchContainerClass( 'panel-success' );
 
