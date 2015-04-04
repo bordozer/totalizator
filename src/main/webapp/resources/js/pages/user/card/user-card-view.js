@@ -24,7 +24,8 @@ define( function ( require ) {
 		initialize: function( options ) {
 			this.userId = options.options.userId;
 
-			this.render();
+			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
@@ -46,31 +47,37 @@ define( function ( require ) {
 		},
 
 		_renderUserStatistics: function() {
-			this.$( '.js-user-statistics' ).html( "User's statistics are going to be here..." );
+			this.$( '.js-user-statistics' ).html( "User's statistics are going to be here..." ); // TODO: implement as separate component
 		},
 
 		_renderUserBets: function() {
 
+			var userId = this.userId;
+
 			var el = this.$( '.js-user-bets' );
 
-			var container = $( '<div class="col-lg-5"></div>' );
-			el.append( container );
+			var cupsToShow = this.model.get( 'cupsToShow' );
 
-			var model = new MatchesModel.MatchesModel();
-			// TODO: SET CORRECT CATEGORY/CUP/TEAM
-			var view = new MatchesView.MatchesView( {
-				model: model
-				, el: container
-				, settings: {
-					userId: this.userId
-					, categoryId: 1
-					, cupId: 2
-					, teamId: 0
-					, showFutureMatches: false
-					, showFinished: true
-				}
-				, menuItems: []
-			} );
+			_.each( cupsToShow, function( cup ) {
+
+				var container = $( '<div class="col-lg-5"></div>' );
+				el.append( container );
+
+				var model = new MatchesModel.MatchesModel();
+				var view = new MatchesView.MatchesView( {
+					model: model
+					, el: container
+					, settings: {
+						userId: userId
+						, categoryId: cup.categoryId
+						, cupId: cup.cupId
+						, teamId: 0
+						, showFutureMatches: false
+						, showFinished: true
+					}
+					, menuItems: []
+				} );
+			});
 		}
 	});
 } );

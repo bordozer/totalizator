@@ -8,18 +8,18 @@ define( function ( require ) {
 
 	return Backbone.Model.extend( {
 
+		userId: 0,
+
 		defaults: {
-			id: 0
-			, userId: 0
-			, userName: ''
+			cupsToShow: []
 		},
 
 		initialize: function ( options ) {
-			this.options = options.options;
+			this.userId = options.options.userId;
 		},
 
 		url: function() {
-			return '/rest/user/' + this.options.userId + '/';
+			return '/rest/users/' + this.userId + '/card/';
 		}
 	});
 } );
