@@ -39,11 +39,15 @@ public class MatchesAndBetsController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
-		final User user = userService.findByLogin( principal.getName() );
+		final int userId = dto.getUserId();
 
-		final List<MatchBetDTO> matchBetDTOs = getMatchBetDTOs( matchService.loadAll( dto ), user );
+		final User user = userId > 0 ? userService.load( userId ) : userService.findByLogin( principal.getName() );
+		final List<Match> matches = matchService.loadAll( dto );
 
-		if ( dto.getUserId() > 0 ) {
+		final List<MatchBetDTO> matchBetDTOs = getMatchBetDTOs( matches, user );
+
+		if ( userId > 0 ) {
+
 			CollectionUtils.filter( matchBetDTOs, new Predicate<MatchBetDTO>() {
 				@Override
 				public boolean evaluate( final MatchBetDTO matchBetDTO ) {
@@ -53,7 +57,7 @@ public class MatchesAndBetsController {
 						return false;
 					}
 
-					return bet.getUser().getUserId() == dto.getUserId();
+					return bet.getUser().getUserId() == userId;
 				}
 			} );
 		}
