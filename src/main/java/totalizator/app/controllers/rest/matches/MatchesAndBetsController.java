@@ -74,6 +74,11 @@ public class MatchesAndBetsController {
 
 		final Match match = matchService.load( matchId );
 		final MatchBet existingBet = matchBetsService.load( user, match );
+
+		if ( ! existingBet.getUser().equals( user ) ) {
+			throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), user ) );
+		}
+
 		if ( existingBet != null ) {
 			existingBet.setBetScore1( score1 );
 			existingBet.setBetScore2( score2 );
