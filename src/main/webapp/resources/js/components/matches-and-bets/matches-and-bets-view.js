@@ -199,29 +199,34 @@ define( function ( require ) {
 			var menuItems = [
 				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '#', text: translator.actionStandOffHistory }
 				, { selector: 'divider' }
+				, { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '#', text: translator.actionAllMatchBet }
 			];
+
+			var match = this.model.get( 'match' );
 
 			var bet = this.model.get( 'bet' );
 			var isBetEditingMode = this.model.isBetMode();
 
-			if ( isBetEditingMode ) {
-				menuItems.push( { selector: 'js-menu-match-bet-save', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetSave } );
-				menuItems.push( { selector: 'js-menu-match-bet-cancel-editing', icon: 'fa fa-close', link: '#', text: translator.actionCancelBetEditing} );
-			}
+			if ( ! match.matchFinished ) {
 
-			if ( bet == null ) {
-				if ( this.model.isBettingAllowed() && !isBetEditingMode ) {
-					menuItems.push( { selector: 'js-menu-match-bet-add', icon: 'fa fa-plus', link: '#', text: translator.actionMatchBetAdd } );
+				menuItems.push( { selector: 'divider' } );
+
+				if ( isBetEditingMode ) {
+					menuItems.push( { selector: 'js-menu-match-bet-save', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetSave } );
+					menuItems.push( { selector: 'js-menu-match-bet-cancel-editing', icon: 'fa fa-close', link: '#', text: translator.actionCancelBetEditing} );
 				}
-			} else {
-				if ( ! isBetEditingMode ) {
-					menuItems.push( { selector: 'js-menu-match-bet-edit', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetEdit } );
-					menuItems.push( { selector: 'js-menu-match-bet-delete', icon: 'fa fa-close', link: '#', text: translator.actionMatchBetDelete } );
+
+				if ( bet == null ) {
+					if ( this.model.isBettingAllowed() && !isBetEditingMode ) {
+						menuItems.push( { selector: 'js-menu-match-bet-add', icon: 'fa fa-plus', link: '#', text: translator.actionMatchBetAdd } );
+					}
+				} else {
+					if ( ! isBetEditingMode ) {
+						menuItems.push( { selector: 'js-menu-match-bet-edit', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetEdit } );
+						menuItems.push( { selector: 'js-menu-match-bet-delete', icon: 'fa fa-close', link: '#', text: translator.actionMatchBetDelete } );
+					}
 				}
 			}
-
-			menuItems.push( { selector: 'divider' } );
-			menuItems.push( { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '#', text: translator.actionAllMatchBet } );
 
 			mainMenu( menuItems, 'fa-list', this.$( '.js-match-drop-down-menu') );
 		},
