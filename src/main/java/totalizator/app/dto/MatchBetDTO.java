@@ -7,6 +7,7 @@ public class MatchBetDTO {
 	private MatchDTO match;
 	private BetDTO bet;
 	private boolean bettingAllowed;
+	private int points;
 
 	public MatchBetDTO() {
 	}
@@ -14,12 +15,6 @@ public class MatchBetDTO {
 	public MatchBetDTO( final MatchDTO match ) {
 		this.matchId = match.getMatchId();
 		this.match = match;
-	}
-
-	public MatchBetDTO( final MatchDTO match, final BetDTO bet ) {
-		this.matchId = match.getMatchId();
-		this.match = match;
-		this.bet = bet;
 	}
 
 	public int getMatchId() {
@@ -52,6 +47,14 @@ public class MatchBetDTO {
 
 	public void setBettingAllowed( final boolean bettingAllowed ) {
 		this.bettingAllowed = bettingAllowed;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints( final int points ) {
+		this.points = points;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.beans.UserPoints;
 import totalizator.app.models.Cup;
+import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.MatchBetsService;
@@ -25,6 +26,11 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 	@Autowired
 	private MatchBetsService matchBetsService;
+
+	@Override
+	public int getUsersScores( final MatchBet matchBet ) {
+		return ScoreCalculationStrategy.getInstance().getPoints(  matchBet  );
+	}
 
 	@Override
 	public List<UserPoints> getUsersScores( final Cup cup ) {

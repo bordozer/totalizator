@@ -13,6 +13,8 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -50,6 +52,12 @@ public class MatchBetsRestController {
 		for ( final MatchBet matchBet : matchBets ) {
 			matchBetsDTOs.add( dtoService.getMatchBetForMatch( match, matchBet.getUser() ) );
 		}
+		Collections.sort( matchBetsDTOs, new Comparator<MatchBetDTO>() {
+			@Override
+			public int compare( final MatchBetDTO o1, final MatchBetDTO o2 ) {
+				return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
+			}
+		} );
 
 		final MatchBetsDTO result = new MatchBetsDTO();
 

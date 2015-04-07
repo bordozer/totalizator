@@ -39,7 +39,7 @@
 							<td class="text-center"><%=translator.userLabel%></td>
 							<td class="text-center"><img src="<%=team1.teamLogo%>" title="<%=team1.teamName%>" style="width: 32px;"></td>
 							<td class="text-center"><img src="<%=team2.teamLogo%>" title="<%=team2.teamName%>" style="width: 32px;"></td>
-							<td class="text-center"></td>
+							<td class="text-center"><%=translator.userPointsLabel%></td>
 						</tr>
 					</thead>
 
@@ -50,6 +50,7 @@
 								<td><%-matchBet.bet.user.userName%></td>
 								<td class="text-center" width="40"><%-matchBet.bet.score1%></td>
 								<td class="text-center" width="40"><%-matchBet.bet.score2%></td>
+								<td class="text-center" width="40"><%-matchBet.points%></td>
 							</tr>
 						<% })%>
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.dto.*;
 import totalizator.app.models.*;
+import totalizator.app.services.score.CupScoresService;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class DTOServiceImpl implements DTOService {
 
 	@Autowired
 	private TeamService teamService;
+
+	@Autowired
+	private CupScoresService cupScoresService;
 
 	@Override
 	public UserDTO transformUser( final User user ) {
@@ -220,6 +224,7 @@ public class DTOServiceImpl implements DTOService {
 				final BetDTO betDTO = transformMatchBet( matchBet, user );
 
 				matchBetDTO.setBet( betDTO );
+				matchBetDTO.setPoints( cupScoresService.getUsersScores( matchBet ) );
 
 				return matchBetDTO;
 			}

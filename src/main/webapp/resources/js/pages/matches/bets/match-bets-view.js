@@ -15,6 +15,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Match best title"
 		, userLabel: "User"
+		, userPointsLabel: "Points"
 	} );
 
 	var MatchBetsView = Backbone.View.extend( {
