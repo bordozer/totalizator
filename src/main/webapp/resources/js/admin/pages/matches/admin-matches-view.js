@@ -172,7 +172,6 @@ define( function ( require ) {
 
 		renderInfo: function () {
 			var modelJSON = this.model.toJSON();
-			console.log( modelJSON );
 
 			var matchResults = service.matchResults( modelJSON.team1.teamId, modelJSON.score1, modelJSON.team2.teamId, modelJSON.score2 );
 
