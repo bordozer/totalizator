@@ -10,10 +10,7 @@ import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-import totalizator.app.services.MatchBetsService;
-import totalizator.app.services.MatchService;
-import totalizator.app.services.TeamService;
-import totalizator.app.services.UserService;
+import totalizator.app.services.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -34,6 +31,9 @@ public class MatchBetsRestController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bets/", produces = APPLICATION_JSON_VALUE )
@@ -46,8 +46,8 @@ public class MatchBetsRestController {
 		final Team team1 = match.getTeam1();
 		final Team team2 = match.getTeam2();
 
-		final TeamDTO team1DTO = TeamService.TEAM_TO_TEAM_DTO_FUNCTION.apply( team1 );
-		final TeamDTO team2DTO = TeamService.TEAM_TO_TEAM_DTO_FUNCTION.apply( team2 );
+		final TeamDTO team1DTO = dtoService.transform( team1 );
+		final TeamDTO team2DTO = dtoService.transform( team2 );
 
 		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
 

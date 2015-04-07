@@ -1,14 +1,14 @@
 package totalizator.app.controllers.rest.matches;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.*;
+import totalizator.app.dto.BetDTO;
+import totalizator.app.dto.MatchBetDTO;
+import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
@@ -20,7 +20,6 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -46,7 +45,7 @@ public class MatchesAndBetsRestController {
 		final User user = userId > 0 ? userService.load( userId ) : userService.findByLogin( principal.getName() );
 		final List<Match> matches = matchService.loadAll( dto );
 
-		final List<MatchBetDTO> matchBetDTOs = getMatchBetDTOs( matches, user );
+		final List<MatchBetDTO> matchBetDTOs = matchBetsService.transform( matches, user );
 
 		if ( userId > 0 ) {
 
@@ -112,9 +111,5 @@ public class MatchesAndBetsRestController {
 		}
 
 		matchBetsService.delete( matchBetId );
-	}
-
-	private List<MatchBetDTO> getMatchBetDTOs( final List<Match> matches, final User user ) {
-		return matchBetsService.transform( matches, user );
 	}
 }

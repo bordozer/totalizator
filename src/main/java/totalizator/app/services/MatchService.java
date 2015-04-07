@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface MatchService extends GenericService<Match>{
 
-//	List<Match> loadOpen();
-
 	List<Match> loadAll( final Cup cup );
 
 	List<Match> loadAll( final MatchesBetSettingsDTO dto );

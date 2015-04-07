@@ -3,9 +3,10 @@ define( function ( require ) {
 	'use strict';
 
 	var Users = require( 'js/services/users-model' );
-	var Categories = require( 'js/admin/components/category/category-model' );
-	var Cups = require( 'js/admin/components/cup/cup-model' );
-	var Teams = require( 'js/admin/components/team/team-model' );
+
+	var Categories = require( 'js/admin/components/category/category-model' ); 	// TODO: using admin functionality!
+	var Cups = require( 'js/admin/components/cup/cup-model' );					// TODO: using admin functionality!
+	var Teams = require( 'js/admin/components/team/team-model' );				// TODO: using admin functionality!
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -83,12 +84,12 @@ define( function ( require ) {
 		},
 
 		loadTeams: function() {
-			var cups = new Teams.TeamsModel( [], {} );
-			cups.fetch( { cache: false, async: false } );
+			var teams = new Teams.TeamsModel( [], {} );
+			teams.fetch( { cache: false, async: false } );
 
 			var result = [];
-			cups.forEach( function( team ) {
-				result.push( { teamId: team.get( 'teamId' ), categoryId: team.get( 'categoryId' ), teamName: team.get( 'teamName' ) } );
+			teams.forEach( function( team ) {
+				result.push( { teamId: team.get( 'teamId' ), categoryId: team.get( 'categoryId' ), teamName: team.get( 'teamName' ), teamLogo: team.get( 'teamLogo' ) } );
 			});
 
 			return result;

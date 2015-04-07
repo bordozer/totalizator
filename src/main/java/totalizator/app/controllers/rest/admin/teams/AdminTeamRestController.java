@@ -11,6 +11,7 @@ import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 import totalizator.app.services.CategoryService;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamLogoService;
 import totalizator.app.services.TeamService;
 
@@ -32,13 +33,16 @@ public class AdminTeamRestController {
 	@Autowired
 	private TeamLogoService teamLogoService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	private static final Logger LOGGER = Logger.getLogger( AdminTeamRestController.class );
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<TeamDTO> entries() {
-		return Lists.transform( teamService.loadAll(), TeamService.TEAM_TO_TEAM_DTO_FUNCTION );
+		return dtoService.transform( teamService.loadAll() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

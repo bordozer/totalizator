@@ -243,16 +243,20 @@ define( function ( require ) {
 
 			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
 
+			var team1 = service.getTeam( this.teams, match.team1Id );
+			var team2 = service.getTeam( this.teams, match.team2Id );
+			console.log( team1 );
+
 			return {
 				matchId: match.matchId
-				, team1Name: service.getTeam( this.teams, match.team1Id ).teamName
-				, team2Name: service.getTeam( this.teams, match.team2Id ).teamName
+				, team1Name: team1.teamName
+				, team2Name: team2.teamName
 				, style1: winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : ''
 				, style2: winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : ''
 				, score1: match.score1
 				, score2: match.score2
-				, team1Logo: match.team1Logo
-				, team2Logo: match.team2Logo
+				, team1Logo: team1.teamLogo
+				, team2Logo: team2.teamLogo
 				, beginningTime: dateTimeService.formatDateDisplay( match.beginningTime )
 				, matchFinished: match.matchFinished
 				, translator: translator

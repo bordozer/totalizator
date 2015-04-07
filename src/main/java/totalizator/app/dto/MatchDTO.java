@@ -17,11 +17,9 @@ public class MatchDTO {
 
 	private int team1Id;
 	private int score1;
-	private String team1Logo;
 
 	private int team2Id;
 	private int score2;
-	private String team2Logo;
 
 	private Date beginningTime;
 	private boolean matchFinished;
@@ -66,14 +64,6 @@ public class MatchDTO {
 		this.score1 = score1;
 	}
 
-	public String getTeam1Logo() {
-		return team1Logo;
-	}
-
-	public void setTeam1Logo( final String team1Logo ) {
-		this.team1Logo = team1Logo;
-	}
-
 	public int getTeam2Id() {
 		return team2Id;
 	}
@@ -88,14 +78,6 @@ public class MatchDTO {
 
 	public void setScore2( final int score2 ) {
 		this.score2 = score2;
-	}
-
-	public String getTeam2Logo() {
-		return team2Logo;
-	}
-
-	public void setTeam2Logo( final String team2Logo ) {
-		this.team2Logo = team2Logo;
 	}
 
 	@JsonSerialize(using = DateTimeSerializer.class)
