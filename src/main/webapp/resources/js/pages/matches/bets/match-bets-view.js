@@ -33,8 +33,7 @@ define( function ( require ) {
 			var match = this.model.toJSON().match;
 			var matchResults = service.matchResultsByMatch( match );
 
-			var data = _.extend( {}, this.model.toJSON(), { matchResults: matchResults, translator: translator } );
-			console.log( data );
+			var data = _.extend( {}, this.model.toJSON(), { matchResults: matchResults, currentUser: this.currentUser, translator: translator } );
 
 			this.$el.html( template( data ) );
 
