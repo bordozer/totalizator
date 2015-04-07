@@ -16,17 +16,7 @@ define( function ( require ) {
 	return {
 
 		matchResultsByMatch: function( match ) {
-
-			var team1 = match.team1;
-			var team2 = match.team2;
-
-			var team1Id = team1.teamId;
-			var team2Id = team2.teamId;
-
-			var score1 = match.score1;
-			var score2 = match.score2;
-
-			return this.matchResults( team1Id, score1, team2Id, score2 );
+			return this.matchResults( match.team1.teamId, match.score1, match.team2.teamId, match.score2 );
 		},
 
 		matchResults: function( team1Id, score1, team2Id, score2 ) {
