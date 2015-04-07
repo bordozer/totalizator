@@ -196,13 +196,14 @@ define( function ( require ) {
 		},
 
 		_renderDropDownMenuItems: function() {
-			var menuItems = [
-				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '#', text: translator.actionStandOffHistory }
-				, { selector: 'divider' }
-				, { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '#', text: translator.actionAllMatchBet }
-			];
 
 			var match = this.model.get( 'match' );
+
+			var menuItems = [
+				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '/totalizator/teams/' + match.team1Id + '/vs/' + match.team2Id + '/standoff/', text: translator.actionStandOffHistory }
+				, { selector: 'divider' }
+				, { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '/totalizator/matches/' + match.matchId + '/bets/', text: translator.actionAllMatchBet }
+			];
 
 			var bet = this.model.get( 'bet' );
 			var isBetEditingMode = this.model.isBetMode();
