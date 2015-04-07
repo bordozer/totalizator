@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 public abstract class AbstractDataInitializer {
 
@@ -123,6 +125,8 @@ public abstract class AbstractDataInitializer {
 				bet.setBetTime( dateTimeService.offset( match.getBeginningTime(), Calendar.HOUR, getRandomInt( 1, 12 ) ) );
 
 				session.persist( bet );
+
+				iterator.remove();
 
 				i++;
 
