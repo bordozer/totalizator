@@ -1,7 +1,5 @@
 package totalizator.app.controllers.rest.admin.cups;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

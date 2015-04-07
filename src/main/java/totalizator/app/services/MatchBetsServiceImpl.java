@@ -1,17 +1,11 @@
 package totalizator.app.services;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.MatchBetRepository;
-import totalizator.app.dto.BetDTO;
-import totalizator.app.dto.MatchBetDTO;
-import totalizator.app.dto.MatchDTO;
-import totalizator.app.dto.UserDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
@@ -113,57 +107,5 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 		final Date bettingIsAllowedTill = dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN );
 		return dateTimeService.getNow().getTime() < bettingIsAllowedTill.getTime();
-	}
-
-	@Override
-	public List<MatchBetDTO> transform( final List<Match> matches, final User user ) {
-		return Lists.transform( matches, new Function<Match, MatchBetDTO>() {
-			@Override
-			public MatchBetDTO apply( final Match match ) {
-				return transform( match, user );
-			}
-		} );
-	}
-
-	@Override
-	public MatchBetDTO transform( final Match match, final User user ) {
-
-		final Function<Match, MatchBetDTO> function = new Function<Match, MatchBetDTO>() {
-
-			@Override
-			public MatchBetDTO apply( final Match match ) {
-				final MatchDTO matchDTO = dtoService.transformMatch( match );
-
-				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-				matchBetDTO.setBettingAllowed( isBettingAllowed( match, user ) );
-
-				final MatchBet matchBet = load( user, match );
-
-				if ( matchBet == null ) {
-					return matchBetDTO;
-				}
-
-				final BetDTO betDTO = getBetDTO( matchBet, user );
-
-				matchBetDTO.setBet( betDTO );
-
-				return matchBetDTO;
-			}
-		};
-
-		return function.apply( match );
-	}
-
-	@Override
-	public BetDTO getBetDTO( final MatchBet matchBet, final User user ) {
-
-		final MatchDTO matchDTO = dtoService.transformMatch( matchBet.getMatch() );
-
-		final BetDTO betDTO = new BetDTO( matchDTO, dtoService.transformUser( user ) );
-		betDTO.setMatchBetId( matchBet.getId() );
-		betDTO.setScore1( matchBet.getBetScore1() );
-		betDTO.setScore2( matchBet.getBetScore2() );
-
-		return betDTO;
 	}
 }

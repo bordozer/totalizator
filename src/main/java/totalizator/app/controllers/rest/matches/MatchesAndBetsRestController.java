@@ -12,6 +12,7 @@ import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.UserService;
@@ -35,6 +36,9 @@ public class MatchesAndBetsRestController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -45,7 +49,7 @@ public class MatchesAndBetsRestController {
 		final User user = userId > 0 ? userService.load( userId ) : userService.findByLogin( principal.getName() );
 		final List<Match> matches = matchService.loadAll( dto );
 
-		final List<MatchBetDTO> matchBetDTOs = matchBetsService.transform( matches, user );
+		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, user );
 
 		if ( userId > 0 ) {
 
@@ -86,7 +90,7 @@ public class MatchesAndBetsRestController {
 			existingBet.setBetScore2( score2 );
 			matchBetsService.save( existingBet );
 
-			return matchBetsService.getBetDTO( existingBet, user );
+			return dtoService.transformMatchBet( existingBet, user );
 		}
 
 		final MatchBet matchBet = new MatchBet();
@@ -98,7 +102,7 @@ public class MatchesAndBetsRestController {
 
 		final MatchBet result = matchBetsService.save( matchBet );
 
-		return matchBetsService.getBetDTO( result, user );
+		return dtoService.transformMatchBet( result, user );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

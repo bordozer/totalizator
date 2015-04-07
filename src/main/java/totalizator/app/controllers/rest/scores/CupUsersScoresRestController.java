@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.UserDTO;
+import totalizator.app.beans.UserPoints;
 import totalizator.app.models.Cup;
 import totalizator.app.models.User;
-import totalizator.app.beans.UserPoints;
-import totalizator.app.services.DTOService;
-import totalizator.app.services.score.CupScoresService;
 import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.score.CupScoresService;
 
 import java.security.Principal;
 import java.util.List;

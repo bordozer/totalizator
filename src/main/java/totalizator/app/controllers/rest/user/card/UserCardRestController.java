@@ -1,6 +1,5 @@
 package totalizator.app.controllers.rest.user.card;
 
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,6 @@ import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
-import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.UserService;

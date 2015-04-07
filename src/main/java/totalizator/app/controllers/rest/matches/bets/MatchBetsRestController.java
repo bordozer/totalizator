@@ -10,7 +10,10 @@ import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-import totalizator.app.services.*;
+import totalizator.app.services.DTOService;
+import totalizator.app.services.MatchBetsService;
+import totalizator.app.services.MatchService;
+import totalizator.app.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
@@ -53,7 +56,7 @@ public class MatchBetsRestController {
 
 		final List<MatchBet> matchBets = matchBetsService.loadAll( match );
 		for ( final MatchBet matchBet : matchBets ) {
-			matchBetsDTOs.add( matchBetsService.transform( match, matchBet.getUser() ) );
+			matchBetsDTOs.add( dtoService.getMatchBetForMatch( match, matchBet.getUser() ) );
 		}
 
 		final MatchBetsDTO result = new MatchBetsDTO();

@@ -15,6 +15,9 @@ public class DTOServiceImpl implements DTOService {
 	@Autowired
 	private TeamLogoService teamLogoService;
 
+	@Autowired
+	private MatchBetsService matchBetsService;
+
 	@Override
 	public UserDTO transformUser( final User user ) {
 		return userFunction().apply( user );
@@ -61,8 +64,53 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
-	public List<MatchDTO> transformMatch( final List<Match> matches ) {
+	public List<MatchDTO> transformMatches( final List<Match> matches ) {
 		return Lists.transform( matches, matchFunction() );
+	}
+
+	@Override
+	public BetDTO transformMatchBet( final MatchBet matchBet, final User user ) {
+		return betFunction( user ).apply( matchBet );
+	}
+
+	@Override
+	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user ) {
+
+		return Lists.transform( matches, new Function<Match, MatchBetDTO>() {
+			@Override
+			public MatchBetDTO apply( final Match match ) {
+				return getMatchBetForMatch( match, user );
+			}
+		} );
+	}
+
+	@Override
+	public MatchBetDTO getMatchBetForMatch( final Match match, final User user ) {
+
+		final Function<Match, MatchBetDTO> function = new Function<Match, MatchBetDTO>() {
+
+			@Override
+			public MatchBetDTO apply( final Match match ) {
+				final MatchDTO matchDTO = transformMatch( match );
+
+				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
+				matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
+
+				final MatchBet matchBet = matchBetsService.load( user, match );
+
+				if ( matchBet == null ) {
+					return matchBetDTO;
+				}
+
+				final BetDTO betDTO = transformMatchBet( matchBet, user );
+
+				matchBetDTO.setBet( betDTO );
+
+				return matchBetDTO;
+			}
+		};
+
+		return function.apply( match );
 	}
 
 	private Function<User, UserDTO> userFunction() {
@@ -138,6 +186,25 @@ public class DTOServiceImpl implements DTOService {
 				dto.setMatchFinished( match.isMatchFinished() );
 
 				return dto;
+			}
+		};
+	}
+
+	private Function<MatchBet, BetDTO> betFunction( final User user ) {
+
+		return new Function<MatchBet, BetDTO>() {
+
+			@Override
+			public BetDTO apply( final MatchBet matchBet ) {
+
+				final MatchDTO matchDTO = transformMatch( matchBet.getMatch() );
+
+				final BetDTO betDTO = new BetDTO( matchDTO, transformUser( user ) );
+				betDTO.setMatchBetId( matchBet.getId() );
+				betDTO.setScore1( matchBet.getBetScore1() );
+				betDTO.setScore2( matchBet.getBetScore2() );
+
+				return betDTO;
 			}
 		};
 	}

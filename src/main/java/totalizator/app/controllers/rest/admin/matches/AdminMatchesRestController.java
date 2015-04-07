@@ -29,7 +29,7 @@ public class AdminMatchesRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchDTO> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
-		return dtoService.transformMatch( matchService.loadAll( dto ) );
+		return dtoService.transformMatches( matchService.loadAll( dto ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
