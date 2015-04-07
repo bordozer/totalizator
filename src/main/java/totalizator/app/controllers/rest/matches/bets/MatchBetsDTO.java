@@ -1,6 +1,7 @@
 package totalizator.app.controllers.rest.matches.bets;
 
 import totalizator.app.dto.MatchBetDTO;
+import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.TeamDTO;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public class MatchBetsDTO {
 	private List<MatchBetDTO> matchBets;
 	private TeamDTO team1;
 	private TeamDTO team2;
+
+	private MatchDTO match;
 
 	public int getMatchId() {
 		return matchId;
@@ -43,5 +46,13 @@ public class MatchBetsDTO {
 
 	public TeamDTO getTeam2() {
 		return team2;
+	}
+
+	public MatchDTO getMatch() {
+		return match;
+	}
+
+	public void setMatch( final MatchDTO match ) {
+		this.match = match;
 	}
 }

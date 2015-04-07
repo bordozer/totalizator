@@ -62,6 +62,7 @@ public class MatchBetsRestController {
 		final MatchBetsDTO result = new MatchBetsDTO();
 
 		result.setMatchId( matchId );
+		result.setMatch( dtoService.transformMatch( match ) );
 
 		result.setTeam1( team1DTO );
 		result.setTeam2( team2DTO );

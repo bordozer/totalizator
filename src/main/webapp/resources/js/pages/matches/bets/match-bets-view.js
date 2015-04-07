@@ -7,13 +7,13 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/match-bets-template.html' ) );
-	var templateEntry = _.template( require( 'text!./templates/match-bets-entry-template.html' ) );
 
 	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Match best title"
+		, userLabel: "User"
 	} );
 
 	var MatchBetsView = Backbone.View.extend( {
@@ -29,12 +29,13 @@ define( function ( require ) {
 		render: function () {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			console.log( data );
 
 			this.$el.html( template( data ) );
 
 			this._renderNavigation();
 
-			this._renderMatchBets();
+//			this._renderMatchBets();
 
 			return this;
 		},
@@ -42,9 +43,9 @@ define( function ( require ) {
 		_renderNavigation: function() {
 			var selectedCupId = 0;
 			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
-		},
+		}
 
-		_renderMatchBets: function() {
+		/*_renderMatchBets: function() {
 
 			var currentUser = this.currentUser;
 
@@ -59,7 +60,7 @@ define( function ( require ) {
 				console.log( data );
 				container.append( templateEntry( data ) );
 			} );
-		}
+		}*/
 	} );
 
 	return { MatchBetsView: MatchBetsView };
