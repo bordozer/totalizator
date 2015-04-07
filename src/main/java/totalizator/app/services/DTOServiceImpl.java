@@ -74,43 +74,13 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
-	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user ) {
-
-		return Lists.transform( matches, new Function<Match, MatchBetDTO>() {
-			@Override
-			public MatchBetDTO apply( final Match match ) {
-				return getMatchBetForMatch( match, user );
-			}
-		} );
+	public MatchBetDTO getMatchBetForMatch( final Match match, final User user ) {
+		return matchBetFunction( user ).apply( match );
 	}
 
 	@Override
-	public MatchBetDTO getMatchBetForMatch( final Match match, final User user ) {
-
-		final Function<Match, MatchBetDTO> function = new Function<Match, MatchBetDTO>() {
-
-			@Override
-			public MatchBetDTO apply( final Match match ) {
-				final MatchDTO matchDTO = transformMatch( match );
-
-				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-				matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
-
-				final MatchBet matchBet = matchBetsService.load( user, match );
-
-				if ( matchBet == null ) {
-					return matchBetDTO;
-				}
-
-				final BetDTO betDTO = transformMatchBet( matchBet, user );
-
-				matchBetDTO.setBet( betDTO );
-
-				return matchBetDTO;
-			}
-		};
-
-		return function.apply( match );
+	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user ) {
+		return Lists.transform( matches, matchBetFunction( user ) );
 	}
 
 	private Function<User, UserDTO> userFunction() {
@@ -205,6 +175,32 @@ public class DTOServiceImpl implements DTOService {
 				betDTO.setScore2( matchBet.getBetScore2() );
 
 				return betDTO;
+			}
+		};
+	}
+
+	private Function<Match, MatchBetDTO> matchBetFunction( final User user ) {
+
+		return new Function<Match, MatchBetDTO>() {
+
+			@Override
+			public MatchBetDTO apply( final Match match ) {
+				final MatchDTO matchDTO = transformMatch( match );
+
+				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
+				matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
+
+				final MatchBet matchBet = matchBetsService.load( user, match );
+
+				if ( matchBet == null ) {
+					return matchBetDTO;
+				}
+
+				final BetDTO betDTO = transformMatchBet( matchBet, user );
+
+				matchBetDTO.setBet( betDTO );
+
+				return matchBetDTO;
 			}
 		};
 	}
