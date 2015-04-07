@@ -42,7 +42,7 @@ public class AdminCupRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CupDTO create( final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
-		final Cup cup = new Cup( cupDTO.getCupName(), categoryService.load( cupDTO.getCategoryId() ) );
+		final Cup cup = new Cup( cupDTO.getCupName(), categoryService.load( cupDTO.getCategory().getCategoryId() ) );
 		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
 
 		cupService.save( cup );
@@ -58,7 +58,7 @@ public class AdminCupRestController {
 		// TODO: check if name exists
 		final Cup cup = cupService.load( cupDTO.getCupId() );
 		cup.setCupName( cupDTO.getCupName() );
-		cup.setCategory( categoryService.load( cupDTO.getCategoryId() ) );
+		cup.setCategory( categoryService.load( cupDTO.getCategory().getCategoryId() ) );
 		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
 
 		cupService.save( cup );

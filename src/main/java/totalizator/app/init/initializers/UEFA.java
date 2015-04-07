@@ -15,7 +15,7 @@ public class UEFA extends AbstractDataInitializer {
 
 	private static final String CATEGORY = "UEFA";
 
-	private static final String CUP_1 = "2015 - regular";
+	private static final String CUP_1 = "Euro 2016";
 	private static final String CUP_2 = "World cup 2018";
 
 	@Override

@@ -54,7 +54,7 @@ define( function ( require ) {
 			var filterByCategory = this.model.filterByCategory;
 			var self= this;
 			this.model.forEach( function( cup ) {
-				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'categoryId' ) ) {
+				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'category' ).categoryId ) {
 					self.renderEntry( cup );
 				}
 			});
@@ -148,7 +148,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
-				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) )
+				, categoryName: this._getCategoryName( this.model.get( 'category' ).categoryId )
 				, translator: translator
 			} ) );
 

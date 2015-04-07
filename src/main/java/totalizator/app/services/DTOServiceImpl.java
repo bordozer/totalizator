@@ -136,7 +136,7 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public CupDTO apply( final Cup cup ) {
-				final CupDTO cupDTO = new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
+				final CupDTO cupDTO = new CupDTO( cup.getId(), cup.getCupName(), transformCategory( cup.getCategory() ) );
 				cupDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
 
 				return cupDTO;

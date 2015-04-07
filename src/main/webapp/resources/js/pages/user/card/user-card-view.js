@@ -71,7 +71,7 @@ define( function ( require ) {
 					, el: container
 					, settings: {
 						userId: userId
-						, categoryId: cup.categoryId
+						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
 						, teamId: 0
 						, showFutureMatches: false

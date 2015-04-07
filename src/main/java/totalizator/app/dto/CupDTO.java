@@ -7,16 +7,16 @@ public class CupDTO {
 
 	private int cupId;
 	private String cupName;
-	private int categoryId;
+	private CategoryDTO category;
 	private boolean showOnPortalPage;
 
 	public CupDTO() {
 	}
 
-	public CupDTO( final int cupId, final String cupName, final int categoryId ) {
+	public CupDTO( final int cupId, final String cupName, final CategoryDTO category ) {
 		this.cupId = cupId;
 		this.cupName = cupName;
-		this.categoryId = categoryId;
+		this.category = category;
 	}
 
 	public int getCupId() {
@@ -35,12 +35,12 @@ public class CupDTO {
 		this.cupName = cupName;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public CategoryDTO getCategory() {
+		return category;
 	}
 
-	public void setCategoryId( final int categoryId ) {
-		this.categoryId = categoryId;
+	public void setCategory( final CategoryDTO category ) {
+		this.category = category;
 	}
 
 	public boolean isShowOnPortalPage() {

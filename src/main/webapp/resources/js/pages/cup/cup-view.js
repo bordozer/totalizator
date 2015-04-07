@@ -81,7 +81,7 @@ define( function ( require ) {
 				, el: container
 				, settings: {
 					userId: 0
-					, categoryId: cup.categoryId
+					, categoryId: cup.category.categoryId
 					, cupId: cup.cupId
 					, teamId: 0
 				}

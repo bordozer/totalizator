@@ -100,7 +100,7 @@ define( function ( require ) {
 
 			var result = [];
 			cups.forEach( function( cup ) {
-				result.push( { cupId: cup.get( 'cupId' ), categoryId: cup.get( 'categoryId' ), cupName: cup.get( 'cupName' ) } );
+				result.push( { cupId: cup.get( 'cupId' ), category: cup.get( 'category' ), cupName: cup.get( 'cupName' ) } );
 			});
 
 			return result;
@@ -144,7 +144,7 @@ define( function ( require ) {
 
 		categoryCups: function( cups, categoryId ) {
 			return _.filter( cups, function( cup ) {
-				return cup.categoryId == categoryId;
+				return cup.category.categoryId == categoryId;
 			});
 		},
 
