@@ -245,7 +245,6 @@ define( function ( require ) {
 
 			var team1 = service.getTeam( this.teams, match.team1Id );
 			var team2 = service.getTeam( this.teams, match.team2Id );
-			console.log( team1 );
 
 			return {
 				matchId: match.matchId

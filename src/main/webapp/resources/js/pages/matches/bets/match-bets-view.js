@@ -7,6 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/match-bets-template.html' ) );
+	var templateEntry = _.template( require( 'text!./templates/match-bets-entry-template.html' ) );
 
 	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
@@ -27,11 +28,9 @@ define( function ( require ) {
 
 		render: function () {
 
-			console.log( this.model.toJSON() );
+			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
-			this.$el.html( template( {
-				translator: translator
-			} ) );
+			this.$el.html( template( data ) );
 
 			this._renderNavigation();
 
@@ -46,9 +45,20 @@ define( function ( require ) {
 		},
 
 		_renderMatchBets: function() {
+
 			var currentUser = this.currentUser;
 
-			var container = this.$( 'js-match-bets-container' );
+			var container = this.$( '.js-match-bets-container' );
+			console.log( container );
+
+			container.empty();
+
+			_.each( this.model.get( 'matchBets' ), function( matchBet ) {
+				var bet = matchBet.bet;
+				var data = _.extend( {}, bet, { currentUser: currentUser, translator: translator } );
+				console.log( data );
+				container.append( templateEntry( data ) );
+			} );
 		}
 	} );
 
