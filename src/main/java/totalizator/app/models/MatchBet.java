@@ -7,7 +7,12 @@ import java.util.Date;
 import static totalizator.app.models.MatchBet.*;
 
 @Entity
-@Table( name = "matchBets" )
+@Table(
+		name = "matchBets"
+		, indexes = {
+			@Index( name = "matchId_userid_idx", columnList = "matchId,userId", unique = true )
+		}
+)
 @NamedQueries( {
 		@NamedQuery(
 				name = LOAD_ALL,

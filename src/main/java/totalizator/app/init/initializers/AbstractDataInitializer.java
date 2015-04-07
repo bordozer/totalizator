@@ -8,10 +8,7 @@ import totalizator.app.services.TeamLogoService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
@@ -111,6 +108,7 @@ public abstract class AbstractDataInitializer {
 			}
 
 			final List<Match> matches = newArrayList( cupMatches );
+			Collections.shuffle( matches );
 			final Iterator<Match> iterator = matches.iterator();
 
 			int i = 0;
@@ -118,7 +116,7 @@ public abstract class AbstractDataInitializer {
 				final Match match = iterator.next();
 
 				final MatchBet bet = new MatchBet();
-				bet.setMatch( matches.get( getRandomInt( 0, matches.size() - 1 ) ) );
+				bet.setMatch( match );
 				bet.setUser( user );
 				bet.setBetScore1( pastStrategy().generateScore() );
 				bet.setBetScore2( pastStrategy().generateScore() );
