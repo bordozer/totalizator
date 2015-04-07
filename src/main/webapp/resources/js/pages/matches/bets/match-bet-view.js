@@ -44,6 +44,8 @@ define( function ( require ) {
 
 		_renderMatchBets: function() {
 			var currentUser = this.currentUser;
+
+			var container = this.$( 'js-match-bets-container' );
 		}
 	} );
 

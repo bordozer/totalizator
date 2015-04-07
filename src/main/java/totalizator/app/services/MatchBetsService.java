@@ -1,5 +1,8 @@
 package totalizator.app.services;
 
+import totalizator.app.controllers.rest.matches.bets.MatchBetsDTO;
+import totalizator.app.dto.BetDTO;
+import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
@@ -20,4 +23,8 @@ public interface MatchBetsService extends GenericService<MatchBet>{
 	public MatchBet load( final int userId, final int matchId );
 
 	boolean isBettingAllowed( final Match match, final User user );
+
+	MatchBetDTO transform( final Match match, final User user );
+
+	BetDTO getBetDTO( MatchBet matchBet, User user );
 }

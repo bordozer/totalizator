@@ -38,14 +38,7 @@ public class AdminTeamRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<TeamDTO> entries() {
-
-		return Lists.transform( teamService.loadAll(), new Function<Team, TeamDTO>() {
-			@Override
-			public TeamDTO apply( final Team team ) {
-				final Category category = team.getCategory();
-				return new TeamDTO( team.getId(), team.getTeamName(), category.getId() );
-			}
-		} );
+		return Lists.transform( teamService.loadAll(), TeamService.TEAM_TO_TEAM_DTO_FUNCTION );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

@@ -5,16 +5,14 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 
-	var MatchBetModel = Backbone.Collection.extend( {
+	var MatchBetsModel = Backbone.Model.extend( {
 
-		initialize: function ( options ) {
-
-		}
-	});
-
-	var MatchBetsModel = Backbone.Collection.extend( {
-
-		model: MatchBetModel,
+		defaults: {
+			matchId: 0
+			, team1: {}
+			, team2: {}
+			, matchBets: []
+		},
 
 		initialize: function ( options ) {
 			this.matchId = options.options.matchId;
@@ -25,5 +23,5 @@ define( function ( require ) {
 		}
 	});
 
-	return { MatchBetsModel: MatchBetsModel, MatchBetModel: MatchBetModel };
+	return { MatchBetsModel: MatchBetsModel };
 } );
