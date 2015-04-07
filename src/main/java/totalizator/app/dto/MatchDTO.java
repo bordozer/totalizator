@@ -15,10 +15,10 @@ public class MatchDTO {
 
 	private int cupId;
 
-	private int team1Id;
+	private TeamDTO team1;
 	private int score1;
 
-	private int team2Id;
+	private TeamDTO team2;
 	private int score2;
 
 	private Date beginningTime;
@@ -48,12 +48,12 @@ public class MatchDTO {
 		this.cupId = cupId;
 	}
 
-	public int getTeam1Id() {
-		return team1Id;
+	public TeamDTO getTeam1() {
+		return team1;
 	}
 
-	public void setTeam1Id( final int team1Id ) {
-		this.team1Id = team1Id;
+	public void setTeam1( final TeamDTO team1 ) {
+		this.team1 = team1;
 	}
 
 	public int getScore1() {
@@ -64,12 +64,12 @@ public class MatchDTO {
 		this.score1 = score1;
 	}
 
-	public int getTeam2Id() {
-		return team2Id;
+	public TeamDTO getTeam2() {
+		return team2;
 	}
 
-	public void setTeam2Id( final int team2Id ) {
-		this.team2Id = team2Id;
+	public void setTeam2( final TeamDTO team2 ) {
+		this.team2 = team2;
 	}
 
 	public int getScore2() {
@@ -100,6 +100,6 @@ public class MatchDTO {
 
 	@Override
 	public String toString() {
-		return String.format( "%d vs %d ( %d : %d )", team1Id, team2Id, score1, score2 );
+		return String.format( "%s vs %s ( %d : %d )", team1, team2, score1, score2 );
 	}
 }

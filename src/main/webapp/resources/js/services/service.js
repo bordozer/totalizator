@@ -15,9 +15,28 @@ define( function ( require ) {
 
 	return {
 
-		/*matchResults: function( match ) {
+		matchResultsByMatch: function( match ) {
 
-		},*/
+			var team1 = match.team1;
+			var team2 = match.team2;
+
+			var team1Id = team1.teamId;
+			var team2Id = team2.teamId;
+
+			var score1 = match.score1;
+			var score2 = match.score2;
+
+			return this.matchResults( team1Id, score1, team2Id, score2 );
+		},
+
+		matchResults: function( team1Id, score1, team2Id, score2 ) {
+			var winnerId = score1 > score2 ? team1Id : score1 < score2 ? team2Id : 0;
+
+			var style1 = winnerId == team1Id ? 'text-info' : winnerId == team2Id ? 'text-muted' : '';
+			var style2 = winnerId == team2Id ? 'text-info' : winnerId == team1Id ? 'text-muted' : '';
+
+			return { winnerId: winnerId, style1: style1, style2: style2 };
+		},
 
 		saveBet: function( matchId, score1, score2 ) {
 			var result = {};

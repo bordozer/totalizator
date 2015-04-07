@@ -33,4 +33,6 @@ public interface DTOService {
 	MatchBetDTO getMatchBetForMatch( Match match, User user );
 
 	List<MatchBetDTO> getMatchBetForMatches( List<Match> matches, User user );
+
+	void initMatchFromDTO( MatchDTO matchDTO, Match match );
 }

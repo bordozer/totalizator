@@ -8,7 +8,7 @@
 
 		<div class="row">
 
-			<div class="col-lg-6 text-right <%=style1%>">
+			<div class="col-lg-6 text-right <%=matchResults.style1%>">
 				<%=team1.teamName%>
 				<img src="<%=team1.teamLogo%>" title="<%=team1.teamName%>">
 				<% if( match.matchFinished ) { %>
@@ -16,7 +16,7 @@
 				<% } %>
 			</div>
 
-			<div class="col-lg-6 <%=style2%>">
+			<div class="col-lg-6 <%=matchResults.style2%>">
 				<img src="<%=team2.teamLogo%>" title="<%=team2.teamName%>">
 				<%=team2.teamName%>
 				<% if( match.matchFinished ) { %>

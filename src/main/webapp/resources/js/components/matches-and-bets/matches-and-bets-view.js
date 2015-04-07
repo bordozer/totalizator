@@ -241,17 +241,16 @@ define( function ( require ) {
 			var match = this.model.get( 'match' );
 			var bet = this.model.get( 'bet' );
 
-			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
+			var matchResults = service.matchResultsByMatch( match );
 
-			var team1 = service.getTeam( this.teams, match.team1Id );
-			var team2 = service.getTeam( this.teams, match.team2Id );
+			var team1 = match.team1;
+			var team2 = match.team2;
 
 			return {
 				matchId: match.matchId
 				, team1Name: team1.teamName
 				, team2Name: team2.teamName
-				, style1: winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : ''
-				, style2: winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : ''
+				, matchResults: matchResults
 				, score1: match.score1
 				, score2: match.score2
 				, team1Logo: team1.teamLogo

@@ -9,6 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/match-bets-template.html' ) );
 
 	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
+	var service = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -29,12 +30,9 @@ define( function ( require ) {
 		render: function () {
 
 			var match = this.model.toJSON().match;
-			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
+			var matchResults = service.matchResultsByMatch( match );
 
-			var style1 = winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : '';
-			var style2 = winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : '';
-
-			var data = _.extend( {}, this.model.toJSON(), { style1: style1, style2: style2, translator: translator } );
+			var data = _.extend( {}, this.model.toJSON(), { matchResults: matchResults, translator: translator } );
 			console.log( data );
 
 			this.$el.html( template( data ) );

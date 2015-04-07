@@ -18,6 +18,12 @@ public class DTOServiceImpl implements DTOService {
 	@Autowired
 	private MatchBetsService matchBetsService;
 
+	@Autowired
+	private CupService cupService;
+
+	@Autowired
+	private TeamService teamService;
+
 	@Override
 	public UserDTO transformUser( final User user ) {
 		return userFunction().apply( user );
@@ -83,6 +89,21 @@ public class DTOServiceImpl implements DTOService {
 		return Lists.transform( matches, matchBetFunction( user ) );
 	}
 
+	@Override
+	public void initMatchFromDTO( final MatchDTO matchDTO, final Match match ) {
+		match.setCup( cupService.load( matchDTO.getCupId() ) );
+
+		match.setTeam1( teamService.load( matchDTO.getTeam1().getTeamId() ) );
+		match.setScore1( matchDTO.getScore1() );
+
+		match.setTeam2( teamService.load( matchDTO.getTeam2().getTeamId() ) );
+		match.setScore2( matchDTO.getScore2() );
+
+		match.setBeginningTime( matchDTO.getBeginningTime() );
+
+		match.setMatchFinished( matchDTO.isMatchFinished() );
+	}
+
 	private Function<User, UserDTO> userFunction() {
 
 		return new Function<User, UserDTO>() {
@@ -145,10 +166,10 @@ public class DTOServiceImpl implements DTOService {
 				dto.setCategoryId( match.getCup().getCategory().getId() );
 				dto.setCupId( match.getCup().getId() );
 
-				dto.setTeam1Id( match.getTeam1().getId() );
+				dto.setTeam1( transformTeam( match.getTeam1() ) );
 				dto.setScore1( match.getScore1() );
 
-				dto.setTeam2Id( match.getTeam2().getId() );
+				dto.setTeam2( transformTeam( match.getTeam2() ) );
 				dto.setScore2( match.getScore2() );
 
 				dto.setBeginningTime( match.getBeginningTime() );

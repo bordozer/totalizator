@@ -172,20 +172,20 @@ define( function ( require ) {
 
 		renderInfo: function () {
 			var modelJSON = this.model.toJSON();
+			console.log( modelJSON );
 
-			var winnerId = modelJSON.score1 > modelJSON.score2 ? modelJSON.team1Id : modelJSON.score1 < modelJSON.score2 ? modelJSON.team2Id : 0;
+			var matchResults = service.matchResults( modelJSON.team1.teamId, modelJSON.score1, modelJSON.team2.teamId, modelJSON.score2 );
 
 			this.$el.html( templateEntry( {
 				model: modelJSON
 				, matchId: modelJSON.matchId
 				, categoryName: service.getCategory( this.categories, modelJSON.categoryId ).categoryName
 				, cupName: service.getCup( this.cups, modelJSON.cupId ).cupName
-				, team1Name: service.getTeam( this.teams, modelJSON.team1Id ).teamName
-				, team2Name: service.getTeam( this.teams, modelJSON.team2Id ).teamName
+				, team1Name: modelJSON.team1.teamName
+				, team2Name: modelJSON.team2.teamName
 				, score1: modelJSON.score1
 				, score2: modelJSON.score2
-				, style1: winnerId == modelJSON.team1Id ? 'text-info' : winnerId == modelJSON.team2Id ? 'text-muted' : ''
-				, style2: winnerId == modelJSON.team2Id ? 'text-info' : winnerId == modelJSON.team1Id ? 'text-muted' : ''
+				, matchResults: matchResults
 				, beginningTime: dateTimeService.formatDateDisplay( modelJSON.beginningTime )
 				, translator: translator
 			} ) );
@@ -203,7 +203,7 @@ define( function ( require ) {
 
 			this.$el.html( templateEntryEdit( {
 				model: modelJSON
-				, title: modelJSON.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, modelJSON.team1Id ).teamName + ' - ' + service.getTeam( this.teams, modelJSON.team2Id ).teamName
+				, title: modelJSON.matchId == 0 ? translator.newEntryEditFormTitle : modelJSON.team1.teamName + ' - ' + modelJSON.team2.teamName
 				, matchId: modelJSON.matchId
 				, categories: this.categories
 				, categoryId: categoryId

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.MatchRepository;
-import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
@@ -108,20 +107,5 @@ public class MatchServiceImpl implements MatchService {
 	@Transactional
 	public void delete( final int id ) {
 		matchRepository.delete( id );
-	}
-
-	@Override
-	public void initModelFromDTO( final MatchDTO matchDTO, final Match match ) {
-		match.setCup( cupService.load( matchDTO.getCupId() ) );
-
-		match.setTeam1( teamService.load( matchDTO.getTeam1Id() ) );
-		match.setScore1( matchDTO.getScore1() );
-
-		match.setTeam2( teamService.load( matchDTO.getTeam2Id() ) );
-		match.setScore2( matchDTO.getScore2() );
-
-		match.setBeginningTime( matchDTO.getBeginningTime() );
-
-		match.setMatchFinished( matchDTO.isMatchFinished() );
 	}
 }

@@ -39,7 +39,7 @@ public class AdminMatchesRestController {
 
 		final Match match = new Match();
 
-		matchService.initModelFromDTO( matchDTO, match );
+		dtoService.initMatchFromDTO( matchDTO, match );
 
 		final Match saved = matchService.save( match );
 
@@ -55,7 +55,7 @@ public class AdminMatchesRestController {
 
 		final Match match = matchService.load( matchDTO.getMatchId() );
 
-		matchService.initModelFromDTO( matchDTO, match );
+		dtoService.initMatchFromDTO( matchDTO, match );
 
 		matchService.save( match );
 
