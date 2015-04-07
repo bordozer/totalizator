@@ -9,13 +9,10 @@ import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
-import totalizator.app.models.User;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
-import totalizator.app.services.UserService;
 
-import java.security.Principal;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -32,17 +29,12 @@ public class MatchBetsRestController {
 	private MatchBetsService matchBetsService;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private DTOService dtoService;
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bets/", produces = APPLICATION_JSON_VALUE )
-	public MatchBetsDTO matchBets( final @PathVariable( "matchId" ) int matchId, final Principal principal ) {
-
-		final User currentUser = userService.findByLogin( principal.getName() );
+	public MatchBetsDTO matchBets( final @PathVariable( "matchId" ) int matchId ) {
 
 		final Match match = matchService.load( matchId );
 
