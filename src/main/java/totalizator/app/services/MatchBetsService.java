@@ -24,6 +24,8 @@ public interface MatchBetsService extends GenericService<MatchBet>{
 
 	boolean isBettingAllowed( final Match match, final User user );
 
+	List<MatchBetDTO> transform( List<Match> matches, User user );
+
 	MatchBetDTO transform( final Match match, final User user );
 
 	BetDTO getBetDTO( MatchBet matchBet, User user );

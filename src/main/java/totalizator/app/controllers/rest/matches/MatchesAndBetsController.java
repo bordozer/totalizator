@@ -115,12 +115,6 @@ public class MatchesAndBetsController {
 	}
 
 	private List<MatchBetDTO> getMatchBetDTOs( final List<Match> matches, final User user ) {
-
-		return Lists.transform( matches, new Function<Match, MatchBetDTO>() {
-			@Override
-			public MatchBetDTO apply( final Match match ) {
-				return matchBetsService.transform( match, user );
-			}
-		} );
+		return matchBetsService.transform( matches, user );
 	}
 }

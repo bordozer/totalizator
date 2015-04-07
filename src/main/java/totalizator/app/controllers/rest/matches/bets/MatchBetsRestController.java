@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
@@ -17,7 +16,6 @@ import totalizator.app.services.UserService;
 import java.security.Principal;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
