@@ -28,14 +28,18 @@ define( function ( require ) {
 
 		render: function () {
 
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var match = this.model.toJSON().match;
+			var winnerId = match.score1 > match.score2 ? match.team1Id : match.score1 < match.score2 ? match.team2Id : 0;
+
+			var style1 = winnerId == match.team1Id ? 'text-info' : winnerId == match.team2Id ? 'text-muted' : '';
+			var style2 = winnerId == match.team2Id ? 'text-info' : winnerId == match.team1Id ? 'text-muted' : '';
+
+			var data = _.extend( {}, this.model.toJSON(), { style1: style1, style2: style2, translator: translator } );
 			console.log( data );
 
 			this.$el.html( template( data ) );
 
 			this._renderNavigation();
-
-//			this._renderMatchBets();
 
 			return this;
 		},
@@ -44,23 +48,6 @@ define( function ( require ) {
 			var selectedCupId = 0;
 			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
 		}
-
-		/*_renderMatchBets: function() {
-
-			var currentUser = this.currentUser;
-
-			var container = this.$( '.js-match-bets-container' );
-			console.log( container );
-
-			container.empty();
-
-			_.each( this.model.get( 'matchBets' ), function( matchBet ) {
-				var bet = matchBet.bet;
-				var data = _.extend( {}, bet, { currentUser: currentUser, translator: translator } );
-				console.log( data );
-				container.append( templateEntry( data ) );
-			} );
-		}*/
 	} );
 
 	return { MatchBetsView: MatchBetsView };

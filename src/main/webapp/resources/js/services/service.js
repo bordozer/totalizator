@@ -15,6 +15,10 @@ define( function ( require ) {
 
 	return {
 
+		/*matchResults: function( match ) {
+
+		},*/
+
 		saveBet: function( matchId, score1, score2 ) {
 			var result = {};
 			$.ajax( {
