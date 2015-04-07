@@ -118,7 +118,7 @@ public abstract class AbstractDataInitializer {
 				final Match match = iterator.next();
 
 				final MatchBet bet = new MatchBet();
-				bet.setMatch( cupMatches.get( getRandomInt( 0, matches.size() - 1 ) ) );
+				bet.setMatch( matches.get( getRandomInt( 0, matches.size() - 1 ) ) );
 				bet.setUser( user );
 				bet.setBetScore1( pastStrategy().generateScore() );
 				bet.setBetScore2( pastStrategy().generateScore() );

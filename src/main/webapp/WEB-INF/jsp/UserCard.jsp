@@ -1,7 +1,14 @@
+<%@ page import="org.apache.commons.lang.StringEscapeUtils" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <jsp:useBean id="userCardModel" type="totalizator.app.controllers.ui.user.card.UserCardModel" scope="request"/>
+
+<%
+	final String username = StringEscapeUtils.escapeJavaScript( userCardModel.getUser().getUsername() );
+%>
+
+<c:set var="username" value="<%=username%>" />
 
 <tags:page currentUser="${userCardModel.currentUser}">
 
@@ -17,7 +24,7 @@
 
 			var breadcrumbs = [
 				{ link: '#', title: translator.title }
-				, { link: '#', title: '${userCardModel.user.username}' }
+				, { link: '#', title: '${username}' }
 			];
 
 			var userId = ${userCardModel.user.id};

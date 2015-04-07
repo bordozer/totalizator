@@ -1,5 +1,6 @@
 package totalizator.app.dto;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import totalizator.app.models.User;
 
 public class UserDTO {
@@ -9,7 +10,7 @@ public class UserDTO {
 
 	public UserDTO( final User user ) {
 		this.userId = user.getId();
-		this.userName = user.getUsername();
+		this.userName = StringEscapeUtils.escapeJavaScript( user.getUsername() );
 	}
 
 	public int getUserId() {
