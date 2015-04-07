@@ -7,6 +7,7 @@ import totalizator.app.models.User;
 public class MatchBetsModel extends AbstractPageModel {
 
 	private Match match;
+	private String matchTime;
 
 	protected MatchBetsModel( final User currentUser ) {
 		super( currentUser );
@@ -18,5 +19,13 @@ public class MatchBetsModel extends AbstractPageModel {
 
 	public Match getMatch() {
 		return match;
+	}
+
+	public void setMatchTime( final String matchTime ) {
+		this.matchTime = matchTime;
+	}
+
+	public String getMatchTime() {
+		return matchTime;
 	}
 }

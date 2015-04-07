@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.models.Match;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
 
@@ -26,6 +27,9 @@ public class MatchBetsController {
 	@Autowired
 	private MatchService matchService;
 
+	@Autowired
+	private DateTimeService dateTimeService;
+
 	@ModelAttribute( MODEL_NAME )
 	public MatchBetsModel preparePagingModel( final Principal principal ) {
 		return new MatchBetsModel( userService.findByLogin( principal.getName() ) );
@@ -37,6 +41,7 @@ public class MatchBetsController {
 		final Match match = matchService.load( matchId );
 
 		model.setMatch( match );
+		model.setMatchTime( dateTimeService.formatDate( match.getBeginningTime() ) );
 
 		return VIEW;
 	}

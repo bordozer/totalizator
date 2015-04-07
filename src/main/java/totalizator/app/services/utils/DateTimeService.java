@@ -9,4 +9,6 @@ public interface DateTimeService {
 	Date offset( final int measure, final int offset );
 
 	Date offset( final Date time, final int measure, final int offset );
+
+	String formatDate( final Date date );
 }

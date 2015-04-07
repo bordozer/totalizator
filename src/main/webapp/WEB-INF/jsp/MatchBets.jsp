@@ -17,7 +17,7 @@
 				title: 'Match best title'
 			} );
 
-			var teamsTitle = '${match.team1.teamName} vs ${match.team2.teamName}';
+			var teamsTitle = '${match.team1.teamName} vs ${match.team2.teamName} ( ${match.beginningTime} )';
 
 			var breadcrumbs = [
 				{ link: '#', title: translator.title }

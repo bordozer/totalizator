@@ -27,6 +27,11 @@ public class DateTimeServiceImpl implements DateTimeService {
 		return cal.getTime();
 	}
 
+	@Override
+	public String formatDate( final Date date ) {
+		return date.toString(); //TODO;
+	}
+
 	private Calendar getCalendar( final Date date ) {
 		final Calendar calendar = getCalendar();
 		calendar.setTime( date );
