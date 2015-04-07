@@ -46,8 +46,8 @@ public class MatchBetsRestController {
 		final Team team1 = match.getTeam1();
 		final Team team2 = match.getTeam2();
 
-		final TeamDTO team1DTO = dtoService.transform( team1 );
-		final TeamDTO team2DTO = dtoService.transform( team2 );
+		final TeamDTO team1DTO = dtoService.transformTeam( team1 );
+		final TeamDTO team2DTO = dtoService.transformTeam( team2 );
 
 		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
 

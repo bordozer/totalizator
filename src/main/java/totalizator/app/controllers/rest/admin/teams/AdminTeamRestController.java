@@ -1,14 +1,11 @@
 package totalizator.app.controllers.rest.admin.teams;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.TeamDTO;
-import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.DTOService;
@@ -42,7 +39,7 @@ public class AdminTeamRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<TeamDTO> entries() {
-		return dtoService.transform( teamService.loadAll() );
+		return dtoService.transformTeams( teamService.loadAll() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

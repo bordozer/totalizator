@@ -39,6 +39,9 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Autowired
 	private DateTimeService dateTimeService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll() {
@@ -156,7 +159,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 		final MatchDTO matchDTO = matchService.initDTOFromModel( matchBet.getMatch() );
 
-		final BetDTO betDTO = new BetDTO( matchDTO, new UserDTO( user ) );
+		final BetDTO betDTO = new BetDTO( matchDTO, dtoService.transformUser( user ) );
 		betDTO.setMatchBetId( matchBet.getId() );
 		betDTO.setScore1( matchBet.getBetScore1() );
 		betDTO.setScore2( matchBet.getBetScore2() );

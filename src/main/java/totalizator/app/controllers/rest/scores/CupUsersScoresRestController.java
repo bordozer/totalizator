@@ -10,6 +10,7 @@ import totalizator.app.dto.UserDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 import totalizator.app.beans.UserPoints;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.score.CupScoresService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
@@ -32,6 +33,9 @@ public class CupUsersScoresRestController {
 	@Autowired
 	private CupScoresService cupScoresService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/scores/", produces = APPLICATION_JSON_VALUE )
@@ -42,7 +46,7 @@ public class CupUsersScoresRestController {
 
 		final CupUsersScoresDTO result = new CupUsersScoresDTO();
 
-		result.setCurrentUser( new UserDTO( user ) );
+		result.setCurrentUser( dtoService.transformUser( user ) );
 
 		result.setUserPoints( getUsersScores( cup ) );
 
@@ -54,7 +58,7 @@ public class CupUsersScoresRestController {
 		return Lists.transform( cupScoresService.getUsersScoresSummary( cup ), new Function<UserPoints, UserPointsDTO>() {
 			@Override
 			public UserPointsDTO apply( final UserPoints userPoints ) {
-				return new UserPointsDTO( new UserDTO( userPoints.getUser() ), userPoints.getPoints()  );
+				return new UserPointsDTO( dtoService.transformUser( userPoints.getUser() ), userPoints.getPoints()  );
 			}
 		} );
 	}

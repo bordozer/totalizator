@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.models.User;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
@@ -22,6 +23,9 @@ public class AdminMainPageController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -30,7 +34,7 @@ public class AdminMainPageController {
 		final User user = userService.findByLogin( principal.getName() );
 
 		final AdminMainPageDTO dto = new AdminMainPageDTO();
-		dto.setUserDTO( new UserDTO( user ) );
+		dto.setUserDTO( dtoService.transformUser( user ) );
 
 		return dto;
 	}

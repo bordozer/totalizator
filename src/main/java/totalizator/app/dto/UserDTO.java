@@ -12,11 +12,6 @@ public class UserDTO {
 		this.userName = user.getUsername();
 	}
 
-	public UserDTO( final int id, final String username ) {
-		this.userId = id;
-		this.userName = username;
-	}
-
 	public int getUserId() {
 		return userId;
 	}

@@ -17,6 +17,6 @@ public abstract class AbstractPageModel {
 	}
 
 	public String getCurrentUserJSON() {
-		return new Gson().toJson( new UserDTO( currentUser ) );
+		return new Gson().toJson( new UserDTO( currentUser ) ); // TODO: use DTOService.transformUser()!
 	}
 }
