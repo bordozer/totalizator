@@ -25,8 +25,9 @@
 			];
 
 			var matchId = ${match.id};
+			var currentUser = ${matchBetsModel.currentUserJSON};
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { matchId: matchId } } );
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { matchId: matchId, currentUser: currentUser } } );
 			pageView.render();
 		} );
 	</script>
