@@ -10,6 +10,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.UserService;
 
@@ -31,6 +32,9 @@ public class UserCardRestController {
 	@Autowired
 	private MatchBetsService matchBetsService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/card/", produces = APPLICATION_JSON_VALUE )
@@ -46,7 +50,7 @@ public class UserCardRestController {
 		}
 
 		final List<Cup> cups = newArrayList( cupsWhereUserHasBets );
-		final List<CupDTO> cupDTOs = Lists.transform( cups, CupService.CUP_DTO_FUNCTION );
+		final List<CupDTO> cupDTOs = dtoService.transformCups( cups );
 
 		final UserCardDTO result = new UserCardDTO();
 		result.setCupsToShow( cupDTOs );

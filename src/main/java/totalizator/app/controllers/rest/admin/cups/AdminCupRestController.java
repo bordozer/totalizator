@@ -11,6 +11,7 @@ import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
 
 import java.util.List;
 
@@ -26,22 +27,16 @@ public class AdminCupRestController {
 	@Autowired
 	private CategoryService categoryService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	private static final Logger LOGGER = Logger.getLogger( AdminCupRestController.class );
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> entries() {
-
-		return Lists.transform( cupService.loadAll(), new Function<Cup, CupDTO>() {
-			@Override
-			public CupDTO apply( final Cup cup ) {
-				final CupDTO cupDTO = new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
-				cupDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
-
-				return cupDTO;
-			}
-		} );
+		return dtoService.transformCups( cupService.loadAll() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

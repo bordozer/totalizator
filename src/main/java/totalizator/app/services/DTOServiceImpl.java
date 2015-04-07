@@ -5,9 +5,11 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.dto.CategoryDTO;
+import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.models.Category;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
 
@@ -40,6 +42,16 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
+	public CupDTO transformCup( final Cup cup ) {
+		return cupFunction().apply( cup );
+	}
+
+	@Override
+	public List<CupDTO> transformCups( final List<Cup> cups ) {
+		return Lists.transform( cups, cupFunction() );
+	}
+
+	@Override
 	public TeamDTO transformTeam( final Team team ) {
 		return teamFunction().apply( team );
 	}
@@ -67,6 +79,20 @@ public class DTOServiceImpl implements DTOService {
 			@Override
 			public CategoryDTO apply( final Category category ) {
 				return null;
+			}
+		};
+	}
+
+	private Function<Cup, CupDTO> cupFunction() {
+
+		return new Function<Cup, CupDTO>() {
+
+			@Override
+			public CupDTO apply( final Cup cup ) {
+				final CupDTO cupDTO = new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
+				cupDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
+
+				return cupDTO;
 			}
 		};
 	}

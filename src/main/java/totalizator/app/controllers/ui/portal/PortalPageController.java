@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
 import totalizator.config.root.SecurityConfig;
 
@@ -27,6 +28,9 @@ public class PortalPageController {
 	@Autowired
 	private CupService cupService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel preparePagingModel( final Principal principal ) {
 		return new PortalPageModel( userService.findByLogin( principal.getName() ) );
@@ -35,7 +39,7 @@ public class PortalPageController {
 	@RequestMapping( method = RequestMethod.GET, value = "" )
 	public String portalPage( final @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
 
-		model.setCupsToShow( Lists.transform( cupService.portalPageCups(), CupService.CUP_DTO_FUNCTION ) );
+		model.setCupsToShow( dtoService.transformCups( cupService.portalPageCups() ) );
 
 		model.setCupsToShowJSON( new Gson().toJson( model.getCupsToShow() ) );
 

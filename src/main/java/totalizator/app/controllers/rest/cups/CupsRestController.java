@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
 
 import java.security.Principal;
 import java.util.List;
@@ -21,20 +22,20 @@ public class CupsRestController {
 	@Autowired
 	private CupService cupService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/", produces = APPLICATION_JSON_VALUE )
 	public CupDTO getDefaultLogin( final Principal principal, final @PathVariable( "cupId" ) int cupId ) {
-
-		final Cup cup = cupService.load( cupId );
-
-		return new CupDTO( cup.getId(), cup.getCupName(), cup.getCategory().getId() );
+		return dtoService.transformCup( cupService.load( cupId ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/navi/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> cupsToShow() {
-		return Lists.transform( cupService.portalPageCups(), CupService.CUP_DTO_FUNCTION );
+		return dtoService.transformCups( cupService.portalPageCups() );
 	}
 }
