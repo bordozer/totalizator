@@ -1,13 +1,7 @@
 package totalizator.app.services;
 
-import totalizator.app.dto.CategoryDTO;
-import totalizator.app.dto.CupDTO;
-import totalizator.app.dto.TeamDTO;
-import totalizator.app.dto.UserDTO;
-import totalizator.app.models.Category;
-import totalizator.app.models.Cup;
-import totalizator.app.models.Team;
-import totalizator.app.models.User;
+import totalizator.app.dto.*;
+import totalizator.app.models.*;
 
 import java.util.List;
 
@@ -29,4 +23,8 @@ public interface DTOService {
 	TeamDTO transformTeam( final Team team );
 
 	List<TeamDTO> transformTeams( final List<Team> teams );
+
+	MatchDTO transformMatch( Match match );
+
+	List<MatchDTO> transformMatch( List<Match> matches );
 }

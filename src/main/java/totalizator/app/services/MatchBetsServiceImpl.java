@@ -132,7 +132,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 			@Override
 			public MatchBetDTO apply( final Match match ) {
-				final MatchDTO matchDTO = matchService.initDTOFromModel( match );
+				final MatchDTO matchDTO = dtoService.transformMatch( match );
 
 				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
 				matchBetDTO.setBettingAllowed( isBettingAllowed( match, user ) );
@@ -157,7 +157,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	public BetDTO getBetDTO( final MatchBet matchBet, final User user ) {
 
-		final MatchDTO matchDTO = matchService.initDTOFromModel( matchBet.getMatch() );
+		final MatchDTO matchDTO = dtoService.transformMatch( matchBet.getMatch() );
 
 		final BetDTO betDTO = new BetDTO( matchDTO, dtoService.transformUser( user ) );
 		betDTO.setMatchBetId( matchBet.getId() );

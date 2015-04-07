@@ -1,7 +1,5 @@
 package totalizator.app.controllers.rest.admin.matches;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -9,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchService;
 
 import java.security.Principal;
@@ -23,17 +22,14 @@ public class AdminMatchesRestController {
 	@Autowired
 	private MatchService matchService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchDTO> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
-
-		return Lists.transform( matchService.loadAll( dto ), new Function<Match, MatchDTO>() {
-			@Override
-			public MatchDTO apply( final Match match ) {
-				return matchService.initDTOFromModel( match );
-			}
-		} );
+		return dtoService.transformMatch( matchService.loadAll( dto ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -63,7 +59,7 @@ public class AdminMatchesRestController {
 
 		matchService.save( match );
 
-		return matchService.initDTOFromModel( match );
+		return dtoService.transformMatch( match );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

@@ -26,9 +26,6 @@ public class MatchServiceImpl implements MatchService {
 	@Autowired
 	private TeamService teamService;
 
-	@Autowired
-	private TeamLogoService teamLogoService;
-
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
 	@Override
@@ -126,26 +123,5 @@ public class MatchServiceImpl implements MatchService {
 		match.setBeginningTime( matchDTO.getBeginningTime() );
 
 		match.setMatchFinished( matchDTO.isMatchFinished() );
-	}
-
-	@Override
-	public MatchDTO initDTOFromModel( final Match match ) {
-		final MatchDTO dto = new MatchDTO();
-
-		dto.setMatchId( match.getId() );
-		dto.setCategoryId( match.getCup().getCategory().getId() );
-		dto.setCupId( match.getCup().getId() );
-
-		dto.setTeam1Id( match.getTeam1().getId() );
-		dto.setScore1( match.getScore1() );
-
-		dto.setTeam2Id( match.getTeam2().getId() );
-		dto.setScore2( match.getScore2() );
-
-		dto.setBeginningTime( match.getBeginningTime() );
-
-		dto.setMatchFinished( match.isMatchFinished() );
-
-		return dto;
 	}
 }
