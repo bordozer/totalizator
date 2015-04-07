@@ -11,7 +11,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/matches/bets/match-bet', 'translator' ], function ( $, Page, matchBet, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/matches/bets/match-bets', 'translator' ], function ( $, Page, matchBet, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Match best title'
