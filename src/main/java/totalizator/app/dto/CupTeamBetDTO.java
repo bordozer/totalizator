@@ -6,6 +6,8 @@ public class CupTeamBetDTO {
 	private TeamDTO team;
 	private UserDTO user;
 
+	private CupPositionDTO cupPosition;
+
 	public CupDTO getCup() {
 		return cup;
 	}
@@ -28,5 +30,13 @@ public class CupTeamBetDTO {
 
 	public void setUser( final UserDTO user ) {
 		this.user = user;
+	}
+
+	public CupPositionDTO getCupPosition() {
+		return cupPosition;
+	}
+
+	public void setCupPosition( final CupPositionDTO cupPosition ) {
+		this.cupPosition = cupPosition;
 	}
 }

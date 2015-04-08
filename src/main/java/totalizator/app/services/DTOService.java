@@ -1,6 +1,7 @@
 package totalizator.app.services;
 
 import totalizator.app.dto.*;
+import totalizator.app.enums.CupPosition;
 import totalizator.app.models.*;
 
 import java.util.List;
@@ -24,19 +25,21 @@ public interface DTOService {
 
 	List<TeamDTO> transformTeams( final List<Team> teams );
 
-	MatchDTO transformMatch( Match match );
+	MatchDTO transformMatch( final Match match );
 
-	List<MatchDTO> transformMatches( List<Match> matches );
+	List<MatchDTO> transformMatches( final List<Match> matches );
 
-	BetDTO transformMatchBet( MatchBet matchBet, User user );
+	BetDTO transformMatchBet( final MatchBet matchBet, final User user );
 
-	MatchBetDTO getMatchBetForMatch( Match match, User user );
+	MatchBetDTO getMatchBetForMatch( final Match match, final User user );
 
-	List<MatchBetDTO> getMatchBetForMatches( List<Match> matches, User user );
+	List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user );
 
-	void initMatchFromDTO( MatchDTO matchDTO, Match match );
+	void initMatchFromDTO( final MatchDTO matchDTO, final Match match );
 
-	CupTeamBetDTO transformCupTeamBet( CupTeamBet cupTeamBet );
+	CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet );
 
-	List<CupTeamBetDTO> transformCupTeamBets( List<CupTeamBet> cupTeamBets );
+	List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets );
+
+	CupPositionDTO transformCupPosition( final CupPosition cupPosition );
 }

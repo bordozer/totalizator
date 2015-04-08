@@ -2,9 +2,9 @@ package totalizator.app.enums;
 
 public enum CupPosition {
 
-	FIRST( 0, "", 1 )
-	, SECOND( 0, "", 2 )
-	, THIRD( 0, "", 3 )
+	FIRST( 0, "Gold medal", 1 )
+	, SECOND( 0, "Silver medal", 2 )
+	, THIRD( 0, "Bronze medal", 3 )
 	;
 
 	private final int id;
@@ -30,6 +30,7 @@ public enum CupPosition {
 	}
 
 	public CupPosition getById( final int id ) {
+
 		for ( final CupPosition cupPosition : values() ) {
 			if ( cupPosition.getId() == id ) {
 				return cupPosition;

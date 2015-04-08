@@ -51,6 +51,7 @@ public class CupTeamBetsRestController {
 		final List<CupTeamBetDTO> result = newArrayList();
 
 		for ( final CupPosition cupPosition : CupPosition.values() ) {
+
 			final CupTeamBet cupTeamBet = cupTeamBetService.load( cup, user, cupPosition );
 
 			if ( cupTeamBet != null ) {
@@ -60,6 +61,7 @@ public class CupTeamBetsRestController {
 				final CupTeamBetDTO emptyCupTeamBetDTO = new CupTeamBetDTO();
 				emptyCupTeamBetDTO.setCup( cupDTO );
 				emptyCupTeamBetDTO.setUser( userDTO );
+				emptyCupTeamBetDTO.setCupPosition( dtoService.transformCupPosition( cupPosition ) );
 
 				result.add( emptyCupTeamBetDTO );
 			}
