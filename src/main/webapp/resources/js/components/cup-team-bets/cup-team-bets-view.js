@@ -19,10 +19,14 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.cup = options.options.cup;
-			this.render();
+
+			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		renderBody: function () {
+
+			console.log( this.model );
 
 			var data = _.extend( {}, this.model.toJSON(), { cup: this.cup, translator: translator } );
 

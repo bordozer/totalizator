@@ -108,6 +108,16 @@ public class DTOServiceImpl implements DTOService {
 		match.setMatchFinished( matchDTO.isMatchFinished() );
 	}
 
+	@Override
+	public CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet ) {
+		return cupTeamBetFunction().apply( cupTeamBet );
+	}
+
+	@Override
+	public List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets ) {
+		return Lists.transform( cupTeamBets, cupTeamBetFunction() );
+	}
+
 	private Function<User, UserDTO> userFunction() {
 
 		return new Function<User, UserDTO>() {
@@ -227,6 +237,23 @@ public class DTOServiceImpl implements DTOService {
 				matchBetDTO.setPoints( cupScoresService.getUsersScores( matchBet ) );
 
 				return matchBetDTO;
+			}
+		};
+	}
+
+	private Function<CupTeamBet, CupTeamBetDTO> cupTeamBetFunction() {
+
+		return new Function<CupTeamBet, CupTeamBetDTO>() {
+			@Override
+			public CupTeamBetDTO apply( final CupTeamBet cupTeamBet ) {
+
+				final CupTeamBetDTO result = new CupTeamBetDTO();
+
+				result.setCup( transformCup( cupTeamBet.getCup() ) );
+				result.setTeam( transformTeam( cupTeamBet.getTeam() ) );
+				result.setUser( transformUser( cupTeamBet.getUser() ) );
+
+				return result;
 			}
 		};
 	}

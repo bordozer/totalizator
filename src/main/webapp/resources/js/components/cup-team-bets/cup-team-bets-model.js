@@ -8,11 +8,7 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		defaults: {
-			id: 0
-			, cup: {}
-			, team: {}
-			, cupPosition: 0
-			, betTime: null
+			cupTeamBets: []
 		},
 
 		initialize: function ( options ) {
