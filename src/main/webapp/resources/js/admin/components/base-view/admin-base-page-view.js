@@ -13,6 +13,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuPortalPageLabel: 'Menu: Portal page'
+		, menuUsersLabel: 'Users'
 		, menuAdminLabel: 'Menu: Admin'
 		, menuMatchesLabel: 'Menu: Matches'
 		, menuUntranslatedListLabel: 'Menu: Untranslated list'
