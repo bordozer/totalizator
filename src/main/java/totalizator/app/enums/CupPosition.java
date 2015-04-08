@@ -2,9 +2,9 @@ package totalizator.app.enums;
 
 public enum CupPosition {
 
-	FIRST( 0, "Gold medal", 1 )
-	, SECOND( 0, "Silver medal", 2 )
-	, THIRD( 0, "Bronze medal", 3 )
+	FIRST( 1, "Gold medal", 1 )
+	, SECOND( 2, "Silver medal", 2 )
+	, THIRD( 3, "Bronze medal", 3 )
 	;
 
 	private final int id;

@@ -2,23 +2,23 @@ package totalizator.app.dto;
 
 public class CupPositionDTO {
 
-	private int id;
+	private int cupPositionId;
 	private String cupPositionName;
 
 	public CupPositionDTO() {
 	}
 
-	public CupPositionDTO( final int id, final String cupPositionName ) {
-		this.id = id;
+	public CupPositionDTO( final int cupPositionId, final String cupPositionName ) {
+		this.cupPositionId = cupPositionId;
 		this.cupPositionName = cupPositionName;
 	}
 
-	public int getId() {
-		return id;
+	public int getCupPositionId() {
+		return cupPositionId;
 	}
 
-	public void setId( final int id ) {
-		this.id = id;
+	public void setCupPositionId( final int cupPositionId ) {
+		this.cupPositionId = cupPositionId;
 	}
 
 	public String getCupPositionName() {

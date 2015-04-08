@@ -9,6 +9,8 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/cup-team-bets-template.html' ) );
 
 	var WindowView = require( 'js/components/window/window-view' );
+	var service = require( '/resources/js/services/service.js' );
+	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -26,11 +28,19 @@ define( function ( require ) {
 
 		renderBody: function () {
 
-			console.log( this.model );
+			var model = this.model.toJSON();
+			console.log( model );
 
-			var data = _.extend( {}, this.model.toJSON(), { cup: this.cup, translator: translator } );
+			var teams = service.loadTeams();
+			var data = _.extend( {}, model, { cup: this.cup, teams: teams, translator: translator } );
 
 			this.setBody( template( data ) );
+
+			var self = this;
+			_.each( model.cupTeamBets, function( cupTeamBet ) {
+				var cupPosition = cupTeamBet.cupPosition;
+				self.$( '#cup-team-position-' + cupPosition.cupPositionId  ).chosen( { width: '100%' } );
+			});
 
 			this.trigger( 'inner-view-rendered' );
 
