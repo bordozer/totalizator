@@ -14,13 +14,9 @@ define( function ( require ) {
 	var CupScoresModel = require( 'js/components/cup-users-scores/cup-users-scores-model' );
 	var CupScoresView = require( 'js/components/cup-users-scores/cup-users-scores-view' );
 
-	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
+	var cupTeamBets = require( 'js/components/cup-team-bets/cup-team-bets' );
 
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		menuAdminLabel: "Menu: Admin"
-		, menuLogoutLabel: 'Menu: Logout'
-	} );
+	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
 	var CupPageView = Backbone.View.extend( {
 
@@ -34,7 +30,6 @@ define( function ( require ) {
 		render: function () {
 
 			this.$el.html( template( {
-				translator: translator
 			 } ) );
 
 			this._renderNavigation();
@@ -94,6 +89,9 @@ define( function ( require ) {
 
 		_renderCupTeamBets: function() {
 
+			var el = this.$( '.js-cup-team-bets' );
+
+			cupTeamBets( el, { cup: this._getCup() } );
 		},
 
 		_getCup: function() {
