@@ -17,6 +17,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Cup result bets"
 		, menuEditCupTeamBetsLabel: "Edit cup team bets"
+		, noCupTeamPositionLabel: "No bet yet"
 	} );
 
 	var CupTeamBetsDetails = Backbone.View.extend( {
