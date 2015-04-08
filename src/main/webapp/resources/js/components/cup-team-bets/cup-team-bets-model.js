@@ -7,6 +7,8 @@ define( function ( require ) {
 
 	return Backbone.Model.extend( {
 
+		_editMode: false,
+
 		defaults: {
 			cupTeamBets: []
 		},
@@ -18,6 +20,19 @@ define( function ( require ) {
 
 		url: function() {
 			return '/rest/cups/' + this.cup.cupId + '/bets/' + this.currentUser.userId + '/';
+		},
+
+		editMode: function( editMode ) {
+
+			if ( editMode != undefined ) {
+				this._editMode = editMode;
+			}
+
+			return this._editMode;
+		},
+
+		isEditMode: function() {
+			return this._editMode;
 		}
 	});
 } );

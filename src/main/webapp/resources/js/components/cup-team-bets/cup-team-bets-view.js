@@ -18,11 +18,45 @@ define( function ( require ) {
 		title: "Cup result bets"
 	} );
 
+	var CupTeamBetsDetails = Backbone.View.extend({
+
+		initialize: function( options ) {
+
+		},
+
+		render: function ( data ) {
+			this.$el.html( template( data ) );
+		}
+	});
+
+	var CupTeamBetsEdit = Backbone.View.extend({
+
+		initialize: function( options ) {
+			this.teams = service.loadTeams();
+		},
+
+		render: function ( data ) {
+
+			this.$el.html( templateEdit( data ) );
+
+			var self = this;
+			_.each( this.model.get( 'cupTeamBets' ), function( cupTeamBet ) {
+				var cupPosition = cupTeamBet.cupPosition;
+				self.$( '#cup-team-position-' + cupPosition.cupPositionId  ).chosen( { width: '100%' } );
+			});
+
+			return this;
+		}
+	});
+
 	return WindowView.extend( {
 
 		initialize: function( options ) {
 			this.cup = options.options.cup;
 			this.teams = service.loadTeams();
+
+			this.cupTeamBetsView = new CupTeamBetsDetails( { model: this.model } );
+			this.cupTeamBetsEditView = new CupTeamBetsEdit( { model: this.model } );
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -30,6 +64,15 @@ define( function ( require ) {
 
 		renderBody: function () {
 
+			var data = _.extend( {}, this.model.toJSON(), { cup: this.cup, teams: this.teams, translator: translator } );
+
+			var view = this.cupTeamBetsView;
+			if ( this.model.isEditMode() ) {
+				view = this.cupTeamBetsEditView;
+			}
+
+			this.setBody( view.$el );
+			view.render( data );
 
 			this.trigger( 'inner-view-rendered' );
 
@@ -46,40 +89,6 @@ define( function ( require ) {
 
 		getTitleHint: function() {
 			return this.cup.category.categoryName + ': ' + this.cup.cupName;
-		}
-	});
-
-	var CupTeamBetsDetails = Backbone.View.extend({
-
-		initialize: function( options ) {
-
-		},
-
-		render: function () {
-
-		}
-	});
-
-	var CupTeamBetsEdit = Backbone.View.extend({
-
-		initialize: function( options ) {
-			this.teams = service.loadTeams();
-		},
-
-		render: function () {
-			var model = this.model.toJSON();
-
-			var data = _.extend( {}, model, { cup: this.cup, teams: this.teams, translator: translator } );
-
-			this.setBody( templateEdit( data ) );
-
-			var self = this;
-			_.each( model.cupTeamBets, function( cupTeamBet ) {
-				var cupPosition = cupTeamBet.cupPosition;
-				self.$( '#cup-team-position-' + cupPosition.cupPositionId  ).chosen( { width: '100%' } );
-			});
-
-			return this;
 		}
 	});
 } );
