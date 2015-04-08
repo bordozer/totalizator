@@ -1,6 +1,6 @@
 package totalizator.app.models;
 
-import totalizator.app.enums.TeamBetEventType;
+import totalizator.app.enums.CupPosition;
 
 import javax.persistence.*;
 
@@ -45,7 +45,7 @@ public class TeamBet extends AbstractEntity {
 	@JoinColumn(name="userId")
 	private User user;
 
-	private TeamBetEventType teamBetEventType;
+	private CupPosition cupPosition;
 
 	private Date betTime;
 
@@ -65,12 +65,12 @@ public class TeamBet extends AbstractEntity {
 		this.user = user;
 	}
 
-	public TeamBetEventType getTeamBetEventType() {
-		return teamBetEventType;
+	public CupPosition getCupPosition() {
+		return cupPosition;
 	}
 
-	public void setTeamBetEventType( final TeamBetEventType teamBetEventType ) {
-		this.teamBetEventType = teamBetEventType;
+	public void setCupPosition( final CupPosition cupPosition ) {
+		this.cupPosition = cupPosition;
 	}
 
 	public Date getBetTime() {
@@ -83,6 +83,6 @@ public class TeamBet extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %s %s", cup, user, teamBetEventType );
+		return String.format( "%s: %s %s", cup, user, cupPosition );
 	}
 }

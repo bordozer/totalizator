@@ -32,6 +32,8 @@ public class Cup extends AbstractEntity {
 
 	private boolean showOnPortalPage;
 
+	private boolean finished;
+
 	public Cup() {
 	}
 
@@ -62,6 +64,14 @@ public class Cup extends AbstractEntity {
 
 	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
 		this.showOnPortalPage = showOnPortalPage;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished( final boolean finished ) {
+		this.finished = finished;
 	}
 
 	@Override
