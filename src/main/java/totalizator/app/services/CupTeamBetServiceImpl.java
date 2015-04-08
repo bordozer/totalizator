@@ -60,12 +60,12 @@ public class CupTeamBetServiceImpl implements CupTeamBetService {
 	}
 
 	@Override
-	public List<CupTeamBet> load( final Cup cup, final User user, final CupPosition cupPosition ) {
+	public CupTeamBet load( final Cup cup, final User user, final CupPosition cupPosition ) {
 		return cupTeamBetRepository.load( cup, user, cupPosition );
 	}
 
 	@Override
-	public List<CupTeamBet> load( final Cup cup, final Team team, final User user ) {
+	public CupTeamBet load( final Cup cup, final User user, final Team team ) {
 		return cupTeamBetRepository.load( cup, team, user );
 	}
 }

@@ -16,7 +16,7 @@ public interface CupTeamBetService extends GenericService<CupTeamBet> {
 
 	List<CupTeamBet> load( final Cup cup, final User user );
 
-	List<CupTeamBet> load( final Cup cup, final User user, final CupPosition cupPosition );
+	CupTeamBet load( final Cup cup, final User user, final CupPosition cupPosition );
 
-	List<CupTeamBet> load( final Cup cup, final Team team, final User user );
+	CupTeamBet load( final Cup cup, final User user, final Team team );
 }

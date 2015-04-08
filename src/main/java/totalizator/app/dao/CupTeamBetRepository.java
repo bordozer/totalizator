@@ -55,14 +55,6 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 				.getResultList();
 	}
 
-	public List<CupTeamBet> load( final Cup cup, final User user, final CupPosition cupPosition ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION, CupTeamBet.class )
-				.setParameter( "cupId", cup.getId() )
-				.setParameter( "userId", user.getId() )
-				.setParameter( "cupPosition", cupPosition.getId() )
-				.getResultList();
-	}
-
 	public List<CupTeamBet> load( final Cup cup, final Team team ) {
 		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
@@ -70,11 +62,23 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 				.getResultList();
 	}
 
-	public List<CupTeamBet> load( final Cup cup, final Team team, final User user ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM_AND_USER, CupTeamBet.class )
+	public CupTeamBet load( final Cup cup, final User user, final CupPosition cupPosition ) {
+		final List<CupTeamBet> result = em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION, CupTeamBet.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "userId", user.getId() )
+				.setParameter( "cupPosition", cupPosition.getId() )
+				.getResultList();
+
+		return result.size() == 1 ? result.get( 0 ) : null;
+	}
+
+	public CupTeamBet load( final Cup cup, final Team team, final User user ) {
+		final List<CupTeamBet> result = em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM_AND_USER, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "teamId", team.getId() )
 				.setParameter( "userId", user.getId() )
 				.getResultList();
+
+		return result.size() == 1 ? result.get( 0 ) : null;
 	}
 }
