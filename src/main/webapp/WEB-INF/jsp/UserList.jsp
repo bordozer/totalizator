@@ -19,7 +19,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var currentUser = ${userCardModel.currentUserJSON};
+			var currentUser = ${userListModel.currentUserJSON};
 
 			var pageView = new Page( { el: $( '.js-user-list-container' ), bodyRenderer: userList, breadcrumbs: breadcrumbs, options: { currentUser: currentUser } } );
 			pageView.render();

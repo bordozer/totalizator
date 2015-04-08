@@ -6,13 +6,25 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	return Backbone.Model.extend( {
+	var UserModel = Backbone.Model.extend( {
+
+		idAttribute: 'userId',
 
 		userId: 0,
 
 		defaults: {
-			users: []
+			userId: 0
+			, userName: ''
 		},
+
+		initialize: function ( options ) {
+
+		}
+	});
+
+	return Backbone.Collection.extend( {
+
+		model: UserModel,
 
 		initialize: function ( options ) {
 		},

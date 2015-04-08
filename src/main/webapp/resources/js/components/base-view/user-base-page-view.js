@@ -25,7 +25,7 @@ define( function ( require ) {
 			return [
 				{ selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
-				, { selector: '', icon: 'fa fa-users', link: '/users/', text: translator.menuUsersLabel }
+				, { selector: '', icon: 'fa fa-users', link: '/totalizator/users/', text: translator.menuUsersLabel }
 				, { selector: 'divider' }
 				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
