@@ -4,24 +4,37 @@ import totalizator.app.enums.TeamBetEventType;
 
 import javax.persistence.*;
 
-import static totalizator.app.models.TeamBet.LOAD_ALL_FOR_CUP;
-import static totalizator.app.models.TeamBet.LOAD_ALL_FOR_CUP_AND_USER;
+import java.util.Date;
+
+import static totalizator.app.models.TeamBet.*;
 
 @Entity
-@Table(name = "teamBets")
+@Table(
+		name = "teamBets"
+)
 @NamedQueries( {
 		@NamedQuery(
+				name = LOAD_ALL,
+				query = "select t from TeamBet t order by betTime desc"
+		),
+		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP,
-				query = "select t from TeamBet t where cupId= :cupId"
+				query = "select t from TeamBet t where cupId= :cupId order by betTime desc"
+		),
+		@NamedQuery(
+				name = LOAD_ALL_FOR_USER,
+				query = "select t from TeamBet t where userId= :userId order by betTime desc"
 		),
 		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP_AND_USER,
-				query = "select t from TeamBet t where cupId= :cupId and userId= :userId"
+				query = "select t from TeamBet t where cupId= :cupId and userId= :userId order by betTime desc"
 		)
 } )
 public class TeamBet extends AbstractEntity {
 
+	public static final String LOAD_ALL = "teamBet.loadAll";
 	public static final String LOAD_ALL_FOR_CUP = "teamBet.loadForCup";
+	public static final String LOAD_ALL_FOR_USER = "teamBet.loadForCupCupAndUser";
 	public static final String LOAD_ALL_FOR_CUP_AND_USER = "teamBet.loadForCupCupAndUser";
 
 	@ManyToOne
@@ -33,6 +46,8 @@ public class TeamBet extends AbstractEntity {
 	private User user;
 
 	private TeamBetEventType teamBetEventType;
+
+	private Date betTime;
 
 	public Cup getCup() {
 		return cup;
@@ -56,5 +71,18 @@ public class TeamBet extends AbstractEntity {
 
 	public void setTeamBetEventType( final TeamBetEventType teamBetEventType ) {
 		this.teamBetEventType = teamBetEventType;
+	}
+
+	public Date getBetTime() {
+		return betTime;
+	}
+
+	public void setBetTime( final Date betTime ) {
+		this.betTime = betTime;
+	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: %s %s", cup, user, teamBetEventType );
 	}
 }

@@ -53,7 +53,7 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 
 	@Override
 	public MatchBet save( final MatchBet entry ) {
-		return em.merge( entry );
+			return em.merge( entry );
 	}
 
 	@Override

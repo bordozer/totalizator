@@ -10,7 +10,7 @@ import static totalizator.app.models.MatchBet.*;
 @Table(
 		name = "matchBets"
 		, indexes = {
-			@Index( name = "matchId_userid_idx", columnList = "matchId,userId", unique = true )
+			@Index( name = "matchId_userId_idx", columnList = "matchId,userId", unique = true )
 		}
 )
 @NamedQueries( {

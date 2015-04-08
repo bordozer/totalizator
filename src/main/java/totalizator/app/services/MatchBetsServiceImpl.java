@@ -33,9 +33,6 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Autowired
 	private DateTimeService dateTimeService;
 
-	@Autowired
-	private DTOService dtoService;
-
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll() {
