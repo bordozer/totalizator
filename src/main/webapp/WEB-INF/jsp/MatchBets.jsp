@@ -5,6 +5,7 @@
 
 <tags:page currentUser="${matchBetsModel.currentUser}">
 
+	<c:set var="cup" value="${matchBetsModel.cup}" />
 	<c:set var="match" value="${matchBetsModel.match}" />
 
 	<div class="portal-page-container"></div>
@@ -17,10 +18,12 @@
 				title: 'Match bests'
 			} );
 
-			var teamsTitle = '${match.team1.teamName} vs ${match.team2.teamName} ( ${match.beginningTime} )';
+			var teamsTitle = '#${match.id}, ${match.team1.teamName} vs ${match.team2.teamName}, ${match.beginningTime}';
 
 			var breadcrumbs = [
-				{ link: '#', title: translator.title }
+				{ link: '#', title: "${cup.category.categoryName}" }
+				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
+				, { link: '#', title: translator.title }
 				, { link: '#', title: teamsTitle }
 			];
 

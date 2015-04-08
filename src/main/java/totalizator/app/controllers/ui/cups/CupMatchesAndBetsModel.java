@@ -1,44 +1,27 @@
 package totalizator.app.controllers.ui.cups;
 
 import totalizator.app.controllers.ui.AbstractPageModel;
+import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 
 public class CupMatchesAndBetsModel extends AbstractPageModel {
 
-	private int cupId;
-	private String categoryName;
-	private String cupName;
+	private Cup cup;
 
 	protected CupMatchesAndBetsModel( final User user ) {
 		super( user );
 	}
 
-	public void setCupId( final int cupId ) {
-		this.cupId = cupId;
+	public Cup getCup() {
+		return cup;
 	}
 
-	public int getCupId() {
-		return cupId;
-	}
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName( final String categoryName ) {
-		this.categoryName = categoryName;
-	}
-
-	public String getCupName() {
-		return cupName;
-	}
-
-	public void setCupName( final String cupName ) {
-		this.cupName = cupName;
+	public void setCup( final Cup cup ) {
+		this.cup = cup;
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%d", cupId );
+		return String.format( "%s", cup );
 	}
 }

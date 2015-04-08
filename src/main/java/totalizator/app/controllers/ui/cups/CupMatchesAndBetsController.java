@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import totalizator.app.models.Cup;
 import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
 
@@ -34,10 +33,7 @@ public class CupMatchesAndBetsController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/" )
 	public String portalPage( final @PathVariable( "cupId" ) int cupId, final @ModelAttribute( MODEL_NAME ) CupMatchesAndBetsModel model ) {
 
-		final Cup cup = cupService.load( cupId );
-		model.setCupId( cupId );
-		model.setCategoryName( cup.getCategory().getCategoryName() );
-		model.setCupName( cup.getCupName() );
+		model.setCup( cupService.load( cupId ) );
 
 		return VIEW;
 	}

@@ -43,6 +43,8 @@ public class MatchBetsController {
 		model.setMatch( match );
 		model.setMatchTime( dateTimeService.formatDate( match.getBeginningTime() ) );
 
+		model.setCup( match.getCup() );
+
 		return VIEW;
 	}
 }

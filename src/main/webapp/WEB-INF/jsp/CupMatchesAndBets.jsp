@@ -5,22 +5,24 @@
 
 <tags:page currentUser="${cupMatchesAndBetsModel.currentUser}">
 
+	<c:set var="cup" value="${cupMatchesAndBetsModel.cup}" />
+
 	<div class="portal-page-container"></div>
 
 	<script type="text/javascript">
 
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup', 'translator' ], function ( $, Page, cup, Translator ) {
 
-			var cupId = ${cupMatchesAndBetsModel.cupId};
+			var cupId = ${cup.id};
 
 			var translator = new Translator( {
-				title: 'Cups'
+				title: 'Cup details'
 			} );
 
 			var breadcrumbs = [
-				{ link: '#', title: "${cupMatchesAndBetsModel.categoryName}" }
+				{ link: '#', title: "${cup.category.categoryName}" }
+				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
 				, { link: '#', title: translator.title }
-				, { link: '#', title: "${cupMatchesAndBetsModel.cupName}" }
 			];
 
 			var currentUser = ${cupMatchesAndBetsModel.currentUserJSON};
