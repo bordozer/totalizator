@@ -57,7 +57,7 @@ define( function ( require ) {
 
 		_bind: function() {
 
-			var result = {};
+			var result = [];
 
 			var self = this;
 			_.each( this.model.get( 'cupTeamBets' ), function ( cupTeamBet ) {
@@ -67,7 +67,7 @@ define( function ( require ) {
 				var cupPositionId = cupPosition.cupPositionId;
 				var teamId = self.$( '#cup-team-position-' + cupPositionId ).val();
 
-				result.push( { teamId: cupPositionId, cupPositionId: teamId } );
+				result.push( { teamId: teamId, cupPositionId: cupPositionId } );
 			} );
 
 			console.log( result );

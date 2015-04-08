@@ -55,11 +55,16 @@ public class CupTeamBetsRestController {
 
 		for ( final UserCupTeamBetsDTO userCupTeamBetsDTO : userCupTeamBetsDTOs ) {
 
+			final int teamId = userCupTeamBetsDTO.getTeamId();
+			if ( teamId == 0 ) {
+				continue;
+			}
+
 			final CupTeamBet entry = new CupTeamBet();
 			entry.setCup( cup );
 			entry.setUser( user );
 
-			entry.setTeam( teamService.load( userCupTeamBetsDTO.getTeamId() ) );
+			entry.setTeam( teamService.load( teamId ) );
 			entry.setCupPosition( CupPosition.getById( userCupTeamBetsDTO.getCupPositionId() ) );
 
 			entry.setBetTime( new Date() );
