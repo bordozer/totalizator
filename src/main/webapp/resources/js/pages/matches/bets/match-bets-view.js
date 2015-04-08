@@ -13,7 +13,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: "Match best title"
+		title: "Matches and bests"
 		, userLabel: "User"
 		, userPointsLabel: "Points"
 	} );

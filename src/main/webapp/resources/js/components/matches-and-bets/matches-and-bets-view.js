@@ -16,7 +16,8 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		actionMatchBetAdd: 'Match and Bets: Add bet'
+		title: 'Matches and bests'
+		, actionMatchBetAdd: 'Match and Bets: Add bet'
 		, actionMatchBetEdit: 'Match and Bets: Edit bet'
 		, actionMatchBetSave: 'Match and Bets: save bet'
 		, actionCancelBetEditing: 'Match and Bets: Cancel bet editing'
@@ -43,6 +44,10 @@ define( function ( require ) {
 
 			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
 			this.model.refresh( filter );
+		},
+
+		getTitle: function() {
+			return translator.title;
 		},
 
 		getIcon: function() {

@@ -36,6 +36,7 @@ public class CupMatchesAndBetsController {
 
 		final Cup cup = cupService.load( cupId );
 		model.setCupId( cupId );
+		model.setCategoryName( cup.getCategory().getCategoryName() );
 		model.setCupName( cup.getCupName() );
 
 		return VIEW;

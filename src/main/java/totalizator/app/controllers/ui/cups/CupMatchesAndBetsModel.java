@@ -6,6 +6,7 @@ import totalizator.app.models.User;
 public class CupMatchesAndBetsModel extends AbstractPageModel {
 
 	private int cupId;
+	private String categoryName;
 	private String cupName;
 
 	protected CupMatchesAndBetsModel( final User user ) {
@@ -18,6 +19,14 @@ public class CupMatchesAndBetsModel extends AbstractPageModel {
 
 	public int getCupId() {
 		return cupId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName( final String categoryName ) {
+		this.categoryName = categoryName;
 	}
 
 	public String getCupName() {

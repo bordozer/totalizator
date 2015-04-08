@@ -14,7 +14,7 @@
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/matches/bets/match-bets', 'translator' ], function ( $, Page, matchBet, Translator ) {
 
 			var translator = new Translator( {
-				title: 'Match best title'
+				title: 'Match bests'
 			} );
 
 			var teamsTitle = '${match.team1.teamName} vs ${match.team2.teamName} ( ${match.beginningTime} )';

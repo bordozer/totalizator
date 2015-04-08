@@ -14,14 +14,13 @@
 			var cupId = ${cupMatchesAndBetsModel.cupId};
 
 			var translator = new Translator( {
-				title: 'Matches and bets: page title'
+				title: 'Cups'
 			} );
 
-			var title = "${cupMatchesAndBetsModel.cupName} / " + translator.title;
-
 			var breadcrumbs = [
-				{ link: '#', title: "${cupMatchesAndBetsModel.cupName}" }
+				{ link: '#', title: "${cupMatchesAndBetsModel.categoryName}" }
 				, { link: '#', title: translator.title }
+				, { link: '#', title: "${cupMatchesAndBetsModel.cupName}" }
 			];
 
 			var currentUser = ${cupMatchesAndBetsModel.currentUserJSON};
