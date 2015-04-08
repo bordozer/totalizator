@@ -55,8 +55,21 @@ define( function ( require ) {
 			return this;
 		},
 
-		_onSaveClick: function() {
+		_bind: function() {
 
+			var result = {};
+
+			var self = this;
+			_.each( this.model.get( 'cupTeamBets' ), function ( cupTeamBet ) {
+				var cupPosition = cupTeamBet.cupPosition;
+				result[ cupPosition.cupPositionId ] = self.$( '#cup-team-position-' + cupPosition.cupPositionId ).val();
+			} );
+
+			return result;
+		},
+
+		_onSaveClick: function() {
+			this.model.save( this._bind() );
 		},
 
 		_onDiscardClick: function() {
