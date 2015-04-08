@@ -34,8 +34,8 @@ public class TeamBet extends AbstractEntity {
 
 	public static final String LOAD_ALL = "teamBet.loadAll";
 	public static final String LOAD_ALL_FOR_CUP = "teamBet.loadForCup";
-	public static final String LOAD_ALL_FOR_USER = "teamBet.loadForCupCupAndUser";
-	public static final String LOAD_ALL_FOR_CUP_AND_USER = "teamBet.loadForCupCupAndUser";
+	public static final String LOAD_ALL_FOR_USER = "teamBet.loadForUser";
+	public static final String LOAD_ALL_FOR_CUP_AND_USER = "teamBet.loadForCupAndUser";
 
 	@ManyToOne
 	@JoinColumn(name="cupId")
