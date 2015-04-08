@@ -8,26 +8,37 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-team-bets-template.html' ) );
 
+	var WindowView = require( 'js/components/window/window-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		cupResultBetsLabel: "cup result bets"
+		title: "Cup result bets"
 	} );
 
-	return Backbone.View.extend( {
+	return WindowView.extend( {
 
 		initialize: function( options ) {
 			this.cup = options.options.cup;
 			this.render();
 		},
 
-		render: function () {
+		renderBody: function () {
 
-			this.$el.html( template( {
-				cup: this.cup
-				, translator: translator
-			 } ) );
+			var data = _.extend( {}, this.model.toJSON(), { cup: this.cup, translator: translator } );
+
+			this.setBody( template( data ) );
+
+			this.trigger( 'inner-view-rendered' );
 
 			return this;
+		},
+
+		getTitle: function () {
+			return translator.title; //
+		},
+
+		getIcon: function () {
+			return 'fa-money';
 		}
 
 	});
