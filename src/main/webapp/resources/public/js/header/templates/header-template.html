@@ -18,7 +18,17 @@
 				<ul class="breadcrumb">
 					<li><a href="/totalizator/"><%=translator.projectNameLabel%></a></li>
 					<% _.each( breadcrumbs, function( crumb ){ %>
-						<li <a href="<%=crumb.link%>"><%=crumb.title%></a></li>
+						<li class="<%=crumb.link == '#' ? 'active' : ''%>">
+
+							<% if( crumb.link == '#' ) { %>
+								<%=crumb.title%>
+							<% } %>
+
+							<% if( crumb.link != '#' ) { %>
+								<a href="<%=crumb.link%>"><%=crumb.title%></a>
+							<% } %>
+
+						</li>
 					<% }) %>
 				</ul>
 			</div>
