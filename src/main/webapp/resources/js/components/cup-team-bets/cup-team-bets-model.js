@@ -13,10 +13,11 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cup = options.options.cup;
+			this.currentUser = options.options.currentUser;
 		},
 
 		url: function() {
-			return '/rest/cups/' + this.cup.cupId + '/bets/';
+			return '/rest/cups/' + this.cup.cupId + '/bets/' + this.currentUser.userId + '/';
 		}
 	});
 } );

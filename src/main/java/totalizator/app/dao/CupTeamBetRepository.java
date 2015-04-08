@@ -48,21 +48,15 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 				.getResultList();
 	}
 
-	public List<CupTeamBet> load( final User user ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
-				.setParameter( "userId", user.getId() )
-				.getResultList();
-	}
-
 	public List<CupTeamBet> load( final Cup cup, final User user ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
+		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "userId", user.getId() )
 				.getResultList();
 	}
 
 	public List<CupTeamBet> load( final Cup cup, final User user, final CupPosition cupPosition ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
+		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "userId", user.getId() )
 				.setParameter( "cupPosition", cupPosition.getId() )
@@ -70,14 +64,14 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 	}
 
 	public List<CupTeamBet> load( final Cup cup, final Team team ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
+		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "teamId", team.getId() )
 				.getResultList();
 	}
 
 	public List<CupTeamBet> load( final Cup cup, final Team team, final User user ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
+		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM_AND_USER, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "teamId", team.getId() )
 				.setParameter( "userId", user.getId() )

@@ -91,7 +91,7 @@ define( function ( require ) {
 
 			var el = this.$( '.js-cup-team-bets' );
 
-			cupTeamBets( el, { cup: this._getCup() } );
+			cupTeamBets( el, { cup: this._getCup(), currentUser: this.currentUser } );
 		},
 
 		_getCup: function() {
