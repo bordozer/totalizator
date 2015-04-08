@@ -34,12 +34,15 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			return translator.title; //
+			return translator.title;
 		},
 
 		getIcon: function () {
 			return 'fa-money';
-		}
+		},
 
+		getTitleHint: function() {
+			return this.cup.category.categoryName + ': ' + this.cup.cupName;
+		}
 	});
 } );
