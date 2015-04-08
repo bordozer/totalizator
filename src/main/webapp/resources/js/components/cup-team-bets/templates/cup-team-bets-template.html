@@ -11,7 +11,7 @@
 					<select class="chosen-select" id="cup-team-position-<%=cupTeamBet.cupPosition.cupPositionId%>">
 						<option value="0">&nbsp;</option>
 						<% _.each( teams, function( team ) { %>
-						<option value="<%=team.teamId%>" <%= cupTeamBet.cupPosition.cupPositionId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+						<option value="<%=team.teamId%>" <%= cupTeamBet.team != null && cupTeamBet.team.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
 						<% }) %>
 					</select>
 				</td>
