@@ -7,6 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/cup-team-bets-template.html' ) );
+	var templateEdit = _.template( require( 'text!./templates/cup-team-bets-template-edit.html' ) );
 
 	var WindowView = require( 'js/components/window/window-view' );
 	var service = require( '/resources/js/services/service.js' );
@@ -21,6 +22,7 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.cup = options.options.cup;
+			this.teams = service.loadTeams();
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -28,19 +30,6 @@ define( function ( require ) {
 
 		renderBody: function () {
 
-			var model = this.model.toJSON();
-			console.log( model );
-
-			var teams = service.loadTeams();
-			var data = _.extend( {}, model, { cup: this.cup, teams: teams, translator: translator } );
-
-			this.setBody( template( data ) );
-
-			var self = this;
-			_.each( model.cupTeamBets, function( cupTeamBet ) {
-				var cupPosition = cupTeamBet.cupPosition;
-				self.$( '#cup-team-position-' + cupPosition.cupPositionId  ).chosen( { width: '100%' } );
-			});
 
 			this.trigger( 'inner-view-rendered' );
 
@@ -57,6 +46,40 @@ define( function ( require ) {
 
 		getTitleHint: function() {
 			return this.cup.category.categoryName + ': ' + this.cup.cupName;
+		}
+	});
+
+	var CupTeamBetsDetails = Backbone.View.extend({
+
+		initialize: function( options ) {
+
+		},
+
+		render: function () {
+
+		}
+	});
+
+	var CupTeamBetsEdit = Backbone.View.extend({
+
+		initialize: function( options ) {
+			this.teams = service.loadTeams();
+		},
+
+		render: function () {
+			var model = this.model.toJSON();
+
+			var data = _.extend( {}, model, { cup: this.cup, teams: this.teams, translator: translator } );
+
+			this.setBody( templateEdit( data ) );
+
+			var self = this;
+			_.each( model.cupTeamBets, function( cupTeamBet ) {
+				var cupPosition = cupTeamBet.cupPosition;
+				self.$( '#cup-team-position-' + cupPosition.cupPositionId  ).chosen( { width: '100%' } );
+			});
+
+			return this;
 		}
 	});
 } );
