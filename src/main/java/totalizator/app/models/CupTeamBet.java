@@ -23,7 +23,7 @@ import static totalizator.app.models.CupTeamBet.*;
 		),
 		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP_AND_TEAM,
-				query = "select t from CupTeamBet t where cupId= :cupId and teamId: =teamId order by betTime desc"
+				query = "select t from CupTeamBet t where cupId= :cupId and teamId= :teamId order by betTime desc"
 		),
 		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP_AND_USER,
@@ -31,7 +31,7 @@ import static totalizator.app.models.CupTeamBet.*;
 		),
 		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP_AND_TEAM_AND_USER,
-				query = "select t from CupTeamBet t where cupId= :cupId and teamId: =teamId and userId= :userId order by betTime desc"
+				query = "select t from CupTeamBet t where cupId= :cupId and teamId= :teamId and userId= :userId order by betTime desc"
 		),
 		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION,
