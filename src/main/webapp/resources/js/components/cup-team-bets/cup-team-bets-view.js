@@ -16,22 +16,28 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Cup result bets"
+		, menuEditCupTeamBetsLabel: "Edit cup team bets"
 	} );
 
-	var CupTeamBetsDetails = Backbone.View.extend({
+	var CupTeamBetsDetails = Backbone.View.extend( {
 
-		initialize: function( options ) {
+		initialize: function ( options ) {
 
 		},
 
 		render: function ( data ) {
 			this.$el.html( template( data ) );
 		}
-	});
+	} );
 
-	var CupTeamBetsEdit = Backbone.View.extend({
+	var CupTeamBetsEdit = Backbone.View.extend( {
 
-		initialize: function( options ) {
+		events: {
+			'click .js-cup-team-bets-save': '_onSaveClick'
+			, 'click .js-cup-team-bets-discard ': '_onDiscardClick'
+		},
+
+		initialize: function ( options ) {
 			this.teams = service.loadTeams();
 		},
 
@@ -40,23 +46,46 @@ define( function ( require ) {
 			this.$el.html( templateEdit( data ) );
 
 			var self = this;
-			_.each( this.model.get( 'cupTeamBets' ), function( cupTeamBet ) {
+			_.each( this.model.get( 'cupTeamBets' ), function ( cupTeamBet ) {
 				var cupPosition = cupTeamBet.cupPosition;
-				self.$( '#cup-team-position-' + cupPosition.cupPositionId  ).chosen( { width: '100%' } );
-			});
+				self.$( '#cup-team-position-' + cupPosition.cupPositionId ).chosen( { width: '100%' } );
+			} );
 
 			return this;
+		},
+
+		_onSaveClick: function() {
+
+		},
+
+		_onDiscardClick: function() {
+			this.model.editMode( false );
+			this.trigger( 'cancel' );
 		}
-	});
+	} );
 
 	return WindowView.extend( {
 
-		initialize: function( options ) {
+		events: {
+			'click .js-menu-edit-cup-team-bets': '_onEditCupTeamBetsClick'
+		},
+
+		initialize: function ( options ) {
+
 			this.cup = options.options.cup;
 			this.teams = service.loadTeams();
 
+			var menuItems = [
+				{ selector: 'divider' }
+				,
+				{ selector: 'js-menu-edit-cup-team-bets', icon: 'fa fa-edit', link: '#', text: translator.menuEditCupTeamBetsLabel }
+			];
+			this.addMenuItems( menuItems );
+
 			this.cupTeamBetsView = new CupTeamBetsDetails( { model: this.model } );
+
 			this.cupTeamBetsEditView = new CupTeamBetsEdit( { model: this.model } );
+			this.cupTeamBetsEditView.on( 'cancel', this.renderBody, this );
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -74,6 +103,8 @@ define( function ( require ) {
 			this.setBody( view.$el );
 			view.render( data );
 
+			view.delegateEvents();
+
 			this.trigger( 'inner-view-rendered' );
 
 			return this;
@@ -87,8 +118,16 @@ define( function ( require ) {
 			return 'fa-money';
 		},
 
-		getTitleHint: function() {
+		getTitleHint: function () {
 			return this.cup.category.categoryName + ': ' + this.cup.cupName;
+		},
+
+		_onEditCupTeamBetsClick: function ( evt ) {
+			evt.preventDefault();
+
+			this.model.editMode( true );
+
+			this.renderBody();
 		}
-	});
+	} );
 } );
