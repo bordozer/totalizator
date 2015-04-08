@@ -2,6 +2,8 @@ package totalizator.app.models;
 
 import javax.persistence.*;
 
+import java.util.Date;
+
 import static totalizator.app.models.Cup.FIND_BY_NAME;
 import static totalizator.app.models.Cup.LOAD_ALL;
 
@@ -31,6 +33,8 @@ public class Cup extends AbstractEntity {
 	private Category category;
 
 	private boolean showOnPortalPage;
+
+	private Date startDate;
 
 	private boolean finished;
 
@@ -64,6 +68,14 @@ public class Cup extends AbstractEntity {
 
 	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
 		this.showOnPortalPage = showOnPortalPage;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate( final Date startDate ) {
+		this.startDate = startDate;
 	}
 
 	public boolean isFinished() {
