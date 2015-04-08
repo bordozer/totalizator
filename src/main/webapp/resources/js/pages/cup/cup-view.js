@@ -41,7 +41,9 @@ define( function ( require ) {
 
 			this._renderCupScores();
 
-			this._renderCupMatches();
+			this._renderCupMatchesAndBets();
+
+			this._renderCupTeamBets();
 
 			return this;
 		},
@@ -63,7 +65,7 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderCupMatches: function() {
+		_renderCupMatchesAndBets: function() {
 
 			var currentUser = this.currentUser;
 
@@ -88,6 +90,10 @@ define( function ( require ) {
 				, menuItems: []
 				, currentUser: currentUser
 			} );
+		},
+
+		_renderCupTeamBets: function() {
+
 		},
 
 		_getCup: function() {

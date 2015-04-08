@@ -49,7 +49,7 @@ define( function ( require ) {
 
 		renderInnerView: function ( filter ) {
 
-			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
+			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
 
 			this.model.refresh( filter );
 		},
@@ -62,7 +62,7 @@ define( function ( require ) {
 			return this.getTitleHint();
 		},
 
-		_renderCupMatches: function() {
+		_renderCupMatchesAndBets: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
 

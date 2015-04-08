@@ -41,7 +41,7 @@ define( function ( require ) {
 
 			this.currentUser = this.options.currentUser;
 
-			this.listenToOnce( this.model, 'sync', this._renderCupMatches );
+			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
 			this.model.refresh( filter );
 		},
 
@@ -49,7 +49,7 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
-		_renderCupMatches: function() {
+		_renderCupMatchesAndBets: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
 			el.empty();
