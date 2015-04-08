@@ -66,7 +66,7 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 		final List<CupTeamBet> result = em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "userId", user.getId() )
-				.setParameter( "cupPosition", cupPosition.getId() )
+				.setParameter( "cupPosition", cupPosition )
 				.getResultList();
 
 		return result.size() == 1 ? result.get( 0 ) : null;

@@ -53,8 +53,8 @@ public class CupTeamBetsRestController {
 		for ( final CupPosition cupPosition : CupPosition.values() ) {
 			final CupTeamBet cupTeamBet = cupTeamBetService.load( cup, user, cupPosition );
 
-			final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet );
-			if ( cupTeamBetDTO != null ) {
+			if ( cupTeamBet != null ) {
+				final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet );
 				result.add( cupTeamBetDTO );
 			} else {
 				final CupTeamBetDTO emptyCupTeamBetDTO = new CupTeamBetDTO();
