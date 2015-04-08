@@ -29,7 +29,7 @@ public enum CupPosition {
 		return order;
 	}
 
-	public CupPosition getById( final int id ) {
+	public static CupPosition getById( final int id ) {
 
 		for ( final CupPosition cupPosition : values() ) {
 			if ( cupPosition.getId() == id ) {

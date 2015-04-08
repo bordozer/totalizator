@@ -61,15 +61,22 @@ define( function ( require ) {
 
 			var self = this;
 			_.each( this.model.get( 'cupTeamBets' ), function ( cupTeamBet ) {
+
 				var cupPosition = cupTeamBet.cupPosition;
-				result[ cupPosition.cupPositionId ] = self.$( '#cup-team-position-' + cupPosition.cupPositionId ).val();
+
+				var cupPositionId = cupPosition.cupPositionId;
+				var teamId = self.$( '#cup-team-position-' + cupPositionId ).val();
+
+				result.push( { teamId: cupPositionId, cupPositionId: teamId } );
 			} );
+
+			console.log( result );
 
 			return result;
 		},
 
 		_onSaveClick: function() {
-			this.model.save( this._bind() );
+			this.model.save( { data: this._bind() }, { cache: false } );
 		},
 
 		_onDiscardClick: function() {
