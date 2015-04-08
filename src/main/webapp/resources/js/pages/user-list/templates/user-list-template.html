@@ -6,6 +6,14 @@
 
 	<div class="col-lg-10 js-user-list">
 
+		<ul>
+			<% _.each( users, function( user ) { %>
+				<li>
+					<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
+				</li>
+			<% }) %>
+		</ul>
+
 	</div>
 
 </div>

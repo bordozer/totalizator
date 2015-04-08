@@ -25,20 +25,21 @@ define( function ( require ) {
 		render: function() {
 
 			this.$el.html( template( {
-				translator: translator
+				users: this.model.toJSON()
+				, translator: translator
 			} ) );
 
 			this._renderNavigation();
 
-			this._renderUserList();
+//			this._renderUserList();
 		},
 
 		_renderNavigation: function() {
 			var selectedCupId = 0;
 			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
-		},
+		}
 
-		_renderUserList: function() {
+		/*_renderUserList: function() {
 			var el = this.$( '.js-user-list' );
 
 			var userRenderer = _.bind( this._userRenderer, this );
@@ -49,6 +50,6 @@ define( function ( require ) {
 			var user = model.toJSON();
 
 			this.$( '.js-user-list' ).append( user.userName );
-		}
+		}*/
 	});
 } );
