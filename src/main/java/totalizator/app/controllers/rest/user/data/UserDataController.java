@@ -1,7 +1,5 @@
 package totalizator.app.controllers.rest.user.data;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +9,6 @@ import totalizator.app.models.User;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
-import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -23,18 +20,6 @@ public class UserDataController {
 
 	@Autowired
 	private UserService userService;
-
-	@ResponseBody
-	@ResponseStatus( HttpStatus.OK )
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<UserDTO> getUsers() {
-		return Lists.transform( userService.loadAll(), new Function<User, UserDTO>() {
-			@Override
-			public UserDTO apply( final User user ) {
-				return getUserDTO( user );
-			}
-		} );
-	}
 
 	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )

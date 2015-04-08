@@ -23,7 +23,7 @@
 			} );
 
 			var breadcrumbs = [
-				{ link: '#', title: translator.title }
+				{ link: '/totalizator/users/', title: translator.title }
 				, { link: '#', title: '${username}' }
 			];
 

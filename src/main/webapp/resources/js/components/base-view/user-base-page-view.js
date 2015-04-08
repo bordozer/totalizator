@@ -11,6 +11,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
+		, menuUsersLabel: 'Users'
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
@@ -23,6 +24,8 @@ define( function ( require ) {
 		mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel }
+				, { selector: 'divider' }
+				, { selector: '', icon: 'fa fa-users', link: '/users/', text: translator.menuUsersLabel }
 				, { selector: 'divider' }
 				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];

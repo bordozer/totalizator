@@ -31,6 +31,8 @@ define( function ( require ) {
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }
+				, { selector: '', icon: 'fa fa-users', link: '/users/', text: translator.menuUsersLabel }
+				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }

@@ -11,7 +11,7 @@ import totalizator.app.services.UserService;
 import java.security.Principal;
 
 @Controller
-@RequestMapping( "totalizator/users/{userId}/" )
+@RequestMapping( "/totalizator/users/{userId}" )
 public class UserCardController {
 
 	public static final String MODEL_NAME = "userCardModel";
@@ -26,7 +26,7 @@ public class UserCardController {
 		return new UserCardModel( userService.load( userId ), userService.findByLogin( principal.getName() ) );
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "" )
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String portalPage( final @ModelAttribute( MODEL_NAME ) UserCardModel model ) {
 		return VIEW;
 	}
