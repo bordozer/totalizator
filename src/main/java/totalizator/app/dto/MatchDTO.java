@@ -11,9 +11,9 @@ public class MatchDTO {
 
 	private int matchId;
 
-	private int categoryId;
+	private CategoryDTO category;
 
-	private int cupId;
+	private CupDTO cup;
 
 	private TeamDTO team1;
 	private int score1;
@@ -32,20 +32,20 @@ public class MatchDTO {
 		this.matchId = matchId;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public CategoryDTO getCategory() {
+		return category;
 	}
 
-	public void setCategoryId( final int categoryId ) {
-		this.categoryId = categoryId;
+	public void setCategory( final CategoryDTO category ) {
+		this.category = category;
 	}
 
-	public int getCupId() {
-		return cupId;
+	public CupDTO getCup() {
+		return cup;
 	}
 
-	public void setCupId( final int cupId ) {
-		this.cupId = cupId;
+	public void setCup( final CupDTO cup ) {
+		this.cup = cup;
 	}
 
 	public TeamDTO getTeam1() {

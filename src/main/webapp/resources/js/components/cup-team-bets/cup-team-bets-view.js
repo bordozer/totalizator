@@ -20,7 +20,7 @@ define( function ( require ) {
 		, noCupTeamPositionLabel: "No bet yet"
 		, cupPositionLabel: "cup position"
 		, validation_DuplicateTeams: "Cup team bet validation: Duplicated teams!"
-		, cupBettingIsFinished: "Cup betting is finished"
+		, cupBettingIsFinished: "Cup betting is denied"
 	} );
 
 	var CupTeamBetsDetails = Backbone.View.extend( {

@@ -33,6 +33,8 @@ define( function ( require ) {
 		, footer_NoBetYetLabel: 'Match and Bets / Footer: no bet yet'
 		, footer_BettingFinishedLabel: 'Match and Bets / Footer: betting finished'
 		, footer_MatchFinishedLabel: 'Match and Bets / Footer: Match finished'
+
+		, matchBettingIsFinished: "Match betting is denied"
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
@@ -309,6 +311,8 @@ define( function ( require ) {
 
 		_onBetButtonClick: function( evt ) {
 			evt.preventDefault();
+
+			console.log( this.model );
 
 			this._goBetMode();
 		},

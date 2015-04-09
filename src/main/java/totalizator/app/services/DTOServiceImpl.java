@@ -99,7 +99,7 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public void initMatchFromDTO( final MatchDTO matchDTO, final Match match ) {
-		match.setCup( cupService.load( matchDTO.getCupId() ) );
+		match.setCup( cupService.load( matchDTO.getCup().getCupId() ) );
 
 		match.setTeam1( teamService.load( matchDTO.getTeam1().getTeamId() ) );
 		match.setScore1( matchDTO.getScore1() );
@@ -185,8 +185,8 @@ public class DTOServiceImpl implements DTOService {
 				final MatchDTO dto = new MatchDTO();
 
 				dto.setMatchId( match.getId() );
-				dto.setCategoryId( match.getCup().getCategory().getId() );
-				dto.setCupId( match.getCup().getId() );
+				dto.setCategory( transformCategory( match.getCup().getCategory() ) );
+				dto.setCup( transformCup( match.getCup() ) );
 
 				dto.setTeam1( transformTeam( match.getTeam1() ) );
 				dto.setScore1( match.getScore1() );
