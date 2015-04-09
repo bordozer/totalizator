@@ -8,6 +8,7 @@ public class CupDTO {
 	private int cupId;
 	private String cupName;
 	private CategoryDTO category;
+	private int winnersCount;
 	private boolean showOnPortalPage;
 
 	public CupDTO() {
@@ -49,6 +50,14 @@ public class CupDTO {
 
 	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
 		this.showOnPortalPage = showOnPortalPage;
+	}
+
+	public int getWinnersCount() {
+		return winnersCount;
+	}
+
+	public void setWinnersCount( final int winnersCount ) {
+		this.winnersCount = winnersCount;
 	}
 
 	@Override

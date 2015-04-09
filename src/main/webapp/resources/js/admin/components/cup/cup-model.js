@@ -11,9 +11,11 @@ define( function ( require ) {
 		defaults: {
 			cupId: 0
 			, cupName: ''
-			, isEditState: false
 			, categoryId: 0
+			, winnersCount: 3
+			, finished: false
 			, showOnPortalPage: false
+			, isEditState: false
 		},
 
 		initialize: function ( options ) {

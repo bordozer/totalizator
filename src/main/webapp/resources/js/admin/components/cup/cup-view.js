@@ -21,6 +21,9 @@ define( function ( require ) {
 		, entryEditCategoryLabel: "Category"
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
 		, entryEditShowOnPortalPageLabel: "Admin / Cups / Edit: Show on portal page label"
+		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
+		, cupValidation_CupName: "Cup validation: Enter a cup name!"
+		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
 	} );
 
 	var CupsView = WindowView.extend( {
@@ -133,7 +136,7 @@ define( function ( require ) {
 			, 'click .cup-entry-save': '_onEntrySaveClick'
 			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
 			, 'click .cup-entry-del': '_onEntryDelClick'
-			, 'change .entry-name, .entry-category-id': '_onChange'
+			, 'change .entry-name, .entry-category-id, .winners-count-field': '_onChange'
 		},
 
 		initialize: function ( options ) {
@@ -204,14 +207,21 @@ define( function ( require ) {
 			var cupName = this._getCupName();
 			var categoryId = this._getCategoryId();
 			var showOnPortalPage = this._getShowOnPortalPage();
+			var winnersCount = this._getWinnersCount();
 
-			this.model.set( { cupName: cupName, categoryId: categoryId, showOnPortalPage: showOnPortalPage } );
+			this.model.set( { cupName: cupName, categoryId: categoryId, winnersCount: winnersCount, showOnPortalPage: showOnPortalPage } );
 		},
 
 		_validate: function() {
 
 			if ( this._getCupName().length == 0 ) {
-				alert( 'Enter a name!' );
+				alert( translator.cupValidation_CupName );
+
+				return false;
+			}
+
+			if ( this._getWinnersCount() <= 0 ) {
+				alert( translator.cupValidation_WinnersCount );
 
 				return false;
 			}
@@ -229,6 +239,10 @@ define( function ( require ) {
 
 		_getShowOnPortalPage: function() {
 			return this.$( '.show-on-portal-page-checkbox' ).is(':checked');
+		},
+
+		_getWinnersCount: function() {
+			return this.$( '.winners-count-field' ).val();
 		},
 
 		_onChange: function( evt ) {

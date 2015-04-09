@@ -30,6 +30,13 @@
 				</tr>
 
 				<tr>
+					<td><%=translator.entryEditWinnersCountLabel%></td>
+					<td>
+						<input type="number" class="form-control winners-count-field" value="<%=model.winnersCount %>" >
+					</td>
+				</tr>
+
+				<tr>
 					<td><%=translator.entryEditShowOnPortalPageLabel%></td>
 					<td>
 						<input type="checkbox" class="show-on-portal-page-checkbox" value="true" <%=model.showOnPortalPage ? 'checked' : ''%> >

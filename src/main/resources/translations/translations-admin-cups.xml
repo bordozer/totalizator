@@ -18,6 +18,26 @@
 	</translation>
 
 	<translation>
+		<nerd>Admin / Cups / Edit: Winners count</nerd>
+		<ru><![CDATA[К-во победителей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Cup validation: Enter a cup name!</nerd>
+		<ru><![CDATA[Введите название чемпионата]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Cup validation: Winners count should be positive number!</nerd>
+		<ru><![CDATA[К-во победителей должно быть больше нуля]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

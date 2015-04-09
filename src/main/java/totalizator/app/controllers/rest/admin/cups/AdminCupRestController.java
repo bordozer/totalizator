@@ -44,10 +44,12 @@ public class AdminCupRestController {
 		// TODO: check if name exists
 		final Cup cup = new Cup( cupDTO.getCupName(), categoryService.load( cupDTO.getCategory().getCategoryId() ) );
 		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
+		cup.setWinnersCount( cupDTO.getWinnersCount() );
 
 		cupService.save( cup );
 
 		cupDTO.setCupId( cup.getId() );
+
 		return cupDTO;
 	}
 
@@ -60,6 +62,7 @@ public class AdminCupRestController {
 		cup.setCupName( cupDTO.getCupName() );
 		cup.setCategory( categoryService.load( cupDTO.getCategory().getCategoryId() ) );
 		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
+		cup.setWinnersCount( cupDTO.getWinnersCount() );
 
 		cupService.save( cup );
 
