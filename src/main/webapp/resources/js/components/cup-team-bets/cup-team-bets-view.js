@@ -18,6 +18,7 @@ define( function ( require ) {
 		title: "Cup result bets"
 		, menuEditCupTeamBetsLabel: "Edit cup team bets"
 		, noCupTeamPositionLabel: "No bet yet"
+		, cupPositionLabel: "cup position"
 	} );
 
 	var CupTeamBetsDetails = Backbone.View.extend( {

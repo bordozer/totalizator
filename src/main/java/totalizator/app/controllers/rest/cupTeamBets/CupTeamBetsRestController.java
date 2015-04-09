@@ -84,7 +84,7 @@ public class CupTeamBetsRestController {
 
 		final List<CupTeamBetDTO> result = newArrayList();
 
-		for ( int i = 0; i < cup.getWinnersCount(); i++ ) {
+		for ( int i = 1; i <= cup.getWinnersCount(); i++ ) {
 
 			final CupTeamBet cupTeamBet = cupTeamBetService.load( cup, user, i );
 
