@@ -10,11 +10,11 @@
 			<tr>
 				<td>
 
-					<% if( cupTeamBet.team != null && cupTeamBet.team.teamId == team.teamId ) { %>
-						<span class="text-primary"><%=team.teamName%></span>
+					<% if( cupTeamBet.team != null ) { %>
+						<span class="text-primary"><%=cupTeamBet.team.teamName%></span>
 					<% } %>
 
-					<% if( cupTeamBet.team == null || cupTeamBet.team.teamId != team.teamId ) { %>
+					<% if( cupTeamBet.team == null ) { %>
 						<span class="text-muted"><%=translator.noCupTeamPositionLabel%></span>
 					<% } %>
 

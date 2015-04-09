@@ -24,10 +24,11 @@ define( function ( require ) {
 	var CupTeamBetsDetails = Backbone.View.extend( {
 
 		initialize: function ( options ) {
-
+			this.cup = options.cup;
 		},
 
 		render: function ( data ) {
+			console.log( data );
 			this.$el.html( template( data ) );
 		}
 	} );
@@ -40,6 +41,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.cup = options.cup;
 			this.teams = service.loadTeams();
 		},
 
@@ -58,7 +60,7 @@ define( function ( require ) {
 
 		_bind: function() {
 
-			var result = [];
+			var data = [];
 
 			var self = this;
 			_.each( this.model.get( 'cupTeamBets' ), function ( cupTeamBet ) {
@@ -67,16 +69,23 @@ define( function ( require ) {
 
 				var teamId = self.$( '#cup-team-position-' + cupPosition ).val();
 
-				result.push( { teamId: teamId, cupPosition: cupPosition } );
+				data.push( { teamId: teamId, cupPosition: cupPosition } );
 			} );
 
-			console.log( result );
-
-			return result;
+			return data;
 		},
 
 		_onSaveClick: function() {
-//			this.model.save( { data: this._bind() }, { cache: false } );
+			var data = this._bind();
+
+			var cup = this.cup;
+			_.each( data, function( teamPosition ) {
+				service.saveCupTeamBet( cup, teamPosition );
+			});
+
+			this.model.editMode( false );
+
+			this.trigger( 'refresh' );
 		},
 
 		_onDiscardClick: function() {
@@ -103,13 +112,14 @@ define( function ( require ) {
 			];
 			this.addMenuItems( menuItems );
 
-			this.cupTeamBetsView = new CupTeamBetsDetails( { model: this.model } );
+			this.cupTeamBetsView = new CupTeamBetsDetails( { model: this.model, cup: this.cup } );
 
-			this.cupTeamBetsEditView = new CupTeamBetsEdit( { model: this.model } );
-			this.cupTeamBetsEditView.on( 'cancel', this.renderBody, this );
+			this.cupTeamBetsEditView = new CupTeamBetsEdit( { model: this.model, cup: this.cup } );
+			this.cupTeamBetsEditView.on( 'refresh', this.refresh, this );
+			this.cupTeamBetsEditView.on( 'cancel', this.cancelEditing, this );
 
 			this.model.on( 'sync', this.render, this );
-			this.model.fetch( { cache: false } );
+			this.model.refresh();
 		},
 
 		renderBody: function () {
@@ -148,6 +158,14 @@ define( function ( require ) {
 
 			this.model.editMode( true );
 
+			this.renderBody();
+		},
+
+		refresh: function() {
+			this.model.refresh();
+		},
+
+		cancelEditing: function() {
 			this.renderBody();
 		}
 	} );

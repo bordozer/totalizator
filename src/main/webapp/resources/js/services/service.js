@@ -45,6 +45,19 @@ define( function ( require ) {
 			return result;
 		},
 
+		saveCupTeamBet: function( cup, teamPosition ) {
+			$.ajax( {
+				method: 'POST',
+				url: '/rest/cups/' + cup.cupId + '/bets/' + teamPosition.cupPosition + '/' + teamPosition.teamId + '/',
+				async: false,
+				success: function ( response ) {
+				},
+				error: function() {
+					alert( 'Bet saving failed' ); // TODO
+				}
+			} );
+		},
+
 		deleteBet: function( matchId, matchBetId ) {
 
 			$.ajax( {

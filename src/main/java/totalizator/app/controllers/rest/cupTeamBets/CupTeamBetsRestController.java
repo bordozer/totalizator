@@ -9,9 +9,11 @@ import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
+import totalizator.app.models.Team;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -46,32 +48,27 @@ public class CupTeamBetsRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.POST, value = "/{userId}/", produces = APPLICATION_JSON_VALUE )
-	public CupTeamBetsDTO save( final List<UserCupTeamBetsDTO> userCupTeamBetsDTOs, final @PathVariable( "cupId" ) int cupId, final @PathVariable( "userId" ) int userId ) {
+	@RequestMapping( method = RequestMethod.POST, value = "/{position}/{teamId}/", produces = APPLICATION_JSON_VALUE )
+	public void save( final @PathVariable( "cupId" ) int cupId, final @PathVariable( "position" ) int position, final @PathVariable( "teamId" ) int teamId, final Principal principal ) {
 
-		final User user = userService.load( userId );
-		final Cup cup = cupService.load( cupId );
-
-		for ( final UserCupTeamBetsDTO userCupTeamBetsDTO : userCupTeamBetsDTOs ) {
-
-			final int teamId = userCupTeamBetsDTO.getTeamId();
-			if ( teamId == 0 ) {
-				continue;
-			}
-
-			final CupTeamBet entry = new CupTeamBet();
-			entry.setCup( cup );
-			entry.setUser( user );
-
-			entry.setTeam( teamService.load( teamId ) );
-			entry.setCupPosition( userCupTeamBetsDTO.getCupPosition() );
-
-			entry.setBetTime( new Date() );
-
-			cupTeamBetService.save( entry );
+		if ( cupId == 0 || teamId == 0 || position <= 0 ) {
+			return; // TODO: move to validator
 		}
 
-		return getCupTeamBetsDTO( cupId, userId );
+		final Cup cup = cupService.load( cupId );
+		final Team team = teamService.load( teamId );
+		final User user = userService.findByLogin( principal.getName() );
+
+		final CupTeamBet entry = new CupTeamBet();
+
+		entry.setCup( cup );
+		entry.setUser( user );
+		entry.setTeam( team );
+		entry.setCupPosition( position );
+
+		entry.setBetTime( new Date() );
+
+		cupTeamBetService.save( entry );
 	}
 
 	private CupTeamBetsDTO getCupTeamBetsDTO( final int cupId, final int userId ) {

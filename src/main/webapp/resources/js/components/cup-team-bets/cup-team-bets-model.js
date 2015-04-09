@@ -22,6 +22,10 @@ define( function ( require ) {
 			return '/rest/cups/' + this.cup.cupId + '/bets/' + this.currentUser.userId + '/';
 		},
 
+		refresh: function() {
+			this.fetch( { cache: false, reset: true } );
+		},
+
 		editMode: function( editMode ) {
 
 			if ( editMode != undefined ) {
