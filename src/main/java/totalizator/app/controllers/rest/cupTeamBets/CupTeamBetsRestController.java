@@ -51,7 +51,7 @@ public class CupTeamBetsRestController {
 		// TODO: server validation
 
 		final Cup cup = cupService.load( cupId );
-		if ( ! cup.isReadyForMatchBets() ) {
+		if ( ! cup.isReadyForCupBets() ) {
 			throw new IllegalArgumentException( String.format( "Match betting for cup %s is finished", cup ) );
 		}
 
