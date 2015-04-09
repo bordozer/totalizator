@@ -71,6 +71,7 @@ define( function ( require ) {
 				},
 				error: function() {
 					result = false;
+					console.log( teamPosition );
 				}
 			} );
 

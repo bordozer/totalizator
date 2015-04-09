@@ -105,11 +105,7 @@ define( function ( require ) {
 				return;
 			}
 
-			service.saveCupTeamBet( this.cup, data );
-			/*var cup = this.cup;
-			_.each( data, function( teamPosition ) {
-				service.saveCupTeamBet( cup, teamPosition );
-			});*/
+			service.saveCupTeamBets( this.cup, data );
 
 			this.model.editMode( false );
 
