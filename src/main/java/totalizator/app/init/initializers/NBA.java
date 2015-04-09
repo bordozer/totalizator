@@ -31,7 +31,8 @@ public class NBA extends AbstractDataInitializer {
 		final Cup nba2015Regular = new Cup( CUP_1, category );
 		nba2015Regular.setShowOnPortalPage( true );
 		nba2015Regular.setWinnersCount( 16 );
-		nba2015Regular.setReadyForBets( false );
+		nba2015Regular.setReadyForCupBets( false );
+		nba2015Regular.setReadyForMatchBets( true );
 		nba2015Regular.setFinished( true );
 
 		session.persist( nba2015Regular );
@@ -39,7 +40,8 @@ public class NBA extends AbstractDataInitializer {
 		final Cup nba2015PlayOff = new Cup( CUP_2, category );
 		nba2015PlayOff.setShowOnPortalPage( true );
 		nba2015PlayOff.setWinnersCount( 2 );
-		nba2015PlayOff.setReadyForBets( true );
+		nba2015PlayOff.setReadyForCupBets( true );
+		nba2015PlayOff.setReadyForMatchBets( true );
 		nba2015PlayOff.setFinished( false );
 
 		session.persist( nba2015PlayOff );

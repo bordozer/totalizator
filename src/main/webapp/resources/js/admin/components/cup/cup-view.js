@@ -22,7 +22,8 @@ define( function ( require ) {
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
 		, entryEditShowOnPortalPageLabel: "Admin / Cups / Edit: Show on portal page label"
 		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
-		, entryEditReadyForBetsLabel: "Admin / Cups / Edit: Ready for bets"
+		, entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
+		, entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"
 		, entryEditCupIsFinishedLabel: "Admin / Cups / Edit: Cup is finished"
 		, cupValidation_CupName: "Cup validation: Enter a cup name!"
 		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
@@ -209,7 +210,8 @@ define( function ( require ) {
 			var cupName = this._getCupName();
 			var categoryId = this._getCategoryId();
 			var showOnPortalPage = this._isShowOnPortalPage();
-			var readyForBets = this._isReadyForBest();
+			var readyForCupBets = this._isReadyForCupBest();
+			var readyForMatchBets = this._isReadyForMatchBest();
 			var finished = this._isFinished();
 			var winnersCount = this._getWinnersCount();
 
@@ -218,7 +220,8 @@ define( function ( require ) {
 				, categoryId: categoryId
 				, winnersCount: winnersCount
 				, showOnPortalPage: showOnPortalPage
-				, readyForBets: readyForBets
+				, readyForCupBets: readyForCupBets
+				, readyForMatchBets: readyForMatchBets
 				, finished: finished
 			} );
 		},
@@ -252,8 +255,12 @@ define( function ( require ) {
 			return this.$( '.show-on-portal-page-checkbox' ).is(':checked');
 		},
 
-		_isReadyForBest: function() {
-			return this.$( '.ready-for-bets-checkbox' ).is(':checked');
+		_isReadyForCupBest: function() {
+			return this.$( '.ready-for-cup-bets-checkbox' ).is(':checked');
+		},
+
+		_isReadyForMatchBest: function() {
+			return this.$( '.ready-for-match-bets-checkbox' ).is(':checked');
 		},
 
 		_isFinished: function() {

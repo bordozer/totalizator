@@ -30,7 +30,8 @@ public class NCAA extends AbstractDataInitializer {
 		final Cup ncaa2015 = new Cup( CUP_1, category );
 		ncaa2015.setShowOnPortalPage( true );
 		ncaa2015.setWinnersCount( 8 );
-		ncaa2015.setReadyForBets( true );
+		ncaa2015.setReadyForCupBets( true );
+		ncaa2015.setReadyForMatchBets( true );
 		ncaa2015.setFinished( false );
 
 		session.persist( ncaa2015 );

@@ -38,8 +38,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Admin / Cups / Edit: Ready for bets</nerd>
-		<ru><![CDATA[Прием ставок]]></ru>
+		<nerd>Admin / Cups / Edit: Ready for cup bets</nerd>
+		<ru><![CDATA[Прием ставок на чемпионат]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Cups / Edit: Ready for match bets</nerd>
+		<ru><![CDATA[Прием ставок на матчи]]></ru>
 	</translation>
 
 	<translation>

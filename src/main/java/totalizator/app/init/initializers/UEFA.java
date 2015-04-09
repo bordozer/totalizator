@@ -31,14 +31,16 @@ public class UEFA extends AbstractDataInitializer {
 		final Cup uefa2016Euro = new Cup( CUP_1, category );
 		uefa2016Euro.setShowOnPortalPage( true );
 		uefa2016Euro.setWinnersCount( 3 );
-		uefa2016Euro.setReadyForBets( false );
+		uefa2016Euro.setReadyForCupBets( false );
+		uefa2016Euro.setReadyForMatchBets( false );
 		uefa2016Euro.setFinished( false );
 
 		session.persist( uefa2016Euro );
 
 		final Cup uefa2018WorldCup = new Cup( CUP_2, category );
 		uefa2018WorldCup.setWinnersCount( 3 );
-		uefa2018WorldCup.setReadyForBets( true );
+		uefa2018WorldCup.setReadyForCupBets( false );
+		uefa2018WorldCup.setReadyForMatchBets( false );
 		uefa2018WorldCup.setFinished( false );
 
 		session.persist( uefa2018WorldCup );

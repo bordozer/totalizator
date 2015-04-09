@@ -37,7 +37,8 @@ public class Cup extends AbstractEntity {
 
 	private Date startDate;
 
-	private boolean readyForBets;
+	private boolean readyForCupBets;
+	private boolean readyForMatchBets;
 	private boolean finished;
 
 	public Cup() {
@@ -88,12 +89,20 @@ public class Cup extends AbstractEntity {
 		this.startDate = startDate;
 	}
 
-	public boolean isReadyForBets() {
-		return readyForBets;
+	public boolean isReadyForCupBets() {
+		return readyForCupBets;
 	}
 
-	public void setReadyForBets( final boolean readyForBets ) {
-		this.readyForBets = readyForBets;
+	public void setReadyForCupBets( final boolean readyForCupBets ) {
+		this.readyForCupBets = readyForCupBets;
+	}
+
+	public boolean isReadyForMatchBets() {
+		return readyForMatchBets;
+	}
+
+	public void setReadyForMatchBets( final boolean readyForMatchBets ) {
+		this.readyForMatchBets = readyForMatchBets;
 	}
 
 	public boolean isFinished() {

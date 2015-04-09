@@ -16,7 +16,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/admin/rest/cups" )
+@RequestMapping("/admin/rest/cups")
 public class AdminCupRestController {
 
 	@Autowired
@@ -30,16 +30,16 @@ public class AdminCupRestController {
 
 	private static final Logger LOGGER = Logger.getLogger( AdminCupRestController.class );
 
-	@ResponseStatus( HttpStatus.OK )
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
 	public List<CupDTO> entries() {
 		return dtoService.transformCups( cupService.loadAll() );
 	}
 
-	@ResponseStatus( HttpStatus.OK )
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping(method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
 	public CupDTO create( final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
 
@@ -82,11 +82,16 @@ public class AdminCupRestController {
 	}
 
 	private void initFromDTO( final CupDTO cupDTO, final Cup cup ) {
+
 		cup.setCupName( cupDTO.getCupName() );
-		cup.setCategory(categoryService.load( cupDTO.getCategory().getCategoryId() ));
-		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
+		cup.setCategory( categoryService.load( cupDTO.getCategory().getCategoryId() ) );
+
 		cup.setWinnersCount( cupDTO.getWinnersCount() );
-		cup.setReadyForBets( cupDTO.isReadyForBets() );
+
+		cup.setReadyForCupBets( cupDTO.isReadyForCupBets() );
+		cup.setReadyForMatchBets( cupDTO.isReadyForMatchBets() );
 		cup.setFinished( cupDTO.isFinished() );
+
+		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
 	}
 }

@@ -10,7 +10,8 @@ public class CupDTO {
 	private CategoryDTO category;
 	private int winnersCount;
 	private boolean showOnPortalPage;
-	private boolean readyForBets;
+	private boolean readyForCupBets;
+	private boolean readyForMatchBets;
 	private boolean finished;
 
 	public CupDTO() {
@@ -62,12 +63,20 @@ public class CupDTO {
 		this.winnersCount = winnersCount;
 	}
 
-	public boolean isReadyForBets() {
-		return readyForBets;
+	public boolean isReadyForCupBets() {
+		return readyForCupBets;
 	}
 
-	public void setReadyForBets( final boolean readyForBets ) {
-		this.readyForBets = readyForBets;
+	public void setReadyForCupBets( final boolean readyForCupBets ) {
+		this.readyForCupBets = readyForCupBets;
+	}
+
+	public boolean isReadyForMatchBets() {
+		return readyForMatchBets;
+	}
+
+	public void setReadyForMatchBets( final boolean readyForMatchBets ) {
+		this.readyForMatchBets = readyForMatchBets;
 	}
 
 	public boolean isFinished() {
