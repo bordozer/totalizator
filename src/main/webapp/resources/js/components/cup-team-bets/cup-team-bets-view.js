@@ -68,7 +68,7 @@ define( function ( require ) {
 				var cupPosition = teamPosition.cupPosition;
 
 				var entry = _.find( data, function( _teamPosition ) {
-					return result && _teamPosition.teamId == teamId && _teamPosition.cupPosition != cupPosition;
+					return result && _teamPosition.teamId > 0 && _teamPosition.teamId == teamId && _teamPosition.cupPosition != cupPosition;
 				} );
 
 				if ( entry != undefined ) {
@@ -105,10 +105,11 @@ define( function ( require ) {
 				return;
 			}
 
-			var cup = this.cup;
+			service.saveCupTeamBet( this.cup, data );
+			/*var cup = this.cup;
 			_.each( data, function( teamPosition ) {
 				service.saveCupTeamBet( cup, teamPosition );
-			});
+			});*/
 
 			this.model.editMode( false );
 

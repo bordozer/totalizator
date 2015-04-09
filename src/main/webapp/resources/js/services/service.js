@@ -11,6 +11,8 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		logoutConfirmationLabel: 'Logout confirmation: Logout?'
+		, matchBetSavingError: 'Match bet saving error'
+		, cupTeamBetSavingError: 'Cup team bet saving error'
 	} );
 
 	return {
@@ -38,14 +40,29 @@ define( function ( require ) {
 					result = response;
 				},
 				error: function() {
-					alert( 'Bet saving failed' ); // TODO
+					alert( translator.matchBetSavingError );
 				}
 			} );
 
 			return result;
 		},
 
+		saveCupTeamBets: function( cup, teamPositions ) {
+
+			var result = true;
+
+			var self = this;
+			_.each( teamPositions, function ( teamPosition ) {
+				result = result && self.saveCupTeamBet( cup, teamPosition );
+			} );
+
+			if ( ! result ) {
+				alert( translator.cupTeamBetSavingError );
+			}
+		},
+
 		saveCupTeamBet: function( cup, teamPosition ) {
+			var result = true;
 			$.ajax( {
 				method: 'POST',
 				url: '/rest/cups/' + cup.cupId + '/bets/' + teamPosition.cupPosition + '/' + teamPosition.teamId + '/',
@@ -53,9 +70,11 @@ define( function ( require ) {
 				success: function ( response ) {
 				},
 				error: function() {
-					alert( 'Bet saving failed' ); // TODO
+					result = false;
 				}
 			} );
+
+			return result;
 		},
 
 		deleteBet: function( matchId, matchBetId ) {

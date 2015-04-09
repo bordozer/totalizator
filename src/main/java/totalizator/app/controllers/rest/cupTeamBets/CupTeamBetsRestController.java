@@ -57,10 +57,13 @@ public class CupTeamBetsRestController {
 		final User user = userService.findByLogin( principal.getName() );
 
 		final CupTeamBet existingTupTeamBet = cupTeamBetService.load( cup, user, position );
-
-		if ( cupId == 0 || teamId == 0 || position <= 0 ) {
+		if ( cupId > 0 && position > 0 && teamId == 0 && cupTeamBetService != null ) {
 			cupTeamBetService.delete( existingTupTeamBet.getId() );
 			return;
+		}
+
+		if ( cupId == 0 || teamId == 0 || position <= 0 ) {
+			throw new IllegalArgumentException( String.format( "Wrong cup team bet data: cup #%d, position #%d, teamId #%d", cupId, position, teamId ) );
 		}
 
 		final Team team = teamService.load( teamId );
