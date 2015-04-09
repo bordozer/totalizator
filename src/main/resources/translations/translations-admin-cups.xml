@@ -9,7 +9,7 @@
 
 	<translation>
 		<nerd>Admin / Cups / Edit: Show on portal page label</nerd>
-		<ru><![CDATA[Показывать на главной странице]]></ru>
+		<ru><![CDATA[Показывать на главной]]></ru>
 	</translation>
 
 	<translation>
@@ -35,6 +35,21 @@
 	<translation>
 		<nerd>cup position</nerd>
 		<ru><![CDATA[место]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Cups / Edit: Ready for bets</nerd>
+		<ru><![CDATA[Прием ставок]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin / Cups / Edit: Cup is finished</nerd>
+		<ru><![CDATA[Завершен]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

@@ -37,6 +37,7 @@ public class Cup extends AbstractEntity {
 
 	private Date startDate;
 
+	private boolean readyForBets;
 	private boolean finished;
 
 	public Cup() {
@@ -85,6 +86,14 @@ public class Cup extends AbstractEntity {
 
 	public void setStartDate( final Date startDate ) {
 		this.startDate = startDate;
+	}
+
+	public boolean isReadyForBets() {
+		return readyForBets;
+	}
+
+	public void setReadyForBets( final boolean readyForBets ) {
+		this.readyForBets = readyForBets;
 	}
 
 	public boolean isFinished() {

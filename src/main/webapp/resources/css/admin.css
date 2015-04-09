@@ -7,3 +7,8 @@ div {
 	min-height: 30px;
 	padding: 5px;
 }
+
+.admin-form-text {
+	font-size: 12px;
+	padding-right: 10px;
+}

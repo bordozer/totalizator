@@ -10,6 +10,8 @@ public class CupDTO {
 	private CategoryDTO category;
 	private int winnersCount;
 	private boolean showOnPortalPage;
+	private boolean readyForBets;
+	private boolean finished;
 
 	public CupDTO() {
 	}
@@ -58,6 +60,22 @@ public class CupDTO {
 
 	public void setWinnersCount( final int winnersCount ) {
 		this.winnersCount = winnersCount;
+	}
+
+	public boolean isReadyForBets() {
+		return readyForBets;
+	}
+
+	public void setReadyForBets( final boolean readyForBets ) {
+		this.readyForBets = readyForBets;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished( final boolean finished ) {
+		this.finished = finished;
 	}
 
 	@Override

@@ -22,6 +22,8 @@ define( function ( require ) {
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
 		, entryEditShowOnPortalPageLabel: "Admin / Cups / Edit: Show on portal page label"
 		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
+		, entryEditReadyForBetsLabel: "Admin / Cups / Edit: Ready for bets"
+		, entryEditCupIsFinishedLabel: "Admin / Cups / Edit: Cup is finished"
 		, cupValidation_CupName: "Cup validation: Enter a cup name!"
 		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
 	} );
@@ -136,7 +138,7 @@ define( function ( require ) {
 			, 'click .cup-entry-save': '_onEntrySaveClick'
 			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
 			, 'click .cup-entry-del': '_onEntryDelClick'
-			, 'change .entry-name, .entry-category-id, .winners-count-field': '_onChange'
+			, 'change .entry-name, .entry-category-id, .winners-count-field, .ready-for-bets-checkbox, .cup-is-finished-checkbox': '_onChange'
 		},
 
 		initialize: function ( options ) {
@@ -206,10 +208,19 @@ define( function ( require ) {
 		_bind: function() {
 			var cupName = this._getCupName();
 			var categoryId = this._getCategoryId();
-			var showOnPortalPage = this._getShowOnPortalPage();
+			var showOnPortalPage = this._isShowOnPortalPage();
+			var readyForBets = this._isReadyForBest();
+			var finished = this._isFinished();
 			var winnersCount = this._getWinnersCount();
 
-			this.model.set( { cupName: cupName, categoryId: categoryId, winnersCount: winnersCount, showOnPortalPage: showOnPortalPage } );
+			this.model.set( {
+				cupName: cupName
+				, categoryId: categoryId
+				, winnersCount: winnersCount
+				, showOnPortalPage: showOnPortalPage
+				, readyForBets: readyForBets
+				, finished: finished
+			} );
 		},
 
 		_validate: function() {
@@ -237,8 +248,16 @@ define( function ( require ) {
 			return this.$( '.entry-category-id' ).val();
 		},
 
-		_getShowOnPortalPage: function() {
+		_isShowOnPortalPage: function() {
 			return this.$( '.show-on-portal-page-checkbox' ).is(':checked');
+		},
+
+		_isReadyForBest: function() {
+			return this.$( '.ready-for-bets-checkbox' ).is(':checked');
+		},
+
+		_isFinished: function() {
+			return this.$( '.cup-is-finished-checkbox' ).is(':checked');
 		},
 
 		_getWinnersCount: function() {

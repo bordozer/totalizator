@@ -11,7 +11,7 @@
 		<div class="col-lg-12">
 			<table>
 				<tr>
-					<td><%=translator.entryEditCategoryLabel%></td>
+					<td class="admin-form-text"><%=translator.entryEditCategoryLabel%></td>
 					<td>
 						<select class="chosen-select entry-category-id">
 							<% _.each( categories, function( category ) { %>
@@ -23,23 +23,37 @@
 				</tr>
 
 				<tr>
-					<td><%=translator.entryEditCupNameLabel%></td>
+					<td class="admin-form-text"><%=translator.entryEditCupNameLabel%></td>
 					<td>
 						<input type="text" class="form-control entry-name" value="<%=model.cupName%>">
 					</td>
 				</tr>
 
 				<tr>
-					<td><%=translator.entryEditWinnersCountLabel%></td>
+					<td class="admin-form-text"><%=translator.entryEditWinnersCountLabel%></td>
 					<td>
 						<input type="number" class="form-control winners-count-field" value="<%=model.winnersCount %>" >
 					</td>
 				</tr>
 
 				<tr>
-					<td><%=translator.entryEditShowOnPortalPageLabel%></td>
+					<td class="admin-form-text"><%=translator.entryEditShowOnPortalPageLabel%></td>
 					<td>
 						<input type="checkbox" class="show-on-portal-page-checkbox" value="true" <%=model.showOnPortalPage ? 'checked' : ''%> >
+					</td>
+				</tr>
+
+				<tr>
+					<td class="admin-form-text"><%=translator.entryEditReadyForBetsLabel%></td>
+					<td>
+						<input type="checkbox" class="ready-for-bets-checkbox" value="true" <%=model.readyForBets ? 'checked' : ''%> >
+					</td>
+				</tr>
+
+				<tr>
+					<td class="admin-form-text"><%=translator.entryEditCupIsFinishedLabel%></td>
+					<td>
+						<input type="checkbox" class="cup-is-finished-checkbox" value="true" <%=model.finished ? 'checked' : ''%> >
 					</td>
 				</tr>
 			</table>

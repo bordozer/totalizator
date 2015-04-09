@@ -13,6 +13,7 @@ define( function ( require ) {
 			, cupName: ''
 			, categoryId: 0
 			, winnersCount: 3
+			, readyForBets: false
 			, finished: false
 			, showOnPortalPage: false
 			, isEditState: false

@@ -42,9 +42,10 @@ public class AdminCupRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CupDTO create( final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
-		final Cup cup = new Cup( cupDTO.getCupName(), categoryService.load( cupDTO.getCategory().getCategoryId() ) );
-		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
-		cup.setWinnersCount( cupDTO.getWinnersCount() );
+
+		final Cup cup = new Cup();
+
+		initFromDTO( cupDTO, cup );
 
 		cupService.save( cup );
 
@@ -58,11 +59,10 @@ public class AdminCupRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/{cupId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CupDTO edit( final @PathVariable( "cupId" ) int cupId, final @RequestBody CupDTO cupDTO ) {
 		// TODO: check if name exists
+
 		final Cup cup = cupService.load( cupDTO.getCupId() );
-		cup.setCupName( cupDTO.getCupName() );
-		cup.setCategory( categoryService.load( cupDTO.getCategory().getCategoryId() ) );
-		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
-		cup.setWinnersCount( cupDTO.getWinnersCount() );
+
+		initFromDTO( cupDTO, cup );
 
 		cupService.save( cup );
 
@@ -79,5 +79,14 @@ public class AdminCupRestController {
 		}
 
 		cupService.delete( cupId );
+	}
+
+	private void initFromDTO( final CupDTO cupDTO, final Cup cup ) {
+		cup.setCupName( cupDTO.getCupName() );
+		cup.setCategory(categoryService.load( cupDTO.getCategory().getCategoryId() ));
+		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
+		cup.setWinnersCount( cupDTO.getWinnersCount() );
+		cup.setReadyForBets( cupDTO.isReadyForBets() );
+		cup.setFinished( cupDTO.isFinished() );
 	}
 }
