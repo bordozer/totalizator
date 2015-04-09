@@ -56,6 +56,7 @@ define( function ( require ) {
 		},
 
 		renderEntry: function ( model ) {
+
 			var view = new CategoryView( {
 				model: model
 				, isSelected: this.model.selectedCategoryId == model.get( 'categoryId' )
@@ -65,11 +66,12 @@ define( function ( require ) {
 
 			this.listenTo( view, 'events:refresh', this.reRender );
 
+			var container = this.$( this.windowBodyContainerSelector );
 			if ( model.get( 'categoryId' ) == 0 ) {
-				return this.$( '.categories-container' ).append( view.renderEdit().$el );
+				return container.append( view.renderEdit().$el );
 			}
 
-			return this.$( this.windowBodyContainerSelector ).append( view.render().$el );
+			return container.append( view.render().$el );
 		},
 
 		reRender: function( options ) {
