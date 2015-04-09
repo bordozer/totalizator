@@ -4,14 +4,16 @@
 
 			<% _.each( cupTeamBets, function( cupTeamBet ) { %>
 			<tr>
-				<td><%=cupTeamBet.cupPosition%> <%= translator.cupPositionLabel %></td>
+				<td>
+					<strong><%=cupTeamBet.cupPosition%> <%= translator.cupPositionLabel %></strong>
+				</td>
 			</tr>
 
 			<tr>
 				<td>
 
 					<% if( cupTeamBet.team != null ) { %>
-						<img src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="32">
+						<img src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="64">
 						<span class="text-primary"><%=cupTeamBet.team.teamName%></span>
 					<% } %>
 

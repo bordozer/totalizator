@@ -51,15 +51,20 @@ public class CupTeamBetsRestController {
 	@RequestMapping( method = RequestMethod.POST, value = "/{position}/{teamId}/", produces = APPLICATION_JSON_VALUE )
 	public void save( final @PathVariable( "cupId" ) int cupId, final @PathVariable( "position" ) int position, final @PathVariable( "teamId" ) int teamId, final Principal principal ) {
 
-		if ( cupId == 0 || teamId == 0 || position <= 0 ) {
-			return; // TODO: move to validator
-		}
+		// TODO: server validation
 
 		final Cup cup = cupService.load( cupId );
-		final Team team = teamService.load( teamId );
 		final User user = userService.findByLogin( principal.getName() );
 
 		final CupTeamBet existingTupTeamBet = cupTeamBetService.load( cup, user, position );
+
+		if ( cupId == 0 || teamId == 0 || position <= 0 ) {
+			cupTeamBetService.delete( existingTupTeamBet.getId() );
+			return;
+		}
+
+		final Team team = teamService.load( teamId );
+
 		if ( existingTupTeamBet != null ) {
 			existingTupTeamBet.setTeam( team );
 			cupTeamBetService.save( existingTupTeamBet );
