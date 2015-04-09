@@ -144,8 +144,10 @@ define( function ( require ) {
 
 				if ( this.model.isBettingAllowed() ) {
 					this._setMatchContainerClass( 'panel-warning' );
-					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_NoBetYetLabel, true ) );
-					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-money button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
+
+					var icon = match.cup.readyForMatchBets ? 'fa-money' : 'fa-ban';
+					this.$( '.js-panel-footer' ).append( this._renderIcon( icon, translator.footer_NoBetYetLabel, true ) );
+					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa " + icon + " button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
 				} else if( ! match.matchFinished ) {
 					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel, false ) );
 				}
