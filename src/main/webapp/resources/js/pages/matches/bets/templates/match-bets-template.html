@@ -46,10 +46,10 @@
 					<tbody>
 
 						<% _.each( matchBets, function( matchBet ) {%>
-							<tr class="<%= matchBet.bet.user.userId == currentUser.userId ? 'text-primary' : '' %>" >
-								<td><%-matchBet.bet.user.userName%></td>
-								<td class="text-center" width="150"><%-matchBet.bet.score1%></td>
-								<td class="text-center" width="150"><%-matchBet.bet.score2%></td>
+							<tr>
+								<td class="<%= matchBet.bet.user.userId == currentUser.userId ? 'text-primary' : '' %>"><%-matchBet.bet.user.userName%></td>
+								<td class="text-center <%=matchBet.matchResults.style1%>" width="150"><%-matchBet.bet.score1%></td>
+								<td class="text-center <%=matchBet.matchResults.style2%>" width="150"><%-matchBet.bet.score2%></td>
 								<td class="text-center" width="60"><strong><%-matchBet.points > 0 ? '+' + matchBet.points : ''%></strong></td>
 							</tr>
 						<% })%>

@@ -30,10 +30,19 @@ define( function ( require ) {
 
 		render: function () {
 
-			var match = this.model.toJSON().match;
+			var model = this.model.toJSON();
+
+			var match = model.match;
 			var matchResults = service.matchResultsByMatch( match );
 
-			var data = _.extend( {}, this.model.toJSON(), { matchResults: matchResults, currentUser: this.currentUser, translator: translator } );
+			var data = _.extend( {}, model, { matchResults: matchResults, currentUser: this.currentUser, translator: translator } );
+			_.each( data.matchBets, function( matchBet ) {
+				var team1Id = match.team1.teamId;
+				var score1 = matchBet.bet.score1;
+				var team2Id = match.team2.teamId;
+				var score2 = matchBet.bet.score2;
+				matchBet[ 'matchResults' ] = service.matchResults( team1Id, score1, team2Id, score2 );
+			} );
 
 			this.$el.html( template( data ) );
 
