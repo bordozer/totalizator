@@ -34,7 +34,7 @@ define( function ( require ) {
 		, footer_BettingFinishedLabel: 'Match and Bets / Footer: betting finished'
 		, footer_MatchFinishedLabel: 'Match and Bets / Footer: Match finished'
 
-		, matchBettingIsFinished: "Match betting is denied"
+		, matchBettingIsDenied: "Match betting is denied"
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
@@ -312,7 +312,11 @@ define( function ( require ) {
 		_onBetButtonClick: function( evt ) {
 			evt.preventDefault();
 
-			console.log( this.model );
+			var cup = this.model.get( 'match' ).cup;
+			if ( ! cup.readyForMatchBets ) {
+				alert( translator.matchBettingIsDenied );
+				return;
+			}
 
 			this._goBetMode();
 		},
