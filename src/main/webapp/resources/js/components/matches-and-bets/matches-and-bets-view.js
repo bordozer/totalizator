@@ -206,7 +206,7 @@ define( function ( require ) {
 
 		_renderDropDownMenuItems: function() {
 
-			var betsCount = this.model.get( 'betsCount' );
+			var betsCount = this.model.get( 'betsCount' ); // TODO: load 'fresh' data each rendering
 			var match = this.model.get( 'match' );
 
 			var menuItems = [
