@@ -19,6 +19,7 @@ define( function ( require ) {
 		, menuEditCupTeamBetsLabel: "Edit cup team bets"
 		, noCupTeamPositionLabel: "No bet yet"
 		, cupPositionLabel: "cup position"
+		, validation_DuplicateTeams: "Cup team bet validation: Duplicated teams!"
 	} );
 
 	var CupTeamBetsDetails = Backbone.View.extend( {
@@ -28,7 +29,6 @@ define( function ( require ) {
 		},
 
 		render: function ( data ) {
-			console.log( data );
 			this.$el.html( template( data ) );
 		}
 	} );
@@ -58,6 +58,28 @@ define( function ( require ) {
 			return this;
 		},
 
+		_validate: function( data ) {
+
+			var result = true;
+
+			_.each( data, function( teamPosition ) {
+
+				var teamId = teamPosition.teamId;
+				var cupPosition = teamPosition.cupPosition;
+
+				var entry = _.find( data, function( _teamPosition ) {
+					return result && _teamPosition.teamId == teamId && _teamPosition.cupPosition != cupPosition;
+				} );
+
+				if ( entry != undefined ) {
+					result = false;
+					alert( translator.validation_DuplicateTeams );
+				}
+			});
+
+			return result;
+		},
+
 		_bind: function() {
 
 			var data = [];
@@ -76,7 +98,12 @@ define( function ( require ) {
 		},
 
 		_onSaveClick: function() {
+
 			var data = this._bind();
+
+			if ( ! this._validate( data ) ) {
+				return;
+			}
 
 			var cup = this.cup;
 			_.each( data, function( teamPosition ) {

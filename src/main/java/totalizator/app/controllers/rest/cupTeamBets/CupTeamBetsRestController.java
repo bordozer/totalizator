@@ -59,6 +59,14 @@ public class CupTeamBetsRestController {
 		final Team team = teamService.load( teamId );
 		final User user = userService.findByLogin( principal.getName() );
 
+		final CupTeamBet existingTupTeamBet = cupTeamBetService.load( cup, user, position );
+		if ( existingTupTeamBet != null ) {
+			existingTupTeamBet.setTeam( team );
+			cupTeamBetService.save( existingTupTeamBet );
+
+			return;
+		}
+
 		final CupTeamBet entry = new CupTeamBet();
 
 		entry.setCup( cup );

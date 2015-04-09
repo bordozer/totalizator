@@ -13,6 +13,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Cup team bet validation: Duplicated teams!</nerd>
+		<ru><![CDATA[Команды не должны повторяться!]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Edit cup team bets</nerd>
+		<ru><![CDATA[Изменить ставки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
