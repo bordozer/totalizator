@@ -20,6 +20,7 @@ define( function ( require ) {
 		, noCupTeamPositionLabel: "No bet yet"
 		, cupPositionLabel: "cup position"
 		, validation_DuplicateTeams: "Cup team bet validation: Duplicated teams!"
+		, cupBettingIsFinished: "Cup betting is finished"
 	} );
 
 	var CupTeamBetsDetails = Backbone.View.extend( {
@@ -179,6 +180,11 @@ define( function ( require ) {
 
 		_onEditCupTeamBetsClick: function ( evt ) {
 			evt.preventDefault();
+
+			if ( ! this.cup.readyForCupBets ) {
+				alert( translator.cupBettingIsFinished );
+				return;
+			}
 
 			this.model.editMode( true );
 
