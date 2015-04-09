@@ -206,12 +206,13 @@ define( function ( require ) {
 
 		_renderDropDownMenuItems: function() {
 
+			var betsCount = this.model.get( 'betsCount' );
 			var match = this.model.get( 'match' );
 
 			var menuItems = [
 				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '/totalizator/teams/' + match.team1.teamId + '/vs/' + match.team2.teamId + '/standoff/', text: translator.actionStandOffHistory }
 				, { selector: 'divider' }
-				, { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '/totalizator/matches/' + match.matchId + '/bets/', text: translator.actionAllMatchBet }
+				, { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '/totalizator/matches/' + match.matchId + '/bets/', text: translator.actionAllMatchBet + ' ( ' + betsCount + ' )' }
 			];
 
 			var bet = this.model.get( 'bet' );

@@ -60,4 +60,12 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 	public void delete( final int id ) {
 		em.remove( load( id ) );
 	}
+
+	public int betsCount( final Match match ) {
+		final List<Long> bets = em.createNamedQuery( MatchBet.LOAD_MATCH_BETA_COUNT, Long.class )
+				.setParameter( "matchId", match.getId() )
+				.getResultList();
+
+		return bets.size() == 1 ? bets.get( 0 ).intValue() : 0;
+	}
 }

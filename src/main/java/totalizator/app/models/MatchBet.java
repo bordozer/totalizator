@@ -28,6 +28,10 @@ import static totalizator.app.models.MatchBet.*;
 		@NamedQuery(
 				name = LOAD_FOR_USER_AND_MATCH,
 				query = "select mb from MatchBet mb where userId= :userId and matchId= :matchId order by betTime desc"
+		),
+		@NamedQuery(
+				name = LOAD_MATCH_BETA_COUNT,
+				query = "select count(id) from MatchBet mb where matchId= :matchId"
 		)
 } )
 public class MatchBet extends AbstractEntity {
@@ -36,6 +40,7 @@ public class MatchBet extends AbstractEntity {
 	public static final String LOAD_FOR_USER = "matchBets.loadForUser";
 	public static final String LOAD_FOR_MATCH = "matchBets.loadForMatch";
 	public static final String LOAD_FOR_USER_AND_MATCH = "matchBets.loadForUserAndMatch";
+	public static final String LOAD_MATCH_BETA_COUNT = "matchBets.matchBetsCount";
 
 	@ManyToOne
 	@JoinColumn(name="matchId")

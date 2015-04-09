@@ -105,4 +105,9 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 		final Date bettingIsAllowedTill = dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN );
 		return dateTimeService.getNow().getTime() < bettingIsAllowedTill.getTime();
 	}
+
+	@Override
+	public int betsCount( final Match match ) {
+		return matchBetRepository.betsCount( match );
+	}
 }
