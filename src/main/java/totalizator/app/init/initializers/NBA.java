@@ -33,7 +33,7 @@ public class NBA extends AbstractDataInitializer {
 		nba2015Regular.setWinnersCount( 16 );
 		nba2015Regular.setReadyForCupBets( false );
 		nba2015Regular.setReadyForMatchBets( true );
-		nba2015Regular.setFinished( true );
+		nba2015Regular.setFinished( false );
 
 		session.persist( nba2015Regular );
 

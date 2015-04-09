@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.UserDTO;
-import totalizator.app.models.Cup;
-import totalizator.app.models.CupTeamBet;
-import totalizator.app.models.Team;
-import totalizator.app.models.User;
+import totalizator.app.models.*;
 import totalizator.app.services.*;
 
 import java.security.Principal;
@@ -54,6 +51,10 @@ public class CupTeamBetsRestController {
 		// TODO: server validation
 
 		final Cup cup = cupService.load( cupId );
+		if ( ! cup.isReadyForMatchBets() ) {
+			throw new IllegalArgumentException( String.format( "Match betting for cup %s is finished", cup ) );
+		}
+
 		final User user = userService.findByLogin( principal.getName() );
 
 		final CupTeamBet existingTupTeamBet = cupTeamBetService.load( cup, user, position );

@@ -75,9 +75,12 @@ public class MatchesAndBetsRestController {
 	@RequestMapping( method = RequestMethod.POST, value = "/{matchId}/bets/{score1}/{score2}/", produces = APPLICATION_JSON_VALUE )
 	public BetDTO saveBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "score1" ) int score1, final @PathVariable( "score2" ) int score2 ) {
 
-		final User user = userService.findByLogin( principal.getName() );
-
 		final Match match = matchService.load( matchId );
+		if ( ! match.getCup().isReadyForMatchBets() ) {
+			throw new IllegalArgumentException( String.format( "Match betting for cup %s is finished", match.getCup() ) );
+		}
+
+		final User user = userService.findByLogin( principal.getName() );
 		final MatchBet existingBet = matchBetsService.load( user, match );
 
 		if ( existingBet != null ) {
