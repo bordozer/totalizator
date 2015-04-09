@@ -51,6 +51,8 @@ public abstract class AbstractDataInitializer {
 
 			final List<Match> futureCupMatches = generateMatches( cup, teams, futureStrategy(), 10, session );
 			generateBets( users, futureCupMatches, session );
+
+			generateCupBets( cup, teams, users, session );
 		}
 	}
 
@@ -133,6 +135,25 @@ public abstract class AbstractDataInitializer {
 				if ( i >= betsCountGenerateTo ) {
 					break;
 				}
+			}
+
+		}
+	}
+
+	private void generateCupBets( final Cup cup, final List<Team> teams, final List<User> users, final Session session ) {
+
+		for ( final User user : users ) {
+			final int betCount = getRandomInt( 1, cup.getWinnersCount() );
+			for ( int i = 1; i < betCount; i++ ) {
+				final CupTeamBet cupTeamBet = new CupTeamBet();
+
+				cupTeamBet.setCup( cup );
+				cupTeamBet.setUser( user );
+				cupTeamBet.setTeam( getRandomTeam( teams ) );
+				cupTeamBet.setCupPosition( i );
+				cupTeamBet.setBetTime( dateTimeService.getNow() ); // TODO: offset from cup beginning time
+
+				session.persist( cupTeamBet );
 			}
 		}
 	}

@@ -30,10 +30,18 @@ public class NBA extends AbstractDataInitializer {
 
 		final Cup nba2015Regular = new Cup( CUP_1, category );
 		nba2015Regular.setShowOnPortalPage( true );
+		nba2015Regular.setWinnersCount( 16 );
+		nba2015Regular.setReadyForBets( false );
+		nba2015Regular.setFinished( true );
+
 		session.persist( nba2015Regular );
 
 		final Cup nba2015PlayOff = new Cup( CUP_2, category );
 		nba2015PlayOff.setShowOnPortalPage( true );
+		nba2015PlayOff.setWinnersCount( 2 );
+		nba2015PlayOff.setReadyForBets( true );
+		nba2015PlayOff.setFinished( false );
+
 		session.persist( nba2015PlayOff );
 
 		return newArrayList( nba2015PlayOff, nba2015Regular );
