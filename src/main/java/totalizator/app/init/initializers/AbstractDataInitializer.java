@@ -143,8 +143,10 @@ public abstract class AbstractDataInitializer {
 	private void generateCupBets( final Cup cup, final List<Team> teams, final List<User> users, final Session session ) {
 
 		for ( final User user : users ) {
+
 			final int betCount = getRandomInt( 1, cup.getWinnersCount() );
-			for ( int i = 1; i < betCount; i++ ) {
+			for ( int i = 1; i <= betCount; i++ ) {
+
 				final CupTeamBet cupTeamBet = new CupTeamBet();
 
 				cupTeamBet.setCup( cup );
