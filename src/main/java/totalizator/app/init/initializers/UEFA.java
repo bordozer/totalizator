@@ -3,7 +3,9 @@ package totalizator.app.init.initializers;
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
-import totalizator.app.models.*;
+import totalizator.app.models.Category;
+import totalizator.app.models.Cup;
+import totalizator.app.models.Team;
 
 import java.io.IOException;
 import java.util.List;

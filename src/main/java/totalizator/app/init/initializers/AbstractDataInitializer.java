@@ -8,10 +8,12 @@ import totalizator.app.services.TeamLogoService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
 
 public abstract class AbstractDataInitializer {
 

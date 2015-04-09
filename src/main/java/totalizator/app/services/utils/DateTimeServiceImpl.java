@@ -1,7 +1,6 @@
 package totalizator.app.services.utils;
 
 import org.springframework.stereotype.Service;
-import totalizator.app.services.utils.DateTimeService;
 
 import java.util.Calendar;
 import java.util.Date;

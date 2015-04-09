@@ -49,7 +49,7 @@ define( function ( require ) {
 			var self = this;
 			_.each( this.model.get( 'cupTeamBets' ), function ( cupTeamBet ) {
 				var cupPosition = cupTeamBet.cupPosition;
-				self.$( '#cup-team-position-' + cupPosition.cupPositionId ).chosen( { width: '100%' } );
+				self.$( '#cup-team-position-' + cupPosition ).chosen( { width: '100%' } );
 			} );
 
 			return this;
@@ -64,10 +64,9 @@ define( function ( require ) {
 
 				var cupPosition = cupTeamBet.cupPosition;
 
-				var cupPositionId = cupPosition.cupPositionId;
-				var teamId = self.$( '#cup-team-position-' + cupPositionId ).val();
+				var teamId = self.$( '#cup-team-position-' + cupPosition ).val();
 
-				result.push( { teamId: teamId, cupPositionId: cupPositionId } );
+				result.push( { teamId: teamId, cupPosition: cupPosition } );
 			} );
 
 			console.log( result );
@@ -76,7 +75,7 @@ define( function ( require ) {
 		},
 
 		_onSaveClick: function() {
-			this.model.save( { data: this._bind() }, { cache: false } );
+//			this.model.save( { data: this._bind() }, { cache: false } );
 		},
 
 		_onDiscardClick: function() {

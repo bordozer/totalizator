@@ -3,7 +3,7 @@ package totalizator.app.controllers.rest.cupTeamBets;
 public class UserCupTeamBetsDTO {
 
 	private int teamId;
-	private int cupPositionId;
+	private int cupPosition;
 
 	public int getTeamId() {
 		return teamId;
@@ -13,11 +13,11 @@ public class UserCupTeamBetsDTO {
 		this.teamId = teamId;
 	}
 
-	public int getCupPositionId() {
-		return cupPositionId;
+	public int getCupPosition() {
+		return cupPosition;
 	}
 
-	public void setCupPositionId( final int cupPositionId ) {
-		this.cupPositionId = cupPositionId;
+	public void setCupPosition( final int cupPosition ) {
+		this.cupPosition = cupPosition;
 	}
 }

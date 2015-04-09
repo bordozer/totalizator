@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.UserDTO;
-import totalizator.app.enums.CupPosition;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.User;
@@ -65,7 +64,7 @@ public class CupTeamBetsRestController {
 			entry.setUser( user );
 
 			entry.setTeam( teamService.load( teamId ) );
-			entry.setCupPosition( CupPosition.getById( userCupTeamBetsDTO.getCupPositionId() ) );
+			entry.setCupPosition( userCupTeamBetsDTO.getCupPosition() );
 
 			entry.setBetTime( new Date() );
 
@@ -85,9 +84,9 @@ public class CupTeamBetsRestController {
 
 		final List<CupTeamBetDTO> result = newArrayList();
 
-		for ( final CupPosition cupPosition : CupPosition.values() ) {
+		for ( int i = 0; i < cup.getWinnersCount(); i++ ) {
 
-			final CupTeamBet cupTeamBet = cupTeamBetService.load( cup, user, cupPosition );
+			final CupTeamBet cupTeamBet = cupTeamBetService.load( cup, user, i );
 
 			if ( cupTeamBet != null ) {
 				final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet );
@@ -96,7 +95,7 @@ public class CupTeamBetsRestController {
 				final CupTeamBetDTO emptyCupTeamBetDTO = new CupTeamBetDTO();
 				emptyCupTeamBetDTO.setCup( cupDTO );
 				emptyCupTeamBetDTO.setUser( userDTO );
-				emptyCupTeamBetDTO.setCupPosition( dtoService.transformCupPosition( cupPosition ) );
+				emptyCupTeamBetDTO.setCupPosition( i );
 
 				result.add( emptyCupTeamBetDTO );
 			}

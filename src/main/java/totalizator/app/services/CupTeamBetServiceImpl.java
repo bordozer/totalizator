@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CupTeamBetRepository;
-import totalizator.app.enums.CupPosition;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
@@ -42,16 +41,16 @@ public class CupTeamBetServiceImpl implements CupTeamBetService {
 		cupTeamBetRepository.delete( id );
 	}
 
-	@Override
+	/*@Override
 	@Transactional( readOnly = true )
 	public List<CupTeamBet> load( final Cup cup ) {
 		return cupTeamBetRepository.load( cup );
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public List<CupTeamBet> load( final Cup cup, final Team team ) {
 		return cupTeamBetRepository.load( cup, team );
-	}
+	}*/
 
 	@Override
 	@Transactional( readOnly = true )
@@ -60,7 +59,7 @@ public class CupTeamBetServiceImpl implements CupTeamBetService {
 	}
 
 	@Override
-	public CupTeamBet load( final Cup cup, final User user, final CupPosition cupPosition ) {
+	public CupTeamBet load( final Cup cup, final User user, final int cupPosition ) {
 		return cupTeamBetRepository.load( cup, user, cupPosition );
 	}
 

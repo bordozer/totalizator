@@ -8,7 +8,7 @@
 			</tr>
 			<tr>
 				<td>
-					<select class="chosen-select" id="cup-team-position-<%=cupTeamBet.cupPosition.cupPositionId%>">
+					<select class="chosen-select" id="cup-team-position-<%=cupTeamBet.cupPosition%>">
 						<option value="0">&nbsp;</option>
 						<% _.each( teams, function( team ) { %>
 						<option value="<%=team.teamId%>" <%= cupTeamBet.team != null && cupTeamBet.team.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>

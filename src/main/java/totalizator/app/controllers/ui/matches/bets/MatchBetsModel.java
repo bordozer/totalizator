@@ -1,7 +1,6 @@
 package totalizator.app.controllers.ui.matches.bets;
 
 import totalizator.app.controllers.ui.AbstractPageModel;
-import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.User;

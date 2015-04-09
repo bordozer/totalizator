@@ -2,9 +2,9 @@ package totalizator.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import totalizator.config.root.SecurityConfig;
 import totalizator.config.root.DevelopmentConfiguration;
 import totalizator.config.root.RootContextConfig;
+import totalizator.config.root.SecurityConfig;
 import totalizator.config.root.TestConfiguration;
 import totalizator.config.servlet.ServletContextConfig;
 

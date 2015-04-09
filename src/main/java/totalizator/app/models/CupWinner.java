@@ -1,12 +1,8 @@
 package totalizator.app.models;
 
-import totalizator.app.enums.CupPosition;
-
 import javax.persistence.*;
 
-import static totalizator.app.models.CupWinner.LOAD_ALL;
-import static totalizator.app.models.CupWinner.LOAD_FOR_CUP;
-import static totalizator.app.models.CupWinner.LOAD_FOR_CUP_AND_TEAM;
+import static totalizator.app.models.CupWinner.*;
 
 @Entity
 @Table(
@@ -40,7 +36,7 @@ public class CupWinner extends AbstractEntity {
 	@JoinColumn(name="teamId")
 	private Team team;
 
-	private CupPosition cupPosition;
+	private int cupPosition;
 
 	public Cup getCup() {
 		return cup;
@@ -58,16 +54,16 @@ public class CupWinner extends AbstractEntity {
 		this.team = team;
 	}
 
-	public CupPosition getCupPosition() {
+	public int getCupPosition() {
 		return cupPosition;
 	}
 
-	public void setCupPosition( final CupPosition cupPosition ) {
+	public void setCupPosition( final int cupPosition ) {
 		this.cupPosition = cupPosition;
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %s %s", cup, team, cupPosition );
+		return String.format( "%s: %s %d", cup, team, cupPosition );
 	}
 }

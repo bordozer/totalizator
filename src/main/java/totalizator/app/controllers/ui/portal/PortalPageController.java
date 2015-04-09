@@ -1,6 +1,5 @@
 package totalizator.app.controllers.ui.portal;
 
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

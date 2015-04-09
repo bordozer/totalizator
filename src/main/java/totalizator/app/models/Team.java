@@ -2,9 +2,7 @@ package totalizator.app.models;
 
 import javax.persistence.*;
 
-import static totalizator.app.models.Team.FIND_BY_CATEGORY;
-import static totalizator.app.models.Team.FIND_BY_NAME;
-import static totalizator.app.models.Team.LOAD_ALL;
+import static totalizator.app.models.Team.*;
 
 
 @Entity

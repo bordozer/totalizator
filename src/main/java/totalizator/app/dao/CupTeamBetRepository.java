@@ -2,7 +2,6 @@ package totalizator.app.dao;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
-import totalizator.app.enums.CupPosition;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
@@ -42,11 +41,11 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 		em.remove( load( id ) );
 	}
 
-	public List<CupTeamBet> load( final Cup cup ) {
+	/*public List<CupTeamBet> load( final Cup cup ) {
 		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.getResultList();
-	}
+	}*/
 
 	public List<CupTeamBet> load( final Cup cup, final User user ) {
 		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER, CupTeamBet.class )
@@ -55,14 +54,14 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 				.getResultList();
 	}
 
-	public List<CupTeamBet> load( final Cup cup, final Team team ) {
+	/*public List<CupTeamBet> load( final Cup cup, final Team team ) {
 		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "teamId", team.getId() )
 				.getResultList();
-	}
+	}*/
 
-	public CupTeamBet load( final Cup cup, final User user, final CupPosition cupPosition ) {
+	public CupTeamBet load( final Cup cup, final User user, final int cupPosition ) {
 		final List<CupTeamBet> result = em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "userId", user.getId() )

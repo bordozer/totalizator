@@ -1,7 +1,6 @@
 package totalizator.app.models;
 
 import javax.persistence.*;
-
 import java.util.Date;
 
 import static totalizator.app.models.Cup.FIND_BY_NAME;
@@ -32,6 +31,8 @@ public class Cup extends AbstractEntity {
 	@JoinColumn(name="categoryId")
 	private Category category;
 
+	private int winnersCount;
+
 	private boolean showOnPortalPage;
 
 	private Date startDate;
@@ -60,6 +61,14 @@ public class Cup extends AbstractEntity {
 
 	public void setCategory( final Category category ) {
 		this.category = category;
+	}
+
+	public int getWinnersCount() {
+		return winnersCount;
+	}
+
+	public void setWinnersCount( final int winnersCount ) {
+		this.winnersCount = winnersCount;
 	}
 
 	public boolean isShowOnPortalPage() {

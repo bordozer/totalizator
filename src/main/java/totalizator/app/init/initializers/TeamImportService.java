@@ -6,7 +6,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Component;
-import totalizator.app.init.initializers.TeamData;
 import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 

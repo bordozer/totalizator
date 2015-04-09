@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.TeamRepository;
 import totalizator.app.models.Category;
-import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 
 import java.util.List;

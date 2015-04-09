@@ -5,10 +5,8 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.dto.*;
-import totalizator.app.enums.CupPosition;
 import totalizator.app.models.*;
 import totalizator.app.services.score.CupScoresService;
-import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
@@ -122,11 +120,6 @@ public class DTOServiceImpl implements DTOService {
 	@Override
 	public List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets ) {
 		return Lists.transform( cupTeamBets, cupTeamBetFunction() );
-	}
-
-	@Override
-	public CupPositionDTO transformCupPosition( final CupPosition cupPosition ) {
-		return cupPositionFunction().apply( cupPosition );
 	}
 
 	private Function<User, UserDTO> userFunction() {
@@ -264,20 +257,9 @@ public class DTOServiceImpl implements DTOService {
 				result.setTeam( transformTeam( cupTeamBet.getTeam() ) );
 				result.setUser( transformUser( cupTeamBet.getUser() ) );
 
-				result.setCupPosition( transformCupPosition( cupTeamBet.getCupPosition() ) );
+				result.setCupPosition( cupTeamBet.getCupPosition() );
 
 				return result;
-			}
-		};
-	}
-
-	private Function<CupPosition, CupPositionDTO> cupPositionFunction() {
-
-		return new Function<CupPosition, CupPositionDTO>() {
-			@Override
-			public CupPositionDTO apply( final CupPosition cupPosition ) {
-				final String positionName = translatorService.translate( cupPosition.getName(), Language.RU ); // TODO: language!
-				return new CupPositionDTO( cupPosition.getId(), positionName );
 			}
 		};
 	}

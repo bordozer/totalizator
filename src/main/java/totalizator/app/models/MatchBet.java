@@ -1,7 +1,6 @@
 package totalizator.app.models;
 
 import javax.persistence.*;
-
 import java.util.Date;
 
 import static totalizator.app.models.MatchBet.*;
