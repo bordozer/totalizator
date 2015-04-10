@@ -3,7 +3,7 @@ define( function ( require ) {
 	'use strict';
 
 	var DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm';
-	var DATE_TIME_DISPLAY_FORMAT = 'D MMM HH:mm';
+	var DATE_TIME_DISPLAY_FORMAT = 'D MMM YYYY HH:mm';
 
 	var LOCALE = 'ru';
 

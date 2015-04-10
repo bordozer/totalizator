@@ -158,7 +158,7 @@ define( function ( require ) {
 
 		categoryTeams: function( teams, categoryId ) {
 			return _.filter( teams, function( team ) {
-				return team.categoryId == categoryId;
+				return team.category.categoryId == categoryId;
 			});
 		},
 

@@ -175,13 +175,16 @@ define( function ( require ) {
 
 			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
 
+			var team1 = service.getTeam( this.teams, model.team1Id );
+			var team2 = service.getTeam( this.teams, model.team2Id );
+
 			this.$el.html( templateEntry( {
 				model: model
 				, matchId: model.matchId
 				, categoryName: service.getCategory( this.categories, model.categoryId ).categoryName
 				, cupName: service.getCup( this.cups, model.cupId ).cupName
-				, team1Name: service.getTeam( this.teams, model.team1Id ).teamName
-				, team2Name: service.getTeam( this.teams, model.team2Id ).teamName
+				, team1: team1
+				, team2: team2
 				, score1: model.score1
 				, score2: model.score2
 				, matchResults: matchResults
@@ -197,10 +200,15 @@ define( function ( require ) {
 		},
 
 		renderEdit: function () {
+
 			var model = this.model.toJSON();
 			var categoryId = model.categoryId;
 
 			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
+
+			var cups = service.categoryCups( this.cups, categoryId );
+			var teams = service.categoryTeams( this.teams, categoryId );
+			console.log( categoryId );
 
 			this.$el.html( templateEntryEdit( {
 				model: model
@@ -208,8 +216,8 @@ define( function ( require ) {
 				, matchId: model.matchId
 				, categories: this.categories
 				, categoryId: categoryId
-				, cups: service.categoryCups( this.cups, categoryId )
-				, teams: service.categoryTeams( this.teams, categoryId )
+				, cups: cups
+				, teams: teams
 				, translator: translator
 			} ) );
 

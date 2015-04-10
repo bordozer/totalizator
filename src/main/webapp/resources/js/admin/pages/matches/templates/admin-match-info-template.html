@@ -5,18 +5,24 @@
 		<button type="button" class="btn btn-default fa fa-recycle entry-del" title="<%=translator.matchDeleteLabel%>"></button>
 	</div>
 
-	<div class="col-lg-3">
+	<div class="col-lg-2">
 		<input type="checkbox" class="js-group-checkbox" value="true">
 		<strong>#<%=matchId%></strong>
 		<%=categoryName%> / <%=cupName%>
 	</div>
 
-	<div class="col-lg-3 text-right <%=matchResults.style1%>"><%=team1Name%></div>
-	<div class="col-lg-3 <%=matchResults.style2%>"><%=team2Name%></div>
+	<div class="col-lg-3 text-right <%=matchResults.style1%>">
+		<%=team1.teamName%>
+		<img src="<%=team1.teamLogo%>" height="32">
+	</div>
+	<div class="col-lg-3 <%=matchResults.style2%>">
+		<img src="<%=team2.teamLogo%>" height="32">
+		<%=team2.teamName%>
+	</div>
 	<div class="col-lg-1">
 		<span class="<%=matchResults.style1%>"><%=score1%></span> - <span class="<%=matchResults.style2%>"><%=score2%></span>
 	</div>
-	<div class="col-lg-1"><small><%=beginningTime%></small></div>
+	<div class="col-lg-2"><small><%=beginningTime%></small></div>
 </div>
 
 
