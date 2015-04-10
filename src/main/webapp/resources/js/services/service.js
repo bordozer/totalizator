@@ -109,36 +109,21 @@ define( function ( require ) {
 			var categories = new Categories( [], {} );
 			categories.fetch( { cache: false, async: false } );
 
-			var result = [];
-			categories.forEach( function( category ) {
-				result.push( category );
-			});
-
-			return result;
+			return categories.toJSON();
 		},
 
 		loadCups: function() {
 			var cups = new Cups( [], {} );
 			cups.fetch( { cache: false, async: false } );
 
-			var result = [];
-			cups.forEach( function( cup ) {
-				result.push( cup );
-			});
-
-			return result;
+			return cups.toJSON();
 		},
 
 		loadTeams: function() {
 			var teams = new Teams( [], {} );
 			teams.fetch( { cache: false, async: false } );
 
-			var result = [];
-			teams.forEach( function( team ) {
-				result.push( team );
-			});
-
-			return result;
+			return teams.toJSON();
 		},
 
 		getUser: function( users, userId ) {
