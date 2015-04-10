@@ -45,6 +45,6 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	private String format() {
-		return FORMAT_DATE_TIME;
+		return DATE_TIME_FORMAT;
 	}
 }

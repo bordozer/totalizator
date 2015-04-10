@@ -140,7 +140,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: model
-				, categoryName: this._getCategoryName( model.category.categoryId )
+				, categoryName: this._getCategoryName( model.categoryId )
 				, translator: translator
 			} ) );
 

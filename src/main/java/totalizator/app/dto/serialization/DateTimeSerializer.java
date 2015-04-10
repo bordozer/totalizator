@@ -14,7 +14,7 @@ public class DateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
 	@Override
 	public void serialize( final LocalDateTime value, final JsonGenerator jgen, final SerializerProvider provider ) throws IOException, JsonProcessingException {
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( DateTimeService.FORMAT_DATE_TIME );
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( DateTimeService.DATE_TIME_FORMAT );
 		jgen.writeString( value.format( formatter ) );
 	}
 }

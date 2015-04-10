@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public interface DateTimeService {
 
-	String FORMAT_DATE_TIME = "dd/MM/yyyy HH:mm";
+	String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
 
 	LocalDateTime getNow();
 
