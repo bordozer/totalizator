@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import totalizator.app.beans.ValidationResult;
 import totalizator.app.dto.BetDTO;
 import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.MatchesBetSettingsDTO;
@@ -81,8 +82,9 @@ public class MatchesAndBetsRestController {
 		final User user = userService.findByLogin( principal.getName() );
 		final Match match = matchService.load( matchId );
 
-		if ( ! matchBetsService.isBettingAllowed( match, user ) ) {
-			throw new IllegalArgumentException( String.format( "Match betting for cup %s is finished", match.getCup() ) );
+		final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, user );
+		if ( ! validationResult.isPassed() ) {
+			throw new IllegalArgumentException( validationResult.getMessage() ); // TODO: show the exception to user
 		}
 
 		final MatchBet existingBet = matchBetsService.load( user, match );
@@ -90,7 +92,7 @@ public class MatchesAndBetsRestController {
 		if ( existingBet != null ) {
 
 			if ( ! existingBet.getUser().equals( user ) ) {
-				throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), user ) );
+				throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), user ) ); // TODO: show the exception to user
 			}
 
 			existingBet.setBetScore1( score1 );

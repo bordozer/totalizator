@@ -6,8 +6,10 @@ public class MatchBetDTO {
 
 	private MatchDTO match;
 	private BetDTO bet;
-	private boolean bettingAllowed;
 	private int points;
+
+	private boolean bettingAllowed;
+	private String bettingValidationMessage;
 
 	private int betsCount;
 
@@ -49,6 +51,14 @@ public class MatchBetDTO {
 
 	public void setBettingAllowed( final boolean bettingAllowed ) {
 		this.bettingAllowed = bettingAllowed;
+	}
+
+	public String getBettingValidationMessage() {
+		return bettingValidationMessage;
+	}
+
+	public void setBettingValidationMessage( final String bettingValidationMessage ) {
+		this.bettingValidationMessage = bettingValidationMessage;
 	}
 
 	public int getPoints() {

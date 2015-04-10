@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import totalizator.app.beans.ValidationResult;
 import totalizator.app.dto.*;
 import totalizator.app.models.*;
 import totalizator.app.services.score.CupScoresService;
@@ -208,7 +209,10 @@ public class DTOServiceImpl implements DTOService {
 				final MatchDTO matchDTO = transformMatch( match, user );
 
 				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-				matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
+
+				final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, user );
+				matchBetDTO.setBettingAllowed( validationResult.isPassed() );
+				matchBetDTO.setBettingValidationMessage( validationResult.getMessage() );
 
 				final MatchBet matchBet = matchBetsService.load( user, match );
 
