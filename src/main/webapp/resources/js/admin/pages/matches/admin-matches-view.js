@@ -197,13 +197,13 @@ define( function ( require ) {
 		},
 
 		renderEdit: function () {
-			var modelJSON = this.model.toJSON();
-			var categoryId = this.model.get( 'categoryId' );
+			var model = this.model.toJSON();
+			var categoryId = model.category.categoryId;
 
 			this.$el.html( templateEntryEdit( {
-				model: modelJSON
-				, title: modelJSON.matchId == 0 ? translator.newEntryEditFormTitle : modelJSON.team1.teamName + ' - ' + modelJSON.team2.teamName
-				, matchId: modelJSON.matchId
+				model: model
+				, title: model.matchId == 0 ? translator.newEntryEditFormTitle : model.team1.teamName + ' - ' + model.team2.teamName
+				, matchId: model.matchId
 				, categories: this.categories
 				, categoryId: categoryId
 				, cups: service.categoryCups( this.cups, categoryId )
@@ -214,12 +214,13 @@ define( function ( require ) {
 			var options = {
 				width: "100%"
 			};
+
 			this.$( '#category-select-box' ).chosen( options );
 			this.$( '#cup-select-box' ).chosen( options );
 			this.$( '#team1-select-box' ).chosen( options );
 			this.$( '#team2-select-box' ).chosen( options );
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: dateTimeService.parseDate( modelJSON.beginningTime ) } );
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: dateTimeService.parseDate( model.beginningTime ) } );
 
 			return this;
 		},

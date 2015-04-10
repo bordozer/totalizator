@@ -44,7 +44,7 @@
 							<select id="cup-select-box" class="chosen-select cups-select-box">
 								<option value="0"></option>
 							<% _.each( cups, function( cup ) { %>
-								<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
+								<option value="<%=cup.cupId%>" <%= model.cup.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
 							<% }) %>
 							</select>
 						</div>
@@ -55,7 +55,7 @@
 
 					<div class="col-lg-6">
 
-						<% if( teams.length > 0 && model.cupId > 0 ) { %>
+						<% if( teams.length > 0 && model.cup.cupId > 0 ) { %>
 							<div class="row">
 								<div class="col-lg-12 text-right">
 									<%=translator.matchEdit_Team%> 1
@@ -84,7 +84,7 @@
 
 					<div class="col-lg-6">
 
-						<% if( teams.length > 0 && model.cupId > 0 ) { %>
+						<% if( teams.length > 0 && model.cup.cupId > 0 ) { %>
 							<div class="row">
 								<div class="col-lg-12">
 									<%=translator.matchEdit_Team%> 2
