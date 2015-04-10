@@ -11,7 +11,11 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!./templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/cup-edit-template.html' );
 
+	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
+
 	var service = require( '/resources/js/services/service.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
@@ -25,6 +29,7 @@ define( function ( require ) {
 		, entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
 		, entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"
 		, entryEditCupIsFinishedLabel: "Admin / Cups / Edit: Cup is finished"
+		, entryEditCupStartDateLabel: "Admin / Cups / Edit: Cup start date"
 		, cupValidation_CupName: "Cup validation: Enter a cup name!"
 		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
 	} );
@@ -150,11 +155,12 @@ define( function ( require ) {
 
 		render: function () {
 
-			var modelJSON = this.model.toJSON();
+			var model = this.model.toJSON();
 
 			this.$el.html( this.templateView( {
-				model: modelJSON
+				model: model
 				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) ).categoryName
+				, cupStartDate: dateTimeService.formatDateDisplay( model.cupStartDate )
 				, translator: translator
 			} ) );
 
@@ -162,13 +168,16 @@ define( function ( require ) {
 		},
 
 		renderEdit: function () {
-			var modelJSON = this.model.toJSON();
+
+			var model = this.model.toJSON();
 
 			this.$el.html( this.templateEdit( {
-				model: modelJSON
+				model: model
 				, categories: this.categories
 				, translator: translator
 			} ) );
+
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: dateTimeService.parseDate( model.cupStartDate ) } );
 
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
 
@@ -222,6 +231,7 @@ define( function ( require ) {
 				, showOnPortalPage: showOnPortalPage
 				, readyForCupBets: readyForCupBets
 				, readyForMatchBets: readyForMatchBets
+				, cupStartDate: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
 				, finished: finished
 			} );
 		},
