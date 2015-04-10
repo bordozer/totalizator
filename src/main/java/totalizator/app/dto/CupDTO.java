@@ -1,8 +1,14 @@
 package totalizator.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.dto.serialization.DateTimeDeserializer;
+import totalizator.app.dto.serialization.DateTimeSerializer;
 
-@JsonIgnoreProperties( ignoreUnknown = true )
+import java.util.Date;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CupDTO {
 
 	private int cupId;
@@ -10,8 +16,12 @@ public class CupDTO {
 	private CategoryDTO category;
 	private int winnersCount;
 	private boolean showOnPortalPage;
+
+	private Date cupStartDate;
+
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
+
 	private boolean finished;
 
 	public CupDTO() {
@@ -53,6 +63,16 @@ public class CupDTO {
 
 	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
 		this.showOnPortalPage = showOnPortalPage;
+	}
+
+	@JsonSerialize( using = DateTimeSerializer.class )
+	public Date getCupStartDate() {
+		return cupStartDate;
+	}
+
+	@JsonDeserialize( using = DateTimeDeserializer.class )
+	public void setCupStartDate( final Date cupStartDate ) {
+		this.cupStartDate = cupStartDate;
 	}
 
 	public int getWinnersCount() {

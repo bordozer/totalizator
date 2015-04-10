@@ -12,7 +12,7 @@ import totalizator.app.models.User;
 import java.util.List;
 
 @Service
-public class CupTeamBetServiceImpl implements CupTeamBetService {
+public class CupBetsServiceImpl implements CupBetsService {
 
 	@Autowired
 	private CupTeamBetRepository cupTeamBetRepository;
@@ -40,17 +40,6 @@ public class CupTeamBetServiceImpl implements CupTeamBetService {
 	public void delete( final int id ) {
 		cupTeamBetRepository.delete( id );
 	}
-
-	/*@Override
-	@Transactional( readOnly = true )
-	public List<CupTeamBet> load( final Cup cup ) {
-		return cupTeamBetRepository.load( cup );
-	}*/
-
-	/*@Override
-	public List<CupTeamBet> load( final Cup cup, final Team team ) {
-		return cupTeamBetRepository.load( cup, team );
-	}*/
 
 	@Override
 	@Transactional( readOnly = true )

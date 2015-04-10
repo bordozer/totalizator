@@ -31,7 +31,7 @@ public class CupTeamBetsRestController {
 	private TeamService teamService;
 
 	@Autowired
-	private CupTeamBetService cupTeamBetService;
+	private CupBetsService cupBetsService;
 
 	@Autowired
 	private DTOService dtoService;
@@ -57,9 +57,9 @@ public class CupTeamBetsRestController {
 
 		final User user = userService.findByLogin( principal.getName() );
 
-		final CupTeamBet existingTupTeamBet = cupTeamBetService.load( cup, user, position );
+		final CupTeamBet existingTupTeamBet = cupBetsService.load( cup, user, position );
 		if ( cupId > 0 && position > 0 && teamId == 0 && existingTupTeamBet != null ) {
-			cupTeamBetService.delete( existingTupTeamBet.getId() );
+			cupBetsService.delete( existingTupTeamBet.getId() );
 			return;
 		}
 
@@ -71,7 +71,7 @@ public class CupTeamBetsRestController {
 
 		if ( existingTupTeamBet != null ) {
 			existingTupTeamBet.setTeam( team );
-			cupTeamBetService.save( existingTupTeamBet );
+			cupBetsService.save( existingTupTeamBet );
 
 			return;
 		}
@@ -85,7 +85,7 @@ public class CupTeamBetsRestController {
 
 		entry.setBetTime( new Date() );
 
-		cupTeamBetService.save( entry );
+		cupBetsService.save( entry );
 	}
 
 	private CupTeamBetsDTO getCupTeamBetsDTO( final int cupId, final int userId ) {
@@ -100,7 +100,7 @@ public class CupTeamBetsRestController {
 
 		for ( int i = 1; i <= cup.getWinnersCount(); i++ ) {
 
-			final CupTeamBet cupTeamBet = cupTeamBetService.load( cup, user, i );
+			final CupTeamBet cupTeamBet = cupBetsService.load( cup, user, i );
 
 			if ( cupTeamBet != null ) {
 				final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet );

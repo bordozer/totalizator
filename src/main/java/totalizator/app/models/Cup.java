@@ -35,7 +35,7 @@ public class Cup extends AbstractEntity {
 
 	private boolean showOnPortalPage;
 
-	private Date startDate;
+	private Date cupStartDate;
 
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
@@ -81,12 +81,12 @@ public class Cup extends AbstractEntity {
 		this.showOnPortalPage = showOnPortalPage;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public Date getCupStartDate() {
+		return cupStartDate;
 	}
 
-	public void setStartDate( final Date startDate ) {
-		this.startDate = startDate;
+	public void setCupStartDate( final Date cupStartDate ) {
+		this.cupStartDate = cupStartDate;
 	}
 
 	public boolean isReadyForCupBets() {

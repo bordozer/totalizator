@@ -7,11 +7,7 @@ import totalizator.app.models.User;
 
 import java.util.List;
 
-public interface CupTeamBetService extends GenericService<CupTeamBet> {
-
-//	List<CupTeamBet> load( final Cup cup );
-
-//	List<CupTeamBet> load( final Cup cup, final Team team );
+public interface CupBetsService extends GenericService<CupTeamBet> {
 
 	List<CupTeamBet> load( final Cup cup, final User user );
 
