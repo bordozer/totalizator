@@ -214,7 +214,6 @@ define( function ( require ) {
 			var options = {
 				width: "100%"
 			};
-
 			this.$( '#category-select-box' ).chosen( options );
 			this.$( '#cup-select-box' ).chosen( options );
 			this.$( '#team1-select-box' ).chosen( options );
