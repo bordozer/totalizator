@@ -8,7 +8,6 @@ import totalizator.app.services.TeamLogoService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -105,7 +104,7 @@ public abstract class AbstractDataInitializer {
 
 		for ( final User user : users ) {
 
-			final int betsCountGenerateTo = getRandomInt( 0, cupMatches.size() - 1 );
+			final int betsCountGenerateTo = rnd( 0, cupMatches.size() - 1 );
 
 			if ( betsCountGenerateTo == 0 ) {
 				continue;
@@ -124,7 +123,7 @@ public abstract class AbstractDataInitializer {
 				bet.setUser( user );
 				bet.setBetScore1( pastStrategy().generateScore() );
 				bet.setBetScore2( pastStrategy().generateScore() );
-				bet.setBetTime( dateTimeService.offset( match.getBeginningTime(), Calendar.HOUR, getRandomInt( 1, 12 ) ) );
+				bet.setBetTime( dateTimeService.plusHours( match.getBeginningTime(), rnd( 1, 12 ) ) );
 
 				session.persist( bet );
 
@@ -144,7 +143,7 @@ public abstract class AbstractDataInitializer {
 
 		for ( final User user : users ) {
 
-			final int betCount = getRandomInt( 1, cup.getWinnersCount() );
+			final int betCount = rnd( 1, cup.getWinnersCount() );
 			for ( int i = 1; i <= betCount; i++ ) {
 
 				final CupTeamBet cupTeamBet = new CupTeamBet();
@@ -153,7 +152,7 @@ public abstract class AbstractDataInitializer {
 				cupTeamBet.setUser( user );
 				cupTeamBet.setTeam( getRandomTeam( teams ) );
 				cupTeamBet.setCupPosition( i );
-				cupTeamBet.setBetTime( dateTimeService.offset( cup.getCupStartTime(), Calendar.HOUR, getRandomInt( 1, 10 ) ) );
+				cupTeamBet.setBetTime( dateTimeService.minusDays( cup.getCupStartTime(), rnd( 1, 10 ) ) );
 
 				session.persist( cupTeamBet );
 			}
@@ -181,7 +180,7 @@ public abstract class AbstractDataInitializer {
 			return null;
 		}
 
-		return teams.get( getRandomInt( 0, teams.size() - 1 ) );
+		return teams.get( rnd( 0, teams.size() - 1 ) );
 	}
 
 	private Category generateCategory( final String name, final Session session ) {
@@ -191,7 +190,7 @@ public abstract class AbstractDataInitializer {
 		return category;
 	}
 
-	public static int getRandomInt( final int minValue, final int maxValue ) {
+	public static int rnd( final int minValue, final int maxValue ) {
 
 		if ( maxValue == 0 ) {
 			return 0;

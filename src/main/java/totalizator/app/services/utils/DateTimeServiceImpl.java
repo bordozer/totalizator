@@ -14,13 +14,38 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
-	public LocalDateTime offset( final int measure, final int offset ) {
-		return offset( getNow(), measure, offset );
+	public LocalDateTime minusHours( final int hours ) {
+		return minusHours( getNow(), hours );
 	}
 
 	@Override
-	public LocalDateTime offset( final LocalDateTime time, final int measure, final int offset ) {
-		return time; // TODO
+	public LocalDateTime minusDays( final int days ) {
+		return minusDays( getNow(), days );
+	}
+
+	@Override
+	public LocalDateTime plusHours( final int hours ) {
+		return plusHours( getNow(), hours );
+	}
+
+	@Override
+	public LocalDateTime plusHours( final LocalDateTime time, final int hours ) {
+		return time.plusHours( hours );
+	}
+
+	@Override
+	public LocalDateTime minusHours( final LocalDateTime time, final int hours ) {
+		return time.minusHours( hours );
+	}
+
+	@Override
+	public LocalDateTime minusDays( final LocalDateTime time, final int days ) {
+		return time.minusDays( days );
+	}
+
+	@Override
+	public LocalDateTime plusDays( final LocalDateTime time, final int days ) {
+		return time.plusDays( days );
 	}
 
 	@Override

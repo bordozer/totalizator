@@ -11,13 +11,12 @@ import totalizator.app.models.User;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.List;
 
 @Service
 public class CupBetsServiceImpl implements CupBetsService {
 
-	private static final int STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS = 24;
+	private static final int STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS = 24; // TODO: mode to the settings
 	@Autowired
 	private CupTeamBetRepository cupTeamBetRepository;
 
@@ -70,6 +69,6 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	private LocalDateTime getCupLastBettingSecond( final Cup cup ) {
-		return dateTimeService.offset( cup.getCupStartTime(), Calendar.HOUR, STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS );
+		return dateTimeService.minusHours( cup.getCupStartTime(), STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS );
 	}
 }

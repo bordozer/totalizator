@@ -3,7 +3,6 @@ package totalizator.app.init.initializers;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 abstract class MatchDataGenerationStrategy {
 
@@ -19,12 +18,12 @@ abstract class MatchDataGenerationStrategy {
 
 			@Override
 			public LocalDateTime generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) );
+				return dateTimeService.minusHours( rnd( 1, 512 ) );
 			}
 
 			@Override
 			public int generateScore() {
-				return getRandomInt( 80, 115 );
+				return rnd( 80, 115 );
 			}
 
 			@Override
@@ -39,7 +38,7 @@ abstract class MatchDataGenerationStrategy {
 
 			@Override
 			public LocalDateTime generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, getRandomInt( 1, 168 ) );
+				return dateTimeService.plusHours( rnd( 1, 168 ) );
 			}
 
 			@Override
@@ -59,12 +58,12 @@ abstract class MatchDataGenerationStrategy {
 
 			@Override
 			public LocalDateTime generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) );
+				return dateTimeService.minusHours( rnd( 1, 512 ) );
 			}
 
 			@Override
 			public int generateScore() {
-				return getRandomInt( 60, 85 );
+				return rnd( 60, 85 );
 			}
 
 			@Override
@@ -79,7 +78,7 @@ abstract class MatchDataGenerationStrategy {
 
 			@Override
 			public LocalDateTime generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, getRandomInt( 1, 200 ) );
+				return dateTimeService.plusHours( rnd( 1, 200 ) );
 			}
 
 			@Override
@@ -100,12 +99,12 @@ abstract class MatchDataGenerationStrategy {
 
 			@Override
 			public LocalDateTime generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, -getRandomInt( 1, 512 ) );
+				return dateTimeService.minusHours( rnd( 1, 512 ) );
 			}
 
 			@Override
 			public int generateScore() {
-				return getRandomInt( 0, 8 );
+				return rnd( 0, 8 );
 			}
 
 			@Override
@@ -120,7 +119,7 @@ abstract class MatchDataGenerationStrategy {
 
 			@Override
 			public LocalDateTime generateBeginningTime( final DateTimeService dateTimeService ) {
-				return dateTimeService.offset( Calendar.HOUR, getRandomInt( 1, 256 ) );
+				return dateTimeService.plusHours( rnd( 1, 256 ) );
 			}
 
 			@Override
@@ -135,7 +134,7 @@ abstract class MatchDataGenerationStrategy {
 		};
 	}
 
-	private static int getRandomInt( final int minValue, final int maxValue ) {
-		return AbstractDataInitializer.getRandomInt( minValue, maxValue );
+	private static int rnd( final int minValue, final int maxValue ) {
+		return AbstractDataInitializer.rnd( minValue, maxValue );
 	}
 }

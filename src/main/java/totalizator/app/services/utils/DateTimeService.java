@@ -8,9 +8,21 @@ public interface DateTimeService {
 
 	LocalDateTime getNow();
 
-	LocalDateTime offset( final int measure, final int offset );
+	LocalDateTime minusHours( final int hours );
 
-	LocalDateTime offset( final LocalDateTime time, final int measure, final int offset );
+	LocalDateTime plusHours( int hours );
+
+	LocalDateTime minusDays( final int days );
+
+
+	LocalDateTime minusHours( final LocalDateTime time, int hours );
+
+	LocalDateTime plusHours( final LocalDateTime time, int hours );
+
+	LocalDateTime minusDays( final LocalDateTime time, final int days );
+
+	LocalDateTime plusDays( final LocalDateTime time, final int days );
+
 
 	String formatDateTime( final LocalDateTime time );
 
