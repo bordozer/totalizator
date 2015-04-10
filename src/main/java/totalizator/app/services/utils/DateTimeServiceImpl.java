@@ -4,14 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 @Service
 public class DateTimeServiceImpl implements DateTimeService {
-
-	private static final String FORMAT_DATE = "yyyy-MM-dd";
-	private static final String FORMAT_TIME = "HH:mm";
 
 	@Override
 	public LocalDateTime getNow() {
@@ -25,10 +20,6 @@ public class DateTimeServiceImpl implements DateTimeService {
 
 	@Override
 	public LocalDateTime offset( final LocalDateTime time, final int measure, final int offset ) {
-
-//		final Calendar cal = getCalendar( time );
-//		cal.add( measure, offset );
-
 		return time; // TODO
 	}
 
@@ -53,22 +44,7 @@ public class DateTimeServiceImpl implements DateTimeService {
 		return LocalDateTime.of( time.getYear(), time.getMonth(), time.getDayOfMonth(), time.getHour(), time.getMinute() );
 	}
 
-	private Calendar getCalendar( final Date date ) {
-
-		final Calendar calendar = getCalendar();
-		calendar.setTime( date );
-
-		return calendar;
-	}
-
-	private Calendar getCalendar() {
-		final Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek( Calendar.MONDAY );
-
-		return calendar;
-	}
-
 	private String format() {
-		return String.format( "%s %s", FORMAT_DATE, FORMAT_TIME );
+		return FORMAT_DATE_TIME;
 	}
 }
