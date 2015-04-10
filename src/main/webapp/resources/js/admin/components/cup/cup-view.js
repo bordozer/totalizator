@@ -154,7 +154,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateView( {
 				model: modelJSON
-				, categoryName: this._getCategoryName( this.model.get( 'category' ).categoryId )
+				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) ).categoryName
 				, translator: translator
 			} ) );
 

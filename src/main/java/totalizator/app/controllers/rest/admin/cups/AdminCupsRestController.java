@@ -51,7 +51,7 @@ public class AdminCupsRestController {
 
 				cupEditDTO.setCupId( cup.getId() );
 				cupEditDTO.setCupName( cup.getCupName() );
-				cupEditDTO.setCupId( cup.getCategory().getId() );
+				cupEditDTO.setCategoryId( cup.getCategory().getId() );
 
 
 				cupEditDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
