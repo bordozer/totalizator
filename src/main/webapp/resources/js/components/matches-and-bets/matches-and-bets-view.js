@@ -119,9 +119,11 @@ define( function ( require ) {
 //			console.log( model );
 
 			var match = this.model.get( 'match' );
-
 			var isMatchFinished = match.matchFinished;
+
+			var bet = this.model.get( 'bet' );
 			var isBettingAllowed = this.model.isBettingAllowed();
+			console.log( isBettingAllowed );
 
 			this._renderDropDownMenuItems();
 
@@ -139,8 +141,6 @@ define( function ( require ) {
 
 				return this;
 			}
-
-			var bet = this.model.get( 'bet' );
 
 			if( bet == null ) {
 

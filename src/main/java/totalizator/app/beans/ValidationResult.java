@@ -17,7 +17,7 @@ public class ValidationResult {
 	}
 
 	public static ValidationResult fail( final String message ) {
-		return new ValidationResult( true, message );
+		return new ValidationResult( false, message );
 	}
 
 	public boolean isPassed() {
