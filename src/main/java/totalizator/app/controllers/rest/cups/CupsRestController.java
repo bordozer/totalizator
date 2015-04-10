@@ -22,10 +22,17 @@ public class CupsRestController {
 	private CupService cupService;
 
 	@Autowired
-	private DTOService dtoService;
+	private UserService userService;
 
 	@Autowired
-	private UserService userService;
+	private DTOService dtoService;
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	public List<CupDTO> all( final Principal principal ) {
+		return dtoService.transformCups( cupService.loadAll(), userService.findByLogin( principal.getName() ) );
+	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
