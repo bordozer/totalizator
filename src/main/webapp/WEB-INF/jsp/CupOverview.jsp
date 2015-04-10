@@ -11,7 +11,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup', 'translator' ], function ( $, Page, cup, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup-overview/cup-overview', 'translator' ], function ( $, Page, cupOverview, Translator ) {
 
 			var cupId = ${cup.id};
 
@@ -27,7 +27,7 @@
 
 			var currentUser = ${cupOverviewModel.currentUserJSON};
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cupOverview, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
 			pageView.render();
 		} );
 	</script>
