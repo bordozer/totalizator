@@ -136,11 +136,11 @@ define( function ( require ) {
 
 		render: function () {
 
-			var modelJSON = this.model.toJSON();
+			var model = this.model.toJSON();
 
 			this.$el.html( this.templateView( {
-				model: modelJSON
-				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) )
+				model: model
+				, categoryName: this._getCategoryName( model.category.categoryId )
 				, translator: translator
 			} ) );
 
