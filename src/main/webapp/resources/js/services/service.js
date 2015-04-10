@@ -11,6 +11,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		logoutConfirmationLabel: 'Logout confirmation: Logout?'
+		, logoutFailedMessage: 'Logout failed'
 		, matchBetSavingError: 'Match bet saving error'
 		, cupTeamBetSavingError: 'Cup team bet saving error'
 	} );
@@ -175,7 +176,7 @@ define( function ( require ) {
 					window.location.reload();
 				},
 				error: function() {
-					alert( 'Logout failed' ); // TODO
+					alert( translator.logoutFailedMessage );
 				}
 			} )
 		},
