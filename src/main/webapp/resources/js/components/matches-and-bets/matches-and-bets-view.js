@@ -116,7 +116,7 @@ define( function ( require ) {
 			this.$el.html( templateMatch( this._getViewOptions() ) );
 			this._fadeIn();
 
-			console.log( this.model.toJSON() );
+//			console.log( this.model.toJSON() );
 
 			this._renderDropDownMenuItems();
 
