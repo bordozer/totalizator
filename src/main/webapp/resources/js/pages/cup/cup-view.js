@@ -16,8 +16,6 @@ define( function ( require ) {
 
 	var cupTeamBets = require( 'js/components/cup-team-bets/cup-team-bets' );
 
-	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
-
 	var CupPageView = Backbone.View.extend( {
 
 		initialize: function( options ) {
@@ -32,8 +30,6 @@ define( function ( require ) {
 			this.$el.html( template( {
 			 } ) );
 
-			this._renderNavigation();
-
 			this._renderCupScores();
 
 			this._renderCupMatchesAndBets();
@@ -43,8 +39,8 @@ define( function ( require ) {
 			return this;
 		},
 
-		_renderNavigation: function() {
-			var view = new CupsNaviView( this._getCup().cupId, this.$( '.js-cups-navi' ) );
+		getActiveCupId: function() {
+			return this._getCup().cupId;
 		},
 
 		_renderCupScores: function() {

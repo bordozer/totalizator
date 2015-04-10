@@ -6,7 +6,11 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var userPageTemplate = _.template( require( 'text!./templates/user-base-page-template.html' ) );
+
 	var PageView = require( 'js/components/base-view/base-page-view' );
+
+	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -21,6 +25,15 @@ define( function ( require ) {
 			'click .logout-link': 'logout'
 		},
 
+		renderBody: function() {
+
+			this.$( '.body-container' ).html( userPageTemplate( {
+			} ) );
+
+			var cupsNaviView = new CupsNaviView( this.getActiveCupId(), this.$( '.js-cups-navi' ) ); // TODO: cupId?
+			this.bodyView = this.bodyRenderer( this.$( '.js-custom-view' ), this.options ).view();
+		},
+
 		mainMenuItems: function() {
 			return [
 				{ selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel }
@@ -29,6 +42,10 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
+		},
+
+		getActiveCupId: function() {
+			return 0;
 		}
 	});
 } );

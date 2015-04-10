@@ -8,8 +8,6 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/user-list-template.html' ) );
 
-	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
-
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Users"
@@ -19,6 +17,7 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.currentUser = options.options.currentUser;
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -30,13 +29,6 @@ define( function ( require ) {
 				, currentUser: this.currentUser
 				, translator: translator
 			} ) );
-
-			this._renderNavigation();
-		},
-
-		_renderNavigation: function() {
-			var selectedCupId = 0;
-			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
 		}
 	});
 } );

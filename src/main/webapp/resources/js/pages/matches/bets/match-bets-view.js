@@ -46,14 +46,7 @@ define( function ( require ) {
 
 			this.$el.html( template( data ) );
 
-			this._renderNavigation();
-
 			return this;
-		},
-
-		_renderNavigation: function() {
-			var selectedCupId = 0;
-			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
 		}
 	} );
 
