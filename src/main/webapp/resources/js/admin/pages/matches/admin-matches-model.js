@@ -13,11 +13,11 @@ define( function ( require ) {
 
 		defaults: {
 			matchId: 0
-			, categoryId: 0
-			, cupId: 0
-			, team1Id: 0
+			, category: {}
+			, cup: {}
+			, team1: {}
 			, score1: 0
-			, team2Id: 0
+			, team2: {}
 			, score2: 0
 			, beginningTime: new Date()
 			, matchFinished: false
