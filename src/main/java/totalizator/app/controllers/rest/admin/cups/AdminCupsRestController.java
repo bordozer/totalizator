@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
@@ -58,7 +57,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
 				cupEditDTO.setReadyForCupBets( cup.isReadyForCupBets() );
 				cupEditDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
-				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isCupBettingAllowed( cup, currentUser ) );
+				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isNotTooLateForCupBetting( cup, currentUser ) );
 				cupEditDTO.setFinished( cup.isFinished() );
 
 				return cupEditDTO;

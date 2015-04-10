@@ -15,5 +15,5 @@ public interface CupBetsService extends GenericService<CupTeamBet> {
 
 	CupTeamBet load( final Cup cup, final User user, final Team team );
 
-	boolean isCupBettingAllowed( final Cup cup, final User user );
+	boolean isNotTooLateForCupBetting( final Cup cup, final User user );
 }

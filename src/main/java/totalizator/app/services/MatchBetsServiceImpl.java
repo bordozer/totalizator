@@ -100,13 +100,29 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
-	public boolean isMatchBettingAllowed( final Match match, final User user ) {
+	public boolean userCanBetMatch( final Match match, final User user ) {
+
+		if ( match.getCup().isFinished() ) {
+			return false;
+		}
+
+		if ( ! match.getCup().isReadyForMatchBets() ) {
+			return false;
+		}
 
 		if ( match.isMatchFinished() ) {
 			return false;
 		}
 
-		return dateTimeService.getNow().isBefore( getMatchLastBettingSecond( match ) );
+		if ( isTooLateForMatchBetting( match ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean isTooLateForMatchBetting( final Match match ) {
+		return dateTimeService.getNow().isAfter( getMatchLastBettingSecond( match ) );
 	}
 
 	private LocalDateTime getMatchLastBettingSecond( final Match match ) {

@@ -134,7 +134,7 @@ public class DTOServiceImpl implements DTOService {
 				cupDTO.setReadyForCupBets( cup.isReadyForCupBets() );
 				cupDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
 				cupDTO.setCupStartDate( cup.getCupStartTime() );
-				cupDTO.setCupBettingIsAllowed( cupBetsService.isCupBettingAllowed( cup, user ) );
+				cupDTO.setCupBettingIsAllowed( cupBetsService.isNotTooLateForCupBetting( cup, user ) );
 				cupDTO.setFinished( cup.isFinished() );
 
 				return cupDTO;
@@ -208,7 +208,7 @@ public class DTOServiceImpl implements DTOService {
 				final MatchDTO matchDTO = transformMatch( match, user );
 
 				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-				matchBetDTO.setBettingAllowed( matchBetsService.isMatchBettingAllowed( match, user ) );
+				matchBetDTO.setBettingAllowed( matchBetsService.userCanBetMatch( match, user ) );
 
 				final MatchBet matchBet = matchBetsService.load( user, match );
 

@@ -64,7 +64,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	@Override
-	public boolean isCupBettingAllowed( final Cup cup, final User user ) {
+	public boolean isNotTooLateForCupBetting( final Cup cup, final User user ) {
 		return dateTimeService.getNow().isBefore( getCupLastBettingSecond( cup ) );
 	}
 
