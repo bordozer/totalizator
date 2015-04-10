@@ -14,6 +14,8 @@
 
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/matches/bets/match-bets', 'translator' ], function ( $, Page, matchBet, Translator ) {
 
+			var cupId = ${matchBetsModel.match.cup.id};
+
 			var translator = new Translator( {
 				title: 'Match bests'
 			} );
@@ -30,7 +32,7 @@
 			var matchId = ${match.id};
 			var currentUser = ${matchBetsModel.currentUserJSON};
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { matchId: matchId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { cupId: cupId, matchId: matchId, currentUser: currentUser } } );
 			pageView.render();
 		} );
 	</script>
