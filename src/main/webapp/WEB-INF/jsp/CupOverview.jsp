@@ -21,7 +21,7 @@
 
 			var breadcrumbs = [
 				{ link: '#', title: "${cup.category.categoryName}" }
-				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
+				, { link: '#', title: "${cup.cupName}" }
 				, { link: '#', title: translator.title }
 			];
 
