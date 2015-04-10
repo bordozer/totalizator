@@ -48,9 +48,9 @@ define( function ( require ) {
 			this.model.refresh( filter );
 		},
 
-		getTitle: function() {
+		/*getTitle: function() {
 			return translator.title;
-		},
+		},*/
 
 		getIcon: function() {
 			return 'fa-futbol-o';
