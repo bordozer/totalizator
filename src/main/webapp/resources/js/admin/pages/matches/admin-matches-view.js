@@ -236,16 +236,17 @@ define( function ( require ) {
 			}
 		},
 
-		_saveEntry: function() {
+		_saveEntry: function () {
 			this._bind();
 
-			if( ! this._validate() ){
+			if ( !this._validate() ) {
 				return;
 			}
 
-			var rend = _.bind( function() {
+			var rend = _.bind( function () {
 				this.trigger( 'matches:render' );
 			}, this );
+			console.log( this.model.toJSON() );
 			this.model.save().then( rend );
 		},
 

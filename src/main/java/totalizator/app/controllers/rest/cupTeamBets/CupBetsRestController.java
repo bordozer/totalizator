@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.UserDTO;
-import totalizator.app.models.*;
+import totalizator.app.models.Cup;
+import totalizator.app.models.CupTeamBet;
+import totalizator.app.models.Team;
+import totalizator.app.models.User;
 import totalizator.app.services.*;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;

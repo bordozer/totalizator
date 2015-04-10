@@ -6,7 +6,6 @@ import totalizator.app.dto.serialization.DateTimeDeserializer;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class MatchDTO {
 

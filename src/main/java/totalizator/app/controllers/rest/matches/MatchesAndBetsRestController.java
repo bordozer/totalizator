@@ -19,7 +19,6 @@ import totalizator.app.services.UserService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
