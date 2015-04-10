@@ -147,10 +147,7 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public TeamDTO apply( final Team team ) {
-				final Category category = team.getCategory();
-				final String teamLogoURL = teamLogoService.getTeamLogoURL( team );
-
-				return new TeamDTO( team.getId(), team.getTeamName(), category.getId(), teamLogoURL );
+				return new TeamDTO( team.getId(), team.getTeamName(), transformCategory( team.getCategory() ), teamLogoService.getTeamLogoURL( team ) );
 			}
 		};
 	}

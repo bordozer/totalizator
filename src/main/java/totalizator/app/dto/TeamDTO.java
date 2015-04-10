@@ -4,16 +4,16 @@ public class TeamDTO {
 
 	private int teamId;
 	private String teamName;
-	private int categoryId;
+	private CategoryDTO category;
 	private String teamLogo;
 
 	public TeamDTO() {
 	}
 
-	public TeamDTO( final int teamId, final String teamName, final int categoryId, final String teamLogo ) {
+	public TeamDTO( final int teamId, final String teamName, final CategoryDTO category, final String teamLogo ) {
 		this.teamId = teamId;
 		this.teamName = teamName;
-		this.categoryId = categoryId;
+		this.category = category;
 		this.teamLogo = teamLogo;
 	}
 
@@ -33,12 +33,12 @@ public class TeamDTO {
 		this.teamName = teamName;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public CategoryDTO getCategory() {
+		return category;
 	}
 
-	public void setCategoryId( final int categoryId ) {
-		this.categoryId = categoryId;
+	public void setCategory( final CategoryDTO category ) {
+		this.category = category;
 	}
 
 	public String getTeamLogo() {

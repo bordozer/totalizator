@@ -12,6 +12,7 @@ define( function ( require ) {
 			teamId: 0
 			, teamName: ''
 			, category: {}
+			, teamLogo: ''
 		},
 
 		initialize: function ( options ) {

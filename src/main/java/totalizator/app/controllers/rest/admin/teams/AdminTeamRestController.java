@@ -47,7 +47,7 @@ public class AdminTeamRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamDTO create( final @RequestBody TeamDTO teamDTO ) {
 		// TODO: check if name exists
-		final Team team = teamService.save( new Team( teamDTO.getTeamName(), categoryService.load( teamDTO.getCategoryId() ) ) );
+		final Team team = teamService.save( new Team( teamDTO.getTeamName(), categoryService.load( teamDTO.getCategory().getCategoryId() ) ) );
 
 		teamDTO.setTeamId( team.getId() );
 		return teamDTO;
@@ -60,7 +60,7 @@ public class AdminTeamRestController {
 		// TODO: check if name exists
 		final Team team = teamService.load( teamDTO.getTeamId() );
 		team.setTeamName( teamDTO.getTeamName() );
-		team.setCategory( categoryService.load( teamDTO.getCategoryId() ) );
+		team.setCategory( categoryService.load( teamDTO.getCategory().getCategoryId() ) );
 
 		teamService.save( team );
 
