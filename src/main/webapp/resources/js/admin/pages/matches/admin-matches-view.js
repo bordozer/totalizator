@@ -178,8 +178,8 @@ define( function ( require ) {
 			this.$el.html( templateEntry( {
 				model: modelJSON
 				, matchId: modelJSON.matchId
-				, categoryName: service.getCategory( this.categories, modelJSON.categoryId ).categoryName
-				, cupName: service.getCup( this.cups, modelJSON.cupId ).cupName
+				, categoryName: modelJSON.category.categoryName
+				, cupName: modelJSON.cup.cupName
 				, team1Name: modelJSON.team1.teamName
 				, team2Name: modelJSON.team2.teamName
 				, score1: modelJSON.score1
