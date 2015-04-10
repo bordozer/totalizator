@@ -11,7 +11,6 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.selectedCupId = options.selectedCupId;
 
 			this.on( 'navigation:set:active:cup', this._setSelectedCupId, this );
 
