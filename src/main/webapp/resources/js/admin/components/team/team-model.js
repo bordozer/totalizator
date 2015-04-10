@@ -13,8 +13,8 @@ define( function ( require ) {
 		defaults: {
 			teamId: 0
 			, teamName: ''
-			, isEditState: false
 			, categoryId: 0
+			, isEditState: false
 		},
 
 		initialize: function ( options ) {

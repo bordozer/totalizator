@@ -1,19 +1,19 @@
-package totalizator.app.dto;
+package totalizator.app.controllers.rest.admin.teams;
 
-public class TeamDTO {
+public class TeamEditDTO {
 
 	private int teamId;
 	private String teamName;
-	private CategoryDTO category;
+	private int categoryId;
 	private String teamLogo;
 
-	public TeamDTO() {
+	public TeamEditDTO() {
 	}
 
-	public TeamDTO( final int teamId, final String teamName, final CategoryDTO category, final String teamLogo ) {
+	public TeamEditDTO( final int teamId, final String teamName, final int categoryId, final String teamLogo ) {
 		this.teamId = teamId;
 		this.teamName = teamName;
-		this.category = category;
+		this.categoryId = categoryId;
 		this.teamLogo = teamLogo;
 	}
 
@@ -33,12 +33,12 @@ public class TeamDTO {
 		this.teamName = teamName;
 	}
 
-	public CategoryDTO getCategory() {
-		return category;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory( final CategoryDTO category ) {
-		this.category = category;
+	public void setCategoryId( final int categoryId ) {
+		this.categoryId = categoryId;
 	}
 
 	public String getTeamLogo() {

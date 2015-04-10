@@ -40,10 +40,9 @@ public class AdminCupsRestController {
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
 	public List<CupEditDTO> entries( final Principal principal ) {
 
-		final List<Cup> cups = cupService.loadAll();
 		final User currentUser = userService.findByLogin( principal.getName() );
 
-		return Lists.transform( cups, new Function<Cup, CupEditDTO>() {
+		return Lists.transform( cupService.loadAll(), new Function<Cup, CupEditDTO>() {
 			@Override
 			public CupEditDTO apply( final Cup cup ) {
 
