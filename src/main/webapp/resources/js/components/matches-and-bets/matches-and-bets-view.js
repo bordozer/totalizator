@@ -128,7 +128,6 @@ define( function ( require ) {
 
 				var userBet = this.model.get( 'bet' );
 
-//				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
 
@@ -283,6 +282,10 @@ define( function ( require ) {
 
 		_deleteBet: function() {
 
+			if ( ! this._assertBetting() ) {
+				return;
+			}
+
 			if ( ! confirm( translator.deleteBetConfirmationLabel ) ) {
 				return;
 			}
@@ -311,9 +314,7 @@ define( function ( require ) {
 		_onBetButtonClick: function( evt ) {
 			evt.preventDefault();
 
-			var cup = this.model.get( 'match' ).cup;
-			if ( ! cup.readyForMatchBets ) {
-				alert( translator.matchBettingIsDenied );
+			if ( ! this._assertBetting() ) {
 				return;
 			}
 
@@ -341,7 +342,22 @@ define( function ( require ) {
 		_onBetEditButtonClick: function( evt ) {
 			evt.preventDefault();
 
+			if ( ! this._assertBetting() ) {
+				return;
+			}
+
 			this._goBetMode();
+		},
+
+		_assertBetting: function() {
+
+			var cup = this.model.get( 'match' ).cup;
+			if ( ! cup.readyForMatchBets ) {
+				alert( translator.matchBettingIsDenied );
+				return false;
+			}
+
+			return true;
 		}
 	});
 
