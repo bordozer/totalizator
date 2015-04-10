@@ -123,7 +123,6 @@ define( function ( require ) {
 
 			var bet = this.model.get( 'bet' );
 			var isBettingAllowed = this.model.isBettingAllowed();
-			console.log( isBettingAllowed );
 
 			this._renderDropDownMenuItems();
 
