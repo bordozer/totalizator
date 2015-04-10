@@ -102,6 +102,8 @@ public abstract class AbstractDataInitializer {
 
 	private void generateBets( final List<User> users, final List<Match> cupMatches, final Session session ) {
 
+		final MatchDataGenerationStrategy matchDataGenerationStrategy = pastStrategy();
+
 		for ( final User user : users ) {
 
 			final int betsCountGenerateTo = rnd( 0, cupMatches.size() - 1 );
@@ -119,11 +121,12 @@ public abstract class AbstractDataInitializer {
 				final Match match = iterator.next();
 
 				final MatchBet bet = new MatchBet();
+
 				bet.setMatch( match );
 				bet.setUser( user );
-				bet.setBetScore1( pastStrategy().generateScore() );
-				bet.setBetScore2( pastStrategy().generateScore() );
-				bet.setBetTime( dateTimeService.plusHours( match.getBeginningTime(), rnd( 1, 12 ) ) );
+				bet.setBetScore1( matchDataGenerationStrategy.generateScore() );
+				bet.setBetScore2( matchDataGenerationStrategy.generateScore() );
+				bet.setBetTime( dateTimeService.minusHours( match.getBeginningTime(), rnd( 1, 12 ) ) );
 
 				session.persist( bet );
 
