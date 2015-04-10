@@ -7,7 +7,7 @@ import totalizator.app.dto.serialization.DateTimeSerializer;
 
 import java.time.LocalDateTime;
 
-public class MatchDTOAdmin {
+public class MatchEditDTO {
 
 	private int matchId;
 

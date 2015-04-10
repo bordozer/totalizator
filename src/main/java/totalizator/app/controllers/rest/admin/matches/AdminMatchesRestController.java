@@ -33,30 +33,30 @@ public class AdminMatchesRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<MatchDTOAdmin> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
+	public List<MatchEditDTO> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
 		final List<Match> matches = matchService.loadAll( dto );
 
-		return Lists.transform( matches, new Function<Match, MatchDTOAdmin>() {
+		return Lists.transform( matches, new Function<Match, MatchEditDTO>() {
 			@Override
-			public MatchDTOAdmin apply( final Match match ) {
+			public MatchEditDTO apply( final Match match ) {
 
-				final MatchDTOAdmin matchDTOAdmin = new MatchDTOAdmin();
+				final MatchEditDTO matchEditDTO = new MatchEditDTO();
 
-				matchDTOAdmin.setMatchId( match.getId() );
-				matchDTOAdmin.setCategoryId( match.getCup().getCategory().getId() );
-				matchDTOAdmin.setCupId( match.getCup().getId() );
+				matchEditDTO.setMatchId( match.getId() );
+				matchEditDTO.setCategoryId( match.getCup().getCategory().getId() );
+				matchEditDTO.setCupId( match.getCup().getId() );
 
-				matchDTOAdmin.setTeam1Id( match.getTeam1().getId() );
-				matchDTOAdmin.setScore1( match.getScore1() );
+				matchEditDTO.setTeam1Id( match.getTeam1().getId() );
+				matchEditDTO.setScore1( match.getScore1() );
 
-				matchDTOAdmin.setTeam2Id( match.getTeam2().getId() );
-				matchDTOAdmin.setScore2( match.getScore2() );
+				matchEditDTO.setTeam2Id( match.getTeam2().getId() );
+				matchEditDTO.setScore2( match.getScore2() );
 
-				matchDTOAdmin.setBeginningTime( match.getBeginningTime() );
-				matchDTOAdmin.setMatchFinished( match.isMatchFinished() );
+				matchEditDTO.setBeginningTime( match.getBeginningTime() );
+				matchEditDTO.setMatchFinished( match.isMatchFinished() );
 
-				return matchDTOAdmin;
+				return matchEditDTO;
 			}
 		} );
 	}
@@ -64,31 +64,31 @@ public class AdminMatchesRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public MatchDTOAdmin create( final @RequestBody MatchDTOAdmin matchDTOAdmin ) {
+	public MatchEditDTO create( final @RequestBody MatchEditDTO matchEditDTO ) {
 
 		final Match match = new Match();
 
-		initMatchFromDTO( matchDTOAdmin, match );
+		initMatchFromDTO( matchEditDTO, match );
 
 		final Match saved = matchService.save( match );
 
-		matchDTOAdmin.setMatchId( saved.getId() );
+		matchEditDTO.setMatchId( saved.getId() );
 
-		return matchDTOAdmin;
+		return matchEditDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/{matchId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public MatchDTOAdmin save( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchDTOAdmin matchDTOAdmin, final Principal principal ) {
+	public MatchEditDTO save( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchEditDTO matchEditDTO, final Principal principal ) {
 
-		final Match match = matchService.load( matchDTOAdmin.getMatchId() );
+		final Match match = matchService.load( matchEditDTO.getMatchId() );
 
-		initMatchFromDTO( matchDTOAdmin, match );
+		initMatchFromDTO( matchEditDTO, match );
 
 		matchService.save( match );
 
-		return matchDTOAdmin;
+		return matchEditDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -103,19 +103,19 @@ public class AdminMatchesRestController {
 		matchService.delete( matchId );
 	}
 
-	private void initMatchFromDTO( final MatchDTOAdmin matchDTOAdmin, final Match match ) {
+	private void initMatchFromDTO( final MatchEditDTO matchEditDTO, final Match match ) {
 
-		match.setCup( cupService.load( matchDTOAdmin.getCupId() ) );
+		match.setCup( cupService.load( matchEditDTO.getCupId() ) );
 
-		match.setTeam1( teamService.load( matchDTOAdmin.getTeam1Id() ) );
-		match.setScore1( matchDTOAdmin.getScore1() );
+		match.setTeam1( teamService.load( matchEditDTO.getTeam1Id() ) );
+		match.setScore1( matchEditDTO.getScore1() );
 
-		match.setTeam2( teamService.load( matchDTOAdmin.getTeam2Id() ) );
-		match.setScore2( matchDTOAdmin.getScore2() );
+		match.setTeam2( teamService.load( matchEditDTO.getTeam2Id() ) );
+		match.setScore2( matchEditDTO.getScore2() );
 
-		match.setBeginningTime( matchDTOAdmin.getBeginningTime() );
+		match.setBeginningTime( matchEditDTO.getBeginningTime() );
 
-		match.setMatchFinished( matchDTOAdmin.isMatchFinished() );
+		match.setMatchFinished( matchEditDTO.isMatchFinished() );
 	}
 
 }

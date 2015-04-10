@@ -249,6 +249,7 @@ define( function ( require ) {
 				this.trigger( 'matches:render' );
 			}, this );
 
+			console.log( this.model.url );
 			this.model.save().then( rend );
 		},
 
