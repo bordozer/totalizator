@@ -44,7 +44,7 @@ define( function ( require ) {
 		model: MatchModel,
 
 		initialize: function ( options ) {
-			this.url = '/rest/matches/';
+			this.url = '/rest/matches/bets/';
 		},
 
 		refresh: function( data ) {

@@ -20,12 +20,6 @@ public class DTOServiceImpl implements DTOService {
 	private MatchBetsService matchBetsService;
 
 	@Autowired
-	private CupService cupService;
-
-	@Autowired
-	private TeamService teamService;
-
-	@Autowired
 	private CupScoresService cupScoresService;
 
 	@Autowired
@@ -94,21 +88,6 @@ public class DTOServiceImpl implements DTOService {
 	@Override
 	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user ) {
 		return Lists.transform( matches, matchBetFunction( user ) );
-	}
-
-	@Override
-	public void initMatchFromDTO( final MatchDTO matchDTO, final Match match ) {
-		match.setCup( cupService.load( matchDTO.getCup().getCupId() ) );
-
-		match.setTeam1( teamService.load( matchDTO.getTeam1().getTeamId() ) );
-		match.setScore1( matchDTO.getScore1() );
-
-		match.setTeam2( teamService.load( matchDTO.getTeam2().getTeamId() ) );
-		match.setScore2( matchDTO.getScore2() );
-
-		match.setBeginningTime( matchDTO.getBeginningTime() );
-
-		match.setMatchFinished( matchDTO.isMatchFinished() );
 	}
 
 	@Override

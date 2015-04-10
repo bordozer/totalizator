@@ -44,7 +44,7 @@
 							<select id="cup-select-box" class="chosen-select cups-select-box">
 								<option value="0"></option>
 							<% _.each( cups, function( cup ) { %>
-								<option value="<%=cup.cupId%>" <%= model.cup.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
+								<option value="<%=cup.cupId%>" <%= model.cupId == cup.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
 							<% }) %>
 							</select>
 						</div>
@@ -55,7 +55,7 @@
 
 					<div class="col-lg-6">
 
-						<% if( teams.length > 0 && model.cup.cupId > 0 ) { %>
+						<% if( teams.length > 0 && model.cupId > 0 ) { %>
 							<div class="row">
 								<div class="col-lg-12 text-right">
 									<%=translator.matchEdit_Team%> 1
@@ -67,7 +67,7 @@
 									<select id="team1-select-box" class="chosen-select team1-select-box">
 										<option value="0">&nbsp;</option>
 									<% _.each( teams, function( team ) { %>
-										<option value="<%=team.teamId%>" <%= model.team1.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+										<option value="<%=team.teamId%>" <%= model.team1Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
 									<% }) %>
 									</select>
 								</div>
@@ -84,7 +84,7 @@
 
 					<div class="col-lg-6">
 
-						<% if( teams.length > 0 && model.cup.cupId > 0 ) { %>
+						<% if( teams.length > 0 && model.cupId > 0 ) { %>
 							<div class="row">
 								<div class="col-lg-12">
 									<%=translator.matchEdit_Team%> 2
@@ -96,7 +96,7 @@
 									<select id="team2-select-box" class="form-control team2-select-box">
 										<option value="0">&nbsp;</option>
 									<% _.each( teams, function( team ) { %>
-										<option value="<%=team.teamId%>" <%= model.team2.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+										<option value="<%=team.teamId%>" <%= model.team2Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
 									<% }) %>
 									</select>
 								</div>

@@ -44,7 +44,7 @@ public class MatchesAndBetsRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/bets/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
 		final int userId = dto.getUserId();

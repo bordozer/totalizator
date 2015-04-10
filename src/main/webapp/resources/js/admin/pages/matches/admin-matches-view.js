@@ -171,21 +171,21 @@ define( function ( require ) {
 		},
 
 		renderInfo: function () {
-			var modelJSON = this.model.toJSON();
+			var model = this.model.toJSON();
 
-			var matchResults = service.matchResults( modelJSON.team1.teamId, modelJSON.score1, modelJSON.team2.teamId, modelJSON.score2 );
+			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
 
 			this.$el.html( templateEntry( {
-				model: modelJSON
-				, matchId: modelJSON.matchId
-				, categoryName: modelJSON.category.categoryName
-				, cupName: modelJSON.cup.cupName
-				, team1Name: modelJSON.team1.teamName
-				, team2Name: modelJSON.team2.teamName
-				, score1: modelJSON.score1
-				, score2: modelJSON.score2
+				model: model
+				, matchId: model.matchId
+				, categoryName: service.getCategory( this.categories, model.categoryId ).categoryName
+				, cupName: service.getCup( this.cups, model.cupId ).cupName
+				, team1Name: service.getTeam( this.teams, model.team1Id ).teamName
+				, team2Name: service.getTeam( this.teams, model.team2Id ).teamName
+				, score1: model.score1
+				, score2: model.score2
 				, matchResults: matchResults
-				, beginningTime: dateTimeService.formatDateDisplay( modelJSON.beginningTime )
+				, beginningTime: dateTimeService.formatDateDisplay( model.beginningTime )
 				, translator: translator
 			} ) );
 
@@ -198,11 +198,13 @@ define( function ( require ) {
 
 		renderEdit: function () {
 			var model = this.model.toJSON();
-			var categoryId = model.category.categoryId;
+			var categoryId = model.categoryId;
+
+			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
 
 			this.$el.html( templateEntryEdit( {
 				model: model
-				, title: model.matchId == 0 ? translator.newEntryEditFormTitle : model.team1.teamName + ' - ' + model.team2.teamName
+				, title: title
 				, matchId: model.matchId
 				, categories: this.categories
 				, categoryId: categoryId
@@ -246,7 +248,7 @@ define( function ( require ) {
 			var rend = _.bind( function () {
 				this.trigger( 'matches:render' );
 			}, this );
-			console.log( this.model.toJSON() );
+
 			this.model.save().then( rend );
 		},
 

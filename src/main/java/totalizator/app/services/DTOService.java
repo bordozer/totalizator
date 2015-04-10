@@ -34,8 +34,6 @@ public interface DTOService {
 
 	List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user );
 
-	void initMatchFromDTO( final MatchDTO matchDTO, final Match match );
-
 	CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet, final User user );
 
 	List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets, final User user );
