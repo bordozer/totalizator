@@ -47,7 +47,9 @@
 
 						<% _.each( matchBets, function( matchBet ) {%>
 							<tr>
-								<td class="<%= matchBet.bet.user.userId == currentUser.userId ? 'text-primary' : '' %>"><%-matchBet.bet.user.userName%></td>
+								<td class="<%= matchBet.bet.user.userId == currentUser.userId ? 'current-user text-primary' : '' %>">
+									<a href="/totalizator/users/<%=matchBet.bet.user.userId%>/"><%-matchBet.bet.user.userName%></a>
+								</td>
 								<td class="text-center <%=matchBet.matchResults.style1%>" width="150"><%-matchBet.bet.score1%></td>
 								<td class="text-center <%=matchBet.matchResults.style2%>" width="150"><%-matchBet.bet.score2%></td>
 								<td class="text-center" width="60"><strong><%-matchBet.points > 0 ? '+' + matchBet.points : ''%></strong></td>
