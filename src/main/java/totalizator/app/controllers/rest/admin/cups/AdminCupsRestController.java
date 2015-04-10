@@ -55,6 +55,7 @@ public class AdminCupsRestController {
 
 				cupEditDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
 				cupEditDTO.setWinnersCount( cup.getWinnersCount() );
+				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
 				cupEditDTO.setReadyForCupBets( cup.isReadyForCupBets() );
 				cupEditDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
 				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isCupBettingAllowed( cup, currentUser ) );
