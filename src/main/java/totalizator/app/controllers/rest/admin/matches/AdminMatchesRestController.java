@@ -9,6 +9,7 @@ import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchService;
+import totalizator.app.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,11 +26,14 @@ public class AdminMatchesRestController {
 	@Autowired
 	private DTOService dtoService;
 
+	@Autowired
+	private UserService userService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchDTO> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
-		return dtoService.transformMatches( matchService.loadAll( dto ) );
+		return dtoService.transformMatches( matchService.loadAll( dto ), userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -51,7 +55,7 @@ public class AdminMatchesRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/{matchId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public MatchDTO edit( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchDTO matchDTO ) {
+	public MatchDTO edit( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchDTO matchDTO, final Principal principal ) {
 
 		final Match match = matchService.load( matchDTO.getMatchId() );
 
@@ -59,7 +63,7 @@ public class AdminMatchesRestController {
 
 		matchService.save( match );
 
-		return dtoService.transformMatch( match );
+		return dtoService.transformMatch( match, userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

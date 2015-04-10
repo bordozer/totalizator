@@ -32,6 +32,7 @@ public class NCAA extends AbstractDataInitializer {
 		ncaa2015.setWinnersCount( 8 );
 		ncaa2015.setReadyForCupBets( true );
 		ncaa2015.setReadyForMatchBets( true );
+		ncaa2015.setCupStartTime( dateTimeService.parseDate( "2014-09-01" ) );
 		ncaa2015.setFinished( false );
 
 		session.persist( ncaa2015 );

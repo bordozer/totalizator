@@ -33,6 +33,7 @@ public class UEFA extends AbstractDataInitializer {
 		uefa2016Euro.setWinnersCount( 3 );
 		uefa2016Euro.setReadyForCupBets( false );
 		uefa2016Euro.setReadyForMatchBets( false );
+		uefa2016Euro.setCupStartTime( dateTimeService.parseDate( "2016-06-10" ) );
 		uefa2016Euro.setFinished( false );
 
 		session.persist( uefa2016Euro );
@@ -41,6 +42,7 @@ public class UEFA extends AbstractDataInitializer {
 		uefa2018WorldCup.setWinnersCount( 3 );
 		uefa2018WorldCup.setReadyForCupBets( false );
 		uefa2018WorldCup.setReadyForMatchBets( false );
+		uefa2018WorldCup.setCupStartTime( dateTimeService.parseDate( "2018-06-14" ) );
 		uefa2018WorldCup.setFinished( false );
 
 		session.persist( uefa2018WorldCup );

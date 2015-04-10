@@ -1,6 +1,7 @@
 package totalizator.app.models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static totalizator.app.models.MatchBet.*;
@@ -53,7 +54,7 @@ public class MatchBet extends AbstractEntity {
 	private int betScore1;
 	private int betScore2;
 
-	private Date betTime;
+	private LocalDateTime betTime;
 
 	public Match getMatch() {
 		return match;
@@ -87,11 +88,11 @@ public class MatchBet extends AbstractEntity {
 		this.betScore2 = betScore2;
 	}
 
-	public Date getBetTime() {
+	public LocalDateTime getBetTime() {
 		return betTime;
 	}
 
-	public void setBetTime( final Date betTime ) {
+	public void setBetTime( final LocalDateTime betTime ) {
 		this.betTime = betTime;
 	}
 

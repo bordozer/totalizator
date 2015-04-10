@@ -10,7 +10,9 @@ import totalizator.app.models.Cup;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
+import totalizator.app.services.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -28,13 +30,16 @@ public class AdminCupRestController {
 	@Autowired
 	private DTOService dtoService;
 
+	@Autowired
+	private UserService userService;
+
 	private static final Logger LOGGER = Logger.getLogger( AdminCupRestController.class );
 
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
-	public List<CupDTO> entries() {
-		return dtoService.transformCups( cupService.loadAll() );
+	public List<CupDTO> entries( final Principal principal ) {
+		return dtoService.transformCups( cupService.loadAll(), userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseStatus(HttpStatus.OK)
@@ -86,11 +91,12 @@ public class AdminCupRestController {
 		cup.setCupName( cupDTO.getCupName() );
 		cup.setCategory( categoryService.load( cupDTO.getCategory().getCategoryId() ) );
 
+		cup.setCupStartTime( cupDTO.getCupStartDate() );
 		cup.setWinnersCount( cupDTO.getWinnersCount() );
+		cup.setFinished( cupDTO.isFinished() );
 
 		cup.setReadyForCupBets( cupDTO.isReadyForCupBets() );
 		cup.setReadyForMatchBets( cupDTO.isReadyForMatchBets() );
-		cup.setFinished( cupDTO.isFinished() );
 
 		cup.setShowOnPortalPage( cupDTO.isShowOnPortalPage() );
 	}

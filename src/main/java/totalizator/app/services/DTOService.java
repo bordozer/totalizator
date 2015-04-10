@@ -16,17 +16,17 @@ public interface DTOService {
 
 	List<CategoryDTO> transformCategories( final List<Category> users );
 
-	CupDTO transformCup( final Cup cup );
+	CupDTO transformCup( final Cup cup, final User user );
 
-	List<CupDTO> transformCups( final List<Cup> cups );
+	List<CupDTO> transformCups( final List<Cup> cups, final User user );
 
 	TeamDTO transformTeam( final Team team );
 
 	List<TeamDTO> transformTeams( final List<Team> teams );
 
-	MatchDTO transformMatch( final Match match );
+	MatchDTO transformMatch( final Match match, final User user );
 
-	List<MatchDTO> transformMatches( final List<Match> matches );
+	List<MatchDTO> transformMatches( final List<Match> matches, final User user );
 
 	BetDTO transformMatchBet( final MatchBet matchBet, final User user );
 
@@ -36,7 +36,7 @@ public interface DTOService {
 
 	void initMatchFromDTO( final MatchDTO matchDTO, final Match match );
 
-	CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet );
+	CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet, final User user );
 
-	List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets );
+	List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets, final User user );
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import totalizator.app.dto.*;
 import totalizator.app.models.*;
 import totalizator.app.services.score.CupScoresService;
-import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class DTOServiceImpl implements DTOService {
 	private CupScoresService cupScoresService;
 
 	@Autowired
-	private TranslatorService translatorService;
+	private CupBetsService cupBetsService;
 
 	@Override
 	public UserDTO transformUser( final User user ) {
@@ -53,13 +52,13 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
-	public CupDTO transformCup( final Cup cup ) {
-		return cupFunction().apply( cup );
+	public CupDTO transformCup( final Cup cup, final User user ) {
+		return cupFunction( user ).apply( cup );
 	}
 
 	@Override
-	public List<CupDTO> transformCups( final List<Cup> cups ) {
-		return Lists.transform( cups, cupFunction() );
+	public List<CupDTO> transformCups( final List<Cup> cups, final User user ) {
+		return Lists.transform( cups, cupFunction( user ) );
 	}
 
 	@Override
@@ -73,13 +72,13 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
-	public MatchDTO transformMatch( final Match match ) {
-		return matchFunction().apply( match );
+	public MatchDTO transformMatch( final Match match, final User user ) {
+		return matchFunction( user ).apply( match );
 	}
 
 	@Override
-	public List<MatchDTO> transformMatches( final List<Match> matches ) {
-		return Lists.transform( matches, matchFunction() );
+	public List<MatchDTO> transformMatches( final List<Match> matches, final User user ) {
+		return Lists.transform( matches, matchFunction( user ) );
 	}
 
 	@Override
@@ -113,13 +112,13 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
-	public CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet ) {
-		return cupTeamBetFunction().apply( cupTeamBet );
+	public CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet, final User user ) {
+		return cupTeamBetFunction( user ).apply( cupTeamBet );
 	}
 
 	@Override
-	public List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets ) {
-		return Lists.transform( cupTeamBets, cupTeamBetFunction() );
+	public List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets, final User user ) {
+		return Lists.transform( cupTeamBets, cupTeamBetFunction( user ) );
 	}
 
 	private Function<User, UserDTO> userFunction() {
@@ -144,7 +143,7 @@ public class DTOServiceImpl implements DTOService {
 		};
 	}
 
-	private Function<Cup, CupDTO> cupFunction() {
+	private Function<Cup, CupDTO> cupFunction( final User user ) {
 
 		return new Function<Cup, CupDTO>() {
 
@@ -155,6 +154,7 @@ public class DTOServiceImpl implements DTOService {
 				cupDTO.setWinnersCount( cup.getWinnersCount() );
 				cupDTO.setReadyForCupBets( cup.isReadyForCupBets() );
 				cupDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
+				cupDTO.setCupBettingIsAllowed( cupBetsService.isCupBettingAllowed( cup, user ) );
 				cupDTO.setFinished( cup.isFinished() );
 
 				return cupDTO;
@@ -176,7 +176,7 @@ public class DTOServiceImpl implements DTOService {
 		};
 	}
 
-	private Function<Match, MatchDTO> matchFunction() {
+	private Function<Match, MatchDTO> matchFunction( final User user ) {
 
 		return new Function<Match, MatchDTO>() {
 
@@ -186,7 +186,7 @@ public class DTOServiceImpl implements DTOService {
 
 				dto.setMatchId( match.getId() );
 				dto.setCategory( transformCategory( match.getCup().getCategory() ) );
-				dto.setCup( transformCup( match.getCup() ) );
+				dto.setCup( transformCup( match.getCup(), user ) );
 
 				dto.setTeam1( transformTeam( match.getTeam1() ) );
 				dto.setScore1( match.getScore1() );
@@ -210,7 +210,7 @@ public class DTOServiceImpl implements DTOService {
 			@Override
 			public BetDTO apply( final MatchBet matchBet ) {
 
-				final MatchDTO matchDTO = transformMatch( matchBet.getMatch() );
+				final MatchDTO matchDTO = transformMatch( matchBet.getMatch(), user );
 
 				final BetDTO betDTO = new BetDTO( matchDTO, transformUser( user ) );
 				betDTO.setMatchBetId( matchBet.getId() );
@@ -228,10 +228,10 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public MatchBetDTO apply( final Match match ) {
-				final MatchDTO matchDTO = transformMatch( match );
+				final MatchDTO matchDTO = transformMatch( match, user );
 
 				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-				matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
+				matchBetDTO.setBettingAllowed( matchBetsService.isMatchBettingAllowed( match, user ) );
 
 				final MatchBet matchBet = matchBetsService.load( user, match );
 
@@ -251,7 +251,7 @@ public class DTOServiceImpl implements DTOService {
 		};
 	}
 
-	private Function<CupTeamBet, CupTeamBetDTO> cupTeamBetFunction() {
+	private Function<CupTeamBet, CupTeamBetDTO> cupTeamBetFunction( final User user ) {
 
 		return new Function<CupTeamBet, CupTeamBetDTO>() {
 			@Override
@@ -259,7 +259,7 @@ public class DTOServiceImpl implements DTOService {
 
 				final CupTeamBetDTO result = new CupTeamBetDTO();
 
-				result.setCup( transformCup( cupTeamBet.getCup() ) );
+				result.setCup( transformCup( cupTeamBet.getCup(), user ) );
 				result.setTeam( transformTeam( cupTeamBet.getTeam() ) );
 				result.setUser( transformUser( cupTeamBet.getUser() ) );
 

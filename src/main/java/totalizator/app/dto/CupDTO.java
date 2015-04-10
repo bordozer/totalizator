@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,10 +18,12 @@ public class CupDTO {
 	private int winnersCount;
 	private boolean showOnPortalPage;
 
-	private Date cupStartDate;
+	private LocalDateTime cupStartDate;
 
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
+
+	private boolean cupBettingIsAllowed;
 
 	private boolean finished;
 
@@ -66,12 +69,12 @@ public class CupDTO {
 	}
 
 	@JsonSerialize( using = DateTimeSerializer.class )
-	public Date getCupStartDate() {
+	public LocalDateTime getCupStartDate() {
 		return cupStartDate;
 	}
 
 	@JsonDeserialize( using = DateTimeDeserializer.class )
-	public void setCupStartDate( final Date cupStartDate ) {
+	public void setCupStartDate( final LocalDateTime cupStartDate ) {
 		this.cupStartDate = cupStartDate;
 	}
 
@@ -97,6 +100,14 @@ public class CupDTO {
 
 	public void setReadyForMatchBets( final boolean readyForMatchBets ) {
 		this.readyForMatchBets = readyForMatchBets;
+	}
+
+	public boolean isCupBettingIsAllowed() {
+		return cupBettingIsAllowed;
+	}
+
+	public void setCupBettingIsAllowed( final boolean cupBettingIsAllowed ) {
+		this.cupBettingIsAllowed = cupBettingIsAllowed;
 	}
 
 	public boolean isFinished() {

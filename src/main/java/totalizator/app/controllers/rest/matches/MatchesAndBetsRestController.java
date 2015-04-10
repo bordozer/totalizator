@@ -16,6 +16,7 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
 import java.util.Date;
@@ -38,6 +39,9 @@ public class MatchesAndBetsRestController {
 
 	@Autowired
 	private DTOService dtoService;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
@@ -101,7 +105,7 @@ public class MatchesAndBetsRestController {
 		matchBet.setMatch( match );
 		matchBet.setBetScore1( score1 );
 		matchBet.setBetScore2( score2 );
-		matchBet.setBetTime( new Date() );
+		matchBet.setBetTime( dateTimeService.getNow() );
 
 		final MatchBet result = matchBetsService.save( matchBet );
 

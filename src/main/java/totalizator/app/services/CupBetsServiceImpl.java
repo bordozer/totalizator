@@ -8,14 +8,21 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
+import totalizator.app.services.utils.DateTimeService;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
 public class CupBetsServiceImpl implements CupBetsService {
 
+	private static final int STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS = 24;
 	@Autowired
 	private CupTeamBetRepository cupTeamBetRepository;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -55,5 +62,14 @@ public class CupBetsServiceImpl implements CupBetsService {
 	@Override
 	public CupTeamBet load( final Cup cup, final User user, final Team team ) {
 		return cupTeamBetRepository.load( cup, team, user );
+	}
+
+	@Override
+	public boolean isCupBettingAllowed( final Cup cup, final User user ) {
+		return dateTimeService.getNow().isBefore( getCupLastBettingSecond( cup ) );
+	}
+
+	private LocalDateTime getCupLastBettingSecond( final Cup cup ) {
+		return dateTimeService.offset( cup.getCupStartTime(), Calendar.HOUR, STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS );
 	}
 }

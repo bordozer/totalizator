@@ -12,6 +12,7 @@ import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.utils.DateTimeService;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -96,18 +97,21 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
-	public boolean isBettingAllowed( final Match match, final User user ) {
+	public int betsCount( final Match match ) {
+		return matchBetRepository.betsCount( match );
+	}
+
+	@Override
+	public boolean isMatchBettingAllowed( final Match match, final User user ) {
 
 		if ( match.isMatchFinished() ) {
 			return false;
 		}
 
-		final Date bettingIsAllowedTill = dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN );
-		return dateTimeService.getNow().getTime() < bettingIsAllowedTill.getTime();
+		return dateTimeService.getNow().isBefore( getMatchLastBettingSecond( match ) );
 	}
 
-	@Override
-	public int betsCount( final Match match ) {
-		return matchBetRepository.betsCount( match );
+	private LocalDateTime getMatchLastBettingSecond( final Match match ) {
+		return dateTimeService.offset( match.getBeginningTime(), Calendar.MINUTE, STOP_BETTING_BEFORE_MATCH_BEGINNING_MIN );
 	}
 }

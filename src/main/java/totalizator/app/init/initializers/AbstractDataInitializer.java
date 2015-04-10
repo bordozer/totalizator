@@ -31,10 +31,10 @@ public abstract class AbstractDataInitializer {
 	protected TeamImportService teamImportService;
 
 	@Autowired
-	private TeamLogoService teamLogoService;
+	protected DateTimeService dateTimeService;
 
 	@Autowired
-	private DateTimeService dateTimeService;
+	private TeamLogoService teamLogoService;
 
 	public void generate( final List<User> users, final Session session ) throws IOException, DocumentException {
 
@@ -153,7 +153,7 @@ public abstract class AbstractDataInitializer {
 				cupTeamBet.setUser( user );
 				cupTeamBet.setTeam( getRandomTeam( teams ) );
 				cupTeamBet.setCupPosition( i );
-				cupTeamBet.setBetTime( dateTimeService.getNow() ); // TODO: offset from cup beginning time
+				cupTeamBet.setBetTime( dateTimeService.offset( cup.getCupStartTime(), Calendar.HOUR, getRandomInt( 1, 10 ) ) );
 
 				session.persist( cupTeamBet );
 			}

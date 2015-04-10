@@ -9,6 +9,7 @@ import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.models.*;
 import totalizator.app.services.*;
+import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
 import java.util.Date;
@@ -19,7 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/rest/cups/{cupId}/bets" )
-public class CupTeamBetsRestController {
+public class CupBetsRestController {
 
 	@Autowired
 	private UserService userService;
@@ -35,6 +36,9 @@ public class CupTeamBetsRestController {
 
 	@Autowired
 	private DTOService dtoService;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
@@ -83,7 +87,7 @@ public class CupTeamBetsRestController {
 		entry.setTeam( team );
 		entry.setCupPosition( position );
 
-		entry.setBetTime( new Date() );
+		entry.setBetTime( dateTimeService.getNow() );
 
 		cupBetsService.save( entry );
 	}
@@ -94,7 +98,7 @@ public class CupTeamBetsRestController {
 		final Cup cup = cupService.load( cupId );
 
 		final UserDTO userDTO = dtoService.transformUser( user );
-		final CupDTO cupDTO = dtoService.transformCup( cup );
+		final CupDTO cupDTO = dtoService.transformCup( cup, user );
 
 		final List<CupTeamBetDTO> result = newArrayList();
 
@@ -103,7 +107,7 @@ public class CupTeamBetsRestController {
 			final CupTeamBet cupTeamBet = cupBetsService.load( cup, user, i );
 
 			if ( cupTeamBet != null ) {
-				final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet );
+				final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet, user );
 				result.add( cupTeamBetDTO );
 			} else {
 				final CupTeamBetDTO emptyCupTeamBetDTO = new CupTeamBetDTO();
