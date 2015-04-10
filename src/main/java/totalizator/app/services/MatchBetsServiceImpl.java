@@ -100,7 +100,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
-	public boolean userCanBetMatch( final Match match, final User user ) {
+	public boolean isBettingAllowed( final Match match, final User user ) {
 
 		if ( match.getCup().isFinished() ) {
 			return false;

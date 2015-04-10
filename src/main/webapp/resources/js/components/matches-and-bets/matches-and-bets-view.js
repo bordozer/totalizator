@@ -135,9 +135,11 @@ define( function ( require ) {
 			}
 
 			var bet = this.model.get( 'bet' );
+			var isBettingAllowed = this.model.isBettingAllowed();
+
 			if( bet == null ) {
 
-				if ( this.model.isBettingAllowed() ) {
+				if ( isBettingAllowed ) {
 					this._setMatchContainerClass( 'panel-warning' );
 
 					var icon = match.cup.readyForMatchBets ? 'fa-money' : 'fa-ban';
@@ -154,13 +156,13 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-success' );
 
-			if ( ! match.matchFinished ) {
+			if ( isBettingAllowed ) {
 				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 			}
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
-			if ( ! match.matchFinished ) {
+			if ( ! isBettingAllowed ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
 			}
@@ -211,9 +213,10 @@ define( function ( require ) {
 			];
 
 			var bet = this.model.get( 'bet' );
+			var isBettingAllowed = this.model.isBettingAllowed();
 			var isBetEditingMode = this.model.isBetMode();
 
-			if ( ! match.matchFinished ) {
+			if ( isBettingAllowed ) {
 
 				menuItems.push( { selector: 'divider' } );
 
@@ -352,7 +355,7 @@ define( function ( require ) {
 		_assertBetting: function() {
 
 			var cup = this.model.get( 'match' ).cup;
-			if ( ! cup.readyForMatchBets ) {
+			if ( ! this.model.isBettingAllowed() ) {
 				alert( translator.matchBettingIsDenied );
 				return false;
 			}

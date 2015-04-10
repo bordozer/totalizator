@@ -81,7 +81,7 @@ public class MatchesAndBetsRestController {
 		final User user = userService.findByLogin( principal.getName() );
 		final Match match = matchService.load( matchId );
 
-		if ( ! matchBetsService.userCanBetMatch( match, user ) ) {
+		if ( ! matchBetsService.isBettingAllowed( match, user ) ) {
 			throw new IllegalArgumentException( String.format( "Match betting for cup %s is finished", match.getCup() ) );
 		}
 

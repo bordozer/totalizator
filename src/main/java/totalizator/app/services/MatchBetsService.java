@@ -21,5 +21,5 @@ public interface MatchBetsService extends GenericService<MatchBet>{
 
 	int betsCount( final Match match );
 
-	boolean userCanBetMatch( final Match match, final User user );
+	boolean isBettingAllowed( final Match match, final User user );
 }

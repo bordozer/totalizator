@@ -208,7 +208,7 @@ public class DTOServiceImpl implements DTOService {
 				final MatchDTO matchDTO = transformMatch( match, user );
 
 				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-				matchBetDTO.setBettingAllowed( matchBetsService.userCanBetMatch( match, user ) );
+				matchBetDTO.setBettingAllowed( matchBetsService.isBettingAllowed( match, user ) );
 
 				final MatchBet matchBet = matchBetsService.load( user, match );
 
