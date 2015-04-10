@@ -1,6 +1,7 @@
 package totalizator.app.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static totalizator.app.models.Cup.FIND_BY_NAME;

@@ -2,7 +2,6 @@ package totalizator.app.services.utils;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -11,7 +10,7 @@ import java.util.Date;
 @Service
 public class DateTimeServiceImpl implements DateTimeService {
 
-	private static final String FORMAT_DATE = "MMM d yyyy";
+	private static final String FORMAT_DATE = "yyyy-MM-dd";
 	private static final String FORMAT_TIME = "HH:mm";
 
 	@Override
@@ -36,7 +35,7 @@ public class DateTimeServiceImpl implements DateTimeService {
 	@Override
 	public String formatDateTime( final LocalDateTime time ) {
 
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( String.format( "%s %s", FORMAT_DATE, FORMAT_TIME ) );
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( format() );
 		final LocalDateTime dateTime = localDateTime( time );
 
 		return dateTime.format( formatter );
@@ -45,7 +44,7 @@ public class DateTimeServiceImpl implements DateTimeService {
 	@Override
 	public LocalDateTime parseDate( final String date ) {
 
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( FORMAT_DATE );
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( format() );
 
 		return LocalDateTime.parse( date, formatter );
 	}
@@ -67,5 +66,9 @@ public class DateTimeServiceImpl implements DateTimeService {
 		calendar.setFirstDayOfWeek( Calendar.MONDAY );
 
 		return calendar;
+	}
+
+	private String format() {
+		return String.format( "%s %s", FORMAT_DATE, FORMAT_TIME );
 	}
 }
