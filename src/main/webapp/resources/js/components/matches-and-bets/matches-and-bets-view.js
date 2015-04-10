@@ -32,7 +32,6 @@ define( function ( require ) {
 		, footer_YourBetLabel: 'Match and Bets / Footer: Your bet'
 		, footer_NoBetYetLabel: 'Match and Bets / Footer: no bet yet'
 		, footer_BettingFinishedLabel: 'Match and Bets / Footer: betting finished'
-		, footer_MatchFinishedLabel: 'Match and Bets / Footer: Match finished'
 
 		, matchBettingIsDenied: "Match betting is denied"
 	} );
@@ -116,13 +115,18 @@ define( function ( require ) {
 			this.$el.html( templateMatch( this._getViewOptions() ) );
 			this._fadeIn();
 
-//			console.log( this.model.toJSON() );
+			var model = this.model.toJSON();
+//			console.log( model );
+
+			var match = this.model.get( 'match' );
+
+			var isMatchFinished = match.matchFinished;
+			var isBettingAllowed = this.model.isBettingAllowed();
 
 			this._renderDropDownMenuItems();
 
-			var match = this.model.get( 'match' );
-			if ( match.matchFinished ) {
-				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', translator.footer_MatchFinishedLabel, false ) );
+			if ( isMatchFinished ) {
+				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', model.bettingValidationMessage, false ) );
 			}
 
 			var isFilterByAnotherUserBets = this.filter.userId && this.currentUser.userId != this.filter.userId;
@@ -137,7 +141,6 @@ define( function ( require ) {
 			}
 
 			var bet = this.model.get( 'bet' );
-			var isBettingAllowed = this.model.isBettingAllowed();
 
 			if( bet == null ) {
 
@@ -147,7 +150,7 @@ define( function ( require ) {
 					var icon = match.cup.readyForMatchBets ? 'fa-money' : 'fa-ban';
 					this.$( '.js-panel-footer' ).append( this._renderIcon( icon, translator.footer_NoBetYetLabel, true ) );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa " + icon + " button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
-				} else if( ! match.matchFinished ) {
+				} else if( ! isBettingAllowed ) {
 					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel, false ) );
 				}
 

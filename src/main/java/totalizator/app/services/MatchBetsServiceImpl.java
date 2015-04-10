@@ -111,11 +111,11 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 		final Language language = Language.RU; // TODO: language!
 
 		if ( match.getCup().isFinished() ) {
-			return ValidationResult.fail( translatorService.translate( "Cup '$1' is finished", language, match.getCup().getCupName() ) );
+			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, match.getCup().getCupName() ) );
 		}
 
 		if ( ! match.getCup().isReadyForMatchBets() ) {
-			return ValidationResult.fail( translatorService.translate( "Cup '$1' is not open for bets at this moment", language, match.getCup().getCupName() ) );
+			return ValidationResult.fail( translatorService.translate( "Cup $1 is not open for bets at this moment", language, match.getCup().getCupName() ) );
 		}
 
 		if ( match.isMatchFinished() ) {
@@ -123,7 +123,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 		}
 
 		if ( isTooLateForMatchBetting( match ) ) {
-			return ValidationResult.fail( translatorService.translate( "It's too late for betting. The betting was possible till $1", language, dateTimeService.formatDateTimeUI( getMatchLastBettingSecond( match ) ) ) );
+			return ValidationResult.fail( translatorService.translate( "It_s too late for betting. The betting was possible till $1", language, dateTimeService.formatDateTimeUI( getMatchLastBettingSecond( match ) ) ) );
 		}
 
 		return ValidationResult.pass();
