@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public interface DateTimeService {
 
 	String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+	String DATE_TIME_FORMAT_UI = "dd MMM yyyy HH:mm";
 
 	LocalDateTime getNow();
 
@@ -24,7 +25,7 @@ public interface DateTimeService {
 	LocalDateTime plusDays( final LocalDateTime time, final int days );
 
 
-	String formatDateTime( final LocalDateTime time );
+	String formatDateTimeUI( final LocalDateTime time );
 
 	LocalDateTime parseDate( final String date );
 }

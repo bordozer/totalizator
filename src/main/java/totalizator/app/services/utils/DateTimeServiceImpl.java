@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Service
 public class DateTimeServiceImpl implements DateTimeService {
@@ -49,9 +50,9 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
-	public String formatDateTime( final LocalDateTime time ) {
+	public String formatDateTimeUI( final LocalDateTime time ) {
 
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( format() );
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( formatUI(), Locale.getDefault() );
 		final LocalDateTime dateTime = localDateTime( time );
 
 		return dateTime.format( formatter );
@@ -59,9 +60,7 @@ public class DateTimeServiceImpl implements DateTimeService {
 
 	@Override
 	public LocalDateTime parseDate( final String date ) {
-
 		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( format() );
-
 		return LocalDateTime.parse( date, formatter );
 	}
 
@@ -71,5 +70,9 @@ public class DateTimeServiceImpl implements DateTimeService {
 
 	private String format() {
 		return DATE_TIME_FORMAT;
+	}
+
+	private String formatUI() {
+		return DATE_TIME_FORMAT_UI;
 	}
 }
