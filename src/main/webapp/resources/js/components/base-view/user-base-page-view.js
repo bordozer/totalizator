@@ -33,11 +33,10 @@ define( function ( require ) {
 			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
 
 			this.bodyView = this.bodyRenderer( this.$( '.js-custom-view' ), this.options ).view();
-			this.bodyView.on( '', this._setActiveCup, this );
+			this.bodyView.on( 'navigation:set:active:cup', this._setActiveCup, this );
 		},
 
 		_setActiveCup: function( options ) {
-			console.log( options );
 			this.cupsNavigation.trigger( 'navigation:set:active:cup', options );
 		},
 

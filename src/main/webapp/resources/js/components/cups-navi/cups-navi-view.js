@@ -13,7 +13,7 @@ define( function ( require ) {
 		initialize: function( options ) {
 			this.selectedCupId = options.selectedCupId;
 
-			this.on( 'navigation:set:active:cup', this.render, this );
+			this.on( 'navigation:set:active:cup', this._setSelectedCupId, this );
 
 			this.listenTo( this.model, 'sync', this.render );
 			this.model.fetch( { cache: false} );
@@ -30,8 +30,6 @@ define( function ( require ) {
 		},
 
 		_setSelectedCupId: function( options ) {
-
-			console.log( '_setSelectedCupId', options );
 
 			this.selectedCupId = options.selectedCupId;
 
