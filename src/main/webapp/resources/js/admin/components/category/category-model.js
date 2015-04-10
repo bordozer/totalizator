@@ -25,7 +25,7 @@ define( function ( require ) {
 		selectedCategoryId: 0,
 
 		initialize: function ( options ) {
-			this.url = '/admin/rest/category/';
+			this.url = '/admin/rest/categories/';
 		}
 	});
 

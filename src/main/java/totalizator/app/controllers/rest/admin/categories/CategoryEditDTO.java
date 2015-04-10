@@ -1,17 +1,14 @@
-package totalizator.app.dto;
+package totalizator.app.controllers.rest.admin.categories;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties( ignoreUnknown = true )
-public class CategoryDTO {
+public class CategoryEditDTO {
 
 	private int categoryId;
 	private String categoryName;
 
-	public CategoryDTO() {
+	public CategoryEditDTO() {
 	}
 
-	public CategoryDTO( final int categoryId, final String categoryName ) {
+	public CategoryEditDTO( final int categoryId, final String categoryName ) {
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 	}
