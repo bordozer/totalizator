@@ -4,11 +4,11 @@ import totalizator.app.controllers.ui.AbstractPageModel;
 import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 
-public class CupMatchesAndBetsModel extends AbstractPageModel {
+public class CupOverviewModel extends AbstractPageModel {
 
 	private Cup cup;
 
-	protected CupMatchesAndBetsModel( final User user ) {
+	protected CupOverviewModel( final User user ) {
 		super( user );
 	}
 

@@ -15,6 +15,7 @@ define( function ( require ) {
 		var view = new View.CupPageView( { model: model, el: container, options: options } );
 
 		return {
+
 			view: function() {
 				return view;
 			}

@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var PageView = require( 'js/components/base-view/base-page-view' );
 
-	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
+	var CupsNavigation = require( 'js/components/cups-navi/cups-navi' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -30,8 +30,15 @@ define( function ( require ) {
 			this.$( '.body-container' ).html( userPageTemplate( {
 			} ) );
 
-			var cupsNaviView = new CupsNaviView( this.getActiveCupId(), this.$( '.js-cups-navi' ) ); // TODO: cupId?
+			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
+
 			this.bodyView = this.bodyRenderer( this.$( '.js-custom-view' ), this.options ).view();
+			this.bodyView.on( '', this._setActiveCup, this );
+		},
+
+		_setActiveCup: function( options ) {
+			console.log( options );
+			this.cupsNavigation.trigger( 'navigation:set:active:cup', options );
 		},
 
 		mainMenuItems: function() {
@@ -42,10 +49,6 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
-		},
-
-		getActiveCupId: function() {
-			return 0;
 		}
 	});
 } );

@@ -13,6 +13,13 @@ define( function ( require ) {
 
 		var model = new Model();
 		var view = new View( { model: model, el: container, selectedCupId: selectedCupId } );
+
+		return {
+
+			view: function() {
+				return view;
+			}
+		}
 	}
 
 	return init;

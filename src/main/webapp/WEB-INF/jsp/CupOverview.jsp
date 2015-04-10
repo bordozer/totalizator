@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="cupMatchesAndBetsModel" type="totalizator.app.controllers.ui.cups.CupMatchesAndBetsModel" scope="request"/>
+<jsp:useBean id="cupOverviewModel" type="totalizator.app.controllers.ui.cups.CupOverviewModel" scope="request"/>
 
-<tags:page currentUser="${cupMatchesAndBetsModel.currentUser}">
+<tags:page currentUser="${cupOverviewModel.currentUser}">
 
-	<c:set var="cup" value="${cupMatchesAndBetsModel.cup}" />
+	<c:set var="cup" value="${cupOverviewModel.cup}" />
 
 	<div class="portal-page-container"></div>
 
@@ -25,7 +25,7 @@
 				, { link: '#', title: translator.title }
 			];
 
-			var currentUser = ${cupMatchesAndBetsModel.currentUserJSON};
+			var currentUser = ${cupOverviewModel.currentUserJSON};
 
 			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
 			pageView.render();

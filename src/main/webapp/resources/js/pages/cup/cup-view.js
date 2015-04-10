@@ -30,6 +30,8 @@ define( function ( require ) {
 			this.$el.html( template( {
 			 } ) );
 
+			this.trigger( 'navigation:set:active:cup', { selectedCupId: this._getCup().cupId } );
+
 			this._renderCupScores();
 
 			this._renderCupMatchesAndBets();
@@ -37,10 +39,6 @@ define( function ( require ) {
 			this._renderCupTeamBets();
 
 			return this;
-		},
-
-		getActiveCupId: function() {
-			return this._getCup().cupId;
 		},
 
 		_renderCupScores: function() {

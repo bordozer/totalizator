@@ -13,11 +13,11 @@ import java.security.Principal;
 
 @Controller
 @RequestMapping( "/totalizator/cups" )
-public class CupMatchesAndBetsController {
+public class CupOverviewController {
 
-	public static final String MODEL_NAME = "cupMatchesAndBetsModel";
+	public static final String MODEL_NAME = "cupOverviewModel";
 
-	private static final String VIEW = "/CupMatchesAndBets";
+	private static final String VIEW = "/CupOverview";
 
 	@Autowired
 	private UserService userService;
@@ -26,12 +26,12 @@ public class CupMatchesAndBetsController {
 	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
-	public CupMatchesAndBetsModel preparePagingModel( final Principal principal ) {
-		return new CupMatchesAndBetsModel( userService.findByLogin( principal.getName() ) );
+	public CupOverviewModel preparePagingModel( final Principal principal ) {
+		return new CupOverviewModel( userService.findByLogin( principal.getName() ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/" )
-	public String portalPage( final @PathVariable( "cupId" ) int cupId, final @ModelAttribute( MODEL_NAME ) CupMatchesAndBetsModel model ) {
+	public String portalPage( final @PathVariable( "cupId" ) int cupId, final @ModelAttribute( MODEL_NAME ) CupOverviewModel model ) {
 
 		model.setCup( cupService.load( cupId ) );
 
