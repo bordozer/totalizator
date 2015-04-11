@@ -11,7 +11,8 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.selectedCupId = options.selectedCupId;
+
+			this.on( 'navigation:set:active:cup', this._setSelectedCupId, this );
 
 			this.listenTo( this.model, 'sync', this.render );
 			this.model.fetch( { cache: false} );
@@ -25,6 +26,13 @@ define( function ( require ) {
 			} ) );
 
 			return this;
+		},
+
+		_setSelectedCupId: function( options ) {
+
+			this.selectedCupId = options.selectedCupId;
+
+			this.render();
 		}
 	} );
 } );

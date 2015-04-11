@@ -8,8 +8,6 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/portal-template.html' ) );
 
-	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
-
 	var MatchesModel = require( 'js/components/matches-and-bets/matches-and-bets-model' );
 	var MatchesView = require( 'js/components/matches-and-bets/matches-and-bets-view' );
 
@@ -35,16 +33,9 @@ define( function ( require ) {
 				translator: translator
 			 } ) );
 
-			this._renderNavigation();
-
 			this._renderMatches();
 
 			return this;
-		},
-
-		_renderNavigation: function() {
-			var selectedCupId = 0;
-			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
 		},
 
 		_renderMatches: function() {

@@ -8,14 +8,20 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
+import totalizator.app.services.utils.DateTimeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class CupTeamBetServiceImpl implements CupTeamBetService {
+public class CupBetsServiceImpl implements CupBetsService {
 
+	private static final int STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS = 24; // TODO: mode to the settings
 	@Autowired
 	private CupTeamBetRepository cupTeamBetRepository;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -41,17 +47,6 @@ public class CupTeamBetServiceImpl implements CupTeamBetService {
 		cupTeamBetRepository.delete( id );
 	}
 
-	/*@Override
-	@Transactional( readOnly = true )
-	public List<CupTeamBet> load( final Cup cup ) {
-		return cupTeamBetRepository.load( cup );
-	}*/
-
-	/*@Override
-	public List<CupTeamBet> load( final Cup cup, final Team team ) {
-		return cupTeamBetRepository.load( cup, team );
-	}*/
-
 	@Override
 	@Transactional( readOnly = true )
 	public List<CupTeamBet> load( final Cup cup, final User user ) {
@@ -66,5 +61,14 @@ public class CupTeamBetServiceImpl implements CupTeamBetService {
 	@Override
 	public CupTeamBet load( final Cup cup, final User user, final Team team ) {
 		return cupTeamBetRepository.load( cup, team, user );
+	}
+
+	@Override
+	public boolean isNotTooLateForCupBetting( final Cup cup, final User user ) {
+		return dateTimeService.getNow().isBefore( getCupLastBettingSecond( cup ) );
+	}
+
+	private LocalDateTime getCupLastBettingSecond( final Cup cup ) {
+		return dateTimeService.minusHours( cup.getCupStartTime(), STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS );
 	}
 }

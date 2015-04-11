@@ -171,21 +171,24 @@ define( function ( require ) {
 		},
 
 		renderInfo: function () {
-			var modelJSON = this.model.toJSON();
+			var model = this.model.toJSON();
 
-			var matchResults = service.matchResults( modelJSON.team1.teamId, modelJSON.score1, modelJSON.team2.teamId, modelJSON.score2 );
+			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
+
+			var team1 = service.getTeam( this.teams, model.team1Id );
+			var team2 = service.getTeam( this.teams, model.team2Id );
 
 			this.$el.html( templateEntry( {
-				model: modelJSON
-				, matchId: modelJSON.matchId
-				, categoryName: service.getCategory( this.categories, modelJSON.categoryId ).categoryName
-				, cupName: service.getCup( this.cups, modelJSON.cupId ).cupName
-				, team1Name: modelJSON.team1.teamName
-				, team2Name: modelJSON.team2.teamName
-				, score1: modelJSON.score1
-				, score2: modelJSON.score2
+				model: model
+				, matchId: model.matchId
+				, categoryName: service.getCategory( this.categories, model.categoryId ).categoryName
+				, cupName: service.getCup( this.cups, model.cupId ).cupName
+				, team1: team1
+				, team2: team2
+				, score1: model.score1
+				, score2: model.score2
 				, matchResults: matchResults
-				, beginningTime: dateTimeService.formatDateDisplay( modelJSON.beginningTime )
+				, beginningTime: dateTimeService.formatDateDisplay( model.beginningTime )
 				, translator: translator
 			} ) );
 
@@ -197,17 +200,24 @@ define( function ( require ) {
 		},
 
 		renderEdit: function () {
-			var modelJSON = this.model.toJSON();
-			var categoryId = this.model.get( 'categoryId' );
+
+			var model = this.model.toJSON();
+			var categoryId = model.categoryId;
+
+			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
+
+			var cups = service.categoryCups( this.cups, categoryId );
+			var teams = service.categoryTeams( this.teams, categoryId );
+			console.log( categoryId );
 
 			this.$el.html( templateEntryEdit( {
-				model: modelJSON
-				, title: modelJSON.matchId == 0 ? translator.newEntryEditFormTitle : modelJSON.team1.teamName + ' - ' + modelJSON.team2.teamName
-				, matchId: modelJSON.matchId
+				model: model
+				, title: title
+				, matchId: model.matchId
 				, categories: this.categories
 				, categoryId: categoryId
-				, cups: service.categoryCups( this.cups, categoryId )
-				, teams: service.categoryTeams( this.teams, categoryId )
+				, cups: cups
+				, teams: teams
 				, translator: translator
 			} ) );
 
@@ -220,7 +230,7 @@ define( function ( require ) {
 			this.$( '#team1-select-box' ).chosen( options );
 			this.$( '#team2-select-box' ).chosen( options );
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: dateTimeService.parseDate( modelJSON.beginningTime ) } );
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: dateTimeService.parseDate( model.beginningTime ) } );
 
 			return this;
 		},
@@ -236,17 +246,18 @@ define( function ( require ) {
 			}
 		},
 
-		_saveEntry: function() {
+		_saveEntry: function () {
 			this._bind();
 
-			if( ! this._validate() ){
+			if ( !this._validate() ) {
 				return;
 			}
 
-			var rend = _.bind( function() {
+			var rend = _.bind( function () {
 				this.trigger( 'matches:render' );
 			}, this );
-			this.model.save().then( rend );
+
+			this.model.save().then( null, rend );
 		},
 
 		_bind: function() {

@@ -32,7 +32,6 @@ define( function ( require ) {
 		, footer_YourBetLabel: 'Match and Bets / Footer: Your bet'
 		, footer_NoBetYetLabel: 'Match and Bets / Footer: no bet yet'
 		, footer_BettingFinishedLabel: 'Match and Bets / Footer: betting finished'
-		, footer_MatchFinishedLabel: 'Match and Bets / Footer: Match finished'
 
 		, matchBettingIsDenied: "Match betting is denied"
 	} );
@@ -46,10 +45,6 @@ define( function ( require ) {
 
 			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
 			this.model.refresh( filter );
-		},
-
-		getTitle: function() {
-			return translator.title;
 		},
 
 		getIcon: function() {
@@ -120,11 +115,19 @@ define( function ( require ) {
 			this.$el.html( templateMatch( this._getViewOptions() ) );
 			this._fadeIn();
 
-			this._renderDropDownMenuItems();
+			var model = this.model.toJSON();
+//			console.log( model );
 
 			var match = this.model.get( 'match' );
-			if ( match.matchFinished ) {
-				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', translator.footer_MatchFinishedLabel, false ) );
+			var isMatchFinished = match.matchFinished;
+
+			var bet = this.model.get( 'bet' );
+			var isBettingAllowed = this.model.isBettingAllowed();
+
+			this._renderDropDownMenuItems();
+
+			if ( isMatchFinished ) {
+				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', model.bettingValidationMessage, false ) );
 			}
 
 			var isFilterByAnotherUserBets = this.filter.userId && this.currentUser.userId != this.filter.userId;
@@ -132,23 +135,21 @@ define( function ( require ) {
 
 				var userBet = this.model.get( 'bet' );
 
-//				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
 
 				return this;
 			}
 
-			var bet = this.model.get( 'bet' );
 			if( bet == null ) {
 
-				if ( this.model.isBettingAllowed() ) {
+				if ( isBettingAllowed ) {
 					this._setMatchContainerClass( 'panel-warning' );
 
 					var icon = match.cup.readyForMatchBets ? 'fa-money' : 'fa-ban';
 					this.$( '.js-panel-footer' ).append( this._renderIcon( icon, translator.footer_NoBetYetLabel, true ) );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa " + icon + " button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
-				} else if( ! match.matchFinished ) {
+				} else if( ! isBettingAllowed ) {
 					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel, false ) );
 				}
 
@@ -159,13 +160,13 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-success' );
 
-			if ( ! match.matchFinished ) {
+			if ( isBettingAllowed ) {
 				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 			}
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
-			if ( ! match.matchFinished ) {
+			if ( ! isBettingAllowed ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
 			}
@@ -216,9 +217,10 @@ define( function ( require ) {
 			];
 
 			var bet = this.model.get( 'bet' );
+			var isBettingAllowed = this.model.isBettingAllowed();
 			var isBetEditingMode = this.model.isBetMode();
 
-			if ( ! match.matchFinished ) {
+			if ( isBettingAllowed ) {
 
 				menuItems.push( { selector: 'divider' } );
 
@@ -287,6 +289,10 @@ define( function ( require ) {
 
 		_deleteBet: function() {
 
+			if ( ! this._assertBetting() ) {
+				return;
+			}
+
 			if ( ! confirm( translator.deleteBetConfirmationLabel ) ) {
 				return;
 			}
@@ -315,9 +321,7 @@ define( function ( require ) {
 		_onBetButtonClick: function( evt ) {
 			evt.preventDefault();
 
-			var cup = this.model.get( 'match' ).cup;
-			if ( ! cup.readyForMatchBets ) {
-				alert( translator.matchBettingIsDenied );
+			if ( ! this._assertBetting() ) {
 				return;
 			}
 
@@ -345,7 +349,22 @@ define( function ( require ) {
 		_onBetEditButtonClick: function( evt ) {
 			evt.preventDefault();
 
+			if ( ! this._assertBetting() ) {
+				return;
+			}
+
 			this._goBetMode();
+		},
+
+		_assertBetting: function() {
+
+			var cup = this.model.get( 'match' ).cup;
+			if ( ! this.model.isBettingAllowed() ) {
+				alert( translator.matchBettingIsDenied );
+				return false;
+			}
+
+			return true;
 		}
 	});
 

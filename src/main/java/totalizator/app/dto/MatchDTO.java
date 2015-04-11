@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class MatchDTO {
 
@@ -21,7 +21,7 @@ public class MatchDTO {
 	private TeamDTO team2;
 	private int score2;
 
-	private Date beginningTime;
+	private LocalDateTime beginningTime;
 	private boolean matchFinished;
 
 	public int getMatchId() {
@@ -81,12 +81,12 @@ public class MatchDTO {
 	}
 
 	@JsonSerialize(using = DateTimeSerializer.class)
-	public Date getBeginningTime() {
+	public LocalDateTime getBeginningTime() {
 		return beginningTime;
 	}
 
 	@JsonDeserialize(using = DateTimeDeserializer.class)
-	public void setBeginningTime( final Date beginningTime ) {
+	public void setBeginningTime( final LocalDateTime beginningTime ) {
 		this.beginningTime = beginningTime;
 	}
 

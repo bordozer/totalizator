@@ -1,7 +1,7 @@
 package totalizator.app.models;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static totalizator.app.models.CupTeamBet.*;
 
@@ -58,7 +58,7 @@ public class CupTeamBet extends AbstractEntity {
 
 	private int cupPosition;
 
-	private Date betTime;
+	private LocalDateTime betTime;
 
 	public Cup getCup() {
 		return cup;
@@ -92,11 +92,11 @@ public class CupTeamBet extends AbstractEntity {
 		this.cupPosition = cupPosition;
 	}
 
-	public Date getBetTime() {
+	public LocalDateTime getBetTime() {
 		return betTime;
 	}
 
-	public void setBetTime( final Date betTime ) {
+	public void setBetTime( final LocalDateTime betTime ) {
 		this.betTime = betTime;
 	}
 

@@ -2,16 +2,26 @@ define( function ( require ) {
 
 	'use strict';
 
-	var DATE_TIME_FORMAT = 'D/M/YYYY HH:mm';
-	var DATE_TIME_DISPLAY_FORMAT = 'D MMM HH:mm';
+	var DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm';
+	var DATE_TIME_DISPLAY_FORMAT = 'D MMM YYYY HH:mm';
+
+	var LOCALE = 'ru';
 
 	var $ = require( 'jquery' );
 
 	var moment = require( 'moment' );
-	moment.locale( 'ru', {
+	moment.locale( LOCALE, {
 	} );
 
 	return {
+
+		getFormat: function() {
+			return DATE_TIME_FORMAT;
+		},
+
+		getLocale: function() {
+			return LOCALE;
+		},
 
 		// date => str formatted
 		formatDate: function ( time ) {

@@ -21,6 +21,7 @@ define( function ( require ) {
 	var MatchBetsView = Backbone.View.extend( {
 
 		initialize: function ( options ) {
+			this.cupId = options.options.cupId;
 			this.matchId = options.options.matchId;
 			this.currentUser = options.options.currentUser;
 
@@ -29,6 +30,8 @@ define( function ( require ) {
 		},
 
 		render: function () {
+
+//			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } ); // if I want to highlight the cup in navigation...
 
 			var model = this.model.toJSON();
 
@@ -46,14 +49,7 @@ define( function ( require ) {
 
 			this.$el.html( template( data ) );
 
-			this._renderNavigation();
-
 			return this;
-		},
-
-		_renderNavigation: function() {
-			var selectedCupId = 0;
-			var cupsNaviView = new CupsNaviView( selectedCupId, this.$( '.js-cups-navi' ) );
 		}
 	} );
 

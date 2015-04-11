@@ -97,7 +97,15 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			return translator.title;
+			var filter = this.settingsModel.toJSON();
+
+			var categoryId = filter.categoryId;
+			var cupId = filter.cupId;
+
+			var category = ( categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.pluralAll );
+			var cup = ( cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.pluralAll );
+
+			return translator.title + ': ' + category + ' ' + cup;
 		},
 
 		getTitleHint: function() {

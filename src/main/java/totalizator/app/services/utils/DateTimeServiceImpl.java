@@ -2,46 +2,77 @@ package totalizator.app.services.utils;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Service
 public class DateTimeServiceImpl implements DateTimeService {
 
 	@Override
-	public Date getNow() {
-		return new Date();
+	public LocalDateTime getNow() {
+		return LocalDateTime.now();
 	}
 
 	@Override
-	public Date offset( final int measure, final int offset ) {
-		return offset( new Date(), measure, offset );
+	public LocalDateTime minusHours( final int hours ) {
+		return minusHours( getNow(), hours );
 	}
 
 	@Override
-	public Date offset( final Date time, final int measure, final int offset ) {
-		final Calendar cal = getCalendar( time );
-		cal.add( measure, offset );
-
-		return cal.getTime();
+	public LocalDateTime minusDays( final int days ) {
+		return minusDays( getNow(), days );
 	}
 
 	@Override
-	public String formatDate( final Date date ) {
-		return date.toString(); //TODO;
+	public LocalDateTime plusHours( final int hours ) {
+		return plusHours( getNow(), hours );
 	}
 
-	private Calendar getCalendar( final Date date ) {
-		final Calendar calendar = getCalendar();
-		calendar.setTime( date );
-
-		return calendar;
+	@Override
+	public LocalDateTime plusHours( final LocalDateTime time, final int hours ) {
+		return time.plusHours( hours );
 	}
 
-	private Calendar getCalendar() {
-		final Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek( Calendar.MONDAY );
+	@Override
+	public LocalDateTime minusHours( final LocalDateTime time, final int hours ) {
+		return time.minusHours( hours );
+	}
 
-		return calendar;
+	@Override
+	public LocalDateTime minusDays( final LocalDateTime time, final int days ) {
+		return time.minusDays( days );
+	}
+
+	@Override
+	public LocalDateTime plusDays( final LocalDateTime time, final int days ) {
+		return time.plusDays( days );
+	}
+
+	@Override
+	public String formatDateTimeUI( final LocalDateTime time ) {
+
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( formatUI(), Locale.getDefault() );
+		final LocalDateTime dateTime = localDateTime( time );
+
+		return dateTime.format( formatter );
+	}
+
+	@Override
+	public LocalDateTime parseDate( final String date ) {
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( format() );
+		return LocalDateTime.parse( date, formatter );
+	}
+
+	private LocalDateTime localDateTime( final LocalDateTime time ) {
+		return LocalDateTime.of( time.getYear(), time.getMonth(), time.getDayOfMonth(), time.getHour(), time.getMinute() );
+	}
+
+	private String format() {
+		return DATE_TIME_FORMAT;
+	}
+
+	private String formatUI() {
+		return DATE_TIME_FORMAT_UI;
 	}
 }

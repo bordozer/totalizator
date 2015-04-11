@@ -1,5 +1,6 @@
 package totalizator.app.services;
 
+import totalizator.app.beans.ValidationResult;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
@@ -19,7 +20,9 @@ public interface MatchBetsService extends GenericService<MatchBet>{
 
 	public MatchBet load( final int userId, final int matchId );
 
-	boolean isBettingAllowed( final Match match, final User user );
-
 	int betsCount( final Match match );
+
+	ValidationResult validateBettingAllowed( final Match match, final User user );
+
+	boolean isBettingAllowed( final Match match, final User user );
 }

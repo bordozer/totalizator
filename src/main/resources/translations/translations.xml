@@ -103,6 +103,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Logout failed</nerd>
+		<ru><![CDATA[Ошибка завершении сессии]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.CategoryDTO;
 import totalizator.app.models.Category;
 import totalizator.app.services.CategoryService;
 
@@ -16,10 +15,10 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/admin/rest/category" )
-public class AdminCategoryController {
+@RequestMapping( "/admin/rest/categories" )
+public class AdminCategoriesController {
 
-	private static final Logger LOGGER = Logger.getLogger( AdminCategoryController.class );
+	private static final Logger LOGGER = Logger.getLogger( AdminCategoriesController.class );
 
 	@Autowired
 	private CategoryService categoryService;
@@ -27,12 +26,12 @@ public class AdminCategoryController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<CategoryDTO> entries() {
+	public List<CategoryEditDTO> entries() {
 
-		return Lists.transform( categoryService.loadAll(), new Function<Category, CategoryDTO>() {
+		return Lists.transform( categoryService.loadAll(), new Function<Category, CategoryEditDTO>() {
 			@Override
-			public CategoryDTO apply( final Category category ) {
-				return new CategoryDTO( category.getId(), category.getCategoryName() );
+			public CategoryEditDTO apply( final Category category ) {
+				return new CategoryEditDTO( category.getId(), category.getCategoryName() );
 			}
 		} );
 	}
@@ -40,35 +39,37 @@ public class AdminCategoryController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public CategoryDTO create( final @RequestBody CategoryDTO categoryDTO ) {
+	public CategoryEditDTO create( final @RequestBody CategoryEditDTO categoryEditDTO ) {
 		// TODO: check if name exists
-		final Category category = categoryService.save( new Category( categoryDTO.getCategoryName() ) );
+		final Category category = categoryService.save( new Category( categoryEditDTO.getCategoryName() ) );
 
-		categoryDTO.setCategoryId( category.getId() );
+		categoryEditDTO.setCategoryId( category.getId() );
 
-		return categoryDTO;
+		return categoryEditDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/{categoryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public CategoryDTO edit( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryDTO categoryDTO ) {
+	public CategoryEditDTO edit( final @PathVariable( "categoryId" ) int categoryId, final @RequestBody CategoryEditDTO categoryEditDTO ) {
 		// TODO: check if name exists
-		final Category category = categoryService.load( categoryDTO.getCategoryId() );
-		category.setCategoryName( categoryDTO.getCategoryName() );
+		final Category category = categoryService.load( categoryEditDTO.getCategoryId() );
+		category.setCategoryName( categoryEditDTO.getCategoryName() );
 
 		categoryService.save( category );
 
-		return categoryDTO;
+		return categoryEditDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{categoryId}" )
 	public void delete( final @PathVariable( "categoryId" ) int categoryId ) {
+
 		if ( categoryId == 0 ) {
 			return;
 		}
+
 		categoryService.delete( categoryId );
 	}
 }

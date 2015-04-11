@@ -1,14 +1,14 @@
 package totalizator.app.controllers.rest.admin.teams;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Team;
 import totalizator.app.services.CategoryService;
-import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamLogoService;
 import totalizator.app.services.TeamService;
 
@@ -30,41 +30,46 @@ public class AdminTeamRestController {
 	@Autowired
 	private TeamLogoService teamLogoService;
 
-	@Autowired
-	private DTOService dtoService;
-
 	private static final Logger LOGGER = Logger.getLogger( AdminTeamRestController.class );
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<TeamDTO> entries() {
-		return dtoService.transformTeams( teamService.loadAll() );
+	public List<TeamEditDTO> entries() {
+
+		return Lists.transform( teamService.loadAll(), new Function<Team, TeamEditDTO>() {
+
+			@Override
+			public TeamEditDTO apply( final Team team ) {
+				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), teamLogoService.getTeamLogoURL( team ) );
+			}
+		} );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public TeamDTO create( final @RequestBody TeamDTO teamDTO ) {
+	public TeamEditDTO create( final @RequestBody TeamEditDTO teamEditDTO ) {
 		// TODO: check if name exists
-		final Team team = teamService.save( new Team( teamDTO.getTeamName(), categoryService.load( teamDTO.getCategoryId() ) ) );
+		final Team team = teamService.save( new Team( teamEditDTO.getTeamName(), categoryService.load( teamEditDTO.getCategoryId() ) ) );
 
-		teamDTO.setTeamId( team.getId() );
-		return teamDTO;
+		teamEditDTO.setTeamId( team.getId() );
+
+		return teamEditDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/{teamId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public TeamDTO edit( final @PathVariable( "teamId" ) int teamId, final @RequestBody TeamDTO teamDTO ) {
+	public TeamEditDTO edit( final @PathVariable( "teamId" ) int teamId, final @RequestBody TeamEditDTO teamEditDTO ) {
 		// TODO: check if name exists
-		final Team team = teamService.load( teamDTO.getTeamId() );
-		team.setTeamName( teamDTO.getTeamName() );
-		team.setCategory( categoryService.load( teamDTO.getCategoryId() ) );
+		final Team team = teamService.load( teamEditDTO.getTeamId() );
+		team.setTeamName( teamEditDTO.getTeamName() );
+		team.setCategory( categoryService.load( teamEditDTO.getCategoryId() ) );
 
 		teamService.save( team );
 
-		return teamDTO;
+		return teamEditDTO;
 	}
 
 	@ResponseStatus( HttpStatus.OK )

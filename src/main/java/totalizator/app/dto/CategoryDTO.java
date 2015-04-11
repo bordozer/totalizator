@@ -11,7 +11,7 @@ public class CategoryDTO {
 	public CategoryDTO() {
 	}
 
-	public CategoryDTO( int categoryId, String categoryName ) {
+	public CategoryDTO( final int categoryId, final String categoryName ) {
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 	}

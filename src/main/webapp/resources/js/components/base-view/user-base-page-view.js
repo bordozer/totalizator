@@ -6,7 +6,11 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var userPageTemplate = _.template( require( 'text!./templates/user-base-page-template.html' ) );
+
 	var PageView = require( 'js/components/base-view/base-page-view' );
+
+	var CupsNavigation = require( 'js/components/cups-navi/cups-navi' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -19,6 +23,21 @@ define( function ( require ) {
 
 		builtinEvents: {
 			'click .logout-link': 'logout'
+		},
+
+		renderBody: function() {
+
+			this.$( '.body-container' ).html( userPageTemplate( {
+			} ) );
+
+			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
+
+			this.bodyView = this.bodyRenderer( this.$( '.js-custom-view' ), this.options ).view();
+			this.bodyView.on( 'navigation:set:active:cup', this._setActiveCup, this );
+		},
+
+		_setActiveCup: function( options ) {
+			this.cupsNavigation.trigger( 'navigation:set:active:cup', options );
 		},
 
 		mainMenuItems: function() {

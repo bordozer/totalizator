@@ -4,13 +4,14 @@ define( function ( require ) {
 
 	var Users = require( 'js/services/users-model' );
 
-	var Categories = require( 'js/admin/components/category/category-model' ); 	// TODO: using admin functionality!
-	var Cups = require( 'js/admin/components/cup/cup-model' );					// TODO: using admin functionality!
-	var Teams = require( 'js/admin/components/team/team-model' );				// TODO: using admin functionality!
+	var Categories = require( 'js/models/categories-model' );
+	var Cups = require( 'js/models/cups-model' );
+	var Teams = require( 'js/models/teams-model' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		logoutConfirmationLabel: 'Logout confirmation: Logout?'
+		, logoutFailedMessage: 'Logout failed'
 		, matchBetSavingError: 'Match bet saving error'
 		, cupTeamBetSavingError: 'Cup team bet saving error'
 	} );
@@ -106,39 +107,24 @@ define( function ( require ) {
 		},
 
 		loadCategories: function() {
-			var categories = new Categories.CategoriesModel( [], {} );
+			var categories = new Categories( [], {} );
 			categories.fetch( { cache: false, async: false } );
 
-			var result = [];
-			categories.forEach( function( category ) {
-				result.push( { categoryId: category.get( 'categoryId' ), categoryName: category.get( 'categoryName' ) } );
-			});
-
-			return result;
+			return categories.toJSON();
 		},
 
 		loadCups: function() {
-			var cups = new Cups.CupsModel( [], {} );
+			var cups = new Cups( [], {} );
 			cups.fetch( { cache: false, async: false } );
 
-			var result = [];
-			cups.forEach( function( cup ) {
-				result.push( { cupId: cup.get( 'cupId' ), category: cup.get( 'category' ), cupName: cup.get( 'cupName' ) } );
-			});
-
-			return result;
+			return cups.toJSON();
 		},
 
 		loadTeams: function() {
-			var teams = new Teams.TeamsModel( [], {} );
+			var teams = new Teams( [], {} );
 			teams.fetch( { cache: false, async: false } );
 
-			var result = [];
-			teams.forEach( function( team ) {
-				result.push( { teamId: team.get( 'teamId' ), categoryId: team.get( 'categoryId' ), teamName: team.get( 'teamName' ), teamLogo: team.get( 'teamLogo' ) } );
-			});
-
-			return result;
+			return teams.toJSON();
 		},
 
 		getUser: function( users, userId ) {
@@ -173,7 +159,7 @@ define( function ( require ) {
 
 		categoryTeams: function( teams, categoryId ) {
 			return _.filter( teams, function( team ) {
-				return team.categoryId == categoryId;
+				return team.category.categoryId == categoryId;
 			});
 		},
 
@@ -190,7 +176,7 @@ define( function ( require ) {
 					window.location.reload();
 				},
 				error: function() {
-					alert( 'Logout failed' ); // TODO
+					alert( translator.logoutFailedMessage );
 				}
 			} )
 		},

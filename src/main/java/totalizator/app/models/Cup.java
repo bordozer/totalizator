@@ -1,7 +1,8 @@
 package totalizator.app.models;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static totalizator.app.models.Cup.FIND_BY_NAME;
 import static totalizator.app.models.Cup.LOAD_ALL;
@@ -12,7 +13,7 @@ import static totalizator.app.models.Cup.LOAD_ALL;
 @NamedQueries( {
 		@NamedQuery(
 				name = LOAD_ALL,
-				query = "select c from Cup c order by categoryId, cupName"
+				query = "select c from Cup c order by categoryId, cupStartTime desc"
 		),
 		@NamedQuery(
 				name = FIND_BY_NAME,
@@ -35,7 +36,7 @@ public class Cup extends AbstractEntity {
 
 	private boolean showOnPortalPage;
 
-	private Date startDate;
+	private LocalDateTime cupStartTime;
 
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
@@ -81,12 +82,12 @@ public class Cup extends AbstractEntity {
 		this.showOnPortalPage = showOnPortalPage;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public LocalDateTime getCupStartTime() {
+		return cupStartTime;
 	}
 
-	public void setStartDate( final Date startDate ) {
-		this.startDate = startDate;
+	public void setCupStartTime( final LocalDateTime cupStartTime ) {
+		this.cupStartTime = cupStartTime;
 	}
 
 	public boolean isReadyForCupBets() {

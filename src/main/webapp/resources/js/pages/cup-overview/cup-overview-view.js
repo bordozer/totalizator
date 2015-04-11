@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!./templates/cup-template.html' ) );
+	var template = _.template( require( 'text!./templates/cup-overview-template.html' ) );
 
 	var MatchesModel = require( 'js/components/matches-and-bets/matches-and-bets-model' );
 	var MatchesView = require( 'js/components/matches-and-bets/matches-and-bets-view' );
@@ -15,8 +15,6 @@ define( function ( require ) {
 	var CupScoresView = require( 'js/components/cup-users-scores/cup-users-scores-view' );
 
 	var cupTeamBets = require( 'js/components/cup-team-bets/cup-team-bets' );
-
-	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 
 	var CupPageView = Backbone.View.extend( {
 
@@ -32,7 +30,7 @@ define( function ( require ) {
 			this.$el.html( template( {
 			 } ) );
 
-			this._renderNavigation();
+			this.trigger( 'navigation:set:active:cup', { selectedCupId: this._getCup().cupId } );
 
 			this._renderCupScores();
 
@@ -41,10 +39,6 @@ define( function ( require ) {
 			this._renderCupTeamBets();
 
 			return this;
-		},
-
-		_renderNavigation: function() {
-			var view = new CupsNaviView( this._getCup().cupId, this.$( '.js-cups-navi' ) );
 		},
 
 		_renderCupScores: function() {

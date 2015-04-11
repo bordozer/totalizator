@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import totalizator.app.beans.ValidationResult;
 import totalizator.app.dto.BetDTO;
 import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.MatchesBetSettingsDTO;
@@ -16,9 +17,9 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -39,9 +40,12 @@ public class MatchesAndBetsRestController {
 	@Autowired
 	private DTOService dtoService;
 
+	@Autowired
+	private DateTimeService dateTimeService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/bets/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
 		final int userId = dto.getUserId();
@@ -75,18 +79,20 @@ public class MatchesAndBetsRestController {
 	@RequestMapping( method = RequestMethod.POST, value = "/{matchId}/bets/{score1}/{score2}/", produces = APPLICATION_JSON_VALUE )
 	public BetDTO saveBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "score1" ) int score1, final @PathVariable( "score2" ) int score2 ) {
 
+		final User user = userService.findByLogin( principal.getName() );
 		final Match match = matchService.load( matchId );
-		if ( ! match.getCup().isReadyForMatchBets() ) {
-			throw new IllegalArgumentException( String.format( "Match betting for cup %s is finished", match.getCup() ) );
+
+		final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, user );
+		if ( ! validationResult.isPassed() ) {
+			throw new IllegalArgumentException( validationResult.getMessage() ); // TODO: show the exception to user
 		}
 
-		final User user = userService.findByLogin( principal.getName() );
 		final MatchBet existingBet = matchBetsService.load( user, match );
 
 		if ( existingBet != null ) {
 
 			if ( ! existingBet.getUser().equals( user ) ) {
-				throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), user ) );
+				throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), user ) ); // TODO: show the exception to user
 			}
 
 			existingBet.setBetScore1( score1 );
@@ -101,7 +107,7 @@ public class MatchesAndBetsRestController {
 		matchBet.setMatch( match );
 		matchBet.setBetScore1( score1 );
 		matchBet.setBetScore2( score2 );
-		matchBet.setBetTime( new Date() );
+		matchBet.setBetTime( dateTimeService.getNow() );
 
 		final MatchBet result = matchBetsService.save( matchBet );
 

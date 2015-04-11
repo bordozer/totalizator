@@ -1,14 +1,31 @@
 package totalizator.app.services.utils;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public interface DateTimeService {
 
-	Date getNow();
+	String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+	String DATE_TIME_FORMAT_UI = "dd MMM yyyy HH:mm";
 
-	Date offset( final int measure, final int offset );
+	LocalDateTime getNow();
 
-	Date offset( final Date time, final int measure, final int offset );
+	LocalDateTime minusHours( final int hours );
 
-	String formatDate( final Date date );
+	LocalDateTime plusHours( int hours );
+
+	LocalDateTime minusDays( final int days );
+
+
+	LocalDateTime minusHours( final LocalDateTime time, int hours );
+
+	LocalDateTime plusHours( final LocalDateTime time, int hours );
+
+	LocalDateTime minusDays( final LocalDateTime time, final int days );
+
+	LocalDateTime plusDays( final LocalDateTime time, final int days );
+
+
+	String formatDateTimeUI( final LocalDateTime time );
+
+	LocalDateTime parseDate( final String date );
 }

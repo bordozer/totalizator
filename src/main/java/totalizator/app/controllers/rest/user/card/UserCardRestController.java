@@ -48,7 +48,7 @@ public class UserCardRestController {
 		}
 
 		final List<Cup> cups = newArrayList( cupsWhereUserHasBets );
-		final List<CupDTO> cupDTOs = dtoService.transformCups( cups );
+		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, user );
 
 		final UserCardDTO result = new UserCardDTO();
 		result.setCupsToShow( cupDTOs );

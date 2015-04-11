@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.UserDTO;
-import totalizator.app.models.*;
+import totalizator.app.models.Cup;
+import totalizator.app.models.CupTeamBet;
+import totalizator.app.models.Team;
+import totalizator.app.models.User;
 import totalizator.app.services.*;
+import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -19,7 +22,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/rest/cups/{cupId}/bets" )
-public class CupTeamBetsRestController {
+public class CupBetsRestController {
 
 	@Autowired
 	private UserService userService;
@@ -31,10 +34,13 @@ public class CupTeamBetsRestController {
 	private TeamService teamService;
 
 	@Autowired
-	private CupTeamBetService cupTeamBetService;
+	private CupBetsService cupBetsService;
 
 	@Autowired
 	private DTOService dtoService;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
@@ -57,9 +63,9 @@ public class CupTeamBetsRestController {
 
 		final User user = userService.findByLogin( principal.getName() );
 
-		final CupTeamBet existingTupTeamBet = cupTeamBetService.load( cup, user, position );
+		final CupTeamBet existingTupTeamBet = cupBetsService.load( cup, user, position );
 		if ( cupId > 0 && position > 0 && teamId == 0 && existingTupTeamBet != null ) {
-			cupTeamBetService.delete( existingTupTeamBet.getId() );
+			cupBetsService.delete( existingTupTeamBet.getId() );
 			return;
 		}
 
@@ -71,7 +77,7 @@ public class CupTeamBetsRestController {
 
 		if ( existingTupTeamBet != null ) {
 			existingTupTeamBet.setTeam( team );
-			cupTeamBetService.save( existingTupTeamBet );
+			cupBetsService.save( existingTupTeamBet );
 
 			return;
 		}
@@ -83,9 +89,9 @@ public class CupTeamBetsRestController {
 		entry.setTeam( team );
 		entry.setCupPosition( position );
 
-		entry.setBetTime( new Date() );
+		entry.setBetTime( dateTimeService.getNow() );
 
-		cupTeamBetService.save( entry );
+		cupBetsService.save( entry );
 	}
 
 	private CupTeamBetsDTO getCupTeamBetsDTO( final int cupId, final int userId ) {
@@ -94,16 +100,16 @@ public class CupTeamBetsRestController {
 		final Cup cup = cupService.load( cupId );
 
 		final UserDTO userDTO = dtoService.transformUser( user );
-		final CupDTO cupDTO = dtoService.transformCup( cup );
+		final CupDTO cupDTO = dtoService.transformCup( cup, user );
 
 		final List<CupTeamBetDTO> result = newArrayList();
 
 		for ( int i = 1; i <= cup.getWinnersCount(); i++ ) {
 
-			final CupTeamBet cupTeamBet = cupTeamBetService.load( cup, user, i );
+			final CupTeamBet cupTeamBet = cupBetsService.load( cup, user, i );
 
 			if ( cupTeamBet != null ) {
-				final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet );
+				final CupTeamBetDTO cupTeamBetDTO = dtoService.transformCupTeamBet( cupTeamBet, user );
 				result.add( cupTeamBetDTO );
 			} else {
 				final CupTeamBetDTO emptyCupTeamBetDTO = new CupTeamBetDTO();

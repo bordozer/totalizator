@@ -59,7 +59,27 @@
 
 	<translation>
 		<nerd>Match betting is denied</nerd>
-		<ru><![CDATA[Ставки на результаты матчей этого чемпионата на данный момент не принимаются]]></ru>
+		<ru><![CDATA[Возможность делать ставки на результаты матчей этого чемпионата или изменять существующие ставки на данный момент ограничена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Cup $1 is finished</nerd>
+		<ru><![CDATA[$1 завершен]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Cup $1 is not open for bets at this moment</nerd>
+		<ru><![CDATA[Возможность делать ставки на результаты матчей $1 или изменять существующие ставки на данный момент ограничена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Match is finished</nerd>
+		<ru><![CDATA[Матч завершен]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>It_s too late for betting. The betting was possible till $1</nerd>
+		<ru><![CDATA[Возможность делать ставки истекла $1]]></ru>
 	</translation>
 
 	<translation>

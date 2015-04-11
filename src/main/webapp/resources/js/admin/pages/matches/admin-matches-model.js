@@ -24,7 +24,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-
+//			this.url = '/admin/rest/matches/';
 		},
 
 		selected: function( val ) {
