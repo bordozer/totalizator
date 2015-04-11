@@ -156,17 +156,14 @@ define( function ( require ) {
 				return this;
 			}
 
-			var betUserId = bet.user.userId;
-
 			this._setMatchContainerClass( 'panel-success' );
-
-			if ( isBettingAllowed ) {
+			if ( match.matchFinished ) {
 				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 			}
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
-			if ( ! isBettingAllowed ) {
+			if ( ! match.matchFinished ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
 			}
