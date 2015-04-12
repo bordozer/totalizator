@@ -25,7 +25,7 @@ public class Category extends AbstractEntity {
 	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
 	private String categoryName;
 
-	@Column( unique = true, columnDefinition = "VARCHAR(30)" )
+	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
 
 	public Category() {

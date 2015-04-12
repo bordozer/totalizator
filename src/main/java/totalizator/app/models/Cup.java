@@ -41,7 +41,7 @@ public class Cup extends AbstractEntity {
 	private boolean readyForMatchBets;
 	private boolean finished;
 
-	@Column( unique = true, columnDefinition = "VARCHAR(30)" )
+	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
 
 	public Cup() {

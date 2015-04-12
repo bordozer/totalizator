@@ -34,7 +34,7 @@ public class Team extends AbstractEntity {
 	@JoinColumn(name="categoryId")
 	private Category category;
 
-	@Column( unique = true, columnDefinition = "VARCHAR(30)" )
+	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
 
 	public Team() {
