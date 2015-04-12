@@ -189,7 +189,10 @@ public abstract class AbstractDataInitializer {
 	}
 
 	private Category generateCategory( final String name, final Session session ) {
+
 		final Category category = new Category( name );
+		category.setLogoFileName( name.toLowerCase() );
+
 		session.persist( category );
 
 		return category;
