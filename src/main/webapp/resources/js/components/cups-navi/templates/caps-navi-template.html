@@ -4,7 +4,7 @@
 		<ul class="nav nav-tabs nav-stacked">
 			<% _.each( cupsShowTo, function( cup ) { %>
 				<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>" >
-					<a href="/totalizator/cups/<%- cup.cupId %>/bets/">
+					<a href="/totalizator/cups/<%- cup.cupId %>/">
 						<%- cup.category.categoryName %>: <%- cup.cupName %>
 					</a>
 				</li>

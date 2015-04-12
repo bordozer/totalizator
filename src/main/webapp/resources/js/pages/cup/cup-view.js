@@ -10,7 +10,8 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: ""
+		title: "Cup overview"
+		, bupBetsLabel: "Cup bets"
 	} );
 
 	return Backbone.View.extend( {
@@ -26,7 +27,7 @@ define( function ( require ) {
 		},
 
 		render: function() {
-			var data = _.extend( {}, this.model.toJSON() );
+			var data = _.extend( {}, this.model.toJSON(), { cupId: this.cupId, translator: translator } );
 			this.$el.html( template( data ) );
 		}
 	} );
