@@ -39,6 +39,7 @@ public abstract class AbstractDataInitializer {
 	public void generate( final List<User> users, final Session session ) throws IOException, DocumentException {
 
 		final Category category = generateCategory( getName(), session );
+		uploadLogo( category, "nba-logo.png" );
 
 		final List<Cup> cups = generateCups( category, session );
 
@@ -203,9 +204,17 @@ public abstract class AbstractDataInitializer {
 		return minValue + ( int ) ( Math.random() * ( maxValue - minValue + 1 ) );
 	}
 
-	protected void uploadLogo( final Cup cup, final String dir, final String logoFileName ) {
+	protected void uploadLogo( final Category category, final String logoFileName ) {
 		try {
-			logoService.uploadLogo( cup, new File( String.format( "%s/%s", TeamImportService.RESOURCES_DIR, dir ), logoFileName ) );
+			logoService.uploadLogo( category, new File( String.format( "%s/%s", TeamImportService.RESOURCES_DIR, category.getCategoryName().toLowerCase() ), logoFileName ) );
+		} catch ( IOException e ) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void uploadLogo( final Cup cup, final String logoFileName ) {
+		try {
+			logoService.uploadLogo( cup, new File( String.format( "%s/%s", TeamImportService.RESOURCES_DIR, cup.getCategory().getCategoryName().toLowerCase() ), logoFileName ) );
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}

@@ -38,8 +38,6 @@ public class NCAA extends AbstractDataInitializer {
 
 		session.persist( ncaa2015 );
 
-		uploadLogo( ncaa2015, "ncaa", "ncaa-logo.png" );
-
 		return newArrayList( ncaa2015 );
 	}
 

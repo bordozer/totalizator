@@ -39,7 +39,7 @@ public class UEFA extends AbstractDataInitializer {
 
 		session.persist( uefa2016Euro );
 
-		uploadLogo( uefa2016Euro, "uefa", "uefa-euro-2016-logo.png" );
+		uploadLogo( uefa2016Euro, "uefa-euro-2016-logo.png" );
 
 		final Cup uefa2018WorldCup = new Cup( CUP_2, category );
 		uefa2018WorldCup.setWinnersCount( 3 );
@@ -51,7 +51,7 @@ public class UEFA extends AbstractDataInitializer {
 
 		session.persist( uefa2018WorldCup );
 
-		uploadLogo( uefa2018WorldCup, "uefa", "uefa-world-cup-2018-logo.png" );
+		uploadLogo( uefa2018WorldCup, "uefa-world-cup-2018-logo.png" );
 
 		return newArrayList( uefa2016Euro, uefa2018WorldCup );
 	}

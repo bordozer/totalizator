@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
+import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.LogoService;
 import totalizator.app.services.TeamService;
@@ -22,22 +23,39 @@ public class ResourcesController {
 	private static final File IMAGE_NOT_FOUND_FILE = new File( "src/main/webapp/resources/img/team-logo-not-found.png" );
 
 	@Autowired
-	private TeamService teamService;
+	private CategoryService categoryService;
 
 	@Autowired
 	private CupService cupService;
 
 	@Autowired
+	private TeamService teamService;
+
+	@Autowired
 	private LogoService logoService;
 
-	@RequestMapping( "teams/{teamId}/logo/" )
-	public void teamLogo( final @PathVariable( "teamId" ) int teamId, final HttpServletResponse response ) throws IOException {
-		downloadFile( logoService.getLogoFile( teamService.load( teamId ) ), response );
+	@RequestMapping( "cups/{categoryId}/logo/" )
+	public void categoryLogo( final @PathVariable( "categoryId" ) int categoryId, final HttpServletResponse response ) throws IOException {
+		downloadFile( logoService.getLogoFile( categoryService.load( categoryId ) ), response );
 	}
 
 	@RequestMapping( "cups/{cupId}/logo/" )
 	public void cupLogo( final @PathVariable( "cupId" ) int cupId, final HttpServletResponse response ) throws IOException {
-		downloadFile( logoService.getLogoFile( cupService.load( cupId ) ), response );
+
+		final Cup cup = cupService.load( cupId );
+
+		final File cupLogo = logoService.getLogoFile( cup );
+		if ( cupLogo != null ) {
+			downloadFile( cupLogo, response );
+			return;
+		}
+
+		downloadFile( logoService.getLogoFile( cup.getCategory() ), response );
+	}
+
+	@RequestMapping( "teams/{teamId}/logo/" )
+	public void teamLogo( final @PathVariable( "teamId" ) int teamId, final HttpServletResponse response ) throws IOException {
+		downloadFile( logoService.getLogoFile( teamService.load( teamId ) ), response );
 	}
 
 	private void downloadFile( final File beingDownloadedFile, final HttpServletResponse response ) throws IOException {

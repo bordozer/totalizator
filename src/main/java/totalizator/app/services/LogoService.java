@@ -1,5 +1,6 @@
 package totalizator.app.services;
 
+import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 
@@ -12,19 +13,31 @@ public interface LogoService {
 
 	void createLogosDir() throws IOException;
 
-	void uploadLogo( final Team team, final File file ) throws IOException;
+
+	void uploadLogo( final Category category, final File file ) throws IOException;
 
 	void uploadLogo( final Cup cup, final File file ) throws IOException;
 
-	void deleteLogo( final Team team ) throws IOException;
+	void uploadLogo( final Team team, final File file ) throws IOException;
+
+
+	void deleteLogo( final Category category ) throws IOException;
 
 	void deleteLogo( final Cup cup ) throws IOException;
 
-	File getLogoFile( final Team team ) throws IOException;
+	void deleteLogo( final Team team ) throws IOException;
+
+
+	File getLogoFile( final Category category ) throws IOException;
 
 	File getLogoFile( final Cup cup ) throws IOException;
 
-	String getLogoURL( final Team team );
+	File getLogoFile( final Team team ) throws IOException;
+
+
+	String getLogoURL( final Category category );
 
 	String getLogoURL( final Cup cup );
+
+	String getLogoURL( final Team team );
 }

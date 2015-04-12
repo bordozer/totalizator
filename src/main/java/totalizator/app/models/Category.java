@@ -25,6 +25,9 @@ public class Category extends AbstractEntity {
 	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
 	private String categoryName;
 
+	@Column( unique = true, columnDefinition = "VARCHAR(30)" )
+	private String logoFileName;
+
 	public Category() {
 	}
 
@@ -38,6 +41,14 @@ public class Category extends AbstractEntity {
 
 	public void setCategoryName( final String categoryName ) {
 		this.categoryName = categoryName;
+	}
+
+	public String getLogoFileName() {
+		return logoFileName;
+	}
+
+	public void setLogoFileName( final String logoFileName ) {
+		this.logoFileName = logoFileName;
 	}
 
 	@Override

@@ -40,8 +40,6 @@ public class NBA extends AbstractDataInitializer {
 
 		session.persist( nba2015Regular );
 
-		uploadLogo( nba2015Regular, "nba", "nba-regular-logo.png" );
-
 		final Cup nba2015PlayOff = new Cup( CUP_2, category );
 		nba2015PlayOff.setShowOnPortalPage( true );
 		nba2015PlayOff.setWinnersCount( 2 );
@@ -52,8 +50,6 @@ public class NBA extends AbstractDataInitializer {
 		nba2015PlayOff.setLogoFileName( "nba-playoff-logo.png" );
 
 		session.persist( nba2015PlayOff );
-
-		uploadLogo( nba2015PlayOff, "nba", "nba-playoff-logo.png" );
 
 		return newArrayList( nba2015PlayOff, nba2015Regular );
 	}
