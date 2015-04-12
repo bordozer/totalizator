@@ -10,14 +10,14 @@
 
 			<div class="col-lg-6 text-right <%=matchResults.style1%>">
 				<%=team1.teamName%>
-				<img src="<%=team1.teamLogo%>" title="<%=team1.teamName%>">
+				<img class="team-logo" src="<%=team1.teamLogo%>" title="<%=team1.teamName%>">
 				<% if( match.matchFinished ) { %>
 					<h5><%=match.score1%></h5>
 				<% } %>
 			</div>
 
 			<div class="col-lg-6 <%=matchResults.style2%>">
-				<img src="<%=team2.teamLogo%>" title="<%=team2.teamName%>">
+				<img class="team-logo" src="<%=team2.teamLogo%>" title="<%=team2.teamName%>">
 				<%=team2.teamName%>
 				<% if( match.matchFinished ) { %>
 					<h5><%=match.score2%></h5>
