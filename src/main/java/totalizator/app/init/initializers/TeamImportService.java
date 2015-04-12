@@ -18,7 +18,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @Component
 class TeamImportService {
 
-	private static final File RESOURCES_DIR = new File( "src/main/java/totalizator/app/init/teams/" );
+	private static final File RESOURCES_DIR = new File( "src/main/java/totalizator/app/init/resources/" );
 	private static final String TEAMS_XML = "teams.xml";
 	private static final String LOGOS_DIR_NAME = "logos";
 
