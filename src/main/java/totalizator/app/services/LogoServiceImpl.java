@@ -5,13 +5,14 @@ import org.codehaus.plexus.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.models.Category;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 
 import java.io.File;
 import java.io.IOException;
 
 @Service
-public class TeamLogoServiceImpl implements TeamLogoService {
+public class LogoServiceImpl implements LogoService {
 
 	@Autowired
 	private SystemVarsService systemVarsService;
@@ -28,19 +29,32 @@ public class TeamLogoServiceImpl implements TeamLogoService {
 
 	@Override
 	public void uploadLogo( final Team team, final File file ) throws IOException {
-		FileUtils.copyFile( file, getTeamLogoFile( team ) );
+		FileUtils.copyFile( file, getLogoFile( team ) );
+	}
+
+	@Override
+	public void uploadLogo( final Cup cup, final File file ) throws IOException {
+		FileUtils.copyFile( file, getLogoFile( cup ) );
 	}
 
 	@Override
 	public void deleteLogo( final Team team ) throws IOException {
-		final File logoFile = getTeamLogoFile( team );
+		final File logoFile = getLogoFile( team );
 		if ( logoFile.exists() ) {
 			FileUtils.fileDelete( logoFile.getPath() );
 		}
 	}
 
 	@Override
-	public File getTeamLogoFile( final Team team ) throws IOException {
+	public void deleteLogo( final Cup cup ) throws IOException {
+		final File logoFile = getLogoFile( cup );
+		if ( logoFile.exists() ) {
+			FileUtils.fileDelete( logoFile.getPath() );
+		}
+	}
+
+	@Override
+	public File getLogoFile( final Team team ) throws IOException {
 
 		final File categoryLogosDir = getCategoryLogosDir( team.getCategory() );
 
@@ -48,7 +62,7 @@ public class TeamLogoServiceImpl implements TeamLogoService {
 
 		final String logoFileName = team.getLogoFileName();
 
-		if ( StringUtils.isNoneEmpty( logoFileName ) ) {
+		if ( StringUtils.isNotEmpty( logoFileName ) ) {
 			return new File( categoryLogosDir, logoFileName );
 		}
 
@@ -56,8 +70,29 @@ public class TeamLogoServiceImpl implements TeamLogoService {
 	}
 
 	@Override
-	public String getTeamLogoURL( final Team team ) {
+	public String getLogoURL( final Team team ) {
 		return String.format( "/resources/team/%d/logo/", team.getId() );
+	}
+
+	@Override
+	public String getLogoURL( final Cup cup ) {
+		return String.format( "/resources/cup/%d/logo/", cup.getId() );
+	}
+
+	@Override
+	public File getLogoFile( final Cup cup ) throws IOException {
+
+		final File categoryLogosDir = getCategoryLogosDir( cup.getCategory() );
+
+		assertDirExists( categoryLogosDir );
+
+		final String logoFileName = cup.getLogoFileName();
+
+		if ( StringUtils.isNotEmpty( logoFileName ) ) {
+			return new File( categoryLogosDir, logoFileName );
+		}
+
+		return null;
 	}
 
 	private File getCategoryLogosDir( final Category category ) {

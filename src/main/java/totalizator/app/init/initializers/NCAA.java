@@ -34,8 +34,11 @@ public class NCAA extends AbstractDataInitializer {
 		ncaa2015.setReadyForMatchBets( true );
 		ncaa2015.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
 		ncaa2015.setFinished( false );
+		ncaa2015.setLogoFileName( "ncaa-logo.png" );
 
 		session.persist( ncaa2015 );
+
+		uploadLogo( ncaa2015, "ncaa", "ncaa-logo.png" );
 
 		return newArrayList( ncaa2015 );
 	}

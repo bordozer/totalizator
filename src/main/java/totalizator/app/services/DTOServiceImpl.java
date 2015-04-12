@@ -15,7 +15,7 @@ import java.util.List;
 public class DTOServiceImpl implements DTOService {
 
 	@Autowired
-	private TeamLogoService teamLogoService;
+	private LogoService logoService;
 
 	@Autowired
 	private MatchBetsService matchBetsService;
@@ -149,7 +149,7 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public TeamDTO apply( final Team team ) {
-				return new TeamDTO( team.getId(), team.getTeamName(), transformCategory( team.getCategory() ), teamLogoService.getTeamLogoURL( team ) );
+				return new TeamDTO( team.getId(), team.getTeamName(), transformCategory( team.getCategory() ), logoService.getLogoURL( team ) );
 			}
 		};
 	}

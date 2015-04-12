@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.Team;
 import totalizator.app.services.CategoryService;
-import totalizator.app.services.TeamLogoService;
+import totalizator.app.services.LogoService;
 import totalizator.app.services.TeamService;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class AdminTeamRestController {
 	private CategoryService categoryService;
 
 	@Autowired
-	private TeamLogoService teamLogoService;
+	private LogoService logoService;
 
 	private static final Logger LOGGER = Logger.getLogger( AdminTeamRestController.class );
 
@@ -41,7 +41,7 @@ public class AdminTeamRestController {
 
 			@Override
 			public TeamEditDTO apply( final Team team ) {
-				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), teamLogoService.getTeamLogoURL( team ) );
+				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), logoService.getLogoURL( team ) );
 			}
 		} );
 	}
@@ -84,6 +84,6 @@ public class AdminTeamRestController {
 		final Team team = teamService.load( teamId );
 
 		teamService.delete( teamId );
-		teamLogoService.deleteLogo( team );
+		logoService.deleteLogo( team );
 	}
 }

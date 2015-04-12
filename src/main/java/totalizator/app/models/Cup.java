@@ -1,7 +1,6 @@
 package totalizator.app.models;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static totalizator.app.models.Cup.FIND_BY_NAME;
@@ -41,6 +40,9 @@ public class Cup extends AbstractEntity {
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
 	private boolean finished;
+
+	@Column( unique = true, columnDefinition = "VARCHAR(30)" )
+	private String logoFileName;
 
 	public Cup() {
 	}
@@ -141,5 +143,13 @@ public class Cup extends AbstractEntity {
 	@Override
 	public String toString() {
 		return String.format( "#%d: '%s'", getId(), cupName );
+	}
+
+	public String getLogoFileName() {
+		return logoFileName;
+	}
+
+	public void setLogoFileName( final String logoFileName ) {
+		this.logoFileName = logoFileName;
 	}
 }

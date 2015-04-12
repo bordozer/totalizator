@@ -7,6 +7,7 @@ import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -35,8 +36,11 @@ public class NBA extends AbstractDataInitializer {
 		nba2015Regular.setReadyForCupBets( false );
 		nba2015Regular.setReadyForMatchBets( true );
 		nba2015Regular.setFinished( false );
+		nba2015Regular.setLogoFileName( "nba-regular-logo.png" );
 
 		session.persist( nba2015Regular );
+
+		uploadLogo( nba2015Regular, "nba", "nba-regular-logo.png" );
 
 		final Cup nba2015PlayOff = new Cup( CUP_2, category );
 		nba2015PlayOff.setShowOnPortalPage( true );
@@ -45,8 +49,11 @@ public class NBA extends AbstractDataInitializer {
 		nba2015PlayOff.setReadyForCupBets( true );
 		nba2015PlayOff.setReadyForMatchBets( true );
 		nba2015PlayOff.setFinished( false );
+		nba2015PlayOff.setLogoFileName( "nba-playoff-logo.png" );
 
 		session.persist( nba2015PlayOff );
+
+		uploadLogo( nba2015PlayOff, "nba", "nba-playoff-logo.png" );
 
 		return newArrayList( nba2015PlayOff, nba2015Regular );
 	}

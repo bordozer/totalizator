@@ -4,9 +4,10 @@ import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import totalizator.app.models.*;
-import totalizator.app.services.TeamLogoService;
+import totalizator.app.services.LogoService;
 import totalizator.app.services.utils.DateTimeService;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
@@ -33,7 +34,7 @@ public abstract class AbstractDataInitializer {
 	protected DateTimeService dateTimeService;
 
 	@Autowired
-	private TeamLogoService teamLogoService;
+	protected LogoService logoService;
 
 	public void generate( final List<User> users, final Session session ) throws IOException, DocumentException {
 
@@ -66,7 +67,7 @@ public abstract class AbstractDataInitializer {
 			session.persist( team );
 
 			if ( teamData.getLogo() != null ) {
-				teamLogoService.uploadLogo( team, teamData.getLogo() );
+				logoService.uploadLogo( team, teamData.getLogo() );
 			}
 
 			result.add( team );
@@ -200,5 +201,13 @@ public abstract class AbstractDataInitializer {
 		}
 
 		return minValue + ( int ) ( Math.random() * ( maxValue - minValue + 1 ) );
+	}
+
+	protected void uploadLogo( final Cup cup, final String dir, final String logoFileName ) {
+		try {
+			logoService.uploadLogo( cup, new File( String.format( "%s/%s", TeamImportService.RESOURCES_DIR, dir ), logoFileName ) );
+		} catch ( IOException e ) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -11,7 +11,7 @@ import totalizator.app.init.initializers.NBA;
 import totalizator.app.init.initializers.NCAA;
 import totalizator.app.init.initializers.UEFA;
 import totalizator.app.models.User;
-import totalizator.app.services.TeamLogoService;
+import totalizator.app.services.LogoService;
 import totalizator.app.services.UserService;
 
 import javax.persistence.EntityManagerFactory;
@@ -31,7 +31,7 @@ public class TestDataInitializer {
 	private EntityManagerFactory entityManagerFactory;
 
 	@Autowired
-	private TeamLogoService teamLogoService;
+	private LogoService logoService;
 
 	private final List<AbstractDataInitializer> initializers = newArrayList();
 
@@ -58,8 +58,8 @@ public class TestDataInitializer {
 
 	public void init() throws Exception {
 
-		teamLogoService.deleteLogosDir();
-		teamLogoService.createLogosDir();
+		logoService.deleteLogosDir();
+		logoService.createLogosDir();
 
 		final SessionFactory sessionFactory = entityManagerFactory.unwrap( SessionFactory.class );
 

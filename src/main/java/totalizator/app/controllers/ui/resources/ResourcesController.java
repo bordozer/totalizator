@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import totalizator.app.models.Team;
-import totalizator.app.services.TeamLogoService;
+import totalizator.app.services.LogoService;
 import totalizator.app.services.TeamService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,14 +23,14 @@ public class ResourcesController {
 	private TeamService teamService;
 
 	@Autowired
-	private TeamLogoService teamLogoService;
+	private LogoService logoService;
 
 	@RequestMapping( "team/{teamId}/logo/" )
 	public void downloadUserPhoto( final @PathVariable( "teamId" ) int teamId, final HttpServletResponse response ) throws IOException {
 
 		final Team team = teamService.load( teamId );
 
-		downloadFile( teamLogoService.getTeamLogoFile( team ), response );
+		downloadFile( logoService.getLogoFile( team ), response );
 	}
 
 	private void downloadFile( final File beingDownloadedFile, final HttpServletResponse response ) throws IOException {

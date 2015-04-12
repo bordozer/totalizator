@@ -35,8 +35,11 @@ public class UEFA extends AbstractDataInitializer {
 		uefa2016Euro.setReadyForMatchBets( false );
 		uefa2016Euro.setCupStartTime( dateTimeService.parseDate( "10/06/2016 00:00" ) );
 		uefa2016Euro.setFinished( false );
+		uefa2016Euro.setLogoFileName( "uefa-euro-2016-logo.png" );
 
 		session.persist( uefa2016Euro );
+
+		uploadLogo( uefa2016Euro, "uefa", "uefa-euro-2016-logo.png" );
 
 		final Cup uefa2018WorldCup = new Cup( CUP_2, category );
 		uefa2018WorldCup.setWinnersCount( 3 );
@@ -44,8 +47,11 @@ public class UEFA extends AbstractDataInitializer {
 		uefa2018WorldCup.setReadyForMatchBets( false );
 		uefa2018WorldCup.setCupStartTime( dateTimeService.parseDate( "14/06/2018 00:00" ) );
 		uefa2018WorldCup.setFinished( false );
+		uefa2018WorldCup.setLogoFileName( "uefa-world-cup-2018-logo.png" );
 
 		session.persist( uefa2018WorldCup );
+
+		uploadLogo( uefa2018WorldCup, "uefa", "uefa-world-cup-2018-logo.png" );
 
 		return newArrayList( uefa2016Euro, uefa2018WorldCup );
 	}
