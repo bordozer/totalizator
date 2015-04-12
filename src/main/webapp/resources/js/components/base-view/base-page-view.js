@@ -41,7 +41,7 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
-			this.bodyView = this.bodyRenderer( this.$( '.js-body-view-containerr' ), this.options ).view();
+			this.bodyView = this.bodyRenderer( this.$( '.js-body-view-container' ), this.options ).view();
 		},
 
 		_renderHeader: function() {
