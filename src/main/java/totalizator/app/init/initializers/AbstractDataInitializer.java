@@ -209,7 +209,7 @@ public abstract class AbstractDataInitializer {
 
 	protected void uploadLogo( final Category category, final String logoFileName ) {
 		try {
-			logoService.uploadLogo( category, new File( String.format( "%s/%s", TeamImportService.RESOURCES_DIR, category.getCategoryName().toLowerCase() ), logoFileName ) );
+			logoService.uploadLogo( category, generateLogoFileName( logoFileName, category ) );
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
@@ -217,9 +217,13 @@ public abstract class AbstractDataInitializer {
 
 	protected void uploadLogo( final Cup cup, final String logoFileName ) {
 		try {
-			logoService.uploadLogo( cup, new File( String.format( "%s/%s.png", TeamImportService.RESOURCES_DIR, cup.getCategory().getCategoryName().toLowerCase() ), logoFileName ) );
+			logoService.uploadLogo( cup, generateLogoFileName( logoFileName, cup.getCategory() ) );
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
+	}
+
+	private File generateLogoFileName( final String logoFileName, final Category category ) {
+		return new File( String.format( "%s/%s.png", TeamImportService.RESOURCES_DIR, category.getCategoryName().toLowerCase() ), logoFileName );
 	}
 }
