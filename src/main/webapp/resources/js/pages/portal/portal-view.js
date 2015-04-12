@@ -46,7 +46,7 @@ define( function ( require ) {
 
 			_.each( this.cupsToShow, function( cup ) {
 
-				var container = $( '<div class="col-lg-5"></div>' );
+				var container = $( '<div class="col-lg-4"></div>' );
 				el.append( container );
 
 				var model = new MatchesModel.MatchesModel();

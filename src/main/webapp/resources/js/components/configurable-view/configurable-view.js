@@ -105,7 +105,7 @@ define( function ( require ) {
 			var category = ( categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.pluralAll );
 			var cup = ( cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.pluralAll );
 
-			return translator.title + ': ' + category + ' ' + cup;
+			return category + ': ' + cup;
 		},
 
 		getTitleHint: function() {

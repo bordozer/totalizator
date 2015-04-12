@@ -16,8 +16,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: 'Matches and bests'
-		, actionMatchBetAdd: 'Match and Bets: Add bet'
+		actionMatchBetAdd: 'Match and Bets: Add bet'
 		, actionMatchBetEdit: 'Match and Bets: Edit bet'
 		, actionMatchBetSave: 'Match and Bets: save bet'
 		, actionCancelBetEditing: 'Match and Bets: Cancel bet editing'
