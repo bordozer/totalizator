@@ -1,7 +1,7 @@
 <div class="row">
 
 	<div class="col-lg-12">
-		<ul class="nav nav-tabs nav-stacked">
+		<ul class="nav nav-tabs">
 			<% _.each( cupsShowTo, function( cup ) { %>
 				<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>" >
 					<a href="/totalizator/cups/<%- cup.cupId %>/">

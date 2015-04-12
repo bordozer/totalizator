@@ -31,7 +31,7 @@ define( function ( require ) {
 
 		render: function () {
 
-//			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } ); // if I want to highlight the cup in navigation...
+			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 
 			var model = this.model.toJSON();
 
