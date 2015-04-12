@@ -74,7 +74,7 @@ public class ResourcesController {
 	}
 
 	private boolean isLogo( final File beingDownloadedFile ) {
-		return beingDownloadedFile != null && beingDownloadedFile.isFile() && beingDownloadedFile.exists();
+		return beingDownloadedFile != null && beingDownloadedFile.exists() && beingDownloadedFile.isFile();
 	}
 
 	private static String contentDisposition( final File file ) {

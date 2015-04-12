@@ -39,7 +39,7 @@ public abstract class AbstractDataInitializer {
 	public void generate( final List<User> users, final Session session ) throws IOException, DocumentException {
 
 		final Category category = generateCategory( getName(), session );
-		uploadLogo( category, "nba-logo.png" );
+		uploadLogo( category );
 
 		final List<Cup> cups = generateCups( category, session );
 
@@ -191,11 +191,15 @@ public abstract class AbstractDataInitializer {
 	private Category generateCategory( final String name, final Session session ) {
 
 		final Category category = new Category( name );
-		category.setLogoFileName( name.toLowerCase() );
+		category.setLogoFileName( getCategoryLogoFileName( category ) );
 
 		session.persist( category );
 
 		return category;
+	}
+
+	private String getCategoryLogoFileName( final Category category ) {
+		return String.format( "%s.png", category.getCategoryName().toLowerCase() );
 	}
 
 	public static int rnd( final int minValue, final int maxValue ) {
@@ -207,9 +211,9 @@ public abstract class AbstractDataInitializer {
 		return minValue + ( int ) ( Math.random() * ( maxValue - minValue + 1 ) );
 	}
 
-	protected void uploadLogo( final Category category, final String logoFileName ) {
+	protected void uploadLogo( final Category category ) {
 		try {
-			logoService.uploadLogo( category, generateLogoFileName( logoFileName, category ) );
+			logoService.uploadLogo( category, new File( getCategoryResourcesPath( category ), getCategoryLogoFileName( category ) ) );
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
@@ -217,13 +221,14 @@ public abstract class AbstractDataInitializer {
 
 	protected void uploadLogo( final Cup cup, final String logoFileName ) {
 		try {
-			logoService.uploadLogo( cup, generateLogoFileName( logoFileName, cup.getCategory() ) );
+			logoService.uploadLogo( cup, new File( getCategoryResourcesPath( cup.getCategory() ), logoFileName ) );
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
 	}
 
-	private File generateLogoFileName( final String logoFileName, final Category category ) {
-		return new File( String.format( "%s/%s.png", TeamImportService.RESOURCES_DIR, category.getCategoryName().toLowerCase() ), logoFileName );
+	private String getCategoryResourcesPath( final Category category ) {
+		return String.format( "%s/%s/", TeamImportService.RESOURCES_DIR, category.getCategoryName().toLowerCase() );
 	}
+
 }
