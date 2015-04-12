@@ -16,7 +16,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 @Component
-class TeamImportService {
+public class TeamImportService {
 
 	public static final File RESOURCES_DIR = new File( "src/main/java/totalizator/app/init/resources/" );
 
