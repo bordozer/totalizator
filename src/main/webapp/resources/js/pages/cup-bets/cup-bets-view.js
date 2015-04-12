@@ -36,7 +36,7 @@ define( function ( require ) {
 
 			this._renderCupMatchesAndBets();
 
-			this._renderCupTeamBets();
+			this._renderCupBets();
 
 			return this;
 		},
@@ -81,7 +81,7 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderCupTeamBets: function() {
+		_renderCupBets: function() {
 
 			var el = this.$( '.js-cup-team-bets' );
 
