@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!public/js/header/templates/header-template.html' ) );
+	var template = _.template( require( 'text!./templates/header-template.html' ) );
 
 	var CupsNavigation = require( 'js/components/cups-navi/cups-navi' );
 
