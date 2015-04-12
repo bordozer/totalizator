@@ -118,7 +118,9 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public CategoryDTO apply( final Category category ) {
-				return new CategoryDTO( category.getId(), category.getCategoryName() );
+				final CategoryDTO categoryDTO = new CategoryDTO( category.getId(), category.getCategoryName() );
+				categoryDTO.setLogoUrl( logoService.getLogoURL( category ) );
+				return categoryDTO;
 			}
 		};
 	}
