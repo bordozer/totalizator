@@ -10,8 +10,6 @@ define( function ( require ) {
 
 	var PageView = require( 'js/components/base-view/base-page-view' );
 
-	var CupsNavigation = require( 'js/components/cups-navi/cups-navi' );
-
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
@@ -27,17 +25,15 @@ define( function ( require ) {
 
 		renderBody: function() {
 
-			this.$( '.body-container' ).html( userPageTemplate( {
+			this.$( '.js-body-view-container' ).html( userPageTemplate( {
 			} ) );
-
-			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
 
 			this.bodyView = this.bodyRenderer( this.$( '.js-custom-view' ), this.options ).view();
 			this.bodyView.on( 'navigation:set:active:cup', this._setActiveCup, this );
 		},
 
 		_setActiveCup: function( options ) {
-			this.cupsNavigation.trigger( 'navigation:set:active:cup', options );
+			this.headerView.trigger( 'navigation:set:active:cup', options );
 		},
 
 		mainMenuItems: function() {

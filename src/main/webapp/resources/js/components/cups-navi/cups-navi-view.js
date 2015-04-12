@@ -19,7 +19,6 @@ define( function ( require ) {
 		},
 
 		render: function () {
-
 			this.$el.html( template( {
 				cupsShowTo: this.model.toJSON()
 				, selectedCupId: this.selectedCupId

@@ -41,11 +41,11 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
-			this.bodyView = this.bodyRenderer( this.$( '.body-container' ), this.options ).view();
+			this.bodyView = this.bodyRenderer( this.$( '.js-body-view-containerr' ), this.options ).view();
 		},
 
 		_renderHeader: function() {
-			pageHeader( this.$( '.header-container'), this.breadcrumbs );
+			this.headerView = pageHeader( this.$( '.header-container'), this.breadcrumbs ).view();
 		},
 
 		_renderMenu: function() {

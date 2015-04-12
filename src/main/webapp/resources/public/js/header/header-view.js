@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!public/js/header/templates/header-template.html' ) );
 
+	var CupsNavigation = require( 'js/components/cups-navi/cups-navi' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		projectNameLabel: 'Project name: Totalizator'
@@ -17,6 +19,8 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 			this.breadcrumbs = options.breadcrumbs;
+
+			this.on( 'navigation:set:active:cup', this._setActiveCup, this );
 
 			this.render();
 		},
@@ -32,7 +36,13 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
+			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
+
 			return this;
+		},
+
+		_setActiveCup: function( options ) {
+			this.cupsNavigation.trigger( 'navigation:set:active:cup', options );
 		}
 	} );
 

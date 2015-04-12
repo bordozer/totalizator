@@ -16,17 +16,17 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		events: {
-
-		},
-
 		initialize: function ( options ) {
 			this.cupId = options.options.cupId;
 
-			this.render();
+			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function() {
+
+			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
+
 			var data = _.extend( {}, this.model.toJSON(), { cupId: this.cupId, translator: translator } );
 			this.$el.html( template( data ) );
 		}

@@ -8,7 +8,6 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/match-bets-template.html' ) );
 
-	var CupsNaviView = require( 'js/components/cups-navi/cups-navi' );
 	var service = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );
@@ -21,6 +20,7 @@ define( function ( require ) {
 	var MatchBetsView = Backbone.View.extend( {
 
 		initialize: function ( options ) {
+
 			this.cupId = options.options.cupId;
 			this.matchId = options.options.matchId;
 			this.currentUser = options.options.currentUser;

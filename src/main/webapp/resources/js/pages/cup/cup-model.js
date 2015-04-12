@@ -12,6 +12,10 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cupId = options.options.cupId;
+		},
+
+		url: function () {
+			return '/rest/cups/' + this.cupId + '/';
 		}
 	} );
 } );

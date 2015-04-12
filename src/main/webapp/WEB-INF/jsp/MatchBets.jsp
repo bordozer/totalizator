@@ -8,7 +8,7 @@
 	<c:set var="cup" value="${matchBetsModel.cup}" />
 	<c:set var="match" value="${matchBetsModel.match}" />
 
-	<div class="portal-page-container"></div>
+	<div class="match-bets-container"></div>
 
 	<script type="text/javascript">
 
@@ -32,7 +32,7 @@
 			var matchId = ${match.id};
 			var currentUser = ${matchBetsModel.currentUserJSON};
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { cupId: cupId, matchId: matchId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.match-bets-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { cupId: cupId, matchId: matchId, currentUser: currentUser } } );
 			pageView.render();
 		} );
 	</script>
