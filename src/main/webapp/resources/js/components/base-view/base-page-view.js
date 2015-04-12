@@ -45,7 +45,7 @@ define( function ( require ) {
 		},
 
 		_renderHeader: function() {
-			this.headerView = pageHeader( this.$( '.header-container'), this.breadcrumbs ).view();
+			this.headerView = pageHeader( this.$( '.header-container'), { breadcrumbs: this.breadcrumbs } ).view();
 		},
 
 		_renderMenu: function() {

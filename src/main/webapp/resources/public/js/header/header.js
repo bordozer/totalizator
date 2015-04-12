@@ -9,10 +9,10 @@ define( function( require ) {
 	var Model = require( './header-model' );
 	var View = require( './header-view' );
 
-	function init( container, breadcrumbs ) {
+	function init( container, options ) {
 
-		var model = new Model.HeaderModel();
-		var view = new View.HeaderView( { model: model, el: container, breadcrumbs: breadcrumbs } );
+		var model = new Model();
+		var view = new View.HeaderView( { model: model, el: container, options: options } );
 
 		return {
 

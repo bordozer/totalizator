@@ -18,23 +18,34 @@
 <body>
 	<div class="container-fluid">
 
-
-		<div class="header-container page-header-c"></div>
-
 		<script type="text/javascript">
-			require( [ 'jquery', 'public/js/header/header', 'translator' ], function ( $, init, Translator ) {
+			require( [ 'jquery', 'translator' ], function ( $, Translator ) {
 
 				var translator = new Translator( {
-					loginPageTitleLabel: 'Login page title: Login'
+					projectName: 'Project name: Totalizator'
 				} );
 
-				var breadcrumbs = [
-					{ link: '#', title: translator.loginPageTitleLabel }
-				];
+				$( '.js-project-name' ).text( translator.projectName );
 
-				init( $( '.header-container'), breadcrumbs );
 			} );
 		</script>
+
+		<div class="page-header" style="padding-left: 15px; margin: 0;">
+
+		<div class="row">
+
+			<div class="col-lg-2">
+				<img src="/resources/public/img/logo.png">
+			</div>
+
+			<div class="col-lg-10">
+				<h1 class="js-project-name"></h1>
+			</div>
+
+		</div>
+
+	</div>
+
 
 
 

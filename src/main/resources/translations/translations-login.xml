@@ -3,11 +3,6 @@
 <translations>
 
 	<translation>
-		<nerd>Login page title: Login</nerd>
-		<ru><![CDATA[Авторизация]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Login page: Login</nerd>
 		<ru><![CDATA[Логин]]></ru>
 	</translation>

@@ -18,7 +18,7 @@ define( function ( require ) {
 	var HeaderView = Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.breadcrumbs = options.breadcrumbs;
+			this.breadcrumbs = options.options.breadcrumbs;
 
 			this.on( 'navigation:set:active:cup', this._setActiveCup, this );
 

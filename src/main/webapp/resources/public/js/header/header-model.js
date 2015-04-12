@@ -4,11 +4,9 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 
-	var HeaderModel = Backbone.Model.extend( {
+	return Backbone.Model.extend( {
 
 		initialize: function ( options ) {
 		}
 	});
-
-	return { HeaderModel: HeaderModel };
 } );
