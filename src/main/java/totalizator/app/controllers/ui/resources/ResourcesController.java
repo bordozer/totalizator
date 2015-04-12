@@ -34,7 +34,7 @@ public class ResourcesController {
 	@Autowired
 	private LogoService logoService;
 
-	@RequestMapping( "cups/{categoryId}/logo/" )
+	@RequestMapping( "categories/{categoryId}/logo/" )
 	public void categoryLogo( final @PathVariable( "categoryId" ) int categoryId, final HttpServletResponse response ) throws IOException {
 		downloadFile( logoService.getLogoFile( categoryService.load( categoryId ) ), response );
 	}
@@ -45,7 +45,7 @@ public class ResourcesController {
 		final Cup cup = cupService.load( cupId );
 
 		final File cupLogo = logoService.getLogoFile( cup );
-		if ( cupLogo != null ) {
+		if ( isLogo( cupLogo ) ) {
 			downloadFile( cupLogo, response );
 			return;
 		}
@@ -60,7 +60,7 @@ public class ResourcesController {
 
 	private void downloadFile( final File beingDownloadedFile, final HttpServletResponse response ) throws IOException {
 
-		final File file = beingDownloadedFile == null || ! beingDownloadedFile.isFile() || ! beingDownloadedFile.exists() ? IMAGE_NOT_FOUND_FILE : beingDownloadedFile;
+		final File file = isLogo( beingDownloadedFile ) ? beingDownloadedFile : IMAGE_NOT_FOUND_FILE;
 
 		response.setContentLength( ( int ) file.length() );
 		response.setContentType( CONTENT_TYPE );
@@ -71,6 +71,10 @@ public class ResourcesController {
 
 		pipe( file, outputStream );
 		outputStream.close();
+	}
+
+	private boolean isLogo( final File beingDownloadedFile ) {
+		return beingDownloadedFile != null && beingDownloadedFile.isFile() && beingDownloadedFile.exists();
 	}
 
 	private static String contentDisposition( final File file ) {
