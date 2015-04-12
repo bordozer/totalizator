@@ -217,7 +217,7 @@ public abstract class AbstractDataInitializer {
 
 	protected void uploadLogo( final Cup cup, final String logoFileName ) {
 		try {
-			logoService.uploadLogo( cup, new File( String.format( "%s/%s", TeamImportService.RESOURCES_DIR, cup.getCategory().getCategoryName().toLowerCase() ), logoFileName ) );
+			logoService.uploadLogo( cup, new File( String.format( "%s/%s.png", TeamImportService.RESOURCES_DIR, cup.getCategory().getCategoryName().toLowerCase() ), logoFileName ) );
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
