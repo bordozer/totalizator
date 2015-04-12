@@ -17,6 +17,7 @@ define( function ( require ) {
 			, readyForMatchBets: false
 			, finished: false
 			, showOnPortalPage: false
+			, logoUrl: ''
 		},
 
 		initialize: function ( options ) {

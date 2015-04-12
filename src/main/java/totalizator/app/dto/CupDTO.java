@@ -25,6 +25,7 @@ public class CupDTO {
 	private boolean cupBettingIsAllowed;
 
 	private boolean finished;
+	private String logoUrl;
 
 	public CupDTO() {
 	}
@@ -120,5 +121,13 @@ public class CupDTO {
 	@Override
 	public String toString() {
 		return String.format( "#%d %s", cupId, cupName );
+	}
+
+	public void setLogoUrl( final String logoUrl ) {
+		this.logoUrl = logoUrl;
+	}
+
+	public String getLogoUrl() {
+		return logoUrl;
 	}
 }

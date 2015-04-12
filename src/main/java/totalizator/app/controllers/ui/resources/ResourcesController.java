@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
+import totalizator.app.services.CupService;
 import totalizator.app.services.LogoService;
 import totalizator.app.services.TeamService;
 
@@ -23,14 +25,19 @@ public class ResourcesController {
 	private TeamService teamService;
 
 	@Autowired
+	private CupService cupService;
+
+	@Autowired
 	private LogoService logoService;
 
-	@RequestMapping( "team/{teamId}/logo/" )
-	public void downloadUserPhoto( final @PathVariable( "teamId" ) int teamId, final HttpServletResponse response ) throws IOException {
+	@RequestMapping( "teams/{teamId}/logo/" )
+	public void teamLogo( final @PathVariable( "teamId" ) int teamId, final HttpServletResponse response ) throws IOException {
+		downloadFile( logoService.getLogoFile( teamService.load( teamId ) ), response );
+	}
 
-		final Team team = teamService.load( teamId );
-
-		downloadFile( logoService.getLogoFile( team ), response );
+	@RequestMapping( "cups/{cupId}/logo/" )
+	public void cupLogo( final @PathVariable( "cupId" ) int cupId, final HttpServletResponse response ) throws IOException {
+		downloadFile( logoService.getLogoFile( cupService.load( cupId ) ), response );
 	}
 
 	private void downloadFile( final File beingDownloadedFile, final HttpServletResponse response ) throws IOException {

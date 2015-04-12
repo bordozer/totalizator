@@ -71,12 +71,12 @@ public class LogoServiceImpl implements LogoService {
 
 	@Override
 	public String getLogoURL( final Team team ) {
-		return String.format( "/resources/team/%d/logo/", team.getId() );
+		return String.format( "/resources/teams/%d/logo/", team.getId() );
 	}
 
 	@Override
 	public String getLogoURL( final Cup cup ) {
-		return String.format( "/resources/cup/%d/logo/", cup.getId() );
+		return String.format( "/resources/cups/%d/logo/", cup.getId() );
 	}
 
 	@Override
