@@ -1,270 +1,405 @@
 <?xml version="1.0"?>
-
+<!--http://www.sciencekids.co.nz/pictures/flags.html-->
 <teams>
 
 	<team>
-		<name>Czech Republic</name>
-		<flag>CzechRepublic.png</flag>
-	</team>
-
-	<team>
-		<name>Iceland</name>
-		<logo>Iceland.png</logo>
-	</team>
-
-	<team>
-		<name>Netherlands</name>
-		<logo>Netherlands.png</logo>
-	</team>
-
-	<team>
-		<name>Turkey</name>
-		<logo>Turkey.png</logo>
-	</team>
-
-	<team>
-		<name>Latvia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Kazakhstan</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Israel</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Wales</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Cyprus</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Belgium</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Bosnia and Herzegovina</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Andorra</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Slovakia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Spain</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Ukraine</name>
-		<logo>Ukraine.png</logo>
-	</team>
-
-	<team>
-		<name>FYR Macedonia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Belarus</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Luxembourg</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Poland</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Germany</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Scotland</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Republic of Ireland</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Georgia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Gibraltar</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>England</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Slovenia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Switzerland</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Lithuania</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Estonia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>San Marino</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Romania</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Northern Ireland</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Hungary</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Finland</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Faroe Islands</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Greece</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Austria</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Sweden</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Russia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Montenegro</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Liechtenstein</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Moldova</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Croatia</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Italy</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Norway</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Bulgaria</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Malta</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Azerbaijan</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Denmark</name>
-		<logo></logo>
-	</team>
-
-	<team>
-		<name>Portugal</name>
-		<logo></logo>
+		<name>Afghanistan</name>
+		<logo>Afghanistan.jpg</logo>
 	</team>
 
 	<team>
 		<name>Albania</name>
-		<logo></logo>
+		<logo>Albania.jpg</logo>
 	</team>
 
 	<team>
-		<name>Serbia</name>
-		<logo></logo>
+		<name>Algeria</name>
+		<logo>Algeria.jpg</logo>
+	</team>
+
+	<team>
+		<name>Andorra</name>
+		<logo>Andorra.jpg</logo>
+	</team>
+
+	<team>
+		<name>Angola</name>
+		<logo>Angola.jpg</logo>
+	</team>
+
+	<team>
+		<name>Antigua and Barbuda</name>
+		<logo>Antigua_and_Barbuda.jpg</logo>
+	</team>
+
+	<team>
+		<name>Argentina</name>
+		<logo>Argentina.jpg</logo>
 	</team>
 
 	<team>
 		<name>Armenia</name>
-		<logo></logo>
+		<logo>Armenia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Australia</name>
+		<logo>Australia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Austria</name>
+		<logo>Austria.jpg</logo>
+	</team>
+
+	<team>
+		<name>Azerbaijan</name>
+		<logo>Azerbaijan.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bahamas</name>
+		<logo>Bahamas.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bahrain</name>
+		<logo>Bahrain.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bangladesh</name>
+		<logo>Bangladesh.jpg</logo>
+	</team>
+
+	<team>
+		<name>Barbados</name>
+		<logo>Barbados.jpg</logo>
+	</team>
+
+	<team>
+		<name>Belarus</name>
+		<logo>Belarus.jpg</logo>
+	</team>
+
+	<team>
+		<name>Belgium</name>
+		<logo>Belgium.jpg</logo>
+	</team>
+
+	<team>
+		<name>Belize</name>
+		<logo>Belize.jpg</logo>
+	</team>
+
+	<team>
+		<name>Benin</name>
+		<logo>Benin.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bermuda</name>
+		<logo>Bermuda.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bhutan</name>
+		<logo>Bhutan.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bolivia</name>
+		<logo>Bolivia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bosnia and Herzegovina</name>
+		<logo>Bosnia_and_Herzegovina.jpg</logo>
+	</team>
+
+	<team>
+		<name>Botswana</name>
+		<logo>Botswana.jpg</logo>
+	</team>
+
+	<team>
+		<name>Brazil</name>
+		<logo>Brazil.jpg</logo>
+	</team>
+
+	<team>
+		<name>Brunei</name>
+		<logo>Brunei.jpg</logo>
+	</team>
+
+	<team>
+		<name>Bulgaria</name>
+		<logo>Bulgaria.jpg</logo>
+	</team>
+
+	<team>
+		<name>Burkina Faso</name>
+		<logo>Burkina_Faso.jpg</logo>
+	</team>
+
+	<team>
+		<name>Burundi</name>
+		<logo>Burundi.jpg</logo>
+	</team>
+
+	<team>
+		<name>Cambodia</name>
+		<logo>Cambodia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Cameroon</name>
+		<logo>Cameroon.jpg</logo>
+	</team>
+
+	<team>
+		<name>Canada</name>
+		<logo>Canada.jpg</logo>
+	</team>
+
+	<team>
+		<name>Cape Verde</name>
+		<logo>Cape_Verde.jpg</logo>
+	</team>
+
+	<team>
+		<name>Cayman Islands</name>
+		<logo>Cayman_Islands.jpg</logo>
+	</team>
+
+	<team>
+		<name>Central African Republic</name>
+		<logo>Central_African_Republic.jpg</logo>
+	</team>
+
+	<team>
+		<name>Chad</name>
+		<logo>Chad.jpg</logo>
+	</team>
+
+	<team>
+		<name>Chile</name>
+		<logo>Chile.jpg</logo>
+	</team>
+
+	<team>
+		<name>China</name>
+		<logo>China.jpg</logo>
+	</team>
+
+	<team>
+		<name>Colombia</name>
+		<logo>Colombia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Comoros</name>
+		<logo>Comoros.jpg</logo>
+	</team>
+
+	<team>
+		<name>Cook Islands</name>
+		<logo>Cook_Islands.jpg</logo>
+	</team>
+
+	<team>
+		<name>Costa Rica</name>
+		<logo>Costa_Rica.jpg</logo>
+	</team>
+
+	<team>
+		<name>Croatia</name>
+		<logo>Croatia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Cuba</name>
+		<logo>Cuba.jpg</logo>
+	</team>
+
+	<team>
+		<name>Cyprus</name>
+		<logo>Cyprus.jpg</logo>
+	</team>
+
+	<team>
+		<name>Czech Republic</name>
+		<logo>Czech_Republic.jpg</logo>
+	</team>
+
+	<team>
+		<name>Democratic Republic of Congo</name>
+		<logo>Democratic_Republic_of_the_Congo.jpg</logo>
+	</team>
+
+	<team>
+		<name>Denmark</name>
+		<logo>Denmark.jpg</logo>
+	</team>
+
+	<team>
+		<name>Djibouti</name>
+		<logo>Djibouti.jpg</logo>
+	</team>
+
+	<team>
+		<name>Dominica</name>
+		<logo>Dominica.jpg</logo>
+	</team>
+
+	<team>
+		<name>Dominican Republic</name>
+		<logo>Dominican_Republic.jpg</logo>
+	</team>
+
+	<team>
+		<name>East Timor</name>
+		<logo>East_Timor.jpg</logo>
+	</team>
+
+	<team>
+		<name>Ecuador</name>
+		<logo>Ecuador.jpg</logo>
+	</team>
+
+	<team>
+		<name>Egypt</name>
+		<logo>Egypt.jpg</logo>
+	</team>
+
+	<team>
+		<name>El Salvador</name>
+		<logo>El_Salvador.jpg</logo>
+	</team>
+
+	<team>
+		<name>England</name>
+		<logo>England.jpg</logo>
+	</team>
+
+	<team>
+		<name>Equatorial Guinea</name>
+		<logo>Equatorial_Guinea.jpg.jpg</logo>
+	</team>
+
+	<team>
+		<name>Eritrea</name>
+		<logo>Eritrea.jpg</logo>
+	</team>
+
+	<team>
+		<name>Estonia</name>
+		<logo>Estonia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Ethiopia</name>
+		<logo>Ethiopia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Fiji</name>
+		<logo>Fiji.jpg</logo>
+	</team>
+
+	<team>
+		<name>Finland</name>
+		<logo>Finland.jpg</logo>
+	</team>
+
+	<team>
+		<name>France</name>
+		<logo>France.jpg</logo>
+	</team>
+
+	<team>
+		<name>Gabon</name>
+		<logo>Gabon.jpg</logo>
+	</team>
+
+	<team>
+		<name>Georgia</name>
+		<logo>Georgia.jpg</logo>
+	</team>
+
+	<team>
+		<name>Germany</name>
+		<logo>Germany.jpg</logo>
+	</team>
+
+	<team>
+		<name>Ghana</name>
+		<logo>Ghana.jpg</logo>
+	</team>
+
+	<team>
+		<name>Greece</name>
+		<logo>Greece.jpg</logo>
+	</team>
+
+	<team>
+		<name>Greenland</name>
+		<logo>Greenland.jpg</logo>
+	</team>
+
+	<team>
+		<name>Grenada</name>
+		<logo>Grenada.jpg</logo>
+	</team>
+
+	<team>
+		<name>Guam</name>
+		<logo>Guam.jpg</logo>
+	</team>
+
+	<team>
+		<name>Guatemala</name>
+		<logo>Guatemala.jpg</logo>
+	</team>
+
+	<team>
+		<name>Guinea</name>
+		<logo>Guinea.jpg</logo>
+	</team>
+
+	<team>
+		<name>Guinea-Bissau</name>
+		<logo>Guinea-Bissau.jpg</logo>
+	</team>
+
+	<team>
+		<name>Guyana</name>
+		<logo>Guyana.jpg</logo>
+	</team>
+
+	<team>
+		<name>Haiti</name>
+		<logo>Haiti.jpg</logo>
+	</team>
+
+	<team>
+		<name>Honduras</name>
+		<logo>Honduras.jpg</logo>
+	</team>
+
+	<team>
+		<name>Hong Kong</name>
+		<logo>Hong_Kong.jpg</logo>
+	</team>
+
+	<team>
+		<name>Hungary</name>
+		<logo>Hungary.jpg</logo>
+	</team>
+
+	<team>
+		<name>Iceland</name>
+		<logo>Iceland.jpg</logo>
 	</team>
 
 </teams>
