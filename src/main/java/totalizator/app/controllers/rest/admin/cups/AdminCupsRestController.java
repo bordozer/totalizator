@@ -32,6 +32,9 @@ public class AdminCupsRestController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private LogoService logoService;
+
 	private static final Logger LOGGER = Logger.getLogger( AdminCupsRestController.class );
 
 	@ResponseStatus(HttpStatus.OK)
@@ -59,6 +62,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
 				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isNotTooLateForCupBetting( cup, currentUser ) );
 				cupEditDTO.setFinished( cup.isFinished() );
+				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
 
 				return cupEditDTO;
 			}

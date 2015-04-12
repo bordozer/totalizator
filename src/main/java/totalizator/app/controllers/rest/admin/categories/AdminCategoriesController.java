@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.Category;
 import totalizator.app.services.CategoryService;
+import totalizator.app.services.LogoService;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class AdminCategoriesController {
 	@Autowired
 	private CategoryService categoryService;
 
+	@Autowired
+	private LogoService logoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -31,7 +35,11 @@ public class AdminCategoriesController {
 		return Lists.transform( categoryService.loadAll(), new Function<Category, CategoryEditDTO>() {
 			@Override
 			public CategoryEditDTO apply( final Category category ) {
-				return new CategoryEditDTO( category.getId(), category.getCategoryName() );
+
+				final CategoryEditDTO categoryEditDTO = new CategoryEditDTO( category.getId(), category.getCategoryName() );
+				categoryEditDTO.setLogoUrl( logoService.getLogoURL( category ) );
+
+				return categoryEditDTO;
 			}
 		} );
 	}

@@ -3,6 +3,9 @@
 		<button type="button" class="btn btn-default fa fa-edit category-entry-edit"></button>
 		<button type="button" class="btn btn-default fa fa-recycle category-entry-del"></button>
 	</div>
-	<div class="col-lg-9 category-entry-name" style="cursor: hand;"><%=model.categoryName%></div>
+	<div class="col-lg-9 category-entry-name" style="cursor: hand;">
+		<img class="team-logo" src="<%=model.logoUrl%>" height="32">
+		<%=model.categoryName%>
+	</div>
 </div>
 

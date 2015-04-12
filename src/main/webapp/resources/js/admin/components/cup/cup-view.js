@@ -65,7 +65,7 @@ define( function ( require ) {
 			var filterByCategory = this.model.filterByCategory;
 			var self= this;
 			this.model.forEach( function( cup ) {
-				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'category' ).categoryId ) {
+				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'categoryId' ) ) {
 					self.renderEntry( cup );
 				}
 			});

@@ -24,6 +24,8 @@ public class CupEditDTO {
 
 	private boolean showOnPortalPage;
 
+	private String logoUrl;
+
 	public int getCupId() {
 		return cupId;
 	}
@@ -104,6 +106,14 @@ public class CupEditDTO {
 
 	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
 		this.showOnPortalPage = showOnPortalPage;
+	}
+
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public void setLogoUrl( final String logoUrl ) {
+		this.logoUrl = logoUrl;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ public class CategoryEditDTO {
 
 	private int categoryId;
 	private String categoryName;
+	private String logoUrl;
 
 	public CategoryEditDTO() {
 	}
@@ -27,6 +28,14 @@ public class CategoryEditDTO {
 
 	public void setCategoryName( final String categoryName ) {
 		this.categoryName = categoryName;
+	}
+
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public void setLogoUrl( final String logoUrl ) {
+		this.logoUrl = logoUrl;
 	}
 
 	@Override

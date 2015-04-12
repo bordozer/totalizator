@@ -3,6 +3,11 @@
 		<button type="button" class="btn btn-default fa fa-edit team-entry-edit"></button>
 		<button type="button" class="btn btn-default fa fa-recycle team-entry-del"></button>
 	</div>
-	<div class="col-lg-7 cup-entry-name" title="#<%=model.cupId%>"><%=model.teamName%></div>
-	<div class="col-lg-2"><%=categoryName%></div>
+	<div class="col-lg-7 cup-entry-name" title="#<%=model.cupId%>">
+		<img class="team-logo" src="<%=model.teamLogo%>" height="32">
+		<%=model.teamName%>
+	</div>
+	<div class="col-lg-2">
+		<%=categoryName%>
+	</div>
 </div>

@@ -11,6 +11,7 @@ define( function ( require ) {
 		defaults: {
 			categoryId: 0
 			, categoryName: ''
+			, logoUrl: ''
 		},
 
 		initialize: function ( options ) {
