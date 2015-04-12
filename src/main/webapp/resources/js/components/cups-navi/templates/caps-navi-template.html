@@ -5,7 +5,7 @@
 			<% _.each( cupsShowTo, function( cup ) { %>
 				<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>" >
 					<a href="/totalizator/cups/<%- cup.cupId %>/">
-						<img src="<%=cup.logoUrl%>"> <%- cup.category.categoryName %>: <%- cup.cupName %>
+						<img src="<%=cup.logoUrl%>" height="32"> <%- cup.category.categoryName %>: <%- cup.cupName %>
 					</a>
 				</li>
 			<% }) %>
