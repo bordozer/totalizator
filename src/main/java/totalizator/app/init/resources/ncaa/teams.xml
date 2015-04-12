@@ -4,47 +4,47 @@
 
 	<team>
 		<name>Duke</name>
-		<logo>Duke</logo>
+		<logo>Duke.png</logo>
 	</team>
 
 	<team>
 		<name>Syracuse</name>
-		<logo>Syracuse</logo>
+		<logo>Syracuse.png</logo>
 	</team>
 
 	<team>
 		<name>West Virginia</name>
-		<logo>West_Virginia</logo>
+		<logo>West_Virginia.png</logo>
 	</team>
 
 	<team>
 		<name>New Mexico</name>
-		<logo>New_Mexico</logo>
+		<logo>New_Mexico.png</logo>
 	</team>
 
 	<team>
 		<name>Albany</name>
-		<logo>Albany</logo>
+		<logo>Albany.png</logo>
 	</team>
 
 	<team>
 		<name>Cincinnati</name>
-		<logo>Cincinnati</logo>
+		<logo>Cincinnati.png</logo>
 	</team>
 
 	<team>
 		<name>Houston</name>
-		<logo>Houston</logo>
+		<logo>Houston.png</logo>
 	</team>
 
 	<team>
 		<name>Memphis</name>
-		<logo>Memphis</logo>
+		<logo>Memphis.png</logo>
 	</team>
 
 	<team>
 		<name>Louisville</name>
-		<logo>Louisville</logo>
+		<logo>Louisville.png</logo>
 	</team>
 
 	<team>
@@ -54,17 +54,17 @@
 
 	<team>
 		<name>Jacksonville</name>
-		<logo>Jacksonville</logo>
+		<logo>Jacksonville.png</logo>
 	</team>
 
 	<team>
 		<name>Oklahoma State</name>
-		<logo>Oklahoma_State</logo>
+		<logo>Oklahoma_State.png</logo>
 	</team>
 
 	<team>
 		<name>Oregon</name>
-		<logo>Oregon</logo>
+		<logo>Oregon.png</logo>
 	</team>
 
 </teams>
