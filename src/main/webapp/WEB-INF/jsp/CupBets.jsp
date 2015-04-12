@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="cupBetsModel" type="totalizator.app.controllers.ui.cups.CupBetsModel" scope="request"/>
+<jsp:useBean id="cupBetsModel" type="totalizator.app.controllers.ui.cups.bets.CupBetsModel" scope="request"/>
 
 <tags:page currentUser="${cupBetsModel.currentUser}">
 
 	<c:set var="cup" value="${cupBetsModel.cup}" />
 
-	<div class="portal-page-container"></div>
+	<div class="cup-bets-container"></div>
 
 	<script type="text/javascript">
 
@@ -21,13 +21,13 @@
 
 			var breadcrumbs = [
 				{ link: '#', title: "${cup.category.categoryName}" }
-				, { link: '#', title: "${cup.cupName}" }
+				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
 				, { link: '#', title: translator.title }
 			];
 
 			var currentUser = ${cupBetsModel.currentUserJSON};
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: cupBets, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.cup-bets-container' ), bodyRenderer: cupBets, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
 			pageView.render();
 		} );
 	</script>
