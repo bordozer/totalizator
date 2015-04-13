@@ -207,7 +207,7 @@ define( function ( require ) {
 			} ) );
 
 			if ( isCupFinished ) {
-				this.$( '.js-cup-data-form' ).attr( 'disabled', 'disabled' );
+				this.$( 'input, select' ).attr( 'disabled', 'disabled' );
 			}
 
 			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: dateTimeService.parseDate( model.cupStartDate ) } );
