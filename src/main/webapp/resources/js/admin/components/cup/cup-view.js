@@ -35,6 +35,7 @@ define( function ( require ) {
 		, cupValidation_CupName: "Cup validation: Enter a cup name!"
 		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
 		, cupResultsTab: "Cup edit: Cup results"
+		, cupPositionLabel: "cup position"
 	} );
 
 	var CupsView = WindowView.extend( {
@@ -55,6 +56,8 @@ define( function ( require ) {
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
 			this.on( 'events:filter_by_category', this._filterByCategory, this );
+
+			this.allTeams = service.loadTeams();
 
 			this._loadCategories();
 
@@ -83,6 +86,7 @@ define( function ( require ) {
 			var view = new CupView( {
 				model: model
 				, categories: this.categories
+				, allTeams: this.allTeams
 			} );
 
 			view.on( 'events:cups_changed', this._triggerCupsChanged, this );
@@ -154,9 +158,11 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.categories = options.categories;
+			this.allTeams = options.allTeams;
+
 			this.cupResults = []; // TODO: load saved results
 
-			this.adminCupResults = new AdminCupResultsView( { el: this.$el } );
+			this.adminCupResults = new AdminCupResultsView( { el: this.$el, allTeams: this.allTeams } );
 			this.listenTo( this.adminCupResults, 'events:cup-data-edit-tab', this._switchEditTab );
 
 			this.model.on( 'sync', this.render, this )
@@ -180,9 +186,20 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
+			var self = this;
+			var cupWinners = [];
+			_.each( this.cupResults, function( result ) {
+				var cupPosition = result.cupPosition;
+				var teamId = result.teamId;
+
+				var team = service.getTeam( self.allTeams, teamId );
+				cupWinners.push( { cupPosition: cupPosition, team: team } );
+			});
+
 			this.$el.html( this.templateEdit( {
 				model: model
 				, categories: this.categories
+				, cupWinners: cupWinners
 				, translator: translator
 			} ) );
 
@@ -211,7 +228,6 @@ define( function ( require ) {
 
 		_switchEditTab: function( data ) {
 			this.cupResults = data;
-//			console.log( '_switchEditTab', this.cupResults ); // TODO: LOGGING
 			this.renderEdit();
 		},
 

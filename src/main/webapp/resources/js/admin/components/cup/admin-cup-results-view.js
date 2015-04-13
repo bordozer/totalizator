@@ -25,7 +25,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.allTeams = service.loadTeams();
+			this.allTeams = options.allTeams;
 		},
 
 		render: function ( options ) {
@@ -83,7 +83,6 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			var data = this._bind();
-			console.log( 'bind', data );
 
 			if ( ! this._validate( data ) ) {
 				return;
