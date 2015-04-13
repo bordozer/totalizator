@@ -33,6 +33,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Cup validation: Defined winners count does not equals winners</nerd>
+		<ru><![CDATA[Указанное к-во победителей чемпионата не совпадает с к-вом определенных победителей]]></ru> <!-- TODO: ? -->
+	</translation>
+
+	<translation>
 		<nerd>cup position</nerd>
 		<ru><![CDATA[место]]></ru>
 	</translation>

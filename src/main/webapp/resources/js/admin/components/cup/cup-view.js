@@ -34,6 +34,7 @@ define( function ( require ) {
 		, entryEditCupStartDateLabel: "Admin / Cups / Edit: Cup start date"
 		, cupValidation_CupName: "Cup validation: Enter a cup name!"
 		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
+		, cupValidation_WinnersCountDoesNotEqualsWinners: "Cup validation: Defined winners count does not equals winners"
 		, cupResultsTab: "Cup edit: Cup results"
 		, cupPositionLabel: "cup position"
 	} );
@@ -296,6 +297,13 @@ define( function ( require ) {
 
 			if ( this._getWinnersCount() <= 0 ) {
 				alert( translator.cupValidation_WinnersCount );
+
+				return false;
+			}
+
+			var winners = this.model.get( 'cupWinners' ).length;
+			if ( winners > 0 && this._getWinnersCount() != winners ) {
+				alert( translator.cupValidation_WinnersCountDoesNotEqualsWinners );
 
 				return false;
 			}
