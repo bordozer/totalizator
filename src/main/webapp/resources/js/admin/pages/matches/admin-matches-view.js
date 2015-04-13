@@ -230,7 +230,7 @@ define( function ( require ) {
 			this.$( '#team1-select-box' ).chosen( options );
 			this.$( '#team2-select-box' ).chosen( options );
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: dateTimeService.parseDate( model.beginningTime ) } );
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: model.beginningTime } );
 
 			return this;
 		},
