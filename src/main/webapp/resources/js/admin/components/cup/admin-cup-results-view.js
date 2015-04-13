@@ -30,23 +30,13 @@ define( function ( require ) {
 
 		render: function ( options ) {
 
-			this.categoryId = options.categoryId;
-
-			this.cupId = options.cupId;
-			this.cupName = options.cupName;
-			this.logoUrl = options.logoUrl;
 			this.winnersCount = options.winnersCount;
 
-			this.cupResults = options.cupResults;
-
-			this.teams = service.filterTeamsByCategory( this.allTeams, this.categoryId );
+			this.teams = service.filterTeamsByCategory( this.allTeams, options.categoryId );
 
 			var data = _.extend( {}, {
-				logoUrl: this.logoUrl
-				, cupName: this.cupName
-				, winnersCount: this.winnersCount
-				, teams: this.teams
-				, cupResults: this.cupResults
+				teams: this.teams
+				, options: options
 				, translator: translator
 			} );
 

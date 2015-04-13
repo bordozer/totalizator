@@ -6,8 +6,8 @@
 			<button type="button" class="btn btn-primary fa fa-save js-cup-entry-save"></button>
 			<button type="button" class="btn btn-default fa fa-close cup-entry-edit-cancel"></button>
 		</div>
-		<img class="team-logo" src="<%=logoUrl%>" height="32">
-		<%=cupName%>
+		<img class="team-logo" src="<%=options.logoUrl%>" height="32">
+		<%=options.cupName%>
 	</div>
 
 	<div class="panel-body">
@@ -15,7 +15,7 @@
 
 			<table class="table table-striped table-hover">
 
-				<% for( var i = 1; i <= winnersCount; i++ ) { %>
+				<% for( var i = 1; i <= options.winnersCount; i++ ) { %>
 				<tr>
 					<td>
 						<strong><%= i %> <%= translator.cupPositionLabel %></strong>
@@ -26,7 +26,7 @@
 						<select class="chosen-select" id="cup-team-position-<%= i %>">
 							<option value="0">&nbsp;</option>
 							<% _.each( teams, function( team ) { %>
-							<option value="<%=team.teamId%>" <%= cupResults[i - 1] != undefined && cupResults[i - 1].teamId == team.teamId ? 'selected' : '' %> ><%= team.teamName %></option>
+							<option value="<%=team.teamId%>" <%= options.cupResults[i - 1] != undefined && options.cupResults[i - 1].teamId == team.teamId ? 'selected' : '' %> ><%= team.teamName %></option>
 							<% }) %>
 						</select>
 					</td>
