@@ -48,6 +48,7 @@ define( function ( require ) {
 		},
 
 		renderInnerView: function ( filter ) {
+			this.filter = filter;
 
 			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
 
@@ -111,7 +112,7 @@ define( function ( require ) {
 
 		_addEntry: function() {
 			this.listenToOnce( this.model, 'add', this._renderNewEntry );
-			this.model.add( {} );
+			this.model.add( { categoryId: this.filter.categoryId, cupId: this.filter.cupId } );
 		},
 
 		_finishSelectedMatchesClick: function() {
@@ -208,7 +209,6 @@ define( function ( require ) {
 
 			var cups = service.filterCupsByCategory( this.cups, categoryId );
 			var teams = service.filterTeamsByCategory( this.teams, categoryId );
-			console.log( categoryId );
 
 			this.$el.html( templateEntryEdit( {
 				model: model
