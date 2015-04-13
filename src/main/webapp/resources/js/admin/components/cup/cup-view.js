@@ -263,6 +263,7 @@ define( function ( require ) {
 		_saveEntry: function() {
 
 			this.model.cancelEditState();
+			this.model.set( { finished: this._isFinished() } );
 
 			var self = this;
 			this.model.save().then( function() {

@@ -27,12 +27,11 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.cupId = options.cupId;
 			this.allTeams = options.allTeams;
 		},
 
 		render: function ( options ) {
-
+			this.cupId = options.cupId;
 			this.options = options;
 			this.winnersCount = options.winnersCount;
 
