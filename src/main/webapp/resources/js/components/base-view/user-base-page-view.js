@@ -10,6 +10,8 @@ define( function ( require ) {
 
 	var PageView = require( 'js/components/base-view/base-page-view' );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
@@ -37,13 +39,23 @@ define( function ( require ) {
 		},
 
 		mainMenuItems: function() {
-			return [
+
+			var menus = [
 				{ selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
-				, { selector: '', icon: 'fa fa-users', link: '/totalizator/users/', text: translator.menuUsersLabel }
-				, { selector: 'divider' }
-				, { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel }
 			];
+
+			var cups = service.loadCups();
+			_.each( cups, function( cup ) {
+				menus.push( { selector: 'category-' + cup.cupId, icon: 'fa fa-cubes', link: '/totalizator/cups/' + cup.cupId + '/', text: cup.category.categoryName + ': ' + cup.cupName } );
+			} );
+
+			menus.push( { selector: 'divider' } );
+			menus.push( { selector: '', icon: 'fa fa-users', link: '/totalizator/users/', text: translator.menuUsersLabel } );
+			menus.push( { selector: 'divider' } );
+			menus.push( { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel } );
+
+			return menus;
 		}
 	});
 } );
