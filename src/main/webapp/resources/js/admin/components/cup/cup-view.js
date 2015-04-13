@@ -162,8 +162,8 @@ define( function ( require ) {
 
 			this.cupResults = []; // TODO: load saved results
 
-			this.adminCupResults = new AdminCupResultsView( { el: this.$el, allTeams: this.allTeams } );
-			this.listenTo( this.adminCupResults, 'events:cup-data-edit-tab', this._switchEditTab );
+			this.adminCupResultsView = new AdminCupResultsView( { el: this.$el, allTeams: this.allTeams } );
+			this.listenTo( this.adminCupResultsView, 'events:cup-data-edit-tab', this._switchEditTab );
 
 			this.model.on( 'sync', this.render, this )
 		},
@@ -223,7 +223,7 @@ define( function ( require ) {
 				, cupResults: this.cupResults
 			};
 
-			this.adminCupResults.render( options );
+			this.adminCupResultsView.render( options );
 		},
 
 		_switchEditTab: function( data ) {
