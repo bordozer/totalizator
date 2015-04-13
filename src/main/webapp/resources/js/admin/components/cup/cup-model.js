@@ -24,6 +24,8 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.on( 'events:save-attributes', this._saveAttributes, this );
+			this.on( 'events:restore-attributes', this._restoreAttributes, this );
 		},
 
 		setEditState: function() {
@@ -32,6 +34,14 @@ define( function ( require ) {
 
 		cancelEditState: function() {
 			this.set( { isEditState: false } );
+		},
+
+		_saveAttributes: function() {
+			this._attrs = this.toJSON();
+		},
+
+		_restoreAttributes: function() {
+			this.set( this._attrs );
 		}
 	});
 

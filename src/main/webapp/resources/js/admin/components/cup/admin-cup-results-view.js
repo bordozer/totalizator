@@ -15,6 +15,7 @@ define( function ( require ) {
 		cupEditDataTab: "Cup edit: Switch to edit data tab"
 		, cupPositionLabel: "cup position"
 		, defineAllCupWinners: "Define all cup winners!"
+		, resetCupWinners: "Reset cup winners"
 	} );
 
 	return Backbone.View.extend( {

@@ -165,7 +165,8 @@ define( function ( require ) {
 			this.listenTo( this.adminCupResultsView, 'events:cup-data-edit-tab', this._switchEditTab );
 			this.listenTo( this.adminCupResultsView, 'events:cup-save', this._bindWinnersAndSave );
 
-			this.model.on( 'sync', this.render, this )
+			this.model.on( 'sync', this.render, this );
+			this.model.trigger( 'events:save-attributes' );
 		},
 
 		render: function () {
@@ -266,6 +267,7 @@ define( function ( require ) {
 			var self = this;
 			this.model.save().then( function() {
 				self.trigger( 'events:caps_changed' );
+				self.model.trigger( 'events:save-attributes' );
 			});
 		},
 
@@ -374,11 +376,15 @@ define( function ( require ) {
 
 		_onEntryEditCancelClick: function( evt ) {
 			evt.preventDefault();
+
+			this.model.trigger( 'events:restore-attributes' );
+
 			if ( this.model.get( 'cupId' ) > 0 ) {
 				this.model.cancelEditState();
 				this.render();
 				return;
 			}
+
 			this.model.destroy();
 			this.remove();
 		}
