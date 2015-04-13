@@ -2,10 +2,12 @@
 
 	<div class="panel-heading clearfix">
 		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default fa fa-flag-checkered js-finish-cup" title="<%=translator.cupResultsTab%>"></button>
 			<button type="button" class="btn btn-primary fa fa-save cup-entry-save"></button>
 			<button type="button" class="btn btn-default fa fa-close cup-entry-edit-cancel"></button>
 		</div>
 		<img class="team-logo" src="<%=model.logoUrl%>" height="32">
+		<%=model.cupName%>
 	</div>
 
 	<div class="panel-body">

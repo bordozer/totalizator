@@ -11,6 +11,8 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!./templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/cup-edit-template.html' );
 
+	var AdminCupResultsView = require( './admin-cup-results-view' );
+
 	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
 
 	var service = require( '/resources/js/services/service.js' );
@@ -32,6 +34,7 @@ define( function ( require ) {
 		, entryEditCupStartDateLabel: "Admin / Cups / Edit: Cup start date"
 		, cupValidation_CupName: "Cup validation: Enter a cup name!"
 		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
+		, cupResultsTab: "Cup edit: Cup results"
 	} );
 
 	var CupsView = WindowView.extend( {
@@ -141,6 +144,7 @@ define( function ( require ) {
 
 		events: {
 			'click .cup-entry-name, .cup-entry-edit': '_onEntryEditClick'
+			, 'click .js-finish-cup': '_renderCupBets'
 			, 'click .cup-entry-save': '_onEntrySaveClick'
 			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
 			, 'click .cup-entry-del': '_onEntryDelClick'
@@ -148,6 +152,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+
 			this.categories = options.categories;
 
 			this.model.on( 'sync', this.render, this )
@@ -182,6 +187,13 @@ define( function ( require ) {
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
 
 			return this;
+		},
+
+		_renderCupBets: function() {
+			var model = this.model.toJSON();
+
+			var adminCupResults = new AdminCupResultsView( { el: this.$el, cupId: model.cupId, cupName: model.cupName, logoUrl: model.logoUrl } );
+			this.listenTo( adminCupResults, 'events:cup-data-edit-tab', this.renderEdit );
 		},
 
 		_getCategoryName: function( categoryId ) {
