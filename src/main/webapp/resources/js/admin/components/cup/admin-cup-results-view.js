@@ -22,6 +22,7 @@ define( function ( require ) {
 		events: {
 			'click .js-cup-entry-save': '_onSaveClick'
 			, 'click .js-cup-entry-edit': '_onSwitchToEditTabClick'
+			, 'click .js-cup-reset-winners': '_onResetWinnersClick'
 		},
 
 		initialize: function ( options ) {
@@ -31,6 +32,7 @@ define( function ( require ) {
 
 		render: function ( options ) {
 
+			this.options = options;
 			this.winnersCount = options.winnersCount;
 
 			this.teams = service.filterTeamsByCategory( this.allTeams, options.categoryId );
@@ -91,6 +93,14 @@ define( function ( require ) {
 			}
 
 			this.trigger( 'events:cup-data-edit-tab', data );
+		},
+
+		_onResetWinnersClick: function( evt ) {
+			evt.preventDefault();
+
+			this.options.cupWinners = [];
+
+			this.render( this.options );
 		}
 	} );
 } );
