@@ -13,7 +13,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		cupEditDataTab: "Cup edit: Switch to edit data tab"
-
+		, cupPositionLabel: "cup position"
 	} );
 
 	return Backbone.View.extend( {
@@ -29,18 +29,23 @@ define( function ( require ) {
 			this.cupId = options.cupId;
 			this.cupName = options.cupName;
 			this.logoUrl = options.logoUrl;
+			this.winnersCount = options.winnersCount;
 
 			this.allTeams = service.loadTeams();
 			this.teams = service.filterTeamsByCategory( this.allTeams, this.categoryId );
-			console.log( this.teams );
 
 			this.render();
 		},
 
 		render: function () {
-			var data = _.extend( {}, { logoUrl: this.logoUrl, cupName: this.cupName, translator: translator } );
+
+			var data = _.extend( {}, { logoUrl: this.logoUrl, cupName: this.cupName, winnersCount: this.winnersCount, teams: this.teams, translator: translator } );
 
 			this.$el.html( template( data ) );
+
+			for( var i = 1; i <= this.winnersCount; i++ ) {
+				this.$( '#cup-team-position-' + i ).chosen( { width: '100%' } );
+			}
 
 			return this;
 		},

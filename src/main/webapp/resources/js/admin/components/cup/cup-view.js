@@ -199,6 +199,7 @@ define( function ( require ) {
 				, cupId: model.cupId
 				, cupName: model.cupName
 				, logoUrl: model.logoUrl
+				, winnersCount: model.winnersCount
 			};
 
 			var adminCupResults = new AdminCupResultsView( options );
