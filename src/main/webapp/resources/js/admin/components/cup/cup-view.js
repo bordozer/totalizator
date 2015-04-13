@@ -321,7 +321,7 @@ define( function ( require ) {
 		},
 
 		_isFinished: function() {
-			return this.$( '.cup-is-finished-checkbox' ).is(':checked');
+			return this.cupResults.length > 0;
 		},
 
 		_getWinnersCount: function() {
