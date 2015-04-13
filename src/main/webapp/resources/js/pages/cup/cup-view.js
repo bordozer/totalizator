@@ -12,6 +12,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Cup overview"
 		, bupBetsLabel: "Cup bets"
+		, cupFinished: "Cup finished"
 	} );
 
 	return Backbone.View.extend( {
@@ -27,7 +28,18 @@ define( function ( require ) {
 
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 
-			var data = _.extend( {}, this.model.toJSON(), { cupId: this.cupId, translator: translator } );
+			var model = this.model.toJSON();
+			console.log( model );
+
+			var data = _.extend( {}
+					, model
+					, {
+						cupId: this.cupId
+						, isCupFinished: model.finished
+						, translator: translator
+					}
+			);
+
 			this.$el.html( template( data ) );
 		}
 	} );

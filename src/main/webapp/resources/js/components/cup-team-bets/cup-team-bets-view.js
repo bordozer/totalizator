@@ -179,9 +179,10 @@ define( function ( require ) {
 		},
 
 		_onEditCupTeamBetsClick: function ( evt ) {
+
 			evt.preventDefault();
 
-			if ( ! this.cup.readyForCupBets ) {
+			if ( ! this.cup.readyForCupBets ) { // TODO: implement security when server side ready
 				alert( translator.cupBettingIsFinished );
 				return;
 			}
