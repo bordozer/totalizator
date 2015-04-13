@@ -78,6 +78,7 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			var data = this._bind();
+			this.trigger( 'events:cup-save', data );
 		},
 
 		_onSwitchToEditTabClick: function( evt ) {

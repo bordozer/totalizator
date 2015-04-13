@@ -162,6 +162,7 @@ define( function ( require ) {
 
 			this.adminCupResultsView = new AdminCupResultsView( { el: this.$el, allTeams: this.allTeams } );
 			this.listenTo( this.adminCupResultsView, 'events:cup-data-edit-tab', this._switchEditTab );
+			this.listenTo( this.adminCupResultsView, 'events:cup-save', this._bindWinnersAndSave );
 
 			this.model.on( 'sync', this.render, this )
 		},
@@ -229,6 +230,11 @@ define( function ( require ) {
 			this.renderEdit();
 		},
 
+		_bindWinnersAndSave: function( data ) {
+			this.model.set( { cupWinners: data } );
+			this._saveEntry();
+		},
+
 		_getCategoryName: function( categoryId ) {
 			var category = service.getCategory( this.categories, categoryId );
 			return category.categoryName;
@@ -246,12 +252,6 @@ define( function ( require ) {
 		},
 
 		_saveEntry: function() {
-
-			this._bind();
-
-			if( ! this._validate() ){
-				return;
-			}
 
 			this.model.cancelEditState();
 
@@ -341,6 +341,12 @@ define( function ( require ) {
 
 		_onEntrySaveClick: function( evt ) {
 			evt.preventDefault();
+
+			this._bind();
+
+			if( ! this._validate() ){
+				return;
+			}
 
 			this._saveEntry();
 		},
