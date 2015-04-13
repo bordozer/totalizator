@@ -12,3 +12,9 @@ div {
 	font-size: 12px;
 	padding-right: 10px;
 }
+
+.admin-icon {
+	float: left;
+	width: 20px;
+	padding-right: 2px;
+}
