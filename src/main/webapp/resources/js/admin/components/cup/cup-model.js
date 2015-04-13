@@ -20,7 +20,7 @@ define( function ( require ) {
 			, showOnPortalPage: false
 			, logoUrl: ''
 			, isEditState: false
-			, cupResults: []
+			, cupWinners: []
 		},
 
 		initialize: function ( options ) {

@@ -25,6 +25,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.cupId = options.cupId;
 			this.allTeams = options.allTeams;
 		},
 
@@ -56,7 +57,7 @@ define( function ( require ) {
 			for( var i = 1; i <= this.winnersCount; i++ ) {
 				var teamId = this.$( '#cup-team-position-' + i ).val();
 				if ( teamId > 0 ) {
-					data.push( { cupPosition: i, teamId: teamId } );
+					data.push( { cup: this.cupId, cupPosition: i, teamId: teamId } );
 				}
 			}
 

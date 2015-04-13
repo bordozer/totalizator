@@ -2,10 +2,12 @@ package totalizator.app.controllers.rest.admin.cups;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.dto.CupWinnerDTO;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class CupEditDTO {
 
@@ -25,6 +27,8 @@ public class CupEditDTO {
 	private boolean showOnPortalPage;
 
 	private String logoUrl;
+
+	private List<CupWinnerDTO> cupWinners;
 
 	public int getCupId() {
 		return cupId;
@@ -114,6 +118,14 @@ public class CupEditDTO {
 
 	public void setLogoUrl( final String logoUrl ) {
 		this.logoUrl = logoUrl;
+	}
+
+	public List<CupWinnerDTO> getCupWinners() {
+		return cupWinners;
+	}
+
+	public void setCupWinners( final List<CupWinnerDTO> cupWinners ) {
+		this.cupWinners = cupWinners;
 	}
 
 	@Override

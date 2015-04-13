@@ -186,7 +186,7 @@ define( function ( require ) {
 
 			var self = this;
 			var cupWinners = [];
-			_.each( model.cupResults, function( result ) {
+			_.each( model.cupWinners, function( result ) {
 				var cupPosition = result.cupPosition;
 				var teamId = result.teamId;
 
@@ -218,14 +218,14 @@ define( function ( require ) {
 				, cupName: model.cupName
 				, logoUrl: model.logoUrl
 				, winnersCount: model.winnersCount
-				, cupResults: model.cupResults
+				, cupWinners: model.cupWinners
 			};
 
 			this.adminCupResultsView.render( options );
 		},
 
 		_switchEditTab: function( data ) {
-			this.model.set( { cupResults: data } );
+			this.model.set( { cupWinners: data } );
 			this.renderEdit();
 		},
 
@@ -320,7 +320,7 @@ define( function ( require ) {
 		},
 
 		_isFinished: function() {
-			return this.model.get( 'cupResults' ).length > 0;
+			return this.model.get( 'cupWinners' ).length > 0;
 		},
 
 		_getWinnersCount: function() {

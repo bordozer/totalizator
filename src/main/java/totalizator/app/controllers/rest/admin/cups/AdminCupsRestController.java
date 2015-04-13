@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import totalizator.app.dto.CupWinnerDTO;
 import totalizator.app.models.Cup;
+import totalizator.app.models.CupWinner;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
 
@@ -33,7 +35,13 @@ public class AdminCupsRestController {
 	private UserService userService;
 
 	@Autowired
+	private TeamService teamService;
+
+	@Autowired
 	private LogoService logoService;
+
+	@Autowired
+	private CupWinnerService cupWinnerService;
 
 	private static final Logger LOGGER = Logger.getLogger( AdminCupsRestController.class );
 
@@ -63,6 +71,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isNotTooLateForCupBetting( cup, currentUser ) );
 				cupEditDTO.setFinished( cup.isFinished() );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
+				cupEditDTO.setCupWinners( getCupWinners( cup, currentUser ) );
 
 				return cupEditDTO;
 			}
@@ -96,7 +105,18 @@ public class AdminCupsRestController {
 
 		initFromDTO( cupEditDTO, cup );
 
-		cupService.save( cup );
+		final Cup save = cupService.save( cup );
+
+		final List<CupWinnerDTO> cupWinners = cupEditDTO.getCupWinners();
+		for ( final CupWinnerDTO cupWinner : cupWinners ) {
+
+			final CupWinner winner = new CupWinner();
+			winner.setCup( save );
+			winner.setCupPosition( cupWinner.getCupPosition() );
+			winner.setTeam( teamService.load( cupWinner.getTeamId() ) );
+
+			cupWinnerService.save( winner );
+		}
 
 		return cupEditDTO;
 	}
@@ -126,5 +146,15 @@ public class AdminCupsRestController {
 		cup.setReadyForMatchBets( cupEditDTO.isReadyForMatchBets() );
 
 		cup.setShowOnPortalPage( cupEditDTO.isShowOnPortalPage() );
+	}
+
+	private List<CupWinnerDTO> getCupWinners( final Cup cup, final User user ) {
+
+		return Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, CupWinnerDTO>() {
+			@Override
+			public CupWinnerDTO apply( final CupWinner cupWinner ) {
+				return new CupWinnerDTO( cupWinner.getCup().getId(), cupWinner.getCupPosition(), cupWinner.getTeam().getId() );
+			}
+		} );
 	}
 }
