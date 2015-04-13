@@ -26,7 +26,7 @@
 						<select class="chosen-select" id="cup-team-position-<%= i %>">
 							<option value="0">&nbsp;</option>
 							<% _.each( teams, function( team ) { %>
-							<option value="<%=team.teamId%>" <%= cupResults[i] != undefined && cupResults[i].teamId == team.teamId ? 'selected' : '' %> ><%= team.teamName %></option>
+							<option value="<%=team.teamId%>" <%= cupResults[i - 1] != undefined && cupResults[i - 1].teamId == team.teamId ? 'selected' : '' %> ><%= team.teamName %></option>
 							<% }) %>
 						</select>
 					</td>
