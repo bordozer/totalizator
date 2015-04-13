@@ -29,7 +29,6 @@ define( function ( require ) {
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 
 			var model = this.model.toJSON();
-			console.log( model );
 
 			var data = _.extend( {}
 					, model
