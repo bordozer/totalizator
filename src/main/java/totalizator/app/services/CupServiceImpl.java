@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CupRepository;
 import totalizator.app.models.Cup;
+import totalizator.app.models.CupWinner;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public class CupServiceImpl implements CupService {
 
 	@Autowired
 	private CupRepository cupRepository;
+
+	@Autowired
+	private CupWinnerService cupWinnerService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -59,5 +63,16 @@ public class CupServiceImpl implements CupService {
 		} );
 
 		return portalPageCups;
+	}
+
+	@Override
+	@Transactional
+	public void save( final Cup cup, final List<CupWinner> winners ) {
+
+		save( cup );
+
+		cupWinnerService.deleteAllWinners( cup );
+
+		cupWinnerService.saveAll( winners );
 	}
 }

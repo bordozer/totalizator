@@ -105,18 +105,20 @@ public class AdminCupsRestController {
 
 		initFromDTO( cupEditDTO, cup );
 
-		final Cup save = cupService.save( cup );
+		final List<CupWinner> winners = Lists.transform( cupEditDTO.getCupWinners(), new Function<CupWinnerDTO, CupWinner>() {
 
-		final List<CupWinnerDTO> cupWinners = cupEditDTO.getCupWinners();
-		for ( final CupWinnerDTO cupWinner : cupWinners ) {
+			@Override
+			public CupWinner apply( final CupWinnerDTO dto ) {
+				final CupWinner winner = new CupWinner();
+				winner.setCup( cup );
+				winner.setCupPosition( dto.getCupPosition() );
+				winner.setTeam( teamService.load( dto.getTeamId() ) );
 
-			final CupWinner winner = new CupWinner();
-			winner.setCup( save );
-			winner.setCupPosition( cupWinner.getCupPosition() );
-			winner.setTeam( teamService.load( cupWinner.getTeamId() ) );
+				return winner;
+			}
+		} );
 
-			cupWinnerService.save( winner );
-		}
+		cupService.save( cup, winners );
 
 		return cupEditDTO;
 	}

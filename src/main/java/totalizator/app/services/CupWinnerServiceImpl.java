@@ -51,4 +51,23 @@ public class CupWinnerServiceImpl implements CupWinnerService {
 	public List<CupWinner> loadAll( final Cup cup, final Team team ) {
 		return cupWinnerRepository.loadAll( cup, team );
 	}
+
+	@Override
+	@Transactional
+	public void saveAll( final Cup cup, final List<CupWinner> winners ) {
+		deleteAllWinners( cup );
+		saveAll( winners );
+	}
+
+	@Override
+	@Transactional
+	public void saveAll( final List<CupWinner> winners ) {
+		cupWinnerRepository.saveAll( winners );
+	}
+
+	@Override
+	@Transactional
+	public void deleteAllWinners( final Cup cup ) {
+		cupWinnerRepository.deleteAllWinners( cup );
+	}
 }

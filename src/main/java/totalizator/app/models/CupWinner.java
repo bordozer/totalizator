@@ -20,6 +20,10 @@ import static totalizator.app.models.CupWinner.*;
 		@NamedQuery(
 				name = LOAD_FOR_CUP_AND_TEAM,
 				query = "select t from CupWinner t where cupId= :cupId and teamId= :teamId"
+		),
+		@NamedQuery(
+				name = DELETE_ALL_CUP_WINNERS,
+				query = "delete from CupWinner t where cupId= :cupId"
 		)
 } )
 public class CupWinner extends AbstractEntity {
@@ -27,6 +31,7 @@ public class CupWinner extends AbstractEntity {
 	public static final String LOAD_ALL = "cupWinners.loadAll";
 	public static final String LOAD_FOR_CUP = "cupWinners.loadForCup";
 	public static final String LOAD_FOR_CUP_AND_TEAM = "cupWinners.loadForCupAndTeam";
+	public static final String DELETE_ALL_CUP_WINNERS = "cupWinners.DeleteAllForCup";
 
 	@ManyToOne
 	@JoinColumn(name="cupId")

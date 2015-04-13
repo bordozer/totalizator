@@ -202,6 +202,10 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
+			if ( this._isFinished() ) {
+				this.$( '.js-cup-data-form' ).attr('disabled', 'disabled');
+			}
+
 			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: dateTimeService.parseDate( model.cupStartDate ) } );
 
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
