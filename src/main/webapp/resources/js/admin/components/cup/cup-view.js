@@ -154,6 +154,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.categories = options.categories;
+			this.cupResults = []; // TODO: load saved results
 
 			this.model.on( 'sync', this.render, this )
 		},
@@ -192,7 +193,6 @@ define( function ( require ) {
 		_renderCupBets: function() {
 
 			var model = this.model.toJSON();
-			console.log( model ); // TODO!
 
 			var options = { el: this.$el
 				, categoryId: model.categoryId
@@ -200,10 +200,16 @@ define( function ( require ) {
 				, cupName: model.cupName
 				, logoUrl: model.logoUrl
 				, winnersCount: model.winnersCount
+				, cupResults: this.cupResults
 			};
 
 			var adminCupResults = new AdminCupResultsView( options );
-			this.listenTo( adminCupResults, 'events:cup-data-edit-tab', this.renderEdit );
+			this.listenTo( adminCupResults, 'events:cup-data-edit-tab', this._switchEditTab );
+		},
+
+		_switchEditTab: function( data ) {
+			this.cupResults = data;
+			this.renderEdit();
 		},
 
 		_getCategoryName: function( categoryId ) {

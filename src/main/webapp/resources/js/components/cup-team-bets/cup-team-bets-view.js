@@ -92,7 +92,7 @@ define( function ( require ) {
 
 				var teamId = self.$( '#cup-team-position-' + cupPosition ).val();
 
-				data.push( { teamId: teamId, cupPosition: cupPosition } );
+				data.push( { cupPosition: cupPosition, teamId: teamId } );
 			} );
 
 			return data;
