@@ -21,10 +21,15 @@ define( function ( require ) {
 
 		events: {
 			'click .js-cup-entry-save': '_onSaveClick'
-			, 'click .js-cup-entry-edit': '_onEditClick'
+			, 'click .js-cup-entry-edit': '_onSwitchToEditTabClick'
 		},
 
 		initialize: function ( options ) {
+			this.allTeams = service.loadTeams();
+		},
+
+		render: function ( options ) {
+
 			this.categoryId = options.categoryId;
 
 			this.cupId = options.cupId;
@@ -34,13 +39,7 @@ define( function ( require ) {
 
 			this.cupResults = options.cupResults;
 
-			this.allTeams = service.loadTeams();
 			this.teams = service.filterTeamsByCategory( this.allTeams, this.categoryId );
-
-			this.render();
-		},
-
-		render: function () {
 
 			var data = _.extend( {}, {
 				logoUrl: this.logoUrl
@@ -90,11 +89,11 @@ define( function ( require ) {
 			var data = this._bind();
 		},
 
-		_onEditClick: function( evt ) {
+		_onSwitchToEditTabClick: function( evt ) {
 			evt.preventDefault();
 
 			var data = this._bind();
-			console.log( data );
+			console.log( 'bind', data );
 
 			if ( ! this._validate( data ) ) {
 				return;

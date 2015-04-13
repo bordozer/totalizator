@@ -156,6 +156,9 @@ define( function ( require ) {
 			this.categories = options.categories;
 			this.cupResults = []; // TODO: load saved results
 
+			this.adminCupResults = new AdminCupResultsView( { el: this.$el } );
+			this.listenTo( this.adminCupResults, 'events:cup-data-edit-tab', this._switchEditTab );
+
 			this.model.on( 'sync', this.render, this )
 		},
 
@@ -194,8 +197,8 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
-			var options = { el: this.$el
-				, categoryId: model.categoryId
+			var options = {
+				categoryId: model.categoryId
 				, cupId: model.cupId
 				, cupName: model.cupName
 				, logoUrl: model.logoUrl
@@ -203,12 +206,12 @@ define( function ( require ) {
 				, cupResults: this.cupResults
 			};
 
-			var adminCupResults = new AdminCupResultsView( options );
-			this.listenTo( adminCupResults, 'events:cup-data-edit-tab', this._switchEditTab );
+			this.adminCupResults.render( options );
 		},
 
 		_switchEditTab: function( data ) {
 			this.cupResults = data;
+//			console.log( '_switchEditTab', this.cupResults ); // TODO: LOGGING
 			this.renderEdit();
 		},
 
