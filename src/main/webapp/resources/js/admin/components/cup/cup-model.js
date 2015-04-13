@@ -20,6 +20,7 @@ define( function ( require ) {
 			, showOnPortalPage: false
 			, logoUrl: ''
 			, isEditState: false
+			, cupResults: []
 		},
 
 		initialize: function ( options ) {

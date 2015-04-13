@@ -160,8 +160,6 @@ define( function ( require ) {
 			this.categories = options.categories;
 			this.allTeams = options.allTeams;
 
-			this.cupResults = []; // TODO: load saved results
-
 			this.adminCupResultsView = new AdminCupResultsView( { el: this.$el, allTeams: this.allTeams } );
 			this.listenTo( this.adminCupResultsView, 'events:cup-data-edit-tab', this._switchEditTab );
 
@@ -188,7 +186,7 @@ define( function ( require ) {
 
 			var self = this;
 			var cupWinners = [];
-			_.each( this.cupResults, function( result ) {
+			_.each( model.cupResults, function( result ) {
 				var cupPosition = result.cupPosition;
 				var teamId = result.teamId;
 
@@ -220,14 +218,14 @@ define( function ( require ) {
 				, cupName: model.cupName
 				, logoUrl: model.logoUrl
 				, winnersCount: model.winnersCount
-				, cupResults: this.cupResults
+				, cupResults: model.cupResults
 			};
 
 			this.adminCupResultsView.render( options );
 		},
 
 		_switchEditTab: function( data ) {
-			this.cupResults = data;
+			this.model.set( { cupResults: data } );
 			this.renderEdit();
 		},
 
@@ -248,6 +246,7 @@ define( function ( require ) {
 		},
 
 		_saveEntry: function() {
+
 			this._bind();
 
 			if( ! this._validate() ){
@@ -321,7 +320,7 @@ define( function ( require ) {
 		},
 
 		_isFinished: function() {
-			return this.cupResults.length > 0;
+			return this.model.get( 'cupResults' ).length > 0;
 		},
 
 		_getWinnersCount: function() {
