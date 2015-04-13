@@ -68,6 +68,8 @@ public class CupWinnerServiceImpl implements CupWinnerService {
 	@Override
 	@Transactional
 	public void deleteAllWinners( final Cup cup ) {
-		cupWinnerRepository.deleteAllWinners( cup );
+		for ( final CupWinner cupWinner : cupWinnerRepository.loadAll( cup ) ) {
+			cupWinnerRepository.delete( cupWinner.getId() );
+		}
 	}
 }

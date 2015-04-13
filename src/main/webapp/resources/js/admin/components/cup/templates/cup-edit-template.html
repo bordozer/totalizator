@@ -68,17 +68,21 @@
 				</tr>
 			</table>
 
-			<hr />
+			<% if( isCupFinished ) { %>
 
-			<% _.each( cupWinners, function( winner ) { %>
-			<div class="row">
-				<div class="col-lg-12">
-					<strong><%=winner.cupPosition%> <%= translator.cupPositionLabel %>:</strong>
-					<img src="<%=winner.team.teamLogo%>" height="32" />
-					<%=winner.team.teamName%>
+				<hr />
+
+				<% _.each( cupWinners, function( winner ) { %>
+				<div class="row">
+					<div class="col-lg-12">
+						<strong><%=winner.cupPosition%> <%= translator.cupPositionLabel %>:</strong>
+						<img src="<%=winner.team.teamLogo%>" height="32" />
+						<%=winner.team.teamName%>
+					</div>
 				</div>
-			</div>
-			<% })%>
+				<% })%>
+
+			<% } %>
 
 		</div>
 	</div>

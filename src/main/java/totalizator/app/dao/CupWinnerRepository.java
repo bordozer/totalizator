@@ -53,12 +53,6 @@ public class CupWinnerRepository implements GenericService<CupWinner> {
 				.getResultList();
 	}
 
-	public void deleteAllWinners( final Cup cup ) {
-		em.createNamedQuery( CupWinner.DELETE_ALL_CUP_WINNERS, CupWinner.class )
-				.setParameter( "cupId", cup.getId() )
-				.getResultList();
-	}
-
 	public void saveAll( final List<CupWinner> winners ) {
 		for ( final CupWinner winner : winners ) {
 			save( winner );

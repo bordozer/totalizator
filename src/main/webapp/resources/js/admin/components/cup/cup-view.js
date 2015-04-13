@@ -196,15 +196,18 @@ define( function ( require ) {
 				cupWinners.push( { cupPosition: cupPosition, team: team } );
 			});
 
+			var isCupFinished = this._isFinished();
+
 			this.$el.html( this.templateEdit( {
 				model: model
 				, categories: this.categories
 				, cupWinners: cupWinners
+				, isCupFinished: isCupFinished
 				, translator: translator
 			} ) );
 
-			if ( this._isFinished() ) {
-				this.$( '.js-cup-data-form' ).attr('disabled', 'disabled');
+			if ( isCupFinished ) {
+				this.$( '.js-cup-data-form' ).attr( 'disabled', 'disabled' );
 			}
 
 			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: dateTimeService.parseDate( model.cupStartDate ) } );
