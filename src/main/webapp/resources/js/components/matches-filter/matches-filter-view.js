@@ -53,8 +53,8 @@ define( function ( require ) {
 				model: model
 				, users: this.users
 				, categories: this.categories
-				, cups: service.categoryCups( this.cups, categoryId )
-				, teams: service.categoryTeams( this.teams, categoryId )
+				, cups: service.filterCupsByCategory( this.cups, categoryId )
+				, teams: service.filterTeamsByCategory( this.teams, categoryId )
 				, showFutureMatches: model.showFutureMatches
 				, showFinished: model.showFinished
 				, translator: translator

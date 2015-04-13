@@ -190,9 +190,18 @@ define( function ( require ) {
 		},
 
 		_renderCupBets: function() {
-			var model = this.model.toJSON();
 
-			var adminCupResults = new AdminCupResultsView( { el: this.$el, cupId: model.cupId, cupName: model.cupName, logoUrl: model.logoUrl } );
+			var model = this.model.toJSON();
+			console.log( model ); // TODO!
+
+			var options = { el: this.$el
+				, categoryId: model.categoryId
+				, cupId: model.cupId
+				, cupName: model.cupName
+				, logoUrl: model.logoUrl
+			};
+
+			var adminCupResults = new AdminCupResultsView( options );
 			this.listenTo( adminCupResults, 'events:cup-data-edit-tab', this.renderEdit );
 		},
 

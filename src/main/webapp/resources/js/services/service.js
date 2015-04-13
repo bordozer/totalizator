@@ -113,6 +113,7 @@ define( function ( require ) {
 			return categories.toJSON();
 		},
 
+		// TODO: limit by category
 		loadCups: function() {
 			var cups = new Cups( [], {} );
 			cups.fetch( { cache: false, async: false } );
@@ -120,6 +121,7 @@ define( function ( require ) {
 			return cups.toJSON();
 		},
 
+		// TODO: limit by category
 		loadTeams: function() {
 			var teams = new Teams( [], {} );
 			teams.fetch( { cache: false, async: false } );
@@ -127,37 +129,41 @@ define( function ( require ) {
 			return teams.toJSON();
 		},
 
+		// TODO: rename to find user
 		getUser: function( users, userId ) {
 			return _.find( users, function( user ) {
 				return user.userId == userId;
 			} );
 		},
 
+		// TODO: rename to find category
 		getCategory: function( categories, categoryId ) {
 			return _.find( categories, function( category ) {
 				return category.categoryId == categoryId;
 			} );
 		},
 
+		// TODO: rename to find cup
 		getCup: function( cups, cupId ) {
 			return _.find( cups, function( cup ) {
 				return cup.cupId == cupId;
 			} );
 		},
 
+		// TODO: rename to find team
 		getTeam: function( teams, teamId ) {
 			return _.find( teams, function( team ) {
 				return team.teamId == teamId;
 			} );
 		},
 
-		categoryCups: function( cups, categoryId ) {
+		filterCupsByCategory: function( cups, categoryId ) {
 			return _.filter( cups, function( cup ) {
 				return cup.category.categoryId == categoryId;
 			});
 		},
 
-		categoryTeams: function( teams, categoryId ) {
+		filterTeamsByCategory: function( teams, categoryId ) {
 			return _.filter( teams, function( team ) {
 				return team.category.categoryId == categoryId;
 			});

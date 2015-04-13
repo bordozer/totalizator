@@ -206,8 +206,8 @@ define( function ( require ) {
 
 			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
 
-			var cups = service.categoryCups( this.cups, categoryId );
-			var teams = service.categoryTeams( this.teams, categoryId );
+			var cups = service.filterCupsByCategory( this.cups, categoryId );
+			var teams = service.filterTeamsByCategory( this.teams, categoryId );
 			console.log( categoryId );
 
 			this.$el.html( templateEntryEdit( {

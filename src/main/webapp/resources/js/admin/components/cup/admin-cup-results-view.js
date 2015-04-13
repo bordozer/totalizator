@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/admin-cup-results-template.html' ) );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		cupEditDataTab: "Cup edit: Switch to edit data tab"
@@ -22,9 +24,15 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.categoryId = options.categoryId;
+
 			this.cupId = options.cupId;
-			this.logoUrl = options.logoUrl;
 			this.cupName = options.cupName;
+			this.logoUrl = options.logoUrl;
+
+			this.allTeams = service.loadTeams();
+			this.teams = service.filterTeamsByCategory( this.allTeams, this.categoryId );
+			console.log( this.teams );
 
 			this.render();
 		},
