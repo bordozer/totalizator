@@ -71,7 +71,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isNotTooLateForCupBetting( cup, currentUser ) );
 				cupEditDTO.setFinished( cup.isFinished() );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
-				cupEditDTO.setCupWinners( getCupWinners( cup, currentUser ) );
+				cupEditDTO.setCupWinners( getCupWinners( cup ) );
 
 				return cupEditDTO;
 			}
@@ -148,7 +148,7 @@ public class AdminCupsRestController {
 		cup.setShowOnPortalPage( cupEditDTO.isShowOnPortalPage() );
 	}
 
-	private List<CupWinnerDTO> getCupWinners( final Cup cup, final User user ) {
+	private List<CupWinnerDTO> getCupWinners( final Cup cup ) {
 
 		return Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, CupWinnerDTO>() {
 			@Override
