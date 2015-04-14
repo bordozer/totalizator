@@ -49,7 +49,7 @@ define( function ( require ) {
 		},
 
 		_renderMenu: function() {
-			mainMenu( this.mainMenuItems(), 'fa-list-alt', this.$( '.js-main-menu-container') );
+			mainMenu( this.mainMenuItems(), 'fa-list-alt', 'btn-default', this.$( '.js-main-menu-container') );
 		},
 
 		mainMenuItems: function() {

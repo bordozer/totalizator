@@ -15,6 +15,7 @@ define( function ( require ) {
 		initialize: function( options ) {
 			this.menus = options.menus;
 			this.icon = options.icon;
+			this.cssClass = options.cssClass;
 		},
 
 		render: function () {
@@ -23,6 +24,7 @@ define( function ( require ) {
 				model: this.model.toJSON()
 				, icon: this.icon
 				, menus: this.menus
+				, cssClass: this.cssClass
 			 } ) );
 
 			return this;

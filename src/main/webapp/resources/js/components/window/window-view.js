@@ -97,7 +97,7 @@ define( function ( require ) {
 		},
 
 		_renderDropDownMenu: function() {
-			mainMenu( this.menuItems, this.getIcon(), this.$( '.js-window-drop-down-menu') );
+			mainMenu( this.menuItems, this.getIcon(), 'btn-default', this.$( '.js-window-drop-down-menu') );
 		},
 
 		_onInnerViewRendered: function() {

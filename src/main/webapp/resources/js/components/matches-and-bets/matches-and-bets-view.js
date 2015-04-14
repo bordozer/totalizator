@@ -237,7 +237,7 @@ define( function ( require ) {
 				}
 			}
 
-			mainMenu( menuItems, 'fa-list', this.$( '.js-match-drop-down-menu') );
+			mainMenu( menuItems, 'fa-list', 'btn-default', this.$( '.js-match-drop-down-menu') );
 		},
 
 		_setMatchContainerClass: function( clazz ) {
