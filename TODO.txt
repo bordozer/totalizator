@@ -11,6 +11,7 @@ TO DO
 	2.2 Change menu option "Reset filters" behavior: reset filtering to default page values instead of cleaning up them
 	2.3 Do not show other match bets until match betting not finished
 	2.4 Implement 'compact' view for matches
+	2.5 Show 'home game' info
 
  3. Do not show other cup bets until cup betting not finished
 
@@ -40,6 +41,10 @@ TO DO
 12. UI language changing
 
 13. EN && UA translations
+
+14. Auto import games' data
+	http://espn.go.com/nba/teams ( ruby example http://danielfrg.com/blog/2013/04/01/nba-scraping-data/ )
+
 
 KNOWN BUGS
 1. Admin - reload matches after adding a match - a strange results are shown
