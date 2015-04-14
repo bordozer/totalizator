@@ -1,0 +1,33 @@
+TO DO
+
+1. Cup overview ( /totalizator/cups/1/ )
+	1.1 Starting time
+	1.2 Teams
+	1.3 User rating
+	1.4 All cup bets by users
+
+2. Match and bets
+	2.1 Match bets view - Category and Cup in settings have are mandatory
+	2.2 Change menu option "Reset filters" behavior: reset filtering to default page values instead of cleaning up them
+	2.3 Do not show other match bets until match betting not finished
+	2.4 Implement 'compact' view for matches
+
+3. Do not show other cup bets until cup betting not finished
+
+4. Cup betting security
+	4.1 Cup betting allowance
+	4.2  Match betting allowance
+
+5. Admin
+	5.1 Separate cups loading for admin and users
+	5.2 Save cup winners: validate team duplicating
+	5.3 Separate Categories / Cups / Teams to separate pages
+	5.4 Team list with search by first latter ( + quick search )
+	5.5 Cup edit: limit the teams that remains in the cup ( affects new match teams list and cup bets )
+
+6. Teams history of stands off
+
+7. Configurable view options: add second team of stands off ( allows using 'Matches'N'Bets' view for teams history of stands off )
+
+KNOWN BUGS
+1. Admin - reload matches after adding a match - a strange results are shown
