@@ -26,7 +26,7 @@ define( function ( require ) {
 		, newCupLabel: "Admin / Cups: New cup"
 		, entryEditCategoryLabel: "Category"
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
-		, entryEditShowOnPortalPageLabel: "Admin / Cups / Edit: Show on portal page label"
+		, entryEditShowOnPortalPageLabel: "Public cup"
 		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
 		, entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
 		, entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"

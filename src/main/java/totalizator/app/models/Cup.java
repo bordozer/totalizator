@@ -114,7 +114,7 @@ public class Cup extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return String.format( "#%d: '%s'", getId(), cupName );
+		return String.format( "%s: #%d: '%s'", category, getId(), cupName );
 	}
 
 	public String getLogoFileName() {
