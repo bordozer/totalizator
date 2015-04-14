@@ -115,7 +115,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 		}
 
 		if ( ! match.getCup().isReadyForMatchBets() ) {
-			return ValidationResult.fail( translatorService.translate( "Cup $1 is not open for bets at this moment", language, match.getCup().getCupName() ) );
+			return ValidationResult.fail( translatorService.translate( "Cup $1 is not open for game bets at this moment", language, match.getCup().getCupName() ) );
 		}
 
 		if ( match.isMatchFinished() ) {

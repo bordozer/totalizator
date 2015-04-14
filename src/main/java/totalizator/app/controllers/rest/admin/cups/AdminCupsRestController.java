@@ -48,9 +48,7 @@ public class AdminCupsRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
-	public List<CupEditDTO> entries( final Principal principal ) {
-
-		final User currentUser = userService.findByLogin( principal.getName() );
+	public List<CupEditDTO> entries() {
 
 		return Lists.transform( cupService.loadAll(), new Function<Cup, CupEditDTO>() {
 			@Override
@@ -68,7 +66,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
 				cupEditDTO.setReadyForCupBets( cup.isReadyForCupBets() );
 				cupEditDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
-				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isNotTooLateForCupBetting( cup, currentUser ) );
+				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isTooLateForCupBetting( cup ) );
 				cupEditDTO.setFinished( cup.isFinished() );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
 				cupEditDTO.setCupWinners( getCupWinners( cup ) );

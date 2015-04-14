@@ -1,5 +1,6 @@
 package totalizator.app.services;
 
+import totalizator.app.beans.ValidationResult;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
@@ -15,5 +16,9 @@ public interface CupBetsService extends GenericService<CupTeamBet> {
 
 	CupTeamBet load( final Cup cup, final User user, final Team team );
 
-	boolean isNotTooLateForCupBetting( final Cup cup, final User user );
+	boolean isTooLateForCupBetting( final Cup cup );
+
+	ValidationResult validateBettingAllowed( final Cup cup, final User user );
+
+	boolean isBettingAllowed( final Cup cup, final User user );
 }
