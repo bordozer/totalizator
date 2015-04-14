@@ -2,7 +2,7 @@
 	<button class="btn <%=cssClass%> dropdown-toggle fa <%=icon%>" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 		<span class="caret"></span>
 	</button>
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+	<ul class="dropdown-menu <%=cssClass%>" role="menu" aria-labelledby="dropdownMenu1">
 		<% _.each( menus, function( menu ) { %>
 
 			<% if( menu.selector != 'divider' ) { %>
