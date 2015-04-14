@@ -9,7 +9,7 @@
 
 	<translation>
 		<nerd>Cup betting is not allowed after cup start ( $1 )</nerd>
-		<ru><![CDATA[Ставки на результат чемпионата принимаются только до его начала ( $1 )]]></ru>
+		<ru><![CDATA[Ставки на результат чемпионата не принимаются после его начала ( $1 )]]></ru>
 	</translation>
 
 	<translation>
