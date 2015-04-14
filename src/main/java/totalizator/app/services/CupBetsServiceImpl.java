@@ -70,8 +70,13 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	@Override
-	public boolean isTooLateForCupBetting( final Cup cup ) {
+	public boolean isCupBettingFinished( final Cup cup ) {
 		return dateTimeService.getNow().isAfter( getCupLastBettingSecond( cup ) );
+	}
+
+	@Override
+	public boolean isMatchBettingFinished( final Cup cup ) {
+		return cup.isFinished();
 	}
 
 	@Override
@@ -83,11 +88,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, cup.getCupName() ) );
 		}
 
-		if ( ! cup.isReadyForCupBets() ) {
-			return ValidationResult.fail( translatorService.translate( "Cup $1 is not open for bets at this moment", language, cup.getCupName() ) );
-		}
-
-		if ( isTooLateForCupBetting( cup ) ) {
+		if ( isCupBettingFinished( cup ) ) {
 			return ValidationResult.fail( translatorService.translate( "It_s too late for betting. The betting was possible till $1", language, dateTimeService.formatDateTimeUI( getCupLastBettingSecond( cup ) ) ) );
 		}
 
@@ -95,7 +96,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	@Override
-	public boolean isBettingAllowed( final Cup cup, final User user ) {
+	public boolean canCupBeBet( final Cup cup, final User user ) {
 		return validateBettingAllowed( cup, user ).isPassed();
 	}
 

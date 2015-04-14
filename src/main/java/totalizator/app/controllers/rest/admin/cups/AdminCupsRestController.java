@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupWinnerDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
-import totalizator.app.models.User;
 import totalizator.app.services.*;
 
-import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -66,7 +64,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
 				cupEditDTO.setReadyForCupBets( cup.isReadyForCupBets() );
 				cupEditDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
-				cupEditDTO.setCupBettingIsAllowed( cupBetsService.isTooLateForCupBetting( cup ) );
+				cupEditDTO.setCupBettingIsAllowed( ! cupBetsService.isCupBettingFinished( cup ) );
 				cupEditDTO.setFinished( cup.isFinished() );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
 				cupEditDTO.setCupWinners( getCupWinners( cup ) );

@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface CupService extends GenericService<Cup>, NamedEntityGenericService<Cup> {
 
-	List<Cup> portalPageCups();
+	List<Cup> loadPublicActive();
+
+	List<Cup> loadPublicInactive();
 
 	void save( final Cup cup, final List<CupWinner> winners );
 }

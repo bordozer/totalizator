@@ -38,7 +38,7 @@ public class PortalPageController {
 	@RequestMapping( method = RequestMethod.GET, value = "" )
 	public String portalPage( final @ModelAttribute( MODEL_NAME ) PortalPageModel model, final Principal principal ) {
 
-		model.setCupsToShow( dtoService.transformCups( cupService.portalPageCups(), userService.findByLogin( principal.getName() ) ) );
+		model.setCupsToShow( dtoService.transformCups( cupService.loadPublicActive(), userService.findByLogin( principal.getName() ) ) );
 
 		model.setCupsToShowJSON( new Gson().toJson( model.getCupsToShow() ) );
 

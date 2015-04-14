@@ -33,12 +33,16 @@ public class Cup extends AbstractEntity {
 
 	private int winnersCount;
 
-	private boolean showOnPortalPage;
+	private boolean showOnPortalPage; // TODO: rename to 'publicCup'
 
 	private LocalDateTime cupStartTime;
 
+	@Deprecated
 	private boolean readyForCupBets;
+
+	@Deprecated
 	private boolean readyForMatchBets;
+
 	private boolean finished;
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
@@ -92,18 +96,22 @@ public class Cup extends AbstractEntity {
 		this.cupStartTime = cupStartTime;
 	}
 
+	@Deprecated
 	public boolean isReadyForCupBets() {
 		return readyForCupBets;
 	}
 
+	@Deprecated
 	public void setReadyForCupBets( final boolean readyForCupBets ) {
 		this.readyForCupBets = readyForCupBets;
 	}
 
+	@Deprecated
 	public boolean isReadyForMatchBets() {
 		return readyForMatchBets;
 	}
 
+	@Deprecated
 	public void setReadyForMatchBets( final boolean readyForMatchBets ) {
 		this.readyForMatchBets = readyForMatchBets;
 	}

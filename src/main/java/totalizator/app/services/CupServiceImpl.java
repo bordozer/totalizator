@@ -20,6 +20,9 @@ public class CupServiceImpl implements CupService {
 	@Autowired
 	private CupWinnerService cupWinnerService;
 
+	@Autowired
+	private CupBetsService cupBetsService;
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<Cup> loadAll() {
@@ -51,14 +54,28 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
-	public List<Cup> portalPageCups() {
+	public List<Cup> loadPublicActive() {
 
 		final List<Cup> portalPageCups = loadAll();
 
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isShowOnPortalPage();
+				return cup.isShowOnPortalPage() && ! cupBetsService.isMatchBettingFinished( cup );
+			}
+		} );
+
+		return portalPageCups;
+	}
+
+	@Override
+	public List<Cup> loadPublicInactive() {
+		final List<Cup> portalPageCups = loadAll();
+
+		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
+			@Override
+			public boolean evaluate( final Cup cup ) {
+				return cup.isShowOnPortalPage() && cupBetsService.isMatchBettingFinished( cup );
 			}
 		} );
 
