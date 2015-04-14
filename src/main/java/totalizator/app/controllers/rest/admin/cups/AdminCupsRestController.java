@@ -48,32 +48,7 @@ public class AdminCupsRestController {
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
 	public List<CupEditDTO> entries() {
 
-		return Lists.transform( cupService.loadAll(), new Function<Cup, CupEditDTO>() {
-			@Override
-			public CupEditDTO apply( final Cup cup ) {
-
-				final CupEditDTO cupEditDTO = new CupEditDTO();
-
-				cupEditDTO.setCupId( cup.getId() );
-				cupEditDTO.setCupName( cup.getCupName() );
-				cupEditDTO.setCategoryId( cup.getCategory().getId() );
-
-
-				cupEditDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
-				cupEditDTO.setWinnersCount( cup.getWinnersCount() );
-				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
-				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
-				cupEditDTO.setCupWinners( getCupWinners( cup ) );
-
-				cupEditDTO.setReadyForCupBets( ! cupBetsService.isCupBettingFinished( cup ) );
-				cupEditDTO.setReadyForMatchBets( ! cupBetsService.isMatchBettingFinished( cup ) );
-				cupEditDTO.setFinished( cupBetsService.isCupFinished( cup ) );
-
-				cupEditDTO.setCupBettingIsAllowed( ! cupBetsService.isCupBettingFinished( cup ) );
-
-				return cupEditDTO;
-			}
-		} );
+		return Lists.transform( cupService.loadAll(), getFunction() );
 	}
 
 	@ResponseStatus(HttpStatus.OK)
@@ -84,13 +59,11 @@ public class AdminCupsRestController {
 
 		final Cup cup = new Cup();
 
-		initFromDTO( cupEditDTO, cup );
+		initFromDTO( cup, cupEditDTO );
 
-		cupService.save( cup );
+		final Cup saved = cupService.save( cup );
 
-		cupEditDTO.setCupId( cup.getId() );
-
-		return cupEditDTO;
+		return getFunction().apply( saved );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -101,7 +74,7 @@ public class AdminCupsRestController {
 
 		final Cup cup = cupService.load( cupEditDTO.getCupId() );
 
-		initFromDTO( cupEditDTO, cup );
+		initFromDTO( cup, cupEditDTO );
 
 		final List<CupWinner> winners = Lists.transform( cupEditDTO.getCupWinners(), new Function<CupWinnerDTO, CupWinner>() {
 
@@ -116,9 +89,9 @@ public class AdminCupsRestController {
 			}
 		} );
 
-		cupService.save( cup, winners );
+		final Cup saved = cupService.save( cup, winners );
 
-		return cupEditDTO;
+		return getFunction().apply( saved );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -133,7 +106,7 @@ public class AdminCupsRestController {
 		cupService.delete( cupId );
 	}
 
-	private void initFromDTO( final CupEditDTO cupEditDTO, final Cup cup ) {
+	private void initFromDTO( final Cup cup, final CupEditDTO cupEditDTO ) {
 
 		cup.setCupName( cupEditDTO.getCupName() );
 		cup.setCategory( categoryService.load( cupEditDTO.getCategoryId() ) );
@@ -152,5 +125,34 @@ public class AdminCupsRestController {
 				return new CupWinnerDTO( cupWinner.getCup().getId(), cupWinner.getCupPosition(), cupWinner.getTeam().getId() );
 			}
 		} );
+	}
+
+	private Function<Cup, CupEditDTO> getFunction() {
+
+		return new Function<Cup, CupEditDTO>() {
+
+			@Override
+			public CupEditDTO apply( final Cup cup ) {
+
+				final CupEditDTO cupEditDTO = new CupEditDTO();
+
+				cupEditDTO.setCupId( cup.getId() );
+				cupEditDTO.setCupName( cup.getCupName() );
+				cupEditDTO.setCategoryId( cup.getCategory().getId() );
+
+
+				cupEditDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
+				cupEditDTO.setWinnersCount( cup.getWinnersCount() );
+				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
+				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
+				cupEditDTO.setCupWinners( getCupWinners( cup ) );
+
+				cupEditDTO.setReadyForCupBets( !cupBetsService.isCupBettingFinished( cup ) );
+				cupEditDTO.setReadyForMatchBets( !cupBetsService.isMatchBettingFinished( cup ) );
+				cupEditDTO.setFinished( cupBetsService.isCupFinished( cup ) );
+
+				return cupEditDTO;
+			}
+		};
 	}
 }

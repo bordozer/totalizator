@@ -24,7 +24,7 @@ public interface CupBetsService extends GenericService<CupTeamBet> {
 
 	boolean isMatchBettingFinished( final Cup cup );
 
-	ValidationResult validateBettingAllowed( final Cup cup, final User user );
+	ValidationResult validateBettingAllowed( final Cup cup );
 
 	boolean canCupBeBet( final Cup cup, final User user );
 }

@@ -94,7 +94,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	@Override
-	public ValidationResult validateBettingAllowed( final Cup cup, final User user ) {
+	public ValidationResult validateBettingAllowed( final Cup cup ) {
 
 		final Language language = Language.RU; // TODO: language!
 
@@ -111,6 +111,6 @@ public class CupBetsServiceImpl implements CupBetsService {
 
 	@Override
 	public boolean canCupBeBet( final Cup cup, final User user ) {
-		return validateBettingAllowed( cup, user ).isPassed();
+		return validateBettingAllowed( cup ).isPassed();
 	}
 }

@@ -84,12 +84,14 @@ public class CupServiceImpl implements CupService {
 
 	@Override
 	@Transactional
-	public void save( final Cup cup, final List<CupWinner> winners ) {
+	public Cup save( final Cup cup, final List<CupWinner> winners ) {
 
-		save( cup );
+		final Cup saved = save( cup );
 
 		cupWinnerService.deleteAllWinners( cup );
 
 		cupWinnerService.saveAll( winners );
+
+		return saved;
 	}
 }

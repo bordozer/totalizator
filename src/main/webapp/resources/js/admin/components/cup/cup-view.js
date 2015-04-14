@@ -211,7 +211,7 @@ define( function ( require ) {
 				this.$( 'input, select' ).attr( 'disabled', 'disabled' );
 			}
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: dateTimeService.parseDate( model.cupStartDate ) } );
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: model.cupStartDate } );
 
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
 

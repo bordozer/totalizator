@@ -3,6 +3,7 @@ package totalizator.app.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.beans.ValidationResult;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
@@ -22,7 +23,7 @@ public class CupDTO {
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
 
-	private boolean cupBettingIsAllowed; // TODO: replace with validation result
+	private ValidationResult cupBetAllowance;
 
 	private boolean finished;
 	private String logoUrl;
@@ -102,12 +103,12 @@ public class CupDTO {
 		this.readyForMatchBets = readyForMatchBets;
 	}
 
-	public boolean isCupBettingIsAllowed() {
-		return cupBettingIsAllowed;
+	public ValidationResult getCupBetAllowance() {
+		return cupBetAllowance;
 	}
 
-	public void setCupBettingIsAllowed( final boolean cupBettingIsAllowed ) {
-		this.cupBettingIsAllowed = cupBettingIsAllowed;
+	public void setCupBetAllowance( final ValidationResult cupBetAllowance ) {
+		this.cupBetAllowance = cupBetAllowance;
 	}
 
 	public boolean isFinished() {

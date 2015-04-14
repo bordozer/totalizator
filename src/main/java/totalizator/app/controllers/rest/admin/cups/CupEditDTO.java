@@ -1,5 +1,6 @@
 package totalizator.app.controllers.rest.admin.cups;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.CupWinnerDTO;
@@ -9,6 +10,9 @@ import totalizator.app.dto.serialization.DateTimeSerializer;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@JsonIgnoreProperties( value = {
+	"cupBetAllowance"
+} )
 public class CupEditDTO {
 
 	private int cupId;
@@ -20,7 +24,6 @@ public class CupEditDTO {
 
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
-	private boolean cupBettingIsAllowed;
 
 	private boolean finished;
 
@@ -86,14 +89,6 @@ public class CupEditDTO {
 
 	public void setReadyForMatchBets( final boolean readyForMatchBets ) {
 		this.readyForMatchBets = readyForMatchBets;
-	}
-
-	public boolean isCupBettingIsAllowed() {
-		return cupBettingIsAllowed;
-	}
-
-	public void setCupBettingIsAllowed( final boolean cupBettingIsAllowed ) {
-		this.cupBettingIsAllowed = cupBettingIsAllowed;
 	}
 
 	public boolean isFinished() {
