@@ -9,12 +9,14 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/match-bets-template.html' ) );
 
 	var service = require( '/resources/js/services/service.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Matches and bests"
 		, userLabel: "User"
 		, userPointsLabel: "Points"
+		, anotherBetsAreHidden: "Bets of another users will be shown after the match start"
 	} );
 
 	var MatchBetsView = Backbone.View.extend( {
@@ -37,9 +39,13 @@ define( function ( require ) {
 			console.log( model );
 
 			var match = model.match;
+
+			var matchBeginningTime = dateTimeService.formatDateDisplay( match.beginningTime );
+
 			var matchResults = service.matchResultsByMatch( match );
 
-			var data = _.extend( {}, model, { matchResults: matchResults, currentUser: this.currentUser, translator: translator } );
+			var data = _.extend( {}, model, { matchResults: matchResults, currentUser: this.currentUser, matchBeginningTime: matchBeginningTime, translator: translator } );
+
 			_.each( data.matchBets, function( matchBet ) {
 				var team1Id = match.team1.teamId;
 				var score1 = matchBet.bet.score1;
