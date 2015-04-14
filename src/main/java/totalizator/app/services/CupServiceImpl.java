@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CupRepository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
+import totalizator.app.services.utils.DateTimeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,6 +24,9 @@ public class CupServiceImpl implements CupService {
 
 	@Autowired
 	private CupBetsService cupBetsService;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -93,5 +98,15 @@ public class CupServiceImpl implements CupService {
 		cupWinnerService.saveAll( winners );
 
 		return saved;
+	}
+
+	@Override
+	public boolean isCupStarted( final Cup cup ) {
+		return dateTimeService.getNow().isAfter( cup.getCupStartTime() );
+	}
+
+	@Override
+	public boolean isCupFinished( final Cup cup ) {
+		return cupWinnerService.hasChampions( cup );
 	}
 }

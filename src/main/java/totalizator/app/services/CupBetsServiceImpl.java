@@ -13,13 +13,15 @@ import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class CupBetsServiceImpl implements CupBetsService {
 
-	private static final int STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS = 1; // TODO: mode to the settings
+
+	@Autowired
+	private CupService cupService;
+
 	@Autowired
 	private CupTeamBetRepository cupTeamBetRepository;
 
@@ -28,9 +30,6 @@ public class CupBetsServiceImpl implements CupBetsService {
 
 	@Autowired
 	private TranslatorService translatorService;
-
-	@Autowired
-	private CupWinnerService cupWinnerService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -73,24 +72,13 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	@Override
-	public boolean isCupStarted( final Cup cup ) {
-		final LocalDateTime cupLastBettingSecond = dateTimeService.minusHours( cup.getCupStartTime(), STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS );
-		return dateTimeService.getNow().isAfter( cupLastBettingSecond );
-	}
-
-	@Override
-	public boolean isCupFinished( final Cup cup ) {
-		return cupWinnerService.hasChampions( cup );
-	}
-
-	@Override
 	public boolean isCupBettingFinished( final Cup cup ) {
-		return isCupStarted( cup );
+		return cupService.isCupStarted( cup );
 	}
 
 	@Override
 	public boolean isMatchBettingFinished( final Cup cup ) {
-		return isCupFinished( cup );
+		return cupService.isCupFinished( cup );
 	}
 
 	@Override
@@ -98,7 +86,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 
 		final Language language = Language.RU; // TODO: language!
 
-		if ( isCupFinished( cup ) ) {
+		if ( cupService.isCupFinished( cup ) ) {
 			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, cup.getCupName() ) );
 		}
 

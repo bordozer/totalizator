@@ -27,6 +27,9 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	private MatchBetRepository matchBetRepository;
 
 	@Autowired
+	private CupService cupService;
+
+	@Autowired
 	private UserService userService;
 
 	@Autowired
@@ -109,24 +112,13 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
-	public boolean isMatchStarted( final Match match ) {
-		final LocalDateTime matchLastBettingSecond = dateTimeService.minusHours( match.getBeginningTime(), STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS );
-		return dateTimeService.getNow().isAfter( matchLastBettingSecond );
-	}
-
-	@Override
-	public boolean isMatchFinished( final Match match ) {
-		return match.isMatchFinished();
-	}
-
-	@Override
 	public ValidationResult validateBettingAllowed( final Match match, final User user ) {
 
 		final Language language = Language.RU; // TODO: language!
 
 		final Cup cup = match.getCup();
 
-		if ( cupBetsService.isCupFinished( cup ) ) {
+		if ( cupService.isCupFinished( cup ) ) {
 			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, cup.getCupName() ) );
 		}
 
@@ -134,11 +126,11 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 			return ValidationResult.fail( translatorService.translate( "Cup $1 is not open for game bets at this moment", language, cup.getCupName() ) );
 		}
 
-		if ( isMatchFinished( match ) ) {
+		if ( matchService.isMatchFinished( match ) ) {
 			return ValidationResult.fail( translatorService.translate( "Match is finished", language ) );
 		}
 
-		if ( isMatchStarted( match ) ) {
+		if ( matchService.isMatchStarted( match ) ) {
 			return ValidationResult.fail( translatorService.translate( "Match betting is not allowed after match start ( $1 )", language, dateTimeService.formatDateTimeUI( match.getBeginningTime() ) ) );
 		}
 
@@ -148,5 +140,10 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	public boolean canMatchBeBet( final Match match, final User user ) {
 		return validateBettingAllowed( match, user ).isPassed();
+	}
+
+	@Override
+	public boolean userCanSeeAnotherBets( final Match match, final User user ) {
+		return matchService.isMatchStarted( match );
 	}
 }

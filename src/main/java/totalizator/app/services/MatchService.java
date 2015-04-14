@@ -11,4 +11,8 @@ public interface MatchService extends GenericService<Match>{
 	List<Match> loadAll( final Cup cup );
 
 	List<Match> loadAll( final MatchesBetSettingsDTO dto );
+
+	boolean isMatchStarted( Match match );
+
+	boolean isMatchFinished( Match match );
 }

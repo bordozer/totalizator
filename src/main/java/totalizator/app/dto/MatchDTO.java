@@ -1,5 +1,6 @@
 package totalizator.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
@@ -7,6 +8,7 @@ import totalizator.app.dto.serialization.DateTimeSerializer;
 
 import java.time.LocalDateTime;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MatchDTO {
 
 	private int matchId;
@@ -22,7 +24,11 @@ public class MatchDTO {
 	private int score2;
 
 	private LocalDateTime beginningTime;
+
+	private boolean matchStarted;
 	private boolean matchFinished;
+
+	private boolean showAnotherBets;
 
 	public int getMatchId() {
 		return matchId;
@@ -96,6 +102,22 @@ public class MatchDTO {
 
 	public void setMatchFinished( final boolean matchFinished ) {
 		this.matchFinished = matchFinished;
+	}
+
+	public boolean isMatchStarted() {
+		return matchStarted;
+	}
+
+	public void setMatchStarted( final boolean matchStarted ) {
+		this.matchStarted = matchStarted;
+	}
+
+	public boolean isShowAnotherBets() {
+		return showAnotherBets;
+	}
+
+	public void setShowAnotherBets( final boolean showAnotherBets ) {
+		this.showAnotherBets = showAnotherBets;
 	}
 
 	@Override

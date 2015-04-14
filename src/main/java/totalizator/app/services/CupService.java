@@ -12,4 +12,8 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 	List<Cup> loadPublicInactive();
 
 	Cup save( final Cup cup, final List<CupWinner> winners );
+
+	boolean isCupStarted( Cup cup );
+
+	boolean isCupFinished( Cup cup );
 }

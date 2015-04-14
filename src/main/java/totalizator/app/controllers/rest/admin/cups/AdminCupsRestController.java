@@ -149,7 +149,8 @@ public class AdminCupsRestController {
 
 				cupEditDTO.setReadyForCupBets( !cupBetsService.isCupBettingFinished( cup ) );
 				cupEditDTO.setReadyForMatchBets( !cupBetsService.isMatchBettingFinished( cup ) );
-				cupEditDTO.setFinished( cupBetsService.isCupFinished( cup ) );
+
+				cupEditDTO.setFinished( cupService.isCupFinished( cup ) );
 
 				return cupEditDTO;
 			}

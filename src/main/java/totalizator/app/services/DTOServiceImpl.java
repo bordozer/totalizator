@@ -21,13 +21,16 @@ public class DTOServiceImpl implements DTOService {
 	private MatchBetsService matchBetsService;
 
 	@Autowired
+	private MatchService matchService;
+
+	@Autowired
 	private CupScoresService cupScoresService;
 
 	@Autowired
 	private CupBetsService cupBetsService;
 
 	@Autowired
-	private CupWinnerService cupWinnerService;
+	private CupService cupService;
 
 	@Override
 	public UserDTO transformUser( final User user ) {
@@ -140,9 +143,11 @@ public class DTOServiceImpl implements DTOService {
 				cupDTO.setCupStartDate( cup.getCupStartTime() );
 				cupDTO.setLogoUrl( logoService.getLogoURL( cup ) );
 
-				cupDTO.setReadyForCupBets( ! cupBetsService.isCupBettingFinished( cup ) );
-				cupDTO.setReadyForMatchBets( ! cupBetsService.isMatchBettingFinished( cup ) );
-				cupDTO.setFinished( cupBetsService.isCupFinished( cup ) );
+				cupDTO.setReadyForCupBets( !cupBetsService.isCupBettingFinished( cup ) );
+				cupDTO.setReadyForMatchBets( !cupBetsService.isMatchBettingFinished( cup ) );
+
+				cupDTO.setCupStarted( cupService.isCupStarted( cup ) );
+				cupDTO.setFinished( cupService.isCupFinished( cup ) );
 
 				cupDTO.setCupBetAllowance( cupBetsService.validateBettingAllowed( cup ) );
 
@@ -183,6 +188,9 @@ public class DTOServiceImpl implements DTOService {
 				dto.setBeginningTime( match.getBeginningTime() );
 
 				dto.setMatchFinished( match.isMatchFinished() );
+				dto.setMatchStarted( matchService.isMatchStarted( match ) );
+
+				dto.setShowAnotherBets( matchBetsService.userCanSeeAnotherBets( match, user )  );
 
 				return dto;
 			}

@@ -10,7 +10,9 @@ import totalizator.app.dao.MatchRepository;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
+import totalizator.app.services.utils.DateTimeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,10 +22,7 @@ public class MatchServiceImpl implements MatchService {
 	private MatchRepository matchRepository;
 
 	@Autowired
-	private CupService cupService;
-
-	@Autowired
-	private TeamService teamService;
+	private DateTimeService dateTimeService;
 
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
@@ -107,5 +106,15 @@ public class MatchServiceImpl implements MatchService {
 	@Transactional
 	public void delete( final int id ) {
 		matchRepository.delete( id );
+	}
+
+	@Override
+	public boolean isMatchStarted( final Match match ) {
+		return dateTimeService.getNow().isAfter( match.getBeginningTime() );
+	}
+
+	@Override
+	public boolean isMatchFinished( final Match match ) {
+		return match.isMatchFinished();
 	}
 }

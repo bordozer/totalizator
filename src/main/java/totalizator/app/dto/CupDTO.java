@@ -26,6 +26,8 @@ public class CupDTO {
 	private ValidationResult cupBetAllowance;
 
 	private boolean finished;
+	private boolean cupStarted;
+
 	private String logoUrl;
 
 	public CupDTO() {
@@ -119,9 +121,12 @@ public class CupDTO {
 		this.finished = finished;
 	}
 
-	@Override
-	public String toString() {
-		return String.format( "#%d %s", cupId, cupName );
+	public boolean isCupStarted() {
+		return cupStarted;
+	}
+
+	public void setCupStarted( final boolean cupStarted ) {
+		this.cupStarted = cupStarted;
 	}
 
 	public void setLogoUrl( final String logoUrl ) {
@@ -130,5 +135,10 @@ public class CupDTO {
 
 	public String getLogoUrl() {
 		return logoUrl;
+	}
+
+	@Override
+	public String toString() {
+		return String.format( "#%d %s", cupId, cupName );
 	}
 }

@@ -16,10 +16,6 @@ public interface CupBetsService extends GenericService<CupTeamBet> {
 
 	CupTeamBet load( final Cup cup, final User user, final Team team );
 
-	boolean isCupStarted( Cup cup );
-
-	boolean isCupFinished( Cup cup );
-
 	boolean isCupBettingFinished( final Cup cup );
 
 	boolean isMatchBettingFinished( final Cup cup );
