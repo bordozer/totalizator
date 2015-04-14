@@ -15,9 +15,9 @@ public interface CupWinnerService extends GenericService<CupWinner> {
 
 	void saveAll( final Cup cup, List<CupWinner> winners );
 
-	@Transactional
 	void saveAll( List<CupWinner> winners );
 
-	@Transactional
 	void deleteAllWinners( Cup cup );
+
+	boolean hasChampions( final Cup cup );
 }

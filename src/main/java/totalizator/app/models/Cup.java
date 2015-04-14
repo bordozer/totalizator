@@ -43,6 +43,7 @@ public class Cup extends AbstractEntity {
 	@Deprecated
 	private boolean readyForMatchBets;
 
+	@Deprecated
 	private boolean finished;
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
@@ -116,10 +117,12 @@ public class Cup extends AbstractEntity {
 		this.readyForMatchBets = readyForMatchBets;
 	}
 
+	@Deprecated
 	public boolean isFinished() {
 		return finished;
 	}
 
+	@Deprecated
 	public void setFinished( final boolean finished ) {
 		this.finished = finished;
 	}

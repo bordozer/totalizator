@@ -29,6 +29,9 @@ public class CupBetsServiceImpl implements CupBetsService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private CupWinnerService cupWinnerService;
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<CupTeamBet> loadAll() {
@@ -71,12 +74,12 @@ public class CupBetsServiceImpl implements CupBetsService {
 
 	@Override
 	public boolean isCupBettingFinished( final Cup cup ) {
-		return dateTimeService.getNow().isAfter( getCupLastBettingSecond( cup ) );
+		return cupHasStarted( cup );
 	}
 
 	@Override
 	public boolean isMatchBettingFinished( final Cup cup ) {
-		return cup.isFinished();
+		return cupWinnerService.hasChampions( cup );
 	}
 
 	@Override
@@ -98,6 +101,11 @@ public class CupBetsServiceImpl implements CupBetsService {
 	@Override
 	public boolean canCupBeBet( final Cup cup, final User user ) {
 		return validateBettingAllowed( cup, user ).isPassed();
+	}
+
+	private boolean cupHasStarted( final Cup cup ) {
+		final LocalDateTime cupLastBettingSecond = dateTimeService.minusHours( cup.getCupStartTime(), STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS );
+		return dateTimeService.getNow().isAfter( cupLastBettingSecond );
 	}
 
 	private LocalDateTime getCupLastBettingSecond( final Cup cup ) {

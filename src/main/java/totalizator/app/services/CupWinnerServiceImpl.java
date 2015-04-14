@@ -72,4 +72,9 @@ public class CupWinnerServiceImpl implements CupWinnerService {
 			cupWinnerRepository.delete( cupWinner.getId() );
 		}
 	}
+
+	@Override
+	public boolean hasChampions( final Cup cup ) {
+		return loadAll( cup ).size() > 0;
+	}
 }
