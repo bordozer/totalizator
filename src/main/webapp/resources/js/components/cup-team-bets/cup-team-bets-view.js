@@ -171,7 +171,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-money';
+			return 'fa-gift';
 		},
 
 		getTitleHint: function () {
