@@ -36,7 +36,6 @@ define( function ( require ) {
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 
 			var model = this.model.toJSON();
-			console.log( model );
 
 			var match = model.match;
 
