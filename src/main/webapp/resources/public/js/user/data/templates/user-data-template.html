@@ -6,8 +6,9 @@
 
 <div class="panel panel-info">
 
-	<div class="panel-heading">
-		<h3 class="panel-title text-center"><%=translator.newUserDataTitleLabel%></h3>
+	<div class="panel-heading text-left">
+		<span class="js-window-icon fa fa-user-plus"></span>
+		<%=translator.newUserDataTitleLabel%>
  	</div>
 
 	<div class="panel-body text-left">
@@ -51,9 +52,11 @@
 		</table>
 	</div>
 
-	<div class="panel-footer text-left">
-		<button type="button" class="fa fa-save save-button"> <%=translator.userDataSaveButtonLabel%></button>
-		<button type="button" class="fa fa-backward back-to-login-button" style="float: right"> <%=translator.userDataBackToLoginPageLabel%></button>
+	<div class="panel-footer clearfix">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default fa fa-backward back-to-login-button"> <%=translator.userDataBackToLoginPageLabel%></button>
+			<button type="button" class="btn btn-primary fa fa-save save-button"> <%=translator.userDataSaveButtonLabel%></button>
+		</div>
 	</div>
 
 </div>
