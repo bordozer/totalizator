@@ -62,12 +62,14 @@ public class AdminCupsRestController {
 				cupEditDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
 				cupEditDTO.setWinnersCount( cup.getWinnersCount() );
 				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
-				cupEditDTO.setReadyForCupBets( ! cupBetsService.isCupBettingFinished( cup ) );
-				cupEditDTO.setReadyForMatchBets( ! cupBetsService.isCupBettingFinished( cup ) );
-				cupEditDTO.setCupBettingIsAllowed( ! cupBetsService.isCupBettingFinished( cup ) );
-				cupEditDTO.setFinished( cupBetsService.isCupFinished( cup ) );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
 				cupEditDTO.setCupWinners( getCupWinners( cup ) );
+
+				cupEditDTO.setReadyForCupBets( ! cupBetsService.isCupBettingFinished( cup ) );
+				cupEditDTO.setReadyForMatchBets( ! cupBetsService.isMatchBettingFinished( cup ) );
+				cupEditDTO.setFinished( cupBetsService.isCupFinished( cup ) );
+
+				cupEditDTO.setCupBettingIsAllowed( ! cupBetsService.isCupBettingFinished( cup ) );
 
 				return cupEditDTO;
 			}
