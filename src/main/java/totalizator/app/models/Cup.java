@@ -37,9 +37,6 @@ public class Cup extends AbstractEntity {
 
 	private LocalDateTime cupStartTime;
 
-	@Deprecated
-	private boolean finished;
-
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
 
@@ -89,16 +86,6 @@ public class Cup extends AbstractEntity {
 
 	public void setCupStartTime( final LocalDateTime cupStartTime ) {
 		this.cupStartTime = cupStartTime;
-	}
-
-	@Deprecated
-	public boolean isFinished() {
-		return finished;
-	}
-
-	@Deprecated
-	public void setFinished( final boolean finished ) {
-		this.finished = finished;
 	}
 
 	@Override

@@ -141,7 +141,7 @@ public class DTOServiceImpl implements DTOService {
 				cupDTO.setReadyForMatchBets( ! cupBetsService.isMatchBettingFinished( cup ) );
 				cupDTO.setCupStartDate( cup.getCupStartTime() );
 				cupDTO.setCupBettingIsAllowed( ! cupBetsService.isCupBettingFinished( cup ) );
-				cupDTO.setFinished( cup.isFinished() );
+				cupDTO.setFinished( cupBetsService.isCupFinished( cup ) );
 				cupDTO.setLogoUrl( logoService.getLogoURL( cup ) );
 
 				return cupDTO;

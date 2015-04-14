@@ -65,7 +65,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setReadyForCupBets( ! cupBetsService.isCupBettingFinished( cup ) );
 				cupEditDTO.setReadyForMatchBets( ! cupBetsService.isCupBettingFinished( cup ) );
 				cupEditDTO.setCupBettingIsAllowed( ! cupBetsService.isCupBettingFinished( cup ) );
-				cupEditDTO.setFinished( cup.isFinished() );
+				cupEditDTO.setFinished( cupBetsService.isCupFinished( cup ) );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
 				cupEditDTO.setCupWinners( getCupWinners( cup ) );
 
