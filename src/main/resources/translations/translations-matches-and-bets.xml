@@ -78,13 +78,8 @@
 	</translation>
 
 	<translation>
-		<nerd>It_s too late for betting. The betting was possible till $1</nerd>
-		<ru><![CDATA[Возможность делать ставки истекла $1]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Match betting is not allowed after match start ( $1 )</nerd>
+		<ru><![CDATA[Ставки на игру не принимаются после начала игры ( $1 )]]></ru>
 	</translation>
 
 	<translation>

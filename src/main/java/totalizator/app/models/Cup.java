@@ -38,9 +38,6 @@ public class Cup extends AbstractEntity {
 	private LocalDateTime cupStartTime;
 
 	@Deprecated
-	private boolean readyForMatchBets;
-
-	@Deprecated
 	private boolean finished;
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
@@ -92,16 +89,6 @@ public class Cup extends AbstractEntity {
 
 	public void setCupStartTime( final LocalDateTime cupStartTime ) {
 		this.cupStartTime = cupStartTime;
-	}
-
-	@Deprecated
-	public boolean isReadyForMatchBets() {
-		return readyForMatchBets;
-	}
-
-	@Deprecated
-	public void setReadyForMatchBets( final boolean readyForMatchBets ) {
-		this.readyForMatchBets = readyForMatchBets;
 	}
 
 	@Deprecated

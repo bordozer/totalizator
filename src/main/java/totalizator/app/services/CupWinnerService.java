@@ -1,6 +1,5 @@
 package totalizator.app.services;
 
-import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;

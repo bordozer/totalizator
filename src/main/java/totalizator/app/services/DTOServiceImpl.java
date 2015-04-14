@@ -26,6 +26,9 @@ public class DTOServiceImpl implements DTOService {
 	@Autowired
 	private CupBetsService cupBetsService;
 
+	@Autowired
+	private CupWinnerService cupWinnerService;
+
 	@Override
 	public UserDTO transformUser( final User user ) {
 		return userFunction().apply( user );

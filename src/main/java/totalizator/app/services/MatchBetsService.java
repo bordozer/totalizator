@@ -24,5 +24,9 @@ public interface MatchBetsService extends GenericService<MatchBet>{
 
 	ValidationResult validateBettingAllowed( final Match match, final User user );
 
-	boolean isBettingAllowed( final Match match, final User user );
+	boolean isMatchFinished( Match match );
+
+	boolean canMatchBeBet( final Match match, final User user );
+
+	boolean isMatchStarted( Match match );
 }

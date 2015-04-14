@@ -38,6 +38,9 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private CupBetsService cupBetsService;
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll() {
@@ -106,39 +109,44 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
+	public boolean isMatchStarted( final Match match ) {
+		final LocalDateTime matchLastBettingSecond = dateTimeService.minusHours( match.getBeginningTime(), STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS );
+		return dateTimeService.getNow().isAfter( matchLastBettingSecond );
+	}
+
+	@Override
+	public boolean isMatchFinished( final Match match ) {
+		return match.isMatchFinished();
+	}
+
+	@Override
 	public ValidationResult validateBettingAllowed( final Match match, final User user ) {
 
 		final Language language = Language.RU; // TODO: language!
 
-		if ( match.getCup().isFinished() ) {
-			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, match.getCup().getCupName() ) );
+		final Cup cup = match.getCup();
+
+		if ( cupBetsService.isCupFinished( cup ) ) {
+			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, cup.getCupName() ) );
 		}
 
-		if ( ! match.getCup().isReadyForMatchBets() ) {
-			return ValidationResult.fail( translatorService.translate( "Cup $1 is not open for game bets at this moment", language, match.getCup().getCupName() ) );
+		if ( cupBetsService.isMatchBettingFinished( cup ) ) {
+			return ValidationResult.fail( translatorService.translate( "Cup $1 is not open for game bets at this moment", language, cup.getCupName() ) );
 		}
 
-		if ( match.isMatchFinished() ) {
+		if ( isMatchFinished( match ) ) {
 			return ValidationResult.fail( translatorService.translate( "Match is finished", language ) );
 		}
 
-		if ( isTooLateForMatchBetting( match ) ) {
-			return ValidationResult.fail( translatorService.translate( "It_s too late for betting. The betting was possible till $1", language, dateTimeService.formatDateTimeUI( getMatchLastBettingSecond( match ) ) ) );
+		if ( isMatchStarted( match ) ) {
+			return ValidationResult.fail( translatorService.translate( "Match betting is not allowed after match start ( $1 )", language, dateTimeService.formatDateTimeUI( match.getBeginningTime() ) ) );
 		}
 
 		return ValidationResult.pass();
 	}
 
 	@Override
-	public boolean isBettingAllowed( final Match match, final User user ) {
+	public boolean canMatchBeBet( final Match match, final User user ) {
 		return validateBettingAllowed( match, user ).isPassed();
-	}
-
-	private boolean isTooLateForMatchBetting( final Match match ) {
-		return dateTimeService.getNow().isAfter( getMatchLastBettingSecond( match ) );
-	}
-
-	private LocalDateTime getMatchLastBettingSecond( final Match match ) {
-		return dateTimeService.minusHours( match.getBeginningTime(), STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS );
 	}
 }

@@ -139,10 +139,6 @@ public class AdminCupsRestController {
 		cup.setCupStartTime( cupEditDTO.getCupStartDate() );
 		cup.setWinnersCount( cupEditDTO.getWinnersCount() );
 
-//		cup.setFinished( cupEditDTO.isFinished() );
-//		cup.setReadyForCupBets( cupEditDTO.isReadyForCupBets() );
-//		cup.setReadyForMatchBets( cupEditDTO.isReadyForMatchBets() );
-
 		cup.setShowOnPortalPage( cupEditDTO.isShowOnPortalPage() );
 	}
 

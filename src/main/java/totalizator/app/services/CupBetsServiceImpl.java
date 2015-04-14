@@ -73,13 +73,24 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	@Override
+	public boolean isCupStarted( final Cup cup ) {
+		final LocalDateTime cupLastBettingSecond = dateTimeService.minusHours( cup.getCupStartTime(), STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS );
+		return dateTimeService.getNow().isAfter( cupLastBettingSecond );
+	}
+
+	@Override
+	public boolean isCupFinished( final Cup cup ) {
+		return cupWinnerService.hasChampions( cup );
+	}
+
+	@Override
 	public boolean isCupBettingFinished( final Cup cup ) {
-		return cupHasStarted( cup );
+		return isCupStarted( cup );
 	}
 
 	@Override
 	public boolean isMatchBettingFinished( final Cup cup ) {
-		return cupWinnerService.hasChampions( cup );
+		return isCupFinished( cup );
 	}
 
 	@Override
@@ -87,12 +98,12 @@ public class CupBetsServiceImpl implements CupBetsService {
 
 		final Language language = Language.RU; // TODO: language!
 
-		if ( cup.isFinished() ) {
+		if ( isCupFinished( cup ) ) {
 			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, cup.getCupName() ) );
 		}
 
 		if ( isCupBettingFinished( cup ) ) {
-			return ValidationResult.fail( translatorService.translate( "It_s too late for betting. The betting was possible till $1", language, dateTimeService.formatDateTimeUI( getCupLastBettingSecond( cup ) ) ) );
+			return ValidationResult.fail( translatorService.translate( "Cup betting is not allowed after cup start ( $1 )", language, dateTimeService.formatDateTimeUI( cup.getCupStartTime() ) ) );
 		}
 
 		return ValidationResult.pass();
@@ -101,14 +112,5 @@ public class CupBetsServiceImpl implements CupBetsService {
 	@Override
 	public boolean canCupBeBet( final Cup cup, final User user ) {
 		return validateBettingAllowed( cup, user ).isPassed();
-	}
-
-	private boolean cupHasStarted( final Cup cup ) {
-		final LocalDateTime cupLastBettingSecond = dateTimeService.minusHours( cup.getCupStartTime(), STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS );
-		return dateTimeService.getNow().isAfter( cupLastBettingSecond );
-	}
-
-	private LocalDateTime getCupLastBettingSecond( final Cup cup ) {
-		return dateTimeService.minusHours( cup.getCupStartTime(), STOP_BETTING_BEFORE_CUP_BEGINNING_HOURS );
 	}
 }
