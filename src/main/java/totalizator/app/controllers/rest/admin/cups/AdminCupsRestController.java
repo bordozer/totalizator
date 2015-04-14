@@ -62,8 +62,8 @@ public class AdminCupsRestController {
 				cupEditDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
 				cupEditDTO.setWinnersCount( cup.getWinnersCount() );
 				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
-				cupEditDTO.setReadyForCupBets( cup.isReadyForCupBets() );
-				cupEditDTO.setReadyForMatchBets( cup.isReadyForMatchBets() );
+				cupEditDTO.setReadyForCupBets( ! cupBetsService.isCupBettingFinished( cup ) );
+				cupEditDTO.setReadyForMatchBets( ! cupBetsService.isCupBettingFinished( cup ) );
 				cupEditDTO.setCupBettingIsAllowed( ! cupBetsService.isCupBettingFinished( cup ) );
 				cupEditDTO.setFinished( cup.isFinished() );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
@@ -138,10 +138,10 @@ public class AdminCupsRestController {
 
 		cup.setCupStartTime( cupEditDTO.getCupStartDate() );
 		cup.setWinnersCount( cupEditDTO.getWinnersCount() );
-		cup.setFinished( cupEditDTO.isFinished() );
 
-		cup.setReadyForCupBets( cupEditDTO.isReadyForCupBets() );
-		cup.setReadyForMatchBets( cupEditDTO.isReadyForMatchBets() );
+//		cup.setFinished( cupEditDTO.isFinished() );
+//		cup.setReadyForCupBets( cupEditDTO.isReadyForCupBets() );
+//		cup.setReadyForMatchBets( cupEditDTO.isReadyForMatchBets() );
 
 		cup.setShowOnPortalPage( cupEditDTO.isShowOnPortalPage() );
 	}

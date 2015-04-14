@@ -22,7 +22,7 @@ public class CupDTO {
 	private boolean readyForCupBets;
 	private boolean readyForMatchBets;
 
-	private boolean cupBettingIsAllowed;
+	private boolean cupBettingIsAllowed; // TODO: replace with validation result
 
 	private boolean finished;
 	private String logoUrl;

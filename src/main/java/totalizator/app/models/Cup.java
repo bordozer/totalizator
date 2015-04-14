@@ -38,9 +38,6 @@ public class Cup extends AbstractEntity {
 	private LocalDateTime cupStartTime;
 
 	@Deprecated
-	private boolean readyForCupBets;
-
-	@Deprecated
 	private boolean readyForMatchBets;
 
 	@Deprecated
@@ -95,16 +92,6 @@ public class Cup extends AbstractEntity {
 
 	public void setCupStartTime( final LocalDateTime cupStartTime ) {
 		this.cupStartTime = cupStartTime;
-	}
-
-	@Deprecated
-	public boolean isReadyForCupBets() {
-		return readyForCupBets;
-	}
-
-	@Deprecated
-	public void setReadyForCupBets( final boolean readyForCupBets ) {
-		this.readyForCupBets = readyForCupBets;
 	}
 
 	@Deprecated
