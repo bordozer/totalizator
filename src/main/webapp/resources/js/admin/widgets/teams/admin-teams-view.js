@@ -8,8 +8,8 @@ define( function ( require ) {
 
 	var WidgetView = require( 'js/widgets/widget/widget-view' );
 
-	var TemplateEntry = require( 'text!./templates/team-template.html' );
-	var TemplateEntryEdit = require( 'text!./templates/team-edit-template.html' );
+	var TemplateEntry = require( 'text!./templates/admin-teams-entry-template.html' );
+	var TemplateEntryEdit = require( 'text!./templates/admin-teams-entry-edit-template.html' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );

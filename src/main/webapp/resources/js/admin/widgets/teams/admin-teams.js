@@ -6,8 +6,8 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './team-model' );
-	var View = require( './team-view' );
+	var Model = require( './admin-teams-model' );
+	var View = require( './admin-teams-view' );
 
 	function init( container ) {
 		var model = new Model.TeamsModel();
