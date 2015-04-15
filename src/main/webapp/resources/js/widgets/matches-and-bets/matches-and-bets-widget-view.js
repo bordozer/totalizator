@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
+	var ConfigurableView = require( 'js/widgets/widget-configurable/configurable-view' );
 
 	var templateMatch = _.template( require( 'text!./templates/matches-and-bets-entry-template.html' ) );
 
