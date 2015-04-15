@@ -10,7 +10,9 @@ define( function ( require ) {
 	var chosen = require( 'chosen' );
 
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
 	var service = require( '/resources/js/services/service.js' );
+	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
 
 	var ConfigurableView = require( 'js/components/configurable-view/configurable-view' );
 
@@ -71,6 +73,8 @@ define( function ( require ) {
 				model: this.model
 				, translator: translator
 			} ) );
+
+			this.cups = adminService.loadCups();
 
 			var self = this;
 			this.model.forEach( function( match ) {
