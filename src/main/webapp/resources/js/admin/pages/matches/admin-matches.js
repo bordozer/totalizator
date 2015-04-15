@@ -15,9 +15,9 @@ define( function( require ) {
 		, finishSelectedMatchesLabel: "Admin / Matches / Finish selected matches"
 	} );
 
-	function init( container ) {
+	function init( container, options ) {
 
-		var matchesModel = new Model.MatchesModel();
+		var matchesModel = new Model.MatchesModel( { options: options } );
 
 		var menuItems = [
 			{ selector: 'divider' }
@@ -29,8 +29,9 @@ define( function( require ) {
 			model: matchesModel
 			, el: container
 			, settings: {
-				categoryId: 0
-				, cupId: 0
+				userId: 0
+				, categoryId: options.categoryId
+				, cupId: options.cupId
 				, teamId: 0
 			}
 			, menuItems: menuItems

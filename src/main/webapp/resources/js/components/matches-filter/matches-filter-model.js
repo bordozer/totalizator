@@ -16,17 +16,11 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.settings = options;
 		},
 
 		reset: function() {
-			this.set( {
-				userId: 0
-				, categoryId: 0
-				, cupId: 0
-				, teamId: 0
-				, showFutureMatches: true
-				, showFinished: false
-			} );
+			this.set( this.settings );
 		}
 	});
 });

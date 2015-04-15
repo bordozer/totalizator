@@ -19,7 +19,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs } );
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: { categoryId: 1, cupId: 1 } } );
 			adminView.render();
 		} );
 	</script>
