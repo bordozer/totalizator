@@ -2,9 +2,9 @@ TO DO
 
  1. Cup overview ( /totalizator/cups/1/ )
 	1.1 Starting time
-	1.2 Teams
-	1.3 User rating
 	1.4 All cup bets by users
+	1.5 Bet statistics - bets count
+	1.6 Cup statistics - matches count
 
  2. Match and bets
 	2.3 Do not show other match bets until match betting not finished ( remains to implement for Matches'N'Bets view )
