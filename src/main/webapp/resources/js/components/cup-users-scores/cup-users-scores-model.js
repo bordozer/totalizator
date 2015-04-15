@@ -8,14 +8,14 @@ define( function ( require ) {
 
 	return Backbone.Model.extend( {
 
-		cupId: 0,
+		cup: {},
 
 		initialize: function ( options ) {
-			this.cupId = options.cupId;
+			this.cup = options.cup;
 		},
 
 		url: function() {
-			return '/rest/cups/' + this.cupId + '/scores/';
+			return '/rest/cups/' + this.cup.cupId + '/scores/';
 		},
 
 		refresh: function() {

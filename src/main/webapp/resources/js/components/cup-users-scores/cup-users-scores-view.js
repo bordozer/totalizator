@@ -29,7 +29,8 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			return translator.title;
+			var cup = this.model.cup;
+			return cup.category.categoryName + ' ' +  cup.cupName + ': ' +  translator.title;
 		},
 
 		getIcon: function () {

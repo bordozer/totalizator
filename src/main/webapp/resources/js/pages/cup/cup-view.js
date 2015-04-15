@@ -8,10 +8,14 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-template.html' ) );
 
+	var CupScoresModel = require( 'js/components/cup-users-scores/cup-users-scores-model' );
+	var CupScoresView = require( 'js/components/cup-users-scores/cup-users-scores-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Cup overview"
-		, bupBetsLabel: "Cup bets"
+		, cupBetsLabel: "Cup bets"
+		, cupTeamsLabel: "Cup teams"
 		, cupFinished: "Cup finished"
 	} );
 
@@ -28,18 +32,32 @@ define( function ( require ) {
 
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 
-			var model = this.model.toJSON();
+			var cup = this.model.toJSON();
 
 			var data = _.extend( {}
-					, model
 					, {
-						cupId: this.cupId
-						, isCupFinished: model.finished
+						cup: cup
 						, translator: translator
 					}
 			);
 
 			this.$el.html( template( data ) );
+
+			this._renderCupScores( cup );
+
+			return this;
+		},
+
+		_renderCupScores: function( cup ) {
+
+			var el = this.$( '.js-cup-scores' );
+
+			var model = new CupScoresModel( { cup: cup } );
+
+			var view = new CupScoresView( {
+				model: model
+				, el: el
+			} );
 		}
 	} );
 } );

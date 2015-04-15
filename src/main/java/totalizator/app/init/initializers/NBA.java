@@ -30,7 +30,7 @@ public class NBA extends AbstractDataInitializer {
 
 		final Cup nba2015Regular = new Cup( CUP_1, category );
 		nba2015Regular.setPublicCup( true );
-		nba2015Regular.setWinnersCount( 16 );
+		nba2015Regular.setWinnersCount( 4 );
 		nba2015Regular.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
 
 		session.persist( nba2015Regular );

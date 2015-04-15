@@ -9,10 +9,9 @@ define( function ( require ) {
 	var Model = require( './cup-users-scores-model' );
 	var View = require( './cup-users-scores-view' );
 
-	function init( cupId, container ) {
-
-		var model = new Model();
-		var view = new View( { model: model, el: container, cupId: cupId } );
+	function init( cup, container ) {
+		var model = new Model( { cup: cup } );
+		var view = new View( { model: model, el: container, cup: cup } );
 	}
 
 	return init;

@@ -1,9 +1,34 @@
-<ul>
-	<li>
-		<h3><a href="/totalizator/cups/<%=cupId%>/bets/"><%=translator.bupBetsLabel%></a></h3>
-	</li>
-</ul>
+<div class="row">
 
-<% if( isCupFinished ) { %>
+	<div class="col-lg-2">
+
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<img src="<%=cup.logoUrl%>" title="<%=cup.category.categoryName%>: <%=cup.cupName%>" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<ul>
+					<li>
+						<a href="/totalizator/cups/<%=cup.cupId%>/bets/"><%=translator.cupBetsLabel%></a>
+					</li>
+					<li>
+						<a href="/totalizator/cups/<%=cup.cupId%>/teams/"><%=translator.cupTeamsLabel%></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-lg-3 js-cup-scores">
+
+	</div>
+
+</div>
+
+<% if( cup.finished ) { %>
 	<%= translator.cupFinished %>
 <% } %>
