@@ -1,5 +1,7 @@
 package totalizator.app.controllers.rest.user.card;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -46,6 +48,12 @@ public class UserCardRestController {
 		for ( final MatchBet matchBet : matchBets ) {
 			cupsWhereUserHasBets.add( matchBet.getMatch().getCup() );
 		}
+		CollectionUtils.filter( cupsWhereUserHasBets, new Predicate<Cup>() {
+			@Override
+			public boolean evaluate( final Cup cup ) {
+				return cup.isPublicCup();
+			}
+		} );
 
 		final List<Cup> cups = newArrayList( cupsWhereUserHasBets );
 		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, user );
