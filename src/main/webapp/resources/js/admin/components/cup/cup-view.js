@@ -13,7 +13,7 @@ define( function ( require ) {
 
 	var AdminCupResultsView = require( './admin-cup-results-view' );
 
-	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
+	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );

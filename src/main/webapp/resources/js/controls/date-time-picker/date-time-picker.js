@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var datetimepicker = require( 'datetimepicker' );
 
-	var Template = require( 'text!./templates/datepicker-template.html' );
+	var Template = require( 'text!./templates/date-time-picker-template.html' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	return Backbone.View.extend( {

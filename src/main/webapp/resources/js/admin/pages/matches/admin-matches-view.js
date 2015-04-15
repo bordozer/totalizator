@@ -20,7 +20,7 @@ define( function ( require ) {
 	var templateEntry = _.template( require( 'text!./templates/admin-match-info-template.html' ) );
 	var templateEntryEdit = _.template( require( 'text!./templates/admin-match-edit-template.html' ) );
 
-	var DateTimePickerView = require( 'js/components/datepicker/datepickerView' );
+	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
