@@ -39,7 +39,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.categories = service.loadCategories();
-			this.cups = service.loadCups();
+			this.cups = options.cups;
 			this.teams = service.loadTeams();
 			this.users = service.loadUsers();
 		},

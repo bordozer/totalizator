@@ -13,7 +13,7 @@ define( function ( require ) {
 
 			$.ajax( {
 				method: 'GET',
-				url: '/admin/rest/cups/',
+				url: '/admin/rest/cups/all/',
 				async: false,
 				success: function ( data ) {
 					result = data;

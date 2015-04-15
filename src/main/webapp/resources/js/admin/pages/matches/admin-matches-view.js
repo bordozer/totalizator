@@ -65,6 +65,10 @@ define( function ( require ) {
 			return this.getTitleHint();
 		},
 
+		loadCups: function() {
+			return adminService.loadCups();
+		},
+
 		_renderCupMatchesAndBets: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
@@ -74,7 +78,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.cups = adminService.loadCups();
+			this.cups = this.loadCups();
 
 			var self = this;
 			this.model.forEach( function( match ) {

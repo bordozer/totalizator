@@ -53,6 +53,7 @@ define( function ( require ) {
 			this.settingsModel = new FilterModel( options.settings );
 			this.settingsView = new FilterView( {
 				model: this.settingsModel
+				, cups: this.loadCups()
 			} );
 
 			this.on( 'view:render', this.render, this );
@@ -81,8 +82,12 @@ define( function ( require ) {
 			return this;
 		},
 
-		renderInnerView: function( el, filter ) {
+		renderInnerView: function( filter ) {
 			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
+		},
+
+		loadCups: function() {
+			return service.loadCups();
 		},
 
 		_renderSettings: function() {
