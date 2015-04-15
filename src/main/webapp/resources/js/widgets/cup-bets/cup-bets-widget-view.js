@@ -6,8 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!./templates/cup-bets-template.html' ) );
-	var templateEdit = _.template( require( 'text!./templates/cup-bets-template-edit.html' ) );
+	var template = _.template( require( 'text!./templates/cup-bets-widget-template.html' ) );
+	var templateEdit = _.template( require( 'text!./templates/cup-bets-widget-template-edit.html' ) );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
