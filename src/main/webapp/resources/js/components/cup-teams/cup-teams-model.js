@@ -5,18 +5,7 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 
-	var Team = Backbone.Model.extend( {
-
-		defaults: {
-		},
-
-		initialize: function ( options ) {
-		}
-	} );
-
-	return Backbone.Collection.extend( {
-
-		model: Team,
+	return Backbone.Model.extend( {
 
 		initialize: function ( options ) {
 			this.cup = options.options.cup;

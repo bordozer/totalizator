@@ -33,14 +33,11 @@ define( function ( require ) {
 
 		_renderTeams: function () {
 
-			var data = _.extend( {}, { teams: this.model.toJSON(), letters: [ 'a', 'b', 'c' ], translator: translator } );
+			var model = this.model.toJSON();
+
+			var data = _.extend( {}, { teams: model.teams, letters: model.letters, translator: translator } );
 
 			this.setBody( template( data ) );
-
-			this.model.forEach( function( model ) {
-				var team = model.toJSON();
-
-			});
 
 			this.trigger( 'inner-view-rendered' );
 

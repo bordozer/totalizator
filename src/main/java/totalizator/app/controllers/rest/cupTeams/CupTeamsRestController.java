@@ -1,5 +1,7 @@
 package totalizator.app.controllers.rest.cupTeams;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +19,8 @@ import totalizator.app.services.TeamService;
 import java.security.Principal;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -35,13 +39,20 @@ public class CupTeamsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<TeamDTO> all( final @PathVariable( "cupId" ) int cupId
+	public CupTeamsDTO all( final @PathVariable( "cupId" ) int cupId
 			, @RequestParam(value = "letter", required = false) final String letter
 			, final Principal principal )
 	{
 		final Cup cup = cupService.load( cupId );
 
 		final List<Team> teams = teamService.loadAll( cup.getCategory() );
+
+		final List<String> letters = Lists.transform( newArrayList( teams ), new Function<Team, String>() {
+			@Override
+			public String apply( final Team team ) {
+				return team.getTeamName().substring( 0, 1 );
+			}
+		} );
 
 		if ( StringUtils.isNotEmpty( letter ) ) {
 			CollectionUtils.filter( teams, new Predicate<Team>() {
@@ -52,6 +63,7 @@ public class CupTeamsRestController {
 			} );
 		}
 
-		return dtoService.transformTeams( teams );
+
+		return new CupTeamsDTO( dtoService.transformTeams( teams ), newHashSet( letters ) );
 	}
 }
