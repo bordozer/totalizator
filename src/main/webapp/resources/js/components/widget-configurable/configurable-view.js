@@ -6,14 +6,14 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var FilterModel = require( 'js/widgets/widget-configurable/filter/matches-filter-model' );
-	var FilterView = require( 'js/widgets/widget-configurable/filter/matches-filter-view' );
+	var FilterModel = require( './filter/matches-filter-model' );
+	var FilterView = require( './filter/matches-filter-view' );
 
 	var service = require( '/resources/js/services/service.js' );
 
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
 
-	var WidgetView = require( 'js/widgets/widget/widget-view' );
+	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

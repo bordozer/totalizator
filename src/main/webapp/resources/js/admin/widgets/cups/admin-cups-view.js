@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var WidgetView = require( 'js/widgets/widget/widget-view' );
+	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var TemplateEntry = require( 'text!./templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/cup-edit-template.html' );

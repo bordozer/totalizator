@@ -32,6 +32,7 @@ define( function ( require ) {
 			];
 			this.addMenuItems( options.menuItems );
 
+
 			this.events = _.extend( this.builtinEvents, this.events );
 
 			this.on( 'view:render', this.render, this );

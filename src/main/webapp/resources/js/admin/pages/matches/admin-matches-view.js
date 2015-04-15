@@ -14,7 +14,7 @@ define( function ( require ) {
 	var service = require( '/resources/js/services/service.js' );
 	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
 
-	var ConfigurableView = require( 'js/widgets/widget-configurable/configurable-view' );
+	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
 	var templateList = _.template( require( 'text!./templates/admin-matches-template.html' ) );
 	var templateEntry = _.template( require( 'text!./templates/admin-match-info-template.html' ) );
