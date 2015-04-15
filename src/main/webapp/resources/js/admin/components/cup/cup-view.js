@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var WindowView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var TemplateEntry = require( 'text!./templates/cup-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/cup-edit-template.html' );
@@ -39,7 +39,7 @@ define( function ( require ) {
 		, cupPositionLabel: "cup position"
 	} );
 
-	var CupsView = WindowView.extend( {
+	var CupsView = WidgetView.extend( {
 
 		events: {
 			'click .js-new-cup-button': '_onAddClick'

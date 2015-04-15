@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-teams-template.html' ) );
 
-	var WindowView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -16,7 +16,7 @@ define( function ( require ) {
 		, allTeamsLabel: "All teams"
 	} );
 
-	return WindowView.extend( {
+	return WidgetView.extend( {
 
 		events: {
 			'click .js-cup-team-letter': '_onFilter'

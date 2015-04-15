@@ -9,7 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/cup-bets-template.html' ) );
 	var templateEdit = _.template( require( 'text!./templates/cup-bets-template-edit.html' ) );
 
-	var WindowView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );
@@ -119,7 +119,7 @@ define( function ( require ) {
 		}
 	} );
 
-	return WindowView.extend( {
+	return WidgetView.extend( {
 
 		events: {
 			'click .js-menu-edit-cup-bets': '_onEditCupTeamBetsClick'

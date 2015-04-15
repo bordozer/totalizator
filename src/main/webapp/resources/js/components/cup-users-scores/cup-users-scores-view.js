@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-users-scores-table-template.html' ) );
 
-	var WindowView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -17,7 +17,7 @@ define( function ( require ) {
 		, pointsColumn: 'Cup users scores: Points'
 	} );
 
-	return WindowView.extend( {
+	return WidgetView.extend( {
 
 		initialize: function ( options ) {
 			this.listenTo( this.model, 'sync', this._renderScores );

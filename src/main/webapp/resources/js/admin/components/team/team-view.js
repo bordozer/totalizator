@@ -6,7 +6,7 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var WindowView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var TemplateEntry = require( 'text!./templates/team-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/team-edit-template.html' );
@@ -20,7 +20,7 @@ define( function ( require ) {
 		, newTeamLabel: "Admin / Teams: New team"
 	} );
 
-	var TeamsView = WindowView.extend( {
+	var TeamsView = WidgetView.extend( {
 
 		events: {
 			'click .js-new-team-button': '_onAddClick'
