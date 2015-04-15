@@ -8,30 +8,51 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-teams-template.html' ) );
 
+	var WindowView = require( 'js/components/window/window-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: ""
+		title: "Teams"
 	} );
 
-	return Backbone.View.extend( {
+	return WindowView.extend( {
 
 		events: {
 
 		},
 
 		initialize: function ( options ) {
-			this.listenTo( this.model, 'sync', this.render );
+			this.listenTo( this.model, 'sync', this._renderTeams );
+			this.render();
+		},
+
+		renderBody: function () {
 			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
-			console.log( this.model.toJSON() );
+		_renderTeams: function () {
 
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var data = _.extend( {}, { teams: this.model.toJSON(), translator: translator } );
 
-			this.$el.html( template( data ) );
+			this.setBody( template( data ) );
+
+			this.model.forEach( function( model ) {
+				var team = model.toJSON();
+
+			});
+
+			this.trigger( 'inner-view-rendered' );
 
 			return this;
+		},
+
+		getTitle: function () {
+			var cup = this.model.cup;
+			return cup.category.categoryName + ' ' +  cup.cupName + ': ' +  translator.title;
+		},
+
+		getIcon: function () {
+			return 'fa-users';
 		}
 	} );
 } );

@@ -24,6 +24,14 @@ define( function ( require ) {
 
 		url: function () {
 			return '/rest/cups/' + this.cup.cupId + '/teams/';
+		},
+
+		load: function() {
+			this.fetch( { cache:false } );
+		},
+
+		loadStartedWith: function( letter ) {
+			this.fetch( { data: { letter: letter }, cache:false } );
 		}
 	} );
 } );

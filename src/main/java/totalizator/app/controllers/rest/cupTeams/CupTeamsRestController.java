@@ -1,11 +1,14 @@
 package totalizator.app.controllers.rest.cupTeams;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Cup;
+import totalizator.app.models.Team;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
@@ -34,5 +37,23 @@ public class CupTeamsRestController {
 	public List<TeamDTO> all( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 		final Cup cup = cupService.load( cupId );
 		return dtoService.transformTeams( teamService.loadAll( cup.getCategory() ) );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/{letter}/", produces = APPLICATION_JSON_VALUE )
+	public List<TeamDTO> filter( final @PathVariable( "cupId" ) int cupId, final @PathVariable( "letter" ) String letter, final Principal principal ) {
+
+		final Cup cup = cupService.load( cupId );
+
+		final List<Team> teams = teamService.loadAll( cup.getCategory() );
+		CollectionUtils.filter( teams, new Predicate<Team>() {
+			@Override
+			public boolean evaluate( final Team team ) {
+				return team.getTeamName().substring( 1 ).equalsIgnoreCase( letter );
+			}
+		} );
+
+		return dtoService.transformTeams( teams );
 	}
 }

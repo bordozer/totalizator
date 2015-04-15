@@ -1,1 +1,16 @@
-Cup teams
+<table class="table table-striped table-hover">
+
+	<tbody>
+
+		<% _.each( teams, function( team ) { %>
+			<tr>
+				<td>
+					<img src="<%-team.teamLogo%>" height="32" >
+					<a href="/totalizator/teams/<%=team.teamId%>/"><%-team.teamName%></a>
+				</td>
+			</tr>
+		<% })%>
+
+	</tbody>
+
+</table>
