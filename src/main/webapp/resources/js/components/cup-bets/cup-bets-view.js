@@ -6,8 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!./templates/cup-team-bets-template.html' ) );
-	var templateEdit = _.template( require( 'text!./templates/cup-team-bets-template-edit.html' ) );
+	var template = _.template( require( 'text!./templates/cup-bets-template.html' ) );
+	var templateEdit = _.template( require( 'text!./templates/cup-bets-template-edit.html' ) );
 
 	var WindowView = require( 'js/components/window/window-view' );
 	var service = require( '/resources/js/services/service.js' );
@@ -36,8 +36,8 @@ define( function ( require ) {
 	var CupTeamBetsEdit = Backbone.View.extend( {
 
 		events: {
-			'click .js-cup-team-bets-save': '_onSaveClick'
-			, 'click .js-cup-team-bets-discard ': '_onDiscardClick'
+			'click .js-cup-bets-save': '_onSaveClick'
+			, 'click .js-cup-bets-discard ': '_onDiscardClick'
 		},
 
 		initialize: function ( options ) {
@@ -121,7 +121,7 @@ define( function ( require ) {
 	return WindowView.extend( {
 
 		events: {
-			'click .js-menu-edit-cup-team-bets': '_onEditCupTeamBetsClick'
+			'click .js-menu-edit-cup-bets': '_onEditCupTeamBetsClick'
 		},
 
 		initialize: function ( options ) {
@@ -132,7 +132,7 @@ define( function ( require ) {
 			var menuItems = [
 				{ selector: 'divider' }
 				,
-				{ selector: 'js-menu-edit-cup-team-bets', icon: 'fa fa-edit', link: '#', text: translator.menuEditCupTeamBetsLabel }
+				{ selector: 'js-menu-edit-cup-bets', icon: 'fa fa-edit', link: '#', text: translator.menuEditCupTeamBetsLabel }
 			];
 			this.addMenuItems( menuItems );
 

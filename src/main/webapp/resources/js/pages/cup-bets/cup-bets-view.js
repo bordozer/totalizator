@@ -11,7 +11,7 @@ define( function ( require ) {
 	var MatchesModel = require( 'js/components/matches-and-bets/matches-and-bets-model' );
 	var MatchesView = require( 'js/components/matches-and-bets/matches-and-bets-view' );
 
-	var cupTeamBets = require( 'js/components/cup-team-bets/cup-team-bets' );
+	var cupTeamBets = require( 'js/components/cup-bets/cup-bets' );
 
 	var CupPageView = Backbone.View.extend( {
 
@@ -65,7 +65,7 @@ define( function ( require ) {
 
 		_renderCupBets: function() {
 
-			var el = this.$( '.js-cup-team-bets' );
+			var el = this.$( '.js-cup-bets' );
 
 			cupTeamBets( el, { cup: this._getCup(), currentUser: this.currentUser } );
 		},
