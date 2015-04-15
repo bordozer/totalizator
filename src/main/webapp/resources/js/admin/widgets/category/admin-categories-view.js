@@ -8,8 +8,8 @@ define( function ( require ) {
 
 	var WidgetView = require( 'js/widgets/widget/widget-view' );
 
-	var TemplateEntry = require( 'text!./templates/category-template.html' );
-	var TemplateEntryEdit = require( 'text!./templates/category-edit-template.html' );
+	var TemplateEntry = require( 'text!./templates/admin-categories-template.html' );
+	var TemplateEntryEdit = require( 'text!./templates/admin-categories-edit-template.html' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

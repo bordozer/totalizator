@@ -8,8 +8,8 @@ define( function ( require ) {
 
 	var Template = require( 'text!./templates/admin-template.html' );
 
-	var CategoriesModel = require( 'js/admin/components/category/category-model' );
-	var CategoriesView = require( 'js/admin/components/category/category-view' );
+	var CategoriesModel = require( 'js/admin/widgets/category/admin-categories-model' );
+	var CategoriesView = require( 'js/admin/widgets/category/admin-categories-view' );
 
 	var CupsModel = require( 'js/admin/components/cup/cup-model' );
 	var CupsView = require( 'js/admin/components/cup/cup-view' );
