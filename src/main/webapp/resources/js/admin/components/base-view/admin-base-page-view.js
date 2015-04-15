@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var PageView = require( 'js/components/base-view/base-page-view' );
 
-	var service = require( '/resources/js/services/service.js' );
+	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -29,6 +29,7 @@ define( function ( require ) {
 		},
 
 		mainMenuItems: function() {
+
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }
@@ -46,7 +47,7 @@ define( function ( require ) {
 		},
 
 		_reloadTranslations: function() {
-			service.reloadTranslations();
+			adminService.reloadTranslations();
 //			this.bodyView.render();
 			window.location.reload();
 		}

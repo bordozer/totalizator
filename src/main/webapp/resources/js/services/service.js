@@ -2,6 +2,9 @@ define( function ( require ) {
 
 	'use strict';
 
+	var $ = require( 'jquery' );
+	var _ = require( 'underscore' );
+
 	var Users = require( 'js/services/users-model' );
 
 	var Categories = require( 'js/models/categories-model' );
@@ -72,7 +75,6 @@ define( function ( require ) {
 				},
 				error: function() {
 					result = false;
-					console.log( teamPosition );
 				}
 			} );
 
@@ -183,16 +185,6 @@ define( function ( require ) {
 				},
 				error: function() {
 					alert( translator.logoutFailedMessage );
-				}
-			} )
-		},
-
-		reloadTranslations: function() {
-			$.ajax( {
-				method: 'GET',
-				url: '/admin/rest/translations/reload/',
-				success: function ( response ) {
-//					window.location.reload();
 				}
 			} )
 		}

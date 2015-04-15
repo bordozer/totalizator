@@ -115,7 +115,6 @@ define( function ( require ) {
 			this._fadeIn();
 
 			var model = this.model.toJSON();
-//			console.log( model );
 
 			var match = this.model.get( 'match' );
 			var isMatchFinished = match.matchFinished;

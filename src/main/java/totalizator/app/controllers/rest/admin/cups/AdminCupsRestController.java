@@ -44,7 +44,6 @@ public class AdminCupsRestController {
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
 	public List<CupEditDTO> entries() {
-
 		return Lists.transform( cupService.loadAll(), getFunction() );
 	}
 
