@@ -9,7 +9,7 @@ define( function ( require ) {
 	return Backbone.Collection.extend( {
 
 		initialize: function ( options ) {
-			this.url = '/rest/cups/navi/';
+			this.url = '/rest/cups/current/';
 		},
 
 		refresh: function() {

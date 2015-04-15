@@ -30,9 +30,6 @@ public class AdminCupsRestController {
 	private CupBetsService cupBetsService;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private TeamService teamService;
 
 	@Autowired

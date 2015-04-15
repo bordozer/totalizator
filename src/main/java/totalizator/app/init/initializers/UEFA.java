@@ -29,7 +29,7 @@ public class UEFA extends AbstractDataInitializer {
 	protected List<Cup> generateCups( final Category category, final Session session ) {
 
 		final Cup uefa2016Euro = new Cup( CUP_1, category );
-		uefa2016Euro.setPublicCup( true );
+		uefa2016Euro.setPublicCup( false );
 		uefa2016Euro.setWinnersCount( 3 );
 		uefa2016Euro.setCupStartTime( dateTimeService.parseDate( "10/06/2016 00:00" ) );
 		uefa2016Euro.setLogoFileName( "uefa-euro-2016-logo.png" );
@@ -39,6 +39,7 @@ public class UEFA extends AbstractDataInitializer {
 		uploadLogo( uefa2016Euro, "uefa-euro-2016-logo.png" );
 
 		final Cup uefa2018WorldCup = new Cup( CUP_2, category );
+		uefa2018WorldCup.setPublicCup( false );
 		uefa2018WorldCup.setWinnersCount( 3 );
 		uefa2018WorldCup.setCupStartTime( dateTimeService.parseDate( "14/06/2018 00:00" ) );
 		uefa2018WorldCup.setLogoFileName( "uefa-world-cup-2018-logo.png" );

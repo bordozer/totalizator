@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
+import totalizator.app.models.Cup;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
@@ -31,20 +32,26 @@ public class CupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> all( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadAll(), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.loadAllPublic(), userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/", produces = APPLICATION_JSON_VALUE )
 	public CupDTO getDefaultLogin( final Principal principal, final @PathVariable( "cupId" ) int cupId ) {
-		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
+		final Cup cup = cupService.load( cupId );
+
+		if ( ! cup.isPublicCup() ) {
+			throw new IllegalStateException( String.format( "Cup %s is not public", cup ) );
+		}
+
+		return dtoService.transformCup( cup, userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/navi/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/current/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> cupsToShow( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadCurrent(), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.loadAllCurrent(), userService.findByLogin( principal.getName() ) );
 	}
 }

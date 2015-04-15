@@ -58,14 +58,14 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
-	public List<Cup> loadCurrent() {
+	public List<Cup> loadAllPublic() {
 
 		final List<Cup> portalPageCups = loadAll();
 
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isPublicCup() && ! cupBetsService.isMatchBettingFinished( cup );
+				return cup.isPublicCup();
 			}
 		} );
 
@@ -73,13 +73,28 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
-	public List<Cup> loadPassed() {
-		final List<Cup> portalPageCups = loadAll();
+	public List<Cup> loadAllCurrent() {
+
+		final List<Cup> portalPageCups = loadAllPublic();
 
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isPublicCup() && cupBetsService.isMatchBettingFinished( cup );
+				return cup.isPublicCup();
+			}
+		} );
+
+		return portalPageCups;
+	}
+
+	@Override
+	public List<Cup> loadAllFinished() {
+		final List<Cup> portalPageCups = loadAllPublic();
+
+		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
+			@Override
+			public boolean evaluate( final Cup cup ) {
+				return cup.isPublicCup();
 			}
 		} );
 
