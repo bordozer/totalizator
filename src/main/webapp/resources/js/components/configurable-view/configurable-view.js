@@ -175,11 +175,15 @@ define( function ( require ) {
 				return;
 			}
 
+			this.settingsModel.saveAttributes();
+
 			this.render();
 		},
 
 		_onCloseSettingsClick: function( evt ) {
 			evt.preventDefault();
+
+			this.settingsModel.restoreAttributes();
 
 			this.render();
 		}
