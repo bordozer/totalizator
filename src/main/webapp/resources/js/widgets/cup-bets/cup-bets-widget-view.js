@@ -9,7 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/cup-bets-widget-template.html' ) );
 	var templateEdit = _.template( require( 'text!./templates/cup-bets-widget-template-edit.html' ) );
 
-	var WidgetView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/widgets/widget/widget-view' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );

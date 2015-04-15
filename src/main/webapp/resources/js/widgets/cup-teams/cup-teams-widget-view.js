@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-teams-widget-template.html' ) );
 
-	var WidgetView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/widgets/widget/widget-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

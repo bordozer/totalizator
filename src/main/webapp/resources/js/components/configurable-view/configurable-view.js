@@ -13,7 +13,7 @@ define( function ( require ) {
 
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
 
-	var WidgetView = require( 'js/components/widget/widget-view' );
+	var WidgetView = require( 'js/widgets/widget/widget-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
