@@ -1,5 +1,16 @@
 <table class="table table-striped table-hover">
 
+	<thead>
+		<tr>
+			<td>
+				<a href="#" onclick="return false;" data-letter="" class="js-cup-team-letter"><%-translator.allTeamsLabel%></a>
+				<% _.each( letters, function( letters ) { %>
+					<a href="#" onclick="return false;" data-letter="<%-letters%>" class="js-cup-team-letter"><%-letters%></a>
+				<% } ) %>
+			</td>
+		</tr>
+	</thead>
+
 	<tbody>
 
 		<% _.each( teams, function( team ) { %>

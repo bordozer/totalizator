@@ -2,6 +2,7 @@ package totalizator.app.controllers.rest.cupTeams;
 
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -34,25 +35,22 @@ public class CupTeamsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<TeamDTO> all( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
-		final Cup cup = cupService.load( cupId );
-		return dtoService.transformTeams( teamService.loadAll( cup.getCategory() ) );
-	}
-
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/{letter}/", produces = APPLICATION_JSON_VALUE )
-	public List<TeamDTO> filter( final @PathVariable( "cupId" ) int cupId, final @PathVariable( "letter" ) String letter, final Principal principal ) {
-
+	public List<TeamDTO> all( final @PathVariable( "cupId" ) int cupId
+			, @RequestParam(value = "letter", required = false) final String letter
+			, final Principal principal )
+	{
 		final Cup cup = cupService.load( cupId );
 
 		final List<Team> teams = teamService.loadAll( cup.getCategory() );
-		CollectionUtils.filter( teams, new Predicate<Team>() {
-			@Override
-			public boolean evaluate( final Team team ) {
-				return team.getTeamName().substring( 1 ).equalsIgnoreCase( letter );
-			}
-		} );
+
+		if ( StringUtils.isNotEmpty( letter ) ) {
+			CollectionUtils.filter( teams, new Predicate<Team>() {
+				@Override
+				public boolean evaluate( final Team team ) {
+					return team.getTeamName().substring( 0, 1 ).equalsIgnoreCase( letter );
+				}
+			} );
+		}
 
 		return dtoService.transformTeams( teams );
 	}

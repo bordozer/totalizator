@@ -13,12 +13,13 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Teams"
+		, allTeamsLabel: "All teams"
 	} );
 
 	return WindowView.extend( {
 
 		events: {
-
+			'click .js-cup-team-letter': '_onFilter'
 		},
 
 		initialize: function ( options ) {
@@ -32,7 +33,7 @@ define( function ( require ) {
 
 		_renderTeams: function () {
 
-			var data = _.extend( {}, { teams: this.model.toJSON(), translator: translator } );
+			var data = _.extend( {}, { teams: this.model.toJSON(), letters: [ 'a', 'b', 'c' ], translator: translator } );
 
 			this.setBody( template( data ) );
 
@@ -53,6 +54,13 @@ define( function ( require ) {
 
 		getIcon: function () {
 			return 'fa-users';
+		},
+
+		_onFilter: function( evt ) {
+			evt.preventDefault();
+
+			var letter = $( evt.target ).data( 'letter' );
+			this.model.loadStartedWith( letter );
 		}
 	} );
 } );
