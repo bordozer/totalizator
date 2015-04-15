@@ -8,8 +8,9 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-template.html' ) );
 
-	var CupScoresModel = require( 'js/components/cup-users-scores/cup-users-scores-model' );
-	var CupScoresView = require( 'js/components/cup-users-scores/cup-users-scores-view' );
+	var cupScores = require( 'js/components/cup-users-scores/cup-users-scores' );
+
+	var cupTeams = require( 'js/components/cup-teams/cup-teams' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -45,19 +46,17 @@ define( function ( require ) {
 
 			this._renderCupScores( cup );
 
+			this._renderCupTeams( cup );
+
 			return this;
 		},
 
 		_renderCupScores: function( cup ) {
+			cupScores( this.$( '.js-cup-scores' ), { cup: cup } );
+		},
 
-			var el = this.$( '.js-cup-scores' );
-
-			var model = new CupScoresModel( { cup: cup } );
-
-			var view = new CupScoresView( {
-				model: model
-				, el: el
-			} );
+		_renderCupTeams: function( cup ) {
+			cupTeams( this.$( '.js-cup-teams' ), { cup: cup } );
 		}
 	} );
 } );
