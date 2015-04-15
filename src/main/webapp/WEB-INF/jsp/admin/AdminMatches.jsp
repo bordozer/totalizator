@@ -1,9 +1,9 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="adminModel" type="totalizator.app.controllers.ui.admin.AdminModel" scope="request"/>
+<jsp:useBean id="adminMatchesModel" type="totalizator.app.controllers.ui.admin.matches.AdminMatchesModel" scope="request"/>
 
-<tags:page currentUser="${adminModel.currentUser}">
+<tags:page currentUser="${adminMatchesModel.currentUser}">
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 
@@ -19,7 +19,10 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: { categoryId: 1, cupId: 1 } } );
+			var categoryId = ${adminMatchesModel.categoryId};
+			var cupId = ${adminMatchesModel.cupId};
+
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: { categoryId: categoryId, cupId: cupId } } );
 			adminView.render();
 		} );
 	</script>

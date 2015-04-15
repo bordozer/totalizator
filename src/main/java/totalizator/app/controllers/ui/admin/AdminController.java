@@ -16,7 +16,6 @@ public class AdminController {
 	public static final String MODEL_NAME = "adminModel";
 
 	private static final String VIEW_MAIN_PAGE = "/admin/AdminPage";
-	private static final String VIEW_MATCHES = "/admin/AdminMatches";
 	private static final String VIEW_TRANSLATIONS = "/admin/Translations";
 
 	@Autowired
@@ -28,17 +27,12 @@ public class AdminController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String doLogin( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
+	public String main( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
 		return VIEW_MAIN_PAGE;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/matches/" )
-	public String matches( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
-		return VIEW_MATCHES;
-	}
-
 	@RequestMapping( method = RequestMethod.GET, value = "/translations/" )
-	public String getDefaultLogin( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
+	public String translations( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
 		return VIEW_TRANSLATIONS;
 	}
 }
