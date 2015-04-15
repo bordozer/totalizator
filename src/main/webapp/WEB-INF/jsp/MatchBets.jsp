@@ -12,7 +12,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/matches/bets/match-bets', 'translator' ], function ( $, Page, matchBet, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/match-bets/match-bets', 'translator' ], function ( $, Page, matchBet, Translator ) {
 
 			var cupId = ${matchBetsModel.match.cup.id};
 
