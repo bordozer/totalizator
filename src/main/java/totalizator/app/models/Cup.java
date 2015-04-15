@@ -33,7 +33,7 @@ public class Cup extends AbstractEntity {
 
 	private int winnersCount;
 
-	private boolean showOnPortalPage; // TODO: rename to 'publicCup'
+	private boolean publicCup;
 
 	private LocalDateTime cupStartTime;
 
@@ -72,12 +72,12 @@ public class Cup extends AbstractEntity {
 		this.winnersCount = winnersCount;
 	}
 
-	public boolean isShowOnPortalPage() {
-		return showOnPortalPage;
+	public boolean isPublicCup() {
+		return publicCup;
 	}
 
-	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
-		this.showOnPortalPage = showOnPortalPage;
+	public void setPublicCup( final boolean publicCup ) {
+		this.publicCup = publicCup;
 	}
 
 	public LocalDateTime getCupStartTime() {

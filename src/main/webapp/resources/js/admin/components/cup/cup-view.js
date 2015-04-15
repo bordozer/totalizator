@@ -26,7 +26,7 @@ define( function ( require ) {
 		, newCupLabel: "Admin / Cups: New cup"
 		, entryEditCategoryLabel: "Category"
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
-		, entryEditShowOnPortalPageLabel: "Public cup"
+		, entryEditPublicCupPageLabel: "Public cup"
 		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
 		, entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
 		, entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"
@@ -275,7 +275,7 @@ define( function ( require ) {
 		_bind: function() {
 			var cupName = this._getCupName();
 			var categoryId = this._getCategoryId();
-			var showOnPortalPage = this._isShowOnPortalPage();
+			var publicCup = this._isPublicCup();
 			var readyForCupBets = this._isReadyForCupBest();
 			var readyForMatchBets = this._isReadyForMatchBest();
 			var finished = this._isFinished();
@@ -285,7 +285,7 @@ define( function ( require ) {
 				cupName: cupName
 				, categoryId: categoryId
 				, winnersCount: winnersCount
-				, showOnPortalPage: showOnPortalPage
+				, publicCup: publicCup
 				, readyForCupBets: readyForCupBets
 				, readyForMatchBets: readyForMatchBets
 				, cupStartDate: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
@@ -325,7 +325,7 @@ define( function ( require ) {
 			return this.$( '.entry-category-id' ).val();
 		},
 
-		_isShowOnPortalPage: function() {
+		_isPublicCup: function() {
 			return this.$( '.show-on-portal-page-checkbox' ).is(':checked');
 		},
 

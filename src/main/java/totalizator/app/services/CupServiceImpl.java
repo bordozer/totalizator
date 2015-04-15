@@ -10,7 +10,6 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.services.utils.DateTimeService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -59,14 +58,14 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
-	public List<Cup> loadPublicActive() {
+	public List<Cup> loadCurrent() {
 
 		final List<Cup> portalPageCups = loadAll();
 
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isShowOnPortalPage() && ! cupBetsService.isMatchBettingFinished( cup );
+				return cup.isPublicCup() && ! cupBetsService.isMatchBettingFinished( cup );
 			}
 		} );
 
@@ -74,13 +73,13 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
-	public List<Cup> loadPublicInactive() {
+	public List<Cup> loadPassed() {
 		final List<Cup> portalPageCups = loadAll();
 
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isShowOnPortalPage() && cupBetsService.isMatchBettingFinished( cup );
+				return cup.isPublicCup() && cupBetsService.isMatchBettingFinished( cup );
 			}
 		} );
 

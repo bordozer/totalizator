@@ -6,7 +6,7 @@
 	<div class="col-lg-7 cup-entry-name" title="#<%=model.cupId%>, <%=translator.entryEditCupStartDateLabel%>: <%=cupStartDate%>">
 
 		<div class="admin-logo-icon"><img class="team-logo" src="<%=model.logoUrl%>" height="32"></div>
-		<div class="admin-icon"><span class="<%=model.showOnPortalPage ? 'fa fa-eye' : ''%>" title="<%=translator.entryEditShowOnPortalPageLabel%>" ></span></div>
+		<div class="admin-icon"><span class="<%=model.publicCup ? 'fa fa-eye' : ''%>" title="<%=translator.entryEditPublicCupPageLabel%>" ></span></div>
 		<div class="admin-icon"><span class="<%=model.readyForCupBets ? 'fa fa-diamond' : ''%>" title="<%=translator.entryEditReadyForCupBetsLabel%>" ></span></div>
 		<div class="admin-icon"><span class="<%=model.readyForMatchBets ? 'fa fa-money' : ''%>" title="<%=translator.entryEditReadyForMatchBetsLabel%>" ></span></div>
 		<div class="admin-icon"><span class=" <%=model.finished ? 'fa fa-flag-checkered' : ''%>" title="<%=translator.entryEditCupIsFinishedLabel%>" ></span></div>

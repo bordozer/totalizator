@@ -17,7 +17,7 @@ define( function ( require ) {
 			, readyForCupBets: false
 			, readyForMatchBets: false
 			, finished: false
-			, showOnPortalPage: false
+			, publicCup: false
 			, logoUrl: ''
 			, isEditState: false
 			, cupWinners: []

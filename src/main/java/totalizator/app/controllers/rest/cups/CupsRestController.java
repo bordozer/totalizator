@@ -45,6 +45,6 @@ public class CupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/navi/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> cupsToShow( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadPublicActive(), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.loadCurrent(), userService.findByLogin( principal.getName() ) );
 	}
 }

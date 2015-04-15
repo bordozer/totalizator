@@ -114,7 +114,7 @@ public class AdminCupsRestController {
 		cup.setCupStartTime( cupEditDTO.getCupStartDate() );
 		cup.setWinnersCount( cupEditDTO.getWinnersCount() );
 
-		cup.setShowOnPortalPage( cupEditDTO.isShowOnPortalPage() );
+		cup.setPublicCup( cupEditDTO.isPublicCup() );
 	}
 
 	private List<CupWinnerDTO> getCupWinners( final Cup cup ) {
@@ -141,7 +141,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setCategoryId( cup.getCategory().getId() );
 
 
-				cupEditDTO.setShowOnPortalPage( cup.isShowOnPortalPage() );
+				cupEditDTO.setPublicCup( cup.isPublicCup() );
 				cupEditDTO.setWinnersCount( cup.getWinnersCount() );
 				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );

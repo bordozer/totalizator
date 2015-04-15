@@ -29,7 +29,7 @@ public class UEFA extends AbstractDataInitializer {
 	protected List<Cup> generateCups( final Category category, final Session session ) {
 
 		final Cup uefa2016Euro = new Cup( CUP_1, category );
-		uefa2016Euro.setShowOnPortalPage( true );
+		uefa2016Euro.setPublicCup( true );
 		uefa2016Euro.setWinnersCount( 3 );
 		uefa2016Euro.setCupStartTime( dateTimeService.parseDate( "10/06/2016 00:00" ) );
 		uefa2016Euro.setLogoFileName( "uefa-euro-2016-logo.png" );

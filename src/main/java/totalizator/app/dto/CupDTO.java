@@ -16,7 +16,6 @@ public class CupDTO {
 	private String cupName;
 	private CategoryDTO category;
 	private int winnersCount;
-	private boolean showOnPortalPage;
 
 	private LocalDateTime cupStartDate;
 
@@ -61,14 +60,6 @@ public class CupDTO {
 
 	public void setCategory( final CategoryDTO category ) {
 		this.category = category;
-	}
-
-	public boolean isShowOnPortalPage() {
-		return showOnPortalPage;
-	}
-
-	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
-		this.showOnPortalPage = showOnPortalPage;
 	}
 
 	@JsonSerialize( using = DateTimeSerializer.class )

@@ -27,7 +27,7 @@ public class CupEditDTO {
 
 	private boolean finished;
 
-	private boolean showOnPortalPage;
+	private boolean publicCup;
 
 	private String logoUrl;
 
@@ -99,12 +99,12 @@ public class CupEditDTO {
 		this.finished = finished;
 	}
 
-	public boolean isShowOnPortalPage() {
-		return showOnPortalPage;
+	public boolean isPublicCup() {
+		return publicCup;
 	}
 
-	public void setShowOnPortalPage( final boolean showOnPortalPage ) {
-		this.showOnPortalPage = showOnPortalPage;
+	public void setPublicCup( final boolean publicCup ) {
+		this.publicCup = publicCup;
 	}
 
 	public String getLogoUrl() {

@@ -7,7 +7,6 @@ import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -30,14 +29,14 @@ public class NBA extends AbstractDataInitializer {
 	protected List<Cup> generateCups( final Category category, final Session session ) {
 
 		final Cup nba2015Regular = new Cup( CUP_1, category );
-		nba2015Regular.setShowOnPortalPage( true );
+		nba2015Regular.setPublicCup( true );
 		nba2015Regular.setWinnersCount( 16 );
 		nba2015Regular.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
 
 		session.persist( nba2015Regular );
 
 		final Cup nba2015PlayOff = new Cup( CUP_2, category );
-		nba2015PlayOff.setShowOnPortalPage( true );
+		nba2015PlayOff.setPublicCup( true );
 		nba2015PlayOff.setWinnersCount( 2 );
 		nba2015PlayOff.setCupStartTime( dateTimeService.parseDate( "18/04/2015 00:00" ) );
 
