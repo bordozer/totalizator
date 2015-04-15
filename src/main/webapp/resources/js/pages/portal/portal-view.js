@@ -8,8 +8,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/portal-template.html' ) );
 
-	var MatchesModel = require( 'js/components/matches-and-bets/matches-and-bets-model' );
-	var MatchesView = require( 'js/components/matches-and-bets/matches-and-bets-view' );
+	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
+	var MatchesView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

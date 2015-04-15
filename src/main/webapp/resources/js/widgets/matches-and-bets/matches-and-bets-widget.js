@@ -6,8 +6,8 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './matches-and-bets-model' );
-	var View = require( './matches-and-bets-view' );
+	var Model = require( './matches-and-bets-widget-model' );
+	var View = require( './matches-and-bets-widget-view' );
 
 	function init( container ) {
 		var model = new Model.MatchesModel();
