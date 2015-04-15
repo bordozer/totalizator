@@ -7,16 +7,13 @@ TO DO
 	1.4 All cup bets by users
 
  2. Match and bets
-	2.1 Match bets view - Category and Cup in settings have are mandatory
-	2.2 Change menu option "Reset filters" behavior: reset filtering to default page values instead of cleaning up them
-	2.3 Do not show other match bets until match betting not finished ( Matches'N'Bets on user page )
+	2.3 Do not show other match bets until match betting not finished ( remains to implement for Matches'N'Bets view )
 	2.4 Implement 'compact' view for matches
 	2.5 Refactor the view
 
- 3. Do not show other cup bets until cup betting not finished
+ 3. User page: Show user cups bets ( Note: Do not show other cup bets until cup betting not finished )
 
  5. Admin
-	5.1 Separate cups loading for admin and users
 	5.2 Save cup winners: validate team duplicating
 	5.3 Separate Categories / Cups / Teams to separate pages
 	5.4 Team list with search by first latter ( + quick search )
@@ -41,6 +38,8 @@ TO DO
 14. Auto import games' data
 	http://espn.go.com/nba/teams ( ruby example http://danielfrg.com/blog/2013/04/01/nba-scraping-data/ )
 	14.1 Show 'home game' info
+
+15. Cache
 
 
 KNOWN BUGS
