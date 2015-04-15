@@ -6,8 +6,8 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './cup-teams-model' );
-	var View = require( './cup-teams-view' );
+	var Model = require( './cup-teams-widget-model' );
+	var View = require( './cup-teams-widget-view' );
 
 	function init( container, options ) {
 

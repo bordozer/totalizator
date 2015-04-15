@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var cupScores = require( 'js/components/cup-users-scores/cup-users-scores' );
 
-	var cupTeams = require( 'js/components/cup-teams/cup-teams' );
+	var cupTeams = require( 'js/widgets/cup-teams/cup-teams-widget' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
