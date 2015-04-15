@@ -11,8 +11,8 @@ define( function ( require ) {
 	var CategoriesModel = require( 'js/admin/widgets/category/admin-categories-model' );
 	var CategoriesView = require( 'js/admin/widgets/category/admin-categories-view' );
 
-	var CupsModel = require( 'js/admin/components/cup/cup-model' );
-	var CupsView = require( 'js/admin/components/cup/cup-view' );
+	var CupsModel = require( 'js/admin/widgets/cup/admin-cups-model' );
+	var CupsView = require( 'js/admin/widgets/cup/admin-cups-view' );
 
 	var TeamsModel = require( 'js/admin/components/team/team-model' );
 	var TeamsView = require( 'js/admin/components/team/team-view' );
