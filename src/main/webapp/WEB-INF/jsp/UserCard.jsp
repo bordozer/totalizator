@@ -16,7 +16,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/user/card/user-card', 'translator' ], function ( $, Page, userCard, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/user-card/user-card', 'translator' ], function ( $, Page, userCard, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Users'
