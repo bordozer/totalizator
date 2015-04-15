@@ -34,6 +34,8 @@ define( function ( require ) {
 		, finishedMatchesAreShownLabel: 'Configurable view / Finished matches are shown'
 		, yes: 'yes'
 		, no: 'no'
+		, validationNoCategory: 'Configurable view / Filter: Validation: Select category'
+		, validationNoCup: 'Configurable view / Filter: Validation: Select cup'
 	} );
 
 	return WindowView.extend( {
@@ -130,6 +132,23 @@ define( function ( require ) {
 					+ translator.finishedMatchesAreShownLabel + ' - ' + ( showFinished ? translator.yes : translator.no );
 		},
 
+		_validateFilter: function() {
+
+			var categoryId = this.$( '#settings-category-id' ).val();
+			if ( categoryId == 0 ) {
+				alert( translator.validationNoCategory );
+				return false;
+			}
+
+			var cupId = this.$( '#settings-cup-id' ).val();
+			if ( cupId == 0 ) {
+				alert( translator.validationNoCup );
+				return false;
+			}
+
+			return true;
+		},
+
 		_onSettingsClick: function( evt ) {
 			evt.preventDefault();
 
@@ -146,6 +165,10 @@ define( function ( require ) {
 
 		_onSaveSettingsClick: function( evt ) {
 			evt.preventDefault();
+
+			if ( ! this._validateFilter() ) {
+				return;
+			}
 
 			this.render();
 		},
