@@ -9,6 +9,7 @@ import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
+import totalizator.app.models.User;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
@@ -43,6 +44,8 @@ public class MatchBetsRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bets/", produces = APPLICATION_JSON_VALUE )
 	public MatchBetsDTO matchBets( final @PathVariable( "matchId" ) int matchId, final Principal principal ) {
 
+		final User currentUser = userService.findByLogin( principal.getName() );
+
 		final Match match = matchService.load( matchId );
 
 		final Team team1 = match.getTeam1();
@@ -51,12 +54,34 @@ public class MatchBetsRestController {
 		final TeamDTO team1DTO = dtoService.transformTeam( team1 );
 		final TeamDTO team2DTO = dtoService.transformTeam( team2 );
 
+		final MatchBetsDTO result = new MatchBetsDTO();
+
+		result.setMatchId( matchId );
+
+		result.setMatch( dtoService.transformMatch( match, currentUser ) );
+
+		result.setTeam1( team1DTO );
+		result.setTeam2( team2DTO );
+
+		result.setMatchBets( getMatchBetDTOs( match, currentUser ) );
+
+		return result;
+	}
+
+	private List<MatchBetDTO> getMatchBetDTOs( final Match match, final User currentUser ) {
+
+		if ( ! matchBetsService.userCanSeeAnotherBets( match, currentUser ) ) {
+			return Collections.emptyList();
+		}
+
 		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
+
 
 		final List<MatchBet> matchBets = matchBetsService.loadAll( match );
 		for ( final MatchBet matchBet : matchBets ) {
 			matchBetsDTOs.add( dtoService.getMatchBetForMatch( match, matchBet.getUser() ) );
 		}
+
 		Collections.sort( matchBetsDTOs, new Comparator<MatchBetDTO>() {
 			@Override
 			public int compare( final MatchBetDTO o1, final MatchBetDTO o2 ) {
@@ -64,16 +89,6 @@ public class MatchBetsRestController {
 			}
 		} );
 
-		final MatchBetsDTO result = new MatchBetsDTO();
-
-		result.setMatchId( matchId );
-		result.setMatch( dtoService.transformMatch( match, userService.findByLogin( principal.getName() ) ) );
-
-		result.setTeam1( team1DTO );
-		result.setTeam2( team2DTO );
-
-		result.setMatchBets( matchBetsDTOs );
-
-		return result;
+		return matchBetsDTOs;
 	}
 }
