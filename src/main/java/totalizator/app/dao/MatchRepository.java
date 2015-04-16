@@ -4,10 +4,12 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
+import totalizator.app.models.Team;
 import totalizator.app.services.GenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -43,5 +45,9 @@ public class MatchRepository implements GenericService<Match> {
 	@Override
 	public void delete( final int id ) {
 		em.remove( load( id ) );
+	}
+
+	public Match find( final Team team1, final Team team11, final LocalDate gameDate ) {
+		return null; // TODO
 	}
 }

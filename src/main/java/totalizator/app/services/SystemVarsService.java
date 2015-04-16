@@ -1,5 +1,7 @@
 package totalizator.app.services;
 
+import java.io.File;
+
 public interface SystemVarsService {
 
 	String getDatabaseHost();
@@ -14,5 +16,5 @@ public interface SystemVarsService {
 
 	String getLogosPath();
 
-	String getImportedGamesStatisticsPath();
+	File getImportedGamesDataStoragePath();
 }

@@ -10,8 +10,10 @@ import totalizator.app.dao.MatchRepository;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
+import totalizator.app.models.Team;
 import totalizator.app.services.utils.DateTimeService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -116,5 +118,10 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public boolean isMatchFinished( final Match match ) {
 		return match.isMatchFinished();
+	}
+
+	@Override
+	public Match find( final Team team1, final Team team2, final LocalDate gameDate ) {
+		return matchRepository.find( team1, team1, gameDate );
 	}
 }
