@@ -32,6 +32,7 @@ public class NBAGameImportRunner extends Thread {
 
 			final boolean result = makeImport( gameId );
 			if ( ! result ) {
+				remoteGameDataImportService.stopImport();
 				break;
 			}
 
@@ -48,7 +49,7 @@ public class NBAGameImportRunner extends Thread {
 
 			LOGGER.error( String.format( "Remote game import finished. GameID: %s", nbaGameId ) );
 
-			return true;
+			return isGameImported;
 		} catch ( IOException e ) {
 			LOGGER.error( String.format( "Error during import starting. GameID: %s", nbaGameId ), e );
 		}
