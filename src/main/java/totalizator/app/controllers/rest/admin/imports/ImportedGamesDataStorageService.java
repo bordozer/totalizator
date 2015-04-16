@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public interface ImportedGamesDataStorageService {
 
-	String getGameData( final int remoteGameId ) throws IOException;
+	String getGameData( final String remoteGameId ) throws IOException;
 
-	void store( final int remoteGameId, final String gameJSON ) throws IOException;
+	void store( final String remoteGameId, final String gameJSON ) throws IOException;
 }

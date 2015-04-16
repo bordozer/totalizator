@@ -3,10 +3,7 @@ package totalizator.app.controllers.rest.admin.imports.nba;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import totalizator.app.controllers.rest.admin.imports.GamesDataImportMonitor;
-import totalizator.app.controllers.rest.admin.imports.ImportedGamesDataStorageService;
-import totalizator.app.controllers.rest.admin.imports.RemoteGame;
-import totalizator.app.controllers.rest.admin.imports.RemoteGameService;
+import totalizator.app.controllers.rest.admin.imports.*;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.MatchService;
@@ -17,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 @Service
-public class NBAImportServiceImpl implements NBAImportService {
+public class NBAGameDataImportService implements RemoteGameDataImportService {
 
 	@Autowired
 	private RemoteContentService remoteContentService;
@@ -52,11 +49,14 @@ public class NBAImportServiceImpl implements NBAImportService {
 	}
 
 	@Override
-	public boolean importGame( final int gameId ) throws IOException {
+	public boolean importGame( final String gameId ) throws IOException {
 
-		final String remoteGameJSON = getRemoteGameJSON( gameId );
+		final String gameJSON = getRemoteGameJSON( gameId );
+		if ( StringUtils.isEmpty( gameJSON ) ) {
+			return false;
+		}
 
-		final RemoteGame remoteGame = remoteGameService.parseGame( remoteGameJSON );
+		final RemoteGame remoteGame = remoteGameService.parseGame( gameJSON );
 		final String team1Name = remoteGame.getTeam1Name();
 		final String team2Name = remoteGame.getTeam2Name();
 		final LocalDate gameDate = remoteGame.getGameDate();
@@ -69,16 +69,18 @@ public class NBAImportServiceImpl implements NBAImportService {
 		return true;
 	}
 
-	private String getRemoteGameJSON( final int remoteGameId ) throws IOException {
+	private String getRemoteGameJSON( final String remoteGameId ) throws IOException {
 
 		final String gameData = importedGamesDataStorageService.getGameData( remoteGameId );
-		if ( StringUtils.isNoneEmpty( gameData ) ) {
+		if ( StringUtils.isNotEmpty( gameData ) ) {
 			return gameData;
 		}
 
-		final String gameJSON = remoteContentService.getRemoteContent( String.format( "http://stats.nba.com/stats/boxscore?GameID=%02d&RangeType=0&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0", remoteGameId ) );
+		final String gameJSON = remoteContentService.getRemoteContent( String.format( "http://stats.nba.com/stats/boxscore?GameID=%s&RangeType=0&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0", remoteGameId ) );
 
-		importedGamesDataStorageService.store( remoteGameId, gameJSON );
+		if ( StringUtils.isNotEmpty( gameJSON ) ) {
+//			importedGamesDataStorageService.store( remoteGameId, gameJSON ); // TODO: must be
+		}
 
 		return gameJSON;
 	}

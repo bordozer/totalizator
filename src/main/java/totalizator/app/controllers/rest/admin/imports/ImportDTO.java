@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.admin.imports.nba;
+package totalizator.app.controllers.rest.admin.imports;
 
 public class ImportDTO {
 

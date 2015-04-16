@@ -1,5 +1,6 @@
 package totalizator.app.controllers.rest.admin.imports;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.services.SystemVarsService;
@@ -13,15 +14,15 @@ public class ImportedGamesDataStorageServiceImpl implements ImportedGamesDataSto
 	private SystemVarsService systemVarsService;
 
 	@Override
-	public String getGameData( final int remoteGameId ) throws IOException {
+	public String getGameData( final String remoteGameId ) throws IOException {
 
 		final File file = getRemoteGameFile( remoteGameId );
 
-		if ( ! file.exists() || file.isDirectory() ) {
+		if ( !file.exists() || file.isDirectory() ) {
 			return null;
 		}
 
-		try (BufferedReader br = new BufferedReader( new FileReader( file ) ) ) {
+		try (BufferedReader br = new BufferedReader( new FileReader( file ) )) {
 
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
@@ -36,15 +37,23 @@ public class ImportedGamesDataStorageServiceImpl implements ImportedGamesDataSto
 	}
 
 	@Override
-	public void store( final int remoteGameId, final String gameJSON ) throws IOException {
-		new BufferedWriter( new FileWriter( getGameFilePath( remoteGameId ) ) ).write( gameJSON );
+	public void store( final String remoteGameId, final String gameJSON ) throws IOException {
+
+		final File gameFile = getRemoteGameFile( remoteGameId );
+		if ( gameFile.exists() ) {
+			FileUtils.deleteQuietly( gameFile );
+		}
+
+		final PrintWriter writer = new PrintWriter( getGameFilePath( remoteGameId ), "UTF-8" );
+		writer.println( gameJSON );
+		writer.close();
 	}
 
-	private File getRemoteGameFile( final int remoteGameId ) {
+	private File getRemoteGameFile( final String remoteGameId ) {
 		return new File( getGameFilePath( remoteGameId ) );
 	}
 
-	private String getGameFilePath( final int remoteGameId ) {
-		return String.format( "%s/%02d", systemVarsService.getImportedGamesDataStoragePath(), remoteGameId );
+	private String getGameFilePath( final String remoteGameId ) {
+		return String.format( "%s/%s", systemVarsService.getImportedGamesDataStoragePath(), remoteGameId );
 	}
 }
