@@ -24,8 +24,6 @@ public class NBAGameImportRunner extends Thread {
 	@Override
 	public void run() {
 
-		// TODO: increase initialGameId unless import result false
-
 		int gameId = initialGameId;
 
 		while ( true ) {

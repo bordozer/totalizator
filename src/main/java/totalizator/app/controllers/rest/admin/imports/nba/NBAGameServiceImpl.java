@@ -22,11 +22,11 @@ public class NBAGameServiceImpl implements RemoteGameService {
 
 		final String _team1City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 4 );
 		final String _team1 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 5 );
-		final Double score1 = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 2 ).get( "rowSet" ) ).get( 0 ) ).get( 21 );
+		final Double score1 = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 0 ) ).get( 21 );
 
 		final String _team2City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 9 );
 		final String _team2 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 10 );
-		final Double score2 = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 2 ).get( "rowSet" ) ).get( 1 ) ).get( 21 );
+		final Double score2 = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 1 ) ).get( 21 );
 
 		final boolean isFinal = ( ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 4 ) ).equals( "Final" );
 
