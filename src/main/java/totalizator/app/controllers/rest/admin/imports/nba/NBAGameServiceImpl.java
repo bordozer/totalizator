@@ -1,14 +1,15 @@
-package totalizator.app.controllers.rest.admin.imports;
+package totalizator.app.controllers.rest.admin.imports.nba;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
-import totalizator.app.controllers.rest.admin.imports.nba.NBAGame;
+import totalizator.app.controllers.rest.admin.imports.RemoteGame;
+import totalizator.app.controllers.rest.admin.imports.RemoteGameService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Service
-public class RemoteGameServiceImpl implements RemoteGameService {
+public class NBAGameServiceImpl implements RemoteGameService {
 
 	@Override
 	public RemoteGame parseGame( final String remoteGameJSON ) {
