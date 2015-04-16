@@ -27,7 +27,7 @@ define( function ( require ) {
 					alert( translator.error );
 				}
 			} );
-			console.log( result );
+
 			return result;
 		},
 
@@ -45,7 +45,7 @@ define( function ( require ) {
 					alert( translator.error );
 				}
 			} );
-			console.log( result );
+
 			return result;
 		}
 	}

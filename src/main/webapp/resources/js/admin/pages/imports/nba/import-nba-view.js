@@ -37,16 +37,32 @@ define( function ( require ) {
 			return this;
 		},
 
+		_startImport: function() {
+			var result = nbaImportService.startImport();
+			if ( result.importSuccessful ) {
+				this.$( '.js-import-start-icon' ).removeClass( 'fa-exchange' );
+				this.$( '.js-import-start-icon' ).addClass( 'fa-refresh fa-spin' );
+			}
+		},
+
+		_stopImport: function() {
+			var result = nbaImportService.stopImport();
+			if ( result.importSuccessful ) {
+				this.$( '.js-import-start-icon' ).removeClass( 'fa-refresh fa-spin' );
+				this.$( '.js-import-start-icon' ).addClass( 'fa-exchange' );
+			}
+		},
+
 		_onImportStart: function( evt ) {
 			evt.preventDefault();
 
-			nbaImportService.startImport();
+			this._startImport();
 		},
 
 		_onImportStop: function( evt ) {
 			evt.preventDefault();
 
-			nbaImportService.stopImport();
+			this._stopImport();
 		}
 	} );
 } );
