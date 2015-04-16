@@ -26,13 +26,33 @@ public class NBAGameImportRunner extends Thread {
 
 		// TODO: increase initialGameId unless import result false
 
-		final String gameId = String.format( "%010d", initialGameId );
+		int gameId = initialGameId;
+
+		while ( true ) {
+
+			final boolean result = makeImport( gameId );
+			if ( ! result ) {
+				break;
+			}
+
+			gameId++;
+		}
+	}
+
+	private boolean makeImport( final int gameId ) {
+
+		final String nbaGameId = String.format( "%010d", gameId );
 
 		try {
-			final boolean isGameImported = remoteGameDataImportService.importGame( cup, gameId );
-			LOGGER.error( String.format( "Remote game import finished. GameID: %s", gameId ) );
+			final boolean isGameImported = remoteGameDataImportService.importGame( cup, nbaGameId );
+
+			LOGGER.error( String.format( "Remote game import finished. GameID: %s", nbaGameId ) );
+
+			return true;
 		} catch ( IOException e ) {
-			LOGGER.error( String.format( "Error during import starting. GameID: %s", gameId ), e );
+			LOGGER.error( String.format( "Error during import starting. GameID: %s", nbaGameId ), e );
 		}
+
+		return false;
 	}
 }
