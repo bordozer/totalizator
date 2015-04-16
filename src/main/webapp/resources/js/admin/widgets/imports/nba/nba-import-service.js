@@ -18,7 +18,7 @@ define( function ( require ) {
 			var result = {};
 			$.ajax( {
 				method: 'get',
-				url: '/admin/rest/imports/nba/start/',
+				url: '/admin/rest/games-data-import/nba/start/',
 				async: false,
 				success: function ( response ) {
 					result = response;
@@ -36,7 +36,7 @@ define( function ( require ) {
 			var result = {};
 			$.ajax( {
 				method: 'get',
-				url: '/admin/rest/imports/nba/stop/',
+				url: '/admin/rest/games-data-import/nba/stop/',
 				async: false,
 				success: function ( response ) {
 					result = response;

@@ -10,14 +10,16 @@ define( function ( require ) {
 
 	var nbaImportService = require( './nba-import-service' );
 
+	var WidgetView = require( 'js/components/widget/widget-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: ""
+		title: "NBA games data import"
 		, startImport: "Start import"
 		, stopImport: "Stop import"
 	} );
 
-	return Backbone.View.extend( {
+	return WidgetView.extend( {
 
 		events: {
 			'click .js-import-start': '_onImportStart'
@@ -28,13 +30,23 @@ define( function ( require ) {
 			this.render();
 		},
 
-		render: function () {
+		renderBody: function () {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
-			this.$el.html( template( data ) );
+			this.$( this.windowBodyContainerSelector ).html( template( data ) );
+
+			this.trigger( 'inner-view-rendered' );
 
 			return this;
+		},
+
+		getTitle: function () {
+			return translator.title;
+		},
+
+		getIcon: function () {
+			return 'fa-exchange';
 		},
 
 		_startImport: function() {
