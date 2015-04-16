@@ -20,6 +20,8 @@ public class NBAGameImportRunner extends Thread {
 	@Override
 	public void run() {
 
+		// TODO: increase initialGameId unless import result false
+
 		final String gameId = String.format( "%010d", initialGameId );
 
 		try {
