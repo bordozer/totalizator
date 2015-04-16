@@ -16,6 +16,7 @@ define( function ( require ) {
 		, menuUsersLabel: 'Users'
 		, menuAdminLabel: 'Menu: Admin'
 		, menuMatchesLabel: 'Menu: Matches'
+		, importsNBALabel: 'Admin / Imports: NBA'
 		, menuUntranslatedListLabel: 'Menu: Untranslated list'
 		, menuReloadTranslationsLabel: 'Menu: Reload translations'
 		, menuLogoutLabel: 'Menu: Logout'
@@ -39,6 +40,10 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }
 				, { selector: 'divider' }
+
+				, { selector: '', icon: 'fa fa-exchange', link: '/admin/imports/nba/', text: translator.importsNBALabel }
+				, { selector: 'divider' }
+
 				, { selector: '', icon: 'fa fa-language', link: '/admin/translations/', text: translator.menuUntranslatedListLabel }
 				, { selector: 'admin-reload-translations', icon: 'fa fa-refresh', link: '#', text: translator.menuReloadTranslationsLabel }
 				, { selector: 'divider' }
