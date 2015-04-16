@@ -1,4 +1,4 @@
-package totalizator.app.controllers.ui.admin.imports.nba;
+package totalizator.app.controllers.ui.admin.imports;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,23 +10,23 @@ import totalizator.app.services.UserService;
 import java.security.Principal;
 
 @Controller
-@RequestMapping( "admin/imports/nba" )
-public class NBAImportController {
+@RequestMapping( "admin/games-data-import" )
+public class GamesDataImportController {
 
-	public static final String MODEL_NAME = "nbaImportModel";
+	public static final String MODEL_NAME = "gamesDataImportModel";
 
-	private static final String VIEW = "/admin/imports/NBA";
+	private static final String VIEW = "/admin/GamesDataImport";
 
 	@Autowired
 	private UserService userService;
 
 	@ModelAttribute( MODEL_NAME )
-	public NBAImportModel preparePagingModel( final Principal principal ) {
-		return new NBAImportModel( userService.findByLogin( principal.getName() ) );
+	public GamesDataImportModel preparePagingModel( final Principal principal ) {
+		return new GamesDataImportModel( userService.findByLogin( principal.getName() ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String main( final @ModelAttribute( MODEL_NAME ) NBAImportModel model ) {
+	public String main( final @ModelAttribute( MODEL_NAME ) GamesDataImportModel model ) {
 		return VIEW;
 	}
 }
