@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="col-lg-12 text-center">
 		<div class="btn-group" role="group" aria-label="...">
-			<button type="button" class="btn btn-default js-import-start">
-				<span class="fa fa-exchange js-import-start-icon"></span> <%=translator.startImport%>
+			<button type="button" class="btn btn-default js-import-start" title="<%=statusMessage%>">
+				<span class="fa <%= isImportingNow ? 'fa-refresh fa-spin' : 'fa-exchange'%>  js-import-start-icon"></span> <%=translator.startImport%>
 			</button>
 			<button type="button" class="btn btn-default js-import-stop">
 				<span class="fa fa-close"></span> <%=translator.stopImport%>

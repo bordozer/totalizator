@@ -47,6 +47,23 @@ define( function ( require ) {
 			} );
 
 			return result;
+		},
+
+		isImportingNow: function() {
+			var result = {};
+			$.ajax( {
+				method: 'get',
+				url: '/admin/rest/games-data-import/nba/state/',
+				async: false,
+				success: function ( response ) {
+					result = response;
+				},
+				error: function() {
+					alert( translator.error );
+				}
+			} );
+
+			return result;
 		}
 	}
 } );

@@ -32,7 +32,7 @@ public class NBAImportRestController {
 		final ImportDTO result = new ImportDTO();
 
 		if ( nbaImportService.isImportingNow() ) {
-			result.setImportSuccessful( false );
+			result.setRequestSuccessful( false );
 			result.setImportMessage( translatorService.translate( "Import is already going", getLanguage() ) );
 
 			return result;
@@ -40,7 +40,7 @@ public class NBAImportRestController {
 
 		nbaImportService.startImport();
 
-		result.setImportSuccessful( true );
+		result.setRequestSuccessful( true );
 		result.setImportMessage( translatorService.translate( "Import started", getLanguage() ) );
 
 		return result;
@@ -54,7 +54,7 @@ public class NBAImportRestController {
 		final ImportDTO result = new ImportDTO();
 
 		if ( ! nbaImportService.isImportingNow() ) {
-			result.setImportSuccessful( false );
+			result.setRequestSuccessful( false );
 			result.setImportMessage( translatorService.translate( "Import is not active", getLanguage() ) );
 
 			return result;
@@ -62,8 +62,28 @@ public class NBAImportRestController {
 
 		nbaImportService.stopImport();
 
-		result.setImportSuccessful( true );
+		result.setRequestSuccessful( true );
 		result.setImportMessage( translatorService.translate( "Import stopped", getLanguage() ) );
+
+		return result;
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/state/", produces = APPLICATION_JSON_VALUE )
+	public ImportDTO isImportingNow() {
+
+		final ImportDTO result = new ImportDTO();
+
+		final boolean isImportingNow = nbaImportService.isImportingNow();
+
+		result.setRequestSuccessful( isImportingNow );
+
+		if ( isImportingNow ) {
+			result.setImportMessage( translatorService.translate( "Import is going", getLanguage() ) );
+		} else {
+			result.setImportMessage( translatorService.translate( "Import is stopped", getLanguage() ) );
+		}
 
 		return result;
 	}

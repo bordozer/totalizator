@@ -2,15 +2,15 @@ package totalizator.app.controllers.rest.admin.imports.nba;
 
 public class ImportDTO {
 
-	private boolean importSuccessful;
+	private boolean requestSuccessful;
 	private String importMessage;
 
-	public boolean isImportSuccessful() {
-		return importSuccessful;
+	public boolean isRequestSuccessful() {
+		return requestSuccessful;
 	}
 
-	public void setImportSuccessful( final boolean importSuccessful ) {
-		this.importSuccessful = importSuccessful;
+	public void setRequestSuccessful( final boolean requestSuccessful ) {
+		this.requestSuccessful = requestSuccessful;
 	}
 
 	public String getImportMessage() {

@@ -43,6 +43,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Import is going</nerd>
+		<ru><![CDATA[Происходит импорт матчей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import is stopped</nerd>
+		<ru><![CDATA[Импорт матчей неактивен]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
