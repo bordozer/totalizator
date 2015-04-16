@@ -27,7 +27,7 @@ public class NCAAImport {
 
 	private void makeImport() throws IOException {
 
-		final String content = getRemotePageContent( "http://www.foxsports.com/college-basketball/teams" );
+		final String content = getRemoteContent( "http://www.foxsports.com/college-basketball/teams" );
 
 		final List<NCAATeam> teams = getTeams( content );
 
@@ -44,7 +44,7 @@ public class NCAAImport {
 			teamElement.addElement( "name" ).addText( teamName );
 			teamElement.addElement( "logo" ).addText( logoName );
 
-			final String imageContent = getImageContentFromUrl( team.logoURL );
+			final String imageContent = getRemoteContent( team.logoURL );
 
 			final File image = new File( TeamImportService.RESOURCES_DIR + "/ncaa/logos/" + logoName );
 			writeImageContentToFile( image, imageContent );
@@ -70,24 +70,6 @@ public class NCAAImport {
 
 	private String generateLogoName( final NCAATeam team ) {
 		return String.format( String.format( "%s %s.jpg", team.teamState, team.teamName ).trim() ).replace( " ", "_" ).replace( "'", "" );
-	}
-
-	public String getImageContentFromUrl( final String imageUrl ) {
-
-		final DefaultHttpClient httpClient = new DefaultHttpClient();
-
-		final HttpGet httpGet = new HttpGet( imageUrl );
-
-		try {
-			final ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			return httpClient.execute( httpGet, responseHandler ); // -XX:-LoopUnswitching
-		} catch ( final IOException e ) {
-			System.out.println( e );
-		} finally {
-			httpClient.getConnectionManager().shutdown();
-		}
-
-		return null;
 	}
 
 	private List<NCAATeam> getTeams( final String content ) {
@@ -127,7 +109,6 @@ public class NCAAImport {
 		}
 
 		return "";
-//		throw new IllegalStateException( String.format( "Can not extract team name: %s", teamSection ) );
 	}
 
 	private String getLogo( final String teamSection ) {
@@ -141,15 +122,15 @@ public class NCAAImport {
 		throw new IllegalStateException( String.format( "Can not extract team logo: %s", teamSection ) );
 	}
 
-	public String getRemotePageContent( final String pageUrl ) {
+	public String getRemoteContent( final String url ) {
 
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
-		final HttpGet httpGet = new HttpGet( pageUrl );
+		final HttpGet httpGet = new HttpGet( url );
 
 		try {
 			final ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			return httpClient.execute( httpGet, responseHandler ); // -XX:-LoopUnswitching
+			return httpClient.execute( httpGet, responseHandler );
 		} catch ( final IOException e ) {
 			System.out.println( e );
 		} finally {

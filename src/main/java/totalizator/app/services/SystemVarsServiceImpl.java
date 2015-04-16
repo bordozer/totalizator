@@ -74,6 +74,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 		return config.getString( "system.logos.path" );
 	}
 
+	@Override
+	public String getImportedGamesStatisticsPath() {
+		return config.getString( "system.imports.path" );
+	}
+
 	private File getPropertyFile( final String fileName ) {
 		return new File( String.format( "%s/%s.properties", getPropertiesPath(), fileName ) );
 	}

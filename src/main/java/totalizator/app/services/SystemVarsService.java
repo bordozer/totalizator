@@ -13,4 +13,6 @@ public interface SystemVarsService {
 	String getDatabaseUserPassword();
 
 	String getLogosPath();
+
+	String getImportedGamesStatisticsPath();
 }
