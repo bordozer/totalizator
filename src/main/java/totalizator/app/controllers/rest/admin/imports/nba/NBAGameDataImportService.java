@@ -79,7 +79,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 		final String gameJSON = remoteContentService.getRemoteContent( String.format( "http://stats.nba.com/stats/boxscore?GameID=%s&RangeType=0&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0", remoteGameId ) );
 
 		if ( StringUtils.isNotEmpty( gameJSON ) ) {
-//			importedGamesDataStorageService.store( remoteGameId, gameJSON ); // TODO: must be
+			importedGamesDataStorageService.store( remoteGameId, gameJSON );
 		}
 
 		return gameJSON;
