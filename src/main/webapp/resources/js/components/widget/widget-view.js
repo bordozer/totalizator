@@ -97,6 +97,10 @@ define( function ( require ) {
 			}
 		},
 
+		footerText: function( text ) {
+			this.$( '.js-footer' ).text( text );
+		},
+
 		_renderDropDownMenu: function() {
 			mainMenu( this.menuItems, this.getIcon(), 'btn-default', this.$( '.js-window-drop-down-menu') );
 		},

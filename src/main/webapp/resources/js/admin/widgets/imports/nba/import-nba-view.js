@@ -33,10 +33,10 @@ define( function ( require ) {
 		renderBody: function () {
 
 			this.importStatus = nbaImportService.isImportingNow();
+			this.footerText( this.importStatus.importMessage );
 
 			var data = _.extend( {}, this.model.toJSON(), {
 				isImportingNow: this.importStatus.requestSuccessful
-				, statusMessage: this.importStatus.importMessage
 				,translator: translator
 			} );
 
@@ -57,20 +57,18 @@ define( function ( require ) {
 
 		_startImport: function() {
 			var result = nbaImportService.startImport();
+
 			this.renderBody();
-			/*if ( result.requestSuccessful ) {
-				this.$( '.js-import-start-icon' ).removeClass( 'fa-exchange' );
-				this.$( '.js-import-start-icon' ).addClass( 'fa-refresh fa-spin' );
-			}*/
+
+			this.footerText( result.importMessage );
 		},
 
 		_stopImport: function() {
 			var result = nbaImportService.stopImport();
+
 			this.renderBody();
-			/*if ( result.requestSuccessful ) {
-				this.$( '.js-import-start-icon' ).removeClass( 'fa-refresh fa-spin' );
-				this.$( '.js-import-start-icon' ).addClass( 'fa-exchange' );
-			}*/
+
+			this.footerText( result.importMessage );
 		},
 
 		_onImportStart: function( evt ) {
