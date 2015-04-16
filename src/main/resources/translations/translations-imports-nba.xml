@@ -8,6 +8,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Start import</nerd>
+		<ru><![CDATA[Начать импорт]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import is already going</nerd>
+		<ru><![CDATA[Импорт уже идет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import started</nerd>
+		<ru><![CDATA[Импорт начат]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Stop import</nerd>
+		<ru><![CDATA[Прервать импорт]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import is not active</nerd>
+		<ru><![CDATA[Импорт не активный]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import stopped</nerd>
+		<ru><![CDATA[Импорт прерван]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

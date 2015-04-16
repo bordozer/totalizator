@@ -8,15 +8,20 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/import-nba-template.html' ) );
 
+	var nbaImportService = require( './nba-import-service' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: ""
+		, startImport: "Start import"
+		, stopImport: "Stop import"
 	} );
 
 	return Backbone.View.extend( {
 
 		events: {
-
+			'click .js-import-start': '_onImportStart'
+			, 'click .js-import-stop': '_onImportStop'
 		},
 
 		initialize: function ( options ) {
@@ -30,6 +35,18 @@ define( function ( require ) {
 			this.$el.html( template( data ) );
 
 			return this;
+		},
+
+		_onImportStart: function( evt ) {
+			evt.preventDefault();
+
+			nbaImportService.startImport();
+		},
+
+		_onImportStop: function( evt ) {
+			evt.preventDefault();
+
+			nbaImportService.stopImport();
 		}
 	} );
 } );

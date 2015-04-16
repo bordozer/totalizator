@@ -13,7 +13,7 @@ import totalizator.app.translator.TranslatorService;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/admin/rest/imports/nba/" )
+@RequestMapping( "/admin/rest/imports/nba" )
 public class NBAImportRestController {
 
 	private static final int INITIAL_GAME_ID = 21401230; // TODO: add 00 at start!
