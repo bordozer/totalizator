@@ -18,7 +18,7 @@ import static totalizator.app.models.Match.*;
 		),
 		@NamedQuery(
 				name = FIND_BY_TEAMS,
-				query = "select c from Match c where team1Id= :team1Id and team2Id= :team2Id"
+				query = "select c from Match c where ( team1Id= :team1Id and team2Id= :team2Id ) or (team1Id= :team2Id and team2Id= :team1Id)"
 		)
 } )
 public class Match extends AbstractEntity {

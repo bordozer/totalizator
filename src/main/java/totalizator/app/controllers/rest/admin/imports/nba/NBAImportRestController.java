@@ -4,11 +4,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import totalizator.app.controllers.rest.admin.imports.ImportDTO;
+import totalizator.app.models.Cup;
+import totalizator.app.services.CupService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
@@ -21,6 +20,9 @@ public class NBAImportRestController {
 	private static final int INITIAL_GAME_ID = 21401230; // TODO: add 00 at start!
 
 	@Autowired
+	private CupService cupService;
+
+	@Autowired
 	private NBAGameDataImportService nbaGameDataImportService;
 
 	@Autowired
@@ -31,7 +33,9 @@ public class NBAImportRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/start/", produces = APPLICATION_JSON_VALUE)
-	public ImportDTO startImport() {
+	public ImportDTO startImport( final @RequestParam( "cupId" ) int cupId ) {
+
+		final Cup cup = cupService.load( cupId );
 
 		final ImportDTO result = new ImportDTO();
 
@@ -45,7 +49,7 @@ public class NBAImportRestController {
 		nbaGameDataImportService.startImport();
 
 		final int initialGameId = INITIAL_GAME_ID; // TODO: save last imported!
-		new NBAGameImportRunner( initialGameId, nbaGameDataImportService ).start();
+		new NBAGameImportRunner( initialGameId, cup, nbaGameDataImportService ).start();
 
 		result.setRequestSuccessful( true );
 		result.setImportMessage( translatorService.translate( "Import started", getLanguage() ) );

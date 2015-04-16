@@ -1,5 +1,7 @@
 package totalizator.app.controllers.rest.admin.imports;
 
+import totalizator.app.models.Cup;
+
 import java.io.IOException;
 
 public interface RemoteGameDataImportService {
@@ -10,5 +12,5 @@ public interface RemoteGameDataImportService {
 
 	boolean isImportingNow();
 
-	boolean importGame( final String gameId ) throws IOException;
+	boolean importGame( final Cup cup, final String gameId ) throws IOException;
 }

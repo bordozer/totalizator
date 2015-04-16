@@ -8,7 +8,10 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/import-nba-template.html' ) );
 
+	var service = require( '/resources/js/services/service.js' );
 	var nbaImportService = require( './nba-import-service' );
+
+	var chosen = require( 'chosen' );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
@@ -37,10 +40,13 @@ define( function ( require ) {
 
 			var data = _.extend( {}, this.model.toJSON(), {
 				isImportingNow: this.importStatus.requestSuccessful
+				, cups: service.loadCups()
 				,translator: translator
 			} );
 
 			this.$( this.windowBodyContainerSelector ).html( template( data ) );
+
+			this.$( '#selectedCupId' ).chosen( { width: 100 } );
 
 			this.trigger( 'inner-view-rendered' );
 
@@ -56,7 +62,7 @@ define( function ( require ) {
 		},
 
 		_startImport: function() {
-			var result = nbaImportService.startImport();
+			var result = nbaImportService.startImport( this.$( '#selectedCupId' ).val() );
 
 			this.renderBody();
 

@@ -10,6 +10,7 @@ import totalizator.app.services.GenericService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -47,7 +48,10 @@ public class MatchRepository implements GenericService<Match> {
 		em.remove( load( id ) );
 	}
 
-	public Match find( final Team team1, final Team team11, final LocalDate gameDate ) {
-		return null; // TODO
+	public List<Match> find( final Team team1, final Team team2 ) {
+		return em.createNamedQuery( Match.FIND_BY_TEAMS, Match.class )
+				.setParameter( "team1Id", team1.getId() )
+				.setParameter( "team2Id", team2.getId() )
+				.getResultList();
 	}
 }

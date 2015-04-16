@@ -13,7 +13,6 @@ import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.utils.DateTimeService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -121,7 +120,16 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public Match find( final Team team1, final Team team2, final LocalDate gameDate ) {
-		return matchRepository.find( team1, team1, gameDate );
+	public Match find( final Team team1, final Team team2, final LocalDateTime localDateTime ) {
+		final List<Match> matches = matchRepository.find( team1, team2 );
+
+		CollectionUtils.filter( matches, new Predicate<Match>() {
+			@Override
+			public boolean evaluate( final Match match ) {
+				return match.getBeginningTime().equals( localDateTime );
+			}
+		} );
+
+		return matches.size() > 0 ? matches.get( 0 ) : null;
 	}
 }

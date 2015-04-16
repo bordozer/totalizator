@@ -13,12 +13,12 @@ define( function ( require ) {
 
 	return {
 
-		startImport: function() {
+		startImport: function( cupId ) {
 
 			var result = {};
 			$.ajax( {
 				method: 'get',
-				url: '/admin/rest/games-data-import/nba/start/',
+				url: '/admin/rest/games-data-import/nba/start/?cupId=' + cupId,
 				async: false,
 				success: function ( response ) {
 					result = response;
