@@ -34,6 +34,10 @@ public class NBAGameImportRunner extends Thread {
 				break;
 			}
 
+			if ( ! remoteGameDataImportService.isImportingNow() ) {
+				break;
+			}
+
 			gameId++;
 		}
 	}
