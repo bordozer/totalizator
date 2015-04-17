@@ -28,15 +28,16 @@ define( function ( require ) {
 		render: function() {
 			var data = _.extend( {}, { translator: translator } );
 			this.$el.html( template( data ) );
+
+			this._renderMatches();
 		},
 
 		_renderMatches: function() {
 
-			var model = this.model.toJSON();
-
 			var currentUser = this.currentUser;
 
 			var el = this.$( '.js-teams-stands-off-matches' );
+			var self = this;
 
 			_.each( this.cups, function( cup ) {
 
@@ -52,8 +53,8 @@ define( function ( require ) {
 						userId: 0
 						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
-						, teamId: this.team1Id
-						, team2Id: this.team2Id
+						, teamId: self.team1Id
+						, team2Id: self.team2Id
 					}
 					, menuItems: []
 					, currentUser: currentUser
