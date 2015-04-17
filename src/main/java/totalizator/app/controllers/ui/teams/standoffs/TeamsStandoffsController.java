@@ -71,6 +71,11 @@ public class TeamsStandoffsController {
 		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, model.getCurrentUser() );
 		model.setCups( new Gson().toJson( cupDTOs ) );
 
+		final int score1 = 0;
+		final int score2 = 1;
+		model.setScore1( score1 );
+		model.setScore2( score2 );
+
 		return VIEW;
 	}
 }

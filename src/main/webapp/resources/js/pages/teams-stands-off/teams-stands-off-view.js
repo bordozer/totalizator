@@ -22,11 +22,14 @@ define( function ( require ) {
 			this.team1 = options.options.team1;
 			this.team2 = options.options.team2;
 
+			this.score1 = options.options.score1;
+			this.score2 = options.options.score2;
+
 			this.render();
 		},
 
 		render: function() {
-			var data = _.extend( {}, { team1: this.team1, team2: this.team2, translator: translator } );
+			var data = _.extend( {}, { team1: this.team1, team2: this.team2, score1: this.score1, score2: this.score2, translator: translator } );
 			this.$el.html( template( data ) );
 
 			this._renderMatches();
