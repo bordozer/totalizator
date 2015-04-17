@@ -6,11 +6,15 @@ import java.io.IOException;
 
 public interface RemoteGameDataImportService {
 
-	void startImport();
+	void start();
 
-	void stopImport();
+	void stop();
 
-	boolean isImportingNow();
+	void finish();
+
+	void error( final String message );
+
+	boolean isActive();
 
 	boolean importGame( final Cup cup, final String gameId ) throws IOException;
 }

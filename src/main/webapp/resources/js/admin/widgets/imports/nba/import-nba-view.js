@@ -35,11 +35,11 @@ define( function ( require ) {
 
 		renderBody: function () {
 
-			this.importStatus = nbaImportService.isImportingNow();
-			this.footerText( this.importStatus.importMessage );
+			this.importStatus = nbaImportService.getImportStatus();
+			this.footerText( this.importStatus.importStatusMessage );
 
 			var data = _.extend( {}, this.model.toJSON(), {
-				isImportingNow: this.importStatus.requestSuccessful
+				isImportingNow: this.importStatus.importActive
 				, cups: service.loadCups()
 				,translator: translator
 			} );
@@ -66,7 +66,7 @@ define( function ( require ) {
 
 			this.renderBody();
 
-			this.footerText( result.importMessage );
+			this.footerText( result.importStatusMessage );
 		},
 
 		_stopImport: function() {
@@ -74,7 +74,7 @@ define( function ( require ) {
 
 			this.renderBody();
 
-			this.footerText( result.importMessage );
+			this.footerText( result.importStatusMessage );
 		},
 
 		_onImportStart: function( evt ) {

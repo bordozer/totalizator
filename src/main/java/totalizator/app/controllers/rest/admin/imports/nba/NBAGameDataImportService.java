@@ -10,6 +10,7 @@ import totalizator.app.models.Team;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.RemoteContentService;
 import totalizator.app.services.TeamService;
+import totalizator.app.translator.TranslatorService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -32,21 +33,46 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 	@Autowired
 	private RemoteGameService remoteGameService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	private final GamesDataImportMonitor gamesDataImportMonitor = new GamesDataImportMonitor();
 
 	@Override
-	public void startImport() {
-		setActivity( true );
+	public void start() {
+		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.start();
+		}
 	}
 
 	@Override
-	public void stopImport() {
-		setActivity( false );
+	public void stop() {
+		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.stop();
+		}
 	}
 
 	@Override
-	public boolean isImportingNow() {
-		return gamesDataImportMonitor.isImportActive();
+	public void finish() {
+		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.finish();
+		}
+	}
+
+	@Override
+	public void error( final String message ) {
+		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.error( message );
+		}
+	}
+
+	@Override
+	public boolean isActive() {
+		return gamesDataImportMonitor.isActive();
+	}
+
+	public GamesDataImportMonitor getMonitor() {
+		return gamesDataImportMonitor;
 	}
 
 	@Override
@@ -120,11 +146,5 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 		}
 
 		return gameJSON;
-	}
-
-	private void setActivity( final boolean importActive ) {
-		synchronized ( gamesDataImportMonitor ) {
-			gamesDataImportMonitor.setImportActive( importActive );
-		}
 	}
 }

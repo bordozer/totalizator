@@ -49,7 +49,7 @@ define( function ( require ) {
 			return result;
 		},
 
-		isImportingNow: function() {
+		getImportStatus: function() {
 			var result = {};
 			$.ajax( {
 				method: 'get',

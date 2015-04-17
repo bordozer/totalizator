@@ -4,8 +4,6 @@ import org.apache.log4j.Logger;
 import totalizator.app.controllers.rest.admin.imports.RemoteGameDataImportService;
 import totalizator.app.models.Cup;
 
-import java.io.IOException;
-
 public class NBAGameImportRunner extends Thread {
 
 	private final int initialGameId;
@@ -30,11 +28,11 @@ public class NBAGameImportRunner extends Thread {
 
 			final boolean result = makeImport( gameId );
 			if ( ! result ) {
-				remoteGameDataImportService.stopImport();
+				remoteGameDataImportService.finish();
 				break;
 			}
 
-			if ( ! remoteGameDataImportService.isImportingNow() ) {
+			if ( ! remoteGameDataImportService.isActive() ) {
 				break;
 			}
 
@@ -52,7 +50,10 @@ public class NBAGameImportRunner extends Thread {
 			LOGGER.error( String.format( "Remote game import finished. GameID: %s", nbaGameId ) );
 
 			return isGameImported;
-		} catch ( IOException e ) {
+		} catch ( final Throwable e ) {
+
+			remoteGameDataImportService.error( e.getMessage() );
+
 			LOGGER.error( String.format( "Error during import starting. GameID: %s", nbaGameId ), e );
 		}
 

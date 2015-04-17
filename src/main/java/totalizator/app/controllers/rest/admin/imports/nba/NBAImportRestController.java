@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.controllers.rest.admin.imports.ImportDTO;
+import totalizator.app.controllers.rest.admin.imports.GamesDataImportMonitor;
+import totalizator.app.controllers.rest.admin.imports.ImportStatusDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.services.CupService;
 import totalizator.app.translator.Language;
@@ -17,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/admin/rest/games-data-import/nba")
 public class NBAImportRestController {
 
-	private static final int INITIAL_GAME_ID = 21400001; // 0021400001 - 21401230
+	private static final int INITIAL_GAME_ID = 21400001; // 21400001 - 21401230
 
 	@Autowired
 	private CupService cupService;
@@ -33,26 +34,26 @@ public class NBAImportRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/start/", produces = APPLICATION_JSON_VALUE)
-	public ImportDTO startImport( final @RequestParam( "cupId" ) int cupId ) {
+	public ImportStatusDTO startImport( final @RequestParam( "cupId" ) int cupId ) {
 
 		final Cup cup = cupService.load( cupId );
 
-		final ImportDTO result = new ImportDTO();
+		final ImportStatusDTO result = new ImportStatusDTO();
 
-		if ( nbaGameDataImportService.isImportingNow() ) {
-			result.setRequestSuccessful( false );
-			result.setImportMessage( translatorService.translate( "Import is already going", getLanguage() ) );
+		if ( nbaGameDataImportService.isActive() ) {
+			result.setImportActive( false );
+			result.setImportStatusMessage( translatorService.translate( "Import is already going", getLanguage() ) );
 
 			return result;
 		}
 
-		nbaGameDataImportService.startImport();
+		nbaGameDataImportService.start();
 
 		final int initialGameId = INITIAL_GAME_ID; // TODO: save last imported!
 		new NBAGameImportRunner( initialGameId, cup, nbaGameDataImportService ).start();
 
-		result.setRequestSuccessful( true );
-		result.setImportMessage( translatorService.translate( "Import started", getLanguage() ) );
+		result.setImportActive( true );
+		result.setImportStatusMessage( translatorService.translate( "Import started", getLanguage() ) );
 
 		return result;
 	}
@@ -60,22 +61,22 @@ public class NBAImportRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/stop/", produces = APPLICATION_JSON_VALUE)
-	public ImportDTO stopImport() {
+	public ImportStatusDTO stopImport() {
 
-		final ImportDTO result = new ImportDTO();
+		final ImportStatusDTO result = new ImportStatusDTO();
 
-		if ( ! nbaGameDataImportService.isImportingNow() ) {
-			result.setRequestSuccessful( false );
-			result.setRequestSuccessful( false );
-			result.setImportMessage( translatorService.translate( "Import is not active", getLanguage() ) );
+		if ( ! nbaGameDataImportService.isActive() ) {
+			result.setImportActive( false );
+			result.setImportActive( false );
+			result.setImportStatusMessage( translatorService.translate( "Import is not active", getLanguage() ) );
 
 			return result;
 		}
 
-		nbaGameDataImportService.stopImport();
+		nbaGameDataImportService.stop();
 
-		result.setRequestSuccessful( true );
-		result.setImportMessage( translatorService.translate( "Import stopped", getLanguage() ) );
+		result.setImportActive( true );
+		result.setImportStatusMessage( translatorService.translate( "Import stopped", getLanguage() ) );
 
 		return result;
 	}
@@ -83,19 +84,17 @@ public class NBAImportRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/state/", produces = APPLICATION_JSON_VALUE )
-	public ImportDTO isImportingNow() {
+	public ImportStatusDTO importState() {
 
-		final ImportDTO result = new ImportDTO();
+		final ImportStatusDTO result = new ImportStatusDTO();
 
-		final boolean isImportingNow = nbaGameDataImportService.isImportingNow();
+		final boolean isActive = nbaGameDataImportService.isActive();
 
-		result.setRequestSuccessful( isImportingNow );
+		result.setImportActive( isActive );
 
-		if ( isImportingNow ) {
-			result.setImportMessage( translatorService.translate( "Import is going", getLanguage() ) );
-		} else {
-			result.setImportMessage( translatorService.translate( "Import is stopped", getLanguage() ) );
-		}
+		final GamesDataImportMonitor monitor = nbaGameDataImportService.getMonitor();
+		final String stateMessage = String.format( "%s %s", translatorService.translate( monitor.getCurrentStatusMessage(), getLanguage() ), monitor.getCurrentStatusMessage() );
+		result.setImportStatusMessage( stateMessage );
 
 		return result;
 	}
