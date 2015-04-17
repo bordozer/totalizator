@@ -1,6 +1,7 @@
 package totalizator.app.controllers.rest.admin.imports.nba;
 
 import org.apache.log4j.Logger;
+import org.codehaus.plexus.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -92,7 +93,8 @@ public class NBAImportRestController {
 		result.setImportActive( isActive );
 
 		final GamesDataImportMonitor monitor = nbaGameDataImportService.getMonitor();
-		final String stateMessage = String.format( "%s %s", translatorService.translate( monitor.getCurrentStatusMessage(), getLanguage() ), monitor.getImportErrorMessage() );
+		final String error = StringUtils.isNotEmpty( monitor.getImportErrorMessage() ) ? String.format( " ( %s )", monitor.getImportErrorMessage() ) : "";
+		final String stateMessage = String.format( "%s%s", translatorService.translate( monitor.getCurrentStatusMessage(), getLanguage() ), error );
 		result.setImportStatusMessage( stateMessage );
 
 		return result;
