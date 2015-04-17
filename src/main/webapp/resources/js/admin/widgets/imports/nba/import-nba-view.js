@@ -41,11 +41,15 @@ define( function ( require ) {
 
 			var isImportingNow = importStatus.importActive;
 
+			var cups = _.filter( service.loadCups(), function( cup ) {
+				return cup.finished == false;
+			});
+
 			var data = _.extend( {}, this.model.toJSON(), {
 				isImportingNow: isImportingNow
 				, cupId: importStatus.cupId
 				, importButtonTitle: isImportingNow ? importStatus.importStatusMessage : translator.startImport
-				, cups: service.loadCups()
+				, cups: cups
 				,translator: translator
 			} );
 
