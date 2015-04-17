@@ -1,6 +1,5 @@
 package totalizator.app.controllers.ui.teams.standoffs;
 
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,13 +11,11 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -42,9 +39,6 @@ public class TeamsStandoffsController {
 	@Autowired
 	private MatchService matchService;
 
-	@Autowired
-	private DTOService dtoService;
-
 	@ModelAttribute( MODEL_NAME )
 	public TeamsStandoffsModel preparePagingModel( final Principal principal ) {
 		return new TeamsStandoffsModel( userService.findByLogin( principal.getName() ) );
@@ -52,8 +46,6 @@ public class TeamsStandoffsController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/standoff/{team1Id}/vs/{team2Id}/" )
 	public String portalPage( final @PathVariable( "team1Id" ) int team1Id, final @PathVariable( "team2Id" ) int team2Id, final @ModelAttribute( MODEL_NAME ) TeamsStandoffsModel model ) {
-
-		final User currentUser = model.getCurrentUser();
 
 		final Team team1 = teamService.load( team1Id );
 		final Team team2 = teamService.load( team2Id );
@@ -64,7 +56,9 @@ public class TeamsStandoffsController {
 		final List<Match> matches = matchService.find( team1, team2 );
 		final Set<Cup> cupsSet = newHashSet();
 		for ( final Match match : matches ) {
-			cupsSet.add( match.getCup() );
+			if ( matchService.isMatchFinished( match ) ) {
+				cupsSet.add( match.getCup() );
+			}
 		}
 		final List<Cup> cups = newArrayList( cupsSet );
 		model.setCups( cups );
