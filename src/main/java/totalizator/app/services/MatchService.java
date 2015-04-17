@@ -19,4 +19,6 @@ public interface MatchService extends GenericService<Match>{
 	boolean isMatchFinished( Match match );
 
 	Match find( final Team team1, final Team team2, final LocalDateTime localDateTime );
+
+	List<Match> find( final Team team1, final Team team2 );
 }

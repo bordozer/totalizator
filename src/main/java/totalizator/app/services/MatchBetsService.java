@@ -10,15 +10,15 @@ import java.util.List;
 
 public interface MatchBetsService extends GenericService<MatchBet>{
 
-	public List<MatchBet> loadAll( final User user );
+	List<MatchBet> loadAll( final User user );
 
-	public List<MatchBet> loadAll( final Match match );
+	List<MatchBet> loadAll( final Match match );
 
 	List<MatchBet> loadAll( final Cup cup, final User user );
 
-	public MatchBet load( final User user, final Match match );
+	MatchBet load( final User user, final Match match );
 
-	public MatchBet load( final int userId, final int matchId );
+	MatchBet load( final int userId, final int matchId );
 
 	int betsCount( final Match match );
 

@@ -132,4 +132,9 @@ public class MatchServiceImpl implements MatchService {
 
 		return matches.size() > 0 ? matches.get( 0 ) : null;
 	}
+
+	@Override
+	public List<Match> find( final Team team1, final Team team2 ) {
+		return matchRepository.find( team1, team2 );
+	}
 }

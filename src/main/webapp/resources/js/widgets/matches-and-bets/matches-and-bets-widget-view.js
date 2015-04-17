@@ -206,7 +206,7 @@ define( function ( require ) {
 			var match = this.model.get( 'match' );
 
 			var menuItems = [
-				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '/totalizator/teams/' + match.team1.teamId + '/vs/' + match.team2.teamId + '/standoff/', text: translator.actionStandOffHistory }
+				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '/totalizator/teams/standoff/' + match.team1.teamId + '/vs/' + match.team2.teamId + '/', text: translator.actionStandOffHistory }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '/totalizator/matches/' + match.matchId + '/bets/', text: translator.actionAllMatchBet + ' ( ' + betsCount + ' )' }
 			];
