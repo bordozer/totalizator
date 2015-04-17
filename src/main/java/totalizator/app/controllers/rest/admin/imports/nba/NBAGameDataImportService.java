@@ -35,8 +35,9 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 	private final GamesDataImportMonitor gamesDataImportMonitor = new GamesDataImportMonitor();
 
 	@Override
-	public void start() {
+	public void start( final int cupId ) {
 		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.setCupId( cupId );
 			gamesDataImportMonitor.start();
 		}
 	}
@@ -44,6 +45,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 	@Override
 	public void stop() {
 		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.setCupId( 0 );
 			gamesDataImportMonitor.stop();
 		}
 	}
@@ -51,6 +53,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 	@Override
 	public void finish() {
 		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.setCupId( 0 );
 			gamesDataImportMonitor.finish();
 		}
 	}
@@ -58,6 +61,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 	@Override
 	public void error( final String message ) {
 		synchronized ( gamesDataImportMonitor ) {
+			gamesDataImportMonitor.setCupId( 0 );
 			gamesDataImportMonitor.error( message );
 		}
 	}
@@ -125,6 +129,11 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 		matchService.save( newMatch );
 
 		return true;
+	}
+
+	@Override
+	public int getActiveImportCupId() {
+		return gamesDataImportMonitor.getCupId();
 	}
 
 	private String getRemoteGameJSON( final String remoteGameId ) throws IOException {

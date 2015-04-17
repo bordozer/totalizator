@@ -36,14 +36,15 @@ define( function ( require ) {
 
 		renderBody: function () {
 
-			this.importStatus = nbaImportService.getImportStatus();
-			this.footerText( this.importStatus.importStatusMessage );
+			var importStatus = nbaImportService.getImportStatus();
+			this.footerText( importStatus.importStatusMessage );
 
-			var isImportingNow = this.importStatus.importActive;
+			var isImportingNow = importStatus.importActive;
 
 			var data = _.extend( {}, this.model.toJSON(), {
 				isImportingNow: isImportingNow
-				, importButtonTitle: isImportingNow ? this.importStatus.importStatusMessage : translator.startImport
+				, cupId: importStatus.cupId
+				, importButtonTitle: isImportingNow ? importStatus.importStatusMessage : translator.startImport
 				, cups: service.loadCups()
 				,translator: translator
 			} );

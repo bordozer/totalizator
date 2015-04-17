@@ -2,8 +2,18 @@ package totalizator.app.controllers.rest.admin.imports;
 
 public class GamesDataImportMonitor {
 
+	private int cupId;
+
 	private ImportState importState = ImportState.NOT_STARTED;
 	private String importErrorMessage;
+
+	public int getCupId() {
+		return cupId;
+	}
+
+	public void setCupId( final int cupId ) {
+		this.cupId = cupId;
+	}
 
 	public ImportState getImportState() {
 		return importState;

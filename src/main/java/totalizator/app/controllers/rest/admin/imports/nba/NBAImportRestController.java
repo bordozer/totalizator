@@ -45,17 +45,18 @@ public class NBAImportRestController {
 		final ImportStatusDTO result = new ImportStatusDTO();
 
 		if ( nbaGameDataImportService.isActive() ) {
+			result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
 			result.setImportActive( false );
 			result.setImportStatusMessage( translatorService.translate( "Import is already going", getLanguage() ) );
 
 			return result;
 		}
 
-		nbaGameDataImportService.start();
+		nbaGameDataImportService.start( cupId );
 
-		final int initialGameId = INITIAL_GAME_ID; // TODO: save last imported!
-		new NBAGameImportRunner( initialGameId, cup, nbaGameDataImportService ).start();
+		new NBAGameImportRunner( INITIAL_GAME_ID, cup, nbaGameDataImportService ).start();
 
+		result.setCupId( cupId );
 		result.setImportActive( true );
 		result.setImportStatusMessage( translatorService.translate( "Import started", getLanguage() ) );
 
@@ -70,6 +71,7 @@ public class NBAImportRestController {
 		final ImportStatusDTO result = new ImportStatusDTO();
 
 		if ( ! nbaGameDataImportService.isActive() ) {
+			result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
 			result.setImportActive( false );
 			result.setImportStatusMessage( translatorService.translate( "Import is not active", getLanguage() ) );
 
@@ -78,7 +80,8 @@ public class NBAImportRestController {
 
 		nbaGameDataImportService.stop();
 
-		result.setImportActive( true );
+		result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
+		result.setImportActive( nbaGameDataImportService.isActive() );
 		result.setImportStatusMessage( translatorService.translate( "Import stopped", getLanguage() ) );
 
 		return result;
@@ -93,6 +96,7 @@ public class NBAImportRestController {
 
 		final boolean isActive = nbaGameDataImportService.isActive();
 
+		result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
 		result.setImportActive( isActive );
 
 		final GamesDataImportMonitor monitor = nbaGameDataImportService.getMonitor();

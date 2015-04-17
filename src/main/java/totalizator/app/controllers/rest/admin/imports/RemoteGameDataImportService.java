@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public interface RemoteGameDataImportService {
 
-	void start();
+	void start( final int cupId );
 
 	void stop();
 
@@ -17,4 +17,6 @@ public interface RemoteGameDataImportService {
 	boolean isActive();
 
 	boolean importGame( final Cup cup, final String gameId ) throws IOException;
+
+	int getActiveImportCupId();
 }
