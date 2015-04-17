@@ -10,7 +10,6 @@ import totalizator.app.models.Team;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.RemoteContentService;
 import totalizator.app.services.TeamService;
-import totalizator.app.translator.TranslatorService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -32,9 +31,6 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 
 	@Autowired
 	private RemoteGameService remoteGameService;
-
-	@Autowired
-	private TranslatorService translatorService;
 
 	private final GamesDataImportMonitor gamesDataImportMonitor = new GamesDataImportMonitor();
 

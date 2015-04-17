@@ -2,9 +2,8 @@ package totalizator.app.controllers.rest.admin.imports;
 
 public class GamesDataImportMonitor {
 
-	private ImportState importState;
-	private String currentStatusMessage;
-	private String customMessage;
+	private ImportState importState = ImportState.NOT_STARTED;
+	private String importErrorMessage;
 
 	public ImportState getImportState() {
 		return importState;
@@ -15,11 +14,7 @@ public class GamesDataImportMonitor {
 	}
 
 	public String getCurrentStatusMessage() {
-		return currentStatusMessage;
-	}
-
-	public void setCurrentStatusMessage( final String currentStatusMessage ) {
-		this.currentStatusMessage = currentStatusMessage;
+		return importState.getDescription();
 	}
 
 	public boolean isActive() {
@@ -38,16 +33,16 @@ public class GamesDataImportMonitor {
 		importState = ImportState.FINISHED;
 	}
 
-	public void error( final String message ) {
-		customMessage = message;
+	public void error( final String error ) {
+		importErrorMessage = error;
 		importState = ImportState.ERROR;
 	}
 
-	public String getCustomMessage() {
-		return customMessage;
+	public String getImportErrorMessage() {
+		return importErrorMessage;
 	}
 
-	public void setCustomMessage( final String customMessage ) {
-		this.customMessage = customMessage;
+	public void setImportErrorMessage( final String importErrorMessage ) {
+		this.importErrorMessage = importErrorMessage;
 	}
 }

@@ -67,7 +67,6 @@ public class NBAImportRestController {
 
 		if ( ! nbaGameDataImportService.isActive() ) {
 			result.setImportActive( false );
-			result.setImportActive( false );
 			result.setImportStatusMessage( translatorService.translate( "Import is not active", getLanguage() ) );
 
 			return result;
@@ -93,7 +92,7 @@ public class NBAImportRestController {
 		result.setImportActive( isActive );
 
 		final GamesDataImportMonitor monitor = nbaGameDataImportService.getMonitor();
-		final String stateMessage = String.format( "%s %s", translatorService.translate( monitor.getCurrentStatusMessage(), getLanguage() ), monitor.getCurrentStatusMessage() );
+		final String stateMessage = String.format( "%s %s", translatorService.translate( monitor.getCurrentStatusMessage(), getLanguage() ), monitor.getImportErrorMessage() );
 		result.setImportStatusMessage( stateMessage );
 
 		return result;
