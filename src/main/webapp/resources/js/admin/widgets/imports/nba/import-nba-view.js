@@ -43,6 +43,7 @@ define( function ( require ) {
 
 			var data = _.extend( {}, this.model.toJSON(), {
 				isImportingNow: isImportingNow
+				, importButtonTitle: isImportingNow ? this.importStatus.importStatusMessage : translator.startImport
 				, cups: service.loadCups()
 				,translator: translator
 			} );
