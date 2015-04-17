@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
@@ -39,6 +41,9 @@ public class TeamsStandoffsController {
 	@Autowired
 	private MatchService matchService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ModelAttribute( MODEL_NAME )
 	public TeamsStandoffsModel preparePagingModel( final Principal principal ) {
 		return new TeamsStandoffsModel( userService.findByLogin( principal.getName() ) );
@@ -61,8 +66,8 @@ public class TeamsStandoffsController {
 			}
 		}
 		final List<Cup> cups = newArrayList( cupsSet );
-		model.setCups( cups );
-		model.setCupsJSON( new Gson().toJson( cups ) );
+		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, model.getCurrentUser() );
+		model.setCups( new Gson().toJson( cupDTOs ) );
 
 		return VIEW;
 	}

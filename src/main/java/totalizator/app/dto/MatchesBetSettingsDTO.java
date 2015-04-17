@@ -6,6 +6,7 @@ public class MatchesBetSettingsDTO {
 	private int categoryId;
 	private int cupId;
 	private int teamId;
+	private int team2Id;
 	private boolean showFutureMatches;
 	private boolean showFinished;
 
@@ -39,6 +40,14 @@ public class MatchesBetSettingsDTO {
 
 	public void setTeamId( final int teamId ) {
 		this.teamId = teamId;
+	}
+
+	public int getTeam2Id() {
+		return team2Id;
+	}
+
+	public void setTeam2Id( final int team2Id ) {
+		this.team2Id = team2Id;
 	}
 
 	public boolean isShowFutureMatches() {

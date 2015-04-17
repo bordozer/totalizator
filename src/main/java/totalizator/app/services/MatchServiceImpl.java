@@ -65,10 +65,19 @@ public class MatchServiceImpl implements MatchService {
 			CollectionUtils.filter( matches, new Predicate<Match>() {
 				@Override
 				public boolean evaluate( final Match match ) {
-					return match.getTeam1().getId() == dto.getTeamId() || match.getTeam2().getId() == dto.getTeamId();
+					return ( match.getTeam1().getId() == dto.getTeamId() ) || ( match.getTeam2().getId() == dto.getTeamId() );
 				}
 			} );
 		}
+
+		/*if ( dto.getTeam2Id() > 0 ) {
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return match.getTeam1().getId() == dto.getTeam2Id() || match.getTeam2().getId() == dto.getTeam2Id();
+				}
+			} );
+		}*/
 
 		if ( !dto.isShowFutureMatches() ) {
 			CollectionUtils.filter( matches, new Predicate<Match>() {

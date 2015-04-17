@@ -11,8 +11,7 @@ public class TeamsStandoffsModel extends AbstractPageModel {
 
 	private Team team1;
 	private Team team2;
-	private List<Cup> cups;
-	private String cupsJSON;
+	private String cups;
 
 	protected TeamsStandoffsModel( final User currentUser ) {
 		super( currentUser );
@@ -34,19 +33,11 @@ public class TeamsStandoffsModel extends AbstractPageModel {
 		return team2;
 	}
 
-	public void setCups( final List<Cup> cups ) {
+	public void setCups( final String cups ) {
 		this.cups = cups;
 	}
 
-	public List<Cup> getCups() {
+	public String getCups() {
 		return cups;
-	}
-
-	public void setCupsJSON( final String cupsJSON ) {
-		this.cupsJSON = cupsJSON;
-	}
-
-	public String getCupsJSON() {
-		return cupsJSON;
 	}
 }

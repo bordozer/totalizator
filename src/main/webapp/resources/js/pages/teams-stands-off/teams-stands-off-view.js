@@ -21,6 +21,7 @@ define( function ( require ) {
 			this.cups = options.options.cups;
 			this.team1Id = options.options.team1Id;
 			this.team2Id = options.options.team2Id;
+//			console.log( this.cups, this.team1Id, this.team2Id );
 
 			this.render();
 		},
@@ -45,7 +46,6 @@ define( function ( require ) {
 				el.append( container );
 
 				var model = new MatchesModel.MatchesModel();
-
 				var view = new MatchesView.MatchesView( {
 					model: model
 					, el: container
@@ -55,6 +55,8 @@ define( function ( require ) {
 						, cupId: cup.cupId
 						, teamId: self.team1Id
 						, team2Id: self.team2Id
+						, showFinished: true
+						, showFutureMatches: false
 					}
 					, menuItems: []
 					, currentUser: currentUser
