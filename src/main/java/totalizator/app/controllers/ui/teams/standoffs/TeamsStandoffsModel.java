@@ -12,6 +12,8 @@ public class TeamsStandoffsModel extends AbstractPageModel {
 	private Team team1;
 	private Team team2;
 	private String cups;
+	private String team1JSON;
+	private String team2JSON;
 
 	protected TeamsStandoffsModel( final User currentUser ) {
 		super( currentUser );
@@ -39,5 +41,21 @@ public class TeamsStandoffsModel extends AbstractPageModel {
 
 	public String getCups() {
 		return cups;
+	}
+
+	public void setTeam1JSON( final String team1JSON ) {
+		this.team1JSON = team1JSON;
+	}
+
+	public String getTeam1JSON() {
+		return team1JSON;
+	}
+
+	public void setTeam2JSON( final String team2JSON ) {
+		this.team2JSON = team2JSON;
+	}
+
+	public String getTeam2JSON() {
+		return team2JSON;
 	}
 }

@@ -20,11 +20,11 @@
 			];
 
 			var currentUser = ${teamsStandoffsModel.currentUserJSON};
-			var team1Id = ${teamsStandoffsModel.team1.id};
-			var team2Id = ${teamsStandoffsModel.team2.id};
+			var team1 = ${teamsStandoffsModel.team1JSON};
+			var team2 = ${teamsStandoffsModel.team2JSON};
 			var cups = ${teamsStandoffsModel.cups};
 
-			var options = { team1Id: team1Id, team2Id: team2Id, cups: cups, currentUser: currentUser };
+			var options = { team1: team1, team2: team2, cups: cups, currentUser: currentUser };
 
 			var pageView = new Page( { el: $( '.teams-stands-off-container' ), bodyRenderer: standsOff, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();

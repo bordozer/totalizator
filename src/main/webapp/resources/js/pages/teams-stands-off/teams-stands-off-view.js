@@ -19,15 +19,14 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cups = options.options.cups;
-			this.team1Id = options.options.team1Id;
-			this.team2Id = options.options.team2Id;
-//			console.log( this.cups, this.team1Id, this.team2Id );
+			this.team1 = options.options.team1;
+			this.team2 = options.options.team2;
 
 			this.render();
 		},
 
 		render: function() {
-			var data = _.extend( {}, { translator: translator } );
+			var data = _.extend( {}, { team1: this.team1, team2: this.team2, translator: translator } );
 			this.$el.html( template( data ) );
 
 			this._renderMatches();
@@ -53,8 +52,8 @@ define( function ( require ) {
 						userId: 0
 						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
-						, teamId: self.team1Id
-						, team2Id: self.team2Id
+						, teamId: self.team1.teamId
+						, team2Id: self.team2.teamId
 						, showFinished: true
 						, showFutureMatches: false
 					}

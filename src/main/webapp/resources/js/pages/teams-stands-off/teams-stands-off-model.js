@@ -15,12 +15,8 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cups = options.options.cups;
-			this.team1Id = options.options.team1Id;
-			this.team2Id = options.options.team2Id;
+			this.team1 = options.options.team1;
+			this.team2 = options.options.team2;
 		}
-
-		/*url: function() {
-			return '/rest/teams/standoff/' + this.team1Id + '/vs/' + this.team2Id + '/';
-		}*/
 	} );
 } );

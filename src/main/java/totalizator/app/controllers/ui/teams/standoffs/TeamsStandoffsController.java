@@ -56,7 +56,9 @@ public class TeamsStandoffsController {
 		final Team team2 = teamService.load( team2Id );
 
 		model.setTeam1( team1 );
+		model.setTeam1JSON( new Gson().toJson( dtoService.transformTeam( team1 ) ) );
 		model.setTeam2( team2 );
+		model.setTeam2JSON( new Gson().toJson( dtoService.transformTeam( team2 ) ) );
 
 		final List<Match> matches = matchService.find( team1, team2 );
 		final Set<Cup> cupsSet = newHashSet();
