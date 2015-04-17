@@ -52,6 +52,6 @@ public class CupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/current/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> cupsToShow( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadAllCurrent(), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.loadAllPublic(), userService.findByLogin( principal.getName() ) );
 	}
 }

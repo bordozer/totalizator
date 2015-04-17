@@ -22,9 +22,6 @@ public class CupServiceImpl implements CupService {
 	private CupWinnerService cupWinnerService;
 
 	@Autowired
-	private CupBetsService cupBetsService;
-
-	@Autowired
 	private DateTimeService dateTimeService;
 
 	@Override
@@ -80,7 +77,7 @@ public class CupServiceImpl implements CupService {
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isPublicCup();
+				return cup.isPublicCup() && ! isCupFinished( cup );
 			}
 		} );
 
@@ -94,7 +91,7 @@ public class CupServiceImpl implements CupService {
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isPublicCup();
+				return cup.isPublicCup() && isCupFinished( cup );
 			}
 		} );
 
