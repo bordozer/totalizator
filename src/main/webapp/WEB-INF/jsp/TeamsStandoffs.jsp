@@ -5,24 +5,28 @@
 
 <tags:page currentUser="${teamsStandoffsModel.currentUser}">
 
-	<div class="cup-container"></div>
+	<div class="teams-stands-off-container"></div>
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup', 'translator' ], function ( $, Page, cup, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/teams-stands-off/teams-stands-off', 'translator' ], function ( $, Page, standsOff, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Teams stands off'
 			} );
 
 			var breadcrumbs = [
-				, { link: '#', title: translator.title }
+				{ link: '#', title: translator.title }
 			];
 
 			var currentUser = ${teamsStandoffsModel.currentUserJSON};
-			var matchesAndBetsJSON = ${teamsStandoffsModel.matchesAndBetsJSON};
+			var team1Id = ${teamsStandoffsModel.team1.id};
+			var team2Id = ${teamsStandoffsModel.team2.id};
+			var cups = ${teamsStandoffsModel.cupsJSON};
 
-			var pageView = new Page( { el: $( '.cup-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { matchesAndBetsJSON: matchesAndBetsJSON, currentUser: currentUser } } );
+			var options = { team1Id: team1Id, team2Id: team1Id, cups: cups, currentUser: currentUser };
+
+			var pageView = new Page( { el: $( '.teams-stands-off-container' ), bodyRenderer: standsOff, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();
 		} );
 	</script>

@@ -9,9 +9,9 @@ define( function( require ) {
 	var Model = require( './matches-and-bets-widget-model' );
 	var View = require( './matches-and-bets-widget-view' );
 
-	function init( container ) {
-		var model = new Model.MatchesModel();
-		var view = new View.PortalPageView( { model: model, el: container } );
+	function init( container, options ) {
+		var model = new Model.MatchesModel( { options: options } );
+		var view = new View.PortalPageView( { model: model, el: container, options: options } );
 	}
 
 	return init;

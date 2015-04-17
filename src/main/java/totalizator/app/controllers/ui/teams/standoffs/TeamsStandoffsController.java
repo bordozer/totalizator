@@ -1,5 +1,6 @@
 package totalizator.app.controllers.ui.teams.standoffs;
 
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
@@ -16,7 +18,12 @@ import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 @Controller
 @RequestMapping( "/totalizator/teams/" )
@@ -51,9 +58,17 @@ public class TeamsStandoffsController {
 		final Team team1 = teamService.load( team1Id );
 		final Team team2 = teamService.load( team2Id );
 
-		final List<Match> matches = matchService.find( team1, team2 );
+		model.setTeam1( team1 );
+		model.setTeam2( team2 );
 
-		model.setMatchesAndBetsJSON( new Gson().toJson( dtoService.getMatchBetForMatches( matches, currentUser ) ) );
+		final List<Match> matches = matchService.find( team1, team2 );
+		final Set<Cup> cupsSet = newHashSet();
+		for ( final Match match : matches ) {
+			cupsSet.add( match.getCup() );
+		}
+		final List<Cup> cups = newArrayList( cupsSet );
+		model.setCups( cups );
+		model.setCupsJSON( new Gson().toJson( cups ) );
 
 		return VIEW;
 	}
