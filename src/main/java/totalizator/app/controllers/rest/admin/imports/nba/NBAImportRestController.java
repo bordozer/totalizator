@@ -38,6 +38,9 @@ public class NBAImportRestController {
 	public ImportStatusDTO startImport( final @RequestParam( "cupId" ) int cupId ) {
 
 		final Cup cup = cupService.load( cupId );
+		if ( cup == null ) {
+			throw new IllegalArgumentException( String.format( "Cup #%d not found", cupId ) );
+		}
 
 		final ImportStatusDTO result = new ImportStatusDTO();
 

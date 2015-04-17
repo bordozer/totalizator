@@ -10,6 +10,7 @@ define( function ( require ) {
 
 	var service = require( '/resources/js/services/service.js' );
 	var nbaImportService = require( './nba-import-service' );
+	var autorefreshService = require( 'js/services/auto-refresh-service' );
 
 	var chosen = require( 'chosen' );
 
@@ -38,8 +39,10 @@ define( function ( require ) {
 			this.importStatus = nbaImportService.getImportStatus();
 			this.footerText( this.importStatus.importStatusMessage );
 
+			var isImportingNow = this.importStatus.importActive;
+
 			var data = _.extend( {}, this.model.toJSON(), {
-				isImportingNow: this.importStatus.importActive
+				isImportingNow: isImportingNow
 				, cups: service.loadCups()
 				,translator: translator
 			} );
@@ -47,6 +50,10 @@ define( function ( require ) {
 			this.$( this.windowBodyContainerSelector ).html( template( data ) );
 
 			this.$( '#selectedCupId' ).chosen( { width: 100 } );
+
+			if ( isImportingNow ) {
+				this._scheduleAutorefresh();
+			}
 
 			this.trigger( 'inner-view-rendered' );
 
@@ -62,7 +69,10 @@ define( function ( require ) {
 		},
 
 		_startImport: function() {
+
 			var result = nbaImportService.startImport( this.$( '#selectedCupId' ).val() );
+
+			this._scheduleAutorefresh();
 
 			this.renderBody();
 
@@ -71,10 +81,22 @@ define( function ( require ) {
 
 		_stopImport: function() {
 			var result = nbaImportService.stopImport();
+			autorefreshService.stop();
 
 			this.renderBody();
 
 			this.footerText( result.importStatusMessage );
+		},
+
+		_scheduleAutorefresh: function() {
+
+			var self = this;
+			var autorefresh = function() {
+				self.renderBody();
+			};
+
+			var exec = _.bind( autorefresh, this );
+			autorefreshService.start( 10, exec );
 		},
 
 		_onImportStart: function( evt ) {

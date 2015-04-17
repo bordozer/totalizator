@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>ImportState: Not started</nerd>
+		<ru><![CDATA[Не запускался]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ImportState: In progress</nerd>
+		<ru><![CDATA[Импорт в процессе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ImportState: Stopped by user</nerd>
+		<ru><![CDATA[Прервано пользователем]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ImportState: Finished successfully</nerd>
+		<ru><![CDATA[Завершен успешно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ImportState: Finished with error</nerd>
+		<ru><![CDATA[Завершен с ошибкой]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

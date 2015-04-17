@@ -4,11 +4,11 @@ import java.util.EnumSet;
 
 public enum ImportState {
 
-	NOT_STARTED( "Not started" )
-	, IN_PROGRESS( "In progress" )
-	, STOPPED( "Stopped by user" )
-	, FINISHED( "Finished successfully" )
-	, ERROR( "Finished with error" )
+	NOT_STARTED( "ImportState: Not started" )
+	, IN_PROGRESS( "ImportState: In progress" )
+	, STOPPED( "ImportState: Stopped by user" )
+	, FINISHED( "ImportState: Finished successfully" )
+	, ERROR( "ImportState: Finished with error" )
 	;
 
 	public static final EnumSet ACTIVE = EnumSet.of( IN_PROGRESS );
