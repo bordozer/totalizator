@@ -70,16 +70,21 @@ public class MatchBetsRestController {
 
 	private List<MatchBetDTO> getMatchBetDTOs( final Match match, final User currentUser ) {
 
-		if ( ! matchBetsService.userCanSeeAnotherBets( match, currentUser ) ) {
+		final boolean canSeeAnotherBets = matchBetsService.userCanSeeAnotherBets( match, currentUser );
+		/*if ( !canSeeAnotherBets ) {
 			return Collections.emptyList();
-		}
+		}*/
 
 		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
 
-
 		final List<MatchBet> matchBets = matchBetsService.loadAll( match );
 		for ( final MatchBet matchBet : matchBets ) {
-			matchBetsDTOs.add( dtoService.getMatchBetForMatch( match, matchBet.getUser() ) );
+			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser() );
+			if ( ! canSeeAnotherBets ) {
+				matchBetDTO.getBet().setScore1( 0 );
+				matchBetDTO.getBet().setScore2( 0 );
+			}
+			matchBetsDTOs.add( matchBetDTO );
 		}
 
 		Collections.sort( matchBetsDTOs, new Comparator<MatchBetDTO>() {
