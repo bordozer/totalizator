@@ -21,6 +21,7 @@ define( function ( require ) {
 		title: "NBA games data import"
 		, startImport: "Start import"
 		, stopImport: "Stop import"
+		, validation_SelectCup: "Select cup first!"
 	} );
 
 	return WidgetView.extend( {
@@ -74,9 +75,19 @@ define( function ( require ) {
 			return 'fa-exchange';
 		},
 
+		_getSelectedCupId: function() {
+			return this.$( '#selectedCupId' ).val();
+		},
+
 		_startImport: function() {
 
-			var result = nbaImportService.startImport( this.$( '#selectedCupId' ).val() );
+			var cupId = this._getSelectedCupId();
+			if ( cupId == 0 ) {
+				alert( translator.validation_SelectCup );
+				return;
+			}
+
+			var result = nbaImportService.startImport( cupId );
 
 			this._scheduleAutorefresh();
 

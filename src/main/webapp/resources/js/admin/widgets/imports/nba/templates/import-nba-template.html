@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-lg-12 text-center">
 		<select id="selectedCupId" <%= isImportingNow ? 'disabled' : '' %> >
+		<option value="0"></option>
 		<% _.each( cups, function( cup ) { %>
 			<option value="<%=cup.cupId%>" <%= cup.cupId == cupId ? 'selected' : '' %> ><%=cup.category.categoryName%> <%=cup.cupName%></option>
 		<% }) %>
