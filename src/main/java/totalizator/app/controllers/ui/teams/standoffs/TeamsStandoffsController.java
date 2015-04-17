@@ -11,7 +11,6 @@ import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.models.User;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.TeamService;
@@ -71,11 +70,22 @@ public class TeamsStandoffsController {
 		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, model.getCurrentUser() );
 		model.setCups( new Gson().toJson( cupDTOs ) );
 
-		final int score1 = 0;
-		final int score2 = 1;
+		final int score1 = getScore( matches, team1 );
+		final int score2 = getScore( matches, team2 );
 		model.setScore1( score1 );
 		model.setScore2( score2 );
 
 		return VIEW;
+	}
+
+	private int getScore( final List<Match> matches, final Team team ) {
+		int result = 0;
+
+		for ( final Match match : matches ) {
+			result += match.getScore1() > match.getScore2() && match.getTeam1().equals( team ) ? 1 : 0;
+			result += match.getScore1() < match.getScore2() && match.getTeam2().equals( team ) ? 1 : 0;
+		}
+
+		return result;
 	}
 }

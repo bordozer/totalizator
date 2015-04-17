@@ -38,7 +38,6 @@ define( function ( require ) {
 	var MatchesView = ConfigurableView.extend( {
 
 		renderInnerView: function ( filter ) {
-			console.log( filter );
 			this.filter = filter;
 
 			this.currentUser = this.options.currentUser;
