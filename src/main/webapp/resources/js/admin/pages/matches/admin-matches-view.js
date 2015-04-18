@@ -127,7 +127,7 @@ define( function ( require ) {
 			this.model.add( { categoryId: this.filter.categoryId, cupId: this.filter.cupId } );
 		},
 
-		_finishSelectedMatchesClick: function() {
+		_finishSelectedMatches: function() {
 			var matches = this._getSelectedMatchIds();
 			_.each( matches, function( match ) {
 				match.finish();
@@ -135,12 +135,12 @@ define( function ( require ) {
 			this._triggerRender();
 		},
 
-		_deleteSelectedMatchesClick: function() {
+		_deleteSelectedMatches: function() {
 			var matches = this._getSelectedMatchIds();
 			_.each( matches, function( match ) {
 				match.deleteMatch();
 			});
-			this._triggerRender();
+//			this._triggerRender();
 		},
 
 		_onAddClick: function( evt ) {
@@ -152,14 +152,14 @@ define( function ( require ) {
 		_onFinishSelectedMatchesClick: function( evt ) {
 			evt.preventDefault();
 
-			this._finishSelectedMatchesClick();
+			this._finishSelectedMatches();
 		},
 
 		_onDeleteSelectedMatchesClick: function( evt ) {
 			evt.preventDefault();
 
 			if ( confirm( translator.deleteAllMatchesMessage ) ) {
-				this._deleteSelectedMatchesClick();
+				this._deleteSelectedMatches();
 			}
 		}
 	} );
