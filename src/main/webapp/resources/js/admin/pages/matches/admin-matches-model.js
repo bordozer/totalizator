@@ -24,7 +24,10 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.url = '/admin/rest/matches/' + this.get( 'matchId' );
+		},
+
+		url: function() {
+			return '/admin/rest/matches/' + this.get( 'matchId' );
 		},
 
 		selected: function( val ) {
