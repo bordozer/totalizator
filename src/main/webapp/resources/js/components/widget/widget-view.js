@@ -32,7 +32,6 @@ define( function ( require ) {
 			];
 			this.addMenuItems( options.menuItems );
 
-
 			this.events = _.extend( this.builtinEvents, this.events );
 
 			this.on( 'view:render', this.render, this );
@@ -103,6 +102,15 @@ define( function ( require ) {
 
 		_renderDropDownMenu: function() {
 			mainMenu( this.menuItems, this.getIcon(), 'btn-default', this.$( '.js-window-drop-down-menu') );
+
+			var customButtons = _.filter( this.menuItems, function( menu ) {
+				return menu.button;
+			});
+
+			var menuContainer = this.$( '.js-custom-buttons' );
+			_.each( customButtons, function( menu ) {
+				menuContainer.append( "<button class='btn btn-default " + menu.selector + " " + menu.icon + "' title='" + menu.text + "'></button>" );
+			});
 		},
 
 		_onInnerViewRendered: function() {
