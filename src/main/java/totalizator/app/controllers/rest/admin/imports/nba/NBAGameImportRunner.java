@@ -64,6 +64,9 @@ public class NBAGameImportRunner extends Thread {
 	}
 
 	private int calculateCupInitialGameId( final int year ) {
-		return 20000001 + ( year - 2000 ) * 100000; // NBA's games ids are in diapason 21400001 - 21401230
+		// NBA's games ids are in diapason 21400001 - 21401230
+		// All star game id 0031400001
+		// where 14 is a first cup's year ( 2014/2015 )
+		return 20000001 + ( year - 2000 ) * 100000;
 	}
 }
