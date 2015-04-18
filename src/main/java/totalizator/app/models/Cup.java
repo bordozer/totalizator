@@ -40,6 +40,11 @@ public class Cup extends AbstractEntity {
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
 
+	// TODO: make this configurable, won't be working for football
+	private int guessedRightPoints = 6;
+	private int guessedPointsWithinDeltaPoints = 3;
+	private int guessedRightWinners = 1;
+
 	public Cup() {
 	}
 
@@ -86,6 +91,30 @@ public class Cup extends AbstractEntity {
 
 	public void setCupStartTime( final LocalDateTime cupStartTime ) {
 		this.cupStartTime = cupStartTime;
+	}
+
+	public int getGuessedRightPoints() {
+		return guessedRightPoints;
+	}
+
+	public void setGuessedRightPoints( final int guessedRightPoints ) {
+		this.guessedRightPoints = guessedRightPoints;
+	}
+
+	public int getGuessedPointsWithinDeltaPoints() {
+		return guessedPointsWithinDeltaPoints;
+	}
+
+	public void setGuessedPointsWithinDeltaPoints( final int guessedPointsWithinDeltaPoints ) {
+		this.guessedPointsWithinDeltaPoints = guessedPointsWithinDeltaPoints;
+	}
+
+	public int getGuessedRightWinners() {
+		return guessedRightWinners;
+	}
+
+	public void setGuessedRightWinners( final int guessedRightWinners ) {
+		this.guessedRightWinners = guessedRightWinners;
 	}
 
 	@Override

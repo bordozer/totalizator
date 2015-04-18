@@ -1,12 +1,12 @@
 package totalizator.app.services.score;
 
+import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 
 class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 
-	private static final int GUESSED_RIGHT_MATCH_RESULT_POINTS_POINTS = 3;
-	private static final int GUESSED_RIGHT_MATCH_WINNER_OR_DRAW_POINTS = 1;
+	private static final int MATCH_POINTS_GUESSING_DELTA = 3;
 
 	@Override
 	int getPoints( final MatchBet bet ) {
@@ -14,6 +14,8 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 		if ( ! bet.getMatch().isMatchFinished() ) {
 			return 0;
 		}
+
+		final Cup cup = bet.getMatch().getCup();
 
 		final Match match = bet.getMatch();
 
@@ -24,11 +26,15 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 		final int betScore2 = bet.getBetScore2();
 
 		if ( isMatchPointsGuessedRight( betScore1, betScore2, score1, score2 ) ) {
-			return GUESSED_RIGHT_MATCH_RESULT_POINTS_POINTS;
+			return cup.getGuessedRightPoints();
 		}
 
 		if ( isMatchWinnerGuessedRight( betScore1, betScore2, score1, score2 ) ) {
-			return GUESSED_RIGHT_MATCH_WINNER_OR_DRAW_POINTS;
+			return cup.getGuessedRightWinners();
+		}
+
+		if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2 ) ) {
+			return cup.getGuessedPointsWithinDeltaPoints();
 		}
 
 		return 0;
@@ -57,5 +63,13 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 		final boolean isDrawGuessed = betScore1 == betScore2;
 
 		return isMatchFinishedWithDraw && isDrawGuessed;
+	}
+
+	private boolean isPointsWithingGuessed( final int betScore1, final int betScore2, final int score1, final int score2 ) {
+
+		final boolean score1WithinDelta = ( betScore1 >= score1 - MATCH_POINTS_GUESSING_DELTA ) || ( betScore1 <= score1 + MATCH_POINTS_GUESSING_DELTA );
+		final boolean score2WithinDelta = ( betScore2 >= score2 - MATCH_POINTS_GUESSING_DELTA ) || ( betScore2 <= score2 + MATCH_POINTS_GUESSING_DELTA );
+
+		return score1WithinDelta && score2WithinDelta;
 	}
 }
