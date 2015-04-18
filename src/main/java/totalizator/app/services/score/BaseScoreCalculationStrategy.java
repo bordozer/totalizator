@@ -32,11 +32,12 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 			return GUESSED_RIGHT_SCORES_POINTS;
 		}
 
-		if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2 ) ) {
-			return GUESSED_SCORES_WITHIN_DELTA_POINTS;
-		}
-
 		if ( isMatchWinnerGuessedRight( betScore1, betScore2, score1, score2 ) ) {
+
+			if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2 ) ) {
+				return GUESSED_SCORES_WITHIN_DELTA_POINTS;
+			}
+
 			return GUESSED_RIGHT_WINNERS;
 		}
 
