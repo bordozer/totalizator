@@ -80,7 +80,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
 		}
 
-		if ( !cupService.isCupFinished( cup ) ) {
+		if ( cupService.isCupFinished( cup ) ) {
 			for ( final CupTeamBet cupTeamBet : cupBetsService.load( cup ) ) {
 
 				final Team team = cupTeamBet.getTeam();
@@ -122,7 +122,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 			final Team winner = winners.get( i ).getTeam();
 
-			if ( winner.equals( team ) ) {
+			if ( i == cupPosition && winner.equals( team ) ) {
 				result += 6;
 				continue;
 			}
