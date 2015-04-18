@@ -5,11 +5,8 @@ import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.beans.UserPoints;
-import totalizator.app.models.Cup;
-import totalizator.app.models.MatchBet;
-import totalizator.app.models.User;
-import totalizator.app.services.MatchBetsService;
-import totalizator.app.services.UserService;
+import totalizator.app.models.*;
+import totalizator.app.services.*;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,6 +22,15 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 	@Autowired
 	private MatchBetsService matchBetsService;
+
+	@Autowired
+	private CupService cupService;
+
+	@Autowired
+	private CupWinnerService cupWinnerService;
+
+	@Autowired
+	private CupBetsService cupBetsService;
 
 	@Override
 	public int getUsersScores( final MatchBet matchBet ) {
@@ -74,12 +80,54 @@ public class CupScoresServiceImpl implements CupScoresService {
 			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
 		}
 
+		for ( final UserPoints userPoints : result ) {
+			userPoints.setPoints( userPoints.getPoints() + getUserCupWinnersPoints( cup, userPoints.getUser() ) );
+		}
+
 		Collections.sort( result, new Comparator<UserPoints>() {
 			@Override
 			public int compare( final UserPoints o1, final UserPoints o2 ) {
 				return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
 			}
 		} );
+
+		return result;
+	}
+
+	@Override
+	public int getUserCupWinnersPoints( final Cup cup, final User user ) {
+
+		if ( ! cupService.isCupFinished( cup ) ) {
+			return 0;
+		}
+
+		final List<CupWinner> winners = cupWinnerService.loadAll( cup );
+		final List<CupTeamBet> userCupBets = cupBetsService.load( cup, user );
+
+		int result = 0;
+
+		for ( int i = 0; i < cup.getWinnersCount(); i++ ) {
+
+			final Team winner = winners.get( i ).getTeam();
+			final Team betTeam = userCupBets.get( i ).getTeam();
+
+			if ( winner.equals( betTeam ) ) {
+				result += 6;
+				continue;
+			}
+
+			final CupWinner cupWinner = CollectionUtils.find( winners, new Predicate<CupWinner>() {
+
+				@Override
+				public boolean evaluate( final CupWinner cupWinner ) {
+					return cupWinner.getTeam().equals( betTeam );
+				}
+			} );
+
+			if ( cupWinner != null ) {
+				result += 3;
+			}
+		}
 
 		return result;
 	}
