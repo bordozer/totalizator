@@ -19,8 +19,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/admin/rest/games-data-import/nba")
 public class NBAImportRestController {
 
-	private static final int INITIAL_GAME_ID = 21400001; // 21400001 - 21401230
-
 	@Autowired
 	private CupService cupService;
 
@@ -54,7 +52,7 @@ public class NBAImportRestController {
 
 		nbaGameDataImportService.start( cupId );
 
-		new NBAGameImportRunner( INITIAL_GAME_ID, cup, nbaGameDataImportService ).start();
+		new NBAGameImportRunner( cup, nbaGameDataImportService ).start();
 
 		result.setCupId( cupId );
 		result.setImportActive( true );

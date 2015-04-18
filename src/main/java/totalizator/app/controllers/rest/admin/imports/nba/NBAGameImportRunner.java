@@ -4,17 +4,17 @@ import org.apache.log4j.Logger;
 import totalizator.app.controllers.rest.admin.imports.RemoteGameDataImportService;
 import totalizator.app.models.Cup;
 
+import java.time.LocalDateTime;
+
 public class NBAGameImportRunner extends Thread {
 
-	private final int initialGameId;
 	private Cup cup;
 
 	private final RemoteGameDataImportService remoteGameDataImportService;
 
 	private final Logger LOGGER = Logger.getLogger( NBAGameImportRunner.class );
 
-	public NBAGameImportRunner( final int initialGameId, final Cup cup, final RemoteGameDataImportService remoteGameDataImportService ) {
-		this.initialGameId = initialGameId;
+	public NBAGameImportRunner( final Cup cup, final RemoteGameDataImportService remoteGameDataImportService ) {
 		this.cup = cup;
 		this.remoteGameDataImportService = remoteGameDataImportService;
 	}
@@ -22,17 +22,20 @@ public class NBAGameImportRunner extends Thread {
 	@Override
 	public void run() {
 
-		int gameId = initialGameId;
+		final LocalDateTime cupStartTime = this.cup.getCupStartTime();
+		final int year = cupStartTime.getYear();
+
+		int gameId = calculateCupInitialGameId( year );
 
 		while ( true ) {
 
 			final boolean result = makeImport( gameId );
-			if ( ! result ) {
+			if ( !result ) {
 				remoteGameDataImportService.finish();
 				break;
 			}
 
-			if ( ! remoteGameDataImportService.isActive() ) {
+			if ( !remoteGameDataImportService.isActive() ) {
 				break;
 			}
 
@@ -58,5 +61,9 @@ public class NBAGameImportRunner extends Thread {
 		}
 
 		return false;
+	}
+
+	private int calculateCupInitialGameId( final int year ) {
+		return 20000001 + ( year - 2000 ) * 100000; // NBA's games ids are in diapason 21400001 - 21401230
 	}
 }
