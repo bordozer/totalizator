@@ -13,6 +13,7 @@ define( function( require ) {
 	var translator = new Translator( {
 		addMatchLabel: "Admin / Matches / Add entry"
 		, finishSelectedMatchesLabel: "Admin / Matches / Finish selected matches"
+		, deleteSelectedMatchesLabel: "Admin / Matches / Delete selected matches"
 	} );
 
 	function init( container, options ) {
@@ -22,7 +23,9 @@ define( function( require ) {
 		var menuItems = [
 			{ selector: 'divider' }
 			, { selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel }
+			, { selector: 'divider' }
 			, { selector: 'js-finish-selected-matches-button', icon: 'fa fa-flag-checkered', link: '#', text: translator.finishSelectedMatchesLabel }
+			, { selector: 'js-delete-selected-matches-button', icon: 'fa fa-close', link: '#', text: translator.deleteSelectedMatchesLabel }
 		];
 
 		var matchesView = new View.MatchesView( {

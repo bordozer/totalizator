@@ -18,6 +18,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Admin / Matches / Delete selected matches</nerd>
+		<ru><![CDATA[Удалить выделенные матчи]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Admin / Matches / Edit entry</nerd>
 		<ru><![CDATA[Редактировать]]></ru>
 	</translation>
@@ -53,13 +58,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Delete match?</nerd>
+		<ru><![CDATA[Удалить матч?]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Delete ALL selected matches?</nerd>
+		<ru><![CDATA[Удалить ВСЕ выделенные матчи?]]></ru>
 	</translation>
 
 	<translation>

@@ -40,6 +40,9 @@ define( function ( require ) {
 		, validation_SelectTeam1_Label: "Admin / Teams / Validation: Select team1"
 		, validation_SelectTeam2_Label: "Admin / Teams / Validation: Select team2"
 		, validation_SelectDifferentTeams_Label: "Admin / Teams / Validation: Select different teams"
+
+		, deleteMatchMessage: "Delete match?"
+		, deleteAllMatchesMessage: "Delete ALL selected matches?"
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
@@ -47,6 +50,7 @@ define( function ( require ) {
 		events: {
 			'click .js-add-entry-button': '_onAddClick'
 			, 'click .js-finish-selected-matches-button': '_onFinishSelectedMatchesClick'
+			, 'click .js-delete-selected-matches-button': '_onDeleteSelectedMatchesClick'
 		},
 
 		renderInnerView: function ( filter ) {
@@ -105,7 +109,7 @@ define( function ( require ) {
 		},
 
 		_renderNewEntry: function( model ) {
-			this.$( '.match-list-container' ).html( this._renderEntry( model ) );
+			this.$( '.admin-match-list-container' ).append( this._renderEntry( model ) );
 		},
 
 		_getSelectedMatchIds: function() {
@@ -131,6 +135,14 @@ define( function ( require ) {
 			this._triggerRender();
 		},
 
+		_deleteSelectedMatchesClick: function() {
+			var matches = this._getSelectedMatchIds();
+			_.each( matches, function( match ) {
+				match.deleteMatch();
+			});
+			this._triggerRender();
+		},
+
 		_onAddClick: function( evt ) {
 			evt.preventDefault();
 
@@ -141,6 +153,14 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._finishSelectedMatchesClick();
+		},
+
+		_onDeleteSelectedMatchesClick: function( evt ) {
+			evt.preventDefault();
+
+			if ( confirm( translator.deleteAllMatchesMessage ) ) {
+				this._deleteSelectedMatchesClick();
+			}
 		}
 	} );
 
@@ -167,6 +187,7 @@ define( function ( require ) {
 			this.cups = options.cups;
 			this.teams = options.teams;
 
+			this.listenTo( this.model, 'destroy', this._removeView );
 			this.model.on( 'sync', this.render, this );
 		},
 
@@ -248,10 +269,13 @@ define( function ( require ) {
 		},
 
 		_deleteEntry: function() {
-			if ( confirm( "Delete match?" ) ) {
+			if ( confirm( translator.deleteMatchMessage ) ) {
 				this.model.destroy();
-				this.remove();
 			}
+		},
+
+		_removeView: function() {
+			this.remove();
 		},
 
 		_saveEntry: function () {

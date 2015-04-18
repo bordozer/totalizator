@@ -38,6 +38,10 @@ define( function ( require ) {
 
 		finish: function() {
 			this.save( { matchFinished: true }, { async: false } );
+		},
+
+		deleteMatch: function() {
+			this.destroy();
 		}
 	});
 
