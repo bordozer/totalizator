@@ -20,8 +20,6 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 			return 0;
 		}
 
-		final Cup cup = bet.getMatch().getCup();
-
 		final Match match = bet.getMatch();
 
 		final int score1 = match.getScore1();
