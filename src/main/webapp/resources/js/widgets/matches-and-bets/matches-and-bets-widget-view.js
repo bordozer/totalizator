@@ -147,7 +147,7 @@ define( function ( require ) {
 					var icon = match.cup.readyForMatchBets ? 'fa-money' : 'fa-ban';
 					this.$( '.js-panel-footer' ).append( this._renderIcon( icon, translator.footer_NoBetYetLabel, true ) );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa " + icon + " button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
-				} else if( ! isBettingAllowed ) {
+				} else if( ! isMatchFinished ) {
 					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel, false ) );
 				}
 
