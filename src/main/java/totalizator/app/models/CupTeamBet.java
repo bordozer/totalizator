@@ -14,14 +14,10 @@ import static totalizator.app.models.CupTeamBet.*;
 				name = LOAD_ALL,
 				query = "select t from CupTeamBet t order by betTime desc"
 		),
-		/*@NamedQuery(
+		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP,
 				query = "select t from CupTeamBet t where cupId= :cupId order by betTime desc"
-		),*/
-		/*@NamedQuery(
-				name = LOAD_ALL_FOR_CUP_AND_TEAM,
-				query = "select t from CupTeamBet t where cupId= :cupId and teamId= :teamId order by betTime desc"
-		),*/
+		),
 		@NamedQuery(
 				name = LOAD_ALL_FOR_CUP_AND_USER,
 				query = "select t from CupTeamBet t where cupId= :cupId and userId= :userId order by cupPosition"
@@ -38,7 +34,7 @@ import static totalizator.app.models.CupTeamBet.*;
 public class CupTeamBet extends AbstractEntity {
 
 	public static final String LOAD_ALL = "cupTeamBets.loadAll";
-//	public static final String LOAD_ALL_FOR_CUP = "cupTeamBets.loadForCup";
+	public static final String LOAD_ALL_FOR_CUP = "cupTeamBets.loadForCup";
 //	public static final String LOAD_ALL_FOR_CUP_AND_TEAM = "cupTeamBets.loadForCupAndTeam";
 	public static final String LOAD_ALL_FOR_CUP_AND_USER = "cupTeamBets.loadForCupAndUser";
 	public static final String LOAD_ALL_FOR_CUP_AND_TEAM_AND_USER = "cupTeamBets.loadForCupAndTeamAndUser";

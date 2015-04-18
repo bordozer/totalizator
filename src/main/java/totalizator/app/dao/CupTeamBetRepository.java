@@ -80,4 +80,10 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 
 		return result.size() == 1 ? result.get( 0 ) : null;
 	}
+
+	public List<CupTeamBet> load( final Cup cup ) {
+		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
+				.setParameter( "cupId", cup.getId() )
+				.getResultList();
+	}
 }

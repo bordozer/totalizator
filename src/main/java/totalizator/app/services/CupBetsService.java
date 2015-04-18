@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface CupBetsService extends GenericService<CupTeamBet> {
 
+	List<CupTeamBet> load( final Cup cup );
+
 	List<CupTeamBet> load( final Cup cup, final User user );
 
 	CupTeamBet load( final Cup cup, final User user, final int cupPosition );

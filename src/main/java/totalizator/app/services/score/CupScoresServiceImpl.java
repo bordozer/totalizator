@@ -34,7 +34,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 	@Override
 	public int getUsersScores( final MatchBet matchBet ) {
-		return ScoreCalculationStrategy.getInstance().getPoints(  matchBet  );
+		return ScoreCalculationStrategy.getInstance().getPoints( matchBet );
 	}
 
 	@Override
@@ -80,8 +80,22 @@ public class CupScoresServiceImpl implements CupScoresService {
 			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
 		}
 
-		for ( final UserPoints userPoints : result ) {
-			userPoints.setPoints( userPoints.getPoints() + getUserCupWinnersPoints( cup, userPoints.getUser() ) );
+		if ( !cupService.isCupFinished( cup ) ) {
+			for ( final CupTeamBet cupTeamBet : cupBetsService.load( cup ) ) {
+
+				final Team team = cupTeamBet.getTeam();
+				final User user = cupTeamBet.getUser();
+				final int cupPosition = cupTeamBet.getCupPosition();
+
+				final UserPoints userPoints = getUserPoints( result, user );
+
+				if ( userPoints == null ) {
+					result.add( new UserPoints( user, getUserCupWinnersPoints( cup, team, user, cupPosition ) ) );
+					continue;
+				}
+
+				userPoints.setPoints( userPoints.getPoints() + getUserCupWinnersPoints( cup, team, user, cupPosition ) );
+			}
 		}
 
 		Collections.sort( result, new Comparator<UserPoints>() {
@@ -95,23 +109,20 @@ public class CupScoresServiceImpl implements CupScoresService {
 	}
 
 	@Override
-	public int getUserCupWinnersPoints( final Cup cup, final User user ) {
+	public int getUserCupWinnersPoints( final Cup cup, final Team team, final User user, final int cupPosition ) {
 
-		if ( ! cupService.isCupFinished( cup ) ) {
+		if ( !cupService.isCupFinished( cup ) ) {
 			return 0;
 		}
 
-		final List<CupWinner> winners = cupWinnerService.loadAll( cup );
-		final List<CupTeamBet> userCupBets = cupBetsService.load( cup, user );
-
 		int result = 0;
+		final List<CupWinner> winners = cupWinnerService.loadAll( cup );
 
 		for ( int i = 0; i < cup.getWinnersCount(); i++ ) {
 
 			final Team winner = winners.get( i ).getTeam();
-			final Team betTeam = userCupBets.get( i ).getTeam();
 
-			if ( winner.equals( betTeam ) ) {
+			if ( winner.equals( team ) ) {
 				result += 6;
 				continue;
 			}
@@ -120,7 +131,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 				@Override
 				public boolean evaluate( final CupWinner cupWinner ) {
-					return cupWinner.getTeam().equals( betTeam );
+					return cupWinner.getTeam().equals( team );
 				}
 			} );
 

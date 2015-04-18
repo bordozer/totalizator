@@ -56,6 +56,11 @@ public class CupBetsServiceImpl implements CupBetsService {
 	}
 
 	@Override
+	public List<CupTeamBet> load( final Cup cup ) {
+		return cupTeamBetRepository.load( cup );
+	}
+
+	@Override
 	@Transactional( readOnly = true )
 	public List<CupTeamBet> load( final Cup cup, final User user ) {
 		return cupTeamBetRepository.load( cup, user );
