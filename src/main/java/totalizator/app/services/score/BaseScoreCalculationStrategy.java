@@ -59,8 +59,8 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 
 	private boolean isPointsWithingGuessed( final int betScore1, final int betScore2, final int score1, final int score2 ) {
 
-		final boolean score1WithinDelta = ( betScore1 >= score1 - MATCH_POINTS_GUESSING_DELTA ) || ( betScore1 <= score1 + MATCH_POINTS_GUESSING_DELTA );
-		final boolean score2WithinDelta = ( betScore2 >= score2 - MATCH_POINTS_GUESSING_DELTA ) || ( betScore2 <= score2 + MATCH_POINTS_GUESSING_DELTA );
+		final boolean score1WithinDelta = ( betScore1 >= score1 - MATCH_POINTS_GUESSING_DELTA ) && ( betScore1 <= score1 + MATCH_POINTS_GUESSING_DELTA );
+		final boolean score2WithinDelta = ( betScore2 >= score2 - MATCH_POINTS_GUESSING_DELTA ) && ( betScore2 <= score2 + MATCH_POINTS_GUESSING_DELTA );
 
 		return score1WithinDelta && score2WithinDelta;
 	}
