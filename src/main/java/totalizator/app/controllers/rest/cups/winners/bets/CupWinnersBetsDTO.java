@@ -14,11 +14,6 @@ public class CupWinnersBetsDTO {
 	public CupWinnersBetsDTO() {
 	}
 
-	public CupWinnersBetsDTO( final int winnersCount, final List<CupTeamBetDTO> cupBets ) {
-		this.winnersCount = winnersCount;
-		this.cupBets = cupBets;
-	}
-
 	public int getWinnersCount() {
 		return winnersCount;
 	}
