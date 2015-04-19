@@ -124,6 +124,7 @@ define( function ( require ) {
 
 			this._renderDropDownMenuItems();
 
+
 			if ( isMatchFinished ) {
 				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', model.bettingValidationMessage, false ) );
 			}
@@ -135,6 +136,7 @@ define( function ( require ) {
 
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
+				this.$( '.js-panel-footer' ).append( '<h4>+' + model.points + '</h4>' );
 
 				return this;
 			}
@@ -164,6 +166,8 @@ define( function ( require ) {
 			if ( ! match.matchFinished ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
+			} else {
+				this.$( '.bet-buttons-cell' ).append( model.points );
 			}
 
 			return this;
