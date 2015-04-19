@@ -9,28 +9,33 @@ import totalizator.config.root.TestConfiguration;
 import totalizator.config.servlet.ServletContextConfig;
 
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] {RootContextConfig.class, DevelopmentConfiguration.class, TestConfiguration.class, SecurityConfig.class };
+		return new Class<?>[]{ RootContextConfig.class, DevelopmentConfiguration.class, TestConfiguration.class, SecurityConfig.class };
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] {ServletContextConfig.class};
+		return new Class<?>[]{ ServletContextConfig.class };
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"/"};
+		return new String[]{ "/" };
 	}
 
 	@Override
 	protected Filter[] getServletFilters() {
-		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+		final CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding( "UTF-8" );
-		return new Filter[] {characterEncodingFilter};
+		characterEncodingFilter.setForceEncoding( true );
+
+		return new Filter[]{ characterEncodingFilter };
 	}
 }
