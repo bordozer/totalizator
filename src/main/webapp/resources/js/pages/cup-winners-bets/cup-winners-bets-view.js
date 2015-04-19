@@ -11,6 +11,8 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: ""
+		, userLabel: 'User'
+		, cupPositionLabel: 'cup position'
 	} );
 
 	return Backbone.View.extend( {
@@ -29,7 +31,7 @@ define( function ( require ) {
 		render: function () {
 
 			var model = this.model.toJSON();
-			console.log( model );
+//			console.log( model );
 
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 

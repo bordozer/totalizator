@@ -1,1 +1,37 @@
-winners bets
+<table class="table table-striped table-hover">
+
+	<thead>
+		<tr>
+			<td class="text-center">
+				<h4><%= translator.userLabel %></h4>
+			</td>
+			<% for( i = 1; i <= winnersCount; i++ ) {%>
+				<td class="text-center">
+					<h4><%=i%> <%= translator.cupPositionLabel %></h4>
+				</td>
+			<% } %>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<% _.each( usersCupBets, function( userCupBet ) { %>
+
+			<tr>
+				<td><%- userCupBet.userName %></td>
+				<% for( i = 1; i <= winnersCount; i++ ) {%>
+					<td class="text-center">
+						<% if( userCupBet[ i - 1 ].team ) { %>
+							<img src="<%= userCupBet[ i - 1 ].team.teamLogo %>">
+							<br />
+							<%= userCupBet[ i - 1 ].team.teamName %>
+						<% } %>
+					</td>
+				<% } %>
+			</tr>
+
+		<% } ) %>
+
+	</tbody>
+
+</table>

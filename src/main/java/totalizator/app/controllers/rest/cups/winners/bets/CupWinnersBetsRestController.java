@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupTeamBetDTO;
+import totalizator.app.dto.TeamDTO;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
@@ -16,6 +17,9 @@ import totalizator.app.services.CupBetsService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.utils.DateTimeService;
+import totalizator.app.translator.Language;
+import totalizator.app.translator.TranslatorService;
 
 import java.security.Principal;
 import java.util.Collections;
@@ -43,6 +47,12 @@ public class CupWinnersBetsRestController {
 	@Autowired
 	private DTOService dtoService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
+	@Autowired
+	private DateTimeService dateTimeService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -56,14 +66,17 @@ public class CupWinnersBetsRestController {
 
 		final List<CupTeamBetDTO> bets = dtoService.transformCupTeamBets( cupBets, userService.findByLogin( principal.getName() ) );
 
+		final boolean isCupBetsAreHiddenYet = !cupBetsService.isCupBettingFinished( cup );
+
 		final Map<UserDTO, List<CupTeamBetDTO>> data = newLinkedHashMap();
 
 		final List<UserDTO> users = Lists.transform( bets, new Function<CupTeamBetDTO, UserDTO>() {
 			@Override
 			public UserDTO apply( final CupTeamBetDTO cupBet ) {
-				return null;
+				return cupBet.getUser();
 			}
 		} );
+
 		for ( final UserDTO user : users ) {
 
 			final List<CupTeamBetDTO> userBets = newArrayList( bets );
@@ -81,6 +94,24 @@ public class CupWinnersBetsRestController {
 					return ( ( Integer ) o1.getCupPosition() ).compareTo( o2.getCupPosition() );
 				}
 			} );
+
+			if ( isCupBetsAreHiddenYet ) {
+				for ( final CupTeamBetDTO userBet : userBets ) {
+
+					final TeamDTO team = userBet.getTeam();
+
+					final TeamDTO fakeTeam = new TeamDTO();
+					fakeTeam.setCategory( team.getCategory() );
+					fakeTeam.setTeamId( 0 );
+					fakeTeam.setTeamLogo( "/resources/img/team-logo-not-found.png" );
+					fakeTeam.setTeamName( translatorService.translate( "Team name is hidden till $1"
+							, Language.RU // TODO: Language!!!
+							, dateTimeService.formatDateTimeUI( cup.getCupStartTime() )
+					) );
+
+					userBet.setTeam( fakeTeam );
+				}
+			}
 
 			data.put( user, userBets );
 		}
