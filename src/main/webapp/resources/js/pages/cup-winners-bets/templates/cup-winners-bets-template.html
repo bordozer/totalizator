@@ -21,12 +21,20 @@
 				<td>
 					<a href="/totalizator/users/<%- userCupBet.user.userId %>/"><%- userCupBet.user.userName %></a>
 				</td>
-				<% for( i = 1; i <= winnersCount; i++ ) {%>
+				<% for( i = 1; i <= winnersCount; i++ ) { %>
 					<td class="text-center">
 						<% if( userCupBet.userCupBets[ i - 1 ].team ) { %>
+
 							<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>">
+
 							<br />
+
 							<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+
+							<% if( userCupBet.userCupBets[ i - 1 ].points > 0 ) { %>
+								<h4>+ <%= userCupBet.userCupBets[ i - 1 ].points %></h4>
+							<% } %>
+
 						<% } %>
 					</td>
 				<% } %>

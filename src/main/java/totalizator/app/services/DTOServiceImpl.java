@@ -255,13 +255,18 @@ public class DTOServiceImpl implements DTOService {
 			@Override
 			public CupTeamBetDTO apply( final CupTeamBet cupTeamBet ) {
 
+				final Cup cup = cupTeamBet.getCup();
+				final Team team = cupTeamBet.getTeam();
+
 				final CupTeamBetDTO result = new CupTeamBetDTO();
 
-				result.setCup( transformCup( cupTeamBet.getCup(), user ) );
-				result.setTeam( transformTeam( cupTeamBet.getTeam() ) );
-				result.setUser( transformUser( cupTeamBet.getUser() ) );
+				result.setCup( transformCup( cup, user ) );
+				result.setTeam( transformTeam( team ) );
+				result.setUser( transformUser( user ) );
 
 				result.setCupPosition( cupTeamBet.getCupPosition() );
+
+				result.setPoints( cupScoresService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
 
 				return result;
 			}

@@ -1,32 +1,26 @@
 package totalizator.app.controllers.rest.cups.winners.bets;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.TeamDTO;
-import totalizator.app.dto.UserDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.User;
 import totalizator.app.services.CupBetsService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
-import totalizator.app.services.UserService;
 import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newLinkedHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -36,9 +30,6 @@ public class CupWinnersBetsRestController {
 
 	@Autowired
 	private CupService cupService;
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private CupBetsService cupBetsService;

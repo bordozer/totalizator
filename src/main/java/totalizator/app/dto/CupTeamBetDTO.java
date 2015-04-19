@@ -7,6 +7,7 @@ public class CupTeamBetDTO {
 	private UserDTO user;
 
 	private int cupPosition;
+	private int points;
 
 	public CupDTO getCup() {
 		return cup;
@@ -38,5 +39,13 @@ public class CupTeamBetDTO {
 
 	public void setCupPosition( final int cupPosition ) {
 		this.cupPosition = cupPosition;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints( final int points ) {
+		this.points = points;
 	}
 }
