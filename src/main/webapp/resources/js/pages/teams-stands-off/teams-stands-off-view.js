@@ -12,7 +12,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: "Teams stand off"
+		title: "Teams standoff history"
 	} );
 
 	return Backbone.View.extend( {

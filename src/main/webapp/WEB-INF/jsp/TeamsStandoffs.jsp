@@ -12,7 +12,7 @@
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/teams-stands-off/teams-stands-off', 'translator' ], function ( $, Page, standsOff, Translator ) {
 
 			var translator = new Translator( {
-				title: 'Teams stands off'
+				title: 'Teams standoff history'
 			} );
 
 			var breadcrumbs = [

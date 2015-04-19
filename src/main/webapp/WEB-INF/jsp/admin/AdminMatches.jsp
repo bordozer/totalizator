@@ -22,7 +22,9 @@
 			var categoryId = ${adminMatchesModel.categoryId};
 			var cupId = ${adminMatchesModel.cupId};
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: { categoryId: categoryId, cupId: cupId } } );
+			var currentUser = ${adminMatchesModel.currentUserJSON};
+
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: { categoryId: categoryId, cupId: cupId, currentUser: currentUser } } );
 			adminView.render();
 		} );
 	</script>

@@ -21,7 +21,9 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs } );
+			var currentUser = ${adminModel.currentUserJSON};
+
+			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs, options: { currentUser: currentUser } } );
 			adminView.render();
 		} );
 	</script>

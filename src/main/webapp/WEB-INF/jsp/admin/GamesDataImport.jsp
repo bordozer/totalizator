@@ -21,7 +21,9 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: gamesDataImport, breadcrumbs: breadcrumbs, options: {} } );
+			var currentUser = ${gamesDataImportModel.currentUserJSON};
+
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: gamesDataImport, breadcrumbs: breadcrumbs, options: { currentUser: currentUser } } );
 			adminView.render();
 		} );
 	</script>

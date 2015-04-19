@@ -17,7 +17,9 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var adminView = new Admin( { el: $( '.translations-container' ), bodyRenderer: translations, breadcrumbs: breadcrumbs } );
+			var currentUser = ${adminModel.currentUserJSON};
+
+			var adminView = new Admin( { el: $( '.translations-container' ), bodyRenderer: translations, breadcrumbs: breadcrumbs, options: { currentUser: currentUser } } );
 			adminView.render();
 		} );
 	</script>

@@ -26,7 +26,7 @@ define( function ( require ) {
 
 		, actionAllMatchBet: 'Portal page / Matches / Menu: All bets'
 
-		, actionStandOffHistory: 'Portal page / Matches / Menu: StandOff history'
+		, actionStandOffHistory: 'Teams standoff history'
 
 		, footer_YourBetLabel: 'Match and Bets / Footer: Your bet'
 		, footer_NoBetYetLabel: 'Match and Bets / Footer: no bet yet'
