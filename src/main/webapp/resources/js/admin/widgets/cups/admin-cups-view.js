@@ -35,7 +35,7 @@ define( function ( require ) {
 		, cupValidation_CupName: "Cup validation: Enter a cup name!"
 		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
 		, cupValidation_WinnersCountDoesNotEqualsWinners: "Cup validation: Defined winners count does not equals winners"
-		, cupResultsTab: "Cup edit: Cup results"
+		, cupResultsTab: "Cup winners"
 		, cupPositionLabel: "cup position"
 	} );
 

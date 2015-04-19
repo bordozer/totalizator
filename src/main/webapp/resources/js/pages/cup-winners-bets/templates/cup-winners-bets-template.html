@@ -15,11 +15,25 @@
 
 	<tbody>
 
+		<% if( winners.length > 0 ) { %>
+			<tr>
+				<td class="bg-success">
+					<h4><%= translator.realCupWinnersLabel %></h4>
+				</td>
+				<% _.each( winners, function( team ) { %>
+					<td class="text-center bg-success">
+						<img src="<%= team.teamLogo %>">
+						<h4><%- team.teamName %></h4>
+					</td>
+				<% } ) %>
+			</tr>
+		<% } %>
+
 		<% _.each( usersCupBets, function( userCupBet ) { %>
 
 			<tr>
 				<td>
-					<a href="/totalizator/users/<%- userCupBet.user.userId %>/"><%- userCupBet.user.userName %></a>
+					<h4><a href="/totalizator/users/<%- userCupBet.user.userId %>/"><%- userCupBet.user.userName %></a></h4>
 				</td>
 				<% for( i = 1; i <= winnersCount; i++ ) { %>
 					<td class="text-center">

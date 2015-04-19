@@ -1,16 +1,17 @@
 package totalizator.app.controllers.rest.cups.winners.bets;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.TeamDTO;
-import totalizator.app.models.Cup;
-import totalizator.app.models.CupTeamBet;
-import totalizator.app.models.User;
+import totalizator.app.models.*;
 import totalizator.app.services.CupBetsService;
 import totalizator.app.services.CupService;
+import totalizator.app.services.CupWinnerService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
@@ -43,6 +44,9 @@ public class CupWinnersBetsRestController {
 	@Autowired
 	private DateTimeService dateTimeService;
 
+	@Autowired
+	private CupWinnerService cupWinnerService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -53,11 +57,20 @@ public class CupWinnersBetsRestController {
 		final CupWinnersBetsDTO result = new CupWinnersBetsDTO();
 		result.setWinnersCount( cup.getWinnersCount() );
 
+		final List<CupWinner> cupWinners = cupWinnerService.loadAll( cup );
+		result.setWinners( dtoService.transformTeams( Lists.transform( cupWinners, new Function<CupWinner, Team>() {
+			@Override
+			public Team apply( final CupWinner cupWinner ) {
+				return cupWinner.getTeam();
+			}
+		} ) ) );
+
 		final boolean isCupBetsAreHiddenYet = !cupBetsService.isCupBettingFinished( cup );
 
 		final List<User> users = getUsers( cup );
 
 		final List<UserCupBetsDTO> usersCupBets = newArrayList();
+
 		for ( final User user : users ) {
 
 			final List<CupTeamBet> cupTeamBets = cupBetsService.load( cup, user );
