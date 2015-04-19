@@ -1,4 +1,4 @@
-package totalizator.app.controllers.ui.cups.winnersBets;
+package totalizator.app.controllers.ui.cups.winners.bets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +12,12 @@ import totalizator.app.services.UserService;
 import java.security.Principal;
 
 @Controller
-@RequestMapping( "/totalizator/cups/{cupId}/bets/winners" )
+@RequestMapping( "/totalizator/cups/{cupId}/winners/bets/" )
 public class CupWinnersBetsController {
 
 	public static final String MODEL_NAME = "cupWinnersBetsModel";
 
-	private static final String VIEW = "/CupBetsWinners";
+	private static final String VIEW = "/CupWinnersBets";
 
 	@Autowired
 	private UserService userService;

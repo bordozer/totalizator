@@ -22,7 +22,8 @@ define( function ( require ) {
 		initialize: function ( options ) {
 			this.cupId = options.options.cupId;
 
-			this.render();
+			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {

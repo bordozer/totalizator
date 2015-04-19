@@ -1,4 +1,4 @@
-package totalizator.app.controllers.ui.cups.winnersBets;
+package totalizator.app.controllers.ui.cups.winners.bets;
 
 import totalizator.app.controllers.ui.AbstractPageModel;
 import totalizator.app.models.Cup;

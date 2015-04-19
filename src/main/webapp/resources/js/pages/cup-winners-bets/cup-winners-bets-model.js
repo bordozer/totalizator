@@ -11,11 +11,11 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-
+			this.matchId = options.options.matchId;
 		},
 
 		url: function () {
-			return '/';
+			return '/rest/cups/' + this.matchId + '/winners/bets/';
 		}
 	} );
 } );

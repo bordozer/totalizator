@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="cupWinnersBetsModel" type="totalizator.app.controllers.ui.cups.winnersBets.CupWinnersBetsModel" scope="request"/>
+<jsp:useBean id="cupWinnersBetsModel" type="totalizator.app.controllers.ui.cups.winners.bets.CupWinnersBetsModel" scope="request"/>
 
 <tags:page currentUser="${cupWinnersBetsModel.currentUser}">
 
