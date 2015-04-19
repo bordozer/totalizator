@@ -19,6 +19,7 @@ define( function ( require ) {
 		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
 
+			this.currentUser = options.options.currentUser;
 			this.breadcrumbs = options.breadcrumbs;
 			this.options = options.options;
 			this.bodyRenderer = options.bodyRenderer;
@@ -45,7 +46,7 @@ define( function ( require ) {
 		},
 
 		_renderHeader: function() {
-			this.headerView = pageHeader( this.$( '.header-container'), { breadcrumbs: this.breadcrumbs } ).view();
+			this.headerView = pageHeader( this.$( '.header-container'), { breadcrumbs: this.breadcrumbs, currentUser: this.currentUser } ).view();
 		},
 
 		_renderMenu: function() {

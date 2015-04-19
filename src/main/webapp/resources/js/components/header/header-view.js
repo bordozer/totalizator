@@ -18,6 +18,7 @@ define( function ( require ) {
 	var HeaderView = Backbone.View.extend( {
 
 		initialize: function( options ) {
+			this.currentUser = options.options.currentUser;
 			this.breadcrumbs = options.options.breadcrumbs;
 
 			this.on( 'navigation:set:active:cup', this._setActiveCup, this );
@@ -31,6 +32,7 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				model: this.model
+				, currentUser: this.currentUser
 				, title: title
 				, breadcrumbs: this.breadcrumbs
 				, translator: translator
