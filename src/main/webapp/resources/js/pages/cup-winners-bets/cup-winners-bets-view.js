@@ -31,7 +31,7 @@ define( function ( require ) {
 		render: function () {
 
 			var model = this.model.toJSON();
-//			console.log( model );
+			console.log( model );
 
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 

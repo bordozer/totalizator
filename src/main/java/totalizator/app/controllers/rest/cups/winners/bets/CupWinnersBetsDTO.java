@@ -1,17 +1,14 @@
 package totalizator.app.controllers.rest.cups.winners.bets;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import totalizator.app.dto.CupTeamBetDTO;
-import totalizator.app.dto.UserDTO;
 
 import java.util.List;
-import java.util.Map;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class CupWinnersBetsDTO {
 
 	private int winnersCount;
-	private Map<UserDTO, List<CupTeamBetDTO>> usersCupBets;
+	private List<UserCupBetsDTO> usersCupBets;
 
 	public CupWinnersBetsDTO() {
 	}
@@ -24,11 +21,11 @@ public class CupWinnersBetsDTO {
 		this.winnersCount = winnersCount;
 	}
 
-	public void setUsersCupBets( final Map<UserDTO, List<CupTeamBetDTO>> usersCupBets ) {
-		this.usersCupBets = usersCupBets;
+	public List<UserCupBetsDTO> getUsersCupBets() {
+		return usersCupBets;
 	}
 
-	public Map<UserDTO, List<CupTeamBetDTO>> getUsersCupBets() {
-		return usersCupBets;
+	public void setUsersCupBets( final List<UserCupBetsDTO> usersCupBets ) {
+		this.usersCupBets = usersCupBets;
 	}
 }

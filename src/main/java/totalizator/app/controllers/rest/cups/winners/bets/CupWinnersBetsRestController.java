@@ -68,14 +68,14 @@ public class CupWinnersBetsRestController {
 
 		final boolean isCupBetsAreHiddenYet = !cupBetsService.isCupBettingFinished( cup );
 
-		final Map<UserDTO, List<CupTeamBetDTO>> data = newLinkedHashMap();
-
 		final List<UserDTO> users = Lists.transform( bets, new Function<CupTeamBetDTO, UserDTO>() {
 			@Override
 			public UserDTO apply( final CupTeamBetDTO cupBet ) {
 				return cupBet.getUser();
 			}
 		} );
+
+		final List<UserCupBetsDTO> usersCupBets = newArrayList();
 
 		for ( final UserDTO user : users ) {
 
@@ -113,10 +113,14 @@ public class CupWinnersBetsRestController {
 				}
 			}
 
-			data.put( user, userBets );
+			final UserCupBetsDTO data = new UserCupBetsDTO();
+			data.setUser( user );
+			data.setUserCupBets( userBets );
+
+			usersCupBets.add( data );
 		}
 
-		result.setUsersCupBets( data );
+		result.setUsersCupBets( usersCupBets );
 
 		return result;
 	}

@@ -18,13 +18,13 @@
 		<% _.each( usersCupBets, function( userCupBet ) { %>
 
 			<tr>
-				<td><%- userCupBet.userName %></td>
+				<td><%- userCupBet.user.userName %></td>
 				<% for( i = 1; i <= winnersCount; i++ ) {%>
 					<td class="text-center">
-						<% if( userCupBet[ i - 1 ].team ) { %>
-							<img src="<%= userCupBet[ i - 1 ].team.teamLogo %>">
+						<% if( userCupBet.userCupBets[ i - 1 ].team ) { %>
+							<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>">
 							<br />
-							<%= userCupBet[ i - 1 ].team.teamName %>
+							<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
 						<% } %>
 					</td>
 				<% } %>

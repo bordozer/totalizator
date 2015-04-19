@@ -9,7 +9,7 @@ define( function ( require ) {
 
 		defaults: {
 			winnersCount: 0
-			, usersCupBets: {}
+			, usersCupBets: []
 		},
 
 		initialize: function ( options ) {
