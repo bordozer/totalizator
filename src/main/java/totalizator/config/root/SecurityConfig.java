@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import totalizator.app.security.AjaxAuthenticationSuccessHandler;
 import totalizator.app.security.SecurityUserDetailsService;
 
@@ -34,31 +36,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure( HttpSecurity http ) throws Exception {
 
+		/*final CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding( "UTF-8" );
+		filter.setForceEncoding( true );*/
+
 		http
-			.csrf().disable()
-			.authorizeRequests()
-			.antMatchers( "/resources/public/**" ).permitAll()
-			.antMatchers( "/resources/img*//**" ).permitAll()
-			.antMatchers( "/resources/bower_components*//**" ).permitAll()
-			.antMatchers( "/resources/js//**" ).permitAll()
-			.antMatchers( "/rest/translator/" ).permitAll()
-			.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll() // create user
-			.anyRequest().authenticated()
-			.and()
-			.formLogin()
-			.defaultSuccessUrl( PORTAL_PAGE_URL )
-			.loginProcessingUrl( "/authenticate" )
-			.usernameParameter( "login" )
-			.passwordParameter( "password" )
-			.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
-			.loginPage( LOGIN_PAGE_URL )
-			.and()
-			.httpBasic()
-			.and()
-			.logout()
-			.logoutUrl( "/logout" )
-			.logoutSuccessUrl( LOGIN_PAGE_URL )
-			.permitAll()
+//				.addFilterBefore( filter, CsrfFilter.class )
+				.csrf().disable()
+				.authorizeRequests()
+				.antMatchers( "/resources/public/**" ).permitAll()
+				.antMatchers( "/resources/img*//**" ).permitAll()
+				.antMatchers( "/resources/bower_components*//**" ).permitAll()
+				.antMatchers( "/resources/js//**" ).permitAll()
+				.antMatchers( "/rest/translator/" ).permitAll()
+				.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll() // create user
+				.anyRequest().authenticated()
+				.and()
+				.formLogin()
+				.defaultSuccessUrl( PORTAL_PAGE_URL )
+				.loginProcessingUrl( "/authenticate" )
+				.usernameParameter( "login" )
+				.passwordParameter( "password" )
+				.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
+				.loginPage( LOGIN_PAGE_URL )
+				.and()
+				.httpBasic()
+				.and()
+				.logout()
+				.logoutUrl( "/logout" )
+				.logoutSuccessUrl( LOGIN_PAGE_URL )
+				.permitAll()
 		;
 		/*if ( "true".equals( System.getProperty( "httpsOnly" ) ) ) {
 

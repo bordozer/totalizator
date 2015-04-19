@@ -9,9 +9,6 @@ import totalizator.config.root.TestConfiguration;
 import totalizator.config.servlet.ServletContextConfig;
 
 import javax.servlet.Filter;
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -32,6 +29,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
 	@Override
 	protected Filter[] getServletFilters() {
+
 		final CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding( "UTF-8" );
 		characterEncodingFilter.setForceEncoding( true );
