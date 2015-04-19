@@ -1,10 +1,15 @@
 package totalizator.app.controllers.rest.cups.winners.bets;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupTeamBetDTO;
+import totalizator.app.dto.UserDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.services.CupBetsService;
@@ -16,7 +21,10 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newLinkedHashMap;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -47,19 +55,37 @@ public class CupWinnersBetsRestController {
 		result.setWinnersCount( cup.getWinnersCount() );
 
 		final List<CupTeamBetDTO> bets = dtoService.transformCupTeamBets( cupBets, userService.findByLogin( principal.getName() ) );
-		Collections.sort( bets, new Comparator<CupTeamBetDTO>() {
+
+		final Map<UserDTO, List<CupTeamBetDTO>> data = newLinkedHashMap();
+
+		final List<UserDTO> users = Lists.transform( bets, new Function<CupTeamBetDTO, UserDTO>() {
 			@Override
-			public int compare( final CupTeamBetDTO o1, final CupTeamBetDTO o2 ) {
-
-				if ( o1.getUser().getUserId() != o2.getUser().getUserId() ) {
-					return o1.getUser().getUserName().compareTo( o2.getUser().getUserName() );
-				}
-
-				return o1.getCupPosition() - o2.getCupPosition();
+			public UserDTO apply( final CupTeamBetDTO cupBet ) {
+				return null;
 			}
 		} );
+		for ( final UserDTO user : users ) {
 
-		result.setCupBets( bets );
+			final List<CupTeamBetDTO> userBets = newArrayList( bets );
+
+			CollectionUtils.filter( userBets, new Predicate<CupTeamBetDTO>() {
+				@Override
+				public boolean evaluate( final CupTeamBetDTO cupTeamBetDTO ) {
+					return cupTeamBetDTO.getUser().getUserId() == user.getUserId();
+				}
+			} );
+
+			Collections.sort( userBets, new Comparator<CupTeamBetDTO>() {
+				@Override
+				public int compare( final CupTeamBetDTO o1, final CupTeamBetDTO o2 ) {
+					return ( ( Integer ) o1.getCupPosition() ).compareTo( o2.getCupPosition() );
+				}
+			} );
+
+			data.put( user, userBets );
+		}
+
+		result.setUsersCupBets( data );
 
 		return result;
 	}
