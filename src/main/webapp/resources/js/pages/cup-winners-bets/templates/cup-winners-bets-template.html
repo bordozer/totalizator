@@ -18,7 +18,9 @@
 		<% _.each( usersCupBets, function( userCupBet ) { %>
 
 			<tr>
-				<td><%- userCupBet.user.userName %></td>
+				<td>
+					<a href="/totalizator/users/<%- userCupBet.user.userId %>/"><%- userCupBet.user.userName %></a>
+				</td>
 				<% for( i = 1; i <= winnersCount; i++ ) {%>
 					<td class="text-center">
 						<% if( userCupBet.userCupBets[ i - 1 ].team ) { %>
