@@ -8,6 +8,8 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		defaults: {
+			winnersCount: 0
+			, cupBets: []
 		},
 
 		initialize: function ( options ) {
