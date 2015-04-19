@@ -97,7 +97,7 @@ define( function ( require ) {
 		},
 
 		footerText: function( text ) {
-			this.$( '.js-footer' ).text( text );
+			this.$( '.js-footer' ).html( text );
 		},
 
 		_renderDropDownMenu: function() {

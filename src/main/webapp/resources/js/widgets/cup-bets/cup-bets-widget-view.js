@@ -20,6 +20,7 @@ define( function ( require ) {
 		, menuEditCupTeamBetsLabel: "Edit cup team bets"
 		, noCupTeamPositionLabel: "No bet yet"
 		, cupPositionLabel: "cup position"
+		, allCupBetsLabel: "All cup winners bets"
 		, validation_DuplicateTeams: "Cup team bet validation: Duplicated teams!"
 	} );
 
@@ -160,6 +161,8 @@ define( function ( require ) {
 			view.render( data );
 
 			view.delegateEvents();
+
+			this.footerText( "<a href='/totalizator/cups/" + this.cup.cupId + "/bets/winners/'>" + translator.allCupBetsLabel + "</a>" );
 
 			this.trigger( 'inner-view-rendered' );
 
