@@ -136,7 +136,9 @@ define( function ( require ) {
 
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
-				this.$( '.js-panel-footer' ).append( '<h4>+' + model.points + '</h4>' );
+				if ( model.points > 0 ) {
+					this.$( '.js-panel-footer' ).append( '<h4 class="text-danger text-right"><strong> +' + model.points + '</strong></h4>' );
+				}
 
 				return this;
 			}
