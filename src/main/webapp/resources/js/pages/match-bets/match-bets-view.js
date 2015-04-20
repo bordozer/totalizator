@@ -16,6 +16,7 @@ define( function ( require ) {
 		title: "Matches and bests"
 		, userLabel: "User"
 		, userPointsLabel: "Points"
+		, matchBestsLabel: "Match bests"
 		, anotherBetsAreHidden: "Bets of another users will be shown after the match start"
 	} );
 
