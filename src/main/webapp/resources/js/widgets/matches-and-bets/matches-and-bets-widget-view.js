@@ -137,7 +137,8 @@ define( function ( require ) {
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
 				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
 				if ( model.points > 0 ) {
-					this.$( '.js-panel-footer' ).append( '<h4 class="text-danger text-right"><strong> +' + model.points + '</strong></h4>' );
+					this._setMatchContainerClass( 'panel-success' );
+					this._showBetPoints( model.points );
 				}
 
 				return this;
@@ -146,8 +147,6 @@ define( function ( require ) {
 			if( bet == null ) {
 
 				if ( isBettingAllowed ) {
-					this._setMatchContainerClass( 'panel-warning' );
-
 					var icon = match.cup.readyForMatchBets ? 'fa-money' : 'fa-ban';
 					this.$( '.js-panel-footer' ).append( this._renderIcon( icon, translator.footer_NoBetYetLabel, true ) );
 					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa " + icon + " button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
@@ -158,10 +157,14 @@ define( function ( require ) {
 				return this;
 			}
 
-			this._setMatchContainerClass( 'panel-success' );
-			if ( match.matchFinished ) {
-				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
+			if ( ! match.matchFinished ) {
+				this._setMatchContainerClass( 'panel-warning' );
 			}
+
+			if ( match.matchFinished && model.points > 0 ) {
+				this._setMatchContainerClass( 'panel-success' );
+			}
+
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
 
@@ -169,7 +172,9 @@ define( function ( require ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
 			} else {
-				this.$( '.bet-buttons-cell' ).append( model.points );
+				if ( model.points > 0 ) {
+					this._showBetPoints( model.points );
+				}
 			}
 
 			return this;
@@ -196,6 +201,10 @@ define( function ( require ) {
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
 
 			return this;
+		},
+
+		_showBetPoints: function( points ) {
+			this.$( '.js-panel-footer' ).append( '<h4 class="text-danger text-right"><strong> +' + points + '</strong></h4>' );
 		},
 
 		_renderIcon: function( icon, title, disabled ) {
