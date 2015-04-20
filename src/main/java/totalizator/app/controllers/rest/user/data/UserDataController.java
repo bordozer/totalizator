@@ -49,7 +49,7 @@ public class UserDataController {
 
 	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )
-	@RequestMapping( method = RequestMethod.GET, value = "/rest/users/{userId}/is-admin/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/is-admin/", produces = APPLICATION_JSON_VALUE )
 	public boolean isAdmin( final @PathVariable( "userId" ) int userId ) {
 		return securityService.isAdmin( userId );
 	}
