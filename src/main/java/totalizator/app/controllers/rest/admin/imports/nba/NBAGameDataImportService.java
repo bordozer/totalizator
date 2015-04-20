@@ -1,6 +1,7 @@
 package totalizator.app.controllers.rest.admin.imports.nba;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.controllers.rest.admin.imports.*;
@@ -31,6 +32,8 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 
 	@Autowired
 	private RemoteGameService remoteGameService;
+
+	private final Logger LOGGER = Logger.getLogger( NBAGameDataImportService.class );
 
 	private final GamesDataImportMonitor gamesDataImportMonitor = new GamesDataImportMonitor();
 
@@ -93,13 +96,15 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 		final Team team1 = teamService.findByName( team1Name );
 
 		if ( team1 == null ) {
-			throw new IllegalArgumentException( String.format( "Team name '%s' not found", team1Name ) );
+			LOGGER.warn( String.format( "Team '%s' not found. Game import skipped", team1Name ) );
+			return true;
 		}
 
 		final Team team2 = teamService.findByName( team2Name );
 
 		if ( team2 == null ) {
-			throw new IllegalArgumentException( String.format( "Team name '%s' not found", team2Name ) );
+			LOGGER.warn( String.format( "Team '%s' not found. Game import skipped", team2Name ) );
+			return true;
 		}
 
 		final Match match = matchService.find( team1, team2, gameDate );
