@@ -71,9 +71,6 @@ public class MatchBetsRestController {
 	private List<MatchBetDTO> getMatchBetDTOs( final Match match, final User currentUser ) {
 
 		final boolean canSeeAnotherBets = matchBetsService.userCanSeeAnotherBets( match, currentUser );
-		/*if ( !canSeeAnotherBets ) {
-			return Collections.emptyList();
-		}*/
 
 		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
 
@@ -90,7 +87,12 @@ public class MatchBetsRestController {
 		Collections.sort( matchBetsDTOs, new Comparator<MatchBetDTO>() {
 			@Override
 			public int compare( final MatchBetDTO o1, final MatchBetDTO o2 ) {
-				return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
+
+				if ( o2.getPoints() + o1.getPoints() > 0 ) {
+					return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
+				}
+
+				return o1.getBet().getUser().getUserName().compareToIgnoreCase( o2.getBet().getUser().getUserName() );
 			}
 		} );
 
