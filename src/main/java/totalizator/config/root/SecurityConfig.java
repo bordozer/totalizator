@@ -36,21 +36,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure( HttpSecurity http ) throws Exception {
 
-		/*final CharacterEncodingFilter filter = new CharacterEncodingFilter();
-		filter.setEncoding( "UTF-8" );
-		filter.setForceEncoding( true );*/
-
 		http
-//				.addFilterBefore( filter, CsrfFilter.class )
 				.csrf().disable()
 				.authorizeRequests()
 				.antMatchers( "/resources/public/**" ).permitAll()
 				.antMatchers( "/resources/img*//**" ).permitAll()
 				.antMatchers( "/resources/bower_components*//**" ).permitAll()
-//				.antMatchers( "/resources/js//**" ).permitAll()
 				.antMatchers( "/rest/translator/" ).permitAll()
 				.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll() // create user
-				.anyRequest().authenticated()
+				.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
+				.anyRequest()
+				.authenticated()
 				.and()
 				.formLogin()
 				.defaultSuccessUrl( PORTAL_PAGE_URL )
@@ -67,11 +63,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl( LOGIN_PAGE_URL )
 				.permitAll()
 		;
-		/*if ( "true".equals( System.getProperty( "httpsOnly" ) ) ) {
-
-			LOGGER.info( "launching the application in HTTPS-only mode" );
-
-			http.requiresChannel().anyRequest().requiresSecure();
-		}*/
 	}
 }

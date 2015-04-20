@@ -1,4 +1,6 @@
 
+system.admin.ids=1,2,3
+
 system.logos.path=/home/blu/dev/totalizator/logos/
 
 system.imports.path=/home/blu/dev/totalizator/imports/

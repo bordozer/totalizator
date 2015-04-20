@@ -1,6 +1,7 @@
 package totalizator.app.services;
 
 import java.io.File;
+import java.util.List;
 
 public interface SystemVarsService {
 
@@ -17,4 +18,6 @@ public interface SystemVarsService {
 	String getLogosPath();
 
 	File getImportedGamesDataStoragePath();
+
+	List<Integer> getAdminIds();
 }

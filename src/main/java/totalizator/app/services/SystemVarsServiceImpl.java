@@ -19,6 +19,8 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 	private final CompositeConfiguration config = new CompositeConfiguration();
 
+	private final List<Integer> adminIds = newArrayList();
+
 	public void init() throws ConfigurationException, IOException {
 
 		final List<String> propertyFiles = newArrayList();
@@ -39,6 +41,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 			}
 
 			config.addConfiguration( new PropertiesConfiguration( propertyFile ) );
+		}
+
+		final String[] _ids = config.getString( "system.admin.ids" ).split( "," );
+		for ( final String _id : _ids ) {
+			adminIds.add( Integer.valueOf( _id.trim() ) );
 		}
 
 		LOGGER.debug( "Configurations have been loaded" );
@@ -77,6 +84,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	@Override
 	public File getImportedGamesDataStoragePath() {
 		return new File( config.getString( "system.imports.path" ) );
+	}
+
+	@Override
+	public List<Integer> getAdminIds() {
+		return adminIds;
 	}
 
 	private File getPropertyFile( final String fileName ) {

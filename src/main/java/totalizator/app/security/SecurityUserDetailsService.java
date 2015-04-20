@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import totalizator.app.dao.UserRepository;
 import totalizator.app.models.User;
+import totalizator.app.services.SecurityService;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class SecurityUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private SecurityService securityService;
+
 	@Override
 	public UserDetails loadUserByUsername( final String login ) throws UsernameNotFoundException {
 		final User user = userRepository.findByLogin( login ); // TODO: use service
@@ -33,8 +37,11 @@ public class SecurityUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException( String.format( "Username not found: %s", login ) );
 		}
 
+		final boolean isAdmin = securityService.isAdmin( user );
+		final String role = isAdmin ? "ROLE_ADMIN" : "ROLE_USER";
+
 		final List<GrantedAuthority> authorities = newArrayList();
-		authorities.add( new SimpleGrantedAuthority( "ROLE_USER" ) );
+		authorities.add( new SimpleGrantedAuthority( role ) );
 
 		return new org.springframework.security.core.userdetails.User( login, user.getPassword(), authorities );
 	}
