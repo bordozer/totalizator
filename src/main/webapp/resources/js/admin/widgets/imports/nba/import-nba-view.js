@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/import-nba-template.html' ) );
 
-	var service = require( '/resources/js/services/service.js' );
+	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
 	var nbaImportService = require( './nba-import-service' );
 	var autorefreshService = require( 'js/services/auto-refresh-service' );
 
@@ -42,9 +42,7 @@ define( function ( require ) {
 
 			var isImportingNow = importStatus.importActive;
 
-			var cups = _.filter( service.loadCups(), function( cup ) {
-				return cup.finished == false;
-			});
+			var cups = adminService.loadCups();
 
 			var data = _.extend( {}, this.model.toJSON(), {
 				isImportingNow: isImportingNow
@@ -56,7 +54,7 @@ define( function ( require ) {
 
 			this.$( this.windowBodyContainerSelector ).html( template( data ) );
 
-			this.$( '#selectedCupId' ).chosen( { width: 100 } );
+			this.$( '#selectedCupId' ).chosen( { width: '100%' } );
 
 			if ( isImportingNow ) {
 				this._scheduleAutorefresh();
