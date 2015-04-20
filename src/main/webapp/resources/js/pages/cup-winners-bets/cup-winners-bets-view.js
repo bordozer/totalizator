@@ -14,6 +14,7 @@ define( function ( require ) {
 		, userLabel: 'User'
 		, cupPositionLabel: 'cup position'
 		, realCupWinnersLabel: 'Cup winners'
+		, noWinnerBetLabel: 'No bet'
 	} );
 
 	return Backbone.View.extend( {
@@ -32,6 +33,7 @@ define( function ( require ) {
 		render: function () {
 
 			var model = this.model.toJSON();
+			console.log( model );
 
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 

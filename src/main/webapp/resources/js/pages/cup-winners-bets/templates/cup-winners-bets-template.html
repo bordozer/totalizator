@@ -37,18 +37,21 @@
 				</td>
 				<% for( i = 1; i <= winnersCount; i++ ) { %>
 					<td class="text-center">
-						<% if( userCupBet.userCupBets[ i - 1 ].team ) { %>
+						<% if( userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].team ) { %>
 
 							<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>">
 
-							<br />
-
-							<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+							<h5><%= userCupBet.userCupBets[ i - 1 ].team.teamName %></h5>
 
 							<% if( userCupBet.userCupBets[ i - 1 ].points > 0 ) { %>
 								<h4>+ <%= userCupBet.userCupBets[ i - 1 ].points %></h4>
 							<% } %>
 
+						<% } %>
+
+						<% if( ! userCupBet.userCupBets[ i - 1 ] || ! userCupBet.userCupBets[ i - 1 ].team ) { %>
+							<img src="/resources/img/team-logo-not-found.png">
+							<h5><%= translator.noWinnerBetLabel %></h5>
 						<% } %>
 					</td>
 				<% } %>
