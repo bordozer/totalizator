@@ -23,7 +23,11 @@
 
 			var currentUser = ${gamesDataImportModel.currentUserJSON};
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: gamesDataImport, breadcrumbs: breadcrumbs, options: { currentUser: currentUser } } );
+			var options = {
+				currentUser: currentUser
+			};
+
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: gamesDataImport, breadcrumbs: breadcrumbs, options: options } );
 			adminView.render();
 		} );
 	</script>

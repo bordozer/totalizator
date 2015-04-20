@@ -24,7 +24,13 @@
 
 			var currentUser = ${adminMatchesModel.currentUserJSON};
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: { categoryId: categoryId, cupId: cupId, currentUser: currentUser } } );
+			var options = {
+				categoryId: categoryId
+				, cupId: cupId
+				, currentUser: currentUser
+			};
+
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: options } );
 			adminView.render();
 		} );
 	</script>

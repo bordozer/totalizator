@@ -19,9 +19,11 @@ define( function ( require ) {
 		constructor: function ( options ) {
 			this.events = _.extend( this.builtinEvents, this.events );
 
-			this.currentUser = options.options.currentUser;
-			this.breadcrumbs = options.breadcrumbs;
 			this.options = options.options;
+
+			this.currentUser = options.options.currentUser;
+
+			this.breadcrumbs = options.breadcrumbs;
 			this.bodyRenderer = options.bodyRenderer;
 
 			Backbone.View.apply( this, [ options ] );

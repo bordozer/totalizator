@@ -187,6 +187,25 @@ define( function ( require ) {
 					alert( translator.logoutFailedMessage );
 				}
 			} )
+		},
+
+		isAdmin: function( user ) {
+
+			var result = false;
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/users/' + user.userId + '/is-admin/',
+				async: false,
+				success: function ( response ) {
+					result = response;
+				},
+				error: function() {
+					alert( 'Error' ); // TODO: translate
+				}
+			} );
+
+			return result;
 		}
 	}
 } );

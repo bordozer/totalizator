@@ -12,9 +12,13 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public boolean isAdmin( final User user ) {
+		return isAdmin( user.getId() );
+	}
 
+	@Override
+	public boolean isAdmin( final int userId ) {
 		for ( final int adminId : systemVarsService.getAdminIds() ) {
-			if ( user.getId() == adminId ) {
+			if ( userId == adminId ) {
 				return true;
 			}
 		}

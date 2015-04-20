@@ -40,10 +40,12 @@ define( function ( require ) {
 
 		mainMenuItems: function() {
 
-			var menus = [
-				{ selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel }
-				, { selector: 'divider' }
-			];
+			var menus = [];
+
+			if ( service.isAdmin( this.currentUser ) ) {
+				menus.push( { selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel } );
+				menus.push( { selector: 'divider' } );
+			}
 
 			var cups = service.loadCups();
 			_.each( cups, function( cup ) {

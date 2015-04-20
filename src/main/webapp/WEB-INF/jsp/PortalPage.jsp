@@ -23,7 +23,12 @@
 
 			var currentUser = ${portalPageModel.currentUserJSON};
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: { cupsToShow: cupsToShow, currentUser: currentUser } } );
+			var options = {
+				cupsToShow: cupsToShow
+				, currentUser: currentUser
+			};
+
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();
 		} );
 	</script>

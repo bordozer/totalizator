@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.User;
+import totalizator.app.services.SecurityService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
@@ -20,6 +21,9 @@ public class UserDataController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private SecurityService securityService;
 
 	@ResponseBody
 	@ResponseStatus( HttpStatus.OK )
@@ -41,6 +45,13 @@ public class UserDataController {
 	public NewUserDTO registerUser( final @RequestBody NewUserDTO newUserDTO ) {
 		userService.createUser( newUserDTO.getLogin(), newUserDTO.getName(), newUserDTO.getPassword() );
 		return newUserDTO;
+	}
+
+	@ResponseBody
+	@ResponseStatus( HttpStatus.OK )
+	@RequestMapping( method = RequestMethod.GET, value = "/rest/users/{userId}/is-admin/", produces = APPLICATION_JSON_VALUE )
+	public boolean isAdmin( final @PathVariable( "userId" ) int userId ) {
+		return securityService.isAdmin( userId );
 	}
 
 	private UserDTO getUserDTO( final User user ) {

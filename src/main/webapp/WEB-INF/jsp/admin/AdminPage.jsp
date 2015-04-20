@@ -23,7 +23,11 @@
 
 			var currentUser = ${adminModel.currentUserJSON};
 
-			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs, options: { currentUser: currentUser } } );
+			var options = {
+				currentUser: currentUser
+			};
+
+			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs, options: options } );
 			adminView.render();
 		} );
 	</script>
