@@ -18,8 +18,7 @@ import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.security.Principal;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
@@ -115,27 +114,20 @@ public class CupWinnersBetsRestController {
 		final Set<User> usersSet = newHashSet();
 
 		final List<CupTeamBet> cupBets = cupBetsService.load( cup );
-//		final List<CupTeamBetDTO> bets = dtoService.transformCupTeamBets( cupBets, userService.findByLogin( principal.getName() ) );
 
 		for ( final CupTeamBet bet : cupBets ) {
 			usersSet.add( bet.getUser() );
 		}
 
-		return newArrayList( usersSet );
+		final List<User> users = newArrayList( usersSet );
 
-		/*final List<UserDTO> users = Lists.transform( bets, new Function<CupTeamBetDTO, UserDTO>() {
+		Collections.sort( users, new Comparator<User>() {
 			@Override
-			public UserDTO apply( final CupTeamBetDTO cupBet ) {
-				return cupBet.getUser();
+			public int compare( final User o1, final User o2 ) {
+				return o1.getUsername().compareTo( o2.getUsername() );
 			}
 		} );
 
-
-		final Map<UserDTO, List<CupTeamBetDTO>> map = newLinkedHashMap();
-		for ( final UserDTO user : users ) {
-			map.put( user, newArrayList() );
-		}
-
-		return map;*/
+		return users;
 	}
 }
