@@ -53,12 +53,12 @@ public class CupScoresServiceImpl implements CupScoresService {
 			}
 		}
 
-		CollectionUtils.filter( result, new Predicate<UserPoints>() {
+		/*CollectionUtils.filter( result, new Predicate<UserPoints>() {
 			@Override
 			public boolean evaluate( final UserPoints userPoints ) {
 				return userPoints.getPoints() > 0;
 			}
-		} );
+		} );*/
 
 		return result;
 	}
