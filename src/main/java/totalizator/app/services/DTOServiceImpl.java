@@ -10,6 +10,9 @@ import totalizator.app.models.*;
 import totalizator.app.services.score.CupScoresService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Service
 public class DTOServiceImpl implements DTOService {
@@ -106,7 +109,28 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets, final User user ) {
-		return Lists.transform( cupTeamBets, cupTeamBetFunction( user ) );
+
+		final java.util.function.Function<CupTeamBet, CupTeamBetDTO> mapper = new java.util.function.Function<CupTeamBet, CupTeamBetDTO>() {
+			@Override
+			public CupTeamBetDTO apply( final CupTeamBet cupTeamBet ) {
+
+				final Cup cup = cupTeamBet.getCup();
+				final Team team = cupTeamBet.getTeam();
+
+				final CupTeamBetDTO result = new CupTeamBetDTO();
+
+				result.setCup( DTOServiceImpl.this.transformCup( cup, user ) );
+				result.setTeam( DTOServiceImpl.this.transformTeam( team ) );
+				result.setUser( DTOServiceImpl.this.transformUser( user ) );
+
+				result.setCupPosition( cupTeamBet.getCupPosition() );
+
+				result.setPoints( cupScoresService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
+
+				return result;
+			}
+		};
+		return cupTeamBets.stream().map( mapper ).collect( Collectors.toList() );
 	}
 
 	private Function<User, UserDTO> userFunction() {

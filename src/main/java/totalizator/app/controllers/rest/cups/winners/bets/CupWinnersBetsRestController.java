@@ -106,6 +106,7 @@ public class CupWinnersBetsRestController {
 			) );
 
 			userCupBet.setTeam( fakeTeam );
+			int i = 0;
 		}
 	}
 
