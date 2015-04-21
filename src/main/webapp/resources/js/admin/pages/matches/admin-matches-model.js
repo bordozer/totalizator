@@ -21,6 +21,7 @@ define( function ( require ) {
 			, score2: 0
 			, beginningTime: new Date()
 			, matchFinished: false
+			, homeTeamNumber: 0
 		},
 
 		initialize: function ( options ) {

@@ -24,6 +24,8 @@ public class MatchEditDTO {
 	private LocalDateTime beginningTime;
 	private boolean matchFinished;
 
+	private int homeTeamNumber;
+
 	public int getMatchId() {
 		return matchId;
 	}
@@ -96,5 +98,13 @@ public class MatchEditDTO {
 
 	public void setMatchFinished( final boolean matchFinished ) {
 		this.matchFinished = matchFinished;
+	}
+
+	public int getHomeTeamNumber() {
+		return homeTeamNumber;
+	}
+
+	public void setHomeTeamNumber( final int homeTeamNumber ) {
+		this.homeTeamNumber = homeTeamNumber;
 	}
 }

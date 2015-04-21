@@ -44,6 +44,8 @@ public class Match extends AbstractEntity {
 	private LocalDateTime beginningTime;
 	private boolean matchFinished;
 
+	private int homeTeamNumber;
+
 	public Cup getCup() {
 		return cup;
 	}
@@ -98,6 +100,14 @@ public class Match extends AbstractEntity {
 
 	public void setMatchFinished( final boolean matchFinished ) {
 		this.matchFinished = matchFinished;
+	}
+
+	public int getHomeTeamNumber() {
+		return homeTeamNumber;
+	}
+
+	public void setHomeTeamNumber( final int homeTeamNumber ) {
+		this.homeTeamNumber = homeTeamNumber;
 	}
 
 	@Override

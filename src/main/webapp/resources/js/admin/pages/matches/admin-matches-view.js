@@ -247,6 +247,7 @@ define( function ( require ) {
 				, categoryId: categoryId
 				, cups: cups
 				, teams: teams
+				, homeTeamNumber: model.homeTeamNumber
 				, translator: translator
 			} ) );
 
@@ -293,6 +294,7 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
+
 			this.model.set( {
 				cupId: this.$( '.cups-select-box' ).val()
 				, team1Id: this.$( '.team1-select-box' ).val()
@@ -301,6 +303,7 @@ define( function ( require ) {
 				, score2: this.$( '#score2' ).val()
 				, beginningTime: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
 				, matchFinished: this.$( '.js-match-finished' ).is(':checked')
+				, homeTeamNumber: this.$( "input[name='homeTeamNumber']:checked" ).val()
 			} );
 		},
 

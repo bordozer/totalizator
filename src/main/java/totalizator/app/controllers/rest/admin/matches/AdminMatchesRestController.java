@@ -56,6 +56,8 @@ public class AdminMatchesRestController {
 				matchEditDTO.setBeginningTime( match.getBeginningTime() );
 				matchEditDTO.setMatchFinished( match.isMatchFinished() );
 
+				matchEditDTO.setHomeTeamNumber( match.getHomeTeamNumber() );
+
 				return matchEditDTO;
 			}
 		} );
@@ -116,6 +118,8 @@ public class AdminMatchesRestController {
 		match.setBeginningTime( matchEditDTO.getBeginningTime() );
 
 		match.setMatchFinished( matchEditDTO.isMatchFinished() );
+
+		match.setHomeTeamNumber( matchEditDTO.getHomeTeamNumber() );
 	}
 
 }
