@@ -12,12 +12,18 @@
 	</div>
 
 	<div class="col-lg-3 text-right <%=matchResults.style1%>">
+		<% if( homeTeamNumber == 1 ) { %>
+			<i class="fa fa-home"></i>
+		<% } %>
 		<%=team1.teamName%>
 		<img class="team-logo" src="<%=team1.teamLogo%>" height="32">
 	</div>
 	<div class="col-lg-3 <%=matchResults.style2%>">
 		<img class="team-logo" src="<%=team2.teamLogo%>" height="32">
 		<%=team2.teamName%>
+		<% if( homeTeamNumber == 2 ) { %>
+			<i class="fa fa-home"></i>
+		<% } %>
 	</div>
 	<div class="col-lg-1">
 		<span class="<%=matchResults.style1%>"><%=score1%></span> - <span class="<%=matchResults.style2%>"><%=score2%></span>
