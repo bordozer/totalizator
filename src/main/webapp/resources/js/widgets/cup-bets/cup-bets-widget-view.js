@@ -44,7 +44,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cup = options.cup;
-			this.teams = service.loadTeams();
+			this.teams = options.teams;
 		},
 
 		render: function ( data ) {
@@ -129,7 +129,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.cup = options.options.cup;
-			this.teams = service.loadTeams();
+			this.teams = service.filterTeamsByCategory ( service.loadTeams(), this.cup.category.categoryId );
 
 			var menuItems = [
 				{ selector: 'divider' }
@@ -140,7 +140,7 @@ define( function ( require ) {
 
 			this.cupTeamBetsView = new CupTeamBetsDetails( { model: this.model, cup: this.cup } );
 
-			this.cupTeamBetsEditView = new CupTeamBetsEdit( { model: this.model, cup: this.cup } );
+			this.cupTeamBetsEditView = new CupTeamBetsEdit( { model: this.model, cup: this.cup, teams: this.teams } );
 			this.cupTeamBetsEditView.on( 'refresh', this.refresh, this );
 			this.cupTeamBetsEditView.on( 'cancel', this.cancelEditing, this );
 
