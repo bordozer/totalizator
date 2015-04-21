@@ -12,6 +12,7 @@ import totalizator.app.models.User;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.UserTitleService;
 import totalizator.app.services.score.CupScoresService;
 
 import java.security.Principal;
@@ -35,17 +36,20 @@ public class CupUsersScoresRestController {
 	@Autowired
 	private DTOService dtoService;
 
+	@Autowired
+	private UserTitleService userTitleService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/scores/", produces = APPLICATION_JSON_VALUE )
 	public CupUsersScoresDTO cupUsersScores( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
-		final User user = userService.findByLogin( principal.getName() );
+		final User currentUser = userService.findByLogin( principal.getName() );
 		final Cup cup = cupService.load( cupId );
 
 		final CupUsersScoresDTO result = new CupUsersScoresDTO();
 
-		result.setCurrentUser( dtoService.transformUser( user ) );
+		result.setCurrentUser( dtoService.transformUser( currentUser ) );
 
 		result.setUserPoints( getUsersScores( cup ) );
 
@@ -57,7 +61,7 @@ public class CupUsersScoresRestController {
 		return Lists.transform( cupScoresService.getUsersScoresSummary( cup ), new Function<UserPoints, UserPointsDTO>() {
 			@Override
 			public UserPointsDTO apply( final UserPoints userPoints ) {
-				return new UserPointsDTO( dtoService.transformUser( userPoints.getUser() ), userPoints.getPoints()  );
+				return new UserPointsDTO( dtoService.transformUser( userPoints.getUser() ), userPoints.getPoints(), userTitleService.getUserTitle( userPoints.getUser(), cup ) );
 			}
 		} );
 	}

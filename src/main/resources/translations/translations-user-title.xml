@@ -3,6 +3,11 @@
 <translations>
 
 	<translation>
+		<nerd>User title: -1</nerd>
+		<ru><![CDATA[Ставок нет]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>User title: 0</nerd>
 		<ru><![CDATA[Слепец]]></ru>
 	</translation>

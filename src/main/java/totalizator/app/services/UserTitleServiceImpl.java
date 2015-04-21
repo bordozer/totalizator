@@ -21,9 +21,6 @@ import static com.google.common.collect.Lists.newArrayList;
 public class UserTitleServiceImpl implements UserTitleService {
 
 	@Autowired
-	private CupService cupService;
-
-	@Autowired
 	private MatchService matchService;
 
 	@Autowired
@@ -38,9 +35,9 @@ public class UserTitleServiceImpl implements UserTitleService {
 	private final static List<String> ICONS = newArrayList( "fa fa-ban", "fa fa-frown-o", "fa fa-meh-o", "fa fa-smile-o", "fa fa-graduation-cap", "fa fa-magic" );
 
 	@Override
-	public UserTitle getUserTitle( final User user ) {
+	public UserTitle getUserTitle( final User user, final Cup cup ) {
 
-		final List<MatchBet> bets = matchBetsService.loadAll( user );
+		final List<MatchBet> bets = matchBetsService.loadAll( cup, user );
 		CollectionUtils.filter( bets, new Predicate<MatchBet>() {
 
 			@Override
@@ -51,10 +48,7 @@ public class UserTitleServiceImpl implements UserTitleService {
 
 		final int betsCount = bets.size();
 
-		final List<UserPoints> userPoints = newArrayList();
-		for ( final Cup cup : cupService.loadAllCurrent() ) {
-			userPoints.addAll( cupScoresService.getUserPoints( cup, user ) );
-		}
+		final List<UserPoints> userPoints = cupScoresService.getUserPoints( cup, user );
 
 		int points = 0;
 		for ( final UserPoints userPoint : userPoints ) {
@@ -62,7 +56,7 @@ public class UserTitleServiceImpl implements UserTitleService {
 		}
 
 		if ( betsCount == 0 ) {
-			return new UserTitle( getTitle( "User title: 0", 0 ), ICONS.get( 0 ) );
+			return new UserTitle( getTitle( "User title: -1", 0 ), "fa fa-close" );
 		}
 
 		final int luckyLevel = points * 100 / betsCount;
