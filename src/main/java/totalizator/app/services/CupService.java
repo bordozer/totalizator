@@ -9,6 +9,8 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 
 	List<Cup> loadAllCurrent();
 
+	void sort( List<Cup> cups );
+
 	List<Cup> loadAllPublic();
 
 	List<Cup> loadAllFinished();

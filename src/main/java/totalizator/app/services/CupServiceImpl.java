@@ -32,14 +32,19 @@ public class CupServiceImpl implements CupService {
 
 		final List<Cup> cups = cupRepository.loadAll();
 
+		sort( cups );
+
+		return cups;
+	}
+
+	@Override
+	public void sort( final List<Cup> cups ) {
 		Collections.sort( cups, new Comparator<Cup>() {
 			@Override
 			public int compare( final Cup o1, final Cup o2 ) {
 				return o2.getCupStartTime().compareTo( o1.getCupStartTime() );
 			}
 		} );
-
-		return cups;
 	}
 
 	@Override

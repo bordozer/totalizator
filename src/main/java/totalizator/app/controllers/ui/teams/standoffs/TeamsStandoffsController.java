@@ -11,10 +11,7 @@ import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.services.DTOService;
-import totalizator.app.services.MatchService;
-import totalizator.app.services.TeamService;
-import totalizator.app.services.UserService;
+import totalizator.app.services.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -30,6 +27,9 @@ public class TeamsStandoffsController {
 	public static final String MODEL_NAME = "teamsStandoffsModel";
 
 	private static final String VIEW = "/TeamsStandoffs";
+
+	@Autowired
+	private CupService cupService;
 
 	@Autowired
 	private UserService userService;
@@ -67,6 +67,7 @@ public class TeamsStandoffsController {
 			}
 		}
 		final List<Cup> cups = newArrayList( cupsSet );
+		cupService.sort( cups );
 		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, model.getCurrentUser() );
 		model.setCups( new Gson().toJson( cupDTOs ) );
 
