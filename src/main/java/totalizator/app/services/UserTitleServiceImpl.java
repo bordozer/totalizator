@@ -35,7 +35,7 @@ public class UserTitleServiceImpl implements UserTitleService {
 	@Autowired
 	private TranslatorService translatorService;
 
-	private final static List<String> ICONS = newArrayList( "fa fa-ban", "fa fa-frown-o", "fa fa-meh-o", "fa fa-smile-o", "fa fa-sun-o", "fa fa-bolt", "fa fa-diamond" );
+	private final static List<String> ICONS = newArrayList( "fa fa-ban", "fa fa-frown-o", "fa fa-meh-o", "fa fa-smile-o", "fa-graduation-cap", "fa-magic" );
 
 	@Override
 	public UserTitle getUserTitle( final User user ) {

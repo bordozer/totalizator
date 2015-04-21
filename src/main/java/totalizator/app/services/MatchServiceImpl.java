@@ -14,6 +14,8 @@ import totalizator.app.models.Team;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -30,12 +32,12 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Match> loadAll() {
-		return matchRepository.loadAll();
+		return sort( matchRepository.loadAll() );
 	}
 
 	@Override
 	public List<Match> loadAll( final Cup cup ) {
-		return matchRepository.loadAll( cup );
+		return sort( matchRepository.loadAll( cup ) );
 	}
 
 	@Override
@@ -145,5 +147,15 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public List<Match> find( final Team team1, final Team team2 ) {
 		return matchRepository.find( team1, team2 );
+	}
+
+	private List<Match> sort( final List<Match> matches ) {
+		Collections.sort( matches, new Comparator<Match>() {
+			@Override
+			public int compare( final Match o1, final Match o2 ) {
+				return o2.getBeginningTime().compareTo( o1.getBeginningTime() );
+			}
+		} );
+		return matches;
 	}
 }
