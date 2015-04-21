@@ -280,6 +280,7 @@ define( function ( require ) {
 				, team2Logo: team2.teamLogo
 				, beginningTime: dateTimeService.formatDateDisplay( match.beginningTime )
 				, matchFinished: match.matchFinished
+				, homeTeamNumber: match.homeTeamNumber
 				, translator: translator
 			};
 		},

@@ -18,6 +18,9 @@
 					<div class="row">
 						<div class="col-lg-12 match-team-name">
 							<%=team1Name%>
+							<% if( homeTeamNumber == 1 ) { %>
+								<i class="fa fa-home"></i>
+							<% } %>
 						</div>
 					</div>
 					<div class="row">
@@ -37,6 +40,9 @@
 				<div class="col-lg-6 text-center <%=matchResults.style2%>">
 					<div class="row">
 						<div class="col-lg-12 match-team-name">
+							<% if( homeTeamNumber == 2 ) { %>
+								<i class="fa fa-home"></i>
+							<% } %>
 							<%=team2Name%>
 						</div>
 					</div>
