@@ -10,6 +10,8 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.services.utils.DateTimeService;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -27,7 +29,17 @@ public class CupServiceImpl implements CupService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Cup> loadAll() {
-		return cupRepository.loadAll();
+
+		final List<Cup> cups = cupRepository.loadAll();
+
+		Collections.sort( cups, new Comparator<Cup>() {
+			@Override
+			public int compare( final Cup o1, final Cup o2 ) {
+				return o2.getCupStartTime().compareTo( o1.getCupStartTime() );
+			}
+		} );
+
+		return cups;
 	}
 
 	@Override
