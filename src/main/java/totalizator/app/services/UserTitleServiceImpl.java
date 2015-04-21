@@ -35,6 +35,8 @@ public class UserTitleServiceImpl implements UserTitleService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	private final static List<String> ICONS = newArrayList( "fa fa-ban", "fa fa-frown-o", "fa fa-meh-o", "fa fa-smile-o", "fa fa-fire", "fa fa-sun-o", "fa fa-diamond" );
+
 	@Override
 	public UserTitle getUserTitle( final User user ) {
 
@@ -62,26 +64,30 @@ public class UserTitleServiceImpl implements UserTitleService {
 		final int luckyLevel = points * 100 / betsCount;
 
 		if ( luckyLevel > 0 && luckyLevel <= 30 ) {
-			return new UserTitle( translatorService.translate( "User title: 1", getLanguage() ), "fa fa-meh-o" );
+			return new UserTitle( getTitle( "User title: 1", luckyLevel ), ICONS.get( 1 ) );
 		}
 
 		if ( luckyLevel > 31 && luckyLevel <= 50 ) {
-			return new UserTitle( translatorService.translate( "User title: 2", getLanguage() ), "fa fa-smile-o" );
+			return new UserTitle( getTitle( "User title: 2", luckyLevel ), ICONS.get( 2 ) );
 		}
 
 		if ( luckyLevel > 51 && luckyLevel <= 80 ) {
-			return new UserTitle( translatorService.translate( "User title: 3", getLanguage() ), "fa fa-fire" );
+			return new UserTitle( getTitle( "User title: 3", luckyLevel ), ICONS.get( 3 ) );
 		}
 
 		if ( luckyLevel > 81 && luckyLevel <= 90 ) {
-			return new UserTitle( translatorService.translate( "User title: 4", getLanguage() ), "fa fa-sun-o" );
+			return new UserTitle( getTitle( "User title: 4", luckyLevel ), ICONS.get( 4 ) );
 		}
 
 		if ( luckyLevel > 91 ) {
-			return new UserTitle( translatorService.translate( "User title: 5", getLanguage() ), "fa fa-diamond" );
+			return new UserTitle( getTitle( "User title: 5", luckyLevel ), ICONS.get( 5 ) );
 		}
 
-		return new UserTitle( translatorService.translate( "User title: 0", getLanguage() ), "fa fa-frown-o" );
+		return new UserTitle( getTitle( "User title: 0", luckyLevel ), ICONS.get( 0 ) );
+	}
+
+	private String getTitle( final String nerd, final int luckyLevel ) {
+		return String.format( "%s %s", translatorService.translate( nerd, getLanguage() ), luckyLevel ) + "%";
 	}
 
 	private Language getLanguage() {
