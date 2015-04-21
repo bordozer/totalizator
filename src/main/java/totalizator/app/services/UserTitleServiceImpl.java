@@ -61,6 +61,10 @@ public class UserTitleServiceImpl implements UserTitleService {
 			points += userPoint.getPoints();
 		}
 
+		if ( betsCount == 0 ) {
+			return new UserTitle( getTitle( "User title: 0", 0 ), ICONS.get( 0 ) );
+		}
+
 		final int luckyLevel = points * 100 / betsCount;
 
 		if ( luckyLevel > 0 && luckyLevel <= 30 ) {
