@@ -1,6 +1,7 @@
 <table class="table table-striped table-hover">
 
 	<thead>
+		<td></td>
 		<td><%=translator.userColumn%></td>
 		<td><%=translator.pointsColumn%></td>
 	</thead>
@@ -9,8 +10,18 @@
 
 		<% _.each( userPoints, function( userPoint ) { %>
 			<tr <%=currentUser.userId == userPoint.user.userId ? "class='current-user'" : '' %> >
-				<td><a href="/totalizator/users/<%=userPoint.user.userId%>/"><%-userPoint.user.userName%></a></td>
-				<td><%-userPoint.points%></td>
+
+				<td width="20">
+					<span class="<%=userPoint.user.userTitle.userTitleIcon%>" title="<%=userPoint.user.userTitle.userTitle%>"></span>
+				</td>
+
+				<td>
+					<a href="/totalizator/users/<%=userPoint.user.userId%>/"><%-userPoint.user.userName%></a>
+				</td>
+
+				<td>
+					<%-userPoint.points%>
+				</td>
 			</tr>
 		<% })%>
 

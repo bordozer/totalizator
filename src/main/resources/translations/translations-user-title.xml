@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>User title: 0</nerd>
+		<ru><![CDATA[Слепец]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User title: 1</nerd>
+		<ru><![CDATA[Цыган]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User title: 2</nerd>
+		<ru><![CDATA[Астролог]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User title: 3</nerd>
+		<ru><![CDATA[Ведун]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User title: 4</nerd>
+		<ru><![CDATA[Пророк]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User title: 5</nerd>
+		<ru><![CDATA[Оракул]]></ru>
+	</translation>
+
+</translations>

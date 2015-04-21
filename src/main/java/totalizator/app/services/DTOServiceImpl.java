@@ -32,6 +32,9 @@ public class DTOServiceImpl implements DTOService {
 	@Autowired
 	private CupService cupService;
 
+	@Autowired
+	private UserTitleService userTitleService;
+
 	@Override
 	public UserDTO transformUser( final User user ) {
 		return userFunction().apply( user );
@@ -113,7 +116,11 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public UserDTO apply( final User user ) {
-				return new UserDTO( user );
+
+				final UserDTO userDTO = new UserDTO( user );
+				userDTO.setUserTitle( userTitleService.getUserTitle( user ) );
+
+				return userDTO;
 			}
 		};
 	}

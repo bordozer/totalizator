@@ -40,17 +40,10 @@ public class CupScoresServiceImpl implements CupScoresService {
 	@Override
 	public List<UserPoints> getUsersScores( final Cup cup ) {
 
-		final ScoreCalculationStrategy calculationStrategy = ScoreCalculationStrategy.getInstance();
-
 		final List<UserPoints> result = newArrayList();
 
 		for ( final User user : userService.loadAll() ) {
-
-			final List<MatchBet> userCupBets = matchBetsService.loadAll( cup, user );
-
-			for ( final MatchBet bet : userCupBets ) {
-				result.add( new UserPoints( user, calculationStrategy.getPoints( bet ) ) );
-			}
+			result.addAll( getUserPoints( cup, user ) );
 		}
 
 		/*CollectionUtils.filter( result, new Predicate<UserPoints>() {
@@ -61,6 +54,20 @@ public class CupScoresServiceImpl implements CupScoresService {
 		} );*/
 
 		return result;
+	}
+
+	@Override
+	public List<UserPoints> getUserPoints( final Cup cup, final User user ) {
+		final List<UserPoints> userResult = newArrayList();
+
+		final ScoreCalculationStrategy calculationStrategy = ScoreCalculationStrategy.getInstance();
+
+		final List<MatchBet> userCupBets = matchBetsService.loadAll( cup, user );
+
+		for ( final MatchBet bet : userCupBets ) {
+			userResult.add( new UserPoints( user, calculationStrategy.getPoints( bet ) ) );
+		}
+		return userResult;
 	}
 
 	@Override

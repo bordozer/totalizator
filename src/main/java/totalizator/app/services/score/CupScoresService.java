@@ -14,6 +14,8 @@ public interface CupScoresService {
 
 	List<UserPoints> getUsersScores( final Cup cup );
 
+	List<UserPoints> getUserPoints( Cup cup, User user );
+
 	List<UserPoints> getUsersScoresSummary( Cup cup );
 
 	int getUserCupWinnersPoints( Cup cup, final Team team, User user, final int cupPosition );

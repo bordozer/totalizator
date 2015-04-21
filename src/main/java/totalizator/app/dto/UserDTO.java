@@ -1,12 +1,14 @@
 package totalizator.app.dto;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import totalizator.app.beans.UserTitle;
 import totalizator.app.models.User;
 
 public class UserDTO {
 
 	private int userId;
 	private String userName;
+	private UserTitle userTitle;
 
 	public UserDTO( final User user ) {
 		this.userId = user.getId();
@@ -27,6 +29,14 @@ public class UserDTO {
 
 	public void setUserName( final String userName ) {
 		this.userName = userName;
+	}
+
+	public UserTitle getUserTitle() {
+		return userTitle;
+	}
+
+	public void setUserTitle( final UserTitle userTitle ) {
+		this.userTitle = userTitle;
 	}
 
 	@Override
