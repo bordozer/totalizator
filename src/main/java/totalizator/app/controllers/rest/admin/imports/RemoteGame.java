@@ -1,6 +1,5 @@
 package totalizator.app.controllers.rest.admin.imports;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class RemoteGame {
@@ -12,6 +11,7 @@ public class RemoteGame {
 	private int score2;
 	private String homeTeamName;
 	private boolean finished;
+	private int homeTeamNumber;
 
 	public String getTeam1Name() {
 		return team1Name;
@@ -67,5 +67,13 @@ public class RemoteGame {
 
 	public boolean isFinished() {
 		return finished;
+	}
+
+	public int getHomeTeamNumber() {
+		return homeTeamNumber;
+	}
+
+	public void setHomeTeamNumber( final int homeTeamNumber ) {
+		this.homeTeamNumber = homeTeamNumber;
 	}
 }

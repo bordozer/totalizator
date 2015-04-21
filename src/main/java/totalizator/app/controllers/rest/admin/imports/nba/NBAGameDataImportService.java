@@ -112,6 +112,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 			match.setScore1( remoteGame.getScore1() );
 			match.setScore2( remoteGame.getScore2() );
 			match.setMatchFinished( remoteGame.isFinished() );
+			match.setHomeTeamNumber( remoteGame.getHomeTeamNumber() );
 
 			matchService.save( match );
 
@@ -130,6 +131,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 		newMatch.setScore2( remoteGame.getScore2() );
 
 		newMatch.setMatchFinished( remoteGame.isFinished() );
+		newMatch.setHomeTeamNumber( remoteGame.getHomeTeamNumber() );
 
 		matchService.save( newMatch );
 

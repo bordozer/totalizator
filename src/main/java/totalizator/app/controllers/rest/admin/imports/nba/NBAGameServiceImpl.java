@@ -34,6 +34,7 @@ public class NBAGameServiceImpl implements RemoteGameService {
 		final Double team1TeamId = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 3 );
 
 		final String _homeTeam = team1TeamId.doubleValue() == homeTeamId.doubleValue() ? _team1 : _team2;
+		final int homeTeamNumber = team1TeamId.doubleValue() == homeTeamId.doubleValue() ? 1 : 2;
 
 		final RemoteGame remoteGame = new RemoteGame();
 
@@ -48,6 +49,7 @@ public class NBAGameServiceImpl implements RemoteGameService {
 		remoteGame.setHomeTeamName( _homeTeam );
 
 		remoteGame.setFinished( isFinal );
+		remoteGame.setHomeTeamNumber( homeTeamNumber  );
 
 		return remoteGame;
 	}
