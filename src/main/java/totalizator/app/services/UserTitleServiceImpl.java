@@ -65,19 +65,19 @@ public class UserTitleServiceImpl implements UserTitleService {
 			return new UserTitle( getTitle( "User title: 1", luckyLevel ), ICONS.get( 1 ) );
 		}
 
-		if ( luckyLevel > 31 && luckyLevel <= 50 ) {
+		if ( luckyLevel >= 31 && luckyLevel <= 50 ) {
 			return new UserTitle( getTitle( "User title: 2", luckyLevel ), ICONS.get( 2 ) );
 		}
 
-		if ( luckyLevel > 51 && luckyLevel <= 80 ) {
+		if ( luckyLevel >= 51 && luckyLevel <= 80 ) {
 			return new UserTitle( getTitle( "User title: 3", luckyLevel ), ICONS.get( 3 ) );
 		}
 
-		if ( luckyLevel > 81 && luckyLevel <= 90 ) {
+		if ( luckyLevel >= 81 && luckyLevel <= 90 ) {
 			return new UserTitle( getTitle( "User title: 4", luckyLevel ), ICONS.get( 4 ) );
 		}
 
-		if ( luckyLevel > 91 ) {
+		if ( luckyLevel >= 91 ) {
 			return new UserTitle( getTitle( "User title: 5", luckyLevel ), ICONS.get( 5 ) );
 		}
 
