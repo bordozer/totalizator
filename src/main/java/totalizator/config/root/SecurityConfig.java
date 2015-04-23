@@ -71,7 +71,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 				.rememberMe()
 					.rememberMeServices( rememberMeServices() )
-//					.tokenRepository( persistentTokenRepository() )
 					.key( "remember-me-key" )
 					.tokenValiditySeconds( 1209600 )
 		;
