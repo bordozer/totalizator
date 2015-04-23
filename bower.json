@@ -20,5 +20,6 @@
 		, "eonasdan-bootstrap-datetimepicker": "latest"
 		, "fontawesome": "latest"
 		, "knockout": "latest"
+		, "bootbox": "4.4.0"
 	}
 }

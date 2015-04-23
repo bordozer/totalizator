@@ -28,6 +28,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Login page: Login failed message</nerd>
+		<ru><![CDATA[Вы ошиблись при наборе логина или пароля, или вы таки не тот, за кого себя выдаете...]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

@@ -5,6 +5,7 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
+	var bootbox = require( 'bootbox' );
 
 	var LoginFormModel = require( 'public/js/login-form/login-form-model' );
 	var LoginFormView = require( 'public/js/login-form/login-form-view' );
@@ -15,6 +16,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		loginFailedLabel: 'Login page: Login failed'
+		, loginFailedMessage: 'Login page: Login failed message'
 	} );
 
 	var LoginCompositeView = Backbone.View.extend( {
@@ -56,7 +58,11 @@ define( function ( require ) {
 						window.location.replace( '/totalizator/' );
 						return;
 					}
-					alert( translator.loginFailedLabel );
+
+					bootbox.dialog( {
+						title: translator.loginFailedLabel
+						, message: translator.loginFailedMessage
+					} );
 				}
 			} )
 		},
