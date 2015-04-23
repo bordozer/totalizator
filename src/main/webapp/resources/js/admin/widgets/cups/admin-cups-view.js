@@ -173,10 +173,22 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
+			var cupCustomCSS = '';
+			if ( ! model.publicCup ) {
+				cupCustomCSS = 'text-muted';
+			} else if ( ! model.finished ) {
+				cupCustomCSS = 'text-info';
+			} else {
+				cupCustomCSS = 'text-warning';
+			}
+
+			var category = this._getCategoryName( this.model.get( 'categoryId' ) );
+
 			this.$el.html( this.templateView( {
 				model: model
-				, categoryName: this._getCategoryName( this.model.get( 'categoryId' ) ).categoryName
+				, categoryName: category
 				, cupStartDate: dateTimeService.formatDateDisplay( model.cupStartDate )
+				, cupCustomCSS: cupCustomCSS
 				, translator: translator
 			} ) );
 
