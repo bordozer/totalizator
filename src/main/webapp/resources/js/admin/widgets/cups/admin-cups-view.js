@@ -27,6 +27,7 @@ define( function ( require ) {
 		, entryEditCategoryLabel: "Category"
 		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
 		, entryEditPublicCupPageLabel: "Public cup"
+		, entryEditNonPublicCupPageLabel: "Nonpublic cup"
 		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
 		, entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
 		, entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"

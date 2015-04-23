@@ -12,6 +12,11 @@
 		<ru><![CDATA[Публичный чемпионат]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Nonpublic cup</nerd>
+		<ru><![CDATA[Скрытый чемпионат]]></ru>
+	</translation>
+
 
 	<translation>
 		<nerd>Admin / Cups: New cup</nerd>
