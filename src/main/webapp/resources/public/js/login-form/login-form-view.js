@@ -14,7 +14,7 @@ define( function ( require ) {
 		loginLabel: 'Login page: Login'
 		, passwordLabel: 'Login page: Password'
 		, createNewUserLabel: 'Login page: Create new user'
-//		, validationEnterLoginLabel: 'Login page: Enter login'
+		, rememberMeLabel: 'Login page: Remember me'
 	} );
 
 	var LoginFormView = Backbone.View.extend( {
