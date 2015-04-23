@@ -2,6 +2,7 @@ package totalizator.config.root;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,8 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import totalizator.app.security.AjaxAuthenticationSuccessHandler;
 import totalizator.app.security.SecurityUserDetailsService;
 
@@ -30,7 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure( AuthenticationManagerBuilder auth ) throws Exception {
-		auth.userDetailsService( userDetailsService ).passwordEncoder( new BCryptPasswordEncoder() );
+		auth
+			.eraseCredentials( true )
+			.userDetailsService( userDetailsService )
+			.passwordEncoder( new BCryptPasswordEncoder() )
+		;
 	}
 
 	@Override
@@ -39,29 +43,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.csrf().disable()
 				.authorizeRequests()
-				.antMatchers( "/resources/public/**" ).permitAll()
-				.antMatchers( "/resources/img*//**" ).permitAll()
-				.antMatchers( "/resources/bower_components*//**" ).permitAll()
-				.antMatchers( "/rest/translator/" ).permitAll()
-				.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll() // create user
-				.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
-				.anyRequest()
-				.authenticated()
-				.and()
+					.antMatchers( "/resources/public/**" ).permitAll()
+					.antMatchers( "/resources/img*//**" ).permitAll()
+					.antMatchers( "/resources/bower_components*//**" ).permitAll()
+					.antMatchers( "/rest/translator/" ).permitAll()
+					.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll()
+					.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
+					.anyRequest()
+					.authenticated()
+					.and()
 				.formLogin()
-				.defaultSuccessUrl( PORTAL_PAGE_URL )
-				.loginProcessingUrl( "/authenticate" )
-				.usernameParameter( "login" )
-				.passwordParameter( "password" )
-				.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
-				.loginPage( LOGIN_PAGE_URL )
-				.and()
-				.httpBasic()
-				.and()
+					.defaultSuccessUrl( PORTAL_PAGE_URL )
+					.loginProcessingUrl( "/authenticate" )
+					.usernameParameter( "login" )
+					.passwordParameter( "password" )
+					.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
+					.loginPage( LOGIN_PAGE_URL )
+					.and()
+					.httpBasic()
+					.and()
 				.logout()
-				.logoutUrl( "/logout" )
-				.logoutSuccessUrl( LOGIN_PAGE_URL )
-				.permitAll()
+					.logoutUrl( "/logout" )
+					.logoutSuccessUrl( LOGIN_PAGE_URL )
+					.permitAll()
+					.and()
+				.rememberMe()
+					.rememberMeServices( rememberMeServices() )
+					.key( "remember-me-key" )
 		;
+	}
+
+	@Bean
+	public TokenBasedRememberMeServices rememberMeServices() {
+		return new TokenBasedRememberMeServices( "remember-me-key", userDetailsService );
 	}
 }

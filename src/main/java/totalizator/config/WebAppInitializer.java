@@ -1,7 +1,6 @@
 package totalizator.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import totalizator.config.root.DevelopmentConfiguration;
 import totalizator.config.root.RootContextConfig;
@@ -10,6 +9,8 @@ import totalizator.config.root.TestConfiguration;
 import totalizator.config.servlet.ServletContextConfig;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -26,6 +27,12 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	@Override
 	protected String[] getServletMappings() {
 		return new String[]{ "/" };
+	}
+
+	@Override
+	public void onStartup( final ServletContext servletContext ) throws ServletException {
+		super.onStartup( servletContext );
+		servletContext.addListener( new SessionListener() );
 	}
 
 	@Override
