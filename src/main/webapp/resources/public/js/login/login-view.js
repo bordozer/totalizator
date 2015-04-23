@@ -12,6 +12,11 @@ define( function ( require ) {
 	var UserDataModel = require( 'public/js/user/data/user-data-model' );
 	var UserDataView = require( 'public/js/user/data/user-data-view' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		loginFailedLabel: 'Login page: Login failed'
+	} );
+
 	var LoginCompositeView = Backbone.View.extend( {
 
 		initialize: function( options ) {
@@ -51,7 +56,7 @@ define( function ( require ) {
 						window.location.replace( '/totalizator/' );
 						return;
 					}
-					alert( 'Access denied' ); // TODO
+					alert( translator.loginFailedLabel );
 				}
 			} )
 		},

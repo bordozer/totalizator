@@ -71,13 +71,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 				.rememberMe()
 					.rememberMeServices( rememberMeServices() )
-					.key( "_spring_security_remember_me" )
-					.tokenValiditySeconds( 1209600 )
+//					.key( "_spring_security_remember_me" )
+//					.tokenValiditySeconds( 1209600 )
 		;
 	}
 
 	@Bean
 	public TokenBasedRememberMeServices rememberMeServices() {
-		return new TokenBasedRememberMeServices( "uniqueAndSecret", userDetailsService );
+
+		final TokenBasedRememberMeServices meServices = new TokenBasedRememberMeServices( "myAppKey", userDetailsService );
+		meServices.setCookieName( "USER_ID_AUTO_SIGN_IN_TOO" );
+		meServices.setTokenValiditySeconds( 1209600 );
+
+		return meServices;
 	}
 }
