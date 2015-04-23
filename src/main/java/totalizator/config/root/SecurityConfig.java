@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 				.rememberMe()
 					.rememberMeServices( rememberMeServices() )
-					.key( "remember-me-key" )
+					.key( "_spring_security_remember_me" )
 					.tokenValiditySeconds( 1209600 )
 		;
 	}
