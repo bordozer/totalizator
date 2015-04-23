@@ -25,10 +25,20 @@
 			<tr>
 				<td><label for="password"> <%=translator.passwordLabel%></label></td>
 				<td>
-					<div class="form-group password">
-						<input type="password" id="password" name="password" class="form-control" value="tester">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="form-group password">
+								<input type="password" id="password" name="password" class="form-control" value="tester">
+							</div>
+							<ul class="small password-errors" style="display: none;"></ul>
+						</div>
 					</div>
-					<ul class="small password-errors" style="display: none;"></ul>
+
+					<div class="row">
+						<div class="col-lg-12">
+							<input type="checkbox" name="_spring_security_remember_me" value="true" /> remember me
+						</div>
+					</div>
 				</td>
 			</tr>
 		</table>

@@ -58,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.usernameParameter( "login" )
 					.passwordParameter( "password" )
 					.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
+					.failureUrl( "/login?error" ) // TODO: implement
 					.loginPage( LOGIN_PAGE_URL )
 					.and()
 					.httpBasic()
@@ -65,16 +66,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 					.logoutUrl( "/logout" )
 					.logoutSuccessUrl( LOGIN_PAGE_URL )
+					.deleteCookies( "JSESSIONID" )
 					.permitAll()
 					.and()
 				.rememberMe()
 					.rememberMeServices( rememberMeServices() )
+//					.tokenRepository( persistentTokenRepository() )
 					.key( "remember-me-key" )
+					.tokenValiditySeconds( 1209600 )
 		;
 	}
 
 	@Bean
 	public TokenBasedRememberMeServices rememberMeServices() {
-		return new TokenBasedRememberMeServices( "remember-me-key", userDetailsService );
+		return new TokenBasedRememberMeServices( "uniqueAndSecret", userDetailsService );
 	}
 }
