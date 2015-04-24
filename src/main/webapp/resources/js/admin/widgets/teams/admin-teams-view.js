@@ -18,6 +18,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Teams"
 		, newTeamLabel: "Admin / Teams: New team"
+		, goTopLabel: "Scroll to top"
 	} );
 
 	var TeamsView = WidgetView.extend( {
@@ -55,6 +56,8 @@ define( function ( require ) {
 					self.renderEntry( team );
 				}
 			});
+
+			this.footerText( "<i class='fa fa-arrow-up'></i> <a href='#'>" + translator.goTopLabel + "</a>" );
 
 			this.trigger( 'inner-view-rendered' );
 		},
@@ -104,7 +107,9 @@ define( function ( require ) {
 
 		_addEntry: function() {
 			this.listenToOnce( this.model, 'add', this.renderEntry );
-			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory } );
+			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory, isTeamChecked: 'checked'  } );
+
+			$( "html, body" ).animate( { scrollTop: $( document ).height() }, "fast" );
 		},
 
 		_onAddClick: function( evt ) {

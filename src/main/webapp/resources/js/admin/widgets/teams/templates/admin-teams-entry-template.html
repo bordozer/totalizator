@@ -6,7 +6,7 @@
 	</div>
 
 	<div class="col-lg-7" title="#<%=model.cupId%>">
-		<input type="checkbox" value="<%=model.teamId%>">
+		<input type="checkbox" value="<%=model.teamId%>" <%= model.isTeamChecked %> >
 		<img class="team-logo" src="<%=model.teamLogo%>" height="32">
 		<%=model.teamName%>
 	</div>
