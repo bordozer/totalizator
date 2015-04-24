@@ -92,6 +92,7 @@ define( function ( require ) {
 			} );
 
 			view.on( 'events:cups_changed', this._triggerCupsChanged, this );
+			view.on( 'events:admin:cup:selected', this._triggerCupSelected, this );
 
 			var container = this.$( this.windowBodyContainerSelector );
 			if ( model.get( 'isEditState' ) ) {
@@ -111,6 +112,10 @@ define( function ( require ) {
 
 		_triggerCupsChanged: function() {
 			this.trigger( 'events:cups_changed' );
+		},
+
+		_triggerCupSelected: function( options ) {
+			this.trigger( 'events:admin:cup:selected', options );
 		},
 
 		_loadCategories: function() {
@@ -149,7 +154,8 @@ define( function ( require ) {
 		templateEdit: _.template( TemplateEntryEdit ),
 
 		events: {
-			'click .cup-entry-name, .cup-entry-edit': '_onEntryEditClick'
+			'click .cup-entry-edit': '_onEntryEditClick'
+			, 'click .js-cup-entry': '_onCupClick'
 			, 'click .js-finish-cup': '_renderCupBets'
 			, 'click .cup-entry-save': '_onEntrySaveClick'
 			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
@@ -368,6 +374,11 @@ define( function ( require ) {
 			evt.preventDefault();
 			this.model.setEditState();
 			this._editEntry();
+		},
+
+		_onCupClick: function( evt ) {
+			evt.preventDefault();
+			this.trigger( "events:admin:cup:selected", { selectedCupId: this.model.get( 'cupId' ) } );
 		},
 
 		_onEntrySaveClick: function( evt ) {

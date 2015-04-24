@@ -39,6 +39,7 @@ define( function ( require ) {
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
 			this.on( 'events:filter_by_category', this._filterByCategory, this );
+			this.on( 'events:admin:cup:selected', this._filterBySelectedCup, this );
 
 			this._loadCategories();
 
@@ -67,6 +68,7 @@ define( function ( require ) {
 			var view = new TeamView( {
 				model: model
 				, categories: this.categories
+				, selectedCupId: this.model.selectedCupId
 			} );
 
 			view.on( 'events:teams_changed', this._triggerTeamsChanged, this );
@@ -102,6 +104,12 @@ define( function ( require ) {
 
 		_filterByCategory: function( options ) {
 			this.model.filterByCategory = options.categoryId;
+			this.model.selectedCupId = 0;
+			this.render();
+		},
+
+		_filterBySelectedCup: function( options ) {
+			this.model.selectedCupId = options.selectedCupId;
 			this.render();
 		},
 
@@ -136,6 +144,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.categories = options.categories;
+			this.selectedCupId = options.selectedCupId;
 
 			this.model.on( 'sync', this.render, this )
 		},
@@ -147,6 +156,7 @@ define( function ( require ) {
 			this.$el.html( this.templateView( {
 				model: model
 				, categoryName: this._getCategoryName( model.categoryId )
+				, selectedCupId: this.selectedCupId
 				, translator: translator
 			} ) );
 

@@ -71,6 +71,7 @@ define( function ( require ) {
 
 		_renderCups: function() {
 			this.cupsView = new CupsView.CupsView( { model: this.cupsModel, el: this.$( '.admin-page-cups-container' ) } );
+			this.cupsView.on( 'events:admin:cup:selected', this._filterTeamsByCup, this );
 		},
 
 		_renderTeams: function() {
@@ -85,8 +86,11 @@ define( function ( require ) {
 		_filterByCategory: function( options ) {
 			this.cupsView.trigger( 'events:filter_by_category', options );
 			this.teamsView.trigger( 'events:filter_by_category', options );
-		}
+		},
 
+		_filterTeamsByCup: function( options ) {
+			this.teamsView.trigger( 'events:admin:cup:selected', options );
+		}
 	} );
 
 	return { AdminView: AdminView };
