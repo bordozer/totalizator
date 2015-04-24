@@ -32,7 +32,7 @@ define( function ( require ) {
 	var TeamsModel = Backbone.Collection.extend( {
 
 		model: TeamModel,
-		selectedCupId: 0,
+		selectedCup: { cupId: 0 },
 
 		initialize: function ( options ) {
 			this.url = '/admin/rest/teams/';

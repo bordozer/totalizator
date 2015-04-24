@@ -55,6 +55,13 @@ public class AdminCupsRestController {
 		return dtoService.transformCups( cupService.loadAll(), userService.findByLogin( principal.getName() ) );
 	}
 
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/", produces = APPLICATION_JSON_VALUE )
+	public CupDTO getCup( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
+	}
+
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)

@@ -49,7 +49,7 @@ define( function ( require ) {
 
 		model: CupModel,
 
-		selectedCupId: 0,
+		selectedCup: { cupId: 0 },
 
 		initialize: function ( options ) {
 			this.url = '/admin/rest/cups/';

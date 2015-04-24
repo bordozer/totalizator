@@ -18,6 +18,8 @@ define( function ( require ) {
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
+	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
@@ -89,7 +91,7 @@ define( function ( require ) {
 				model: model
 				, categories: this.categories
 				, allTeams: this.allTeams
-				, isSelected: this.model.selectedCupId == model.get( 'cupId' )
+				, isSelected: this.model.selectedCup.cupId == model.get( 'cupId' )
 			} );
 
 			view.on( 'events:cups_changed', this._triggerCupsChanged, this );
@@ -130,7 +132,7 @@ define( function ( require ) {
 
 		_filterByCategory: function( options ) {
 			this.model.filterByCategory = options.categoryId;
-			this.model.selectedCupId = 0;
+			this.model.selectedCup = { cupId: 0 };
 			this.render();
 		},
 
@@ -140,10 +142,11 @@ define( function ( require ) {
 		},
 
 		_onCupSelect: function( options ) {
-			this._triggerCupSelected( options );
 
-			this.model.selectedCupId = options.selectedCupId;
+			this.model.selectedCup = options.selectedCup;
 			this.render();
+
+			this._triggerCupSelected( options );
 		},
 
 		_onAddClick: function( evt ) {
@@ -395,7 +398,8 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this.model.isCupSelected = true;
-			this.trigger( "events:admin:cup:selected", { selectedCupId: this.model.get( 'cupId' ) } );
+			var selectedCup = adminService.loadCup( this.model.get( 'cupId' ) );
+			this.trigger( "events:admin:cup:selected", { selectedCup: selectedCup } );
 		},
 
 		_onEntrySaveClick: function( evt ) {

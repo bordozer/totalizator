@@ -12,6 +12,7 @@ define( function ( require ) {
 	var TemplateEntryEdit = require( 'text!./templates/admin-teams-entry-edit-template.html' );
 
 	var service = require( '/resources/js/services/service.js' );
+
 	var chosen = require( 'chosen' );
 
 	var Translator = require( 'translator' );
@@ -68,7 +69,7 @@ define( function ( require ) {
 			var view = new TeamView( {
 				model: model
 				, categories: this.categories
-				, selectedCupId: this.model.selectedCupId
+				, selectedCup: this.model.selectedCup
 			} );
 
 			view.on( 'events:teams_changed', this._triggerTeamsChanged, this );
@@ -104,12 +105,12 @@ define( function ( require ) {
 
 		_filterByCategory: function( options ) {
 			this.model.filterByCategory = options.categoryId;
-			this.model.selectedCupId = 0;
+			this.model.selectedCup = { cupId: 0 };
 			this.render();
 		},
 
 		_filterBySelectedCup: function( options ) {
-			this.model.selectedCupId = options.selectedCupId;
+			this.model.selectedCup = options.selectedCup;
 			this.render();
 		},
 
@@ -144,7 +145,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.categories = options.categories;
-			this.selectedCupId = options.selectedCupId;
+			this.selectedCup = options.selectedCup;
 
 			this.model.on( 'sync', this.render, this )
 		},
@@ -156,7 +157,7 @@ define( function ( require ) {
 			this.$el.html( this.templateView( {
 				model: model
 				, categoryName: this._getCategoryName( model.categoryId )
-				, selectedCupId: this.selectedCupId
+				, selectedCup: this.selectedCup
 				, translator: translator
 			} ) );
 

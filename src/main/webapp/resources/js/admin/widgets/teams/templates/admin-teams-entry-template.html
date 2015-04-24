@@ -7,7 +7,7 @@
 
 	<div class="col-lg-7" title="#<%=model.cupId%>">
 
-		<% if( selectedCupId > 0 ) { %>
+		<% if( selectedCup.cupId > 0 ) { %>
 			<input type="checkbox" class="js-team-checkbox" value="<%=model.teamId%>" <%= model.isTeamChecked %> >
 		<% } %>
 

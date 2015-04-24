@@ -26,6 +26,24 @@ define( function ( require ) {
 			return result;
 		},
 
+		loadCup: function( cupId ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/admin/rest/cups/' + cupId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( 'Error loading cups' ); // TODO: translate
+				}
+			} );
+
+			return result;
+		},
+
 		reloadTranslations: function() {
 			$.ajax( {
 				method: 'GET',
