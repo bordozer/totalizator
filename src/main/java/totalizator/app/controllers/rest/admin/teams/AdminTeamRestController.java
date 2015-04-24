@@ -55,7 +55,7 @@ public class AdminTeamRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.PUT, value = "/cups/{cupId}/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamEditDTO create( final @RequestBody TeamEditDTO teamEditDTO ) {
 		// TODO: check if name exists
 		final Team team = teamService.save( new Team( teamEditDTO.getTeamName(), categoryService.load( teamEditDTO.getCategoryId() ) ) );
@@ -67,7 +67,7 @@ public class AdminTeamRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/{teamId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.PUT, value = "/cups/{cupId}/{teamId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamEditDTO edit( final @PathVariable( "teamId" ) int teamId, final @RequestBody TeamEditDTO teamEditDTO ) {
 		// TODO: check if name exists
 		final Team team = teamService.load( teamEditDTO.getTeamId() );
@@ -81,7 +81,7 @@ public class AdminTeamRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.DELETE, value = "/{teamId}" )
+	@RequestMapping( method = RequestMethod.DELETE, value = "/cups/{cupId}/{teamId}" )
 	public void delete( final @PathVariable( "teamId" ) int teamId ) throws IOException {
 
 		if ( teamId == 0 ) {

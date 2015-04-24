@@ -133,7 +133,7 @@ define( function ( require ) {
 		},
 
 		_reRender: function() {
-			this.model.refresh();
+			this.render();
 		}
 	} );
 

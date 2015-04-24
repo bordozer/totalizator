@@ -61,7 +61,7 @@ public class LogoServiceImpl implements LogoService {
 	@Override
 	public void deleteLogo( final Team team ) throws IOException {
 		final File logoFile = getLogoFile( team );
-		if ( logoFile.exists() ) {
+		if ( logoFile != null && logoFile.exists() ) {
 			FileUtils.fileDelete( logoFile.getPath() );
 		}
 	}
