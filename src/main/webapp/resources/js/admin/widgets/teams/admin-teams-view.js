@@ -38,7 +38,7 @@ define( function ( require ) {
 			];
 			this.addMenuItems( menuItems );
 
-			this.model.on( 'sync', this.render, this );
+			this.model.on( 'sync', this._renderTeams, this );
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
 			this.on( 'events:filter_by_category', this._filterByCategory, this );
@@ -46,11 +46,14 @@ define( function ( require ) {
 
 			this._loadCategories();
 
-			this.model.fetch( { cache: false } );
+			this.render();
 		},
 
 		renderBody: function() {
+			this.model.fetch( { cache: false } );
+		},
 
+		_renderTeams: function() {
 			this.$( this.windowBodyContainerSelector ).empty();
 
 			var filterByCategory = this.model.filterByCategory;
