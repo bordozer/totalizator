@@ -10,6 +10,7 @@ import totalizator.app.dao.MatchRepository;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
+import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.services.utils.DateTimeService;
 
@@ -26,6 +27,9 @@ public class MatchServiceImpl implements MatchService {
 
 	@Autowired
 	private DateTimeService dateTimeService;
+
+	@Autowired
+	private MatchBetsService matchBetsService;
 
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
@@ -117,6 +121,10 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	@Transactional
 	public void delete( final int id ) {
+		final List<MatchBet> bets = matchBetsService.loadAll( load( id ) );
+		for ( final MatchBet bet : bets ) {
+			matchBetsService.delete( bet.getId() );
+		}
 		matchRepository.delete( id );
 	}
 
