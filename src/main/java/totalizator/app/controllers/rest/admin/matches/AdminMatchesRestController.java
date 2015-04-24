@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
+import totalizator.app.models.MatchBet;
 import totalizator.app.services.CupService;
+import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.MatchService;
 import totalizator.app.services.TeamService;
 
@@ -29,6 +31,9 @@ public class AdminMatchesRestController {
 
 	@Autowired
 	private TeamService teamService;
+
+	@Autowired
+	private MatchBetsService matchBetsService;
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
@@ -57,6 +62,8 @@ public class AdminMatchesRestController {
 				matchEditDTO.setMatchFinished( match.isMatchFinished() );
 
 				matchEditDTO.setHomeTeamNumber( match.getHomeTeamNumber() );
+
+				matchEditDTO.setBetsCount( matchBetsService.betsCount( match ) );
 
 				return matchEditDTO;
 			}

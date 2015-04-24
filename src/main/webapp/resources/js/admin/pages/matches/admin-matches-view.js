@@ -43,6 +43,7 @@ define( function ( require ) {
 
 		, deleteMatchMessage: "Delete match?"
 		, deleteAllMatchesMessage: "Delete ALL selected matches?"
+		, betsCountLabel: "Bets count"
 	} );
 
 	var MatchesView = ConfigurableView.extend( {

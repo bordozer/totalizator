@@ -26,6 +26,8 @@ public class MatchEditDTO {
 
 	private int homeTeamNumber;
 
+	private int betsCount;
+
 	public int getMatchId() {
 		return matchId;
 	}
@@ -106,5 +108,13 @@ public class MatchEditDTO {
 
 	public void setHomeTeamNumber( final int homeTeamNumber ) {
 		this.homeTeamNumber = homeTeamNumber;
+	}
+
+	public int getBetsCount() {
+		return betsCount;
+	}
+
+	public void setBetsCount( final int betsCount ) {
+		this.betsCount = betsCount;
 	}
 }
