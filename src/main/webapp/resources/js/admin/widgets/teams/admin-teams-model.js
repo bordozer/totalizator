@@ -15,6 +15,7 @@ define( function ( require ) {
 			, teamName: ''
 			, categoryId: 0
 			, isEditState: false
+			, isTeamChecked: true
 		},
 
 		initialize: function ( options ) {

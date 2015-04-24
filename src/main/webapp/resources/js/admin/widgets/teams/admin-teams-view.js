@@ -11,6 +11,8 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!./templates/admin-teams-entry-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/admin-teams-entry-edit-template.html' );
 
+	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+
 	var service = require( '/resources/js/services/service.js' );
 
 	var chosen = require( 'chosen' );
@@ -116,7 +118,7 @@ define( function ( require ) {
 
 		_addEntry: function() {
 			this.listenToOnce( this.model, 'add', this.renderEntry );
-			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory, isTeamChecked: 'checked'  } );
+			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory } );
 
 			$( "html, body" ).animate( { scrollTop: $( document ).height() }, "fast" );
 		},
@@ -250,6 +252,8 @@ define( function ( require ) {
 
 			var isTeamChecked = this._isTeamChecked();
 			this.model.set( { isTeamChecked: isTeamChecked } );
+
+			adminService.setTeamCupParticipation( this.selectedCup.cupId, this.model.get( 'teamId' ), isTeamChecked );
 		},
 
 		_onEntryEditClick: function( evt ) {

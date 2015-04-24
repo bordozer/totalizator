@@ -6,14 +6,16 @@ public class TeamEditDTO {
 	private String teamName;
 	private int categoryId;
 	private String teamLogo;
+	private boolean teamChecked;
 
 	public TeamEditDTO() {
 	}
 
-	public TeamEditDTO( final int teamId, final String teamName, final int categoryId, final String teamLogo ) {
+	public TeamEditDTO( final int teamId, final String teamName, final int categoryId, final boolean teamChecked, final String teamLogo ) {
 		this.teamId = teamId;
 		this.teamName = teamName;
 		this.categoryId = categoryId;
+		this.teamChecked = teamChecked;
 		this.teamLogo = teamLogo;
 	}
 
@@ -47,6 +49,14 @@ public class TeamEditDTO {
 
 	public void setTeamLogo( final String teamLogo ) {
 		this.teamLogo = teamLogo;
+	}
+
+	public boolean isTeamChecked() {
+		return teamChecked;
+	}
+
+	public void setTeamChecked( final boolean teamChecked ) {
+		this.teamChecked = teamChecked;
 	}
 
 	@Override

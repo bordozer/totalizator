@@ -52,6 +52,10 @@ define( function ( require ) {
 //					window.location.reload();
 				}
 			} )
+		},
+
+		setTeamCupParticipation: function( cupId, teamId, isTeamParticipatingInCup ) {
+
 		}
 	}
 } );

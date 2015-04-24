@@ -8,7 +8,7 @@
 	<div class="col-lg-7" title="#<%=model.cupId%>">
 
 		<% if( selectedCup.cupId > 0 && ! this.selectedCup.finished ) { %>
-			<input type="checkbox" class="js-team-checkbox" value="<%=model.teamId%>" <%= model.isTeamChecked %> >
+			<input type="checkbox" class="js-team-checkbox" value="<%=model.teamId%>" <%= model.isTeamChecked ? 'checked' : '' %> >
 		<% } %>
 
 		<img class="team-logo" src="<%=model.teamLogo%>" height="32">

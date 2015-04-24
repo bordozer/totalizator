@@ -41,7 +41,7 @@ public class AdminTeamRestController {
 
 			@Override
 			public TeamEditDTO apply( final Team team ) {
-				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), logoService.getLogoURL( team ) );
+				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), true, logoService.getLogoURL( team ) );
 			}
 		} );
 	}
