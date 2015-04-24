@@ -89,10 +89,11 @@ define( function ( require ) {
 				model: model
 				, categories: this.categories
 				, allTeams: this.allTeams
+				, isSelected: this.model.selectedCupId == model.get( 'cupId' )
 			} );
 
 			view.on( 'events:cups_changed', this._triggerCupsChanged, this );
-			view.on( 'events:admin:cup:selected', this._triggerCupSelected, this );
+			view.on( 'events:admin:cup:selected', this._onCupSelect, this );
 
 			var container = this.$( this.windowBodyContainerSelector );
 			if ( model.get( 'isEditState' ) ) {
@@ -129,12 +130,20 @@ define( function ( require ) {
 
 		_filterByCategory: function( options ) {
 			this.model.filterByCategory = options.categoryId;
+			this.model.selectedCupId = 0;
 			this.render();
 		},
 
 		_addEntry: function() {
 			this.listenToOnce( this.model, 'add', this.renderEntry );
 			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory } );
+		},
+
+		_onCupSelect: function( options ) {
+			this._triggerCupSelected( options );
+
+			this.model.selectedCupId = options.selectedCupId;
+			this.render();
 		},
 
 		_onAddClick: function( evt ) {
@@ -172,6 +181,8 @@ define( function ( require ) {
 			this.listenTo( this.adminCupResultsView, 'events:cup-data-edit-tab', this._switchEditTab );
 			this.listenTo( this.adminCupResultsView, 'events:cup-save', this._bindWinnersAndSave );
 
+			this.isSelected = options.isSelected;
+
 			this.model.on( 'sync', this.render, this );
 			this.model.trigger( 'events:save-attributes' );
 		},
@@ -198,6 +209,10 @@ define( function ( require ) {
 				, cupCustomCSS: cupCustomCSS
 				, translator: translator
 			} ) );
+
+			if ( this.isSelected ) {
+				this.$( '.admin-entry-line' ).addClass( 'bg-success' );
+			}
 
 			return this;
 		},
@@ -378,6 +393,8 @@ define( function ( require ) {
 
 		_onCupClick: function( evt ) {
 			evt.preventDefault();
+
+			this.model.isCupSelected = true;
 			this.trigger( "events:admin:cup:selected", { selectedCupId: this.model.get( 'cupId' ) } );
 		},
 

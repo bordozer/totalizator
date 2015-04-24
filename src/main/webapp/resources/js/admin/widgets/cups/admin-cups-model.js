@@ -49,6 +49,8 @@ define( function ( require ) {
 
 		model: CupModel,
 
+		selectedCupId: 0,
+
 		initialize: function ( options ) {
 			this.url = '/admin/rest/cups/';
 		},
