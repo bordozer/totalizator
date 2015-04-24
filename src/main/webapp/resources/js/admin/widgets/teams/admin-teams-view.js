@@ -121,7 +121,7 @@ define( function ( require ) {
 		templateEdit: _.template( TemplateEntryEdit ),
 
 		events: {
-			'click .cup-entry-name, .team-entry-edit': '_onEntryEditClick'
+			'click .team-entry-edit': '_onEntryEditClick'
 			, 'click .team-entry-del': '_onEntryDelClick'
 			, 'click .team-entry-save': '_onEntrySaveClick'
 			, 'click .team-entry-edit-cancel': '_onEntryEditCancelClick'
