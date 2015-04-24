@@ -258,6 +258,8 @@ define( function ( require ) {
 			this.model.set( { teamChecked: isTeamChecked } );
 
 			adminService.setTeamCupParticipation( this.selectedCup.cupId, this.model.get( 'teamId' ), isTeamChecked );
+
+			this.render();
 		},
 
 		_onEntryEditClick: function( evt ) {
