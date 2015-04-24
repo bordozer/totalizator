@@ -56,7 +56,7 @@ define( function ( require ) {
 		renderInnerView: function ( filter ) {
 			this.filter = filter;
 
-			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
+			this.listenToOnce( this.model, 'sync', this._renderMatches );
 
 			this.model.refresh( filter );
 		},
@@ -73,7 +73,7 @@ define( function ( require ) {
 			return adminService.loadCups();
 		},
 
-		_renderCupMatchesAndBets: function() {
+		_renderMatches: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
 
@@ -93,6 +93,7 @@ define( function ( require ) {
 		},
 
 		_renderEntry: function ( model ) {
+
 			var view = new MatchView( {
 				model: model
 				, categories: this.categories
@@ -140,7 +141,6 @@ define( function ( require ) {
 			_.each( matches, function( match ) {
 				match.deleteMatch();
 			});
-//			this._triggerRender();
 		},
 
 		_onAddClick: function( evt ) {
@@ -238,7 +238,7 @@ define( function ( require ) {
 			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
 
 			var cups = service.filterCupsByCategory( this.cups, categoryId );
-			var teams = service.filterTeamsByCategory( this.teams, categoryId );
+			var teams = service.loadCupTeams( model.cupId );
 
 			this.$el.html( templateEntryEdit( {
 				model: model

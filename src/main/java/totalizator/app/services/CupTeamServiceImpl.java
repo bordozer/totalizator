@@ -1,5 +1,7 @@
 package totalizator.app.services;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +9,10 @@ import totalizator.app.dao.CupTeamRepository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeam;
 import totalizator.app.models.Team;
+
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Service
 public class CupTeamServiceImpl implements CupTeamService {
@@ -43,6 +49,17 @@ public class CupTeamServiceImpl implements CupTeamService {
 	@Transactional( readOnly = true )
 	public boolean exists( final Cup cup, final Team team ) {
 		return cupTeamRepository.load( cup.getId(), team.getId() ) != null;
+	}
+
+	@Override
+	public List<Team> loadActiveForCup( final int cupId ) {
+
+		return Lists.transform( cupTeamRepository.loadAll( cupId ), new Function<CupTeam, Team>() {
+			@Override
+			public Team apply( final CupTeam cupTeam ) {
+				return cupTeam.getTeam();
+			}
+		} );
 	}
 
 	private void createNewEntry( final int cupId, final int teamId ) {

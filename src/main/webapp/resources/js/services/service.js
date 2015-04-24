@@ -159,6 +159,25 @@ define( function ( require ) {
 			} );
 		},
 
+		loadCupTeams: function( cupId ) {
+
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/teams/cup/' + cupId + '/active/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.logoutFailedMessage );
+				}
+			} );
+
+			return result;
+		},
+
 		filterCupsByCategory: function( cups, categoryId ) {
 			return _.filter( cups, function( cup ) {
 				return cup.category.categoryId == categoryId;

@@ -14,7 +14,6 @@ public class CupTeamRepository implements GenericService<CupTeam> {
 	@PersistenceContext
 	private EntityManager em;
 
-
 	@Override
 	public List<CupTeam> loadAll() {
 		return em.createNamedQuery( CupTeam.LOAD_ALL, CupTeam.class )
@@ -34,6 +33,12 @@ public class CupTeamRepository implements GenericService<CupTeam> {
 	@Override
 	public void delete( final int id ) {
 		em.remove( load( id ) );
+	}
+
+	public List<CupTeam> loadAll( final int cupId ) {
+		return em.createNamedQuery( CupTeam.LOAD_ALL_CUP_TEAMS, CupTeam.class )
+				.setParameter( "cupId", cupId )
+				.getResultList();
 	}
 
 	public CupTeam load( final int cupId, final int teamId ) {
