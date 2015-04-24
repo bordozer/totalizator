@@ -36,6 +36,13 @@ define( function ( require ) {
 				, translator: translator
 			 } ) );
 
+			var self = this;
+			this.$( 'input' ).keypress( function ( e ) {
+				if ( e.which == 13 ) {
+					self._processLogin();
+				}
+			} );
+
 			return this.$el;
 		},
 
@@ -51,17 +58,14 @@ define( function ( require ) {
 		},
 
 		_processLogin: function() {
-			this._validate();
+			this._bindData();
+			if( this._validate() ) {
+				this._authenticate();
+			}
 		},
 
 		_validate: function() {
-			this._bindData();
-			var isLoginOk = this._validateLogin();
-			var isPasswordOk = this._validatePassword();
-			if ( isLoginOk && isPasswordOk ) {
-//				this.model.save();
-				this._authenticate();
-			}
+			return this._validateLogin() && this._validatePassword();
 		},
 
 		_bindData: function() {
