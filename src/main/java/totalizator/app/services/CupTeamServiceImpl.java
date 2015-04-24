@@ -48,7 +48,12 @@ public class CupTeamServiceImpl implements CupTeamService {
 	@Override
 	@Transactional( readOnly = true )
 	public boolean exists( final Cup cup, final Team team ) {
-		return cupTeamRepository.load( cup.getId(), team.getId() ) != null;
+		return exists( cup.getId(), team.getId() );
+	}
+
+	@Override
+	public boolean exists( final int cupId, final int teamId ) {
+		return cupTeamRepository.load( cupId, teamId ) != null;
 	}
 
 	@Override

@@ -36,12 +36,15 @@
 					<h4><a href="/totalizator/users/<%- userCupBet.user.userId %>/"><%- userCupBet.user.userName %></a></h4>
 				</td>
 				<% for( i = 1; i <= winnersCount; i++ ) { %>
-					<td class="text-center">
+					<td class="text-center <%= userCupBet.userCupBets[ i - 1 ].stillActive ? 'text-info' : 'text-danger' %>">
 						<% if( userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].team ) { %>
 
 							<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>">
 
-							<h5><%= userCupBet.userCupBets[ i - 1 ].team.teamName %></h5>
+							<h5 title="<%-translator.teamIsOutOfCupLabel%>">
+								<%= userCupBet.userCupBets[ i - 1 ].stillActive ? '' : "<i class='fa fa-close'></i>" %>
+								<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+							</h5>
 
 							<% if( userCupBet.userCupBets[ i - 1 ].points > 0 ) { %>
 								<h4>+ <%= userCupBet.userCupBets[ i - 1 ].points %></h4>

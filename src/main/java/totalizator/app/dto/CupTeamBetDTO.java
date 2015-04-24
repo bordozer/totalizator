@@ -9,6 +9,8 @@ public class CupTeamBetDTO {
 	private int cupPosition;
 	private int points;
 
+	private boolean stillActive;
+
 	public CupDTO getCup() {
 		return cup;
 	}
@@ -47,5 +49,13 @@ public class CupTeamBetDTO {
 
 	public void setPoints( final int points ) {
 		this.points = points;
+	}
+
+	public boolean isStillActive() {
+		return stillActive;
+	}
+
+	public void setStillActive( final boolean stillActive ) {
+		this.stillActive = stillActive;
 	}
 }

@@ -15,6 +15,7 @@ define( function ( require ) {
 		, cupPositionLabel: 'cup position'
 		, realCupWinnersLabel: 'Cup winners'
 		, noWinnerBetLabel: 'No bet'
+		, teamIsOutOfCupLabel: 'Team has been knocked out'
 	} );
 
 	return Backbone.View.extend( {
