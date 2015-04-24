@@ -159,7 +159,7 @@ define( function ( require ) {
 			} );
 		},
 
-		loadCupTeams: function( cupId ) {
+		loadCupActiveTeams: function( cupId ) {
 
 			var result = [];
 

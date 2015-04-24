@@ -129,7 +129,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.cup = options.options.cup;
-			this.teams = service.filterTeamsByCategory ( service.loadTeams(), this.cup.category.categoryId );
+			this.teams = service.loadCupActiveTeams( this.cup.cupId );
 
 			var menuItems = [
 				{ selector: 'divider' }
