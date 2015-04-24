@@ -29,9 +29,8 @@ define( function ( require ) {
 			this.cupsModel = new CupsModel.CupsModel();
 			this.teamsModel = new TeamsModel.TeamsModel();
 
-			var categories = service.loadCategories();
-			if ( categories.length > 0  ) {
-				var preselectedCategory = categories[0];
+			var preselectedCategory = this._getPreselectedCategory();
+			if ( preselectedCategory  ) {
 				this.categoriesModel.selectedCategoryId = preselectedCategory.categoryId;
 				this.cupsModel.filterByCategory = preselectedCategory.categoryId;
 				this.teamsModel.filterByCategory = preselectedCategory.categoryId;
@@ -55,7 +54,8 @@ define( function ( require ) {
 		},
 
 		_getPreselectedCategory: function() {
-
+			var categories = service.loadCategories();
+			return categories.length > 0 ? categories[ 0 ] : null ;
 		},
 
 		_renderCategories: function() {
