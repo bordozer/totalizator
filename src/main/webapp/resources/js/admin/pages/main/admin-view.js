@@ -17,6 +17,8 @@ define( function ( require ) {
 	var TeamsModel = require( 'js/admin/widgets/teams/admin-teams-model' );
 	var TeamsView = require( 'js/admin/widgets/teams/admin-teams-view' );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var AdminView = Backbone.View.extend( {
 
 		template:_.template( Template ),
@@ -26,6 +28,14 @@ define( function ( require ) {
 			this.categoriesModel = new CategoriesModel.CategoriesModel();
 			this.cupsModel = new CupsModel.CupsModel();
 			this.teamsModel = new TeamsModel.TeamsModel();
+
+			var categories = service.loadCategories();
+			if ( categories.length > 0  ) {
+				var preselectedCategory = categories[0];
+				this.categoriesModel.selectedCategoryId = preselectedCategory.categoryId;
+				this.cupsModel.filterByCategory = preselectedCategory.categoryId;
+				this.teamsModel.filterByCategory = preselectedCategory.categoryId;
+			}
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -42,6 +52,10 @@ define( function ( require ) {
 			this._renderTeams();
 
 			return this.$el;
+		},
+
+		_getPreselectedCategory: function() {
+
 		},
 
 		_renderCategories: function() {
