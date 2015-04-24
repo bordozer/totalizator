@@ -43,7 +43,7 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 			config.addConfiguration( new PropertiesConfiguration( propertyFile ) );
 		}
 
-		final String[] _ids = config.getString( "system.admin.ids" ).split( "," );
+		final List<String> _ids = config.getList( "system.admin.ids" );
 		for ( final String _id : _ids ) {
 			adminIds.add( Integer.valueOf( _id.trim() ) );
 		}
