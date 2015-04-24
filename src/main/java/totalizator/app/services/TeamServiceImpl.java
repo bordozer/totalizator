@@ -49,9 +49,4 @@ public class TeamServiceImpl implements TeamService {
 	public Team findByName( final String name ) {
 		return teamRepository.findByName( name );
 	}
-
-	@Override
-	public void setTeamActivity( final int teamId, final int cupId, final boolean isActive ) {
-		final int i = 0;
-	}
 }

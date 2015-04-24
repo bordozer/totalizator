@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.Team;
 import totalizator.app.services.CategoryService;
+import totalizator.app.services.CupTeamService;
 import totalizator.app.services.LogoService;
 import totalizator.app.services.TeamService;
 
@@ -26,6 +27,9 @@ public class AdminTeamRestController {
 
 	@Autowired
 	private CategoryService categoryService;
+
+	@Autowired
+	private CupTeamService cupTeamService;
 
 	@Autowired
 	private LogoService logoService;
@@ -91,6 +95,6 @@ public class AdminTeamRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.POST, value = "/{teamId}/cups/{cupId}/active/{isActive}/", produces = APPLICATION_JSON_VALUE )
 	public void teamActivity( final @PathVariable( "teamId" ) int teamId, final @PathVariable( "cupId" ) int cupId, final @PathVariable( "isActive" ) boolean isActive ) {
-		teamService.setTeamActivity( teamId, cupId, isActive );
+		cupTeamService.saveCupTeam( cupId, teamId, isActive );
 	}
 }
