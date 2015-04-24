@@ -36,7 +36,11 @@ define( function ( require ) {
 		selectedCup: { cupId: 0 },
 
 		initialize: function ( options ) {
-			this.url = '/admin/rest/teams/';
+//			this.selectedCup = options.selectedCup;
+		},
+
+		url: function() {
+			return '/admin/rest/teams/cups/' + this.selectedCup.cupId + '/';
 		},
 
 		refresh: function() {

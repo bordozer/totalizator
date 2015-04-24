@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
-import totalizator.app.services.CategoryService;
-import totalizator.app.services.CupTeamService;
-import totalizator.app.services.LogoService;
-import totalizator.app.services.TeamService;
+import totalizator.app.services.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +24,9 @@ public class AdminTeamRestController {
 	private TeamService teamService;
 
 	@Autowired
+	private CupService cupService;
+
+	@Autowired
 	private CategoryService categoryService;
 
 	@Autowired
@@ -38,14 +39,16 @@ public class AdminTeamRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<TeamEditDTO> entries() {
+	@RequestMapping( method = RequestMethod.GET, value = "/cups/{cupId}", produces = APPLICATION_JSON_VALUE )
+	public List<TeamEditDTO> cupTeams( final @PathVariable( "cupId" ) int cupId ) {
+
+		final Cup cup = cupService.load( cupId );
 
 		return Lists.transform( teamService.loadAll(), new Function<Team, TeamEditDTO>() {
 
 			@Override
 			public TeamEditDTO apply( final Team team ) {
-				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), true, logoService.getLogoURL( team ) );
+				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), cup != null && cupTeamService.exists( cup, team ), logoService.getLogoURL( team ) );
 			}
 		} );
 	}

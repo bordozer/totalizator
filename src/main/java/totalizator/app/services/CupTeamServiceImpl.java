@@ -3,7 +3,9 @@ package totalizator.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.dao.CupTeamRepository;
+import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeam;
+import totalizator.app.models.Team;
 
 @Service
 public class CupTeamServiceImpl implements CupTeamService {
@@ -33,6 +35,11 @@ public class CupTeamServiceImpl implements CupTeamService {
 			deleteExistingEntry( cupTeam );
 			return;
 		}
+	}
+
+	@Override
+	public boolean exists( final Cup cup, final Team team ) {
+		return cupTeamRepository.load( cup.getId(), team.getId() ) != null;
 	}
 
 	private void createNewEntry( final int cupId, final int teamId ) {
