@@ -18,6 +18,7 @@ define( function ( require ) {
 	var TeamsView = require( 'js/admin/widgets/teams/admin-teams-view' );
 
 	var service = require( '/resources/js/services/service.js' );
+	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
 
 	var AdminView = Backbone.View.extend( {
 
@@ -29,7 +30,8 @@ define( function ( require ) {
 			this.cupsModel = new CupsModel.CupsModel();
 			this.teamsModel = new TeamsModel.TeamsModel();
 
-			this._preselectCategory();
+			var preselectedCategory = this._preselectCategory();
+			var preselectedCup = this._preselectCup( preselectedCategory );
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -60,6 +62,23 @@ define( function ( require ) {
 				this.cupsModel.filterByCategory = preselectedCategory.categoryId;
 				this.teamsModel.filterByCategory = preselectedCategory.categoryId;
 			}
+
+			return preselectedCategory;
+		},
+
+		_getPreselectedCup: function( preselectedCategory ) {
+			var cups = adminService.loadCups();
+			var cupsByCategory = service.filterCupsByCategory( cups, preselectedCategory.categoryId );
+			return cupsByCategory.length > 0 ? cupsByCategory[ 0 ] : null ;
+		},
+
+		_preselectCup: function( preselectedCategory ) {
+			var preselectedCup = this._getPreselectedCup( preselectedCategory );
+			if ( preselectedCup  ) {
+				this.cupsModel.selectedCup = preselectedCup;
+				this.teamsModel.selectedCup = preselectedCup;
+			}
+			return preselectedCup;
 		},
 
 		_renderCategories: function() {

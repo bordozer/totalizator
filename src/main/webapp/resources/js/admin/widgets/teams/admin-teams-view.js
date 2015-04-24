@@ -102,18 +102,18 @@ define( function ( require ) {
 
 		_updateCategories: function() {
 			this._loadCategories();
-			this.render();
+			this._reRender();
 		},
 
 		_filterByCategory: function( options ) {
 			this.model.filterByCategory = options.categoryId;
 			this.model.selectedCup = { cupId: 0 };
-			this.render();
+			this._reRender();
 		},
 
 		_filterBySelectedCup: function( options ) {
 			this.model.selectedCup = options.selectedCup;
-			this.render();
+			this._reRender();
 		},
 
 		_addEntry: function() {
@@ -127,6 +127,10 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._addEntry();
+		},
+
+		_reRender: function() {
+			this.model.refresh();
 		}
 	} );
 
