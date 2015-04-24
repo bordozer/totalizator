@@ -131,6 +131,7 @@ define( function ( require ) {
 			, 'click .team-entry-save': '_onEntrySaveClick'
 			, 'click .team-entry-edit-cancel': '_onEntryEditCancelClick'
 			, 'change .entry-name, .entry-category-id': '_onChange'
+			, 'change .js-team-checkbox': '_toggleTeamCheckbox'
 		},
 
 		initialize: function ( options ) {
@@ -223,10 +224,21 @@ define( function ( require ) {
 			return this.$( '.entry-category-id' ).val();
 		},
 
+		_isTeamChecked: function() {
+			return this.$( '.js-team-checkbox' ).is(':checked');
+		},
+
 		_onChange: function( evt ) {
 			evt.preventDefault();
 
 			this._bind();
+		},
+
+		_toggleTeamCheckbox: function( evt ) {
+			evt.preventDefault();
+
+			var isTeamChecked = this._isTeamChecked();
+			this.model.set( { isTeamChecked: isTeamChecked } );
 		},
 
 		_onEntryEditClick: function( evt ) {
