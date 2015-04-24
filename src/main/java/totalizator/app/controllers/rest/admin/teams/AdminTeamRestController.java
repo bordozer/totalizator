@@ -12,6 +12,7 @@ import totalizator.app.models.Team;
 import totalizator.app.services.*;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -44,11 +45,15 @@ public class AdminTeamRestController {
 
 		final Cup cup = cupService.load( cupId );
 
-		return Lists.transform( teamService.loadAll(), new Function<Team, TeamEditDTO>() {
+		if ( cup == null ) {
+			return Collections.emptyList();
+		}
+
+		return Lists.transform( teamService.loadAll( cup.getCategory() ), new Function<Team, TeamEditDTO>() {
 
 			@Override
 			public TeamEditDTO apply( final Team team ) {
-				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), cup != null && cupTeamService.exists( cup, team ), logoService.getLogoURL( team ) );
+				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), cupTeamService.exists( cup, team ), logoService.getLogoURL( team ) );
 			}
 		} );
 	}

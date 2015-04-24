@@ -36,7 +36,6 @@ define( function ( require ) {
 		selectedCup: { cupId: 0 },
 
 		initialize: function ( options ) {
-//			this.selectedCup = options.selectedCup;
 		},
 
 		url: function() {

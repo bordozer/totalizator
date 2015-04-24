@@ -142,7 +142,6 @@ define( function ( require ) {
 		},
 
 		_onCupSelect: function( options ) {
-
 			this.model.selectedCup = options.selectedCup;
 			this.render();
 

@@ -31,7 +31,7 @@ define( function ( require ) {
 			this.teamsModel = new TeamsModel.TeamsModel();
 
 			var preselectedCategory = this._preselectCategory();
-			var preselectedCup = this._preselectCup( preselectedCategory );
+//			var preselectedCup = this._preselectCup( preselectedCategory );
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
