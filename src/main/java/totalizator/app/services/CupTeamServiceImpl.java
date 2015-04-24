@@ -10,9 +10,9 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeam;
 import totalizator.app.models.Team;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @Service
 public class CupTeamServiceImpl implements CupTeamService {
@@ -59,7 +59,15 @@ public class CupTeamServiceImpl implements CupTeamService {
 	@Override
 	public List<Team> loadActiveForCup( final int cupId ) {
 
-		return Lists.transform( cupTeamRepository.loadAll( cupId ), new Function<CupTeam, Team>() {
+		final List<CupTeam> cupTeams = cupTeamRepository.loadAll( cupId );
+		Collections.sort( cupTeams, new Comparator<CupTeam>() {
+			@Override
+			public int compare( final CupTeam o1, final CupTeam o2 ) {
+				return o1.getTeam().getTeamName().compareToIgnoreCase( o2.getTeam().getTeamName() );
+			}
+		} );
+
+		return Lists.transform( cupTeams, new Function<CupTeam, Team>() {
 			@Override
 			public Team apply( final CupTeam cupTeam ) {
 				return cupTeam.getTeam();
