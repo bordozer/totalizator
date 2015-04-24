@@ -47,10 +47,10 @@ public abstract class AbstractDataInitializer {
 
 		for ( final Cup cup : cups ) {
 
-			final List<Match> finishedCupMatches = generateMatches( cup, teams, pastStrategy(), 100, session );
+			final List<Match> finishedCupMatches = generateMatches( cup, teams, pastStrategy(), 5, session );
 			generateBets( users, finishedCupMatches, session );
 
-			final List<Match> futureCupMatches = generateMatches( cup, teams, futureStrategy(), 10, session );
+			final List<Match> futureCupMatches = generateMatches( cup, teams, futureStrategy(), 2, session );
 			generateBets( users, futureCupMatches, session );
 
 			generateCupBets( cup, teams, users, session );

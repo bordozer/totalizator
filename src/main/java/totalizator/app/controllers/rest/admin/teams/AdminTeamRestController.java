@@ -86,4 +86,11 @@ public class AdminTeamRestController {
 		teamService.delete( teamId );
 		logoService.deleteLogo( team );
 	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.POST, value = "/{teamId}/cups/{cupId}/active/{isActive}/", produces = APPLICATION_JSON_VALUE )
+	public void teamActivity( final @PathVariable( "teamId" ) int teamId, final @PathVariable( "cupId" ) int cupId, final @PathVariable( "isActive" ) boolean isActive ) {
+		teamService.setTeamActivity( teamId, cupId, isActive );
+	}
 }

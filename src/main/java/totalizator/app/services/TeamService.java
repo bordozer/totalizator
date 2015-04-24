@@ -8,4 +8,6 @@ import java.util.List;
 public interface TeamService extends GenericService<Team>, NamedEntityGenericService<Team> {
 
 	List<Team> loadAll( final Category category );
+
+	void setTeamActivity( final int teamId, final int cupId, final boolean isActive );
 }

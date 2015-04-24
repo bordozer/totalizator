@@ -54,8 +54,15 @@ define( function ( require ) {
 			} )
 		},
 
-		setTeamCupParticipation: function( cupId, teamId, isTeamParticipatingInCup ) {
+		setTeamCupParticipation: function( cupId, teamId, isTeamActiveInCup ) {
+			$.ajax( {
+				method: 'POST',
+				url: '/admin/rest/teams/' + teamId + '/cups/' + cupId + '/active/' + isTeamActiveInCup + '/',
+				async: false,
+				success: function ( response ) {
 
+				}
+			} )
 		}
 	}
 } );
