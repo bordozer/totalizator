@@ -38,7 +38,7 @@ public class CupTeamRepository implements GenericService<CupTeam> {
 
 	public CupTeam load( final int cupId, final int teamId ) {
 
-		final List<CupTeam> list = em.createNamedQuery( CupTeam.LOAD_ALL_CUP_TEAMS, CupTeam.class )
+		final List<CupTeam> list = em.createNamedQuery( CupTeam.LOAD_CUP_TEAM, CupTeam.class )
 				.setParameter( "teamId", teamId )
 				.setParameter( "cupId", cupId )
 				.getResultList();

@@ -251,7 +251,7 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			var isTeamChecked = this._isTeamChecked();
-			this.model.set( { isTeamChecked: isTeamChecked } );
+			this.model.set( { teamChecked: isTeamChecked } );
 
 			adminService.setTeamCupParticipation( this.selectedCup.cupId, this.model.get( 'teamId' ), isTeamChecked );
 		},
