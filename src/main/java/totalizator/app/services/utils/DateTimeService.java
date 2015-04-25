@@ -28,4 +28,6 @@ public interface DateTimeService {
 	String formatDateTimeUI( final LocalDateTime time );
 
 	LocalDateTime parseDate( final String date );
+
+	boolean hasTheSameDate( final LocalDateTime time1, final LocalDateTime time2 );
 }

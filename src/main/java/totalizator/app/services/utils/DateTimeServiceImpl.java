@@ -64,6 +64,12 @@ public class DateTimeServiceImpl implements DateTimeService {
 		return LocalDateTime.parse( date, formatter );
 	}
 
+	@Override
+	public boolean hasTheSameDate( final LocalDateTime time1, final LocalDateTime time2 ) {
+		final LocalDateTime from = LocalDateTime.of( time2.getYear(), time2.getMonth(), time2.getDayOfMonth(), 0, 0 ).minusSeconds( 1 );
+		return time1.isAfter( from ) && time1.isBefore( LocalDateTime.from( from.plusDays( 1 ).minusSeconds( 1 ) ) );
+	}
+
 	private LocalDateTime localDateTime( final LocalDateTime time ) {
 		return LocalDateTime.of( time.getYear(), time.getMonth(), time.getDayOfMonth(), time.getHour(), time.getMinute() );
 	}

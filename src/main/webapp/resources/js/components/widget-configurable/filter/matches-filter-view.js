@@ -37,10 +37,9 @@ define( function ( require ) {
 			, 'change #settings-team-id': '_onTeamChange'
 			, 'change #settings2-team-id': '_onTeam2Change'
 			, 'click #filter-by-match-date-enabled': '_onFilterByDateCheckboxClick'
+			, 'change .form-control date-picker-input': '_onFilterByDateChange'
 			, 'change #settings-show-future-matches': '_onShowFutureChange'
 			, 'change #settings-show-finished': '_onShowFinishedChange'
-//			, 'click .matches-settings-save': '_onSettingsSave'
-//			, 'click .matches-settings-cancel': '_onSettingsCancel'
 		},
 
 		initialize: function ( options ) {
@@ -75,7 +74,7 @@ define( function ( require ) {
 			this.$( '#settings-team-id' ).chosen( options );
 			this.$( '#settings2-team-id' ).chosen( options );
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-filter-by-match-date' ), initialValue: new Date(), disableTime: true } );
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-filter-by-match-date' ), initialValue: this.model.get( 'filterByDate' ) || new Date(), disableTime: true } );
 
 			return this;
 		},
@@ -150,10 +149,19 @@ define( function ( require ) {
 
 			this.model.set( {
 				filterByDateEnable: this.$( '#filter-by-match-date-enabled' ).is( ':checked' )
-				, filterByDate: matchDate // TODO: bind this on date change
+				, filterByDate: matchDate
 			} );
 
 			this.render();
+		},
+		_onFilterByDateChange: function( evt ) {
+			evt.preventDefault();
+
+			var matchDate = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
+			console.log( matchDate );
+			this.model.set( {
+				filterByDate: matchDate
+			} );
 		},
 
 		_onShowFutureChange: function( evt ) {

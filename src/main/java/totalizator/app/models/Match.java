@@ -112,6 +112,6 @@ public class Match extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return String.format( "Match #%d: Team %s vs Team %s, %d : %d", getId(), team1, team2, score1, score2 );
+		return String.format( "Match #%d: Team %s vs Team %s, %d : %d ( %s )", getId(), team1, team2, score1, score2, beginningTime );
 	}
 }

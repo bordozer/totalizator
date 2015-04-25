@@ -14,6 +14,7 @@ import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.services.utils.DateTimeService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
@@ -99,6 +100,19 @@ public class MatchServiceImpl implements MatchService {
 				@Override
 				public boolean evaluate( final Match match ) {
 					return ! match.isMatchFinished();
+				}
+			} );
+		}
+
+		if ( dto.isFilterByDateEnable() ) {
+
+			final String _filterByDate = dto.getFilterByDate();
+			final LocalDateTime filterByDate = dateTimeService.parseDate( _filterByDate );
+
+			CollectionUtils.filter( matches, new Predicate<Match>() {
+				@Override
+				public boolean evaluate( final Match match ) {
+					return dateTimeService.hasTheSameDate( match.getBeginningTime(), filterByDate );
 				}
 			} );
 		}

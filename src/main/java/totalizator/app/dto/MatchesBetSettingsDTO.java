@@ -17,7 +17,7 @@ public class MatchesBetSettingsDTO {
 	private int teamId;
 	private int team2Id;
 
-	private LocalDateTime filterByDate;
+	private String filterByDate;
 	private boolean filterByDateEnable;
 
 	private boolean showFutureMatches;
@@ -63,13 +63,13 @@ public class MatchesBetSettingsDTO {
 		this.team2Id = team2Id;
 	}
 
-	@JsonSerialize( using = DateTimeSerializer.class )
-	public LocalDateTime getFilterByDate() {
+//	@JsonSerialize( using = DateTimeSerializer.class )
+	public String getFilterByDate() {
 		return filterByDate;
 	}
 
-	@JsonDeserialize( using = DateTimeDeserializer.class )
-	public void setFilterByDate( final LocalDateTime filterByDate ) {
+//	@JsonDeserialize( using = DateTimeDeserializer.class )
+	public void setFilterByDate( final String filterByDate ) {
 		this.filterByDate = filterByDate;
 	}
 
