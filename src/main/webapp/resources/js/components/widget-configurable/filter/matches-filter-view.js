@@ -37,7 +37,6 @@ define( function ( require ) {
 			, 'change #settings-team-id': '_onTeamChange'
 			, 'change #settings2-team-id': '_onTeam2Change'
 			, 'click #filter-by-match-date-enabled': '_onFilterByDateCheckboxClick'
-			, 'change .form-control date-picker-input': '_onFilterByDateChange'
 			, 'change #settings-show-future-matches': '_onShowFutureChange'
 			, 'change #settings-show-finished': '_onShowFinishedChange'
 		},
@@ -47,6 +46,10 @@ define( function ( require ) {
 			this.cups = options.cups;
 			this.teams = service.loadTeams();
 			this.users = service.loadUsers();
+
+			if ( ! this.model.get( 'filterByDate' ) ) {
+				this.model.set( { filterByDate: new Date() } )
+			}
 		},
 
 		render: function() {
@@ -74,7 +77,12 @@ define( function ( require ) {
 			this.$( '#settings-team-id' ).chosen( options );
 			this.$( '#settings2-team-id' ).chosen( options );
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-filter-by-match-date' ), initialValue: this.model.get( 'filterByDate' ) || new Date(), disableTime: true } );
+			this.dateTimePickerView = new DateTimePickerView( {
+				el: this.$( '.js-filter-by-match-date' )
+				, initialValue: this.model.get( 'filterByDate' )
+				, disableTime: true
+				, datTimeChangeCallback: this._onFilterByDateChange.bind( this )
+			});
 
 			return this;
 		},
@@ -145,22 +153,16 @@ define( function ( require ) {
 		_onFilterByDateCheckboxClick: function( evt ) {
 			evt.preventDefault();
 
-			var matchDate = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
-
 			this.model.set( {
 				filterByDateEnable: this.$( '#filter-by-match-date-enabled' ).is( ':checked' )
-				, filterByDate: matchDate
 			} );
 
 			this.render();
 		},
-		_onFilterByDateChange: function( evt ) {
-			evt.preventDefault();
 
-			var matchDate = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
-			console.log( matchDate );
+		_onFilterByDateChange: function( date ) {
 			this.model.set( {
-				filterByDate: matchDate
+				filterByDate: date
 			} );
 		},
 

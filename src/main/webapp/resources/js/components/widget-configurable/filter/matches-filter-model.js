@@ -11,7 +11,7 @@ define( function ( require ) {
 			, categoryId: 0
 			, cupId: 0
 			, teamId: 0
-			, filterByDate: null
+			, filterByDate: new Date()
 			, filterByDateEnable: false
 			, showFutureMatches: true
 			, showFinished: false
