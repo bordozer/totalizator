@@ -8,6 +8,10 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/caps-navi-template.html' ) );
 
+	var service = require( '/resources/js/services/service.js' );
+
+	var mainMenu = require( 'js/components/main-menu/main-menu' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		allCups: 'All cups'
@@ -24,13 +28,20 @@ define( function ( require ) {
 		},
 
 		render: function () {
+
 			this.$el.html( template( {
 				cupsShowTo: this.model.toJSON()
 				, selectedCupId: this.selectedCupId
 				, translator: translator
 			} ) );
 
+			this._renderPublicCupsMenu();
+
 			return this;
+		},
+
+		_renderPublicCupsMenu: function() {
+			mainMenu( this._publicCupsMenuItems(), 'fa-cubes', 'btn-default', this.$( '.js-public-cups-menu') );
 		},
 
 		_setSelectedCupId: function( options ) {
@@ -38,6 +49,18 @@ define( function ( require ) {
 			this.selectedCupId = options.selectedCupId;
 
 			this.render();
+		},
+
+		_publicCupsMenuItems: function() {
+
+			var menus = [];
+
+			var cups = service.loadPublicCups();
+			_.each( cups, function( cup ) {
+				menus.push( { selector: 'category-' + cup.cupId, icon: 'fa fa-cubes', link: '/totalizator/cups/' + cup.cupId + '/', text: cup.category.categoryName + ': ' + cup.cupName } );
+			} );
+
+			return menus;
 		}
 	} );
 } );
