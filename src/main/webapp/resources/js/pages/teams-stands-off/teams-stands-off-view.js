@@ -25,6 +25,8 @@ define( function ( require ) {
 			this.score1 = options.options.score1;
 			this.score2 = options.options.score2;
 
+			this.currentUser = options.options.currentUser;
+
 			this.render();
 		},
 
