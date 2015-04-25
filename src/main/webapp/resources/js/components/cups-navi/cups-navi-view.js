@@ -8,6 +8,11 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/caps-navi-template.html' ) );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		allCups: 'All cups'
+	} );
+
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
@@ -22,6 +27,7 @@ define( function ( require ) {
 			this.$el.html( template( {
 				cupsShowTo: this.model.toJSON()
 				, selectedCupId: this.selectedCupId
+				, translator: translator
 			} ) );
 
 			return this;

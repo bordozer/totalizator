@@ -1,15 +1,25 @@
 <div class="row">
 
 	<div class="col-lg-12">
+
 		<ul class="nav nav-tabs">
+
+			<li role="presentation" class="<%= selectedCupId == 0 ? 'active' : '' %>" >
+				<a href="/totalizator/cups/">
+					<img src="/resources/img/team-logo-not-found.png" height="32" title="<%= translator.allCups %>">
+				</a>
+			</li>
+
 			<% _.each( cupsShowTo, function( cup ) { %>
-				<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>" >
+				<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>" title="<%- cup.category.categoryName %>: <%- cup.cupName %>">
 					<a href="/totalizator/cups/<%- cup.cupId %>/">
 						<img src="<%=cup.logoUrl%>" height="32"> <%- cup.category.categoryName %>: <%- cup.cupName %>
 					</a>
 				</li>
 			<% }) %>
+
 		</ul>
+
 	</div>
 
 </div>
