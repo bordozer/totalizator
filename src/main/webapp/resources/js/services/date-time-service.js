@@ -3,6 +3,7 @@ define( function ( require ) {
 	'use strict';
 
 	var DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm';
+	var DATE_FORMAT = 'DD/MM/YYYY';
 	var DATE_TIME_DISPLAY_FORMAT = 'D MMM YYYY HH:mm';
 
 	var LOCALE = 'ru';
@@ -15,8 +16,12 @@ define( function ( require ) {
 
 	return {
 
-		getFormat: function() {
+		getDateTimeFormat: function() {
 			return DATE_TIME_FORMAT;
+		},
+
+		getDateFormat: function() {
+			return DATE_FORMAT;
 		},
 
 		getLocale: function() {

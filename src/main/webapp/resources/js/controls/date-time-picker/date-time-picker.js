@@ -19,16 +19,17 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.model = new Backbone.Model();
-			this.render( options.initialValue );
+
+			this.render( options.initialValue, options.disableTime );
 		},
 
-		render: function( time ) {
+		render: function( time, disableTime ) {
 
 			this.$el.html( this.template( {
 			} ) );
 
 			this.dtp = this.$( '.date-time-picker-container' ).datetimepicker( {
-				format: dateTimeService.getFormat()
+				format: disableTime ? dateTimeService.getDateFormat() : dateTimeService.getDateTimeFormat()
 				, locale: dateTimeService.getLocale()
 			} );
 			this.picker = this.dtp.data( "DateTimePicker" );

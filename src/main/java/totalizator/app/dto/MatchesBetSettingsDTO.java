@@ -1,5 +1,14 @@
 package totalizator.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.dto.serialization.DateTimeDeserializer;
+import totalizator.app.dto.serialization.DateTimeSerializer;
+
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MatchesBetSettingsDTO {
 
 	private int userId;
@@ -7,6 +16,10 @@ public class MatchesBetSettingsDTO {
 	private int cupId;
 	private int teamId;
 	private int team2Id;
+
+	private LocalDateTime filterByDate;
+	private boolean filterByDateEnable;
+
 	private boolean showFutureMatches;
 	private boolean showFinished;
 
@@ -48,6 +61,24 @@ public class MatchesBetSettingsDTO {
 
 	public void setTeam2Id( final int team2Id ) {
 		this.team2Id = team2Id;
+	}
+
+	@JsonSerialize( using = DateTimeSerializer.class )
+	public LocalDateTime getFilterByDate() {
+		return filterByDate;
+	}
+
+	@JsonDeserialize( using = DateTimeDeserializer.class )
+	public void setFilterByDate( final LocalDateTime filterByDate ) {
+		this.filterByDate = filterByDate;
+	}
+
+	public boolean isFilterByDateEnable() {
+		return filterByDateEnable;
+	}
+
+	public void setFilterByDateEnable( final boolean filterByDateEnable ) {
+		this.filterByDateEnable = filterByDateEnable;
 	}
 
 	public boolean isShowFutureMatches() {

@@ -40,6 +40,8 @@
 		</div>
 	</div>
 
+	<hr />
+
 	<div class="row">
 		<div class="col-lg-5 text-right"><%=translator.teamLabel%></div>
 		<div class="col-lg-6">
@@ -66,6 +68,18 @@
 					<% }) %>
 				</select>
 			<% } %>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row">
+		<div class="col-lg-5 text-right">
+			<%=translator.matchDateLabel%>
+			<input type="checkbox" id="filter-by-match-date-enabled" value="true" <%= model.filterByDateEnable ? 'checked' : '' %> >
+		</div>
+		<div class="col-lg-6">
+			<div class="js-filter-by-match-date"></div>
 		</div>
 	</div>
 

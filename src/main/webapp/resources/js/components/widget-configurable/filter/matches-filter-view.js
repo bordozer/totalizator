@@ -11,6 +11,9 @@ define( function ( require ) {
 	var service = require( '/resources/js/services/service.js' );
 	var chosen = require( 'chosen' );
 
+	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Matches: Settings'
@@ -20,6 +23,7 @@ define( function ( require ) {
 		, categoryLabel: 'Category'
 		, cupLabel: 'Configurable view / Filter: Cup'
 		, teamLabel: 'Team'
+		, matchDateLabel: 'Configurable view / Filter: Match date'
 		, showFutureMatchesLabel: 'Configurable view / Filter: Show future matches'
 		, showFinishedLabel: 'Configurable view / Filter: Show finished matches'
 	} );
@@ -32,10 +36,11 @@ define( function ( require ) {
 			, 'change #settings-cup-id': '_onCupChange'
 			, 'change #settings-team-id': '_onTeamChange'
 			, 'change #settings2-team-id': '_onTeam2Change'
+			, 'click #filter-by-match-date-enabled': '_onFilterByDateCheckboxClick'
 			, 'change #settings-show-future-matches': '_onShowFutureChange'
 			, 'change #settings-show-finished': '_onShowFinishedChange'
-			, 'click .matches-settings-save': '_onSettingsSave'
-			, 'click .matches-settings-cancel': '_onSettingsCancel'
+//			, 'click .matches-settings-save': '_onSettingsSave'
+//			, 'click .matches-settings-cancel': '_onSettingsCancel'
 		},
 
 		initialize: function ( options ) {
@@ -69,6 +74,8 @@ define( function ( require ) {
 			this.$( '#settings-cup-id' ).chosen( options );
 			this.$( '#settings-team-id' ).chosen( options );
 			this.$( '#settings2-team-id' ).chosen( options );
+
+			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-filter-by-match-date' ), initialValue: new Date(), disableTime: true } );
 
 			return this;
 		},
@@ -136,6 +143,19 @@ define( function ( require ) {
 			this._team2Change( $( evt.target ).val() );
 		},
 
+		_onFilterByDateCheckboxClick: function( evt ) {
+			evt.preventDefault();
+
+			var matchDate = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
+
+			this.model.set( {
+				filterByDateEnable: this.$( '#filter-by-match-date-enabled' ).is( ':checked' )
+				, filterByDate: matchDate // TODO: bind this on date change
+			} );
+
+			this.render();
+		},
+
 		_onShowFutureChange: function( evt ) {
 			evt.preventDefault();
 
@@ -146,10 +166,14 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._showFinishedChange( this.$( '#settings-show-finished' ).is(':checked') );
-		},
+		}
 
-		_onSettingsSave: function( evt ) {
+		/*_onSettingsSave: function( evt ) {
 			evt.preventDefault();
+			console.log( 1 );
+
+			var matchDate = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
+			this.model.set( { filterByDate: matchDate } );
 
 			this.trigger( 'events:setting_apply' );
 		},
@@ -158,6 +182,6 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this.trigger( 'events:setting_cancel' );
-		}
+		}*/
 	});
 } );
