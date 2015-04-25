@@ -28,7 +28,7 @@ define( function ( require ) {
 		model: CupModel,
 
 		initialize: function ( options ) {
-			this.url = '/rest/cups/';
+			this.url = '/rest/cups/public/';
 		},
 
 		refresh: function() {
