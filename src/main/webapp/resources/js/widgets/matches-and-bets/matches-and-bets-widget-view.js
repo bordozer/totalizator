@@ -33,6 +33,7 @@ define( function ( require ) {
 		, footer_BettingFinishedLabel: 'Match and Bets / Footer: betting finished'
 
 		, matchBettingIsDenied: "Match betting is denied"
+		, menuHint: "Match menu"
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
@@ -251,7 +252,14 @@ define( function ( require ) {
 				}
 			}
 
-			mainMenu( menuItems, 'fa-list', 'btn-default', this.$( '.js-match-drop-down-menu') );
+			var options = {
+				menus: menuItems
+				, menuButtonIcon: 'fa-list'
+				, menuButtonText: ''
+				, menuButtonHint: translator.menuHint
+				, cssClass: 'btn-default'
+			};
+			mainMenu( options, this.$( '.js-match-drop-down-menu') );
 		},
 
 		_setMatchContainerClass: function( clazz ) {

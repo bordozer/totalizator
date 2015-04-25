@@ -1,7 +1,9 @@
 <div class="dropdown col-lg-2">
-	<button class="btn <%=cssClass%> dropdown-toggle fa <%=icon%>" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-		<span class="caret"></span>
+
+	<button class="btn <%=cssClass%> dropdown-toggle fa <%=menuButtonIcon%>" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" title="<%-menuButtonHint%>">
+		<span class="caret"></span><%-menuButtonText%>
 	</button>
+
 	<ul class="dropdown-menu <%=cssClass%>" role="menu" aria-labelledby="dropdownMenu1">
 		<% _.each( menus, function( menu ) { %>
 

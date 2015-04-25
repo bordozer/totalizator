@@ -14,6 +14,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		loadingLabel: 'Loading...'
 		, menuItemRefreshLabel: 'Menu item: Refresh'
+		, widgetMenuHint: 'Widget menu'
 	} );
 
 	return Backbone.View.extend( {
@@ -101,7 +102,14 @@ define( function ( require ) {
 		},
 
 		_renderDropDownMenu: function() {
-			mainMenu( this.menuItems, this.getIcon(), 'btn-default', this.$( '.js-window-drop-down-menu') );
+			var options = {
+				menus: this.menuItems
+				, menuButtonIcon: this.getIcon()
+				, menuButtonText: ''
+				, menuButtonHint: translator.widgetMenuHint
+				, cssClass: 'btn-default'
+			};
+			mainMenu( options, this.$( '.js-window-drop-down-menu') );
 
 			var customButtons = _.filter( this.menuItems, function( menu ) {
 				return menu.button;

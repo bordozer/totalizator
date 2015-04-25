@@ -13,16 +13,23 @@ define( function ( require ) {
 		template:_.template( Template ),
 
 		initialize: function( options ) {
-			this.menus = options.menus;
-			this.icon = options.icon;
-			this.cssClass = options.cssClass;
+
+			this.menus = options.options.menus;
+
+			this.menuButtonIcon = options.options.menuButtonIcon;
+			this.menuButtonText = options.options.menuButtonText;
+			this.menuButtonHint = options.options.menuButtonHint;
+
+			this.cssClass = options.options.cssClass;
 		},
 
 		render: function () {
 
 			this.$el.html( this.template( {
 				model: this.model.toJSON()
-				, icon: this.icon
+				, menuButtonIcon: this.menuButtonIcon
+				, menuButtonHint: this.menuButtonHint
+				, menuButtonText: this.menuButtonText
 				, menus: this.menus
 				, cssClass: this.cssClass
 			 } ) );

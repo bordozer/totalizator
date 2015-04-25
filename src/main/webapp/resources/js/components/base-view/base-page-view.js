@@ -14,6 +14,11 @@ define( function ( require ) {
 
 	var service = require( '/resources/js/services/service.js' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		mainMenuLabel: 'Main menu'
+	} );
+
 	return Backbone.View.extend( {
 
 		constructor: function ( options ) {
@@ -52,7 +57,14 @@ define( function ( require ) {
 		},
 
 		_renderMenu: function() {
-			mainMenu( this.mainMenuItems(), 'fa-list-alt', 'btn-default', this.$( '.js-main-menu-container') );
+			var options = {
+				menus: this.mainMenuItems()
+				, menuButtonIcon: 'fa-list-alt'
+				, menuButtonText: ''
+				, menuButtonHint: translator.mainMenuLabel
+				, cssClass: 'btn-default'
+			};
+			mainMenu( options, this.$( '.js-main-menu-container') );
 		},
 
 		mainMenuItems: function() {

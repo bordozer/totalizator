@@ -45,13 +45,7 @@ define( function ( require ) {
 			if ( service.isAdmin( this.currentUser ) ) {
 				menus.push( { selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel } );
 				menus.push( { selector: 'divider' } );
-			};
-
-			/*var cups = service.loadPublicCups();
-			_.each( cups, function( cup ) {
-				menus.push( { selector: 'category-' + cup.cupId, icon: 'fa fa-cubes', link: '/totalizator/cups/' + cup.cupId + '/', text: cup.category.categoryName + ': ' + cup.cupName } );
-			} );
-			menus.push( { selector: 'divider' } );*/
+			}
 
 			menus.push( { selector: '', icon: 'fa fa-users', link: '/totalizator/users/', text: translator.menuUsersLabel } );
 			menus.push( { selector: 'divider' } );

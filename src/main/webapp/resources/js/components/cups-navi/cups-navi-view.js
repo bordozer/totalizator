@@ -41,7 +41,14 @@ define( function ( require ) {
 		},
 
 		_renderPublicCupsMenu: function() {
-			mainMenu( this._publicCupsMenuItems(), 'fa-cubes', 'btn-default', this.$( '.js-public-cups-menu') );
+			var options = {
+				menus: this._publicCupsMenuItems()
+				, menuButtonIcon: 'fa-cubes'
+				, menuButtonText: ''
+				, menuButtonHint: translator.allCups
+				, cssClass: 'btn-default'
+			};
+			mainMenu( options, this.$( '.js-public-cups-menu') );
 		},
 
 		_setSelectedCupId: function( options ) {
