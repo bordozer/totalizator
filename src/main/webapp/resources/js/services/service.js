@@ -116,7 +116,7 @@ define( function ( require ) {
 		},
 
 		// TODO: limit by category
-		loadCups: function() {
+		loadPublicCups: function() {
 			var cups = new Cups( [], {} );
 			cups.fetch( { cache: false, async: false } );
 

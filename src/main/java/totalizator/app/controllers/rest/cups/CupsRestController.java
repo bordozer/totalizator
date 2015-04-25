@@ -32,13 +32,14 @@ public class CupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> all( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadAllPublic(), userService.findByLogin( principal.getName() ) );
+		return publicCups( principal );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/", produces = APPLICATION_JSON_VALUE )
 	public CupDTO getDefaultLogin( final Principal principal, final @PathVariable( "cupId" ) int cupId ) {
+
 		final Cup cup = cupService.load( cupId );
 
 		if ( ! cup.isPublicCup() ) {

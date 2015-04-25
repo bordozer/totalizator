@@ -47,7 +47,7 @@ define( function ( require ) {
 				menus.push( { selector: 'divider' } );
 			}
 
-			var cups = service.loadCups();
+			var cups = service.loadPublicCups();
 			_.each( cups, function( cup ) {
 				menus.push( { selector: 'category-' + cup.cupId, icon: 'fa fa-cubes', link: '/totalizator/cups/' + cup.cupId + '/', text: cup.category.categoryName + ': ' + cup.cupName } );
 			} );

@@ -60,7 +60,7 @@ define( function ( require ) {
 
 			this.users = service.loadUsers();
 			this.categories = service.loadCategories();
-			this.cups = service.loadCups();
+			this.cups = service.loadPublicCups();
 			this.teams = service.loadTeams();
 
 			this.events = _.extend( this.configurableViewEvents, this.events );
@@ -87,7 +87,7 @@ define( function ( require ) {
 		},
 
 		loadCups: function() {
-			return service.loadCups();
+			return service.loadPublicCups();
 		},
 
 		_renderSettings: function() {
