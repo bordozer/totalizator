@@ -50,8 +50,15 @@ public class CupsRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/current/", produces = APPLICATION_JSON_VALUE )
-	public List<CupDTO> cupsToShow( final Principal principal ) {
+	@RequestMapping( method = RequestMethod.GET, value = "/public/", produces = APPLICATION_JSON_VALUE )
+	public List<CupDTO> publicCups( final Principal principal ) {
 		return dtoService.transformCups( cupService.loadAllPublic(), userService.findByLogin( principal.getName() ) );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/current/", produces = APPLICATION_JSON_VALUE )
+	public List<CupDTO> currentCups( final Principal principal ) {
+		return dtoService.transformCups( cupService.loadAllCurrent(), userService.findByLogin( principal.getName() ) );
 	}
 }

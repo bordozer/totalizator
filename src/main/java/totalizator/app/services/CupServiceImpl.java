@@ -94,7 +94,7 @@ public class CupServiceImpl implements CupService {
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isPublicCup() && ! isCupFinished( cup );
+				return ! isCupFinished( cup );
 			}
 		} );
 
@@ -108,7 +108,7 @@ public class CupServiceImpl implements CupService {
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return cup.isPublicCup() && isCupFinished( cup );
+				return isCupFinished( cup );
 			}
 		} );
 
