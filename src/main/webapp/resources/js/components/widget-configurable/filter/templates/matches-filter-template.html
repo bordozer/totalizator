@@ -54,6 +54,21 @@
 		</div>
 	</div>
 
+
+	<div class="row">
+		<div class="col-lg-5 text-right"><%=translator.teamLabel%></div>
+		<div class="col-lg-6">
+			<% if( model.categoryId > 0 ) { %>
+				<select class="chosen-select" id="settings2-team-id">
+					<option value="0">&nbsp;</option>
+					<% _.each( teams, function( team ) { %>
+					<option value="<%=team.teamId%>" <%= model.team2Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+					<% }) %>
+				</select>
+			<% } %>
+		</div>
+	</div>
+
 	<hr />
 
 	<div class="row">

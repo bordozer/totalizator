@@ -31,6 +31,7 @@ define( function ( require ) {
 			, 'change #settings-category-id': '_onCategoryChange'
 			, 'change #settings-cup-id': '_onCupChange'
 			, 'change #settings-team-id': '_onTeamChange'
+			, 'change #settings2-team-id': '_onTeam2Change'
 			, 'change #settings-show-future-matches': '_onShowFutureChange'
 			, 'change #settings-show-finished': '_onShowFinishedChange'
 			, 'click .matches-settings-save': '_onSettingsSave'
@@ -67,6 +68,7 @@ define( function ( require ) {
 			this.$( '#settings-category-id' ).chosen( options );
 			this.$( '#settings-cup-id' ).chosen( options );
 			this.$( '#settings-team-id' ).chosen( options );
+			this.$( '#settings2-team-id' ).chosen( options );
 
 			return this;
 		},
@@ -77,17 +79,22 @@ define( function ( require ) {
 		},
 
 		_categoryChange: function( categoryId ) {
-			this.model.set( { categoryId: categoryId, cupId: 0, teamId: 0 } );
+			this.model.set( { categoryId: categoryId, cupId: 0, teamId: 0, team2Id: 0 } );
 			this.render();
 		},
 
 		_cupChange: function( cupId ) {
-			this.model.set( { cupId: cupId, teamId: 0 } );
+			this.model.set( { cupId: cupId } );
 			this.render();
 		},
 
 		_teamChange: function( teamId ) {
 			this.model.set( { teamId: teamId } );
+			this.render();
+		},
+
+		_team2Change: function( teamId ) {
+			this.model.set( { team2Id: teamId } );
 			this.render();
 		},
 
@@ -121,6 +128,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._teamChange( $( evt.target ).val() );
+		},
+
+		_onTeam2Change: function( evt ) {
+			evt.preventDefault();
+
+			this._team2Change( $( evt.target ).val() );
 		},
 
 		_onShowFutureChange: function( evt ) {
