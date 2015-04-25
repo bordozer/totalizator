@@ -63,6 +63,10 @@ define( function ( require ) {
 			var menus = [];
 
 			var cups = service.loadPublicCups();
+
+//			menus.push( { selector: 'js-all-cups', icon: 'fa fa-cubes', link: '/totalizator/cups/', text: translator.allCups } );
+//			menus.push( { selector: 'divider' } );
+
 			_.each( cups, function( cup ) {
 				menus.push( { selector: 'category-' + cup.cupId, icon: 'fa fa-cubes', link: '/totalizator/cups/' + cup.cupId + '/', text: cup.category.categoryName + ': ' + cup.cupName } );
 			} );
