@@ -175,21 +175,5 @@ define( function ( require ) {
 
 			this._showFinishedChange( this.$( '#settings-show-finished' ).is(':checked') );
 		}
-
-		/*_onSettingsSave: function( evt ) {
-			evt.preventDefault();
-			console.log( 1 );
-
-			var matchDate = dateTimeService.formatDate( this.dateTimePickerView.getValue() );
-			this.model.set( { filterByDate: matchDate } );
-
-			this.trigger( 'events:setting_apply' );
-		},
-
-		_onSettingsCancel: function( evt ) {
-			evt.preventDefault();
-
-			this.trigger( 'events:setting_cancel' );
-		}*/
 	});
 } );
