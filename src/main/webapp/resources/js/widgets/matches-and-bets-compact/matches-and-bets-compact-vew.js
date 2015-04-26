@@ -10,6 +10,8 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Teams standoff history"
@@ -48,20 +50,18 @@ define( function ( require ) {
 		},
 
 		_renderEntry: function ( model, el ) {
-			console.log( model.toJSON() );
 
-			el.append( '- ' );
+			var data = _.extend( {}, model.toJSON(), { view: this, translator: translator } );
 
-			/*var view = new MatchView( {
-				model: model
-				, categories: this.categories
-				, cups: this.cups
-				, teams: this.teams
-				, filter: this.filter
-				, currentUser: this.currentUser
-			} );
+			el.append( template( data ) );
+		},
 
-			return el.append( view.render().$el );*/
+		_getMatchResult: function( match ) {
+			return service.matchResultsByMatch( match );
+		},
+
+		getMatchResults: function( match ) {
+			return service.matchResultsByMatch( match );
 		}
 	} );
 } );

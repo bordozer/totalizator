@@ -1,1 +1,42 @@
-Compact view
+<% var matchResults = view.getMatchResults( match ) %>
+<div class="row">
+
+	<div class="col-lg-2 text-right">
+		#<%= matchId %> &nbsp;&nbsp; <strong><%= match.beginningTime %></strong>
+	</div>
+
+	<div class="col-lg-2 text-right <%= matchResults.style1 %> ">
+		<% if( match.homeTeamNumber == 1 ) { %>
+			<i class="fa fa-home"></i>
+		<% } %>
+		<%= match.team1.teamName %> <img src="<%= match.team1.teamLogo %>" height="32">
+	</div>
+
+	<div class="col-lg-1 text-right <%= matchResults.style1 %> ">
+		<%= match.score1 %>
+	</div>
+
+	<div class="col-lg-1 text-left <%= matchResults.style2 %> ">
+		<%= match.score2 %>
+	</div>
+
+	<div class="col-lg-2 <%= matchResults.style2 %>">
+		<img src="<%= match.team2.teamLogo %>" height="32"> <%= match.team2.teamName %>
+		<% if( match.homeTeamNumber == 2 ) { %>
+			<i class="fa fa-home"></i>
+		<% } %>
+	</div>
+
+	<div class="col-lg-2 text-center">
+		<% if( bet != null ) { %>
+			<%= bet.score1 %> : <%= bet.score2 %>
+		<% } %>
+	</div>
+
+	<div class="col-lg-2 text-center">
+		<% if( points > 0 ) { %>
+			+ <%= points %>
+		<% } %>
+	</div>
+
+</div>
