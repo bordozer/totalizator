@@ -34,6 +34,10 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
+		getTitle: function() {
+			return this.getTitleHint();
+		},
+
 		_renderCupMatchesAndBets: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
@@ -60,7 +64,6 @@ define( function ( require ) {
 		_renderEntry: function ( model, el ) {
 
 			var data = _.extend( {}, model.toJSON(), { view: this, translator: translator } );
-//			console.log( model.toJSON() );
 
 			el.append( template( data ) );
 		},
