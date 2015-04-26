@@ -7,8 +7,10 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/teams-stands-off-template.html' ) );
 
-	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
-	var MatchesView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-view' );
+//	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
+//	var MatchesView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-view' );
+
+	var MatchesAndBetsCompact = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -39,9 +41,26 @@ define( function ( require ) {
 
 		_renderMatches: function() {
 
+			var el = this.$( '.js-teams-stands-off-matches' );
+
 			var currentUser = this.currentUser;
 
-			var el = this.$( '.js-teams-stands-off-matches' );
+			var view = new MatchesAndBetsCompact( {
+				el: el
+				, settings: {
+					userId: 0
+					, categoryId: 0
+					, cupId: 0
+					, teamId: this.team1.teamId
+					, team2Id: this.team2.teamId
+					, showFinished: true
+					, showFutureMatches: false
+				}
+				, menuItems: []
+				, currentUser: currentUser
+			} ).view();
+
+			/*var el = this.$( '.js-teams-stands-off-matches' );
 			var self = this;
 
 			_.each( this.cups, function( cup ) {
@@ -65,7 +84,7 @@ define( function ( require ) {
 					, menuItems: []
 					, currentUser: currentUser
 				} );
-			} );
+			} );*/
 		}
 	});
 } );
