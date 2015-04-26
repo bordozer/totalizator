@@ -11,6 +11,7 @@ define( function ( require ) {
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
 	var service = require( '/resources/js/services/service.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -74,6 +75,10 @@ define( function ( require ) {
 
 		getMatchResults: function( match ) {
 			return service.matchResultsByMatch( match );
+		},
+
+		formatDate: function( dateTime ) {
+			return dateTimeService.formatDateDisplay( dateTime );
 		}
 	} );
 } );
