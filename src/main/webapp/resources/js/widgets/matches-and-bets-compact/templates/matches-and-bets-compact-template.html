@@ -33,7 +33,7 @@
 
 	<div class="col-lg-2 text-center">
 		<% if( bet != null ) { %>
-			<span title="<%- translator.yourBetHint %>"><%= bet.score1 %> : <%= bet.score2 %></span>
+			<span title="<%- translator.yourBetHint %>"><%= transformer.betScore1() %> : <%= transformer.betScore2() %></span>
 		<% } %>
 		<% if( points > 0 ) { %>
 			<strong><sup class="text-warning">+ <%= points %></sup></strong>
