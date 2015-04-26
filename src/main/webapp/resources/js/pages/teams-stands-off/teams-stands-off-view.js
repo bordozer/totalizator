@@ -47,7 +47,6 @@ define( function ( require ) {
 			var currentUser = this.currentUser;
 
 			var cupsToShow = this.model.get( 'cupsToShow' );
-			console.log( cupsToShow );
 
 			_.each( cupsToShow, function( cup ) {
 
