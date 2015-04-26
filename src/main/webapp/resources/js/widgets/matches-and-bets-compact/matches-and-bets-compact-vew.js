@@ -15,6 +15,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Teams standoff history"
+		, yourBetHint: "Your bet"
 	} );
 
 	return ConfigurableView.extend( {
@@ -41,9 +42,20 @@ define( function ( require ) {
 			var el = this.$( this.windowBodyContainerSelector );
 			el.empty();
 
+			var cupId = 0;
 			var self = this;
 			this.model.forEach( function( matchBet ) {
+				var model = matchBet.toJSON();
+
+				var cup = model.match.cup;
+				if ( cupId != cup.cupId ) {
+					el.append( "<div class='row'><div class='col-lg-12'><h3><img src='" + cup.logoUrl + "' height='32'> " + cup.cupName + "</h3></div></div><hr />" );
+				}
+				console.log( cup );
+
 				self._renderEntry( matchBet, el );
+
+				cupId = cup.cupId;
 			});
 
 			this.trigger( 'inner-view-rendered' );
@@ -52,6 +64,7 @@ define( function ( require ) {
 		_renderEntry: function ( model, el ) {
 
 			var data = _.extend( {}, model.toJSON(), { view: this, translator: translator } );
+//			console.log( model.toJSON() );
 
 			el.append( template( data ) );
 		},

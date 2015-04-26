@@ -29,7 +29,7 @@
 
 	<div class="col-lg-2 text-center">
 		<% if( bet != null ) { %>
-			<%= bet.score1 %> : <%= bet.score2 %>
+			<span title="<%- translator.yourBetHint %>"><%= bet.score1 %> : <%= bet.score2 %></span>
 		<% } %>
 	</div>
 
