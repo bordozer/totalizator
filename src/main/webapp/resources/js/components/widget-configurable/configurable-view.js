@@ -139,17 +139,17 @@ define( function ( require ) {
 
 		_validateFilter: function() {
 
-			/*var categoryId = this.$( '#settings-category-id' ).val();
+			var categoryId = this.$( '#settings-category-id' ).val();
 			if ( categoryId == 0 ) {
 				alert( translator.validationNoCategory );
 				return false;
-			}*/
+			}
 
-			/*var cupId = this.$( '#settings-cup-id' ).val();
+			var cupId = this.$( '#settings-cup-id' ).val();
 			if ( cupId == 0 ) {
 				alert( translator.validationNoCup );
 				return false;
-			}*/
+			}
 
 			return true;
 		},

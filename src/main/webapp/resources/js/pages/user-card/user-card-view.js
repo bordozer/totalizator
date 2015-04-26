@@ -53,13 +53,13 @@ define( function ( require ) {
 
 			_.each( cupsToShow, function( cup ) {
 
-				var container = $( '<div class="col-lg-6"></div>' );
+				var container = $( '<div class="col-lg-12"></div>' );
 				el.append( container );
 
 				var model = new MatchesModel.MatchesModel();
 				var view = new MatchesAndBetsCompactView( {
 					model: model
-					, el: el
+					, el: container
 					, settings: {
 						userId: userId
 						, categoryId: cup.category.categoryId

@@ -27,7 +27,8 @@ define( function ( require ) {
 
 			this.currentUser = options.options.currentUser;
 
-			this.render();
+			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function() {
@@ -39,26 +40,38 @@ define( function ( require ) {
 
 		_renderMatches: function() {
 
+			var self = this;
+
 			var el = this.$( '.js-teams-stands-off-matches' );
 
 			var currentUser = this.currentUser;
 
-			var model = new MatchesModel.MatchesModel();
-			var view = new MatchesAndBetsCompactView( {
-				model: model
-				, el: el
-				, settings: {
-					userId: 0
-					, categoryId: 0
-					, cupId: 0
-					, teamId: this.team1.teamId
-					, team2Id: this.team2.teamId
-					, showFinished: true
-					, showFutureMatches: false
-				}
-				, menuItems: []
-				, currentUser: currentUser
-			} );
+			var cupsToShow = this.model.get( 'cupsToShow' );
+			console.log( cupsToShow );
+
+			_.each( cupsToShow, function( cup ) {
+
+				var container = $( '<div class="col-lg-12"></div>' );
+				el.append( container );
+
+				var model = new MatchesModel.MatchesModel();
+
+				var view = new MatchesAndBetsCompactView( {
+					model: model
+					, el: container
+					, settings: {
+						userId: 0
+						, categoryId: cup.category.categoryId
+						, cupId: cup.cupId
+						, teamId: self.team1.teamId
+						, team2Id: self.team2.teamId
+						, showFinished: true
+						, showFutureMatches: true
+					}
+					, menuItems: []
+					, currentUser: currentUser
+				} );
+			});
 		}
 	});
 } );

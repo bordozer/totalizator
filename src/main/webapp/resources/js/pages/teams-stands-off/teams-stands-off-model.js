@@ -10,13 +10,16 @@ define( function ( require ) {
 
 		defaults: {
 			cupsToShow: []
-			, matchesAndBets: []
 		},
 
 		initialize: function ( options ) {
 			this.cups = options.options.cups;
 			this.team1 = options.options.team1;
 			this.team2 = options.options.team2;
+		},
+
+		url: function() {
+			return '/rest/teams/' + this.team1.teamId + '/vs/' + this.team2.teamId + '/';
 		}
 	} );
 } );
