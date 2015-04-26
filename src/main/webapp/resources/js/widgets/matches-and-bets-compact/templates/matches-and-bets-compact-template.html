@@ -1,11 +1,12 @@
 <% var matchResults = view.getMatchResults( match ) %>
+<% var activeMatchStyle = ! match.matchFinished ? 'text-success' : '' %>
 <div class="row">
 
-	<div class="col-lg-2 text-right">
-		#<%= matchId %> &nbsp;&nbsp; <strong><%= match.beginningTime %></strong>
+	<div class="col-lg-2 text-right" title="#<%= matchId %>">
+		<strong><%= match.beginningTime %></strong>
 	</div>
 
-	<div class="col-lg-2 text-right <%= matchResults.style1 %> ">
+	<div class="col-lg-2 text-right <%= matchResults.style1 %> <%= activeMatchStyle %> ">
 		<% if( match.homeTeamNumber == 1 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
@@ -13,14 +14,18 @@
 	</div>
 
 	<div class="col-lg-1 text-right <%= matchResults.style1 %> ">
-		<%= match.score1 %>
+		<% if( match.matchFinished ) { %>
+			<%= match.score1 %>
+		<% } %>
 	</div>
 
 	<div class="col-lg-1 text-left <%= matchResults.style2 %> ">
-		<%= match.score2 %>
+		<% if( match.matchFinished ) { %>
+			<%= match.score2 %>
+		<% } %>
 	</div>
 
-	<div class="col-lg-2 <%= matchResults.style2 %>">
+	<div class="col-lg-2 <%= matchResults.style2 %>  <%= activeMatchStyle %>">
 		<img src="<%= match.team2.teamLogo %>" height="32"> <%= match.team2.teamName %>
 		<% if( match.homeTeamNumber == 2 ) { %>
 			<i class="fa fa-home"></i>

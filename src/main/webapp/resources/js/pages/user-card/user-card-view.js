@@ -44,28 +44,12 @@ define( function ( require ) {
 
 		_renderUserBets: function() {
 
+			var userId = this.userId;
 			var currentUser = this.currentUser;
 
 			var el = this.$( '.js-user-bets' );
 
-			var model = new MatchesModel.MatchesModel();
-			var view = new MatchesAndBetsCompactView( {
-				model: model
-				, el: el
-				, settings: {
-					userId: this.userId
-					, categoryId: 0
-					, cupId: 0
-					, teamId: 0
-					, team2Id: 0
-					, showFinished: true
-					, showFutureMatches: true
-				}
-				, menuItems: []
-				, currentUser: currentUser
-			} );
-
-			/*var cupsToShow = this.model.get( 'cupsToShow' );
+			var cupsToShow = this.model.get( 'cupsToShow' );
 
 			_.each( cupsToShow, function( cup ) {
 
@@ -73,21 +57,22 @@ define( function ( require ) {
 				el.append( container );
 
 				var model = new MatchesModel.MatchesModel();
-				var view = new MatchesView.MatchesView( {
+				var view = new MatchesAndBetsCompactView( {
 					model: model
-					, el: container
+					, el: el
 					, settings: {
 						userId: userId
 						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
 						, teamId: 0
-						, showFutureMatches: false
+						, team2Id: 0
 						, showFinished: true
+						, showFutureMatches: true
 					}
 					, menuItems: []
 					, currentUser: currentUser
 				} );
-			});*/
+			});
 		}
 	});
 } );
