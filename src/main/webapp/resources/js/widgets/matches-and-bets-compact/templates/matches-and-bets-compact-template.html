@@ -1,31 +1,31 @@
-<% var matchResults = view.getMatchResults( match ) %>
+<% var matchResults = transformer.getMatchResults() %>
 <div class="row">
 
 	<div class="col-lg-2 text-right" title="#<%= matchId %>">
-		<strong><%= view.formatDate( match.beginningTime ) %></strong> <sup><%= view.formatTime( match.beginningTime ) %></sup>
+		<strong><%= transformer.formatDate() %></strong> <sup><%= transformer.formatTime() %></sup>
 	</div>
 
 	<div class="col-lg-3 text-right <%= matchResults.style1 %> ">
 		<% if( match.homeTeamNumber == 1 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
-		<small><%= match.team1.teamName %></small> <img src="<%= match.team1.teamLogo %>" height="32">
+		<small><%= transformer.team1().teamName %></small> <img src="<%= transformer.team1().teamLogo %>" height="32">
 	</div>
 
 	<div class="col-lg-1 text-right <%= matchResults.style1 %> ">
 		<% if( match.matchFinished ) { %>
-			<%= match.score1 %>
+			<%= transformer.score1() %>
 		<% } %>
 	</div>
 
 	<div class="col-lg-1 text-left <%= matchResults.style2 %> ">
 		<% if( match.matchFinished ) { %>
-			<%= match.score2 %>
+			<%= transformer.score2() %>
 		<% } %>
 	</div>
 
 	<div class="col-lg-3 <%= matchResults.style2 %>">
-		<img src="<%= match.team2.teamLogo %>" height="32"> <small><%= match.team2.teamName %></small>
+		<img src="<%= transformer.team2().teamLogo %>" height="32"> <small><%= transformer.team2().teamName %></small>
 		<% if( match.homeTeamNumber == 2 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>

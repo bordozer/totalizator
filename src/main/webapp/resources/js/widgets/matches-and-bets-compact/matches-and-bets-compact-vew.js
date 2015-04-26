@@ -19,6 +19,60 @@ define( function ( require ) {
 		, yourBetHint: "Your bet"
 	} );
 
+	var MatchTransformer = function ( _match, _teamId, _team2Id ) {
+
+		var match = _match;
+		var team1Id = _teamId;
+		var team2Id = _team2Id;
+
+		return {
+
+			team1: function() {
+				if ( team1Id == match.team1.teamId ) {
+					return match.team1;
+				}
+
+				return match.team2;
+			},
+
+			team2: function() {
+				if ( team2Id == match.team2.teamId ) {
+					return match.team2;
+				}
+
+				return match.team1;
+			},
+
+			score1: function() {
+				if ( team1Id == match.team1.teamId ) {
+					return match.score1;
+				}
+
+				return match.score2;
+			},
+
+			score2: function() {
+				if ( team2Id == match.team2.teamId ) {
+					return match.score2;
+				}
+
+				return match.score1;
+			},
+
+			getMatchResults: function() {
+				return service.matchResults( this.team1().teamId, this.score1(), this.team2().teamId, this.score2() );
+			},
+
+			formatDate: function() {
+				return dateTimeService.formatDateDisplay( match.beginningTime );
+			},
+
+			formatTime: function() {
+				return dateTimeService.formatTimeDisplay( match.beginningTime );
+			}
+		}
+	};
+
 	return ConfigurableView.extend( {
 
 		renderInnerView: function ( filter ) {
@@ -45,7 +99,7 @@ define( function ( require ) {
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
-				self._renderEntry( matchBet, el );
+				self._renderEntry( matchBet.toJSON(), el );
 			});
 
 			this.trigger( 'inner-view-rendered' );
@@ -53,25 +107,10 @@ define( function ( require ) {
 
 		_renderEntry: function ( model, el ) {
 
-			var data = _.extend( {}, model.toJSON(), { view: this, translator: translator } );
+			var matchTransformer = new MatchTransformer( model.match, this.filter.teamId, this.filter.team2Id );
+			var data = _.extend( {}, model, { transformer: matchTransformer, translator: translator } );
 
 			el.append( template( data ) );
-		},
-
-		_getMatchResult: function( match ) {
-			return service.matchResultsByMatch( match );
-		},
-
-		getMatchResults: function( match ) {
-			return service.matchResultsByMatch( match );
-		},
-
-		formatDate: function( dateTime ) {
-			return dateTimeService.formatDateDisplay( dateTime );
-		},
-
-		formatTime: function( dateTime ) {
-			return dateTimeService.formatTimeDisplay( dateTime );
 		}
 	} );
 } );
