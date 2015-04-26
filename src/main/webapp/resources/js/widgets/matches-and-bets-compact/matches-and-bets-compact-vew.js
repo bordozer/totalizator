@@ -51,7 +51,6 @@ define( function ( require ) {
 				if ( cupId != cup.cupId ) {
 					el.append( "<div class='row'><div class='col-lg-12'><h3><img src='" + cup.logoUrl + "' height='32'> " + cup.cupName + "</h3></div></div><hr />" );
 				}
-				console.log( cup );
 
 				self._renderEntry( matchBet, el );
 
