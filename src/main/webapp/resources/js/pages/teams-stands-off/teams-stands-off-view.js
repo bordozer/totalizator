@@ -7,10 +7,11 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/teams-stands-off-template.html' ) );
 
-//	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
+	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
 //	var MatchesView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-view' );
 
-	var MatchesAndBetsCompact = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact' );
+//	var MatchesAndBetsCompact = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact' );
+	var MatchesAndBetsCompactView = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact-vew' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -45,8 +46,10 @@ define( function ( require ) {
 
 			var currentUser = this.currentUser;
 
-			var view = new MatchesAndBetsCompact( {
-				el: el
+			var model = new MatchesModel.MatchesModel();
+			var view = new MatchesAndBetsCompactView( {
+				model: model
+				, el: el
 				, settings: {
 					userId: 0
 					, categoryId: 0
@@ -58,33 +61,7 @@ define( function ( require ) {
 				}
 				, menuItems: []
 				, currentUser: currentUser
-			} ).view();
-
-			/*var el = this.$( '.js-teams-stands-off-matches' );
-			var self = this;
-
-			_.each( this.cups, function( cup ) {
-
-				var container = $( '<div class="col-lg-4"></div>' );
-				el.append( container );
-
-				var model = new MatchesModel.MatchesModel();
-				var view = new MatchesView.MatchesView( {
-					model: model
-					, el: container
-					, settings: {
-						userId: 0
-						, categoryId: cup.category.categoryId
-						, cupId: cup.cupId
-						, teamId: self.team1.teamId
-						, team2Id: self.team2.teamId
-						, showFinished: true
-						, showFutureMatches: false
-					}
-					, menuItems: []
-					, currentUser: currentUser
-				} );
-			} );*/
+			} );
 		}
 	});
 } );

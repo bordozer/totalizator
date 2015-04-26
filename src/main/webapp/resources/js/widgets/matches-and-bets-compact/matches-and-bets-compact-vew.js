@@ -12,7 +12,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: ""
+		title: "Teams standoff history"
 	} );
 
 	return ConfigurableView.extend( {
@@ -30,6 +30,10 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
+		getTitle: function() {
+			return translator.title;
+		},
+
 		_renderCupMatchesAndBets: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
@@ -44,6 +48,9 @@ define( function ( require ) {
 		},
 
 		_renderEntry: function ( model, el ) {
+			console.log( model.toJSON() );
+
+			el.append( '- ' );
 
 			/*var view = new MatchView( {
 				model: model
@@ -53,9 +60,8 @@ define( function ( require ) {
 				, filter: this.filter
 				, currentUser: this.currentUser
 			} );
-			var $el = view.render().$el;*/
 
-			return el.append( '-=-' );
+			return el.append( view.render().$el );*/
 		}
 	} );
 } );
