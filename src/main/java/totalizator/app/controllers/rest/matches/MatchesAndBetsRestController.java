@@ -55,14 +55,6 @@ public class MatchesAndBetsRestController {
 		final List<Match> matches = matchService.loadAll( dto );
 
 		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, user );
-		for ( final MatchBetDTO matchBetDTO : matchBetDTOs ) {
-
-			if ( ! matchBetsService.userCanSeeAnotherBets( matchService.load( matchBetDTO.getMatchId() ), currentUser ) ) {
-				final BetDTO bet = matchBetDTO.getBet();
-				bet.setScore1( 0 );
-				bet.setScore2( 0 );
-			}
-		}
 
 		if ( userId > 0 ) {
 
