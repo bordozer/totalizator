@@ -9,7 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/user-card-template.html' ) );
 
 	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
-	var MatchesView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-view' );
+	var MatchesAndBetsCompactView = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact-vew' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -44,12 +44,28 @@ define( function ( require ) {
 
 		_renderUserBets: function() {
 
-			var userId = this.userId;
 			var currentUser = this.currentUser;
 
 			var el = this.$( '.js-user-bets' );
 
-			var cupsToShow = this.model.get( 'cupsToShow' );
+			var model = new MatchesModel.MatchesModel();
+			var view = new MatchesAndBetsCompactView( {
+				model: model
+				, el: el
+				, settings: {
+					userId: this.userId
+					, categoryId: 0
+					, cupId: 0
+					, teamId: 0
+					, team2Id: 0
+					, showFinished: true
+					, showFutureMatches: true
+				}
+				, menuItems: []
+				, currentUser: currentUser
+			} );
+
+			/*var cupsToShow = this.model.get( 'cupsToShow' );
 
 			_.each( cupsToShow, function( cup ) {
 
@@ -71,7 +87,7 @@ define( function ( require ) {
 					, menuItems: []
 					, currentUser: currentUser
 				} );
-			});
+			});*/
 		}
 	});
 } );
