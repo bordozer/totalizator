@@ -46,7 +46,7 @@ define( function ( require ) {
 
 				var cup = model.match.cup;
 				if ( cupId != cup.cupId ) {
-					el.append( "<div class='row'><div class='col-lg-12'><h3><img src='" + cup.logoUrl + "' height='32'> " + cup.cupName + "</h3></div></div><hr />" );
+					el.append( "<div class='row'><div class='col-lg-12'><h4><img src='" + cup.logoUrl + "' height='32'> " + cup.category.categoryName + ': ' + cup.cupName + "</h4></div></div><hr />" );
 				}
 
 				self._renderEntry( matchBet, el );
