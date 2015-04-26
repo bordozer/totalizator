@@ -34,10 +34,6 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
-		getTitle: function() {
-			return translator.title;
-		},
-
 		_renderCupMatchesAndBets: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
@@ -79,6 +75,10 @@ define( function ( require ) {
 
 		formatDate: function( dateTime ) {
 			return dateTimeService.formatDateDisplay( dateTime );
+		},
+
+		formatTime: function( dateTime ) {
+			return dateTimeService.formatTimeDisplay( dateTime );
 		}
 	} );
 } );

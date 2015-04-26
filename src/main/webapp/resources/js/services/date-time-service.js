@@ -4,7 +4,10 @@ define( function ( require ) {
 
 	var DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm';
 	var DATE_FORMAT = 'DD/MM/YYYY';
-	var DATE_TIME_DISPLAY_FORMAT = 'D MMM YYYY HH:mm';
+
+//	var DATE_TIME_DISPLAY_FORMAT = 'D MMM YYYY HH:mm';
+	var DATE_DISPLAY_FORMAT = 'D MMM YYYY';
+	var TIME_DISPLAY_FORMAT = 'HH:mm';
 
 	var LOCALE = 'ru';
 
@@ -34,8 +37,16 @@ define( function ( require ) {
 		},
 
 		// str => srt formatted for displaying
+		formatDateTimeDisplay: function ( time ) {
+			return moment( this.parseDate( time ) ).format( DATE_DISPLAY_FORMAT + ' ' + TIME_DISPLAY_FORMAT );
+		},
+
 		formatDateDisplay: function ( time ) {
-			return moment( this.parseDate( time ) ).format( DATE_TIME_DISPLAY_FORMAT );
+			return moment( this.parseDate( time ) ).format( DATE_DISPLAY_FORMAT );
+		},
+
+		formatTimeDisplay: function ( time ) {
+			return moment( this.parseDate( time ) ).format( TIME_DISPLAY_FORMAT );
 		},
 
 		// str => date

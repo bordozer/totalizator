@@ -40,7 +40,7 @@ define( function ( require ) {
 
 			var match = model.match;
 
-			var matchBeginningTime = dateTimeService.formatDateDisplay( match.beginningTime );
+			var matchBeginningTime = dateTimeService.formatDateTimeDisplay( match.beginningTime );
 
 			var matchResults = service.matchResultsByMatch( match );
 

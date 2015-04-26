@@ -219,7 +219,7 @@ define( function ( require ) {
 				, score1: model.score1
 				, score2: model.score2
 				, matchResults: matchResults
-				, beginningTime: dateTimeService.formatDateDisplay( model.beginningTime )
+				, beginningTime: dateTimeService.formatDateTimeDisplay( model.beginningTime )
 				, homeTeamNumber: model.homeTeamNumber
 				, translator: translator
 			} ) );

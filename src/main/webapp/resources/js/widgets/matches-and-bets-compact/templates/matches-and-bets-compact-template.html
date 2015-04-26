@@ -2,7 +2,7 @@
 <div class="row">
 
 	<div class="col-lg-2 text-right" title="#<%= matchId %>">
-		<strong><%= view.formatDate( match.beginningTime ) %></strong>
+		<strong><%= view.formatDate( match.beginningTime ) %></strong> <sup><%= view.formatTime( match.beginningTime ) %></sup>
 	</div>
 
 	<div class="col-lg-3 text-right <%= matchResults.style1 %> ">
@@ -36,7 +36,7 @@
 			<span title="<%- translator.yourBetHint %>"><%= bet.score1 %> : <%= bet.score2 %></span>
 		<% } %>
 		<% if( points > 0 ) { %>
-			+ <%= points %>
+			<strong><sup class="text-warning">+ <%= points %></sup></strong>
 		<% } %>
 	</div>
 

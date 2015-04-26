@@ -207,7 +207,7 @@ define( function ( require ) {
 			this.$el.html( this.templateView( {
 				model: model
 				, categoryName: category
-				, cupStartDate: dateTimeService.formatDateDisplay( model.cupStartDate )
+				, cupStartDate: dateTimeService.formatDateTimeDisplay( model.cupStartDate )
 				, cupCustomCSS: cupCustomCSS
 				, translator: translator
 			} ) );
