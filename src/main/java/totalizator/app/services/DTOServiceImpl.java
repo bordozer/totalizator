@@ -99,7 +99,7 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user ) {
-		return Lists.transform( matches, matchBetFunction( user ) );
+		return newArrayList( Lists.transform( matches, matchBetFunction( user ) ) );
 	}
 
 	@Override
