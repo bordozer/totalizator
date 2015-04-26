@@ -32,7 +32,7 @@
 	</div>
 
 	<div class="col-lg-2 text-center">
-		<% if( bet != null ) { %>
+		<% if( match.matchFinished && bet != null ) { %>
 			<span title="<%- translator.yourBetHint %>"><%= transformer.betScore1() %> : <%= transformer.betScore2() %></span>
 		<% } %>
 		<% if( points > 0 ) { %>
