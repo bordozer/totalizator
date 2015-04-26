@@ -28,6 +28,10 @@ define( function ( require ) {
 		return {
 
 			team1: function() {
+				if ( team1Id == 0 || team2Id == 0 ) {
+					return match.team1;
+				}
+
 				if ( team1Id == match.team1.teamId ) {
 					return match.team1;
 				}
@@ -36,6 +40,10 @@ define( function ( require ) {
 			},
 
 			team2: function() {
+				if ( team1Id == 0 || team2Id == 0 ) {
+					return match.team2;
+				}
+
 				if ( team2Id == match.team2.teamId ) {
 					return match.team2;
 				}
@@ -44,6 +52,10 @@ define( function ( require ) {
 			},
 
 			score1: function() {
+				if ( team1Id == 0 || team2Id == 0 ) {
+					return match.score1;
+				}
+
 				if ( team1Id == match.team1.teamId ) {
 					return match.score1;
 				}
@@ -52,6 +64,10 @@ define( function ( require ) {
 			},
 
 			score2: function() {
+				if ( team1Id == 0 || team2Id == 0 ) {
+					return match.score2;
+				}
+
 				if ( team2Id == match.team2.teamId ) {
 					return match.score2;
 				}
