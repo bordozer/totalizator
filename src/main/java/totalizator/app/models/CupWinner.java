@@ -15,7 +15,7 @@ import static totalizator.app.models.CupWinner.*;
 		),
 		@NamedQuery(
 				name = LOAD_FOR_CUP,
-				query = "select t from CupWinner t where cupId= :cupId order by cupPosition desc"
+				query = "select t from CupWinner t where cupId= :cupId order by cupPosition"
 		),
 		@NamedQuery(
 				name = LOAD_FOR_CUP_AND_TEAM,
