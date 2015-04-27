@@ -50,7 +50,7 @@ public class NBAGameImportRunner extends Thread {
 		try {
 			final boolean isGameImported = remoteGameDataImportService.importGame( cup, nbaGameId );
 
-			LOGGER.error( String.format( "Remote game import finished. GameID: %s", nbaGameId ) );
+			LOGGER.info( String.format( "Remote game import finished. GameID: %s", nbaGameId ) );
 
 			return isGameImported;
 		} catch ( final Throwable e ) {
