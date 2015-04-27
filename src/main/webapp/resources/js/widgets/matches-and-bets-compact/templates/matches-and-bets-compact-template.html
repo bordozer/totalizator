@@ -6,7 +6,7 @@
 	</div>
 
 	<div class="col-lg-3 text-right <%= matchResults.style1 %> ">
-		<% if( match.homeTeamNumber == 1 ) { %>
+		<% if( transformer.homeTeamNumber() == 1 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
 		<small><%= transformer.team1().teamName %></small> <img src="<%= transformer.team1().teamLogo %>" height="32">
@@ -26,7 +26,7 @@
 
 	<div class="col-lg-3 <%= matchResults.style2 %>">
 		<img src="<%= transformer.team2().teamLogo %>" height="32"> <small><%= transformer.team2().teamName %></small>
-		<% if( match.homeTeamNumber == 2 ) { %>
+		<% if( transformer.homeTeamNumber() == 2 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
 	</div>

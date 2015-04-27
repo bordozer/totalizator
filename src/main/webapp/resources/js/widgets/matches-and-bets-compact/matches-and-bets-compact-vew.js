@@ -76,6 +76,18 @@ define( function ( require ) {
 				return match.score1;
 			},
 
+			homeTeamNumber: function() {
+				if ( team1Id == 0 || team2Id == 0 ) {
+					return match.homeTeamNumber;
+				}
+
+				if ( team1Id == match.team1.teamId ) {
+					return match.homeTeamNumber;
+				}
+
+				return match.homeTeamNumber == 1 ? 2 : 1;
+			},
+
 			betScore1: function() {
 				if ( bet == null ) {
 					return 0;
