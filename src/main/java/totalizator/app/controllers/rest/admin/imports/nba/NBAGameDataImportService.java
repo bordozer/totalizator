@@ -86,6 +86,8 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 			return false;
 		}
 
+		gamesDataImportMonitor.incrementProcessedGamesCount();
+
 		final RemoteGame remoteGame = remoteGameService.parseGame( gameJSON );
 
 		final String team1Name = remoteGame.getTeam1Name();

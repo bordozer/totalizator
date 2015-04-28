@@ -6,6 +6,7 @@ public class GamesDataImportMonitor {
 
 	private ImportState importState = ImportState.NOT_STARTED;
 	private String importErrorMessage;
+	private int processedGamesCount;
 
 	public int getCupId() {
 		return cupId;
@@ -33,6 +34,7 @@ public class GamesDataImportMonitor {
 
 	public void start() {
 		importState = ImportState.IN_PROGRESS;
+		processedGamesCount = 0;
 	}
 
 	public void stop() {
@@ -54,5 +56,13 @@ public class GamesDataImportMonitor {
 
 	public void setImportErrorMessage( final String importErrorMessage ) {
 		this.importErrorMessage = importErrorMessage;
+	}
+
+	public int getProcessedGamesCount() {
+		return processedGamesCount;
+	}
+
+	public void incrementProcessedGamesCount() {
+		this.processedGamesCount++;
 	}
 }

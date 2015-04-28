@@ -30,6 +30,7 @@ public class NBAGameImportRunner extends Thread {
 		while ( true ) {
 
 			final boolean result = makeImport( gameId );
+
 			if ( !result ) {
 				remoteGameDataImportService.finish();
 				break;
