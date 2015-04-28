@@ -78,6 +78,16 @@
 	</translation>
 
 	<translation>
+		<nerd>$1 games are imported</nerd>
+		<ru><![CDATA[Импортировано $1 игр]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

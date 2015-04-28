@@ -100,9 +100,9 @@ public class NBAImportRestController {
 		final GamesDataImportMonitor monitor = nbaGameDataImportService.getMonitor();
 		final String error = StringUtils.isNotEmpty( monitor.getImportErrorMessage() ) ? String.format( " ( %s )", monitor.getImportErrorMessage() ) : "";
 
-		final String stateMessage = String.format( "%s ( %d )%s"
+		final String stateMessage = String.format( "%s ( %s )%s"
 				, translatorService.translate( monitor.getCurrentStatusMessage(), getLanguage() )
-				, monitor.getProcessedGamesCount()
+				, translatorService.translate( "$1 games are imported", getLanguage(), String.valueOf( monitor.getProcessedGamesCount() ) )
 				, error
 		);
 		result.setImportStatusMessage( stateMessage );
