@@ -34,7 +34,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-bar-chart';
+			return 'fa-angellist';
 		},
 
 		_renderWinners: function () {
