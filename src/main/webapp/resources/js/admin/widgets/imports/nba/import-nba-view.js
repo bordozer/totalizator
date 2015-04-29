@@ -123,6 +123,10 @@ define( function ( require ) {
 		_onImportStop: function( evt ) {
 			evt.preventDefault();
 
+			if ( ! confirm( translator.stopImport + '?' ) ) {
+				return;
+			}
+
 			this._stopImport();
 		}
 	} );
