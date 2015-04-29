@@ -46,6 +46,22 @@ public class CupWinnersBetsRestController {
 	@Autowired
 	private CupTeamService cupTeamService;
 
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	public List<TeamDTO> winners( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+
+		final Cup cup = cupService.load( cupId );
+
+		return dtoService.transformTeams( Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, Team>() {
+			@Override
+			public Team apply( final CupWinner cupWinner ) {
+				return cupWinner.getTeam();
+			}
+		} ) );
+	}
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
