@@ -23,9 +23,9 @@ public class ImportedGamesDataStorageServiceImpl implements ImportedGamesDataSto
 			return null;
 		}
 
-		try ( BufferedReader br = new BufferedReader( new FileReader( file ) ) ) {
+		try ( final BufferedReader br = new BufferedReader( new FileReader( file ) ) ) {
 
-			StringBuilder sb = new StringBuilder();
+			final StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
 
 			while ( line != null ) {
