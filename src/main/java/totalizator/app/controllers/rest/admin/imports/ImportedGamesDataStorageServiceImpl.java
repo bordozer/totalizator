@@ -41,10 +41,14 @@ public class ImportedGamesDataStorageServiceImpl implements ImportedGamesDataSto
 	public void store( final Cup cup, final String remoteGameId, final String gameJSON ) throws IOException {
 
 		final File gameFile = getRemoteGameFile( cup, remoteGameId );
+
+		final File yearFolder = gameFile.getParentFile();
+		if ( ! yearFolder.exists() ) {
+			FileUtils.forceMkdir( yearFolder );
+		}
+
 		if ( gameFile.exists() ) {
 			FileUtils.deleteQuietly( gameFile );
-		} else {
-			FileUtils.forceMkdir( new File( gameFile.getPath() ) );
 		}
 
 		final PrintWriter writer = new PrintWriter( gameFile, "UTF-8" );
