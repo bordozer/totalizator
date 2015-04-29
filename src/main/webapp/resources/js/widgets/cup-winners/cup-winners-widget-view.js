@@ -34,7 +34,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-angellist';
+			return 'fa-gift';
 		},
 
 		_renderWinners: function () {
