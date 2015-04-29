@@ -12,6 +12,8 @@ define( function ( require ) {
 
 	var cupTeams = require( 'js/widgets/cup-teams/cup-teams-widget' );
 
+	var cupWinners = require( 'js/widgets/cup-winners/cup-winners-widget' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Cup overview"
@@ -49,6 +51,8 @@ define( function ( require ) {
 
 			this._renderCupTeams( cup );
 
+			this._renderCupWinners( cup );
+
 			return this;
 		},
 
@@ -58,6 +62,10 @@ define( function ( require ) {
 
 		_renderCupTeams: function( cup ) {
 			cupTeams( this.$( '.js-cup-teams' ), { cup: cup } );
+		},
+
+		_renderCupWinners: function( cup ) {
+			cupWinners( this.$( '.js-cup-winners' ), { cup: cup } );
 		}
 	} );
 } );

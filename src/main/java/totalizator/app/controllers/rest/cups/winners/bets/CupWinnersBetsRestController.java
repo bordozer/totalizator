@@ -22,7 +22,7 @@ import static com.google.common.collect.Sets.newHashSet;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/rest/cups/{cupId}/winners/bets" )
+@RequestMapping( "/rest/cups/{cupId}" )
 public class CupWinnersBetsRestController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class CupWinnersBetsRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/winners/", produces = APPLICATION_JSON_VALUE )
 	public List<TeamDTO> winners( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
 		final Cup cup = cupService.load( cupId );
@@ -64,7 +64,7 @@ public class CupWinnersBetsRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/winners/bets/", produces = APPLICATION_JSON_VALUE )
 	public CupWinnersBetsDTO all( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
 		final Cup cup = cupService.load( cupId );
