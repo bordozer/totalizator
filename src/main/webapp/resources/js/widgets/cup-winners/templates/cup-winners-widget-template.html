@@ -1,1 +1,23 @@
-winners
+<table class="table table-striped table-hover">
+	<tbody>
+		<% var i = 1 %>
+
+		<% _.each( winners, function( team ) { %>
+
+				<tr>
+					<td>
+						<strong><%- i %> <%= translator.cupPosition %></strong>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<span class="text-muted"><img src="<%- team.teamLogo %>"> <%- team.teamName %></span>
+					</td>
+				</tr>
+
+			<% i++ %>
+
+		<% } ) %>
+	</tbody>
+</table>

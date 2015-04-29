@@ -13,6 +13,8 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Cup winners'
+		, cupPosition: 'cup position'
+		, cupIsNotFinished: 'The cup has not finished yet'
 	} );
 
 	return WidgetView.extend( {
@@ -36,9 +38,15 @@ define( function ( require ) {
 		},
 
 		_renderWinners: function () {
-			console.log( this.model.toJSON() );
 
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var cup = this.model.cup;
+			if ( ! cup.finished ) {
+				this.setBody( "<span class='text-center'>" + translator.cupIsNotFinished + "</span>" );
+				this.trigger( 'inner-view-rendered' );
+				return;
+			}
+
+			var data = _.extend( {}, { winners: this.model.toJSON(), translator: translator } );
 
 			this.setBody( template( data ) );
 
