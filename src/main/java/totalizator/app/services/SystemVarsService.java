@@ -17,7 +17,7 @@ public interface SystemVarsService {
 
 	String getLogosPath();
 
-	File getImportedGamesDataStoragePath();
+	File getImportedGamesDataStorageDir();
 
 	List<Integer> getAdminIds();
 }

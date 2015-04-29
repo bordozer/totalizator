@@ -82,7 +82,7 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public File getImportedGamesDataStoragePath() {
+	public File getImportedGamesDataStorageDir() {
 		return new File( config.getString( "system.imports.path" ) );
 	}
 

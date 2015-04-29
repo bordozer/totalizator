@@ -81,7 +81,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 	@Override
 	public boolean importGame( final Cup cup, final String gameId ) throws IOException {
 
-		final String gameJSON = getRemoteGameJSON( gameId );
+		final String gameJSON = getRemoteGameJSON( cup, gameId );
 		if ( StringUtils.isEmpty( gameJSON ) ) {
 			return false;
 		}
@@ -145,9 +145,9 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 		return gamesDataImportMonitor.getCupId();
 	}
 
-	private String getRemoteGameJSON( final String remoteGameId ) throws IOException {
+	private String getRemoteGameJSON( final Cup cup, final String remoteGameId ) throws IOException {
 
-		final String gameData = importedGamesDataStorageService.getGameData( remoteGameId );
+		final String gameData = importedGamesDataStorageService.getGameData( cup, remoteGameId );
 		if ( StringUtils.isNotEmpty( gameData ) ) {
 			return gameData;
 		}
@@ -156,7 +156,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 		final String gameJSON = remoteContentService.getRemoteContent( url );
 
 		if ( StringUtils.isNotEmpty( gameJSON ) ) {
-			importedGamesDataStorageService.store( remoteGameId, gameJSON );
+			importedGamesDataStorageService.store( cup, remoteGameId, gameJSON );
 		}
 
 		return gameJSON;
