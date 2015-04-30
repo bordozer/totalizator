@@ -15,7 +15,7 @@ define( function ( require ) {
 		},
 
 		url: function () {
-			return '/rest/category/' + this.categoryId + '/';
+			return '/rest/categories/' + this.categoryId + '/';
 		}
 	} );
 } );

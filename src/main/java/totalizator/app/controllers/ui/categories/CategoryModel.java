@@ -4,11 +4,11 @@ import totalizator.app.controllers.ui.AbstractPageModel;
 import totalizator.app.models.Category;
 import totalizator.app.models.User;
 
-class CategoryModel extends AbstractPageModel {
+public class CategoryModel extends AbstractPageModel {
 
 	private Category category;
 
-	protected CategoryModel( final User currentUser ) {
+	CategoryModel( final User currentUser ) {
 		super( currentUser );
 	}
 
