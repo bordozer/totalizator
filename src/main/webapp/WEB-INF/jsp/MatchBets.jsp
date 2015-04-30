@@ -23,7 +23,7 @@
 			var teamsTitle = '#${match.id}, ${match.team1.teamName} vs ${match.team2.teamName}, ${matchBetsModel.matchTime}';
 
 			var breadcrumbs = [
-				{ link: '#', title: "${cup.category.categoryName}" }
+				{ link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
 				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
 				, { link: '#', title: teamsTitle }
 				, { link: '#', title: translator.title }
