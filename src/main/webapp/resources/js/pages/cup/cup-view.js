@@ -18,7 +18,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Cup overview"
 		, cupBetsLabel: "Cup bets"
-		, allCupBetsLabel: "All cup winners bets"
+		, allCupBetsLabel: "Cup result bets"
 		, cupTeamsLabel: "Cup teams"
 		, cupFinished: "Cup finished"
 	} );

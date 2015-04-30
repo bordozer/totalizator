@@ -16,7 +16,7 @@
 			var cupId = ${cup.id};
 
 			var translator = new Translator( {
-				title: 'All cup winners bets'
+				title: 'Cup result bets'
 			} );
 
 			var breadcrumbs = [
