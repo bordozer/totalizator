@@ -50,18 +50,18 @@ define( function ( require ) {
 		initialize: function ( options ) {
 			this.options = options;
 
+			this.users = service.loadUsers();
+			this.categories = service.loadCategories();
+			this.cups = this.loadCups();
+			this.teams = service.loadTeams();
+
 			this.settingsModel = new FilterModel( options.settings );
 			this.settingsView = new FilterView( {
 				model: this.settingsModel
-				, cups: this.loadCups()
+				, cups: this.cups
 			} );
 
 			this.on( 'view:render', this.render, this );
-
-			this.users = service.loadUsers();
-			this.categories = service.loadCategories();
-			this.cups = service.loadPublicCups();
-			this.teams = service.loadTeams();
 
 			this.events = _.extend( this.configurableViewEvents, this.events );
 
