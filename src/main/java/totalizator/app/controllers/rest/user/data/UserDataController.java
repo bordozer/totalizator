@@ -29,7 +29,7 @@ public class UserDataController {
 	@ResponseStatus( HttpStatus.OK )
 	@RequestMapping( method = RequestMethod.GET, value = "/current/", produces = APPLICATION_JSON_VALUE )
 	public UserDTO getCurrentUser( final Principal principal ) {
-		return getUserDTO( userService.findByName( principal.getName() ) );
+		return getUserDTO( userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseBody
