@@ -14,20 +14,20 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cupId = options.options.cupId;
-			this.render();
+
+			this.model.on( 'sync', this.render, this );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
 
-			var model = this.model.toJSON();
-
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 
-			var data = _.extend( {}, model );
+			var cup = this.model.toJSON();
 
-			this.$el.html( template( data ) );
+			this.$el.html( template() );
 
-			cupWinnersBetsWidget( this.$( '.js-cup-winners-bets' ), { cupId: this.cupId } );
+			cupWinnersBetsWidget( this.$( '.js-cup-winners-bets' ), { cup: cup } );
 
 			return this;
 		}

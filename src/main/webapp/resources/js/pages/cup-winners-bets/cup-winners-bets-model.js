@@ -8,12 +8,14 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		defaults: {
-			winnersCount: 0
-			, usersCupBets: []
 		},
 
 		initialize: function ( options ) {
 			this.cupId = options.options.cupId;
+		},
+
+		url: function () {
+			return '/rest/cups/' + this.cupId + '/';
 		}
 	} );
 } );

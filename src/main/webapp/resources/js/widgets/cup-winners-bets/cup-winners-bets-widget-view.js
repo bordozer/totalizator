@@ -25,7 +25,7 @@ define( function ( require ) {
 	return WidgetView.extend( {
 
 		initialize: function ( options ) {
-			this.cupId = options.options.cupId;
+			this.cup = options.options.cup;
 
 			this.listenTo( this.model, 'sync', this._renderCupWinnersBets );
 			this.render();
@@ -36,8 +36,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			var cup = service.getCup( service.loadPublicCups(), this.cupId );
-			return this.getCupTitle( cup, translator.title );
+			return this.getCupTitle( this.cup, translator.title );
 		},
 
 		getIcon: function () {

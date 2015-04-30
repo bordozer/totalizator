@@ -38,12 +38,7 @@ define( function ( require ) {
 
 			var cup = this.model.toJSON();
 
-			var data = _.extend( {}
-					, {
-						cup: cup
-						, translator: translator
-					}
-			);
+			var data = _.extend( {}, { cup: cup, translator: translator } );
 
 			this.$el.html( template( data ) );
 
