@@ -170,7 +170,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			return translator.title;
+			return this.getCupTitle( this.cup, translator.title );
 		},
 
 		getIcon: function () {

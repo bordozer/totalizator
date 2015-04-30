@@ -106,13 +106,9 @@ define( function ( require ) {
 		getTitle: function() {
 			var filter = this.settingsModel.toJSON();
 
-			var categoryId = filter.categoryId;
-			var cupId = filter.cupId;
+			var cup = service.getCup( this.cups, filter.cupId );
 
-			var category = ( categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.pluralAll );
-			var cup = ( cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.pluralAll );
-
-			return category + ': ' + cup;
+			return this.getCupTitle( cup, translator.title );
 		},
 
 		getTitleHint: function() {

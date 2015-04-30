@@ -63,6 +63,10 @@ define( function ( require ) {
 			return '...';
 		},
 
+		getCupTitle: function( cup, title ) {
+			return cup.category.categoryName + '<strong>' + " <a href='/totalizator/cups/" + cup.cupId + "/'>" +  cup.cupName + '</a></strong> - ' +  title;
+		},
+
 		getTitleHint: function() {
 
 		},

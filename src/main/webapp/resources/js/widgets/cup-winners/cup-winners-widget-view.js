@@ -29,8 +29,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			var cup = this.model.cup;
-			return cup.category.categoryName + ' ' +  cup.cupName + ' - ' +  translator.title;
+			return this.getCupTitle( this.model.cup, translator.title );
 		},
 
 		getIcon: function () {
