@@ -8,27 +8,13 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-winners-bets-template.html' ) );
 
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		title: ""
-		, userLabel: 'User'
-		, cupPositionLabel: 'cup position'
-		, realCupWinnersLabel: 'Cup winners'
-		, noWinnerBetLabel: 'No bet'
-		, teamIsOutOfCupLabel: 'Team has been knocked out'
-	} );
+	var cupWinnersBetsWidget = require( 'js/widgets/cup-winners-bets/cup-winners-bets-widget' );
 
 	return Backbone.View.extend( {
 
-		events: {
-
-		},
-
 		initialize: function ( options ) {
 			this.cupId = options.options.cupId;
-
-			this.model.on( 'sync', this.render, this );
-			this.model.fetch( { cache: false } );
+			this.render();
 		},
 
 		render: function () {
@@ -37,9 +23,11 @@ define( function ( require ) {
 
 			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
 
-			var data = _.extend( {}, model, { translator: translator } );
+			var data = _.extend( {}, model );
 
 			this.$el.html( template( data ) );
+
+			cupWinnersBetsWidget( this.$( '.js-cup-winners-bets' ), { cupId: this.cupId } );
 
 			return this;
 		}
