@@ -15,7 +15,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: "Teams standoff history"
+		title: "Matches"
 		, yourBetHint: "Your bet"
 		, noMatchesFound: "No matches found"
 	} );
@@ -138,6 +138,7 @@ define( function ( require ) {
 	return ConfigurableView.extend( {
 
 		renderInnerView: function ( filter ) {
+
 			this.filter = filter;
 
 			this.currentUser = this.options.currentUser;
@@ -151,7 +152,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			return this.getTitleHint();
+			return this.getCupTitle( this.options.cup, translator.title );
 		},
 
 		_renderCupMatchesAndBets: function() {

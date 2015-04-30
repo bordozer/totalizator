@@ -71,6 +71,7 @@ define( function ( require ) {
 					}
 					, menuItems: []
 					, currentUser: currentUser
+					, cup: cup
 				} );
 			});
 		}

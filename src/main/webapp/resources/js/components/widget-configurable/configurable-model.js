@@ -1,0 +1,17 @@
+define( function ( require ) {
+
+	'use strict';
+
+	var Backbone = require( 'backbone' );
+	var _ = require( 'underscore' );
+
+	return Backbone.Model.extend( {
+
+		initialize: function ( options ) {
+		},
+
+		url: function() {
+			return '/rest/users/current/';
+		}
+	});
+} );

@@ -8,6 +8,7 @@ define( function ( require ) {
 
 	var FilterModel = require( './filter/matches-filter-model' );
 	var FilterView = require( './filter/matches-filter-view' );
+	var ConfigurableModel = require( './configurable-model' );
 
 	var service = require( '/resources/js/services/service.js' );
 
@@ -49,17 +50,12 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.options = options;
+			this.filter = options.settings;
 
-			this.users = service.loadUsers();
-			this.categories = service.loadCategories();
-			this.cups = this.loadCups();
-			this.teams = service.loadTeams();
+			this.dataModel = new ConfigurableModel( { filter: this.filter } );
+			this.dataModel.on( 'sync', this._runRender, this );
 
-			this.settingsModel = new FilterModel( options.settings );
-			this.settingsView = new FilterView( {
-				model: this.settingsModel
-				, cups: this.cups
-			} );
+			this.settingsModel = new FilterModel( this.filter );
 
 			this.on( 'view:render', this.render, this );
 
@@ -77,9 +73,24 @@ define( function ( require ) {
 
 		renderBody: function() {
 
-			this.renderInnerView( this.settingsModel.toJSON() );
+			this.dataModel.fetch( { cache: false } );
 
 			return this;
+		},
+
+		_runRender: function() {
+
+			this.users = service.loadUsers();
+			this.categories = service.loadCategories();
+			this.cups = this.loadCups();
+			this.teams = service.loadTeams();
+
+			this.settingsView = new FilterView( {
+				model: this.settingsModel
+				, cups: this.cups
+			} );
+
+			this.renderInnerView( this.settingsModel.toJSON() );
 		},
 
 		renderInnerView: function( filter ) {
@@ -104,33 +115,8 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			var filter = this.settingsModel.toJSON();
-
-			var cup = service.getCup( this.cups, filter.cupId );
-
+			var cup = service.getCup( this.loadCups(), this.filter.cupId );
 			return this.getCupTitle( cup, translator.title );
-		},
-
-		getTitleHint: function() {
-			var filter = this.settingsModel.toJSON();
-
-			var userId = filter.userId;
-			var categoryId = filter.categoryId;
-			var cupId = filter.cupId;
-			var teamId = filter.teamId;
-			var showFutureMatches = filter.showFutureMatches;
-			var showFinished = filter.showFinished;
-
-			var filterByCategoryText = translator.category + ': ' + ( categoryId > 0 ? service.getCategory( this.categories, categoryId ).categoryName : translator.pluralAll );
-			var filterByCupText = translator.cup + ': ' + ( cupId > 0 ? service.getCup( this.cups, cupId ).cupName : translator.pluralAll );
-			var filterByTeamText = translator.team + ': ' + ( teamId > 0 ? service.getTeam( this.teams, teamId ).teamName : translator.pluralAll );
-			var filterByUserText = translator.user + ': ' + ( userId > 0 ? service.getUser( this.users, userId ).userName : translator.pluralAll );
-
-			return translator.filteredBy + ': ' + filterByCategoryText + ', ' + filterByCupText + ', ' + filterByTeamText + ', ' + filterByUserText
-					+ ', ' + translator.matches + ': '
-					+ translator.futureMatchesAreShownLabel + ' - ' + ( showFutureMatches ? translator.yes : translator.no )
-					+ ', '
-					+ translator.finishedMatchesAreShownLabel + ' - ' + ( showFinished ? translator.yes : translator.no );
 		},
 
 		_validateFilter: function() {

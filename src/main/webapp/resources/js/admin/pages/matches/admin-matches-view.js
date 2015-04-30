@@ -66,10 +66,6 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
-		getTitle: function() {
-			return this.getTitleHint();
-		},
-
 		loadCups: function() {
 			return adminService.loadCups();
 		},
