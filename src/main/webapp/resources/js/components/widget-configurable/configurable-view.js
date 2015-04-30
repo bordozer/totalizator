@@ -115,7 +115,9 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			var cup = service.getCup( this.loadCups(), this.filter.cupId );
+			var cupId = this.settingsView == undefined ? this.filter.cupId : this.settingsView.get( 'cupId' );
+			var cup = service.getCup( this.loadCups(), cupId );
+
 			return this.getCupTitle( cup, translator.title );
 		},
 
