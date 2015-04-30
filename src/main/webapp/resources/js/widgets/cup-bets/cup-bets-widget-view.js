@@ -16,7 +16,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: "Cup result bets"
+		title: "Your cup winners bets"
 		, menuEditCupTeamBetsLabel: "Edit cup team bets"
 		, noCupTeamPositionLabel: "No bet yet"
 		, cupPositionLabel: "cup position"
