@@ -20,7 +20,7 @@ define( function ( require ) {
 		, menuEditCupTeamBetsLabel: "Edit cup team bets"
 		, noCupTeamPositionLabel: "No bet yet"
 		, cupPositionLabel: "cup position"
-		, allCupBetsLabel: "Cup result bets"
+		, allCupBetsLabel: "All cup winners bets"
 		, validation_DuplicateTeams: "Cup team bet validation: Duplicated teams!"
 	} );
 

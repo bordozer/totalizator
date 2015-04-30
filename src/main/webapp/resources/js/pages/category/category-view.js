@@ -9,6 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/category-template.html' ) );
 
 	var service = require( '/resources/js/services/service.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var cupWinners = require( 'js/widgets/cup-winners/cup-winners-widget' );
 
@@ -50,7 +51,12 @@ define( function ( require ) {
 				var container = $( '<div></div>' );
 				el.append( container );
 
-				cupWinners( container, { cup: cup } );
+				container.append( "<h4 class='text-center'>" + dateTimeService.formatDateDisplay( cup.cupStartDate ) + "</h4>" );
+
+				var winnersContainer = $( "<div class='row'><div class='col-lg-12'></div></div>" );
+				container.append( winnersContainer );
+
+				cupWinners( winnersContainer, { cup: cup } );
 			});
 		}
 	} );

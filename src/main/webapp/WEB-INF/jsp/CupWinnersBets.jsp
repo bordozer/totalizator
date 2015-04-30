@@ -16,13 +16,12 @@
 			var cupId = ${cup.id};
 
 			var translator = new Translator( {
-				title: 'Cup result bets'
+				title: 'All cup winners bets'
 			} );
 
 			var breadcrumbs = [
 				{ link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
 				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
-				, { link: '#', title: '${cup.cupName}' }
 				, { link: '#', title: translator.title }
 			];
 

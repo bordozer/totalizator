@@ -8,6 +8,16 @@
 	</translation>
 
 	<translation>
+		<nerd>Your cup winners bets</nerd>
+		<ru><![CDATA[Ваши ставки на победителей чемпионата]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>All cup winners bets</nerd>
+		<ru><![CDATA[Все ставки на победителей чемпионата]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>No bet yet</nerd>
 		<ru><![CDATA[Ставки нет]]></ru>
 	</translation>
@@ -25,11 +35,6 @@
 	<translation>
 		<nerd>Cup team bet saving error</nerd>
 		<ru><![CDATA[Ошибка при сохранении ставки на результат чемпионата]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Your cup winners bets</nerd>
-		<ru><![CDATA[Ваши ставки на победителей чемпионата]]></ru>
 	</translation>
 
 	<translation>
