@@ -40,9 +40,8 @@ public class NBAImportRestController {
 			throw new IllegalArgumentException( String.format( "Cup #%d not found", cupId ) );
 		}
 
-		final ImportStatusDTO result = new ImportStatusDTO();
-
 		if ( nbaGameDataImportService.isActive() ) {
+			final ImportStatusDTO result = new ImportStatusDTO();
 			result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
 			result.setImportActive( false );
 			result.setImportStatusMessage( translatorService.translate( "Import is already going", getLanguage() ) );
@@ -54,6 +53,7 @@ public class NBAImportRestController {
 
 		new NBAGameImportRunner( cup, nbaGameDataImportService ).start();
 
+		final ImportStatusDTO result = new ImportStatusDTO();
 		result.setCupId( cupId );
 		result.setImportActive( true );
 		result.setImportStatusMessage( translatorService.translate( "Import started", getLanguage() ) );
