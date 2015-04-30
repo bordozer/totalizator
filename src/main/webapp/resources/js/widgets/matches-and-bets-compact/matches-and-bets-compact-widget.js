@@ -7,7 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var Model = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
-	var View = require( './matches-and-bets-compact-vew' );
+	var View = require( './matches-and-bets-compact-widget-vew' );
 
 	function init( container, options ) {
 
