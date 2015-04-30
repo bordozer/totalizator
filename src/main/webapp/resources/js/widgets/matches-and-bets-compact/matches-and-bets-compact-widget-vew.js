@@ -17,6 +17,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Teams standoff history"
 		, yourBetHint: "Your bet"
+		, noMatchesFound: "No matches found"
 	} );
 
 	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id ) {
@@ -157,6 +158,12 @@ define( function ( require ) {
 
 			var el = this.$( this.windowBodyContainerSelector );
 			el.empty();
+
+			if ( this.model.length == 0 ) {
+				el.html( translator.noMatchesFound );
+				this.trigger( 'inner-view-rendered' );
+				return;
+			}
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
