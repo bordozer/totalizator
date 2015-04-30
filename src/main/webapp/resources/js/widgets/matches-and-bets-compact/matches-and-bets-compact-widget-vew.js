@@ -151,10 +151,6 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
-		getTitle: function() {
-			return this.getCupTitle( this.options.cup, translator.title );
-		},
-
 		_renderCupMatchesAndBets: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
