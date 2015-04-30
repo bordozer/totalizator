@@ -99,10 +99,6 @@ define( function ( require ) {
 			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
 
-		/*loadCups: function() {
-			return service.loadPublicCups();
-		},*/
-
 		_renderSettings: function() {
 
 			this.$( this.windowBodyContainerSelector ).html( templateSettings( {
@@ -117,11 +113,10 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			return "TODO";
-			/*var cupId = this.settingsModel == undefined ? this.filter.cupId : this.settingsModel.get( 'cupId' );
-			var cup = service.getCup( this.loadCups(), cupId );
+			var cupId = this.settingsModel == undefined ? this.filter.cupId : this.settingsModel.get( 'cupId' );
+			var cup = service.getCup( service.loadPublicCups(), cupId );
 
-			return this.getCupTitle( cup, translator.title );*/
+			return this.getCupTitle( cup, translator.title );
 		},
 
 		_validateFilter: function() {
