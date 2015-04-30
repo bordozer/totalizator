@@ -64,7 +64,7 @@ define( function ( require ) {
 		},
 
 		getCupTitle: function( cup, title ) {
-			return cup.category.categoryName + ":<strong>" + " <a class='text-info' href='/totalizator/cups/" + cup.cupId + "/'>" +  cup.cupName + "</a></strong><br /><span style='padding-left: 17px;'>" +  title + '</span>';
+			return cup.category.categoryName + ":<strong>" + " <a class='text-info' href='/totalizator/cups/" + cup.cupId + "/'>" +  cup.cupName + "</a></strong> - " +  title;
 		},
 
 		getTitleHint: function() {
