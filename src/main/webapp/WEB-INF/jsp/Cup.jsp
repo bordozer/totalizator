@@ -20,7 +20,7 @@
 			} );
 
 			var breadcrumbs = [
-				{ link: '#', title: "${cup.category.categoryName}" }
+				{ link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
 				, { link: '#', title: "${cup.cupName}" }
 				, { link: '#', title: translator.title }
 			];
