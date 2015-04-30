@@ -9,7 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/user-card-template.html' ) );
 
 	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
-	var MatchesAndBetsCompactView = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact-vew' );
+	var MatchesAndBetsCompactView = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact-widget-vew' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
