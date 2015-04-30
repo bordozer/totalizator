@@ -8,6 +8,10 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/category-template.html' ) );
 
+	var service = require( '/resources/js/services/service.js' );
+
+	var cupWinners = require( 'js/widgets/cup-winners/cup-winners-widget' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Category overview"
@@ -25,13 +29,29 @@ define( function ( require ) {
 		render: function() {
 
 			var category = this.model.toJSON();
-			console.log( category );
 
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var cups = service.filterCupsByCategory( service.loadPublicCups(), category.categoryId );
+
+			var data = _.extend( {}, this.model.toJSON(), { cups: cups, translator: translator } );
 
 			this.$el.html( template( data ) );
 
+			this._renderCupsWinners( cups );
+
 			return this;
+		},
+
+		_renderCupsWinners: function( cups ) {
+
+			var el = this.$( '.js-cups' );
+
+			_.each( cups, function( cup ) {
+
+				var container = $( '<div></div>' );
+				el.append( container );
+
+				cupWinners( container, { cup: cup } );
+			});
 		}
 	} );
 } );
