@@ -80,10 +80,12 @@ define( function ( require ) {
 
 		_runRender: function() {
 
-			this.users = service.loadUsers();
-			this.categories = service.loadCategories();
-			this.cups = this.loadCups();
-			this.teams = service.loadTeams();
+			var matchFilterDataModel = this.dataModel.toJSON();
+
+			this.users = matchFilterDataModel.users;
+			this.categories = matchFilterDataModel.categories;
+			this.cups = matchFilterDataModel.cups;
+			this.teams = matchFilterDataModel.teams;
 
 			this.settingsView = new FilterView( {
 				model: this.settingsModel
@@ -97,9 +99,9 @@ define( function ( require ) {
 			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
 		},
 
-		loadCups: function() {
+		/*loadCups: function() {
 			return service.loadPublicCups();
-		},
+		},*/
 
 		_renderSettings: function() {
 
@@ -115,10 +117,11 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			var cupId = this.settingsModel == undefined ? this.filter.cupId : this.settingsModel.get( 'cupId' );
+			return "TODO";
+			/*var cupId = this.settingsModel == undefined ? this.filter.cupId : this.settingsModel.get( 'cupId' );
 			var cup = service.getCup( this.loadCups(), cupId );
 
-			return this.getCupTitle( cup, translator.title );
+			return this.getCupTitle( cup, translator.title );*/
 		},
 
 		_validateFilter: function() {

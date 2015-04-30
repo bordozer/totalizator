@@ -164,7 +164,8 @@ public class DTOServiceImpl implements DTOService {
 			@Override
 			public CupDTO apply( final Cup cup ) {
 
-				final CupDTO cupDTO = new CupDTO( cup.getId(), cup.getCupName(), transformCategory( cup.getCategory() ) );
+				final String cupName = cup.isPublicCup() ? cup.getCupName() : String.format( "[ %s ]", cup.getCupName() );
+				final CupDTO cupDTO = new CupDTO( cup.getId(), cupName, transformCategory( cup.getCategory() ) );
 
 				cupDTO.setWinnersCount( cup.getWinnersCount() );
 				cupDTO.setCupStartDate( cup.getCupStartTime() );

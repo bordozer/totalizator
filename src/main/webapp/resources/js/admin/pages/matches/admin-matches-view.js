@@ -66,10 +66,6 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
-		loadCups: function() {
-			return adminService.loadCups();
-		},
-
 		_renderMatches: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
@@ -79,7 +75,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.cups = this.loadCups();
+			this.cups = adminService.loadCups();
 
 			var self = this;
 			this.model.forEach( function( match ) {

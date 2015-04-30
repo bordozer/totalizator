@@ -8,10 +8,11 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		initialize: function ( options ) {
+			this.initialFilter = options.filter;
 		},
 
 		url: function() {
-			return '/rest/users/current/';
+			return '/rest/cups/' + this.initialFilter.cupId + '/matches/filter-data/';
 		}
 	});
 } );
