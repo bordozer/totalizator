@@ -40,7 +40,7 @@ define( function ( require ) {
 
 			var cup = this.model.cup;
 			if ( ! cup.finished ) {
-				this.setBody( "<span class='text-center'>" + translator.cupIsNotFinished + "</span>" );
+				this.setBody( "<span class='text-center'><small>" + translator.cupIsNotFinished + "</small></span>" );
 				this.trigger( 'inner-view-rendered' );
 				return;
 			}
