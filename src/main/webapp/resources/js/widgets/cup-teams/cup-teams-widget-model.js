@@ -7,6 +7,9 @@ define( function ( require ) {
 
 	return Backbone.Model.extend( {
 
+		letter: '',
+		active: false,
+
 		initialize: function ( options ) {
 			this.cup = options.options.cup;
 		},
@@ -16,11 +19,24 @@ define( function ( require ) {
 		},
 
 		load: function() {
+			this.letter = '';
+			this.active = false;
+
 			this.fetch( { cache:false } );
 		},
 
 		loadStartedWith: function( letter ) {
+			this.letter = letter;
+			this.active = false;
+
 			this.fetch( { data: { letter: letter }, cache:false } );
+		},
+
+		loadActive: function( letter ) {
+			this.letter = '';
+			this.active = true;
+
+			this.fetch( { data: { active: true }, cache:false } );
 		}
 	} );
 } );

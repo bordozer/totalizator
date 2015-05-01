@@ -13,6 +13,7 @@ import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.services.CupService;
+import totalizator.app.services.CupTeamService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
 
@@ -34,6 +35,9 @@ public class CupTeamsRestController {
 	private TeamService teamService;
 
 	@Autowired
+	private CupTeamService cupTeamService;
+
+	@Autowired
 	private DTOService dtoService;
 
 	@ResponseStatus( HttpStatus.OK )
@@ -41,6 +45,7 @@ public class CupTeamsRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public CupTeamsDTO all( final @PathVariable( "cupId" ) int cupId
 			, @RequestParam(value = "letter", required = false) final String letter
+			, @RequestParam(value = "active", required = false) final boolean active
 			, final Principal principal )
 	{
 		final Cup cup = cupService.load( cupId );
@@ -54,7 +59,7 @@ public class CupTeamsRestController {
 			}
 		} );
 
-		if ( StringUtils.isNotEmpty( letter ) ) {
+		if ( ! active && StringUtils.isNotEmpty( letter ) ) {
 			CollectionUtils.filter( teams, new Predicate<Team>() {
 				@Override
 				public boolean evaluate( final Team team ) {
@@ -63,6 +68,10 @@ public class CupTeamsRestController {
 			} );
 		}
 
+		if ( active ) {
+			final List<Team> activeTeams = cupTeamService.loadActiveForCup( cupId );
+			return new CupTeamsDTO( dtoService.transformTeams( activeTeams ), newHashSet( letters ) );
+		}
 
 		return new CupTeamsDTO( dtoService.transformTeams( teams ), newHashSet( letters ) );
 	}

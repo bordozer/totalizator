@@ -14,6 +14,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Teams"
 		, allTeamsLabel: "All teams"
+		, activeTeamsLabel: "Active teams"
 	} );
 
 	return WidgetView.extend( {
@@ -28,14 +29,20 @@ define( function ( require ) {
 		},
 
 		renderBody: function () {
-			this.model.fetch( { cache: false } );
+			this.model.loadActive();
 		},
 
 		_renderTeams: function () {
 
 			var model = this.model.toJSON();
 
-			var data = _.extend( {}, { teams: model.teams, letters: model.letters, translator: translator } );
+			var data = _.extend( {}, {
+				teams: model.teams
+				, letters: model.letters
+				, letter: this.model.letter
+				, active: this.model.active
+				, translator: translator
+			} );
 
 			this.setBody( template( data ) );
 
@@ -56,6 +63,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			var letter = $( evt.target ).data( 'letter' );
+
+			if ( letter == 'active' ) {
+				this.model.loadActive();
+				return;
+			}
+
 			this.model.loadStartedWith( letter );
 		}
 	} );

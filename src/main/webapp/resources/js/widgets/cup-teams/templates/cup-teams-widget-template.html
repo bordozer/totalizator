@@ -3,9 +3,11 @@
 	<thead>
 		<tr>
 			<td class="text-center">
-				<a href="#" onclick="return false;" data-letter="" class="js-cup-team-letter"><%-translator.allTeamsLabel%></a>
+				[ <a href="#" onclick="return false;" data-letter="" class="js-cup-team-letter <%- ! active && letter == '' ? 'text-success' : '' %>"><%-translator.allTeamsLabel%></a> ]
+				[ <a href="#" onclick="return false;" data-letter="active" class="js-cup-team-letter <%- active ? 'text-success' : '' %>"><%-translator.activeTeamsLabel%></a> ]
+				<br />
 				<% _.each( letters, function( letters ) { %>
-					<a href="#" onclick="return false;" data-letter="<%-letters%>" class="js-cup-team-letter"><%-letters%></a>
+					<a href="#" onclick="return false;" data-letter="<%-letters%>" class="js-cup-team-letter <%- letter == letters ? 'text-success' : '' %>"><%-letters%></a>
 				<% } ) %>
 			</td>
 		</tr>
