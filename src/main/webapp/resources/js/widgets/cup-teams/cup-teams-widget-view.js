@@ -24,11 +24,17 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.cup = options.options.cup;
+
 			this.listenTo( this.model, 'sync', this._renderTeams );
 			this.render();
 		},
 
 		renderBody: function () {
+			if ( this.cup.finished ) {
+				this.model.loadAll();
+				return;
+			}
 			this.model.loadActive();
 		},
 

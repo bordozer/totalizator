@@ -18,7 +18,7 @@ define( function ( require ) {
 			return '/rest/cups/' + this.cup.cupId + '/teams/';
 		},
 
-		load: function() {
+		loadAll: function() {
 			this.letter = '';
 			this.active = false;
 
