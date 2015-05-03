@@ -20,7 +20,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.settings = options;
+			this.initialSettings = options;
 
 			this.saveAttributes();
 		},
@@ -34,7 +34,7 @@ define( function ( require ) {
 		},
 
 		reset: function() {
-			this.set( _.extend( this.defaults, this.settings ) );
+			this.set( _.extend( this.defaults, this.initialSettings ) );
 		}
 	});
 });
