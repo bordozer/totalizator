@@ -64,10 +64,7 @@ define( function ( require ) {
 						userId: userId
 						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
-						, teamId: 0
-						, team2Id: 0
 						, showFinished: true
-						, showFutureMatches: false
 					}
 					, menuItems: []
 					, currentUser: currentUser

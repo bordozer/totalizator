@@ -32,10 +32,9 @@ define( function( require ) {
 			model: matchesModel
 			, el: container
 			, settings: {
-				userId: 0
-				, categoryId: options.categoryId
+				categoryId: options.categoryId
 				, cupId: options.cupId
-				, teamId: 0
+				, showFutureMatches: true
 			}
 			, menuItems: menuItems
 		} );

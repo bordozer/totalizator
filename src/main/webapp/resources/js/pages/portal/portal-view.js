@@ -55,10 +55,9 @@ define( function ( require ) {
 					model: model
 					, el: container
 					, settings: {
-						userId: 0
-						, categoryId: cup.category.categoryId
+						categoryId: cup.category.categoryId
 						, cupId: cup.cupId
-						, teamId: 0
+						, showFutureMatches: true
 					}
 					, menuItems: []
 					, currentUser: currentUser
