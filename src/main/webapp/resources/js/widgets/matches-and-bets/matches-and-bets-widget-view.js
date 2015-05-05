@@ -28,7 +28,7 @@ define( function ( require ) {
 
 		, actionStandOffHistory: 'Teams standoff history'
 
-		, footer_YourBetLabel: 'Match and Bets / Footer: Your bet'
+		, footer_YourBetLabel: 'Your bet'
 		, footer_NoBetYetLabel: 'Match and Bets / Footer: no bet yet'
 		, footer_BettingFinishedLabel: 'Match and Bets / Footer: betting finished'
 
@@ -125,7 +125,6 @@ define( function ( require ) {
 
 			this._renderDropDownMenuItems();
 
-
 			if ( isMatchFinished ) {
 				this.$( '.js-panel-footer' ).html( this._renderIcon( 'fa-flag-checkered', model.bettingValidationMessage, false ) );
 			}
@@ -166,8 +165,12 @@ define( function ( require ) {
 				this._setMatchContainerClass( 'panel-success' );
 			}
 
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + bet.score1 + "</div>" );
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + bet.score2 + "</div>" );
+			if ( ! match.matchFinished ) {
+				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
+			}
+			var resultHighlight = service.matchResults( match.team1.teamId, bet.score1, match.team2.teamId, bet.score2 );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right " + resultHighlight.style1 + "'>" + bet.score1 + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score " + resultHighlight.style2 + "'>" + bet.score2 + "</div>" );
 
 			if ( ! match.matchFinished ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
