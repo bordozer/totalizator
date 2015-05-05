@@ -12,7 +12,7 @@
 				<%=team1.teamName%>
 				<img class="team-logo" src="<%=team1.teamLogo%>" title="<%=team1.teamName%>">
 				<% if( match.matchFinished ) { %>
-					<h5><%=match.score1%></h5>
+					<h5 class="<%=matchResults.style1%>"><%=match.score1%></h5>
 				<% } %>
 			</div>
 
@@ -20,7 +20,7 @@
 				<img class="team-logo" src="<%=team2.teamLogo%>" title="<%=team2.teamName%>">
 				<%=team2.teamName%>
 				<% if( match.matchFinished ) { %>
-					<h5><%=match.score2%></h5>
+					<h5 class="<%=matchResults.style2%>"><%=match.score2%></h5>
 				<% } %>
 			</div>
 
