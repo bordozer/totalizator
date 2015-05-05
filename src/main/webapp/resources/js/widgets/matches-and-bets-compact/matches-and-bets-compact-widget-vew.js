@@ -125,6 +125,10 @@ define( function ( require ) {
 				return service.matchResults( this.team1().teamId, this.score1(), this.team2().teamId, this.score2() );
 			},
 
+			getBetScoreHighlights: function() {
+				return service.matchResults( this.team1().teamId, this.betScore1(), this.team2().teamId, this.betScore2() );
+			},
+
 			formatDate: function() {
 				return dateTimeService.formatDateDisplay( match.beginningTime );
 			},
