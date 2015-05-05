@@ -7,7 +7,9 @@
 
 	<div class="col-lg-2">
 		<input type="checkbox" class="js-group-checkbox" value="true">
-		<strong>#<%=matchId%></strong> ( <%=translator.betsCountLabel%>: <a href="/totalizator/matches/<%=matchId%>/bets/"><%= model.betsCount %></a> )
+		<strong>#<%=matchId%></strong> &nbsp;
+		<%= model.matchFinished ? "<i class='fa fa-flag-checkered'></i>" : '' %> &nbsp;
+		<%=translator.betsCountLabel%>: <a href="/totalizator/matches/<%=matchId%>/bets/"><%= model.betsCount %></a>
 	</div>
 
 	<div class="col-lg-3 text-right <%=matchResults.style1%>">
