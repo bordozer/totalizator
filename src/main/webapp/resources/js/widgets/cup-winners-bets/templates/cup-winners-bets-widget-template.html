@@ -39,17 +39,27 @@
 					<td class="text-center <%= userCupBet.userCupBets[ i - 1 ].stillActive ? 'text-info' : 'text-danger' %>">
 						<% if( userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].team ) { %>
 
-							<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" <%= userCupBet.userCupBets[ i - 1 ].stillActive ? '' : "style='opacity: 0.2;'" %> >
+							<% if( userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
+								<div title="<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>">
+									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" >
+									<h5>
+										<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+									</h5>
+								</div>
 
-							<h5>
-								<% if( ! userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
-									<i class='fa fa-close' title="<%-translator.teamIsOutOfCupLabel%>"></i>
+								<% if( userCupBet.userCupBets[ i - 1 ].points > 0 ) { %>
+									<h4>+ <%= userCupBet.userCupBets[ i - 1 ].points %></h4>
 								<% } %>
-								<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
-							</h5>
+							<% } %>
 
-							<% if( userCupBet.userCupBets[ i - 1 ].points > 0 ) { %>
-								<h4>+ <%= userCupBet.userCupBets[ i - 1 ].points %></h4>
+							<% if( ! userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
+								<div title="<%-translator.teamIsOutOfCupLabel%>" style='opacity: 0.4;'>
+									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>"  >
+									<h5>
+										<i class='fa fa-close'></i>
+										<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+									</h5>
+								</div>
 							<% } %>
 
 						<% } %>
