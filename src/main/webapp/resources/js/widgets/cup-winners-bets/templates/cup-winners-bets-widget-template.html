@@ -39,10 +39,12 @@
 					<td class="text-center <%= userCupBet.userCupBets[ i - 1 ].stillActive ? 'text-info' : 'text-danger' %>">
 						<% if( userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].team ) { %>
 
-							<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>">
+							<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" <%= userCupBet.userCupBets[ i - 1 ].stillActive ? '' : "style='opacity: 0.2;'" %> >
 
-							<h5 title="<%-translator.teamIsOutOfCupLabel%>">
-								<%= userCupBet.userCupBets[ i - 1 ].stillActive ? '' : "<i class='fa fa-close'></i>" %>
+							<h5>
+								<% if( ! userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
+									<i class='fa fa-close' title="<%-translator.teamIsOutOfCupLabel%>"></i>
+								<% } %>
 								<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
 							</h5>
 
