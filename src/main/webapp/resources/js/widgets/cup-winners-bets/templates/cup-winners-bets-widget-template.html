@@ -53,13 +53,13 @@
 							<% } %>
 
 							<% if( ! userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
-								<div title="<%-translator.teamIsOutOfCupLabel%>" style='opacity: 0.4;'>
+								<div title="<%-translator.teamIsOutOfCupLabel%>" style='opacity: 0.3;'>
 									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>"  >
-									<h5>
-										<i class='fa fa-close'></i>
-										<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
-									</h5>
 								</div>
+								<h5>
+									<i class='fa fa-close'></i>
+									<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+								</h5>
 							<% } %>
 
 						<% } %>
