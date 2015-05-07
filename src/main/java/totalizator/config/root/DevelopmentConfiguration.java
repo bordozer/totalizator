@@ -79,6 +79,12 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
 		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLDialect" );
+
+		jpaProperties.put( "javax.persistence.sharedCache.mode", "ENABLE_SELECTIVE" );
+		jpaProperties.put( "hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" );
+		jpaProperties.put( "hibernate.cache.use_second_level_cache", "true" );
+		jpaProperties.put( "hibernate.cache.use_query_cache", "true" );
+
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
