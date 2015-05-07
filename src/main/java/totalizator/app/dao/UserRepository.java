@@ -2,6 +2,7 @@ package totalizator.app.dao;
 
 import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.User;
@@ -57,6 +58,7 @@ public class UserRepository implements GenericService<User>, NamedEntityGenericS
 	}
 
 	@Cacheable( value = CACHE_USER )
+//	@CachePut( value = CACHE_USER, key = "#result.id" )
 	public User findByLogin( final String login ) {
 		final List<User> users = em.createNamedQuery( User.FIND_BY_LOGIN, User.class )
 				.setParameter( "login", login )
