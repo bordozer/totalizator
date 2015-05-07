@@ -3,11 +3,8 @@ package totalizator.config.root;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
-import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -22,7 +19,6 @@ import totalizator.app.services.SystemVarsServiceImpl;
 import totalizator.app.translator.TranslatorServiceImpl;
 
 import javax.persistence.SharedCacheMode;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
