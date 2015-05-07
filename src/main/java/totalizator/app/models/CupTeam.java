@@ -1,5 +1,7 @@
 package totalizator.app.models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 import static totalizator.app.models.CupTeam.LOAD_ALL;
@@ -7,7 +9,8 @@ import static totalizator.app.models.CupTeam.LOAD_ALL_CUP_TEAMS;
 import static totalizator.app.models.CupTeam.LOAD_CUP_TEAM;
 
 @Entity
-@Cacheable( true )
+//@Cacheable( true )
+@org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table( name = "cupTeams" )
 @NamedQueries( {
 		@NamedQuery(

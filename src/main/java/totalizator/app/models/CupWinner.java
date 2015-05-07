@@ -1,11 +1,14 @@
 package totalizator.app.models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 import static totalizator.app.models.CupWinner.*;
 
 @Entity
-@Cacheable( true )
+//@Cacheable( true )
+@org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table(
 		name = "cupWinners"
 )

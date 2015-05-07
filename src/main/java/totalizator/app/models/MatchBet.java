@@ -1,12 +1,15 @@
 package totalizator.app.models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static totalizator.app.models.MatchBet.*;
 
 @Entity
-@Cacheable( true )
+//@Cacheable( true )
+@org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table(
 		name = "matchBets"
 		, indexes = {

@@ -3,11 +3,15 @@
 
 	<defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false"/>
 
-	<cache name="messageCache" maxElementsInMemory="100" eternal="true" overflowToDisk="false"/>
-	<cache name="messagesCache" maxElementsInMemory="100" eternal="true" overflowToDisk="false"/>
-
-	<cache name="totalizator.app.cache.cup-scores.query" eternal="true" overflowToDisk="false" statistics="true">
-		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" properties="replicatePuts = false, replicatePutsViaCopy = false, replicateUpdates = false, replicateRemovals = true, replicateUpdatesViaCopy = false, replicateAsynchronously = true"/>
-	</cache>
+	<cache name="totalizator.app.cache.cup-scores.query"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+		/>
 
 </ehcache>

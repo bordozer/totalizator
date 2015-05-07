@@ -1,9 +1,8 @@
 package totalizator.config.root;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.config.CacheConfiguration;
+import net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory;
 import org.apache.log4j.Logger;
-import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
+import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
@@ -18,7 +17,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import totalizator.app.services.SystemVarsService;
 import totalizator.app.services.SystemVarsServiceImpl;
-import totalizator.app.services.score.CupScoresService;
 import totalizator.app.translator.TranslatorServiceImpl;
 
 import javax.persistence.SharedCacheMode;
@@ -90,7 +88,7 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLDialect" );
 
 		jpaProperties.put( "javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE );
-		jpaProperties.put( Environment.CACHE_REGION_FACTORY, SingletonEhCacheRegionFactory.class.getName() );
+		jpaProperties.put( Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName() );
 		jpaProperties.put( Environment.USE_SECOND_LEVEL_CACHE, true );
 		jpaProperties.put( Environment.USE_QUERY_CACHE, true );
 		jpaProperties.put( Environment.GENERATE_STATISTICS, true );
@@ -101,7 +99,7 @@ public class DevelopmentConfiguration {
 		return entityManagerFactoryBean;
 	}
 
-	@Bean( name = "cacheManager" )
+	@Bean
 	public EhCacheCacheManager cacheManager() {
 		return new EhCacheCacheManager( ehCacheManagerFactoryBean().getObject() );
 	}
