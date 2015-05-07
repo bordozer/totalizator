@@ -5,10 +5,13 @@ import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -99,14 +102,7 @@ public class DevelopmentConfiguration {
 		return entityManagerFactoryBean;
 	}
 
-	@Bean
-	public CacheManager cacheManager() {
-		final SimpleCacheManager cacheManager = new SimpleCacheManager();
-		cacheManager.setCaches( Arrays.asList( new ConcurrentMapCache( "default" ) ) );
-		return cacheManager;
-	}
-
-	/*@Bean( name = "cacheManager" )
+	@Bean( name = "cacheManager" )
 	public EhCacheCacheManager cacheManager() {
 		return new EhCacheCacheManager( ehCacheManagerFactoryBean().getObject() );
 	}
@@ -120,5 +116,5 @@ public class DevelopmentConfiguration {
 		cacheManagerFactoryBean.setShared( true );
 
 		return cacheManagerFactoryBean;
-	}*/
+	}
 }
