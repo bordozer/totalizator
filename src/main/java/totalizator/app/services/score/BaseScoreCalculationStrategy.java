@@ -1,6 +1,5 @@
 package totalizator.app.services.score;
 
-import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 

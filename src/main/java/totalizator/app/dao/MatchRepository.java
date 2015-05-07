@@ -9,6 +9,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.GenericService;
+import totalizator.app.services.score.CupScoresService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,6 +50,7 @@ public class MatchRepository implements GenericService<Match> {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
 	} )
 	public Match save( final Match entry ) {
 		return em.merge( entry );
@@ -58,6 +60,7 @@ public class MatchRepository implements GenericService<Match> {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );

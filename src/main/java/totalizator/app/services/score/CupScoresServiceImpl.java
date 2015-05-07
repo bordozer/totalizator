@@ -3,6 +3,7 @@ package totalizator.app.services.score;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import totalizator.app.beans.UserPoints;
 import totalizator.app.models.*;
@@ -33,11 +34,13 @@ public class CupScoresServiceImpl implements CupScoresService {
 	private CupBetsService cupBetsService;
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public int getUsersScores( final MatchBet matchBet ) {
 		return ScoreCalculationStrategy.getInstance().getPoints( matchBet );
 	}
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public List<UserPoints> getUsersScores( final Cup cup ) {
 
 		final List<UserPoints> result = newArrayList();
@@ -57,6 +60,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 	}
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public List<UserPoints> getUserPoints( final Cup cup, final User user ) {
 		final List<UserPoints> userResult = newArrayList();
 
@@ -71,6 +75,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 	}
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public List<UserPoints> getUsersScoresSummary( final Cup cup ) {
 		final List<UserPoints> usersScores = getUsersScores( cup );
 
@@ -116,6 +121,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 	}
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public int getUserCupWinnersPoints( final Cup cup, final Team team, final User user, final int cupPosition ) {
 
 		if ( !cupService.isCupFinished( cup ) ) {

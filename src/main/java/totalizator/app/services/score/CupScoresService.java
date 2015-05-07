@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface CupScoresService {
 
+	String CACHE_QUERY = "totalizator.app.cache.cup-scores.query";
+
 	int getUsersScores( final MatchBet matchBet );
 
 	List<UserPoints> getUsersScores( final Cup cup );
