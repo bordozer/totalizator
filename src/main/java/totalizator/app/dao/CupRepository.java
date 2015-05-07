@@ -22,32 +22,32 @@ public class CupRepository implements GenericService<Cup>, NamedEntityGenericSer
 	private EntityManager em;
 
 	@Override
-	@Cacheable( value = CACHE_CUP )
+//	@Cacheable( value = CACHE_CUP )
 	public List<Cup> loadAll() {
 		return em.createNamedQuery( Cup.LOAD_ALL, Cup.class )
 				.getResultList();
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_CUP, allEntries = true )
+	@CacheEvict( value = CACHE_CUP, key="#id" )
 	public Cup save( final Cup entry ) {
 		return em.merge( entry );
 	}
 
 	@Override
-	@Cacheable( value = CACHE_CUP )
+	@Cacheable( value = CACHE_CUP, key="#id" )
 	public Cup load( final int id ) {
 		return em.find( Cup.class, id );
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_CUP, allEntries = true )
+	@CacheEvict( value = CACHE_CUP, key="#id" )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
 	}
 
 	@Override
-	@Cacheable( value = CACHE_CUP )
+//	@Cacheable( value = CACHE_CUP )
 	public Cup findByName( final String name ) {
 		final List<Cup> cups = em.createNamedQuery( Cup.FIND_BY_NAME, Cup.class )
 				.setParameter( "cupName", name )

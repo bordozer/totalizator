@@ -23,13 +23,13 @@ public class MatchRepository implements GenericService<Match> {
 	private EntityManager em;
 
 	@Override
-	@Cacheable( value = CACHE_MATCH )
+//	@Cacheable( value = CACHE_MATCH )
 	public List<Match> loadAll() {
 		return em.createNamedQuery( Match.LOAD_ALL, Match.class )
 				.getResultList();
 	}
 
-	@Cacheable( value = CACHE_MATCH )
+//	@Cacheable( value = CACHE_MATCH )
 	public List<Match> loadAll( final Cup cup ) {
 		return em.createNamedQuery( Match.FIND_BY_CUP, Match.class )
 				.setParameter( "cupId", cup.getId() )
@@ -37,24 +37,24 @@ public class MatchRepository implements GenericService<Match> {
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_MATCH, allEntries = true )
+	@CacheEvict( value = CACHE_MATCH, key="#id" )
 	public Match save( final Match entry ) {
 		return em.merge( entry );
 	}
 
 	@Override
-	@Cacheable( value = CACHE_MATCH )
+	@Cacheable( value = CACHE_MATCH, key="#id" )
 	public Match load( final int id ) {
 		return em.find( Match.class, id );
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_MATCH, allEntries = true )
+	@CacheEvict( value = CACHE_MATCH, key="#id" )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
 	}
 
-	@Cacheable( value = CACHE_MATCH )
+//	@Cacheable( value = CACHE_MATCH )
 	public List<Match> find( final Team team1, final Team team2 ) {
 		return em.createNamedQuery( Match.FIND_BY_TEAMS, Match.class )
 				.setParameter( "team1Id", team1.getId() )
