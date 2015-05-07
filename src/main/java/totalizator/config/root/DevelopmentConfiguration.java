@@ -1,5 +1,7 @@
 package totalizator.config.root;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.config.CacheConfiguration;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
@@ -16,6 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import totalizator.app.services.SystemVarsService;
 import totalizator.app.services.SystemVarsServiceImpl;
+import totalizator.app.services.score.CupScoresService;
 import totalizator.app.translator.TranslatorServiceImpl;
 
 import javax.persistence.SharedCacheMode;
@@ -108,7 +111,7 @@ public class DevelopmentConfiguration {
 
 		final EhCacheManagerFactoryBean cacheManagerFactoryBean = new EhCacheManagerFactoryBean();
 
-		cacheManagerFactoryBean.setConfigLocation( new FileSystemResource( "src/main/webapp/WEB-INF/config/ehcache.xml" ) );
+		cacheManagerFactoryBean.setConfigLocation( new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" ) );
 		cacheManagerFactoryBean.setShared( true );
 
 		return cacheManagerFactoryBean;

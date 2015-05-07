@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
 	<defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false"/>
+
 	<cache name="messageCache" maxElementsInMemory="100" eternal="true" overflowToDisk="false"/>
 	<cache name="messagesCache" maxElementsInMemory="100" eternal="true" overflowToDisk="false"/>
+
+	<cache name="totalizator.app.cache.cup-scores.query" eternal="true" overflowToDisk="false" statistics="true">
+		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" properties="replicatePuts = false, replicatePutsViaCopy = false, replicateUpdates = false, replicateRemovals = true, replicateUpdatesViaCopy = false, replicateAsynchronously = true"/>
+	</cache>
+
 </ehcache>
