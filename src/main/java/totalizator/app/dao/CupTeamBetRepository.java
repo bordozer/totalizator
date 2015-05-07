@@ -41,25 +41,12 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 		em.remove( load( id ) );
 	}
 
-	/*public List<CupTeamBet> load( final Cup cup ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )
-				.setParameter( "cupId", cup.getId() )
-				.getResultList();
-	}*/
-
 	public List<CupTeamBet> load( final Cup cup, final User user ) {
 		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER, CupTeamBet.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "userId", user.getId() )
 				.getResultList();
 	}
-
-	/*public List<CupTeamBet> load( final Cup cup, final Team team ) {
-		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM, CupTeamBet.class )
-				.setParameter( "cupId", cup.getId() )
-				.setParameter( "teamId", team.getId() )
-				.getResultList();
-	}*/
 
 	public CupTeamBet load( final Cup cup, final User user, final int cupPosition ) {
 		final List<CupTeamBet> result = em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION, CupTeamBet.class )
