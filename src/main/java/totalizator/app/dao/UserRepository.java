@@ -29,9 +29,9 @@ public class UserRepository implements GenericService<User>, NamedEntityGenericS
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_USER, key="#id" )
-	public User save( final User user ) {
-		return em.merge( user );
+	@CacheEvict( value = CACHE_USER, key="#entry.id" )
+	public User save( final User entry ) {
+		return em.merge( entry );
 	}
 
 	@Override

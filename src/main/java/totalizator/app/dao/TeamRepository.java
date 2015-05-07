@@ -23,13 +23,13 @@ public class TeamRepository implements GenericService<Team>, NamedEntityGenericS
 	private EntityManager em;
 
 	@Override
-	@Cacheable( value = CACHE_TEAM )
+//	@Cacheable( value = CACHE_TEAM )
 	public List<Team> loadAll() {
 		return em.createNamedQuery( Team.LOAD_ALL, Team.class )
 				.getResultList();
 	}
 
-	@Cacheable( value = CACHE_TEAM )
+//	@Cacheable( value = CACHE_TEAM )
 	public List<Team> loadAll( final Category category ) {
 		return em.createNamedQuery( Team.FIND_BY_CATEGORY, Team.class )
 				.setParameter( "categoryId", category.getId() )
@@ -37,7 +37,7 @@ public class TeamRepository implements GenericService<Team>, NamedEntityGenericS
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_TEAM, key="#id" )
+	@CacheEvict( value = CACHE_TEAM, key="#entry.id" )
 	public Team save( final Team entry ) {
 		return em.merge( entry );
 	}
