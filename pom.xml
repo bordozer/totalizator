@@ -99,7 +99,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>3.0.3.RELEASE</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
