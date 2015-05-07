@@ -1,11 +1,15 @@
 package totalizator.app.models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static totalizator.app.models.Match.*;
 
 @Entity
+@Cacheable( true )
+//@org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_ONLY )
 @Table( name = "matches" )
 @NamedQueries( {
 		@NamedQuery(

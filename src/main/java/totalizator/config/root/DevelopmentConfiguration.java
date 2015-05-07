@@ -1,6 +1,8 @@
 package totalizator.config.root;
 
 import org.apache.log4j.Logger;
+import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,6 +16,7 @@ import totalizator.app.services.SystemVarsService;
 import totalizator.app.services.SystemVarsServiceImpl;
 import totalizator.app.translator.TranslatorServiceImpl;
 
+import javax.persistence.SharedCacheMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,10 +83,12 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
 		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLDialect" );
 
-		jpaProperties.put( "javax.persistence.sharedCache.mode", "ENABLE_SELECTIVE" );
-		jpaProperties.put( "hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" );
-		jpaProperties.put( "hibernate.cache.use_second_level_cache", "true" );
-		jpaProperties.put( "hibernate.cache.use_query_cache", "true" );
+		jpaProperties.put( "javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE );
+		jpaProperties.put( Environment.CACHE_REGION_FACTORY, SingletonEhCacheRegionFactory.class.getName() );
+		jpaProperties.put( Environment.USE_SECOND_LEVEL_CACHE, true );
+		jpaProperties.put( Environment.USE_QUERY_CACHE, true );
+		jpaProperties.put( Environment.GENERATE_STATISTICS, true );
+		jpaProperties.put( Environment.USE_STRUCTURED_CACHE, true );
 
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 

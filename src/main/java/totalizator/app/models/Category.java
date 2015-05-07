@@ -1,11 +1,15 @@
 package totalizator.app.models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 import static totalizator.app.models.Category.FIND_BY_NAME;
 import static totalizator.app.models.Category.LOAD_ALL;
 
 @Entity
+@Cacheable( true )
+//@org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_ONLY )
 @Table( name = "categories" )
 @NamedQueries( {
 		@NamedQuery(

@@ -1,5 +1,7 @@
 package totalizator.app.models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,6 +10,8 @@ import static totalizator.app.models.Cup.LOAD_ALL;
 
 
 @Entity
+@Cacheable( true )
+//@org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_ONLY )
 @Table( name = "cups" )
 @NamedQueries( {
 		@NamedQuery(

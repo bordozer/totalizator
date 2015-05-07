@@ -1,11 +1,15 @@
 package totalizator.app.models;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 import static totalizator.app.models.Team.*;
 
 
 @Entity
+@Cacheable( true )
+//@org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_ONLY )
 @Table( name = "teams" )
 @NamedQueries( {
 		@NamedQuery(
