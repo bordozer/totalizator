@@ -98,7 +98,7 @@ public class DevelopmentConfiguration {
 		return entityManagerFactoryBean;
 	}
 
-	@Bean( name = "cacheManager" )
+	@Bean( name = "ehCacheManager" )
 	public CacheManager cacheManager() {
 		return new EhCacheCacheManager( ehcache().getObject() );
 	}
@@ -107,7 +107,7 @@ public class DevelopmentConfiguration {
 	public EhCacheManagerFactoryBean ehcache() {
 
 		final EhCacheManagerFactoryBean ehcache = new EhCacheManagerFactoryBean();
-		ehcache.setCacheManagerName( "cacheManager" );
+		ehcache.setCacheManagerName( "ehCacheManager" );
 
 		return ehcache;
 	}
