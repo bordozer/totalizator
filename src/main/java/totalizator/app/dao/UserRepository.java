@@ -47,7 +47,7 @@ public class UserRepository implements GenericService<User>, NamedEntityGenericS
 	}
 
 	@Override
-//	@Cacheable( value = CACHE_USER )
+	@Cacheable( value = CACHE_USER )
 	public User findByName( final String name ) {
 		final List<User> users = em.createNamedQuery( User.FIND_BY_USERNAME, User.class )
 				.setParameter( "username", name )
@@ -56,7 +56,7 @@ public class UserRepository implements GenericService<User>, NamedEntityGenericS
 		return users.size() == 1 ? users.get( 0 ) : null;
 	}
 
-//	@Cacheable( value = CACHE_USER )
+	@Cacheable( value = CACHE_USER )
 	public User findByLogin( final String login ) {
 		final List<User> users = em.createNamedQuery( User.FIND_BY_LOGIN, User.class )
 				.setParameter( "login", login )

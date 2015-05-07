@@ -22,7 +22,7 @@ public class CupRepository implements GenericService<Cup>, NamedEntityGenericSer
 	private EntityManager em;
 
 	@Override
-//	@Cacheable( value = CACHE_CUP )
+	@Cacheable( value = CACHE_CUP )
 	public List<Cup> loadAll() {
 		return em.createNamedQuery( Cup.LOAD_ALL, Cup.class )
 				.getResultList();
@@ -47,7 +47,7 @@ public class CupRepository implements GenericService<Cup>, NamedEntityGenericSer
 	}
 
 	@Override
-//	@Cacheable( value = CACHE_CUP )
+	@Cacheable( value = CACHE_CUP )
 	public Cup findByName( final String name ) {
 		final List<Cup> cups = em.createNamedQuery( Cup.FIND_BY_NAME, Cup.class )
 				.setParameter( "cupName", name )

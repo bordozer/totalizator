@@ -22,7 +22,7 @@ public class CategoryRepository implements GenericService<Category>, NamedEntity
 	private EntityManager em;
 
 	@Override
-//	@Cacheable( value = CACHE_CATEGORY )
+	@Cacheable( value = CACHE_CATEGORY )
 	public List<Category> loadAll() {
 		return em.createNamedQuery( Category.LOAD_ALL, Category.class )
 				.getResultList();
@@ -47,7 +47,7 @@ public class CategoryRepository implements GenericService<Category>, NamedEntity
 	}
 
 	@Override
-//	@Cacheable( value = CACHE_CATEGORY, key="#id" )
+	@Cacheable( value = CACHE_CATEGORY, key="#id" )
 	public Category findByName( final String categoryName ) {
 		final List<Category> categories = em.createNamedQuery( Category.FIND_BY_NAME, Category.class )
 				.setParameter( "categoryName", categoryName )
