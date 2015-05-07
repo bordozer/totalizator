@@ -3,6 +3,7 @@ package totalizator.app.dao;
 import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
@@ -17,19 +18,21 @@ import java.util.List;
 public class MatchRepository implements GenericService<Match> {
 
 	private static final Logger LOGGER = Logger.getLogger( MatchRepository.class );
-	private static final String CACHE_MATCH = "totalizator.app.cache.match";
+
+	private static final String CACHE_ENTRY = "totalizator.app.cache.match";
+	private static final String CACHE_QUERY = "totalizator.app.cache.matches";
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
-//	@Cacheable( value = CACHE_MATCH )
+	@Cacheable( value = CACHE_QUERY )
 	public List<Match> loadAll() {
 		return em.createNamedQuery( Match.LOAD_ALL, Match.class )
 				.getResultList();
 	}
 
-//	@Cacheable( value = CACHE_MATCH )
+	@Cacheable( value = CACHE_QUERY )
 	public List<Match> loadAll( final Cup cup ) {
 		return em.createNamedQuery( Match.FIND_BY_CUP, Match.class )
 				.setParameter( "cupId", cup.getId() )
@@ -37,24 +40,30 @@ public class MatchRepository implements GenericService<Match> {
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_MATCH, key="#entry.id" )
-	public Match save( final Match entry ) {
-		return em.merge( entry );
-	}
-
-	@Override
-	@Cacheable( value = CACHE_MATCH, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key="#id" )
 	public Match load( final int id ) {
 		return em.find( Match.class, id );
 	}
 
 	@Override
-	@CacheEvict( value = CACHE_MATCH, key="#id" )
+	@Caching( evict = {
+		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
+		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+	} )
+	public Match save( final Match entry ) {
+		return em.merge( entry );
+	}
+
+	@Override
+	@Caching( evict = {
+		@CacheEvict( value = CACHE_ENTRY, key="#id" )
+		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
 	}
 
-//	@Cacheable( value = CACHE_MATCH )
+	@Cacheable( value = CACHE_QUERY )
 	public List<Match> find( final Team team1, final Team team2 ) {
 		return em.createNamedQuery( Match.FIND_BY_TEAMS, Match.class )
 				.setParameter( "team1Id", team1.getId() )
