@@ -3,21 +3,22 @@ package totalizator.config.root;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import totalizator.app.init.TestDataInitializer;
 import totalizator.app.services.SystemVarsService;
 import totalizator.app.services.SystemVarsServiceImpl;
 import totalizator.app.translator.TranslatorServiceImpl;
+
 
 import javax.persistence.SharedCacheMode;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import java.util.Map;
 @Configuration
 @Profile( "development" )
 @EnableTransactionManagement
+//@EnableCaching
 public class DevelopmentConfiguration {
 
 	private static final Logger LOGGER = Logger.getLogger( DevelopmentConfiguration.class );
@@ -49,19 +51,19 @@ public class DevelopmentConfiguration {
 	public DriverManagerDataSource dataSource( final SystemVarsService systemVarsService ) {
 
 		LOGGER.debug( String.format( "Connection information: host=%s; port=%s; db=%s"
-				, systemVarsService.getDatabaseHost()
-				, systemVarsService.getDatabasePort()
-				, systemVarsService.getDatabaseName() )
+						, systemVarsService.getDatabaseHost()
+						, systemVarsService.getDatabasePort()
+						, systemVarsService.getDatabaseName() )
 		);
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName( "com.mysql.jdbc.Driver" );
 		dataSource.setUrl( String.format( "jdbc:mysql://%s:%s/%s"
-				, systemVarsService.getDatabaseHost()
-				, systemVarsService.getDatabasePort()
-				, systemVarsService.getDatabaseName() )
+						, systemVarsService.getDatabaseHost()
+						, systemVarsService.getDatabasePort()
+						, systemVarsService.getDatabaseName() )
 		);
-		dataSource.setUsername( systemVarsService.getDatabaseUserName());
+		dataSource.setUsername( systemVarsService.getDatabaseUserName() );
 		dataSource.setPassword( systemVarsService.getDatabaseUserPassword() );
 
 		return dataSource;
@@ -98,17 +100,19 @@ public class DevelopmentConfiguration {
 		return entityManagerFactoryBean;
 	}
 
-	@Bean( name = "ehCacheManager" )
-	public CacheManager cacheManager() {
-		return new EhCacheCacheManager( ehcache().getObject() );
+	@Bean( name = "cacheManager" )
+	public EhCacheCacheManager cacheManager() {
+		return new EhCacheCacheManager( ehCacheManagerFactoryBean().getObject() );
 	}
 
-	@Bean( name = "ehcache" )
-	public EhCacheManagerFactoryBean ehcache() {
+	@Bean
+	public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
 
-		final EhCacheManagerFactoryBean ehcache = new EhCacheManagerFactoryBean();
-		ehcache.setCacheManagerName( "ehCacheManager" );
+		final EhCacheManagerFactoryBean cacheManagerFactoryBean = new EhCacheManagerFactoryBean();
 
-		return ehcache;
+		cacheManagerFactoryBean.setConfigLocation( new FileSystemResource( "src/main/webapp/WEB-INF/config/ehcache.xml" ) );
+		cacheManagerFactoryBean.setShared( true );
+
+		return cacheManagerFactoryBean;
 	}
 }
