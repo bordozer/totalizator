@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import static totalizator.app.models.MatchBet.*;
 
 @Entity
+@Cacheable( true )
 @Table(
 		name = "matchBets"
 		, indexes = {

@@ -6,8 +6,9 @@ import java.time.LocalDateTime;
 import static totalizator.app.models.CupTeamBet.*;
 
 @Entity
+@Cacheable( true )
 @Table(
-		name = "cupTeamBets"
+	name = "cupTeamBets"
 )
 @NamedQueries( {
 		@NamedQuery(

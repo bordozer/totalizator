@@ -5,6 +5,7 @@ import javax.persistence.*;
 import static totalizator.app.models.CupWinner.*;
 
 @Entity
+@Cacheable( true )
 @Table(
 		name = "cupWinners"
 )

@@ -7,8 +7,8 @@ import static totalizator.app.models.CupTeam.LOAD_ALL_CUP_TEAMS;
 import static totalizator.app.models.CupTeam.LOAD_CUP_TEAM;
 
 @Entity
+@Cacheable( true )
 @Table( name = "cupTeams" )
-
 @NamedQueries( {
 		@NamedQuery(
 				name = LOAD_ALL,
