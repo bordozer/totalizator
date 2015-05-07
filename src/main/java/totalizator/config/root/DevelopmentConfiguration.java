@@ -3,6 +3,9 @@ package totalizator.config.root;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -21,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@Profile("development")
+@Profile( "development" )
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
 
@@ -93,5 +96,19 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
+	}
+
+	@Bean( name = "cacheManager" )
+	public CacheManager cacheManager() {
+		return new EhCacheCacheManager( ehcache().getObject() );
+	}
+
+	@Bean( name = "ehcache" )
+	public EhCacheManagerFactoryBean ehcache() {
+
+		final EhCacheManagerFactoryBean ehcache = new EhCacheManagerFactoryBean();
+		ehcache.setCacheManagerName( "cacheManager" );
+
+		return ehcache;
 	}
 }
