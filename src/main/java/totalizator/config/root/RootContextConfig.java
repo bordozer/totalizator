@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 import java.io.IOException;
 
 @Configuration
-@EnableCaching
+//@EnableCaching
 @ComponentScan( {
 		"totalizator.app.services"
 		, "totalizator.app.dao"
