@@ -180,4 +180,15 @@
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
+	<cache name="totalizator.app.cache.cup-scores.query"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
 </ehcache>
