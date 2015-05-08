@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import totalizator.app.dao.UserDao;
 import totalizator.app.models.User;
 import totalizator.app.services.SecurityService;
-import totalizator.app.services.UserService;
 
 import java.util.List;
 
@@ -22,14 +22,14 @@ public class SecurityUserDetailsService implements UserDetailsService {
 	private static final Logger LOGGER = Logger.getLogger( SecurityUserDetailsService.class );
 
 	@Autowired
-	private UserService userService;
+	private UserDao userRepository;
 
 	@Autowired
 	private SecurityService securityService;
 
 	@Override
 	public UserDetails loadUserByUsername( final String login ) throws UsernameNotFoundException {
-		final User user = userService.findByLogin( login );
+		final User user = userRepository.findByLogin( login );
 
 		if ( user == null ) {
 			LOGGER.debug ( String.format( "================================= User login not found: %s =================================", login ) );

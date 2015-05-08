@@ -1,6 +1,5 @@
 package totalizator.app.dao;
 
-import org.springframework.cache.annotation.Cacheable;
 import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 import totalizator.app.services.GenericService;
@@ -13,6 +12,5 @@ public interface TeamDao extends GenericService<Team>, NamedEntityGenericService
 	String CACHE_ENTRY = "totalizator.app.cache.team";
 	String CACHE_QUERY = "totalizator.app.cache.teams";
 
-	@Cacheable( value = CACHE_QUERY )
 	List<Team> loadAll( Category category );
 }

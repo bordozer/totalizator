@@ -1,6 +1,5 @@
 package totalizator.app.dao;
 
-import org.springframework.cache.annotation.Cacheable;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
@@ -15,7 +14,6 @@ public interface CupWinnerDao extends GenericService<CupWinner> {
 
 	List<CupWinner> loadAll( Cup cup );
 
-	@Cacheable( value = CACHE_QUERY )
 	List<CupWinner> loadAll( Cup cup, Team team );
 
 	void saveAll( List<CupWinner> winners );
