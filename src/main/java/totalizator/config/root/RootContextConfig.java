@@ -55,18 +55,29 @@ public class RootContextConfig {
 
 	@Bean
 	public EhCacheCacheManager cacheManager() throws IOException {
+		return new EhCacheCacheManager( CacheManager.create( ConfigurationFactory.parseConfiguration( getConfigLocation().getInputStream() ) ) );
+	}
+
+	private Resource getConfigLocation() {
+		return new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" );
+	}
+
+	/*@Bean
+	public EhCacheCacheManager cacheManager() throws IOException {
 
 		final CacheConfiguration cupScoresCache = new CacheConfiguration( CupScoresService.CACHE_QUERY, 100 );
 
 		final net.sf.ehcache.config.Configuration configuration = new net.sf.ehcache.config.Configuration();
 		configuration.addCache( cupScoresCache );
 
-		return new EhCacheCacheManager( CacheManager.create( configuration ) );
-	}
+		final List<FactoryConfiguration> factoryConfiguration = configuration.getCacheManagerPeerProviderFactoryConfiguration();
+		if ( factoryConfiguration.iterator().hasNext() ) {
+			final FactoryConfiguration peerProviderConfiguration = factoryConfiguration.iterator().next();
+			peerProviderConfiguration.setProperties( "peerDiscovery=manual,rmiUrls=//localhost:#41001/totalizator.app.cache.cup-scores.query" );
+			peerProviderConfiguration.setPropertySeparator( "," );
+		}
 
-	/*@Bean
-	public EhCacheCacheManager cacheManager() throws IOException {
-		return new EhCacheCacheManager( CacheManager.create( ConfigurationFactory.parseConfiguration( getConfigLocation().getInputStream() ) ) );
+		return new EhCacheCacheManager( CacheManager.create( configuration ) );
 	}*/
 
 	/*@Bean
@@ -84,8 +95,4 @@ public class RootContextConfig {
 
 		return cacheManagerFactoryBean;
 	}*/
-
-	private Resource getConfigLocation() {
-		return new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" );
-	}
 }
