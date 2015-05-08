@@ -99,6 +99,30 @@ public class MatchBet extends AbstractEntity {
 	}
 
 	@Override
+	public int hashCode() {
+		return 31 * getId();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+
+		if ( obj == null ) {
+			return false;
+		}
+
+		if ( obj == this ) {
+			return true;
+		}
+
+		if ( !( obj instanceof MatchBet ) ) {
+			return false;
+		}
+
+		final MatchBet matchBet = ( MatchBet ) obj;
+		return matchBet.getId() == getId();
+	}
+
+	@Override
 	public String toString() {
 		return String.format( "%s: %d - %d ( %s )", match, betScore1, betScore2, user );
 	}

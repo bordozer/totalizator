@@ -4,9 +4,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
-import static totalizator.app.models.CupTeam.LOAD_ALL;
-import static totalizator.app.models.CupTeam.LOAD_ALL_CUP_TEAMS;
-import static totalizator.app.models.CupTeam.LOAD_CUP_TEAM;
+import static totalizator.app.models.CupTeam.*;
 
 @Entity
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
@@ -61,6 +59,30 @@ public class CupTeam extends AbstractEntity {
 
 	public void setTeam( final Team team ) {
 		this.team = team;
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * getId();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+
+		if ( obj == null ) {
+			return false;
+		}
+
+		if ( obj == this ) {
+			return true;
+		}
+
+		if ( !( obj instanceof CupTeam ) ) {
+			return false;
+		}
+
+		final CupTeam cupTeam = ( CupTeam ) obj;
+		return cupTeam.getId() == getId();
 	}
 
 	@Override

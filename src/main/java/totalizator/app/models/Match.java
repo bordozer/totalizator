@@ -114,6 +114,30 @@ public class Match extends AbstractEntity {
 	}
 
 	@Override
+	public int hashCode() {
+		return 31 * getId();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+
+		if ( obj == null ) {
+			return false;
+		}
+
+		if ( obj == this ) {
+			return true;
+		}
+
+		if ( !( obj instanceof Match ) ) {
+			return false;
+		}
+
+		final Match match = ( Match ) obj;
+		return match.getId() == getId();
+	}
+
+	@Override
 	public String toString() {
 		return String.format( "Match #%d: Team %s vs Team %s, %d : %d ( %s )", getId(), team1, team2, score1, score2, beginningTime );
 	}

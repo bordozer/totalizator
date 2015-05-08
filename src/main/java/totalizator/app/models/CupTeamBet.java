@@ -100,6 +100,30 @@ public class CupTeamBet extends AbstractEntity {
 	}
 
 	@Override
+	public int hashCode() {
+		return 31 * getId();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+
+		if ( obj == null ) {
+			return false;
+		}
+
+		if ( obj == this ) {
+			return true;
+		}
+
+		if ( !( obj instanceof CupTeamBet ) ) {
+			return false;
+		}
+
+		final CupTeamBet cupWinner = ( CupTeamBet ) obj;
+		return cupWinner.getId() == getId();
+	}
+
+	@Override
 	public String toString() {
 		return String.format( "%s: %s will get %s ( by %s )", cup, team, cupPosition, user );
 	}
