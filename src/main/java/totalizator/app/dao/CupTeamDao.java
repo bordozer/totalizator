@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CupTeamDao extends GenericService<CupTeam> {
 
-	List<CupTeam> loadAll( int cupId );
+	List<CupTeam> loadAll( final int cupId );
 
-	CupTeam load( int cupId, int teamId );
+	CupTeam load( final int cupId, final int teamId );
 }

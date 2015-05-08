@@ -12,11 +12,11 @@ public interface MatchBetDao extends GenericService<MatchBet> {
 	String CACHE_ENTRY = "totalizator.app.cache.match-bet";
 	String CACHE_QUERY = "totalizator.app.cache.match-bet.query";
 
-	List<MatchBet> loadAll( User user );
+	List<MatchBet> loadAll( final User user );
 
-	List<MatchBet> loadAll( Match match );
+	List<MatchBet> loadAll( final Match match );
 
-	MatchBet load( User user, Match match );
+	MatchBet load( final User user, final Match match );
 
-	int betsCount( Match match );
+	int betsCount( final Match match );
 }

@@ -12,5 +12,5 @@ public interface TeamDao extends GenericService<Team>, NamedEntityGenericService
 	String CACHE_ENTRY = "totalizator.app.cache.team";
 	String CACHE_QUERY = "totalizator.app.cache.teams";
 
-	List<Team> loadAll( Category category );
+	List<Team> loadAll( final Category category );
 }

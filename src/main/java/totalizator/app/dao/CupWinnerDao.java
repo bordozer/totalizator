@@ -12,9 +12,9 @@ public interface CupWinnerDao extends GenericService<CupWinner> {
 	String CACHE_ENTRY = "totalizator.app.cache.cup-winner";
 	String CACHE_QUERY = "totalizator.app.cache.cup-winner.query";
 
-	List<CupWinner> loadAll( Cup cup );
+	List<CupWinner> loadAll( final Cup cup );
 
-	List<CupWinner> loadAll( Cup cup, Team team );
+	List<CupWinner> loadAll( final Cup cup, final Team team );
 
-	void saveAll( List<CupWinner> winners );
+	void saveAll( final List<CupWinner> winners );
 }

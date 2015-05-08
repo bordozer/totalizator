@@ -9,5 +9,5 @@ public interface UserDao extends GenericService<User>, NamedEntityGenericService
 	String CACHE_ENTRY = "totalizator.app.cache.user";
 	String CACHE_QUERY = "totalizator.app.cache.users";
 
-	User findByLogin( String login );
+	User findByLogin( final String login );
 }

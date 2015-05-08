@@ -12,7 +12,7 @@ public interface MatchDao extends GenericService<Match> {
 	String CACHE_ENTRY = "totalizator.app.cache.match";
 	String CACHE_QUERY = "totalizator.app.cache.matches";
 
-	List<Match> loadAll( Cup cup );
+	List<Match> loadAll( final Cup cup );
 
-	List<Match> find( Team team1, Team team2 );
+	List<Match> find( final Team team1, final Team team2 );
 }

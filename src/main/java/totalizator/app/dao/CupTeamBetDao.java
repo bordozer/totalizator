@@ -13,11 +13,11 @@ public interface CupTeamBetDao extends GenericService<CupTeamBet> {
 	String CACHE_ENTRY = "totalizator.app.cache.user-cup-winner-bet";
 	String CACHE_QUERY = "totalizator.app.cache.user-cup-winner-bet.query";
 
-	List<CupTeamBet> load( Cup cup, User user );
+	List<CupTeamBet> load( final Cup cup, final User user );
 
-	CupTeamBet load( Cup cup, User user, int cupPosition );
+	CupTeamBet load( final Cup cup, final User user, final int cupPosition );
 
-	CupTeamBet load( Cup cup, Team team, User user );
+	CupTeamBet load( final Cup cup, final Team team, final User user );
 
-	List<CupTeamBet> load( Cup cup );
+	List<CupTeamBet> load( final Cup cup );
 }
