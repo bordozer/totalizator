@@ -76,6 +76,7 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( Environment.USE_QUERY_CACHE, true );
 		jpaProperties.put( Environment.GENERATE_STATISTICS, true );
 		jpaProperties.put( Environment.USE_STRUCTURED_CACHE, true );
+//		jpaProperties.put( Environment.CACHE_PROVIDER_CONFIG, "src/main/webapp/WEB-INF/ehcache.xml" );
 
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
