@@ -1,23 +1,17 @@
 package totalizator.config.root;
 
-import net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import totalizator.app.services.SystemVarsService;
-import totalizator.app.services.SystemVarsServiceImpl;
-import totalizator.app.translator.TranslatorServiceImpl;
 
 import javax.persistence.SharedCacheMode;
 import java.util.HashMap;
@@ -26,7 +20,6 @@ import java.util.Map;
 @Configuration
 @Profile( "development" )
 @EnableTransactionManagement
-//@EnableCaching
 public class DevelopmentConfiguration {
 
 	private static final Logger LOGGER = Logger.getLogger( DevelopmentConfiguration.class );
@@ -35,16 +28,6 @@ public class DevelopmentConfiguration {
 	public TestDataInitializer initTestData() {
 		return new TestDataInitializer();
 	}*/
-
-	@Bean( name = "systemVarsService", initMethod = "init" )
-	public SystemVarsServiceImpl systemVarsService() {
-		return new SystemVarsServiceImpl();
-	}
-
-	@Bean( name = "translatorService", initMethod = "init" )
-	public TranslatorServiceImpl TranslatorService() {
-		return new TranslatorServiceImpl();
-	}
 
 	@Bean( name = "datasource" )
 	public DriverManagerDataSource dataSource( final SystemVarsService systemVarsService ) {
@@ -97,21 +80,5 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
-	}
-
-	@Bean
-	public EhCacheCacheManager cacheManager() {
-		return new EhCacheCacheManager( ehCacheManagerFactoryBean().getObject() );
-	}
-
-	@Bean
-	public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
-
-		final EhCacheManagerFactoryBean cacheManagerFactoryBean = new EhCacheManagerFactoryBean();
-
-		cacheManagerFactoryBean.setConfigLocation( new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" ) );
-		cacheManagerFactoryBean.setShared( true );
-
-		return cacheManagerFactoryBean;
 	}
 }
