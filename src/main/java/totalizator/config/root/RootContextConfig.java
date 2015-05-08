@@ -25,7 +25,6 @@ import java.io.IOException;
 		, "totalizator.app.security"
 		, "totalizator.app.translator"
 } )
-//@EnableCaching
 public class RootContextConfig {
 
 	@Bean( name = "transactionManager" )
