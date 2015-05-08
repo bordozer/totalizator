@@ -2,6 +2,7 @@ package totalizator.config.root;
 
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.ConfigurationFactory;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +19,7 @@ import javax.persistence.EntityManagerFactory;
 import java.io.IOException;
 
 @Configuration
+@EnableCaching
 @ComponentScan( {
 		"totalizator.app.services"
 		, "totalizator.app.dao"
