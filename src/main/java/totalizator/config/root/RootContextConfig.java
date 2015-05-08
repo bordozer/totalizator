@@ -4,6 +4,7 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.ConfigurationFactory;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import totalizator.app.cache.MyKeyGenerator;
 import totalizator.app.services.SystemVarsServiceImpl;
 import totalizator.app.translator.TranslatorServiceImpl;
 
@@ -51,10 +53,12 @@ public class RootContextConfig {
 
 	@Bean
 	public EhCacheCacheManager cacheManager() throws IOException {
-		/*final EhCacheManagerFactoryBean factoryBean = new EhCacheManagerFactoryBean();
-		factoryBean.setConfigLocation( getConfigLocation() );
-		return new EhCacheCacheManager( factoryBean.getObject() );*/
 		return new EhCacheCacheManager( CacheManager.create( ConfigurationFactory.parseConfiguration( getConfigLocation().getInputStream() ) ) );
+	}
+
+	@Bean
+	public KeyGenerator keyGenerator() {
+		return new MyKeyGenerator();
 	}
 
 	private Resource getConfigLocation() {
