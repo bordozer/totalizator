@@ -16,9 +16,6 @@ public class CategoryRepository implements CategoryDao {
 
 	private static final Logger LOGGER = Logger.getLogger( CategoryRepository.class );
 
-	private static final String CACHE_ENTRY = "totalizator.app.cache.category";
-	private static final String CACHE_QUERY = "totalizator.app.cache.categories";
-
 	@PersistenceContext
 	private EntityManager em;
 

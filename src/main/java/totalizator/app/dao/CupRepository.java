@@ -16,9 +16,6 @@ public class CupRepository implements CupDao {
 
 	private static final Logger LOGGER = Logger.getLogger( CupRepository.class );
 
-	private static final String CACHE_ENTRY = "totalizator.app.cache.cup";
-	private static final String CACHE_QUERY = "totalizator.app.cache.cups";
-
 	@PersistenceContext
 	private EntityManager em;
 

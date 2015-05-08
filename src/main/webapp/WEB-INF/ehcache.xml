@@ -4,7 +4,172 @@
 
 	<defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false"/>
 
-	<cache name="totalizator.app.cache.cup-scores.query"
+	<cache name="totalizator.app.cache.category"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.categories"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.cup"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.cups"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.user-cup-winner-bet"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.user-cup-winner-bet.query"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.cup-winner"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.cup-winner.query"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.match-bet"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.match-bet.query"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.match"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.matches"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.team"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.teams"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.user"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   overflowToDisk="false"
+		   timeToIdleSeconds="12000"
+		   timeToLiveSeconds="12000"
+		   diskPersistent="false"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.users"
 		   maxElementsInMemory="300"
 		   eternal="true"
 		   overflowToDisk="false"
