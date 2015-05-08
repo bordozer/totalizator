@@ -5,7 +5,7 @@ import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import totalizator.app.dao.CupRepository;
+import totalizator.app.dao.CupDao;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.services.utils.DateTimeService;
@@ -18,7 +18,7 @@ import java.util.List;
 public class CupServiceImpl implements CupService {
 
 	@Autowired
-	private CupRepository cupRepository;
+	private CupDao cupRepository;
 
 	@Autowired
 	private CupWinnerService cupWinnerService;

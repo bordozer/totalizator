@@ -6,15 +6,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
-import totalizator.app.services.GenericService;
-import totalizator.app.services.NamedEntityGenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CupRepository implements GenericService<Cup>, NamedEntityGenericService<Cup> {
+public class CupRepository implements CupDao {
 
 	private static final Logger LOGGER = Logger.getLogger( CupRepository.class );
 

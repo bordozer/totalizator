@@ -2,14 +2,13 @@ package totalizator.app.dao;
 
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.CupTeam;
-import totalizator.app.services.GenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CupTeamRepository implements GenericService<CupTeam> {
+public class CupTeamRepository implements CupTeamDao {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -35,12 +34,14 @@ public class CupTeamRepository implements GenericService<CupTeam> {
 		em.remove( load( id ) );
 	}
 
+	@Override
 	public List<CupTeam> loadAll( final int cupId ) {
 		return em.createNamedQuery( CupTeam.LOAD_ALL_CUP_TEAMS, CupTeam.class )
 				.setParameter( "cupId", cupId )
 				.getResultList();
 	}
 
+	@Override
 	public CupTeam load( final int cupId, final int teamId ) {
 
 		final List<CupTeam> list = em.createNamedQuery( CupTeam.LOAD_CUP_TEAM, CupTeam.class )

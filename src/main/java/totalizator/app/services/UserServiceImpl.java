@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import totalizator.app.dao.UserRepository;
+import totalizator.app.dao.UserDao;
 import totalizator.app.models.User;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
 	private static final Logger LOGGER = Logger.getLogger( UserServiceImpl.class );
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserDao userRepository;
 
 	@Override
 	@Transactional

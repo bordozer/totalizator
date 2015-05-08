@@ -6,20 +6,15 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.User;
-import totalizator.app.services.GenericService;
-import totalizator.app.services.NamedEntityGenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserRepository implements GenericService<User>, NamedEntityGenericService<User> {
+public class UserRepository implements UserDao {
 
 	private static final Logger LOGGER = Logger.getLogger( UserRepository.class );
-
-	private static final String CACHE_ENTRY = "totalizator.app.cache.user";
-	private static final String CACHE_QUERY = "totalizator.app.cache.users";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -65,6 +60,7 @@ public class UserRepository implements GenericService<User>, NamedEntityGenericS
 		return users.size() == 1 ? users.get( 0 ) : null;
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public User findByLogin( final String login ) {
 		final List<User> users = em.createNamedQuery( User.FIND_BY_LOGIN, User.class )

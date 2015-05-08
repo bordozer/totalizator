@@ -51,6 +51,9 @@ public class RootContextConfig {
 
 	@Bean
 	public EhCacheCacheManager cacheManager() throws IOException {
+		/*final EhCacheManagerFactoryBean factoryBean = new EhCacheManagerFactoryBean();
+		factoryBean.setConfigLocation( getConfigLocation() );
+		return new EhCacheCacheManager( factoryBean.getObject() );*/
 		return new EhCacheCacheManager( CacheManager.create( ConfigurationFactory.parseConfiguration( getConfigLocation().getInputStream() ) ) );
 	}
 

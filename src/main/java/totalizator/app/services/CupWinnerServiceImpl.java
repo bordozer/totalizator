@@ -3,7 +3,7 @@ package totalizator.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import totalizator.app.dao.CupWinnerRepository;
+import totalizator.app.dao.CupWinnerDao;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
@@ -14,7 +14,7 @@ import java.util.List;
 public class CupWinnerServiceImpl implements CupWinnerService {
 
 	@Autowired
-	private CupWinnerRepository cupWinnerRepository;
+	private CupWinnerDao cupWinnerRepository;
 
 	@Override
 	@Transactional( readOnly = true )

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.beans.ValidationResult;
-import totalizator.app.dao.CupTeamBetRepository;
+import totalizator.app.dao.CupTeamBetDao;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
@@ -23,7 +23,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 	private CupService cupService;
 
 	@Autowired
-	private CupTeamBetRepository cupTeamBetRepository;
+	private CupTeamBetDao cupTeamBetRepository;
 
 	@Autowired
 	private DateTimeService dateTimeService;

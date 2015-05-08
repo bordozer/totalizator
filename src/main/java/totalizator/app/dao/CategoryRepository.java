@@ -6,15 +6,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.Category;
-import totalizator.app.services.GenericService;
-import totalizator.app.services.NamedEntityGenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CategoryRepository implements GenericService<Category>, NamedEntityGenericService<Category> {
+public class CategoryRepository implements CategoryDao {
 
 	private static final Logger LOGGER = Logger.getLogger( CategoryRepository.class );
 

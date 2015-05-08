@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.services.GenericService;
 import totalizator.app.services.score.CupScoresService;
 
 import javax.persistence.EntityManager;
@@ -16,12 +15,9 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class MatchRepository implements GenericService<Match> {
+public class MatchRepository implements MatchDao {
 
 	private static final Logger LOGGER = Logger.getLogger( MatchRepository.class );
-
-	private static final String CACHE_ENTRY = "totalizator.app.cache.match";
-	private static final String CACHE_QUERY = "totalizator.app.cache.matches";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -33,6 +29,7 @@ public class MatchRepository implements GenericService<Match> {
 				.getResultList();
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<Match> loadAll( final Cup cup ) {
 		return em.createNamedQuery( Match.FIND_BY_CUP, Match.class )
@@ -66,6 +63,7 @@ public class MatchRepository implements GenericService<Match> {
 		em.remove( load( id ) );
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<Match> find( final Team team1, final Team team2 ) {
 		return em.createNamedQuery( Match.FIND_BY_TEAMS, Match.class )

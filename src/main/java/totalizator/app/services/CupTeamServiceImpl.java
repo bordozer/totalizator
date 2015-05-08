@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import totalizator.app.dao.CupTeamRepository;
+import totalizator.app.dao.CupTeamDao;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeam;
 import totalizator.app.models.Team;
@@ -18,7 +18,7 @@ import java.util.List;
 public class CupTeamServiceImpl implements CupTeamService {
 
 	@Autowired
-	private CupTeamRepository cupTeamRepository;
+	private CupTeamDao cupTeamRepository;
 
 	@Autowired
 	private CupService cupService;

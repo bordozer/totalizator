@@ -9,7 +9,6 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-import totalizator.app.services.GenericService;
 import totalizator.app.services.score.CupScoresService;
 
 import javax.persistence.EntityManager;
@@ -17,10 +16,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CupTeamBetRepository implements GenericService<CupTeamBet> {
-
-	private static final String CACHE_ENTRY = "totalizator.app.cache.user-cup-winner-bet";
-	private static final String CACHE_QUERY = "totalizator.app.cache.user-cup-winner-bet.query";
+public class CupTeamBetRepository implements CupTeamBetDao {
 
 	private static final Logger LOGGER = Logger.getLogger( CupTeamBetRepository.class );
 
@@ -60,6 +56,7 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 		em.remove( load( id ) );
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<CupTeamBet> load( final Cup cup, final User user ) {
 		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER, CupTeamBet.class )
@@ -68,6 +65,7 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 				.getResultList();
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public CupTeamBet load( final Cup cup, final User user, final int cupPosition ) {
 		final List<CupTeamBet> result = em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION, CupTeamBet.class )
@@ -79,6 +77,7 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 		return result.size() == 1 ? result.get( 0 ) : null;
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public CupTeamBet load( final Cup cup, final Team team, final User user ) {
 		final List<CupTeamBet> result = em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP_AND_TEAM_AND_USER, CupTeamBet.class )
@@ -90,6 +89,7 @@ public class CupTeamBetRepository implements GenericService<CupTeamBet> {
 		return result.size() == 1 ? result.get( 0 ) : null;
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<CupTeamBet> load( final Cup cup ) {
 		return em.createNamedQuery( CupTeamBet.LOAD_ALL_FOR_CUP, CupTeamBet.class )

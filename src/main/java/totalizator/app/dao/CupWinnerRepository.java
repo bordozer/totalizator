@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
-import totalizator.app.services.GenericService;
 import totalizator.app.services.score.CupScoresService;
 
 import javax.persistence.EntityManager;
@@ -16,16 +15,15 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CupWinnerRepository implements GenericService<CupWinner> {
-
-	private static final String CACHE_ENTRY = "totalizator.app.cache.cup-winner";
-	private static final String CACHE_QUERY = "totalizator.app.cache.cup-winner.query";
+public class CupWinnerRepository implements CupWinnerDao {
 
 	private static final Logger LOGGER = Logger.getLogger( CupWinnerRepository.class );
 
 	@PersistenceContext
 	private EntityManager em;
 
+	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public List<CupWinner> loadAll( final Cup cup ) {
 		return em.createNamedQuery( CupWinner.LOAD_FOR_CUP, CupWinner.class )
 				.setParameter( "cupId", cup.getId() )
@@ -65,6 +63,7 @@ public class CupWinnerRepository implements GenericService<CupWinner> {
 		em.remove( load( id ) );
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<CupWinner> loadAll( final Cup cup, final Team team ) {
 		return em.createNamedQuery( CupWinner.LOAD_FOR_CUP_AND_TEAM, CupWinner.class )
@@ -73,6 +72,7 @@ public class CupWinnerRepository implements GenericService<CupWinner> {
 				.getResultList();
 	}
 
+	@Override
 	public void saveAll( final List<CupWinner> winners ) {
 		for ( final CupWinner winner : winners ) {
 			save( winner );

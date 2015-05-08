@@ -3,7 +3,7 @@ package totalizator.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import totalizator.app.dao.CategoryRepository;
+import totalizator.app.dao.CategoryDao;
 import totalizator.app.models.Category;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private CategoryDao categoryRepository;
 
 	@Override
 	@Transactional( readOnly = true )

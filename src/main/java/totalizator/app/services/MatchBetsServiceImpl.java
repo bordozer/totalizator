@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.beans.ValidationResult;
-import totalizator.app.dao.MatchBetRepository;
+import totalizator.app.dao.MatchBetDao;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
@@ -15,7 +15,6 @@ import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,7 +23,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	public static final int STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS = 1; // TODO: mode to the settings
 
 	@Autowired
-	private MatchBetRepository matchBetRepository;
+	private MatchBetDao matchBetRepository;
 
 	@Autowired
 	private CupService cupService;

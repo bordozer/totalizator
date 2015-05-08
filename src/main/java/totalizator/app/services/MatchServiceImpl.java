@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import totalizator.app.dao.MatchRepository;
+import totalizator.app.dao.MatchDao;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
@@ -14,7 +14,6 @@ import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.services.utils.DateTimeService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,7 +23,7 @@ import java.util.List;
 public class MatchServiceImpl implements MatchService {
 
 	@Autowired
-	private MatchRepository matchRepository;
+	private MatchDao matchRepository;
 
 	@Autowired
 	private DateTimeService dateTimeService;

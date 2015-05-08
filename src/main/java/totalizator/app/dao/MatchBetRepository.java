@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
-import totalizator.app.services.GenericService;
 import totalizator.app.services.score.CupScoresService;
 
 import javax.persistence.EntityManager;
@@ -16,12 +15,9 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class MatchBetRepository implements GenericService<MatchBet> {
+public class MatchBetRepository implements MatchBetDao {
 
 	private static final Logger LOGGER = Logger.getLogger( MatchBetRepository.class );
-
-	private static final String CACHE_ENTRY = "totalizator.app.cache.match-bet";
-	private static final String CACHE_QUERY = "totalizator.app.cache.match-bet.query";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -33,6 +29,7 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 				.getResultList();
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<MatchBet> loadAll( final User user ) {
 		return em.createNamedQuery( MatchBet.LOAD_FOR_USER, MatchBet.class )
@@ -40,6 +37,7 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 				.getResultList();
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<MatchBet> loadAll( final Match match ) {
 		return em.createNamedQuery( MatchBet.LOAD_FOR_MATCH, MatchBet.class )
@@ -47,6 +45,7 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 				.getResultList();
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public MatchBet load( final User user, final Match match ) {
 		final List<MatchBet> bets = em.createNamedQuery( MatchBet.LOAD_FOR_USER_AND_MATCH, MatchBet.class )
@@ -83,6 +82,7 @@ public class MatchBetRepository implements GenericService<MatchBet> {
 		em.remove( load( id ) );
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public int betsCount( final Match match ) {
 		final List<Long> bets = em.createNamedQuery( MatchBet.LOAD_MATCH_BETA_COUNT, Long.class )

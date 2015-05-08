@@ -3,7 +3,7 @@ package totalizator.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import totalizator.app.dao.TeamRepository;
+import totalizator.app.dao.TeamDao;
 import totalizator.app.models.Category;
 import totalizator.app.models.Team;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class TeamServiceImpl implements TeamService {
 
 	@Autowired
-	private TeamRepository teamRepository;
+	private TeamDao teamRepository;
 
 	@Override
 	@Transactional( readOnly = true )

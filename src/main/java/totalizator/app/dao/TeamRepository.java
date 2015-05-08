@@ -7,20 +7,15 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 import totalizator.app.models.Category;
 import totalizator.app.models.Team;
-import totalizator.app.services.GenericService;
-import totalizator.app.services.NamedEntityGenericService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class TeamRepository implements GenericService<Team>, NamedEntityGenericService<Team> {
+public class TeamRepository implements TeamDao {
 
 	private static final Logger LOGGER = Logger.getLogger( TeamRepository.class );
-
-	private static final String CACHE_ENTRY = "totalizator.app.cache.team";
-	private static final String CACHE_QUERY = "totalizator.app.cache.teams";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -32,6 +27,7 @@ public class TeamRepository implements GenericService<Team>, NamedEntityGenericS
 				.getResultList();
 	}
 
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<Team> loadAll( final Category category ) {
 		return em.createNamedQuery( Team.FIND_BY_CATEGORY, Team.class )
