@@ -10,7 +10,6 @@ import static totalizator.app.models.Cup.LOAD_ALL;
 
 
 @Entity
-//@Cacheable( true )
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table( name = "cups" )
 @NamedQueries( {

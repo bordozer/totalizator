@@ -9,7 +9,6 @@ import static totalizator.app.models.CupTeam.LOAD_ALL_CUP_TEAMS;
 import static totalizator.app.models.CupTeam.LOAD_CUP_TEAM;
 
 @Entity
-//@Cacheable( true )
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table( name = "cupTeams" )
 @NamedQueries( {

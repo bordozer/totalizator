@@ -8,7 +8,6 @@ import static totalizator.app.models.Team.*;
 
 
 @Entity
-//@Cacheable( true )
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table( name = "teams" )
 @NamedQueries( {

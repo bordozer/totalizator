@@ -7,7 +7,6 @@ import javax.persistence.*;
 import static totalizator.app.models.User.LOAD_ALL;
 
 @Entity
-//@Cacheable( true )
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table(name = "users")
 @NamedQueries({

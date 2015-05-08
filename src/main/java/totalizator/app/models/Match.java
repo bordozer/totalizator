@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import static totalizator.app.models.Match.*;
 
 @Entity
-//@Cacheable( true )
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table( name = "matches" )
 @NamedQueries( {
