@@ -1,18 +1,26 @@
 package totalizator.config.root;
 
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.config.CacheConfiguration;
+import net.sf.ehcache.config.ConfigurationFactory;
+import net.sf.ehcache.config.FactoryConfiguration;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import totalizator.app.services.SystemVarsServiceImpl;
+import totalizator.app.services.score.CupScoresService;
 import totalizator.app.translator.TranslatorServiceImpl;
 
 import javax.persistence.EntityManagerFactory;
+import java.io.IOException;
+import java.util.List;
 
 @Configuration
 @ComponentScan( {
@@ -46,6 +54,22 @@ public class RootContextConfig {
 	}
 
 	@Bean
+	public EhCacheCacheManager cacheManager() throws IOException {
+
+		final CacheConfiguration cupScoresCache = new CacheConfiguration( CupScoresService.CACHE_QUERY, 100 );
+
+		final net.sf.ehcache.config.Configuration configuration = new net.sf.ehcache.config.Configuration();
+		configuration.addCache( cupScoresCache );
+
+		return new EhCacheCacheManager( CacheManager.create( configuration ) );
+	}
+
+	/*@Bean
+	public EhCacheCacheManager cacheManager() throws IOException {
+		return new EhCacheCacheManager( CacheManager.create( ConfigurationFactory.parseConfiguration( getConfigLocation().getInputStream() ) ) );
+	}*/
+
+	/*@Bean
 	public EhCacheCacheManager cacheManager() {
 		return new EhCacheCacheManager( ehCacheManagerFactoryBean().getObject() );
 	}
@@ -59,5 +83,9 @@ public class RootContextConfig {
 		cacheManagerFactoryBean.setShared( true );
 
 		return cacheManagerFactoryBean;
+	}*/
+
+	private Resource getConfigLocation() {
+		return new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" );
 	}
 }
