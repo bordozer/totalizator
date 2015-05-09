@@ -7,21 +7,13 @@ TO DO
 	1.6 Cup statistics - matches count
 
  2. Match and bets
-	2.3 Do not show other match bets until match betting not finished ( remains to implement for Matches'N'Bets view )
-	2.4 Implement 'compact' view for matches
 	2.5 Refactor the view
 
  3. User page: Show user cups bets ( Note: Do not show other cup bets until cup betting not finished )
 
  5. Admin
 	5.2 Save cup winners: validate team duplicating
-	5.3 Separate Categories / Cups / Teams to separate pages
 	5.4 Team list with search by first latter ( + quick search )
-	5.5 Cup edit: limit the teams that remains in the cup ( affects new match teams list and cup bets )
-
- 6. Teams history of stands off
-
- 7. Configurable view options: add second team of stands off ( allows using 'Matches'N'Bets' view for teams history of stands off )
 
  8. Category saving validation
 
@@ -36,11 +28,3 @@ TO DO
 13. EN && UA translations
 
 14. Auto import games' data
-	http://espn.go.com/nba/teams ( ruby example http://danielfrg.com/blog/2013/04/01/nba-scraping-data/ )
-	14.1 Show 'home game' info
-
-15. Cache
-
-
-KNOWN BUGS
-1. Admin - reload matches after adding a match - a strange results are shown
