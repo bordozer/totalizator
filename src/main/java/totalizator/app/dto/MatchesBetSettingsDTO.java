@@ -1,12 +1,6 @@
 package totalizator.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import totalizator.app.dto.serialization.DateTimeDeserializer;
-import totalizator.app.dto.serialization.DateTimeSerializer;
-
-import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MatchesBetSettingsDTO {

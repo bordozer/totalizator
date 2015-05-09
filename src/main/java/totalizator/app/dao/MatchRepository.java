@@ -48,6 +48,7 @@ public class MatchRepository implements MatchDao {
 		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Match save( final Match entry ) {
 		return em.merge( entry );
@@ -58,6 +59,7 @@ public class MatchRepository implements MatchDao {
 		@CacheEvict( value = CACHE_ENTRY, key="#id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
