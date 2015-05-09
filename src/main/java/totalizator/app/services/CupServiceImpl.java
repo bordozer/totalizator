@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class CupServiceImpl implements CupService {
 
@@ -30,7 +32,7 @@ public class CupServiceImpl implements CupService {
 	@Transactional( readOnly = true )
 	public List<Cup> loadAll() {
 
-		final List<Cup> cups = cupRepository.loadAll();
+		final List<Cup> cups = newArrayList( cupRepository.loadAll() );
 
 		sort( cups );
 

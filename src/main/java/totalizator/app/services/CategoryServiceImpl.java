@@ -8,6 +8,8 @@ import totalizator.app.models.Category;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -17,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Category> loadAll() {
-		return categoryRepository.loadAll();
+		return newArrayList( categoryRepository.loadAll() );
 	}
 
 	@Override

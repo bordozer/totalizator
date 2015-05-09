@@ -9,6 +9,8 @@ import totalizator.app.models.Team;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class TeamServiceImpl implements TeamService {
 
@@ -18,12 +20,12 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Team> loadAll() {
-		return teamRepository.loadAll();
+		return newArrayList( teamRepository.loadAll() );
 	}
 
 	@Override
 	public List<Team> loadAll( final Category category ) {
-		return teamRepository.loadAll( category );
+		return newArrayList( teamRepository.loadAll( category ) );
 	}
 
 	@Override

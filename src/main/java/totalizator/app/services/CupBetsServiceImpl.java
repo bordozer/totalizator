@@ -15,6 +15,8 @@ import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class CupBetsServiceImpl implements CupBetsService {
 
@@ -34,7 +36,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<CupTeamBet> loadAll() {
-		return cupTeamBetRepository.loadAll();
+		return newArrayList( cupTeamBetRepository.loadAll() );
 	}
 
 	@Override
@@ -57,13 +59,13 @@ public class CupBetsServiceImpl implements CupBetsService {
 
 	@Override
 	public List<CupTeamBet> load( final Cup cup ) {
-		return cupTeamBetRepository.load( cup );
+		return newArrayList( cupTeamBetRepository.load( cup ) );
 	}
 
 	@Override
 	@Transactional( readOnly = true )
 	public List<CupTeamBet> load( final Cup cup, final User user ) {
-		return cupTeamBetRepository.load( cup, user );
+		return newArrayList( cupTeamBetRepository.load( cup, user ) );
 	}
 
 	@Override

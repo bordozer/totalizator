@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class MatchServiceImpl implements MatchService {
 
@@ -36,12 +38,12 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Match> loadAll() {
-		return sort( matchRepository.loadAll() );
+		return sort( newArrayList( matchRepository.loadAll() ) );
 	}
 
 	@Override
 	public List<Match> loadAll( final Cup cup ) {
-		return sort( matchRepository.loadAll( cup ) );
+		return sort( newArrayList( matchRepository.loadAll( cup ) ) );
 	}
 
 	@Override
@@ -167,10 +169,11 @@ public class MatchServiceImpl implements MatchService {
 
 	@Override
 	public List<Match> find( final Team team1, final Team team2 ) {
-		return matchRepository.find( team1, team2 );
+		return newArrayList( matchRepository.find( team1, team2 ) );
 	}
 
 	private List<Match> sort( final List<Match> matches ) {
+
 		Collections.sort( matches, new Comparator<Match>() {
 			@Override
 			public int compare( final Match o1, final Match o2 ) {

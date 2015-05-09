@@ -17,6 +17,8 @@ import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class MatchBetsServiceImpl implements MatchBetsService {
 
@@ -46,26 +48,26 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll() {
-		return matchBetRepository.loadAll();
+		return newArrayList( matchBetRepository.loadAll() );
 	}
 
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll( final User user ) {
-		return matchBetRepository.loadAll( user );
+		return newArrayList( matchBetRepository.loadAll( user ) );
 	}
 
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll( final Match match ) {
-		return matchBetRepository.loadAll( match );
+		return newArrayList( matchBetRepository.loadAll( match ) );
 	}
 
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll( final Cup cup, final User user ) {
 
-		final List<MatchBet> bets = matchBetRepository.loadAll( user );
+		final List<MatchBet> bets = loadAll( user );
 
 		CollectionUtils.filter( bets, new Predicate<MatchBet>() {
 			@Override

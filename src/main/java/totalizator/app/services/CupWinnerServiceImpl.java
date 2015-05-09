@@ -10,6 +10,8 @@ import totalizator.app.models.Team;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class CupWinnerServiceImpl implements CupWinnerService {
 
@@ -19,7 +21,7 @@ public class CupWinnerServiceImpl implements CupWinnerService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<CupWinner> loadAll() {
-		return cupWinnerRepository.loadAll();
+		return newArrayList( cupWinnerRepository.loadAll() );
 	}
 
 	@Override
@@ -43,13 +45,13 @@ public class CupWinnerServiceImpl implements CupWinnerService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<CupWinner> loadAll( final Cup cup ) {
-		return cupWinnerRepository.loadAll( cup );
+		return newArrayList( cupWinnerRepository.loadAll( cup ) );
 	}
 
 	@Override
 	@Transactional( readOnly = true )
 	public List<CupWinner> loadAll( final Cup cup, final Team team ) {
-		return cupWinnerRepository.loadAll( cup, team );
+		return newArrayList( cupWinnerRepository.loadAll( cup, team ) );
 	}
 
 	@Override

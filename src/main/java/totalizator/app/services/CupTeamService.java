@@ -1,11 +1,14 @@
 package totalizator.app.services;
 
 import totalizator.app.models.Cup;
+import totalizator.app.models.CupTeam;
 import totalizator.app.models.Team;
 
 import java.util.List;
 
 public interface CupTeamService {
+
+	List<CupTeam> loadAll( final int cupId );
 
 	void saveCupTeam( final int cupId, final int teamId, final boolean isActive );
 

@@ -10,6 +10,8 @@ import totalizator.app.models.User;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<User> loadAll() {
-		return userRepository.loadAll();
+		return newArrayList( userRepository.loadAll() );
 	}
 
 	@Override
