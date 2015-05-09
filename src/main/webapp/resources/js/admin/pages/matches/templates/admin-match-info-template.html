@@ -9,7 +9,8 @@
 		<input type="checkbox" class="js-group-checkbox" value="true">
 		<strong>#<%=matchId%></strong> &nbsp;
 		<%= model.matchFinished ? "<i class='fa fa-flag-checkered'></i>" : '' %> &nbsp;
-		<%=translator.betsCountLabel%>: <a href="/totalizator/matches/<%=matchId%>/bets/"><%= model.betsCount %></a>
+		<i class="fa fa-money"> <a href="/totalizator/matches/<%=matchId%>/bets/" title="<%=translator.betsCountLabel%>"><%= model.betsCount %></a></i>
+		/ <a class="fa fa-futbol-o" href="/totalizator/teams/standoff/<%=team1.teamId%>/vs/<%=team2.teamId%>/" title="<%=translator.teamsStandOffHistoryLabel%>"></a>
 	</div>
 
 	<div class="col-lg-3 text-right <%=matchResults.style1%>">

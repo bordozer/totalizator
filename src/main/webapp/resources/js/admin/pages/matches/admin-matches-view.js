@@ -44,6 +44,7 @@ define( function ( require ) {
 		, deleteMatchMessage: "Delete match?"
 		, deleteAllMatchesMessage: "Delete ALL selected matches?"
 		, betsCountLabel: "Bets count"
+		, teamsStandOffHistoryLabel: "Teams standoff history"
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
