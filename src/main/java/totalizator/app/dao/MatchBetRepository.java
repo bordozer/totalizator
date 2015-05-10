@@ -83,7 +83,7 @@ public class MatchBetRepository implements MatchBetDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_QUERY )
+//	@Cacheable( value = CACHE_QUERY )
 	public int betsCount( final Match match ) {
 		final List<Long> bets = em.createNamedQuery( MatchBet.LOAD_MATCH_BETA_COUNT, Long.class )
 				.setParameter( "matchId", match.getId() )
