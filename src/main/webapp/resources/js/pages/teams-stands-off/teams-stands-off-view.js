@@ -64,6 +64,7 @@ define( function ( require ) {
 						, teamId: self.team1.teamId
 						, team2Id: self.team2.teamId
 						, showFinished: true
+						, showFutureMatches: true
 					}
 					, menuItems: []
 					, currentUser: currentUser
