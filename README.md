@@ -2,6 +2,11 @@ Github link
 
 https://github.com/bordozer/totalizator
 
+# Requirement
+- linux
+- Java 8
+- git
+
 # Installation
 
 install npm
