@@ -5,6 +5,7 @@ import net.sf.ehcache.config.ConfigurationFactory;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@EnableCaching
 @Profile( "development" )
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
