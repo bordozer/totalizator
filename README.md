@@ -33,15 +33,15 @@ https://github.com/bordozer/totalizator
 
 	- system.admin.ids:		system admins IDs separated by comma (for clear DB should be edited after system run and admin user registration, not necessary to change it if '*test*' profile used)
 
-							*system.admin.ids=1*
+		*system.admin.ids=1*
 
  	- system.logos.path: 	folder with teams' logo images
 
-							*system.logos.path=/home/user/totalizator-files/logos/*
+		*system.logos.path=/home/user/totalizator-files/logos/*
 
 	- system.imports.path:	folder with imported games' data
 
-							*system.imports.path=/home/user/totalizator-files/imports/*
+		*system.imports.path=/home/user/totalizator-files/imports/*
 
 **vim src/main/resources/system.properties**
 
