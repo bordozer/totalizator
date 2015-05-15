@@ -31,13 +31,13 @@ cp src/main/resources/system.properties.template src/main/resources/system.prope
 
 # edit system properties
 
-	system.admin.ids:		system admins IDs separated by comma (should be edited after system run and admin user registration)
+	- system.admin.ids:		system admins IDs separated by comma (should be edited after system run and admin user registration)
 							system.admin.ids=1
 
- 	system.logos.path: 		folder with teams' logo images
+ 	- system.logos.path: 		folder with teams' logo images
 							system.logos.path=/home/user/totalizator-files/logos/
 
-	system.imports.path:	folder with imported games' data
+	- system.imports.path:	folder with imported games' data
 							system.imports.path=/home/user/totalizator-files/imports/
 
 vim src/main/resources/system.properties
