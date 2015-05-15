@@ -72,7 +72,8 @@ in a browser
 **http://localhost:9091/resources/public/login.html**
 
 # Notes
-*test* profile automatically generates random data - users and games
+*test* profile automatically generates random data - users and games.
+
 Use with ID=1 ( system.admin.ids=1 in system.properties ) Hakeem Olajuwon ( login 'hakeem', password 'hakeem' ) is administrator. He has additional menu Administration where cups and games are configured.
 
 
