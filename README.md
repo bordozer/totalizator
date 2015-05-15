@@ -31,7 +31,7 @@ https://github.com/bordozer/totalizator
 
 	edit system properties
 
-	- system.admin.ids:		system admins IDs separated by comma (should be edited after system run and admin user registration)
+	- system.admin.ids:		system admins IDs separated by comma (for clear DB should be edited after system run and admin user registration, not necessary to change it if '*test*' profile used)
 
 							*system.admin.ids=1*
 
