@@ -1,5 +1,7 @@
 package totalizator.config.root;
 
+import org.hibernate.cache.ehcache.EhCacheRegionFactory;
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -10,6 +12,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import totalizator.app.init.TestDataInitializer;
 
+import javax.persistence.SharedCacheMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +51,14 @@ public class TestConfiguration {
 		jpaProperties.put( "hibernate.show_sql", "true" );
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
+
+		jpaProperties.put( "javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE );
+		jpaProperties.put( Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName() );
+		jpaProperties.put( Environment.USE_SECOND_LEVEL_CACHE, true );
+		jpaProperties.put( Environment.USE_QUERY_CACHE, true );
+		jpaProperties.put( Environment.GENERATE_STATISTICS, true );
+		jpaProperties.put( Environment.USE_STRUCTURED_CACHE, true );
+
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
