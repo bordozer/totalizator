@@ -1,19 +1,27 @@
 package totalizator.config.root;
 
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.config.ConfigurationFactory;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import totalizator.app.cache.MyKeyGenerator;
 import totalizator.app.services.SystemVarsService;
 
 import javax.persistence.SharedCacheMode;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,5 +89,19 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
+	}
+
+	@Bean
+	public EhCacheCacheManager cacheManager() throws IOException {
+		return new EhCacheCacheManager( CacheManager.create( ConfigurationFactory.parseConfiguration( getConfigLocation().getInputStream() ) ) );
+	}
+
+	@Bean
+	public KeyGenerator keyGenerator() {
+		return new MyKeyGenerator();
+	}
+
+	private Resource getConfigLocation() {
+		return new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" );
 	}
 }
