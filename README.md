@@ -2,18 +2,23 @@
 https://github.com/bordozer/totalizator
 
 # installation
+
 $ **sudo zypper in npm**
 
 install bower
+
 $ **npm install -g bower**
 
 clone remote repository
+
 $ **git clone https://github.com/bordozer/totalizator.git**
 
 change directory to project
+
 $ **cd totalizator**
 
 install dependencies
+
 $ **bower install**
 
 $ **bower install https://github.com/harvesthq/chosen/releases/download/v1.4.0/chosen_v1.4.0.zip**
