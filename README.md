@@ -15,23 +15,32 @@ https://github.com/bordozer/totalizator
 
 # install dependencies
 **bower install**
+
 **bower install https://github.com/harvesthq/chosen/releases/download/v1.4.0/chosen_v1.4.0.zip**
 
 # create *.properties
 - **database.properties**
+
 	( '*test*' profile does not use the properties, so it is not necessary to change it )
+
 	**cp src/main/resources/database.properties.template src/main/resources/database.properties**
 
 - **system.properties**
+
 	**cp src/main/resources/system.properties.template src/main/resources/system.properties**
+
 	edit system properties
+
 	- system.admin.ids:		system admins IDs separated by comma (should be edited after system run and admin user registration)
+
 							*system.admin.ids=1*
 
  	- system.logos.path: 	folder with teams' logo images
+
 							*system.logos.path=/home/user/totalizator-files/logos/*
 
 	- system.imports.path:	folder with imported games' data
+
 							*system.imports.path=/home/user/totalizator-files/imports/*
 
 **vim src/main/resources/system.properties**
