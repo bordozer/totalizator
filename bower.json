@@ -10,16 +10,16 @@
 	, "description": "Totalizator project"
 
 	, "dependencies": {
-		"jquery": "latest"
-		, "jquery-ui": "latest"
-		, "requirejs": "latest"
-		, "backbone" : "latest"
-		, "underscore" : "latest"
-		, "text" : "latest"
-		, "bootstrap" : "latest"
-		, "eonasdan-bootstrap-datetimepicker": "latest"
-		, "fontawesome": "latest"
-		, "knockout": "latest"
+		"jquery": "1.11.3"
+		, "jquery-ui": "1.11.4"
+		, "requirejs": "2.1.17"
+		, "backbone" : "1.2.0"
+		, "underscore" : "1.8.3"
+		, "text" : "2.0.12"
+		, "bootstrap" : "3.3.4"
+		, "eonasdan-bootstrap-datetimepicker": "4.7.14"
+		, "fontawesome": "4.3.0"
+		, "knockout": "3.3.0"
 		, "bootbox": "4.4.0"
 	}
 }
