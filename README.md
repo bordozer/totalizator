@@ -17,7 +17,7 @@ bower install
 
 bower install https://github.com/harvesthq/chosen/releases/download/v1.4.0/chosen_v1.4.0.zip
 
-# create database.properties from template
+# create database.properties from template ( 'test' profile does not use the properties, so it is not necessary to change it )
 cp src/main/resources/database.properties.template src/main/resources/database.properties
 
 # edit database properties
