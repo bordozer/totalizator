@@ -134,8 +134,8 @@ define( function ( require ) {
 
 				var userBet = this.model.get( 'bet' );
 
-				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
-				this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
+				this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score text-right'>" + userBet.score1 + "</div>" );
+				this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score'>" + userBet.score2 + "</div>" );
 				if ( model.points > 0 ) {
 					this._setMatchContainerClass( 'panel-success' );
 					this._showBetPoints( model.points );
@@ -169,8 +169,8 @@ define( function ( require ) {
 				this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
 			}
 			var resultHighlight = service.matchResults( match.team1.teamId, bet.score1, match.team2.teamId, bet.score2 );
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score text-right " + resultHighlight.style1 + "'>" + bet.score1 + "</div>" );
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 match-bet-score " + resultHighlight.style2 + "'>" + bet.score2 + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score text-right " + resultHighlight.style1 + "'>" + bet.score1 + "</div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score " + resultHighlight.style2 + "'>" + bet.score2 + "</div>" );
 
 			if ( ! match.matchFinished ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
@@ -198,8 +198,8 @@ define( function ( require ) {
 			this._setMatchContainerClass( 'panel-danger' );
 
 			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
-			this.$( '.js-panel-footer' ).append( "<div class='col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
+			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.actionMatchBetSave + "'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
@@ -212,7 +212,7 @@ define( function ( require ) {
 		},
 
 		_renderIcon: function( icon, title, disabled ) {
-			return "<div class='col-lg-3 fa " + icon + " fa-2x' title='" + title + "' " + ( disabled ? "style='opacity: 0.2;'" : "")  + "></div>";
+			return "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 fa " + icon + " fa-2x' title='" + title + "' " + ( disabled ? "style='opacity: 0.2;'" : "")  + "></div>";
 		},
 
 		_fadeIn: function() {
