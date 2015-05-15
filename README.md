@@ -1,4 +1,5 @@
-# Github link
+Github link
+
 https://github.com/bordozer/totalizator
 
 # Installation
