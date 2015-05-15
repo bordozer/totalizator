@@ -27,9 +27,16 @@ vim src/main/resources/database.properties
 mv src/main/resources/system.properties.template src/main/resources/system.properties
 
 # edit system properties
+
 #	system.admin.ids:		system admins IDs separated by comma (should be edited after system run and admin user registration)
+#							system.admin.ids=1
+
 # 	system.logos.path: 		folder with teams' logo images
+#							system.logos.path=/home/user/totalizator-files/logos/
+
 #	system.imports.path:	folder with imported games' data
+#							system.imports.path=/home/user/totalizator-files/imports/
+
 vim src/main/resources/system.properties
 
 #run from command line
@@ -37,6 +44,8 @@ JAVA_HOME=/opt/java/jdk1.8.0_20 ; mvn clean install jetty:run -Djetty.port=9091 
 
 # in a browser
 http://localhost:9091/resources/public/login.html
+
+# Use with ID=1 ( system.admin.ids=1 in system.properties ) Hakeem Olajuwon ( login 'hakeem', password 'hakeem' ) is administrator. He has additional menu Administration.
 
 
 
