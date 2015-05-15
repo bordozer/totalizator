@@ -60,16 +60,16 @@ There is two properties files
 # Run
 
 run from command line
-- change 9091 to your free port
-- define path to your Java 8 instead of /opt/java/jdk1.8.0_20
+- change *9091* to your free port
+- define path to your Java 8 instead of */opt/java/jdk1.8.0_20*
 
-$ **JAVA_HOME=/opt/java/jdk1.8.0_20 ; mvn clean install jetty:run -Djetty.port=9091 -Dspring.profiles.active=*test***
+$ **JAVA_HOME=*/opt/java/jdk1.8.0_20* ; mvn clean install jetty:run -Djetty.port=*9091* -Dspring.profiles.active=*test***
 
 # Browser
 
 in a browser
 
-**http://localhost:9091/resources/public/login.html**
+**http://localhost:*9091*/resources/public/login.html**
 
 # Notes
 *test* profile automatically generates random data - users and games.
@@ -81,6 +81,6 @@ Use with ID=1 ( system.admin.ids=1 in system.properties ) Hakeem Olajuwon ( logi
 # Development
 IDE IDEA configuration (with JRebel)
 
-jetty:run -Djetty.port=9091 -Dspring.profiles.active=development -Djavaagent:/home/blu/.IntelliJIdea13/config/plugins/jr-ide-idea/lib/jrebel/jrebel.jar
+jetty:run -Djetty.port=*9091* -Dspring.profiles.active=development -Djavaagent:/home/blu/.IntelliJIdea13/config/plugins/jr-ide-idea/lib/jrebel/jrebel.jar
 
 
