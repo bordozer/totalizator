@@ -43,19 +43,19 @@ There is two properties files
 
 	edit system properties
 
-	- system.admin.ids:		system admins IDs separated by comma (for clear DB should be edited after system run and admin user registration, not necessary to change it if '*test*' profile used)
+	$ **vim src/main/resources/system.properties**
+
+	- system.admin.ids: system admins IDs separated by comma (for clear DB should be edited after system run and admin user registration, not necessary to change it if '*test*' profile used)
 
 		*system.admin.ids=1*
 
- 	- system.logos.path: 	folder with teams' logo images
+ 	- system.logos.path: folder with teams' logo images
 
 		*system.logos.path=/home/user/totalizator-files/logos/*
 
-	- system.imports.path:	folder with imported games' data
+	- system.imports.path: folder with imported games' data
 
 		*system.imports.path=/home/user/totalizator-files/imports/*
-
-$ **vim src/main/resources/system.properties**
 
 #run from command line
 $ JAVA_HOME=/opt/java/jdk1.8.0_20 ; mvn clean install jetty:run -Djetty.port=9091 -Dspring.profiles.active=*test*
