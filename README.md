@@ -58,13 +58,14 @@ There is two properties files
 		*system.imports.path=/home/user/totalizator-files/imports/*
 
 #run from command line
-$ JAVA_HOME=/opt/java/jdk1.8.0_20 ; mvn clean install jetty:run -Djetty.port=9091 -Dspring.profiles.active=*test*
+$ **JAVA_HOME=/opt/java/jdk1.8.0_20 ; mvn clean install jetty:run -Djetty.port=9091 -Dspring.profiles.active=*test***
 
 # in a browser
-http://localhost:9091/resources/public/login.html
+**http://localhost:9091/resources/public/login.html**
 
 # Notes
-Use with ID=1 ( system.admin.ids=1 in system.properties ) Hakeem Olajuwon ( login 'hakeem', password 'hakeem' ) is administrator. He has additional menu Administration.
+*test* profile automatically generates random data - users and games
+Use with ID=1 ( system.admin.ids=1 in system.properties ) Hakeem Olajuwon ( login 'hakeem', password 'hakeem' ) is administrator. He has additional menu Administration where cups and games are configured.
 
 
 
