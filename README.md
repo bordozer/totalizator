@@ -1,27 +1,28 @@
 # Github link
 https://github.com/bordozer/totalizator
 
-# install npm
+# installation
 $ **sudo zypper in npm**
 
-# install bower
+install bower
 $ **npm install -g bower**
 
-# clone remote repository
+clone remote repository
 $ **git clone https://github.com/bordozer/totalizator.git**
 
-# change directory to project
+change directory to project
 $ **cd totalizator**
 
-# install dependencies
+install dependencies
 $ **bower install**
 
 $ **bower install https://github.com/harvesthq/chosen/releases/download/v1.4.0/chosen_v1.4.0.zip**
 
-# create *.properties
+# configuration
+create *.properties from template
 - database.properties
 
-	( '*test*' profile does not use the properties, so it is not necessary to change it )
+	( '*test*' profile uses a virtual DB, so it is not necessary to change the file )
 
 	$ **cp src/main/resources/database.properties.template src/main/resources/database.properties**
 
