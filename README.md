@@ -1,7 +1,9 @@
 # Github link
 https://github.com/bordozer/totalizator
 
-# installation
+# Installation
+
+install npm
 
 $ **sudo zypper in npm**
 
@@ -23,13 +25,17 @@ $ **bower install**
 
 $ **bower install https://github.com/harvesthq/chosen/releases/download/v1.4.0/chosen_v1.4.0.zip**
 
-# configuration
-create *.properties from template
+# Configuration
+
+There is two properties files
+
 - database.properties
 
-	( '*test*' profile uses a virtual DB, so it is not necessary to change the file )
+	create file from template
 
 	$ **cp src/main/resources/database.properties.template src/main/resources/database.properties**
+
+	'*test*' profile uses a virtual DB, so it is not necessary to change it. The file is used for *development* profile, when not virtual DB is used.
 
 - system.properties
 
