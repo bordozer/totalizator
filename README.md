@@ -18,13 +18,13 @@ bower install
 bower install https://github.com/harvesthq/chosen/releases/download/v1.4.0/chosen_v1.4.0.zip
 
 # create database.properties from template
-mv src/main/resources/database.properties.template src/main/resources/database.properties
+cp src/main/resources/database.properties.template src/main/resources/database.properties
 
 # edit database properties
 vim src/main/resources/database.properties
 
 # create system.properties from template
-mv src/main/resources/system.properties.template src/main/resources/system.properties
+cp src/main/resources/system.properties.template src/main/resources/system.properties
 
 # edit system properties
 
