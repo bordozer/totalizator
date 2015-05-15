@@ -57,10 +57,16 @@ There is two properties files
 
 		*system.imports.path=/home/user/totalizator-files/imports/*
 
-#run from command line
+# Run
+
+run from command line ( change 9091 to your free port )
+
 $ **JAVA_HOME=/opt/java/jdk1.8.0_20 ; mvn clean install jetty:run -Djetty.port=9091 -Dspring.profiles.active=*test***
 
-# in a browser
+# Browser
+
+in a browser
+
 **http://localhost:9091/resources/public/login.html**
 
 # Notes
