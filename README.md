@@ -1,4 +1,5 @@
-# https://github.com/bordozer/totalizator
+# Github link
+https://github.com/bordozer/totalizator
 
 # install npm
 sudo zypper in npm
