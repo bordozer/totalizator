@@ -59,7 +59,9 @@ There is two properties files
 
 # Run
 
-run from command line ( change 9091 to your free port )
+run from command line
+- change 9091 to your free port
+- define path to your Java 8 instead of /opt/java/jdk1.8.0_20
 
 $ **JAVA_HOME=/opt/java/jdk1.8.0_20 ; mvn clean install jetty:run -Djetty.port=9091 -Dspring.profiles.active=*test***
 
