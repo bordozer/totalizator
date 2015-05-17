@@ -73,6 +73,10 @@ public class CupWinnerRepository implements CupWinnerDao {
 	}
 
 	@Override
+	@Caching( evict = {
+		@CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+	} )
 	public void saveAll( final List<CupWinner> winners ) {
 		for ( final CupWinner winner : winners ) {
 			save( winner );
