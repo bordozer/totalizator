@@ -8,8 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-bets-template.html' ) );
 
-	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
-	var MatchesView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-view' );
+	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
 	var cupTeamBets = require( 'js/widgets/cup-bets/cup-bets-widget' );
 
@@ -47,19 +46,17 @@ define( function ( require ) {
 
 			var cup = this._getCup();
 
-			var model = new MatchesModel.MatchesModel();
-
-			var view = new MatchesView.MatchesView( {
-				model: model
-				, el: container
-				, settings: {
+			var options = {
+				settings: {
 					categoryId: cup.category.categoryId
 					, cupId: cup.cupId
 					, showFutureMatches: true
 				}
+				, isCompactView: false
 				, menuItems: []
 				, currentUser: currentUser
-			} );
+			};
+			matchesAndBetsView( container, options );
 		},
 
 		_renderCupBets: function() {

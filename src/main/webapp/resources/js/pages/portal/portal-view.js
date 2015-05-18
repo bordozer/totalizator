@@ -8,8 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/portal-template.html' ) );
 
-	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
-	var MatchesView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-view' );
+	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -49,19 +48,17 @@ define( function ( require ) {
 				var container = $( '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4"></div>' );
 				el.append( container );
 
-				var model = new MatchesModel.MatchesModel();
-
-				var view = new MatchesView.MatchesView( {
-					model: model
-					, el: container
-					, settings: {
+				var options = {
+					settings: {
 						categoryId: cup.category.categoryId
 						, cupId: cup.cupId
 						, showFutureMatches: true
 					}
+					, isCompactView: false
 					, menuItems: []
 					, currentUser: currentUser
-				} );
+				};
+				matchesAndBetsView( container, options );
 			} );
 		}
 	} );

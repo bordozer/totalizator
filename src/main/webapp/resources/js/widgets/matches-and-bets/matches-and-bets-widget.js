@@ -8,10 +8,36 @@ define( function( require ) {
 
 	var Model = require( './matches-and-bets-widget-model' );
 	var View = require( './matches-and-bets-widget-view' );
+	var ViewCompact = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact-widget-vew' );
 
 	function init( container, options ) {
-		var model = new Model.MatchesModel( { options: options } );
-		var view = new View.PortalPageView( { model: model, el: container, options: options } );
+
+		var model = new Model.MatchesModel();
+
+		var settings = options.settings;
+		var matchesAndBetOptions = {
+			model: model
+			, el: container
+			, settings: {
+				userId: settings.userId
+				, categoryId: settings.categoryId
+				, cupId: settings.cupId
+				, teamId: settings.teamId
+				, team2Id: settings.team2Id
+				, filterByDate: settings.filterByDate
+				, filterByDateEnable: settings.filterByDateEnable
+				, showFutureMatches: settings.showFutureMatches
+				, showFinished: settings.showFinished
+			}
+			, menuItems: options.menuItems
+			, currentUser: options.currentUser
+		};
+
+		if ( options.isCompactView ) {
+			new ViewCompact( matchesAndBetOptions );
+		} else {
+			new View.MatchesView( matchesAndBetOptions );
+		}
 	}
 
 	return init;
