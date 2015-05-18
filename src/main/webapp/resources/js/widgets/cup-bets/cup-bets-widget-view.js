@@ -22,6 +22,7 @@ define( function ( require ) {
 		, cupPositionLabel: "cup position"
 		, allCupBetsLabel: "All cup winners bets"
 		, validation_DuplicateTeams: "Cup team bet validation: Duplicated teams!"
+		, teamIsOutOfCupLabel: 'Team has been knocked out'
 	} );
 
 	var CupTeamBetsDetails = Backbone.View.extend( {

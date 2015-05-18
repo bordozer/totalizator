@@ -35,7 +35,8 @@ public class DTOServiceImpl implements DTOService {
 	@Autowired
 	private CupService cupService;
 
-
+	@Autowired
+	private CupTeamService cupTeamService;
 
 	@Override
 	public UserDTO transformUser( final User user ) {
@@ -126,6 +127,8 @@ public class DTOServiceImpl implements DTOService {
 				result.setCupPosition( cupTeamBet.getCupPosition() );
 
 				result.setPoints( cupScoresService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
+
+				result.setStillActive( cupTeamService.exists( cup.getId(), team.getId() ) );
 
 				return result;
 			}
@@ -296,6 +299,8 @@ public class DTOServiceImpl implements DTOService {
 				result.setCupPosition( cupTeamBet.getCupPosition() );
 
 				result.setPoints( cupScoresService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
+
+				result.setStillActive( cupTeamService.exists( cup.getId(), team.getId() ) );
 
 				return result;
 			}

@@ -9,13 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.*;
-import totalizator.app.services.*;
+import totalizator.app.services.CupBetsService;
+import totalizator.app.services.CupService;
+import totalizator.app.services.CupWinnerService;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
@@ -42,10 +48,6 @@ public class CupWinnersBetsRestController {
 
 	@Autowired
 	private CupWinnerService cupWinnerService;
-
-	@Autowired
-	private CupTeamService cupTeamService;
-
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
@@ -94,9 +96,6 @@ public class CupWinnersBetsRestController {
 			userCupBetsDTO.setUser( dtoService.transformUser( user ) );
 
 			final List<CupTeamBetDTO> userCupBets = dtoService.transformCupTeamBets( cupTeamBets, user );
-			for ( final CupTeamBetDTO userCupBet : userCupBets ) {
-				userCupBet.setStillActive( cupTeamService.exists( userCupBet.getCup().getCupId(), userCupBet.getTeam().getTeamId() ) );
-			}
 
 			if ( isCupBetsAreHiddenYet ) {
 				replaceTeamsWithFakeData( cup, userCupBets );

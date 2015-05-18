@@ -35,3 +35,7 @@
 .team-logo {
 	/*border: 1px solid silver;*/
 }
+
+.team-out-of-cup {
+	opacity: 0.3;
+}

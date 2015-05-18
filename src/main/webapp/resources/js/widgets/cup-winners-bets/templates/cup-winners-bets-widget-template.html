@@ -53,7 +53,7 @@
 							<% } %>
 
 							<% if( ! userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
-								<div title="<%-translator.teamIsOutOfCupLabel%>" style='opacity: 0.3;'>
+								<div class="team-out-of-cup" title="<%-translator.teamIsOutOfCupLabel%>">
 									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>"  >
 								</div>
 								<h5>

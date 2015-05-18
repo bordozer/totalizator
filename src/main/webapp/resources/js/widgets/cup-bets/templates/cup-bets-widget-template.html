@@ -11,10 +11,21 @@
 
 			<tr>
 				<td>
-
 					<% if( cupTeamBet.team != null ) { %>
-						<img class="team-logo" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="64">
-						<span class="text-primary"><%=cupTeamBet.team.teamName%></span>
+
+						<% if( cupTeamBet.stillActive ) { %>
+							<img class="team-logo" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="64">
+							<span class="text-primary"><%=cupTeamBet.team.teamName%></span>
+						<% } %>
+
+						<% if( ! cupTeamBet.stillActive ) { %>
+							<img class="team-logo team-out-of-cup" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%> ( <%-translator.teamIsOutOfCupLabel%> )" height="64">
+							<span class="text-danger team-out-of-cup" title="<%-translator.teamIsOutOfCupLabel%>">
+								<i class='fa fa-close'></i>
+								<%=cupTeamBet.team.teamName%>
+							</span>
+						<% } %>
+
 					<% } %>
 
 					<% if( cupTeamBet.team == null ) { %>
