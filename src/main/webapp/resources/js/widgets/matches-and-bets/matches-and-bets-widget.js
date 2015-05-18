@@ -8,7 +8,7 @@ define( function( require ) {
 
 	var Model = require( './matches-and-bets-widget-model' );
 	var View = require( './matches-and-bets-widget-view' );
-	var ViewCompact = require( './matches-and-bets-compact-widget-vew' );
+	var ViewCompact = require( './matches-and-bets-widget-vew-compact' );
 
 	function init( container, options ) {
 
