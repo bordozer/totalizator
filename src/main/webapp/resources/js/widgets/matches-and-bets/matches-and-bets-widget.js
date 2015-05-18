@@ -15,11 +15,11 @@ define( function( require ) {
 		switchViewsLabel: 'Switch match and bets views'
 	} );
 
-	function createView( _options ) {
+	function createView( renderOptions ) {
 
-		var model = _options.model;
-		var container = _options.container;
-		var options = _options.options;
+		var model = renderOptions.model;
+		var container = renderOptions.container;
+		var options = renderOptions.options;
 
 		var settings = options.settings;
 		var matchesAndBetOptions = {
@@ -49,22 +49,22 @@ define( function( require ) {
 
 	function init( container, options ) {
 
-		var modeMenu = { selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel };
-		options.menuItems.push( modeMenu );
+		var switchViewsMenu = { selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel };
+		options.menuItems.push( switchViewsMenu );
 
 		var model = new Model.MatchesModel();
 
-		var _options = {
+		var renderOptions = {
 			model: model
 			, container: container
 			, options: options
 		};
 
 		var render = _.bind( function() {
-			createView( _options );
+			createView( renderOptions );
 		}, this );
 
-		var view = createView( _options );
+		var view = createView( renderOptions );
 
 		view.on( 'events:switch_views', render, this );
 	}
