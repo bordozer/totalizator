@@ -46,6 +46,7 @@ define( function ( require ) {
 			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
+			, 'click .js-switch-views': '_switchViews'
 		},
 
 		initialize: function ( options ) {
@@ -168,6 +169,10 @@ define( function ( require ) {
 			this.settingsModel.restoreAttributes();
 
 			this.render();
+		},
+
+		_switchViews: function() {
+			this.trigger( 'events:switch_views' );
 		}
 	});
 } );
