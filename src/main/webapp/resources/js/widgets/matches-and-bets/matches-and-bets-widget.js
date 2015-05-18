@@ -10,9 +10,17 @@ define( function( require ) {
 	var View = require( './matches-and-bets-widget-view' );
 	var ViewCompact = require( './matches-and-bets-widget-vew-compact' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		switchViewsLabel: 'Switch match and bets views'
+	} );
+
 	function init( container, options ) {
 
 		var model = new Model.MatchesModel();
+
+		var modeMenu = { selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel };
+		options.menuItems.push( modeMenu );
 
 		var settings = options.settings;
 		var matchesAndBetOptions = {
