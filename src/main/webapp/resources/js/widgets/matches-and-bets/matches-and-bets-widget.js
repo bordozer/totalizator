@@ -47,10 +47,14 @@ define( function( require ) {
 		return new View.MatchesView( matchesAndBetOptions );
 	}
 
+	function addSwitchViewsMenu( menuItems ) {
+		var switchViewsMenu = { selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel };
+		menuItems.push( switchViewsMenu );
+	}
+
 	function init( container, options ) {
 
-		var switchViewsMenu = { selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel };
-		options.menuItems.push( switchViewsMenu );
+		addSwitchViewsMenu( options.menuItems );
 
 		var model = new Model.MatchesModel();
 
@@ -62,9 +66,11 @@ define( function( require ) {
 
 		var render = _.bind( function() {
 			createView( renderOptions );
+			options.isCompactView = ! options.isCompactView;
 		}, this );
 
 		var view = createView( renderOptions );
+		options.isCompactView = ! options.isCompactView;
 
 		view.on( 'events:switch_views', render, this );
 	}
