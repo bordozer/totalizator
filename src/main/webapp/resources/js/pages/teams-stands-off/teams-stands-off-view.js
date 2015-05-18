@@ -7,8 +7,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/teams-stands-off-template.html' ) );
 
-	var MatchesModel = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
-	var MatchesAndBetsCompactView = require( 'js/widgets/matches-and-bets-compact/matches-and-bets-compact-widget-vew' );
+	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -53,12 +52,8 @@ define( function ( require ) {
 				var container = $( '<div></div>' );
 				el.append( container );
 
-				var model = new MatchesModel.MatchesModel();
-
-				var view = new MatchesAndBetsCompactView( {
-					model: model
-					, el: container
-					, settings: {
+				var options = {
+					settings: {
 						categoryId: cup.category.categoryId
 						, cupId: cup.cupId
 						, teamId: self.team1.teamId
@@ -66,9 +61,11 @@ define( function ( require ) {
 						, showFinished: true
 						, showFutureMatches: true
 					}
+					, isCompactView: true
 					, menuItems: []
 					, currentUser: currentUser
-				} );
+				};
+				matchesAndBetsView( container, options );
 			});
 		}
 	});
