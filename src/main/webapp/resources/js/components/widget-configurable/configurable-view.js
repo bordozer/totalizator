@@ -51,12 +51,12 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.options = options;
-			this.filter = options.settings;
+			this.initialFilter = options.settings;
 
-			this.dataModel = new ConfigurableModel( { filter: this.filter } );
+			this.dataModel = new ConfigurableModel( { filter: this.initialFilter } );
 			this.dataModel.on( 'sync', this._runRender, this );
 
-			this.settingsModel = new FilterModel( this.filter );
+			this.settingsModel = new FilterModel( this.initialFilter );
 
 			this.on( 'view:render', this.render, this );
 
@@ -114,7 +114,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			var cupId = this.settingsModel == undefined ? this.filter.cupId : this.settingsModel.get( 'cupId' );
+			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
 			var cup = service.getCup( service.loadPublicCups(), cupId );
 
 			return this.getCupTitle( cup, translator.title );
@@ -172,7 +172,7 @@ define( function ( require ) {
 		},
 
 		_switchViews: function() {
-			this.trigger( 'events:switch_views' );
+			this.trigger( 'events:switch_views', this.settingsModel.toJSON() );
 		}
 	});
 } );

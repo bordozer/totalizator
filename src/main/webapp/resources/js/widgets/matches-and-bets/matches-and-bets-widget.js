@@ -15,11 +15,9 @@ define( function( require ) {
 		switchViewsLabel: 'Switch match and bets views'
 	} );
 
-	function createView( renderOptions ) {
+	var view = null;
 
-		var model = renderOptions.model;
-		var container = renderOptions.container;
-		var options = renderOptions.options;
+	function createView( model, container, options ) {
 
 		var settings = options.settings;
 		var matchesAndBetOptions = {
@@ -58,21 +56,25 @@ define( function( require ) {
 
 		var model = new Model.MatchesModel();
 
-		var renderOptions = {
-			model: model
-			, container: container
-			, options: options
-		};
+		var render = _.bind( function( filter ) {
 
-		var render = _.bind( function() {
-			createView( renderOptions );
+			options.settings = filter;
+
+			if ( view ) {
+				view.remove();
+			}
+
+			var el = $( '<div></div>' );
+			container.html( el );
+
+			view = createView( model, el, options );
+
+			view.on( 'events:switch_views', render, this, filter );
+
 			options.isCompactView = ! options.isCompactView;
 		}, this );
 
-		var view = createView( renderOptions );
-		options.isCompactView = ! options.isCompactView;
-
-		view.on( 'events:switch_views', render, this );
+		render( options.settings );
 	}
 
 	return init;
