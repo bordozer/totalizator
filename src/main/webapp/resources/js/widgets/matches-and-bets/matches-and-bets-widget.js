@@ -19,20 +19,20 @@ define( function( require ) {
 
 	function createView( model, container, options ) {
 
-		var settings = options.settings;
+		var filter = options.filter;
 		var matchesAndBetOptions = {
 			model: model
 			, el: container
 			, settings: {
-				userId: settings.userId
-				, categoryId: settings.categoryId
-				, cupId: settings.cupId
-				, teamId: settings.teamId
-				, team2Id: settings.team2Id
-				, filterByDate: settings.filterByDate
-				, filterByDateEnable: settings.filterByDateEnable
-				, showFutureMatches: settings.showFutureMatches
-				, showFinished: settings.showFinished
+				userId: filter.userId
+				, categoryId: filter.categoryId
+				, cupId: filter.cupId
+				, teamId: filter.teamId
+				, team2Id: filter.team2Id
+				, filterByDate: filter.filterByDate
+				, filterByDateEnable: filter.filterByDateEnable
+				, showFutureMatches: filter.showFutureMatches
+				, showFinished: filter.showFinished
 			}
 			, menuItems: options.menuItems
 			, currentUser: options.currentUser
@@ -58,7 +58,7 @@ define( function( require ) {
 
 		var render = _.bind( function( filter ) {
 
-			options.settings = filter;
+			options.filter = filter;
 
 			if ( view ) {
 				view.remove();
@@ -74,7 +74,7 @@ define( function( require ) {
 			options.isCompactView = ! options.isCompactView;
 		}, this );
 
-		render( options.settings );
+		render( options.filter );
 	}
 
 	return init;

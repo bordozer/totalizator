@@ -47,7 +47,7 @@ define( function ( require ) {
 			var cup = this._getCup();
 
 			var options = {
-				settings: {
+				filter: {
 					categoryId: cup.category.categoryId
 					, cupId: cup.cupId
 					, showFutureMatches: true

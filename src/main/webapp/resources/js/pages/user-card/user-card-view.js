@@ -56,7 +56,7 @@ define( function ( require ) {
 				el.append( container );
 
 				var options = {
-					settings: {
+					filter: {
 						userId: userId
 						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
