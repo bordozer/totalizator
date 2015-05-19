@@ -7,6 +7,8 @@ define( function( require ) {
 	var $ = require( 'jquery' );
 
 	var Model = require( './matches-and-bets-widget-model' );
+	var FilterModel = require( 'js/components/widget-configurable/filter/matches-filter-model' );
+
 	var View = require( './matches-and-bets-widget-view' );
 	var ViewCompact = require( './matches-and-bets-widget-vew-compact' );
 
@@ -17,23 +19,13 @@ define( function( require ) {
 
 	var view = null;
 
-	function createView( model, container, options ) {
+	function createView( model, container, filterModel, options ) {
 
-		var filter = options.filter;
 		var matchesAndBetOptions = {
 			model: model
+			, filterModel: filterModel
 			, el: container
-			, settings: {
-				userId: filter.userId
-				, categoryId: filter.categoryId
-				, cupId: filter.cupId
-				, teamId: filter.teamId
-				, team2Id: filter.team2Id
-				, filterByDate: filter.filterByDate
-				, filterByDateEnable: filter.filterByDateEnable
-				, showFutureMatches: filter.showFutureMatches
-				, showFinished: filter.showFinished
-			}
+			, settings: options.filter
 			, menuItems: options.menuItems
 			, currentUser: options.currentUser
 		};
@@ -55,6 +47,7 @@ define( function( require ) {
 		addSwitchViewsMenu( options.menuItems );
 
 		var model = new Model.MatchesModel();
+		var filterModel = new FilterModel( options.filter );
 
 		var render = _.bind( function( filter ) {
 
@@ -67,7 +60,7 @@ define( function( require ) {
 			var el = $( '<div></div>' );
 			container.html( el );
 
-			view = createView( model, el, options );
+			view = createView( model, el, filterModel, options );
 
 			view.on( 'events:switch_views', render, this, filter );
 

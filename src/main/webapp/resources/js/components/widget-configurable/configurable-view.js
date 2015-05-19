@@ -6,7 +6,6 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var FilterModel = require( './filter/matches-filter-model' );
 	var FilterView = require( './filter/matches-filter-view' );
 	var ConfigurableModel = require( './configurable-model' );
 
@@ -50,13 +49,13 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+
 			this.options = options;
 			this.initialFilter = options.settings;
+			this.settingsModel = options.filterModel;
 
 			this.dataModel = new ConfigurableModel( { filter: this.initialFilter } );
 			this.dataModel.on( 'sync', this._runRender, this );
-
-			this.settingsModel = new FilterModel( this.initialFilter );
 
 			this.on( 'view:render', this.render, this );
 
@@ -147,6 +146,7 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this.settingsModel.reset();
+//			console.log( 1, this.settingsModel.toJSON() );
 
 			this.render();
 		},
@@ -172,6 +172,7 @@ define( function ( require ) {
 		},
 
 		_switchViews: function() {
+//			console.log( 2, this.settingsModel.toJSON() );
 			this.trigger( 'events:switch_views', this.settingsModel.toJSON() );
 		}
 	});
