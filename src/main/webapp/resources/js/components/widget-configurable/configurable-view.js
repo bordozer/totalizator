@@ -146,7 +146,6 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this.settingsModel.reset();
-//			console.log( 1, this.settingsModel.toJSON() );
 
 			this.render();
 		},
@@ -172,7 +171,6 @@ define( function ( require ) {
 		},
 
 		_switchViews: function() {
-//			console.log( 2, this.settingsModel.toJSON() );
 			this.trigger( 'events:switch_views', this.settingsModel.toJSON() );
 		}
 	});
