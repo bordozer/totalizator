@@ -17,8 +17,6 @@ define( function( require ) {
 		switchViewsLabel: 'Switch match and bets views'
 	} );
 
-	var view = null;
-
 	function createView( model, container, filterModel, options ) {
 
 		var matchesAndBetOptions = {
@@ -33,7 +31,7 @@ define( function( require ) {
 			return new ViewCompact( matchesAndBetOptions );
 		}
 
-		return new View.MatchesView( matchesAndBetOptions );
+		return new View( matchesAndBetOptions );
 	}
 
 	function addSwitchViewsMenu( menuItems ) {
@@ -41,12 +39,14 @@ define( function( require ) {
 		menuItems.push( switchViewsMenu );
 	}
 
-	function init( container, options ) {
+	return function( container, options ) {
 
 		addSwitchViewsMenu( options.menuItems );
 
 		var model = new Model.MatchesModel();
 		var filterModel = new FilterModel( options.filter );
+
+		var view = null;
 
 		var render = _.bind( function( filter ) {
 
@@ -68,6 +68,4 @@ define( function( require ) {
 
 		render( options.filter );
 	}
-
-	return init;
 });

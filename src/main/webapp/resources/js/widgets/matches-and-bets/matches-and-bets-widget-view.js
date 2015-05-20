@@ -36,49 +36,6 @@ define( function ( require ) {
 		, menuHint: "Match menu"
 	} );
 
-	var MatchesView = ConfigurableView.extend( {
-
-		renderInnerView: function ( filter ) {
-			this.filter = filter;
-
-			this.currentUser = this.options.currentUser;
-
-			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
-			this.model.refresh( filter );
-		},
-
-		getIcon: function() {
-			return 'fa-futbol-o';
-		},
-
-		_renderCupMatchesAndBets: function() {
-
-			var el = this.$( this.windowBodyContainerSelector );
-			el.empty();
-
-			var self = this;
-			this.model.forEach( function( matchBet ) {
-				self._renderEntry( matchBet, el );
-			});
-
-			this.trigger( 'inner-view-rendered' );
-		},
-
-		_renderEntry: function ( model, el ) {
-
-			var view = new MatchView( {
-				model: model
-				, categories: this.categories
-				, cups: this.cups
-				, teams: this.teams
-				, filter: this.filter
-				, currentUser: this.currentUser
-			} );
-
-			return el.append( view.render().$el );
-		}
-	});
-
 	var MatchView = Backbone.View.extend( {
 
 		events: {
@@ -391,5 +348,46 @@ define( function ( require ) {
 		}
 	});
 
-	return { MatchesView: MatchesView };
+	return ConfigurableView.extend( {
+
+		renderInnerView: function ( filter ) {
+			this.filter = filter;
+
+			this.currentUser = this.options.currentUser;
+
+			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
+			this.model.refresh( filter );
+		},
+
+		getIcon: function() {
+			return 'fa-futbol-o';
+		},
+
+		_renderCupMatchesAndBets: function() {
+
+			var el = this.$( this.windowBodyContainerSelector );
+			el.empty();
+
+			var self = this;
+			this.model.forEach( function( matchBet ) {
+				self._renderEntry( matchBet, el );
+			});
+
+			this.trigger( 'inner-view-rendered' );
+		},
+
+		_renderEntry: function ( model, el ) {
+
+			var view = new MatchView( {
+				model: model
+				, categories: this.categories
+				, cups: this.cups
+				, teams: this.teams
+				, filter: this.filter
+				, currentUser: this.currentUser
+			} );
+
+			return el.append( view.render().$el );
+		}
+	});
 } );

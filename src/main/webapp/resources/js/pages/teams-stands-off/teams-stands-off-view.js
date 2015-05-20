@@ -4,6 +4,7 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
+	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/teams-stands-off-template.html' ) );
 
@@ -65,6 +66,7 @@ define( function ( require ) {
 					, menuItems: []
 					, currentUser: currentUser
 				};
+
 				matchesAndBetsView( container, options );
 			});
 		}
