@@ -35,9 +35,9 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 
 		if ( isMatchWinnerGuessedRight( betScore1, betScore2, score1, score2 ) ) {
 
-			if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2, MATCH_POINTS_GUESSING_STRONG_DELTA ) ) {
+			/*if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2, MATCH_POINTS_GUESSING_STRONG_DELTA ) ) {
 				return GUESSED_SCORES_WITHIN_STRONG_DELTA_POINTS;
-			}
+			}*/
 
 			if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2, MATCH_POINTS_GUESSING_DELTA ) ) {
 				return GUESSED_SCORES_WITHIN_DELTA_POINTS;
