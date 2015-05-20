@@ -232,7 +232,7 @@ define( function ( require ) {
 			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
 
 			var cups = service.filterCupsByCategory( this.cups, categoryId );
-			var teams = service.loadCupActiveTeams( model.cupId );
+			var teams = this.model.id == 0 ? service.loadCupActiveTeams( model.cupId ) : this.teams;
 
 			this.$el.html( templateEntryEdit( {
 				model: model
