@@ -7,10 +7,12 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 
 	// TODO: make this configurable in Cup, won't be working for football
 	private static final int GUESSED_RIGHT_SCORES_POINTS = 6;
+	private static final int GUESSED_SCORES_WITHIN_STRONG_DELTA_POINTS = 4;
 	private static final int GUESSED_SCORES_WITHIN_DELTA_POINTS = 3;
 	private static final int GUESSED_RIGHT_WINNERS = 1;
 
 	private static final int MATCH_POINTS_GUESSING_DELTA = 3;
+	private static final int MATCH_POINTS_GUESSING_STRONG_DELTA = 1;
 
 	@Override
 	int getPoints( final MatchBet bet ) {
@@ -33,7 +35,11 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 
 		if ( isMatchWinnerGuessedRight( betScore1, betScore2, score1, score2 ) ) {
 
-			if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2 ) ) {
+			if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2, MATCH_POINTS_GUESSING_STRONG_DELTA ) ) {
+				return GUESSED_SCORES_WITHIN_STRONG_DELTA_POINTS;
+			}
+
+			if ( isPointsWithingGuessed( betScore1, betScore2, score1, score2, MATCH_POINTS_GUESSING_DELTA ) ) {
 				return GUESSED_SCORES_WITHIN_DELTA_POINTS;
 			}
 
@@ -56,10 +62,10 @@ class BaseScoreCalculationStrategy extends ScoreCalculationStrategy {
 		return hasMatchFinishedWithGuessedDraw( betScore1, betScore2, score1, score2 );
 	}
 
-	private boolean isPointsWithingGuessed( final int betScore1, final int betScore2, final int score1, final int score2 ) {
+	private boolean isPointsWithingGuessed( final int betScore1, final int betScore2, final int score1, final int score2, int delta ) {
 
-		final boolean score1WithinDelta = ( betScore1 >= score1 - MATCH_POINTS_GUESSING_DELTA ) && ( betScore1 <= score1 + MATCH_POINTS_GUESSING_DELTA );
-		final boolean score2WithinDelta = ( betScore2 >= score2 - MATCH_POINTS_GUESSING_DELTA ) && ( betScore2 <= score2 + MATCH_POINTS_GUESSING_DELTA );
+		final boolean score1WithinDelta = ( betScore1 >= score1 - delta ) && ( betScore1 <= score1 + delta );
+		final boolean score2WithinDelta = ( betScore2 >= score2 - delta ) && ( betScore2 <= score2 + delta );
 
 		return score1WithinDelta && score2WithinDelta;
 	}
