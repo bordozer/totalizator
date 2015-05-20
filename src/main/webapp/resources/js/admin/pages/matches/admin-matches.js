@@ -9,6 +9,8 @@ define( function( require ) {
 	var Model = require( './admin-matches-model' );
 	var View = require( './admin-matches-view' );
 
+	var FilterModel = require( 'js/components/widget-configurable/filter/matches-filter-model' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		addMatchLabel: "Admin / Matches / Add entry"
@@ -28,14 +30,18 @@ define( function( require ) {
 			, { selector: 'js-delete-selected-matches-button', icon: 'fa fa-close', link: '#', text: translator.deleteSelectedMatchesLabel }
 		];
 
+		var filter = {
+			categoryId: options.categoryId
+				, cupId: options.cupId
+				, showFutureMatches: true
+		};
+		var filterModel = new FilterModel( filter );
+
 		var matchesView = new View.MatchesView( {
 			model: matchesModel
 			, el: container
-			, settings: {
-				categoryId: options.categoryId
-				, cupId: options.cupId
-				, showFutureMatches: true
-			}
+			, filterModel: filterModel
+			, settings: filter
 			, menuItems: menuItems
 		} );
 
