@@ -41,7 +41,6 @@ define( function( require ) {
 			model: matchesModel
 			, el: container
 			, filterModel: filterModel
-			, settings: filter
 			, menuItems: menuItems
 		} );
 

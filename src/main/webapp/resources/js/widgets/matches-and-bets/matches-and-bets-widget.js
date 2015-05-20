@@ -25,7 +25,6 @@ define( function( require ) {
 			model: model
 			, filterModel: filterModel
 			, el: container
-			, settings: options.filter
 			, menuItems: options.menuItems
 			, currentUser: options.currentUser
 		};

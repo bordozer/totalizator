@@ -51,7 +51,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.options = options;
-			this.initialFilter = options.settings;
+			this.initialFilter = options.filterModel.toJSON();
 			this.settingsModel = options.filterModel;
 
 			this.dataModel = new ConfigurableModel( { filter: this.initialFilter } );
