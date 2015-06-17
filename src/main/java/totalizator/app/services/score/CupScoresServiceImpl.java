@@ -128,32 +128,43 @@ public class CupScoresServiceImpl implements CupScoresService {
 			return 0;
 		}
 
-		int result = 0;
 		final List<CupWinner> winners = cupWinnerService.loadAll( cup );
 
-		for ( int i = 0; i < cup.getWinnersCount(); i++ ) {
+		final int realTeamPositionInCupFinal = getTeamRealPosition( winners, team );
 
-			final Team winner = winners.get( i ).getTeam();
-
-			if ( i == cupPosition && winner.equals( team ) ) {
-				result += 6;
-				continue;
-			}
-
-			final CupWinner cupWinner = CollectionUtils.find( winners, new Predicate<CupWinner>() {
-
-				@Override
-				public boolean evaluate( final CupWinner cupWinner ) {
-					return cupWinner.getTeam().equals( team );
-				}
-			} );
-
-			if ( cupWinner != null ) {
-				result += 3;
-			}
+		if ( realTeamPositionInCupFinal == cupPosition ) {
+			return 6;
 		}
 
-		return result;
+		final boolean userWinnerPresentsInWinners = CollectionUtils.find( winners, new Predicate<CupWinner>() {
+
+			@Override
+			public boolean evaluate( final CupWinner cupWinner ) {
+				return cupWinner.getTeam().equals( team );
+			}
+		} ) == null;
+
+		if ( userWinnerPresentsInWinners ) {
+			return 3;
+		}
+
+		return 0;
+	}
+
+	private int getTeamRealPosition( final List<CupWinner> winners, final Team team ) {
+
+		int position = 1;
+
+		for ( final CupWinner winner : winners ) {
+
+			if ( winner.getTeam().equals( team ) ) {
+				return position;
+			}
+
+			position++;
+		}
+
+		return 0;
 	}
 
 	private UserPoints getUserPoints( List<UserPoints> usersScores, final User user ) {
