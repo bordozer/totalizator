@@ -142,7 +142,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 			public boolean evaluate( final CupWinner cupWinner ) {
 				return cupWinner.getTeam().equals( team );
 			}
-		} ) == null;
+		} ) != null;
 
 		if ( userWinnerPresentsInWinners ) {
 			return 3;
