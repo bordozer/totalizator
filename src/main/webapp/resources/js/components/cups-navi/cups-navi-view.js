@@ -61,6 +61,7 @@ define( function ( require ) {
 		_publicCupsMenuItems: function() {
 
 			var menus = [];
+			var self = this;
 
 			var cups = service.loadPublicCups();
 
@@ -68,7 +69,15 @@ define( function ( require ) {
 //			menus.push( { selector: 'divider' } );
 
 			_.each( cups, function( cup ) {
-				menus.push( { selector: 'category-' + cup.cupId, icon: 'fa fa-cubes', link: '/totalizator/cups/' + cup.cupId + '/', text: cup.category.categoryName + ': ' + cup.cupName } );
+
+				var selected = self.selectedCupId && self.selectedCupId === cup.cupId;
+
+				menus.push( {
+					selector: 'category-' + cup.cupId
+					, icon: selected ? 'fa fa-check-circle' : 'fa fa-circle-thin'
+					, link: '/totalizator/cups/' + cup.cupId + '/'
+					, text: cup.category.categoryName + ': ' + cup.cupName
+				} );
 			} );
 
 			return menus;
