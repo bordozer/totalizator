@@ -32,6 +32,8 @@ public interface DTOService {
 
 	MatchBetDTO getMatchBetForMatch( final Match match, final User user );
 
+	List<BetDTO> transformMatchBets( List<MatchBet> matchBets, User user );
+
 	List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user );
 
 	CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet, final User user );
