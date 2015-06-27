@@ -163,9 +163,10 @@ define( function ( require ) {
 		},
 
 		_saveEntry: function() {
+
 			this._bind();
 
-			if( ! this._validate() ){
+			if ( ! this.model.isValid() ) {
 				return;
 			}
 
@@ -176,18 +177,8 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
+			this.model.makeSnapshot();
 			this.model.set( { categoryName: this.$( '.entry-name' ).val() } );
-		},
-
-		_validate: function() {
-
-			if ( this.model.get( 'categoryName' ).trim().length == 0 ) {
-				alert( 'Enter a name!' ); // TODO: translate
-
-				return false;
-			}
-
-			return true;
 		},
 
 		_onCategoryEditClick: function( evt ) {
@@ -219,6 +210,7 @@ define( function ( require ) {
 		_onCategoryEditCancelClick: function( evt ) {
 			evt.preventDefault();
 			if ( this.model.get( 'categoryId' ) > 0 ) {
+				this.model.restoreSnapshot();
 				this.render();
 				return;
 			}
