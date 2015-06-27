@@ -62,6 +62,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<UserPoints> getUserPoints( final Cup cup, final User user ) {
+
 		final List<UserPoints> userResult = newArrayList();
 
 		final ScoreCalculationStrategy calculationStrategy = ScoreCalculationStrategy.getInstance();
@@ -71,6 +72,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 		for ( final MatchBet bet : userCupBets ) {
 			userResult.add( new UserPoints( user, calculationStrategy.getPoints( bet ) ) );
 		}
+
 		return userResult;
 	}
 
