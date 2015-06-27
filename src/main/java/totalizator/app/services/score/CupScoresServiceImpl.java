@@ -177,4 +177,24 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 		return null;
 	}
+
+	public void setUserService( final UserService userService ) {
+		this.userService = userService;
+	}
+
+	public void setMatchBetsService( final MatchBetsService matchBetsService ) {
+		this.matchBetsService = matchBetsService;
+	}
+
+	public void setCupService( final CupService cupService ) {
+		this.cupService = cupService;
+	}
+
+	public void setCupWinnerService( final CupWinnerService cupWinnerService ) {
+		this.cupWinnerService = cupWinnerService;
+	}
+
+	public void setCupBetsService( final CupBetsService cupBetsService ) {
+		this.cupBetsService = cupBetsService;
+	}
 }

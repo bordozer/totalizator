@@ -47,6 +47,10 @@ public class AbstractEntity {
 		return id;
 	}
 
+	public void setId( final int id ) {
+		this.id = id;
+	}
+
 	@Override
 	public boolean equals( Object o ) {
 		if ( this == o ) return true;
