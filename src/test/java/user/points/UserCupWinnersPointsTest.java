@@ -13,7 +13,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 
-public class UserPointsTest {
+public class UserCupWinnersPointsTest {
 
 	@Before
 	public void setup() {
@@ -30,7 +30,7 @@ public class UserPointsTest {
 		cupScoresService.setCupWinnerService( cupWinnerService( testData ) );
 
 		final int points = cupScoresService.getUserCupWinnersPoints( testData.cup, testData.team1, testData.user, 1 );
-		assertEquals( "User guessed right the cup winner and it's position, have to be 6 points", points, 6 );
+		assertEquals( "User guessed right the cup winner and it's position, have to be 6 points", 6, points );
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class UserPointsTest {
 		cupScoresService.setCupWinnerService( cupWinnerService( testData ) );
 
 		final int points = cupScoresService.getUserCupWinnersPoints( testData.cup, testData.team1, testData.user, 2 );
-		assertEquals( "User guessed right the cup winner but did not it's position, have to be 3 points", points, 3 );
+		assertEquals( "User guessed right the cup winner but did not it's position, have to be 3 points", 3, points );
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class UserPointsTest {
 		cupScoresService.setCupWinnerService( cupWinnerService( testData ) );
 
 		final int points = cupScoresService.getUserCupWinnersPoints( testData.cup, testData.team3, testData.user, 1 );
-		assertEquals( "User's team is outsider, it have to be zero points", points, 0 );
+		assertEquals( "User's team is outsider, it have to be zero points", 0, points );
 	}
 
 	private CupWinnerService cupWinnerService( final TestData testData ) {
