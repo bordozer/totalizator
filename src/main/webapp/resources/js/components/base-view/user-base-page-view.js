@@ -16,6 +16,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		menuAdminLabel: "Menu: Admin"
 		, menuUsersLabel: 'Users'
+		, menuYourGroupsLabel: 'Your groups'
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
@@ -48,6 +49,8 @@ define( function ( require ) {
 			}
 
 			menus.push( { selector: '', icon: 'fa fa-users', link: '/totalizator/users/', text: translator.menuUsersLabel } );
+			menus.push( { selector: 'divider' } );
+			menus.push( { selector: '', icon: 'fa fa-cloud', link: '/totalizator/users/' + this.currentUser.userId + '/groups/', text: translator.menuYourGroupsLabel } );
 			menus.push( { selector: 'divider' } );
 			menus.push( { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel } );
 

@@ -22,8 +22,6 @@ import static com.google.common.collect.Lists.newArrayList;
 @Service
 public class MatchBetsServiceImpl implements MatchBetsService {
 
-	public static final int STOP_BETTING_BEFORE_MATCH_BEGINNING_HOURS = 1; // TODO: mode to the settings
-
 	@Autowired
 	private MatchBetDao matchBetRepository;
 

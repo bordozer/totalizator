@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>User groups</nerd>
+		<ru><![CDATA[Группы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete user group?</nerd>
+		<ru><![CDATA[Удалить группу?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Enter a user group name!</nerd>
+		<ru><![CDATA[Введите название группы!]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

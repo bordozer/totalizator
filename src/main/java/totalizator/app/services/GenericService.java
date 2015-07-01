@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface GenericService<T extends AbstractEntity> {
 
+	String CACHE_PERMANENT = "totalizator.app.cache.permanent";
+
 	List<T> loadAll();
 
 	T load( final int id );

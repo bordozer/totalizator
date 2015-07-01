@@ -141,6 +141,25 @@ public class DTOServiceImpl implements DTOService {
 		return cupTeamBets.stream().map( mapper ).collect( Collectors.toList() );
 	}
 
+	@Override
+	public List<UserGroupDTO> transformUserGroups( final List<UserGroup> userGroups ) {
+
+		final java.util.function.Function<? super UserGroup, UserGroupDTO> mapper = new java.util.function.Function<UserGroup, UserGroupDTO>() {
+
+			@Override
+			public UserGroupDTO apply( final UserGroup userGroup ) {
+
+				final UserGroupDTO userGroupDTO = new UserGroupDTO();
+				userGroupDTO.setUserGroupId( userGroup.getId() );
+				userGroupDTO.setUserGroupName( userGroup.getGroupName() );
+//				userGroupDTO.setUserGroupOwner( transformUser( userGroup.getOwner() ) );
+
+				return userGroupDTO;
+			}
+		};
+		return userGroups.stream().map( mapper ).collect( Collectors.toList() );
+	}
+
 	private Function<User, UserDTO> userFunction() {
 
 		return new Function<User, UserDTO>() {

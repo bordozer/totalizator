@@ -69,7 +69,7 @@ public class MatchBetRepository implements MatchBetDao {
 		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
 	} )
 	public MatchBet save( final MatchBet entry ) {
-			return em.merge( entry );
+		return em.merge( entry );
 	}
 
 	@Override

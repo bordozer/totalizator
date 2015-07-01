@@ -5,7 +5,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 	var _ = require( 'underscore' );
 
-	var Users = require( 'js/services/users-model' );
+	var Users = require( 'js/models/users-model' );
 
 	var Categories = require( 'js/models/categories-model' );
 	var Cups = require( 'js/models/cups-model' );
@@ -94,6 +94,10 @@ define( function ( require ) {
 					alert( 'Bet deletion failed' ); // TODO
 				}
 			} )
+		},
+
+		loadUser: function( userId ) {
+			return this.getUser( this.loadUsers(), userId ); // TODO: load user directly
 		},
 
 		loadUsers: function() {

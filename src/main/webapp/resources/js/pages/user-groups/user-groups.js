@@ -5,8 +5,8 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 
-	var Model = require( './user-list-model' );
-	var View = require( './user-list-view' );
+	var Model = require( './user-groups-model' );
+	var View = require( './user-groups-view' );
 
 	function init( container, options ) {
 
@@ -14,6 +14,7 @@ define( function ( require ) {
 		var view = new View( { model: model, el: container, options: options } );
 
 		return {
+
 			view: function() {
 				return view;
 			}
