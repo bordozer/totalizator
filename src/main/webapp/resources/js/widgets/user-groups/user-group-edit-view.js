@@ -29,6 +29,9 @@ define( function ( require ) {
 		render: function () {
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 			this.$el.html( template( data ) );
+
+			this.$( '.js-user-group-name' ).focus();
+			this.$( '.js-user-group-name' ).select();
 		},
 
 		_onSaveClick: function() {
