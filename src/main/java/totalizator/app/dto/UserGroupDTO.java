@@ -2,13 +2,15 @@ package totalizator.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class UserGroupDTO {
 
 	private int userGroupId;
 
 	private String userGroupName;
-	private int[] cupIds;
+	private List<Integer> cupIds;
 
 	public int getUserGroupId() {
 		return userGroupId;
@@ -26,11 +28,11 @@ public class UserGroupDTO {
 		this.userGroupName = userGroupName;
 	}
 
-	public int[] getCupIds() {
+	public List<Integer> getCupIds() {
 		return cupIds;
 	}
 
-	public void setCupIds( final int[] cupIds ) {
+	public void setCupIds( final List<Integer> cupIds ) {
 		this.cupIds = cupIds;
 	}
 
