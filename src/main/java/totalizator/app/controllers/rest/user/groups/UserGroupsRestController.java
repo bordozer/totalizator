@@ -44,7 +44,7 @@ public class UserGroupsRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE )
 	public UserGroupDTO create( final @RequestBody UserGroupDTO dto, final @PathVariable( "userId" ) int userId ) {
 
-		final UserGroup userGroup = save( userId, dto.getUserGroupName(), new UserGroup() );
+		final UserGroup userGroup = save( userId, dto, new UserGroup() );
 		dto.setUserGroupId( userGroup.getId() );
 
 		return dto;
@@ -55,7 +55,7 @@ public class UserGroupsRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/{userGroupId}", produces = APPLICATION_JSON_VALUE )
 	public UserGroupDTO save( final @RequestBody UserGroupDTO dto, final @PathVariable( "userId" ) int userId, final @PathVariable( "userGroupId" ) int userGroupId ) {
 
-		save( userId, dto.getUserGroupName(), userGroupService.load( userGroupId ) );
+		save( userId, dto, userGroupService.load( userGroupId ) );
 
 		return dto;
 	}
@@ -67,13 +67,16 @@ public class UserGroupsRestController {
 		userGroupService.delete( userGroupId );
 	}
 
-	private UserGroup save( final int userId, final String userGroupName, final UserGroup userGroup ) {
+	private UserGroup save( final int userId, final UserGroupDTO dto, final UserGroup userGroup ) {
 
 		final User groupOwner = userService.load( userId );
 
 		userGroup.setOwner( groupOwner );
-		userGroup.setGroupName( userGroupName );
+		userGroup.setGroupName( dto.getUserGroupName() );
 		userGroup.setCreationTime( dateTimeService.getNow() );
+
+		final List<Integer> cupIds = dto.getCupIds();
+		// TODO: save allowed for group cup ids
 
 		return userGroupService.save( userGroup );
 	}
