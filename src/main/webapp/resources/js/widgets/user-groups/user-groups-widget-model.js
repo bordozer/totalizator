@@ -20,6 +20,7 @@ define( function ( require ) {
 		defaults: {
 			userGroupId: 0
 			, userGroupName: 'New group'
+			, cupIds: []
 		},
 
 		initialize: function ( options ) {

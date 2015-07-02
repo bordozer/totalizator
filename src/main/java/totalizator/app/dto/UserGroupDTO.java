@@ -8,6 +8,7 @@ public class UserGroupDTO {
 	private int userGroupId;
 
 	private String userGroupName;
+	private int[] cupIds;
 
 	public int getUserGroupId() {
 		return userGroupId;
@@ -23,6 +24,14 @@ public class UserGroupDTO {
 
 	public void setUserGroupName( final String userGroupName ) {
 		this.userGroupName = userGroupName;
+	}
+
+	public int[] getCupIds() {
+		return cupIds;
+	}
+
+	public void setCupIds( final int[] cupIds ) {
+		this.cupIds = cupIds;
 	}
 
 	@Override

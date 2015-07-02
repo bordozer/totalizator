@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/user-group-edit-template.html' ) );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		groupParameters: 'User group parameters'
@@ -27,7 +29,23 @@ define( function ( require ) {
 		},
 
 		render: function () {
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var categories = service.loadCategories();
+			var cups = service.loadPublicCups();
+
+			var categoriesAndCups = [];
+			_.each( categories, function( category ) {
+
+				var entry = { category: category, cups: [] };
+
+				var categoryCups = service.filterCupsByCategory( cups, category.categoryId );
+				_.each( categoryCups, function( cup ) {
+					entry.cups.push( cup );
+				});
+
+				categoriesAndCups.push( entry );
+			});
+
+			var data = _.extend( {}, this.model.toJSON(), { categoriesAndCups: categoriesAndCups, translator: translator } );
 			this.$el.html( template( data ) );
 		},
 
@@ -43,7 +61,24 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
-			this.model.set( { userGroupName: this.$( '.js-user-group-name' ).val() } );
+
+			var userGroupName = this._getUserGroupName();
+			var cupIds = this._getCupIds();
+
+			this.model.set( { userGroupName: userGroupName, cupIds: cupIds } );
+		},
+
+		_getUserGroupName: function() {
+			return this.$( '.js-user-group-name' ).val();
+		},
+
+		_getCupIds: function() {
+			var cupIds = [];
+			this.$( "[name='cupIds']:checked" ).each( function () {
+				cupIds.push( $( this ).val() );
+			} );
+
+			return cupIds;
 		},
 
 		_onCancelClick: function() {
