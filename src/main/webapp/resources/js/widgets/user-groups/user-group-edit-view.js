@@ -35,12 +35,17 @@ define( function ( require ) {
 			var categoriesAndCups = [];
 			_.each( categories, function( category ) {
 
-				var entry = { category: category, cups: [] };
-
+				var _cups = [];
 				var categoryCups = service.filterCupsByCategory( cups, category.categoryId );
 				_.each( categoryCups, function( cup ) {
-					entry.cups.push( cup );
+					_cups.push( cup );
 				});
+
+				if ( _cups.length == 0 ) {
+					return;
+				}
+
+				var entry = { category: category, cups: _cups };
 
 				categoriesAndCups.push( entry );
 			});
