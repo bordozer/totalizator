@@ -33,6 +33,9 @@ public class CupScoresServiceImpl implements CupScoresService {
 	@Autowired
 	private CupBetsService cupBetsService;
 
+	@Autowired
+	private UserGroupService userGroupService;
+
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public int getUsersScores( final MatchBet matchBet ) {
@@ -49,12 +52,17 @@ public class CupScoresServiceImpl implements CupScoresService {
 			result.addAll( getUserPoints( cup, user ) );
 		}
 
-		/*CollectionUtils.filter( result, new Predicate<UserPoints>() {
-			@Override
-			public boolean evaluate( final UserPoints userPoints ) {
-				return userPoints.getPoints() > 0;
-			}
-		} );*/
+		return result;
+	}
+
+	@Override
+	public List<UserPoints> getUsersScores( final Cup cup, final UserGroup userGroup ) {
+
+		final List<UserPoints> result = newArrayList();
+
+		for ( final User user : userGroupService.loadUserGroupMembers( userGroup ) ) {
+			result.addAll( getUserPoints( cup, user ) );
+		}
 
 		return result;
 	}
@@ -79,47 +87,12 @@ public class CupScoresServiceImpl implements CupScoresService {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<UserPoints> getUsersScoresSummary( final Cup cup ) {
-		final List<UserPoints> usersScores = getUsersScores( cup );
+		return getUserPoints( cup, getUsersScores( cup ) );
+	}
 
-		final List<UserPoints> result = newArrayList();
-		for ( final UserPoints usersScore : usersScores ) {
-
-			final UserPoints userPoints = getUserPoints( result, usersScore.getUser() );
-
-			if ( userPoints == null ) {
-				result.add( new UserPoints( usersScore.getUser(), usersScore.getPoints() ) );
-				continue;
-			}
-
-			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
-		}
-
-		if ( cupService.isCupFinished( cup ) ) {
-			for ( final CupTeamBet cupTeamBet : cupBetsService.load( cup ) ) {
-
-				final Team team = cupTeamBet.getTeam();
-				final User user = cupTeamBet.getUser();
-				final int cupPosition = cupTeamBet.getCupPosition();
-
-				final UserPoints userPoints = getUserPoints( result, user );
-
-				if ( userPoints == null ) {
-					result.add( new UserPoints( user, getUserCupWinnersPoints( cup, team, user, cupPosition ) ) );
-					continue;
-				}
-
-				userPoints.setPoints( userPoints.getPoints() + getUserCupWinnersPoints( cup, team, user, cupPosition ) );
-			}
-		}
-
-		Collections.sort( result, new Comparator<UserPoints>() {
-			@Override
-			public int compare( final UserPoints o1, final UserPoints o2 ) {
-				return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
-			}
-		} );
-
-		return result;
+	@Override
+	public List<UserPoints> getUsersScoresSummary( final Cup cup, final UserGroup userGroup ) {
+		return getUserPoints( cup, getUsersScores( cup, userGroup ) );
 	}
 
 	@Override
@@ -167,6 +140,49 @@ public class CupScoresServiceImpl implements CupScoresService {
 		}
 
 		return 0;
+	}
+
+	private List<UserPoints> getUserPoints( final Cup cup, final List<UserPoints> usersScores ) {
+
+		final List<UserPoints> result = newArrayList();
+
+		for ( final UserPoints usersScore : usersScores ) {
+
+			final UserPoints userPoints = getUserPoints( result, usersScore.getUser() );
+
+			if ( userPoints == null ) {
+				result.add( new UserPoints( usersScore.getUser(), usersScore.getPoints() ) );
+				continue;
+			}
+
+			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
+		}
+
+		if ( cupService.isCupFinished( cup ) ) {
+			for ( final CupTeamBet cupTeamBet : cupBetsService.load( cup ) ) {
+
+				final Team team = cupTeamBet.getTeam();
+				final User user = cupTeamBet.getUser();
+				final int cupPosition = cupTeamBet.getCupPosition();
+
+				final UserPoints userPoints = getUserPoints( result, user );
+
+				if ( userPoints == null ) {
+					result.add( new UserPoints( user, getUserCupWinnersPoints( cup, team, user, cupPosition ) ) );
+					continue;
+				}
+
+				userPoints.setPoints( userPoints.getPoints() + getUserCupWinnersPoints( cup, team, user, cupPosition ) );
+			}
+		}
+
+		Collections.sort( result, new Comparator<UserPoints>() {
+			@Override
+			public int compare( final UserPoints o1, final UserPoints o2 ) {
+				return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
+			}
+		} );
+		return result;
 	}
 
 	private UserPoints getUserPoints( List<UserPoints> usersScores, final User user ) {

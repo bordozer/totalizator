@@ -53,7 +53,9 @@ define( function ( require ) {
 
 		_filterByUserGroup: function( evt ) {
 			var menu = $( evt.target );
-			console.log( menu );
+			var userGroupId = menu.data( 'entity_id' );
+			this.model.userGroupId = userGroupId ? userGroupId : 0;
+			this.render();
 		}
 	} );
 } );

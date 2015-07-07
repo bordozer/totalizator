@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.beans.UserPoints;
 import totalizator.app.models.Cup;
 import totalizator.app.models.User;
-import totalizator.app.services.CupService;
-import totalizator.app.services.DTOService;
-import totalizator.app.services.UserService;
-import totalizator.app.services.UserTitleService;
+import totalizator.app.services.*;
 import totalizator.app.services.score.CupScoresService;
 
 import java.security.Principal;
@@ -39,10 +36,13 @@ public class CupUsersScoresRestController {
 	@Autowired
 	private UserTitleService userTitleService;
 
+	@Autowired
+	private UserGroupService userGroupService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/scores/", produces = APPLICATION_JSON_VALUE )
-	public CupUsersScoresDTO cupUsersScores( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+	public CupUsersScoresDTO cupUsersScores( final @PathVariable( "cupId" ) int cupId, final @RequestParam( value = "userGroupId", required = false ) int userGroupId, final Principal principal ) {
 
 		final User currentUser = userService.findByLogin( principal.getName() );
 		final Cup cup = cupService.load( cupId );
@@ -51,14 +51,16 @@ public class CupUsersScoresRestController {
 
 		result.setCurrentUser( dtoService.transformUser( currentUser ) );
 
-		result.setUserPoints( getUsersScores( cup ) );
+		result.setUserPoints( getUsersScores( cup, userGroupId ) );
 
 		return result;
 	}
 
-	private List<UserPointsDTO> getUsersScores( final Cup cup ) {
+	private List<UserPointsDTO> getUsersScores( final Cup cup, final int userGroupId ) {
 
-		return Lists.transform( cupScoresService.getUsersScoresSummary( cup ), new Function<UserPoints, UserPointsDTO>() {
+		final List<UserPoints> usersScoresSummary = userGroupId == 0 ? cupScoresService.getUsersScoresSummary( cup ) : cupScoresService.getUsersScoresSummary( cup, userGroupService.load( userGroupId ) );
+
+		return Lists.transform( usersScoresSummary, new Function<UserPoints, UserPointsDTO>() {
 			@Override
 			public UserPointsDTO apply( final UserPoints userPoints ) {
 				return new UserPointsDTO( dtoService.transformUser( userPoints.getUser() ), userPoints.getPoints(), userTitleService.getUserTitle( userPoints.getUser(), cup ) );

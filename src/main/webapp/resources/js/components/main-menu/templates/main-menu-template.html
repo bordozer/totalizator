@@ -9,7 +9,7 @@
 
 			<% if( menu.selector != 'divider' ) { %>
 				<li role="presentation" style="height: 30px;">
-					<a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" tabindex="-1" href="<%=menu.link%>" <%= menu.link == '#' ? "onclick='return false;'" : ''%> > <%=menu.text%></a>
+					<a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" data-entity_id="<%=menu.entity_id%>" tabindex="-1" href="<%=menu.link%>" <%= menu.link == '#' ? "onclick='return false;'" : ''%> > <%=menu.text%></a>
 				</li>
 			<% } %>
 

@@ -1,10 +1,7 @@
 package totalizator.app.services.score;
 
 import totalizator.app.beans.UserPoints;
-import totalizator.app.models.Cup;
-import totalizator.app.models.MatchBet;
-import totalizator.app.models.Team;
-import totalizator.app.models.User;
+import totalizator.app.models.*;
 
 import java.util.List;
 
@@ -16,9 +13,13 @@ public interface CupScoresService {
 
 	List<UserPoints> getUsersScores( final Cup cup );
 
-	List<UserPoints> getUserPoints( Cup cup, User user );
+	List<UserPoints> getUsersScores( final Cup cup, final UserGroup userGroup );
 
-	List<UserPoints> getUsersScoresSummary( Cup cup );
+	List<UserPoints> getUserPoints( final Cup cup, final User user );
 
-	int getUserCupWinnersPoints( Cup cup, final Team team, User user, final int cupPosition );
+	List<UserPoints> getUsersScoresSummary( final Cup cup );
+
+	List<UserPoints> getUsersScoresSummary( final Cup cup, final UserGroup userGroup );
+
+	int getUserCupWinnersPoints( final Cup cup, final Team team, User user, final int cupPosition );
 }

@@ -25,7 +25,7 @@ define( function ( require ) {
 		];
 
 		_.each( userGroups, function( userGroup ) {
-			menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: userGroup.userGroupName, options: { userGroupId: userGroup.userGroupId } } );
+			menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: userGroup.userGroupName, entity_id: userGroup.userGroupId } );
 		});
 
 		var model = new Model( { cup: options.cup } );
