@@ -17,7 +17,12 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
+		events: {
+			'click .js-user-group': '_onUserGroupButtonClick'
+		},
+
 		initialize: function( options ) {
+
 			this.currentUser = options.options.currentUser;
 
 			this.model.on( 'sync', this.render, this );
@@ -32,6 +37,16 @@ define( function ( require ) {
 				, userGroups: service.loadUserGroups( this.currentUser.userId )
 				, translator: translator
 			} ) );
+		},
+
+		_onUserGroupButtonClick: function( evt ) {
+
+			var button = $( evt.target );
+
+			var userId = button.data( 'user-id' );
+			var groupId = button.data( 'group-id' );
+
+			// TODO: process user group
 		}
 	});
 } );
