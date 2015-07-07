@@ -3,13 +3,10 @@ define( function ( require ) {
 	'use strict';
 
 	var Backbone = require( 'backbone' );
-	var _ = require( 'underscore' );
 
 	var UserModel = Backbone.Model.extend( {
 
 		idAttribute: 'userId',
-
-		userId: 0,
 
 		defaults: {
 			userId: 0
@@ -17,7 +14,6 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-
 		}
 	});
 
