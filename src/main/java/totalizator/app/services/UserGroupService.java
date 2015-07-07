@@ -19,4 +19,8 @@ public interface UserGroupService extends GenericService<UserGroup> {
 	UserGroup save( final UserGroup userGroup, final List<Integer> cupIds );
 
 	boolean isUserOwnerOfGroup( final UserGroup userGroup, final User user );
+
+	void addMember( final UserGroup userGroup, final User user );
+
+	void removeMember( final UserGroup userGroup, final User user );
 }

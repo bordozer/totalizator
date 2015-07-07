@@ -232,11 +232,29 @@ define( function ( require ) {
 		},
 
 		addUserToGroup: function( userId, groupId ) {
-			// TODO
+			$.ajax( {
+				method: 'POST',
+				url: '/rest/user-groups/' + groupId + '/members/' + userId + '/add/',
+				success: function ( response ) {
+					window.location.reload();
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} )
 		},
 
 		removeUserFromGroup: function( userId, groupId ) {
-			// TODO
+			$.ajax( {
+				method: 'DELETE',
+				url: '/rest/user-groups/' + groupId + '/members/' + userId + '/remove/',
+				success: function ( response ) {
+					window.location.reload();
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} )
 		},
 
 		logout: function () {

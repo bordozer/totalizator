@@ -134,4 +134,16 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 		return false;
 	}
+
+	@Override
+	@Transactional
+	public void addMember( final UserGroup userGroup, final User user ) {
+		userGroupMemberRepository.save( new UserGroupMember( userGroup, user ) );
+	}
+
+	@Override
+	@Transactional
+	public void removeMember( final UserGroup userGroup, final User user ) {
+		userGroupMemberRepository.delete( userGroup, user );
+	}
 }

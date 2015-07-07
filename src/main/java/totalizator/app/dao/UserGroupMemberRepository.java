@@ -47,6 +47,21 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
 	public List<UserGroupMember> loadUserGroupsWhereUserIsMember( final User user ) {
 		return em.createNamedQuery( UserGroupMember.LOAD_USER_GROUP_WHERE_USER_IS_MEMBER, UserGroupMember.class )
 				.setParameter( "userId", user.getId() )
-				 .getResultList();
+				.getResultList();
+	}
+
+	@Override
+	public UserGroupMember load( final UserGroup userGroup, final User user ) {
+		final List<UserGroupMember> resultList = em.createNamedQuery( UserGroupMember.LOAD_USER_GROUP_MEMBER_ENTRY, UserGroupMember.class )
+				.setParameter( "userGroupId", userGroup.getId() )
+				.setParameter( "userId", user.getId() )
+				.getResultList();
+
+		return resultList == null || resultList.size() == 0 ? null : resultList.get( 0 );
+	}
+
+	@Override
+	public void delete( final UserGroup userGroup, final User user ) {
+		delete( load( userGroup, user ).getId() );
 	}
 }
