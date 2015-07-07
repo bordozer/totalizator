@@ -84,7 +84,7 @@ define( function ( require ) {
 
 				result[ userId ] = userGroups;
 			});
-			//console.log( result );
+
 			return result;
 		},
 

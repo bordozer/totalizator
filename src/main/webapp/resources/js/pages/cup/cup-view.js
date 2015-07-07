@@ -27,6 +27,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cupId = options.options.cupId;
+			this.currentUser = options.options.currentUser;
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -52,7 +53,7 @@ define( function ( require ) {
 		},
 
 		_renderCupScores: function( cup ) {
-			cupScores( this.$( '.js-cup-scores' ), { cup: cup } );
+			cupScores( this.$( '.js-cup-scores' ), { cup: cup, user: this.currentUser } );
 		},
 
 		_renderCupTeams: function( cup ) {
