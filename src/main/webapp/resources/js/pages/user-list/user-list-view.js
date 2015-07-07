@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/user-list-template.html' ) );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Users"
@@ -27,6 +29,7 @@ define( function ( require ) {
 			this.$el.html( template( {
 				users: this.model.toJSON()
 				, currentUser: this.currentUser
+				, userGroups: service.loadUserGroups( this.currentUser.userId )
 				, translator: translator
 			} ) );
 		}

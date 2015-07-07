@@ -1,27 +1,47 @@
-<div class="panel panel-info">
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-info">
 
-	<div class="panel-heading">
-		 <%-translator.title%>
+			<div class="panel-heading">
+				<%-translator.title%>
+			</div>
+
+			<div class="panel-body">
+
+				<table class="table table-striped table-hover">
+
+					<thead>
+						<td>Name</td>
+						<% _.each( userGroups, function( userGroup ) { %>
+							<td class="text-center"><%- userGroup.userGroupName %></td>
+						<% }) %>
+					</thead>
+
+					<% _.each( users, function( user ) { %>
+						<tr	<%=currentUser.userId == user.userId ? "class='current-user'" : '' %> >
+
+							<td>
+								<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
+							</td>
+
+							<% _.each( userGroups, function( userGroup ) { %>
+								<td class="text-center">
+									<button type="button" class="btn btn-default fa fa-users js-user-group" data-user="<%=user.userId%>" data-group="<%=userGroup.userGroupId%>"></button>
+								</td>
+							<% }) %>
+
+						</tr>
+					<% }) %>
+
+				</table>
+
+			</div>
+
+			<div class="panel-footer js-footer">
+
+			</div>
+
+		</div>
+
 	</div>
-
-	<div class="panel-body">
-
-		<table class="table table-striped table-hover">
-
-			<% _.each( users, function( user ) { %>
-				<tr <%=currentUser.userId == user.userId ? "class='current-user'" : '' %> >
-					<td>
-						<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
-					</td>
-				</tr>
-			<% }) %>
-
-		</table>
-
-	</div>
-
-	<div class="panel-footer js-footer">
-
-	</div>
-
 </div>

@@ -194,6 +194,24 @@ define( function ( require ) {
 			});
 		},
 
+		loadUserGroups: function( userId ) {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/users/' + userId + '/groups/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.logoutFailedMessage );
+				}
+			} );
+
+			return result;
+		},
+
 		logout: function () {
 
 			if ( ! confirm( translator.logoutConfirmationLabel ) ) {
