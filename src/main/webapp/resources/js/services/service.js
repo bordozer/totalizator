@@ -195,7 +195,7 @@ define( function ( require ) {
 			});
 		},
 
-		loadOwnerGroups: function( userId ) {
+		loadUserGroupsWhereUserIsOwner: function( userId ) {
 			var result = [];
 
 			$.ajax( {
@@ -213,7 +213,7 @@ define( function ( require ) {
 			return result;
 		},
 
-		loadMemberGroups: function( userId ) {
+		loadUserGroupsWhereUserIsMember: function( userId ) {
 			var result = [];
 
 			$.ajax( {

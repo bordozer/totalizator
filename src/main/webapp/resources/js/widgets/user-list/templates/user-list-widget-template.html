@@ -2,7 +2,7 @@
 
 	<thead>
 		<td></td>
-		<% _.each( userGroups, function( userGroup ) { %>
+		<% _.each( currentUserGroups, function( userGroup ) { %>
 			<td class="text-center col-md-1"><%- userGroup.userGroupName %></td>
 		<% }) %>
 	</thead>
@@ -14,11 +14,19 @@
 				<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
 			</td>
 
-			<% _.each( userGroups, function( userGroup ) { %>
+			<% _.each( currentUserGroups, function( userGroup ) { %>
 
 				<td class="text-center">
 					<% if( user.userId != currentUser.userId ) { %>
-						<button type="button" class="btn btn-default fa fa-plus js-user-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"></button>
+
+						<% if( ! userGroupsMembership[ user.userId ][ userGroup.userGroupId ] ) { %>
+							<button type="button" class="btn btn-default fa fa-plus js-user-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"></button>
+						<% } %>
+
+						<% if( userGroupsMembership[ user.userId ][ userGroup.userGroupId ] ) { %>
+							<button type="button" class="btn btn-info fa fa-close js-user-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"></button>
+						<% } %>
+
 					<% } %>
 				</td>
 			<% }) %>

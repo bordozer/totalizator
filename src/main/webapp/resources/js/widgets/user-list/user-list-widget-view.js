@@ -48,7 +48,8 @@ define( function ( require ) {
 
 			var data = _.extend( {}, { users: users
 				, currentUser: this.currentUser
-				, _userGroupsMatrix: this._userGroupsMatrix( users )
+				, currentUserGroups: service.loadUserGroupsWhereUserIsOwner( this.currentUser.userId )
+				, userGroupsMembership: this._userGroupsMatrix( users )
 				, translator: translator
 			} );
 
@@ -61,24 +62,20 @@ define( function ( require ) {
 
 			var result = {};
 
-			//var self = this;
 			_.each( users, function( user ) {
 
 				var userId = user.userId;
 
-				var memberOfGroups = service.loadMemberGroups( userId );
+				var memberOfGroups = service.loadUserGroupsWhereUserIsMember( userId );
 
 				var userGroups = [];
 				_.each( memberOfGroups, function( userGroup ) {
-					userGroups.push( { userGroup: userGroup } );
+					userGroups[ userGroup.userGroupId ] = true;
 				});
 
 				result[ userId ] = userGroups;
 			});
-
-			//var ownGroups = service.loadOwnerGroups( this.currentUser.userId );
-			//var memberOfGroups = service.loadOwnerGroups( this.currentUser.userId );
-			console.log( result );
+			//console.log( result );
 			return result;
 		},
 
