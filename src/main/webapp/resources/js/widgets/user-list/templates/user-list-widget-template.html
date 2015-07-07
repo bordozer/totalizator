@@ -21,12 +21,12 @@
 
 						<% if( ! userGroupsMembership[ user.userId ][ userGroup.userGroupId ] ) { %>
 							<button type="button" class="btn btn-default fa fa-plus js-add-user-to-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
-									title="<%=translator.addUserToGroup%> <%=userGroup.userGroupName%>" ></button>
+									title="<%=translator.addUserToGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
 						<% } %>
 
 						<% if( userGroupsMembership[ user.userId ][ userGroup.userGroupId ] ) { %>
 							<button type="button" class="btn btn-info fa fa-close js-remove-user-from-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
-									title="<%=translator.removeUserFromGroup%> <%=userGroup.userGroupName%>" ></button>
+									title="<%=translator.removeUserFromGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
 						<% } %>
 
 					<% } %>
