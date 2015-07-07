@@ -1,7 +1,6 @@
 package totalizator.app.dao;
 
 import org.springframework.stereotype.Repository;
-import totalizator.app.models.Cup;
 import totalizator.app.models.UserGroup;
 import totalizator.app.models.UserGroupCup;
 

@@ -22,7 +22,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 	private UserGroupDao userGroupRepository;
 
 	@Autowired
-	private UserGroupCupDao userGroupCupDao;
+	private UserGroupCupDao userGroupCupRepository;
 
 	@Autowired
 	private CupService cupService;
@@ -51,10 +51,10 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 		final UserGroup saved = this.save( userGroup );
 
-		userGroupCupDao.deleteAll( userGroup );
+		userGroupCupRepository.deleteAll( saved );
 
 		for ( final int cupId : cupIds ) {
-			userGroupCupDao.save( new UserGroupCup( userGroup, cupService.load( cupId ) ) );
+			userGroupCupRepository.save( new UserGroupCup( saved, cupService.load( cupId ) ) );
 		}
 
 		return saved;
@@ -63,6 +63,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 	@Override
 	@Transactional
 	public void delete( final int id ) {
+		userGroupCupRepository.deleteAll( load( id ) );
 		userGroupRepository.delete( id );
 	}
 
@@ -88,7 +89,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 			}
 		};
 
-		final List<UserGroupCup> userGroupCups = userGroupCupDao.loadAll( userGroup );
+		final List<UserGroupCup> userGroupCups = userGroupCupRepository.loadAll( userGroup );
 
 		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
 	}
