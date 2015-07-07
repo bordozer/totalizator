@@ -19,6 +19,10 @@ define( function ( require ) {
 
 	return WidgetView.extend( {
 
+		events: {
+			'click .js-user-group': '_filterByUserGroup'
+		},
+
 		initialize: function ( options ) {
 			this.listenTo( this.model, 'sync', this._renderScores );
 			this.render();
@@ -45,6 +49,11 @@ define( function ( require ) {
 			this.trigger( 'inner-view-rendered' );
 
 			return this;
+		},
+
+		_filterByUserGroup: function( evt ) {
+			var menu = $( evt.target );
+			console.log( menu );
 		}
 	} );
 } );

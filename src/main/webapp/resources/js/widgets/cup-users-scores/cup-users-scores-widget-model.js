@@ -9,13 +9,14 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		cup: {},
+		userGroupId: 0,
 
 		initialize: function ( options ) {
 			this.cup = options.cup;
 		},
 
 		url: function() {
-			return '/rest/cups/' + this.cup.cupId + '/scores/';
+			return '/rest/cups/' + this.cup.cupId + '/scores/?userGroupId=' + this.userGroupId;
 		},
 
 		refresh: function() {
