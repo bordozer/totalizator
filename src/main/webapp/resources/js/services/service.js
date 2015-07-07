@@ -206,7 +206,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( translator.serverError );
+					//alert( translator.serverError );
 				}
 			} );
 
@@ -224,7 +224,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( translator.serverError );
+					//alert( translator.serverError );
 				}
 			} );
 

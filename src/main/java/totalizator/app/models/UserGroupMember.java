@@ -22,7 +22,7 @@ import static totalizator.app.models.UserGroupMember.LOAD_USER_GROUP_WHERE_USER_
 		),
 		@NamedQuery(
 				name = LOAD_USER_GROUP_WHERE_USER_IS_MEMBER,
-				query = "select g from UserGroupMember g where userId= :userId order by username"
+				query = "select g from UserGroupMember g where userId= :userId"
 		)
 } )
 public class UserGroupMember extends AbstractEntity {

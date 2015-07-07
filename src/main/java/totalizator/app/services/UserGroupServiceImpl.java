@@ -102,9 +102,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 			}
 		};
 
-		final List<UserGroupMember> userGroupCups = userGroupMemberRepository.loadUserGroupMembers( userGroup );
+		final List<UserGroupMember> userGroupMembers = userGroupMemberRepository.loadUserGroupMembers( userGroup );
 
-		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
+		return userGroupMembers.stream().map( mapper ).collect( Collectors.toList() );
 	}
 
 	@Override

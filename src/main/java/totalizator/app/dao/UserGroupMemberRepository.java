@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class MemberRepositoryGroupMember implements UserGroupMemberDao {
+public class UserGroupMemberRepository implements UserGroupMemberDao {
 
 	@PersistenceContext
 	private EntityManager em;
