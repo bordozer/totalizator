@@ -195,12 +195,30 @@ define( function ( require ) {
 			});
 		},
 
-		loadUserGroups: function( userId ) {
+		loadOwnerGroups: function( userId ) {
 			var result = [];
 
 			$.ajax( {
 				method: 'GET',
 				url: '/rest/users/' + userId + '/groups/owner/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
+		loadMemberGroups: function( userId ) {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/users/' + userId + '/groups/member/',
 				async: false,
 				success: function ( data ) {
 					result = data;

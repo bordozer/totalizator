@@ -5,8 +5,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import static totalizator.app.models.UserGroupMember.LOAD_ALL;
-import static totalizator.app.models.UserGroupMember.LOAD_ALL_USERS_GROUPS;
-import static totalizator.app.models.UserGroupMember.LOAD_ALL_USER_GROUP_MEMBERS;
+import static totalizator.app.models.UserGroupMember.LOAD_USER_GROUP_MEMBERS;
+import static totalizator.app.models.UserGroupMember.LOAD_USER_GROUP_WHERE_USER_IS_MEMBER;
 
 @Entity
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
@@ -17,19 +17,19 @@ import static totalizator.app.models.UserGroupMember.LOAD_ALL_USER_GROUP_MEMBERS
 				query = "select g from UserGroupMember g order by groupName"
 		),
 		@NamedQuery(
-				name = LOAD_ALL_USER_GROUP_MEMBERS,
-				query = "select g from UserGroupMember g where userGroupId= :userGroupId order by username"
+				name = LOAD_USER_GROUP_MEMBERS,
+				query = "select g from UserGroupMember g where userGroupId= :userGroupId"
 		),
 		@NamedQuery(
-				name = LOAD_ALL_USERS_GROUPS,
-				query = "select g from UserGroupMember g where userId= :userId order by groupName"
+				name = LOAD_USER_GROUP_WHERE_USER_IS_MEMBER,
+				query = "select g from UserGroupMember g where userId= :userId order by username"
 		)
 } )
 public class UserGroupMember extends AbstractEntity {
 
 	public static final String LOAD_ALL = "userGroupMembers.loadAll";
-	public static final String LOAD_ALL_USER_GROUP_MEMBERS = "userGroupMembers.loadMembers";
-	public static final String LOAD_ALL_USERS_GROUPS = "userGroupMembers.loadOwned";
+	public static final String LOAD_USER_GROUP_MEMBERS = "userGroupMembers.loadMembers";
+	public static final String LOAD_USER_GROUP_WHERE_USER_IS_MEMBER = "userGroupMembers.loadWhereUserIsMembers";
 
 	@ManyToOne
 	@JoinColumn( name = "userGroupId" )

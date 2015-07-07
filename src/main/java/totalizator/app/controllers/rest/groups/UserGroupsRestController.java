@@ -34,6 +34,6 @@ public class UserGroupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{userGroupId}/members/", produces = APPLICATION_JSON_VALUE )
 	public List<UserDTO> allMembersOfUserGroup( final @PathVariable( "userGroupId" ) int userGroupId ) {
-		return dtoService.transformUsers( userGroupService.loadGroupMembers( userGroupService.load( userGroupId ) ) );
+		return dtoService.transformUsers( userGroupService.loadUserGroupMembers( userGroupService.load( userGroupId ) ) );
 	}
 }

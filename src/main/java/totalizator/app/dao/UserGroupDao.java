@@ -11,7 +11,5 @@ public interface UserGroupDao extends GenericService<UserGroup> {
 	String CACHE_ENTRY = "totalizator.app.cache.user-group";
 	String CACHE_QUERY = "totalizator.app.cache.user-group.query";
 
-	List<UserGroup> loadAllOwned( final User user );
-
-	List<UserGroup> loadAll( final User user );
+	List<UserGroup> loadUserGroupsWhereUserIsOwner( final User user );
 }

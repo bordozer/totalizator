@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.UserGroupCupDao;
 import totalizator.app.dao.UserGroupDao;
-import totalizator.app.dao.UserGroupUserDao;
+import totalizator.app.dao.UserGroupMemberDao;
 import totalizator.app.models.*;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 	private UserGroupCupDao userGroupCupRepository;
 
 	@Autowired
-	private UserGroupUserDao userGroupMemberRepository;
+	private UserGroupMemberDao userGroupMemberRepository;
 
 	@Autowired
 	private CupService cupService;
@@ -70,14 +70,41 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 	@Override
 	@Transactional( readOnly = true )
-	public List<UserGroup> loadAllWhereIsOwner( final User user ) {
-		return userGroupRepository.loadAllOwned( user );
+	public List<UserGroup> loadUserGroupsWhereUserIsOwner( final User user ) {
+		return userGroupRepository.loadUserGroupsWhereUserIsOwner( user );
 	}
 
 	@Override
 	@Transactional( readOnly = true )
-	public List<UserGroup> loadAllWhereIsMember( final User user ) {
-		return userGroupRepository.loadAll( user );
+	public List<UserGroup> loadUserGroupsWhereUserIsMember( final User user ) {
+
+		final Function<UserGroupMember, UserGroup> mapper = new Function<UserGroupMember, UserGroup>() {
+			@Override
+			public UserGroup apply( final UserGroupMember userGroupMember ) {
+				return userGroupMember.getUserGroup();
+			}
+		};
+
+		final List<UserGroupMember> memberInGroups = userGroupMemberRepository.loadUserGroupsWhereUserIsMember( user );
+
+		return memberInGroups.stream().map( mapper ).collect( Collectors.toList() );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public List<User> loadUserGroupMembers( final UserGroup userGroup ) {
+
+		final Function<UserGroupMember, User> mapper = new Function<UserGroupMember, User>() {
+
+			@Override
+			public User apply( final UserGroupMember userGroupMember ) {
+				return userGroupMember.getUser();
+			}
+		};
+
+		final List<UserGroupMember> userGroupCups = userGroupMemberRepository.loadUserGroupMembers( userGroup );
+
+		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
 	}
 
 	@Override
@@ -95,26 +122,11 @@ public class UserGroupServiceImpl implements UserGroupService {
 		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
 	}
 
-	@Override
-	public List<User> loadGroupMembers( final UserGroup userGroup ) {
-
-		final Function<UserGroupMember, User> mapper = new Function<UserGroupMember, User>() {
-			@Override
-			public User apply( final UserGroupMember userGroupUser ) {
-				return userGroupUser.getUser();
-			}
-		};
-
-		final List<UserGroupMember> userGroupCups = userGroupMemberRepository.loadUsers( userGroup );
-
-		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
-	}
-
 	@Transactional( readOnly = true )
 	@Cacheable( value = GenericService.CACHE_PERMANENT )
-	public boolean isOwner( final UserGroup userGroup, final User user ) {
+	public boolean isUserOwnerOfGroup( final UserGroup userGroup, final User user ) {
 
-		for ( final UserGroup group : loadAllWhereIsOwner( user ) ) {
+		for ( final UserGroup group : loadUserGroupsWhereUserIsOwner( user ) ) {
 			if ( group.getOwner().equals( user ) ) {
 				return true;
 			}

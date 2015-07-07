@@ -44,15 +44,42 @@ define( function ( require ) {
 
 		_renderUserList: function() {
 
-			var data = _.extend( {}, { users: this.model.toJSON()
+			var users = this.model.toJSON();
+
+			var data = _.extend( {}, { users: users
 				, currentUser: this.currentUser
-				, userGroups: service.loadUserGroups( this.currentUser.userId )
+				, _userGroupsMatrix: this._userGroupsMatrix( users )
 				, translator: translator
 			} );
 
 			this.setBody( template( data ) );
 
 			this.trigger( 'inner-view-rendered' );
+		},
+
+		_userGroupsMatrix: function( users ) {
+
+			var result = {};
+
+			//var self = this;
+			_.each( users, function( user ) {
+
+				var userId = user.userId;
+
+				var memberOfGroups = service.loadMemberGroups( userId );
+
+				var userGroups = [];
+				_.each( memberOfGroups, function( userGroup ) {
+					userGroups.push( { userGroup: userGroup } );
+				});
+
+				result[ userId ] = userGroups;
+			});
+
+			//var ownGroups = service.loadOwnerGroups( this.currentUser.userId );
+			//var memberOfGroups = service.loadOwnerGroups( this.currentUser.userId );
+			console.log( result );
+			return result;
 		},
 
 		_onUserGroupButtonClick: function( evt ) {

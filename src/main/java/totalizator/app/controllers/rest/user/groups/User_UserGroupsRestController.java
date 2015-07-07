@@ -35,15 +35,15 @@ public class User_UserGroupsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/owner/", produces = APPLICATION_JSON_VALUE )
-	public List<UserGroupDTO> allGroupsWhereUserIsOwner( final @PathVariable( "userId" ) int userId ) {
-		return dtoService.transformUserGroups( userGroupService.loadAllWhereIsOwner( userService.load( userId ) ) );
+	public List<UserGroupDTO> loadUserGroupsWhereUserIsOwner( final @PathVariable( "userId" ) int userId ) {
+		return dtoService.transformUserGroups( userGroupService.loadUserGroupsWhereUserIsOwner( userService.load( userId ) ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/member/", produces = APPLICATION_JSON_VALUE )
-	public List<UserGroupDTO> loadAllWhereIsMember( final @PathVariable( "userId" ) int userId ) {
-		return dtoService.transformUserGroups( userGroupService.loadAllWhereIsMember( userService.load( userId ) ) );
+	public List<UserGroupDTO> loadUserGroupsWhereUserIsMember( final @PathVariable( "userId" ) int userId ) {
+		return dtoService.transformUserGroups( userGroupService.loadUserGroupsWhereUserIsMember( userService.load( userId ) ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

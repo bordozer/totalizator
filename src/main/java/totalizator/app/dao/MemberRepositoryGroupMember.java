@@ -1,6 +1,7 @@
 package totalizator.app.dao;
 
 import org.springframework.stereotype.Repository;
+import totalizator.app.models.User;
 import totalizator.app.models.UserGroup;
 import totalizator.app.models.UserGroupMember;
 
@@ -9,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserGroupMemberRepository implements UserGroupUserDao {
+public class MemberRepositoryGroupMember implements UserGroupMemberDao {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -36,9 +37,16 @@ public class UserGroupMemberRepository implements UserGroupUserDao {
 	}
 
 	@Override
-	public List<UserGroupMember> loadUsers( final UserGroup userGroup ) {
-		return em.createNamedQuery( UserGroupMember.LOAD_ALL_USER_GROUP_MEMBERS, UserGroupMember.class )
+	public List<UserGroupMember> loadUserGroupMembers( final UserGroup userGroup ) {
+		return em.createNamedQuery( UserGroupMember.LOAD_USER_GROUP_MEMBERS, UserGroupMember.class )
 				.setParameter( "userGroupId", userGroup.getId() )
+				 .getResultList();
+	}
+
+	@Override
+	public List<UserGroupMember> loadUserGroupsWhereUserIsMember( final User user ) {
+		return em.createNamedQuery( UserGroupMember.LOAD_USER_GROUP_WHERE_USER_IS_MEMBER, UserGroupMember.class )
+				.setParameter( "userId", user.getId() )
 				 .getResultList();
 	}
 }

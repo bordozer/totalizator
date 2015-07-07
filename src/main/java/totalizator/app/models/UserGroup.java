@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static totalizator.app.models.UserGroup.LOAD_ALL;
-import static totalizator.app.models.UserGroup.LOAD_ALL_USER_OWNS;
+import static totalizator.app.models.UserGroup.LOAD_ALL_USER_IS_OWNER;
 
 @Entity
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
@@ -17,14 +17,14 @@ import static totalizator.app.models.UserGroup.LOAD_ALL_USER_OWNS;
 				query = "select g from UserGroup g order by groupName"
 		),
 		@NamedQuery(
-				name = LOAD_ALL_USER_OWNS,
+				name = LOAD_ALL_USER_IS_OWNER,
 				query = "select g from UserGroup g where userId= :userId order by groupName"
 		)
 } )
 public class UserGroup extends AbstractEntity {
 
 	public static final String LOAD_ALL = "userGroup.loadAll";
-	public static final String LOAD_ALL_USER_OWNS = "userGroup.loadAllUserOwns";
+	public static final String LOAD_ALL_USER_IS_OWNER = "userGroup.loadAllWhereUserIsOwner";
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String groupName;

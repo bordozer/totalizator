@@ -50,15 +50,9 @@ public class UserGroupRepository implements UserGroupDao {
 
 	@Override
 	@Cacheable( value = CACHE_QUERY )
-	public List<UserGroup> loadAllOwned( final User user ) {
-		return em.createNamedQuery( UserGroup.LOAD_ALL_USER_OWNS, UserGroup.class )
+	public List<UserGroup> loadUserGroupsWhereUserIsOwner( final User user ) {
+		return em.createNamedQuery( UserGroup.LOAD_ALL_USER_IS_OWNER, UserGroup.class )
 				.setParameter( "userId", user.getId() )
 				.getResultList();
-	}
-
-	@Override
-	@Cacheable( value = CACHE_QUERY )
-	public List<UserGroup> loadAll( final User user ) {
-		return null; // TODO
 	}
 }
