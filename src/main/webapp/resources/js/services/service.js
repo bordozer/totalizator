@@ -17,6 +17,7 @@ define( function ( require ) {
 		, logoutFailedMessage: 'Logout failed'
 		, matchBetSavingError: 'Match bet saving error'
 		, cupTeamBetSavingError: 'Cup team bet saving error'
+		, serverError: 'Server error'
 	} );
 
 	return {
@@ -91,7 +92,7 @@ define( function ( require ) {
 
 				},
 				error: function() {
-					alert( 'Bet deletion failed' ); // TODO
+					alert( translator.serverError ); // TODO
 				}
 			} )
 		},
@@ -175,7 +176,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( translator.logoutFailedMessage );
+					alert( translator.serverError );
 				}
 			} );
 
@@ -199,13 +200,13 @@ define( function ( require ) {
 
 			$.ajax( {
 				method: 'GET',
-				url: '/rest/users/' + userId + '/groups/',
+				url: '/rest/users/' + userId + '/groups/owner/',
 				async: false,
 				success: function ( data ) {
 					result = data;
 				},
 				error: function() {
-					alert( translator.logoutFailedMessage );
+					alert( translator.serverError );
 				}
 			} );
 

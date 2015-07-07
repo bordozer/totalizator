@@ -26,7 +26,7 @@ public class UserGroupCupRepository implements UserGroupCupDao {
 	}
 
 	@Override
-	public List<UserGroupCup> loadAll( final UserGroup userGroup ) {
+	public List<UserGroupCup> loadCups( final UserGroup userGroup ) {
 		return em.createNamedQuery( UserGroupCup.LOAD_CUPS_FOR_USER_GROUP, UserGroupCup.class )
 				.setParameter( "userGroupId", userGroup.getId() )
 				 .getResultList();
@@ -49,7 +49,7 @@ public class UserGroupCupRepository implements UserGroupCupDao {
 
 	@Override
 	public void deleteAll( final UserGroup userGroup ) {
-		for ( final UserGroupCup userGroupCup : loadAll( userGroup ) ) {
+		for ( final UserGroupCup userGroupCup : loadCups( userGroup ) ) {
 			this.delete( userGroupCup );
 		}
 	}

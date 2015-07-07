@@ -6,10 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.UserGroupCupDao;
 import totalizator.app.dao.UserGroupDao;
-import totalizator.app.models.Cup;
-import totalizator.app.models.User;
-import totalizator.app.models.UserGroup;
-import totalizator.app.models.UserGroupCup;
+import totalizator.app.dao.UserGroupUserDao;
+import totalizator.app.models.*;
 
 import java.util.List;
 import java.util.function.Function;
@@ -23,6 +21,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 	@Autowired
 	private UserGroupCupDao userGroupCupRepository;
+
+	@Autowired
+	private UserGroupUserDao userGroupMemberRepository;
 
 	@Autowired
 	private CupService cupService;
@@ -69,13 +70,13 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 	@Override
 	@Transactional( readOnly = true )
-	public List<UserGroup> loadAllOwned( final User user ) {
+	public List<UserGroup> loadAllWhereIsOwner( final User user ) {
 		return userGroupRepository.loadAllOwned( user );
 	}
 
 	@Override
 	@Transactional( readOnly = true )
-	public List<UserGroup> loadAll( final User user ) {
+	public List<UserGroup> loadAllWhereIsMember( final User user ) {
 		return userGroupRepository.loadAll( user );
 	}
 
@@ -89,7 +90,22 @@ public class UserGroupServiceImpl implements UserGroupService {
 			}
 		};
 
-		final List<UserGroupCup> userGroupCups = userGroupCupRepository.loadAll( userGroup );
+		final List<UserGroupCup> userGroupCups = userGroupCupRepository.loadCups( userGroup );
+
+		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
+	}
+
+	@Override
+	public List<User> loadGroupMembers( final UserGroup userGroup ) {
+
+		final Function<UserGroupMember, User> mapper = new Function<UserGroupMember, User>() {
+			@Override
+			public User apply( final UserGroupMember userGroupUser ) {
+				return userGroupUser.getUser();
+			}
+		};
+
+		final List<UserGroupMember> userGroupCups = userGroupMemberRepository.loadUsers( userGroup );
 
 		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
 	}
@@ -98,7 +114,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 	@Cacheable( value = GenericService.CACHE_PERMANENT )
 	public boolean isOwner( final UserGroup userGroup, final User user ) {
 
-		for ( final UserGroup group : loadAllOwned( user ) ) {
+		for ( final UserGroup group : loadAllWhereIsOwner( user ) ) {
 			if ( group.getOwner().equals( user ) ) {
 				return true;
 			}

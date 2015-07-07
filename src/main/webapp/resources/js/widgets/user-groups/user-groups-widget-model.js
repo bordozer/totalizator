@@ -47,7 +47,7 @@ define( function ( require ) {
 		},
 
 		url: function() {
-			return '/rest/users/' + this.user.userId + '/groups/';
+			return '/rest/users/' + this.user.userId + '/groups/owner/';
 		},
 
 		refresh: function() {

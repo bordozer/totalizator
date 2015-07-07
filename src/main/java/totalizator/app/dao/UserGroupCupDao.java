@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserGroupCupDao extends GenericService<UserGroupCup> {
 
-	List<UserGroupCup> loadAll( final UserGroup userGroup );
+	List<UserGroupCup> loadCups( final UserGroup userGroup );
 
 	void delete( final UserGroupCup userGroupCup );
 
