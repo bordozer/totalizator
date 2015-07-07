@@ -99,6 +99,7 @@ define( function ( require ) {
 				return;
 			}
 
+			service.addUserToGroup( user.userId, userGroup.userGroupId );
 		},
 
 		_onRemoveUserFromGroupClick: function( evt ) {
@@ -112,6 +113,7 @@ define( function ( require ) {
 				return;
 			}
 
+			service.removeUserFromGroup( user.userId, userGroup.userGroupId );
 		},
 
 		_getData: function( button ) {

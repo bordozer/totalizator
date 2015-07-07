@@ -239,10 +239,6 @@ define( function ( require ) {
 			// TODO
 		},
 
-		cancelUserInvitationToGroup: function( userId, groupId ) {
-			// TODO
-		},
-
 		logout: function () {
 
 			if ( ! confirm( translator.logoutConfirmationLabel ) ) {
