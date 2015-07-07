@@ -62,8 +62,12 @@ define( function ( require ) {
 			var userId = button.data( 'user-id' );
 			var groupId = button.data( 'group-id' );
 
-			// TODO: process user group
 			//console.log( userId, groupId );
+
+			// TODO: process user group
+			// service.addUserToGroup( userId, groupId );
+			// service.removeUserFromGroup( userId, groupId );
+			// service.cancelUserInvitationToGroup( userId, groupId );
 		}
 	});
 } );

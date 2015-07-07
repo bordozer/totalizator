@@ -212,6 +212,18 @@ define( function ( require ) {
 			return result;
 		},
 
+		addUserToGroup: function( userId, groupId ) {
+			// TODO
+		},
+
+		removeUserFromGroup: function( userId, groupId ) {
+			// TODO
+		},
+
+		cancelUserInvitationToGroup: function( userId, groupId ) {
+			// TODO
+		},
+
 		logout: function () {
 
 			if ( ! confirm( translator.logoutConfirmationLabel ) ) {
