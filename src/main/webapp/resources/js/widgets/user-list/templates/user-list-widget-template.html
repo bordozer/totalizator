@@ -1,0 +1,29 @@
+<table class="table table-striped table-hover">
+
+	<thead>
+		<td></td>
+		<% _.each( userGroups, function( userGroup ) { %>
+			<td class="text-center"><%- userGroup.userGroupName %></td>
+		<% }) %>
+	</thead>
+
+	<% _.each( users, function( user ) { %>
+		<tr	<%=currentUser.userId == user.userId ? "class='current-user'" : '' %> >
+
+			<td>
+				<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
+			</td>
+
+			<% _.each( userGroups, function( userGroup ) { %>
+
+				<td class="text-center">
+					<% if( user.userId != currentUser.userId ) { %>
+						<button type="button" class="btn btn-default fa fa-plus js-user-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"></button>
+					<% } %>
+				</td>
+			<% }) %>
+
+		</tr>
+	<% }) %>
+
+</table>
