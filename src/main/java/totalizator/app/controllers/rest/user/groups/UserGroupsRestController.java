@@ -75,9 +75,6 @@ public class UserGroupsRestController {
 		userGroup.setGroupName( dto.getUserGroupName() );
 		userGroup.setCreationTime( dateTimeService.getNow() );
 
-		final List<Integer> cupIds = dto.getCupIds();
-		// TODO: save allowed for group cup ids
-
-		return userGroupService.save( userGroup );
+		return userGroupService.save( userGroup, dto.getCupIds() );
 	}
 }

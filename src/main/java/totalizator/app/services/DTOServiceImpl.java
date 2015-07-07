@@ -38,6 +38,9 @@ public class DTOServiceImpl implements DTOService {
 	@Autowired
 	private CupTeamService cupTeamService;
 
+	@Autowired
+	private UserGroupService userGroupService;
+
 	@Override
 	public UserDTO transformUser( final User user ) {
 		return userFunction().apply( user );
@@ -144,6 +147,13 @@ public class DTOServiceImpl implements DTOService {
 	@Override
 	public List<UserGroupDTO> transformUserGroups( final List<UserGroup> userGroups ) {
 
+		final java.util.function.Function<Cup, Integer> cupMapper = new java.util.function.Function<Cup, Integer>() {
+			@Override
+			public Integer apply( final Cup cup ) {
+				return cup.getId();
+			}
+		};
+
 		final java.util.function.Function<? super UserGroup, UserGroupDTO> mapper = new java.util.function.Function<UserGroup, UserGroupDTO>() {
 
 			@Override
@@ -152,11 +162,13 @@ public class DTOServiceImpl implements DTOService {
 				final UserGroupDTO userGroupDTO = new UserGroupDTO();
 				userGroupDTO.setUserGroupId( userGroup.getId() );
 				userGroupDTO.setUserGroupName( userGroup.getGroupName() );
-//				userGroupDTO.setUserGroupOwner( transformUser( userGroup.getOwner() ) );
+
+				userGroupDTO.setCupIds( userGroupService.loadCups( userGroup ).stream().map( cupMapper ).collect( Collectors.toList() ) );
 
 				return userGroupDTO;
 			}
 		};
+
 		return userGroups.stream().map( mapper ).collect( Collectors.toList() );
 	}
 

@@ -4,17 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import totalizator.app.dao.UserGroupCupDao;
 import totalizator.app.dao.UserGroupDao;
+import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 import totalizator.app.models.UserGroup;
+import totalizator.app.models.UserGroupCup;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class UserGroupServiceImpl implements UserGroupService {
 
 	@Autowired
 	private UserGroupDao userGroupRepository;
+
+	@Autowired
+	private UserGroupCupDao userGroupCupDao;
+
+	@Autowired
+	private CupService cupService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -36,6 +47,21 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 	@Override
 	@Transactional
+	public UserGroup save( final UserGroup userGroup, final List<Integer> cupIds ) {
+
+		final UserGroup saved = this.save( userGroup );
+
+		userGroupCupDao.deleteAll( userGroup );
+
+		for ( final int cupId : cupIds ) {
+			userGroupCupDao.save( new UserGroupCup( userGroup, cupService.load( cupId ) ) );
+		}
+
+		return saved;
+	}
+
+	@Override
+	@Transactional
 	public void delete( final int id ) {
 		userGroupRepository.delete( id );
 	}
@@ -50,6 +76,21 @@ public class UserGroupServiceImpl implements UserGroupService {
 	@Transactional( readOnly = true )
 	public List<UserGroup> loadAll( final User user ) {
 		return userGroupRepository.loadAll( user );
+	}
+
+	@Override
+	public List<Cup> loadCups( final UserGroup userGroup ) {
+
+		final Function<UserGroupCup, Cup> mapper = new Function<UserGroupCup, Cup>() {
+			@Override
+			public Cup apply( final UserGroupCup userGroupCup ) {
+				return userGroupCup.getCup();
+			}
+		};
+
+		final List<UserGroupCup> userGroupCups = userGroupCupDao.loadAll( userGroup );
+
+		return userGroupCups.stream().map( mapper ).collect( Collectors.toList() );
 	}
 
 	@Transactional( readOnly = true )

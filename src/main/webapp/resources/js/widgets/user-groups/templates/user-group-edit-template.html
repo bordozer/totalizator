@@ -20,7 +20,7 @@
 				<% _.each( entry.cups, function( cup ) { %>
 					<div class="row">
 						<div class="col-lg-12" style="padding-left: 50px;">
-							<input type="checkbox" name="cupIds" value="<%-cup.cupId%>"> <%-cup.cupName%>
+							<input type="checkbox" name="cupIds" value="<%-cup.cupId%>" <%= selectedCupIds[ cup.cupId ] ? 'checked' : '' %> > <%-cup.cupName%>
 						</div>
 					</div>
 				<% }) %>

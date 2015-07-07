@@ -50,7 +50,13 @@ define( function ( require ) {
 				categoriesAndCups.push( entry );
 			});
 
-			var data = _.extend( {}, this.model.toJSON(), { categoriesAndCups: categoriesAndCups, translator: translator } );
+			var selectedCupIds = {};
+			_.each( this.model.toJSON().cupIds, function( cupId ) {
+				selectedCupIds[ cupId ] = true;
+			});
+
+			var data = _.extend( {}, this.model.toJSON(), { categoriesAndCups: categoriesAndCups, selectedCupIds: selectedCupIds, translator: translator } );
+
 			this.$el.html( template( data ) );
 
 			this.$( '.js-user-group-name' ).focus();

@@ -26,7 +26,7 @@ define( function ( require ) {
 		},
 
 		render: function () {
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var data = _.extend( {}, this.model.toJSON(), { selectedCupsCount: this.model.toJSON().cupIds.length, translator: translator } );
 			this.$el.html( template( data ) );
 		},
 
