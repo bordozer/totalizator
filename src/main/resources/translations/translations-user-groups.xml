@@ -18,8 +18,23 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Add user to group</nerd>
+		<ru><![CDATA[Добавить пользователя в группу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Remove user from group</nerd>
+		<ru><![CDATA[Удалить пользователя из группы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Add the user to the group?</nerd>
+		<ru><![CDATA[Добавить пользователя в группу?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Remove the user from the group?</nerd>
+		<ru><![CDATA[Исключить пользователя из группы?]]></ru>
 	</translation>
 
 	<translation>

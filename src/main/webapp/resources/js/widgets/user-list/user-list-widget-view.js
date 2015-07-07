@@ -14,17 +14,24 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Users"
+		, addUserToGroup: "Add user to group"
+		, removeUserFromGroup: "Remove user from group"
+		, addUserToGroupConfirmation: "Add the user to the group?"
+		, removeUserFromGroupConfirmation: "Remove the user from the group?"
 	} );
 
 	return WidgetView.extend( {
 
 		events: {
-			'click .js-user-group': '_onUserGroupButtonClick'
+			'click .js-add-user-to-group': '_onAddUserToGroupClick'
+			, 'click .js-remove-user-from-group': '_onRemoveUserFromGroupClick'
 		},
 
 		initialize: function( options ) {
 
 			this.currentUser = options.options.currentUser;
+
+			this.users = service.loadUsers();
 
 			this.listenTo( this.model, 'sync', this._renderUserList );
 			this.render();
@@ -46,9 +53,11 @@ define( function ( require ) {
 
 			var users = this.model.toJSON();
 
+			this.currentUserGroups = service.loadUserGroupsWhereUserIsOwner( this.currentUser.userId );
+
 			var data = _.extend( {}, { users: users
 				, currentUser: this.currentUser
-				, currentUserGroups: service.loadUserGroupsWhereUserIsOwner( this.currentUser.userId )
+				, currentUserGroups: this.currentUserGroups
 				, userGroupsMembership: this._userGroupsMatrix( users )
 				, translator: translator
 			} );
@@ -79,19 +88,54 @@ define( function ( require ) {
 			return result;
 		},
 
-		_onUserGroupButtonClick: function( evt ) {
+		_onAddUserToGroupClick: function( evt ) {
 
-			var button = $( evt.target );
+			var data = this._getData( $( evt.target ) );
+
+			var user = data.user;
+			var userGroup = data.userGroup;
+
+			if ( ! confirm( this._confirmMessage( translator.addUserToGroupConfirmation, data ) ) ) {
+				return;
+			}
+
+		},
+
+		_onRemoveUserFromGroupClick: function( evt ) {
+
+			var data = this._getData( $( evt.target ) );
+
+			var user = data.user;
+			var userGroup = data.userGroup;
+
+			if ( ! confirm( this._confirmMessage( translator.removeUserFromGroupConfirmation, data ) ) ) {
+				return;
+			}
+
+		},
+
+		_getData: function( button ) {
 
 			var userId = button.data( 'user-id' );
-			var groupId = button.data( 'group-id' );
+			var userGroupId = button.data( 'group-id' );
 
-			//console.log( userId, groupId );
+			var user = _.find( this.users, function( user ) {
+				return user.userId == userId;
+			} );
 
-			// TODO: process user group
-			// service.addUserToGroup( userId, groupId );
-			// service.removeUserFromGroup( userId, groupId );
-			// service.cancelUserInvitationToGroup( userId, groupId );
+			var userGroup = _.find( this.currentUserGroups, function( userGroup ) {
+				return userGroup.userGroupId == userGroupId;
+			} );
+
+			return { user: user, userGroup: userGroup };
+		},
+
+		_confirmMessage: function( message, data ) {
+
+			var user = data.user;
+			var userGroup = data.userGroup;
+
+			return message + "\n\nUser: " + user.userName + "\nUser group: " + userGroup.userGroupName; // TODO: translate
 		}
 	});
 } );
