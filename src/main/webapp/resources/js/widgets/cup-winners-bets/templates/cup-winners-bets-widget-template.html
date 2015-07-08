@@ -36,7 +36,8 @@
 					<h4><a href="/totalizator/users/<%- userCupBet.user.userId %>/"><%- userCupBet.user.userName %></a></h4>
 				</td>
 				<% for( i = 1; i <= winnersCount; i++ ) { %>
-					<td class="text-center <%= userCupBet.userCupBets[ i - 1 ].stillActive ? 'text-info' : 'text-danger' %>">
+
+					<td class="text-center <%= userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].stillActive ? 'text-info' : 'text-danger' %>">
 						<% if( userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].team ) { %>
 
 							<% if( userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
