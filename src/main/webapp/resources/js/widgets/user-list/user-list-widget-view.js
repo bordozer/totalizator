@@ -56,7 +56,7 @@ define( function ( require ) {
 
 			_.each( users, function( user ) {
 
-				var el = $( '<div></div>' );
+				var el = $( '<div class="user-list-entry"></div>' );
 				container.append( el );
 
 				var view = new EntryView( {
