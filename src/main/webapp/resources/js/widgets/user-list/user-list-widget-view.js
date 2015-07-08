@@ -55,7 +55,8 @@ define( function ( require ) {
 
 			this.currentUserGroups = service.loadUserGroupsWhereUserIsOwner( this.currentUser.userId );
 
-			var data = _.extend( {}, { users: users
+			var data = _.extend( {}, {
+				users: users
 				, currentUser: this.currentUser
 				, currentUserGroups: this.currentUserGroups
 				, userGroupsMembership: this._userGroupsMatrix( users )
