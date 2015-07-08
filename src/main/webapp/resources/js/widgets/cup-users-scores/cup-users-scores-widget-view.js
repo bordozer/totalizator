@@ -93,9 +93,9 @@ define( function ( require ) {
 
 		_ownUserGroupMenuItems: function ( userId ) {
 
-			var userGroups = service.loadUserGroupsWhereUserIsOwner( userId );
+			var userGroupsForCup = this._filterUserGroupsByCup( service.loadUserGroupsWhereUserIsOwner( userId ) );
 
-			if ( userGroups.length == 0 ) {
+			if ( userGroupsForCup.length == 0 ) {
 				return [];
 			}
 
@@ -105,7 +105,7 @@ define( function ( require ) {
 
 			var selectedUserGroupId = this.model.userGroupId;
 
-			_.each( userGroups, function( userGroup ) {
+			_.each( userGroupsForCup, function( userGroup ) {
 				menuItems.push( {
 					selector: 'js-user-group'
 					, icon: 'fa fa-group'
@@ -121,7 +121,7 @@ define( function ( require ) {
 
 		_anotherUserGroupMenuItems: function ( userId ) {
 
-			var userGroups = service.loadUserGroupsWhereUserIsMember( userId );
+			var userGroups = this._filterUserGroupsByCup( service.loadUserGroupsWhereUserIsMember( userId ) );
 
 			if ( userGroups.length == 0 ) {
 				return [];
@@ -146,6 +146,17 @@ define( function ( require ) {
 			});
 
 			return menuItems;
+		},
+
+		_filterUserGroupsByCup: function( userGroups ) {
+
+			var cupId = this.model.cup.cupId;
+
+			return _.filter( userGroups, function( userGroup ) {
+				return _.filter( userGroup.userGroupCups, function( cup ) {
+					return cup.cupId == cupId;
+				} ).length > 0;
+			} );
 		}
 	} );
 } );
