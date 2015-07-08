@@ -6,6 +6,7 @@ define( function ( require ) {
 	var View = require( './user-list-widget-view' );
 
 	function init( container, options ) {
+
 		var model = new Model( { options: options } );
 		var view = new View( { model: model, el: container, options: options } );
 	}

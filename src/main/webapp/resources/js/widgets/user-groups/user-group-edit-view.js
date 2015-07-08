@@ -72,6 +72,8 @@ define( function ( require ) {
 			}
 
 			this.model.save( {}, { async: false } );
+
+			this.trigger( 'events:user_groups_are_changed' );
 		},
 
 		_bind: function() {

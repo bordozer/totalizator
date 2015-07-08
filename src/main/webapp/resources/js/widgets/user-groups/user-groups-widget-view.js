@@ -66,6 +66,7 @@ define( function ( require ) {
 
 			var view  = new UserGroupView( { model: model, el: el } );
 			view.on( 'events:user_group_edit', this._showGroupSettings, this );
+			view.on( 'events:user_groups_are_changed', this._triggerGroupChange, this );
 		},
 
 		_onNewGroupClick: function() {
@@ -79,8 +80,13 @@ define( function ( require ) {
 
 			var userGroupEditView = new UserGroupEditView( { model: userGroup, el: container } );
 			userGroupEditView.on( 'events:close_group_settings', this.renderBody, this );
+			userGroupEditView.on( 'events:user_groups_are_changed', this._triggerGroupChange, this );
 
 			userGroupEditView.render();
+		},
+
+		_triggerGroupChange: function() {
+			this.trigger( 'events:user_groups_are_changed' );
 		}
 	});
 } );

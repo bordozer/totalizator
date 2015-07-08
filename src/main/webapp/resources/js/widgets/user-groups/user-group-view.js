@@ -42,6 +42,8 @@ define( function ( require ) {
 
 			this.model.destroy();
 			this.remove();
+
+			this.trigger( 'events:user_groups_are_changed' );
 		}
 	});
 } );
