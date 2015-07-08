@@ -1,7 +1,7 @@
 <div class="row" style="line-height: 30px;">
 
 	<div class="col-lg-4">
-		<%- user.userName %>
+		<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
 	</div>
 
 	<% _.each( currentUserGroups, function( userGroup ) { %>

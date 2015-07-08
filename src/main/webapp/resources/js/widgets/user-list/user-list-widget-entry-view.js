@@ -59,7 +59,8 @@ define( function ( require ) {
 
 		_onAddUserToGroupClick: function( evt ) {
 
-			var data = this._getData( $( evt.target ) );
+			var button = $( evt.target );
+			var data = this._getData( button );
 
 			var user = data.user;
 			var userGroup = data.userGroup;
