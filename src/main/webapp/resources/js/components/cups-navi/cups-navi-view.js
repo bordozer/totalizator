@@ -15,6 +15,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		allCups: 'All cups'
+		, cupFinishedLabel: 'The cup is finished'
 	} );
 
 	return Backbone.View.extend( {
@@ -76,7 +77,7 @@ define( function ( require ) {
 					selector: 'category-' + cup.cupId
 					, icon: selected ? 'fa fa-check-circle' : 'fa fa-circle-thin'
 					, link: '/totalizator/cups/' + cup.cupId + '/'
-					, text: cup.category.categoryName + ': ' + cup.cupName
+					, text: cup.category.categoryName + ': ' + cup.cupName + ( cup.finished ? " (<span class='fa fa-flag-checkered'></span>" + translator.cupFinishedLabel + ' )' : '' )
 				} );
 			} );
 
