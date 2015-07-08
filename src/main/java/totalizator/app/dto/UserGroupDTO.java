@@ -11,6 +11,7 @@ public class UserGroupDTO {
 
 	private String userGroupName;
 	private List<Integer> cupIds;
+	private UserDTO userGroupOwner;
 
 	public int getUserGroupId() {
 		return userGroupId;
@@ -34,6 +35,14 @@ public class UserGroupDTO {
 
 	public void setCupIds( final List<Integer> cupIds ) {
 		this.cupIds = cupIds;
+	}
+
+	public UserDTO getUserGroupOwner() {
+		return userGroupOwner;
+	}
+
+	public void setUserGroupOwner( final UserDTO userGroupOwner ) {
+		this.userGroupOwner = userGroupOwner;
 	}
 
 	@Override

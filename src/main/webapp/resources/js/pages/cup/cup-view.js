@@ -53,7 +53,7 @@ define( function ( require ) {
 		},
 
 		_renderCupScores: function( cup ) {
-			cupScores( this.$( '.js-cup-scores' ), { cup: cup, user: this.currentUser } );
+			cupScores( this.$( '.js-cup-scores' ), { cup: cup, user: this.currentUser, currentUser: this.currentUser } );
 		},
 
 		_renderCupTeams: function( cup ) {

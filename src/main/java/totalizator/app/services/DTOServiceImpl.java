@@ -162,6 +162,7 @@ public class DTOServiceImpl implements DTOService {
 				final UserGroupDTO userGroupDTO = new UserGroupDTO();
 				userGroupDTO.setUserGroupId( userGroup.getId() );
 				userGroupDTO.setUserGroupName( userGroup.getGroupName() );
+				userGroupDTO.setUserGroupOwner( transformUser( userGroup.getOwner() ) );
 
 				userGroupDTO.setCupIds( userGroupService.loadCups( userGroup ).stream().map( cupMapper ).collect( Collectors.toList() ) );
 

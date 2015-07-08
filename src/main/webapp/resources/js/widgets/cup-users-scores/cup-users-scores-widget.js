@@ -16,17 +16,7 @@ define( function ( require ) {
 
 	function init( container, options ) {
 
-		var userGroups = service.loadUserGroupsWhereUserIsOwner( options.user.userId );
-
-		var menuItems = [
-			{ selector: 'divider' }
-			, { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter }
-			, { selector: 'divider' }
-		];
-
-		_.each( userGroups, function( userGroup ) {
-			menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: userGroup.userGroupName, entity_id: userGroup.userGroupId } );
-		});
+		var menuItems = userGroupMenuItems( options.user.userId );
 
 		var model = new Model( { cup: options.cup } );
 		var view = new View( {
@@ -34,6 +24,65 @@ define( function ( require ) {
 			, el: container
 			, menuItems: menuItems
 		} );
+	}
+
+	function userGroupMenuItems( userId ) {
+
+		var ownGroupsMenuItems = ownUserGroupMenuItems( userId );
+		var anotherGroupMenuItems = anotherUserGroupMenuItems( userId );
+
+		if ( ownGroupsMenuItems.length == 0 && anotherGroupMenuItems.length == 0 ) {
+			return [];
+		}
+
+		var menuItems = [
+			{ selector: 'divider' }
+			, { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter }
+		];
+
+		menuItems = menuItems.concat( ownGroupsMenuItems );
+		menuItems = menuItems.concat( anotherGroupMenuItems );
+
+		return menuItems;
+	}
+
+	function ownUserGroupMenuItems( userId ) {
+
+		var userGroups = service.loadUserGroupsWhereUserIsOwner( userId );
+
+		if ( userGroups.length == 0 ) {
+			return [];
+		}
+
+		var menuItems = [
+			{ selector: 'divider' }
+		];
+
+		_.each( userGroups, function( userGroup ) {
+			menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: userGroup.userGroupName, entity_id: userGroup.userGroupId } );
+		});
+
+		return menuItems;
+	}
+
+	function anotherUserGroupMenuItems( userId ) {
+
+		var userGroups = service.loadUserGroupsWhereUserIsMember( userId );
+
+		if ( userGroups.length == 0 ) {
+			return [];
+		}
+
+		var menuItems = [
+			{ selector: 'divider' }
+		];
+
+		_.each( userGroups, function( userGroup ) {
+			var groupName = userGroup.userGroupName + ' ( ' + userGroup.userGroupOwner.userName + ' )';
+			menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: groupName, entity_id: userGroup.userGroupId } );
+		});
+
+		return menuItems;
 	}
 
 	return init;
