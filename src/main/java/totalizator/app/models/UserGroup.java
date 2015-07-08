@@ -26,7 +26,7 @@ public class UserGroup extends AbstractEntity {
 	public static final String LOAD_ALL = "userGroup.loadAll";
 	public static final String LOAD_ALL_USER_IS_OWNER = "userGroup.loadAllWhereUserIsOwner";
 
-	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
+	@Column( columnDefinition = "VARCHAR(100)" )
 	private String groupName;
 
 	@ManyToOne

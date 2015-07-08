@@ -84,7 +84,7 @@ public class User_UserGroupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE )
 	public UserGroupEditDTO create( final @RequestBody UserGroupEditDTO dto, final @PathVariable( "userId" ) int userId ) {
-
+		// TODO: validate!
 		final UserGroup userGroup = save( userId, dto, new UserGroup() );
 		dto.setUserGroupId( userGroup.getId() );
 
@@ -95,7 +95,7 @@ public class User_UserGroupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/{userGroupId}", produces = APPLICATION_JSON_VALUE )
 	public UserGroupEditDTO save( final @RequestBody UserGroupEditDTO dto, final @PathVariable( "userId" ) int userId, final @PathVariable( "userGroupId" ) int userGroupId ) {
-
+		// TODO: validate!
 		save( userId, dto, userGroupService.load( userGroupId ) );
 
 		return dto;
