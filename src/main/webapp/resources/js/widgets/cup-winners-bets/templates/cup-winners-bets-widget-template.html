@@ -66,8 +66,8 @@
 						<% } %>
 
 						<% if( ! userCupBet.userCupBets[ i - 1 ] || ! userCupBet.userCupBets[ i - 1 ].team ) { %>
-							<img src="/resources/img/team-logo-not-found.png">
-							<h5><%= translator.noWinnerBetLabel %></h5>
+							<h3 class="fa fa-trophy fa-2x text-muted"></h3>
+							<h5 class="text-muted"><%= translator.noWinnerBetLabel %></h5>
 						<% } %>
 					</td>
 				<% } %>
