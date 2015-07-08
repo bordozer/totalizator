@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class UserGroupServiceImpl implements UserGroupService {
 
@@ -102,7 +104,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 			}
 		};
 
-		final List<UserGroupMember> userGroupMembers = userGroupMemberRepository.loadUserGroupMembers( userGroup );
+		final List<UserGroupMember> userGroupMembers = newArrayList();
+		userGroupMembers.add( new UserGroupMember( userGroup, userGroup.getOwner() ) );
+		userGroupMembers.addAll( userGroupMemberRepository.loadUserGroupMembers( userGroup ) );
 
 		return userGroupMembers.stream().map( mapper ).collect( Collectors.toList() );
 	}

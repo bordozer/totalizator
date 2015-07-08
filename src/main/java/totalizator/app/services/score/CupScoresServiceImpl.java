@@ -45,26 +45,12 @@ public class CupScoresServiceImpl implements CupScoresService {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<UserPoints> getUsersScores( final Cup cup ) {
-
-		final List<UserPoints> result = newArrayList();
-
-		for ( final User user : userService.loadAll() ) {
-			result.addAll( getUserPoints( cup, user ) );
-		}
-
-		return result;
+		return getUserScores( cup, userService.loadAll() );
 	}
 
 	@Override
 	public List<UserPoints> getUsersScores( final Cup cup, final UserGroup userGroup ) {
-
-		final List<UserPoints> result = newArrayList();
-
-		for ( final User user : userGroupService.loadUserGroupMembers( userGroup ) ) {
-			result.addAll( getUserPoints( cup, user ) );
-		}
-
-		return result;
+		return getUserScores( cup, userGroupService.loadUserGroupMembers( userGroup ) );
 	}
 
 	@Override
@@ -194,6 +180,17 @@ public class CupScoresServiceImpl implements CupScoresService {
 		}
 
 		return null;
+	}
+
+	private List<UserPoints> getUserScores( final Cup cup, final List<User> users ) {
+
+		final List<UserPoints> result = newArrayList();
+
+		for ( final User user : users ) {
+			result.addAll( getUserPoints( cup, user ) );
+		}
+
+		return result;
 	}
 
 	public void setUserService( final UserService userService ) {
