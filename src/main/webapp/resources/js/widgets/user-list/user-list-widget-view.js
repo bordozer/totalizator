@@ -15,10 +15,6 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Users"
-		, addUserToGroup: "Add user to group"
-		, removeUserFromGroup: "Remove user from group"
-		, addUserToGroupConfirmation: "Add the user to the group?"
-		, removeUserFromGroupConfirmation: "Remove the user from the group?"
 	} );
 
 	return WidgetView.extend( {
@@ -26,8 +22,6 @@ define( function ( require ) {
 		initialize: function( options ) {
 
 			this.currentUser = options.options.currentUser;
-
-			//this.users = service.loadUsers();
 
 			this.listenTo( this.model, 'sync', this._renderUserList );
 			this.render();
@@ -76,82 +70,5 @@ define( function ( require ) {
 
 			this.trigger( 'inner-view-rendered' );
 		}
-
-		/*_userGroupsMatrix: function( users ) {
-
-			var result = {};
-
-			_.each( users, function( user ) {
-
-				var userId = user.userId;
-
-				var memberOfGroups = service.loadUserGroupsWhereUserIsMember( userId );
-
-				var userGroups = [];
-				_.each( memberOfGroups, function( userGroup ) {
-					userGroups[ userGroup.userGroupId ] = true;
-				});
-
-				result[ userId ] = userGroups;
-			});
-
-			return result;
-		}*/
-
-		/*_onAddUserToGroupClick: function( evt ) {
-
-			var data = this._getData( $( evt.target ) );
-
-			var user = data.user;
-			var userGroup = data.userGroup;
-
-			/!*if ( ! confirm( this._confirmMessage( translator.addUserToGroupConfirmation, data ) ) ) {
-				return;
-			}*!/
-
-			service.addUserToUserGroup( user.userId, userGroup.userGroupId );
-
-			this.render();
-		},
-
-		_onRemoveUserFromGroupClick: function( evt ) {
-
-			var data = this._getData( $( evt.target ) );
-
-			var user = data.user;
-			var userGroup = data.userGroup;
-
-			/!*if ( ! confirm( this._confirmMessage( translator.removeUserFromGroupConfirmation, data ) ) ) {
-				return;
-			}*!/
-
-			service.removeUserFromGroup( user.userId, userGroup.userGroupId );
-
-			this.render();
-		},*/
-
-		/*_getData: function( button ) {
-
-			var userId = button.data( 'user-id' );
-			var userGroupId = button.data( 'group-id' );
-
-			var user = _.find( this.users, function( user ) {
-				return user.userId == userId;
-			} );
-
-			var userGroup = _.find( this.currentUserGroups, function( userGroup ) {
-				return userGroup.userGroupId == userGroupId;
-			} );
-
-			return { user: user, userGroup: userGroup };
-		},*/
-
-		/*_confirmMessage: function( message, data ) {
-
-			var user = data.user;
-			var userGroup = data.userGroup;
-
-			return message + "\n\nUser: " + user.userName + "\nUser group: " + userGroup.userGroupName; // TODO: translate
-		}*/
 	});
 } );

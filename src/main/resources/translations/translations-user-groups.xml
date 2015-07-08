@@ -28,16 +28,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Add the user to the group?</nerd>
-		<ru><![CDATA[Добавить пользователя в группу?]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Remove the user from the group?</nerd>
-		<ru><![CDATA[Исключить пользователя из группы?]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Remove user group filter</nerd>
 		<ru><![CDATA[Убрать фильтр по группе]]></ru>
 	</translation>

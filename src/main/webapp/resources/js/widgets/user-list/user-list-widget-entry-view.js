@@ -12,6 +12,8 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Users"
+		, addUserToGroup: "Add user to group"
+		, removeUserFromGroup: "Remove user from group"
 	} );
 
 	return Backbone.View.extend( {
