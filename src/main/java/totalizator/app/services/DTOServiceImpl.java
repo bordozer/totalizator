@@ -145,7 +145,7 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
-	public List<UserGroupDTO> transformUserGroups( final List<UserGroup> userGroups ) {
+	public List<UserGroupDTO> transformUserGroups( final List<UserGroup> userGroups, final User user ) {
 
 		final java.util.function.Function<Cup, Integer> cupMapper = new java.util.function.Function<Cup, Integer>() {
 			@Override
@@ -164,7 +164,7 @@ public class DTOServiceImpl implements DTOService {
 				userGroupDTO.setUserGroupName( userGroup.getGroupName() );
 				userGroupDTO.setUserGroupOwner( transformUser( userGroup.getOwner() ) );
 
-				userGroupDTO.setCupIds( userGroupService.loadCups( userGroup ).stream().map( cupMapper ).collect( Collectors.toList() ) );
+				userGroupDTO.setUserGroupCups( transformCups( userGroupService.loadCups( userGroup ), user ) );
 
 				return userGroupDTO;
 			}

@@ -1,17 +1,16 @@
-package totalizator.app.dto;
+package totalizator.app.controllers.rest.user.groups;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class UserGroupDTO {
+public class UserGroupEditDTO {
 
 	private int userGroupId;
 
 	private String userGroupName;
-	private List<CupDTO> userGroupCups;
-	private UserDTO userGroupOwner;
+	private List<Integer> cupIds;
 
 	public int getUserGroupId() {
 		return userGroupId;
@@ -29,20 +28,12 @@ public class UserGroupDTO {
 		this.userGroupName = userGroupName;
 	}
 
-	public List<CupDTO> getUserGroupCups() {
-		return userGroupCups;
+	public List<Integer> getCupIds() {
+		return cupIds;
 	}
 
-	public void setUserGroupCups( final List<CupDTO> userGroupCups ) {
-		this.userGroupCups = userGroupCups;
-	}
-
-	public UserDTO getUserGroupOwner() {
-		return userGroupOwner;
-	}
-
-	public void setUserGroupOwner( final UserDTO userGroupOwner ) {
-		this.userGroupOwner = userGroupOwner;
+	public void setCupIds( final List<Integer> cupIds ) {
+		this.cupIds = cupIds;
 	}
 
 	@Override

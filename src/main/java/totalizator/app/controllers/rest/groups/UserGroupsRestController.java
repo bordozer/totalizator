@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.dto.UserGroupDTO;
+import totalizator.app.models.User;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserGroupService;
 import totalizator.app.services.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -30,8 +32,8 @@ public class UserGroupsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<UserGroupDTO> allUserGroups() {
-		return dtoService.transformUserGroups( userGroupService.loadAll() );
+	public List<UserGroupDTO> allUserGroups( final Principal principal ) {
+		return dtoService.transformUserGroups( userGroupService.loadAll(), getUser( principal ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -53,5 +55,9 @@ public class UserGroupsRestController {
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{userGroupId}/members/{userId}/remove/", produces = APPLICATION_JSON_VALUE )
 	public void removeMember( final @PathVariable( "userGroupId" ) int userGroupId, final @PathVariable( "userId" ) int userId ) {
 		userGroupService.removeMember( userGroupService.load( userGroupId ), userService.load( userId ) );
+	}
+
+	private User getUser( final Principal principal ) {
+		return userService.findByLogin( principal.getName() );
 	}
 }

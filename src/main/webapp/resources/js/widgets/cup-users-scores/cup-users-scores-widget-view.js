@@ -33,7 +33,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			return this.getCupTitle( this.model.cup,  translator.title );
+			return this.getCupTitle( this.model.cup, translator.title );
 		},
 
 		getIcon: function () {
