@@ -106,7 +106,7 @@ define( function ( require ) {
 
 			var customMenuItems = this.getCustomMenuItems();
 			if ( customMenuItems.length > 0 ) {
-				customMenuItems.push( { selector: 'divider' } );
+				menuItems = menuItems.concat( [ { selector: 'divider' } ] );
 			}
 
 			menuItems = menuItems.concat( customMenuItems );
