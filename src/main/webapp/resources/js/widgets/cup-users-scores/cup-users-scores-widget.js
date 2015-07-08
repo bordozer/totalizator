@@ -31,7 +31,8 @@ define( function ( require ) {
 		var ownGroupsMenuItems = ownUserGroupMenuItems( userId );
 		var anotherGroupMenuItems = anotherUserGroupMenuItems( userId );
 
-		if ( ownGroupsMenuItems.length == 0 && anotherGroupMenuItems.length == 0 ) {
+		var userIsNotAMemberOfAGroups = ownGroupsMenuItems.length == 0 && anotherGroupMenuItems.length == 0;
+		if ( userIsNotAMemberOfAGroups ) {
 			return [];
 		}
 
