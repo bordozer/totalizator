@@ -16,6 +16,7 @@ define( function ( require ) {
 
 	function init( container, options ) {
 
+		// TODO: widget menu 'Refresh' does not update user groups menus
 		var menuItems = userGroupMenuItems( options.user.userId );
 
 		var model = new Model( { cup: options.cup } );
