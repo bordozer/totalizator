@@ -63,7 +63,6 @@ define( function ( require ) {
 						, showFutureMatches: true
 					}
 					, isCompactView: true
-					, menuItems: []
 					, currentUser: currentUser
 				};
 

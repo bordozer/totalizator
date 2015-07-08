@@ -45,6 +45,10 @@ define( function ( require ) {
 		, deleteAllMatchesMessage: "Delete ALL selected matches?"
 		, betsCountLabel: "Bets count"
 		, teamsStandOffHistoryLabel: "Teams standoff history"
+
+		, addMatchLabel: "Admin / Matches / Add entry"
+		, finishSelectedMatchesLabel: "Admin / Matches / Finish selected matches"
+		, deleteSelectedMatchesLabel: "Admin / Matches / Delete selected matches"
 	} );
 
 	var MatchesView = ConfigurableView.extend( {
@@ -65,6 +69,15 @@ define( function ( require ) {
 
 		getIcon: function() {
 			return 'fa-futbol-o';
+		},
+
+		innerViewMenuItems: function() {
+			return [
+				{ selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel, button: true }
+				, { selector: 'divider' }
+				, { selector: 'js-finish-selected-matches-button', icon: 'fa fa-flag-checkered', link: '#', text: translator.finishSelectedMatchesLabel }
+				, { selector: 'js-delete-selected-matches-button', icon: 'fa fa-close', link: '#', text: translator.deleteSelectedMatchesLabel }
+			]
 		},
 
 		_renderMatches: function() {

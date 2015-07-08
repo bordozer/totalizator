@@ -50,12 +50,6 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			var menuItems =  [
-				{ selector: 'divider' }
-				,{ selector: 'js-new-cup-button', icon: 'fa fa-plus', link: '#', text: translator.newCupLabel }
-			];
-			this.addCustomMenuItems( menuItems );
-
 			this.model.on( 'sync', this.render, this );
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
@@ -111,6 +105,10 @@ define( function ( require ) {
 
 		getIcon: function () {
 			return 'fa-cubes';
+		},
+
+		getCustomMenuItems: function() {
+			return [ { selector: 'js-new-cup-button', icon: 'fa fa-plus', link: '#', text: translator.newCupLabel } ]
 		},
 
 		_triggerCupsChanged: function() {

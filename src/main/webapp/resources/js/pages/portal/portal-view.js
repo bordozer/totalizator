@@ -55,7 +55,6 @@ define( function ( require ) {
 						, showFutureMatches: true
 					}
 					, isCompactView: false
-					, menuItems: []
 					, currentUser: currentUser
 				};
 				matchesAndBetsView( container, options );

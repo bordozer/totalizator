@@ -13,7 +13,6 @@ define( function ( require ) {
 		var view = new View( {
 			model: model
 			, el: container
-			, menuItems: []
 			, user: options.user
 		} );
 	}

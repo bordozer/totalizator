@@ -28,11 +28,6 @@ define( function ( require ) {
 
 		constructor: function ( options ) {
 
-			this.menuItems =  [
-				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
-			];
-			this.customMenuItems = options.menuItems;
-
 			this.events = _.extend( this.builtinEvents, this.events );
 
 			this.on( 'view:render', this.render, this );
@@ -95,16 +90,7 @@ define( function ( require ) {
 			el.addClass( this.getIcon() );
 		},
 
-		addCustomMenuItems: function( menuItems ) {
-			this.customMenuItems = this.getCustomMenuItems().concat( menuItems );
-		},
-
 		getCustomMenuItems: function() {
-
-			if ( this.customMenuItems && this.customMenuItems.length > 0 ) {
-				return this.customMenuItems;
-			}
-
 			return [];
 		},
 
@@ -114,7 +100,16 @@ define( function ( require ) {
 
 		_renderDropDownMenu: function() {
 
-			var menuItems = this.menuItems.concat( this.getCustomMenuItems() );
+			var menuItems =  [
+				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
+			];
+
+			var customMenuItems = this.getCustomMenuItems();
+			if ( customMenuItems.length > 0 ) {
+				customMenuItems.push( { selector: 'divider' } );
+			}
+
+			menuItems = menuItems.concat( customMenuItems );
 
 			var options = {
 				menus: menuItems
@@ -125,7 +120,7 @@ define( function ( require ) {
 			};
 			mainMenu( options, this.$( '.js-window-drop-down-menu') );
 
-			var customButtons = _.filter( this.menuItems, function( menu ) {
+			var customButtons = _.filter( menuItems, function( menu ) {
 				return menu.button;
 			});
 

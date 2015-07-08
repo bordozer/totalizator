@@ -14,6 +14,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'User groups'
+		, createNewGroupLabel: 'Create user group'
 	} );
 
 	return WidgetView.extend( {
@@ -41,6 +42,10 @@ define( function ( require ) {
 
 		getIcon: function () {
 			return 'fa-cloud';
+		},
+
+		getCustomMenuItems: function() {
+			return [ { selector: 'js-create-user-group', icon: 'fa fa-plus', link: '#', text: translator.createNewGroupLabel, button: false } ];
 		},
 
 		_renderUserGroups: function () {

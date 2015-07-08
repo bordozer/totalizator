@@ -61,13 +61,6 @@ define( function ( require ) {
 
 			this.events = _.extend( this.configurableViewEvents, this.events );
 
-			var configurableViewMenuItems = [
-				{ selector: 'divider' }
-				, { selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
-				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
-			];
-			this.addCustomMenuItems( configurableViewMenuItems );
-
 			this.render();
 		},
 
@@ -97,6 +90,27 @@ define( function ( require ) {
 
 		renderInnerView: function( filter ) {
 			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
+		},
+
+		getCustomMenuItems: function() {
+
+			var result = [
+				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
+				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
+			];
+
+			var viewMenuItems = this.innerViewMenuItems();
+
+			if ( viewMenuItems.length > 0 ) {
+				result = result.concat( [ { selector: 'divider' } ] );
+			}
+			result = result.concat( viewMenuItems );
+
+			return result;
+		},
+
+		innerViewMenuItems: function() {
+			return [];
 		},
 
 		_renderSettings: function() {

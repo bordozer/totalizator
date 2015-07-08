@@ -12,18 +12,12 @@ define( function( require ) {
 	var View = require( './matches-and-bets-widget-view' );
 	var ViewCompact = require( './matches-and-bets-widget-vew-compact' );
 
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		switchViewsLabel: 'Switch match and bets views'
-	} );
-
 	function createView( model, container, filterModel, options ) {
 
 		var matchesAndBetOptions = {
 			model: model
 			, filterModel: filterModel
 			, el: container
-			, menuItems: options.menuItems
 			, currentUser: options.currentUser
 		};
 
@@ -34,14 +28,7 @@ define( function( require ) {
 		return new View( matchesAndBetOptions );
 	}
 
-	function addSwitchViewsMenu( menuItems ) {
-		var switchViewsMenu = { selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel };
-		menuItems.push( switchViewsMenu );
-	}
-
 	return function( container, options ) {
-
-		addSwitchViewsMenu( options.menuItems );
 
 		var model = new Model.MatchesModel();
 		var filterModel = new FilterModel( options.filter );

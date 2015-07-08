@@ -63,7 +63,6 @@ define( function ( require ) {
 						, showFinished: true
 					}
 					, isCompactView: true
-					, menuItems: []
 					, currentUser: currentUser
 				};
 				matchesAndBetsView( container, options );

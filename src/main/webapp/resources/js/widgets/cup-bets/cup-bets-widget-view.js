@@ -132,13 +132,6 @@ define( function ( require ) {
 			this.cup = options.options.cup;
 			this.teams = service.loadCupActiveTeams( this.cup.cupId );
 
-			var menuItems = [
-				{ selector: 'divider' }
-				,
-				{ selector: 'js-menu-edit-cup-bets', icon: 'fa fa-edit', link: '#', text: translator.menuEditCupTeamBetsLabel }
-			];
-			this.addCustomMenuItems( menuItems );
-
 			this.cupTeamBetsView = new CupTeamBetsDetails( { model: this.model, cup: this.cup } );
 
 			this.cupTeamBetsEditView = new CupTeamBetsEdit( { model: this.model, cup: this.cup, teams: this.teams } );
@@ -180,6 +173,10 @@ define( function ( require ) {
 
 		getTitleHint: function () {
 			return this.cup.category.categoryName + ': ' + this.cup.cupName;
+		},
+
+		getCustomMenuItems: function() {
+			return [ { selector: 'js-menu-edit-cup-bets', icon: 'fa fa-edit', link: '#', text: translator.menuEditCupTeamBetsLabel } ]
 		},
 
 		_onEditCupTeamBetsClick: function ( evt ) {

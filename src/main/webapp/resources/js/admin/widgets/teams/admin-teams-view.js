@@ -32,12 +32,6 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 
-			var menuItems =  [
-				{ selector: 'divider' }
-				,{ selector: 'js-new-team-button', icon: 'fa fa-plus', link: '#', text: translator.newTeamLabel }
-			];
-			this.addCustomMenuItems( menuItems );
-
 			this.model.on( 'sync', this._renderTeams, this );
 
 			this.on( 'events:categories_changed', this._updateCategories, this );
@@ -51,6 +45,13 @@ define( function ( require ) {
 
 		renderBody: function() {
 			this.model.fetch( { cache: false } );
+		},
+
+		getCustomMenuItems: function() {
+
+			return [
+				{ selector: 'js-new-team-button', icon: 'fa fa-plus', link: '#', text: translator.newTeamLabel }
+			]
 		},
 
 		_renderTeams: function() {

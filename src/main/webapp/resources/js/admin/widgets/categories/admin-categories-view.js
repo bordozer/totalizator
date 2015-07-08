@@ -25,12 +25,6 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			var menuItems =  [
-				{ selector: 'divider' }
-				,{ selector: 'js-new-category-button', icon: 'fa fa-plus', link: '#', text: translator.newCategoryLabel }
-			];
-			this.addCustomMenuItems( menuItems );
-
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -77,6 +71,10 @@ define( function ( require ) {
 		reRender: function( options ) {
 			this.model.selectedCategoryId = options.selectedCategoryId;
 			this.render();
+		},
+
+		getCustomMenuItems: function() {
+			return [ { selector: 'js-new-category-button', icon: 'fa fa-plus', link: '#', text: translator.newCategoryLabel } ]
 		},
 
 		_triggerCategoriesChanged: function() {
