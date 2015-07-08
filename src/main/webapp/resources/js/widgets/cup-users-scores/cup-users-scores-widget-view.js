@@ -42,7 +42,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-bar-chart';
+			return 'fa-sort-amount-desc';
 		},
 
 		getCustomMenuItems: function() {
