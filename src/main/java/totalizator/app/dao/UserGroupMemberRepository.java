@@ -62,6 +62,10 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
 
 	@Override
 	public void delete( final UserGroup userGroup, final User user ) {
-		delete( load( userGroup, user ).getId() );
+		final UserGroupMember userGroupMember = load( userGroup, user );
+
+		if ( userGroupMember != null ) {
+			em.remove( userGroupMember );
+		}
 	}
 }
