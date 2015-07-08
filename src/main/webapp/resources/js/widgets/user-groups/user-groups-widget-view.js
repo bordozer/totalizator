@@ -41,7 +41,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-cloud';
+			return 'fa-users';
 		},
 
 		getCustomMenuItems: function() {

@@ -34,7 +34,7 @@ define( function ( require ) {
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }
-				, { selector: '', icon: 'fa fa-users', link: '/totalizator/users/', text: translator.menuUsersLabel }
+				, { selector: '', icon: 'fa fa-user', link: '/totalizator/users/', text: translator.menuUsersLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }

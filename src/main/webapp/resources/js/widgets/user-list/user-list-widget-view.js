@@ -36,7 +36,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-users';
+			return 'fa-user';
 		},
 
 		_renderUserList: function() {

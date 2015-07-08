@@ -62,7 +62,7 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-users';
+			return 'fa-street-view';
 		},
 
 		_onFilter: function( evt ) {
