@@ -137,7 +137,7 @@ define( function ( require ) {
 				,
 				{ selector: 'js-menu-edit-cup-bets', icon: 'fa fa-edit', link: '#', text: translator.menuEditCupTeamBetsLabel }
 			];
-			this.addMenuItems( menuItems );
+			this.setCustomMenuItems( menuItems );
 
 			this.cupTeamBetsView = new CupTeamBetsDetails( { model: this.model, cup: this.cup } );
 

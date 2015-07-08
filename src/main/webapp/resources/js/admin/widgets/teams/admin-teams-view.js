@@ -36,7 +36,7 @@ define( function ( require ) {
 				{ selector: 'divider' }
 				,{ selector: 'js-new-team-button', icon: 'fa fa-plus', link: '#', text: translator.newTeamLabel }
 			];
-			this.addMenuItems( menuItems );
+			this.setCustomMenuItems( menuItems );
 
 			this.model.on( 'sync', this._renderTeams, this );
 

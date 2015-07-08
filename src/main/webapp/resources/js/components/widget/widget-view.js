@@ -31,7 +31,7 @@ define( function ( require ) {
 			this.menuItems =  [
 				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
 			];
-			this.customMenuItems = options.menuItems;
+			this.setCustomMenuItems( options.menuItems );
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
@@ -93,6 +93,10 @@ define( function ( require ) {
 			var el = this._getIconEl();
 			el.removeClass( this.progressIcon );
 			el.addClass( this.getIcon() );
+		},
+
+		setCustomMenuItems: function( menuItems ) {
+			this.customMenuItems = menuItems;
 		},
 
 		getCustomMenuItems: function() {

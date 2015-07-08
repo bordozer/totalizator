@@ -29,7 +29,7 @@ define( function ( require ) {
 				{ selector: 'divider' }
 				,{ selector: 'js-new-category-button', icon: 'fa fa-plus', link: '#', text: translator.newCategoryLabel }
 			];
-			this.addMenuItems( menuItems );
+			this.setCustomMenuItems( menuItems );
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
