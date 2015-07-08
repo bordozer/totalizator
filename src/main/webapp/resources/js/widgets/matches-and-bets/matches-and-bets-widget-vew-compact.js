@@ -18,7 +18,7 @@ define( function ( require ) {
 		title: "Matches"
 		, yourBetHint: "Your bet"
 		, noMatchesFound: "No matches found"
-		, switchViewsLabel: 'Switch match and bets views'
+		, switchViewsLabel: 'Switch match and bets to full views'
 	} );
 
 	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id ) {
@@ -157,7 +157,7 @@ define( function ( require ) {
 		},
 
 		innerViewMenuItems: function() {
-			return [ {selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel } ];
+			return [ {selector: 'js-switch-views', icon: 'fa fa-newspaper-o', link: '#', text: translator.switchViewsLabel } ];
 		},
 
 		_renderCupMatchesAndBets: function() {

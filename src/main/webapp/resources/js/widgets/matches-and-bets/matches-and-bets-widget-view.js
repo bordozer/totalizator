@@ -34,7 +34,7 @@ define( function ( require ) {
 
 		, matchBettingIsDenied: "Match betting is denied"
 		, menuHint: "Match menu"
-		, switchViewsLabel: 'Switch match and bets views'
+		, switchViewsLabel: 'Switch match and bets to compact views'
 	} );
 
 	var MatchView = Backbone.View.extend( {
@@ -365,7 +365,7 @@ define( function ( require ) {
 		},
 
 		innerViewMenuItems: function() {
-			return [ {selector: 'js-switch-views', icon: 'fa fa-retweet', link: '#', text: translator.switchViewsLabel } ];
+			return [ {selector: 'js-switch-views', icon: 'fa fa-server', link: '#', text: translator.switchViewsLabel } ];
 		},
 
 		_renderCupMatchesAndBets: function() {

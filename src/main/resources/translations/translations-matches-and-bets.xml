@@ -93,8 +93,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Switch match and bets views</nerd>
-		<ru><![CDATA[Переключить вид]]></ru>
+		<nerd>Switch match and bets to compact views</nerd>
+		<ru><![CDATA[Компактный вид]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Switch match and bets to full views</nerd>
+		<ru><![CDATA[Обычный вид]]></ru>
 	</translation>
 
 	<translation>
