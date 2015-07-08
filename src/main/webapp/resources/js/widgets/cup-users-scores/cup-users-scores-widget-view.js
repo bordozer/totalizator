@@ -64,6 +64,7 @@ define( function ( require ) {
 			var menu = $( evt.target );
 			var userGroupId = menu.data( 'entity_id' );
 			this.model.userGroupId = userGroupId ? userGroupId : 0;
+
 			this.render();
 		},
 
@@ -77,10 +78,12 @@ define( function ( require ) {
 				return [];
 			}
 
-			var menuItems = [
-				{ selector: 'divider' }
-				, { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter }
-			];
+			var menuItems = [];
+
+			if ( this.model.userGroupId > 0 ) {
+				menuItems.push( { selector: 'divider' } );
+				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter } );
+			}
 
 			menuItems = menuItems.concat( ownGroupsMenuItems );
 			menuItems = menuItems.concat( anotherGroupMenuItems );
@@ -100,8 +103,17 @@ define( function ( require ) {
 				{ selector: 'divider' }
 			];
 
+			var selectedUserGroupId = this.model.userGroupId;
+
 			_.each( userGroups, function( userGroup ) {
-				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: userGroup.userGroupName, entity_id: userGroup.userGroupId } );
+				menuItems.push( {
+					selector: 'js-user-group'
+					, icon: 'fa fa-group'
+					, link: '#'
+					, text: userGroup.userGroupName
+					, entity_id: userGroup.userGroupId
+					, selected: selectedUserGroupId == userGroup.userGroupId
+				} );
 			});
 
 			return menuItems;
@@ -119,9 +131,18 @@ define( function ( require ) {
 				{ selector: 'divider' }
 			];
 
+			var selectedUserGroupId = this.model.userGroupId;
+
 			_.each( userGroups, function( userGroup ) {
 				var groupName = userGroup.userGroupName + ' ( ' + userGroup.userGroupOwner.userName + ' )';
-				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: groupName, entity_id: userGroup.userGroupId } );
+				menuItems.push( {
+					selector: 'js-user-group'
+					, icon: 'fa fa-group'
+					, link: '#'
+					, text: groupName
+					, entity_id: userGroup.userGroupId
+					, selected: selectedUserGroupId == userGroup.userGroupId
+				} );
 			});
 
 			return menuItems;

@@ -8,8 +8,10 @@
 		<% _.each( menus, function( menu ) { %>
 
 			<% if( menu.selector != 'divider' ) { %>
-				<li role="presentation" style="height: 30px;">
-					<a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" data-entity_id="<%=menu.entity_id%>" tabindex="-1" href="<%=menu.link%>" <%= menu.link == '#' ? "onclick='return false;'" : ''%> > <%=menu.text%></a>
+				<li role="presentation" style="height: 30px;" class="">
+					<a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" data-entity_id="<%=menu.entity_id%>" tabindex="-1" href="<%=menu.link%>" <%= menu.link == '#' ? "onclick='return false;'" : ''%> >
+						<span class="<%= menu.selected ? 'text-info' : ''%>" data-entity_id="<%=menu.entity_id%>"><%=menu.text%></span>
+					</a>
 				</li>
 			<% } %>
 
