@@ -66,7 +66,7 @@ define( function ( require ) {
 				, { selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
 			];
-			this.setCustomMenuItems( configurableViewMenuItems );
+			this.addCustomMenuItems( configurableViewMenuItems );
 
 			this.render();
 		},

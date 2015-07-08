@@ -54,7 +54,7 @@ define( function ( require ) {
 				{ selector: 'divider' }
 				,{ selector: 'js-new-cup-button', icon: 'fa fa-plus', link: '#', text: translator.newCupLabel }
 			];
-			this.setCustomMenuItems( menuItems );
+			this.addCustomMenuItems( menuItems );
 
 			this.model.on( 'sync', this.render, this );
 
