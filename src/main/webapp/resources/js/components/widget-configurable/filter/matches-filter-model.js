@@ -20,7 +20,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.initialSettings = _.extend( this.defaults, options );
+			this.initialSettings = this.toJSON();
 
 			this.saveAttributes();
 		},
