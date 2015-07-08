@@ -95,9 +95,9 @@ define( function ( require ) {
 			var user = data.user;
 			var userGroup = data.userGroup;
 
-			if ( ! confirm( this._confirmMessage( translator.addUserToGroupConfirmation, data ) ) ) {
+			/*if ( ! confirm( this._confirmMessage( translator.addUserToGroupConfirmation, data ) ) ) {
 				return;
-			}
+			}*/
 
 			service.addUserToUserGroup( user.userId, userGroup.userGroupId );
 
@@ -111,9 +111,9 @@ define( function ( require ) {
 			var user = data.user;
 			var userGroup = data.userGroup;
 
-			if ( ! confirm( this._confirmMessage( translator.removeUserFromGroupConfirmation, data ) ) ) {
+			/*if ( ! confirm( this._confirmMessage( translator.removeUserFromGroupConfirmation, data ) ) ) {
 				return;
-			}
+			}*/
 
 			service.removeUserFromGroup( user.userId, userGroup.userGroupId );
 
