@@ -31,7 +31,7 @@ define( function ( require ) {
 			this.menuItems =  [
 				{ selector: 'js-menu-refresh', icon: 'fa fa-refresh', link: '#', text: translator.menuItemRefreshLabel }
 			];
-			this.addMenuItems( options.menuItems );
+			this.customMenuItems = options.menuItems;
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
@@ -95,10 +95,13 @@ define( function ( require ) {
 			el.addClass( this.getIcon() );
 		},
 
-		addMenuItems: function( menuItems ) {
-			if ( menuItems && menuItems.length > 0 ) {
-				this.menuItems = this.menuItems.concat( menuItems );
+		getCustomMenuItems: function() {
+
+			if ( this.customMenuItems && this.customMenuItems.length > 0 ) {
+				return this.customMenuItems;
 			}
+
+			return [];
 		},
 
 		footerText: function( text ) {
@@ -106,8 +109,11 @@ define( function ( require ) {
 		},
 
 		_renderDropDownMenu: function() {
+
+			var menuItems = this.menuItems.concat( this.getCustomMenuItems() );
+
 			var options = {
-				menus: this.menuItems
+				menus: menuItems
 				, menuButtonIcon: this.getIcon()
 				, menuButtonText: ''
 				, menuButtonHint: translator.widgetMenuHint

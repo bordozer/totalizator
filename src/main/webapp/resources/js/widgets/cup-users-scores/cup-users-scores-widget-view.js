@@ -10,11 +10,14 @@ define( function ( require ) {
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Cup users scores: Scores'
 		, userColumn: 'Cup users scores: User name'
 		, pointsColumn: 'Cup users scores: Points'
+		, removeUserGroupFilter: "Remove user group filter"
 	} );
 
 	return WidgetView.extend( {
@@ -24,6 +27,8 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.user = options.user;
+
 			this.listenTo( this.model, 'sync', this._renderScores );
 			this.render();
 		},
@@ -38,6 +43,10 @@ define( function ( require ) {
 
 		getIcon: function () {
 			return 'fa-bar-chart';
+		},
+
+		getCustomMenuItems: function() {
+			return this._userGroupMenuItems( this.user.userId );
 		},
 
 		_renderScores: function () {
@@ -56,6 +65,66 @@ define( function ( require ) {
 			var userGroupId = menu.data( 'entity_id' );
 			this.model.userGroupId = userGroupId ? userGroupId : 0;
 			this.render();
+		},
+
+		_userGroupMenuItems: function ( userId ) {
+
+			var ownGroupsMenuItems = this._ownUserGroupMenuItems( userId );
+			var anotherGroupMenuItems = this._anotherUserGroupMenuItems( userId );
+
+			var userIsNotAMemberOfAGroups = ownGroupsMenuItems.length == 0 && anotherGroupMenuItems.length == 0;
+			if ( userIsNotAMemberOfAGroups ) {
+				return [];
+			}
+
+			var menuItems = [
+				{ selector: 'divider' }
+				, { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter }
+			];
+
+			menuItems = menuItems.concat( ownGroupsMenuItems );
+			menuItems = menuItems.concat( anotherGroupMenuItems );
+
+			return menuItems;
+		},
+
+		_ownUserGroupMenuItems: function ( userId ) {
+
+			var userGroups = service.loadUserGroupsWhereUserIsOwner( userId );
+
+			if ( userGroups.length == 0 ) {
+				return [];
+			}
+
+			var menuItems = [
+				{ selector: 'divider' }
+			];
+
+			_.each( userGroups, function( userGroup ) {
+				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: userGroup.userGroupName, entity_id: userGroup.userGroupId } );
+			});
+
+			return menuItems;
+		},
+
+		_anotherUserGroupMenuItems: function ( userId ) {
+
+			var userGroups = service.loadUserGroupsWhereUserIsMember( userId );
+
+			if ( userGroups.length == 0 ) {
+				return [];
+			}
+
+			var menuItems = [
+				{ selector: 'divider' }
+			];
+
+			_.each( userGroups, function( userGroup ) {
+				var groupName = userGroup.userGroupName + ' ( ' + userGroup.userGroupOwner.userName + ' )';
+				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-group', link: '#', text: groupName, entity_id: userGroup.userGroupId } );
+			});
+
+			return menuItems;
 		}
 	} );
 } );
