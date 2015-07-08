@@ -26,7 +26,7 @@ public class UEFA extends AbstractDataInitializer {
 	}
 
 	@Override
-	protected List<Cup> generateCups( final Category category, final Session session ) {
+	protected List<Cup> generateCups( final Category category, final List<Team> teams, final Session session ) {
 
 		final Cup uefa2016Euro = new Cup( CUP_1, category );
 		uefa2016Euro.setPublicCup( false );

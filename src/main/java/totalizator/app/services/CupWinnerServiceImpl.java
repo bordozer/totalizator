@@ -54,12 +54,12 @@ public class CupWinnerServiceImpl implements CupWinnerService {
 		return newArrayList( cupWinnerRepository.loadAll( cup, team ) );
 	}
 
-	@Override
+	/*@Override
 	@Transactional
 	public void saveAll( final Cup cup, final List<CupWinner> winners ) {
 		deleteAllWinners( cup );
 		saveAll( winners );
-	}
+	}*/
 
 	@Override
 	@Transactional

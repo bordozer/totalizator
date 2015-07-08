@@ -19,7 +19,7 @@ public abstract class AbstractDataInitializer {
 
 	protected abstract String getName();
 
-	protected abstract List<Cup> generateCups( final Category category, final Session session );
+	protected abstract List<Cup> generateCups( final Category category, final List<Team> teams, final Session session );
 
 	protected abstract List<Team> loadTeamsData( final Category category, final Session session ) throws DocumentException, IOException;
 
@@ -41,9 +41,9 @@ public abstract class AbstractDataInitializer {
 		final Category category = generateCategory( getName(), session );
 		uploadLogo( category );
 
-		final List<Cup> cups = generateCups( category, session );
-
 		final List<Team> teams = loadTeamsData( category, session );
+
+		final List<Cup> cups = generateCups( category, teams, session );
 
 		for ( final Cup cup : cups ) {
 
@@ -179,7 +179,7 @@ public abstract class AbstractDataInitializer {
 		return match;
 	}
 
-	private Team getRandomTeam( final List<Team> teams ) {
+	protected Team getRandomTeam( final List<Team> teams ) {
 
 		if ( teams == null || teams.size() == 0 ) {
 			return null;

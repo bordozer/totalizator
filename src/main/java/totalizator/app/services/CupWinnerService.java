@@ -12,11 +12,11 @@ public interface CupWinnerService extends GenericService<CupWinner> {
 
 	List<CupWinner> loadAll( final Cup cup, final Team team  );
 
-	void saveAll( final Cup cup, List<CupWinner> winners );
+//	void saveAll( final Cup cup, final List<CupWinner> winners );
 
-	void saveAll( List<CupWinner> winners );
+	void saveAll( final List<CupWinner> winners );
 
-	void deleteAllWinners( Cup cup );
+	void deleteAllWinners( final Cup cup );
 
 	boolean hasChampions( final Cup cup );
 }

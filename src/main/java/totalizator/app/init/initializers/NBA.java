@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
+import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
 
 import java.io.IOException;
@@ -17,8 +18,9 @@ public class NBA extends AbstractDataInitializer {
 
 	private static final String CATEGORY = "NBA";
 
-	private static final String CUP_1 = "2015 - regular";
 	private static final String CUP_2 = "2015 - playoff";
+	private static final String CUP_1 = "2015 - regular";
+	private static final String CUP_3 = "2014 - playoff";
 
 	@Override
 	protected String getName() {
@@ -26,14 +28,7 @@ public class NBA extends AbstractDataInitializer {
 	}
 
 	@Override
-	protected List<Cup> generateCups( final Category category, final Session session ) {
-
-		final Cup nba2015Regular = new Cup( CUP_1, category );
-		nba2015Regular.setPublicCup( true );
-		nba2015Regular.setWinnersCount( 4 );
-		nba2015Regular.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
-
-		session.persist( nba2015Regular );
+	protected List<Cup> generateCups( final Category category, final List<Team> teams, final Session session ) {
 
 		final Cup nba2015PlayOff = new Cup( CUP_2, category );
 		nba2015PlayOff.setPublicCup( true );
@@ -42,7 +37,35 @@ public class NBA extends AbstractDataInitializer {
 
 		session.persist( nba2015PlayOff );
 
-		return newArrayList( nba2015PlayOff, nba2015Regular );
+		final Cup nba2015Regular = new Cup( CUP_1, category );
+		nba2015Regular.setPublicCup( true );
+		nba2015Regular.setWinnersCount( 4 );
+		nba2015Regular.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
+
+		session.persist( nba2015Regular );
+
+		final Cup nba2014PlayOff = new Cup( CUP_3, category );
+		nba2014PlayOff.setPublicCup( true );
+		nba2014PlayOff.setWinnersCount( 2 );
+		nba2014PlayOff.setCupStartTime( dateTimeService.parseDate( "20/04/2014 00:00" ) );
+
+		session.persist( nba2014PlayOff );
+
+		final CupWinner winner1 = new CupWinner();
+		winner1.setCup( nba2014PlayOff );
+		winner1.setTeam( getRandomTeam( teams ) );
+		winner1.setCupPosition( 1 );
+
+		session.persist( winner1 );
+
+		final CupWinner winner2 = new CupWinner();
+		winner2.setCup( nba2014PlayOff );
+		winner2.setTeam( getRandomTeam( teams ) );
+		winner2.setCupPosition( 2 );
+
+		session.persist( winner2 );
+
+		return newArrayList( nba2014PlayOff, nba2015Regular, nba2015PlayOff );
 	}
 
 	@Override
