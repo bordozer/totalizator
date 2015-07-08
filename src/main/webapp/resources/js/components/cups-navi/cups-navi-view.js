@@ -15,7 +15,6 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		allCups: 'All cups'
-		, cupFinishedLabel: 'The cup is finished'
 	} );
 
 	return Backbone.View.extend( {
@@ -70,11 +69,15 @@ define( function ( require ) {
 
 				var selected = self.selectedCupId && self.selectedCupId === cup.cupId;
 
+				var menuText = cup.category.categoryName + ': ' + cup.cupName;
+				if ( selected ) {
+					menuText = "<strong class='text-info'>" + menuText + '</strong>';
+				}
 				menus.push( {
 					selector: 'category-' + cup.cupId
-					, icon: selected ? 'fa fa-check-circle' : 'fa fa-circle-thin'
+					, icon: cup.finished ? 'fa fa-flag-checkered' : 'fa fa-flag-o'
 					, link: '/totalizator/cups/' + cup.cupId + '/'
-					, text: cup.category.categoryName + ': ' + cup.cupName + ( cup.finished ? " ( " + translator.cupFinishedLabel + ' )' : '' )
+					, text: menuText
 				} );
 			} );
 
