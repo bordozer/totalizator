@@ -3,10 +3,7 @@ package totalizator.app.init.initializers;
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
-import totalizator.app.models.Category;
-import totalizator.app.models.Cup;
-import totalizator.app.models.CupWinner;
-import totalizator.app.models.Team;
+import totalizator.app.models.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,42 +27,11 @@ public class NBA extends AbstractDataInitializer {
 	@Override
 	protected List<Cup> generateCups( final Category category, final List<Team> teams, final Session session ) {
 
-		final Cup nba2015PlayOff = new Cup( CUP_2, category );
-		nba2015PlayOff.setPublicCup( true );
-		nba2015PlayOff.setWinnersCount( 2 );
-		nba2015PlayOff.setCupStartTime( dateTimeService.parseDate( "18/04/2015 00:00" ) );
-
-		session.persist( nba2015PlayOff );
-
-		final Cup nba2015Regular = new Cup( CUP_1, category );
-		nba2015Regular.setPublicCup( true );
-		nba2015Regular.setWinnersCount( 4 );
-		nba2015Regular.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
-
-		session.persist( nba2015Regular );
-
-		final Cup nba2014PlayOff = new Cup( CUP_3, category );
-		nba2014PlayOff.setPublicCup( true );
-		nba2014PlayOff.setWinnersCount( 2 );
-		nba2014PlayOff.setCupStartTime( dateTimeService.parseDate( "20/04/2014 00:00" ) );
-
-		session.persist( nba2014PlayOff );
-
-		final CupWinner winner1 = new CupWinner();
-		winner1.setCup( nba2014PlayOff );
-		winner1.setTeam( getRandomTeam( teams ) );
-		winner1.setCupPosition( 1 );
-
-		session.persist( winner1 );
-
-		final CupWinner winner2 = new CupWinner();
-		winner2.setCup( nba2014PlayOff );
-		winner2.setTeam( getRandomTeam( teams ) );
-		winner2.setCupPosition( 2 );
-
-		session.persist( winner2 );
-
-		return newArrayList( nba2014PlayOff, nba2015Regular, nba2015PlayOff );
+		return newArrayList(
+			nba2014PlayOff_Finished( category, teams, session )
+			, nba2015Regular( category, teams, session )
+			, nba2015PlayOff( category, teams, session )
+		);
 	}
 
 	@Override
@@ -81,5 +47,85 @@ public class NBA extends AbstractDataInitializer {
 	@Override
 	protected MatchDataGenerationStrategy futureStrategy() {
 		return MatchDataGenerationStrategy.nbaFutureStrategy();
+	}
+
+	private Cup nba2015PlayOff( final Category category, final List<Team> teams, final Session session ) {
+
+		final Cup nba2015PlayOff = new Cup( CUP_2, category );
+		nba2015PlayOff.setPublicCup( true );
+		nba2015PlayOff.setWinnersCount( 2 );
+		nba2015PlayOff.setCupStartTime( dateTimeService.parseDate( "18/04/2015 00:00" ) );
+
+		session.persist( nba2015PlayOff );
+
+		fillAliveTeams( teams, session, nba2015PlayOff );
+
+		return nba2015PlayOff;
+	}
+
+	private Cup nba2015Regular( final Category category, final List<Team> teams, final Session session ) {
+
+		final Cup nba2015Regular = new Cup( CUP_1, category );
+		nba2015Regular.setPublicCup( true );
+		nba2015Regular.setWinnersCount( 4 );
+		nba2015Regular.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
+
+		session.persist( nba2015Regular );
+
+		fillAliveTeams( teams, session, nba2015Regular );
+
+		return nba2015Regular;
+	}
+
+	private Cup nba2014PlayOff_Finished( final Category category, final List<Team> teams, final Session session ) {
+
+		final Cup nba2014PlayOff = new Cup( CUP_3, category );
+		nba2014PlayOff.setPublicCup( true );
+		nba2014PlayOff.setWinnersCount( 2 );
+		nba2014PlayOff.setCupStartTime( dateTimeService.parseDate( "20/04/2014 00:00" ) );
+
+		session.persist( nba2014PlayOff );
+
+		final Team teamWinner1 = getRandomTeam( teams );
+		final CupWinner winner1 = new CupWinner();
+		winner1.setCup( nba2014PlayOff );
+		winner1.setTeam( teamWinner1 );
+		winner1.setCupPosition( 1 );
+
+		session.persist( winner1 );
+
+		final Team teamWinner2 = getRandomTeam( teams );
+		final CupWinner winner2 = new CupWinner();
+		winner2.setCup( nba2014PlayOff );
+		winner2.setTeam( teamWinner2 );
+		winner2.setCupPosition( 2 );
+
+		session.persist( winner2 );
+
+		final CupTeam cupTeam1 = new CupTeam( nba2014PlayOff, teamWinner1 );
+		session.persist( cupTeam1 );
+
+		final CupTeam cupTeam2 = new CupTeam( nba2014PlayOff, teamWinner2 );
+		session.persist( cupTeam2 );
+		return nba2014PlayOff;
+	}
+
+	private void fillAliveTeams( final List<Team> teams, final Session session, final Cup nba2015PlayOff ) {
+
+		final List<Team> aliveTeams = newArrayList();
+		final int aliveTeamsCount = rnd( 4, teams.size() - 1 );
+		for ( int i = 0; i < aliveTeamsCount; i++ ) {
+
+			final Team randomTeam = getRandomTeam( teams );
+
+			if ( aliveTeams.contains( randomTeam ) ) {
+				continue;
+			}
+
+			final CupTeam cupTeam1 = new CupTeam( nba2015PlayOff, randomTeam );
+			session.persist( cupTeam1 );
+
+			aliveTeams.add( randomTeam );
+		}
 	}
 }
