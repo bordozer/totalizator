@@ -66,9 +66,6 @@ define( function ( require ) {
 
 			var cups = service.loadPublicCups();
 
-//			menus.push( { selector: 'js-all-cups', icon: 'fa fa-cubes', link: '/totalizator/cups/', text: translator.allCups } );
-//			menus.push( { selector: 'divider' } );
-
 			_.each( cups, function( cup ) {
 
 				var selected = self.selectedCupId && self.selectedCupId === cup.cupId;
@@ -77,7 +74,7 @@ define( function ( require ) {
 					selector: 'category-' + cup.cupId
 					, icon: selected ? 'fa fa-check-circle' : 'fa fa-circle-thin'
 					, link: '/totalizator/cups/' + cup.cupId + '/'
-					, text: cup.category.categoryName + ': ' + cup.cupName + ( cup.finished ? " (<span class='fa fa-flag-checkered'></span>" + translator.cupFinishedLabel + ' )' : '' )
+					, text: cup.category.categoryName + ': ' + cup.cupName + ( cup.finished ? " ( " + translator.cupFinishedLabel + ' )' : '' )
 				} );
 			} );
 
