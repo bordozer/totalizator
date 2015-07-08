@@ -235,6 +235,7 @@ define( function ( require ) {
 			$.ajax( {
 				method: 'POST',
 				url: '/rest/user-groups/' + groupId + '/members/' + userId + '/add/',
+				async: false,
 				success: function ( response ) {
 				},
 				error: function() {
@@ -247,6 +248,7 @@ define( function ( require ) {
 			$.ajax( {
 				method: 'DELETE',
 				url: '/rest/user-groups/' + groupId + '/members/' + userId + '/remove/',
+				async: false,
 				success: function ( response ) {
 				},
 				error: function() {

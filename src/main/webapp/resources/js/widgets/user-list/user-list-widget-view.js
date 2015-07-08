@@ -6,6 +6,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/user-list-widget-template.html' ) );
+	var EntryView = require( './user-list-widget-entry-view' );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
@@ -22,16 +23,11 @@ define( function ( require ) {
 
 	return WidgetView.extend( {
 
-		events: {
-			'click .js-add-user-to-group': '_onAddUserToGroupClick'
-			, 'click .js-remove-user-from-group': '_onRemoveUserFromGroupClick'
-		},
-
 		initialize: function( options ) {
 
 			this.currentUser = options.options.currentUser;
 
-			this.users = service.loadUsers();
+			//this.users = service.loadUsers();
 
 			this.listenTo( this.model, 'sync', this._renderUserList );
 			this.render();
@@ -53,22 +49,35 @@ define( function ( require ) {
 
 			var users = this.model.toJSON();
 
-			this.currentUserGroups = service.loadUserGroupsWhereUserIsOwner( this.currentUser.userId );
+			var currentUser = this.currentUser;
+			var currentUserGroups = service.loadUserGroupsWhereUserIsOwner( this.currentUser.userId );
 
 			var data = _.extend( {}, {
-				users: users
-				, currentUser: this.currentUser
-				, currentUserGroups: this.currentUserGroups
-				, userGroupsMembership: this._userGroupsMatrix( users )
+				currentUserGroups: currentUserGroups
 				, translator: translator
 			} );
 
 			this.setBody( template( data ) );
+			var container = this.$( '.js-users-container' );
+
+			_.each( users, function( user ) {
+
+				var el = $( '<div></div>' );
+				container.append( el );
+
+				var view = new EntryView( {
+					el: el
+					, user: user
+					, currentUser: currentUser
+					, currentUserGroups: currentUserGroups
+					, users: users
+				} );
+			});
 
 			this.trigger( 'inner-view-rendered' );
-		},
+		}
 
-		_userGroupsMatrix: function( users ) {
+		/*_userGroupsMatrix: function( users ) {
 
 			var result = {};
 
@@ -87,18 +96,18 @@ define( function ( require ) {
 			});
 
 			return result;
-		},
+		}*/
 
-		_onAddUserToGroupClick: function( evt ) {
+		/*_onAddUserToGroupClick: function( evt ) {
 
 			var data = this._getData( $( evt.target ) );
 
 			var user = data.user;
 			var userGroup = data.userGroup;
 
-			/*if ( ! confirm( this._confirmMessage( translator.addUserToGroupConfirmation, data ) ) ) {
+			/!*if ( ! confirm( this._confirmMessage( translator.addUserToGroupConfirmation, data ) ) ) {
 				return;
-			}*/
+			}*!/
 
 			service.addUserToUserGroup( user.userId, userGroup.userGroupId );
 
@@ -112,16 +121,16 @@ define( function ( require ) {
 			var user = data.user;
 			var userGroup = data.userGroup;
 
-			/*if ( ! confirm( this._confirmMessage( translator.removeUserFromGroupConfirmation, data ) ) ) {
+			/!*if ( ! confirm( this._confirmMessage( translator.removeUserFromGroupConfirmation, data ) ) ) {
 				return;
-			}*/
+			}*!/
 
 			service.removeUserFromGroup( user.userId, userGroup.userGroupId );
 
 			this.render();
-		},
+		},*/
 
-		_getData: function( button ) {
+		/*_getData: function( button ) {
 
 			var userId = button.data( 'user-id' );
 			var userGroupId = button.data( 'group-id' );
@@ -135,14 +144,14 @@ define( function ( require ) {
 			} );
 
 			return { user: user, userGroup: userGroup };
-		},
+		},*/
 
-		_confirmMessage: function( message, data ) {
+		/*_confirmMessage: function( message, data ) {
 
 			var user = data.user;
 			var userGroup = data.userGroup;
 
 			return message + "\n\nUser: " + user.userName + "\nUser group: " + userGroup.userGroupName; // TODO: translate
-		}
+		}*/
 	});
 } );

@@ -1,0 +1,25 @@
+<div class="row" style="line-height: 30px;">
+
+	<div class="col-lg-4">
+		<%- user.userName %>
+	</div>
+
+	<% _.each( currentUserGroups, function( userGroup ) { %>
+		<div class="col-lg-1 text-center">
+			<% if( user.userId != currentUser.userId ) { %>
+
+				<% if( ! isMember( userGroup.userGroupId ) ) { %>
+					<button type="button" class="btn btn-default fa fa-plus js-add-user-to-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
+							title="<%=translator.addUserToGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
+				<% } %>
+
+				<% if( isMember( userGroup.userGroupId ) ) { %>
+					<button type="button" class="btn btn-info fa fa-close js-remove-user-from-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
+							title="<%=translator.removeUserFromGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
+				<% } %>
+
+			<% } %>
+		</div>
+	<% }) %>
+
+</div>

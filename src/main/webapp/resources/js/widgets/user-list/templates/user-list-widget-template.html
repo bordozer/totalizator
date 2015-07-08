@@ -1,39 +1,21 @@
-<table class="table table-striped table-hover">
+<div class="row">
 
-	<thead>
-		<td></td>
-		<% _.each( currentUserGroups, function( userGroup ) { %>
-			<td class="text-center col-md-1"><%- userGroup.userGroupName %></td>
-		<% }) %>
-	</thead>
+	<div class="col-lg-4">
+		<%- translator.title %>
+	</div>
 
-	<% _.each( users, function( user ) { %>
-		<tr	<%=currentUser.userId == user.userId ? "class='current-user'" : '' %> >
-
-			<td>
-				<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
-			</td>
-
-			<% _.each( currentUserGroups, function( userGroup ) { %>
-
-				<td class="text-center">
-					<% if( user.userId != currentUser.userId ) { %>
-
-						<% if( ! userGroupsMembership[ user.userId ][ userGroup.userGroupId ] ) { %>
-							<button type="button" class="btn btn-default fa fa-user-plus js-add-user-to-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
-									title="<%=translator.addUserToGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
-						<% } %>
-
-						<% if( userGroupsMembership[ user.userId ][ userGroup.userGroupId ] ) { %>
-							<button type="button" class="btn btn-info fa fa-user-times js-remove-user-from-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
-									title="<%=translator.removeUserFromGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
-						<% } %>
-
-					<% } %>
-				</td>
-			<% }) %>
-
-		</tr>
+	<% _.each( currentUserGroups, function( userGroup ) { %>
+		<div class="col-lg-1 text-center">
+			<%- userGroup.userGroupName %>
+		</div>
 	<% }) %>
 
-</table>
+</div>
+
+<hr />
+
+<div class="row">
+	<div class="col-lg-12 js-users-container">
+
+	</div>
+</div>
