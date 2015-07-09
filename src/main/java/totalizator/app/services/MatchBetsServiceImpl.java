@@ -145,4 +145,14 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	public boolean userCanSeeAnotherBets( final Match match, final User user ) {
 		return matchService.isMatchStarted( match );
 	}
+
+	@Override
+	public boolean isAllowedToShowMatchBets( final MatchBet matchBet, final User user ) {
+
+		if ( matchBet.getUser().equals( user ) ) {
+			return true;
+		}
+
+		return userCanSeeAnotherBets( matchBet.getMatch(), user );
+	}
 }

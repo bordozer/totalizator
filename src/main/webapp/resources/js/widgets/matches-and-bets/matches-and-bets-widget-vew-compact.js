@@ -16,7 +16,6 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Matches"
-		, yourBetHint: "Your bet"
 		, noMatchesFound: "No matches found"
 		, switchViewsLabel: 'Switch match and bets to full views'
 	} );

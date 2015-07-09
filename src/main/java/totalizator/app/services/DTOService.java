@@ -28,13 +28,13 @@ public interface DTOService {
 
 	List<MatchDTO> transformMatches( final List<Match> matches, final User user );
 
-	BetDTO transformMatchBet( final MatchBet matchBet, final User user );
+	BetDTO transformMatchBet( final MatchBet matchBet, final User user, final User accessor );
 
-	MatchBetDTO getMatchBetForMatch( final Match match, final User user );
+	MatchBetDTO getMatchBetForMatch( final Match match, final User betOfUser, final User accessor );
 
-	List<BetDTO> transformMatchBets( List<MatchBet> matchBets, User user );
+	List<BetDTO> transformMatchBets( final List<MatchBet> matchBets, final User user, final User accessor );
 
-	List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user );
+	List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User betOfUser, final User accessor );
 
 	CupTeamBetDTO transformCupTeamBet( final CupTeamBet cupTeamBet, final User user );
 
