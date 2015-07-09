@@ -154,6 +154,7 @@ public class NBAGameDataImportService implements RemoteGameDataImportService {
 
 		// TODO: import by date ( 05/01/2015 mm/dd/yyyy - first of may)
 		// http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=05/01/2015&DayOffset=0
+		// https://github.com/ins429/ins
 		final String url = String.format( "http://stats.nba.com/stats/boxscore?GameID=%s&RangeType=0&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0", remoteGameId );
 		final String gameJSON = remoteContentService.getRemoteContent( url );
 
