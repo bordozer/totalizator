@@ -81,8 +81,8 @@ define( function ( require ) {
 			var menuItems = [];
 
 			if ( this.model.userGroupId > 0 ) {
-				menuItems.push( { selector: 'divider' } );
 				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter } );
+				menuItems.push( { selector: 'divider' } );
 			}
 
 			menuItems = menuItems.concat( ownGroupsMenuItems );
@@ -99,9 +99,7 @@ define( function ( require ) {
 				return [];
 			}
 
-			var menuItems = [
-				{ selector: 'divider' }
-			];
+			var menuItems = [];
 
 			var selectedUserGroupId = this.model.userGroupId;
 
@@ -127,9 +125,7 @@ define( function ( require ) {
 				return [];
 			}
 
-			var menuItems = [
-				{ selector: 'divider' }
-			];
+			var menuItems = [];
 
 			var selectedUserGroupId = this.model.userGroupId;
 
