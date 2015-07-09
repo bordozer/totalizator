@@ -118,6 +118,10 @@ public class MatchServiceImpl implements MatchService {
 			} );
 		}
 
+		if ( dto.isShowFutureMatches() ) {
+			Collections.reverse( matches );
+		}
+
 		return matches;
 	}
 
