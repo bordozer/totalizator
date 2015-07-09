@@ -26,7 +26,7 @@ define( function ( require ) {
 		, user: 'User'
 		, noInnerViewLabel: 'No inner view was supplied...'
 		, settingsLabel: 'Configurable view: Matches: settings'
-		, settingsButtonHint: 'Configurable view: Matches: settings button hint'
+		, settingsButtonHint: 'Configurable view: Filtering settings'
 		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'
 		, pluralAll: 'Plural all'
 		, settingsFilterLabel: 'Configurable view / Settings: Filter'
