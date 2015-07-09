@@ -26,8 +26,8 @@ define( function ( require ) {
 		, user: 'User'
 		, noInnerViewLabel: 'No inner view was supplied...'
 		, settingsLabel: 'Configurable view: Matches: settings'
-		, settingsButtonHint: 'Configurable view: Filtering settings'
-		, resetFilterButtonHint: 'Configurable view: Matches: reset filter button hint'
+		, filteringSettingsButtonLabel: 'Configurable view: Filtering settings'
+		, resetFilterButtonHint: 'Configurable view: Reset filter to default'
 		, pluralAll: 'Plural all'
 		, settingsFilterLabel: 'Configurable view / Settings: Filter'
 		, futureMatchesAreShownLabel: 'Configurable view / Future matches are shown'
@@ -96,7 +96,7 @@ define( function ( require ) {
 
 			var result = [
 				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
-				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.settingsButtonHint }
+				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel }
 			];
 
 			var viewMenuItems = this.innerViewMenuItems();
