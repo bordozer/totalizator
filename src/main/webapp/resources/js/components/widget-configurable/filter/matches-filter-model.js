@@ -35,6 +35,7 @@ define( function ( require ) {
 
 		reset: function() {
 			this.set( this.initialSettings );
+			this.saveAttributes();
 		}
 	});
 });
