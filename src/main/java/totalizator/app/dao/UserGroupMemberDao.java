@@ -16,4 +16,6 @@ public interface UserGroupMemberDao extends GenericService<UserGroupMember> {
 	UserGroupMember load( final UserGroup userGroup, final User user );
 
 	void delete( final UserGroup userGroup, final User user );
+
+	void deleteAll( UserGroup userGroup );
 }

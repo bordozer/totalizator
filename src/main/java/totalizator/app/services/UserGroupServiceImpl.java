@@ -69,7 +69,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 		final UserGroup userGroup = load( id );
 
-		userGroupCupRepository.deleteAll( userGroup );
+		userGroupMemberRepository.deleteAll( userGroup );
 
 		userGroupCupRepository.deleteAll( userGroup );
 
