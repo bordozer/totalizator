@@ -70,6 +70,8 @@ define( function ( require ) {
 
 		_userGroupMenuItems: function ( userId ) {
 
+			var separator = { selector: 'divider' };
+
 			var ownGroupsMenuItems = this._ownUserGroupMenuItems( userId );
 			var anotherGroupMenuItems = this._anotherUserGroupMenuItems( userId );
 
@@ -82,10 +84,15 @@ define( function ( require ) {
 
 			if ( this.model.userGroupId > 0 ) {
 				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter } );
-				menuItems.push( { selector: 'divider' } );
+				menuItems.push( separator );
 			}
 
 			menuItems = menuItems.concat( ownGroupsMenuItems );
+
+			if ( ownGroupsMenuItems.length > 0 && anotherGroupMenuItems.length > 0 ) {
+				menuItems = menuItems.concat( [ separator ] );
+			}
+
 			menuItems = menuItems.concat( anotherGroupMenuItems );
 
 			return menuItems;
