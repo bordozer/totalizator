@@ -66,7 +66,13 @@ public class UserGroupServiceImpl implements UserGroupService {
 	@Override
 	@Transactional
 	public void delete( final int id ) {
-		userGroupCupRepository.deleteAll( load( id ) );
+
+		final UserGroup userGroup = load( id );
+
+		userGroupCupRepository.deleteAll( userGroup );
+
+		userGroupCupRepository.deleteAll( userGroup );
+
 		userGroupRepository.delete( id );
 	}
 
