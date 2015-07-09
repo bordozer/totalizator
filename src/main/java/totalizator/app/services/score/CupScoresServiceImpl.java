@@ -12,8 +12,10 @@ import totalizator.app.services.*;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 @Service
 public class CupScoresServiceImpl implements CupScoresService {
@@ -144,23 +146,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 			userPoints.setPoints( userPoints.getPoints() + usersScore.getPoints() );
 		}
 
-		if ( cupService.isCupFinished( cup ) ) {
-			for ( final CupTeamBet cupTeamBet : cupBetsService.load( cup ) ) {
-
-				final Team team = cupTeamBet.getTeam();
-				final User user = cupTeamBet.getUser();
-				final int cupPosition = cupTeamBet.getCupPosition();
-
-				final UserPoints userPoints = getUserPoints( result, user );
-
-				if ( userPoints == null ) {
-					result.add( new UserPoints( user, getUserCupWinnersPoints( cup, team, user, cupPosition ) ) );
-					continue;
-				}
-
-				userPoints.setPoints( userPoints.getPoints() + getUserCupWinnersPoints( cup, team, user, cupPosition ) );
-			}
-		}
+		addCupBetsPoints( cup, usersScores, result );
 
 		Collections.sort( result, new Comparator<UserPoints>() {
 			@Override
@@ -169,6 +155,39 @@ public class CupScoresServiceImpl implements CupScoresService {
 			}
 		} );
 		return result;
+	}
+
+	private void addCupBetsPoints( final Cup cup, final List<UserPoints> usersScores, final List<UserPoints> result ) {
+		final Set<User> users = newHashSet();
+		for ( final UserPoints usersScore : usersScores ) {
+			users.add( usersScore.getUser() );
+		}
+
+		for ( final User user : users ) {
+			addCupBetsPointsForUser( cup, user, result );
+		}
+	}
+
+	private void addCupBetsPointsForUser( final Cup cup, final User user, final List<UserPoints> result ) {
+
+		if ( !cupService.isCupFinished( cup ) ) {
+			return;
+		}
+
+		for ( final CupTeamBet cupTeamBet : cupBetsService.load( cup, user ) ) {
+
+			final Team team = cupTeamBet.getTeam();
+			final int cupPosition = cupTeamBet.getCupPosition();
+
+			final UserPoints userPoints = getUserPoints( result, user );
+
+			if ( userPoints == null ) {
+				result.add( new UserPoints( user, getUserCupWinnersPoints( cup, team, user, cupPosition ) ) );
+				continue;
+			}
+
+			userPoints.setPoints( userPoints.getPoints() + getUserCupWinnersPoints( cup, team, user, cupPosition ) );
+		}
 	}
 
 	private UserPoints getUserPoints( List<UserPoints> usersScores, final User user ) {
