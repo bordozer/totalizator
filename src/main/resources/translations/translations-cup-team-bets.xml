@@ -5,61 +5,85 @@
 	<translation>
 		<nerd>Cup matches</nerd>
 		<ru><![CDATA[Матчи]]></ru>
+		<en><![CDATA[Games]]></en>
+		<ua><![CDATA[Iгри]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup result bets</nerd>
 		<ru><![CDATA[Ставки на победителей]]></ru>
+		<en><![CDATA[Cup result bets]]></en>
+		<ua><![CDATA[Ставки на переможцiв]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Your cup winners bets</nerd>
 		<ru><![CDATA[Ваши ставки на победителей чемпионата]]></ru>
+		<en><![CDATA[Your cup winners bets]]></en>
+		<ua><![CDATA[Вашi ставки на переможцiв]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>All cup winners bets</nerd>
 		<ru><![CDATA[Все ставки на победителей чемпионата]]></ru>
+		<en><![CDATA[All cup winners bets]]></en>
+		<ua><![CDATA[Всi ставки на переможцiв]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>No bet yet</nerd>
 		<ru><![CDATA[Ставки нет]]></ru>
+		<en><![CDATA[No bet yet]]></en>
+		<ua><![CDATA[Ставок нема]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup team bet validation: Duplicated teams!</nerd>
 		<ru><![CDATA[Команды не должны повторяться!]]></ru>
+		<en><![CDATA[Duplicated teams!]]></en>
+		<ua><![CDATA[Команди не повиннi повторюватися]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Edit cup team bets</nerd>
 		<ru><![CDATA[Изменить ставки]]></ru>
+		<en><![CDATA[Edit cup team bets]]></en>
+		<ua><![CDATA[Змiнити ставки]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup team bet saving error</nerd>
 		<ru><![CDATA[Ошибка при сохранении ставки на результат чемпионата]]></ru>
+		<en><![CDATA[Cup team bet saving error]]></en>
+		<ua><![CDATA[Якась халепа]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>No bet</nerd>
 		<ru><![CDATA[Ставки нет]]></ru>
+		<en><![CDATA[No bet]]></en>
+		<ua><![CDATA[Ставок нема]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Team has been knocked out</nerd>
 		<ru><![CDATA[Команда покинула чемпионат]]></ru>
+		<en><![CDATA[Team has been knocked out]]></en>
+		<ua><![CDATA[Команда покинула чемпiонат]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

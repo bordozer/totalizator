@@ -5,51 +5,71 @@
 	<translation>
 		<nerd>Matches: Settings</nerd>
 		<ru><![CDATA[Матчи - настройки]]></ru>
+		<en><![CDATA[Games: Settings]]></en>
+		<ua><![CDATA[Iгри - налаштовання]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Matches: Settings: cancel button</nerd>
 		<ru><![CDATA[Вернуться к отображению матчей]]></ru>
+		<en><![CDATA[Cancel]]></en>
+		<ua><![CDATA[Вiдмiна]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Matches: Settings: save button</nerd>
 		<ru><![CDATA[Применить настройки]]></ru>
+		<en><![CDATA[Apply]]></en>
+		<ua><![CDATA[Застосувати]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Teams standoff history</nerd>
 		<ru><![CDATA[История противостояний команд]]></ru>
+		<en><![CDATA[Teams standoff history]]></en>
+		<ua><![CDATA[Iсторiя протистояння команд]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Portal page / Matches / Menu: All bets</nerd>
 		<ru><![CDATA[Все ставки на матч]]></ru>
+		<en><![CDATA[All bets]]></en>
+		<ua><![CDATA[Всi ставки на гру]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Finished matches are shown</nerd>
 		<ru><![CDATA[завершенные]]></ru>
+		<en><![CDATA[finished]]></en>
+		<ua><![CDATA[завершенi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Future matches are shown</nerd>
 		<ru><![CDATA[будущие]]></ru>
+		<en><![CDATA[future]]></en>
+		<ua><![CDATA[майбутнi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

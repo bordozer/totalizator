@@ -3,58 +3,73 @@
 <translations>
 
 	<translation>
-		<nerd>Configurable view / Filter: Cup</nerd>
-		<ru><![CDATA[Чемпионат]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Configurable view: Matches: settings</nerd>
 		<ru><![CDATA[Матчи: настройки]]></ru>
+		<en><![CDATA[Games settings]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view: Filtering settings</nerd>
 		<ru><![CDATA[Настройка фильтра]]></ru>
+		<en><![CDATA[Filtering settings]]></en>
+		<ua><![CDATA[Налаштування фiльтру]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view: Reset filter to default</nerd>
 		<ru><![CDATA[Фильтр по-умолчанию]]></ru>
+		<en><![CDATA[Reset filter to default]]></en>
+		<ua><![CDATA[Типовий фiльтр]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Filter: Show future matches</nerd>
 		<ru><![CDATA[Будущие]]></ru>
+		<en><![CDATA[Show future matches]]></en>
+		<ua><![CDATA[Майбутнi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Filter: Show finished matches</nerd>
 		<ru><![CDATA[Завершенные]]></ru>
+		<en><![CDATA[Show finished matches]]></en>
+		<ua><![CDATA[Завершенi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Settings: Filter</nerd>
 		<ru><![CDATA[Фильтр]]></ru>
+		<en><![CDATA[Filter]]></en>
+		<ua><![CDATA[Фiльтр]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Filtered by</nerd>
 		<ru><![CDATA[Фильтр]]></ru>
+		<en><![CDATA[Filtered by]]></en>
+		<ua><![CDATA[Фiльтр]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Filter: Validation: Select category</nerd>
 		<ru><![CDATA[Выберите категорию]]></ru>
+		<en><![CDATA[Select category]]></en>
+		<ua><![CDATA[Виберiть категорiю]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Filter: Validation: Select cup</nerd>
 		<ru><![CDATA[Выберите чемпионат]]></ru>
+		<en><![CDATA[Select cup]]></en>
+		<ua><![CDATA[Виберiть чемпiонат]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Configurable view / Filter: Match date</nerd>
 		<ru><![CDATA[Дата матча]]></ru>
+		<en><![CDATA[Game date]]></en>
+		<ua><![CDATA[Дата гри]]></ua>
 	</translation>
 
 	<translation>

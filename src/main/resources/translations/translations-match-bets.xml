@@ -5,26 +5,36 @@
 	<translation>
 		<nerd>Match bests</nerd>
 		<ru><![CDATA[Ставки на матч]]></ru>
+		<en><![CDATA[Match bests]]></en>
+		<ua><![CDATA[Ставки на гру]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match bet saving error</nerd>
 		<ru><![CDATA[Ошибка при сохранении ставки на результат матча]]></ru>
+		<en><![CDATA[Match bet saving error]]></en>
+		<ua><![CDATA[Якась халепа зi збереженням даних]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Bets of another users will be shown after the match start</nerd>
 		<ru><![CDATA[Все ставки на матч будут обнародованы после его начала]]></ru>
+		<en><![CDATA[Bets of another users will be shown after the match start<]]></en>
+		<ua><![CDATA[Усi ставки на гру будуть доступнi пiсля його початку]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

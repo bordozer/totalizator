@@ -5,26 +5,36 @@
 	<translation>
 		<nerd>Cup bets</nerd>
 		<ru><![CDATA[Ставки на чемпионат]]></ru>
+		<en><![CDATA[Cup bets]]></en>
+		<ua><![CDATA[Ставки на чемпiонат]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup betting is not allowed after cup start ( $1 )</nerd>
 		<ru><![CDATA[Ставки на результат чемпионата не принимаются после его начала ( $1 )]]></ru>
+		<en><![CDATA[Cup betting is not allowed after cup start ( $1 )]]></en>
+		<ua><![CDATA[Ставки на результат чемпiонату не приймаються пiсля його початку ( $1 ]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup teams</nerd>
 		<ru><![CDATA[Команды]]></ru>
+		<en><![CDATA[Cup teams]]></en>
+		<ua><![CDATA[Команди]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

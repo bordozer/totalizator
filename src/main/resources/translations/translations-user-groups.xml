@@ -5,36 +5,50 @@
 	<translation>
 		<nerd>User groups</nerd>
 		<ru><![CDATA[Группы]]></ru>
+		<en><![CDATA[User groups]]></en>
+		<ua><![CDATA[Групи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Delete user group?</nerd>
 		<ru><![CDATA[Удалить группу?]]></ru>
+		<en><![CDATA[Delete user group?]]></en>
+		<ua><![CDATA[Видалити групу?]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Enter a user group name!</nerd>
 		<ru><![CDATA[Введите название группы!]]></ru>
+		<en><![CDATA[Enter a user group name!]]></en>
+		<ua><![CDATA[Введiть назву группи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Add user to group</nerd>
 		<ru><![CDATA[Добавить пользователя в группу]]></ru>
+		<en><![CDATA[Add user to group]]></en>
+		<ua><![CDATA[Додати користувача до группи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Remove user from group</nerd>
 		<ru><![CDATA[Удалить пользователя из группы]]></ru>
+		<en><![CDATA[Remove user from group]]></en>
+		<ua><![CDATA[Видалити користувача з группи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Remove user group filter</nerd>
 		<ru><![CDATA[Убрать фильтр по группе]]></ru>
+		<en><![CDATA[Remove user group filter]]></en>
+		<ua><![CDATA[Вiдмiнити фильтр по групi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>
