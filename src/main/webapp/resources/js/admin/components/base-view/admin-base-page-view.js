@@ -12,10 +12,10 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		menuPortalPageLabel: 'Menu: Portal page'
+		menuPortalPageLabel: 'Portal page'
 		, menuUsersLabel: 'Users'
-		, menuAdminLabel: 'Menu: Admin'
-		, menuMatchesLabel: 'Menu: Matches'
+		, menuAdminLabel: 'Administration'
+		, menuMatchesLabel: 'Matches'
 		, gamesDataImportLabel: 'Games data import'
 		, menuUntranslatedListLabel: 'Menu: Untranslated list'
 		, menuReloadTranslationsLabel: 'Menu: Reload translations'
