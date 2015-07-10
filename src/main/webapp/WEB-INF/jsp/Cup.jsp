@@ -11,18 +11,13 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup', 'translator' ], function ( $, Page, cup, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup' ], function ( $, Page, cup, Translator ) {
 
 			var cupId = ${cup.id};
-
-			var translator = new Translator( {
-				title: 'Cup'
-			} );
 
 			var breadcrumbs = [
 				{ link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
 				, { link: '#', title: "${cup.cupName}" }
-				, { link: '#', title: translator.title }
 			];
 
 			var currentUser = ${cupModel.currentUserJSON};
