@@ -18,6 +18,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Cup overview"
 		, cupBetsLabel: "Cup bets"
+		, cupMatchesLabel: "Cup matches"
 		, allCupBetsLabel: "Cup result bets"
 		, cupTeamsLabel: "Cup teams"
 		, cupFinished: "Cup finished"

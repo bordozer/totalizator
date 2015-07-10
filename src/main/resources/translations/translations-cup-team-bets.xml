@@ -3,6 +3,11 @@
 <translations>
 
 	<translation>
+		<nerd>Cup matches</nerd>
+		<ru><![CDATA[Матчи]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Cup result bets</nerd>
 		<ru><![CDATA[Ставки на победителей]]></ru>
 	</translation>
