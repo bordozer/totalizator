@@ -126,7 +126,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 		}
 
 		if ( matchService.isMatchFinished( match ) ) {
-			return ValidationResult.fail( translatorService.translate( "Match is finished", language ) );
+			return ValidationResult.fail( translatorService.translate( "Match finished", language ) );
 		}
 
 		if ( matchService.isMatchStarted( match ) ) {

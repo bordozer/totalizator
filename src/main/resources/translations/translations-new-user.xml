@@ -5,81 +5,113 @@
 	<translation>
 		<nerd>Create user: Create user</nerd>
 		<ru><![CDATA[Регистрация нового пользователя]]></ru>
+		<en><![CDATA[Create user]]></en>
+		<ua><![CDATA[Реєстрацiя]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user: Login</nerd>
 		<ru><![CDATA[Логин]]></ru>
+		<en><![CDATA[Login]]></en>
+		<ua><![CDATA[Логiн]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user: Name</nerd>
 		<ru><![CDATA[Имя]]></ru>
+		<en><![CDATA[Name]]></en>
+		<ua><![CDATA[Iм'я]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user: Password</nerd>
 		<ru><![CDATA[Пароль]]></ru>
+		<en><![CDATA[Password]]></en>
+		<ua><![CDATA[Пароль]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user: Confirm password</nerd>
 		<ru><![CDATA[Еще раз пароль]]></ru>
+		<en><![CDATA[Confirm password]]></en>
+		<ua><![CDATA[Ще раз пароль]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user: Back to login</nerd>
 		<ru><![CDATA[Вернуться]]></ru>
+		<en><![CDATA[Back to login]]></en>
+		<ua><![CDATA[Назад]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user: Save data</nerd>
 		<ru><![CDATA[Зарегистрироваться]]></ru>
+		<en><![CDATA[Register]]></en>
+		<ua><![CDATA[Зареєструватися]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Enter login</nerd>
 		<ru><![CDATA[Введите логин]]></ru>
+		<en><![CDATA[Define a login]]></en>
+		<ua><![CDATA[Введiть логiн]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Login must have minimum 3 characters</nerd>
 		<ru><![CDATA[Логин должен быть не менее 3-х символов]]></ru>
+		<en><![CDATA[Login must have minimum 3 characters]]></en>
+		<ua><![CDATA[Логiн повинен бути не менш нiж 3 символи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Enter name</nerd>
 		<ru><![CDATA[Введите имя]]></ru>
+		<en><![CDATA[Define a name]]></en>
+		<ua><![CDATA[Введiть iм'я]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Name must have minimum 3 characters</nerd>
 		<ru><![CDATA[Имя должно быть не менее 3-х символов]]></ru>
+		<en><![CDATA[Name must have minimum 3 characters]]></en>
+		<ua><![CDATA[Iм'я повиненно бути не менш нiж 3 символи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Password can not be null</nerd>
 		<ru><![CDATA[Пароль не может быть пустым]]></ru>
+		<en><![CDATA[Password can not be null]]></en>
+		<ua><![CDATA[Пароль не повинен бути пустим]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Confirm password</nerd>
 		<ru><![CDATA[Введите подтверждение пароля]]></ru>
+		<en><![CDATA[Confirm password]]></en>
+		<ua><![CDATA[Введiть пiдтвердження паролю]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Entered passwords are not equal</nerd>
 		<ru><![CDATA[Введенные пароли не совпадают]]></ru>
+		<en><![CDATA[Entered passwords are not equal]]></en>
+		<ua><![CDATA[А чому у вас паролi рiзнi?]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>
