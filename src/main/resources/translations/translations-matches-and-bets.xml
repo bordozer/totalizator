@@ -82,22 +82,22 @@
 	<translation>
 		<nerd>Match betting is denied</nerd>
 		<ru><![CDATA[Возможность делать ставки на результаты матчей этого чемпионата или изменять существующие ставки на данный момент ограничена]]></ru>
-		<en><![CDATA[Cancel bet editing]]></en>
-		<ua><![CDATA[Вiдмiнити]]></ua>
+		<en><![CDATA[Match betting is denied]]></en>
+		<ua><![CDATA[Можливiсть робити ставки на результати iгор цього чемпiонату або мiняти iснуючi ставки зараз обмежена]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Cup $1 is finished</nerd>
+		<nerd>Cup $1 finished</nerd>
 		<ru><![CDATA[$1 завершен]]></ru>
-		<en><![CDATA[Cup $1 is finished]]></en>
+		<en><![CDATA[$1 finished]]></en>
 		<ua><![CDATA[$1 закiнчився]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup $1 is not open for game bets at this moment</nerd>
 		<ru><![CDATA[Возможность делать ставки на результаты матчей $1 или изменять существующие ставки на данный момент ограничена]]></ru>
-		<en><![CDATA[Cancel bet editing]]></en>
-		<ua><![CDATA[Вiдмiнити]]></ua>
+		<en><![CDATA[Cup $1 is not open for game bets at this moment]]></en>
+		<ua><![CDATA[Можливiсть робити ставки на результати iгор $1 або мiняти iснуючi ставки зараз обмежена]]></ua>
 	</translation>
 
 	<translation>
@@ -117,8 +117,8 @@
 	<translation>
 		<nerd>Match menu</nerd>
 		<ru><![CDATA[Меню матча]]></ru>
-		<en><![CDATA[Cancel bet editing]]></en>
-		<ua><![CDATA[Вiдмiнити]]></ua>
+		<en><![CDATA[Game menu]]></en>
+		<ua><![CDATA[Меню гри]]></ua>
 	</translation>
 
 	<translation>
