@@ -10,6 +10,8 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
+	var MatchMenu = require( './match-menu-view' );
+
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
@@ -173,6 +175,7 @@ define( function ( require ) {
 			var self = this;
 			this.model.forEach( function( matchBet ) {
 				self._renderEntry( matchBet.toJSON(), el );
+				self._renderMatchMenu( matchBet, el );
 			});
 
 			this.trigger( 'inner-view-rendered' );
@@ -184,6 +187,13 @@ define( function ( require ) {
 			var data = _.extend( {}, model, { transformer: matchTransformer, translator: translator } );
 
 			el.append( template( data ) );
+		},
+
+		_renderMatchMenu: function( match, container ) {
+			var matchMenu = new MatchMenu( {
+				model: match
+				, el: this.$( '.js-match-drop-down-menu', container )
+			} );
 		}
 	} );
 } );
