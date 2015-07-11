@@ -20,6 +20,7 @@ define( function ( require ) {
 		title: "Matches"
 		, noMatchesFound: "No matches found"
 		, switchViewsLabel: 'Switch match and bets to full views'
+		, teamPointsLabel: 'Team points'
 	} );
 
 	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id ) {
