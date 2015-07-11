@@ -10,7 +10,7 @@ define( function( require ) {
 	var FilterModel = require( 'js/components/widget-configurable/filter/matches-filter-model' );
 
 	var View = require( './matches-and-bets-widget-view' );
-	var ViewCompact = require( './matches-and-bets-widget-vew-compact' );
+	var ViewCompact = require( './matches-and-bets-widget-view-compact' );
 
 	function createView( model, container, filterModel, options ) {
 
