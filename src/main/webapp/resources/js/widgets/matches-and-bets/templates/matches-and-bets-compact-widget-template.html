@@ -20,12 +20,20 @@
 	<div class="col-lg-1 text-right <%= matchResults.style1 %> ">
 		<% if( match.matchFinished ) { %>
 			<%= transformer.score1() %>
+
+			<% if( bet != null ) { %>
+				<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;"><%= transformer.betScore1() %></sup>
+			<% } %>
 		<% } %>
 	</div>
 
 	<div class="col-lg-1 text-left <%= matchResults.style2 %> ">
 		<% if( match.matchFinished ) { %>
 			<%= transformer.score2() %>
+
+			<% if( bet != null ) { %>
+				<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;"><%= transformer.betScore2() %></sup>
+			<% } %>
 		<% } %>
 	</div>
 
@@ -36,12 +44,9 @@
 		<% } %>
 	</div>
 
-	<div class="col-lg-2 text-center">
-		<% if( bet != null ) { %>
-			<span class="<%=betScoreHighlights.style1%>"><%= transformer.betScore1() %></span> : <span class="<%=betScoreHighlights.style2%>"><%= transformer.betScore2() %></span>
-		<% } %>
+	<div class="col-lg-1 text-center">
 		<% if( points > 0 ) { %>
-			<strong><sup class="text-warning">+ <%= points %></sup></strong>
+			<strong><span class="text-warning">+ <%= points %></span></strong>
 		<% } %>
 	</div>
 
