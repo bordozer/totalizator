@@ -23,12 +23,13 @@ define( function ( require ) {
 		, teamPointsLabel: 'Team points'
 	} );
 
-	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id ) {
+	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id, _points ) {
 
 		var match = _match;
 		var bet = _bet;
 		var team1Id = _teamId;
 		var team2Id = _team2Id;
+		var points = _points;
 
 		return {
 
@@ -129,6 +130,11 @@ define( function ( require ) {
 			},
 
 			getBetScoreHighlights: function() {
+
+				if( bet != null && points == 0 ) {
+					return { style1: 'text-danger', style2: 'text-danger' };
+				}
+
 				return service.matchResults( this.team1().teamId, this.betScore1(), this.team2().teamId, this.betScore2() );
 			},
 
@@ -184,7 +190,7 @@ define( function ( require ) {
 
 		_renderEntry: function ( model, el ) {
 
-			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id );
+			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id, model.points );
 			var data = _.extend( {}, model, { transformer: matchTransformer, translator: translator } );
 
 			el.append( template( data ) );
