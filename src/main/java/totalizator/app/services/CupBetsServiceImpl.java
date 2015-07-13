@@ -94,7 +94,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 		final Language language = Language.RU; // TODO: language!
 
 		if ( cupService.isCupFinished( cup ) ) {
-			return ValidationResult.fail( translatorService.translate( "Cup $1 is finished", language, cup.getCupName() ) );
+			return ValidationResult.fail( translatorService.translate( "Cup $1 finished", language, cup.getCupName() ) );
 		}
 
 		if ( isCupBettingFinished( cup ) ) {

@@ -5,41 +5,57 @@
 	<translation>
 		<nerd>Login page: Login</nerd>
 		<ru><![CDATA[Логин]]></ru>
+		<en><![CDATA[Login]]></en>
+		<ua><![CDATA[Логiн]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Login page: Password</nerd>
 		<ru><![CDATA[Пароль]]></ru>
+		<en><![CDATA[Password]]></en>
+		<ua><![CDATA[Пароль]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Login page: Create new user</nerd>
 		<ru><![CDATA[Регистрация]]></ru>
+		<en><![CDATA[Create new user]]></en>
+		<ua><![CDATA[Реєстрацiя]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Login page: Remember me</nerd>
 		<ru><![CDATA[Запомнить меня (временно не работает)]]></ru>
+		<en><![CDATA[Remember me (is not working yet)]]></en>
+		<ua><![CDATA[Запам'ятати мене (тимчасово не працює)]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Login page: Login failed</nerd>
 		<ru><![CDATA[Ошибка авторизации]]></ru>
+		<en><![CDATA[Login failed]]></en>
+		<ua><![CDATA[Помилка авторизацiї]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Login page: Login failed message</nerd>
 		<ru><![CDATA[Вы ошиблись при наборе логина или пароля, или вы таки не тот, за кого себя выдаете...]]></ru>
+		<en><![CDATA[Login really failed]]></en>
+		<ua><![CDATA[Iди додому, москаль]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

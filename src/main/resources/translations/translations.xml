@@ -5,151 +5,204 @@
 	<translation>
 		<nerd>Project name: Totalizator</nerd>
 		<ru><![CDATA[Тотализатор]]></ru>
+		<en><![CDATA[Totalizator]]></en>
+		<ua><![CDATA[Тоталiзатор]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Admin: Page Title</nerd>
+		<nerd>Administration</nerd>
 		<ru><![CDATA[Администрирование]]></ru>
+		<en><![CDATA[Admin]]></en>
+		<ua><![CDATA[Адмiнiстрування]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Portal page title</nerd>
+		<nerd>Portal page</nerd>
 		<ru><![CDATA[Главная страница]]></ru>
+		<en><![CDATA[Portal page]]></en>
+		<ua><![CDATA[Готовна сторiнка]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Translations: Page Title</nerd>
 		<ru><![CDATA[Переводы]]></ru>
+		<en><![CDATA[Translations]]></en>
+		<ua><![CDATA[Переклади]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Logout confirmation: Logout?</nerd>
 		<ru><![CDATA[Завершить работу?]]></ru>
+		<en><![CDATA[Logout?]]></en>
+		<ua><![CDATA[Усе програв?]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Category</nerd>
 		<ru><![CDATA[Категория]]></ru>
+		<en><![CDATA[Category]]></en>
+		<ua><![CDATA[Лiга]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Categories</nerd>
 		<ru><![CDATA[Категории]]></ru>
+		<en><![CDATA[Categories]]></en>
+		<ua><![CDATA[Лiги]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup</nerd>
 		<ru><![CDATA[Чемпионат]]></ru>
+		<en><![CDATA[Cup]]></en>
+		<ua><![CDATA[Чемпiонат]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cups</nerd>
 		<ru><![CDATA[Чемпионаты]]></ru>
+		<en><![CDATA[Cups]]></en>
+		<ua><![CDATA[Чемпiонати]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Team</nerd>
 		<ru><![CDATA[Команда]]></ru>
+		<en><![CDATA[Team]]></en>
+		<ua><![CDATA[Команда]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Teams</nerd>
 		<ru><![CDATA[Команды]]></ru>
+		<en><![CDATA[Teams]]></en>
+		<ua><![CDATA[Команди]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Matches</nerd>
 		<ru><![CDATA[Матчи]]></ru>
+		<en><![CDATA[Games]]></en>
+		<ua><![CDATA[Iгри]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Loading...</nerd>
 		<ru><![CDATA[Загрузка...]]></ru>
+		<en><![CDATA[Loading...]]></en>
+		<ua><![CDATA[Завантаження...]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Menu item: Refresh</nerd>
 		<ru><![CDATA[Обновить]]></ru>
+		<en><![CDATA[Refresh]]></en>
+		<ua><![CDATA[Оновити]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>User</nerd>
 		<ru><![CDATA[Пользователь]]></ru>
+		<en><![CDATA[User]]></en>
+		<ua><![CDATA[Користувач]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Users</nerd>
 		<ru><![CDATA[Пользователи]]></ru>
+		<en><![CDATA[Users]]></en>
+		<ua><![CDATA[Користувачi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>yes</nerd>
 		<ru><![CDATA[да]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>no</nerd>
 		<ru><![CDATA[нет]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Plural all</nerd>
-		<ru><![CDATA[все]]></ru>
+		<en><![CDATA[no]]></en>
+		<ua><![CDATA[нi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Points</nerd>
 		<ru><![CDATA[Баллы]]></ru>
+		<en><![CDATA[Points]]></en>
+		<ua><![CDATA[Очки]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Logout failed</nerd>
 		<ru><![CDATA[Ошибка завершении сессии]]></ru>
+		<en><![CDATA[Logout failed]]></en>
+		<ua><![CDATA[Якась халепа]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup finished</nerd>
 		<ru><![CDATA[Чемпионат завершен]]></ru>
+		<en><![CDATA[Cup finished]]></en>
+		<ua><![CDATA[Чемпiонат завершений]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>All teams</nerd>
 		<ru><![CDATA[Все]]></ru>
+		<en><![CDATA[All teams]]></en>
+		<ua><![CDATA[Всi команди]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Active teams</nerd>
 		<ru><![CDATA[Активные]]></ru>
+		<en><![CDATA[Active teams]]></en>
+		<ua><![CDATA[Активнi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup winners</nerd>
 		<ru><![CDATA[Команды-победители чемпионата]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>The cup has not finished yet</nerd>
 		<ru><![CDATA[Победители не определены - чемпионат не завершен]]></ru>
+		<en><![CDATA[The cup has not finished yet]]></en>
+		<ua><![CDATA[Переможцi ще не визначенi - чемпiонат триває]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Your groups</nerd>
 		<ru><![CDATA[Ваши группы]]></ru>
+		<en><![CDATA[Your groups]]></en>
+		<ua><![CDATA[Вашi группи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Create user group</nerd>
 		<ru><![CDATA[Создать новую группу]]></ru>
+		<en><![CDATA[Create user group]]></en>
+		<ua><![CDATA[Створити групу]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

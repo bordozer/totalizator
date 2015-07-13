@@ -323,17 +323,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<configuration>
-					<path>/</path>
-					<port>9092</port>
-					<httpsPort>8447</httpsPort>
-					<keystoreFile>${basedir}/other/keystore.jks</keystoreFile>
-					<keystorePass>secret</keystorePass>
-				</configuration>
-			</plugin>
 
 			<plugin>
 				<groupId>org.zeroturnaround</groupId>

@@ -28,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SecurityUserDetailsService userDetailsService;
 
+	@Autowired
+	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+
 	@Override
 	protected void configure( AuthenticationManagerBuilder auth ) throws Exception {
 		auth
@@ -57,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.loginProcessingUrl( "/authenticate" )
 					.usernameParameter( "login" )
 					.passwordParameter( "password" )
-					.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
+//					.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
+					.successHandler( ajaxAuthenticationSuccessHandler )
 					.failureUrl( "/login?error" ) // TODO: implement
 					.loginPage( LOGIN_PAGE_URL )
 					.and()

@@ -2,6 +2,10 @@
 <% var betScoreHighlights = transformer.getBetScoreHighlights() %>
 <div class="row">
 
+	<div class="col-lg-1 js-match-drop-down-menu">
+
+	</div>
+
 	<div class="col-lg-2 text-right" title="#<%= matchId %>">
 		<strong><%= transformer.formatDate() %></strong> <sup><%= transformer.formatTime() %></sup>
 	</div>
@@ -13,15 +17,23 @@
 		<small><%= transformer.team1().teamName %></small> <img src="<%= transformer.team1().teamLogo %>" height="32">
 	</div>
 
-	<div class="col-lg-1 text-right <%= matchResults.style1 %> ">
+	<div class="col-lg-1 text-right">
 		<% if( match.matchFinished ) { %>
-			<%= transformer.score1() %>
+			<span class="<%= matchResults.style1 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score1() %></span>
+
+			<% if( bet != null ) { %>
+				<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;"><%= transformer.betScore1() %></sup>
+			<% } %>
 		<% } %>
 	</div>
 
-	<div class="col-lg-1 text-left <%= matchResults.style2 %> ">
+	<div class="col-lg-1 text-left">
 		<% if( match.matchFinished ) { %>
-			<%= transformer.score2() %>
+			<span class="<%= matchResults.style2 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score2() %></span>
+
+			<% if( bet != null ) { %>
+				<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;"><%= transformer.betScore2() %></sup>
+			<% } %>
 		<% } %>
 	</div>
 
@@ -32,13 +44,9 @@
 		<% } %>
 	</div>
 
-	<div class="col-lg-2 text-center">
-		<% if( bet != null ) { %>
-			<span title="<%- translator.yourBetHint %>">
-			<span class="<%=betScoreHighlights.style1%>"><%= transformer.betScore1() %></span> : <span class="<%=betScoreHighlights.style2%>"><%= transformer.betScore2() %></span></span>
-		<% } %>
+	<div class="col-lg-1 text-center">
 		<% if( points > 0 ) { %>
-			<strong><sup class="text-warning">+ <%= points %></sup></strong>
+			<strong><span class="text-warning">+ <%= points %></span></strong>
 		<% } %>
 	</div>
 

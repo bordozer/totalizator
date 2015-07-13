@@ -5,16 +5,22 @@
 	<translation>
 		<nerd>User card: Statistics</nerd>
 		<ru><![CDATA[Статистика пользователя]]></ru>
+		<en><![CDATA[User statistics]]></en>
+		<ua><![CDATA[Статистика користувача]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>User card: User bets</nerd>
 		<ru><![CDATA[Ставки пользователя]]></ru>
+		<en><![CDATA[User bets]]></en>
+		<ua><![CDATA[Ставки користувача]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

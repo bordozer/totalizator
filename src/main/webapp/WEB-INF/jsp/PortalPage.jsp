@@ -12,7 +12,7 @@
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/portal/portal', 'translator' ], function ( $, Page, portal, Translator ) {
 
 			var translator = new Translator( {
-				title: 'Portal page title'
+				title: 'Portal page'
 			} );
 
 			var breadcrumbs = [

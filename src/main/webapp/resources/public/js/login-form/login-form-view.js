@@ -47,7 +47,7 @@ define( function ( require ) {
 		},
 
 		_authenticate: function() {
-			var data = { login: this.model.get( 'login' ), password: this.model.get( 'password' ) };
+			var data = { login: this.model.get( 'login' ), password: this.model.get( 'password' ), language: this.model.language };
 			this.trigger( 'events:authenticate', data );
 		},
 
@@ -70,6 +70,7 @@ define( function ( require ) {
 
 		_bindData: function() {
 			this.model.set( { login: this.$( '#login' ).val(), password: this.$( '#password' ).val() } );
+			this.model.language = this.$( 'input[name=language]:checked' ).val();
 		},
 
 		_validateLogin: function() {

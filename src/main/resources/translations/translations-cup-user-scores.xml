@@ -5,26 +5,36 @@
 	<translation>
 		<nerd>Cup users scores: Scores</nerd>
 		<ru><![CDATA[Рейтинг]]></ru>
+		<en><![CDATA[Scores]]></en>
+		<ua><![CDATA[Рейтинг]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup users scores: User name</nerd>
 		<ru><![CDATA[Пользователь]]></ru>
+		<en><![CDATA[User name]]></en>
+		<ua><![CDATA[Користувач]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup users scores: Points</nerd>
 		<ru><![CDATA[Баллы]]></ru>
+		<en><![CDATA[Points]]></en>
+		<ua><![CDATA[Очки]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

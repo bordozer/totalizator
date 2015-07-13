@@ -5,56 +5,57 @@
 	<translation>
 		<nerd>Menu: Logout</nerd>
 		<ru><![CDATA[Выход]]></ru>
+		<en><![CDATA[Logout]]></en>
+		<ua><![CDATA[Вихiд]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Menu: Reload translations</nerd>
 		<ru><![CDATA[Перезагрузить переводы]]></ru>
+		<en><![CDATA[Reload translations]]></en>
+		<ua><![CDATA[Перезавантажити переклади]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Menu: Untranslated list</nerd>
 		<ru><![CDATA[Пропущенные переводы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Menu: Portal page</nerd>
-		<ru><![CDATA[Главная страница]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Menu: Admin</nerd>
-		<ru><![CDATA[Администрирование]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Menu: Matches</nerd>
-		<ru><![CDATA[Матчи]]></ru>
+		<en><![CDATA[Untranslated list]]></en>
+		<ua><![CDATA[Пропущенi переклади]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

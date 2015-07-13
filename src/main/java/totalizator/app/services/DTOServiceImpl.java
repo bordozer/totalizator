@@ -92,23 +92,23 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	@Override
-	public BetDTO transformMatchBet( final MatchBet matchBet, final User user ) {
-		return betFunction( user ).apply( matchBet );
+	public BetDTO transformMatchBet( final MatchBet matchBet, final User user, final User accessor ) {
+		return betFunction( user, accessor ).apply( matchBet );
 	}
 
 	@Override
-	public MatchBetDTO getMatchBetForMatch( final Match match, final User user ) {
-		return matchBetFunction( user ).apply( match );
+	public MatchBetDTO getMatchBetForMatch( final Match match, final User betOfUser, final User accessor ) {
+		return matchBetFunction( betOfUser, accessor ).apply( match );
 	}
 
 	@Override
-	public List<BetDTO> transformMatchBets( final List<MatchBet> matchBets, final User user ) {
-		return newArrayList( Lists.transform( matchBets, betFunction( user ) ) );
+	public List<BetDTO> transformMatchBets( final List<MatchBet> matchBets, final User user, final User accessor ) {
+		return newArrayList( Lists.transform( matchBets, betFunction( user, accessor ) ) );
 	}
 
 	@Override
-	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User user ) {
-		return newArrayList( Lists.transform( matches, matchBetFunction( user ) ) );
+	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User betOfUser, final User accessor ) {
+		return newArrayList( Lists.transform( matches, matchBetFunction( betOfUser, accessor ) ) );
 	}
 
 	@Override
@@ -267,7 +267,7 @@ public class DTOServiceImpl implements DTOService {
 		};
 	}
 
-	private Function<MatchBet, BetDTO> betFunction( final User user ) {
+	private Function<MatchBet, BetDTO> betFunction( final User user, final User accessor ) {
 
 		return new Function<MatchBet, BetDTO>() {
 
@@ -278,29 +278,32 @@ public class DTOServiceImpl implements DTOService {
 
 				final BetDTO betDTO = new BetDTO( matchDTO, transformUser( user ) );
 				betDTO.setMatchBetId( matchBet.getId() );
-				betDTO.setScore1( matchBet.getBetScore1() );
-				betDTO.setScore2( matchBet.getBetScore2() );
+
+				if ( matchBetsService.isAllowedToShowMatchBets( matchBet, accessor ) ) {
+					betDTO.setScore1( matchBet.getBetScore1() );
+					betDTO.setScore2( matchBet.getBetScore2() );
+				}
 
 				return betDTO;
 			}
 		};
 	}
 
-	private Function<Match, MatchBetDTO> matchBetFunction( final User user ) {
+	private Function<Match, MatchBetDTO> matchBetFunction( final User betsOfUser, final User accessor ) {
 
 		return new Function<Match, MatchBetDTO>() {
 
 			@Override
 			public MatchBetDTO apply( final Match match ) {
-				final MatchDTO matchDTO = transformMatch( match, user );
+				final MatchDTO matchDTO = transformMatch( match, betsOfUser );
 
 				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
 
-				final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, user );
+				final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, betsOfUser );
 				matchBetDTO.setBettingAllowed( validationResult.isPassed() );
 				matchBetDTO.setBettingValidationMessage( validationResult.getMessage() );
 
-				final MatchBet matchBet = matchBetsService.load( user, match );
+				final MatchBet matchBet = matchBetsService.load( betsOfUser, match );
 
 				matchBetDTO.setBetsCount( matchBetsService.betsCount( match ) );
 
@@ -308,7 +311,7 @@ public class DTOServiceImpl implements DTOService {
 					return matchBetDTO;
 				}
 
-				final BetDTO betDTO = transformMatchBet( matchBet, user );
+				final BetDTO betDTO = transformMatchBet( matchBet, betsOfUser, accessor );
 
 				matchBetDTO.setBet( betDTO );
 				matchBetDTO.setPoints( cupScoresService.getUsersScores( matchBet ) );

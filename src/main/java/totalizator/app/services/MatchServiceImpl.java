@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -116,6 +117,10 @@ public class MatchServiceImpl implements MatchService {
 					return dateTimeService.hasTheSameDate( match.getBeginningTime(), filterByDate );
 				}
 			} );
+		}
+
+		if ( dto.isShowFutureMatches() ) {
+			Collections.reverse( matches );
 		}
 
 		return matches;

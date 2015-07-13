@@ -5,116 +5,162 @@
 	<translation>
 		<nerd>Matches and bests</nerd>
 		<ru><![CDATA[Матчи и ставки]]></ru>
+		<en><![CDATA[Matches and bests]]></en>
+		<ua><![CDATA[Iгри та ставки]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets: Add bet</nerd>
 		<ru><![CDATA[Сделать ставку на матч]]></ru>
+		<en><![CDATA[Add a bet]]></en>
+		<ua><![CDATA[Зробити ставку на гру]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets: Edit bet</nerd>
 		<ru><![CDATA[Изменить ставку ставку на матч]]></ru>
+		<en><![CDATA[Edit the bet]]></en>
+		<ua><![CDATA[Змiнити ставку на гру]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets: Delete bet</nerd>
 		<ru><![CDATA[Отменить ставку на матч]]></ru>
+		<en><![CDATA[Delete the bet]]></en>
+		<ua><![CDATA[Вiдминити ставку на гру]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Your bet</nerd>
 		<ru><![CDATA[Ваша ставка на матч]]></ru>
+		<en><![CDATA[Your bet]]></en>
+		<ua><![CDATA[Ваша ставка на гру]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets / Footer: no bet yet</nerd>
 		<ru><![CDATA[Ставки на матч нет]]></ru>
+		<en><![CDATA[No bet yet]]></en>
+		<ua><![CDATA[Ставки нема]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets / Footer: betting finished</nerd>
 		<ru><![CDATA[Прием ставок завершен]]></ru>
+		<en><![CDATA[Betting finished]]></en>
+		<ua><![CDATA[Прийом ставок завершений]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets / Footer: Match finished</nerd>
 		<ru><![CDATA[Матч завершен]]></ru>
+		<en><![CDATA[Match finished]]></en>
+		<ua><![CDATA[Гра закiнчилася]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets: Delete bet confirmation: Delete bet?</nerd>
 		<ru><![CDATA[Отменить ставку на матч?]]></ru>
+		<en><![CDATA[Delete bet?]]></en>
+		<ua><![CDATA[Вiдмiнити ставку на гру?]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets: save bet</nerd>
 		<ru><![CDATA[Сохранить ставку]]></ru>
+		<en><![CDATA[Save bet]]></en>
+		<ua><![CDATA[Зберегти ставку]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match and Bets: Cancel bet editing</nerd>
 		<ru><![CDATA[Отменить изменения]]></ru>
+		<en><![CDATA[Cancel bet editing]]></en>
+		<ua><![CDATA[Вiдмiнити]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match betting is denied</nerd>
 		<ru><![CDATA[Возможность делать ставки на результаты матчей этого чемпионата или изменять существующие ставки на данный момент ограничена]]></ru>
+		<en><![CDATA[Match betting is denied]]></en>
+		<ua><![CDATA[Можливiсть робити ставки на результати iгор цього чемпiонату або мiняти iснуючi ставки зараз обмежена]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Cup $1 is finished</nerd>
+		<nerd>Cup $1 finished</nerd>
 		<ru><![CDATA[$1 завершен]]></ru>
+		<en><![CDATA[$1 finished]]></en>
+		<ua><![CDATA[$1 закiнчився]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Cup $1 is not open for game bets at this moment</nerd>
 		<ru><![CDATA[Возможность делать ставки на результаты матчей $1 или изменять существующие ставки на данный момент ограничена]]></ru>
+		<en><![CDATA[Cup $1 is not open for game bets at this moment]]></en>
+		<ua><![CDATA[Можливiсть робити ставки на результати iгор $1 або мiняти iснуючi ставки зараз обмежена]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Match is finished</nerd>
+		<nerd>Match finished</nerd>
 		<ru><![CDATA[Матч завершен]]></ru>
+		<en><![CDATA[Game over]]></en>
+		<ua><![CDATA[Гра завершена]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match betting is not allowed after match start ( $1 )</nerd>
 		<ru><![CDATA[Ставки на игру не принимаются после начала игры ( $1 )]]></ru>
+		<en><![CDATA[Match betting is not allowed after match start ( $1 )]]></en>
+		<ua><![CDATA[Ставки на гру не приймаються пiсля початку гри ( $1 )]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Match menu</nerd>
 		<ru><![CDATA[Меню матча]]></ru>
+		<en><![CDATA[Game menu]]></en>
+		<ua><![CDATA[Меню гри]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>No matches found</nerd>
 		<ru><![CDATA[Соответствующих критериям матчей не найдено]]></ru>
+		<en><![CDATA[No matches found]]></en>
+		<ua><![CDATA[Iгри не знайденi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Switch match and bets to compact views</nerd>
 		<ru><![CDATA[Компактный вид]]></ru>
+		<en><![CDATA[Compact views]]></en>
+		<ua><![CDATA[Компактний вигляд]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Switch match and bets to full views</nerd>
 		<ru><![CDATA[Обычный вид]]></ru>
+		<en><![CDATA[Full views]]></en>
+		<ua><![CDATA[Повний вигляд]]></ua>
+	</translation>
+
+	<translation>
+		<nerd>Team points</nerd>
+		<ru><![CDATA[Набранные командой очки]]></ru>
+		<en><![CDATA[Team points]]></en>
+		<ua><![CDATA[Набранi командою очки]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

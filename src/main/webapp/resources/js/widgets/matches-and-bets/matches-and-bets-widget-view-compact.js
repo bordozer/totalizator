@@ -10,23 +10,26 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
+	var MatchMenu = require( './match-menu-view' );
+
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Matches"
-		, yourBetHint: "Your bet"
 		, noMatchesFound: "No matches found"
 		, switchViewsLabel: 'Switch match and bets to full views'
+		, teamPointsLabel: 'Team points'
 	} );
 
-	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id ) {
+	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id, _points ) {
 
 		var match = _match;
 		var bet = _bet;
 		var team1Id = _teamId;
 		var team2Id = _team2Id;
+		var points = _points;
 
 		return {
 
@@ -127,6 +130,11 @@ define( function ( require ) {
 			},
 
 			getBetScoreHighlights: function() {
+
+				if( bet != null && points == 0 ) {
+					return { style1: 'text-danger', style2: 'text-danger' };
+				}
+
 				return service.matchResults( this.team1().teamId, this.betScore1(), this.team2().teamId, this.betScore2() );
 			},
 
@@ -174,6 +182,7 @@ define( function ( require ) {
 			var self = this;
 			this.model.forEach( function( matchBet ) {
 				self._renderEntry( matchBet.toJSON(), el );
+				self._renderMatchMenu( matchBet, el );
 			});
 
 			this.trigger( 'inner-view-rendered' );
@@ -181,10 +190,17 @@ define( function ( require ) {
 
 		_renderEntry: function ( model, el ) {
 
-			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id );
+			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id, model.points );
 			var data = _.extend( {}, model, { transformer: matchTransformer, translator: translator } );
 
 			el.append( template( data ) );
+		},
+
+		_renderMatchMenu: function( match, container ) {
+			var matchMenu = new MatchMenu( {
+				model: match
+				, el: this.$( '.js-match-drop-down-menu', container )
+			} );
 		}
 	} );
 } );

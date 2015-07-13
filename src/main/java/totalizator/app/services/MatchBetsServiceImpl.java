@@ -126,7 +126,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 		}
 
 		if ( matchService.isMatchFinished( match ) ) {
-			return ValidationResult.fail( translatorService.translate( "Match is finished", language ) );
+			return ValidationResult.fail( translatorService.translate( "Match finished", language ) );
 		}
 
 		if ( matchService.isMatchStarted( match ) ) {
@@ -144,5 +144,15 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	public boolean userCanSeeAnotherBets( final Match match, final User user ) {
 		return matchService.isMatchStarted( match );
+	}
+
+	@Override
+	public boolean isAllowedToShowMatchBets( final MatchBet matchBet, final User user ) {
+
+		if ( matchBet.getUser().equals( user ) ) {
+			return true;
+		}
+
+		return userCanSeeAnotherBets( matchBet.getMatch(), user );
 	}
 }

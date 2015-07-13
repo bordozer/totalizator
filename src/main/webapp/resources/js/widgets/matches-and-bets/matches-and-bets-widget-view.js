@@ -12,7 +12,8 @@ define( function ( require ) {
 
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 	var service = require( '/resources/js/services/service.js' );
-	var mainMenu = require( 'js/components/main-menu/main-menu' );
+
+	var MatchMenu = require( './match-menu-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -179,48 +180,10 @@ define( function ( require ) {
 
 		_renderDropDownMenuItems: function() {
 
-			var betsCount = this.model.get( 'betsCount' ); // TODO: load 'fresh' data each rendering
-			var match = this.model.get( 'match' );
-
-			var menuItems = [
-				{ selector: 'js-menu-standoff-history', icon: 'fa fa-calendar', link: '/totalizator/teams/standoff/' + match.team1.teamId + '/vs/' + match.team2.teamId + '/', text: translator.actionStandOffHistory }
-				, { selector: 'divider' }
-				, { selector: 'js-menu-all-match-bets', icon: 'fa fa-money', link: '/totalizator/matches/' + match.matchId + '/bets/', text: translator.actionAllMatchBet + ' ( ' + betsCount + ' )' }
-			];
-
-			var bet = this.model.get( 'bet' );
-			var isBettingAllowed = this.model.isBettingAllowed();
-			var isBetEditingMode = this.model.isBetMode();
-
-			if ( isBettingAllowed ) {
-
-				menuItems.push( { selector: 'divider' } );
-
-				if ( isBetEditingMode ) {
-					menuItems.push( { selector: 'js-menu-match-bet-save', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetSave } );
-					menuItems.push( { selector: 'js-menu-match-bet-cancel-editing', icon: 'fa fa-close', link: '#', text: translator.actionCancelBetEditing} );
-				}
-
-				if ( bet == null ) {
-					if ( this.model.isBettingAllowed() && !isBetEditingMode ) {
-						menuItems.push( { selector: 'js-menu-match-bet-add', icon: 'fa fa-plus', link: '#', text: translator.actionMatchBetAdd } );
-					}
-				} else {
-					if ( ! isBetEditingMode ) {
-						menuItems.push( { selector: 'js-menu-match-bet-edit', icon: 'fa fa-edit', link: '#', text: translator.actionMatchBetEdit } );
-						menuItems.push( { selector: 'js-menu-match-bet-delete', icon: 'fa fa-close', link: '#', text: translator.actionMatchBetDelete } );
-					}
-				}
-			}
-
-			var options = {
-				menus: menuItems
-				, menuButtonIcon: 'fa-list'
-				, menuButtonText: ''
-				, menuButtonHint: translator.menuHint
-				, cssClass: 'btn-default'
-			};
-			mainMenu( options, this.$( '.js-match-drop-down-menu') );
+			var matchMenu = new MatchMenu( {
+				model: this.model
+				, el: this.$( '.js-match-drop-down-menu' )
+			} );
 		},
 
 		_setMatchContainerClass: function( clazz ) {

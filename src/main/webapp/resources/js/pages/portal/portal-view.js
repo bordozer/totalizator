@@ -12,7 +12,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		menuAdminLabel: "Menu: Admin"
+		menuAdminLabel: "Administration"
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 

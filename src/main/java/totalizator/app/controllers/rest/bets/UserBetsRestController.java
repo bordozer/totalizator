@@ -11,6 +11,7 @@ import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -37,42 +38,45 @@ public class UserBetsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<BetDTO> userBets( final @PathVariable( "userId" ) int userId ) {
+	public List<BetDTO> userBets( final @PathVariable( "userId" ) int userId, final Principal principal ) {
 
 		final User user = userService.load( userId );
 
 		final List<MatchBet> bets = matchBetsService.loadAll( user );
 
-		return getMatchBetDTOs( user, bets );
+		final User currentUser = userService.findByLogin( principal.getName() );
+		return getMatchBetDTOs( user, currentUser, bets );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/matches/{matchId}/", produces = APPLICATION_JSON_VALUE )
-	public List<BetDTO> userMatchBets( final @PathVariable( "userId" ) int userId, final @PathVariable( "matchId" ) int matchId ) {
+	public List<BetDTO> userMatchBets( final @PathVariable( "userId" ) int userId, final @PathVariable( "matchId" ) int matchId, final Principal principal ) {
 
 		final User user = userService.load( userId );
 		final Match match = matchService.load( matchId );
 
 		final List<MatchBet> bets = matchBetsService.loadAll( match );
 
-		return getMatchBetDTOs( user, bets );
+		final User currentUser = userService.findByLogin( principal.getName() );
+		return getMatchBetDTOs( user, currentUser, bets );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/cups/{cupId}/", produces = APPLICATION_JSON_VALUE )
-	public List<BetDTO> userCupBets( final @PathVariable( "userId" ) int userId, final @PathVariable( "cupId" ) int cupId ) {
+	public List<BetDTO> userCupBets( final @PathVariable( "userId" ) int userId, final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
 		final User user = userService.load( userId );
 		final Cup cup = cupService.load( cupId );
 
 		final List<MatchBet> bets = matchBetsService.loadAll( cup, user );
 
-		return getMatchBetDTOs( user, bets );
+		final User currentUser = userService.findByLogin( principal.getName() );
+		return getMatchBetDTOs( user, currentUser, bets );
 	}
 
-	private List<BetDTO> getMatchBetDTOs( final User user, final List<MatchBet> bets ) {
-		return dtoService.transformMatchBets( bets, user );
+	private List<BetDTO> getMatchBetDTOs( final User user, final User accessor, final List<MatchBet> bets ) {
+		return dtoService.transformMatchBets( bets, user, accessor );
 	}
 }

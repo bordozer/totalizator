@@ -21,7 +21,7 @@ define( function ( require ) {
 		, buttonCancelSettingsLabel: 'Matches: Settings: cancel button'
 		, userLabel: 'User'
 		, categoryLabel: 'Category'
-		, cupLabel: 'Configurable view / Filter: Cup'
+		, cupLabel: 'Cup'
 		, teamLabel: 'Team'
 		, matchDateLabel: 'Configurable view / Filter: Match date'
 		, showFutureMatchesLabel: 'Configurable view / Filter: Show future matches'

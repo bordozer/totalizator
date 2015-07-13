@@ -54,7 +54,7 @@ public class MatchesAndBetsRestController {
 		final User user = userId > 0 ? userService.load( userId ) : currentUser;
 		final List<Match> matches = matchService.loadAll( dto );
 
-		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, user );
+		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, user, currentUser );
 
 		if ( userId > 0 ) {
 
@@ -80,31 +80,31 @@ public class MatchesAndBetsRestController {
 	@RequestMapping( method = RequestMethod.POST, value = "/{matchId}/bets/{score1}/{score2}/", produces = APPLICATION_JSON_VALUE )
 	public BetDTO saveBet( final Principal principal, final @PathVariable( "matchId" ) int matchId, final @PathVariable( "score1" ) int score1, final @PathVariable( "score2" ) int score2 ) {
 
-		final User user = userService.findByLogin( principal.getName() );
+		final User currentUser = userService.findByLogin( principal.getName() );
 		final Match match = matchService.load( matchId );
 
-		final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, user );
+		final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, currentUser );
 		if ( ! validationResult.isPassed() ) {
 			throw new IllegalArgumentException( validationResult.getMessage() ); // TODO: show the exception to user
 		}
 
-		final MatchBet existingBet = matchBetsService.load( user, match );
+		final MatchBet existingBet = matchBetsService.load( currentUser, match );
 
 		if ( existingBet != null ) {
 
-			if ( ! existingBet.getUser().equals( user ) ) {
-				throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), user ) ); // TODO: show the exception to user
+			if ( ! existingBet.getUser().equals( currentUser ) ) {
+				throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), currentUser ) ); // TODO: show the exception to user
 			}
 
 			existingBet.setBetScore1( score1 );
 			existingBet.setBetScore2( score2 );
 			matchBetsService.save( existingBet );
 
-			return dtoService.transformMatchBet( existingBet, user );
+			return dtoService.transformMatchBet( existingBet, currentUser, currentUser );
 		}
 
 		final MatchBet matchBet = new MatchBet();
-		matchBet.setUser( user );
+		matchBet.setUser( currentUser );
 		matchBet.setMatch( match );
 		matchBet.setBetScore1( score1 );
 		matchBet.setBetScore2( score2 );
@@ -112,7 +112,7 @@ public class MatchesAndBetsRestController {
 
 		final MatchBet result = matchBetsService.save( matchBet );
 
-		return dtoService.transformMatchBet( result, user );
+		return dtoService.transformMatchBet( result, currentUser, currentUser );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

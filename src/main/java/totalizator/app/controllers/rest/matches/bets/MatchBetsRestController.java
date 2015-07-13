@@ -76,7 +76,7 @@ public class MatchBetsRestController {
 
 		final List<MatchBet> matchBets = matchBetsService.loadAll( match );
 		for ( final MatchBet matchBet : matchBets ) {
-			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser() );
+			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser );
 			if ( ! canSeeAnotherBets ) {
 				matchBetDTO.getBet().setScore1( 0 );
 				matchBetDTO.getBet().setScore2( 0 );
