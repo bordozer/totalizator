@@ -1,5 +1,7 @@
 .idea/*
 bower_components
+node_modules/
+target/
 rebel.xml
 log4j.*
 *.properties
