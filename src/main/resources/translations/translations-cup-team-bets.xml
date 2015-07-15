@@ -32,9 +32,9 @@
 
 	<translation>
 		<nerd>No bet yet</nerd>
-		<ru><![CDATA[Ставки нет]]></ru>
-		<en><![CDATA[No bet yet]]></en>
-		<ua><![CDATA[Ставок нема]]></ua>
+		<ru><![CDATA[Ваша ставка не сделана]]></ru>
+		<en><![CDATA[You have not made a bet yet]]></en>
+		<ua><![CDATA[Ваша ставка не зроблена]]></ua>
 	</translation>
 
 	<translation>

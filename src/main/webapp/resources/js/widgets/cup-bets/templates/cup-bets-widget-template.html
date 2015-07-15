@@ -15,7 +15,7 @@
 
 						<% if( cupTeamBet.stillActive ) { %>
 							<img class="team-logo" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="64">
-							<span class="text-primary"><%=cupTeamBet.team.teamName%></span>
+							<span class="text-primary js-menu-edit-cup-bets"><%=cupTeamBet.team.teamName%></span>
 						<% } %>
 
 						<% if( ! cupTeamBet.stillActive ) { %>
@@ -29,7 +29,7 @@
 					<% } %>
 
 					<% if( cupTeamBet.team == null ) { %>
-						<span class="text-muted"><%=translator.noCupTeamPositionLabel%></span>
+						<span class="text-muted js-menu-edit-cup-bets"><%=translator.noCupTeamPositionLabel%></span>
 					<% } %>
 
 				</td>
