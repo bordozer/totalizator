@@ -12,7 +12,7 @@
 		require( [ 'jquery', 'js/admin/components/base-view/admin-base-page-view', 'js/admin/pages/matches/admin-matches', 'translator' ], function ( $, Admin, match, Translator ) {
 
 			var translator = new Translator( {
-				title: 'Admin / Matches: Page Title'
+				title: 'Matches'
 			} );
 
 			var breadcrumbs = [

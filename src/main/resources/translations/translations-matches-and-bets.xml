@@ -52,13 +52,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Match and Bets / Footer: Match finished</nerd>
-		<ru><![CDATA[Матч завершен]]></ru>
-		<en><![CDATA[Match finished]]></en>
-		<ua><![CDATA[Гра закiнчилася]]></ua>
-	</translation>
-
-	<translation>
 		<nerd>Match and Bets: Delete bet confirmation: Delete bet?</nerd>
 		<ru><![CDATA[Отменить ставку на матч?]]></ru>
 		<en><![CDATA[Delete bet?]]></en>

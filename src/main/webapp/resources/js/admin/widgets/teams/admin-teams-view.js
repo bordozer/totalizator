@@ -20,7 +20,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Teams"
-		, newTeamLabel: "Admin / Teams: New team"
+		, newTeamLabel: "New team"
 		, goTopLabel: "Scroll to top"
 	} );
 

@@ -192,17 +192,24 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
-		<ua><![CDATA[]]></ua>
+		<nerd>Save</nerd>
+		<ru><![CDATA[Сохранить]]></ru>
+		<ua><![CDATA[Зберегти]]></ua>
+		<en><![CDATA[Save]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Discard changes</nerd>
+		<ru><![CDATA[Отменить]]></ru>
+		<ua><![CDATA[Скасувати]]></ua>
+		<en><![CDATA[Discard changes]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

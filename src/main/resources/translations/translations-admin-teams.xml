@@ -5,46 +5,64 @@
 	<translation>
 		<nerd>Admin / Teams / Validation: Select a cup</nerd>
 		<ru><![CDATA[Выберите чемпионат]]></ru>
+		<ua><![CDATA[Виберiть чемпiонат]]></ua>
+		<en><![CDATA[Select a cup]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Teams / Validation: Select team1</nerd>
 		<ru><![CDATA[Выберите команду 1]]></ru>
+		<ua><![CDATA[Виберiть першу команду]]></ua>
+		<en><![CDATA[Select team 1]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Teams / Validation: Select team2</nerd>
 		<ru><![CDATA[Выберите команду 2]]></ru>
+		<ua><![CDATA[Виберiть другу команду]]></ua>
+		<en><![CDATA[Select team 2]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Teams / Validation: Select different teams</nerd>
 		<ru><![CDATA[Команды не должны совпадать]]></ru>
+		<ua><![CDATA[Команди не повиннi спiвпадати]]></ua>
+		<en><![CDATA[Select different teams - the teams must not be the same]]></en>
 	</translation>
 
 	<translation>
-		<nerd>Admin / Teams: New team</nerd>
+		<nerd>New team</nerd>
 		<ru><![CDATA[Новая команда]]></ru>
+		<ua><![CDATA[Нова команда]]></ua>
+		<en><![CDATA[New team]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Scroll to top</nerd>
 		<ru><![CDATA[Наверх]]></ru>
+		<ua><![CDATA[Нагору]]></ua>
+		<en><![CDATA[Scroll to top]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

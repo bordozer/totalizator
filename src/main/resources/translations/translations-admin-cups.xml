@@ -5,92 +5,128 @@
 	<translation>
 		<nerd>Admin / Cups / Edit: Cup name label</nerd>
 		<ru><![CDATA[Название]]></ru>
+		<ua><![CDATA[Назва]]></ua>
+		<en><![CDATA[Cup name]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Public cup</nerd>
 		<ru><![CDATA[Публичный чемпионат]]></ru>
+		<ua><![CDATA[Загальнодоступный чемпiонат]]></ua>
+		<en><![CDATA[Public cup]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Nonpublic cup</nerd>
 		<ru><![CDATA[Скрытый чемпионат]]></ru>
+		<ua><![CDATA[Прихований чемпiонат]]></ua>
+		<en><![CDATA[Nonpublic cup]]></en>
 	</translation>
 
 
 	<translation>
 		<nerd>Admin / Cups: New cup</nerd>
 		<ru><![CDATA[Новый чемпионат]]></ru>
+		<ua><![CDATA[Новий чемпiонат]]></ua>
+		<en><![CDATA[New cup]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Cups / Edit: Winners count</nerd>
 		<ru><![CDATA[К-во победителей]]></ru>
+		<ua><![CDATA[Кiлькiсть переможцiв]]></ua>
+		<en><![CDATA[Winners count]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Cup validation: Enter a cup name!</nerd>
 		<ru><![CDATA[Введите название чемпионата]]></ru>
+		<ua><![CDATA[Введiть назву чемпiонату]]></ua>
+		<en><![CDATA[Enter a cup name!]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Cup validation: Winners count should be positive number!</nerd>
 		<ru><![CDATA[К-во победителей должно быть больше нуля]]></ru>
+		<ua><![CDATA[Кiлькiсть переможцiв повинно бути бiльш нуля]]></ua>
+		<en><![CDATA[Winners count should be positive number!]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Cup validation: Defined winners count does not equals winners</nerd>
-		<ru><![CDATA[Указанное к-во победителей чемпионата не совпадает с к-вом определенных победителей]]></ru> <!-- TODO: ? -->
+		<ru><![CDATA[Указанное к-во победителей чемпионата не совпадает с к-вом определенных победителей]]></ru> <!-- TODO: clarify the message -->
+		<ua><![CDATA[Кiлькiсть переможцiв не збiгається з кiлькiстю переможцiв]]></ua> <!-- TODO: clarify the message -->
+		<en><![CDATA[Defined winners count does not equals winners]]></en>
 	</translation>
 
 	<translation>
 		<nerd>cup position</nerd>
 		<ru><![CDATA[место]]></ru>
+		<ua><![CDATA[позицiя]]></ua>
+		<en><![CDATA[place]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Cups / Edit: Ready for cup bets</nerd>
 		<ru><![CDATA[Прием ставок на чемпионат]]></ru>
+		<ua><![CDATA[Готовий до прийому ставок на чемпiонат]]></ua>
+		<en><![CDATA[Ready for cup bets]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Cups / Edit: Ready for match bets</nerd>
 		<ru><![CDATA[Прием ставок на матчи]]></ru>
+		<ua><![CDATA[Готовий до прийому ставок на iгри]]></ua>
+		<en><![CDATA[Ready for match bets]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Cups / Edit: Cup is finished</nerd>
 		<ru><![CDATA[Завершен]]></ru>
+		<ua><![CDATA[Завершений]]></ua>
+		<en><![CDATA[Cup is finished]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Cups / Edit: Cup start date</nerd>
 		<ru><![CDATA[Дата начала]]></ru>
+		<ua><![CDATA[Дата початку]]></ua>
+		<en><![CDATA[Cup start date]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Cup edit: Switch to edit data tab</nerd>
 		<ru><![CDATA[Данные чемпионата]]></ru>
+		<ua><![CDATA[Данi чемпiонату]]></ua>
+		<en><![CDATA[Switch to edit data tab]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Define all cup winners!</nerd>
 		<ru><![CDATA[Определите всех победителей чемпионата, если он закончен, или оставьте все поля пустыми, если чемпионат еще не завершен]]></ru>
+		<ua><![CDATA[Вкажiть усiх переможцiв чемпiонату, якщо вiн завершений, або залиште всi поля порожнiми]]></ua>
+		<en><![CDATA[Define all cup winners!]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Reset cup winners</nerd>
 		<ru><![CDATA[Очистить форму победителей]]></ru>
+		<ua><![CDATA[Очистити форму переможцiв]]></ua>
+		<en><![CDATA[Reset cup winners]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

@@ -3,83 +3,80 @@
 <translations>
 
 	<translation>
-		<nerd>Admin / Matches: Page Title</nerd>
-		<ru><![CDATA[Матчи]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Admin / Matches / Add entry</nerd>
+		<nerd>New match</nerd>
 		<ru><![CDATA[Новый матч]]></ru>
+		<ua><![CDATA[Додати гру]]></ua>
+		<en><![CDATA[New match]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Matches / Finish selected matches</nerd>
 		<ru><![CDATA[Завершить выделенные матчи]]></ru>
+		<ua><![CDATA[Завершити позначенi iгри]]></ua>
+		<en><![CDATA[Finish selected matches]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Matches / Delete selected matches</nerd>
 		<ru><![CDATA[Удалить выделенные матчи]]></ru>
+		<ua><![CDATA[Видалити позначенi iгри]]></ua>
+		<en><![CDATA[Delete selected matches]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Admin / Matches / Edit entry</nerd>
-		<ru><![CDATA[Редактировать]]></ru>
+		<ru><![CDATA[Редактировать данные игры]]></ru>
+		<ua><![CDATA[Редагувати данi гри]]></ua>
+		<en><![CDATA[Edit the match]]></en>
 	</translation>
 
 	<translation>
-		<nerd>Admin / Matches / Delete entry</nerd>
-		<ru><![CDATA[Удалить]]></ru>
+		<nerd>Delete match</nerd>
+		<ru><![CDATA[Удалить матч]]></ru>
+		<ua><![CDATA[Видалити гру]]></ua>
+		<en><![CDATA[Delete the match]]></en>
 	</translation>
 
 	<translation>
-		<nerd>Admin / Matches / Button save</nerd>
-		<ru><![CDATA[Сохранить]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Admin / Matches / Button cancel editing</nerd>
-		<ru><![CDATA[Отменить редактирование]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Admin / Matches / Edit: Match beginning time</nerd>
+		<nerd>Match beginning time</nerd>
 		<ru><![CDATA[Время начала матча]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Admin / Matches / Edit: New entry edit form title</nerd>
-		<ru><![CDATA[Новый матч]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Admin / Matches / Edit: Match finished</nerd>
-		<ru><![CDATA[Матч завершен]]></ru>
+		<ua><![CDATA[Час початку гри]]></ua>
+		<en><![CDATA[Match beginning time]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Delete match?</nerd>
 		<ru><![CDATA[Удалить матч?]]></ru>
+		<ua><![CDATA[Видалити гру?]]></ua>
+		<en><![CDATA[Delete the match?]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Delete ALL selected matches?</nerd>
 		<ru><![CDATA[Удалить ВСЕ выделенные матчи?]]></ru>
+		<ua><![CDATA[Видалити УСI позначенi iгри?]]></ua>
+		<en><![CDATA[Delete ALL selected matches?]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Bets count</nerd>
 		<ru><![CDATA[Ставок]]></ru>
+		<ua><![CDATA[Ставок]]></ua>
+		<en><![CDATA[Bets count]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

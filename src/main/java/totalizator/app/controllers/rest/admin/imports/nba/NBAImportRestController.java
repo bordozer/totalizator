@@ -80,7 +80,7 @@ public class NBAImportRestController {
 
 		result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
 		result.setImportActive( nbaGameDataImportService.isActive() );
-		result.setImportStatusMessage( translatorService.translate( "Import stopped", getLanguage() ) );
+		result.setImportStatusMessage( translatorService.translate( "Import has been stopped", getLanguage() ) );
 
 		return result;
 	}

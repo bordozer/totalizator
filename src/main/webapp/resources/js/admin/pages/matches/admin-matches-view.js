@@ -25,16 +25,16 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		matchEditLabel: "Admin / Matches / Edit entry"
-		, matchDeleteLabel: "Admin / Matches / Delete entry"
+		, matchDeleteLabel: "Delete match"
 
-		, newEntryEditFormTitle: "Admin / Matches / Edit: New entry edit form title"
-		, buttonSaveLabel: "Admin / Matches / Button save"
-		, buttonCancelEditingLabel: "Admin / Matches / Button cancel editing"
+		, newEntryEditFormTitle: "New match"
+		, buttonSaveLabel: "Save"
+		, buttonCancelEditingLabel: "Discard changes"
 		, matchEdit_Category: "Category"
 		, matchEdit_Cup: "Cup"
 		, matchEdit_Team: "Team"
-		, matchEdit_BeginningTime: "Admin / Matches / Edit: Match beginning time"
-		, matchEdit_MatchFinished: "Admin / Matches / Edit: Match finished"
+		, matchEdit_BeginningTime: "Match beginning time"
+		, matchEdit_MatchFinished: "Match finished"
 
 		, validation_SelectCup_Label: "Admin / Teams / Validation: Select a cup"
 		, validation_SelectTeam1_Label: "Admin / Teams / Validation: Select team1"
@@ -46,7 +46,7 @@ define( function ( require ) {
 		, betsCountLabel: "Bets count"
 		, teamsStandOffHistoryLabel: "Teams standoff history"
 
-		, addMatchLabel: "Admin / Matches / Add entry"
+		, addMatchLabel: "New match"
 		, finishSelectedMatchesLabel: "Admin / Matches / Finish selected matches"
 		, deleteSelectedMatchesLabel: "Admin / Matches / Delete selected matches"
 	} );

@@ -5,16 +5,22 @@
 	<translation>
 		<nerd>Admin / Categories: New category</nerd>
 		<ru><![CDATA[Новая категория]]></ru>
+		<en><![CDATA[New category]]></en>
+		<ua><![CDATA[Нова категорiя]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Enter a category name!</nerd>
 		<ru><![CDATA[Введите название категории]]></ru>
+		<en><![CDATA[Enter a category name!]]></en>
+		<ua><![CDATA[Введiть назву категорiї]]></ua>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>
