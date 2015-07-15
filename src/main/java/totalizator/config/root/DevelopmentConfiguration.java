@@ -3,6 +3,7 @@ package totalizator.config.root;
 import org.apache.log4j.Logger;
 import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -10,6 +11,8 @@ import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import totalizator.app.init.TestDataInitializer;
 import totalizator.app.services.SystemVarsService;
@@ -30,8 +33,11 @@ public class DevelopmentConfiguration {
 		return new TestDataInitializer();
 	}*/
 
+	@Autowired
+	private SystemVarsService systemVarsService;
+
 	@Bean( name = "datasource" )
-	public DriverManagerDataSource dataSource( final SystemVarsService systemVarsService ) {
+	public DriverManagerDataSource dataSource() {
 
 		LOGGER.debug( String.format( "Connection information: host=%s; port=%s; db=%s"
 						, systemVarsService.getDatabaseHost()
@@ -82,5 +88,12 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
+	}
+
+	@Bean
+	public PersistentTokenRepository rememberMeTokenRepository() {
+		JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+		jdbcTokenRepository.setDataSource(dataSource());
+		return jdbcTokenRepository;
 	}
 }

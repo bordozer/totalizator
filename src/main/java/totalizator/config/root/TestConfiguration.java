@@ -9,6 +9,8 @@ import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import totalizator.app.init.TestDataInitializer;
 
@@ -62,5 +64,13 @@ public class TestConfiguration {
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
 		return entityManagerFactoryBean;
+	}
+
+	@Bean
+	public PersistentTokenRepository rememberMeTokenRepository() {
+		JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+		jdbcTokenRepository.setDataSource( dataSource() );
+		jdbcTokenRepository.setCreateTableOnStartup( true );
+		return jdbcTokenRepository;
 	}
 }
