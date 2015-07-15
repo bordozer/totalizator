@@ -23,8 +23,7 @@ TO DO
 
 11. User data editing
 
-12. UI language changing
+14. NBA import games' data by date range
 
-13. EN && UA translations
-
-14. Auto import games' data
+15. Team card
+	15.1 Statistics by cup
