@@ -45,6 +45,7 @@ public class TeamRepository implements TeamDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Team save( final Team entry ) {
 		return em.merge( entry );
@@ -54,6 +55,7 @@ public class TeamRepository implements TeamDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
