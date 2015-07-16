@@ -27,9 +27,9 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	private TranslatorService translatorService;
 
 	public AjaxAuthenticationSuccessHandler() {
-		SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-        savedRequestAwareSuccessHandler.setTargetUrlParameter(SecurityConfig.PORTAL_PAGE_URL);
-        this.defaultHandler = savedRequestAwareSuccessHandler;
+		final SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+		savedRequestAwareSuccessHandler.setTargetUrlParameter( SecurityConfig.PORTAL_PAGE_URL );
+		this.defaultHandler = savedRequestAwareSuccessHandler;
 	}
 
 	@Override

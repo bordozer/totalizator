@@ -39,19 +39,11 @@ public class DevelopmentConfiguration {
 	@Bean( name = "datasource" )
 	public DriverManagerDataSource dataSource() {
 
-		LOGGER.debug( String.format( "Connection information: host=%s; port=%s; db=%s"
-						, systemVarsService.getDatabaseHost()
-						, systemVarsService.getDatabasePort()
-						, systemVarsService.getDatabaseName() )
-		);
+		LOGGER.debug( String.format( "Connection information: host=%s; port=%s; db=%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName() ) );
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName( "com.mysql.jdbc.Driver" );
-		dataSource.setUrl( String.format( "jdbc:mysql://%s:%s/%s"
-						, systemVarsService.getDatabaseHost()
-						, systemVarsService.getDatabasePort()
-						, systemVarsService.getDatabaseName() )
-		);
+		dataSource.setUrl( String.format( "jdbc:mysql://%s:%s/%s", systemVarsService.getDatabaseHost(), systemVarsService.getDatabasePort(), systemVarsService.getDatabaseName() ) );
 		dataSource.setUsername( systemVarsService.getDatabaseUserName() );
 		dataSource.setPassword( systemVarsService.getDatabaseUserPassword() );
 
@@ -68,7 +60,7 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
 		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
-//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" );
+		//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" );
 		jpaProperties.put( "hibernate.connection.CharSet", "utf8" );
 		jpaProperties.put( "hibernate.connection.characterEncoding", "utf8" );
 		jpaProperties.put( "hibernate.connection.useUnicode", "true" );
@@ -83,7 +75,7 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( Environment.USE_QUERY_CACHE, true );
 		jpaProperties.put( Environment.GENERATE_STATISTICS, true );
 		jpaProperties.put( Environment.USE_STRUCTURED_CACHE, true );
-//		jpaProperties.put( Environment.CACHE_PROVIDER_CONFIG, "src/main/webapp/WEB-INF/ehcache.xml" );
+		//		jpaProperties.put( Environment.CACHE_PROVIDER_CONFIG, "src/main/webapp/WEB-INF/ehcache.xml" );
 
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
@@ -92,8 +84,10 @@ public class DevelopmentConfiguration {
 
 	@Bean
 	public PersistentTokenRepository rememberMeTokenRepository() {
-		JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
-		jdbcTokenRepository.setDataSource(dataSource());
+
+		final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+		jdbcTokenRepository.setDataSource( dataSource() );
+
 		return jdbcTokenRepository;
 	}
 }

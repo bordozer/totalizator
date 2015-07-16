@@ -19,11 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@Profile("test")
+@Profile( "test" )
 @EnableTransactionManagement
 public class TestConfiguration {
 
-	@Bean(initMethod = "init")
+	@Bean( initMethod = "init" )
 	public TestDataInitializer initTestData() {
 		return new TestDataInitializer();
 	}
@@ -68,9 +68,11 @@ public class TestConfiguration {
 
 	@Bean
 	public PersistentTokenRepository rememberMeTokenRepository() {
-		JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+
+		final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
 		jdbcTokenRepository.setDataSource( dataSource() );
 		jdbcTokenRepository.setCreateTableOnStartup( true );
+
 		return jdbcTokenRepository;
 	}
 }

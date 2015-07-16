@@ -75,9 +75,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.permitAll()
 					.and()
 				.rememberMe()
-                    .tokenRepository( persistentTokenRepository )
-                    .rememberMeServices( rememberMeServices() )
-                    .key( REMEMBER_ME_KEY );
+					.tokenRepository( persistentTokenRepository )
+					.rememberMeServices( rememberMeServices() )
+					.key( REMEMBER_ME_KEY );
     }
 
 
