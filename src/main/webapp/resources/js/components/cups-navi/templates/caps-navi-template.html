@@ -2,17 +2,9 @@
 
 	<div class="col-sm-12 col-md-12 col-lg-12">
 
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs js-cup-tabs">
 
 			<li role="presentation" class="js-public-cups-menu"></li>
-
-			<% _.each( cupsShowTo, function( cup ) { %>
-				<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>" title="<%- cup.category.categoryName %>: <%- cup.cupName %>">
-					<a href="/totalizator/cups/<%- cup.cupId %>/">
-						<img src="<%=cup.logoUrl%>" height="32"> <%- cup.category.categoryName %>: <%- cup.cupName %>
-					</a>
-				</li>
-			<% }) %>
 
 		</ul>
 

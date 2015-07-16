@@ -15,7 +15,71 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		allCups: 'All cups'
+		, cupTabMenu_Matches: 'Matches'
+		, cupTabMenu_Bets: 'Cup bets'
+		, cupTabMenu_WinnersBets: 'Cup result bets'
+		, cupTabMenu_Card: 'card'
 	} );
+
+	var CupTabView =Backbone.View.extend( {
+
+		initialize: function( options ) {
+			this.selectedCupId = options.selectedCupId;
+			this.cup = options.cup;
+		},
+
+		render: function() {
+
+			var options = {
+				menus: this._cupTabMenus()
+				, menuButtonIcon: 'fa fa-cubes'
+				, menuButtonText: ' ' + this.cup.cupName
+				, menuButtonHint: this.cup.category.categoryName + ': ' + this.cup.cupName
+				, cssClass: this.cup.cupId != this.selectedCupId ? 'btn-default' : 'btn-info'
+			};
+
+			mainMenu( options, this.$el );
+		},
+
+		_cupTabMenus: function() {
+
+			var menus = [];
+
+			menus.push( {
+				selector: 'js-matches'
+				, icon: 'fa fa-futbol-o'
+				, link: '/totalizator/cups/' + this.cup.cupId + '/'
+				, text: this.cup.category.categoryName + ': ' + this.cup.cupName + ' - ' + translator.cupTabMenu_Card
+			} );
+
+			menus.push( { selector: 'divider' } );
+
+			menus.push( {
+				selector: 'js-matches'
+				, icon: 'fa fa-futbol-o'
+				, link: '/totalizator/cups/' + this.cup.cupId + '/matches/'
+				, text: translator.cupTabMenu_Matches
+			} );
+
+			menus.push( { selector: 'divider' } );
+
+			menus.push( {
+				selector: 'js-matches'
+				, icon: 'fa fa-futbol-o'
+				, link: '/totalizator/cups/' + this.cup.cupId + '/bets/'
+				, text: translator.cupTabMenu_Bets
+			} );
+
+			menus.push( {
+				selector: 'js-matches'
+				, icon: 'fa fa-futbol-o'
+				, link: '/totalizator/cups/' + this.cup.cupId + '/winners/bets/'
+				, text: translator.cupTabMenu_WinnersBets
+			} );
+
+			return menus;
+		}
+	});
 
 	return Backbone.View.extend( {
 
@@ -37,7 +101,34 @@ define( function ( require ) {
 
 			this._renderPublicCupsMenu();
 
+			this._renderPublicCupTabs();
+
 			return this;
+		},
+
+		_renderPublicCupTabs: function() {
+
+			var cupsToShow = this.model.toJSON();
+			var selectedCupId = this.selectedCupId;
+			var container = this.$( '.js-cup-tabs' );
+
+			_.each( cupsToShow, function( cup ) {
+
+				var el = $( "<li role='presentation' title='" + cup.category.categoryName + ': ' + cup.cupName + "'></li>" );
+				if ( cup.cupId == selectedCupId ) {
+					el.addClass( 'active' );
+				}
+
+				var view = new CupTabView( {
+					cup: cup
+					, selectedCupId: selectedCupId
+					, el: el
+				} );
+
+				container.append( view.$el );
+
+				view.render();
+			} );
 		},
 
 		_renderPublicCupsMenu: function() {
