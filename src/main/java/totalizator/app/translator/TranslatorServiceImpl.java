@@ -16,6 +16,8 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	public static final String TRANSLATIONS_PATH = "src/main/resources/translations/";
 
+	private static final Language DEFAULT_LANGUAGE = Language.EN;
+
 	private Translator translator;
 
 	private static final Logger LOGGER = Logger.getLogger( TranslatorServiceImpl.class );
@@ -102,6 +104,23 @@ public class TranslatorServiceImpl implements TranslatorService {
 		translator.clearUntranslatedMap();
 
 		init();
+	}
+
+	@Override
+	public Language getLanguage( final String code ) {
+
+		final Language language = Language.getByCode( code );
+
+		if ( language != null ) {
+			return language;
+		}
+
+		return DEFAULT_LANGUAGE;
+	}
+
+	@Override
+	public Language getDefaultLanguage() {
+		return DEFAULT_LANGUAGE;
 	}
 
 	public void setTranslator( final Translator translator ) {

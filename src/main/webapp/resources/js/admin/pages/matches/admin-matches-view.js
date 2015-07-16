@@ -245,7 +245,7 @@ define( function ( require ) {
 			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
 
 			var cups = service.filterCupsByCategory( this.cups, categoryId );
-			var teams = this.model.id == 0 ? service.loadCupActiveTeams( model.cupId ) : this.teams;
+			var teams = this.model.id == 0 ? service.loadCupActiveTeams( model.cupId ) : service.filterTeamsByCategory( this.teams, categoryId );
 
 			this.$el.html( templateEntryEdit( {
 				model: model

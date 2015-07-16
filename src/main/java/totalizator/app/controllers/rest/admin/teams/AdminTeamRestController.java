@@ -61,11 +61,15 @@ public class AdminTeamRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/cups/{cupId}/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public TeamEditDTO create( final @RequestBody TeamEditDTO teamEditDTO ) {
+	public TeamEditDTO create( final @RequestBody TeamEditDTO teamEditDTO, final @PathVariable( "cupId" ) int cupId ) {
 		// TODO: check if name exists
 		final Team team = teamService.save( new Team( teamEditDTO.getTeamName(), categoryService.load( teamEditDTO.getCategoryId() ) ) );
 
-		teamEditDTO.setTeamId( team.getId() );
+		final int teamId = team.getId();
+
+		teamActivity( teamId, cupId, true );
+
+		teamEditDTO.setTeamId( teamId );
 
 		return teamEditDTO;
 	}

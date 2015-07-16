@@ -1,11 +1,13 @@
 package totalizator.app.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import totalizator.app.beans.AppContext;
 import totalizator.app.translator.Language;
+import totalizator.app.translator.TranslatorService;
 import totalizator.config.root.SecurityConfig;
 
 import javax.servlet.ServletException;
@@ -21,6 +23,9 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 	private AuthenticationSuccessHandler defaultHandler;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	public AjaxAuthenticationSuccessHandler() {
 		SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
         savedRequestAwareSuccessHandler.setTargetUrlParameter(SecurityConfig.PORTAL_PAGE_URL);
@@ -32,7 +37,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 		if ( "true".equals( request.getHeader( "X-Login-Ajax-call" ) ) ) {
 
-			final Language language = Language.getByCode( request.getParameter( "language" ) );
+			final Language language = translatorService.getLanguage( request.getParameter( "language" ) );
 
 			final AppContext context = new AppContext();
 			context.setLanguage( language );

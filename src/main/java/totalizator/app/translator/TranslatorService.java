@@ -15,4 +15,8 @@ public interface TranslatorService {
 	Map<NerdKey, TranslationData> getUnusedTranslationsMap();
 
 	void reloadTranslations() throws DocumentException;
+
+	Language getLanguage( final String code );
+
+	Language getDefaultLanguage();
 }

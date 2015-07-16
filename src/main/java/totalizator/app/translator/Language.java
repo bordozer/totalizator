@@ -51,13 +51,15 @@ public enum Language {
 	}
 
 	public static Language getByCode( final String code ) {
+
 		for ( final Language language : values() ) {
 			if ( language.getCode().equalsIgnoreCase( code ) ) {
 				return language;
 			}
 		}
 
-		throw new IllegalArgumentException( String.format( "Illegal language code: %s", code ) );
+//		throw new IllegalArgumentException( String.format( "Illegal language code: %s", code ) );
+		return null;
 	}
 
 	public static List<Language> getUILanguages() {

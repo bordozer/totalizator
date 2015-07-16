@@ -18,7 +18,7 @@
 					<div class="col-lg-12 <%-cupCustomCSS%>">
 						<%= model.publicCup && ! model.finished ? '<strong>' : '' %>
 						<%= model.finished ? '<del>' : '' %>
-							<%=categoryName%>: <%=model.cupName%>
+						<%=model.cupName%>
 						<%= model.finished ? '</del>' : '' %>
 						<%= model.publicCup && ! model.finished ? '</strong>' : '' %>
 					</div>
