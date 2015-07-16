@@ -6,6 +6,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 import totalizator.app.beans.AppContext;
 import totalizator.app.translator.Language;
+import totalizator.config.root.SecurityConfig;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,9 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	private AuthenticationSuccessHandler defaultHandler;
 
 	public AjaxAuthenticationSuccessHandler() {
-		this.defaultHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+		SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+        savedRequestAwareSuccessHandler.setTargetUrlParameter(SecurityConfig.PORTAL_PAGE_URL);
+        this.defaultHandler = savedRequestAwareSuccessHandler;
 	}
 
 	@Override

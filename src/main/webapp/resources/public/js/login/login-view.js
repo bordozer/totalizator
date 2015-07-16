@@ -44,18 +44,16 @@ define( function ( require ) {
 		},
 
 		_authenticate: function( options ) {
-			var data = 'login=' + options.login + '&password=' + options.password + '&language=' + options.language;
-			console.log( data );
 			$.ajax( {
 				method: 'POST',
 				url: '/authenticate',
-				data: data,
+				data: options,
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded",
 					"X-Login-Ajax-call": 'true'
 				},
 				success: function ( response ) {
-					if ( response == 'ok' ) {
+					if ( response === 'ok' ) {
 						window.location.replace( '/totalizator/' );
 						return;
 					}

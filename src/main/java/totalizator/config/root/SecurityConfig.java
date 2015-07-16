@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import totalizator.app.security.AjaxAuthenticationSuccessHandler;
 import totalizator.app.security.SecurityUserDetailsService;
@@ -21,27 +21,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public static final String PORTAL_PAGE_URL = "/totalizator/";
 
-	private static final String LOGIN_PAGE_URL = "/resources/public/login.html";
+    private static final String LOGIN_PAGE_URL = "/resources/public/login.html";
 
 	private static final Logger LOGGER = Logger.getLogger( SecurityConfig.class );
+    public static final String REMEMBER_ME_KEY = "myAppKey";
 
-	@Autowired
+    @Autowired
 	private SecurityUserDetailsService userDetailsService;
 
 	@Autowired
 	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
 
+    @Autowired
+    private PersistentTokenRepository persistentTokenRepository;
+
 	@Override
 	protected void configure( AuthenticationManagerBuilder auth ) throws Exception {
 		auth
-			.eraseCredentials( true )
-			.userDetailsService( userDetailsService )
-			.passwordEncoder( new BCryptPasswordEncoder() )
-		;
+			.eraseCredentials(true)
+			.userDetailsService(userDetailsService)
+			.passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
 	protected void configure( HttpSecurity http ) throws Exception {
+
 
 		http
 				.csrf().disable()
@@ -56,16 +60,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.authenticated()
 					.and()
 				.formLogin()
-					.defaultSuccessUrl( PORTAL_PAGE_URL )
+					.defaultSuccessUrl(PORTAL_PAGE_URL)
 					.loginProcessingUrl( "/authenticate" )
 					.usernameParameter( "login" )
 					.passwordParameter( "password" )
-//					.successHandler( new AjaxAuthenticationSuccessHandler( new SavedRequestAwareAuthenticationSuccessHandler() ) )
 					.successHandler( ajaxAuthenticationSuccessHandler )
 					.failureUrl( "/login?error" ) // TODO: implement
 					.loginPage( LOGIN_PAGE_URL )
-					.and()
-					.httpBasic()
 					.and()
 				.logout()
 					.logoutUrl( "/logout" )
@@ -74,19 +75,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.permitAll()
 					.and()
 				.rememberMe()
-					.rememberMeServices( rememberMeServices() )
-//					.key( "_spring_security_remember_me" )
-//					.tokenValiditySeconds( 1209600 )
-		;
-	}
+                    .tokenRepository( persistentTokenRepository )
+                    .rememberMeServices( rememberMeServices() )
+                    .key( REMEMBER_ME_KEY );
+    }
+
+
 
 	@Bean
 	public TokenBasedRememberMeServices rememberMeServices() {
 
-		final TokenBasedRememberMeServices meServices = new TokenBasedRememberMeServices( "myAppKey", userDetailsService );
-		meServices.setCookieName( "USER_ID_AUTO_SIGN_IN_TOO" );
-		meServices.setTokenValiditySeconds( 1209600 );
+		final TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices( REMEMBER_ME_KEY, userDetailsService );
+		rememberMeServices.setTokenValiditySeconds( 1209600 );
 
-		return meServices;
+		return rememberMeServices;
 	}
 }
