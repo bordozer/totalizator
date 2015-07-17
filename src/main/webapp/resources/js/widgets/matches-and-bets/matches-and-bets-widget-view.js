@@ -162,7 +162,7 @@ define( function ( require ) {
 
 			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.actionMatchBetSave + "'></button>" );
 			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
-
+			this.$( '#score1' ).focus().select();
 			return this;
 		},
 
