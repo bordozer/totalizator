@@ -14,7 +14,7 @@ var require = {
 		, text: "bower_components/text/text"
 		, bootstrap: "bower_components/bootstrap/dist/js/bootstrap.min"
 		, knockout: "bower_components/knockout/dist/knockout"
-		, chosen: "bower_components/chosen_v1.4.0/chosen.jquery"
+		, chosen: "bower_components/chosen/chosen.jquery.min"
 		, datetimepicker: "bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min"
 		, moment: "bower_components/moment/min/moment-with-locales.min"
 		, bootbox: "bower_components/bootbox/bootbox"

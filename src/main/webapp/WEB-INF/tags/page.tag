@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />">
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/chosen_v1.4.0/chosen.css" />">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bower_components/chosen/chosen.min.css" />">
 
 	<script type="text/javascript" src="<c:url value="/resources/public/js/require-config.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/bower_components/requirejs/require.js" />"></script>
