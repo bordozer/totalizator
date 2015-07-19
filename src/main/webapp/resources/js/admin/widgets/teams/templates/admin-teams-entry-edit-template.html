@@ -13,42 +13,46 @@
 
 			<div class="panel-body">
 
-				<div class="row">
+				<form method="POST" id='team_form' enctype="multipart/form-data">
 
-					<div class="col-lg-6">
-						<%= translator.teamNameLabel %>
+					<div class="row">
+
+						<div class="col-lg-6">
+							<%= translator.teamNameLabel %>
+						</div>
+
+						<div class="col-lg-6">
+							<input class="form-control entry-name" id="teamNme" name="teamNme" value="<%=model.teamName%>">
+						</div>
 					</div>
 
-					<div class="col-lg-6">
-						<input class="form-control entry-name" id="" name="" value="<%=model.teamName%>">
-					</div>
-				</div>
+					<div class="row">
 
-				<div class="row">
+						<div class="col-lg-6">
+							<%- translator.teamCategoryLabel %>
+						</div>
 
-					<div class="col-lg-6">
-						<%- translator.teamCategoryLabel %>
-					</div>
-
-					<div class="col-lg-6">
-						<select class="chosen-select entry-category-id">
-							<% _.each( categories, function( category ) { %>
-							<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : ''%>><%=category.categoryName%></option>
-							<% }) %>
-						</select>
-					</div>
-				</div>
-
-				<div class="row">
-
-					<div class="col-lg-6">
-						<%- translator.teamLogoLabel %>
+						<div class="col-lg-6">
+							<select class="chosen-select entry-category-id" id="teamCategory" name="teamCategory">
+								<% _.each( categories, function( category ) { %>
+								<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : ''%>><%=category.categoryName%></option>
+								<% }) %>
+							</select>
+						</div>
 					</div>
 
-					<div class="col-lg-6">
-						<input type="file">
+					<div class="row">
+
+						<div class="col-lg-6">
+							<%- translator.teamLogoLabel %>
+						</div>
+
+						<div class="col-lg-6">
+							<input type="file" id="teamLogoFile" name="teamLogoFile">
+						</div>
 					</div>
-				</div>
+
+				</form>
 
 			</div>
 

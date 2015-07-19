@@ -13,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import totalizator.app.cache.MyKeyGenerator;
 import totalizator.app.services.SystemVarsServiceImpl;
 import totalizator.app.translator.TranslatorServiceImpl;
@@ -59,6 +60,15 @@ public class RootContextConfig {
 	@Bean
 	public KeyGenerator keyGenerator() {
 		return new MyKeyGenerator();
+	}
+
+	@Bean
+	public CommonsMultipartResolver multipartResolver(){
+
+		final CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setDefaultEncoding( "UTF-8" );
+
+		return resolver;
 	}
 
 	private Resource getConfigLocation() {

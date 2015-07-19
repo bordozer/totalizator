@@ -47,7 +47,7 @@ define( function ( require ) {
 		},
 
 		_authenticate: function() {
-			this.trigger( 'events:authenticate', this.$('#login-form').serializeArray() );
+			this.trigger( 'events:authenticate', this.$( '#login-form' ).serializeArray() );
 		},
 
 		_onCreateNewUserButtonClick: function( evt ) {

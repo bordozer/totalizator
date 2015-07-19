@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.services.*;
@@ -108,5 +109,27 @@ public class AdminTeamRestController {
 	@RequestMapping( method = RequestMethod.POST, value = "/{teamId}/cups/{cupId}/active/{isActive}/", produces = APPLICATION_JSON_VALUE )
 	public void teamActivity( final @PathVariable( "teamId" ) int teamId, final @PathVariable( "cupId" ) int cupId, final @PathVariable( "isActive" ) boolean isActive ) {
 		cupTeamService.saveCupTeam( cupId, teamId, isActive );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.POST, value = "/{teamId}/logo/" )
+	public void uploadLogo( final @PathVariable( "teamId" ) int teamId, final @RequestBody MultipartFile logoFile ) throws IOException {
+
+		final Team team = teamService.load( teamId );
+
+		if ( logoFile == null ) {
+			team.setLogoFileName( null );
+			teamService.save( team );
+
+			logoService.deleteLogo( team );
+
+			return;
+		}
+
+		team.setLogoFileName( String.format( "team_logo_%d", team.getId() ) );
+		teamService.save( team );
+
+		logoFile.transferTo( logoService.getLogoFile( team ) );
 	}
 }

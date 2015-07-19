@@ -212,6 +212,13 @@ define( function ( require ) {
 		_saveEntry: function() {
 			this._bind();
 
+			//var data = this.$( '#team_form' ).serializeArray();
+			//console.log( data );
+
+			var url = '/admin/rest/teams/' + this.model.id + '/logo/';
+			var file = this.$( '#teamLogoFile' );
+			this._uploadFile( file, url );
+
 			if( ! this._validate() ){
 				return;
 			}
@@ -219,9 +226,37 @@ define( function ( require ) {
 			this.model.cancelEditState();
 
 			var self = this;
-			this.model.save().then( function() {
-				self.trigger( 'events:caps_changed' );
-			});
+			this.model.save()
+					.then( function() {
+						// upload file
+					})
+					.then( function() {
+						self.trigger( 'events:caps_changed' );
+					});
+		},
+
+		_uploadFile: function( file, url ) {
+			console.log( url );
+
+			var form = this.$( '#team_form' );
+			var formData = new FormData( form[2] );
+			//console.log( formData );
+
+			$.ajax( {
+				method: 'POST',
+				url: url,
+				async: false,
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function ( response ) {
+					console.log( 'OK' );
+				},
+				error: function() {
+					console.log( 'ERROR' );
+				}
+			}, 'json' );
 		},
 
 		_bind: function() {

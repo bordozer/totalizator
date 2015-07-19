@@ -7,6 +7,7 @@ public class TeamEditDTO {
 	private int categoryId;
 	private String teamLogo;
 	private boolean teamChecked;
+	private String teamLogoFile;
 
 	public TeamEditDTO() {
 	}
