@@ -170,36 +170,41 @@ define( function ( require ) {
 
 		_renderCupMatchesAndBets: function() {
 
-			var el = this.$( this.windowBodyContainerSelector );
-			el.empty();
+			var container = this.$( this.windowBodyContainerSelector );
+			container.empty();
 
 			if ( this.model.length == 0 ) {
-				el.html( translator.noMatchesFound );
+				container.html( translator.noMatchesFound );
 				this.trigger( 'inner-view-rendered' );
+
 				return;
 			}
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
-				self._renderEntry( matchBet.toJSON(), el );
+
+				var el = $( '<div></div>' );
+				container.append( el );
+
+				el.html( self._renderEntry( matchBet.toJSON() ) );
 				self._renderMatchMenu( matchBet, el );
 			});
 
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		_renderEntry: function ( model, el ) {
+		_renderEntry: function ( model ) {
 
 			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id, model.points );
 			var data = _.extend( {}, model, { transformer: matchTransformer, translator: translator } );
 
-			el.append( template( data ) );
+			return template( data );
 		},
 
-		_renderMatchMenu: function( match, container ) {
+		_renderMatchMenu: function( matchBet, container ) {
 			var matchMenu = new MatchMenu( {
-				model: match
-				, el: this.$( '.js-match-drop-down-menu', container )
+				model: matchBet
+				, el: $( '.js-match-drop-down-menu', container )
 			} );
 		}
 	} );
