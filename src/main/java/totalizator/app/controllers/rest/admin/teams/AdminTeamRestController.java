@@ -8,12 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.services.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -114,18 +117,12 @@ public class AdminTeamRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.POST, value = "/{teamId}/logo/" )
-	public void uploadLogo( final @PathVariable( "teamId" ) int teamId, final @RequestBody MultipartFile logoFile ) throws IOException {
+	public void uploadLogo( final @PathVariable( "teamId" ) int teamId, final MultipartHttpServletRequest request, final HttpServletResponse response ) throws IOException {
 
 		final Team team = teamService.load( teamId );
 
-		if ( logoFile == null ) {
-			team.setLogoFileName( null );
-			teamService.save( team );
-
-			logoService.deleteLogo( team );
-
-			return;
-		}
+		final Iterator<String> itr = request.getFileNames();
+		final MultipartFile logoFile = request.getFile( itr.next() );
 
 		team.setLogoFileName( String.format( "team_logo_%d", team.getId() ) );
 		teamService.save( team );

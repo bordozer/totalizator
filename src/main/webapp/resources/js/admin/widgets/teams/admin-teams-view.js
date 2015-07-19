@@ -210,14 +210,12 @@ define( function ( require ) {
 		},
 
 		_saveEntry: function() {
+
 			this._bind();
 
-			//var data = this.$( '#team_form' ).serializeArray();
-			//console.log( data );
-
 			var url = '/admin/rest/teams/' + this.model.id + '/logo/';
-			var file = this.$( '#teamLogoFile' );
-			this._uploadFile( file, url );
+			//var file = this.$( '#teamLogoFile' );
+			this._uploadFile( teamLogoFile, url );
 
 			if( ! this._validate() ){
 				return;
@@ -236,25 +234,27 @@ define( function ( require ) {
 		},
 
 		_uploadFile: function( file, url ) {
-			console.log( url );
 
 			var form = this.$( '#team_form' );
-			var formData = new FormData( form[2] );
-			//console.log( formData );
+
+			var formData = new FormData();
+			formData.append( "file", file.files[0] );
 
 			$.ajax( {
 				method: 'POST',
+				type: 'POST',
 				url: url,
 				async: false,
 				data: formData,
+				dataType: "text",
 				cache: false,
 				contentType: false,
 				processData: false,
 				success: function ( response ) {
-					console.log( 'OK' );
+
 				},
 				error: function() {
-					console.log( 'ERROR' );
+
 				}
 			}, 'json' );
 		},
