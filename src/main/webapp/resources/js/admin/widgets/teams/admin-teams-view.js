@@ -22,6 +22,9 @@ define( function ( require ) {
 		title: "Teams"
 		, newTeamLabel: "New team"
 		, goTopLabel: "Scroll to top"
+		, teamNameLabel: "Team name"
+		, teamCategoryLabel: "Category"
+		, teamLogoLabel: "Logo"
 	} );
 
 	var TeamsView = WidgetView.extend( {
@@ -181,6 +184,7 @@ define( function ( require ) {
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
 				, categories: this.categories
+				, translator: translator
 			} ) );
 
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
