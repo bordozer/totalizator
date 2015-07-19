@@ -35,8 +35,6 @@ define( function ( require ) {
 
 		initialize: function( options ) {
 
-			this.model.on( 'sync', this._renderTeams, this );
-
 			this.on( 'events:categories_changed', this._updateCategories, this );
 			this.on( 'events:filter_by_category', this._filterByCategory, this );
 			this.on( 'events:admin:cup:selected', this._filterBySelectedCup, this );
@@ -47,6 +45,7 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
+			this.listenToOnce( this.model, 'sync', this._renderTeams );
 			this.model.fetch( { cache: false } );
 		},
 
@@ -58,6 +57,7 @@ define( function ( require ) {
 		},
 
 		_renderTeams: function() {
+
 			this.$( this.windowBodyContainerSelector ).empty();
 
 			var filterByCategory = this.model.filterByCategory;
@@ -160,13 +160,12 @@ define( function ( require ) {
 			this.categories = options.categories;
 			this.selectedCup = options.selectedCup;
 
-			this.model.on( 'sync', this.render, this )
+			this.on( 'events:team_changed', this.render, this )
 		},
 
 		render: function () {
 
 			var model = this.model.toJSON();
-//			console.log( model );
 
 			this.$el.html( this.templateView( {
 				model: model
@@ -213,24 +212,23 @@ define( function ( require ) {
 
 			this._bind();
 
-			var url = '/admin/rest/teams/' + this.model.id + '/logo/';
-			//var file = this.$( '#teamLogoFile' );
-			this._uploadFile( teamLogoFile, url );
-
 			if( ! this._validate() ){
 				return;
 			}
 
-			this.model.cancelEditState();
+			var file = this.$( "#teamLogoFile" )[0];
 
 			var self = this;
 			this.model.save()
 					.then( function() {
-						// upload file
+						var url = '/admin/rest/teams/' + self.model.id + '/logo/';
+						self._uploadFile( file, url );
 					})
 					.then( function() {
-						self.trigger( 'events:caps_changed' );
+						self.trigger( 'events:team_changed' );
 					});
+
+			this.model.cancelEditState();
 		},
 
 		_uploadFile: function( file, url ) {
