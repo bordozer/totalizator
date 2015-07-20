@@ -40,6 +40,7 @@ define( function ( require ) {
 		, cupValidation_WinnersCountDoesNotEqualsWinners: "Cup validation: Defined winners count does not equals winners"
 		, cupResultsTab: "Cup winners"
 		, cupPositionLabel: "cup position"
+		, teamLogoLabel: "Logo"
 	} );
 
 	var CupsView = WidgetView.extend( {
@@ -50,8 +51,6 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.model.on( 'sync', this.render, this );
-
 			this.on( 'events:categories_changed', this._updateCategories, this );
 			this.on( 'events:filter_by_category', this._filterByCategory, this );
 
@@ -59,6 +58,7 @@ define( function ( require ) {
 
 			this._loadCategories();
 
+			this.listenToOnce( this.model, 'sync', this.render );
 			this.model.fetch( { cache: false } );
 		},
 
@@ -183,7 +183,8 @@ define( function ( require ) {
 
 			this.isSelected = options.isSelected;
 
-			this.model.on( 'sync', this.render, this );
+			this.on( 'events:caps_changed', this.render, this );
+			//this.listenToOnce( this.model, 'sync', this.render );
 			this.model.trigger( 'events:save-attributes' );
 		},
 
@@ -241,10 +242,6 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			/*if ( isCupFinished ) {
-				this.$( 'input, select' ).attr( 'disabled', 'disabled' );
-			}*/
-
 			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: model.cupStartDate } );
 
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
@@ -299,11 +296,18 @@ define( function ( require ) {
 			this.model.cancelEditState();
 			this.model.set( { finished: this._isFinished() } );
 
+			var file = this.$( "#cupLogoFile" );
+
 			var self = this;
-			this.model.save().then( function() {
-				self.trigger( 'events:caps_changed' );
-				self.model.trigger( 'events:save-attributes' );
-			});
+			this.model.save()
+					.then( function() {
+						var url = '/admin/rest/cups/' + self.model.id + '/logo/';
+						service.uploadFile( file, url );
+					})
+					.then( function() {
+						self.trigger( 'events:caps_changed' );
+						self.model.trigger( 'events:save-attributes' );
+					});
 		},
 
 		_bind: function() {

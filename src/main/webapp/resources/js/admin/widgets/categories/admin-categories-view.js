@@ -11,10 +11,14 @@ define( function ( require ) {
 	var TemplateEntry = require( 'text!./templates/admin-categories-template.html' );
 	var TemplateEntryEdit = require( 'text!./templates/admin-categories-edit-template.html' );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Categories"
 		, newCategoryLabel: "Admin / Categories: New category"
+		, categoryNameLabel: "Category name"
+		, logoLabel: "Logo"
 	} );
 
 	var CategoriesView = WidgetView.extend( {
@@ -25,7 +29,8 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.model.on( 'sync', this.render, this );
+			//this.model.on( 'sync', this.render, this );
+			this.listenToOnce( this.model, 'sync', this.render );
 			this.model.fetch( { cache: false } );
 		},
 
@@ -117,7 +122,8 @@ define( function ( require ) {
 		initialize: function ( options ) {
 			this.isSelected = options.isSelected;
 
-			this.model.on( 'sync', this.render, this );
+			//this.model.on( 'sync', this.render, this );
+			this.on( 'events:categories_changed', this.render, this );
 		},
 
 		render: function () {
@@ -140,6 +146,7 @@ define( function ( require ) {
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
+				, translator: translator
 			} ) );
 
 			return this;
@@ -168,10 +175,17 @@ define( function ( require ) {
 				return;
 			}
 
+			var file = this.$( "#categoryLogoFile" );
+
 			var self = this;
-			this.model.save().then( function() {
-				self.trigger( 'events:categories_changed' );
-			});
+			this.model.save()
+					.then( function() {
+						var url = '/admin/rest/categories/' + self.model.id + '/logo/';
+						service.uploadFile( file, url );
+					})
+					.then( function() {
+						self.trigger( 'events:categories_changed' );
+					});
 		},
 
 		_bind: function() {

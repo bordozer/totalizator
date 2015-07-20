@@ -53,6 +53,15 @@
 					</td>
 				</tr>
 
+				<tr>
+					<td class="admin-form-text"><%=translator.teamLogoLabel%></td>
+					<td>
+						<form method="POST" id='team_form' enctype="multipart/form-data">
+							<input type="file" id="cupLogoFile" name="cupLogoFile">
+						</form>
+					</td>
+				</tr>
+
 			</table>
 
 			<% if( isCupFinished ) { %>

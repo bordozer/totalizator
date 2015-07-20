@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.CupWinnerDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.services.*;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -122,6 +126,26 @@ public class AdminCupsRestController {
 		}
 
 		cupService.delete( cupId );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.POST, value = "/{cupId}/logo/" )
+	public void uploadLogo( final @PathVariable( "cupId" ) int cupId, final MultipartHttpServletRequest request ) throws IOException {
+
+		final Cup cup = cupService.load( cupId );
+
+		final Iterator<String> itr = request.getFileNames();
+		if ( ! itr.hasNext() ) {
+			return;
+		}
+
+		final MultipartFile logoFile = request.getFile( itr.next() );
+
+		cup.setLogoFileName( String.format( "cup_logo_%d", cup.getId() ) );
+		cupService.save( cup );
+
+		logoFile.transferTo( logoService.getLogoFile( cup ) );
 	}
 
 	private void initFromDTO( final Cup cup, final CupEditDTO cupEditDTO ) {

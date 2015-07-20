@@ -257,6 +257,34 @@ define( function ( require ) {
 			} )
 		},
 
+		uploadFile: function( fileField, url ) {
+
+			var result = true;
+
+			var formData = new FormData();
+			formData.append( "file", fileField[0].files[0] );
+
+			$.ajax( {
+				method: 'POST',
+				type: 'POST',
+				url: url,
+				async: false,
+				data: formData,
+				dataType: "text",
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function ( response ) {
+
+				},
+				error: function() {
+					result = false;
+				}
+			}, 'json' );
+
+			return result;
+		},
+
 		logout: function () {
 
 			if ( ! confirm( translator.logoutConfirmationLabel ) ) {

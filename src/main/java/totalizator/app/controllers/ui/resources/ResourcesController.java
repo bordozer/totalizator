@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import totalizator.app.models.Cup;
-import totalizator.app.models.Team;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.LogoService;

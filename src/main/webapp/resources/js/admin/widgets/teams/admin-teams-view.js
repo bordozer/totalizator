@@ -216,45 +216,19 @@ define( function ( require ) {
 				return;
 			}
 
-			var file = this.$( "#teamLogoFile" )[0];
+			var file = this.$( "#teamLogoFile" );
 
 			var self = this;
 			this.model.save()
 					.then( function() {
 						var url = '/admin/rest/teams/' + self.model.id + '/logo/';
-						self._uploadFile( file, url );
+						service.uploadFile( file, url );
 					})
 					.then( function() {
 						self.trigger( 'events:team_changed' );
 					});
 
 			this.model.cancelEditState();
-		},
-
-		_uploadFile: function( file, url ) {
-
-			var form = this.$( '#team_form' );
-
-			var formData = new FormData();
-			formData.append( "file", file.files[0] );
-
-			$.ajax( {
-				method: 'POST',
-				type: 'POST',
-				url: url,
-				async: false,
-				data: formData,
-				dataType: "text",
-				cache: false,
-				contentType: false,
-				processData: false,
-				success: function ( response ) {
-
-				},
-				error: function() {
-
-				}
-			}, 'json' );
 		},
 
 		_bind: function() {
