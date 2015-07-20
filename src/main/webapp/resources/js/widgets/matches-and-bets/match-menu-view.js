@@ -90,7 +90,7 @@ define( function ( require ) {
 						} );
 						menuItems.push( {
 							selector: 'js-menu-match-bet-delete',
-							icon: 'fa fa-close',
+							icon: 'fa fa-recycle',
 							link: '#',
 							text: translator.actionMatchBetDelete
 						} );

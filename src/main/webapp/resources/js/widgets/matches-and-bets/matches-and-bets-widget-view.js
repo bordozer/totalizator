@@ -133,7 +133,7 @@ define( function ( require ) {
 
 			if ( ! match.matchFinished ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
-				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
+				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-recycle button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
 			} else {
 				if ( model.points > 0 ) {
 					this._showBetPoints( model.points );
