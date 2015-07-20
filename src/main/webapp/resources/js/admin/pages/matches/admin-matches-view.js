@@ -187,6 +187,7 @@ define( function ( require ) {
 			, 'change .team1-select-box': '_onTeam1Change'
 			, 'change .team2-select-box': '_onTeam2Change'
 			, 'change .js-group-checkbox': '_onGroupCheckboxChange'
+			, 'change .js-score': '_onScoreChange'
 		},
 
 		initialize: function ( options ) {
@@ -416,6 +417,10 @@ define( function ( require ) {
 
 		_onGroupCheckboxChange: function() {
 			this.model.selected( this.$( '.js-group-checkbox' ).is(':checked') );
+		},
+
+		_onScoreChange: function() {
+			this.$( '.js-match-finished' ).attr( 'checked', 'checked' );
 		}
 	} );
 
