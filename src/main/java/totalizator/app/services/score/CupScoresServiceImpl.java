@@ -190,7 +190,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 		}
 	}
 
-	private UserPoints getUserPoints( List<UserPoints> usersScores, final User user ) {
+	private UserPoints getUserPoints( final List<UserPoints> usersScores, final User user ) {
 
 		for ( final UserPoints usersScore : usersScores ) {
 			if ( usersScore.getUser().equals( user ) ) {
