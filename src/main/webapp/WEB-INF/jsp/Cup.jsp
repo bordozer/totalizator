@@ -17,7 +17,7 @@
 
 			var breadcrumbs = [
 				{ link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
-				, { link: '#', title: "${cup.cupName}" }
+				, { link: '#', title: "${cup.category.categoryName}: ${cup.cupName}" }
 			];
 
 			var currentUser = ${cupModel.currentUserJSON};
