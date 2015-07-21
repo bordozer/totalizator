@@ -30,11 +30,13 @@ define( function ( require ) {
 
 		render: function() {
 
+			var buttonText = this.cup.category.categoryName + ': ' + this.cup.cupName;
+
 			var options = {
 				menus: this._cupTabMenus()
 				, menuButtonIcon: 'fa fa-cubes'
-				, menuButtonText: ' ' + this.cup.cupName
-				, menuButtonHint: this.cup.category.categoryName + ': ' + this.cup.cupName
+				, menuButtonText: buttonText
+				, menuButtonHint: buttonText
 				, cssClass: this.cup.cupId != this.selectedCupId ? 'btn-default' : 'btn-info'
 			};
 
