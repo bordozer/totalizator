@@ -2,7 +2,7 @@
 
 	<thead>
 		<tr>
-			<td class="text-center">
+			<td class="text-center" colspan="2">
 				[ <a href="#" onclick="return false;" data-letter="" class="js-cup-team-letter <%- ! active && letter == '' ? 'text-success' : '' %>"><%-translator.allTeamsLabel%></a> ]
 				[ <a href="#" onclick="return false;" data-letter="active" class="js-cup-team-letter <%- active ? 'text-success' : '' %>"><%-translator.activeTeamsLabel%></a> ]
 				<br />
@@ -17,8 +17,10 @@
 
 		<% _.each( teams, function( team ) { %>
 			<tr>
+				<td width="70" class="text-center">
+					<img src="<%-team.teamLogo%>" class="team-logo" >
+				</td>
 				<td>
-					<img src="<%-team.teamLogo%>" height="32" class="team-logo" >
 					<a href="/totalizator/teams/<%=team.teamId%>/"><%-team.teamName%></a>
 				</td>
 			</tr>

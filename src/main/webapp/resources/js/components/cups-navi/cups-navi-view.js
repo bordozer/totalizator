@@ -35,7 +35,7 @@ define( function ( require ) {
 			var options = {
 				menus: this._cupTabMenus()
 				, menuButtonIcon: 'fa fa-cubes'
-				, menuButtonText: buttonText
+				, menuButtonText: ' ' + buttonText
 				, menuButtonHint: buttonText
 				, cssClass: this.cup.cupId != this.selectedCupId ? 'btn-default' : 'btn-info'
 			};
