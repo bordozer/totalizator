@@ -22,7 +22,7 @@
 				</td>
 				<% _.each( winners, function( team ) { %>
 					<td class="text-center bg-success">
-						<img src="<%= team.teamLogo %>">
+						<img src="<%= team.teamLogo %>" class="team-logo">
 						<h4><%- team.teamName %></h4>
 					</td>
 				<% } ) %>
@@ -42,7 +42,7 @@
 
 							<% if( userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
 								<div title="<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>">
-									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" >
+									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" class="team-logo" >
 									<h5>
 										<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
 									</h5>
@@ -55,7 +55,7 @@
 
 							<% if( ! userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
 								<div class="team-out-of-cup" title="<%-translator.teamIsOutOfCupLabel%>">
-									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" height="64" >
+									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" class="team-logo" >
 								</div>
 								<h5>
 									<i class='fa fa-close'></i>
