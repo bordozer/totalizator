@@ -25,22 +25,38 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Cups"
-		, newCupLabel: "Admin / Cups: New cup"
-		, entryEditCategoryLabel: "Category"
-		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
-		, entryEditPublicCupPageLabel: "Public cup"
-		, entryEditNonPublicCupPageLabel: "Nonpublic cup"
-		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
-		, entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
-		, entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"
-		, entryEditCupIsFinishedLabel: "Admin / Cups / Edit: Cup is finished"
-		, entryEditCupStartDateLabel: "Admin / Cups / Edit: Cup start date"
-		, cupValidation_CupName: "Cup validation: Enter a cup name!"
-		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
-		, cupValidation_WinnersCountDoesNotEqualsWinners: "Cup validation: Defined winners count does not equals winners"
-		, cupResultsTab: "Cup winners"
-		, cupPositionLabel: "cup position"
-		, teamLogoLabel: "Logo"
+		,
+		newCupLabel: "Admin / Cups: New cup"
+		,
+		entryEditCategoryLabel: "Category"
+		,
+		entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
+		,
+		entryEditPublicCupPageLabel: "Public cup"
+		,
+		entryEditNonPublicCupPageLabel: "Nonpublic cup"
+		,
+		entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
+		,
+		entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
+		,
+		entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"
+		,
+		entryEditCupIsFinishedLabel: "Admin / Cups / Edit: Cup is finished"
+		,
+		entryEditCupStartDateLabel: "Admin / Cups / Edit: Cup start date"
+		,
+		cupValidation_CupName: "Cup validation: Enter a cup name!"
+		,
+		cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
+		,
+		cupValidation_WinnersCountDoesNotEqualsWinners: "Cup validation: Defined winners count does not equals winners"
+		,
+		cupResultsTab: "Cup winners"
+		,
+		cupPositionLabel: "cup position"
+		,
+		teamLogoLabel: "Logo"
 	} );
 
 	var CupsView = WidgetView.extend( {
@@ -67,12 +83,12 @@ define( function ( require ) {
 			this.$( this.windowBodyContainerSelector ).empty();
 
 			var filterByCategory = this.model.filterByCategory;
-			var self= this;
-			this.model.forEach( function( cup ) {
+			var self = this;
+			this.model.forEach( function ( cup ) {
 				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'categoryId' ) ) {
 					self.renderEntry( cup );
 				}
-			});
+			} );
 
 			this.trigger( 'inner-view-rendered' );
 
@@ -107,54 +123,51 @@ define( function ( require ) {
 			return 'fa-cubes';
 		},
 
-		getCustomMenuItems: function() {
+		getCustomMenuItems: function () {
 			return [ { selector: 'js-new-cup-button', icon: 'fa fa-plus', link: '#', text: translator.newCupLabel } ]
 		},
 
-		_triggerCupsChanged: function() {
+		_triggerCupsChanged: function () {
 			this.trigger( 'events:cups_changed' );
 		},
 
-		_triggerCupSelected: function( options ) {
+		_triggerCupSelected: function ( options ) {
 			this.trigger( 'events:admin:cup:selected', options );
 		},
 
-		_loadCategories: function() {
+		_loadCategories: function () {
 			this.categories = service.loadCategories();
 		},
 
-		_updateCategories: function() {
+		_updateCategories: function () {
 			this._loadCategories();
 			this.render();
 		},
 
-		_filterByCategory: function( options ) {
+		_filterByCategory: function ( options ) {
 			this.model.filterByCategory = options.categoryId;
 			this.model.selectedCup = { cupId: 0 };
 			this.render();
 		},
 
-		_addEntry: function() {
+		_addEntry: function () {
 			this.listenToOnce( this.model, 'add', this.renderEntry );
 			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory } );
 		},
 
-		_onCupSelect: function( options ) {
+		_onCupSelect: function ( options ) {
 			this.model.selectedCup = options.selectedCup;
 			this.render();
 
 			this._triggerCupSelected( options );
 		},
 
-		_onAddClick: function( evt ) {
+		_onAddClick: function ( evt ) {
 			evt.preventDefault();
 
 			this._addEntry();
 		}
 	} );
-
-
-
 
 
 	var CupView = Backbone.View.extend( {
@@ -164,12 +177,18 @@ define( function ( require ) {
 
 		events: {
 			'click .cup-entry-edit': '_onEntryEditClick'
-			, 'click .js-cup-entry': '_onCupClick'
-			, 'click .js-finish-cup': '_renderCupBets'
-			, 'click .cup-entry-save': '_onEntrySaveClick'
-			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
-			, 'click .cup-entry-del': '_onEntryDelClick'
-			, 'change .entry-name, .entry-category-id, .winners-count-field, .ready-for-bets-checkbox, .cup-is-finished-checkbox': '_onChange'
+			,
+			'click .js-cup-entry': '_onCupClick'
+			,
+			'click .js-finish-cup': '_renderCupBets'
+			,
+			'click .cup-entry-save': '_onEntrySaveClick'
+			,
+			'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
+			,
+			'click .cup-entry-del': '_onEntryDelClick'
+			,
+			'change .entry-name, .entry-category-id, .winners-count-field, .ready-for-bets-checkbox, .cup-is-finished-checkbox': '_onChange'
 		},
 
 		initialize: function ( options ) {
@@ -224,13 +243,13 @@ define( function ( require ) {
 
 			var self = this;
 			var cupWinners = [];
-			_.each( model.cupWinners, function( result ) {
+			_.each( model.cupWinners, function ( result ) {
 				var cupPosition = result.cupPosition;
 				var teamId = result.teamId;
 
 				var team = service.getTeam( self.allTeams, teamId );
 				cupWinners.push( { cupPosition: cupPosition, team: team } );
-			});
+			} );
 
 			var isCupFinished = this._isFinished();
 
@@ -242,14 +261,17 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.js-cup-start-date' ), initialValue: model.cupStartDate } );
+			this.dateTimePickerView = new DateTimePickerView( {
+				el: this.$( '.js-cup-start-date' ),
+				initialValue: model.cupStartDate
+			} );
 
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
 
 			return this;
 		},
 
-		_renderCupBets: function() {
+		_renderCupBets: function () {
 
 			var model = this.model.toJSON();
 
@@ -265,33 +287,33 @@ define( function ( require ) {
 			this.adminCupResultsView.render( options );
 		},
 
-		_switchEditTab: function( data ) {
+		_switchEditTab: function ( data ) {
 			this.model.set( { cupWinners: data } );
 			this.renderEdit();
 		},
 
-		_bindWinnersAndSave: function( data ) {
+		_bindWinnersAndSave: function ( data ) {
 			this.model.set( { cupWinners: data } );
 			this._saveEntry();
 		},
 
-		_getCategoryName: function( categoryId ) {
+		_getCategoryName: function ( categoryId ) {
 			var category = service.getCategory( this.categories, categoryId );
 			return category.categoryName;
 		},
 
-		_editEntry: function() {
+		_editEntry: function () {
 			this.renderEdit();
 		},
 
-		_deleteEntry: function() {
+		_deleteEntry: function () {
 			if ( confirm( "Delete cup '" + this.model.get( 'cupName' ) + "'?" ) ) {
 				this.model.destroy();
 				this.remove();
 			}
 		},
 
-		_saveEntry: function() {
+		_saveEntry: function () {
 
 			this.model.cancelEditState();
 			this.model.set( { finished: this._isFinished() } );
@@ -300,17 +322,19 @@ define( function ( require ) {
 
 			var self = this;
 			this.model.save()
-					.then( function() {
-						var url = '/admin/rest/cups/' + self.model.id + '/logo/';
-						service.uploadFile( file, url );
-					})
-					.then( function() {
+					.then( function () {
+						if ( file.length > 0 ) {
+							var url = '/admin/rest/cups/' + self.model.id + '/logo/';
+							service.uploadFile( file, url );
+						}
+					} )
+					.then( function () {
 						self.trigger( 'events:caps_changed' );
 						self.model.trigger( 'events:save-attributes' );
-					});
+					} );
 		},
 
-		_bind: function() {
+		_bind: function () {
 			var cupName = this._getCupName();
 			var categoryId = this._getCategoryId();
 			var publicCup = this._isPublicCup();
@@ -331,7 +355,7 @@ define( function ( require ) {
 			} );
 		},
 
-		_validate: function() {
+		_validate: function () {
 
 			if ( this._getCupName().length == 0 ) {
 				alert( translator.cupValidation_CupName );
@@ -355,47 +379,47 @@ define( function ( require ) {
 			return true;
 		},
 
-		_getCupName: function() {
+		_getCupName: function () {
 			return this.$( '.entry-name' ).val().trim();
 		},
 
-		_getCategoryId: function() {
+		_getCategoryId: function () {
 			return this.$( '.entry-category-id' ).val();
 		},
 
-		_isPublicCup: function() {
-			return this.$( '.show-on-portal-page-checkbox' ).is(':checked');
+		_isPublicCup: function () {
+			return this.$( '.show-on-portal-page-checkbox' ).is( ':checked' );
 		},
 
-		_isReadyForCupBest: function() {
-			return this.$( '.ready-for-cup-bets-checkbox' ).is(':checked');
+		_isReadyForCupBest: function () {
+			return this.$( '.ready-for-cup-bets-checkbox' ).is( ':checked' );
 		},
 
-		_isReadyForMatchBest: function() {
-			return this.$( '.ready-for-match-bets-checkbox' ).is(':checked');
+		_isReadyForMatchBest: function () {
+			return this.$( '.ready-for-match-bets-checkbox' ).is( ':checked' );
 		},
 
-		_isFinished: function() {
+		_isFinished: function () {
 			return this.model.get( 'cupWinners' ).length > 0;
 		},
 
-		_getWinnersCount: function() {
+		_getWinnersCount: function () {
 			return this.$( '.winners-count-field' ).val();
 		},
 
-		_onChange: function( evt ) {
+		_onChange: function ( evt ) {
 			evt.preventDefault();
 
 			this._bind();
 		},
 
-		_onEntryEditClick: function( evt ) {
+		_onEntryEditClick: function ( evt ) {
 			evt.preventDefault();
 			this.model.setEditState();
 			this._editEntry();
 		},
 
-		_onCupClick: function( evt ) {
+		_onCupClick: function ( evt ) {
 			evt.preventDefault();
 
 			this.model.isCupSelected = true;
@@ -403,25 +427,25 @@ define( function ( require ) {
 			this.trigger( "events:admin:cup:selected", { selectedCup: selectedCup } );
 		},
 
-		_onEntrySaveClick: function( evt ) {
+		_onEntrySaveClick: function ( evt ) {
 			evt.preventDefault();
 
 			this._bind();
 
-			if( ! this._validate() ){
+			if ( ! this._validate() ) {
 				return;
 			}
 
 			this._saveEntry();
 		},
 
-		_onEntryDelClick: function( evt ) {
+		_onEntryDelClick: function ( evt ) {
 			evt.preventDefault();
 
 			this._deleteEntry();
 		},
 
-		_onEntryEditCancelClick: function( evt ) {
+		_onEntryEditCancelClick: function ( evt ) {
 			evt.preventDefault();
 
 			this.model.trigger( 'events:restore-attributes' );
