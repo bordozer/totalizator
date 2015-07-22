@@ -3,37 +3,48 @@
 		<table class="table table-striped table-hover">
 
 			<% _.each( cupTeamBets, function( cupTeamBet ) { %>
-			<tr>
-				<td>
-					<strong><%=cupTeamBet.cupPosition%> <%= translator.cupPositionLabel %></strong>
-				</td>
-			</tr>
+				<tr>
+					<td>
+						<strong><%=cupTeamBet.cupPosition%> <%= translator.cupPositionLabel %></strong>
+					</td>
+				</tr>
 
-			<tr>
-				<td>
-					<% if( cupTeamBet.team != null ) { %>
+				<tr>
+					<td>
 
-						<% if( cupTeamBet.stillActive ) { %>
-							<img class="team-logo" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="64">
-							<span class="text-primary js-menu-edit-cup-bets"><%=cupTeamBet.team.teamName%></span>
+						<% if( cupTeamBet.team != null ) { %>
+
+							<% if( cupTeamBet.stillActive ) { %>
+								<div class="row">
+									<div class="col-lg-3">
+										<img class="team-logo" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="64">
+									</div>
+									<div class="col-lg-9 text-primary js-menu-edit-cup-bets" style="margin-top: 20px;">
+										<%=cupTeamBet.team.teamName%>
+									</div>
+								</div>
+							<% } %>
+
+							<% if( ! cupTeamBet.stillActive ) { %>
+								<div class="row">
+									<div class="col-lg-3">
+										<img class="team-logo team-out-of-cup" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%> ( <%-translator.teamIsOutOfCupLabel%> )" height="64">
+									</div>
+									<div class="col-lg-9 text-danger team-out-of-cup" title="<%-translator.teamIsOutOfCupLabel%>" style="margin-top: 20px;">
+										<i class='fa fa-close'></i>
+										<%=cupTeamBet.team.teamName%>
+									</div>
+								</div>
+							<% } %>
+
 						<% } %>
 
-						<% if( ! cupTeamBet.stillActive ) { %>
-							<img class="team-logo team-out-of-cup" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%> ( <%-translator.teamIsOutOfCupLabel%> )" height="64">
-							<span class="text-danger team-out-of-cup" title="<%-translator.teamIsOutOfCupLabel%>">
-								<i class='fa fa-close'></i>
-								<%=cupTeamBet.team.teamName%>
-							</span>
+						<% if( cupTeamBet.team == null ) { %>
+							<span class="text-muted js-menu-edit-cup-bets"><%=translator.noCupTeamPositionLabel%></span>
 						<% } %>
 
-					<% } %>
-
-					<% if( cupTeamBet.team == null ) { %>
-						<span class="text-muted js-menu-edit-cup-bets"><%=translator.noCupTeamPositionLabel%></span>
-					<% } %>
-
-				</td>
-			</tr>
+					</td>
+				</tr>
 			<% } ) %>
 
 		</table>
