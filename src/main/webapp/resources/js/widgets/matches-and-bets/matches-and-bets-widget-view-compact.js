@@ -164,6 +164,10 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
+		getPictureURL: function() {
+			return service.loadPublicCup( this.filter.cupId ).logoUrl;
+		},
+
 		innerViewMenuItems: function() {
 			return [ {selector: 'js-switch-views', icon: 'fa fa-newspaper-o', link: '#', text: translator.switchViewsLabel } ];
 		},

@@ -302,7 +302,6 @@ define( function ( require ) {
 
 		_assertBetting: function() {
 
-			var cup = this.model.get( 'match' ).cup;
 			if ( ! this.model.isBettingAllowed() ) {
 				alert( translator.matchBettingIsDenied );
 				return false;
@@ -325,6 +324,10 @@ define( function ( require ) {
 
 		getIcon: function() {
 			return 'fa-futbol-o';
+		},
+
+		getPictureURL: function() {
+			return service.loadPublicCup( this.filter.cupId ).logoUrl;
 		},
 
 		innerViewMenuItems: function() {

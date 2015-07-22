@@ -38,7 +38,7 @@ public class CupsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/", produces = APPLICATION_JSON_VALUE )
-	public CupDTO getDefaultLogin( final Principal principal, final @PathVariable( "cupId" ) int cupId ) {
+	public CupDTO getDefaultLogin( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
 		final Cup cup = cupService.load( cupId );
 

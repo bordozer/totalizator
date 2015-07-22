@@ -31,7 +31,7 @@ define( function ( require ) {
 		render: function () {
 
 			var buttonText = this.cup.category.categoryName + ': ' + this.cup.cupName;
-			console.log( this.cup.logoUrl );
+
 			var options = {
 				menus: this._cupTabMenus()
 				, menuButtonIcon: ''

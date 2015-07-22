@@ -120,6 +120,24 @@ define( function ( require ) {
 			return categories.toJSON();
 		},
 
+		loadPublicCup: function( cupId ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/cups/' + cupId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		// TODO: limit by category
 		loadPublicCups: function() {
 			var cups = new Cups( [], {} );

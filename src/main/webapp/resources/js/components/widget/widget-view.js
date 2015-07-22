@@ -63,15 +63,19 @@ define( function ( require ) {
 		},
 
 		getTitleHint: function() {
-
+			return '';
 		},
 
 		getIcon: function() {
 			return 'fa-windows';
 		},
 
-		renderBody: function() {
+		getPictureURL: function() {
+			return '';
+		},
 
+		renderBody: function() {
+			// render custom widget context here
 		},
 
 		setBody: function( context ) {
@@ -80,14 +84,21 @@ define( function ( require ) {
 
 		showProgress: function() {
 			var el = this._getIconEl();
+			el.html( '' );
 			el.removeClass( this.getIcon() );
 			el.addClass( this.progressIcon );
 		},
 
 		hideProgress: function() {
 			var el = this._getIconEl();
+			el.html( '' );
 			el.removeClass( this.progressIcon );
-			el.addClass( this.getIcon() );
+
+			if ( this.getPictureURL() ) {
+				el.html( "<img src='" + this.getPictureURL() + "' width='32' height='32' style='margin-top: -5px;'>" );
+			} else {
+				el.addClass( this.getIcon() );
+			}
 		},
 
 		getCustomMenuItems: function() {
