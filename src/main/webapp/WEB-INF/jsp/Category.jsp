@@ -11,17 +11,12 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/category/category', 'translator' ], function ( $, Page, category, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/category/category' ], function ( $, Page, category ) {
 
 			var categoryId = ${category.id};
 
-			var translator = new Translator( {
-				title: 'Category'
-			} );
-
 			var breadcrumbs = [
 				{ link: '#', title: "${category.categoryName}" }
-				, { link: '#', title: translator.title }
 			];
 
 			var currentUser = ${categoryModel.currentUserJSON};
