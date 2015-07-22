@@ -35,7 +35,8 @@ abstract class ScoreCalculationStrategy {
 		}
 
 		if ( userGuessedWinnerOnly( matchBet ) ) {
-			return getGuessedWinnerOnlyPoints() + getCategoryCustomPoints( matchBet );
+			final int categoryCustomPoints = getCategoryCustomPoints( matchBet );
+			return categoryCustomPoints > 0 ? categoryCustomPoints : getGuessedWinnerOnlyPoints();
 		}
 
 		return 0;
