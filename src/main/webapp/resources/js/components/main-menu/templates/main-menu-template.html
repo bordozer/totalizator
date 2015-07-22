@@ -1,7 +1,12 @@
 <div class="dropdown col-sm-2 col-md-2 col-lg-2">
 
 	<button class="btn <%=cssClass%> dropdown-toggle fa <%=menuButtonIcon%>" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" title="<%-menuButtonHint%>">
-		<span class="caret"></span><%-menuButtonText%>
+
+		<% if( menuButtonImage ) { %>
+			<img src="<%=menuButtonImage%>" height="24" width="24" style="margin-top: -5px;">
+		<% } %>
+		<%-menuButtonText%>
+		<span class="caret"></span>
 	</button>
 
 	<ul class="dropdown-menu <%=cssClass%>" role="menu" aria-labelledby="dropdownMenu1">

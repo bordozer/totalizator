@@ -17,6 +17,7 @@ define( function ( require ) {
 			this.menus = options.options.menus;
 
 			this.menuButtonIcon = options.options.menuButtonIcon;
+			this.menuButtonImage = options.options.menuButtonImage;
 			this.menuButtonText = options.options.menuButtonText;
 			this.menuButtonHint = options.options.menuButtonHint;
 
@@ -28,6 +29,7 @@ define( function ( require ) {
 			this.$el.html( this.template( {
 				model: this.model.toJSON()
 				, menuButtonIcon: this.menuButtonIcon
+				, menuButtonImage: this.menuButtonImage
 				, menuButtonHint: this.menuButtonHint
 				, menuButtonText: this.menuButtonText
 				, menus: this.menus

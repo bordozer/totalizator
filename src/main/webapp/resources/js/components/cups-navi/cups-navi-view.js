@@ -31,10 +31,11 @@ define( function ( require ) {
 		render: function() {
 
 			var buttonText = this.cup.category.categoryName + ': ' + this.cup.cupName;
-
+			console.log(this.cup.logoUrl);
 			var options = {
 				menus: this._cupTabMenus()
-				, menuButtonIcon: 'fa fa-cubes'
+				, menuButtonIcon: ''
+				, menuButtonImage: this.cup.logoUrl
 				, menuButtonText: ' ' + buttonText
 				, menuButtonHint: buttonText
 				, cssClass: this.cup.cupId != this.selectedCupId ? 'btn-default' : 'btn-info'
