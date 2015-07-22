@@ -1,11 +1,8 @@
 package totalizator.app.controllers.ui.teams.standoffs;
 
 import totalizator.app.controllers.ui.AbstractPageModel;
-import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-
-import java.util.List;
 
 public class TeamsStandoffsModel extends AbstractPageModel {
 

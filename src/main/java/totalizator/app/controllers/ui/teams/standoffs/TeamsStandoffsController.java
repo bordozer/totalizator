@@ -59,7 +59,7 @@ public class TeamsStandoffsController {
 		model.setTeam2( team2 );
 		model.setTeam2JSON( new Gson().toJson( dtoService.transformTeam( team2 ) ) );
 
-		final List<Match> matches = matchService.find( team1, team2 );
+		final List<Match> matches = matchService.loadAll( team1, team2 );
 		final Set<Cup> cupsSet = newHashSet();
 		for ( final Match match : matches ) {
 			if ( matchService.isMatchFinished( match ) ) {

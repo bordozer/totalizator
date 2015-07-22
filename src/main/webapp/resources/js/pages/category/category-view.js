@@ -48,15 +48,12 @@ define( function ( require ) {
 
 			_.each( cups, function( cup ) {
 
-				var container = $( '<div></div>' );
+				var container = $( "<div class='col-lg-3'><div class='row'><div class='col-lg-10'></div></div></div>" ); // style="margin: 10px;"
 				el.append( container );
 
 				container.append( "<h4 class='text-center'>" + dateTimeService.formatDateDisplay( cup.cupStartDate ) + "</h4>" );
 
-				var winnersContainer = $( "<div class='row'><div class='col-lg-12'></div></div>" );
-				container.append( winnersContainer );
-
-				cupWinners( winnersContainer, { cup: cup } );
+				cupWinners( container, { cup: cup } );
 			});
 		}
 	} );

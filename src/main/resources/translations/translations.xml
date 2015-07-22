@@ -171,13 +171,6 @@
 	</translation>
 
 	<translation>
-		<nerd>The cup has not finished yet</nerd>
-		<ru><![CDATA[Победители не определены - чемпионат не завершен]]></ru>
-		<en><![CDATA[The cup has not finished yet]]></en>
-		<ua><![CDATA[Переможцi ще не визначенi - чемпiонат триває]]></ua>
-	</translation>
-
-	<translation>
 		<nerd>Your groups</nerd>
 		<ru><![CDATA[Ваши группы]]></ru>
 		<en><![CDATA[Your groups]]></en>
@@ -220,10 +213,10 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Team won matches</nerd>
+		<ru><![CDATA[Выиграно матчей]]></ru>
+		<ua><![CDATA[Виграно iгор]]></ua>
+		<en><![CDATA[Won matches]]></en>
 	</translation>
 
 	<translation>

@@ -14,7 +14,7 @@ public interface CupWinnerDao extends GenericService<CupWinner> {
 
 	List<CupWinner> loadAll( final Cup cup );
 
-	List<CupWinner> loadAll( final Cup cup, final Team team );
+	CupWinner load( final Cup cup, final Team team );
 
 	void saveAll( final List<CupWinner> winners );
 }

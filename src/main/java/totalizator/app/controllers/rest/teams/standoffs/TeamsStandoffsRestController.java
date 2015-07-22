@@ -45,7 +45,7 @@ public class TeamsStandoffsRestController {
 		final Team team2 = teamService.load( team2Id );
 
 		final Set<Cup> cups = newLinkedHashSet();
-		final List<Match> matches = matchService.find( team1, team2 );
+		final List<Match> matches = matchService.loadAll( team1, team2 );
 		for ( final Match match : matches ) {
 			cups.add( match.getCup() );
 		}

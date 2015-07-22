@@ -3,7 +3,6 @@ package totalizator.app.controllers.rest.admin.cups;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import totalizator.app.dto.CupWinnerDTO;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
@@ -31,7 +30,7 @@ public class CupEditDTO {
 
 	private String logoUrl;
 
-	private List<CupWinnerDTO> cupWinners;
+	private List<CupWinnerEditDTO> cupWinners;
 
 	public int getCupId() {
 		return cupId;
@@ -115,11 +114,11 @@ public class CupEditDTO {
 		this.logoUrl = logoUrl;
 	}
 
-	public List<CupWinnerDTO> getCupWinners() {
+	public List<CupWinnerEditDTO> getCupWinners() {
 		return cupWinners;
 	}
 
-	public void setCupWinners( final List<CupWinnerDTO> cupWinners ) {
+	public void setCupWinners( final List<CupWinnerEditDTO> cupWinners ) {
 		this.cupWinners = cupWinners;
 	}
 

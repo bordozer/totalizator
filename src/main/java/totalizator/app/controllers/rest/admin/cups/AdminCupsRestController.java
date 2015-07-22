@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import totalizator.app.dto.CupDTO;
-import totalizator.app.dto.CupWinnerDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.services.*;
@@ -98,10 +97,10 @@ public class AdminCupsRestController {
 
 		initFromDTO( cup, cupEditDTO );
 
-		final List<CupWinner> winners = Lists.transform( cupEditDTO.getCupWinners(), new Function<CupWinnerDTO, CupWinner>() {
+		final List<CupWinner> winners = Lists.transform( cupEditDTO.getCupWinners(), new Function<CupWinnerEditDTO, CupWinner>() {
 
 			@Override
-			public CupWinner apply( final CupWinnerDTO dto ) {
+			public CupWinner apply( final CupWinnerEditDTO dto ) {
 				final CupWinner winner = new CupWinner();
 				winner.setCup( cup );
 				winner.setCupPosition( dto.getCupPosition() );
@@ -159,12 +158,12 @@ public class AdminCupsRestController {
 		cup.setPublicCup( cupEditDTO.isPublicCup() );
 	}
 
-	private List<CupWinnerDTO> getCupWinners( final Cup cup ) {
+	private List<CupWinnerEditDTO> getCupWinners( final Cup cup ) {
 
-		return Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, CupWinnerDTO>() {
+		return Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, CupWinnerEditDTO>() {
 			@Override
-			public CupWinnerDTO apply( final CupWinner cupWinner ) {
-				return new CupWinnerDTO( cupWinner.getCup().getId(), cupWinner.getCupPosition(), cupWinner.getTeam().getId() );
+			public CupWinnerEditDTO apply( final CupWinner cupWinner ) {
+				return new CupWinnerEditDTO( cupWinner.getCup().getId(), cupWinner.getCupPosition(), cupWinner.getTeam().getId() );
 			}
 		} );
 	}

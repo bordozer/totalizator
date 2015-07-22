@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CupDao;
+import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.services.utils.DateTimeService;
@@ -13,6 +14,7 @@ import totalizator.app.services.utils.DateTimeService;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -42,6 +44,7 @@ public class CupServiceImpl implements CupService {
 	@Override
 	public void sort( final List<Cup> cups ) {
 		Collections.sort( cups, new Comparator<Cup>() {
+
 			@Override
 			public int compare( final Cup o1, final Cup o2 ) {
 				return o2.getCupStartTime().compareTo( o1.getCupStartTime() );
@@ -94,9 +97,10 @@ public class CupServiceImpl implements CupService {
 		final List<Cup> portalPageCups = loadAllPublic();
 
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
+
 			@Override
 			public boolean evaluate( final Cup cup ) {
-				return ! isCupFinished( cup );
+				return !isCupFinished( cup );
 			}
 		} );
 
@@ -104,10 +108,11 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
-	public List<Cup> loadAllFinished() {
+	public List<Cup> loadAllPublicFinished() {
 		final List<Cup> portalPageCups = loadAllPublic();
 
 		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
+
 			@Override
 			public boolean evaluate( final Cup cup ) {
 				return isCupFinished( cup );
@@ -115,6 +120,18 @@ public class CupServiceImpl implements CupService {
 		} );
 
 		return portalPageCups;
+	}
+
+	@Override
+	public List<Cup> loadAllPublic( final Category category ) {
+
+		return loadAllPublic().stream().filter( new java.util.function.Predicate<Cup>() {
+
+			@Override
+			public boolean test( final Cup cup ) {
+				return cup.getCategory().equals( category );
+			}
+		} ).collect( Collectors.toList() );
 	}
 
 	@Override

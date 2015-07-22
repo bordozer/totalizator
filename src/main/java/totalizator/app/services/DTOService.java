@@ -41,4 +41,8 @@ public interface DTOService {
 	List<CupTeamBetDTO> transformCupTeamBets( final List<CupTeamBet> cupTeamBets, final User user );
 
 	List<UserGroupDTO> transformUserGroups( final List<UserGroup> userGroups, final User user );
+
+	CupWinnerDTO transformCupWinner( final CupWinner cupWinner, final User accessor );
+
+	List<CupWinnerDTO> transformCupWinners( final List<CupWinner> cupWinners, final User accessor );
 }

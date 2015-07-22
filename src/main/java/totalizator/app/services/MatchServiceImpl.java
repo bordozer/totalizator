@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -45,6 +44,11 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public List<Match> loadAll( final Cup cup ) {
 		return sort( newArrayList( matchRepository.loadAll( cup ) ) );
+	}
+
+	@Override
+	public List<Match> loadAll( final Cup cup, final Team team ) {
+		return sort( newArrayList( matchRepository.loadAll( cup, team ) ) );
 	}
 
 	@Override
@@ -160,7 +164,7 @@ public class MatchServiceImpl implements MatchService {
 
 	@Override
 	public Match find( final Team team1, final Team team2, final LocalDateTime localDateTime ) {
-		final List<Match> matches = matchRepository.find( team1, team2 );
+		final List<Match> matches = matchRepository.loadAll( team1, team2 );
 
 		CollectionUtils.filter( matches, new Predicate<Match>() {
 			@Override
@@ -173,8 +177,43 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<Match> find( final Team team1, final Team team2 ) {
-		return newArrayList( matchRepository.find( team1, team2 ) );
+	public List<Match> loadAll( final Team team1, final Team team2 ) {
+		return newArrayList( matchRepository.loadAll( team1, team2 ) );
+	}
+
+	@Override
+	public boolean isWinner( final Match match, final Team team ) {
+
+		if ( match.getTeam1().equals( team ) ) {
+			return match.getScore1() > match.getScore2();
+		}
+
+		return match.getScore1() < match.getScore2();
+	}
+
+	@Override
+	public int getMatchCount( final Cup cup ) {
+		return matchRepository.getMatchCount( cup );
+	}
+
+	@Override
+	public int getMatchCount( final Cup cup, final Team team ) {
+		return matchRepository.getMatchCount( cup, team );
+	}
+
+	@Override
+	public int getWonMatchCount( final Cup cup, final Team team ) {
+		int result = 0;
+
+		final List<Match> matches = loadAll( cup, team );
+
+		for ( final Match match : matches ) {
+			if ( isWinner( match, team ) ) {
+				result += 1;
+			}
+		}
+
+		return result;
 	}
 
 	private List<Match> sort( final List<Match> matches ) {
@@ -185,6 +224,7 @@ public class MatchServiceImpl implements MatchService {
 				return o2.getBeginningTime().compareTo( o1.getBeginningTime() );
 			}
 		} );
+
 		return matches;
 	}
 }

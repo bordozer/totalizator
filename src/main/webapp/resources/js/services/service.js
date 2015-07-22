@@ -146,6 +146,24 @@ define( function ( require ) {
 			return cups.toJSON();
 		},
 
+		loadPublicCupsForCategory: function( categoryId ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/categories/' + categoryId + '/cups/public/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		// TODO: limit by category
 		loadTeams: function() {
 			var teams = new Teams( [], {} );

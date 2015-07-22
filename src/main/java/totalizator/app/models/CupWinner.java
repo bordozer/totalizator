@@ -31,6 +31,7 @@ public class CupWinner extends AbstractEntity {
 	public static final String LOAD_FOR_CUP = "cupWinners.loadForCup";
 	public static final String LOAD_FOR_CUP_AND_TEAM = "cupWinners.loadForCupAndTeam";
 
+
 	@ManyToOne
 	@JoinColumn(name="cupId")
 	private Cup cup;

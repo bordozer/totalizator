@@ -1,5 +1,6 @@
 package totalizator.app.services;
 
+import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 
@@ -9,15 +10,17 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 
 	List<Cup> loadAllCurrent();
 
-	void sort( List<Cup> cups );
+	void sort( final List<Cup> cups );
 
 	List<Cup> loadAllPublic();
 
-	List<Cup> loadAllFinished();
+	List<Cup> loadAllPublicFinished();
+
+	List<Cup> loadAllPublic( final Category category );
 
 	Cup save( final Cup cup, final List<CupWinner> winners );
 
-	boolean isCupStarted( Cup cup );
+	boolean isCupStarted( final Cup cup );
 
-	boolean isCupFinished( Cup cup );
+	boolean isCupFinished( final Cup cup );
 }

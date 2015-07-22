@@ -25,6 +25,7 @@ public class MatchRepository implements MatchDao {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<Match> loadAll() {
+
 		return em.createNamedQuery( Match.LOAD_ALL, Match.class )
 				.getResultList();
 	}
@@ -32,23 +33,24 @@ public class MatchRepository implements MatchDao {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<Match> loadAll( final Cup cup ) {
+
 		return em.createNamedQuery( Match.FIND_BY_CUP, Match.class )
 				.setParameter( "cupId", cup.getId() )
 				.getResultList();
 	}
 
 	@Override
-	@Cacheable( value = CACHE_ENTRY, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key = "#id" )
 	public Match load( final int id ) {
 		return em.find( Match.class, id );
 	}
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Match save( final Match entry ) {
 		return em.merge( entry );
@@ -56,10 +58,10 @@ public class MatchRepository implements MatchDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
@@ -67,10 +69,41 @@ public class MatchRepository implements MatchDao {
 
 	@Override
 	@Cacheable( value = CACHE_QUERY )
-	public List<Match> find( final Team team1, final Team team2 ) {
+	public List<Match> loadAll( final Team team1, final Team team2 ) {
+
 		return em.createNamedQuery( Match.FIND_BY_TEAMS, Match.class )
 				.setParameter( "team1Id", team1.getId() )
 				.setParameter( "team2Id", team2.getId() )
 				.getResultList();
+	}
+
+	@Override
+	public List<Match> loadAll( final Cup cup, final Team team ) {
+
+		return em.createNamedQuery( Match.FIND_ALL_TEAM_MATCHES_FOR_CUP, Match.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "teamId", team.getId() )
+				.getResultList();
+	}
+
+	@Override
+	public int getMatchCount( final Cup cup ) {
+
+		final List<Long> winners = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_CUP, Long.class )
+				.setParameter( "cupId", cup.getId() )
+				.getResultList();
+
+		return winners != null && winners.size() > 0  ? ( int ) ( long ) winners.get( 0 ) : 0;
+	}
+
+	@Override
+	public int getMatchCount( final Cup cup, final Team team ) {
+
+		final List<Long> winners = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_CUP_AND_TEAM, Long.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "teamId", team.getId() )
+				.getResultList();
+
+		return winners != null && winners.size() > 0 ? ( int ) ( long ) winners.get( 0 ) : 0;
 	}
 }

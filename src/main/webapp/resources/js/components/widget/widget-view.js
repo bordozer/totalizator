@@ -125,6 +125,7 @@ define( function ( require ) {
 			var options = {
 				menus: menuItems
 				, menuButtonIcon: this.getIcon()
+				//, menuButtonImage: this.getPictureURL()
 				, menuButtonText: ''
 				, menuButtonHint: translator.widgetMenuHint
 				, cssClass: 'btn-default'

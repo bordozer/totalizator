@@ -16,6 +16,9 @@ import static com.google.common.collect.Lists.newArrayList;
 public class CupWinnerServiceImpl implements CupWinnerService {
 
 	@Autowired
+	private CupService cupService;
+
+	@Autowired
 	private CupWinnerDao cupWinnerRepository;
 
 	@Override
@@ -50,16 +53,20 @@ public class CupWinnerServiceImpl implements CupWinnerService {
 
 	@Override
 	@Transactional( readOnly = true )
-	public List<CupWinner> loadAll( final Cup cup, final Team team ) {
-		return newArrayList( cupWinnerRepository.loadAll( cup, team ) );
+	public CupWinner load( final Cup cup, final Team team ) {
+		return cupWinnerRepository.load( cup, team );
 	}
+	@Override
+	public List<CupWinner> loadAll( final Team team ) {
 
-	/*@Override
-	@Transactional
-	public void saveAll( final Cup cup, final List<CupWinner> winners ) {
-		deleteAllWinners( cup );
-		saveAll( winners );
-	}*/
+		final List<CupWinner> result = newArrayList();
+
+		for ( final Cup cup : cupService.loadAllPublicFinished() ) {
+			result.add( load( cup, team ) );
+		}
+
+		return result;
+	}
 
 	@Override
 	@Transactional

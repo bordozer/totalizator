@@ -173,6 +173,35 @@ public class DTOServiceImpl implements DTOService {
 		return userGroups.stream().map( mapper ).collect( Collectors.toList() );
 	}
 
+	@Override
+	public CupWinnerDTO transformCupWinner( final CupWinner cupWinner, final User accessor ) {
+		return cupWinnerFunction( accessor ).apply( cupWinner );
+	}
+
+	@Override
+	public List<CupWinnerDTO> transformCupWinners( final List<CupWinner> cupWinners, final User accessor ) {
+
+		final java.util.function.Function<? super CupWinner, CupWinnerDTO> mapper = new java.util.function.Function<CupWinner, CupWinnerDTO>() {
+
+			@Override
+			public CupWinnerDTO apply( final CupWinner cupWinner ) {
+				return cupWinnerFunction( accessor ).apply( cupWinner );
+			}
+		};
+		return cupWinners.stream().map( mapper ).collect( Collectors.toList() );
+	}
+
+	private Function<CupWinner, CupWinnerDTO> cupWinnerFunction( final User accessor ) {
+
+		return new Function<CupWinner, CupWinnerDTO>() {
+
+			@Override
+			public CupWinnerDTO apply( final CupWinner cupWinner ) {
+				return new CupWinnerDTO( transformCup( cupWinner.getCup(), accessor ), cupWinner.getCupPosition(), transformTeam( cupWinner.getTeam() ) );
+			}
+		};
+	}
+
 	private Function<User, UserDTO> userFunction() {
 
 		return new Function<User, UserDTO>() {

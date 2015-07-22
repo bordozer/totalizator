@@ -65,11 +65,14 @@ public class CupWinnerRepository implements CupWinnerDao {
 
 	@Override
 	@Cacheable( value = CACHE_QUERY )
-	public List<CupWinner> loadAll( final Cup cup, final Team team ) {
-		return em.createNamedQuery( CupWinner.LOAD_FOR_CUP_AND_TEAM, CupWinner.class )
+	public CupWinner load( final Cup cup, final Team team ) {
+
+		final List<CupWinner> list = em.createNamedQuery( CupWinner.LOAD_FOR_CUP_AND_TEAM, CupWinner.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "teamId", team.getId() )
 				.getResultList();
+
+		return list != null && list.size() > 0 ? list.get( 0 ) : null;
 	}
 
 	@Override
@@ -78,6 +81,7 @@ public class CupWinnerRepository implements CupWinnerDao {
 		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
 	} )
 	public void saveAll( final List<CupWinner> winners ) {
+
 		for ( final CupWinner winner : winners ) {
 			save( winner );
 		}

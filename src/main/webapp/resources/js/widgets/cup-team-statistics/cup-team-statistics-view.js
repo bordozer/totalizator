@@ -2,26 +2,25 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!./templates/cup-winners-widget-template.html' ) );
+	var template = _.template( require( 'text!./templates/cup-team-statistics-template.html' ) );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: 'Cup winners'
-		, cupPosition: 'cup position'
-		, cupIsNotFinished: 'The cup has not finished yet'
+		title: "Team card"
+		, cupPosition: "cup position"
+		, teamWonMatches: "Team won matches"
 		, menuOpenCupCard: 'Open cup card'
 	} );
 
 	return WidgetView.extend( {
 
 		initialize: function ( options ) {
-			this.listenTo( this.model, 'sync', this._renderWinners );
+			this.listenTo( this.model, 'sync', this._renderCupStatistics );
 			this.render();
 		},
 
@@ -51,16 +50,9 @@ define( function ( require ) {
 			];
 		},
 
-		_renderWinners: function () {
+		_renderCupStatistics: function () {
 
-			var cup = this.model.cup;
-			if ( ! cup.finished ) {
-				this.setBody( "<span class='text-center'><small>" + translator.cupIsNotFinished + "</small></span>" );
-				this.trigger( 'inner-view-rendered' );
-				return;
-			}
-
-			var data = _.extend( {}, { winners: this.model.toJSON(), translator: translator } );
+			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
 
 			this.setBody( template( data ) );
 
@@ -70,3 +62,4 @@ define( function ( require ) {
 		}
 	});
 } );
+
