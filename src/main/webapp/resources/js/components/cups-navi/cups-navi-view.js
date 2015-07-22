@@ -21,17 +21,17 @@ define( function ( require ) {
 		, cupTabMenu_Card: 'card'
 	} );
 
-	var CupTabView =Backbone.View.extend( {
+	var CupTabView = Backbone.View.extend( {
 
-		initialize: function( options ) {
+		initialize: function ( options ) {
 			this.selectedCupId = options.selectedCupId;
 			this.cup = options.cup;
 		},
 
-		render: function() {
+		render: function () {
 
 			var buttonText = this.cup.category.categoryName + ': ' + this.cup.cupName;
-			console.log(this.cup.logoUrl);
+			console.log( this.cup.logoUrl );
 			var options = {
 				menus: this._cupTabMenus()
 				, menuButtonIcon: ''
@@ -44,7 +44,7 @@ define( function ( require ) {
 			mainMenu( options, this.$el );
 		},
 
-		_cupTabMenus: function() {
+		_cupTabMenus: function () {
 
 			var menus = [];
 
@@ -82,16 +82,16 @@ define( function ( require ) {
 
 			return menus;
 		}
-	});
+	} );
 
 	return Backbone.View.extend( {
 
-		initialize: function( options ) {
+		initialize: function ( options ) {
 
 			this.on( 'navigation:set:active:cup', this._setSelectedCupId, this );
 
 			this.listenTo( this.model, 'sync', this.render );
-			this.model.fetch( { cache: false} );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
@@ -109,13 +109,13 @@ define( function ( require ) {
 			return this;
 		},
 
-		_renderPublicCupTabs: function() {
+		_renderPublicCupTabs: function () {
 
 			var cupsToShow = this.model.toJSON();
 			var selectedCupId = this.selectedCupId;
 			var container = this.$( '.js-cup-tabs' );
 
-			_.each( cupsToShow, function( cup ) {
+			_.each( cupsToShow, function ( cup ) {
 
 				var el = $( "<li role='presentation' title='" + cup.category.categoryName + ': ' + cup.cupName + "'></li>" );
 				if ( cup.cupId == selectedCupId ) {
@@ -134,7 +134,7 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderPublicCupsMenu: function() {
+		_renderPublicCupsMenu: function () {
 			var options = {
 				menus: this._publicCupsMenuItems()
 				, menuButtonIcon: 'fa-cubes'
@@ -142,24 +142,24 @@ define( function ( require ) {
 				, menuButtonHint: translator.allCups
 				, cssClass: 'btn-default'
 			};
-			mainMenu( options, this.$( '.js-public-cups-menu') );
+			mainMenu( options, this.$( '.js-public-cups-menu' ) );
 		},
 
-		_setSelectedCupId: function( options ) {
+		_setSelectedCupId: function ( options ) {
 
 			this.selectedCupId = options.selectedCupId;
 
 			this.render();
 		},
 
-		_publicCupsMenuItems: function() {
+		_publicCupsMenuItems: function () {
 
 			var menus = [];
 			var self = this;
 
 			var cups = service.loadPublicCups();
 
-			_.each( cups, function( cup ) {
+			_.each( cups, function ( cup ) {
 
 				var selected = self.selectedCupId && self.selectedCupId === cup.cupId;
 
