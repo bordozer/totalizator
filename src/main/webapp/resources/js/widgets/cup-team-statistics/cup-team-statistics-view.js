@@ -13,6 +13,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Team card"
 		, cupPosition: "cup position"
+		, teamPlayedMatches: "Team played matches"
 		, teamWonMatches: "Team won matches"
 		, menuOpenCupCard: 'Open cup card'
 	} );
@@ -52,8 +53,8 @@ define( function ( require ) {
 
 		_renderCupStatistics: function () {
 
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
-
+			var data = _.extend( {}, this.model.toJSON(), { team: this.model.team, translator: translator } );
+			console.log( data );
 			this.setBody( template( data ) );
 
 			this.trigger( 'inner-view-rendered' );

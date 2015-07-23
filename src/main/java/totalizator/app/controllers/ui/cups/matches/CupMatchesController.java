@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.CupService;
+import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
@@ -23,6 +24,9 @@ public class CupMatchesController {
 	private UserService userService;
 
 	@Autowired
+	private TeamService teamService;
+
+	@Autowired
 	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
@@ -31,9 +35,34 @@ public class CupMatchesController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/matches/" )
-	public String portalPage( final @PathVariable( "cupId" ) int cupId, final @ModelAttribute( MODEL_NAME ) CupMatchesModel model ) {
+	public String cupMatches( final @PathVariable( "cupId" ) int cupId
+			, final @ModelAttribute( MODEL_NAME ) CupMatchesModel model ) {
 
 		model.setCup( cupService.load( cupId ) );
+
+		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/matches/teams/{teamId}/" )
+	public String cupMatchesForTeam( final @PathVariable( "cupId" ) int cupId
+			, final @PathVariable( "teamId" ) int teamId
+			, final @ModelAttribute( MODEL_NAME ) CupMatchesModel model ) {
+
+		model.setCup( cupService.load( cupId ) );
+		model.setTeam1( teamService.load( teamId ) );
+
+		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/matches/teams/{team1Id}/{team2Id}/" )
+	public String cupMatchesForTeam1( final @PathVariable( "cupId" ) int cupId
+			, final @PathVariable( "team1Id" ) int team1Id
+			, final @PathVariable( "team2Id" ) int team2Id
+			, final @ModelAttribute( MODEL_NAME ) CupMatchesModel model ) {
+
+		model.setCup( cupService.load( cupId ) );
+		model.setTeam1( teamService.load( team1Id ) );
+		model.setTeam2( teamService.load( team2Id ) );
 
 		return VIEW;
 	}

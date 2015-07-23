@@ -14,6 +14,8 @@
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup-matches/cup-matches', 'translator' ], function ( $, Page, cupMatches, Translator ) {
 
 			var cupId = ${cup.id};
+			var team1Id = ${not empty cupMatchesModel.team1 ? cupMatchesModel.team1.id : 0};
+			var team2Id = ${not empty cupMatchesModel.team2 ? cupMatchesModel.team2.id : 0};
 
 			var translator = new Translator( {
 				title: 'Cup matches'
@@ -33,6 +35,8 @@
 				, breadcrumbs: breadcrumbs
 				, options: {
 					cupId: cupId
+					, team1Id: team1Id
+					, team2Id: team2Id
 					, currentUser: currentUser
 				}
 			} );

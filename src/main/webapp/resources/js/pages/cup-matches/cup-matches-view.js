@@ -18,7 +18,10 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		initialize: function ( options ) {
+
 			this.cupId = options.options.cupId;
+			this.team1Id = options.options.team1Id;
+			this.team2Id = options.options.team2Id;
 			this.currentUser = options.options.currentUser;
 
 			this.model.on( 'sync', this.render, this );
@@ -48,6 +51,8 @@ define( function ( require ) {
 				filter: {
 					categoryId: cup.category.categoryId
 					, cupId: cup.cupId
+					, teamId: this.team1Id
+					, team2Id: this.team2Id
 					, showFutureMatches: isFuture
 					, showFinished: ! isFuture
 				}

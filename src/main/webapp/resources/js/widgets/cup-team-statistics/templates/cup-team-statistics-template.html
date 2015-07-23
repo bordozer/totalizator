@@ -2,7 +2,12 @@
 	<div class="col-lg-12" style="min-height: 120px;">
 
 		<h6>
-			<%= translator.teamWonMatches %>: <strong><%= wonMatchCount %> / <strong><%= matchCount %></strong>
+			<%= translator.teamPlayedMatches %>:
+			<strong>
+				<a href="/totalizator/cups/<%=cup.cupId%>/matches/teams/<%=team.teamId%>/"> <%= matchCount %> </a>
+			</strong>
+			<br />
+			<%= translator.teamWonMatches %>: <strong><%= wonMatchCount %></strong>
 		</h6>
 
 		<% if( cupWinner ){ %>
