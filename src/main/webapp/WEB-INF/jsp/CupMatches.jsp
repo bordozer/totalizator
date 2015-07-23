@@ -24,8 +24,19 @@
 			var breadcrumbs = [
 				{ link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
 				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
-				, { link: '#', title: translator.title }
 			];
+
+			<c:if test="${not empty cupMatchesModel.team1}">
+
+				breadcrumbs.push( { link: '/totalizator/teams/${cupMatchesModel.team1.id}/', title: '${cupMatchesModel.team1.teamName}' } );
+
+				<c:if test="${not empty cupMatchesModel.team2}">
+					breadcrumbs.push( { link: '#', title: 'vs' } );
+					breadcrumbs.push( { link: '/totalizator/teams/${cupMatchesModel.team2.id}/', title: '${cupMatchesModel.team2.teamName}' } );
+				</c:if>
+			</c:if>
+
+			breadcrumbs.push( { link: '#', title: translator.title } );
 
 			var currentUser = ${cupMatchesModel.currentUserJSON};
 
