@@ -19,20 +19,22 @@
 									<div class="col-lg-3">
 										<img class="team-logo" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%>" height="64">
 									</div>
-									<div class="col-lg-9 text-primary js-menu-edit-cup-bets" style="margin-top: 20px;">
-										<%=cupTeamBet.team.teamName%>
+									<div class="col-lg-8 text-primary" style="margin-top: 20px;">
+										<a href="#" onclick="return false;"><span class="fa fa-edit js-menu-edit-cup-bets"></span></a>
+										<a href="/totalizator/teams/<%=cupTeamBet.team.teamId%>/"><%=cupTeamBet.team.teamName%></a>
 									</div>
 								</div>
 							<% } %>
 
 							<% if( ! cupTeamBet.stillActive ) { %>
 								<div class="row">
+									<div class="col-lg-1"></div>
 									<div class="col-lg-3">
 										<img class="team-logo team-out-of-cup" src="<%=cupTeamBet.team.teamLogo%>" title="<%=cupTeamBet.team.teamName%> ( <%-translator.teamIsOutOfCupLabel%> )" height="64">
 									</div>
 									<div class="col-lg-9 text-danger team-out-of-cup" title="<%-translator.teamIsOutOfCupLabel%>" style="margin-top: 20px;">
 										<i class='fa fa-close'></i>
-										<%=cupTeamBet.team.teamName%>
+										<a href="/totalizator/teams/<%=cupTeamBet.team.teamId%>/"><%=cupTeamBet.team.teamName%></a>
 									</div>
 								</div>
 							<% } %>
@@ -40,7 +42,8 @@
 						<% } %>
 
 						<% if( cupTeamBet.team == null ) { %>
-							<span class="text-muted js-menu-edit-cup-bets"><%=translator.noCupTeamPositionLabel%></span>
+							<a href="#" onclick="return false;"><span class="fa fa-edit js-menu-edit-cup-bets"></span></a>
+							<span class="text-muted"> <%=translator.noCupTeamPositionLabel%></span>
 						<% } %>
 
 					</td>

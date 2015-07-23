@@ -17,13 +17,13 @@
 		<% if( homeTeamNumber == 1 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
-		<%=team1.teamName%>
+		<a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a>
 		<img class="team-logo" src="<%=team1.teamLogo%>" height="32">
 	</div>
 
 	<div class="col-lg-3 <%=matchResults.style2%>">
 		<img class="team-logo" src="<%=team2.teamLogo%>" height="32">
-		<%=team2.teamName%>
+		<a href="/totalizator/teams/<%=team2.teamId%>/"><%=team2.teamName%></a>
 		<% if( homeTeamNumber == 2 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>

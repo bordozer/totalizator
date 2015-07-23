@@ -203,6 +203,8 @@ define( function ( require ) {
 			return {
 				matchId: match.matchId
 				, cup: match.cup
+				, team1: team1
+				, team2: team2
 				, team1Name: team1.teamName
 				, team2Name: team2.teamName
 				, matchResults: matchResults

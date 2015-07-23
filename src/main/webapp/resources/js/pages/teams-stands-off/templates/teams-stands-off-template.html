@@ -2,7 +2,7 @@
 	<div class="col-lg-12">
 
 		<div class="col-lg-6 text-right">
-			<%=team1.teamName%>
+			<a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a>
 			<img class="team-logo" src="<%=team1.teamLogo%>" title="<%=team1.teamName%>">
 			<%=score1%>
 		</div>
@@ -10,7 +10,7 @@
 		<div class="col-lg-6">
 			<%=score2%>
 			<img class="team-logo" src="<%=team2.teamLogo%>" title="<%=team2.teamName%>">
-			<%=team2.teamName%>
+			<a href="/totalizator/teams/<%=team2.teamId%>/"><%=team2.teamName%></a>
 		</div>
 	</div>
 </div>

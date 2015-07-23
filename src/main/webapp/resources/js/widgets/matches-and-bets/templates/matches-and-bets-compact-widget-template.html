@@ -14,7 +14,12 @@
 		<% if( transformer.homeTeamNumber() == 1 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
-		<small><%= transformer.team1().teamName %></small> <img src="<%= transformer.team1().teamLogo %>" height="32">
+		<small>
+			<a href="/totalizator/teams/<%- transformer.team1().teamId %>/"><%= transformer.team1().teamName %></a>
+		</small>
+		<a href="/totalizator/teams/<%- transformer.team1().teamId %>/">
+			<img src="<%= transformer.team1().teamLogo %>" height="32">
+		</a>
 	</div>
 
 	<div class="col-lg-1 text-right">
@@ -38,7 +43,12 @@
 	</div>
 
 	<div class="col-lg-3 <%= matchResults.style2 %>">
-		<img src="<%= transformer.team2().teamLogo %>" height="32"> <small><%= transformer.team2().teamName %></small>
+		<a href="/totalizator/teams/<%- transformer.team2().teamId %>/">
+			<img src="<%= transformer.team2().teamLogo %>" height="32">
+		</a>
+		<small>
+			<a href="/totalizator/teams/<%- transformer.team2().teamId %>/"><%= transformer.team2().teamName %></a>
+		</small>
 		<% if( transformer.homeTeamNumber() == 2 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>

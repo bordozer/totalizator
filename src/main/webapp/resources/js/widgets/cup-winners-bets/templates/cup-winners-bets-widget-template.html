@@ -23,7 +23,7 @@
 				<% _.each( winners, function( team ) { %>
 					<td class="text-center bg-success">
 						<img src="<%= team.teamLogo %>" class="team-logo">
-						<h4><%- team.teamName %></h4>
+						<h4><a href="/totalizator/teams/<%- team.teamId %>/"><%- team.teamName %></a></h4>
 					</td>
 				<% } ) %>
 			</tr>
@@ -44,7 +44,7 @@
 								<div title="<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>">
 									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" class="team-logo" >
 									<h5>
-										<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+										<a href="/totalizator/teams/<%=userCupBet.userCupBets[ i - 1 ].team.teamId%>/"><%= userCupBet.userCupBets[ i - 1 ].team.teamName %></a>
 									</h5>
 								</div>
 
@@ -59,7 +59,7 @@
 								</div>
 								<h5>
 									<i class='fa fa-close'></i>
-									<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+									<a href="/totalizator/teams/<%=userCupBet.userCupBets[ i - 1 ].team.teamId%>/"><%= userCupBet.userCupBets[ i - 1 ].team.teamName %></a>
 								</h5>
 							<% } %>
 
