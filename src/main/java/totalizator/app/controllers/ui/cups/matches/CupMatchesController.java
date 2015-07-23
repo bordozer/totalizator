@@ -54,7 +54,7 @@ public class CupMatchesController {
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/matches/teams/{team1Id}/{team2Id}/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/matches/teams/{team1Id}/vs/{team2Id}/" )
 	public String cupMatchesForTeam1( final @PathVariable( "cupId" ) int cupId
 			, final @PathVariable( "team1Id" ) int team1Id
 			, final @PathVariable( "team2Id" ) int team2Id

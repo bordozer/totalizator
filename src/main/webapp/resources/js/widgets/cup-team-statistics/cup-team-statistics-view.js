@@ -54,7 +54,7 @@ define( function ( require ) {
 		_renderCupStatistics: function () {
 
 			var data = _.extend( {}, this.model.toJSON(), { team: this.model.team, translator: translator } );
-			console.log( data );
+
 			this.setBody( template( data ) );
 
 			this.trigger( 'inner-view-rendered' );
