@@ -45,13 +45,13 @@ define( function ( require ) {
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
 					link: '/totalizator/cups/15/matches/teams/' + match.team1.teamId + '/',
-					text: match.team1.teamName + ' - ' + translator.matches + ' ( ' + match.cup.cupName + ' )'
+					text: match.cup.cupName + ' / ' + match.team1.teamName + ' - ' + translator.matches
 				}
 				, {
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
 					link: '/totalizator/cups/15/matches/teams/' + match.team2.teamId + '/',
-					text: match.team2.teamName + ' - ' + translator.matches + ' ( ' + match.cup.cupName + ' )'
+					text: match.cup.cupName + ' / ' + match.team2.teamName + ' - ' + translator.matches
 				}
 				, {selector: 'divider'}
 				, {

@@ -44,17 +44,17 @@ define( function ( require ) {
 
 		getCustomMenuItems: function() {
 			return [
-				{ selector: 'js-menu-cup-card'
-					, icon: 'fa fa-external-link'
-					, link: '/totalizator/cups/' + this.model.cup.cupId + '/'
-					, text: translator.menuOpenCupCard
-				}
-				, {selector: 'divider'}
-				, {
+				{
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
 					link: '/totalizator/cups/15/matches/teams/' + this.model.team.teamId + '/',
-					text: this.model.team.teamName + ' - ' + translator.matches + ' ( ' + this.model.cup.cupName + ' )'
+					text:  this.model.cup.cupName + ' / ' + this.model.team.teamName + ' - ' + translator.matches
+				}
+				, {selector: 'divider'}
+				, { selector: 'js-menu-cup-card'
+					, icon: 'fa fa-external-link'
+					, link: '/totalizator/cups/' + this.model.cup.cupId + '/'
+					, text: translator.menuOpenCupCard
 				}
 			];
 		},
