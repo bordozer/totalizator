@@ -16,6 +16,7 @@ define( function ( require ) {
 		, teamPlayedMatches: "Team played matches"
 		, teamWonMatches: "Team won matches"
 		, menuOpenCupCard: 'Open cup card'
+		, matches: 'matches'
 	} );
 
 	return WidgetView.extend( {
@@ -47,6 +48,13 @@ define( function ( require ) {
 					, icon: 'fa fa-external-link'
 					, link: '/totalizator/cups/' + this.model.cup.cupId + '/'
 					, text: translator.menuOpenCupCard
+				}
+				, {selector: 'divider'}
+				, {
+					selector: 'js-menu-team1-matches',
+					icon: 'fa fa-futbol-o',
+					link: '/totalizator/cups/15/matches/teams/' + this.model.team.teamId + '/',
+					text: this.model.team.teamName + ' - ' + translator.matches + ' ( ' + this.model.cup.cupName + ' )'
 				}
 			];
 		},
