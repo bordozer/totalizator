@@ -62,7 +62,7 @@ public class TeamCardRestController {
 		dto.setTeam( dtoService.transformTeam( team ) );
 
 		final List<TeamCardCupData> cupDataMap = newArrayList();
-		for ( final Cup cup : cupService.loadAllPublic( team.getCategory() ) ) {
+		for ( final Cup cup : cupService.loadAllPublicFinished( team.getCategory() ) ) {
 			cupDataMap.add( getTeamCardCupData( currentUser, team, cup ) );
 		}
 

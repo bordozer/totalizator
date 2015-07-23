@@ -14,9 +14,11 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 
 	List<Cup> loadAllPublic();
 
+	List<Cup> loadAllPublic( final Category category );
+
 	List<Cup> loadAllPublicFinished();
 
-	List<Cup> loadAllPublic( final Category category );
+	List<Cup> loadAllPublicFinished( final Category category );
 
 	Cup save( final Cup cup, final List<CupWinner> winners );
 
