@@ -14,6 +14,8 @@ public interface MatchService extends GenericService<Match>{
 
 	List<Match> loadAll( final Cup cup, final Team team );
 
+	List<Match> loadAllFinished( Cup cup, Team team );
+
 	List<Match> loadAll( final MatchesBetSettingsDTO dto );
 
 	boolean isMatchStarted( Match match );
@@ -29,6 +31,8 @@ public interface MatchService extends GenericService<Match>{
 	int getMatchCount( final Cup cup );
 
 	int getMatchCount( final Cup cup, final Team team );
+
+	int getFinishedMatchCount( Cup cup, Team team );
 
 	int getWonMatchCount( final Cup cup, final Team team );
 }

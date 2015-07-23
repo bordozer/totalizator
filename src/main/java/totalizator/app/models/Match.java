@@ -34,6 +34,10 @@ import static totalizator.app.models.Match.*;
 		@NamedQuery(
 				name = LOAD_MATCH_COUNT_FOR_CUP_AND_TEAM,
 				query = "select count(m) from Match m where ( cupId= :cupId ) and ( team1Id= :teamId or team2Id= :teamId )"
+		),
+		@NamedQuery(
+				name = LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM,
+				query = "select count(m) from Match m where ( cupId= :cupId ) and ( matchFinished = true ) and ( team1Id= :teamId or team2Id= :teamId )"
 		)
 } )
 public class Match extends AbstractEntity {
@@ -44,6 +48,7 @@ public class Match extends AbstractEntity {
 	public static final String FIND_ALL_TEAM_MATCHES_FOR_CUP = "matches.findByCupAndTeam";
 	public static final String LOAD_MATCH_COUNT_FOR_CUP = "cups.loadCupMatchCount";
 	public static final String LOAD_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.loadTeamMatchCountForCup";
+	public static final String LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.finishedMatchCountForCupAndTeam";
 
 	@ManyToOne
 	@JoinColumn(name="cupId")

@@ -62,7 +62,7 @@ public class TeamCardRestController {
 		dto.setTeam( dtoService.transformTeam( team ) );
 
 		final List<TeamCardCupData> cupDataMap = newArrayList();
-		for ( final Cup cup : cupService.loadAllPublicFinished( team.getCategory() ) ) {
+		for ( final Cup cup : cupService.loadAllPublic( team.getCategory() ) ) {
 			cupDataMap.add( getTeamCardCupData( currentUser, team, cup ) );
 		}
 
@@ -74,7 +74,7 @@ public class TeamCardRestController {
 	private TeamCardCupData getTeamCardCupData( final User currentUser, final Team team, final Cup cup ) {
 		final TeamCardCupData cupData = new TeamCardCupData( dtoService.transformCup( cup, currentUser ) );
 
-		cupData.setMatchCount( matchService.getMatchCount( cup, team ) );
+		cupData.setMatchCount( matchService.getFinishedMatchCount( cup, team ) );
 		cupData.setWonMatchCount( matchService.getWonMatchCount( cup, team ) );
 
 		final CupWinner cupWinner = cupWinnerService.load( cup, team );

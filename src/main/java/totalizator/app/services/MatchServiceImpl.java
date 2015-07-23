@@ -52,6 +52,21 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	public List<Match> loadAllFinished( final Cup cup, final Team team ) {
+		final List<Match> matches = matchRepository.loadAll( cup, team );
+
+		matches.stream().filter( new java.util.function.Predicate<Match>() {
+
+			@Override
+			public boolean test( final Match match ) {
+				return isMatchFinished( match );
+			}
+		} );
+
+		return sort( newArrayList( matches ) );
+	}
+
+	@Override
 	public List<Match> loadAll( final MatchesBetSettingsDTO dto ) {
 
 		final List<Match> matches = loadAll();
@@ -202,10 +217,15 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	public int getFinishedMatchCount( final Cup cup, final Team team ) {
+		return matchRepository.getFinishedMatchCount( cup, team );
+	}
+
+	@Override
 	public int getWonMatchCount( final Cup cup, final Team team ) {
 		int result = 0;
 
-		final List<Match> matches = loadAll( cup, team );
+		final List<Match> matches = loadAllFinished( cup, team );
 
 		for ( final Match match : matches ) {
 			if ( isWinner( match, team ) ) {

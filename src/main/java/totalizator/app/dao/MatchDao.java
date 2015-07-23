@@ -21,4 +21,6 @@ public interface MatchDao extends GenericService<Match> {
 	int getMatchCount( final Cup cup );
 
 	int getMatchCount( final Cup cup, final Team team );
+
+	int getFinishedMatchCount( final Cup cup, final Team team );
 }

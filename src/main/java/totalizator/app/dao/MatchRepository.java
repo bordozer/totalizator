@@ -106,4 +106,15 @@ public class MatchRepository implements MatchDao {
 
 		return winners != null && winners.size() > 0 ? ( int ) ( long ) winners.get( 0 ) : 0;
 	}
+
+	@Override
+	public int getFinishedMatchCount( final Cup cup, final Team team ) {
+
+		final List<Long> winners = em.createNamedQuery( Match.LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM, Long.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "teamId", team.getId() )
+				.getResultList();
+
+		return winners != null && winners.size() > 0 ? ( int ) ( long ) winners.get( 0 ) : 0;
+	}
 }
