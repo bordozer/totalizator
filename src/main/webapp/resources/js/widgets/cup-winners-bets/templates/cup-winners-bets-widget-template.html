@@ -44,7 +44,12 @@
 								<div title="<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>">
 									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" class="team-logo" >
 									<h5>
+										<% if( userCupBet.userCupBets[ i - 1 ].team.teamId > 0 ) { %>
 										<a href="/totalizator/teams/<%=userCupBet.userCupBets[ i - 1 ].team.teamId%>/"><%= userCupBet.userCupBets[ i - 1 ].team.teamName %></a>
+										<% } %>
+										<% if( userCupBet.userCupBets[ i - 1 ].team.teamId == 0 ) { %>
+											<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+										<% } %>
 									</h5>
 								</div>
 
