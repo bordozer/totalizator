@@ -35,6 +35,7 @@ define( function ( require ) {
 		, no: 'no'
 		, validationNoCategory: 'Configurable view / Filter: Validation: Select category'
 		, validationNoCup: 'Configurable view / Filter: Validation: Select cup'
+		, menuOpenCupCard: 'Open cup card'
 	} );
 
 	return WidgetView.extend( {
@@ -93,9 +94,13 @@ define( function ( require ) {
 
 		getCustomMenuItems: function() {
 
+			var model = this.settingsModel.toJSON();
+
 			var result = [
 				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel }
+				, { selector: 'divider' }
+				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
 			];
 
 			var viewMenuItems = this.innerViewMenuItems();
