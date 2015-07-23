@@ -17,6 +17,7 @@ define( function ( require ) {
 		, actionMatchBetDelete: 'Match and Bets: Delete bet'
 		, actionAllMatchBet: 'Portal page / Matches / Menu: All bets'
 		, actionStandOffHistory: 'Teams standoff history'
+		, matches: 'matches'
 	} );
 
 	return Backbone.View.extend( {
@@ -38,6 +39,19 @@ define( function ( require ) {
 					icon: 'fa fa-calendar',
 					link: '/totalizator/teams/standoff/' + match.team1.teamId + '/vs/' + match.team2.teamId + '/',
 					text: translator.actionStandOffHistory
+				}
+				, {selector: 'divider'}
+				, {
+					selector: 'js-menu-team1-matches',
+					icon: 'fa fa-futbol-o',
+					link: '/totalizator/cups/15/matches/teams/' + match.team1.teamId + '/',
+					text: match.team1.teamName + ' - ' + translator.matches
+				}
+				, {
+					selector: 'js-menu-team1-matches',
+					icon: 'fa fa-futbol-o',
+					link: '/totalizator/cups/15/matches/teams/' + match.team2.teamId + '/',
+					text: match.team2.teamName + ' - ' + translator.matches
 				}
 				, {selector: 'divider'}
 				, {

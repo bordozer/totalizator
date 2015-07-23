@@ -87,6 +87,13 @@
 	</translation>
 
 	<translation>
+		<nerd>matches</nerd>
+		<ru><![CDATA[матчи]]></ru>
+		<en><![CDATA[games]]></en>
+		<ua><![CDATA[iгри]]></ua>
+	</translation>
+
+	<translation>
 		<nerd>Loading...</nerd>
 		<ru><![CDATA[Загрузка...]]></ru>
 		<en><![CDATA[Loading...]]></en>
