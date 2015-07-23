@@ -14,7 +14,6 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.MatchBetsService;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +37,10 @@ public class UserCardRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/card/", produces = APPLICATION_JSON_VALUE )
-	public UserCardDTO cupUsersScores( final @PathVariable( "userId" ) int userId, final Principal principal ) {
+	public UserCardDTO cupUsersScores(
+			final @PathVariable( "userId" ) int userId
+			, final @RequestParam( value = "cupId", required = false ) Integer cupId
+	) {
 
 		final User user = userService.load( userId );
 
@@ -46,6 +48,11 @@ public class UserCardRestController {
 
 		final Set<Cup> cupsWhereUserHasBets = newHashSet();
 		for ( final MatchBet matchBet : matchBets ) {
+
+			if ( cupId != null && matchBet.getMatch().getCup().getId() != cupId ) {
+				continue;
+			}
+
 			cupsWhereUserHasBets.add( matchBet.getMatch().getCup() );
 		}
 		CollectionUtils.filter( cupsWhereUserHasBets, new Predicate<Cup>() {

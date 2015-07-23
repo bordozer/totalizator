@@ -31,7 +31,12 @@
 
 			var currentUser = ${userCardModel.currentUserJSON};
 
-			var pageView = new Page( { el: $( '.js-user-card-container' ), bodyRenderer: userCard, breadcrumbs: breadcrumbs, options: { userId: userId, currentUser: currentUser } } );
+			var options = {
+				userId: userId,
+				filterByCupId: ${userCardModel.filterByCupId},
+				currentUser: currentUser
+			};
+			var pageView = new Page( { el: $( '.js-user-card-container' ), bodyRenderer: userCard, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();
 		} );
 

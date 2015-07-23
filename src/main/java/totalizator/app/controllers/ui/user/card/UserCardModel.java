@@ -6,6 +6,7 @@ import totalizator.app.models.User;
 public class UserCardModel extends AbstractPageModel {
 
 	private final User user;
+	private int filterByCupId;
 
 	public UserCardModel( final User user, final User currentUser ) {
 		super( currentUser );
@@ -14,5 +15,13 @@ public class UserCardModel extends AbstractPageModel {
 
 	public User getUser() {
 		return user;
+	}
+
+	public void setFilterByCupId( final int filterByCupId ) {
+		this.filterByCupId = filterByCupId;
+	}
+
+	public int getFilterByCupId() {
+		return filterByCupId;
 	}
 }

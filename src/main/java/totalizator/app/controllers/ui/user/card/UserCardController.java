@@ -2,10 +2,7 @@ package totalizator.app.controllers.ui.user.card;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;
@@ -27,7 +24,10 @@ public class UserCardController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String portalPage( final @ModelAttribute( MODEL_NAME ) UserCardModel model ) {
+	public String portalPage( final @ModelAttribute( MODEL_NAME ) UserCardModel model, final @RequestParam( value = "cupId", required = false ) Integer cupId ) {
+
+		model.setFilterByCupId( cupId != null ? cupId : 0 );
+
 		return VIEW;
 	}
 }
