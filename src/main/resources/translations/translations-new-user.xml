@@ -3,49 +3,49 @@
 <translations>
 
 	<translation>
-		<nerd>Create user: Create user</nerd>
+		<nerd>Create user</nerd>
 		<ru><![CDATA[Регистрация нового пользователя]]></ru>
 		<en><![CDATA[Create user]]></en>
 		<ua><![CDATA[Реєстрацiя]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Create user: Login</nerd>
+		<nerd>Create login</nerd>
 		<ru><![CDATA[Логин]]></ru>
 		<en><![CDATA[Login]]></en>
 		<ua><![CDATA[Логiн]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Create user: Name</nerd>
+		<nerd>User name</nerd>
 		<ru><![CDATA[Имя]]></ru>
 		<en><![CDATA[Name]]></en>
 		<ua><![CDATA[Iм'я]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Create user: Password</nerd>
+		<nerd>Create password</nerd>
 		<ru><![CDATA[Пароль]]></ru>
 		<en><![CDATA[Password]]></en>
 		<ua><![CDATA[Пароль]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Create user: Confirm password</nerd>
+		<nerd>Create password confirmation</nerd>
 		<ru><![CDATA[Еще раз пароль]]></ru>
 		<en><![CDATA[Confirm password]]></en>
 		<ua><![CDATA[Ще раз пароль]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Create user: Back to login</nerd>
+		<nerd>Back to login</nerd>
 		<ru><![CDATA[Вернуться]]></ru>
 		<en><![CDATA[Back to login]]></en>
 		<ua><![CDATA[Назад]]></ua>
 	</translation>
 
 	<translation>
-		<nerd>Create user: Save data</nerd>
+		<nerd>Register user</nerd>
 		<ru><![CDATA[Зарегистрироваться]]></ru>
 		<en><![CDATA[Register]]></en>
 		<ua><![CDATA[Зареєструватися]]></ua>
@@ -98,6 +98,20 @@
 		<ru><![CDATA[Введенные пароли не совпадают]]></ru>
 		<en><![CDATA[Entered passwords are not equal]]></en>
 		<ua><![CDATA[А чому у вас паролi рiзнi?]]></ua>
+	</translation>
+
+	<translation>
+		<nerd>personal data</nerd>
+		<ru><![CDATA[персональные данные]]></ru>
+		<ua><![CDATA[персональнi данi]]></ua>
+		<en><![CDATA[personal data]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Edit personal data</nerd>
+		<ru><![CDATA[Редактировать]]></ru>
+		<en><![CDATA[Редагувати]]></en>
+		<ua><![CDATA[Edit data]]></ua>
 	</translation>
 
 	<translation>

@@ -22,16 +22,15 @@ define( function ( require ) {
 	var LoginCompositeView = Backbone.View.extend( {
 
 		initialize: function( options ) {
+
 			this.loginFormModel = new LoginFormModel.LoginFormModel();
 			this.loginFormView = new LoginFormView.LoginFormView( { model: this.loginFormModel, el: this.$el } );
+			this.loginFormView.on( 'events:create_new_user_clicked', this._renderNewUserForm, this );
+			this.loginFormView.on( 'events:authenticate', this._authenticate, this );
 
 			this.userDataModel = new UserDataModel.UserDataModel();
 			this.userDataView = new UserDataView.UserDataView( { model: this.userDataModel, el: this.$el } );
-
-			this.loginFormView.on( 'events:create_new_user_clicked', this._renderNewUserForm, this );
 			this.userDataView.on( 'events:back_to_login', this._renderLoginForm, this );
-
-			this.loginFormView.on( 'events:authenticate', this._authenticate, this );
 			this.userDataView.on( 'events:authenticate', this._authenticate, this );
 
 			this.render();

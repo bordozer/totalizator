@@ -1,12 +1,18 @@
 package totalizator.app.controllers.rest.user.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Size;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class UserDTO {
+public class UserEditDTO {
 
 	private int userId;
 	private String login;
+
+	@NotBlank
+	@Size( min = 3 )
 	private String userName;
 
 	public int getUserId() {

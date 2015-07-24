@@ -17,6 +17,7 @@ define( function ( require ) {
 		menuAdminLabel: "Administration"
 		, menuUsersLabel: 'Users'
 		, menuYourGroupsLabel: 'Your groups'
+		, menuPersonalDataLabel: 'User settings'
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
@@ -48,9 +49,12 @@ define( function ( require ) {
 				menus.push( { selector: 'divider' } );
 			}
 
-			menus.push( { selector: '', icon: 'fa fa-user', link: '/totalizator/users/', text: translator.menuUsersLabel } );
-			menus.push( { selector: 'divider' } );
 			menus.push( { selector: '', icon: 'fa fa-users', link: '/totalizator/users/' + this.currentUser.userId + '/groups/', text: translator.menuYourGroupsLabel } );
+			menus.push( { selector: '', icon: 'fa fa-database', link: '/totalizator/users/' + this.currentUser.userId + '/settings/', text: translator.menuPersonalDataLabel } );
+			menus.push( { selector: 'divider' } );
+
+			menus.push( { selector: '', icon: 'fa fa-user', link: '/totalizator/users/', text: translator.menuUsersLabel } );
+
 			menus.push( { selector: 'divider' } );
 			menus.push( { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel } );
 

@@ -22,7 +22,6 @@ define( function ( require ) {
 		refresh: function() {
 			this.fetch( { reset: true } );
 		}
-
 	});
 
 	return { UserDataModel: UserDataModel };

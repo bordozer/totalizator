@@ -13,13 +13,13 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		newUserDataTitleLabel: 'Create user: Create user'
-		, userDataLoginLabel: 'Create user: Login'
-		, userDataNameLabel: 'Create user: Name'
-		, userDataPasswordLabel: 'Create user: Password'
-		, userDataConfirmPasswordLabel: 'Create user: Confirm password'
-		, userDataBackToLoginPageLabel: 'Create user: Back to login'
-		, userDataSaveButtonLabel: 'Create user: Save data'
+		newUserDataTitleLabel: 'Create user'
+		, userDataLoginLabel: 'Create login'
+		, userDataNameLabel: 'User name'
+		, userDataPasswordLabel: 'Create password'
+		, userDataConfirmPasswordLabel: 'Create password confirmation'
+		, userDataBackToLoginPageLabel: 'Back to login'
+		, userDataSaveButtonLabel: 'Register user'
 	} );
 
 	var UserDataView = Backbone.View.extend( {

@@ -9,9 +9,9 @@ define( function( require ) {
 	var Model = require( './user-data-model' );
 	var View = require( './user-data-view' );
 
-	function init( container ) {
-		var model = new Model.UserDataModel();
-		var view = new View.UserDataView( { model: model, el: container } );
+	function init( container, options ) {
+		var model = new Model.UserDataModel( { options: options } );
+		var view = new View.UserDataView( { model: model, el: container, options: options } );
 
 		view.render();
 	}
