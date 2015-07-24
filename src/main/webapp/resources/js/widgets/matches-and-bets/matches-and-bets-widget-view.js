@@ -131,13 +131,17 @@ define( function ( require ) {
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score text-right " + resultHighlight.style1 + "'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score " + resultHighlight.style2 + "'>" + bet.score2 + "</div>" );
 
-			if ( ! match.matchFinished ) {
+			if ( ! match.matchFinished && this.model.isBettingAllowed() ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-recycle button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
-			} else {
-				if ( model.points > 0 ) {
-					this._showBetPoints( model.points );
-				}
+			}
+
+			if ( ! this.model.isBettingAllowed() ) {
+				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-info button-edit-bet' title='" + model.bettingValidationMessage + "'></button>" );
+			}
+
+			if ( model.points > 0 ) {
+				this._showBetPoints( model.points );
 			}
 
 			return this;
