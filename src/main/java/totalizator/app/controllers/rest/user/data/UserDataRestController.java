@@ -52,9 +52,15 @@ public class UserDataRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.POST, value = "/{userId}/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public UserEditDTO saveUserData( @Valid @RequestBody final UserEditDTO dto ) {
+	public UserEditDTO saveUserData( @Valid @RequestBody final UserEditDTO dto, final Principal principal ) {
 
 		final User user = userService.load( dto.getUserId() );
+
+		final User currentUser = userService.findByLogin( principal.getName() );
+		if ( ! currentUser.equals( user )  ) {
+			throw new IllegalStateException( "Can not edit data of another user" );
+		}
+
 		user.setUsername( dto.getUserName() );
 
 		userService.save( user );
