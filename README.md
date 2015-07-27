@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bordozer/totalizator.svg?branch=public)](https://travis-ci.org/bordozer/totalizator)
+
 Github link
 
 https://github.com/bordozer/totalizator
