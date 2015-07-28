@@ -9,17 +9,16 @@ import totalizator.app.beans.AppContext;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 import totalizator.config.root.SecurityConfig;
+import totalizator.config.servlet.RequestListener;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Component
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-
-	public static final String APPLICATION_CONTEXT = "APPLICATION_CONTEXT";
 
 	private AuthenticationSuccessHandler defaultHandler;
 
@@ -37,18 +36,26 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 		if ( "true".equals( request.getHeader( "X-Login-Ajax-call" ) ) ) {
 
-			final Language language = translatorService.getLanguage( request.getParameter( "language" ) );
+			final Language language = getLanguage( request );
 
-			final AppContext context = new AppContext();
-			context.setLanguage( language );
+			setLanguageCookie( response, language );
 
-			final HttpSession session = request.getSession();
-			session.setAttribute( APPLICATION_CONTEXT, context );
+			AppContext.init( language, request.getSession() );
 
 			response.getWriter().print( "ok" );
 			response.getWriter().flush();
 		} else {
 			defaultHandler.onAuthenticationSuccess( request, response, authentication );
 		}
+	}
+
+	private Language getLanguage( final HttpServletRequest request ) {
+		return translatorService.getLanguage( request.getParameter( "language" ) );
+	}
+
+	private static void setLanguageCookie( final HttpServletResponse response, final Language language ) {
+		final Cookie languageCookie = new Cookie( RequestListener.LANGUAGE_COOKIE_NAME, language.getCode() );
+		languageCookie.setMaxAge( Integer.MAX_VALUE );
+		response.addCookie( languageCookie );
 	}
 }

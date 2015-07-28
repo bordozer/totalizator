@@ -48,7 +48,7 @@ public class RootContextConfig {
 	}
 
 	@Bean( name = "translatorService", initMethod = "init" )
-	public TranslatorServiceImpl TranslatorService() {
+	public TranslatorServiceImpl translatorService() {
 		return new TranslatorServiceImpl();
 	}
 
@@ -70,6 +70,11 @@ public class RootContextConfig {
 
 		return resolver;
 	}
+
+	/*@Bean
+	public RequestListener requestListener() {
+		return new RequestListener();
+	}*/
 
 	private Resource getConfigLocation() {
 		return new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" );

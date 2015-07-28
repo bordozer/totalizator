@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import totalizator.app.beans.AppContext;
-import totalizator.app.security.AjaxAuthenticationSuccessHandler;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
@@ -32,18 +31,21 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public TranslationDTO getDefaultLogin( final TranslationDTO dto, final HttpServletRequest request ) {
 
-		final HttpSession session = request.getSession();
-		final AppContext context = ( AppContext ) session.getAttribute( AjaxAuthenticationSuccessHandler.APPLICATION_CONTEXT );
-		final Language language = context != null ? context.getLanguage() : translatorService.getDefaultLanguage();
+		final Language language = getLanguage( request.getSession() );
 
 		final Map<String, String> translations = dto.getTranslations();
 
 		return new TranslationDTO( Maps.transformValues( translations, new Function<String, String>() {
+
 			@Override
 			public String apply( final String nerd ) {
 				return translate( nerd, language );
 			}
 		} ) );
+	}
+
+	private Language getLanguage( final HttpSession session ) {
+		return AppContext.read( session ).getLanguage();
 	}
 
 	private String translate( final String text, final Language language ) {

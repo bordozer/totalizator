@@ -1,16 +1,20 @@
 package totalizator.config;
 
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 public class SessionListener implements HttpSessionListener {
 
-	public static final int SESSION_TIMEOUT_SECONDS = 3600;
+	private static final int SESSION_TIMEOUT_SECONDS = 3600;
 
 	@Override
-	public void sessionCreated( HttpSessionEvent event ) {
+	public void sessionCreated( final HttpSessionEvent event ) {
+
 		System.out.println( "==== Session is created ====" );
-		event.getSession().setMaxInactiveInterval( SESSION_TIMEOUT_SECONDS );
+
+		final HttpSession session = event.getSession();
+		session.setMaxInactiveInterval( SESSION_TIMEOUT_SECONDS );
 	}
 
 	@Override

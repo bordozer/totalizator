@@ -6,6 +6,7 @@ import totalizator.config.root.DevelopmentConfiguration;
 import totalizator.config.root.RootContextConfig;
 import totalizator.config.root.SecurityConfig;
 import totalizator.config.root.TestConfiguration;
+import totalizator.config.servlet.RequestListener;
 import totalizator.config.servlet.ServletContextConfig;
 
 import javax.servlet.Filter;
@@ -33,6 +34,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	public void onStartup( final ServletContext servletContext ) throws ServletException {
 		super.onStartup( servletContext );
 		servletContext.addListener( new SessionListener() );
+		servletContext.addListener( new RequestListener() );
 	}
 
 	@Override
