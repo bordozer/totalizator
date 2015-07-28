@@ -71,11 +71,6 @@ public class RootContextConfig {
 		return resolver;
 	}
 
-	/*@Bean
-	public RequestListener requestListener() {
-		return new RequestListener();
-	}*/
-
 	private Resource getConfigLocation() {
 		return new FileSystemResource( "src/main/webapp/WEB-INF/ehcache.xml" );
 	}

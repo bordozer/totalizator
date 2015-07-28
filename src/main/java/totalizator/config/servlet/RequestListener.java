@@ -13,9 +13,6 @@ public class RequestListener extends RequestContextListener {
 
 	public static final String LANGUAGE_COOKIE_NAME = "language";
 
-//	@Autowired
-//	private TranslatorService translatorService;
-
 	@Override
 	public void requestInitialized( final ServletRequestEvent requestEvent ) {
 		super.requestInitialized( requestEvent );
