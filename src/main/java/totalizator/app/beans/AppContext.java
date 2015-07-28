@@ -11,23 +11,12 @@ public class AppContext {
 
 	public static AppContext init( final Language language, final HttpSession session ) {
 
-		if ( session.getAttribute( APPLICATION_CONTEXT ) != null ) {
-			return ( AppContext ) session.getAttribute( APPLICATION_CONTEXT );
-		}
+		final AppContext context = new AppContext();
+		context.setLanguage( language );
 
-		synchronized ( AppContext.class ) {
+		session.setAttribute( APPLICATION_CONTEXT, context );
 
-			if ( session.getAttribute( APPLICATION_CONTEXT ) != null ) {
-				return ( AppContext ) session.getAttribute( APPLICATION_CONTEXT );
-			}
-
-			final AppContext context = new AppContext();
-			context.setLanguage( language );
-
-			session.setAttribute( APPLICATION_CONTEXT, context );
-
-			return context;
-		}
+		return context;
 	}
 
 	public static AppContext read( final HttpSession session ) {
