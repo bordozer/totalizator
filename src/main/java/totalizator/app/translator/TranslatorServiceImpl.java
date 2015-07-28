@@ -115,7 +115,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 			return language;
 		}
 
-		return DEFAULT_LANGUAGE;
+		return getDefaultLanguage();
 	}
 
 	@Override

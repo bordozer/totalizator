@@ -111,6 +111,6 @@ public class NBAImportRestController {
 	}
 
 	private Language getLanguage() {
-		return Language.RU; // TODO: language!
+		return translatorService.getDefaultLanguage();
 	}
 }

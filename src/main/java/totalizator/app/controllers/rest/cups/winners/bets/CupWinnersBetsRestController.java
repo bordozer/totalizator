@@ -14,7 +14,6 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.CupWinnerService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.utils.DateTimeService;
-import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.security.Principal;
@@ -119,7 +118,7 @@ public class CupWinnersBetsRestController {
 			fakeTeam.setTeamId( 0 );
 			fakeTeam.setTeamLogo( "/resources/img/team-logo-not-found.png" );
 			fakeTeam.setTeamName( translatorService.translate( "Team name is hidden till $1"
-					, Language.RU // TODO: Language!!!
+					, translatorService.getDefaultLanguage()
 					, dateTimeService.formatDateTimeUI( cup.getCupStartTime() )
 			) );
 

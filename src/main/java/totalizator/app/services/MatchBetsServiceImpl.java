@@ -113,7 +113,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	public ValidationResult validateBettingAllowed( final Match match, final User user ) {
 
-		final Language language = Language.RU; // TODO: language!
+		final Language language = translatorService.getDefaultLanguage();
 
 		final Cup cup = match.getCup();
 

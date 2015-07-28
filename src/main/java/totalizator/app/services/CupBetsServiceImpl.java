@@ -91,7 +91,7 @@ public class CupBetsServiceImpl implements CupBetsService {
 	@Override
 	public ValidationResult validateBettingAllowed( final Cup cup ) {
 
-		final Language language = Language.RU; // TODO: language!
+		final Language language = translatorService.getDefaultLanguage();
 
 		if ( cupService.isCupFinished( cup ) ) {
 			return ValidationResult.fail( translatorService.translate( "Cup $1 finished", language, cup.getCupName() ) );

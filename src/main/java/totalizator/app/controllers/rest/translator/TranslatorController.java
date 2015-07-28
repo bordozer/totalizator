@@ -34,7 +34,7 @@ public class TranslatorController {
 
 		final HttpSession session = request.getSession();
 		final AppContext context = ( AppContext ) session.getAttribute( AjaxAuthenticationSuccessHandler.APPLICATION_CONTEXT );
-		final Language language = context != null ? context.getLanguage() : Language.RU;
+		final Language language = context != null ? context.getLanguage() : translatorService.getDefaultLanguage();
 
 		final Map<String, String> translations = dto.getTranslations();
 

@@ -10,7 +10,6 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.score.CupScoresService;
-import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
@@ -85,10 +84,6 @@ public class UserTitleServiceImpl implements UserTitleService {
 	}
 
 	private String getTitle( final String nerd, final int luckyLevel ) {
-		return String.format( "%s %s", translatorService.translate( nerd, getLanguage() ), luckyLevel ) + "%";
-	}
-
-	private Language getLanguage() {
-		return Language.RU; // TODO: language!!!
+		return String.format( "%s %s", translatorService.translate( nerd, translatorService.getDefaultLanguage() ), luckyLevel ) + "%";
 	}
 }
