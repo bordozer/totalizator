@@ -15,7 +15,7 @@ public class AppContext {
 			return ( AppContext ) session.getAttribute( APPLICATION_CONTEXT );
 		}
 
-		synchronized ( session.getAttribute( APPLICATION_CONTEXT ) ) {
+		synchronized ( AppContext.class ) {
 
 			if ( session.getAttribute( APPLICATION_CONTEXT ) != null ) {
 				return ( AppContext ) session.getAttribute( APPLICATION_CONTEXT );
