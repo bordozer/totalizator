@@ -5,99 +5,99 @@
 	<translation>
 		<nerd>Create user</nerd>
 		<ru><![CDATA[Регистрация нового пользователя]]></ru>
-		<en><![CDATA[Create user]]></en>
 		<ua><![CDATA[Реєстрацiя]]></ua>
+		<en><![CDATA[Create user]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create login</nerd>
 		<ru><![CDATA[Логин]]></ru>
-		<en><![CDATA[Login]]></en>
 		<ua><![CDATA[Логiн]]></ua>
+		<en><![CDATA[Login]]></en>
 	</translation>
 
 	<translation>
 		<nerd>User name</nerd>
 		<ru><![CDATA[Имя]]></ru>
-		<en><![CDATA[Name]]></en>
 		<ua><![CDATA[Iм'я]]></ua>
+		<en><![CDATA[Name]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create password</nerd>
 		<ru><![CDATA[Пароль]]></ru>
-		<en><![CDATA[Password]]></en>
 		<ua><![CDATA[Пароль]]></ua>
+		<en><![CDATA[Password]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create password confirmation</nerd>
 		<ru><![CDATA[Еще раз пароль]]></ru>
-		<en><![CDATA[Confirm password]]></en>
 		<ua><![CDATA[Ще раз пароль]]></ua>
+		<en><![CDATA[Confirm password]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Back to login</nerd>
 		<ru><![CDATA[Вернуться]]></ru>
-		<en><![CDATA[Back to login]]></en>
 		<ua><![CDATA[Назад]]></ua>
+		<en><![CDATA[Back to login]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Register user</nerd>
 		<ru><![CDATA[Зарегистрироваться]]></ru>
-		<en><![CDATA[Register]]></en>
 		<ua><![CDATA[Зареєструватися]]></ua>
+		<en><![CDATA[Register]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Enter login</nerd>
 		<ru><![CDATA[Введите логин]]></ru>
-		<en><![CDATA[Define a login]]></en>
 		<ua><![CDATA[Введiть логiн]]></ua>
+		<en><![CDATA[Define a login]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Login must have minimum 3 characters</nerd>
 		<ru><![CDATA[Логин должен быть не менее 3-х символов]]></ru>
-		<en><![CDATA[Login must have minimum 3 characters]]></en>
 		<ua><![CDATA[Логiн повинен бути не менш нiж 3 символи]]></ua>
+		<en><![CDATA[Login must have minimum 3 characters]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Enter name</nerd>
 		<ru><![CDATA[Введите имя]]></ru>
-		<en><![CDATA[Define a name]]></en>
 		<ua><![CDATA[Введiть iм'я]]></ua>
+		<en><![CDATA[Define a name]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Name must have minimum 3 characters</nerd>
 		<ru><![CDATA[Имя должно быть не менее 3-х символов]]></ru>
-		<en><![CDATA[Name must have minimum 3 characters]]></en>
 		<ua><![CDATA[Iм'я повиненно бути не менш нiж 3 символи]]></ua>
+		<en><![CDATA[Name must have minimum 3 characters]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Password can not be null</nerd>
 		<ru><![CDATA[Пароль не может быть пустым]]></ru>
-		<en><![CDATA[Password can not be null]]></en>
 		<ua><![CDATA[Пароль не повинен бути пустим]]></ua>
+		<en><![CDATA[Password can not be null]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Confirm password</nerd>
 		<ru><![CDATA[Введите подтверждение пароля]]></ru>
-		<en><![CDATA[Confirm password]]></en>
 		<ua><![CDATA[Введiть пiдтвердження паролю]]></ua>
+		<en><![CDATA[Confirm password]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Create user validation message: Entered passwords are not equal</nerd>
 		<ru><![CDATA[Введенные пароли не совпадают]]></ru>
-		<en><![CDATA[Entered passwords are not equal]]></en>
 		<ua><![CDATA[А чому у вас паролi рiзнi?]]></ua>
+		<en><![CDATA[Entered passwords are not equal]]></en>
 	</translation>
 
 	<translation>
@@ -110,22 +110,22 @@
 	<translation>
 		<nerd>Edit personal data</nerd>
 		<ru><![CDATA[Редактировать]]></ru>
-		<en><![CDATA[Редагувати]]></en>
-		<ua><![CDATA[Edit data]]></ua>
+		<ua><![CDATA[Редагувати]]></ua>
+		<en><![CDATA[Edit data]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>
