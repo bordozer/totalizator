@@ -16,7 +16,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	public static final String TRANSLATIONS_PATH = "src/main/resources/translations/";
 
-	private static final Language DEFAULT_LANGUAGE = Language.EN;
+	public static final Language DEFAULT_LANGUAGE = Language.EN;
 
 	private Translator translator;
 

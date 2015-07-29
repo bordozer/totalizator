@@ -3,6 +3,7 @@ package totalizator.config.servlet;
 import org.springframework.web.context.request.RequestContextListener;
 import totalizator.app.beans.AppContext;
 import totalizator.app.translator.Language;
+import totalizator.app.translator.TranslatorServiceImpl;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.http.Cookie;
@@ -41,7 +42,7 @@ public class RequestListener extends RequestContextListener {
 			return cookie;
 		}
 
-		return Language.EN; // TODO: translatorService.getDefaultLanguage();
+		return TranslatorServiceImpl.DEFAULT_LANGUAGE; // TODO: translatorService.getDefaultLanguage();
 	}
 
 	private Language getLanguageFromCookie( final HttpServletRequest request ) {
