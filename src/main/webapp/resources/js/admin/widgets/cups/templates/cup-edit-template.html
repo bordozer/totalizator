@@ -62,6 +62,17 @@
 					</td>
 				</tr>
 
+				<tr>
+					<td class="admin-form-text"><%=translator.cupPointsCalculationStrategyLabel%></td>
+					<td>
+						<select class="form-control" id="cupPointsCalculationStrategyId" name="cupPointsCalculationStrategyId">
+							<% _.each( cupPointsCalculationStrategies, function( strategy ) { %>
+								<option value="<%=strategy.pcsId%>" <%= model.cupPointsCalculationStrategyId == strategy.pcsId ? 'selected' : ''%> ><%=strategy.strategyName%></option>
+							<% } ) %>
+						</select>
+					</td>
+				</tr>
+
 			</table>
 
 			<% if( isCupFinished ) { %>

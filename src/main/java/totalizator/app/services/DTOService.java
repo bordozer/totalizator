@@ -45,4 +45,6 @@ public interface DTOService {
 	CupWinnerDTO transformCupWinner( final CupWinner cupWinner, final User accessor );
 
 	List<CupWinnerDTO> transformCupWinners( final List<CupWinner> cupWinners, final User accessor );
+
+	List<PointsCalculationStrategyDTO> transformPCStrategies( final List<PointsCalculationStrategy> strategies );
 }

@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
+import totalizator.app.models.PointsCalculationStrategy;
 import totalizator.app.models.Team;
 
 import java.io.IOException;
@@ -27,10 +28,20 @@ public class NCAA extends AbstractDataInitializer {
 	@Override
 	protected List<Cup> generateCups( final Category category, final List<Team> teams, final Session session ) {
 
+		final PointsCalculationStrategy pointsStrategy = new PointsCalculationStrategy();
+		pointsStrategy.setStrategyName( "NCAA points calculation strategy" );
+		pointsStrategy.setPointsForMatchScore( 4 );
+		pointsStrategy.setPointsForMatchWinner( 1 );
+		pointsStrategy.setPointsDelta( 3 );
+		pointsStrategy.setPointsForBetWithinDelta( 2 );
+
+		session.persist( pointsStrategy );
+
 		final Cup ncaa2015 = new Cup( CUP_1, category );
 		ncaa2015.setPublicCup( true );
 		ncaa2015.setWinnersCount( 8 );
 		ncaa2015.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
+		ncaa2015.setPointsCalculationStrategy( pointsStrategy );
 
 		session.persist( ncaa2015 );
 

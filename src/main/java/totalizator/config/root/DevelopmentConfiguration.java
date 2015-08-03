@@ -14,7 +14,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import totalizator.app.init.TestDataInitializer;
 import totalizator.app.services.SystemVarsService;
 
 import javax.persistence.SharedCacheMode;
@@ -60,7 +59,7 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
 		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
-		//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" );
+//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" ); // TODO: for DB upgrade only
 		jpaProperties.put( "hibernate.connection.CharSet", "utf8" );
 		jpaProperties.put( "hibernate.connection.characterEncoding", "utf8" );
 		jpaProperties.put( "hibernate.connection.useUnicode", "true" );
@@ -75,7 +74,6 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( Environment.USE_QUERY_CACHE, true );
 		jpaProperties.put( Environment.GENERATE_STATISTICS, true );
 		jpaProperties.put( Environment.USE_STRUCTURED_CACHE, true );
-		//		jpaProperties.put( Environment.CACHE_PROVIDER_CONFIG, "src/main/webapp/WEB-INF/ehcache.xml" );
 
 		entityManagerFactoryBean.setJpaPropertyMap( jpaProperties );
 
@@ -87,6 +85,7 @@ public class DevelopmentConfiguration {
 
 		final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
 		jdbcTokenRepository.setDataSource( dataSource() );
+//		jdbcTokenRepository.setCreateTableOnStartup( true ); // TODO: for DB upgrade only
 
 		return jdbcTokenRepository;
 	}

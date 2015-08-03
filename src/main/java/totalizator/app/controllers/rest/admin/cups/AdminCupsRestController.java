@@ -47,6 +47,9 @@ public class AdminCupsRestController {
 	private UserService userService;
 
 	@Autowired
+	private PointsCalculationStrategyService pointsCalculationStrategyService;
+
+	@Autowired
 	private DTOService dtoService;
 
 	private static final Logger LOGGER = Logger.getLogger( AdminCupsRestController.class );
@@ -147,15 +150,17 @@ public class AdminCupsRestController {
 		logoFile.transferTo( logoService.getLogoFile( cup ) );
 	}
 
-	private void initFromDTO( final Cup cup, final CupEditDTO cupEditDTO ) {
+	private void initFromDTO( final Cup cup, final CupEditDTO dto ) {
 
-		cup.setCupName( cupEditDTO.getCupName() );
-		cup.setCategory( categoryService.load( cupEditDTO.getCategoryId() ) );
+		cup.setCupName( dto.getCupName() );
+		cup.setCategory( categoryService.load( dto.getCategoryId() ) );
 
-		cup.setCupStartTime( cupEditDTO.getCupStartDate() );
-		cup.setWinnersCount( cupEditDTO.getWinnersCount() );
+		cup.setCupStartTime( dto.getCupStartDate() );
+		cup.setWinnersCount( dto.getWinnersCount() );
 
-		cup.setPublicCup( cupEditDTO.isPublicCup() );
+		cup.setPublicCup( dto.isPublicCup() );
+
+		cup.setPointsCalculationStrategy( pointsCalculationStrategyService.load( dto.getCupPointsCalculationStrategyId() ) );
 	}
 
 	private List<CupWinnerEditDTO> getCupWinners( final Cup cup ) {
@@ -192,6 +197,7 @@ public class AdminCupsRestController {
 				cupEditDTO.setReadyForMatchBets( !cupBetsService.isMatchBettingFinished( cup ) );
 
 				cupEditDTO.setFinished( cupService.isCupFinished( cup ) );
+				cupEditDTO.setCupPointsCalculationStrategyId( cup.getPointsCalculationStrategy().getId() );
 
 				return cupEditDTO;
 			}

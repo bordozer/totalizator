@@ -9,6 +9,7 @@ import totalizator.app.dao.CupDao;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
+import totalizator.app.models.PointsCalculationStrategy;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.util.Collections;
@@ -147,6 +148,11 @@ public class CupServiceImpl implements CupService {
 		} );
 
 		return cups;
+	}
+
+	@Override
+	public List<Cup> loadCups( final PointsCalculationStrategy strategy ) {
+		return cupRepository.loadCups( strategy );
 	}
 
 	@Override

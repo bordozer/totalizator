@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 import static totalizator.app.models.Cup.FIND_BY_NAME;
 import static totalizator.app.models.Cup.LOAD_ALL;
+import static totalizator.app.models.Cup.LOAD_ALL_USE_STRATEGY;
 
 
 @Entity
@@ -20,18 +21,23 @@ import static totalizator.app.models.Cup.LOAD_ALL;
 		@NamedQuery(
 				name = FIND_BY_NAME,
 				query = "select c from Cup c where cupName= :cupName"
+		),
+		@NamedQuery(
+				name = LOAD_ALL_USE_STRATEGY,
+				query = "select c from Cup c where pointsCalculationStrategyId= :strategyId"
 		)
 } )
 public class Cup extends AbstractEntity {
 
 	public static final String LOAD_ALL = "cups.loadAll";
 	public static final String FIND_BY_NAME = "cups.findByName";
+	public static final java.lang.String LOAD_ALL_USE_STRATEGY = "cups.loadAllForStrategy";
 
-	@Column( columnDefinition = "VARCHAR(255)" ) //unique = true,
+	@Column( columnDefinition = "VARCHAR(255)" )
 	private String cupName;
 
 	@ManyToOne
-	@JoinColumn(name="categoryId")
+	@JoinColumn( name = "categoryId" )
 	private Category category;
 
 	private int winnersCount;
@@ -42,6 +48,10 @@ public class Cup extends AbstractEntity {
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
+
+	@OneToOne
+	@JoinColumn( name = "pointsCalculationStrategyId" )
+	private PointsCalculationStrategy pointsCalculationStrategy;
 
 	public Cup() {
 	}
@@ -115,16 +125,24 @@ public class Cup extends AbstractEntity {
 		return cup.getId() == getId();
 	}
 
-	@Override
-	public String toString() {
-		return String.format( "%s: #%d: '%s'", category, getId(), cupName );
-	}
-
 	public String getLogoFileName() {
 		return logoFileName;
 	}
 
 	public void setLogoFileName( final String logoFileName ) {
 		this.logoFileName = logoFileName;
+	}
+
+	public PointsCalculationStrategy getPointsCalculationStrategy() {
+		return pointsCalculationStrategy;
+	}
+
+	public void setPointsCalculationStrategy( final PointsCalculationStrategy pointsCalculationStrategy ) {
+		this.pointsCalculationStrategy = pointsCalculationStrategy;
+	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: #%d: '%s'", category, getId(), cupName );
 	}
 }

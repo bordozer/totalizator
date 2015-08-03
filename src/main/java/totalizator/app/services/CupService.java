@@ -3,6 +3,7 @@ package totalizator.app.services;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
+import totalizator.app.models.PointsCalculationStrategy;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 	List<Cup> loadAllPublicFinished();
 
 	List<Cup> loadAllPublicFinished( final Category category );
+
+	List<Cup> loadCups( final PointsCalculationStrategy strategy );
 
 	Cup save( final Cup cup, final List<CupWinner> winners );
 

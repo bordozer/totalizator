@@ -32,6 +32,8 @@ public class CupEditDTO {
 
 	private List<CupWinnerEditDTO> cupWinners;
 
+	private int cupPointsCalculationStrategyId;
+
 	public int getCupId() {
 		return cupId;
 	}
@@ -120,6 +122,14 @@ public class CupEditDTO {
 
 	public void setCupWinners( final List<CupWinnerEditDTO> cupWinners ) {
 		this.cupWinners = cupWinners;
+	}
+
+	public int getCupPointsCalculationStrategyId() {
+		return cupPointsCalculationStrategyId;
+	}
+
+	public void setCupPointsCalculationStrategyId( final int cupPointsCalculationStrategyId ) {
+		this.cupPointsCalculationStrategyId = cupPointsCalculationStrategyId;
 	}
 
 	@Override

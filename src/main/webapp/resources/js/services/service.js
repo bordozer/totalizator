@@ -293,6 +293,45 @@ define( function ( require ) {
 			} )
 		},
 
+		loadCupPointsCalculationStrategies: function() {
+			var result = [];
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/points-calculation-strategies/',
+				async: false,
+				success: function ( response ) {
+					result = response;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
+		loadCupsUsePCStrategy: function( strategyId ) {
+
+			if ( strategyId == 0 ) {
+				return [];
+			}
+
+			var result = [];
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/points-calculation-strategies/' + strategyId + '/cups/',
+				async: false,
+				success: function ( response ) {
+					result = response;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		uploadFile: function( fileField, url ) {
 
 			var result = true;

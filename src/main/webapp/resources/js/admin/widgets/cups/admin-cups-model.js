@@ -21,6 +21,7 @@ define( function ( require ) {
 			, logoUrl: ''
 			, isEditState: false
 			, cupWinners: []
+			, cupPointsCalculationStrategyId: 1
 		},
 
 		initialize: function ( options ) {

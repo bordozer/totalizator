@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
+import totalizator.app.models.PointsCalculationStrategy;
 import totalizator.app.models.Team;
 
 import java.io.IOException;
@@ -28,11 +29,19 @@ public class UEFA extends AbstractDataInitializer {
 	@Override
 	protected List<Cup> generateCups( final Category category, final List<Team> teams, final Session session ) {
 
+		final PointsCalculationStrategy pointsStrategy = new PointsCalculationStrategy();
+		pointsStrategy.setStrategyName( "UEFA points calculation strategy" );
+		pointsStrategy.setPointsForMatchScore( 3 );
+		pointsStrategy.setPointsForMatchWinner( 1 );
+
+		session.persist( pointsStrategy );
+
 		final Cup uefa2016Euro = new Cup( CUP_1, category );
 		uefa2016Euro.setPublicCup( false );
 		uefa2016Euro.setWinnersCount( 3 );
 		uefa2016Euro.setCupStartTime( dateTimeService.parseDate( "10/06/2016 00:00" ) );
 		uefa2016Euro.setLogoFileName( "uefa-euro-2016-logo.png" );
+		uefa2016Euro.setPointsCalculationStrategy( pointsStrategy );
 
 		session.persist( uefa2016Euro );
 
@@ -43,6 +52,7 @@ public class UEFA extends AbstractDataInitializer {
 		uefa2018WorldCup.setWinnersCount( 3 );
 		uefa2018WorldCup.setCupStartTime( dateTimeService.parseDate( "14/06/2018 00:00" ) );
 		uefa2018WorldCup.setLogoFileName( "uefa-world-cup-2018-logo.png" );
+		uefa2018WorldCup.setPointsCalculationStrategy( pointsStrategy );
 
 		session.persist( uefa2018WorldCup );
 

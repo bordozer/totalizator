@@ -1,0 +1,71 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading clearfix">
+
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-primary fa fa-save js-entry-save"></button>
+			<button type="button" class="btn btn-default fa fa-close js-entry-edit-cancel"></button>
+		</div>
+
+		<%-strategyName%>
+	</div>
+
+	<div class="panel-body">
+
+		<div class="row">
+			<div class="col-lg-6">
+				<%=translator.strategyNameLabel%>
+			</div>
+
+			<div class="col-lg-6">
+				<input type="text" name="strategyName" class="form-control" value="<%=strategyName%>">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<%=translator.pointsForMatchScoreLabel%>
+			</div>
+
+			<div class="col-lg-2">
+				<input type="number" name="pointsForMatchScore" class="form-control" value="<%=pointsForMatchScore%>">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<%=translator.pointsForMatchWinnerLabel%>
+			</div>
+
+			<div class="col-lg-2">
+				<input type="number" name="pointsForMatchWinner" class="form-control" value="<%=pointsForMatchWinner%>">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<%=translator.pointsDeltaLabel%>
+			</div>
+
+			<div class="col-lg-2">
+				<input type="number" name="pointsDelta" class="form-control" value="<%=pointsDelta%>">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<%=translator.pointsForBetWithinDeltaLabel%>
+			</div>
+
+			<div class="col-lg-2">
+				<input type="number" name="pointsForBetWithinDelta" class="form-control" value="<%=pointsForBetWithinDelta%>">
+			</div>
+		</div>
+
+	</div>
+
+	<div class="panel-footer">
+
+	</div>
+
+</div>

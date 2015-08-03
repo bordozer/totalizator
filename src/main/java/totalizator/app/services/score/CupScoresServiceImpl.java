@@ -41,7 +41,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public int getUsersScores( final MatchBet matchBet ) {
-		return getPointsCalculationStrategy( matchBet.getMatch().getCup().getCategory() ).getPoints( matchBet );
+		return getPointsCalculationStrategy( matchBet.getMatch().getCup() ).getPoints( matchBet );
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 
 		final List<UserPoints> userResult = newArrayList();
 
-		final ScoreCalculationStrategy calculationStrategy = getPointsCalculationStrategy( cup.getCategory() );
+		final BetPointsCalculationStrategy calculationStrategy = getPointsCalculationStrategy( cup );
 
 		final List<MatchBet> userCupBets = matchBetsService.loadAll( cup, user );
 
@@ -232,7 +232,7 @@ public class CupScoresServiceImpl implements CupScoresService {
 		this.cupBetsService = cupBetsService;
 	}
 
-	private ScoreCalculationStrategy getPointsCalculationStrategy( final Category category ) {
-		return ScoreCalculationStrategy.getInstance( PointsCalculationStrategyType.BASKETBALL );
+	private BetPointsCalculationStrategy getPointsCalculationStrategy( final Cup cup ) {
+		return BetPointsCalculationStrategy.getInstance( cup.getPointsCalculationStrategy() );
 	}
 }

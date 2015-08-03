@@ -58,8 +58,16 @@ public class UserPointsTest {
 			category = new Category( "NBA" );
 			category.setId( 1 );
 
+			final PointsCalculationStrategy pointsCalculationStrategy = new PointsCalculationStrategy();
+			pointsCalculationStrategy.setStrategyName( "Abstract strategy" );
+			pointsCalculationStrategy.setPointsForMatchScore( 6 );
+			pointsCalculationStrategy.setPointsForMatchWinner( 1 );
+			pointsCalculationStrategy.setPointsDelta( 3 );
+			pointsCalculationStrategy.setPointsForBetWithinDelta( 3 );
+
 			cup = new Cup( "The Cup", category );
 			cup.setId( 2 );
+			cup.setPointsCalculationStrategy( pointsCalculationStrategy );
 
 			final Team team1 = new Team( "Team 1", category );
 			team1.setId( 101 );

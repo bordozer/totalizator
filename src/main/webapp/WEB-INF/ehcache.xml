@@ -118,4 +118,16 @@
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
+	<cache name="totalizator.app.cache.points-calculation-strategy"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.points-calculation-strategy.query"
+		   maxElementsInMemory="300"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
 </ehcache>

@@ -16,6 +16,7 @@ define( function ( require ) {
 		, menuUsersLabel: 'Users'
 		, menuAdminLabel: 'Administration'
 		, menuMatchesLabel: 'Matches'
+		, pointsCalculationStrategiesLabel: 'Points calculation strategies'
 		, gamesDataImportLabel: 'Games data import'
 		, menuUntranslatedListLabel: 'Menu: Untranslated list'
 		, menuReloadTranslationsLabel: 'Menu: Reload translations'
@@ -34,11 +35,10 @@ define( function ( require ) {
 			return [
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }
-				, { selector: '', icon: 'fa fa-user', link: '/totalizator/users/', text: translator.menuUsersLabel }
-				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }
+				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/points-calculation-strategies/', text: translator.pointsCalculationStrategiesLabel }
 				, { selector: 'divider' }
 
 				, { selector: '', icon: 'fa fa-exchange', link: '/admin/games-data-import/', text: translator.gamesDataImportLabel }
@@ -53,7 +53,6 @@ define( function ( require ) {
 
 		_reloadTranslations: function() {
 			adminService.reloadTranslations();
-//			this.bodyView.render();
 			window.location.reload();
 		}
 	});

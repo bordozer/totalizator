@@ -2,26 +2,18 @@ package totalizator.app.services.score;
 
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
+import totalizator.app.models.PointsCalculationStrategy;
 
-abstract class ScoreCalculationStrategy {
+class BetPointsCalculationStrategy {
 
-	public static final ScoreCalculationStrategy BASKETBALL_SCORE_CALCULATION_STRATEGY = new PointsCalculationStrategy_Basketball();
-	public static final ScoreCalculationStrategy FOOTBALL_SCORE_CALCULATION_STRATEGY = new PointsCalculationStrategy_Football();
+	private final PointsCalculationStrategy pointsCalculationStrategy;
 
-	abstract int getGuessedWinnerAndMatchPoints();
+	public BetPointsCalculationStrategy( final totalizator.app.models.PointsCalculationStrategy strategy ) {
+		this.pointsCalculationStrategy = strategy;
+	}
 
-	abstract int getGuessedWinnerOnlyPoints();
-
-	static ScoreCalculationStrategy getInstance( final PointsCalculationStrategyType strategy ) {
-
-		switch ( strategy ) {
-			case BASKETBALL:
-				return BASKETBALL_SCORE_CALCULATION_STRATEGY;
-			case FOOTBALL:
-				return FOOTBALL_SCORE_CALCULATION_STRATEGY;
-		}
-
-		throw new IllegalArgumentException( String.format( "Unsupported Points Calculation Strategy Type: %s", strategy ) );
+	static BetPointsCalculationStrategy getInstance( final totalizator.app.models.PointsCalculationStrategy strategy ) {
+		return new BetPointsCalculationStrategy( strategy );
 	}
 
 	final int getPoints( final MatchBet matchBet ) {
@@ -31,12 +23,12 @@ abstract class ScoreCalculationStrategy {
 		}
 
 		if ( userGuessedWinnerAndMatchPoints( matchBet ) ) {
-			return getGuessedWinnerAndMatchPoints();
+			return pointsCalculationStrategy.getPointsForMatchScore();
 		}
 
 		if ( userGuessedWinnerOnly( matchBet ) ) {
-			final int categoryCustomPoints = getCategoryCustomPoints( matchBet );
-			return categoryCustomPoints > 0 ? categoryCustomPoints : getGuessedWinnerOnlyPoints();
+			final int pointsForDelta = getPointsForDelta( matchBet );
+			return pointsForDelta > 0 ? pointsForDelta : pointsCalculationStrategy.getPointsForMatchWinner();
 		}
 
 		return 0;
@@ -55,8 +47,20 @@ abstract class ScoreCalculationStrategy {
 		return hasMatchFinishedWithGuessedDraw( matchBet );
 	}
 
-	protected int getCategoryCustomPoints( final MatchBet matchBet ) {
-		return 0;
+	protected int getPointsForDelta( final MatchBet matchBet ) {
+		final Match match = matchBet.getMatch();
+
+		final int score1 = match.getScore1();
+		final int score2 = match.getScore2();
+
+		final int betScore1 = matchBet.getBetScore1();
+		final int betScore2 = matchBet.getBetScore2();
+
+		final double delta = pointsCalculationStrategy.getPointsDelta();
+		final boolean score1WithinDelta = ( betScore1 >= score1 - delta ) && ( betScore1 <= score1 + delta );
+		final boolean score2WithinDelta = ( betScore2 >= score2 - delta ) && ( betScore2 <= score2 + delta );
+
+		return score1WithinDelta && score2WithinDelta ? pointsCalculationStrategy.getPointsForBetWithinDelta() : 0;
 	}
 
 	private boolean hasGuessedWinnerWon( final MatchBet matchBet ) {

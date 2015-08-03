@@ -25,38 +25,23 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Cups"
-		,
-		newCupLabel: "Admin / Cups: New cup"
-		,
-		entryEditCategoryLabel: "Category"
-		,
-		entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
-		,
-		entryEditPublicCupPageLabel: "Public cup"
-		,
-		entryEditNonPublicCupPageLabel: "Nonpublic cup"
-		,
-		entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
-		,
-		entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
-		,
-		entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"
-		,
-		entryEditCupIsFinishedLabel: "Admin / Cups / Edit: Cup is finished"
-		,
-		entryEditCupStartDateLabel: "Admin / Cups / Edit: Cup start date"
-		,
-		cupValidation_CupName: "Cup validation: Enter a cup name!"
-		,
-		cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
-		,
-		cupValidation_WinnersCountDoesNotEqualsWinners: "Cup validation: Defined winners count does not equals winners"
-		,
-		cupResultsTab: "Cup winners"
-		,
-		cupPositionLabel: "cup position"
-		,
-		teamLogoLabel: "Logo"
+		, newCupLabel: "Admin / Cups: New cup"
+		, entryEditCategoryLabel: "Category"
+		, entryEditCupNameLabel: "Admin / Cups / Edit: Cup name label"
+		, entryEditPublicCupPageLabel: "Public cup"
+		, entryEditNonPublicCupPageLabel: "Nonpublic cup"
+		, entryEditWinnersCountLabel: "Admin / Cups / Edit: Winners count"
+		, entryEditReadyForCupBetsLabel: "Admin / Cups / Edit: Ready for cup bets"
+		, entryEditReadyForMatchBetsLabel: "Admin / Cups / Edit: Ready for match bets"
+		, entryEditCupIsFinishedLabel: "Admin / Cups / Edit: Cup is finished"
+		, entryEditCupStartDateLabel: "Admin / Cups / Edit: Cup start date"
+		, cupValidation_CupName: "Cup validation: Enter a cup name!"
+		, cupValidation_WinnersCount: "Cup validation: Winners count should be positive number!"
+		, cupValidation_WinnersCountDoesNotEqualsWinners: "Cup validation: Defined winners count does not equals winners"
+		, cupResultsTab: "Cup winners"
+		, cupPositionLabel: "cup position"
+		, teamLogoLabel: "Logo"
+		, cupPointsCalculationStrategyLabel: "Points calculation strategy"
 	} );
 
 	var CupsView = WidgetView.extend( {
@@ -177,18 +162,12 @@ define( function ( require ) {
 
 		events: {
 			'click .cup-entry-edit': '_onEntryEditClick'
-			,
-			'click .js-cup-entry': '_onCupClick'
-			,
-			'click .js-finish-cup': '_renderCupBets'
-			,
-			'click .cup-entry-save': '_onEntrySaveClick'
-			,
-			'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
-			,
-			'click .cup-entry-del': '_onEntryDelClick'
-			,
-			'change .entry-name, .entry-category-id, .winners-count-field, .ready-for-bets-checkbox, .cup-is-finished-checkbox': '_onChange'
+			, 'click .js-cup-entry': '_onCupClick'
+			, 'click .js-finish-cup': '_renderCupBets'
+			, 'click .cup-entry-save': '_onEntrySaveClick'
+			, 'click .cup-entry-edit-cancel': '_onEntryEditCancelClick'
+			, 'click .cup-entry-del': '_onEntryDelClick'
+			, 'change .entry-name, .entry-category-id, .winners-count-field, .ready-for-bets-checkbox, .cup-is-finished-checkbox': '_onChange'
 		},
 
 		initialize: function ( options ) {
@@ -203,7 +182,6 @@ define( function ( require ) {
 			this.isSelected = options.isSelected;
 
 			this.on( 'events:caps_changed', this.render, this );
-			//this.listenToOnce( this.model, 'sync', this.render );
 			this.model.trigger( 'events:save-attributes' );
 		},
 
@@ -256,6 +234,7 @@ define( function ( require ) {
 			this.$el.html( this.templateEdit( {
 				model: model
 				, categories: this.categories
+				, cupPointsCalculationStrategies: service.loadCupPointsCalculationStrategies()
 				, cupWinners: cupWinners
 				, isCupFinished: isCupFinished
 				, translator: translator
@@ -342,6 +321,7 @@ define( function ( require ) {
 			var readyForMatchBets = this._isReadyForMatchBest();
 			var finished = this._isFinished();
 			var winnersCount = this._getWinnersCount();
+			var cupPointsCalculationStrategyId = this._getCupPointsCalculationStrategyId();
 
 			this.model.set( {
 				cupName: cupName
@@ -352,6 +332,7 @@ define( function ( require ) {
 				, readyForMatchBets: readyForMatchBets
 				, cupStartDate: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
 				, finished: finished
+				, cupPointsCalculationStrategyId: cupPointsCalculationStrategyId
 			} );
 		},
 
@@ -405,6 +386,10 @@ define( function ( require ) {
 
 		_getWinnersCount: function () {
 			return this.$( '.winners-count-field' ).val();
+		},
+
+		_getCupPointsCalculationStrategyId: function () {
+			return this.$( "select[name='cupPointsCalculationStrategyId']" ).val();
 		},
 
 		_onChange: function ( evt ) {

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Points calculation strategies</nerd>
+		<ru><![CDATA[Стратегии рассчета баллов]]></ru>
+		<ua><![CDATA[Стратегiї нарахування балiв]]></ua>
+		<en><![CDATA[Points calculation strategies]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Strategy name</nerd>
+		<ru><![CDATA[Название стратегии]]></ru>
+		<ua><![CDATA[Назва стратегiї]]></ua>
+		<en><![CDATA[Strategy name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Points for match score</nerd>
+		<ru><![CDATA[Баллы за угаданный счет матча]]></ru>
+		<ua><![CDATA[Бали за вгаданий рахунок гри]]></ua>
+		<en><![CDATA[Points for match score]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Points for match winner</nerd>
+		<ru><![CDATA[Баллы за угаданного победителя]]></ru>
+		<ua><![CDATA[Бали за вгаданого переможця]]></ua>
+		<en><![CDATA[Points for match winner]]></en>
+	</translation>
+
+
+	<translation>
+		<nerd>Points delta</nerd>
+		<ru><![CDATA[Дельта дополнительных баллов]]></ru>
+		<ua><![CDATA[Дельта додаткових балiв]]></ua>
+		<en><![CDATA[Additional points delta]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Points for score withing delta</nerd>
+		<ru><![CDATA[Дополнительные баллы за попадание в дельту]]></ru>
+		<ua><![CDATA[Додатковi данi за влучання в дельту]]></ua>
+		<en><![CDATA[Points for score withing delta]]></en>
+	</translation>
+
+	<translation>
+		<nerd>New points calculation strategy</nerd>
+		<ru><![CDATA[Новая стратегия]]></ru>
+		<ua><![CDATA[Нова стратегiя]]></ua>
+		<en><![CDATA[New strategy]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete points calculation strategy?</nerd>
+		<ru><![CDATA[Удалить стратегию рассчета баллов?]]></ru>
+		<ua><![CDATA[Видалити стратегiю розрахунку балiв?]]></ua>
+		<en><![CDATA[Delete points calculation strategy?]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>
