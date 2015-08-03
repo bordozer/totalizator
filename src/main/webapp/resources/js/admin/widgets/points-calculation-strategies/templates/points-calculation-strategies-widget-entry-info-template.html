@@ -6,7 +6,7 @@
 		<small class="text-muted">
 		<ul>
 		<% _.each( cups, function( cup ) { %>
-			<li><%-cup.cupName%></li>
+			<li><a href="/totalizator/cups/<%-cup.cupId%>/"><%-cup.category.categoryName%>: <%-cup.cupName%></a></li>
 		<% } ) %>
 		</ul>
 		</small>
