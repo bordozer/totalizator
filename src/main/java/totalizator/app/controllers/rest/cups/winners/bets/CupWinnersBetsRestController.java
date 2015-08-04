@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import totalizator.app.beans.AppContext;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.*;
@@ -14,8 +15,10 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.CupWinnerService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.utils.DateTimeService;
+import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.Comparator;
@@ -66,9 +69,10 @@ public class CupWinnersBetsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/winners/bets/", produces = APPLICATION_JSON_VALUE )
-	public CupWinnersBetsDTO all( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+	public CupWinnersBetsDTO all( final @PathVariable( "cupId" ) int cupId, final HttpServletRequest request ) {
 
 		final Cup cup = cupService.load( cupId );
+		final Language language = AppContext.read( request.getSession() ).getLanguage();
 
 		final CupWinnersBetsDTO result = new CupWinnersBetsDTO();
 		result.setWinnersCount( cup.getWinnersCount() );
@@ -97,7 +101,7 @@ public class CupWinnersBetsRestController {
 			final List<CupTeamBetDTO> userCupBets = dtoService.transformCupTeamBets( cupTeamBets, user );
 
 			if ( isCupBetsAreHiddenYet ) {
-				replaceTeamsWithFakeData( cup, userCupBets );
+				replaceTeamsWithFakeData( cup, userCupBets, language );
 			}
 			userCupBetsDTO.setUserCupBets( userCupBets );
 
@@ -109,7 +113,7 @@ public class CupWinnersBetsRestController {
 		return result;
 	}
 
-	private void replaceTeamsWithFakeData( final Cup cup, final List<CupTeamBetDTO> userCupBets ) {
+	private void replaceTeamsWithFakeData( final Cup cup, final List<CupTeamBetDTO> userCupBets, final Language language ) {
 		for ( final CupTeamBetDTO userCupBet : userCupBets ) {
 			final TeamDTO team = userCupBet.getTeam();
 
@@ -118,7 +122,7 @@ public class CupWinnersBetsRestController {
 			fakeTeam.setTeamId( 0 );
 			fakeTeam.setTeamLogo( "/resources/img/team-logo-not-found.png" );
 			fakeTeam.setTeamName( translatorService.translate( "Team name is hidden till $1"
-					, translatorService.getDefaultLanguage()
+					, language
 					, dateTimeService.formatDateTimeUI( cup.getCupStartTime() )
 			) );
 
