@@ -52,6 +52,10 @@ define( function ( require ) {
 		// str => date
 		parseDate: function( time ) {
 			return moment( time, DATE_TIME_FORMAT ).toDate();
+		},
+
+		fromNow: function( time ) {
+			return moment( time, DATE_TIME_FORMAT ).fromNow();
 		}
 	}
 } );

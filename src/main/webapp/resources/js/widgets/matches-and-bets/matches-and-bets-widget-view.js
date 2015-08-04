@@ -5,6 +5,7 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
+	var moment = require( 'moment' );
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
@@ -218,6 +219,7 @@ define( function ( require ) {
 				, team2Logo: team2.teamLogo
 				, beginningDate: dateTimeService.formatDateDisplay( match.beginningTime )
 				, beginningTime: dateTimeService.formatTimeDisplay( match.beginningTime )
+				, timeToStart: dateTimeService.fromNow( match.beginningTime )
 				, matchFinished: match.matchFinished
 				, homeTeamNumber: match.homeTeamNumber
 				, translator: translator
