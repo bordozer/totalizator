@@ -21,6 +21,12 @@
 </head>
 <body>
 
+<script type="text/javascript">
+	require( [ 'jquery', 'app' ], function ( $, app ) {
+		document.title = app.projectName();
+	} );
+</script>
+
 	<div class="container-fluid">
 
 		<div class="row">
