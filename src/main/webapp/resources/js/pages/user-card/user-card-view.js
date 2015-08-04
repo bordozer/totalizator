@@ -10,6 +10,7 @@ define( function ( require ) {
 	var templateNoActivity = _.template( require( 'text!./templates/user-card-no-activity-template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
+	var userStatisticsWidget = require( 'js/widgets/user-statistics/user-statistics-widget' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -40,7 +41,19 @@ define( function ( require ) {
 		},
 
 		_renderUserStatistics: function() {
-			this.$( '.js-user-statistics' ).html( "User's statistics are going to be here..." ); // TODO: implement as separate component
+
+			var options = {
+				filter: {
+					categoryId: 1 // TODO
+					, cupId: 1 // TODO
+					, showFinished: true
+					, userId: this.userId
+				}
+				, isCompactView: false
+				, menuItems: []
+			};
+
+			userStatisticsWidget( this.$( '.js-user-statistics' ), options );
 		},
 
 		_renderUserBets: function() {
