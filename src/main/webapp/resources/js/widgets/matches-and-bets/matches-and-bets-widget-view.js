@@ -216,7 +216,8 @@ define( function ( require ) {
 				, score2: match.score2
 				, team1Logo: team1.teamLogo
 				, team2Logo: team2.teamLogo
-				, beginningTime: dateTimeService.formatDateTimeDisplay( match.beginningTime )
+				, beginningDate: dateTimeService.formatDateDisplay( match.beginningTime )
+				, beginningTime: dateTimeService.formatTimeDisplay( match.beginningTime )
 				, matchFinished: match.matchFinished
 				, homeTeamNumber: match.homeTeamNumber
 				, translator: translator
