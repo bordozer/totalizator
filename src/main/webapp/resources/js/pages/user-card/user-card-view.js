@@ -7,6 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/user-card-template.html' ) );
+	var templateNoActivity = _.template( require( 'text!./templates/user-card-no-activity-template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
@@ -14,6 +15,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		userStatisticsLabel: "User card: Statistics"
 		, userBetsLabel: "User card: User bets"
+		, noUserBetsLabel: "The user has not made bets"
 	} );
 
 	return Backbone.View.extend( {
@@ -49,6 +51,11 @@ define( function ( require ) {
 			var el = this.$( '.js-user-bets' );
 
 			var cupsToShow = this.model.get( 'cupsToShow' );
+
+			if ( cupsToShow.length == 0 ) {
+				this.$( '.js-user-bets' ).html( templateNoActivity( { translator: translator } ) );
+				return;
+			}
 
 			_.each( cupsToShow, function( cup ) {
 

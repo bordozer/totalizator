@@ -17,10 +17,17 @@
 	</translation>
 
 	<translation>
+		<nerd>The user has not made bets</nerd>
+		<ru><![CDATA[Пользователь не делал ставок]]></ru>
+		<ua><![CDATA[Користувач не зробив жодної ставки]]></ua>
+		<en><![CDATA[The user has not made bets]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>
