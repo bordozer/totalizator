@@ -23,7 +23,7 @@
 
 <script type="text/javascript">
 	require( [ 'jquery', 'app' ], function ( $, app ) {
-		document.title = app.projectName();
+		document.title = app.projectName() + ' ( ' + app.currentUser().userName + ' ) ';
 	} );
 </script>
 
