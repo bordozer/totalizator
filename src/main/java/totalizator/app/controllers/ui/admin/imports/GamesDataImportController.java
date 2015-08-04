@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "admin/games-data-import" )
 public class GamesDataImportController {
@@ -21,8 +19,8 @@ public class GamesDataImportController {
 	private UserService userService;
 
 	@ModelAttribute( MODEL_NAME )
-	public GamesDataImportModel preparePagingModel( final Principal principal ) {
-		return new GamesDataImportModel( userService.findByLogin( principal.getName() ) );
+	public GamesDataImportModel preparePagingModel() {
+		return new GamesDataImportModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )

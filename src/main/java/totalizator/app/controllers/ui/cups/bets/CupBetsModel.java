@@ -2,15 +2,10 @@ package totalizator.app.controllers.ui.cups.bets;
 
 import totalizator.app.controllers.ui.AbstractPageModel;
 import totalizator.app.models.Cup;
-import totalizator.app.models.User;
 
 public class CupBetsModel extends AbstractPageModel {
 
 	private Cup cup;
-
-	protected CupBetsModel( final User user ) {
-		super( user );
-	}
 
 	public Cup getCup() {
 		return cup;

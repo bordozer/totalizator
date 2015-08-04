@@ -10,15 +10,11 @@ define( function ( require ) {
 
 	var CupsNavigation = require( 'js/components/cups-navi/cups-navi' );
 
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		projectNameLabel: 'Project name: Totalizator'
-	} );
+	var app = require( 'app' );
 
 	var HeaderView = Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.currentUser = options.options.currentUser;
 			this.breadcrumbs = options.options.breadcrumbs;
 
 			this.on( 'navigation:set:active:cup', this._setActiveCup, this );
@@ -32,10 +28,10 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				model: this.model
-				, currentUser: this.currentUser
+				, currentUser: app.currentUser()
 				, title: title
 				, breadcrumbs: this.breadcrumbs
-				, translator: translator
+				, projectName: app.projectName()
 			} ) );
 
 			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();

@@ -3,13 +3,6 @@
 <translations>
 
 	<translation>
-		<nerd>Project name: Totalizator</nerd>
-		<ru><![CDATA[Тотализатор]]></ru>
-		<en><![CDATA[Totalizator]]></en>
-		<ua><![CDATA[Тоталiзатор]]></ua>
-	</translation>
-
-	<translation>
 		<nerd>Administration</nerd>
 		<ru><![CDATA[Администрирование]]></ru>
 		<en><![CDATA[Admin]]></en>

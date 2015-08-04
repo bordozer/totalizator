@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/users/{userId}/groups" )
 public class UserGroupsController {
@@ -22,8 +20,8 @@ public class UserGroupsController {
 	private UserService userService;
 
 	@ModelAttribute( MODEL_NAME )
-	public UserGroupsModel preparePagingModel( final Principal principal ) {
-		return new UserGroupsModel( userService.findByLogin( principal.getName() ) );
+	public UserGroupsModel preparePagingModel() {
+		return new UserGroupsModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )

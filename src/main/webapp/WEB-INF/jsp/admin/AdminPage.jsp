@@ -3,7 +3,7 @@
 
 <jsp:useBean id="adminModel" type="totalizator.app.controllers.ui.admin.AdminModel" scope="request"/>
 
-<tags:page currentUser="${adminModel.currentUser}">
+<tags:page>
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 
@@ -21,13 +21,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var currentUser = ${adminModel.currentUserJSON};
-
-			var options = {
-				currentUser: currentUser
-			};
-
-			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs, options: options } );
+			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs, options: {} } );
 			adminView.render();
 		} );
 	</script>

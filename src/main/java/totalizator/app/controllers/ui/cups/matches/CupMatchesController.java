@@ -10,8 +10,6 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/cups" )
 public class CupMatchesController {
@@ -30,8 +28,8 @@ public class CupMatchesController {
 	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
-	public CupMatchesModel preparePagingModel( final Principal principal ) {
-		return new CupMatchesModel( userService.findByLogin( principal.getName() ) );
+	public CupMatchesModel preparePagingModel() {
+		return new CupMatchesModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/matches/" )

@@ -3,7 +3,7 @@
 
 <jsp:useBean id="matchBetsModel" type="totalizator.app.controllers.ui.matches.bets.MatchBetsModel" scope="request"/>
 
-<tags:page currentUser="${matchBetsModel.currentUser}">
+<tags:page>
 
 	<c:set var="cup" value="${matchBetsModel.cup}" />
 	<c:set var="match" value="${matchBetsModel.match}" />
@@ -30,9 +30,7 @@
 			];
 
 			var matchId = ${match.id};
-			var currentUser = ${matchBetsModel.currentUserJSON};
-
-			var pageView = new Page( { el: $( '.match-bets-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { cupId: cupId, matchId: matchId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.match-bets-container' ), bodyRenderer: matchBet, breadcrumbs: breadcrumbs, options: { cupId: cupId, matchId: matchId } } );
 			pageView.render();
 		} );
 	</script>

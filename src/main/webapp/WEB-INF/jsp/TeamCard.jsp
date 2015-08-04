@@ -3,7 +3,7 @@
 
 <jsp:useBean id="teamCardModel" type="totalizator.app.controllers.ui.teams.card.TeamCardModel" scope="request"/>
 
-<tags:page currentUser="${teamCardModel.currentUser}">
+<tags:page>
 
 	<c:set var="team" value="${teamCardModel.team}" />
 	<c:set var="teamCategory" value="${team.category}" />
@@ -19,10 +19,9 @@
 				, { link: '#', title: '${team.teamName}' }
 			];
 
-			var currentUser = ${teamCardModel.currentUserJSON};
 			var teamId = ${teamCardModel.team.id};
 
-			var options = { teamId: teamId, currentUser: currentUser };
+			var options = { teamId: teamId };
 
 			var pageView = new Page( { el: $( '.team-card-container' ), bodyRenderer: teamCard, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();

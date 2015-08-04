@@ -3,7 +3,7 @@
 
 <jsp:useBean id="portalPageModel" type="totalizator.app.controllers.ui.portal.PortalPageModel" scope="request"/>
 
-<tags:page currentUser="${portalPageModel.currentUser}">
+<tags:page>
 
 	<div class="portal-page-container"></div>
 
@@ -21,11 +21,8 @@
 
 			var cupsToShow = ${portalPageModel.cupsToShowJSON};
 
-			var currentUser = ${portalPageModel.currentUserJSON};
-
 			var options = {
 				cupsToShow: cupsToShow
-				, currentUser: currentUser
 			};
 
 			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: options } );

@@ -3,7 +3,7 @@
 
 <jsp:useBean id="categoryModel" type="totalizator.app.controllers.ui.categories.CategoryModel" scope="request"/>
 
-<tags:page currentUser="${categoryModel.currentUser}">
+<tags:page>
 
 	<c:set var="category" value="${categoryModel.category}" />
 
@@ -19,9 +19,7 @@
 				{ link: '#', title: "${category.categoryName}" }
 			];
 
-			var currentUser = ${categoryModel.currentUserJSON};
-
-			var pageView = new Page( { el: $( '.category-container' ), bodyRenderer: category, breadcrumbs: breadcrumbs, options: { categoryId: categoryId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.category-container' ), bodyRenderer: category, breadcrumbs: breadcrumbs, options: { categoryId: categoryId } } );
 			pageView.render();
 		} );
 	</script>

@@ -31,8 +31,8 @@ public class PortalPageController {
 	private DTOService dtoService;
 
 	@ModelAttribute( MODEL_NAME )
-	public PortalPageModel preparePagingModel( final Principal principal ) {
-		return new PortalPageModel( userService.findByLogin( principal.getName() ) );
+	public PortalPageModel preparePagingModel() {
+		return new PortalPageModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "" )

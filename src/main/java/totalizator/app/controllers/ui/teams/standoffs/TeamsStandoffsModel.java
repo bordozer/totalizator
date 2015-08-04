@@ -2,7 +2,6 @@ package totalizator.app.controllers.ui.teams.standoffs;
 
 import totalizator.app.controllers.ui.AbstractPageModel;
 import totalizator.app.models.Team;
-import totalizator.app.models.User;
 
 public class TeamsStandoffsModel extends AbstractPageModel {
 
@@ -13,10 +12,6 @@ public class TeamsStandoffsModel extends AbstractPageModel {
 	private String team2JSON;
 	private int score1;
 	private int score2;
-
-	protected TeamsStandoffsModel( final User currentUser ) {
-		super( currentUser );
-	}
 
 	public void setTeam1( final Team team1 ) {
 		this.team1 = team1;

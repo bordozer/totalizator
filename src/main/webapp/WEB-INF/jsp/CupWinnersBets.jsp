@@ -3,7 +3,7 @@
 
 <jsp:useBean id="cupWinnersBetsModel" type="totalizator.app.controllers.ui.cups.winners.bets.CupWinnersBetsModel" scope="request"/>
 
-<tags:page currentUser="${cupWinnersBetsModel.currentUser}">
+<tags:page>
 
 	<c:set var="cup" value="${cupWinnersBetsModel.cup}" />
 
@@ -25,9 +25,7 @@
 				, { link: '#', title: translator.title }
 			];
 
-			var currentUser = ${cupWinnersBetsModel.currentUserJSON};
-
-			var pageView = new Page( { el: $( '.match-bets-container' ), bodyRenderer: cupWinnersBets, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.match-bets-container' ), bodyRenderer: cupWinnersBets, breadcrumbs: breadcrumbs, options: { cupId: cupId } } );
 			pageView.render();
 		} );
 	</script>

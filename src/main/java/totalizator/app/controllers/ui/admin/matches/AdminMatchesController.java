@@ -9,7 +9,6 @@ import totalizator.app.models.Cup;
 import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -27,8 +26,8 @@ public class AdminMatchesController {
 	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
-	public AdminMatchesModel preparePagingModel( final Principal principal ) {
-		return new AdminMatchesModel( userService.findByLogin( principal.getName() ) );
+	public AdminMatchesModel preparePagingModel() {
+		return new AdminMatchesModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )

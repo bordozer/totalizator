@@ -3,7 +3,7 @@
 
 <jsp:useBean id="adminMatchesModel" type="totalizator.app.controllers.ui.admin.matches.AdminMatchesModel" scope="request"/>
 
-<tags:page currentUser="${adminMatchesModel.currentUser}">
+<tags:page>
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 
@@ -22,12 +22,9 @@
 			var categoryId = ${adminMatchesModel.categoryId};
 			var cupId = ${adminMatchesModel.cupId};
 
-			var currentUser = ${adminMatchesModel.currentUserJSON};
-
 			var options = {
 				categoryId: categoryId
 				, cupId: cupId
-				, currentUser: currentUser
 			};
 
 			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: options } );

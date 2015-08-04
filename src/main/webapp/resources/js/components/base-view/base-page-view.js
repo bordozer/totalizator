@@ -12,6 +12,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/base-page-template.html' ) );
 
+	var app = require( 'app' );
 	var service = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );
@@ -26,7 +27,7 @@ define( function ( require ) {
 
 			this.options = options.options;
 
-			this.currentUser = options.options.currentUser;
+			this.options.currentUser = app.currentUser(); // TODO: for backward compatibility
 
 			this.breadcrumbs = options.breadcrumbs;
 			this.bodyRenderer = options.bodyRenderer;
@@ -53,7 +54,7 @@ define( function ( require ) {
 		},
 
 		_renderHeader: function() {
-			this.headerView = pageHeader( this.$( '.header-container'), { breadcrumbs: this.breadcrumbs, currentUser: this.currentUser } ).view();
+			this.headerView = pageHeader( this.$( '.header-container'), { breadcrumbs: this.breadcrumbs } ).view();
 		},
 
 		_renderMenu: function() {

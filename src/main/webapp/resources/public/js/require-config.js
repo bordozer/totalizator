@@ -20,6 +20,7 @@ var require = {
 		, bootbox: "bower_components/bootbox/bootbox"
 
 		, translator: "public/js/translator"
+		, app: "public/js/app"
 	},
 
 	shim: {

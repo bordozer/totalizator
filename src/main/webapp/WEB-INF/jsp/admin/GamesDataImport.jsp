@@ -3,7 +3,7 @@
 
 <jsp:useBean id="gamesDataImportModel" type="totalizator.app.controllers.ui.admin.imports.GamesDataImportModel" scope="request"/>
 
-<tags:page currentUser="${gamesDataImportModel.currentUser}">
+<tags:page>
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 
@@ -21,13 +21,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var currentUser = ${gamesDataImportModel.currentUserJSON};
-
-			var options = {
-				currentUser: currentUser
-			};
-
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: gamesDataImport, breadcrumbs: breadcrumbs, options: options } );
+			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: gamesDataImport, breadcrumbs: breadcrumbs, options: {} } );
 			adminView.render();
 		} );
 	</script>

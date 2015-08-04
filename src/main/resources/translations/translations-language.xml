@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Language: Nerd</nerd>
+		<ru><![CDATA[Nerd]]></ru>
+		<ua><![CDATA[Nerd]]></ua>
+		<en><![CDATA[Nerd]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Language: Russian</nerd>
+		<ru><![CDATA[Русский]]></ru>
+		<ua><![CDATA[Росiйська]]></ua>
+		<en><![CDATA[Russian]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Language: Ukrainian</nerd>
+		<ru><![CDATA[Украинский]]></ru>
+		<ua><![CDATA[Українська]]></ua>
+		<en><![CDATA[Ukrainian]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Language: English</nerd>
+		<ru><![CDATA[Английский]]></ru>
+		<ua><![CDATA[Англiйська]]></ua>
+		<en><![CDATA[English]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

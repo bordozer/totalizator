@@ -10,6 +10,7 @@ define( function ( require ) {
 
 	var PageView = require( 'js/components/base-view/base-page-view' );
 
+	var app = require( 'app' );
 	var service = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );
@@ -44,13 +45,15 @@ define( function ( require ) {
 
 			var menus = [];
 
-			if ( service.isAdmin( this.currentUser ) ) {
+			var currentUser = app.currentUser();
+
+			if ( service.isAdmin( currentUser ) ) {
 				menus.push( { selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel } );
 				menus.push( { selector: 'divider' } );
 			}
 
-			menus.push( { selector: '', icon: 'fa fa-users', link: '/totalizator/users/' + this.currentUser.userId + '/groups/', text: translator.menuYourGroupsLabel } );
-			menus.push( { selector: '', icon: 'fa fa-database', link: '/totalizator/users/' + this.currentUser.userId + '/settings/', text: translator.menuPersonalDataLabel } );
+			menus.push( { selector: '', icon: 'fa fa-users', link: '/totalizator/users/' + currentUser.userId + '/groups/', text: translator.menuYourGroupsLabel } );
+			menus.push( { selector: '', icon: 'fa fa-database', link: '/totalizator/users/' + currentUser.userId + '/settings/', text: translator.menuPersonalDataLabel } );
 			menus.push( { selector: 'divider' } );
 
 			menus.push( { selector: '', icon: 'fa fa-user', link: '/totalizator/users/', text: translator.menuUsersLabel } );

@@ -5,13 +5,11 @@ define( function ( require ) {
 	var DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm';
 	var DATE_FORMAT = 'DD/MM/YYYY';
 
-//	var DATE_TIME_DISPLAY_FORMAT = 'D MMM YYYY HH:mm';
 	var DATE_DISPLAY_FORMAT = 'D MMM YYYY';
 	var TIME_DISPLAY_FORMAT = 'HH:mm';
 
-	var LOCALE = 'ru';
-
-	var $ = require( 'jquery' );
+	var app = require( 'app' );
+	var LOCALE = app.language().country; // uk, ru, en
 
 	var moment = require( 'moment' );
 	moment.locale( LOCALE, {

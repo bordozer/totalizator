@@ -52,6 +52,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
+	public String getProjectName() {
+		return config.getString( "system.projectName" );
+	}
+
+	@Override
 	public String getDatabaseHost() {
 		return config.getString( "database.host" );
 	}

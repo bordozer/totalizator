@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers( "/resources/img*//**" ).permitAll()
 					.antMatchers( "/resources/bower_components*//**" ).permitAll()
 					.antMatchers( "/rest/translator/" ).permitAll()
+					.antMatchers( "/rest/app/" ).permitAll()
 					.antMatchers( HttpMethod.PUT, "/rest/users/create/" ).permitAll()
 					.antMatchers( "/admin/**" ).hasRole( "ADMIN" )
 					.anyRequest()

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/categories" )
 public class CategoryController {
@@ -26,8 +24,8 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@ModelAttribute( MODEL_NAME )
-	public CategoryModel preparePagingModel( final Principal principal ) {
-		return new CategoryModel( userService.findByLogin( principal.getName() ) );
+	public CategoryModel preparePagingModel() {
+		return new CategoryModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{categoryId}/" )

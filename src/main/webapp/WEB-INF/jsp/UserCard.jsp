@@ -10,7 +10,7 @@
 
 <c:set var="username" value="<%=username%>" />
 
-<tags:page currentUser="${userCardModel.currentUser}">
+<tags:page>
 
 	<div class="js-user-card-container"></div>
 
@@ -29,12 +29,9 @@
 
 			var userId = ${userCardModel.user.id};
 
-			var currentUser = ${userCardModel.currentUserJSON};
-
 			var options = {
 				userId: userId,
 				filterByCupId: ${userCardModel.filterByCupId},
-				currentUser: currentUser
 			};
 			var pageView = new Page( { el: $( '.js-user-card-container' ), bodyRenderer: userCard, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();

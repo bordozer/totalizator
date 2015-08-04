@@ -4,7 +4,7 @@
 
 <jsp:useBean id="userSettingsModel" type="totalizator.app.controllers.ui.user.data.UserSettingsModel" scope="request"/>
 
-<tags:page currentUser="${userSettingsModel.currentUser}">
+<tags:page>
 
 	<c:set var="userId" value="${userSettingsModel.user.id}" />
 
@@ -26,8 +26,7 @@
 			];
 
 			var options = {
-				userId: ${userId},
-				currentUser: ${userSettingsModel.currentUserJSON}
+				userId: ${userId}
 			};
 
 			var pageView = new Page( { el: $( '.js-user-data-container' ), bodyRenderer: userSettings, breadcrumbs: breadcrumbs, options: options } );

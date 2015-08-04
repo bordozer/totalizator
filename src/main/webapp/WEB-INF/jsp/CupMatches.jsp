@@ -3,7 +3,7 @@
 
 <jsp:useBean id="cupMatchesModel" type="totalizator.app.controllers.ui.cups.matches.CupMatchesModel" scope="request"/>
 
-<tags:page currentUser="${cupMatchesModel.currentUser}">
+<tags:page>
 
 	<c:set var="cup" value="${cupMatchesModel.cup}" />
 
@@ -11,7 +11,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup-matches/cup-matches', 'translator' ], function ( $, Page, cupMatches, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup-matches/cup-matches', 'translator', 'app' ], function ( $, Page, cupMatches, Translator, app ) {
 
 			var cupId = ${cup.id};
 			var team1Id = ${not empty cupMatchesModel.team1 ? cupMatchesModel.team1.id : 0};
@@ -38,8 +38,6 @@
 
 			breadcrumbs.push( { link: '#', title: translator.title } );
 
-			var currentUser = ${cupMatchesModel.currentUserJSON};
-
 			var pageView = new Page( {
 				el: $( '.js-cup-matches-container' )
 				, bodyRenderer: cupMatches
@@ -48,7 +46,7 @@
 					cupId: cupId
 					, team1Id: team1Id
 					, team2Id: team2Id
-					, currentUser: currentUser
+					, currentUser: app.currentUser()
 				}
 			} );
 

@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface SystemVarsService {
 
+	String getProjectName();
+
 	String getDatabaseHost();
 
 	String getDatabasePort();

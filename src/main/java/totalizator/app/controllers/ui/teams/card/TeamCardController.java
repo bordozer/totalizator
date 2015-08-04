@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/teams/{teamId}/" )
 public class TeamCardController {
@@ -26,8 +24,8 @@ public class TeamCardController {
 	private TeamService teamService;
 
 	@ModelAttribute( MODEL_NAME )
-	public TeamCardModel preparePagingModel( final Principal principal ) {
-		return new TeamCardModel( userService.findByLogin( principal.getName() ) );
+	public TeamCardModel preparePagingModel() {
+		return new TeamCardModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )

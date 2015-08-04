@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.CupService;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/cups" )
 public class CupBetsController {
@@ -26,8 +24,8 @@ public class CupBetsController {
 	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
-	public CupBetsModel preparePagingModel( final Principal principal ) {
-		return new CupBetsModel( userService.findByLogin( principal.getName() ) );
+	public CupBetsModel preparePagingModel() {
+		return new CupBetsModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/bets/" )

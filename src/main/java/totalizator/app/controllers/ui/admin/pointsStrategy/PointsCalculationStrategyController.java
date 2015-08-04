@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/admin/points-calculation-strategies/" )
 public class PointsCalculationStrategyController {
@@ -21,8 +19,8 @@ public class PointsCalculationStrategyController {
 	private UserService userService;
 
 	@ModelAttribute( MODEL_NAME )
-	public PointsCalculationStrategyModel preparePagingModel( final Principal principal ) {
-		return new PointsCalculationStrategyModel( userService.findByLogin( principal.getName() ) );
+	public PointsCalculationStrategyModel preparePagingModel() {
+		return new PointsCalculationStrategyModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "//" )

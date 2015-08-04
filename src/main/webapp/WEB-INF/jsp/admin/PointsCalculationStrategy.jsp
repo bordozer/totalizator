@@ -3,7 +3,7 @@
 
 <jsp:useBean id="pointsCalculationStrategyModel" type="totalizator.app.controllers.ui.admin.pointsStrategy.PointsCalculationStrategyModel" scope="request"/>
 
-<tags:page currentUser="${pointsCalculationStrategyModel.currentUser}">
+<tags:page>
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 
@@ -21,13 +21,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var currentUser = ${pointsCalculationStrategyModel.currentUserJSON};
-
-			var options = {
-				currentUser: currentUser
-			};
-
-			var adminView = new Admin( { el: $( '.admin-points-calculation-strategies-container' ), bodyRenderer: renderer, breadcrumbs: breadcrumbs, options: options } );
+			var adminView = new Admin( { el: $( '.admin-points-calculation-strategies-container' ), bodyRenderer: renderer, breadcrumbs: breadcrumbs, options: {} } );
 			adminView.render();
 		} );
 	</script>

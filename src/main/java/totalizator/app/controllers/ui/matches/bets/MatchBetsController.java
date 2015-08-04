@@ -11,8 +11,6 @@ import totalizator.app.services.MatchService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.utils.DateTimeService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/matches" )
 public class MatchBetsController {
@@ -31,8 +29,8 @@ public class MatchBetsController {
 	private DateTimeService dateTimeService;
 
 	@ModelAttribute( MODEL_NAME )
-	public MatchBetsModel preparePagingModel( final Principal principal ) {
-		return new MatchBetsModel( userService.findByLogin( principal.getName() ) );
+	public MatchBetsModel preparePagingModel() {
+		return new MatchBetsModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bets/" )

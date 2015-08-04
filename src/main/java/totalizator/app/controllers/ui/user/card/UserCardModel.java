@@ -8,8 +8,7 @@ public class UserCardModel extends AbstractPageModel {
 	private final User user;
 	private int filterByCupId;
 
-	public UserCardModel( final User user, final User currentUser ) {
-		super( currentUser );
+	public UserCardModel( final User user ) {
 		this.user = user;
 	}
 

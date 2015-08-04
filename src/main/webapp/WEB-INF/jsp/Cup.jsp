@@ -3,7 +3,7 @@
 
 <jsp:useBean id="cupModel" type="totalizator.app.controllers.ui.cups.CupModel" scope="request"/>
 
-<tags:page currentUser="${cupModel.currentUser}">
+<tags:page>
 
 	<c:set var="cup" value="${cupModel.cup}" />
 
@@ -20,9 +20,7 @@
 				, { link: '#', title: "${cup.category.categoryName}: ${cup.cupName}" }
 			];
 
-			var currentUser = ${cupModel.currentUserJSON};
-
-			var pageView = new Page( { el: $( '.cup-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.cup-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId } } );
 			pageView.render();
 		} );
 	</script>

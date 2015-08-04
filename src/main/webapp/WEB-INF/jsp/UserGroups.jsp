@@ -11,7 +11,7 @@
 <c:set var="username" value="<%=username%>" />
 <c:set var="user" value="<%=userGroupsModel.getUser()%>" />
 
-<tags:page currentUser="${userGroupsModel.currentUser}">
+<tags:page>
 
 	<div class="js-user-groups-container"></div>
 
@@ -30,9 +30,7 @@
 				, { link: '#', title: translator.groupsTitle }
 			];
 
-			var currentUser = ${userGroupsModel.currentUserJSON};
-
-			var pageView = new Page( { el: $( '.js-user-groups-container' ), bodyRenderer: userGroups, breadcrumbs: breadcrumbs, options: { userId: ${user.id}, currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.js-user-groups-container' ), bodyRenderer: userGroups, breadcrumbs: breadcrumbs, options: { userId: ${user.id} } } );
 			pageView.render();
 		} );
 

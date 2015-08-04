@@ -19,35 +19,26 @@
 	<div class="container-fluid">
 
 		<script type="text/javascript">
-			require( [ 'jquery', 'translator' ], function ( $, Translator ) {
-
-				var translator = new Translator( {
-					projectName: 'Project name: Totalizator'
-				} );
-
-				$( '.js-project-name' ).text( translator.projectName );
-
+			require( [ 'jquery', 'app' ], function ( $, app ) {
+				$( '.js-project-name' ).text( app.projectName() );
 			} );
 		</script>
 
 		<div class="page-header" style="padding-left: 15px; margin: 0;">
 
-		<div class="row">
+			<div class="row">
 
-			<div class="col-lg-2">
-				<img src="/resources/public/img/logo.png">
-			</div>
+				<div class="col-lg-2">
+					<img src="/resources/public/img/logo.png">
+				</div>
 
-			<div class="col-lg-10">
-				<h1 class="js-project-name"></h1>
+				<div class="col-lg-10">
+					<h1 class="js-project-name"></h1>
+				</div>
+
 			</div>
 
 		</div>
-
-	</div>
-
-
-
 
 		<div class="row" style="margin-top: 50px;">
 

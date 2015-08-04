@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/users/{userId}" )
 public class UserCardController {
@@ -19,8 +17,8 @@ public class UserCardController {
 	private UserService userService;
 
 	@ModelAttribute( MODEL_NAME )
-	public UserCardModel preparePagingModel( final Principal principal, final @PathVariable( "userId" ) int userId ) {
-		return new UserCardModel( userService.load( userId ), userService.findByLogin( principal.getName() ) );
+	public UserCardModel preparePagingModel( final @PathVariable( "userId" ) int userId ) {
+		return new UserCardModel( userService.load( userId ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )

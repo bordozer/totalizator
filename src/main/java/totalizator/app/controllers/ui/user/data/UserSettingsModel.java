@@ -7,10 +7,6 @@ public class UserSettingsModel extends AbstractPageModel {
 
 	private User user;
 
-	protected UserSettingsModel( final User currentUser ) {
-		super( currentUser );
-	}
-
 	public void setUser( final User user ) {
 		this.user = user;
 	}

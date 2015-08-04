@@ -4,7 +4,7 @@
 
 <jsp:useBean id="userListModel" type="totalizator.app.controllers.ui.user.list.UserListModel" scope="request"/>
 
-<tags:page currentUser="${userListModel.currentUser}">
+<tags:page>
 
 	<div class="js-user-list-container"></div>
 
@@ -20,9 +20,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var currentUser = ${userListModel.currentUserJSON};
-
-			var pageView = new Page( { el: $( '.js-user-list-container' ), bodyRenderer: userList, breadcrumbs: breadcrumbs, options: { currentUser: currentUser } } );
+			var pageView = new Page( { el: $( '.js-user-list-container' ), bodyRenderer: userList, breadcrumbs: breadcrumbs, options: {} } );
 			pageView.render();
 		} );
 

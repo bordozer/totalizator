@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.UserService;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping( "/totalizator/users" )
 public class UserListController {
@@ -21,8 +19,8 @@ public class UserListController {
 	private UserService userService;
 
 	@ModelAttribute( MODEL_NAME )
-	public UserListModel preparePagingModel( final Principal principal ) {
-		return new UserListModel( userService.findByLogin( principal.getName() ) );
+	public UserListModel preparePagingModel() {
+		return new UserListModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )

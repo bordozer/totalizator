@@ -11,6 +11,7 @@ import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
+import totalizator.app.models.User;
 import totalizator.app.services.*;
 
 import java.security.Principal;
@@ -45,11 +46,14 @@ public class TeamsStandoffsController {
 
 	@ModelAttribute( MODEL_NAME )
 	public TeamsStandoffsModel preparePagingModel( final Principal principal ) {
-		return new TeamsStandoffsModel( userService.findByLogin( principal.getName() ) );
+		return new TeamsStandoffsModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/standoff/{team1Id}/vs/{team2Id}/" )
-	public String portalPage( final @PathVariable( "team1Id" ) int team1Id, final @PathVariable( "team2Id" ) int team2Id, final @ModelAttribute( MODEL_NAME ) TeamsStandoffsModel model ) {
+	public String portalPage( final @PathVariable( "team1Id" ) int team1Id, final @PathVariable( "team2Id" ) int team2Id
+			, final @ModelAttribute( MODEL_NAME ) TeamsStandoffsModel model, final Principal principal ) {
+
+		final User currentUser = userService.findByLogin( principal.getName() );
 
 		final Team team1 = teamService.load( team1Id );
 		final Team team2 = teamService.load( team2Id );
@@ -68,7 +72,7 @@ public class TeamsStandoffsController {
 		}
 		final List<Cup> cups = newArrayList( cupsSet );
 		cupService.sort( cups );
-		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, model.getCurrentUser() );
+		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, currentUser );
 		model.setCups( new Gson().toJson( cupDTOs ) );
 
 		final int score1 = getScore( matches, team1 );
