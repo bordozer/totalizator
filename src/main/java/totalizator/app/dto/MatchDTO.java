@@ -31,6 +31,7 @@ public class MatchDTO {
 	private boolean showAnotherBets;
 
 	private int homeTeamNumber;
+	private String description;
 
 	public int getMatchId() {
 		return matchId;
@@ -128,6 +129,14 @@ public class MatchDTO {
 
 	public void setHomeTeamNumber( final int homeTeamNumber ) {
 		this.homeTeamNumber = homeTeamNumber;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription( final String description ) {
+		this.description = description;
 	}
 
 	@Override

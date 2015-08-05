@@ -17,7 +17,8 @@ define( function ( require ) {
 		, actionMatchBetDelete: 'Match and Bets: Delete bet'
 		, actionAllMatchBet: 'Portal page / Matches / Menu: All bets'
 		, actionStandOffHistory: 'Teams standoff history'
-		, matches: 'matches'
+		, teamMatchesLabel: 'matches'
+		, menuHint: "Match menu"
 	} );
 
 	return Backbone.View.extend( {
@@ -25,6 +26,7 @@ define( function ( require ) {
 		events: {},
 
 		initialize: function ( options ) {
+			this.menuItems = options.menuItems;
 			this.render();
 		},
 
@@ -33,7 +35,7 @@ define( function ( require ) {
 			var betsCount = this.model.get( 'betsCount' ); // TODO: load 'fresh' data each rendering
 			var match = this.model.get( 'match' );
 
-			var menuItems = [
+			var commonMenuItems = [
 				{
 					selector: 'js-menu-standoff-history',
 					icon: 'fa fa-calendar',
@@ -45,13 +47,13 @@ define( function ( require ) {
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
 					link: '/totalizator/cups/15/matches/teams/' + match.team1.teamId + '/',
-					text: match.cup.cupName + ' / ' + match.team1.teamName + ' - ' + translator.matches
+					text: match.cup.cupName + ' / ' + match.team1.teamName + ' - ' + translator.teamMatchesLabel
 				}
 				, {
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
 					link: '/totalizator/cups/15/matches/teams/' + match.team2.teamId + '/',
-					text: match.cup.cupName + ' / ' + match.team2.teamName + ' - ' + translator.matches
+					text: match.cup.cupName + ' / ' + match.team2.teamName + ' - ' + translator.teamMatchesLabel
 				}
 				, {selector: 'divider'}
 				, {
@@ -62,55 +64,9 @@ define( function ( require ) {
 				}
 			];
 
-			var bet = this.model.get( 'bet' );
-			var isBettingAllowed = this.model.isBettingAllowed();
-			var isBetEditingMode = this.model.isBetMode();
+			commonMenuItems.push( {selector: 'divider'} );
 
-			if ( isBettingAllowed ) {
-
-				menuItems.push( {selector: 'divider'} );
-
-				if ( isBetEditingMode ) {
-					menuItems.push( {
-						selector: 'js-menu-match-bet-save',
-						icon: 'fa fa-edit',
-						link: '#',
-						text: translator.actionMatchBetSave
-					} );
-					menuItems.push( {
-						selector: 'js-menu-match-bet-cancel-editing',
-						icon: 'fa fa-close',
-						link: '#',
-						text: translator.actionCancelBetEditing
-					} );
-				}
-
-				if ( bet == null ) {
-					if ( this.model.isBettingAllowed() && !isBetEditingMode ) {
-						menuItems.push( {
-							selector: 'js-menu-match-bet-add',
-							icon: 'fa fa-plus',
-							link: '#',
-							text: translator.actionMatchBetAdd
-						} );
-					}
-				} else {
-					if ( !isBetEditingMode ) {
-						menuItems.push( {
-							selector: 'js-menu-match-bet-edit',
-							icon: 'fa fa-edit',
-							link: '#',
-							text: translator.actionMatchBetEdit
-						} );
-						menuItems.push( {
-							selector: 'js-menu-match-bet-delete',
-							icon: 'fa fa-recycle',
-							link: '#',
-							text: translator.actionMatchBetDelete
-						} );
-					}
-				}
-			}
+			var menuItems = commonMenuItems.concat( this.menuItems );
 
 			var options = {
 				menus: menuItems

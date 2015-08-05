@@ -313,6 +313,7 @@ define( function ( require ) {
 				, beginningTime: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
 				, matchFinished: this.$( '.js-match-finished' ).is(':checked')
 				, homeTeamNumber: this.$( "input[name='homeTeamNumber']:checked" ).val()
+				, matchDescription: this.$( '#matchDescription' ).val()
 			} );
 		},
 

@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
-	var MatchMenu = require( './match-menu-view' );
+	var MatchMenu = require( './match/match-menu-view' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );

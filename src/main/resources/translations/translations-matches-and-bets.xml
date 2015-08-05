@@ -67,9 +67,9 @@
 
 	<translation>
 		<nerd>Match and Bets: Cancel bet editing</nerd>
-		<ru><![CDATA[Отменить изменения]]></ru>
-		<en><![CDATA[Cancel bet editing]]></en>
-		<ua><![CDATA[Вiдмiнити]]></ua>
+		<ru><![CDATA[Отменить изменения ставки]]></ru>
+		<ua><![CDATA[Скасувати змiни ставки]]></ua>
+		<en><![CDATA[Cancel changes]]></en>
 	</translation>
 
 	<translation>
@@ -138,22 +138,29 @@
 	<translation>
 		<nerd>Team points</nerd>
 		<ru><![CDATA[Набранные командой очки]]></ru>
-		<en><![CDATA[Team points]]></en>
 		<ua><![CDATA[Набранi командою очки]]></ua>
+		<en><![CDATA[Team points]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Match description</nerd>
+		<ru><![CDATA[Информация об игре]]></ru>
+		<ua><![CDATA[Iнформацiя о грi]]></ua>
+		<en><![CDATA[Match description]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Close match info</nerd>
+		<ru><![CDATA[Закрыть информацию о матче]]></ru>
+		<ua><![CDATA[Закрити iнформацiю о грi]]></ua>
+		<en><![CDATA[Close match info]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
 		<en><![CDATA[]]></en>
-		<ua><![CDATA[]]></ua>
 	</translation>
 
 </translations>

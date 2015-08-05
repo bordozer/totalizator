@@ -57,7 +57,7 @@
 
 						<% if( teams.length > 0 && model.cupId > 0 ) { %>
 							<div class="row">
-								<div class="col-lg-12 text-right">
+								<div class="col-lg-12 text-right text-muted">
 									<%=translator.matchEdit_Team%> 1
 								</div>
 							</div>
@@ -93,7 +93,7 @@
 
 						<% if( teams.length > 0 && model.cupId > 0 ) { %>
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-lg-12 text-muted">
 									<%=translator.matchEdit_Team%> 2
 								</div>
 							</div>
@@ -142,6 +142,17 @@
 					</div>
 					<div class="col-lg-6">
 						<input type="checkbox" class="js-match-finished" value="true" <%=model.matchFinished ? 'checked' : ''%> >
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-2">
+						<%=translator.matchEdit_MatchDescription%>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<textarea id="matchDescription" cols="53" rows="3"><%=model.matchDescription%></textarea>
 					</div>
 				</div>
 

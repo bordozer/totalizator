@@ -8,26 +8,12 @@ define( function ( require ) {
 
 		idAttribute: 'matchId',
 
-		betMode: false,
-
 		defaults: {
 			matchId: 0
 			, bettingAllowed: false
 		},
 
 		initialize: function ( options ) {
-		},
-
-		setModeBet: function() {
-			this.betMode = true;
-		},
-
-		setModeMatchInfo: function() {
-			this.betMode = false;
-		},
-
-		isBetMode: function() {
-			return this.betMode;
 		},
 
 		isBettingAllowed: function() {

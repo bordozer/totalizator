@@ -49,7 +49,7 @@ public class Cup extends AbstractEntity {
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn( name = "pointsCalculationStrategyId" )
 	private PointsCalculationStrategy pointsCalculationStrategy;
 

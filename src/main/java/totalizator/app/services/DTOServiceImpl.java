@@ -313,6 +313,7 @@ public class DTOServiceImpl implements DTOService {
 				dto.setShowAnotherBets( matchBetsService.userCanSeeAnotherBets( match, user )  );
 
 				dto.setHomeTeamNumber( match.getHomeTeamNumber() );
+				dto.setDescription( match.getDescription() );
 
 				return dto;
 			}

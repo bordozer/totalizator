@@ -25,6 +25,7 @@ public class MatchEditDTO {
 	private boolean matchFinished;
 
 	private int homeTeamNumber;
+	private String matchDescription;
 
 	private int betsCount;
 
@@ -108,6 +109,14 @@ public class MatchEditDTO {
 
 	public void setHomeTeamNumber( final int homeTeamNumber ) {
 		this.homeTeamNumber = homeTeamNumber;
+	}
+
+	public String getMatchDescription() {
+		return matchDescription;
+	}
+
+	public void setMatchDescription( final String matchDescription ) {
+		this.matchDescription = matchDescription;
 	}
 
 	public int getBetsCount() {

@@ -68,6 +68,7 @@ public class Match extends AbstractEntity {
 	private boolean matchFinished;
 
 	private int homeTeamNumber;
+	private String description;
 
 	public Cup getCup() {
 		return cup;
@@ -131,6 +132,14 @@ public class Match extends AbstractEntity {
 
 	public void setHomeTeamNumber( final int homeTeamNumber ) {
 		this.homeTeamNumber = homeTeamNumber;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription( final String description ) {
+		this.description = description;
 	}
 
 	@Override

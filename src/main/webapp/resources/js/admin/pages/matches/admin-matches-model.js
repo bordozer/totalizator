@@ -22,6 +22,7 @@ define( function ( require ) {
 			, beginningTime: new Date()
 			, matchFinished: false
 			, homeTeamNumber: 0
+			, matchDescription: ''
 		},
 
 		initialize: function ( options ) {
