@@ -158,8 +158,8 @@
 
 	<translation>
 		<nerd>No match description is given</nerd>
-		<ru><![CDATA[Дополнительная информация недоступна]]></ru>
-		<ua><![CDATA[Додаткова iнформацiя недоступна]]></ua>
+		<ru><![CDATA[Дополнительная информация отсутствует]]></ru>
+		<ua><![CDATA[Додаткова iнформацiя не надана]]></ua>
 		<en><![CDATA[No match description is given]]></en>
 	</translation>
 
