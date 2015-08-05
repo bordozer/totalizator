@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: "Matches"
+		noMatchDescription: "No match description is given"
 	} );
 
 	return Backbone.View.extend( {
@@ -21,7 +21,9 @@ define( function ( require ) {
 		},
 
 		render: function () {
-			var data = _.extend( {}, { match: this.match } );
+			var match = this.match;
+			var description = match.description ? match.description : translator.noMatchDescription;
+			var data = _.extend( {}, { description: description } );
 			this.$el.html( template( data ) );
 		}
 	} );
