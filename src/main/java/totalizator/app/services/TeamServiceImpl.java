@@ -17,6 +17,9 @@ public class TeamServiceImpl implements TeamService {
 	@Autowired
 	private TeamDao teamRepository;
 
+	@Autowired
+	private CupTeamService cupTeamService;
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<Team> loadAll() {
@@ -36,14 +39,15 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	@Transactional( readOnly = true )
-	public Team load( final int id ) {
-		return teamRepository.load( id );
+	public Team load( final int teamId ) {
+		return teamRepository.load( teamId );
 	}
 
 	@Override
 	@Transactional
-	public void delete( final int id ) {
-		teamRepository.delete( id );
+	public void delete( final int teamId ) {
+		cupTeamService.clearFor( teamId );
+		teamRepository.delete( teamId );
 	}
 
 	@Override

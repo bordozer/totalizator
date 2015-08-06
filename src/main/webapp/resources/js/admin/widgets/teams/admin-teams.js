@@ -10,8 +10,8 @@ define( function( require ) {
 	var View = require( './admin-teams-view' );
 
 	function init( container ) {
-		var model = new Model.TeamsModel();
-		var view = new View.TeamsView( { model: model, el: container } );
+		var model = new Model();
+		var view = new View( { model: model, el: container } );
 	}
 
 	return init;

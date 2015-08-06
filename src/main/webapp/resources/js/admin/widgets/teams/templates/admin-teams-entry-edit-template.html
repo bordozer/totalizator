@@ -1,68 +1,73 @@
-<div class="row">
-	<div class="col-lg-12">
+<hr />
 
-		<div class="panel panel-default">
+<div class="panel panel-default">
 
-			<div class="panel-heading clearfix" title="<%=model.teamName%>">
-				<%=model.teamName%>
-				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-primary fa fa-save team-entry-save"></button>
-					<button type="button" class="btn btn-default fa fa-close team-entry-edit-cancel"></button>
-				</div>
+	<div class="panel-heading clearfix" title="<%=model.teamName%>">
+
+		<% if ( model.teamLogo ) { %>
+			<span>
+				<img src="<%=model.teamLogo%>" height="24" width="24">
+			</span>
+		<% } %>
+
+		<%=model.teamName%>
+
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-primary fa fa-save team-entry-save"></button>
+			<button type="button" class="btn btn-default fa fa-close team-entry-edit-cancel"></button>
+		</div>
+	</div>
+
+	<div class="panel-body">
+
+		<div class="row">
+
+			<div class="col-lg-6">
+				<%= translator.teamNameLabel %>
 			</div>
 
-			<div class="panel-body">
-
-				<div class="row">
-
-					<div class="col-lg-6">
-						<%= translator.teamNameLabel %>
-					</div>
-
-					<div class="col-lg-6">
-						<input class="form-control entry-name" id="teamNme" name="teamNme" value="<%=model.teamName%>">
-					</div>
-				</div>
-
-				<div class="row">
-
-					<div class="col-lg-6">
-						<%- translator.teamCategoryLabel %>
-					</div>
-
-					<div class="col-lg-6">
-						<select class="chosen-select entry-category-id" id="teamCategory" name="teamCategory">
-							<% _.each( categories, function( category ) { %>
-							<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : ''%>><%=category.categoryName%></option>
-							<% }) %>
-						</select>
-					</div>
-				</div>
-
-				<div class="row">
-
-					<div class="col-lg-6">
-						<%- translator.teamLogoLabel %>
-					</div>
-
-					<div class="col-lg-6">
-
-						<form method="POST" id='team_form' enctype="multipart/form-data">
-							<input type="file" id="teamLogoFile" name="teamLogoFile">
-						</form>
-
-					</div>
-				</div>
-
+			<div class="col-lg-6">
+				<input class="form-control entry-name" id="teamNme" name="teamNme" value="<%=model.teamName%>">
 			</div>
-
 		</div>
 
-		<div class="panel-footer js-footer">
+		<div class="row">
 
+			<div class="col-lg-6">
+				<%- translator.teamCategoryLabel %>
+			</div>
+
+			<div class="col-lg-6">
+				<select class="chosen-select entry-category-id" id="teamCategory" name="teamCategory">
+					<% _.each( categories, function( category ) { %>
+					<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : ''%>><%=category.categoryName%></option>
+					<% }) %>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-lg-6">
+				<%- translator.teamLogoLabel %>
+			</div>
+
+			<div class="col-lg-6">
+
+				<form method="POST" id='team_form' enctype="multipart/form-data">
+					<input type="file" id="teamLogoFile" name="teamLogoFile">
+				</form>
+
+			</div>
 		</div>
 
 	</div>
 
+	<div class="panel-footer js-footer">
+
+	</div>
+
 </div>
+
+<hr />
 

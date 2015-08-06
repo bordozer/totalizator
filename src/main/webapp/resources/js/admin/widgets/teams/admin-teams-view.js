@@ -6,12 +6,10 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
+	var template = _.template( require( 'text!./templates/admin-teams-template.html' ) );
+
 	var WidgetView = require( 'js/components/widget/widget-view' );
-
-	var TemplateEntry = require( 'text!./templates/admin-teams-entry-template.html' );
-	var TemplateEntryEdit = require( 'text!./templates/admin-teams-entry-edit-template.html' );
-
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var TeamView = require( './admin-team-view' );
 
 	var service = require( '/resources/js/services/service.js' );
 
@@ -22,15 +20,16 @@ define( function ( require ) {
 		title: "Teams"
 		, newTeamLabel: "New team"
 		, goTopLabel: "Scroll to top"
-		, teamNameLabel: "Team name"
-		, teamCategoryLabel: "Category"
-		, teamLogoLabel: "Logo"
 	} );
 
-	var TeamsView = WidgetView.extend( {
+	return WidgetView.extend( {
+
+		teamsFilter: '',
 
 		events: {
-			'click .js-new-team-button': '_onAddClick'
+			'click .js-new-team-button': '_createNewTeam'
+			, 'keyup #teams-filter': '_teamsFilter'
+			, 'click .js-teams-filter-clear': '_teamsFilterClear'
 		},
 
 		initialize: function( options ) {
@@ -45,27 +44,63 @@ define( function ( require ) {
 		},
 
 		renderBody: function() {
-			this.listenToOnce( this.model, 'sync', this._renderTeams );
+			this.listenToOnce( this.model, 'sync', this._render );
 			this.model.fetch( { cache: false } );
 		},
 
 		getCustomMenuItems: function() {
 
 			return [
-				{ selector: 'js-new-team-button', icon: 'fa fa-plus', link: '#', text: translator.newTeamLabel }
+				{ selector: 'js-new-team-button', icon: 'fa fa-plus', link: '#', text: translator.newTeamLabel, button: true }
 			]
+		},
+
+		_teamsFilter: function() {
+			this.teamsFilter = this.$( '#teams-filter' ).val();
+			this._renderTeams();
+		},
+
+		_teamsFilterClear: function() {
+			this.$( '#teams-filter' ).val( '' );
+			this.teamsFilter = '';
+			this._renderTeams();
+			this._searchFocus();
+		},
+
+		_render: function() {
+			var container = this.$( this.windowBodyContainerSelector );
+			container.empty();
+
+			if ( this.model.length > 0 ) {
+				var data = _.extend( {}, { teamsFilter: this.teamsFilter, translator: translator } );
+				container.html( template( data ) );
+				this._searchFocus();
+			}
+
+			this._renderTeams();
 		},
 
 		_renderTeams: function() {
 
-			this.$( this.windowBodyContainerSelector ).empty();
+			var container = this.$( '.js-teams' );
+			container.empty();
 
 			var filterByCategory = this.model.filterByCategory;
+			var teamsFilter = this.teamsFilter.toLowerCase();
+
 			var self= this;
+
 			this.model.forEach( function( team ) {
-				if ( ! filterByCategory || self.model.filterByCategory == team.get( 'categoryId' ) ) {
-					self.renderEntry( team );
+
+				if ( filterByCategory != undefined && filterByCategory != team.get( 'categoryId' ) ) {
+					return;
 				}
+
+				if ( teamsFilter.length > 0 && team.get( 'teamName' ).toLowerCase().indexOf( teamsFilter ) == -1 ) {
+					return;
+				}
+
+				self._renderEntry( team );
 			});
 
 			this.footerText( "<i class='fa fa-arrow-up'></i> <a href='#'>" + translator.goTopLabel + "</a>" );
@@ -73,7 +108,9 @@ define( function ( require ) {
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		renderEntry: function ( model ) {
+		_renderEntry: function ( model ) {
+
+			var container = this.$( '.js-teams' );
 
 			var view = new TeamView( {
 				model: model
@@ -81,14 +118,15 @@ define( function ( require ) {
 				, selectedCup: this.model.selectedCup
 			} );
 
-			view.on( 'events:teams_changed', this._triggerTeamsChanged, this );
+			view.on( 'events:search_set_focus', this._searchFocus, this );
+			view.on( 'events:re_render_teams', this._renderTeams, this );
 
-			var container = this.$( this.windowBodyContainerSelector );
 			if ( model.get( 'isEditState' ) ) {
-				return container.append( view.renderEdit().$el );
+				container.append( view.renderEdit().$el );
+				return;
 			}
 
-			return container.append( view.render().$el );
+			container.append( view.render().$el );
 		},
 
 		getTitle: function () {
@@ -99,8 +137,8 @@ define( function ( require ) {
 			return 'fa-street-view';
 		},
 
-		_triggerTeamsChanged: function() {
-			this.trigger( 'events:teams_changed' );
+		_searchFocus: function() {
+			this.$( '#teams-filter' ).focus();
 		},
 
 		_loadCategories: function() {
@@ -123,191 +161,17 @@ define( function ( require ) {
 			this._reRender();
 		},
 
-		_addEntry: function() {
-			this.listenToOnce( this.model, 'add', this.renderEntry );
+		_createNewTeam: function() {
+
+			var container = this.$( '.js-teams' );
+			container.empty();
+
+			this.listenToOnce( this.model, 'add', this._renderEntry );
 			this.model.add( { isEditState: true, categoryId: this.model.filterByCategory } );
-
-			$( "html, body" ).animate( { scrollTop: $( document ).height() }, "fast" );
-		},
-
-		_onAddClick: function( evt ) {
-			evt.preventDefault();
-
-			this._addEntry();
 		},
 
 		_reRender: function() {
 			this.render();
 		}
 	} );
-
-
-	var TeamView = Backbone.View.extend( {
-
-		templateView: _.template( TemplateEntry ),
-		templateEdit: _.template( TemplateEntryEdit ),
-
-		events: {
-			'click .team-entry-edit': '_onEntryEditClick'
-			, 'click .team-entry-del': '_onEntryDelClick'
-			, 'click .team-entry-save': '_onEntrySaveClick'
-			, 'click .team-entry-edit-cancel': '_onEntryEditCancelClick'
-			, 'change .entry-name, .entry-category-id': '_onChange'
-			, 'change .js-team-checkbox': '_toggleTeamCheckbox'
-		},
-
-		initialize: function ( options ) {
-			this.categories = options.categories;
-			this.selectedCup = options.selectedCup;
-
-			this.on( 'events:team_changed', this.render, this )
-		},
-
-		render: function () {
-
-			var model = this.model.toJSON();
-
-			this.$el.html( this.templateView( {
-				model: model
-				, categoryName: this._getCategoryName( model.categoryId )
-				, selectedCup: this.selectedCup
-				, translator: translator
-			} ) );
-
-			return this;
-		},
-
-		renderEdit: function () {
-			var modelJSON = this.model.toJSON();
-
-			this.$el.html( this.templateEdit( {
-				model: modelJSON
-				, categories: this.categories
-				, translator: translator
-			} ) );
-
-			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
-
-			return this;
-		},
-
-		_getCategoryName: function( categoryId ) {
-			return _.find( this.categories, function( category ) {
-				return category.categoryId == categoryId;
-			} ).categoryName;
-		},
-
-		_editEntry: function() {
-			this.renderEdit();
-		},
-
-		_deleteEntry: function() {
-			if ( confirm( "Delete team '" + this.model.get( 'teamName' ) + "'?" ) ) {
-				this.model.destroy();
-				this.remove();
-			}
-		},
-
-		_saveEntry: function() {
-
-			this._bind();
-
-			if( ! this._validate() ){
-				return;
-			}
-
-			var file = this.$( "#teamLogoFile" );
-
-			var self = this;
-			this.model.save()
-					.then( function() {
-						var url = '/admin/rest/teams/' + self.model.id + '/logo/';
-						service.uploadFile( file, url );
-					})
-					.then( function() {
-						self.trigger( 'events:team_changed' );
-					});
-
-			this.model.cancelEditState();
-		},
-
-		_bind: function() {
-			var teamName = this._getTeamName();
-			var categoryId = this._getCategoryId();
-
-			this.model.set( { teamName: teamName, categoryId: categoryId } );
-		},
-
-		_validate: function() {
-
-			if ( this._getTeamName().length == 0 ) {
-				alert( 'Enter a name!' );
-
-				return false;
-			}
-
-			return true;
-		},
-
-		_getTeamName: function() {
-			return this.$( '.entry-name' ).val().trim();
-		},
-
-		_getCategoryId: function() {
-			return this.$( '.entry-category-id' ).val();
-		},
-
-		_isTeamChecked: function() {
-			return this.$( '.js-team-checkbox' ).is(':checked');
-		},
-
-		_onChange: function( evt ) {
-			evt.preventDefault();
-
-			this._bind();
-		},
-
-		_toggleTeamCheckbox: function( evt ) {
-			evt.preventDefault();
-
-			var isTeamChecked = this._isTeamChecked();
-			this.model.set( { teamChecked: isTeamChecked } );
-
-			adminService.setTeamCupParticipation( this.selectedCup.cupId, this.model.get( 'teamId' ), isTeamChecked );
-
-			this.render();
-		},
-
-		_onEntryEditClick: function( evt ) {
-			evt.preventDefault();
-			this.model.setEditState();
-			this._editEntry();
-		},
-
-		_onEntrySaveClick: function( evt ) {
-			evt.preventDefault();
-
-			this._saveEntry();
-		},
-
-		_onEntryDelClick: function( evt ) {
-			evt.preventDefault();
-
-			this._deleteEntry();
-		},
-
-		_onEntryEditCancelClick: function( evt ) {
-			evt.preventDefault();
-			if ( this.model.get( 'teamId' ) > 0 ) {
-				this.model.cancelEditState();
-				this.render();
-
-				return;
-			}
-			this.model.destroy();
-			this.remove();
-		}
-	} );
-
-	return { TeamsView: TeamsView };
 } );

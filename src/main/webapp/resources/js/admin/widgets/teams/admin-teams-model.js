@@ -16,6 +16,7 @@ define( function ( require ) {
 			, categoryId: 0
 			, isEditState: false
 			, teamChecked: true
+			, matchCount: 0
 		},
 
 		initialize: function ( options ) {
@@ -30,7 +31,7 @@ define( function ( require ) {
 		}
 	});
 
-	var TeamsModel = Backbone.Collection.extend( {
+	return Backbone.Collection.extend( {
 
 		model: TeamModel,
 		selectedCup: { cupId: 0 },
@@ -46,6 +47,4 @@ define( function ( require ) {
 			this.fetch( { cache: false, reset: true } );
 		}
 	});
-
-	return { TeamsModel: TeamsModel };
 } );

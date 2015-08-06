@@ -28,10 +28,7 @@ define( function ( require ) {
 
 			this.categoriesModel = new CategoriesModel.CategoriesModel();
 			this.cupsModel = new CupsModel.CupsModel();
-			this.teamsModel = new TeamsModel.TeamsModel();
-
-			var preselectedCategory = this._preselectCategory();
-//			var preselectedCup = this._preselectCup( preselectedCategory );
+			this.teamsModel = new TeamsModel();
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -94,7 +91,7 @@ define( function ( require ) {
 		},
 
 		_renderTeams: function() {
-			this.teamsView = new TeamsView.TeamsView( { model: this.teamsModel, el: this.$( '.admin-page-teams-container' ) } );
+			this.teamsView = new TeamsView( { model: this.teamsModel, el: this.$( '.admin-page-teams-container' ) } );
 		},
 
 		_updateCategories: function() {

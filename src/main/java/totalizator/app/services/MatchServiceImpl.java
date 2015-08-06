@@ -146,6 +146,16 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	public List<Match> loadAll( final Team team ) {
+		return matchRepository.loadAll( team );
+	}
+
+	@Override
+	public int getMatchCount( Team team ) {
+		return matchRepository.getMatchCount( team );
+	}
+
+	@Override
 	@Transactional
 	public Match save( final Match entry ) {
 		return matchRepository.save( entry );

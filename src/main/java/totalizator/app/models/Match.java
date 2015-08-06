@@ -20,6 +20,10 @@ import static totalizator.app.models.Match.*;
 				query = "select c from Match c where cupId= :cupId order by beginningTime desc"
 		),
 		@NamedQuery(
+				name = FIND_BY_TEAM,
+				query = "select c from Match c where ( team1Id= :teamId ) or ( team2Id= :teamId ) order by beginningTime desc"
+		),
+		@NamedQuery(
 				name = FIND_BY_TEAMS,
 				query = "select c from Match c where ( team1Id= :team1Id and team2Id= :team2Id ) or (team1Id= :team2Id and team2Id= :team1Id) order by beginningTime desc"
 		),
@@ -36,6 +40,10 @@ import static totalizator.app.models.Match.*;
 				query = "select count(m) from Match m where ( cupId= :cupId ) and ( team1Id= :teamId or team2Id= :teamId )"
 		),
 		@NamedQuery(
+				name = LOAD_MATCH_COUNT_FOR_TEAM,
+				query = "select count(m) from Match m where ( team1Id= :teamId or team2Id= :teamId )"
+		),
+		@NamedQuery(
 				name = LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM,
 				query = "select count(m) from Match m where ( cupId= :cupId ) and ( matchFinished = true ) and ( team1Id= :teamId or team2Id= :teamId )"
 		)
@@ -44,10 +52,12 @@ public class Match extends AbstractEntity {
 
 	public static final String LOAD_ALL = "matches.loadAll";
 	public static final String FIND_BY_CUP = "matches.findByCup";
+	public static final String FIND_BY_TEAM = "matches.findByTeam";
 	public static final String FIND_BY_TEAMS = "matches.findByTeams";
 	public static final String FIND_ALL_TEAM_MATCHES_FOR_CUP = "matches.findByCupAndTeam";
 	public static final String LOAD_MATCH_COUNT_FOR_CUP = "cups.loadCupMatchCount";
 	public static final String LOAD_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.loadTeamMatchCountForCup";
+	public static final String LOAD_MATCH_COUNT_FOR_TEAM = "cups.loadTeamMatchCount";
 	public static final String LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.finishedMatchCountForCupAndTeam";
 
 	@ManyToOne

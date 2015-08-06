@@ -7,7 +7,7 @@ public class TeamEditDTO {
 	private int categoryId;
 	private String teamLogo;
 	private boolean teamChecked;
-	private String teamLogoFile;
+	private int matchCount;
 
 	public TeamEditDTO() {
 	}
@@ -58,6 +58,14 @@ public class TeamEditDTO {
 
 	public void setTeamChecked( final boolean teamChecked ) {
 		this.teamChecked = teamChecked;
+	}
+
+	public int getMatchCount() {
+		return matchCount;
+	}
+
+	public void setMatchCount( int matchCount ) {
+		this.matchCount = matchCount;
 	}
 
 	@Override

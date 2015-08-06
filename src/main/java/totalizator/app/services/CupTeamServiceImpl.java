@@ -82,6 +82,20 @@ public class CupTeamServiceImpl implements CupTeamService {
 		} );
 	}
 
+	@Override
+	public void clearFor( int teamId ) {
+		for ( final Cup cup : cupService.loadAll() ) {
+			if ( exists( cup.getId(), teamId ) ) {
+				clearFor( cup.getId(), teamId );
+			}
+		}
+	}
+
+	@Override
+	public void clearFor( int cupId, int teamId ) {
+		saveCupTeam( cupId, teamId, false );
+	}
+
 	private void createNewEntry( final int cupId, final int teamId ) {
 		cupTeamRepository.save( new CupTeam( cupService.load( cupId ), teamService.load( teamId ) ) );
 	}

@@ -78,6 +78,22 @@ public class MatchRepository implements MatchDao {
 	}
 
 	@Override
+	public List<Match> loadAll( Team team ) {
+		return em.createNamedQuery( Match.FIND_BY_TEAM, Match.class )
+				.setParameter( "teamId", team.getId() )
+				.getResultList();
+	}
+
+	@Override
+	public int getMatchCount( Team team ) {
+		final List<Long> result = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_TEAM, Long.class )
+				.setParameter( "teamId", team.getId() )
+				.getResultList();
+
+		return result != null && result.size() > 0  ? ( int ) ( long ) result.get( 0 ) : 0;
+	}
+
+	@Override
 	public List<Match> loadAll( final Cup cup, final Team team ) {
 
 		return em.createNamedQuery( Match.FIND_ALL_TEAM_MATCHES_FOR_CUP, Match.class )
@@ -89,11 +105,11 @@ public class MatchRepository implements MatchDao {
 	@Override
 	public int getMatchCount( final Cup cup ) {
 
-		final List<Long> winners = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_CUP, Long.class )
+		final List<Long> result = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_CUP, Long.class )
 				.setParameter( "cupId", cup.getId() )
 				.getResultList();
 
-		return winners != null && winners.size() > 0  ? ( int ) ( long ) winners.get( 0 ) : 0;
+		return result != null && result.size() > 0  ? ( int ) ( long ) result.get( 0 ) : 0;
 	}
 
 	@Override

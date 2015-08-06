@@ -17,4 +17,8 @@ public interface CupTeamService {
 	boolean exists( final Cup cup, final Team team );
 
 	List<Team> loadActiveForCup( final int cupId );
+
+	void clearFor( final int teamId );
+
+	void clearFor( int cupId, int teamId );
 }

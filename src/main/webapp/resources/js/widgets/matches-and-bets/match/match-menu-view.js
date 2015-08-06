@@ -46,13 +46,13 @@ define( function ( require ) {
 				, {
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
-					link: '/totalizator/cups/15/matches/teams/' + match.team1.teamId + '/',
+					link: '/totalizator/cups/' + match.cup.cupId + '/matches/teams/' + match.team1.teamId + '/',
 					text: match.cup.cupName + ' / ' + match.team1.teamName + ' - ' + translator.teamMatchesLabel
 				}
 				, {
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
-					link: '/totalizator/cups/15/matches/teams/' + match.team2.teamId + '/',
+					link: '/totalizator/cups/' + match.cup.cupId + '/matches/teams/' + match.team2.teamId + '/',
 					text: match.cup.cupName + ' / ' + match.team2.teamName + ' - ' + translator.teamMatchesLabel
 				}
 				, {selector: 'divider'}

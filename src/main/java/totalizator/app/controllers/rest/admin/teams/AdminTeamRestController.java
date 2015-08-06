@@ -37,6 +37,9 @@ public class AdminTeamRestController {
 	private CupTeamService cupTeamService;
 
 	@Autowired
+	private MatchService matchService;
+
+	@Autowired
 	private LogoService logoService;
 
 	private static final Logger LOGGER = Logger.getLogger( AdminTeamRestController.class );
@@ -56,7 +59,10 @@ public class AdminTeamRestController {
 
 			@Override
 			public TeamEditDTO apply( final Team team ) {
-				return new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), cupTeamService.exists( cup, team ), logoService.getLogoURL( team ) );
+				final TeamEditDTO dto = new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), cupTeamService.exists( cup, team ), logoService.getLogoURL( team ) );
+				dto.setMatchCount( matchService.getMatchCount( team ) );
+
+				return dto;
 			}
 		} );
 	}
@@ -102,7 +108,7 @@ public class AdminTeamRestController {
 
 		final Team team = teamService.load( teamId );
 
-		teamService.delete( teamId );
+		teamService.delete( teamId ); // TODO: exception if team assigned to some match
 		logoService.deleteLogo( team );
 	}
 

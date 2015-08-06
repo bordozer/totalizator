@@ -2,21 +2,33 @@
 
 	<div class="btn-group pull-right">
 		<button type="button" class="btn btn-default fa fa-edit team-entry-edit"></button>
-		<button type="button" class="btn btn-default fa fa-recycle team-entry-del"></button>
-	</div>
-
-	<div class="col-lg-7" title="#<%=model.cupId%>">
-
-		<% if( selectedCup.cupId > 0 && ! this.selectedCup.finished ) { %>
-			<input type="checkbox" class="js-team-checkbox" value="<%=model.teamId%>" <%= model.teamChecked ? 'checked' : '' %> >
+		<% if( matchCount == 0 ) { %>
+			<button type="button" class="btn btn-default fa fa-recycle team-entry-del" ></button>
 		<% } %>
-
-		<img class="team-logo" src="<%=model.teamLogo%>" height="32">
-		<a href="/totalizator/teams/<%=model.teamId%>/"><%=model.teamName%></a>
 	</div>
 
-	<div class="col-lg-2">
-		<%=categoryName%>
+	<div class="col-lg-9" title="#<%=model.cupId%>">
+
+		<div class="row">
+
+			<div class="col-lg-1">
+				<% if( selectedCup.cupId > 0 && ! selectedCup.finished ) { %>
+					<input type="checkbox" class="js-team-checkbox" value="<%=model.teamId%>" <%= model.teamChecked ? 'checked' : '' %> >
+				<% } %>
+			</div>
+
+			<div class="col-lg-3">
+				<img class="team-logo" src="<%=model.teamLogo%>" height="32" width="64">
+			</div>
+
+			<div class="col-lg-7">
+				<a href="/totalizator/teams/<%=model.teamId%>/"><%=model.teamName%></a>
+				<br />
+				<%= translator.totalMatchesLabel %>: <%=matchCount%>
+			</div>
+
+		</div>
+
 	</div>
 
 </div>
