@@ -26,7 +26,7 @@ define( function ( require ) {
 		events: {},
 
 		initialize: function ( options ) {
-			this.menuItems = options.menuItems;
+			this.menuItems = options.menuItems || [];
 			this.render();
 		},
 
@@ -64,7 +64,9 @@ define( function ( require ) {
 				}
 			];
 
-			commonMenuItems.push( {selector: 'divider'} );
+			if ( this.menuItems.length > 0 ) {
+				commonMenuItems.push( {selector: 'divider'} );
+			}
 
 			var menuItems = commonMenuItems.concat( this.menuItems );
 
