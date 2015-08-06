@@ -68,6 +68,8 @@ public class Match extends AbstractEntity {
 	private boolean matchFinished;
 
 	private int homeTeamNumber;
+
+	@Column( columnDefinition = "TEXT" )
 	private String description;
 
 	public Cup getCup() {
