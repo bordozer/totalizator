@@ -199,6 +199,7 @@ define( function ( require ) {
 					, link: '#'
 					, text: translator.actionMatchBetSave
 					, button: true
+					, cssClass: 'btn-primary'
 				} );
 				menuItems.push( {
 					selector: 'js-menu-match-bet-cancel-editing'
