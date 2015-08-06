@@ -85,9 +85,10 @@ define( function ( require ) {
 				if ( bet == null && this.model.isBettingAllowed() ) {
 					menuItems.push( {
 						selector: 'js-menu-match-bet-add',
-						icon: 'fa fa-plus',
+						icon: 'fa fa-money',
 						link: '#',
 						text: translator.actionMatchBetAdd
+						, button: true
 					} );
 				}
 
@@ -97,12 +98,14 @@ define( function ( require ) {
 						icon: 'fa fa-edit',
 						link: '#',
 						text: translator.actionMatchBetEdit
+						, button: true
 					} );
 					menuItems.push( {
 						selector: 'js-menu-match-bet-delete',
 						icon: 'fa fa-recycle',
 						link: '#',
 						text: translator.actionMatchBetDelete
+						, button: true
 					} );
 				}
 			}
@@ -138,7 +141,7 @@ define( function ( require ) {
 				if ( isBettingAllowed ) {
 					var icon = match.cup.readyForMatchBets ? 'fa-money' : 'fa-ban';
 					this.$( '.js-panel-footer' ).append( this._renderIcon( icon, translator.footer_NoBetYetLabel, true ) );
-					this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa " + icon + " button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
+					//this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa " + icon + " button-bet-match' title='" + translator.actionMatchBetAdd + "'></button>" );
 				} else if( ! isMatchFinished ) {
 					this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-flag-o', translator.footer_BettingFinishedLabel, false ) );
 				}
@@ -161,10 +164,10 @@ define( function ( require ) {
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score text-right " + resultHighlight.style1 + "'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score " + resultHighlight.style2 + "'>" + bet.score2 + "</div>" );
 
-			if ( ! match.matchFinished && this.model.isBettingAllowed() ) {
+			/*if ( ! match.matchFinished && this.model.isBettingAllowed() ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
 				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-recycle button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
-			}
+			}*/
 
 			if ( ! this.model.isBettingAllowed() ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-info button-edit-bet' title='" + model.bettingValidationMessage + "'></button>" );
@@ -191,16 +194,18 @@ define( function ( require ) {
 			var menuItems = [];
 			if ( this.model.isBettingAllowed() ) {
 				menuItems.push( {
-					selector: 'js-menu-match-bet-save',
-					icon: 'fa fa-edit',
-					link: '#',
-					text: translator.actionMatchBetSave
+					selector: 'js-menu-match-bet-save'
+					, icon: 'fa fa-save'
+					, link: '#'
+					, text: translator.actionMatchBetSave
+					, button: true
 				} );
 				menuItems.push( {
-					selector: 'js-menu-match-bet-cancel-editing',
-					icon: 'fa fa-close',
-					link: '#',
-					text: translator.actionCancelBetEditing
+					selector: 'js-menu-match-bet-cancel-editing'
+					, icon: 'fa fa-close'
+					, link: '#'
+					, text: translator.actionCancelBetEditing
+					, button: true
 				} );
 			}
 
@@ -216,12 +221,12 @@ define( function ( require ) {
 
 			this._setMatchContainerClass( 'panel-danger' );
 
-			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-money', translator.footer_YourBetLabel, false ) );
+			this.$( '.js-panel-footer' ).append( this._renderIcon( 'fa-edit', translator.footer_YourBetLabel, true ) );
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
-			this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.actionMatchBetSave + "'></button>" );
-			this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
+			//this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.actionMatchBetSave + "'></button>" );
+			//this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
 			this.$( '#score1' ).focus().select();
 			return this;
 		},
@@ -233,12 +238,17 @@ define( function ( require ) {
 			this._fadeIn();
 
 			var menuItems = [
-				{ selector: 'js-close-match-description', icon: 'fa fa-close', link: '#', text: translator.closeMatchInfo }
+				{ selector: 'js-close-match-description'
+					, icon: 'fa fa-close'
+					, link: '#'
+					, text: translator.closeMatchInfo
+					, button: true
+				}
 			];
 			this._renderDropDownMenuItems( menuItems );
 
-			var div = $( "<div class='btn-group pull-right'></div>" );
-			div.append( "<button class='btn btn-default fa fa-close js-close-match-description' title='" + translator.closeMatchInfo + "'></button>" );
+			//var div = $( "<div class='btn-group pull-right'></div>" );
+			//div.append( "<button class='btn btn-default fa fa-close js-close-match-description' title='" + translator.closeMatchInfo + "'></button>" );
 
 			this.$( '.js-panel-footer' ).html( div );
 		},
