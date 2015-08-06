@@ -246,6 +246,11 @@ public class MatchServiceImpl implements MatchService {
 		return result;
 	}
 
+	@Override
+	public int getFutureMatchCount( Cup cup, Team team ) {
+		return matchRepository.getFutureMatchCount( cup, team );
+	}
+
 	private List<Match> sort( final List<Match> matches ) {
 
 		Collections.sort( matches, new Comparator<Match>() {

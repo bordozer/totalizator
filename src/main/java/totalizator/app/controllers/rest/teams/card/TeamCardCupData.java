@@ -9,8 +9,9 @@ public class TeamCardCupData {
 
 	private CupWinnerDTO cupWinner;
 
-	private int matchCount;
+	private int finishedMatchCount;
 	private int wonMatchCount;
+	private int futureMatchesCount;
 
 	public TeamCardCupData( final CupDTO cup ) {
 		this.cup = cup;
@@ -32,12 +33,12 @@ public class TeamCardCupData {
 		this.cupWinner = cupWinner;
 	}
 
-	public int getMatchCount() {
-		return matchCount;
+	public int getFinishedMatchCount() {
+		return finishedMatchCount;
 	}
 
-	public void setMatchCount( final int matchCount ) {
-		this.matchCount = matchCount;
+	public void setFinishedMatchCount( int finishedMatchCount ) {
+		this.finishedMatchCount = finishedMatchCount;
 	}
 
 	public int getWonMatchCount() {
@@ -46,5 +47,13 @@ public class TeamCardCupData {
 
 	public void setWonMatchCount( final int wonMatchCount ) {
 		this.wonMatchCount = wonMatchCount;
+	}
+
+	public int getFutureMatchesCount() {
+		return futureMatchesCount;
+	}
+
+	public void setFutureMatchesCount( int futureMatchesCount ) {
+		this.futureMatchesCount = futureMatchesCount;
 	}
 }

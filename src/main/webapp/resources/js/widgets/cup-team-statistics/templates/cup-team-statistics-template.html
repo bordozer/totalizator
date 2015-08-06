@@ -1,11 +1,11 @@
 <div class="row">
-	<div class="col-lg-12" style="min-height: 140px;">
+	<div class="col-lg-12" style="min-height: 160px;">
 
 		<h6 style="border-bottom: 1px silver dotted;">
 			<%= translator.teamPlayedMatches %>:
 			<strong>
 				<a href="/totalizator/cups/<%=cup.cupId%>/matches/teams/<%=team.teamId%>/">
-					<span class="clearfix pull-right"><%= matchCount %></span>
+					<span class="clearfix pull-right"><%= finishedMatchCount %></span>
 				</a>
 			</strong>
 			<br />
@@ -21,6 +21,14 @@
 				<%=cupWinner.cupPosition %> <%= translator.cupPosition %>
 			</h2>
 		<% } %>
+
+		<h6 style="border-bottom: 1px silver dotted;">
+			<%= translator.teamFutureMatches %>:
+			<strong>
+				<span class="clearfix pull-right"><%= futureMatchesCount %></span>
+			</strong>
+			<br />
+		</h6>
 
 	</div>
 </div>

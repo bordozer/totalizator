@@ -12,6 +12,8 @@ import totalizator.app.services.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -66,7 +68,14 @@ public class TeamCardRestController {
 			cupDataMap.add( getTeamCardCupData( currentUser, team, cup ) );
 		}
 
-		dto.setCardCupData( cupDataMap );
+		final List<TeamCardCupData> notNullCupData = cupDataMap.stream().filter( new Predicate<TeamCardCupData>() {
+			@Override
+			public boolean test( TeamCardCupData teamCardCupData ) {
+				return teamCardCupData.getFutureMatchesCount() + teamCardCupData.getFinishedMatchCount() > 0;
+			}
+		} ).collect( Collectors.toList() );
+
+		dto.setCardCupData( notNullCupData );
 
 		return dto;
 	}
@@ -74,8 +83,9 @@ public class TeamCardRestController {
 	private TeamCardCupData getTeamCardCupData( final User currentUser, final Team team, final Cup cup ) {
 		final TeamCardCupData cupData = new TeamCardCupData( dtoService.transformCup( cup, currentUser ) );
 
-		cupData.setMatchCount( matchService.getFinishedMatchCount( cup, team ) );
+		cupData.setFinishedMatchCount( matchService.getFinishedMatchCount( cup, team ) );
 		cupData.setWonMatchCount( matchService.getWonMatchCount( cup, team ) );
+		cupData.setFutureMatchesCount( matchService.getFutureMatchCount( cup, team ) );
 
 		final CupWinner cupWinner = cupWinnerService.load( cup, team );
 		if ( cupWinner != null ) {

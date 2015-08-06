@@ -14,6 +14,7 @@ define( function ( require ) {
 		title: "Team card"
 		, cupPosition: "cup position"
 		, teamPlayedMatches: "Team played matches"
+		, teamFutureMatches: "Team future matches"
 		, teamWonMatches: "Team won matches"
 		, menuOpenCupCard: 'Open cup card'
 		, matches: 'matches'

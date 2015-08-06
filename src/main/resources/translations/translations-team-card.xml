@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Team has not been a participant of any cup</nerd>
+		<ru><![CDATA[Команда не принимала участия в чемпионатах]]></ru>
+		<ua><![CDATA[Команда не приймала участi в жодному чемпiонатi]]></ua>
+		<en><![CDATA[Team has not been a participant of any cup]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

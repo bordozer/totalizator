@@ -39,4 +39,6 @@ public interface MatchService extends GenericService<Match>{
 	int getFinishedMatchCount( final Cup cup, final Team team );
 
 	int getWonMatchCount( final Cup cup, final Team team );
+
+	int getFutureMatchCount( final Cup cup, final Team team );
 }

@@ -12,6 +12,11 @@ define( function ( require ) {
 
 	var service = require( '/resources/js/services/service.js' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		noCupLabel: "Team has not been a participant of any cup"
+	} );
+
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
@@ -34,15 +39,18 @@ define( function ( require ) {
 			var model = this.model.toJSON();
 
 			var container = this.$( '.js-cups-statistics' );
-			container.html();
 
-			var cups = service.loadPublicCupsForCategory( model.team.category.categoryId );
+			if ( model.cardCupData.length == 0 ) {
+				container.html( translator.noCupLabel );
+				return;
+			}
 
-			_.each( cups, function( cup ) {
+			_.each( model.cardCupData, function( cupData ) {
+
+				var cup = cupData.cup;
 
 				var el = $( '<div class="col-lg-3"></div>' );
 				container.append( el );
-				el.html( '===' );
 
 				new CupTeamStatistics( el, { team: model.team, cup: cup } );
 			});
