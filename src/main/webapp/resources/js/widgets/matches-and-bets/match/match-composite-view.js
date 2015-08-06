@@ -192,7 +192,7 @@ define( function ( require ) {
 					selector: 'js-menu-match-bet-save'
 					, icon: 'fa fa-save'
 					, link: '#'
-					, text: translator.actionMatchBetSave
+					, text: translator.actionMatchBetSave + ' ( Enter )'
 					, button: true
 					, cssClass: 'btn-primary'
 				} );
