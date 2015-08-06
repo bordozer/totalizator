@@ -135,11 +135,6 @@ define( function ( require ) {
 			var customButtons = _.filter( menuItems, function( menu ) {
 				return menu.button;
 			});
-
-			var menuContainer = this.$( '.js-custom-buttons' );
-			_.each( customButtons, function( menu ) {
-				menuContainer.append( "<button class='btn btn-default " + menu.selector + " " + menu.icon + "' title='" + menu.text + "'></button>" );
-			});
 		},
 
 		_onInnerViewRendered: function() {

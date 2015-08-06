@@ -109,7 +109,7 @@ define( function ( require ) {
 
 			if ( match.description ) {
 				menuItems.push( {selector: 'divider'} );
-				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info-circle', link: '#', text: translator.matchDescription } );
+				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info', link: '#', text: translator.matchDescription, button: true } );
 			}
 
 			this._renderDropDownMenuItems( menuItems );
@@ -206,7 +206,7 @@ define( function ( require ) {
 
 			if ( match.description ) {
 				menuItems.push( {selector: 'divider'} );
-				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info-circle', link: '#', text: translator.matchDescription } );
+				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info', link: '#', text: translator.matchDescription, button: true } );
 			}
 
 			this._renderDropDownMenuItems( menuItems );
