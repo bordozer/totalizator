@@ -164,11 +164,6 @@ define( function ( require ) {
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score text-right " + resultHighlight.style1 + "'>" + bet.score1 + "</div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 match-bet-score " + resultHighlight.style2 + "'>" + bet.score2 + "</div>" );
 
-			/*if ( ! match.matchFinished && this.model.isBettingAllowed() ) {
-				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-edit button-edit-bet' title='" + translator.actionMatchBetEdit + "'></button>" );
-				this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-recycle button-delete-bet' title='" + translator.actionMatchBetDelete + "'></button>" );
-			}*/
-
 			if ( ! this.model.isBettingAllowed() ) {
 				this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-default fa fa-info button-edit-bet' title='" + model.bettingValidationMessage + "'></button>" );
 			}
@@ -226,8 +221,13 @@ define( function ( require ) {
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right'><input class='form-control' id='score1' name='score1' type='number' value='" + bet1 + "'></div>" );
 			this.$( '.js-panel-footer' ).append( "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'><input class='form-control' id='score2' name='score2' type='number' value='" + bet2 + "'></div>" );
 
-			//this.$( '.bet-buttons-cell' ).html( "<button class='btn btn-primary fa fa-save button-bet-save' title='" + translator.actionMatchBetSave + "'></button>" );
-			//this.$( '.bet-buttons-cell' ).append( "<button class='btn btn-default fa fa-close button-bet-discard' title='" + translator.actionCancelBetEditing + "'></button>" );
+			var self = this;
+			this.$( 'input' ).keypress( function ( e ) {
+				if ( e.which == 13 ) {
+					self._saveBet();
+				}
+			} );
+
 			this.$( '#score1' ).focus().select();
 			return this;
 		},
@@ -247,9 +247,6 @@ define( function ( require ) {
 				}
 			];
 			this._renderDropDownMenuItems( menuItems );
-
-			//var div = $( "<div class='btn-group pull-right'></div>" );
-			//div.append( "<button class='btn btn-default fa fa-close js-close-match-description' title='" + translator.closeMatchInfo + "'></button>" );
 
 			this.$( '.js-panel-footer' ).html( div );
 		},
