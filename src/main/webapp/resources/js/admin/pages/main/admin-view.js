@@ -30,6 +30,8 @@ define( function ( require ) {
 			this.cupsModel = new CupsModel.CupsModel();
 			this.teamsModel = new TeamsModel();
 
+			this._preselectCategory();
+
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
