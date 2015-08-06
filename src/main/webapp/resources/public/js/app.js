@@ -42,6 +42,14 @@ define( function ( require ) {
 
 		language: function() {
 			return app.language;
+		},
+
+		timeNow: function() {
+			return app.timeNow;
+		},
+
+		timeNowFormatted: function() {
+			return app.timeNowFormatted;
 		}
 	}
 });

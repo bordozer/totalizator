@@ -2,10 +2,16 @@ package totalizator.app.controllers.rest.app;
 
 import totalizator.app.dto.UserDTO;
 
+import java.time.LocalDateTime;
+
 public class AppDTO {
 
 	private final String projectName;
 	private final LanguageDTO language;
+
+	private LocalDateTime timeNow;
+	private String timeNowFormatted;
+
 	private UserDTO currentUser;
 
 	public AppDTO( final String projectName, final LanguageDTO language ) {
@@ -19,6 +25,22 @@ public class AppDTO {
 
 	public LanguageDTO getLanguage() {
 		return language;
+	}
+
+	public LocalDateTime getTimeNow() {
+		return timeNow;
+	}
+
+	public void setTimeNow( LocalDateTime timeNow ) {
+		this.timeNow = timeNow;
+	}
+
+	public String getTimeNowFormatted() {
+		return timeNowFormatted;
+	}
+
+	public void setTimeNowFormatted( String timeNowFormatted ) {
+		this.timeNowFormatted = timeNowFormatted;
 	}
 
 	public UserDTO getCurrentUser() {

@@ -52,8 +52,12 @@ define( function ( require ) {
 			return moment( time, DATE_TIME_FORMAT ).toDate();
 		},
 
+		timeNow: function( time ) {
+			return app.timeNow();
+		},
+
 		fromNow: function( time ) {
-			return moment( time, DATE_TIME_FORMAT ).fromNow();
+			return moment( time, DATE_TIME_FORMAT ).fromNow( this.timeNow() );
 		}
 	}
 } );

@@ -33,7 +33,6 @@ define( function ( require ) {
 		_renderUSerStatistics: function() {
 
 			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
-//			console.log( this.model.toJSON() );
 
 			var el = this.$( this.windowBodyContainerSelector );
 			el.empty();

@@ -11,11 +11,13 @@ import totalizator.app.beans.AppContext;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.SystemVarsService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDateTime;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -33,6 +35,9 @@ public class AppRestController {
 	private SystemVarsService systemVarsService;
 
 	@Autowired
+	private DateTimeService dateTimeService;
+
+	@Autowired
 	private TranslatorService translatorService;
 
 	@ResponseStatus( HttpStatus.OK )
@@ -46,6 +51,11 @@ public class AppRestController {
 		final LanguageDTO language = new LanguageDTO( translatorService.translate( lang.getName(), lang ), lang.getCountry() );
 
 		final AppDTO dto = new AppDTO( projectName, language );
+
+		final LocalDateTime now = dateTimeService.getNow();
+		dto.setTimeNow( now );
+		dto.setTimeNowFormatted( dateTimeService.formatDateTimeUI( now ) );
+
 		if ( principal != null ) {
 			dto.setCurrentUser( dtoService.transformUser( userService.findByLogin( principal.getName() ) ) );
 		}

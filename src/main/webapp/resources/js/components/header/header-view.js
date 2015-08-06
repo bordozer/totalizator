@@ -32,6 +32,7 @@ define( function ( require ) {
 				, title: title
 				, breadcrumbs: this.breadcrumbs
 				, projectName: app.projectName()
+				, timeNowFormatted: app.timeNowFormatted()
 			} ) );
 
 			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
