@@ -295,6 +295,7 @@ define( function ( require ) {
 				, timeToStart: dateTimeService.fromNow( match.beginningTime )
 				, matchFinished: match.matchFinished
 				, homeTeamNumber: match.homeTeamNumber
+				, matchDescription: match.description
 				, translator: translator
 			};
 		},

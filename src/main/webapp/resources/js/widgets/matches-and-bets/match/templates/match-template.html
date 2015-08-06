@@ -2,7 +2,10 @@
 
 	<div class="panel-heading clearfix">
 		<div class="btn-group pull-right">
-			<div class="js-match-drop-down-menu"></div>
+			<% if( matchDescription ) { %>
+				<button class="btn btn-default fa fa-info-circle js-menu-match-description" type="button" title="<%=translator.matchDescription%>"></button>
+			<% } %>
+			<div class="js-match-drop-down-menu btn-group pull-right"></div>
 		</div>
 		<strong title="#<%=matchId%>"><%=beginningDate%> <sup><%=beginningTime%></sup></strong> - <small><%=timeToStart%></small>
 	</div>
