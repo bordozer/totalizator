@@ -107,8 +107,10 @@ define( function ( require ) {
 				}
 			}
 
-			menuItems.push( {selector: 'divider'} );
-			menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info-circle', link: '#', text: translator.matchDescription } );
+			if ( match.description ) {
+				menuItems.push( {selector: 'divider'} );
+				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info-circle', link: '#', text: translator.matchDescription } );
+			}
 
 			this._renderDropDownMenuItems( menuItems );
 
@@ -182,6 +184,7 @@ define( function ( require ) {
 			this.$( '.js-panel-body' ).html( templateMatchTeams( options ) );
 
 			var bet = this.model.get( 'bet' );
+			var match = this.model.toJSON().match;
 
 			this._fadeIn();
 
@@ -201,8 +204,10 @@ define( function ( require ) {
 				} );
 			}
 
-			menuItems.push( {selector: 'divider'} );
-			menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info-circle', link: '#', text: translator.matchDescription } );
+			if ( match.description ) {
+				menuItems.push( {selector: 'divider'} );
+				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info-circle', link: '#', text: translator.matchDescription } );
+			}
 
 			this._renderDropDownMenuItems( menuItems );
 
