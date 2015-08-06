@@ -57,7 +57,9 @@ define( function ( require ) {
 		},
 
 		fromNow: function( time ) {
-			return moment( time, DATE_TIME_FORMAT ).fromNow( this.timeNow() );
+			var now  = this.timeNow();
+			return moment.duration( moment( now, DATE_TIME_FORMAT ).diff( moment( time, DATE_TIME_FORMAT ) ) ).humanize();
+			//return moment( time, DATE_TIME_FORMAT ).fromNow();
 		}
 	}
 } );

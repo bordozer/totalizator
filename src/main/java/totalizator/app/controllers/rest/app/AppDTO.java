@@ -1,6 +1,8 @@
 package totalizator.app.controllers.rest.app;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.UserDTO;
+import totalizator.app.dto.serialization.DateTimeSerializer;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +29,7 @@ public class AppDTO {
 		return language;
 	}
 
+	@JsonSerialize( using = DateTimeSerializer.class )
 	public LocalDateTime getTimeNow() {
 		return timeNow;
 	}
