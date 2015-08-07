@@ -12,6 +12,8 @@ define( function ( require ) {
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var userStatisticsWidget = require( 'js/widgets/user-statistics/user-statistics-widget' );
 
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		userStatisticsLabel: "User card: Statistics"
@@ -36,28 +38,9 @@ define( function ( require ) {
 				translator: translator
 			} ) );
 
-			//this._renderUserStatistics(); // TODO: switch on when statistics are implemented
+			this._renderUserStatistics();
 
 			this._renderUserBets();
-		},
-
-		_renderUserStatistics: function() {
-
-			var categoryId = 1;		// TODO
-			var cupId = 1;			// TODO
-
-			var options = {
-				filter: {
-					categoryId: categoryId
-					, cupId: cupId
-					, showFinished: true
-					, userId: this.userId
-				}
-				, isCompactView: false
-				, menuItems: []
-			};
-
-			userStatisticsWidget( this.$( '.js-user-statistics' ), options );
 		},
 
 		_renderUserBets: function() {
@@ -72,6 +55,27 @@ define( function ( require ) {
 			if ( cupsToShow.length == 0 ) {
 				this.$( '.js-user-bets' ).html( templateNoActivity( { translator: translator } ) );
 				return;
+			}
+
+			if ( this.filterByCupId ) {
+
+				var container = $( '<div class="col-lg-12"></div>' );
+				el.append( container );
+
+				var cup = service.loadPublicCup( this.filterByCupId );
+
+				var options = {
+					filter: {
+						userId: userId
+						, categoryId: cup.category.categoryId // TODO
+						, cupId: cup.cupId
+						, showFinished: false
+						, showFutureMatches: true
+					}
+					, isCompactView: true
+					, currentUser: currentUser
+				};
+				matchesAndBetsView( container, options );
 			}
 
 			_.each( cupsToShow, function( cup ) {
@@ -91,6 +95,25 @@ define( function ( require ) {
 				};
 				matchesAndBetsView( container, options );
 			});
+		},
+
+		_renderUserStatistics: function() {
+
+			var categoryId = 1;		// TODO
+			var cupId = 1;			// TODO
+
+			var options = {
+				filter: {
+					categoryId: categoryId
+					, cupId: cupId
+					, showFinished: true
+					, userId: this.userId
+				}
+				, isCompactView: false
+				, menuItems: []
+			};
+
+			userStatisticsWidget( this.$( '.js-user-statistics' ), options );
 		}
 	});
 } );
