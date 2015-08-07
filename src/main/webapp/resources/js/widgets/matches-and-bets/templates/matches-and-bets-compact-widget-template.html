@@ -23,22 +23,31 @@
 	</div>
 
 	<div class="col-lg-1 text-right">
+
 		<% if( match.matchFinished ) { %>
 			<span class="<%= matchResults.style1 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score1() %></span>
+		<% } %>
 
-			<% if( bet != null ) { %>
-				<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;"><%= transformer.betScore1() %></sup>
-			<% } %>
+		<% if( ! match.matchFinished ) { %>
+			<span class="text-muted">?</span>
+		<% } %>
+
+		<% if( bet != null ) { %>
+			<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;"><%= transformer.betScore1() %></sup>
 		<% } %>
 	</div>
 
 	<div class="col-lg-1 text-left">
 		<% if( match.matchFinished ) { %>
 			<span class="<%= matchResults.style2 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score2() %></span>
+		<% } %>
 
-			<% if( bet != null ) { %>
-				<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;"><%= transformer.betScore2() %></sup>
-			<% } %>
+		<% if( ! match.matchFinished ) { %>
+			<span class="text-muted">?</span>
+		<% } %>
+
+		<% if( bet != null ) { %>
+			<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;"><%= transformer.betScore2() %></sup>
 		<% } %>
 	</div>
 
