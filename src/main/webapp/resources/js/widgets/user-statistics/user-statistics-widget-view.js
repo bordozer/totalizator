@@ -13,13 +13,15 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		label: 'User statistics'
+		, underConstructionLabel: 'Under construction'
 	} );
 
 	return ConfigurableView.extend( {
 
 		renderInnerView: function( filter ) {
 			this.listenToOnce( this.model, 'sync', this._renderUSerStatistics );
-			this.model.refresh( filter );
+			//this.model.refresh( filter ); // TODO: enable to get data
+			this._renderUSerStatistics();
 		},
 
 		getTitle: function () {
