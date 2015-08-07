@@ -33,12 +33,18 @@ define( function ( require ) {
 				, menuButtonHint: this.menuButtonHint
 				, menuButtonText: this.menuButtonText
 				, menus: this.menus
+				, customButtons: this._customButtons( this.menus )
 				, cssClass: this.cssClass
 			 } ) );
 
 			return this;
-		}
+		},
 
+		_customButtons: function( menues ) {
+			return _.filter( menues, function ( menu ) {
+				return menu.button;
+			});
+		}
 	} );
 
 	return { MainMenuView: MainMenuView };
