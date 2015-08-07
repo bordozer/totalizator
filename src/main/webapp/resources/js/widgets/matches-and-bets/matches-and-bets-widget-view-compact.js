@@ -204,7 +204,13 @@ define( function ( require ) {
 		_renderEntry: function ( model ) {
 
 			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id, model.points );
-			var data = _.extend( {}, model, { transformer: matchTransformer, translator: translator } );
+			var data = _.extend( {}
+					, model
+					, {
+						transformer: matchTransformer
+						, timeToMatchBeginningTime: dateTimeService.fromNow( model.match.beginningTime )
+						, translator: translator
+					} );
 
 			return template( data );
 		},

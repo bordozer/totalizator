@@ -48,7 +48,7 @@ define( function ( require ) {
 					, model
 					, {
 						matchResults: matchResults
-						, timeToOpenBet: dateTimeService.fromNow( match.beginningTime )
+						, timeToBetPublishing: dateTimeService.fromNow( match.beginningTime )
 						, currentUser: this.currentUser
 						, matchBeginningTime: matchBeginningTime
 						, translator: translator
