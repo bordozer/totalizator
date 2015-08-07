@@ -24,6 +24,7 @@ define( function ( require ) {
 		initialize: function( options ) {
 			this.userId = options.options.userId;
 			this.currentUser = options.options.currentUser;
+			this.filterByCupId = options.options.filterByCupId;
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -35,17 +36,20 @@ define( function ( require ) {
 				translator: translator
 			} ) );
 
-			this._renderUserStatistics();
+			//this._renderUserStatistics(); // TODO: switch on when statistics are implemented
 
 			this._renderUserBets();
 		},
 
 		_renderUserStatistics: function() {
 
+			var categoryId = 1;		// TODO
+			var cupId = 1;			// TODO
+
 			var options = {
 				filter: {
-					categoryId: 1 // TODO
-					, cupId: 1 // TODO
+					categoryId: categoryId
+					, cupId: cupId
 					, showFinished: true
 					, userId: this.userId
 				}
