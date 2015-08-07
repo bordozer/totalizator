@@ -58,7 +58,7 @@ define( function ( require ) {
 				, {selector: 'divider'}
 				, {
 					selector: 'js-menu-all-match-bets',
-					icon: 'fa fa-money',
+					icon: match.showAnotherBets ? 'fa fa-money' : 'fa fa-lock',
 					link: '/totalizator/matches/' + match.matchId + '/bets/',
 					text: translator.actionAllMatchBet + ' ( ' + betsCount + ' )'
 				}
