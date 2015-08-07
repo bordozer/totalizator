@@ -142,8 +142,8 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
-	public boolean userCanSeeAnotherBets( final Match match, final User user ) {
-		return matchService.isMatchStarted( match );
+	public boolean userCanSeeAnotherBets( final Match match, final User accessor ) {
+		return matchService.isMatchStarted( match ) || matchService.isMatchFinished( match ); // TODO: yes, looks weird, I know
 	}
 
 	@Override

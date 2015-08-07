@@ -46,7 +46,10 @@ define( function ( require ) {
 
 			var data = _.extend( {}, model, { matchResults: matchResults, currentUser: this.currentUser, matchBeginningTime: matchBeginningTime, translator: translator } );
 
-			_.each( data.matchBets, function( matchBet ) {
+			_.each( data.matchBetsSecured, function( matchBetSecured ) {
+
+				var matchBet = matchBetSecured.matchBet;
+
 				var team1Id = match.team1.teamId;
 				var score1 = matchBet.bet.score1;
 				var team2Id = match.team2.teamId;

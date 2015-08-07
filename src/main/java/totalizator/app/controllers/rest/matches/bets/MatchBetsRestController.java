@@ -63,36 +63,37 @@ public class MatchBetsRestController {
 		result.setTeam1( team1DTO );
 		result.setTeam2( team2DTO );
 
-		result.setMatchBets( getMatchBetDTOs( match, currentUser ) );
+		result.setMatchBetsSecured( getMatchBetDTOs( match, currentUser ) );
 
 		return result;
 	}
 
-	private List<MatchBetDTO> getMatchBetDTOs( final Match match, final User currentUser ) {
+	private List<MatchBetSecuredDTO> getMatchBetDTOs( final Match match, final User currentUser ) {
 
-		final boolean canSeeAnotherBets = matchBetsService.userCanSeeAnotherBets( match, currentUser );
-
-		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
+		final List<MatchBetSecuredDTO> matchBetsDTOs = newArrayList();
 
 		final List<MatchBet> matchBets = matchBetsService.loadAll( match );
 		for ( final MatchBet matchBet : matchBets ) {
+
 			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser );
-			if ( ! canSeeAnotherBets && ! matchBet.getUser().equals( currentUser ) ) {
+
+			final boolean isBetHidden = ! matchBetsService.isAllowedToShowMatchBets( matchBet, currentUser );
+			if ( isBetHidden ) {
 				matchBetDTO.getBet().setScore1( 0 );
 				matchBetDTO.getBet().setScore2( 0 );
 			}
-			matchBetsDTOs.add( matchBetDTO );
+			matchBetsDTOs.add( new MatchBetSecuredDTO( matchBetDTO, isBetHidden ) );
 		}
 
-		Collections.sort( matchBetsDTOs, new Comparator<MatchBetDTO>() {
+		Collections.sort( matchBetsDTOs, new Comparator<MatchBetSecuredDTO>() {
 			@Override
-			public int compare( final MatchBetDTO o1, final MatchBetDTO o2 ) {
+			public int compare( final MatchBetSecuredDTO o1, final MatchBetSecuredDTO o2 ) {
 
-				if ( o2.getPoints() + o1.getPoints() > 0 ) {
-					return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
+				if ( o2.getMatchBet().getPoints() + o1.getMatchBet().getPoints() > 0 ) {
+					return ( ( Integer ) o2.getMatchBet().getPoints() ).compareTo( o1.getMatchBet().getPoints() );
 				}
 
-				return o1.getBet().getUser().getUserName().compareToIgnoreCase( o2.getBet().getUser().getUserName() );
+				return o1.getMatchBet().getBet().getUser().getUserName().compareToIgnoreCase( o2.getMatchBet().getBet().getUser().getUserName() );
 			}
 		} );
 

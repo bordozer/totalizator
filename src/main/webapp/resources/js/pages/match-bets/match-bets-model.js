@@ -11,7 +11,7 @@ define( function ( require ) {
 			matchId: 0
 			, team1: {}
 			, team2: {}
-			, matchBets: []
+			, matchBetsSecured: []
 		},
 
 		initialize: function ( options ) {

@@ -1,6 +1,5 @@
 package totalizator.app.controllers.rest.matches.bets;
 
-import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.TeamDTO;
 
@@ -10,7 +9,7 @@ public class MatchBetsDTO {
 
 	private int matchId;
 
-	private List<MatchBetDTO> matchBets;
+	private List<MatchBetSecuredDTO> matchBetsSecured;
 	private TeamDTO team1;
 	private TeamDTO team2;
 
@@ -24,12 +23,12 @@ public class MatchBetsDTO {
 		this.matchId = matchId;
 	}
 
-	public List<MatchBetDTO> getMatchBets() {
-		return matchBets;
+	public List<MatchBetSecuredDTO> getMatchBetsSecured() {
+		return matchBetsSecured;
 	}
 
-	public void setMatchBets( final List<MatchBetDTO> matchBets ) {
-		this.matchBets = matchBets;
+	public void setMatchBetsSecured( final List<MatchBetSecuredDTO> matchBetsSecured ) {
+		this.matchBetsSecured = matchBetsSecured;
 	}
 
 	public void setTeam1( final TeamDTO team1 ) {

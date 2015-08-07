@@ -26,7 +26,7 @@ public interface MatchBetsService extends GenericService<MatchBet>{
 
 	boolean canMatchBeBet( final Match match, final User user );
 
-	boolean userCanSeeAnotherBets( final Match match, final User user );
+	boolean userCanSeeAnotherBets( final Match match, final User accessor );
 
 	boolean isAllowedToShowMatchBets( final MatchBet matchBet, final User user );
 }

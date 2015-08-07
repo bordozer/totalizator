@@ -63,14 +63,39 @@
 
 								<tbody>
 
-									<% _.each( matchBets, function( matchBet ) {%>
-										<tr class="<%= matchBet.bet.user.userId == currentUser.userId ? 'current-user' : '' %>">
+									<% _.each( matchBetsSecured, function( matchBetSecured ) {%>
+										<tr class="<%= matchBetSecured.matchBet.bet.user.userId == currentUser.userId ? 'current-user' : '' %>">
+
 											<td>
-												<a href="/totalizator/users/<%=matchBet.bet.user.userId%>/"><%-matchBet.bet.user.userName%></a>
+												<a href="/totalizator/users/<%=matchBetSecured.matchBet.bet.user.userId%>/"><%-matchBetSecured.matchBet.bet.user.userName%></a>
 											</td>
-											<td class="text-center <%=matchBet.matchResults.style1%>" width="150"><%-matchBet.bet.score1%></td>
-											<td class="text-center <%=matchBet.matchResults.style2%>" width="150"><%-matchBet.bet.score2%></td>
-											<td class="text-center" width="60"><strong><%-matchBet.points > 0 ? '+' + matchBet.points : ''%></strong></td>
+
+											<td class="text-center <%=matchBetSecured.matchBet.matchResults.style1%>" width="150">
+												<% if( ! matchBetSecured.hiddenBet ) { %>
+													<%-matchBetSecured.matchBet.bet.score1%>
+												<% } %>
+
+												<% if( matchBetSecured.hiddenBet ) { %>
+													<span class="fa fa-lock" title="<%=translator.anotherBetsAreHidden%>"></span>
+												<% } %>
+											</td>
+
+											<td class="text-center <%=matchBetSecured.matchBet.matchResults.style2%>" width="150">
+
+												<% if( ! matchBetSecured.hiddenBet ) { %>
+													<%-matchBetSecured.matchBet.bet.score2%>
+												<% } %>
+
+												<% if( matchBetSecured.hiddenBet ) { %>
+													<span class="fa fa-lock" title="<%=translator.anotherBetsAreHidden%>"></span>
+												<% } %>
+											</td>
+
+											<td class="text-center" width="60">
+												<strong>
+													<%-matchBetSecured.matchBet.points > 0 ? '+' + matchBetSecured.matchBet.points : ''%>
+												</strong>
+											</td>
 										</tr>
 									<% })%>
 
