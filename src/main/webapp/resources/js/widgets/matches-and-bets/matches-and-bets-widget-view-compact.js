@@ -139,7 +139,7 @@ define( function ( require ) {
 					return { style1: 'text-danger', style2: 'text-danger' };
 				}
 
-				return service.matchResults( this.team1().teamId, this.betScore1(), this.team2().teamId, this.betScore2() );
+				return service.getBetScoreHighlights( this.team1().teamId, this.betScore1(), this.team2().teamId, this.betScore2() );
 			},
 
 			formatDate: function() {

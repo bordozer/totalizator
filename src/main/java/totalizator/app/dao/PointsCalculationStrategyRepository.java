@@ -37,6 +37,7 @@ public class PointsCalculationStrategyRepository implements PointsCalculationStr
 		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
 		, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
 		, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
 	} )
 	public PointsCalculationStrategy save( final PointsCalculationStrategy entry ) {
 		return em.merge( entry );
