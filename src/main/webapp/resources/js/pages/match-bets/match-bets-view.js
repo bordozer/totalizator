@@ -44,7 +44,15 @@ define( function ( require ) {
 
 			var matchResults = service.matchResultsByMatch( match );
 
-			var data = _.extend( {}, model, { matchResults: matchResults, currentUser: this.currentUser, matchBeginningTime: matchBeginningTime, translator: translator } );
+			var data = _.extend( {}
+					, model
+					, {
+						matchResults: matchResults
+						, timeToOpenBet: dateTimeService.fromNow( match.beginningTime )
+						, currentUser: this.currentUser
+						, matchBeginningTime: matchBeginningTime
+						, translator: translator
+					} );
 
 			_.each( data.matchBetsSecured, function( matchBetSecured ) {
 
