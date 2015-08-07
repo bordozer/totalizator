@@ -36,37 +36,6 @@ public class MatchServiceImpl implements MatchService {
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
 	@Override
-	@Transactional( readOnly = true )
-	public List<Match> loadAll() {
-		return sort( newArrayList( matchRepository.loadAll() ) );
-	}
-
-	@Override
-	public List<Match> loadAll( final Cup cup ) {
-		return sort( newArrayList( matchRepository.loadAll( cup ) ) );
-	}
-
-	@Override
-	public List<Match> loadAll( final Cup cup, final Team team ) {
-		return sort( newArrayList( matchRepository.loadAll( cup, team ) ) );
-	}
-
-	@Override
-	public List<Match> loadAllFinished( final Cup cup, final Team team ) {
-		final List<Match> matches = matchRepository.loadAll( cup, team );
-
-		matches.stream().filter( new java.util.function.Predicate<Match>() {
-
-			@Override
-			public boolean test( final Match match ) {
-				return isMatchFinished( match );
-			}
-		} );
-
-		return sort( newArrayList( matches ) );
-	}
-
-	@Override
 	public List<Match> loadAll( final MatchesBetSettingsDTO dto ) {
 
 		final List<Match> matches = loadAll();
@@ -143,6 +112,37 @@ public class MatchServiceImpl implements MatchService {
 		}
 
 		return matches;
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public List<Match> loadAll() {
+		return sort( newArrayList( matchRepository.loadAll() ) );
+	}
+
+	@Override
+	public List<Match> loadAll( final Cup cup ) {
+		return sort( newArrayList( matchRepository.loadAll( cup ) ) );
+	}
+
+	@Override
+	public List<Match> loadAll( final Cup cup, final Team team ) {
+		return sort( newArrayList( matchRepository.loadAll( cup, team ) ) );
+	}
+
+	@Override
+	public List<Match> loadAllFinished( final Cup cup, final Team team ) {
+		final List<Match> matches = matchRepository.loadAll( cup, team );
+
+		matches.stream().filter( new java.util.function.Predicate<Match>() {
+
+			@Override
+			public boolean test( final Match match ) {
+				return isMatchFinished( match );
+			}
+		} );
+
+		return sort( newArrayList( matches ) );
 	}
 
 	@Override

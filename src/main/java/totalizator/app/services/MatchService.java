@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface MatchService extends GenericService<Match>{
 
+	List<Match> loadAll( final MatchesBetSettingsDTO dto );
+
 	List<Match> loadAll( final Cup cup );
 
 	List<Match> loadAll( final Cup cup, final Team team );
 
 	List<Match> loadAllFinished( final Cup cup, final Team team );
-
-	List<Match> loadAll( final MatchesBetSettingsDTO dto );
 
 	List<Match> loadAll( final Team team );
 
