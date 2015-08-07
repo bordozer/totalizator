@@ -3,11 +3,10 @@
 <div class="row">
 
 	<div class="col-lg-1 js-match-drop-down-menu">
-
 	</div>
 
 	<div class="col-lg-2 text-right" title="#<%= matchId %>">
-		<strong><%= transformer.formatDate() %></strong> <sup><%= transformer.formatTime() %></sup>
+		<strong style="font-size: 10px;"><%= transformer.formatDate() %></strong> <sup><%= transformer.formatTime() %></sup>
 	</div>
 
 	<div class="col-lg-3 text-right <%= matchResults.style1 %> ">
@@ -22,33 +21,30 @@
 		</a>
 	</div>
 
-	<div class="col-lg-1 text-right">
+	<div class="col-lg-1 text-right text-nowrap">
 
 		<% if( match.matchFinished ) { %>
 			<span class="<%= matchResults.style1 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score1() %></span>
 		<% } %>
 
 		<% if( ! match.matchFinished ) { %>
-			<span class="text-muted">?</span>
+			<span class="text-muted"><strong>?</strong></span>
 		<% } %>
 
-		<% if( bet != null ) { %>
-			<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;"><%= transformer.betScore1() %></sup>
-		<% } %>
+		<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;"><%= bet != null ? transformer.betScore1() : '-' %></sup>
+
 	</div>
 
-	<div class="col-lg-1 text-left">
+	<div class="col-lg-1 text-left text-nowrap">
 		<% if( match.matchFinished ) { %>
 			<span class="<%= matchResults.style2 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score2() %></span>
 		<% } %>
 
 		<% if( ! match.matchFinished ) { %>
-			<span class="text-muted">?</span>
+			<span class="text-muted"><strong>?</strong></span>
 		<% } %>
 
-		<% if( bet != null ) { %>
-			<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;"><%= transformer.betScore2() %></sup>
-		<% } %>
+		<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;"><%= bet != null ? transformer.betScore2() : '-' %></sup>
 	</div>
 
 	<div class="col-lg-3 <%= matchResults.style2 %>">

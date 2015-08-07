@@ -131,6 +131,10 @@ define( function ( require ) {
 
 			getBetScoreHighlights: function() {
 
+				if ( ! match.matchFinished ) {
+					return { style1: 'text-muted', style2: 'text-muted' };
+				}
+
 				if( bet != null && points == 0 ) {
 					return { style1: 'text-danger', style2: 'text-danger' };
 				}

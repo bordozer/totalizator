@@ -1,4 +1,14 @@
-<div class="dropdown btn-group pull-right">
+<% if( menus.length > 0 ) { %>
+	<div class="btn-group">
+		<% _.each( menus, function( menu ) { %>
+			<% if( menu.button ) { %>
+				<button class="btn btn-default fa <%=menu.icon%> <%=menu.selector%> <%=menu.cssClass%>" title="<%=menu.text%>"></button>
+			<% } %>
+		<% }) %>
+	</div>
+<% } %>
+
+<div class="dropdown btn-group">
 
 	<button class="btn <%=cssClass%> dropdown-toggle fa <%=menuButtonIcon%>" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" title="<%-menuButtonHint%>">
 
@@ -26,11 +36,4 @@
 
 		<% }) %>
 	</ul>
-</div>
-<div class="btn-group pull-right">
-	<% _.each( menus, function( menu ) { %>
-		<% if( menu.button ) { %>
-			<button class="btn btn-default fa <%=menu.icon%> <%=menu.selector%> <%=menu.cssClass%>" title="<%=menu.text%>"></button>
-		<% } %>
-	<% }) %>
 </div>
