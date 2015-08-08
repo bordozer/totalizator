@@ -20,6 +20,7 @@ define( function ( require ) {
 		title: "Matches"
 		, switchViewsLabel: 'Switch match and bets to full views'
 		, teamPointsLabel: 'Team points'
+		, securedBetHint: 'Bets of another users will be shown after the match start'
 	} );
 
 	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id, _points ) {
@@ -93,8 +94,13 @@ define( function ( require ) {
 			},
 
 			betScore1: function() {
+
 				if ( bet == null ) {
 					return 0;
+				}
+
+				if ( bet.securedBet ) {
+					return this._securedBet();
 				}
 
 				if ( team1Id == 0 || team2Id == 0 ) {
@@ -109,8 +115,13 @@ define( function ( require ) {
 			},
 
 			betScore2: function() {
+
 				if ( bet == null ) {
 					return 0;
+				}
+
+				if ( bet.securedBet ) {
+					return this._securedBet();
 				}
 
 				if ( team1Id == 0 || team2Id == 0 ) {
@@ -122,6 +133,10 @@ define( function ( require ) {
 				}
 
 				return bet.score1;
+			},
+
+			_securedBet: function() {
+				return "<span class='fa fa-lock' title='" + translator.securedBetHint + ' ( ' + dateTimeService.fromNow( match.beginningTime ) + " )'></span>";
 			},
 
 			getMatchResults: function() {

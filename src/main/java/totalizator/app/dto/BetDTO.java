@@ -10,6 +10,8 @@ public class BetDTO {
 	private int score1;
 	private int score2;
 
+	private boolean securedBet;
+
 	public BetDTO() {
 	}
 
@@ -56,6 +58,14 @@ public class BetDTO {
 
 	public void setScore2( final int score2 ) {
 		this.score2 = score2;
+	}
+
+	public boolean isSecuredBet() {
+		return securedBet;
+	}
+
+	public void setSecuredBet( boolean securedBet ) {
+		this.securedBet = securedBet;
 	}
 
 	@Override

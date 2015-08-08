@@ -332,10 +332,12 @@ public class DTOServiceImpl implements DTOService {
 				final BetDTO betDTO = new BetDTO( matchDTO, transformUser( user ) );
 				betDTO.setMatchBetId( matchBet.getId() );
 
-				if ( matchBetsService.isAllowedToShowMatchBets( matchBet, accessor ) ) {
+				final boolean isSecuredBet = ! matchBetsService.isAllowedToShowMatchBets( matchBet, accessor );
+				if ( ! isSecuredBet ) {
 					betDTO.setScore1( matchBet.getBetScore1() );
 					betDTO.setScore2( matchBet.getBetScore2() );
 				}
+				betDTO.setSecuredBet( isSecuredBet );
 
 				return betDTO;
 			}
