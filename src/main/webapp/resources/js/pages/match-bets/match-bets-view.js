@@ -54,9 +54,7 @@ define( function ( require ) {
 						, translator: translator
 					} );
 
-			_.each( data.matchBetsSecured, function( matchBetSecured ) {
-
-				var matchBet = matchBetSecured.matchBet;
+			_.each( data.matchBets, function( matchBet ) {
 
 				var team1Id = match.team1.teamId;
 				var score1 = matchBet.bet.score1;
