@@ -178,14 +178,6 @@ define( function ( require ) {
 		_renderCupMatchesAndBets: function() {
 
 			var container = this.$( this.windowBodyContainerSelector );
-			/*container.empty();
-
-			if ( this.model.length == 0 ) {
-				container.html( translator.noMatchesFound );
-				this.trigger( 'inner-view-rendered' );
-
-				return;
-			}*/
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
