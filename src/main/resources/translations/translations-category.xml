@@ -17,10 +17,24 @@
 	</translation>
 
 	<translation>
+		<nerd>Show matches on date</nerd>
+		<ru><![CDATA[Матчи на дату]]></ru>
+		<ua><![CDATA[Iгри на дату]]></ua>
+		<en><![CDATA[Show matches on date]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

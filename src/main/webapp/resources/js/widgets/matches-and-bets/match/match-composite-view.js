@@ -248,7 +248,7 @@ define( function ( require ) {
 			];
 			this._renderDropDownMenuItems( menuItems );
 
-			this.$( '.js-panel-footer' ).html( div );
+			//this.$( '.js-panel-footer' ).html( div );
 		},
 
 		_showBetPoints: function( points ) {

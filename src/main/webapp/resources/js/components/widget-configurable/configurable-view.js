@@ -9,9 +9,13 @@ define( function ( require ) {
 	var FilterView = require( './filter/matches-filter-view' );
 	var ConfigurableModel = require( './configurable-model' );
 
+	var DateTimePickerView = require( './matches-on-date-picker' );
+
 	var service = require( '/resources/js/services/service.js' );
 
 	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
+
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
@@ -36,6 +40,7 @@ define( function ( require ) {
 		, validationNoCategory: 'Configurable view / Filter: Validation: Select category'
 		, validationNoCup: 'Configurable view / Filter: Validation: Select cup'
 		, menuOpenCupCard: 'Open cup card'
+		, menuSelectDate: "Show matches on date"
 	} );
 
 	return WidgetView.extend( {
@@ -46,6 +51,7 @@ define( function ( require ) {
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
 			, 'click .js-switch-views': '_switchViews'
+			, 'click .js-menu-date-picker': '_showDatePickerView'
 		},
 
 		initialize: function ( options ) {
@@ -85,6 +91,7 @@ define( function ( require ) {
 				, cups: this.cups
 			} );
 
+			console.log( this.model.toJSON() );
 			this.renderInnerView( this.settingsModel.toJSON() );
 		},
 
@@ -101,6 +108,8 @@ define( function ( require ) {
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel, button: true }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
+				, { selector: 'divider' }
+				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: true }
 			];
 
 			var viewMenuItems = this.innerViewMenuItems();
@@ -190,6 +199,23 @@ define( function ( require ) {
 
 		_switchViews: function() {
 			this.trigger( 'events:switch_views', this.settingsModel.toJSON() );
+		},
+
+		_showDatePickerView: function() {
+			var model = this.settingsModel.toJSON();
+			var el = this.$( this.windowBodyContainerSelector );
+
+			var view = new DateTimePickerView( {
+				matchesOnDate: model.filterByDate
+				, el: el
+			} );
+			view.on( 'events:change_match_date', this._changeMatchDate, this );
+		},
+
+		_changeMatchDate: function( date ) {
+			this.settingsModel.set( { filterByDate: date, filterByDateEnable: true  } );
+
+			this.trigger( 'view:render' );
 		}
 	});
 } );
