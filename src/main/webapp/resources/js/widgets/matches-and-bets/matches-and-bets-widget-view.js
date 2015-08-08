@@ -24,7 +24,7 @@ define( function ( require ) {
 
 			this.currentUser = this.options.currentUser;
 
-			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
+			this.listenToOnce( this.model, 'sync', this._render );
 			this.model.refresh( filter );
 		},
 
@@ -42,12 +42,12 @@ define( function ( require ) {
 
 		_renderCupMatchesAndBets: function() {
 
-			var el = this.$( this.windowBodyContainerSelector );
-			el.empty();
+			var container = this.$( this.windowBodyContainerSelector );
+			container.empty();
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
-				self._renderEntry( matchBet, el );
+				self._renderEntry( matchBet, container );
 			});
 
 			this.trigger( 'inner-view-rendered' );

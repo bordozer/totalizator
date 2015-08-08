@@ -41,6 +41,7 @@ define( function ( require ) {
 		, validationNoCup: 'Configurable view / Filter: Validation: Select cup'
 		, menuOpenCupCard: 'Open cup card'
 		, menuSelectDate: "Show matches on date"
+		, noMatchesFound: "No matches found"
 	} );
 
 	return WidgetView.extend( {
@@ -91,7 +92,6 @@ define( function ( require ) {
 				, cups: this.cups
 			} );
 
-			console.log( this.model.toJSON() );
 			this.renderInnerView( this.settingsModel.toJSON() );
 		},
 
@@ -124,6 +124,27 @@ define( function ( require ) {
 
 		innerViewMenuItems: function() {
 			return [];
+		},
+
+		_render: function() {
+
+			var container = this.$( this.windowBodyContainerSelector );
+			container.empty();
+
+			if ( this.model.length == 0 ) {
+				this._renderNoMatchesFound();
+
+				return;
+			}
+
+			this._renderCupMatchesAndBets();
+		},
+
+		_renderNoMatchesFound: function() {
+			var container = this.$( this.windowBodyContainerSelector );
+			container.html( "<span class='text-muted'>" + translator.noMatchesFound + "</span>" );
+
+			this.trigger( 'inner-view-rendered' );
 		},
 
 		_renderSettings: function() {

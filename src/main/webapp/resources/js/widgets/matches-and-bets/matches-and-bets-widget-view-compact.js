@@ -18,7 +18,6 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Matches"
-		, noMatchesFound: "No matches found"
 		, switchViewsLabel: 'Switch match and bets to full views'
 		, teamPointsLabel: 'Team points'
 	} );
@@ -160,7 +159,7 @@ define( function ( require ) {
 
 			this.currentUser = this.options.currentUser;
 
-			this.listenToOnce( this.model, 'sync', this._renderCupMatchesAndBets );
+			this.listenToOnce( this.model, 'sync', this._render );
 			this.model.refresh( filter );
 		},
 
@@ -179,14 +178,14 @@ define( function ( require ) {
 		_renderCupMatchesAndBets: function() {
 
 			var container = this.$( this.windowBodyContainerSelector );
-			container.empty();
+			/*container.empty();
 
 			if ( this.model.length == 0 ) {
 				container.html( translator.noMatchesFound );
 				this.trigger( 'inner-view-rendered' );
 
 				return;
-			}
+			}*/
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
