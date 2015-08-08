@@ -37,6 +37,10 @@ public class CupRepository implements CupDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Cup save( final Cup entry ) {
 		return em.merge( entry );
@@ -46,6 +50,10 @@ public class CupRepository implements CupDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );

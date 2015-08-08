@@ -37,7 +37,10 @@ public class PointsCalculationStrategyRepository implements PointsCalculationStr
 		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
 		, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
 		, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
 		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public PointsCalculationStrategy save( final PointsCalculationStrategy entry ) {
 		return em.merge( entry );
@@ -50,6 +53,10 @@ public class PointsCalculationStrategyRepository implements PointsCalculationStr
 		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
 		, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
 		, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
