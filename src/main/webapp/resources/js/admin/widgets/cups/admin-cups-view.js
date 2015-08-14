@@ -70,7 +70,7 @@ define( function ( require ) {
 			var filterByCategory = this.model.filterByCategory;
 			var self = this;
 			this.model.forEach( function ( cup ) {
-				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'categoryId' ) ) {
+				if ( ! filterByCategory || self.model.filterByCategory == cup.toJSON().category.categoryId ) {
 					self.renderEntry( cup );
 				}
 			} );
@@ -198,7 +198,7 @@ define( function ( require ) {
 				cupCustomCSS = 'text-warning';
 			}
 
-			var category = this._getCategoryName( this.model.get( 'categoryId' ) );
+			var category = this._getCategoryName( model.category.categoryId );
 
 			this.$el.html( this.templateView( {
 				model: model
