@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.services.*;
+import totalizator.app.services.matches.MatchService;
 
 import java.io.IOException;
 import java.util.Collections;

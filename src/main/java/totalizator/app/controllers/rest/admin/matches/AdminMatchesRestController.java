@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 import totalizator.app.services.CupService;
-import totalizator.app.services.MatchBetsService;
-import totalizator.app.services.MatchService;
+import totalizator.app.services.matches.MatchBetsService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.TeamService;
 
 import java.security.Principal;

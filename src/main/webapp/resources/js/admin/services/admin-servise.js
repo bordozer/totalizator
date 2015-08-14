@@ -13,7 +13,26 @@ define( function ( require ) {
 
 			$.ajax( {
 				method: 'GET',
-				url: '/admin/rest/cups/all/',
+				url: '/admin/rest/cups/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( 'Error loading cups' ); // TODO: translate
+				}
+			} );
+
+			return result;
+		},
+
+		loadAllCurrentCups: function() {
+
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/admin/rest/cups/current/',
 				async: false,
 				success: function ( data ) {
 					result = data;

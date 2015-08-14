@@ -13,10 +13,12 @@ import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
+import totalizator.app.services.matches.MatchService;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
@@ -70,8 +72,7 @@ public class TeamsStandoffsController {
 				cupsSet.add( match.getCup() );
 			}
 		}
-		final List<Cup> cups = newArrayList( cupsSet );
-		cupService.sort( cups );
+		final List<Cup> cups = newArrayList( cupsSet ).stream().sorted( CupServiceImpl.SORT_BY_CUP_BEGINNING_TIME_COMPARATOR ).collect( Collectors.toList() );
 		final List<CupDTO> cupDTOs = dtoService.transformCups( cups, currentUser );
 		model.setCups( new Gson().toJson( cupDTOs ) );
 

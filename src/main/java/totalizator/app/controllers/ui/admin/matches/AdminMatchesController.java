@@ -33,7 +33,7 @@ public class AdminMatchesController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String matches( final @ModelAttribute( MODEL_NAME ) AdminMatchesModel model ) {
 
-		final List<Cup> currentCups = cupService.loadAllCurrent();
+		final List<Cup> currentCups = cupService.loadPublicCurrent();
 		if ( currentCups.size() == 0 ) {
 			return VIEW_MATCHES;
 		}

@@ -12,10 +12,6 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-		},
-
-		url: function () {
-			return '/';
 		}
 	} );
 } );

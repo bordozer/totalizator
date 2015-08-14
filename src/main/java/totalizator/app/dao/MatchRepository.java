@@ -78,6 +78,15 @@ public class MatchRepository implements MatchDao {
 	}
 
 	@Override
+	public List<Match> loadAll( final Cup cup, final Team team1, final Team team2 ) {
+		return em.createNamedQuery( Match.FIND_BY_CUP_AND_TEAMS, Match.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "team1Id", team1.getId() )
+				.setParameter( "team2Id", team2.getId() )
+				.getResultList();
+	}
+
+	@Override
 	public List<Match> loadAll( Team team ) {
 		return em.createNamedQuery( Match.FIND_BY_TEAM, Match.class )
 				.setParameter( "teamId", team.getId() )

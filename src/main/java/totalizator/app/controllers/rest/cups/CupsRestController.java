@@ -31,19 +31,19 @@ public class CupsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<CupDTO> all( final Principal principal ) {
+	public List<CupDTO> nonAdminUserAll( final Principal principal ) {
 		return publicCups( principal );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/", produces = APPLICATION_JSON_VALUE )
-	public CupDTO getDefaultLogin( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+	public CupDTO cup( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
 		final Cup cup = cupService.load( cupId );
 
 		if ( ! cup.isPublicCup() ) {
-			throw new IllegalStateException( String.format( "Cup %s is not public", cup ) );
+			throw new IllegalStateException( String.format( "Cup '#%d' not found", cupId ) );
 		}
 
 		return dtoService.transformCup( cup, userService.findByLogin( principal.getName() ) );
@@ -53,13 +53,13 @@ public class CupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/public/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> publicCups( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadAllPublic(), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.loadPublic(), userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/current/", produces = APPLICATION_JSON_VALUE )
-	public List<CupDTO> currentCups( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadAllCurrent(), userService.findByLogin( principal.getName() ) );
+	@RequestMapping( method = RequestMethod.GET, value = "/public/current/", produces = APPLICATION_JSON_VALUE )
+	public List<CupDTO> publicCurrentCups( final Principal principal ) {
+		return dtoService.transformCups( cupService.loadPublicCurrent(), userService.findByLogin( principal.getName() ) );
 	}
 }

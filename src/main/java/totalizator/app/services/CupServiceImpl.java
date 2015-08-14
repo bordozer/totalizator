@@ -1,7 +1,5 @@
 package totalizator.app.services;
 
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,15 +10,21 @@ import totalizator.app.models.CupWinner;
 import totalizator.app.models.PointsCalculationStrategy;
 import totalizator.app.services.utils.DateTimeService;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @Service
 public class CupServiceImpl implements CupService {
+
+	public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_COMPARATOR = new Comparator<Cup>() {
+
+		@Override
+		public int compare( final Cup o1, final Cup o2 ) {
+			return o2.getCupStartTime().compareTo( o1.getCupStartTime() );
+		}
+	};
 
 	@Autowired
 	private CupDao cupRepository;
@@ -34,23 +38,9 @@ public class CupServiceImpl implements CupService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Cup> loadAll() {
-
-		final List<Cup> cups = newArrayList( cupRepository.loadAll() );
-
-		sort( cups );
-
-		return cups;
-	}
-
-	@Override
-	public void sort( final List<Cup> cups ) {
-		Collections.sort( cups, new Comparator<Cup>() {
-
-			@Override
-			public int compare( final Cup o1, final Cup o2 ) {
-				return o2.getCupStartTime().compareTo( o1.getCupStartTime() );
-			}
-		} );
+		return cupRepository.loadAll().stream()
+				.sorted( SORT_BY_CUP_BEGINNING_TIME_COMPARATOR )
+				.collect( Collectors.toList() );
 	}
 
 	@Override
@@ -78,76 +68,60 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
+	@Transactional( readOnly = true )
 	public List<Cup> loadAllCurrent() {
-
-		final List<Cup> portalPageCups = loadAllPublic();
-
-		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
-
-			@Override
-			public boolean evaluate( final Cup cup ) {
-				return !isCupFinished( cup );
-			}
-		} );
-
-		return portalPageCups;
+		return loadAll().stream()
+				.filter( isCupCurrent() )
+				.collect( Collectors.toList() );
 	}
 
 	@Override
-	public List<Cup> loadAllPublic() {
-
-		final List<Cup> portalPageCups = loadAll();
-
-		CollectionUtils.filter( portalPageCups, new Predicate<Cup>() {
-			@Override
-			public boolean evaluate( final Cup cup ) {
-				return cup.isPublicCup();
-			}
-		} );
-
-		return portalPageCups;
+	public List<Cup> loadPublic() {
+		return loadAll().stream()
+				.filter( isCupPublic() )
+				.collect( Collectors.toList() );
 	}
 
 	@Override
-	public List<Cup> loadAllPublic( final Category category ) {
-
-		return loadAllPublic().stream().filter( new java.util.function.Predicate<Cup>() {
-
-			@Override
-			public boolean test( final Cup cup ) {
-				return cup.getCategory().equals( category );
-			}
-		} ).collect( Collectors.toList() );
+	public List<Cup> loadPublicCurrent() {
+		return loadPublic().stream()
+				.filter( isCupCurrent() )
+				.collect( Collectors.toList() );
 	}
 
 	@Override
-	public List<Cup> loadAllPublicFinished() {
-		final List<Cup> cups = loadAllPublic();
-
-		CollectionUtils.filter( cups, new Predicate<Cup>() {
-
-			@Override
-			public boolean evaluate( final Cup cup ) {
-				return isCupFinished( cup );
-			}
-		} );
-
-		return cups;
+	public List<Cup> loadPublicFinished() {
+		return loadPublic().stream()
+				.filter( isCupFinished() )
+				.collect( Collectors.toList() );
 	}
 
 	@Override
-	public List<Cup> loadAllPublicFinished( final Category category ) {
-		final List<Cup> cups = loadAllPublicFinished();
+	public List<Cup> loadPublic( final Category category ) {
+		return loadPublic().stream()
+				.filter( forCategory( category ) )
+				.collect( Collectors.toList() );
+	}
 
-		CollectionUtils.filter( cups, new Predicate<Cup>() {
+	@Override
+	public List<Cup> loadPublicFinished( final Category category ) {
+		return loadPublicFinished().stream()
+				.filter( forCategory( category ) )
+				.collect( Collectors.toList() );
+	}
 
-			@Override
-			public boolean evaluate( final Cup cup ) {
-				return cup.getCategory().equals( category );
-			}
-		} );
+	@Override
+	public List<Cup> loadHidden() {
+		return loadAll().stream()
+				.filter( isCupHidden() )
+				.collect( Collectors.toList() );
+	}
 
-		return cups;
+	@Override
+	public List<Cup> loadHiddenCurrent() {
+		return loadHidden().stream()
+				.filter( isCupCurrent() )
+				.collect( Collectors.toList() );
 	}
 
 	@Override
@@ -176,5 +150,45 @@ public class CupServiceImpl implements CupService {
 	@Override
 	public boolean isCupFinished( final Cup cup ) {
 		return cupWinnerService.hasChampions( cup );
+	}
+
+	private Predicate<Cup> isCupCurrent() {
+
+		return new Predicate<Cup>() {
+
+			@Override
+			public boolean test( final Cup cup ) {
+				return ! isCupFinished( cup );
+			}
+		};
+	}
+
+	private Predicate<Cup> isCupPublic() {
+
+		return new Predicate<Cup>() {
+
+			@Override
+			public boolean test( final Cup cup ) {
+				return cup.isPublicCup();
+			}
+		};
+	}
+
+	private Predicate<Cup> isCupFinished() {
+		return isCupCurrent().negate();
+	}
+
+	private Predicate<Cup> isCupHidden() {
+		return isCupPublic().negate();
+	}
+
+	private Predicate<Cup> forCategory( final Category category ) {
+		return new Predicate<Cup>() {
+
+			@Override
+			public boolean test( final Cup cup ) {
+				return cup.getCategory().equals( category );
+			}
+		};
 	}
 }

@@ -2,8 +2,8 @@ define( function ( require ) {
 
 	'use strict';
 
-	var DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm';
 	var DATE_FORMAT = 'DD/MM/YYYY';
+	var TIME_FORMAT = 'HH:mm';
 
 	var DATE_DISPLAY_FORMAT = 'D MMM YYYY';
 	var TIME_DISPLAY_FORMAT = 'HH:mm';
@@ -18,7 +18,7 @@ define( function ( require ) {
 	return {
 
 		getDateTimeFormat: function() {
-			return DATE_TIME_FORMAT;
+			return DATE_FORMAT + ' ' + TIME_FORMAT;
 		},
 
 		getDateFormat: function() {
@@ -31,7 +31,12 @@ define( function ( require ) {
 
 		// date => str formatted
 		formatDate: function ( time ) {
-			return moment( time ).format( DATE_TIME_FORMAT );
+			return moment( time ).format( this.getDateFormat() );
+		},
+
+		// date => str formatted
+		formatDateTime: function ( time ) {
+			return moment( time ).format( this.getDateTimeFormat() );
 		},
 
 		// str => srt formatted for displaying
@@ -49,15 +54,19 @@ define( function ( require ) {
 
 		// str => date
 		parseDate: function( time ) {
-			return moment( time, DATE_TIME_FORMAT ).toDate();
+			return moment( time, this.getDateTimeFormat() ).toDate();
 		},
 
-		timeNow: function( time ) {
+		timeNow: function() {
 			return app.timeNow();
 		},
 
+		dateNow: function() {
+			return moment( app.timeNow(), this.getDateFormat() ).format( this.getDateFormat() );
+		},
+
 		fromNow: function( time ) {
-			return moment.duration( moment( time, DATE_TIME_FORMAT ).diff( moment( this.timeNow(), DATE_TIME_FORMAT ) ) ).humanize( {
+			return moment.duration( moment( time, this.getDateTimeFormat() ).diff( moment( this.timeNow(), this.getDateTimeFormat() ) ) ).humanize( {
 				suffix: true,
 				precise: true
 			} );

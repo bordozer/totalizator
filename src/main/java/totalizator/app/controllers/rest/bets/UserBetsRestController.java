@@ -10,6 +10,8 @@ import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
+import totalizator.app.services.matches.MatchBetsService;
+import totalizator.app.services.matches.MatchService;
 
 import java.security.Principal;
 import java.util.List;

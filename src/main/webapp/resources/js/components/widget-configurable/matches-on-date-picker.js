@@ -49,7 +49,7 @@ define( function ( require ) {
 				return;
 			}
 
-			this.trigger( 'events:change_match_date', dateTimeService.formatDate( this.dateTimePickerView.getValue() ) );
+			this.trigger( 'events:change_match_date', dateTimeService.formatDateTime( this.dateTimePickerView.getValue() ) );
 		}
 	} );
 } );

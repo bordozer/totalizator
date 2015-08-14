@@ -34,11 +34,11 @@ define( function ( require ) {
 				, locale: dateTimeService.getLocale()
 				, inline: inline
 			} ).on( "dp.change", function ( e ) {
-				onChangeCallback( dateTimeService.formatDate( e.date ) );
+				onChangeCallback( disableTime ? dateTimeService.formatDate( e.date ) : dateTimeService.formatDateTime( e.date ) );
 			} );
 
 			this.picker = this.dtp.data( "DateTimePicker" );
-			this.setValue( time );
+			this.setValue( time ); // TODO: set silently
 
 			return this;
 		},

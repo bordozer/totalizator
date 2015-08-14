@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
 
@@ -42,12 +41,10 @@ public class MatchesDataRestController {
 		final User currentUser = userService.findByLogin( principal.getName() );
 		final boolean isAdmin = securityService.isAdmin( currentUser );
 
-		final Cup cup = cupService.load( cupId );
-
 		final MatchesDataDTO result = new MatchesDataDTO();
 
 		result.setCategories( dtoService.transformCategories( categoryService.loadAll() ) );
-		result.setCups( dtoService.transformCups( isAdmin ? cupService.loadAll() : cupService.loadAllPublic(), currentUser ) );
+		result.setCups( dtoService.transformCups( isAdmin ? cupService.loadAll() : cupService.loadPublic(), currentUser ) );
 		result.setTeams( dtoService.transformTeams( teamService.loadAll() ) );
 		result.setUsers( dtoService.transformUsers( userService.loadAll() ) );
 

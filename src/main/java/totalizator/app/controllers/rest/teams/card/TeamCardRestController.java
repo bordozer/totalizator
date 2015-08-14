@@ -9,6 +9,7 @@ import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
+import totalizator.app.services.matches.MatchService;
 
 import java.security.Principal;
 import java.util.List;
@@ -64,7 +65,7 @@ public class TeamCardRestController {
 		dto.setTeam( dtoService.transformTeam( team ) );
 
 		final List<TeamCardCupData> cupDataMap = newArrayList();
-		for ( final Cup cup : cupService.loadAllPublic( team.getCategory() ) ) {
+		for ( final Cup cup : cupService.loadPublic( team.getCategory() ) ) {
 			cupDataMap.add( getTeamCardCupData( currentUser, team, cup ) );
 		}
 

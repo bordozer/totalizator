@@ -61,13 +61,24 @@ public class TeamRepository implements TeamDao {
 		em.remove( load( id ) );
 	}
 
+
 	@Override
 	@Cacheable( value = CACHE_QUERY )
-	public Team findByName( final String name ) {
+	public Team findByName( final Category category, final String name ) {
 		final List<Team> teams = em.createNamedQuery( Team.FIND_BY_NAME, Team.class )
 				.setParameter( "teamName", name )
 				.getResultList();
 
-		return teams.size() == 1 ? teams.get( 0 ) : null;
+		if ( teams.size() == 0 ) {
+			return null;
+		}
+
+		for ( final Team team : teams ) {
+			if ( team.getCategory().equals( category ) ) {
+				return team;
+			}
+		}
+
+		return null;
 	}
 }

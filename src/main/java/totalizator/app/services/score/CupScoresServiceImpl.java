@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import totalizator.app.beans.UserPoints;
 import totalizator.app.models.*;
 import totalizator.app.services.*;
+import totalizator.app.services.matches.MatchBetsService;
 
 import java.util.Collections;
 import java.util.Comparator;

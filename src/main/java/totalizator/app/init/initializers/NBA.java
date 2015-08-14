@@ -63,7 +63,7 @@ public class NBA extends AbstractDataInitializer {
 		final Cup nba2015PlayOff = new Cup( CUP_2, category );
 		nba2015PlayOff.setPublicCup( true );
 		nba2015PlayOff.setWinnersCount( 2 );
-		nba2015PlayOff.setCupStartTime( dateTimeService.parseDate( "18/04/2015 00:00" ) );
+		nba2015PlayOff.setCupStartTime( dateTimeService.parseDateTime( "18/04/2015 00:00" ) );
 		nba2015PlayOff.setPointsCalculationStrategy( pointsStrategy );
 
 		session.persist( nba2015PlayOff );
@@ -78,7 +78,7 @@ public class NBA extends AbstractDataInitializer {
 		final Cup nba2015Regular = new Cup( CUP_1, category );
 		nba2015Regular.setPublicCup( true );
 		nba2015Regular.setWinnersCount( 4 );
-		nba2015Regular.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
+		nba2015Regular.setCupStartTime( dateTimeService.parseDateTime( "01/09/2014 00:00" ) );
 		nba2015Regular.setPointsCalculationStrategy( pointsStrategy );
 
 		session.persist( nba2015Regular );
@@ -93,7 +93,7 @@ public class NBA extends AbstractDataInitializer {
 		final Cup nba2014PlayOff = new Cup( CUP_3, category );
 		nba2014PlayOff.setPublicCup( true );
 		nba2014PlayOff.setWinnersCount( 2 );
-		nba2014PlayOff.setCupStartTime( dateTimeService.parseDate( "20/04/2014 00:00" ) );
+		nba2014PlayOff.setCupStartTime( dateTimeService.parseDateTime( "20/04/2014 00:00" ) );
 		nba2014PlayOff.setPointsCalculationStrategy( pointsStrategy );
 
 		session.persist( nba2014PlayOff );

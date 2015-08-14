@@ -9,6 +9,8 @@ import totalizator.app.beans.UserTitle;
 import totalizator.app.models.Cup;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
+import totalizator.app.services.matches.MatchBetsService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.score.CupScoresService;
 import totalizator.app.translator.TranslatorService;
 

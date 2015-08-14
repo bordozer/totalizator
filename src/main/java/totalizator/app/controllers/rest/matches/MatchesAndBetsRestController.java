@@ -14,8 +14,8 @@ import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.DTOService;
-import totalizator.app.services.MatchBetsService;
-import totalizator.app.services.MatchService;
+import totalizator.app.services.matches.MatchBetsService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.utils.DateTimeService;
 

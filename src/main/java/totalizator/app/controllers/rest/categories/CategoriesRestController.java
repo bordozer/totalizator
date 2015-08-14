@@ -50,6 +50,6 @@ public class CategoriesRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{categoryId}/cups/public/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> categoryCaps( final @PathVariable( "categoryId" ) int categoryId, final Principal principal ) {
-		return dtoService.transformCups( cupService.loadAllPublic( categoryService.load( categoryId ) ), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.loadPublic( categoryService.load( categoryId ) ), userService.findByLogin( principal.getName() ) );
 	}
 }

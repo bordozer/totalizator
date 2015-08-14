@@ -4,7 +4,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 import totalizator.app.beans.UserPoints;
 import totalizator.app.models.*;
-import totalizator.app.services.MatchBetsService;
+import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.score.CupScoresServiceImpl;
 
 import java.util.List;

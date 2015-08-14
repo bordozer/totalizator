@@ -8,7 +8,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.DTOService;
-import totalizator.app.services.MatchService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 

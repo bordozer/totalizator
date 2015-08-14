@@ -1,0 +1,102 @@
+<div class="panel <%=panelColor%>">
+
+	<div class="panel-heading">
+
+		<% if( isReadyForImport) { %>
+
+			<% if( ! importImpossible ) { %>
+				<input type="checkbox" id="gamesToImport" checked="checked">
+			<% } %>
+
+			<% if( importImpossible ) { %>
+				<span class='fa fa-close' title="<%=translator.teamNotFoundInCategory%>"></span>
+			<% } %>
+		<% } %>
+
+		<% if( ! isReadyForImport ) { %>
+			<span class='<%=import_status.icon%> fa-2x' title="<%=import_status.title%>"></span>
+		<% } %>
+
+		<small><%=matchBeginningTime%></small>
+
+	</div>
+
+	<div class="panel-body">
+
+		<div class="row">
+
+			<div class="col-lg-6 text-center">
+
+				<% if( homeTeamNumber == 1 ) { %>
+					<i class="fa fa-home text-danger"></i>
+				<% } %>
+
+				<% if( team1 ) { %>
+					<img class="team-logo" src="<%=team1.teamLogo%>">
+					<h5><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1Name%></a></h5>
+				<% } %>
+
+				<% if( ! team1 ) { %>
+					<span class="text-danger" title="<%=translator.teamNotFoundInCategory%>"><%-team1Name%></span>
+				<% } %>
+			</div>
+
+			<div class="col-lg-6 text-center">
+
+				<% if( team2 ) { %>
+					<img class="team-logo" src="<%=team2.teamLogo%>">
+					<h5><a href="/totalizator/teams/<%=team2.teamId%>/"><%=team2.teamName%></a></h5>
+				<% } %>
+
+				<% if( ! team2 ) { %>
+					<span class="text-danger" title="<%=translator.teamNotFoundInCategory%>"><%-team2Name%></span>
+				<% } %>
+
+				<% if( homeTeamNumber == 2 ) { %>
+					<i class="fa fa-home text-danger"></i>
+				<% } %>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-lg-6 text-center <%=matchResults.style1%>">
+				<%=score1%>
+			</div>
+
+			<div class="col-lg-6 text-center <%=matchResults.style2%>">
+				<%=score2%>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="panel-footer">
+
+		<% if( ! import_status ) { %>
+
+			<% if( match ) { %>
+				<a href="/totalizator/matches/<%=match.matchId%>/bets/" class="fa fa-soccer-ball-o text-success" title="#<%=match.matchId%>"></a> <%=translator.theMatchIsAlreadyImported%>
+			<% } %>
+
+			<% if( ! match ) { %>
+				<span class="fa fa-soccer-ball-o text-danger" title="<%=translator.noLocalMatchFound%>"> <%=translator.noLocalMatchFound%></span>
+			<% } %>
+
+		<% } %>
+
+		<% if( import_status ) { %>
+			<%=import_status.title%>
+		<% } %>
+
+		<% if( importImpossible ) { %>
+			<%=translator.teamNotFoundInCategory%>
+		<% } %>
+
+	</div>
+
+</div>
+

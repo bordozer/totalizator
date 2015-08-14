@@ -40,7 +40,7 @@ public class NCAA extends AbstractDataInitializer {
 		final Cup ncaa2015 = new Cup( CUP_1, category );
 		ncaa2015.setPublicCup( true );
 		ncaa2015.setWinnersCount( 8 );
-		ncaa2015.setCupStartTime( dateTimeService.parseDate( "01/09/2014 00:00" ) );
+		ncaa2015.setCupStartTime( dateTimeService.parseDateTime( "01/09/2014 00:00" ) );
 		ncaa2015.setPointsCalculationStrategy( pointsStrategy );
 
 		session.persist( ncaa2015 );

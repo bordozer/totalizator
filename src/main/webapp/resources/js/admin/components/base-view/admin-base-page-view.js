@@ -41,7 +41,7 @@ define( function ( require ) {
 				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/points-calculation-strategies/', text: translator.pointsCalculationStrategiesLabel }
 				, { selector: 'divider' }
 
-				, { selector: '', icon: 'fa fa-exchange', link: '/admin/games-data-import/', text: translator.gamesDataImportLabel }
+				, { selector: '', icon: 'fa fa-exchange', link: '/admin/remote-games-import/', text: translator.gamesDataImportLabel }
 				, { selector: 'divider' }
 
 				, { selector: '', icon: 'fa fa-language', link: '/admin/translations/', text: translator.menuUntranslatedListLabel }

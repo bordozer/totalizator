@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.UserService;
 
 @Controller
-@RequestMapping( "admin/games-data-import" )
+@RequestMapping( "admin/remote-games-import" )
 public class GamesDataImportController {
 
 	public static final String MODEL_NAME = "gamesDataImportModel";

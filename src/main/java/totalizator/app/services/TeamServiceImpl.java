@@ -52,7 +52,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	@Transactional( readOnly = true )
-	public Team findByName( final String name ) {
-		return teamRepository.findByName( name );
+	public Team findByName( final Category category, final String name ) {
+		return teamRepository.findByName( category, name );
 	}
 }

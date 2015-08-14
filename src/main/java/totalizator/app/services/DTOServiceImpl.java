@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import totalizator.app.beans.ValidationResult;
 import totalizator.app.dto.*;
 import totalizator.app.models.*;
+import totalizator.app.services.matches.MatchBetsService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.score.CupScoresService;
 
 import java.util.List;

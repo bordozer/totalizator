@@ -330,7 +330,7 @@ define( function ( require ) {
 				, publicCup: publicCup
 				, readyForCupBets: readyForCupBets
 				, readyForMatchBets: readyForMatchBets
-				, cupStartDate: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
+				, cupStartDate: dateTimeService.formatDateTime( this.dateTimePickerView.getValue() )
 				, finished: finished
 				, cupPointsCalculationStrategyId: cupPointsCalculationStrategyId
 			} );

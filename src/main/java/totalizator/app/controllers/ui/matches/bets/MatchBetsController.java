@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.models.Match;
-import totalizator.app.services.MatchService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.utils.DateTimeService;
 

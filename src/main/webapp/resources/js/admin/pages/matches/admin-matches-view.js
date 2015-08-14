@@ -310,7 +310,7 @@ define( function ( require ) {
 				, score1: this.$( '#score1' ).val()
 				, team2Id: this.$( '.team2-select-box' ).val()
 				, score2: this.$( '#score2' ).val()
-				, beginningTime: dateTimeService.formatDate( this.dateTimePickerView.getValue() )
+				, beginningTime: dateTimeService.formatDateTime( this.dateTimePickerView.getValue() )
 				, matchFinished: this.$( '.js-match-finished' ).is(':checked')
 				, homeTeamNumber: this.$( "input[name='homeTeamNumber']:checked" ).val()
 				, matchDescription: this.$( '#matchDescription' ).val()

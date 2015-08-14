@@ -11,15 +11,19 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 
 	List<Cup> loadAllCurrent();
 
-	void sort( final List<Cup> cups );
+	List<Cup> loadPublic();
 
-	List<Cup> loadAllPublic();
+	List<Cup> loadPublicCurrent();
 
-	List<Cup> loadAllPublic( final Category category );
+	List<Cup> loadPublicFinished();
 
-	List<Cup> loadAllPublicFinished();
+	List<Cup> loadPublic( final Category category );
 
-	List<Cup> loadAllPublicFinished( final Category category );
+	List<Cup> loadPublicFinished( final Category category );
+
+	List<Cup> loadHidden();
+
+	List<Cup> loadHiddenCurrent();
 
 	List<Cup> loadCups( final PointsCalculationStrategy strategy );
 

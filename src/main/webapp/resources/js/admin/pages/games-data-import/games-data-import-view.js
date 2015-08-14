@@ -8,18 +8,9 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/games-data-import-template.html' ) );
 
-	var nbaImport = require( 'js/admin/widgets/imports/nba/import-nba' );
-
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		title: ""
-	} );
+	var RemoteGamesImportView = require( 'js/admin/widgets/game-import/remote-games-import-view' );
 
 	return Backbone.View.extend( {
-
-		events: {
-
-		},
 
 		initialize: function ( options ) {
 			this.render();
@@ -27,17 +18,17 @@ define( function ( require ) {
 
 		render: function () {
 
-			var data = _.extend( {}, this.model.toJSON(), { translator: translator } );
+			var data = _.extend( {}, this.model.toJSON() );
 
 			this.$el.html( template( data ) );
 
-			this._renderNbaImport();
+			this._renderRemoteGamesImport();
 
 			return this;
 		},
 
-		_renderNbaImport: function() {
-			nbaImport( this.$( '.js-nba-import' ), {} );
+		_renderRemoteGamesImport: function() {
+			var view = new RemoteGamesImportView( { el: this.$( '.js-remote-games-import' ) } );
 		}
 	} );
 } );

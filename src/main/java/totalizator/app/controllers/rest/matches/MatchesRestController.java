@@ -9,7 +9,7 @@ import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
-import totalizator.app.services.MatchService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.UserService;
 
 import java.security.Principal;

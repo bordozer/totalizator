@@ -19,6 +19,7 @@ import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -56,9 +57,32 @@ public class AdminCupsRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, value = "/all/", produces = APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
 	public List<CupDTO> entries( final Principal principal ) {
-		return dtoService.transformCups( cupService.loadAll(), userService.findByLogin( principal.getName() ) );
+
+		final List<Cup> publicCups = cupService.loadPublic();
+		final List<Cup> hiddenCups = cupService.loadHidden();
+
+		final List<Cup> result = newArrayList();
+		result.addAll( publicCups );
+		result.addAll( hiddenCups );
+
+		return dtoService.transformCups( result, userService.findByLogin( principal.getName() ) );
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, value = "/current/", produces = APPLICATION_JSON_VALUE)
+	public List<CupDTO> activeCupsOnly( final Principal principal ) {
+
+		final List<Cup> publicCurrentCups = cupService.loadPublicCurrent();
+		final List<Cup> nonPublicCurrentCups = cupService.loadHiddenCurrent();
+
+		final List<Cup> result = newArrayList();
+		result.addAll( publicCurrentCups );
+		result.addAll( nonPublicCurrentCups );
+
+		return dtoService.transformCups( result, userService.findByLogin( principal.getName() ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -68,12 +92,12 @@ public class AdminCupsRestController {
 		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
 	}
 
-	@ResponseStatus(HttpStatus.OK)
+	/*@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
 	public List<CupEditDTO> entries() {
 		return Lists.transform( cupService.loadAll(), getFunction() );
-	}
+	}*/
 
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody

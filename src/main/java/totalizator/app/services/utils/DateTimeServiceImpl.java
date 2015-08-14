@@ -2,6 +2,7 @@ package totalizator.app.services.utils;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -50,18 +51,35 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
-	public String formatDateTimeUI( final LocalDateTime time ) {
+	public LocalDate plusDays( final LocalDate date, final int days ) {
+		return date.plusDays( days );
+	}
 
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( formatUI(), Locale.getDefault() );
+	@Override
+	public String formatDateTimeUI( final LocalDateTime time ) {
+		return formatDateTime( time, formatUI() );
+	}
+
+	private String formatDateTime( final LocalDateTime time, final String pattern ) {
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( pattern, Locale.getDefault() );
 		final LocalDateTime dateTime = localDateTime( time );
 
 		return dateTime.format( formatter );
 	}
 
 	@Override
-	public LocalDateTime parseDate( final String date ) {
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern( format() );
-		return LocalDateTime.parse( date, formatter );
+	public String formatDateTime( final LocalDateTime time ) {
+		return formatDateTime( time, dateTimeFormat() );
+	}
+
+	@Override
+	public LocalDateTime parseDateTime( final String time ) {
+		return LocalDateTime.parse( time, DateTimeFormatter.ofPattern( dateTimeFormat() ) );
+	}
+
+	@Override
+	public LocalDate parseDate( final String date ) {
+		return LocalDate.parse( date, DateTimeFormatter.ofPattern( dateFormat() ) );
 	}
 
 	@Override
@@ -70,12 +88,21 @@ public class DateTimeServiceImpl implements DateTimeService {
 		return time1.isAfter( from ) && time1.isBefore( LocalDateTime.from( from.plusDays( 1 ).minusSeconds( 1 ) ) );
 	}
 
+	@Override
+	public boolean hasTheSameDate( final LocalDateTime time, final LocalDate date ) {
+		return time.toLocalDate().isEqual( date );
+	}
+
 	private LocalDateTime localDateTime( final LocalDateTime time ) {
 		return LocalDateTime.of( time.getYear(), time.getMonth(), time.getDayOfMonth(), time.getHour(), time.getMinute() );
 	}
 
-	private String format() {
-		return DATE_TIME_FORMAT;
+	private String dateFormat() {
+		return DATE_FORMAT;
+	}
+
+	private String dateTimeFormat() {
+		return String.format( "%s %s", DATE_FORMAT, TIME_FORMAT );
 	}
 
 	private String formatUI() {

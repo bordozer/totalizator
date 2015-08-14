@@ -1,10 +1,12 @@
 package totalizator.app.services.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface DateTimeService {
 
-	String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+	String DATE_FORMAT = "dd/MM/yyyy";
+	String TIME_FORMAT = "HH:mm";
 	String DATE_TIME_FORMAT_UI = "dd MMM yyyy HH:mm";
 
 	LocalDateTime getNow();
@@ -24,10 +26,19 @@ public interface DateTimeService {
 
 	LocalDateTime plusDays( final LocalDateTime time, final int days );
 
+	LocalDate plusDays( final LocalDate date, final int days );
+
 
 	String formatDateTimeUI( final LocalDateTime time );
 
-	LocalDateTime parseDate( final String date );
+	String formatDateTime( final LocalDateTime time );
+
+
+	LocalDateTime parseDateTime( final String time );
+
+	LocalDate parseDate( final String date );
 
 	boolean hasTheSameDate( final LocalDateTime time1, final LocalDateTime time2 );
+
+	boolean hasTheSameDate( final LocalDateTime time, final LocalDate date );
 }

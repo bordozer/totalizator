@@ -1,0 +1,37 @@
+<div class="row">
+
+	<div class="col-lg-4">
+		<%= translator.cupLabel %>
+	</div>
+
+	<div class="col-lg-8">
+		<select id="selectedCupId">
+		<option value="0"></option>
+		<% _.each( cups, function( cup ) { %>
+			<option value="<%=cup.cupId%>" <%= cup.cupId == cupId ? 'selected' : '' %> ><%=cup.category.categoryName%> <%=cup.cupName%></option>
+		<% }) %>
+		</select>
+		<br />
+		<span class="text-muted">
+			<input type="checkbox" id="js-show-active-cups-only" class="js-show-active-cups-only" <%=showActiveCupsOnlyClick ? "checked='checked'" : ''%> > <label for="js-show-active-cups-only"><%=translator.showActiveCupsOnly%></label>
+		</span>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-4">
+		<%= translator.dateFromLabel %>
+	</div>
+	<div class="col-lg-8">
+		<div class="js-date-from"></div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-4">
+		<%= translator.dateToLabel %>
+	</div>
+	<div class="col-lg-8">
+		<div class="js-to-date"></div>
+	</div>
+</div>
