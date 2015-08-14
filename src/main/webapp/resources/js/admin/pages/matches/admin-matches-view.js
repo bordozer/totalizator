@@ -71,6 +71,13 @@ define( function ( require ) {
 			return 'fa-futbol-o';
 		},
 
+		getTitle: function() {
+			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
+			var cup = service.getCup( adminService.loadCups(), cupId );
+
+			return this.getCupTitle( cup, translator.title );
+		},
+
 		innerViewMenuItems: function() {
 			return [
 				{ selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel, button: true }
