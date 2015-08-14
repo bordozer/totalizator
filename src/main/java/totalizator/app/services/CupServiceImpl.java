@@ -33,6 +33,9 @@ public class CupServiceImpl implements CupService {
 	private CupWinnerService cupWinnerService;
 
 	@Autowired
+	private CupTeamService cupTeamService;
+
+	@Autowired
 	private DateTimeService dateTimeService;
 
 	@Override
@@ -58,6 +61,7 @@ public class CupServiceImpl implements CupService {
 	@Override
 	@Transactional
 	public void delete( final int id ) {
+		cupTeamService.clearForCup( id );
 		cupRepository.delete( id );
 	}
 

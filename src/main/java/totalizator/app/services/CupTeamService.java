@@ -20,5 +20,7 @@ public interface CupTeamService {
 
 	void clearFor( final int teamId );
 
-	void clearFor( int cupId, int teamId );
+	void clearForCup( final int cupId );
+
+	void clearFor( final int cupId, final int teamId );
 }

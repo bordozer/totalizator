@@ -92,6 +92,13 @@ public class CupTeamServiceImpl implements CupTeamService {
 	}
 
 	@Override
+	public void clearForCup( final int cupId ) {
+		for ( final Team team : teamService.loadAll( cupService.load( cupId ).getCategory() ) ) {
+			clearFor( cupId, team.getId() );
+		}
+	}
+
+	@Override
 	public void clearFor( int cupId, int teamId ) {
 		saveCupTeam( cupId, teamId, false );
 	}
