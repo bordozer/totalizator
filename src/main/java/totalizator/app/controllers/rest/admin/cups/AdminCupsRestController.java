@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
+import totalizator.app.models.Team;
 import totalizator.app.services.*;
 
 import java.io.IOException;
@@ -49,6 +50,9 @@ public class AdminCupsRestController {
 
 	@Autowired
 	private PointsCalculationStrategyService pointsCalculationStrategyService;
+
+	@Autowired
+	private CupTeamService cupTeamService;
 
 	@Autowired
 	private DTOService dtoService;
@@ -92,13 +96,6 @@ public class AdminCupsRestController {
 		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
 	}
 
-	/*@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE)
-	public List<CupEditDTO> entries() {
-		return Lists.transform( cupService.loadAll(), getFunction() );
-	}*/
-
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
@@ -110,6 +107,13 @@ public class AdminCupsRestController {
 		initFromDTO( cup, cupEditDTO );
 
 		final Cup saved = cupService.save( cup );
+
+		final int cupId = saved.getId();
+
+		final List<Team> teams = teamService.loadAll( cupService.load( cupId ).getCategory() );
+		for ( final Team team : teams ) {
+			cupTeamService.saveCupTeam( cupId, team.getId(), true );
+		}
 
 		return getFunction().apply( saved );
 	}

@@ -70,7 +70,7 @@ define( function ( require ) {
 			var filterByCategory = this.model.filterByCategory;
 			var self = this;
 			this.model.forEach( function ( cup ) {
-				if ( ! filterByCategory || self.model.filterByCategory == cup.toJSON().category.categoryId ) {
+				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'category' ).categoryId ) {
 					self.renderEntry( cup );
 				}
 			} );
@@ -198,11 +198,8 @@ define( function ( require ) {
 				cupCustomCSS = 'text-warning';
 			}
 
-			var category = this._getCategoryName( model.category.categoryId );
-
 			this.$el.html( this.templateView( {
 				model: model
-				, categoryName: category
 				, cupStartDate: dateTimeService.formatDateTimeDisplay( model.cupStartDate )
 				, cupCustomCSS: cupCustomCSS
 				, translator: translator
@@ -274,11 +271,6 @@ define( function ( require ) {
 		_bindWinnersAndSave: function ( data ) {
 			this.model.set( { cupWinners: data } );
 			this._saveEntry();
-		},
-
-		_getCategoryName: function ( categoryId ) {
-			var category = service.getCategory( this.categories, categoryId );
-			return category.categoryName;
 		},
 
 		_editEntry: function () {
