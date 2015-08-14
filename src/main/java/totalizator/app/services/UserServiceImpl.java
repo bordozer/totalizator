@@ -72,4 +72,13 @@ public class UserServiceImpl implements UserService {
 	public String encodePassword( final String password ) {
 		return new BCryptPasswordEncoder().encode( password );
 	}
+
+	@Override
+	@Transactional
+	public void updateUserPassword( final User user, final String password ) {
+
+		user.setPassword( encodePassword( password ) );
+
+		userRepository.save( user );
+	}
 }

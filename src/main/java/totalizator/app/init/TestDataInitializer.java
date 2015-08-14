@@ -90,9 +90,11 @@ public class TestDataInitializer {
 		for ( final UserData userData : userDatas ) {
 
 			final String login = userData.firstName.toLowerCase();
+			final String password = login;
+
 			final User user = new User( login
 					, String.format( "%s %s %s", userData.firstName, userData.lastName, userData.thirdName )
-					, userService.encodePassword( login )
+					, userService.encodePassword( password )
 			);
 			session.persist( user );
 

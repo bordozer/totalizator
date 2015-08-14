@@ -8,5 +8,7 @@ public interface UserService extends GenericService<User>, NamedEntityGenericSer
 
 	User findByLogin( final String login );
 
-	String encodePassword( String password );
+	String encodePassword( final String password );
+
+	void updateUserPassword( final User user, final String password );
 }
