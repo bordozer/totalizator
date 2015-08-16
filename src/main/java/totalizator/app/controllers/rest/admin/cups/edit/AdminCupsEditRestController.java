@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
 import totalizator.app.services.*;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,11 +56,6 @@ public class AdminCupsEditRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public List<CupEditDTO> allCups() {
 		return cupService.loadAll().stream().map( transformer() ).collect( Collectors.toList() );
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/" )
-	public CupDTO getCup( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
-		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/0" ) //@RequestMapping("/admin/rest/cups"), consumes = APPLICATION_JSON_VALUE

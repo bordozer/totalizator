@@ -1,6 +1,7 @@
 package totalizator.app.controllers.rest.admin.cups;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,10 @@ public class AdminCupsRestController {
 		result.addAll( nonPublicCurrentCups );
 
 		return dtoService.transformCups( result, userService.findByLogin( principal.getName() ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/" )
+	public CupDTO getCup( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
 	}
 }
