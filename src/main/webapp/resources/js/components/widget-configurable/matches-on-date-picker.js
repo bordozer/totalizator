@@ -45,11 +45,11 @@ define( function ( require ) {
 
 		_onDateSelect: function() {
 
-			if ( ! this.dateTimePickerView ) { // TODO: why this.dateTimePickerView in undefined at first time?
+			if ( ! this.dateTimePickerView ) { // TODO: hack bue to non silent set of setValue() inside datetime picker
 				return;
 			}
 
-			this.trigger( 'events:change_match_date', dateTimeService.formatDateTime( this.dateTimePickerView.getValue() ) );
+			this.trigger( 'events:change_match_date', dateTimeService.formatDate( this.dateTimePickerView.getValue() ) );
 		}
 	} );
 } );
