@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.admin.cups;
+package totalizator.app.controllers.rest.admin.cups.edit;
 
 class CupWinnerEditDTO {
 

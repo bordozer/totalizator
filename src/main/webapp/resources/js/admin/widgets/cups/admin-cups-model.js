@@ -53,7 +53,7 @@ define( function ( require ) {
 		selectedCup: { cupId: 0 },
 
 		initialize: function ( options ) {
-			this.url = '/admin/rest/cups/';
+			this.url = '/admin/rest/cups/edit/';
 		},
 
 		refresh: function() {

@@ -70,7 +70,7 @@ define( function ( require ) {
 			var filterByCategory = this.model.filterByCategory;
 			var self = this;
 			this.model.forEach( function ( cup ) {
-				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'category' ).categoryId ) {
+				if ( ! filterByCategory || self.model.filterByCategory == cup.get( 'categoryId' ) ) {
 					self.renderEntry( cup );
 				}
 			} );
@@ -295,7 +295,7 @@ define( function ( require ) {
 			this.model.save()
 					.then( function () {
 						if ( file.length > 0 ) {
-							var url = '/admin/rest/cups/' + self.model.id + '/logo/';
+							var url = '/admin/rest/cups/edit/' + self.model.id + '/logo/';
 							service.uploadFile( file, url );
 						}
 					} )

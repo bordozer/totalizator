@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.admin.cups;
+package totalizator.app.controllers.rest.admin.cups.edit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
