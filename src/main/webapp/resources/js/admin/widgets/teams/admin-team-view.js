@@ -156,7 +156,7 @@ define( function ( require ) {
 			adminService.setTeamCupParticipation( this.selectedCup.cupId, this.model.get( 'teamId' ), isTeamChecked );
 
 			this.render();
-			this.trigger( 'events:search_set_focus' );
+			//this.trigger( 'events:search_set_focus' );
 		},
 
 		_onEntryEditClick: function( evt ) {
