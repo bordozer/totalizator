@@ -1,50 +1,48 @@
-<div style="padding-left: 15px;">
+<div class="row" style="padding-left: 15px;">
 
-	<div class="row">
-
-		<div class="col-sm-2 col-md-2 col-lg-2 text-center">
-			<a href="/totalizator/" title="<%=projectName%>"><img src="/resources/public/img/logo.png"></a>
-			<h4><span class="fa fa-user text-muted">
+	<div class="col-sm-2 col-md-2 col-lg-2 text-center">
+		<a href="/totalizator/" title="<%=projectName%>"><img src="/resources/public/img/logo.png"></a>
+		<h4>
+			<span class="fa fa-user text-muted">
 				<a href="/totalizator/users/<%- currentUser.userId %>/"><%- currentUser.userName %></a>
-			</span></h4>
+			</span>
+		</h4>
+	</div>
+
+	<div class="col-sm-9 col-md-9 col-lg-9">
+
+		<div class="row">
+			<div class="col-sm-1 col-md-1 col-lg-1 js-main-menu-container" style="margin-top: 22px;"></div>
+			<div class="col-sm-11 col-md-11 col-lg-11">
+				<h3>
+					<%=title%>
+					<br />
+					<small style="font-size: 12px;"><%=timeNowFormatted%></small>
+				</h3>
+			</div>
 		</div>
 
-		<div class="col-sm-9 col-md-9 col-lg-9">
+		<div class="row">
+			<ul class="breadcrumb">
+				<li><a href="/totalizator/"><%=projectName%></a></li>
+				<% _.each( breadcrumbs, function( crumb ){ %>
+					<li class="<%=crumb.link == '#' ? 'active' : ''%>">
 
-			<div class="row">
-				<div class="col-sm-1 col-md-1 col-lg-1 js-main-menu-container" style="margin-top: 22px;"></div>
-				<div class="col-sm-11 col-md-11 col-lg-11">
-					<h3>
-						<%=title%>
-						<br />
-						<small style="font-size: 12px;"><%=timeNowFormatted%></small>
-					</h3>
-				</div>
-			</div>
+						<% if( crumb.link == '#' ) { %>
+							<%=crumb.title%>
+						<% } %>
 
-			<div class="row">
-				<ul class="breadcrumb">
-					<li><a href="/totalizator/"><%=projectName%></a></li>
-					<% _.each( breadcrumbs, function( crumb ){ %>
-						<li class="<%=crumb.link == '#' ? 'active' : ''%>">
+						<% if( crumb.link != '#' ) { %>
+							<a href="<%=crumb.link%>"><%=crumb.title%></a>
+						<% } %>
 
-							<% if( crumb.link == '#' ) { %>
-								<%=crumb.title%>
-							<% } %>
+					</li>
+				<% }) %>
+			</ul>
+		</div>
 
-							<% if( crumb.link != '#' ) { %>
-								<a href="<%=crumb.link%>"><%=crumb.title%></a>
-							<% } %>
-
-						</li>
-					<% }) %>
-				</ul>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12 js-cups-navi"></div>
-			</div>
-
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 js-cups-navi"></div>
 		</div>
 
 	</div>

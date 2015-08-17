@@ -45,7 +45,7 @@ define( function ( require ) {
 
 			_.each( this.cupsToShow, function( cup ) {
 
-				var container = $( '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-4"></div>' );
+				var container = $( '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4"></div>' );
 				el.append( container );
 
 				var options = {

@@ -263,6 +263,7 @@ define( function ( require ) {
 				, categoryId: categoryId
 				, cups: cups
 				, teams: teams
+				, beginningTime: dateTimeService.formatDateTimeDisplay( model.beginningTime )
 				, homeTeamNumber: model.homeTeamNumber
 				, translator: translator
 			} ) );

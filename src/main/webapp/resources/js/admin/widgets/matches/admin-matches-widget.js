@@ -6,8 +6,8 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './admin-matches-model' );
-	var View = require( './admin-matches-view' );
+	var Model = require( './admin-matches-widget-model' );
+	var View = require( './admin-matches-widget-view' );
 
 	var FilterModel = require( 'js/components/widget-configurable/filter/matches-filter-model' );
 
@@ -27,12 +27,6 @@ define( function( require ) {
 			, el: container
 			, filterModel: filterModel
 		} );
-
-		return {
-			view: function() {
-				return matchesView;
-			}
-		}
 	}
 
 	return init;

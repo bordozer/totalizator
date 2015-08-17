@@ -7,9 +7,9 @@
 
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 
-	<div class="admin-matches-container"></div>
+	<div class="admin-matches-page-container"></div>
 	<script type="text/javascript">
-		require( [ 'jquery', 'js/admin/components/base-view/admin-base-page-view', 'js/admin/pages/matches/admin-matches', 'translator' ], function ( $, Admin, match, Translator ) {
+		require( [ 'jquery', 'js/admin/components/base-view/admin-base-page-view', 'js/admin/pages/matches/admin-matches-page', 'translator' ], function ( $, Admin, adminMatches, Translator ) {
 
 			var translator = new Translator( {
 				title: 'Matches'
@@ -27,7 +27,7 @@
 				, cupId: cupId
 			};
 
-			var adminView = new Admin( { el: $( '.admin-matches-container' ), bodyRenderer: match, breadcrumbs: breadcrumbs, options: options } );
+			var adminView = new Admin( { el: $( '.admin-matches-page-container' ), bodyRenderer: adminMatches, breadcrumbs: breadcrumbs, options: options } );
 			adminView.render();
 		} );
 	</script>

@@ -30,8 +30,7 @@ define( function ( require ) {
 
 		renderBody: function() {
 
-			this.$( '.js-body-view-container' ).html( userPageTemplate( {
-			} ) );
+			this.$( '.js-body-view-container' ).html( userPageTemplate() );
 
 			this.bodyView = this.bodyRenderer( this.$( '.js-custom-view' ), this.options ).view();
 			this.bodyView.on( 'navigation:set:active:cup', this._setActiveCup, this );
