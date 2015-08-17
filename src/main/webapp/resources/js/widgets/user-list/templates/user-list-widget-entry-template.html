@@ -1,11 +1,11 @@
-<div class="row " style="line-height: 35px;">
+<div class="row" style="line-height: 35px;">
 
-	<div class="col-lg-4">
-		<a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a>
+	<div class="col-xs-12 col-lg-4">
+		<strong><a href="/totalizator/users/<%-user.userId%>/"><%-user.userName%></a></strong>
 	</div>
 
 	<% _.each( currentUserGroups, function( userGroup ) { %>
-		<div class="col-lg-1 text-center">
+		<div class="col-xs-12 col-lg-1">
 			<% if( user.userId != currentUser.userId ) { %>
 
 				<% if( ! isMember( userGroup.userGroupId ) ) { %>
@@ -17,6 +17,8 @@
 					<button type="button" class="btn btn-info fa fa-user-times js-remove-user-from-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
 							title="<%=translator.removeUserFromGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
 				<% } %>
+
+				<small class="text-muted"><%=userGroup.userGroupName%></small>
 
 			<% } %>
 		</div>

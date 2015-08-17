@@ -4,14 +4,14 @@
 	<input type="text" name="userGroupName" class="form-control js-user-group-name" value="<%=userGroupName%>">
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 
 			<% _.each( categoriesAndCups, function( entry ) { %>
 
 				<hr />
 
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-xs-12">
 						<img src="<%-entry.category.logoUrl%>" height="16">
 						<strong><%-entry.category.categoryName%></strong>
 					</div>
@@ -19,7 +19,7 @@
 
 				<% _.each( entry.cups, function( cup ) { %>
 					<div class="row">
-						<div class="col-lg-12" style="padding-left: 50px;">
+						<div class="col-xs-12" style="padding-left: 50px;">
 							<input type="checkbox" name="cupIds" value="<%-cup.cupId%>" <%= selectedCupIds[ cup.cupId ] ? 'checked' : '' %> > <%-cup.cupName%>
 						</div>
 					</div>
