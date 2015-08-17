@@ -48,7 +48,7 @@ define( function ( require ) {
 
 			_.each( cups, function( cup ) {
 
-				var container = $( "<div class='col-lg-3'><div class='row'><div class='col-lg-10'></div></div></div>" ); // style="margin: 10px;"
+				var container = $( "<div class='col-xs-3'><div class='row'><div class='col-lg-10'></div></div></div>" ); // style="margin: 10px;"
 				el.append( container );
 
 				container.append( "<h4 class='text-center'>" + dateTimeService.formatDateDisplay( cup.cupStartDate ) + "</h4>" );

@@ -59,7 +59,7 @@ define( function ( require ) {
 
 			if ( this.filterByCupId ) {
 
-				var container = $( '<div class="col-lg-12"></div>' );
+				var container = $( '<div class="col-xs-12"></div>' );
 				el.append( container );
 
 				var cup = service.loadPublicCup( this.filterByCupId );
@@ -80,7 +80,7 @@ define( function ( require ) {
 
 			_.each( cupsToShow, function( cup ) {
 
-				var container = $( '<div class="col-lg-12"></div>' );
+				var container = $( '<div class="col-xs-12"></div>' );
 				el.append( container );
 
 				var options = {

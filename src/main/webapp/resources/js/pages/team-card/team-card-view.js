@@ -49,7 +49,7 @@ define( function ( require ) {
 
 				var cup = cupData.cup;
 
-				var el = $( '<div class="col-lg-3"></div>' );
+				var el = $( '<div class="col-xs-3"></div>' );
 				container.append( el );
 
 				new CupTeamStatistics( el, { team: model.team, cup: cup } );
