@@ -24,7 +24,8 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		matchEditLabel: "Admin / Matches / Edit entry"
+		title: "Matches"
+		, matchEditLabel: "Admin / Matches / Edit entry"
 		, matchDeleteLabel: "Delete match"
 
 		, newEntryEditFormTitle: "New match"
@@ -73,7 +74,7 @@ define( function ( require ) {
 
 		getTitle: function() {
 			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
-			var cup = service.getCup( adminService.loadCups(), cupId );
+			var cup = adminService.loadCup( cupId );
 
 			return this.getCupTitle( cup, translator.title );
 		},
