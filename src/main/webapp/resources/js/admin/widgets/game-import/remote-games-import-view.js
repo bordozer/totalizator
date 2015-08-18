@@ -16,7 +16,7 @@ define( function ( require ) {
 	var RemoteGamesModel = require( './remote-game/remote-games-model' );
 	var RemoteGamesView = require( './remote-game/remote-games-view' );
 
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 	var remoteGamesImportService = require( 'js/admin/widgets/game-import/remote-games-import-service' );
 
 	var Translator = require( 'translator' );

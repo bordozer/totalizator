@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.models.User;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
@@ -34,8 +33,6 @@ public class MatchesDataRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public MatchesDataDTO matchesAndBets( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
-
-		final User currentUser = userService.findByLogin( principal.getName() );
 
 		final MatchesDataDTO result = new MatchesDataDTO();
 

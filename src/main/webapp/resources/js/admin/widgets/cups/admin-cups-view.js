@@ -18,7 +18,7 @@ define( function ( require ) {
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var chosen = require( 'chosen' );
 

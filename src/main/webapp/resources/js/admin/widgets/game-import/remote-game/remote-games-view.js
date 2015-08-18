@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var RemoteGameView = require( './remote-game-view' );
 
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

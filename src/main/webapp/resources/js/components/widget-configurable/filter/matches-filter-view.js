@@ -12,7 +12,6 @@ define( function ( require ) {
 	var chosen = require( 'chosen' );
 
 	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
-	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {

@@ -9,7 +9,7 @@ define( function ( require ) {
 	var templateEntry = _.template( require( 'text!./templates/admin-teams-entry-template.html' ) );
 	var templateEntryEdit = _.template( require( 'text!./templates/admin-teams-entry-edit-template.html' ) );
 
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 	var service = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );

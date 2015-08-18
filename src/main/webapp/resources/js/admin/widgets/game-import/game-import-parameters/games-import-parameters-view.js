@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/game-import-parameters-template.html' ) );
 
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );

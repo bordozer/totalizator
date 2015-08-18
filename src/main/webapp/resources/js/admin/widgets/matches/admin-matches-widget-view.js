@@ -10,7 +10,7 @@ define( function ( require ) {
 	var chosen = require( 'chosen' );
 
 	var service = require( '/resources/js/services/service.js' );
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 	var MatchCompositeView = require( './admin-match-edit-view' );
@@ -71,7 +71,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.cups = adminService.loadCups();
+			this.cups = this._loadCups();
 
 			var self = this;
 			this.model.forEach( function( match ) {

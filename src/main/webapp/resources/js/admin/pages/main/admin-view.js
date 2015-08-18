@@ -18,7 +18,7 @@ define( function ( require ) {
 	var TeamsView = require( 'js/admin/widgets/teams/admin-teams-view' );
 
 	var service = require( '/resources/js/services/service.js' );
-	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var AdminView = Backbone.View.extend( {
 
