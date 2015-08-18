@@ -26,6 +26,7 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.saveAttributes();
 		},
 
 		url: function() {
@@ -47,6 +48,14 @@ define( function ( require ) {
 
 		deleteMatch: function() {
 			this.destroy();
+		},
+
+		saveAttributes: function() {
+			this.appliedAttributes = this.toJSON();
+		},
+
+		restoreAttributes: function() {
+			this.set( this.appliedAttributes );
 		}
 	});
 

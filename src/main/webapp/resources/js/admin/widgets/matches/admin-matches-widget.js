@@ -22,7 +22,7 @@ define( function( require ) {
 		};
 		var filterModel = new FilterModel( filter );
 
-		var matchesView = new View.MatchesView( {
+		var matchesView = new View( {
 			model: matchesModel
 			, el: container
 			, filterModel: filterModel

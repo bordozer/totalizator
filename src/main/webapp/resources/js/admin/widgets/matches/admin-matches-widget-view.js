@@ -9,50 +9,24 @@ define( function ( require ) {
 	var moment = require( 'moment' );
 	var chosen = require( 'chosen' );
 
-	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
-
 	var service = require( '/resources/js/services/service.js' );
 	var adminService = require( '/resources/js/admin/services/admin-servise.js' );
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
+	var MatchCompositeView = require( './admin-match-edit-view' );
 
 	var templateList = _.template( require( 'text!./templates/admin-matches-template.html' ) );
-	var templateEntry = _.template( require( 'text!./templates/admin-match-info-template.html' ) );
-	var templateEntryEdit = _.template( require( 'text!./templates/admin-match-edit-template.html' ) );
-
-	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Matches"
-		, matchEditLabel: "Admin / Matches / Edit entry"
-		, matchDeleteLabel: "Delete match"
-
-		, newEntryEditFormTitle: "New match"
-		, buttonSaveLabel: "Save"
-		, buttonCancelEditingLabel: "Discard changes"
-		, matchEdit_Category: "Category"
-		, matchEdit_Cup: "Cup"
-		, matchEdit_Team: "Team"
-		, matchEdit_BeginningTime: "Match beginning time"
-		, matchEdit_MatchFinished: "Match finished"
-
-		, validation_SelectCup_Label: "Admin / Teams / Validation: Select a cup"
-		, validation_SelectTeam1_Label: "Admin / Teams / Validation: Select team1"
-		, validation_SelectTeam2_Label: "Admin / Teams / Validation: Select team2"
-		, validation_SelectDifferentTeams_Label: "Admin / Teams / Validation: Select different teams"
-
-		, deleteMatchMessage: "Delete match?"
-		, deleteAllMatchesMessage: "Delete ALL selected matches?"
-		, betsCountLabel: "Bets count"
-		, teamsStandOffHistoryLabel: "Teams standoff history"
 
 		, addMatchLabel: "New match"
 		, finishSelectedMatchesLabel: "Admin / Matches / Finish selected matches"
 		, deleteSelectedMatchesLabel: "Admin / Matches / Delete selected matches"
 	} );
 
-	var MatchesView = ConfigurableView.extend( {
+	return ConfigurableView.extend( {
 
 		events: {
 			'click .js-add-entry-button': '_onAddClick'
@@ -109,7 +83,7 @@ define( function ( require ) {
 
 		_renderEntry: function ( model ) {
 
-			var view = new MatchView( {
+			var view = new MatchCompositeView( {
 				model: model
 				, categories: this.categories
 				, cups: this.cups
@@ -178,262 +152,5 @@ define( function ( require ) {
 			}
 		}
 	} );
-
-
-
-
-
-	var MatchView = Backbone.View.extend( {
-
-		events: {
-			'click .entry-edit': '_onEditClick'
-			, 'click .entry-save': '_onSaveClick'
-			, 'click .entry-edit-cancel': '_onEditCancelClick'
-			, 'click .entry-del': '_onDelClick'
-			, 'change .categories-select-box': '_onCategoryChange'
-			, 'change .cups-select-box': '_onCupChange'
-			, 'change .team1-select-box': '_onTeam1Change'
-			, 'change .team2-select-box': '_onTeam2Change'
-			, 'change .js-group-checkbox': '_onGroupCheckboxChange'
-			, 'change .js-score': '_onScoreChange'
-		},
-
-		initialize: function ( options ) {
-			this.categories = options.categories;
-			this.cups = options.cups;
-			this.teams = options.teams;
-
-			this.listenTo( this.model, 'destroy', this._removeView );
-			this.model.on( 'sync', this.render, this );
-		},
-
-		render: function() {
-
-			if ( this.model.get( 'matchId' ) == 0 ) {
-				return this.renderEdit();
-			}
-
-			return this.renderInfo();
-		},
-
-		renderInfo: function () {
-			var model = this.model.toJSON();
-
-			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
-
-			var team1 = service.getTeam( this.teams, model.team1Id );
-			var team2 = service.getTeam( this.teams, model.team2Id );
-
-			this.$el.html( templateEntry( {
-				model: model
-				, matchId: model.matchId
-				, categoryName: service.getCategory( this.categories, model.categoryId ).categoryName
-				, cupName: service.getCup( this.cups, model.cupId ).cupName
-				, team1: team1
-				, team2: team2
-				, score1: model.score1
-				, score2: model.score2
-				, matchResults: matchResults
-				, beginningTime: dateTimeService.formatDateTimeDisplay( model.beginningTime )
-				, homeTeamNumber: model.homeTeamNumber
-				, translator: translator
-			} ) );
-
-			if ( this.isSelected ) {
-				this.$( '.admin-entry-line' ).addClass( 'bg-success' );
-			}
-
-			return this;
-		},
-
-		renderEdit: function () {
-
-			var model = this.model.toJSON();
-			var categoryId = model.categoryId;
-
-			var title = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
-
-			var cups = service.filterCupsByCategory( this.cups, categoryId );
-			var teams = this.model.id == 0 ? service.loadCupActiveTeams( model.cupId ) : service.filterTeamsByCategory( this.teams, categoryId );
-
-			this.$el.html( templateEntryEdit( {
-				model: model
-				, title: title
-				, matchId: model.matchId
-				, categories: this.categories
-				, categoryId: categoryId
-				, cups: cups
-				, teams: teams
-				, beginningTime: dateTimeService.formatDateTimeDisplay( model.beginningTime )
-				, homeTeamNumber: model.homeTeamNumber
-				, translator: translator
-			} ) );
-
-			var options = {
-				width: "100%"
-			};
-
-			this.$( '#category-select-box' ).chosen( options );
-			this.$( '#cup-select-box' ).chosen( options );
-			this.$( '#team1-select-box' ).chosen( options );
-			this.$( '#team2-select-box' ).chosen( options );
-
-			this.dateTimePickerView = new DateTimePickerView( { el: this.$( '.match-beginning-time' ), initialValue: model.beginningTime } );
-
-			return this;
-		},
-
-		_editEntry: function() {
-			this.renderEdit();
-		},
-
-		_deleteEntry: function() {
-			if ( confirm( translator.deleteMatchMessage ) ) {
-				this.model.destroy();
-			}
-		},
-
-		_removeView: function() {
-			this.remove();
-		},
-
-		_saveEntry: function () {
-			this._bind();
-
-			if ( !this._validate() ) {
-				return;
-			}
-
-			var rend = _.bind( function () {
-				this.trigger( 'matches:render' );
-			}, this );
-
-			this.model.save().then( null, rend );
-		},
-
-		_bind: function() {
-
-			this.model.set( {
-				cupId: this.$( '.cups-select-box' ).val()
-				, team1Id: this.$( '.team1-select-box' ).val()
-				, score1: this.$( '#score1' ).val()
-				, team2Id: this.$( '.team2-select-box' ).val()
-				, score2: this.$( '#score2' ).val()
-				, beginningTime: dateTimeService.formatDateTime( this.dateTimePickerView.getValue() )
-				, matchFinished: this.$( '.js-match-finished' ).is(':checked')
-				, homeTeamNumber: this.$( "input[name='homeTeamNumber']:checked" ).val()
-				, matchDescription: this.$( '#matchDescription' ).val()
-			} );
-		},
-
-		_validate: function() {
-
-			if ( this.model.get( 'cupId' ) == 0 ) {
-				alert( translator.validation_SelectCup_Label );
-				return false;
-			}
-
-			if ( this.model.get( 'team1Id' ) == 0 ) {
-				alert( translator.validation_SelectTeam1_Label );
-				return false;
-			}
-
-			if ( this.model.get( 'team2Id' ) == 0 ) {
-				alert( translator.validation_SelectTeam2_Label );
-				return false;
-			}
-
-			if ( this.model.get( 'team1Id' ) == this.model.get( 'team2Id' ) ) {
-				alert( translator.validation_SelectDifferentTeams_Label );
-				return false;
-			}
-
-			return true;
-		},
-
-		_changeCategory: function( categoryId ) {
-			this.model.set( { categoryId: categoryId, cupId: 0, team1Id: 0, team2Id: 0 } );
-			this.renderEdit();
-		},
-
-		_changeCup: function( cupId ) {
-			this.model.set( { cupId: cupId } );
-			this.renderEdit();
-		},
-
-		_changeTeam1: function( teamId ) {
-			this.model.set( { team1Id: teamId } );
-		},
-
-		_changeTeam2: function( teamId ) {
-			this.model.set( { team2Id: teamId } );
-		},
-
-		_onCategoryChange: function( evt ) {
-			evt.preventDefault();
-
-			this._changeCategory( $( evt.target ).val() );
-		},
-
-		_onCupChange: function( evt ) {
-			evt.preventDefault();
-
-			this._changeCup( $( evt.target ).val() );
-		},
-
-		_onTeam1Change: function( evt ) {
-			evt.preventDefault();
-
-			this._changeTeam1( $( evt.target ).val() );
-		},
-
-		_onTeam2Change: function( evt ) {
-			evt.preventDefault();
-
-			this._changeTeam2( $( evt.target ).val() );
-		},
-
-		_onEditClick: function( evt ) {
-			evt.preventDefault();
-
-			this._editEntry();
-		},
-
-		_onSaveClick: function( evt ) {
-			evt.preventDefault();
-
-			this._saveEntry();
-		},
-
-		_onDelClick: function( evt ) {
-			evt.preventDefault();
-
-			this._deleteEntry();
-		},
-
-		_onEditCancelClick: function( evt ) {
-			evt.preventDefault();
-
-			if ( this.model.get( 'matchId' ) > 0 ) {
-				this.render();
-				return;
-			}
-
-			this.model.destroy();
-			this.remove();
-
-			this.trigger( 'matches:render' );
-		},
-
-		_onGroupCheckboxChange: function() {
-			this.model.selected( this.$( '.js-group-checkbox' ).is(':checked') );
-		},
-
-		_onScoreChange: function() {
-			this.$( '.js-match-finished' ).attr( 'checked', 'checked' );
-		}
-	} );
-
-	return { MatchesView: MatchesView };
 } );
 
