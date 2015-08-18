@@ -94,6 +94,10 @@ define( function ( require ) {
 			return view.render().$el;
 		},
 
+		_loadCups: function() {
+			return adminService.loadCups();
+		},
+
 		_triggerRender: function() {
 			this.trigger( 'view:render' );
 		},

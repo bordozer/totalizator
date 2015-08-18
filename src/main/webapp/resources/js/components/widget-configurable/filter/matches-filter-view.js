@@ -53,9 +53,10 @@ define( function ( require ) {
 		},
 
 		render: function() {
+
 			var model = this.model.toJSON();
 
-			var categoryId = this.model.get( 'categoryId' );
+			var categoryId = model.categoryId;
 
 			this.$el.html( template( {
 				model: model
@@ -93,7 +94,13 @@ define( function ( require ) {
 		},
 
 		_categoryChange: function( categoryId ) {
-			this.model.set( { categoryId: categoryId, cupId: 0, teamId: 0, team2Id: 0 } );
+
+			var model = this.model.toJSON();
+
+			var cups = service.filterCupsByCategory( this.cups, categoryId );
+			var selectedCupId = cups.length > 0 ? cups[ 0 ].cupId : 0;
+
+			this.model.set( { categoryId: categoryId, cupId: selectedCupId, teamId: 0, team2Id: 0 } );
 			this.render();
 		},
 

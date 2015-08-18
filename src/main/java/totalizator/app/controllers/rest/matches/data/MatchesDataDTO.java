@@ -1,17 +1,15 @@
 package totalizator.app.controllers.rest.matches.data;
 
 import totalizator.app.dto.CategoryDTO;
-import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.dto.UserDTO;
 
 import java.util.List;
 
-public class MatchesDataDTO {
+class MatchesDataDTO {
 
 	private List<UserDTO> users;
 	private List<CategoryDTO> categories;
-	private List<CupDTO> cups;
 	private List<TeamDTO> teams;
 
 	public List<UserDTO> getUsers() {
@@ -28,14 +26,6 @@ public class MatchesDataDTO {
 
 	public void setCategories( final List<CategoryDTO> categories ) {
 		this.categories = categories;
-	}
-
-	public List<CupDTO> getCups() {
-		return cups;
-	}
-
-	public void setCups( final List<CupDTO> cups ) {
-		this.cups = cups;
 	}
 
 	public List<TeamDTO> getTeams() {

@@ -5,7 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.User;
-import totalizator.app.services.*;
+import totalizator.app.services.CategoryService;
+import totalizator.app.services.DTOService;
+import totalizator.app.services.TeamService;
+import totalizator.app.services.UserService;
 
 import java.security.Principal;
 
@@ -19,16 +22,10 @@ public class MatchesDataRestController {
 	private CategoryService categoryService;
 
 	@Autowired
-	private CupService cupService;
-
-	@Autowired
 	private TeamService teamService;
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private SecurityService securityService;
 
 	@Autowired
 	private DTOService dtoService;
@@ -39,12 +36,10 @@ public class MatchesDataRestController {
 	public MatchesDataDTO matchesAndBets( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
 		final User currentUser = userService.findByLogin( principal.getName() );
-		final boolean isAdmin = securityService.isAdmin( currentUser );
 
 		final MatchesDataDTO result = new MatchesDataDTO();
 
 		result.setCategories( dtoService.transformCategories( categoryService.loadAll() ) );
-		result.setCups( dtoService.transformCups( isAdmin ? cupService.loadAll() : cupService.loadPublic(), currentUser ) );
 		result.setTeams( dtoService.transformTeams( teamService.loadAll() ) );
 		result.setUsers( dtoService.transformUsers( userService.loadAll() ) );
 

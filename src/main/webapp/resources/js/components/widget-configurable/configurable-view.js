@@ -82,8 +82,9 @@ define( function ( require ) {
 
 			this.users = matchFilterDataModel.users;
 			this.categories = matchFilterDataModel.categories;
-			this.cups = matchFilterDataModel.cups;
 			this.teams = matchFilterDataModel.teams;
+
+			this.cups = this._loadCups();
 
 			this.settingsView = new FilterView( {
 				model: this.settingsModel
@@ -124,6 +125,13 @@ define( function ( require ) {
 			return [];
 		},
 
+		getTitle: function() {
+			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
+			var cup = service.getCup( service.loadPublicCups(), cupId );
+
+			return this.getCupTitle( cup, translator.title );
+		},
+
 		_render: function() {
 
 			var container = this.$( this.windowBodyContainerSelector );
@@ -158,11 +166,8 @@ define( function ( require ) {
 			return this;
 		},
 
-		getTitle: function() {
-			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
-			var cup = service.getCup( service.loadPublicCups(), cupId );
-
-			return this.getCupTitle( cup, translator.title );
+		_loadCups: function() {
+			return service.loadPublicCups();
 		},
 
 		_validateFilter: function() {
