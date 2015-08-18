@@ -105,7 +105,6 @@ define( function ( require ) {
 						icon: 'fa fa-recycle',
 						link: '#',
 						text: translator.actionMatchBetDelete
-						, button: true
 					} );
 				}
 			}
