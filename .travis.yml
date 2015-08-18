@@ -1,10 +1,13 @@
 language: java
 jdk:
   - oraclejdk8
+addons:
+  ssh_known_hosts: encoders.kiev.ua
 before_install:
   - openssl aes-256-cbc -K $encrypted_37bd821dd0a3_key -iv $encrypted_37bd821dd0a3_iv
-    -in travis/id_rsa.enc -out ./id_rsa -d
+    -in travis/id_rsa.enc -out travis/id_rsa -d
 deploy:
+  skip_cleanup: true
   provider: script
   script: scripts/deploy.sh
   on:
