@@ -362,8 +362,6 @@ public class DTOServiceImpl implements DTOService {
 
 				final MatchBet matchBet = matchBetsService.load( betsOfUser, match );
 
-				matchBetDTO.setBetsCount( matchBetsService.betsCount( match ) );
-
 				if ( matchBet == null ) {
 					return matchBetDTO;
 				}

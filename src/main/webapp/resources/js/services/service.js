@@ -44,6 +44,23 @@ define( function ( require ) {
 			return { winnerId: winnerId, style1: style1, style2: style2 };
 		},
 
+		getBetsCount: function( matchId ) {
+			var result = 0;
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/matches/' + matchId + '/bets/count/',
+				async: false,
+				success: function ( response ) {
+					result = response;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		saveBet: function( matchId, score1, score2 ) {
 			var result = {};
 			$.ajax( {

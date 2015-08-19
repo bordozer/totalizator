@@ -156,7 +156,7 @@ define( function ( require ) {
 
 			view.delegateEvents();
 
-			this.footerText( "<a href='/totalizator/cups/" + this.cup.cupId + "/winners/bets/'>" + translator.allCupBetsLabel + "</a>" );
+			this.footerHtml( "<a href='/totalizator/cups/" + this.cup.cupId + "/winners/bets/'>" + translator.allCupBetsLabel + "</a>" );
 
 			this.trigger( 'inner-view-rendered' );
 

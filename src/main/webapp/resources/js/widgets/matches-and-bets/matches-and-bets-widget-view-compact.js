@@ -10,7 +10,8 @@ define( function ( require ) {
 
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
-	var MatchMenu = require( './match/match-menu-view' );
+	var matchBetMenu = require( 'js/widgets/match-bet/match-bet-menu' );
+	var mainMenu = require( 'js/components/main-menu/main-menu' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -21,6 +22,7 @@ define( function ( require ) {
 		, switchViewsLabel: 'Switch match and bets to full views'
 		, teamPointsLabel: 'Team points'
 		, securedBetHint: 'Bets of another users will be shown after the match start'
+		, menuHint: "Match menu"
 	} );
 
 	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id, _points ) {
@@ -195,12 +197,14 @@ define( function ( require ) {
 			var container = this.$( this.windowBodyContainerSelector );
 
 			var self = this;
-			this.model.forEach( function( matchBet ) {
+			this.model.forEach( function( matchBetModel ) {
 
 				var el = $( '<div></div>' );
 				container.append( el );
 
-				el.html( self._renderEntry( matchBet.toJSON() ) );
+				var matchBet = matchBetModel.toJSON();
+
+				el.html( self._renderEntry( matchBet ) );
 				self._renderMatchMenu( matchBet, el );
 			});
 
@@ -222,10 +226,18 @@ define( function ( require ) {
 		},
 
 		_renderMatchMenu: function( matchBet, container ) {
-			var matchMenu = new MatchMenu( {
-				model: matchBet
-				, el: $( '.js-match-drop-down-menu', container )
-			} );
+
+			var menuItems = matchBetMenu.getCommonMenuItems( matchBet );
+
+			var options = {
+				menus: menuItems
+				, menuButtonIcon: 'fa-list'
+				, menuButtonText: ''
+				, menuButtonHint: translator.menuHint
+				, cssClass: 'btn-default'
+			};
+
+			mainMenu( options, $( '.js-match-drop-down-menu', container ) );
 		}
 	} );
 } );

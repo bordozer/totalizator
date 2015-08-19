@@ -229,7 +229,7 @@ define( function ( require ) {
 
 			this.renderBody();
 
-			this.footerText( result.importStatusMessage );
+			this.footerHtml( result.importStatusMessage );
 		},*/
 
 		/*_stopImport: function() {
@@ -238,7 +238,7 @@ define( function ( require ) {
 
 			this.renderBody();
 
-			this.footerText( result.importStatusMessage );
+			this.footerHtml( result.importStatusMessage );
 		},*/
 
 		/*_scheduleAutorefresh: function() {

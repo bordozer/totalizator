@@ -164,6 +164,20 @@
 	</translation>
 
 	<translation>
+		<nerd>The match has not finished yet</nerd>
+		<ru><![CDATA[Матч еще не завершен]]></ru>
+		<ua><![CDATA[Iгра ще не завершена]]></ua>
+		<en><![CDATA[The match has not finished yet]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Bet of another user</nerd>
+		<ru><![CDATA[Ставка другого пользователя]]></ru>
+		<ua><![CDATA[Ставка iншого користувача]]></ua>
+		<en><![CDATA[Bet of another user]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

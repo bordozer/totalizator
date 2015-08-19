@@ -35,6 +35,13 @@ public class MatchesRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/", produces = APPLICATION_JSON_VALUE )
+	public MatchDTO match( final @PathVariable( "matchId" ) int matchId, final Principal principal ) {
+		return dtoService.transformMatch( matchService.load( matchId ), userService.findByLogin( principal.getName() ) );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchDTO> matches( final MatchesBetSettingsDTO dto, final Principal principal ) {
 		return dtoService.transformMatches( matchService.loadAll( dto ), userService.findByLogin( principal.getName() ) );

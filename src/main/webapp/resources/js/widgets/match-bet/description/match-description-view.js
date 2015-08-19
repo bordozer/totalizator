@@ -17,14 +17,28 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.match = options.match;
+			this.footerEl = options.footerEl;
+
 			this.render();
 		},
 
 		render: function () {
+			this._renderBody();
+			this._renderFooter();
+		},
+
+		_renderBody: function() {
 			var match = this.match;
+
 			var description = match.description ? match.description : translator.noMatchDescription;
+
 			var data = _.extend( {}, { description: description } );
+
 			this.$el.html( template( data ) );
+		},
+
+		_renderFooter: function() {
+			this.footerEl.html( "<div class='col-xs-12 fa fa-info-circle fa-2x text-muted'></div>" );
 		}
 	} );
 } );

@@ -129,7 +129,7 @@ define( function ( require ) {
 			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
 			var cup = service.getCup( service.loadPublicCups(), cupId );
 
-			return this.getCupTitle( cup, translator.title );
+			return this.getCupTitle( cup, '' );
 		},
 
 		_render: function() {

@@ -10,18 +10,9 @@ define( function ( require ) {
 
 		defaults: {
 			matchId: 0
-			, bettingAllowed: false
 		},
 
 		initialize: function ( options ) {
-		},
-
-		isBettingAllowed: function() {
-			return this.get( 'bettingAllowed' );
-		},
-
-		resetBet: function() {
-			this.set( { bet: null } );
 		}
 	});
 
@@ -30,7 +21,10 @@ define( function ( require ) {
 		model: MatchModel,
 
 		initialize: function ( options ) {
-			this.url = '/rest/matches/bets/';
+		},
+
+		url: function() {
+			return '/rest/matches/bets/'; // TODO: get IDs only?
 		},
 
 		refresh: function( data ) {

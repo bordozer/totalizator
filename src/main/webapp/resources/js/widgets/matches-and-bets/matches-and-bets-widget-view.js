@@ -10,7 +10,7 @@ define( function ( require ) {
 
 	var service = require( '/resources/js/services/service.js' );
 
-	var CompositeMatchView = require( './match/match-composite-view' );
+	var MatchBetWidget = require( 'js/widgets/match-bet/match-bet-widget' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -47,24 +47,23 @@ define( function ( require ) {
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {
-				self._renderEntry( matchBet, container );
+				self._renderEntry( matchBet.toJSON(), container );
 			});
 
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		_renderEntry: function ( model, el ) {
+		_renderEntry: function ( model, container ) {
 
-			var view = new CompositeMatchView( {
-				model: model
-				, categories: this.categories
-				, cups: this.cups
-				, teams: this.teams
-				, filter: this.filter
-				, currentUser: this.currentUser
-			} );
+			var el = $( "<div></div>" );
+			container.append( el );
 
-			return el.append( view.render().$el );
+			var options = {
+				matchId: model.matchId
+				, showBetForUserId: this.filter.userId
+			};
+
+			var view = new MatchBetWidget( el, options );
 		}
 	});
 } );

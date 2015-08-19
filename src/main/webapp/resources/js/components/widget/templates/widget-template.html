@@ -1,6 +1,6 @@
 <div class="panel panel-info">
 
-	<div class="panel-heading clearfix" title="<%=titleHint%>">
+	<div class="panel-heading clearfix">
 
 		<div class="btn-group pull-right">
 			<div class="js-window-drop-down-menu"></div>
@@ -8,20 +8,22 @@
 
 		<span class="js-window-icon fa fa-spinner fa-spin"></span>
 
-		<%=title%>
+		<span class="js-widget-title"><%=translator.loadingLabel%></span>
 
 	</div>
 
-	<div class="panel-body js-window-container">
+	<div class="panel-body js-widget-body" style="display: none;">
+
 		<div class="row text-center js-loading">
 			<div class="col-lg-12">
 				<span class="js-window-icon fa fa-spinner fa-spin fa-3x"></span>
 				<h4><%=translator.loadingLabel%></h4>
 			</div>
 		</div>
+
 	</div>
 
-	<div class="panel-footer js-footer">
+	<div class="panel-footer clearfix js-footer">
 
 	</div>
 

@@ -103,7 +103,7 @@ define( function ( require ) {
 				self._renderEntry( team );
 			});
 
-			this.footerText( "<i class='fa fa-arrow-up'></i> <a href='#'>" + translator.goTopLabel + "</a>" );
+			this.footerHtml( "<i class='fa fa-arrow-up'></i> <a href='#'>" + translator.goTopLabel + "</a>" );
 
 			this.trigger( 'inner-view-rendered' );
 		},

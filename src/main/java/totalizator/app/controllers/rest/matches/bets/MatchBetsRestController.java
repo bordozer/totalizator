@@ -11,9 +11,9 @@ import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
 import totalizator.app.services.DTOService;
+import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.UserService;
 
 import java.security.Principal;
 import java.util.Collections;

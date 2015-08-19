@@ -2,8 +2,8 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Model = require( './match-bets-model' );
-	var View = require( './match-bets-view' );
+	var Model = require( './match-bets-widget-model' );
+	var View = require( './match-bets-widget-view' );
 
 	function init( container, options ) {
 
@@ -20,3 +20,5 @@ define( function ( require ) {
 
 	return init;
 } );
+
+

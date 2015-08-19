@@ -1,121 +1,57 @@
 <div class="row">
 
-	<div class="col-xs-2">
+	<div class="col-xs-12">
+
+		<div class="col-xs-6 text-right <%=matchResults.style1%>">
+			<a href="/totalizator/teams/<%=match.team1.teamId%>/"><%=match.team1.teamName%></a>
+			<br />
+			<img class="team-logo" src="<%=match.team1.teamLogo%>" title="<%=match.team1.teamName%>">
+			<% if( match.matchFinished ) { %>
+				<h5 class="<%=matchResults.style1%>"><%=match.score1%></h5>
+			<% } %>
+		</div>
+
+		<div class="col-xs-6 <%=matchResults.style2%>">
+			<a href="/totalizator/teams/<%=match.team2.teamId%>/"><%=match.team2.teamName%></a>
+			<br />
+			<img class="team-logo" src="<%=match.team2.teamLogo%>" title="<%=match.team2.teamName%>">
+			<% if( match.matchFinished ) { %>
+				<h5 class="<%=matchResults.style2%>"><%=match.score2%></h5>
+			<% } %>
+		</div>
 
 	</div>
 
-	<div class="col-xs-6">
+</div>
 
-		<div class="row">
 
-			<div class="col-xs-6 text-right <%=matchResults.style1%>">
-				<a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a>
-				<img class="team-logo" src="<%=team1.teamLogo%>" title="<%=team1.teamName%>">
-				<% if( match.matchFinished ) { %>
-					<h5 class="<%=matchResults.style1%>"><%=match.score1%></h5>
-				<% } %>
-			</div>
+<hr />
 
-			<div class="col-xs-6 <%=matchResults.style2%>">
-				<img class="team-logo" src="<%=team2.teamLogo%>" title="<%=team2.teamName%>">
-				<a href="/totalizator/teams/<%=team2.teamId%>/"><%=team2.teamName%></a>
-				<% if( match.matchFinished ) { %>
-					<h5 class="<%=matchResults.style2%>"><%=match.score2%></h5>
-				<% } %>
-			</div>
 
-		</div>
+<% if( ! match.showAnotherBets ) { %>
+	<div class="row">
 
-		<hr />
-
-		<% if( ! match.showAnotherBets ) { %>
+		<div class="col-xs-12">
 			<div class="row" style="padding-bottom: 20px;">
 				<div class="col-xs-12 text-center text-warning">
 					<%=translator.anotherBetsAreHidden%> <strong><%=matchBeginningTime%></strong> ( <%=timeToBetPublishing%> )
 				</div>
 			</div>
-		<% } %>
+		</div>
 
-			<div class="row">
-
-				<div class="col-xs-12">
-
-					<div class="panel panel-default">
-
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<%= translator.matchBestsLabel %>
-							</h3>
-						</div>
-
-						<div class="panel-body">
-
-							<table class="table table-striped table-hover">
-
-								<thead>
-									<tr>
-										<td class="text-center"><%=translator.userLabel%></td>
-										<td class="text-center"><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a></td>
-										<td class="text-center"><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team2.teamName%></a></td>
-										<td class="text-center"><%=translator.userPointsLabel%></td>
-									</tr>
-								</thead>
-
-								<tbody>
-
-									<% _.each( matchBets, function( matchBet ) {%>
-										<tr class="<%= matchBet.bet.user.userId == currentUser.userId ? 'current-user' : '' %>">
-
-											<td>
-												<a href="/totalizator/users/<%=matchBet.bet.user.userId%>/"><%-matchBet.bet.user.userName%></a>
-											</td>
-
-											<td class="text-center <%=matchBet.matchResults.style1%>" width="150">
-												<% if( ! matchBet.bet.securedBet ) { %>
-													<%-matchBet.bet.score1%>
-												<% } %>
-
-												<% if( matchBet.bet.securedBet ) { %>
-													<span class="fa fa-lock" title="<%=translator.anotherBetsAreHidden%>"></span>
-												<% } %>
-											</td>
-
-											<td class="text-center <%=matchBet.matchResults.style2%>" width="150">
-
-												<% if( ! matchBet.bet.securedBet ) { %>
-													<%-matchBet.bet.score2%>
-												<% } %>
-
-												<% if( matchBet.bet.securedBet ) { %>
-													<span class="fa fa-lock" title="<%=translator.anotherBetsAreHidden%>"></span>
-												<% } %>
-											</td>
-
-											<td class="text-center" width="60">
-												<strong>
-													<%-matchBet.points > 0 ? '+' + matchBet.points : ''%>
-												</strong>
-											</td>
-										</tr>
-									<% })%>
-
-								</tbody>
-
-							</table>
-						</div>
-
-						<div class="panel-footer">
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
+	</div>
+<% } %>
 
 
+<div class="row">
 
+	<div class="col-xs-12 col-lg-4 js-match-bet-widget">
+	</div>
+
+	<div class="col-xs-12 col-lg-6 js-match-bets-widget">
+	</div>
+
+	<div class="col-xs-12 col-lg-2 js-match-bet">
 	</div>
 
 </div>

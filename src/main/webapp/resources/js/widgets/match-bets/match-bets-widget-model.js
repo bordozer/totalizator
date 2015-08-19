@@ -8,6 +8,10 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		defaults: {
+			matchId: 0
+			, team1: {}
+			, team2: {}
+			, matchBets: []
 		},
 
 		initialize: function ( options ) {
@@ -15,7 +19,8 @@ define( function ( require ) {
 		},
 
 		url: function() {
-			return '/rest/matches/' + this.matchId + '/';
+			return '/rest/matches/' + this.matchId + '/bets/';
 		}
 	});
 } );
+

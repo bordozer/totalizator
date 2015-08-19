@@ -51,14 +51,15 @@ public class MatchesAndBetsRestController {
 		final int userId = dto.getUserId();
 
 		final User currentUser = userService.findByLogin( principal.getName() );
-		final User user = userId > 0 ? userService.load( userId ) : currentUser;
+		final User showBetsOfUser = userId > 0 ? userService.load( userId ) : currentUser;
 		final List<Match> matches = matchService.loadAll( dto );
 
-		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, user, currentUser );
+		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, showBetsOfUser, currentUser );
 
 		if ( userId > 0 ) {
 
 			CollectionUtils.filter( matchBetDTOs, new Predicate<MatchBetDTO>() {
+
 				@Override
 				public boolean evaluate( final MatchBetDTO matchBetDTO ) {
 					final BetDTO bet = matchBetDTO.getBet();
@@ -73,6 +74,25 @@ public class MatchesAndBetsRestController {
 		}
 
 		return matchBetDTOs;
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bet-of-user/{userId}/", produces = APPLICATION_JSON_VALUE )
+	public MatchBetDTO matchBet( final @PathVariable( "matchId" ) int matchId, final @PathVariable( "userId" ) int userId, final Principal principal ) {
+
+		final User currentUser = userService.findByLogin( principal.getName() );
+		final User showBetOfUser = userId > 0 ? userService.load( userId ) : currentUser;
+		final Match match = matchService.load( matchId );
+
+		return dtoService.getMatchBetForMatch( match, showBetOfUser, currentUser );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bets/count/", produces = APPLICATION_JSON_VALUE )
+	public int matchBetsCount( final @PathVariable( "matchId" ) int matchId ) {
+		return matchBetsService.betsCount( matchService.load( matchId ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )

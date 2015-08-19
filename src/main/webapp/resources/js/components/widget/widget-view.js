@@ -20,7 +20,7 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		progressIcon: 'fa-spinner fa-spin',
-		windowBodyContainerSelector: '.js-window-container',
+		windowBodyContainerSelector: '.js-widget-body',
 
 		builtinEvents: {
 			'click .js-menu-refresh': '_onMenuRefreshClick'
@@ -39,15 +39,15 @@ define( function ( require ) {
 		render: function() {
 
 			this.$el.html( template( {
-				title: this.getTitle()
-				, titleHint: this.getTitleHint()
-				, icon: this.getIcon()
+				icon: this.getIcon()
 				, translator: translator
 			} ) );
 
 			this.showProgress();
 
 			this._renderDropDownMenu();
+
+			this.$( '.js-widget-body' ).fadeIn( 500, "swing" );
 
 			this.renderBody();
 
@@ -60,11 +60,12 @@ define( function ( require ) {
 
 		getCupTitle: function( cup, title ) {
 			return "<small><a href='/totalizator/categories/" + cup.category.categoryId + "/'>" +  cup.category.categoryName + "</a></small>"
-					+ ":<small><strong>" + " <a class='text-info' href='/totalizator/cups/" + cup.cupId + "/'>" +  cup.cupName + "</a></strong></small> - " +  title;
+					+ ":<small><strong>" + " <a class='text-info' href='/totalizator/cups/" + cup.cupId + "/'>" +  cup.cupName + "</a></strong></small> "
+					+  ( title ? ' - ' + title : '' );
 		},
 
 		getTitleHint: function() {
-			return '';
+			return ''; // NO HTML here
 		},
 
 		getIcon: function() {
@@ -106,8 +107,14 @@ define( function ( require ) {
 			return [];
 		},
 
-		footerText: function( text ) {
+		footerHtml: function( text ) {
 			this.$( '.js-footer' ).html( text );
+		},
+
+		setPanelClass: function( clazz ) {
+			var panel = this.$( '.panel' );
+			panel.removeClass( 'panel-default panel-info panel-success panel-warning panel-danger' );
+			panel.addClass( clazz )
 		},
 
 		_renderDropDownMenu: function() {
@@ -132,14 +139,14 @@ define( function ( require ) {
 				, cssClass: 'btn-default'
 			};
 			mainMenu( options, this.$( '.js-window-drop-down-menu') );
-
-			var customButtons = _.filter( menuItems, function( menu ) {
-				return menu.button;
-			});
 		},
 
 		_onInnerViewRendered: function() {
 			this.hideProgress();
+
+			var title = this.$( '.js-widget-title' );
+			title.html( this.getTitle() );
+			title.attr( 'title', this.getTitleHint() );
 		},
 
 		_getIconEl: function() {

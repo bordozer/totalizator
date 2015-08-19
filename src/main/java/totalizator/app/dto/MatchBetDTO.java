@@ -11,8 +11,6 @@ public class MatchBetDTO {
 	private boolean bettingAllowed;
 	private String bettingValidationMessage;
 
-	private int betsCount;
-
 	public MatchBetDTO() {
 	}
 
@@ -67,14 +65,6 @@ public class MatchBetDTO {
 
 	public void setPoints( final int points ) {
 		this.points = points;
-	}
-
-	public int getBetsCount() {
-		return betsCount;
-	}
-
-	public void setBetsCount( final int betsCount ) {
-		this.betsCount = betsCount;
 	}
 
 	@Override
