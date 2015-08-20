@@ -18,6 +18,7 @@ define( function ( require ) {
 		, noBetYetLabel: 'Match and Bets / Footer: no bet yet'
 		, betOfAnotherUserLabel: 'Bet of another user'
 		, bettingFinishedLabel: 'Match and Bets / Footer: betting finished'
+		, anotherBetsAreHidden: "Bets of another users will be shown after the match start"
 	} );
 
 	return Backbone.View.extend( {
@@ -120,13 +121,25 @@ define( function ( require ) {
 				return;
 			}
 
+			var score1El = this.$( '.js-bet-zone-bet-points-1' );
+			var score2El = this.$( '.js-bet-zone-bet-points-2' );
+
+			var isFilterByAnotherUserBets = this.showBetForUserId && this.currentUser.userId != this.showBetForUserId;
+			if ( isFilterByAnotherUserBets && bet.securedBet ) {
+
+				var hiddenScore = "<span class='fa fa-lock fa-2x text-muted' title='" + translator.anotherBetsAreHidden + "'></span>";
+
+				score1El.html( hiddenScore );
+				score2El.html( hiddenScore );
+
+				return;
+			}
+
 			var betStyled = service.getBetScoreHighlights( match.team1.teamId, bet.score1, match.team2.teamId, bet.score2 );
 
-			var score1El = this.$( '.js-bet-zone-bet-points-1' );
 			score1El.html( bet.score1 );
 			score1El.addClass( betStyled.style1 );
 
-			var score2El = this.$( '.js-bet-zone-bet-points-2' );
 			score2El.html( bet.score2 );
 			score2El.addClass( betStyled.style2 );
 		},
