@@ -40,6 +40,7 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				icon: this.getIcon()
+				, minHeight: this.widgetBodyMinHeight()
 				, translator: translator
 			} ) );
 
@@ -47,7 +48,7 @@ define( function ( require ) {
 
 			this._renderDropDownMenu();
 
-			this.$( '.js-widget-body' ).fadeIn( 500, "swing" );
+			this.$( this.windowBodyContainerSelector ).fadeIn( 500, "swing" );
 
 			this.renderBody();
 
@@ -82,6 +83,10 @@ define( function ( require ) {
 
 		setBody: function( context ) {
 			this.$( this.windowBodyContainerSelector ).html( context );
+		},
+
+		widgetBodyMinHeight: function() {
+			return '50px';
 		},
 
 		showProgress: function() {

@@ -3,7 +3,7 @@ define( function ( require ) {
 	'use strict';
 
 	var Model = require( './match-bet-model' );
-	var View = require( './match-bet-composite-view' );
+	var View = require( './match-bet-view' );
 
 	function init( container, options ) {
 

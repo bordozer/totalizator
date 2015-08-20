@@ -87,6 +87,10 @@ define( function ( require ) {
 			return this.menuItems;
 		},
 
+		widgetBodyMinHeight: function() {
+			return '110px';
+		},
+
 		_render: function() {
 
 			if ( this.mode == MODE_EDIT ) {
