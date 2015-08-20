@@ -9,6 +9,7 @@ define( function ( require ) {
 	var templateInfo = _.template( require( 'text!./templates/bet-zone-template.html' ) );
 	var templateEdit = _.template( require( 'text!./templates/bet-zone-edit-template.html' ) );
 
+	var pointsStylist = require( 'js/services/points-stylist' );
 	var service = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );
@@ -135,13 +136,15 @@ define( function ( require ) {
 				return;
 			}
 
-			var betStyled = service.getBetScoreHighlights( match.team1.teamId, bet.score1, match.team2.teamId, bet.score2 );
+			var betStyled = pointsStylist.styleBetPoints( match, bet );
 
 			score1El.html( bet.score1 );
 			score1El.addClass( betStyled.style1 );
+			score1El.attr( 'title', betStyled.title );
 
 			score2El.html( bet.score2 );
 			score2El.addClass( betStyled.style2 );
+			score2El.attr( 'title', betStyled.title );
 		},
 
 		_renderUserPoints: function() {

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Guessed match points</nerd>
+		<ru><![CDATA[Угадан счет в матче]]></ru>
+		<ua><![CDATA[Вгадан рахунок гри]]></ua>
+		<en><![CDATA[Guessed match points]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Guessed winner</nerd>
+		<ru><![CDATA[Угадан победитель матча]]></ru>
+		<ua><![CDATA[Вгадан переможечь гри]]></ua>
+		<en><![CDATA[Guessed winner]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Guessed wrong</nerd>
+		<ru><![CDATA[Ставка неверная]]></ru>
+		<ua><![CDATA[Нiчого не вгадано]]></ua>
+		<en><![CDATA[Guessed wrong]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Match result is unknown yet</nerd>
+		<ru><![CDATA[Матч еще не зваершен]]></ru>
+		<ua><![CDATA[Гра ще не завершена]]></ua>
+		<en><![CDATA[Match result is unknown yet]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

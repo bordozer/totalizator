@@ -33,7 +33,7 @@
 			<span class="text-muted"><strong>?</strong></span>
 		<% } %>
 
-		<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;"><%= bet != null ? transformer.betScore1() : '-' %></sup>
+		<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;" title="<%=betScoreHighlights.title%>"><%= bet != null ? transformer.betScore1() : '-' %></sup>
 
 	</div>
 
@@ -46,7 +46,7 @@
 			<span class="text-muted"><strong>?</strong></span>
 		<% } %>
 
-		<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;"><%= bet != null ? transformer.betScore2() : '-' %></sup>
+		<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;" title="<%=betScoreHighlights.title%>"><%= bet != null ? transformer.betScore2() : '-' %></sup>
 	</div>
 
 	<div class="col-xs-1 text-center">

@@ -14,6 +14,7 @@ define( function ( require ) {
 	var mainMenu = require( 'js/components/main-menu/main-menu' );
 
 	var service = require( '/resources/js/services/service.js' );
+	var pointsStylist = require( 'js/services/points-stylist' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
@@ -25,116 +26,109 @@ define( function ( require ) {
 		, menuHint: "Match menu"
 	} );
 
-	var MatchTransformer = function ( _match, _bet, _teamId, _team2Id, _points ) {
+	var MatchTransformer = function ( match, bet, team1Id, team2Id ) {
 
-		var match = _match;
-		var bet = _bet;
-		var team1Id = _teamId;
-		var team2Id = _team2Id;
-		var points = _points;
+		function _transformMatch( match, team1Id, team2Id ) {
+
+			var result = {};
+
+			result.matchId = match.matchId;
+			result.category = match.category;
+			result.cup = match.cup;
+			result.beginningTime = match.beginningTime;
+			result.description = match.description;
+
+			result.matchStarted = match.matchStarted;
+			result.matchFinished = match.matchFinished;
+
+			result.showAnotherBets = match.showAnotherBets;
+
+			result.team1 = match.team2;
+			result.team2 = match.team1;
+
+			result.score1 = match.score2;
+			result.score2 = match.score1;
+
+			result.homeTeamNumber = match.homeTeamNumber == 1 ? 2 : 1;
+
+			return result;
+		}
+
+		function _transformBet( bet, matchTransformed ) {
+
+			if ( bet == null ) {
+				return null;
+			}
+
+			var result = {};
+
+			result.matchBetId = bet.matchBetId;
+			result.user = bet.user;
+			result.securedBet = bet.securedBet;
+
+			result.match = matchTransformed;
+
+			result.score1 = bet.score2;
+			result.score2 = bet.score1;
+
+			return result;
+		}
+
+		var _matchTransformed = match;
+		var _betTransformed = bet;
+
+		var needTransform = ! ( team1Id > 0 && match.team1.teamId == team1Id ) && ! ( team2Id > 0 && match.team2.teamId == team2Id );
+		if ( needTransform ) {
+			_matchTransformed = _transformMatch( match, team1Id, team2Id );
+			_betTransformed = _transformBet( bet,  _matchTransformed );
+		}
 
 		return {
 
 			team1: function() {
-				if ( team1Id == 0 || team2Id == 0 ) {
-					return match.team1;
-				}
-
-				if ( team1Id == match.team1.teamId ) {
-					return match.team1;
-				}
-
-				return match.team2;
+				return _matchTransformed.team1;
 			},
 
 			team2: function() {
-				if ( team1Id == 0 || team2Id == 0 ) {
-					return match.team2;
-				}
-
-				if ( team2Id == match.team2.teamId ) {
-					return match.team2;
-				}
-
-				return match.team1;
+				return _matchTransformed.team2;
 			},
 
 			score1: function() {
-				if ( team1Id == 0 || team2Id == 0 ) {
-					return match.score1;
-				}
-
-				if ( team1Id == match.team1.teamId ) {
-					return match.score1;
-				}
-
-				return match.score2;
+				return _matchTransformed.score1;
 			},
 
 			score2: function() {
-				if ( team1Id == 0 || team2Id == 0 ) {
-					return match.score2;
-				}
-
-				if ( team2Id == match.team2.teamId ) {
-					return match.score2;
-				}
-
-				return match.score1;
+				return _matchTransformed.score2;
 			},
 
 			homeTeamNumber: function() {
-				if ( team1Id == 0 || team2Id == 0 ) {
-					return match.homeTeamNumber;
-				}
-
-				if ( team1Id == match.team1.teamId ) {
-					return match.homeTeamNumber;
-				}
-
-				return match.homeTeamNumber == 1 ? 2 : 1;
+				return _matchTransformed.homeTeamNumber;
 			},
 
 			betScore1: function() {
 
-				if ( bet == null ) {
+				if ( _betTransformed == null ) {
 					return 0;
 				}
 
-				if ( bet.securedBet ) {
+				if ( _betTransformed.securedBet ) {
 					return this._securedBet();
 				}
 
-				if ( team1Id == 0 || team2Id == 0 ) {
-					return bet.score1;
-				}
-
-				if ( team1Id == match.team1.teamId ) {
-					return bet.score1;
-				}
-
-				return bet.score2;
+				return _betTransformed.score1;
 			},
 
 			betScore2: function() {
 
-				if ( bet == null ) {
+				if ( _betTransformed == null ) {
 					return 0;
 				}
 
-				if ( bet.securedBet ) {
+				if ( _betTransformed.securedBet ) {
 					return this._securedBet();
 				}
 
-				if ( team1Id == 0 || team2Id == 0 ) {
-					return bet.score2;
-				}
-
-				if ( team2Id == match.team2.teamId ) {
-					return bet.score2;
-				}
-
-				return bet.score1;
+				return _betTransformed.score2;
 			},
 
 			_securedBet: function() {
@@ -146,16 +140,7 @@ define( function ( require ) {
 			},
 
 			getBetScoreHighlights: function() {
-
-				if ( ! match.matchFinished ) {
-					return { style1: 'text-muted', style2: 'text-muted' };
-				}
-
-				if( bet != null && points == 0 ) {
-					return { style1: 'text-danger', style2: 'text-danger' };
-				}
-
-				return service.getBetScoreHighlights( this.team1().teamId, this.betScore1(), this.team2().teamId, this.betScore2() );
+				return pointsStylist.styleBetPoints( _matchTransformed, _betTransformed );
 			},
 
 			formatDate: function() {
@@ -213,7 +198,8 @@ define( function ( require ) {
 
 		_renderEntry: function ( model ) {
 
-			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id, model.points );
+			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id );
+
 			var data = _.extend( {}
 					, model
 					, {

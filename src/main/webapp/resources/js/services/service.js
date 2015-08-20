@@ -35,6 +35,7 @@ define( function ( require ) {
 			return { winnerId: winnerId, style1: style1, style2: style2 };
 		},
 
+		// @Deprecated
 		getBetScoreHighlights: function( team1Id, score1, team2Id, score2 ) {
 			var winnerId = score1 > score2 ? team1Id : score1 < score2 ? team2Id : 0;
 
