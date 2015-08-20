@@ -77,7 +77,7 @@ define( function ( require ) {
 		var _matchTransformed = match;
 		var _betTransformed = bet;
 
-		var needTransform = ! ( team1Id > 0 && match.team1.teamId == team1Id ) && ! ( team2Id > 0 && match.team2.teamId == team2Id );
+		var needTransform = ( team1Id > 0 && match.team1.teamId != team1Id ) || ( team2Id > 0 && match.team2.teamId != team2Id );
 		if ( needTransform ) {
 			_matchTransformed = _transformMatch( match, team1Id, team2Id );
 			_betTransformed = _transformBet( bet,  _matchTransformed );
