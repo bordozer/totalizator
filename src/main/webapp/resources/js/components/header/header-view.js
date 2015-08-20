@@ -37,11 +37,26 @@ define( function ( require ) {
 
 			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
 
+			this._scheduleAppDataLoading();
+
 			return this;
 		},
 
 		_setActiveCup: function( options ) {
 			this.cupsNavigation.trigger( 'navigation:set:active:cup', options );
+		},
+
+		_scheduleAppDataLoading: function() {
+			setTimeout( this._refreshTime.bind( this ), 60000 );
+		},
+
+		_refreshTime: function() {
+
+			app.load();
+
+			this.$( '.js-time-now' ).html( app.timeNowFormatted() );
+
+			this._scheduleAppDataLoading();
 		}
 	} );
 

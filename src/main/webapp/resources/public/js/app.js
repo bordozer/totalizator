@@ -14,9 +14,9 @@ define( function ( require ) {
 			}
 	};
 
-	init();
+	load();
 
-	function init() {
+	function load() {
 
 		$.ajax( {
 			method: 'GET',
@@ -31,6 +31,10 @@ define( function ( require ) {
 	}
 
 	return {
+
+		load: function() {
+			load();
+		},
 
 		projectName: function() {
 			return app.projectName;
