@@ -40,7 +40,7 @@ public class UserCupWinnersBonusCalculationServiceImpl implements UserCupWinners
 						} ) )
 				);
 
-		if ( map != null ) {
+		if ( map != null && map.get( user ) != null ) {
 			return map.get( user );
 		}
 
