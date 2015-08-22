@@ -49,4 +49,9 @@ public class UserCupPointsHolder extends AbstractUserPointsHolder {
 	public void setCupWinnerBonus( final int cupWinnerBonus ) {
 		this.cupWinnerBonus = cupWinnerBonus;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: %s + %s + %s = %s", cup, matchBetPoints, matchBonuses, cupWinnerBonus, getPoints() );
+	}
 }

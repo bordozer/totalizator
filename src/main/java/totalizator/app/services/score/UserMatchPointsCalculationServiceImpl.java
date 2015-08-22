@@ -105,8 +105,17 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 		return userCupPointsHolders
 				.stream()
 				.sorted(
-						( o1, o2 ) -> ( ( Float ) ( o2.getMatchBetPoints() + o2.getMatchBonuses() + o2.getCupWinnerBonus() ) )
-						.compareTo( ( Float ) ( o1.getMatchBetPoints() + o1.getMatchBonuses() + o1.getCupWinnerBonus() ) )
+						( o1, o2 ) -> {
+
+							final int pointsComparator = ( ( Float ) ( o2.getMatchBetPoints() + o2.getMatchBonuses() + o2.getCupWinnerBonus() ) )
+									.compareTo( ( Float ) ( o1.getMatchBetPoints() + o1.getMatchBonuses() + o1.getCupWinnerBonus() ) );
+
+							if ( pointsComparator != 0 ) {
+								return pointsComparator;
+							}
+
+							return o1.getUser().getUsername().compareToIgnoreCase( o2.getUser().getUsername() );
+						}
 				)
 				.collect( Collectors.toList() )
 				;
