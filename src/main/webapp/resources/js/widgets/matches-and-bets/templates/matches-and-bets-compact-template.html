@@ -67,7 +67,7 @@
 
 	<div class="col-xs-1 text-center <%= userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
 		<% if( userMatchPointsHolder.summaryPoints != 0 ) { %>
-			<%-userMatchPointsHolder.summaryPoints%> <sup><%= userMatchPointsHolder.matchBonus > 0 ? userMatchPointsHolder.matchBetPoints + '+' + userMatchPointsHolder.matchBonus : ''%></sup>
+			<%-userMatchPointsHolder.summaryPoints%> <sup><%= userMatchPointsHolder.matchBonus != 0 ? userMatchPointsHolder.matchBetPoints + '+' + userMatchPointsHolder.matchBonus : ''%></sup>
 		<% } %>
 	</div>
 
