@@ -19,9 +19,14 @@
 
 				<td class="text-center">
 					<small>
-						<%= userRatingPosition.userCupPointsHolder.matchBetPoints %>
+
+						<span class="<%=userRatingPosition.userCupPointsHolder.matchBetPoints < 0 ? 'text-danger' : 'text-success'%>"><%= userRatingPosition.userCupPointsHolder.matchBetPoints %></span>
+
 						<% if( userRatingPosition.userCupPointsHolder.matchBetPointsNegative != 0 && userRatingPosition.userCupPointsHolder.matchBetPointsPositive != 0 ){ %>
-							<sup><%= userRatingPosition.userCupPointsHolder.matchBetPointsNegative %> / +<%= userRatingPosition.userCupPointsHolder.matchBetPointsPositive %></sup>
+							<sup>
+								<span class="text-danger"><%= userRatingPosition.userCupPointsHolder.matchBetPointsNegative %></span>
+								/
+								<span class="text-success">+<%= userRatingPosition.userCupPointsHolder.matchBetPointsPositive %></span></sup>
 						<% } %>
 					</small>
 				</td>
