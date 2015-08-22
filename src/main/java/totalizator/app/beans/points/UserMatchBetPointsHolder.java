@@ -23,6 +23,10 @@ public class UserMatchBetPointsHolder extends AbstractUserPointsHolder {
 		return points;
 	}
 
+	public int getMatchBetPoints() {
+		return points;
+	}
+
 	public void setPoints( final int points ) {
 		this.points = points;
 	}

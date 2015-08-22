@@ -17,7 +17,14 @@
 					<a href="/totalizator/users/<%=userRatingPosition.user.userId%>/?cupId=<%=cup.cupId%>"><%-userRatingPosition.user.userName%></a>
 				</td>
 
-				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.matchBetPoints != 0 ? userRatingPosition.userCupPointsHolder.matchBetPoints : ''%></small></td>
+				<td class="text-center">
+					<small>
+						<%= userRatingPosition.userCupPointsHolder.matchBetPoints %>
+						<% if( userRatingPosition.userCupPointsHolder.matchBetPointsNegative != 0 && userRatingPosition.userCupPointsHolder.matchBetPointsPositive != 0 ){ %>
+							<sup><%= userRatingPosition.userCupPointsHolder.matchBetPointsNegative %> / +<%= userRatingPosition.userCupPointsHolder.matchBetPointsPositive %></sup>
+						<% } %>
+					</small>
+				</td>
 				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.matchBonuses != 0 ? userRatingPosition.userCupPointsHolder.matchBonuses : ''%></small></td>
 				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.cupWinnerBonus != 0 ? userRatingPosition.userCupPointsHolder.cupWinnerBonus : ''%></small></td>
 

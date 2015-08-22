@@ -6,6 +6,9 @@ public class UserCupPointsHolderDTO {
 
 	private final UserDTO user;
 
+	private float matchBetPointsPositive;
+	private float matchBetPointsNegative;
+
 	private final float matchBetPoints;
 	private final float matchBonuses;
 	private final int cupWinnerBonus;
@@ -25,6 +28,22 @@ public class UserCupPointsHolderDTO {
 
 	public UserDTO getUser() {
 		return user;
+	}
+
+	public float getMatchBetPointsPositive() {
+		return matchBetPointsPositive;
+	}
+
+	public void setMatchBetPointsPositive( final float matchBetPointsPositive ) {
+		this.matchBetPointsPositive = matchBetPointsPositive;
+	}
+
+	public float getMatchBetPointsNegative() {
+		return matchBetPointsNegative;
+	}
+
+	public void setMatchBetPointsNegative( final float matchBetPointsNegative ) {
+		this.matchBetPointsNegative = matchBetPointsNegative;
 	}
 
 	public float getMatchBetPoints() {

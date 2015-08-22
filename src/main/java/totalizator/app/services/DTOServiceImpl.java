@@ -255,7 +255,14 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public UserCupPointsHolderDTO apply( final UserCupPointsHolder userCupPointsHolder ) {
-				return new UserCupPointsHolderDTO( transformUser( userCupPointsHolder.getUser() ), userCupPointsHolder.getMatchBetPoints(), userCupPointsHolder.getMatchBonuses(), userCupPointsHolder.getCupWinnerBonus() );
+				final Cup cup = userCupPointsHolder.getCup();
+				final User user = userCupPointsHolder.getUser();
+
+				final UserCupPointsHolderDTO dto = new UserCupPointsHolderDTO( transformUser( user ), userCupPointsHolder.getMatchBetPoints(), userCupPointsHolder.getMatchBonuses(), userCupPointsHolder.getCupWinnerBonus() );
+				dto.setMatchBetPointsNegative( userMatchBetPointsCalculationService.getUserMatchBetPointsNegative( cup, user ) );
+				dto.setMatchBetPointsPositive( userMatchBetPointsCalculationService.getUserMatchBetPointsPositive( cup, user ) );
+
+				return dto;
 			}
 		};
 	}

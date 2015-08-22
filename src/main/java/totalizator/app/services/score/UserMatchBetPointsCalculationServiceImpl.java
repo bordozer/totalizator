@@ -11,6 +11,8 @@ import totalizator.app.services.matches.MatchBetsService;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -53,6 +55,39 @@ public class UserMatchBetPointsCalculationServiceImpl implements UserMatchBetPoi
 					}
 				} )
 				.collect( Collectors.toList() );
+	}
+
+	@Override
+	@Cacheable( value = CACHE_QUERY )
+	public int getUserMatchBetPointsNegative( final Cup cup, final User user ) {
+		return getUserPoints( cup, user ).stream().filter( new Predicate<UserMatchBetPointsHolder>() {
+			@Override
+			public boolean test( final UserMatchBetPointsHolder userMatchBetPointsHolder ) {
+				return userMatchBetPointsHolder.getPoints() < 0;
+			}
+		} ).collect( Collectors.summingInt( new ToIntFunction<UserMatchBetPointsHolder>() {
+			@Override
+			public int applyAsInt( final UserMatchBetPointsHolder value ) {
+				return value.getMatchBetPoints();
+			}
+		} ) );
+	}
+
+	@Override
+	@Cacheable( value = CACHE_QUERY )
+	public int getUserMatchBetPointsPositive( final Cup cup, final User user ) {
+
+		return getUserPoints( cup, user ).stream().filter( new Predicate<UserMatchBetPointsHolder>() {
+			@Override
+			public boolean test( final UserMatchBetPointsHolder userMatchBetPointsHolder ) {
+				return userMatchBetPointsHolder.getPoints() > 0;
+			}
+		} ).collect( Collectors.summingInt( new ToIntFunction<UserMatchBetPointsHolder>() {
+			@Override
+			public int applyAsInt( final UserMatchBetPointsHolder value ) {
+				return value.getMatchBetPoints();
+			}
+		} ) );
 	}
 
 	private BetPointsCalculationStrategy getPointsCalculationStrategy( final Cup cup ) {
