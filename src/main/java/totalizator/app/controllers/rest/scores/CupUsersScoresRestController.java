@@ -13,7 +13,7 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserGroupService;
 import totalizator.app.services.UserService;
-import totalizator.app.services.score.UserBetPointsCalculationService;
+import totalizator.app.services.score.UserMatchPointsCalculationService;
 
 import java.security.Principal;
 import java.util.List;
@@ -31,7 +31,7 @@ public class CupUsersScoresRestController {
 	private CupService cupService;
 
 	@Autowired
-	private UserBetPointsCalculationService userBetPointsCalculationService;
+	private UserMatchPointsCalculationService userMatchPointsCalculationService;
 
 	@Autowired
 	private DTOService dtoService;
@@ -70,9 +70,9 @@ public class CupUsersScoresRestController {
 	private List<UserCupPointsHolder> getUsersCupPoints( final Cup cup, final int userGroupId ) {
 
 		if ( userGroupId == 0 ) {
-			return userBetPointsCalculationService.getUsersCupPoints( cup );
+			return userMatchPointsCalculationService.getUsersCupPoints( cup );
 		}
 
-		return userBetPointsCalculationService.getUsersCupPoints( cup, userGroupService.load( userGroupId ) );
+		return userMatchPointsCalculationService.getUsersCupPoints( cup, userGroupService.load( userGroupId ) );
 	}
 }

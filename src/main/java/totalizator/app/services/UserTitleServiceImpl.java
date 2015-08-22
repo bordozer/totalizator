@@ -7,7 +7,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.score.UserBetPointsCalculationService;
+import totalizator.app.services.score.UserMatchPointsCalculationService;
 import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class UserTitleServiceImpl implements UserTitleService {
 	private MatchBetsService matchBetsService;
 
 	@Autowired
-	private UserBetPointsCalculationService userBetPointsCalculationService;
+	private UserMatchPointsCalculationService userMatchPointsCalculationService;
 
 	@Autowired
 	private TranslatorService translatorService;

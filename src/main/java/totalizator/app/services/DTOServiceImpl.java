@@ -14,7 +14,7 @@ import totalizator.app.models.*;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.score.UserBetPointsCalculationService;
+import totalizator.app.services.score.UserMatchPointsCalculationService;
 import totalizator.app.services.score.UserMatchBetPointsCalculationService;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class DTOServiceImpl implements DTOService {
 	private MatchService matchService;
 
 	@Autowired
-	private UserBetPointsCalculationService userBetPointsCalculationService;
+	private UserMatchPointsCalculationService userMatchPointsCalculationService;
 
 	@Autowired
 	private UserMatchBetPointsCalculationService userMatchBetPointsCalculationService;
@@ -413,7 +413,7 @@ public class DTOServiceImpl implements DTOService {
 				final BetDTO betDTO = transformMatchBet( matchBet, betsOfUser, accessor );
 
 				matchBetDTO.setBet( betDTO );
-				matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( userBetPointsCalculationService.getUserMatchPoints( matchBet ) ) );
+				matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( userMatchPointsCalculationService.getUserMatchPoints( matchBet ) ) );
 
 				return matchBetDTO;
 			}

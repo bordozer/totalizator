@@ -8,7 +8,7 @@ import totalizator.app.models.UserGroup;
 
 import java.util.List;
 
-public interface UserBetPointsCalculationService {
+public interface UserMatchPointsCalculationService {
 
 	String CACHE_QUERY = "totalizator.app.cache.user-bet-points-calculation.query";
 

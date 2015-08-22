@@ -21,7 +21,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
 @Service
-public class UserBetPointsCalculationServiceImpl implements UserBetPointsCalculationService {
+public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCalculationService {
 
 	@Autowired
 	private UserService userService;

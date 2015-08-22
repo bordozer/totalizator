@@ -10,6 +10,7 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.CupWinnerService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class UserCupWinnersBonusCalculationServiceImpl implements UserCupWinners
 	@Override
 	public int getUserCupWinnersPoints( final Cup cup, final User user ) {
 
-		return cupBetsService.load( cup, user )
+		final Map<User, Integer> map = cupBetsService.load( cup, user )
 				.stream()
 				.collect(
 						Collectors.groupingBy( CupTeamBet::getUser, Collectors.summingInt( new ToIntFunction<CupTeamBet>() {
@@ -37,7 +38,13 @@ public class UserCupWinnersBonusCalculationServiceImpl implements UserCupWinners
 								return getUserCupWinnersPoints( cup, cupTeamBet.getTeam(), user, cupTeamBet.getCupPosition() );
 							}
 						} ) )
-				).get( user );
+				);
+
+		if ( map != null ) {
+			return map.get( user );
+		}
+
+		return 0;
 	}
 
 	@Override
