@@ -1,6 +1,5 @@
 package totalizator.app.services.score;
 
-import org.springframework.cache.annotation.Cacheable;
 import totalizator.app.beans.points.UserMatchBetPointsHolder;
 import totalizator.app.models.Cup;
 import totalizator.app.models.MatchBet;
@@ -18,9 +17,7 @@ public interface UserMatchBetPointsCalculationService {
 
 	List<UserMatchBetPointsHolder> getUserPoints( final Cup cup, final User user );
 
-	@Cacheable( value = CACHE_QUERY )
 	int getUserMatchBetPointsPositive( Cup cup, User user );
 
-	@Cacheable( value = CACHE_QUERY )
 	int getUserMatchBetPointsNegative( Cup cup, User user );
 }
