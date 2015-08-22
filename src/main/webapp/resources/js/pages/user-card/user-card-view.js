@@ -67,10 +67,10 @@ define( function ( require ) {
 				var options = {
 					filter: {
 						userId: userId
-						, categoryId: cup.category.categoryId // TODO
+						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
-						, showFinished: false
-						, showFutureMatches: true
+						, showFinished: true
+						, showFutureMatches: false
 					}
 					, isCompactView: true
 					, currentUser: currentUser
@@ -88,7 +88,8 @@ define( function ( require ) {
 						userId: userId
 						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
-						, showFinished: true
+						, showFinished: false
+						, showFutureMatches: true
 					}
 					, isCompactView: true
 					, currentUser: currentUser
