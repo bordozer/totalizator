@@ -150,6 +150,11 @@ define( function ( require ) {
 			this.hideProgress();
 
 			var title = this.$( '.js-widget-title' );
+
+			if ( title.length > 1 ) {
+				title = $( title[0] ); // hack for FearFox
+			}
+
 			title.html( this.getTitle() );
 			title.attr( 'title', this.getTitleHint() );
 		},

@@ -65,9 +65,9 @@
 		<% } %>
 	</div>
 
-	<div class="col-xs-1 text-center">
-		<% if( points > 0 ) { %>
-			<strong><span class="text-warning">+ <%= points %></span></strong>
+	<div class="col-xs-1 text-center <%= userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
+		<% if( userMatchPointsHolder.summaryPoints != 0 ) { %>
+			<%-userMatchPointsHolder.summaryPoints%> <sup><%= userMatchPointsHolder.matchBonus > 0 ? userMatchPointsHolder.matchBetPoints + '+' + userMatchPointsHolder.matchBonus : ''%></sup>
 		<% } %>
 	</div>
 

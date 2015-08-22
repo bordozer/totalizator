@@ -1,12 +1,15 @@
 package totalizator.app.services;
 
+import totalizator.app.beans.points.UserCupPointsHolder;
+import totalizator.app.beans.points.UserMatchPointsHolder;
 import totalizator.app.dto.*;
+import totalizator.app.dto.points.UserCupPointsHolderDTO;
+import totalizator.app.dto.points.UserMatchPointsHolderDTO;
 import totalizator.app.models.*;
 
 import java.util.List;
 
 public interface DTOService {
-
 
 	UserDTO transformUser( final User user );
 
@@ -47,4 +50,8 @@ public interface DTOService {
 	List<CupWinnerDTO> transformCupWinners( final List<CupWinner> cupWinners, final User accessor );
 
 	List<PointsCalculationStrategyDTO> transformPCStrategies( final List<PointsCalculationStrategy> strategies );
+
+	UserMatchPointsHolderDTO transformMatchPoints( final UserMatchPointsHolder userMatchPointsHolder );
+
+	UserCupPointsHolderDTO transformCupPoints( final UserCupPointsHolder userCupPointsHolder );
 }

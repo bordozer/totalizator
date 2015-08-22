@@ -1,27 +1,27 @@
 <table class="table table-striped table-hover">
 
 	<thead>
-		<td></td>
 		<td><%=translator.userColumn%></td>
-		<td><%=translator.pointsColumn%></td>
+		<td class="text-center"><%=translator.matchBetsPointsColumn%></td>
+		<td class="text-center"><%=translator.matchBonusColumn%></td>
+		<td class="text-center"><%=translator.winnersBonusColumn%></td>
+		<td class="text-center"><%=translator.summaryPointColumn%></td>
 	</thead>
 
 	<tbody>
 
-		<% _.each( userPoints, function( userPoint ) { %>
-			<tr <%=currentUser.userId == userPoint.user.userId ? "class='current-user'" : '' %> >
-
-				<td width="20">
-					<span class="<%=userPoint.userTitle.userTitleIcon%>" title="<%=userPoint.userTitle.userTitle%>"></span>
-				</td>
+		<% _.each( userRatingPositions, function( userRatingPosition ) { %>
+			<tr <%=currentUser.userId == userRatingPosition.user.userId ? "class='current-user'" : '' %> >
 
 				<td>
-					<a href="/totalizator/users/<%=userPoint.user.userId%>/?cupId=<%=cup.cupId%>"><%-userPoint.user.userName%></a>
+					<a href="/totalizator/users/<%=userRatingPosition.user.userId%>/?cupId=<%=cup.cupId%>"><%-userRatingPosition.user.userName%></a>
 				</td>
 
-				<td>
-					<%-userPoint.points%>
-				</td>
+				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.matchBetPoints > 0 ? userRatingPosition.userCupPointsHolder.matchBetPoints : ''%></small></td>
+				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.matchBonuses > 0 ? userRatingPosition.userCupPointsHolder.matchBonuses : ''%></small></td>
+				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.cupWinnerBonus > 0 ? userRatingPosition.userCupPointsHolder.cupWinnerBonus : ''%></small></td>
+
+				<td class="text-center <%= userRatingPosition.userCupPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> "><%-userRatingPosition.userCupPointsHolder.summaryPoints%></td>
 			</tr>
 		<% })%>
 

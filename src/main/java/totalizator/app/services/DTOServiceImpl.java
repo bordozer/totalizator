@@ -4,12 +4,18 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import totalizator.app.beans.points.UserCupPointsHolder;
+import totalizator.app.beans.points.UserMatchPointsHolder;
 import totalizator.app.beans.ValidationResult;
 import totalizator.app.dto.*;
+import totalizator.app.dto.points.UserCupPointsHolderDTO;
+import totalizator.app.dto.points.UserMatchPointsHolderDTO;
 import totalizator.app.models.*;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.score.CupScoresService;
+import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.score.UserBetPointsCalculationService;
+import totalizator.app.services.score.UserMatchBetPointsCalculationService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +35,13 @@ public class DTOServiceImpl implements DTOService {
 	private MatchService matchService;
 
 	@Autowired
-	private CupScoresService cupScoresService;
+	private UserBetPointsCalculationService userBetPointsCalculationService;
+
+	@Autowired
+	private UserMatchBetPointsCalculationService userMatchBetPointsCalculationService;
+
+	@Autowired
+	private UserCupWinnersBonusCalculationService userCupWinnersBonusCalculationService;
 
 	@Autowired
 	private CupBetsService cupBetsService;
@@ -136,7 +148,7 @@ public class DTOServiceImpl implements DTOService {
 
 				result.setCupPosition( cupTeamBet.getCupPosition() );
 
-				result.setPoints( cupScoresService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
+				result.setPoints( userCupWinnersBonusCalculationService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
 
 				result.setStillActive( cupTeamService.exists( cup.getId(), team.getId() ) );
 
@@ -214,6 +226,38 @@ public class DTOServiceImpl implements DTOService {
 		};
 
 		return strategies.stream().map( mapper ).collect( Collectors.toList() );
+	}
+
+	@Override
+	public UserMatchPointsHolderDTO transformMatchPoints( final UserMatchPointsHolder userMatchPointsHolder ) {
+		return userMatchPointsFunction().apply( userMatchPointsHolder );
+	}
+
+	@Override
+	public UserCupPointsHolderDTO transformCupPoints( final UserCupPointsHolder userCupPointsHolder ) {
+		return userCupPointsFunction().apply( userCupPointsHolder );
+	}
+
+	private Function<UserMatchPointsHolder, UserMatchPointsHolderDTO> userMatchPointsFunction() {
+
+		return new Function<UserMatchPointsHolder, UserMatchPointsHolderDTO>() {
+
+			@Override
+			public UserMatchPointsHolderDTO apply( final UserMatchPointsHolder userMatchPoints ) {
+				return new UserMatchPointsHolderDTO( userMatchPoints.getUserMatchBetPointsHolder().getPoints(), userMatchPoints.getMatchBonus() );
+			}
+		};
+	}
+
+	private Function<UserCupPointsHolder, UserCupPointsHolderDTO> userCupPointsFunction() {
+
+		return new Function<UserCupPointsHolder, UserCupPointsHolderDTO>() {
+
+			@Override
+			public UserCupPointsHolderDTO apply( final UserCupPointsHolder userCupPointsHolder ) {
+				return new UserCupPointsHolderDTO( transformUser( userCupPointsHolder.getUser() ), userCupPointsHolder.getMatchBetPoints(), userCupPointsHolder.getMatchBonuses(), userCupPointsHolder.getCupWinnerBonus() );
+			}
+		};
 	}
 
 	private Function<CupWinner, CupWinnerDTO> cupWinnerFunction( final User accessor ) {
@@ -369,7 +413,7 @@ public class DTOServiceImpl implements DTOService {
 				final BetDTO betDTO = transformMatchBet( matchBet, betsOfUser, accessor );
 
 				matchBetDTO.setBet( betDTO );
-				matchBetDTO.setPoints( cupScoresService.getUsersScores( matchBet ) );
+				matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( userBetPointsCalculationService.getUserMatchPoints( matchBet ) ) );
 
 				return matchBetDTO;
 			}
@@ -393,7 +437,7 @@ public class DTOServiceImpl implements DTOService {
 
 				result.setCupPosition( cupTeamBet.getCupPosition() );
 
-				result.setPoints( cupScoresService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
+				result.setPoints( userCupWinnersBonusCalculationService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
 
 				result.setStillActive( cupTeamService.exists( cup.getId(), team.getId() ) );
 

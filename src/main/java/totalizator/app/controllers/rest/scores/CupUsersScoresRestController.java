@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.beans.UserPoints;
+import totalizator.app.beans.points.UserCupPointsHolder;
 import totalizator.app.models.Cup;
 import totalizator.app.models.User;
-import totalizator.app.services.*;
-import totalizator.app.services.score.CupScoresService;
+import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
+import totalizator.app.services.UserGroupService;
+import totalizator.app.services.UserService;
+import totalizator.app.services.score.UserBetPointsCalculationService;
 
 import java.security.Principal;
 import java.util.List;
@@ -28,13 +31,10 @@ public class CupUsersScoresRestController {
 	private CupService cupService;
 
 	@Autowired
-	private CupScoresService cupScoresService;
+	private UserBetPointsCalculationService userBetPointsCalculationService;
 
 	@Autowired
 	private DTOService dtoService;
-
-	@Autowired
-	private UserTitleService userTitleService;
 
 	@Autowired
 	private UserGroupService userGroupService;
@@ -51,20 +51,28 @@ public class CupUsersScoresRestController {
 
 		result.setCurrentUser( dtoService.transformUser( currentUser ) );
 
-		result.setUserPoints( getUsersScores( cup, userGroupId ) );
+		result.setUserRatingPositions( getUsersPoints( cup, userGroupId ) );
 
 		return result;
 	}
 
-	private List<UserPointsDTO> getUsersScores( final Cup cup, final int userGroupId ) {
+	private List<UserRatingPositionDTO> getUsersPoints( final Cup cup, final int userGroupId ) {
 
-		final List<UserPoints> usersScoresSummary = userGroupId == 0 ? cupScoresService.getUsersScoresSummary( cup ) : cupScoresService.getUsersScoresSummary( cup, userGroupService.load( userGroupId ) );
+		return Lists.transform( getUsersCupPoints( cup, userGroupId ), new Function<UserCupPointsHolder, UserRatingPositionDTO>() {
 
-		return Lists.transform( usersScoresSummary, new Function<UserPoints, UserPointsDTO>() {
 			@Override
-			public UserPointsDTO apply( final UserPoints userPoints ) {
-				return new UserPointsDTO( dtoService.transformUser( userPoints.getUser() ), userPoints.getPoints(), userTitleService.getUserTitle( userPoints.getUser(), cup ) );
+			public UserRatingPositionDTO apply( final UserCupPointsHolder userCupPointsHolder ) {
+				return new UserRatingPositionDTO( dtoService.transformUser( userCupPointsHolder.getUser() ), dtoService.transformCupPoints( userCupPointsHolder ) );
 			}
 		} );
+	}
+
+	private List<UserCupPointsHolder> getUsersCupPoints( final Cup cup, final int userGroupId ) {
+
+		if ( userGroupId == 0 ) {
+			return userBetPointsCalculationService.getUsersCupPoints( cup );
+		}
+
+		return userBetPointsCalculationService.getUsersCupPoints( cup, userGroupService.load( userGroupId ) );
 	}
 }

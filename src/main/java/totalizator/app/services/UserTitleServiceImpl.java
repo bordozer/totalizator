@@ -1,17 +1,13 @@
 package totalizator.app.services;
 
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import totalizator.app.beans.UserPoints;
 import totalizator.app.beans.UserTitle;
 import totalizator.app.models.Cup;
-import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.score.CupScoresService;
+import totalizator.app.services.score.UserBetPointsCalculationService;
 import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
@@ -28,17 +24,20 @@ public class UserTitleServiceImpl implements UserTitleService {
 	private MatchBetsService matchBetsService;
 
 	@Autowired
-	private CupScoresService cupScoresService;
+	private UserBetPointsCalculationService userBetPointsCalculationService;
 
 	@Autowired
 	private TranslatorService translatorService;
 
-	private final static List<String> ICONS = newArrayList( "fa fa-ban", "fa fa-frown-o", "fa fa-meh-o", "fa fa-smile-o", "fa fa-graduation-cap", "fa fa-magic" );
+	private final static List<String> ICONS = newArrayList( "fa fa-ban", "fa fa-frown-o", "fa fa-meh-o", "fa fa-smile-o", "fa fa-graduation-cap", "fa fa-magic", "fa fa-question" );
 
 	@Override
 	public UserTitle getUserTitle( final User user, final Cup cup ) {
 
-		final List<MatchBet> bets = matchBetsService.loadAll( cup, user );
+		// TODO: titles is OFF
+		return new UserTitle( getTitle( "User title: 0", 0 ), ICONS.get( 6 ) );
+
+		/*final List<MatchBet> bets = matchBetsService.loadAll( cup, user );
 		CollectionUtils.filter( bets, new Predicate<MatchBet>() {
 
 			@Override
@@ -49,7 +48,7 @@ public class UserTitleServiceImpl implements UserTitleService {
 
 		final int betsCount = bets.size();
 
-		final List<UserPoints> userPoints = cupScoresService.getUserPoints( cup, user );
+		final List<UserPoints> userPoints = userBetPointsCalculationService.getUsersMatchBetPoints( cup, user );
 
 		int points = 0;
 		for ( final UserPoints userPoint : userPoints ) {
@@ -82,7 +81,7 @@ public class UserTitleServiceImpl implements UserTitleService {
 			return new UserTitle( getTitle( "User title: 5", luckyLevel ), ICONS.get( 5 ) );
 		}
 
-		return new UserTitle( getTitle( "User title: 0", luckyLevel ), ICONS.get( 0 ) );
+		return new UserTitle( getTitle( "User title: 0", luckyLevel ), ICONS.get( 0 ) );*/
 	}
 
 	private String getTitle( final String nerd, final int luckyLevel ) {

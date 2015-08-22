@@ -16,7 +16,10 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: 'Cup users scores: Scores'
 		, userColumn: 'Cup users scores: User name'
-		, pointsColumn: 'Cup users scores: Points'
+		, matchBetsPointsColumn: 'Cup users scores: Match bets points'
+		, matchBonusColumn: 'Cup users scores: Match bonus points'
+		, winnersBonusColumn: 'Cup users scores: Winners bonus'
+		, summaryPointColumn: 'Cup users scores: Summary points'
 		, removeUserGroupFilter: "Remove user group filter"
 	} );
 

@@ -31,7 +31,7 @@ class BetPointsCalculationStrategy {
 			return pointsForDelta > 0 ? pointsForDelta : pointsCalculationStrategy.getPointsForMatchWinner();
 		}
 
-		return 0;
+		return - pointsCalculationStrategy.getPointsForMatchWinner();
 	}
 
 	protected final boolean userGuessedWinnerAndMatchPoints( final MatchBet matchBet ) {

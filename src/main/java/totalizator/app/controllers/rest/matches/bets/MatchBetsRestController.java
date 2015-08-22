@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.TeamDTO;
+import totalizator.app.dto.points.UserMatchPointsHolderDTO;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
@@ -85,11 +86,15 @@ public class MatchBetsRestController {
 		}
 
 		Collections.sort( matchBetsDTOs, new Comparator<MatchBetDTO>() {
+
 			@Override
 			public int compare( final MatchBetDTO o1, final MatchBetDTO o2 ) {
 
-				if ( o2.getPoints() + o1.getPoints() > 0 ) {
-					return ( ( Integer ) o2.getPoints() ).compareTo( o1.getPoints() );
+				final UserMatchPointsHolderDTO pointsHolder1 = o2.getUserMatchPointsHolder();
+				final UserMatchPointsHolderDTO pointsHolder2 = o1.getUserMatchPointsHolder();
+
+				if ( pointsHolder1.getSummaryPoints() + pointsHolder2.getSummaryPoints() > 0 ) {
+					return ( ( Float ) pointsHolder1.getSummaryPoints() ).compareTo( pointsHolder2.getSummaryPoints() );
 				}
 
 				return o1.getBet().getUser().getUserName().compareToIgnoreCase( o2.getBet().getUser().getUserName() );

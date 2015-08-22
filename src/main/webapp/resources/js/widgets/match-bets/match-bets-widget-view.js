@@ -17,9 +17,12 @@ define( function ( require ) {
 	var translator = new Translator( {
 		title: "Match bests"
 		, userLabel: "User"
-		, userPointsLabel: "Points"
 		, matchBestsLabel: "Match bests"
 		, anotherBetsAreHidden: "Bets of another users will be shown after the match start"
+
+		, matchBetsPointsColumn: 'Cup users scores: Match bets points'
+		, matchBonusColumn: 'Cup users scores: Match bonus points'
+		, summaryPointColumn: 'Cup users scores: Summary points'
 	} );
 
 	return WidgetView.extend( {

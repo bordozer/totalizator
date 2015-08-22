@@ -6,14 +6,14 @@ import org.junit.Test;
 import totalizator.app.models.*;
 import totalizator.app.services.CupService;
 import totalizator.app.services.CupWinnerService;
-import totalizator.app.services.score.CupScoresServiceImpl;
+import totalizator.app.services.score.UserCupWinnersBonusCalculationServiceImpl;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
 
-public class UserCupWinnersPointsTest {
+public class UserCupWinnersBonusCalculationServiceTest {
 
 	@Before
 	public void setup() {
@@ -25,11 +25,11 @@ public class UserCupWinnersPointsTest {
 
 		final TestData testData = new TestData();
 
-		final CupScoresServiceImpl cupScoresService = new CupScoresServiceImpl();
-		cupScoresService.setCupService( cupService( testData ) );
-		cupScoresService.setCupWinnerService( cupWinnerService( testData ) );
+		final UserCupWinnersBonusCalculationServiceImpl userBetPointsCalculationService = new UserCupWinnersBonusCalculationServiceImpl();
+		userBetPointsCalculationService.setCupService( cupService( testData ) );
+		userBetPointsCalculationService.setCupWinnerService( cupWinnerService( testData ) );
 
-		final int points = cupScoresService.getUserCupWinnersPoints( testData.cup, testData.team1, testData.user, 1 );
+		final int points = userBetPointsCalculationService.getUserCupWinnersPoints( testData.cup, testData.team1, testData.user, 1 );
 		assertEquals( "User guessed right the cup winner and it's position, have to be 6 points", 6, points );
 	}
 
@@ -38,11 +38,11 @@ public class UserCupWinnersPointsTest {
 
 		final TestData testData = new TestData();
 
-		final CupScoresServiceImpl cupScoresService = new CupScoresServiceImpl();
-		cupScoresService.setCupService( cupService( testData ) );
-		cupScoresService.setCupWinnerService( cupWinnerService( testData ) );
+		final UserCupWinnersBonusCalculationServiceImpl userBetPointsCalculationService = new UserCupWinnersBonusCalculationServiceImpl();
+		userBetPointsCalculationService.setCupService( cupService( testData ) );
+		userBetPointsCalculationService.setCupWinnerService( cupWinnerService( testData ) );
 
-		final int points = cupScoresService.getUserCupWinnersPoints( testData.cup, testData.team1, testData.user, 2 );
+		final int points = userBetPointsCalculationService.getUserCupWinnersPoints( testData.cup, testData.team1, testData.user, 2 );
 		assertEquals( "User guessed right the cup winner but did not it's position, have to be 3 points", 3, points );
 	}
 
@@ -51,11 +51,11 @@ public class UserCupWinnersPointsTest {
 
 		final TestData testData = new TestData();
 
-		final CupScoresServiceImpl cupScoresService = new CupScoresServiceImpl();
-		cupScoresService.setCupService( cupService( testData ) );
-		cupScoresService.setCupWinnerService( cupWinnerService( testData ) );
+		final UserCupWinnersBonusCalculationServiceImpl userBetPointsCalculationService = new UserCupWinnersBonusCalculationServiceImpl();
+		userBetPointsCalculationService.setCupService( cupService( testData ) );
+		userBetPointsCalculationService.setCupWinnerService( cupWinnerService( testData ) );
 
-		final int points = cupScoresService.getUserCupWinnersPoints( testData.cup, testData.team3, testData.user, 1 );
+		final int points = userBetPointsCalculationService.getUserCupWinnersPoints( testData.cup, testData.team3, testData.user, 1 );
 		assertEquals( "User's team is outsider, it have to be zero points", 0, points );
 	}
 

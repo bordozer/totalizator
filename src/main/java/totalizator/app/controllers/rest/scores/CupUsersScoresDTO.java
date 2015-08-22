@@ -7,7 +7,7 @@ import java.util.List;
 public class CupUsersScoresDTO {
 
 	private UserDTO currentUser;
-	private List<UserPointsDTO> userPoints;
+	private List<UserRatingPositionDTO> userRatingPositions;
 
 	public UserDTO getCurrentUser() {
 		return currentUser;
@@ -17,11 +17,11 @@ public class CupUsersScoresDTO {
 		this.currentUser = currentUser;
 	}
 
-	public List<UserPointsDTO> getUserPoints() {
-		return userPoints;
+	public List<UserRatingPositionDTO> getUserRatingPositions() {
+		return userRatingPositions;
 	}
 
-	public void setUserPoints( final List<UserPointsDTO> userPoints ) {
-		this.userPoints = userPoints;
+	public void setUserRatingPositions( final List<UserRatingPositionDTO> userRatingPositions ) {
+		this.userRatingPositions = userRatingPositions;
 	}
 }

@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
-import totalizator.app.services.score.CupScoresService;
+import totalizator.app.services.score.UserBetPointsCalculationService;
+import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.score.UserMatchBetPointsCalculationService;
+import totalizator.app.services.score.MatchBonusPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -66,7 +69,10 @@ public class MatchBetRepository implements MatchBetDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = UserBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
 	} )
 	public MatchBet save( final MatchBet entry ) {
 		return em.merge( entry );
@@ -76,7 +82,10 @@ public class MatchBetRepository implements MatchBetDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = UserBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );

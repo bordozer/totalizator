@@ -191,7 +191,7 @@ define( function ( require ) {
 				return 'panel-warning';
 			}
 
-			var matchFinishedAndUserGotSomePoints = isMatchFinished && matchBet.points > 0;
+			var matchFinishedAndUserGotSomePoints = isMatchFinished && matchBet.userMatchPointsHolder.matchBetPoints > 0;
 			if ( matchFinishedAndUserGotSomePoints ) {
 				return 'panel-success';
 			}

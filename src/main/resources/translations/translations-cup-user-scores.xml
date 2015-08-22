@@ -17,24 +17,45 @@
 	</translation>
 
 	<translation>
-		<nerd>Cup users scores: Points</nerd>
-		<ru><![CDATA[Баллы]]></ru>
-		<ua><![CDATA[Бали]]></ua>
-		<en><![CDATA[Points]]></en>
+		<nerd>Cup users scores: Match bets points</nerd>
+		<ru><![CDATA[Ставки]]></ru>
+		<ua><![CDATA[Ставки]]></ua>
+		<en><![CDATA[Match bets points]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: Match bonus points</nerd>
+		<ru><![CDATA[Бонус]]></ru>
+		<ua><![CDATA[Бонус]]></ua>
+		<en><![CDATA[Bonus]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: Winners bonus</nerd>
+		<ru><![CDATA[Победители]]></ru>
+		<ua><![CDATA[Переможцi]]></ua>
+		<en><![CDATA[Winners]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: Summary points</nerd>
+		<ru><![CDATA[Всего]]></ru>
+		<ua><![CDATA[Всього]]></ua>
+		<en><![CDATA[Summary points]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

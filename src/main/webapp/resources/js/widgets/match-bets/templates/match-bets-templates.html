@@ -5,7 +5,9 @@
 		<td class="text-center"><%=translator.userLabel%></td>
 		<td class="text-center"><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a></td>
 		<td class="text-center"><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team2.teamName%></a></td>
-		<td class="text-center"><%=translator.userPointsLabel%></td>
+		<td class="text-center"><%=translator.matchBetsPointsColumn%></td>
+		<td class="text-center"><%=translator.matchBonusColumn%></td>
+		<td class="text-center"><%=translator.summaryPointColumn%></td>
 	</tr>
 	</thead>
 
@@ -39,10 +41,16 @@
 			<% } %>
 		</td>
 
-		<td class="text-center" width="60">
-			<strong>
-				<%-matchBet.points > 0 ? '+' + matchBet.points : ''%>
-			</strong>
+		<td class="text-center">
+			<small><%= matchBet.userMatchPointsHolder.matchBetPoints != 0 ? matchBet.userMatchPointsHolder.matchBetPoints : ''%></small>
+		</td>
+
+		<td class="text-center">
+			<small><%= matchBet.userMatchPointsHolder.matchBonus != 0 ? matchBet.userMatchPointsHolder.matchBonus : ''%></small>
+		</td>
+
+		<td class="text-center <%= matchBet.userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
+			<strong><%= matchBet.userMatchPointsHolder.summaryPoints != 0 ? matchBet.userMatchPointsHolder.summaryPoints : ''%></strong>
 		</td>
 	</tr>
 	<% })%>

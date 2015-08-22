@@ -148,8 +148,14 @@ define( function ( require ) {
 		},
 
 		_renderUserPoints: function() {
-			if ( this.matchBet.points > 0 ) {
-				this.$( '.js-bet-zone-points' ).html( '+ ' + this.matchBet.points );
+
+			if ( this.matchBet.userMatchPointsHolder.summaryPoints != 0 ) {
+
+				this.$( '.js-bet-zone-points' ).html( this.matchBet.userMatchPointsHolder.summaryPoints );
+
+				if ( this.matchBet.userMatchPointsHolder.matchBonus != 0 ) {
+					this.$( '.js-bet-zone-points' ).append( ' <sup> ' + this.matchBet.userMatchPointsHolder.matchBetPoints + '+' + this.matchBet.userMatchPointsHolder.matchBonus + '</sup>' );
+				}
 			}
 		},
 

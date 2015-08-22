@@ -53,55 +53,73 @@
 	/>
 
 	<cache name="totalizator.app.cache.match-bet"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
 	<cache name="totalizator.app.cache.match-bet.query"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
 	<cache name="totalizator.app.cache.match"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
 	<cache name="totalizator.app.cache.matches"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
 	<cache name="totalizator.app.cache.team"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="2000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
 	<cache name="totalizator.app.cache.teams"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="2000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
 	<cache name="totalizator.app.cache.user"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
 	<cache name="totalizator.app.cache.users"
-		   maxElementsInMemory="300"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
-	<cache name="totalizator.app.cache.cup-scores.query"
-		   maxElementsInMemory="300"
+	<cache name="totalizator.app.cache.user-bet-points-calculation.query"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.user-match-points-calculation.query"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.user-match-bonus-points-calculation.query"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.cup-bet-points-calculation.query"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>

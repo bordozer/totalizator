@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.services.score.CupScoresService;
+import totalizator.app.services.score.UserBetPointsCalculationService;
+import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.score.UserMatchBetPointsCalculationService;
+import totalizator.app.services.score.MatchBonusPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,7 +52,10 @@ public class MatchRepository implements MatchDao {
 	@Caching( evict = {
 			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
 			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Match save( final Match entry ) {
@@ -60,7 +66,10 @@ public class MatchRepository implements MatchDao {
 	@Caching( evict = {
 			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
 			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = CupScoresService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {

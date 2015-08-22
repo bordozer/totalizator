@@ -1,12 +1,14 @@
 package totalizator.app.dto;
 
+import totalizator.app.dto.points.UserMatchPointsHolderDTO;
+
 public class MatchBetDTO {
 
 	private int matchId;
 
 	private MatchDTO match;
 	private BetDTO bet;
-	private int points;
+	private UserMatchPointsHolderDTO userMatchPointsHolder = new UserMatchPointsHolderDTO( 0 );
 
 	private boolean bettingAllowed;
 	private String bettingValidationMessage;
@@ -59,12 +61,12 @@ public class MatchBetDTO {
 		this.bettingValidationMessage = bettingValidationMessage;
 	}
 
-	public int getPoints() {
-		return points;
+	public UserMatchPointsHolderDTO getUserMatchPointsHolder() {
+		return userMatchPointsHolder;
 	}
 
-	public void setPoints( final int points ) {
-		this.points = points;
+	public void setUserMatchPointsHolder( final UserMatchPointsHolderDTO userMatchPointsHolder ) {
+		this.userMatchPointsHolder = userMatchPointsHolder;
 	}
 
 	@Override

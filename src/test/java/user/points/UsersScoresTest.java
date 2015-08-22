@@ -2,79 +2,85 @@ package user.points;
 
 import org.junit.Test;
 import totalizator.app.models.*;
-import totalizator.app.services.score.CupScoresServiceImpl;
+import totalizator.app.services.score.UserMatchBetPointsCalculationServiceImpl;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
+
 
 public class UsersScoresTest {
 
+	public static final int POINTS_FOR_MATCH_SCORE = 6;
+	public static final int POINTS_FOR_MATCH_WINNER = 1;
+	public static final int POINTS_DELTA = 3;
+	public static final int POINTS_FOR_BET_WITHIN_DELTA = 3;
+
 	@Test
 	public void userGuessedRightMatchScores() {
-		check( 80, 90, 6 );
+		check( 80, 90, POINTS_FOR_MATCH_SCORE );
 	}
 
 	@Test
 	public void userGuessedRightMatchWinnerAdnScoreIsVeryClose() {
-		check( 81, 90, 3 );
+		check( 81, 90, POINTS_FOR_BET_WITHIN_DELTA );
 	}
 
 	@Test
 	public void userGuessedRightMatchWinnerAdnScoreIsVeryClose1() {
-		check( 83, 90, 3 );
+		check( 83, 90, POINTS_FOR_BET_WITHIN_DELTA );
 	}
 
 	@Test
 	public void userGuessedRightMatchWinnerAdnScoreIsVeryClose2() {
-		check( 77, 90, 3 );
+		check( 77, 90, POINTS_FOR_BET_WITHIN_DELTA );
 	}
 
 	@Test
 	public void userGuessedRightMatchWinnerAdnScoreIsVeryClose3() {
-		check( 76, 90, 1 );
+		check( 76, 90, POINTS_FOR_MATCH_WINNER );
 	}
 
 	@Test
 	public void userGuessedRightMatchWinnerAdnScoreIsVeryClose4() {
-		check( 84, 90, 1 );
+		check( 84, 90, POINTS_FOR_MATCH_WINNER );
 	}
 
 	@Test
 	public void userGuessedWrong() {
-		check( 100, 90, 0 );
+		check( 100, 90, -POINTS_FOR_MATCH_WINNER );
 	}
 
 	@Test
 	public void guessedRightDrawAndScore() {
-		checkDraw( 80, 80, 6 );
+		checkDraw( 80, 80, POINTS_FOR_MATCH_SCORE );
 	}
 
 	@Test
 	public void realDrawAndBetOnDrawButAnotherScore() {
-		checkDraw( 90, 90, 1 );
+		checkDraw( 90, 90, POINTS_FOR_MATCH_WINNER );
 	}
 
 	@Test
 	public void realDrawButBetOnWinner() {
-		checkDraw( 90, 80, 0 );
+		checkDraw( 90, 80, -POINTS_FOR_MATCH_WINNER );
 	}
 
 	@Test
 	public void realDrawAndBetOnDrawButAnotherScoreButVerySimilar() {
-		checkDraw( 81, 81, 3 );
+		checkDraw( 81, 81, POINTS_FOR_BET_WITHIN_DELTA );
 	}
 
-	private void checkDraw( final int betScore1, final int betScore2, final int expectedPoints ) {
+	private void checkDraw( final int betScore1, final int betScore2, final float expectedPoints ) {
 		check( 80, 80, betScore1, betScore2, expectedPoints );
 	}
 
-	private void check( final int betScore1, final int betScore2, final int expectedPoints ) {
+	private void check( final int betScore1, final int betScore2, final float expectedPoints ) {
 		check( 80, 90, betScore1, betScore2, expectedPoints );
 	}
 
-	private void check( final int matchScore1, final int matchScore2, final int betScore1, final int betScore2, final int expectedPoints ) {
+	private void check( final int matchScore1, final int matchScore2, final int betScore1, final int betScore2, final float expectedPoints ) {
 		final TestData testData = new TestData( matchScore1, matchScore2 );
 
-		final CupScoresServiceImpl cupScoresService = new CupScoresServiceImpl();
+		final UserMatchBetPointsCalculationServiceImpl userMatchBetPointsCalculationService = new UserMatchBetPointsCalculationServiceImpl();
 
 		final MatchBet matchBet = new MatchBet();
 		matchBet.setUser( testData.user );
@@ -82,7 +88,7 @@ public class UsersScoresTest {
 		matchBet.setBetScore1( betScore1 );
 		matchBet.setBetScore2( betScore2 );
 
-		final int points = cupScoresService.getUsersScores( matchBet );
+		final float points = userMatchBetPointsCalculationService.getUserMatchBetPoints( matchBet ).getPoints();
 		assertEquals( "Wrong points for match bet", expectedPoints, points );
 	}
 
@@ -108,10 +114,10 @@ public class UsersScoresTest {
 
 			final PointsCalculationStrategy pointsCalculationStrategy = new PointsCalculationStrategy();
 			pointsCalculationStrategy.setStrategyName( "Abstract strategy" );
-			pointsCalculationStrategy.setPointsForMatchScore( 6 );
-			pointsCalculationStrategy.setPointsForMatchWinner( 1 );
-			pointsCalculationStrategy.setPointsDelta( 3 );
-			pointsCalculationStrategy.setPointsForBetWithinDelta( 3 );
+			pointsCalculationStrategy.setPointsForMatchScore( POINTS_FOR_MATCH_SCORE );
+			pointsCalculationStrategy.setPointsForMatchWinner( POINTS_FOR_MATCH_WINNER );
+			pointsCalculationStrategy.setPointsDelta( POINTS_DELTA );
+			pointsCalculationStrategy.setPointsForBetWithinDelta( POINTS_FOR_BET_WITHIN_DELTA );
 
 			cup = new Cup( "The Cup", category );
 			cup.setId( 2 );
