@@ -62,9 +62,14 @@ define( function ( require ) {
 
 		_load: function() {
 
+			var clientData = {
+				timezone: new Date().getTimezoneOffset() / 60
+			};
+
 			$.ajax( {
 				method: 'GET',
 				url: '/rest/app/',
+				data: clientData,
 				async: false,
 				success: function ( response ) {
 					data = response;

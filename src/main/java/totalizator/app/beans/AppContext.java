@@ -8,6 +8,7 @@ public class AppContext {
 
 	private static final String APPLICATION_CONTEXT = "APPLICATION_CONTEXT";
 	private Language language;
+	private int timeZone;
 
 	public static AppContext init( final Language language, final HttpSession session ) {
 
@@ -29,5 +30,13 @@ public class AppContext {
 
 	public void setLanguage( final Language language ) {
 		this.language = language;
+	}
+
+	public void setTimeZone( final int timeZone ) {
+		this.timeZone = timeZone;
+	}
+
+	public int getTimeZone() {
+		return timeZone;
 	}
 }
