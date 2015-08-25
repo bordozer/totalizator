@@ -156,6 +156,11 @@ public class CupServiceImpl implements CupService {
 		return cupWinnerService.hasChampions( cup );
 	}
 
+	@Override
+	public boolean isCupPublic( final Cup cup ) {
+		return isCupPublic().test( cup );
+	}
+
 	private Predicate<Cup> isCupCurrent() {
 
 		return new Predicate<Cup>() {

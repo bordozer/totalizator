@@ -32,4 +32,6 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 	boolean isCupStarted( final Cup cup );
 
 	boolean isCupFinished( final Cup cup );
+
+	boolean isCupPublic( final Cup cup );
 }

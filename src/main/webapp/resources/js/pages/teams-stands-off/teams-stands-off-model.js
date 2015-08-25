@@ -13,13 +13,12 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.cups = options.options.cups;
-			this.team1 = options.options.team1;
-			this.team2 = options.options.team2;
+			this.team1Id = options.options.team1Id;
+			this.team2Id = options.options.team2Id;
 		},
 
 		url: function() {
-			return '/rest/teams/' + this.team1.teamId + '/vs/' + this.team2.teamId + '/';
+			return '/rest/teams/' + this.team1Id + '/vs/' + this.team2Id + '/';
 		}
 	} );
 } );

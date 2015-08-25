@@ -19,14 +19,10 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var team1 = ${teamsStandoffsModel.team1JSON};
-			var team2 = ${teamsStandoffsModel.team2JSON};
-			var cups = ${teamsStandoffsModel.cups};
-
-			var score1 = ${teamsStandoffsModel.score1};
-			var score2 = ${teamsStandoffsModel.score2};
-
-			var options = { team1: team1, team2: team2, cups: cups, score1: score1, score2: score2 };
+			var options = {
+				team1Id: ${teamsStandoffsModel.team1.id}
+				, team2Id: ${teamsStandoffsModel.team2.id}
+			};
 
 			var pageView = new Page( { el: $( '.teams-stands-off-container' ), bodyRenderer: standsOff, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();

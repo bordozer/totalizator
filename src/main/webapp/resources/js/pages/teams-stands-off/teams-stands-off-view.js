@@ -10,6 +10,9 @@ define( function ( require ) {
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
+	var app = require( 'app' );
+	var service = require( '/resources/js/services/service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Teams standoff history"
@@ -17,57 +20,64 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
+		events: {
+			'click .js-show-cup': '_showCupStandoff'
+		},
+
 		initialize: function ( options ) {
-			this.cups = options.options.cups;
-			this.team1 = options.options.team1;
-			this.team2 = options.options.team2;
-
-			this.score1 = options.options.score1;
-			this.score2 = options.options.score2;
-
-			this.currentUser = options.options.currentUser;
+			this.team1Id = options.options.team1Id;
+			this.team2Id = options.options.team2Id;
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
 
 		render: function() {
-			var data = _.extend( {}, { team1: this.team1, team2: this.team2, score1: this.score1, score2: this.score2, translator: translator } );
+
+			var model = this.model.toJSON();
+
+			var data = _.extend( {}, {
+				team1: model.team1
+				, team2: model.team2
+				, standoffsByCup: model.standoffsByCup
+				, selectedCup: model.cupToShow
+				, translator: translator
+			} );
 			this.$el.html( template( data ) );
 
-			this._renderMatches();
+			this._renderMatches( model.cupToShow );
 		},
 
-		_renderMatches: function() {
+		_renderMatches: function( cup ) {
 
-			var self = this;
+			var model = this.model.toJSON();
 
 			var el = this.$( '.js-teams-stands-off-matches' );
 
-			var currentUser = this.currentUser;
+			var options = {
+				filter: {
+					categoryId: cup.category.categoryId
+					, cupId: cup.cupId
+					, teamId: model.team1.teamId
+					, team2Id: model.team2.teamId
+					, showFinished: true
+					, showFutureMatches: true
+				}
+				, isCompactView: true
+				, currentUser: app.currentUser()
+			};
 
-			var cupsToShow = this.model.get( 'cupsToShow' );
+			matchesAndBetsView( el, options );
+		},
 
-			_.each( cupsToShow, function( cup ) {
+		_showCupStandoff: function( evt ) {
 
-				var container = $( '<div></div>' );
-				el.append( container );
+			var cupId = $( evt.target ).data( 'cupid' );
 
-				var options = {
-					filter: {
-						categoryId: cup.category.categoryId
-						, cupId: cup.cupId
-						, teamId: self.team1.teamId
-						, team2Id: self.team2.teamId
-						, showFinished: true
-						, showFutureMatches: true
-					}
-					, isCompactView: true
-					, currentUser: currentUser
-				};
+			this.$( '.js-cups' ).removeClass( 'bg-warning' );
+			this.$( '.js-cup-' + cupId ).addClass( 'bg-warning' );
 
-				matchesAndBetsView( container, options );
-			});
+			this._renderMatches( service.loadPublicCup( cupId ) );
 		}
 	});
 } );
