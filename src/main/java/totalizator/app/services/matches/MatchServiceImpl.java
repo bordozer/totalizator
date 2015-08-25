@@ -63,7 +63,7 @@ public class MatchServiceImpl implements MatchService {
 			} );
 		}
 
-		if ( !dto.isShowFutureMatches() ) {
+		if ( ! dto.isShowFutureMatches() ) {
 			CollectionUtils.filter( matches, new Predicate<Match>() {
 				@Override
 				public boolean evaluate( final Match match ) {
