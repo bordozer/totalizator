@@ -12,6 +12,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
+import totalizator.app.services.CupService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDate;
@@ -29,6 +30,9 @@ public class MatchServiceImpl implements MatchService {
 	private MatchDao matchRepository;
 
 	@Autowired
+	private CupService cupService;
+
+	@Autowired
 	private DateTimeService dateTimeService;
 
 	@Autowired
@@ -39,25 +43,7 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public List<Match> loadAll( final MatchesBetSettingsDTO dto ) {
 
-		final List<Match> matches = loadAll();
-
-		if ( dto.getCategoryId() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return match.getCup().getCategory().getId() == dto.getCategoryId();
-				}
-			} );
-		}
-
-		if ( dto.getCupId() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return match.getCup().getId() == dto.getCupId();
-				}
-			} );
-		}
+		final List<Match> matches = loadAll( cupService.load( ( dto.getCupId() ) ) );
 
 		if ( dto.getTeamId() > 0 ) {
 			CollectionUtils.filter( matches, new Predicate<Match>() {
@@ -81,16 +67,16 @@ public class MatchServiceImpl implements MatchService {
 			CollectionUtils.filter( matches, new Predicate<Match>() {
 				@Override
 				public boolean evaluate( final Match match ) {
-					return match.isMatchFinished();
+					return isMatchFinished( match );
 				}
 			} );
 		}
 
-		if ( !dto.isShowFinished() ) {
+		if ( ! dto.isShowFinished() ) {
 			CollectionUtils.filter( matches, new Predicate<Match>() {
 				@Override
 				public boolean evaluate( final Match match ) {
-					return ! match.isMatchFinished();
+					return ! isMatchFinished( match );
 				}
 			} );
 		}
