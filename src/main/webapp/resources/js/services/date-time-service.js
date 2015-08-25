@@ -12,8 +12,6 @@ define( function ( require ) {
 	var LOCALE = app.language().country; // uk, ru, en
 
 	var moment = require( 'moment' );
-	moment.locale( LOCALE, {
-	} );
 
 	return {
 
@@ -42,6 +40,10 @@ define( function ( require ) {
 		// str => srt formatted for displaying
 		formatDateTimeDisplay: function ( time ) {
 			return moment( this.parseDate( time ) ).format( DATE_DISPLAY_FORMAT + ' ' + TIME_DISPLAY_FORMAT );
+		},
+
+		formatMomentDateTimeDisplay: function ( momentTime ) {
+			return momentTime.format( DATE_DISPLAY_FORMAT + ' ' + TIME_DISPLAY_FORMAT );
 		},
 
 		formatDateDisplay: function ( time ) {

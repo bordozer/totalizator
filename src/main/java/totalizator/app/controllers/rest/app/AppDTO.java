@@ -11,8 +11,7 @@ public class AppDTO {
 	private final String projectName;
 	private final LanguageDTO language;
 
-	private LocalDateTime timeNow;
-	private String timeNowFormatted;
+	private LocalDateTime serverNow;
 
 	private UserDTO currentUser;
 
@@ -30,20 +29,12 @@ public class AppDTO {
 	}
 
 	@JsonSerialize( using = DateTimeSerializer.class )
-	public LocalDateTime getTimeNow() {
-		return timeNow;
+	public LocalDateTime getServerNow() {
+		return serverNow;
 	}
 
-	public void setTimeNow( LocalDateTime timeNow ) {
-		this.timeNow = timeNow;
-	}
-
-	public String getTimeNowFormatted() {
-		return timeNowFormatted;
-	}
-
-	public void setTimeNowFormatted( String timeNowFormatted ) {
-		this.timeNowFormatted = timeNowFormatted;
+	public void setServerNow( final LocalDateTime serverNow ) {
+		this.serverNow = serverNow;
 	}
 
 	public UserDTO getCurrentUser() {

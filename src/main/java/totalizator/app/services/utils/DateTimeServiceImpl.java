@@ -93,16 +93,17 @@ public class DateTimeServiceImpl implements DateTimeService {
 		return time.toLocalDate().isEqual( date );
 	}
 
+	@Override
+	public String dateTimeFormat() {
+		return String.format( "%s %s", DATE_FORMAT, TIME_FORMAT );
+	}
+
 	private LocalDateTime localDateTime( final LocalDateTime time ) {
 		return LocalDateTime.of( time.getYear(), time.getMonth(), time.getDayOfMonth(), time.getHour(), time.getMinute() );
 	}
 
 	private String dateFormat() {
 		return DATE_FORMAT;
-	}
-
-	private String dateTimeFormat() {
-		return String.format( "%s %s", DATE_FORMAT, TIME_FORMAT );
 	}
 
 	private String formatUI() {

@@ -53,8 +53,7 @@ public class AppRestController {
 		final AppDTO dto = new AppDTO( projectName, language );
 
 		final LocalDateTime now = dateTimeService.getNow();
-		dto.setTimeNow( now );
-		dto.setTimeNowFormatted( dateTimeService.formatDateTimeUI( now ) );
+		dto.setServerNow( now );
 
 		if ( principal != null ) {
 			dto.setCurrentUser( dtoService.transformUser( userService.findByLogin( principal.getName() ) ) );

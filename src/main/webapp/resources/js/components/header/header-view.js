@@ -11,6 +11,7 @@ define( function ( require ) {
 	var CupsNavigation = require( 'js/components/cups-navi/cups-navi' );
 
 	var app = require( 'app' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var HeaderView = Backbone.View.extend( {
 
@@ -32,12 +33,12 @@ define( function ( require ) {
 				, title: title
 				, breadcrumbs: this.breadcrumbs
 				, projectName: app.projectName()
-				, timeNowFormatted: app.timeNowFormatted()
+				, timeNowFormatted: this._getTimeFormatted()
 			} ) );
 
 			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
 
-			this._scheduleAppDataLoading();
+			app.on( 'events:app_data_loaded', this._updateHeaderTime, this );
 
 			return this;
 		},
@@ -46,17 +47,12 @@ define( function ( require ) {
 			this.cupsNavigation.trigger( 'navigation:set:active:cup', options );
 		},
 
-		_scheduleAppDataLoading: function() {
-			setTimeout( this._refreshTime.bind( this ), 60000 );
+		_updateHeaderTime: function() {
+			this.$( '.js-time-now' ).html( this._getTimeFormatted() );
 		},
 
-		_refreshTime: function() {
-
-			app.load();
-
-			this.$( '.js-time-now' ).html( app.timeNowFormatted() );
-
-			this._scheduleAppDataLoading();
+		_getTimeFormatted: function() {
+			return dateTimeService.formatMomentDateTimeDisplay( app.timeNow() );
 		}
 	} );
 

@@ -41,4 +41,6 @@ public interface DateTimeService {
 	boolean hasTheSameDate( final LocalDateTime time1, final LocalDateTime time2 );
 
 	boolean hasTheSameDate( final LocalDateTime time, final LocalDate date );
+
+	String dateTimeFormat();
 }
