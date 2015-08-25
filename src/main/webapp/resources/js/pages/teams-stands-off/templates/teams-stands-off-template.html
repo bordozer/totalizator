@@ -19,23 +19,23 @@
 
 	<div class="col-xs-12 col-lg-4 js-teams-stands-off-by-cups">
 
-		<% _.each( standoffsByCup, function( standoffsByCup ) { %>
-			<div class="row js-cups js-cup-<%= standoffsByCup.cup.cupId %> <%= selectedCup.cupId == standoffsByCup.cup.cupId ? 'bg-warning' : '' %>">
+		<% _.each( standoffsByCup, function( standoff ) { %>
+			<div class="row js-cups js-cup-<%= standoff.cup.cupId %> <%= selectedCup.cupId == standoff.cup.cupId ? 'bg-warning' : '' %>">
 
 				<div class="col-xs-6 text-right">
-					<h4><a href="/totalizator/cups/<%= standoffsByCup.cup.cupId %>/"><%= standoffsByCup.cup.cupName %></a></h4>
+					<h4><a href="/totalizator/cups/<%= standoff.cup.cupId %>/"><%= standoff.cup.cupName %></a></h4>
 				</div>
 
 				<div class="col-xs-2">
-					<h4><%= standoffsByCup.score1 %></h4>
+					<h4><strong class="<%= standoff.style1 %>"><%= standoff.score1 %></strong></h4>
 				</div>
 
 				<div class="col-xs-2">
-					<h4><%= standoffsByCup.score2 %></h4>
+					<h4><strong class="<%= standoff.style2 %>"><%= standoff.score2 %></strong></h4>
 				</div>
 
 				<div class="col-xs-1">
-					<i class="fa fa-info-circle fa-2x js-show-cup" data-cupid="<%= standoffsByCup.cup.cupId %>" style="cursor: hand;"></i>
+					<i class="fa fa-info-circle fa-2x js-show-cup" data-cupid="<%= standoff.cup.cupId %>" style="cursor: hand;"></i>
 				</div>
 			</div>
 

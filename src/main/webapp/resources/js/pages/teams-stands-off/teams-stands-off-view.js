@@ -36,6 +36,11 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
+			_.each( model.standoffsByCup, function( standoff ) {
+				standoff.style1 = standoff.score1 > standoff.score2 ? 'text-success' : ( standoff.score1 < standoff.score2 ? 'text-danger' : '' );
+				standoff.style2 = standoff.score2 > standoff.score1 ? 'text-success' : ( standoff.score2 < standoff.score1 ? 'text-danger' : '' );
+			});
+
 			var data = _.extend( {}, {
 				team1: model.team1
 				, team2: model.team2
