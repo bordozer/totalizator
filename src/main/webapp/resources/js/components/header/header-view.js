@@ -38,7 +38,7 @@ define( function ( require ) {
 
 			this.cupsNavigation = new CupsNavigation( 0, this.$( '.js-cups-navi' ) ).view();
 
-			app.on( 'events:app_data_loaded', this._updateHeaderTime, this );
+			app.on( 'events:app_time_changed', this._updateHeaderTime, this );
 
 			return this;
 		},

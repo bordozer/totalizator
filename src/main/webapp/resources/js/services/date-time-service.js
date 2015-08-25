@@ -39,7 +39,7 @@ define( function ( require ) {
 
 		// str => srt formatted for displaying
 		formatDateTimeDisplay: function ( time ) {
-			return moment( this.parseDate( time ) ).format( DATE_DISPLAY_FORMAT + ' ' + TIME_DISPLAY_FORMAT );
+			return this.formatMomentDateTimeDisplay( moment( this.parseDate( time ) ) );
 		},
 
 		formatMomentDateTimeDisplay: function ( momentTime ) {

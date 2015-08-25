@@ -82,7 +82,7 @@ define( function ( require ) {
 
 			this.clientNow = new moment( this.clientNow ).add( 1, 'minute' );
 
-			this.trigger( 'events:app_data_loaded' );
+			this.trigger( 'events:app_time_changed' );
 
 			this._scheduleClientTimeIncreasing();
 		}
