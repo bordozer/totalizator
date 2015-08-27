@@ -61,7 +61,7 @@ define( function ( require ) {
 		},
 
 		renderBody: function () {
-			//this.model.fetch( { cache: false } );
+			this.model.fetch( { cache: false } );
 		},
 
 		getTitle: function () {
