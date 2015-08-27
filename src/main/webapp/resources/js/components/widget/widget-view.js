@@ -46,11 +46,11 @@ define( function ( require ) {
 
 			this.showProgress();
 
-			this._renderDropDownMenu();
-
 			this.$( this.windowBodyContainerSelector ).fadeIn( 500, "swing" );
 
 			this.renderBody();
+
+			this._renderDropDownMenu();
 
 			this.delegateEvents();
 		},
@@ -97,6 +97,7 @@ define( function ( require ) {
 		},
 
 		hideProgress: function() {
+
 			var el = this._getIconEl();
 			el.html( '' );
 			el.removeClass( this.progressIcon );
