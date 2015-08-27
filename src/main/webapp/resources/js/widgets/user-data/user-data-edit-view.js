@@ -17,8 +17,7 @@ define( function ( require ) {
 	return Backbone.View.extend( {
 
 		events: {
-			'click .js-save-settings-button': '_saveSettings'
-			, 'click .js-close-settings-button': '_closeSettings'
+			'change #userName': '_bind'
 		},
 
 		initialize: function( options ) {
@@ -32,22 +31,7 @@ define( function ( require ) {
 		},
 
 		_bind: function () {
-			return { userName: this.$( '#userName' ).val() };
-		},
-
-		_saveSettings: function() {
-
-			this.model.set( this._bind() );
-
-			if ( ! this.model.isValid() ) {
-				return;
-			}
-
-			this.trigger( 'events:save_user_data' );
-		},
-
-		_closeSettings: function() {
-			this.trigger( 'events:cancel_user_data_editing' );
+			this.model.set( { userName: this.$( '#userName' ).val() } );
 		}
 	});
 } );

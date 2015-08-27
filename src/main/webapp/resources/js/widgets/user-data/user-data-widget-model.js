@@ -9,16 +9,21 @@ define( function ( require ) {
 
 	return Backbone.Model.extend( {
 
+		_attrs: {},
+
 		defaults: {
 			userName: ''
 		},
 
 		initialize: function ( options ) {
+
 			this.userId = options.options.userId;
 
 			this.on( "invalid", function ( model, error ) {
 				dialog.dialogValidationError( error );
 			} );
+
+			this.saveAttributes();
 		},
 
 		url: function() {
@@ -32,6 +37,14 @@ define( function ( require ) {
 			if ( errors.length > 0 ) {
 				return errors[0].message;
 			}
+		},
+
+		saveAttributes: function() {
+			this._attrs = this.toJSON();
+		},
+
+		restoreAttributes: function() {
+			this.set( this._attrs );
 		}
 	});
 } );
