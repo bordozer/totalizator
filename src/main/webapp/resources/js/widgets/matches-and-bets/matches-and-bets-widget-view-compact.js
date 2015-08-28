@@ -222,7 +222,7 @@ define( function ( require ) {
 
 			var options = {
 				menus: menuItems
-				, menuButtonIcon: 'fa-list'
+				, menuButtonIcon: 'fa-futbol-o'
 				, menuButtonText: ''
 				, menuButtonHint: translator.menuHint
 				, cssClass: 'btn-default'
