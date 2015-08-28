@@ -143,10 +143,6 @@ define( function ( require ) {
 				return pointsStylist.styleBetPoints( _matchTransformed, _betTransformed );
 			},
 
-			formatDate: function() {
-				return dateTimeService.formatDateDisplay( match.beginningTime );
-			},
-
 			formatTime: function() {
 				return dateTimeService.formatTimeDisplay( match.beginningTime );
 			}
@@ -184,13 +180,22 @@ define( function ( require ) {
 			var self = this;
 			this.model.forEach( function( matchBetModel ) {
 
-				var el = $( '<div></div>' );
-				container.append( el );
+				var matchesOnDate = matchBetModel.toJSON();
 
-				var matchBet = matchBetModel.toJSON();
+				var date = matchesOnDate.date;
+				var matchBets = matchesOnDate.matchBets;
 
-				el.html( self._renderEntry( matchBet ) );
-				self._renderMatchMenu( matchBet, el );
+				var dateEl = $( "<h6 class='well well-sm text-danger'><strong>" + dateTimeService.formatDateFullDisplay( date ) + "</strong></h6>" );
+				container.append( dateEl );
+
+				_.each( matchBets, function( matchBet ) {
+
+					var el = $( '<div></div>' );
+					container.append( el );
+
+					el.html( self._renderEntry( matchBet ) );
+					self._renderMatchMenu( matchBet, el );
+				} );
 			});
 
 			this.trigger( 'inner-view-rendered' );

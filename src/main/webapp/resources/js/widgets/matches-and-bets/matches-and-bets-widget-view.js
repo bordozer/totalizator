@@ -57,19 +57,19 @@ define( function ( require ) {
 		_renderEntry: function ( model, container ) {
 
 			var date = model.date;
-			var matchIds = model.matchIds;
+			var matchBets = model.matchBets;
 
 			var dateEl = $( "<h4 class='well well-sm text-danger'><strong>" + dateTimeService.formatDateFullDisplay( date ) + "</strong></h4>" );
 			container.append( dateEl );
 
 			var showBetForUserId = this.filter.userId;
-			_.each( matchIds, function( matchId ) {
+			_.each( matchBets, function( matchBet ) {
 
 				var el = $( "<div></div>" );
 				container.append( el );
 
 				var options = {
-					matchId: matchId
+					matchId: matchBet.match.matchId
 					, showBetForUserId: showBetForUserId
 				};
 

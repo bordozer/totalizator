@@ -94,18 +94,12 @@ public class MatchesAndBetsRestController {
 			@Override
 			public void accept( final LocalDate date ) {
 
-				final List<Integer> matchIds = matchBetDTOs
+				final List<MatchBetDTO> matchIds = matchBetDTOs
 						.stream()
 						.filter( new java.util.function.Predicate<MatchBetDTO>() {
 							@Override
 							public boolean test( final MatchBetDTO matchBetDTO ) {
 								return dateTimeService.hasTheSameDate( matchBetDTO.getMatch().getBeginningTime(), date );
-							}
-						}  )
-						.map( new Function<MatchBetDTO, Integer>() {
-							@Override
-							public Integer apply( final MatchBetDTO matchBetDTO ) {
-								return matchBetDTO.getMatch().getMatchId();
 							}
 						} )
 						.collect( Collectors.toList() );

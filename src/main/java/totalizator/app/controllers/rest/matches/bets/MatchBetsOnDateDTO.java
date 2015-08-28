@@ -1,6 +1,7 @@
 package totalizator.app.controllers.rest.matches.bets;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.serialization.DateSerializer;
 
 import java.time.LocalDate;
@@ -9,11 +10,11 @@ import java.util.List;
 public class MatchBetsOnDateDTO {
 
 	private final LocalDate date;
-	private final List<Integer> matchIds;
+	private final List<MatchBetDTO> matchBets;
 
-	public MatchBetsOnDateDTO( final LocalDate date, final List<Integer> matchIds ) {
+	public MatchBetsOnDateDTO( final LocalDate date, final List<MatchBetDTO> matchBets ) {
 		this.date = date;
-		this.matchIds = matchIds;
+		this.matchBets = matchBets;
 	}
 
 	@JsonSerialize( using = DateSerializer.class )
@@ -21,12 +22,12 @@ public class MatchBetsOnDateDTO {
 		return date;
 	}
 
-	public List<Integer> getMatchIds() {
-		return matchIds;
+	public List<MatchBetDTO> getMatchBets() {
+		return matchBets;
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %d", date, matchIds.size() );
+		return String.format( "%s: %d", date, matchBets.size() );
 	}
 }
