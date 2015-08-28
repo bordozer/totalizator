@@ -70,7 +70,7 @@ define( function ( require ) {
 			var self = this;
 			this.$( 'input' ).keypress( function ( e ) {
 				if ( e.which == 13 ) {
-					self._saveBet();
+					self.trigger( 'events:save_bet' );
 				}
 			} );
 

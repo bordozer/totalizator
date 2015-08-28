@@ -141,13 +141,14 @@ define( function ( require ) {
 
 			this._renderMatchTeams();
 
-			new BetZoneView( {
+			var view = new BetZoneView( {
 				matchBet: matchBet
 				, isEdit: true
 				, showBetForUserId: this.model.showBetForUserId
 				, currentUser: this.currentUser
 				, el: this.$( '.js-footer' )
 			} );
+			view.on( 'events:save_bet', this._saveBet, this );
 
 			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_EDIT ) );
 
