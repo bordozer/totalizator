@@ -9,6 +9,7 @@ define( function ( require ) {
 	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
 
 	var service = require( '/resources/js/services/service.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var MatchBetWidget = require( 'js/widgets/match-bet/match-bet-widget' );
 
@@ -55,15 +56,25 @@ define( function ( require ) {
 
 		_renderEntry: function ( model, container ) {
 
-			var el = $( "<div></div>" );
-			container.append( el );
+			var date = model.date;
+			var matchIds = model.matchIds;
 
-			var options = {
-				matchId: model.matchId
-				, showBetForUserId: this.filter.userId
-			};
+			var dateEl = $( "<h4 class='well well-sm text-danger'><strong>" + dateTimeService.formatDateFullDisplay( date ) + "</strong></h4>" );
+			container.append( dateEl );
 
-			var view = new MatchBetWidget( el, options );
+			var showBetForUserId = this.filter.userId;
+			_.each( matchIds, function( matchId ) {
+
+				var el = $( "<div></div>" );
+				container.append( el );
+
+				var options = {
+					matchId: matchId
+					, showBetForUserId: showBetForUserId
+				};
+
+				var view = new MatchBetWidget( el, options );
+			});
 		}
 	});
 } );

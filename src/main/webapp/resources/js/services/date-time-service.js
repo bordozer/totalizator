@@ -8,6 +8,8 @@ define( function ( require ) {
 	var DATE_DISPLAY_FORMAT = 'D MMM YYYY';
 	var TIME_DISPLAY_FORMAT = 'HH:mm';
 
+	var DATE_DISPLAY_FORMAT_FULL = 'D MMMM YYYY, dddd';
+
 	var app = require( 'app' );
 	var LOCALE = app.language().country; // uk, ru, en
 
@@ -48,6 +50,10 @@ define( function ( require ) {
 
 		formatDateDisplay: function ( time ) {
 			return moment( this.parseDate( time ) ).format( DATE_DISPLAY_FORMAT );
+		},
+
+		formatDateFullDisplay: function ( time ) {
+			return moment( this.parseDate( time ) ).format( DATE_DISPLAY_FORMAT_FULL );
 		},
 
 		formatTimeDisplay: function ( time ) {

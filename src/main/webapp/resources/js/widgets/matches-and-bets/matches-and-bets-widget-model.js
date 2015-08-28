@@ -6,10 +6,11 @@ define( function ( require ) {
 
 	var MatchModel = Backbone.Model.extend( {
 
-		idAttribute: 'matchId',
+		//idAttribute: 'matchId',
 
 		defaults: {
-			matchId: 0
+			date: 0
+			, matchIds: []
 		},
 
 		initialize: function ( options ) {
@@ -24,7 +25,7 @@ define( function ( require ) {
 		},
 
 		url: function() {
-			return '/rest/matches/bets/'; // TODO: get IDs only?
+			return '/rest/matches/bets/';
 		},
 
 		refresh: function( data ) {

@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.matches;
+package totalizator.app.controllers.rest.matches.bets;
 
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -14,14 +14,19 @@ import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.services.DTOService;
+import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.UserService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -46,7 +51,7 @@ public class MatchesAndBetsRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/bets/", produces = APPLICATION_JSON_VALUE )
-	public List<MatchBetDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
+	public List<MatchBetsOnDateDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
 		final int userId = dto.getUserId();
 
@@ -73,7 +78,43 @@ public class MatchesAndBetsRestController {
 			} );
 		}
 
-		return matchBetDTOs;
+		final List<LocalDate> matchDates = matchBetDTOs
+				.stream()
+				.map( new Function<MatchBetDTO, LocalDate>() {
+					@Override
+					public LocalDate apply( final MatchBetDTO matchBetDTO ) {
+						return matchBetDTO.getMatch().getBeginningTime().toLocalDate();
+					}
+				} ).distinct().collect( Collectors.toList() );
+
+		final List<MatchBetsOnDateDTO> result = newArrayList();
+
+		matchDates.stream().forEach( new Consumer<LocalDate>() {
+
+			@Override
+			public void accept( final LocalDate date ) {
+
+				final List<Integer> matchIds = matchBetDTOs
+						.stream()
+						.filter( new java.util.function.Predicate<MatchBetDTO>() {
+							@Override
+							public boolean test( final MatchBetDTO matchBetDTO ) {
+								return dateTimeService.hasTheSameDate( matchBetDTO.getMatch().getBeginningTime(), date );
+							}
+						}  )
+						.map( new Function<MatchBetDTO, Integer>() {
+							@Override
+							public Integer apply( final MatchBetDTO matchBetDTO ) {
+								return matchBetDTO.getMatch().getMatchId();
+							}
+						} )
+						.collect( Collectors.toList() );
+
+				result.add( new MatchBetsOnDateDTO( date, matchIds ) );
+			}
+		} );
+
+		return result;
 	}
 
 	@ResponseStatus( HttpStatus.OK )
