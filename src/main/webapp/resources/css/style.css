@@ -24,7 +24,7 @@
 }
 
 .match-bet-score {
-	font-size: 16px;
+	/*font-size: 16px;*/
 	font-weight: bold;
 }
 
@@ -39,4 +39,9 @@
 
 .team-out-of-cup {
 	opacity: 0.3;
+}
+
+.nopadding {
+	padding: 0 !important;
+	margin: 0 !important;
 }
