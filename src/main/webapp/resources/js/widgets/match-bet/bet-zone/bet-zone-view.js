@@ -149,12 +149,15 @@ define( function ( require ) {
 
 		_renderUserPoints: function() {
 
-			if ( this.matchBet.userMatchPointsHolder.summaryPoints != 0 ) {
+			var summaryPoints = this.matchBet.userMatchPointsHolder.summaryPoints;
+			if ( summaryPoints != 0 ) {
 
-				this.$( '.js-bet-zone-points' ).html( this.matchBet.userMatchPointsHolder.summaryPoints );
+				var pointsEl = this.$( '.js-bet-zone-points' );
+				pointsEl.html( summaryPoints );
+				pointsEl.addClass( summaryPoints > 0 ? 'text-success' : 'text-danger' );
 
 				if ( this.matchBet.userMatchPointsHolder.matchBonus != 0 ) {
-					this.$( '.js-bet-zone-points' ).append( ' <sup> ' + this.matchBet.userMatchPointsHolder.matchBetPoints + '+' + this.matchBet.userMatchPointsHolder.matchBonus + '</sup>' );
+					pointsEl.append( ' <sup> ' + this.matchBet.userMatchPointsHolder.matchBetPoints + '+' + this.matchBet.userMatchPointsHolder.matchBonus + '</sup>' );
 				}
 			}
 		},
