@@ -49,6 +49,6 @@ public class MatchBonusPointsCalculationServiceImpl implements MatchBonusPointsC
 			return 0; // nobody won
 		}
 
-		return losersPointsSum / winnersCount;
+		return ( float ) losersPointsSum / ( float ) winnersCount;
 	}
 }

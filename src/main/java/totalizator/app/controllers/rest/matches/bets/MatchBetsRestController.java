@@ -74,9 +74,10 @@ public class MatchBetsRestController {
 
 		final UserGroup userGroup = userGroupId > 0 ? userGroupService.load( userGroupId ) : null;
 
+		final List<MatchBet> matchBets = matchBetsService.loadAll( match, userGroup );
+
 		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
 
-		final List<MatchBet> matchBets = matchBetsService.loadAll( match, userGroup );
 		for ( final MatchBet matchBet : matchBets ) {
 
 			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser, userGroup );
@@ -96,8 +97,8 @@ public class MatchBetsRestController {
 				final UserMatchPointsHolderDTO pointsHolder1 = o2.getUserMatchPointsHolder();
 				final UserMatchPointsHolderDTO pointsHolder2 = o1.getUserMatchPointsHolder();
 
-				if ( pointsHolder1.getSummaryPoints() + pointsHolder2.getSummaryPoints() > 0 ) {
-					return ( ( Float ) pointsHolder1.getSummaryPoints() ).compareTo( pointsHolder2.getSummaryPoints() );
+				if ( pointsHolder1.getSummary() > pointsHolder2.getSummary() || pointsHolder1.getSummary() < pointsHolder2.getSummary() ) {
+					return ( ( Float ) pointsHolder1.getSummary() ).compareTo( pointsHolder2.getSummary() );
 				}
 
 				return o1.getBet().getUser().getUserName().compareToIgnoreCase( o2.getBet().getUser().getUserName() );

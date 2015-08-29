@@ -35,23 +35,23 @@ define( function ( require ) {
 
 		initializeInnerView: function( options ) {
 
-			this.model.fetch( { cache: false, async: false } );
+			var matchId = options.options.matchId;
+			var match = service.loadMatch( matchId );
 
 			this.userName = options.options.userName;
 
-			this.listenTo( this.model, 'sync', this.render );
+			this.listenTo( this.model, 'sync', this._renderMatchBets );
 
 			this.userGroupsView = new WidgetConfigurableComponents_UserGroupsView( {
 				selectedUserGroupId: 0
-				, cup: this.model.get( 'match' ).cup
+				, cup: match.cup
 			} );
 
 			this.nestedSettingsViews.push( this.userGroupsView );
 		},
 
 		renderInnerView: function () {
-			//this.model.fetch( { cache: false } );
-			this._renderMatchBets();
+			this.model.fetch( { cache: false } );
 		},
 
 		getTitle: function () {

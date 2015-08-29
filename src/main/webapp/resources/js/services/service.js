@@ -246,6 +246,24 @@ define( function ( require ) {
 			return result;
 		},
 
+		loadMatch: function( matchId ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/matches/' + matchId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		filterCupsByCategory: function( cups, categoryId ) {
 			return _.filter( cups, function( cup ) {
 				return cup.category.categoryId == categoryId;

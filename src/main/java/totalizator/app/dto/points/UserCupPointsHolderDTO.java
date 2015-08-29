@@ -6,59 +6,59 @@ public class UserCupPointsHolderDTO {
 
 	private final UserDTO user;
 
-	private float matchBetPointsPositive;
-	private float matchBetPointsNegative;
+	private String matchBetPointsPositive;
+	private String matchBetPointsNegative;
 
-	private final float matchBetPoints;
-	private final float matchBonuses;
-	private final int cupWinnerBonus;
+	private final String matchBetPoints;
+	private final String matchBonuses;
+	private final String cupWinnerBonus;
 
-	private final float summaryPoints;
+	private final String summaryPoints;
 
 	public UserCupPointsHolderDTO( final UserDTO user, final float matchBetPoints, final float matchBonuses, final int cupWinnerBonus ) {
 
 		this.user = user;
 
-		this.matchBetPoints = matchBetPoints;
-		this.matchBonuses = matchBonuses;
-		this.cupWinnerBonus = cupWinnerBonus;
+		this.matchBetPoints = String.format( "%.2f", matchBetPoints );
+		this.matchBonuses = String.format( "%.2f", matchBonuses );
+		this.cupWinnerBonus = String.format( "%d", cupWinnerBonus );
 
-		this.summaryPoints = this.matchBetPoints + this.matchBonuses+ this.cupWinnerBonus;
+		this.summaryPoints = String.format( "%.2f", matchBetPoints + matchBonuses + cupWinnerBonus );
 	}
 
 	public UserDTO getUser() {
 		return user;
 	}
 
-	public float getMatchBetPointsPositive() {
+	public String getMatchBetPointsPositive() {
 		return matchBetPointsPositive;
 	}
 
-	public void setMatchBetPointsPositive( final float matchBetPointsPositive ) {
-		this.matchBetPointsPositive = matchBetPointsPositive;
+	public void setMatchBetPointsPositive( final int matchBetPointsPositive ) {
+		this.matchBetPointsPositive = String.format( "%d", matchBetPointsPositive );
 	}
 
-	public float getMatchBetPointsNegative() {
+	public String getMatchBetPointsNegative() {
 		return matchBetPointsNegative;
 	}
 
-	public void setMatchBetPointsNegative( final float matchBetPointsNegative ) {
-		this.matchBetPointsNegative = matchBetPointsNegative;
+	public void setMatchBetPointsNegative( final int matchBetPointsNegative ) {
+		this.matchBetPointsNegative = String.format( "%d", matchBetPointsNegative );
 	}
 
-	public float getMatchBetPoints() {
+	public String getMatchBetPoints() {
 		return matchBetPoints;
 	}
 
-	public float getMatchBonuses() {
+	public String getMatchBonuses() {
 		return matchBonuses;
 	}
 
-	public int getCupWinnerBonus() {
+	public String getCupWinnerBonus() {
 		return cupWinnerBonus;
 	}
 
-	public float getSummaryPoints() {
+	public String getSummaryPoints() {
 		return summaryPoints;
 	}
 
