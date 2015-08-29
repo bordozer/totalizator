@@ -15,11 +15,11 @@ public class UserCupPointsHolderDTO {
 
 	private final String summaryPoints;
 
-	public UserCupPointsHolderDTO( final UserDTO user, final float matchBetPoints, final float matchBonuses, final int cupWinnerBonus ) {
+	public UserCupPointsHolderDTO( final UserDTO user, final int matchBetPoints, final float matchBonuses, final int cupWinnerBonus ) {
 
 		this.user = user;
 
-		this.matchBetPoints = String.format( "%.2f", matchBetPoints );
+		this.matchBetPoints = String.format( "%d", matchBetPoints );
 		this.matchBonuses = String.format( "%.2f", matchBonuses );
 		this.cupWinnerBonus = String.format( "%d", cupWinnerBonus );
 
