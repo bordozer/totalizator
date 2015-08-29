@@ -20,6 +20,8 @@ public interface UserGroupService extends GenericService<UserGroup> {
 
 	boolean isUserOwnerOfGroup( final UserGroup userGroup, final User user );
 
+	boolean isUserMemberOfGroup( final UserGroup userGroup, final User user );
+
 	void addMember( final UserGroup userGroup, final User user );
 
 	void removeMember( final UserGroup userGroup, final User user );

@@ -14,6 +14,8 @@ public interface UserMatchPointsCalculationService {
 
 	UserMatchPointsHolder getUserMatchPoints( final MatchBet matchBet );
 
+	UserMatchPointsHolder getUserMatchPoints( final MatchBet matchBet, final UserGroup userGroup );
+
 	List<UserCupPointsHolder> getUsersCupPoints( final Cup cup );
 
 	List<UserCupPointsHolder> getUsersCupPoints( final Cup cup, final UserGroup userGroup );

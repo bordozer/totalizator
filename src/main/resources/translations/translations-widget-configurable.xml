@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Widget configurable: Show settings action</nerd>
+		<ru><![CDATA[Настройки]]></ru>
+		<ua><![CDATA[Налаштування]]></ua>
+		<en><![CDATA[Settings]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No filter by user groups</nerd>
+		<ru><![CDATA[Не фильтровать]]></ru>
+		<ua><![CDATA[Немає фiльтру]]></ua>
+		<en><![CDATA[No filter]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

@@ -258,6 +258,24 @@ define( function ( require ) {
 			});
 		},
 
+		loadUserGroups: function() {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/user-groups/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					//alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		loadUserGroupsWhereUserIsOwner: function( userId ) {
 			var result = [];
 

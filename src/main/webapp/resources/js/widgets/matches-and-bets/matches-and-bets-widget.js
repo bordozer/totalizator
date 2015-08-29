@@ -7,7 +7,7 @@ define( function( require ) {
 	var $ = require( 'jquery' );
 
 	var Model = require( './matches-and-bets-widget-model' );
-	var FilterModel = require( 'js/components/widget-configurable/filter/matches-filter-model' );
+	var FilterModel = require( 'js/components/widget-matches-and-bets/filter/matches-filter-model' );
 
 	var View = require( './matches-and-bets-widget-view' );
 	var ViewCompact = require( './matches-and-bets-widget-view-compact' );

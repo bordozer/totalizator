@@ -7,18 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.beans.ValidationResult;
 import totalizator.app.dao.MatchBetDao;
-import totalizator.app.models.Cup;
-import totalizator.app.models.Match;
-import totalizator.app.models.MatchBet;
-import totalizator.app.models.User;
+import totalizator.app.models.*;
 import totalizator.app.services.CupBetsService;
 import totalizator.app.services.CupService;
+import totalizator.app.services.UserGroupService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -46,6 +45,9 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Autowired
 	private CupBetsService cupBetsService;
 
+	@Autowired
+	private UserGroupService userGroupService;
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll() {
@@ -62,6 +64,19 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll( final Match match ) {
 		return newArrayList( matchBetRepository.loadAll( match ) );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public List<MatchBet> loadAll( final Match match, final UserGroup userGroup ) {
+
+		return loadAll( match ).stream().filter( new java.util.function.Predicate<MatchBet>() {
+
+			@Override
+			public boolean test( final MatchBet matchBet ) {
+				return userGroupService.isUserMemberOfGroup( userGroup, matchBet.getUser() );
+			}
+		} ).collect( Collectors.toList() );
 	}
 
 	@Override

@@ -6,7 +6,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 	var moment = require( 'moment' );
 
-	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
+	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -18,7 +18,7 @@ define( function ( require ) {
 		switchViewsLabel: 'Switch match and bets to compact views'
 	} );
 
-	return ConfigurableView.extend( {
+	return WidgetMatchesAndBets.extend( {
 
 		renderInnerView: function ( filter ) {
 			this.filter = filter;

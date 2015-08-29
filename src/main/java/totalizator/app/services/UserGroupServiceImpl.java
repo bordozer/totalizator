@@ -11,6 +11,7 @@ import totalizator.app.models.*;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -86,16 +87,15 @@ public class UserGroupServiceImpl implements UserGroupService {
 	@Transactional( readOnly = true )
 	public List<UserGroup> loadUserGroupsWhereUserIsMember( final User user ) {
 
-		final Function<UserGroupMember, UserGroup> mapper = new Function<UserGroupMember, UserGroup>() {
-			@Override
-			public UserGroup apply( final UserGroupMember userGroupMember ) {
-				return userGroupMember.getUserGroup();
-			}
-		};
-
-		final List<UserGroupMember> memberInGroups = userGroupMemberRepository.loadUserGroupsWhereUserIsMember( user );
-
-		return memberInGroups.stream().map( mapper ).collect( Collectors.toList() );
+		return userGroupMemberRepository.loadUserGroupsWhereUserIsMember( user )
+				.stream()
+				.map( new Function<UserGroupMember, UserGroup>() {
+					@Override
+					public UserGroup apply( final UserGroupMember userGroupMember ) {
+						return userGroupMember.getUserGroup();
+					}
+				} )
+				.collect( Collectors.toList() );
 	}
 
 	@Override
@@ -136,13 +136,34 @@ public class UserGroupServiceImpl implements UserGroupService {
 	@Cacheable( value = GenericService.CACHE_PERMANENT )
 	public boolean isUserOwnerOfGroup( final UserGroup userGroup, final User user ) {
 
+		if ( userGroup == null ) {
+			return true;
+		}
+
 		for ( final UserGroup group : loadUserGroupsWhereUserIsOwner( user ) ) {
-			if ( group.getOwner().equals( user ) ) {
+			if ( userGroup.equals( group ) && group.getOwner().equals( user ) ) {
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	@Override
+	public boolean isUserMemberOfGroup( final UserGroup userGroup, final User user ) {
+
+		if ( isUserOwnerOfGroup( userGroup, user ) ) {
+			return true;
+		}
+
+		return loadUserGroupsWhereUserIsMember( user )
+				.stream()
+				.anyMatch( new Predicate<UserGroup>() {
+					@Override
+					public boolean test( final UserGroup memberOfGroup ) {
+						return memberOfGroup.equals( userGroup );
+					}
+				} );
 	}
 
 	@Override

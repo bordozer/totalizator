@@ -3,6 +3,13 @@
 <translations>
 
 	<translation>
+		<nerd>User group</nerd>
+		<ru><![CDATA[Группа]]></ru>
+		<ua><![CDATA[Група]]></ua>
+		<en><![CDATA[User group]]></en>
+	</translation>
+
+	<translation>
 		<nerd>User groups</nerd>
 		<ru><![CDATA[Группы]]></ru>
 		<en><![CDATA[User groups]]></en>

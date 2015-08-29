@@ -9,7 +9,7 @@ define( function( require ) {
 	var Model = require( './admin-matches-widget-model' );
 	var View = require( './admin-matches-widget-view' );
 
-	var FilterModel = require( 'js/components/widget-configurable/filter/matches-filter-model' );
+	var FilterModel = require( 'js/components/widget-matches-and-bets/filter/matches-filter-model' );
 
 	function init( container, options ) {
 

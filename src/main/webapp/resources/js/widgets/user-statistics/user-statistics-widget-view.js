@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/user-statistics-widget-template.html' ) );
 
-	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
+	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -16,7 +16,7 @@ define( function ( require ) {
 		, underConstructionLabel: 'Under construction'
 	} );
 
-	return ConfigurableView.extend( {
+	return WidgetMatchesAndBets.extend( {
 
 		renderInnerView: function( filter ) {
 			this.listenToOnce( this.model, 'sync', this._renderUSerStatistics );

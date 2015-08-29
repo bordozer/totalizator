@@ -41,28 +41,37 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public UserMatchPointsHolder getUserMatchPoints( final MatchBet matchBet ) {
-		return new UserMatchPointsHolder( userMatchBetPointsCalculationService.getUserMatchBetPoints( matchBet ), getUserMatchBonuses( matchBet ) );
+		return new UserMatchPointsHolder( userMatchBetPointsCalculationService.getUserMatchBetPoints( matchBet ), getUserMatchBonuses( matchBet, userService.loadAll() ) );
+	}
+
+	@Override
+	@Cacheable( value = CACHE_QUERY )
+	public UserMatchPointsHolder getUserMatchPoints( final MatchBet matchBet, final UserGroup userGroup ) {
+		final List<User> users = userGroup != null ? userGroupService.loadUserGroupMembers( userGroup ) : userService.loadAll();
+		return new UserMatchPointsHolder( userMatchBetPointsCalculationService.getUserMatchBetPoints( matchBet ), getUserMatchBonuses( matchBet, users ) );
 	}
 
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<UserCupPointsHolder> getUsersCupPoints( final Cup cup ) {
-		return sumPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, userService.loadAll() ) );
+		final List<User> users = userService.loadAll();
+		return sumPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, users ), users );
 	}
 
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<UserCupPointsHolder> getUsersCupPoints( final Cup cup, final UserGroup userGroup ) {
-		return sumPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, userGroupService.loadUserGroupMembers( userGroup ) ) );
+		final List<User> users = userGroupService.loadUserGroupMembers( userGroup );
+		return sumPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, users ), users );
 	}
 
-	private List<UserCupPointsHolder> sumPointsByUser( final Cup cup, final List<UserMatchBetPointsHolder> userMatchBetPointsHolders ) {
+	private List<UserCupPointsHolder> sumPointsByUser( final Cup cup, final List<UserMatchBetPointsHolder> userMatchBetPointsHolders, final List<User> users ) {
 
 		final List<UserMatchPointsHolder> matchPoints = newArrayList();
 		matchPoints.addAll(
 				userMatchBetPointsHolders
 						.stream()
-						.map( usersMatchBetsPoint -> new UserMatchPointsHolder( usersMatchBetsPoint, getUserMatchBonuses( usersMatchBetsPoint.getMatchBet() ) ) )
+						.map( usersMatchBetsPoint -> new UserMatchPointsHolder( usersMatchBetsPoint, getUserMatchBonuses( usersMatchBetsPoint.getMatchBet(), users ) ) )
 						.collect( Collectors.toList() )
 		);
 
@@ -121,13 +130,13 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 				;
 	}
 
-	private float getUserMatchBonuses( final MatchBet matchBet ) {
+	private float getUserMatchBonuses( final MatchBet matchBet, final List<User> users ) {
 
 		if ( userMatchBetPointsCalculationService.getUserMatchBetPoints( matchBet ).getPoints() < 0 ) {
 			return 0; // user who made the bet is loser - no bonuses
 		}
 
-		return matchBonusPointsCalculationService.calculateMatchBonus( matchBet.getMatch() );
+		return matchBonusPointsCalculationService.calculateMatchBonus( matchBet.getMatch(), users );
 	}
 
 	public void setUserService( final UserService userService ) {

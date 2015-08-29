@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import totalizator.app.beans.points.UserMatchBetPointsHolder;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
+import totalizator.app.models.User;
 import totalizator.app.services.matches.MatchBetsService;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class MatchBonusPointsCalculationServiceImpl implements MatchBonusPointsC
 
 	@Override
 	@Cacheable( value = CACHE_QUERY )
-	public float calculateMatchBonus( final Match match ) {
+	public float calculateMatchBonus( final Match match, final List<User> users ) {
 
 		final List<MatchBet> matchBets = matchBetsService.loadAll( match );
 
@@ -28,6 +29,10 @@ public class MatchBonusPointsCalculationServiceImpl implements MatchBonusPointsC
 		int losersPointsSum = 0;
 
 		for ( final MatchBet bet : matchBets ) {
+
+			if ( ! users.contains( bet.getUser() ) ) {
+				continue;
+			}
 
 			final UserMatchBetPointsHolder userBetPoints = userMatchBetPointsCalculationService.getUserMatchBetPoints( bet );
 

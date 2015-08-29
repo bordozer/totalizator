@@ -269,6 +269,27 @@
 	</translation>
 
 	<translation>
+		<nerd>Apply</nerd>
+		<ru><![CDATA[Применить]]></ru>
+		<ua><![CDATA[Застосовувати]]></ua>
+		<en><![CDATA[Apply]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Close</nerd>
+		<ru><![CDATA[Закрыть]]></ru>
+		<ua><![CDATA[Закрити]]></ua>
+		<en><![CDATA[Close]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

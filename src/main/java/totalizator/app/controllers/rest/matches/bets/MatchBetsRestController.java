@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.dto.points.UserMatchPointsHolderDTO;
-import totalizator.app.models.Match;
-import totalizator.app.models.MatchBet;
-import totalizator.app.models.Team;
-import totalizator.app.models.User;
+import totalizator.app.models.*;
 import totalizator.app.services.DTOService;
+import totalizator.app.services.UserGroupService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
@@ -40,10 +38,13 @@ public class MatchBetsRestController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private UserGroupService userGroupService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bets/", produces = APPLICATION_JSON_VALUE )
-	public MatchBetsDTO matchBets( final @PathVariable( "matchId" ) int matchId, final Principal principal ) {
+	public MatchBetsDTO matchBets( final @PathVariable( "matchId" ) int matchId, final @RequestParam( value = "userGroupId", required = false ) int userGroupId, final Principal principal ) {
 
 		final User currentUser = userService.findByLogin( principal.getName() );
 
@@ -64,19 +65,21 @@ public class MatchBetsRestController {
 		result.setTeam1( team1DTO );
 		result.setTeam2( team2DTO );
 
-		result.setMatchBets( getMatchBetDTOs( match, currentUser ) );
+		result.setMatchBets( getMatchBetDTOs( match, currentUser, userGroupId ) );
 
 		return result;
 	}
 
-	private List<MatchBetDTO> getMatchBetDTOs( final Match match, final User currentUser ) {
+	private List<MatchBetDTO> getMatchBetDTOs( final Match match, final User currentUser, final int userGroupId ) {
+
+		final UserGroup userGroup = userGroupId > 0 ? userGroupService.load( userGroupId ) : null;
 
 		final List<MatchBetDTO> matchBetsDTOs = newArrayList();
 
-		final List<MatchBet> matchBets = matchBetsService.loadAll( match );
+		final List<MatchBet> matchBets = matchBetsService.loadAll( match, userGroup );
 		for ( final MatchBet matchBet : matchBets ) {
 
-			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser );
+			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser, userGroup );
 
 			if ( matchBetDTO.getBet().isSecuredBet() ) {
 				matchBetDTO.getBet().setScore1( 0 );

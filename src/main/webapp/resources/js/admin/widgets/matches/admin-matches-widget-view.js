@@ -12,7 +12,7 @@ define( function ( require ) {
 	var service = require( '/resources/js/services/service.js' );
 	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
-	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
+	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );
 	var MatchCompositeView = require( './admin-match-edit-view' );
 
 	var templateList = _.template( require( 'text!./templates/admin-matches-template.html' ) );
@@ -26,7 +26,7 @@ define( function ( require ) {
 		, deleteSelectedMatchesLabel: "Admin / Matches / Delete selected matches"
 	} );
 
-	return ConfigurableView.extend( {
+	return WidgetMatchesAndBets.extend( {
 
 		events: {
 			'click .js-add-entry-button': '_onAddClick'

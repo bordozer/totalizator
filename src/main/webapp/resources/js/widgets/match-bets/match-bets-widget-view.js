@@ -7,7 +7,9 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/match-bets-templates.html' ) );
 
-	var WidgetView = require( 'js/components/widget/widget-view' );
+	var WidgetConfigurableView = require( 'js/components/widget-configurable/widget-configurable' );
+
+	var WidgetConfigurableComponents_UserGroupsView = require( 'js/components/widget-configurable/components/user-groups/component-user-groups-view' );
 
 	var app = require( 'app' );
 	var service = require( '/resources/js/services/service.js' );
@@ -25,21 +27,31 @@ define( function ( require ) {
 		, summaryPointColumn: 'Cup users scores: Summary points'
 	} );
 
-	return WidgetView.extend( {
+	return WidgetConfigurableView.extend( {
 
 		events: {
+			'click .js-user-group': '_filterByUserGroup'
 		},
 
-		initialize: function( options ) {
+		initializeInnerView: function( options ) {
+
+			this.model.fetch( { cache: false, async: false } );
 
 			this.userName = options.options.userName;
 
-			this.listenTo( this.model, 'sync', this._renderMatchBets );
-			this.render();
+			this.listenTo( this.model, 'sync', this.render );
+
+			this.userGroupsView = new WidgetConfigurableComponents_UserGroupsView( {
+				selectedUserGroupId: 0
+				, cup: this.model.get( 'match' ).cup
+			} );
+
+			this.nestedSettingsViews.push( this.userGroupsView );
 		},
 
-		renderBody: function () {
-			this.model.fetch( { cache: false } );
+		renderInnerView: function () {
+			//this.model.fetch( { cache: false } );
+			this._renderMatchBets();
 		},
 
 		getTitle: function () {
@@ -77,6 +89,19 @@ define( function ( require ) {
 			this.$( this.windowBodyContainerSelector ).html( template( data ) );
 
 			this.trigger( 'inner-view-rendered' );
+		},
+
+		_filterByUserGroup: function( evt ) {
+
+			var menu = $( evt.target );
+			var userGroupId = menu.data( 'entity_id' );
+
+			var selectedUserGroupId = userGroupId ? userGroupId : 0;
+
+			this.userGroupsView.selectedUserGroupId = selectedUserGroupId;
+			this.model.userGroupId = selectedUserGroupId;
+
+			this.model.fetch( { cache: false } );
 		}
 	});
 } );

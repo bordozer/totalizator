@@ -112,7 +112,12 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public MatchBetDTO getMatchBetForMatch( final Match match, final User betOfUser, final User accessor ) {
-		return matchBetFunction( betOfUser, accessor ).apply( match );
+		return matchBetFunction( betOfUser, accessor, null ).apply( match );
+	}
+
+	@Override
+	public MatchBetDTO getMatchBetForMatch( final Match match, final User betOfUser, final User accessor, final UserGroup userGroup ) {
+		return matchBetFunction( betOfUser, accessor, userGroup ).apply( match );
 	}
 
 	@Override
@@ -122,7 +127,7 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User betOfUser, final User accessor ) {
-		return newArrayList( Lists.transform( matches, matchBetFunction( betOfUser, accessor ) ) );
+		return newArrayList( Lists.transform( matches, matchBetFunction( betOfUser, accessor, null ) ) );
 	}
 
 	@Override
@@ -397,7 +402,7 @@ public class DTOServiceImpl implements DTOService {
 		};
 	}
 
-	private Function<Match, MatchBetDTO> matchBetFunction( final User betsOfUser, final User accessor ) {
+	private Function<Match, MatchBetDTO> matchBetFunction( final User betsOfUser, final User accessor, final UserGroup userGroup ) {
 
 		return new Function<Match, MatchBetDTO>() {
 
@@ -420,7 +425,7 @@ public class DTOServiceImpl implements DTOService {
 				final BetDTO betDTO = transformMatchBet( matchBet, betsOfUser, accessor );
 
 				matchBetDTO.setBet( betDTO );
-				matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( userMatchPointsCalculationService.getUserMatchPoints( matchBet ) ) );
+				matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( userMatchPointsCalculationService.getUserMatchPoints( matchBet, userGroup ) ) );
 
 				return matchBetDTO;
 			}

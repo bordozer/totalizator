@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/matches-and-bets-compact-template.html' ) );
 
-	var ConfigurableView = require( 'js/components/widget-configurable/configurable-view' );
+	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );
 
 	var matchBetMenu = require( 'js/widgets/match-bet/match-bet-menu' );
 	var mainMenu = require( 'js/components/main-menu/main-menu' );
@@ -149,7 +149,7 @@ define( function ( require ) {
 		}
 	};
 
-	return ConfigurableView.extend( {
+	return WidgetMatchesAndBets.extend( {
 
 		renderInnerView: function ( filter ) {
 

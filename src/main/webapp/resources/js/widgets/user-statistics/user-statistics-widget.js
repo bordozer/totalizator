@@ -9,7 +9,7 @@ define( function ( require ) {
 	var Model = require( 'js/widgets/matches-and-bets/matches-and-bets-widget-model' );
 	var View = require( './user-statistics-widget-view' );
 
-	var FilterModel = require( 'js/components/widget-configurable/filter/matches-filter-model' );
+	var FilterModel = require( 'js/components/widget-matches-and-bets/filter/matches-filter-model' );
 
 	function init( container, options ) {
 

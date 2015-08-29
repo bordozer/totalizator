@@ -8,7 +8,9 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/cup-users-scores-widget-template.html' ) );
 
-	var WidgetView = require( 'js/components/widget/widget-view' );
+	var WidgetConfigurableView = require( 'js/components/widget-configurable/widget-configurable' );
+
+	var WidgetConfigurableComponents_UserGroupsView = require( 'js/components/widget-configurable/components/user-groups/component-user-groups-view' );
 
 	var service = require( '/resources/js/services/service.js' );
 
@@ -20,23 +22,28 @@ define( function ( require ) {
 		, matchBonusColumn: 'Cup users scores: Match bonus points'
 		, winnersBonusColumn: 'Cup users scores: Winners bonus'
 		, summaryPointColumn: 'Cup users scores: Summary points'
-		, removeUserGroupFilter: "Remove user group filter"
 	} );
 
-	return WidgetView.extend( {
+	return WidgetConfigurableView.extend( {
 
 		events: {
 			'click .js-user-group': '_filterByUserGroup'
 		},
 
-		initialize: function ( options ) {
+		initializeInnerView: function ( options ) {
 			this.user = options.user;
 
 			this.listenTo( this.model, 'sync', this._renderScores );
-			this.render();
+
+			this.userGroupsView = new WidgetConfigurableComponents_UserGroupsView( {
+				selectedUserGroupId: 0
+				, cup: this.model.get( 'cup' )
+			} );
+
+			this.nestedSettingsViews.push( this.userGroupsView );
 		},
 
-		renderBody: function () {
+		renderInnerView: function () {
 			this.model.fetch( { cache: false } );
 		},
 
@@ -48,8 +55,8 @@ define( function ( require ) {
 			return 'fa-sort-amount-desc';
 		},
 
-		getCustomMenuItems: function() {
-			return this._userGroupMenuItems( this.user.userId );
+		innerViewMenuItems: function() {
+			return [];
 		},
 
 		_renderScores: function () {
@@ -64,105 +71,16 @@ define( function ( require ) {
 		},
 
 		_filterByUserGroup: function( evt ) {
+
 			var menu = $( evt.target );
 			var userGroupId = menu.data( 'entity_id' );
-			this.model.userGroupId = userGroupId ? userGroupId : 0;
+
+			var selectedUserGroupId = userGroupId ? userGroupId : 0;
+
+			this.userGroupsView.selectedUserGroupId = selectedUserGroupId;
+			this.model.userGroupId = selectedUserGroupId;
 
 			this.render();
-		},
-
-		_userGroupMenuItems: function ( userId ) {
-
-			var separator = { selector: 'divider' };
-
-			var ownGroupsMenuItems = this._ownUserGroupMenuItems( userId );
-			var anotherGroupMenuItems = this._anotherUserGroupMenuItems( userId );
-
-			var userIsNotAMemberOfAGroups = ownGroupsMenuItems.length == 0 && anotherGroupMenuItems.length == 0;
-			if ( userIsNotAMemberOfAGroups ) {
-				return [];
-			}
-
-			var menuItems = [];
-
-			if ( this.model.userGroupId > 0 ) {
-				menuItems.push( { selector: 'js-user-group', icon: 'fa fa-filter', link: '#', text: translator.removeUserGroupFilter } );
-				menuItems.push( separator );
-			}
-
-			menuItems = menuItems.concat( ownGroupsMenuItems );
-
-			if ( ownGroupsMenuItems.length > 0 && anotherGroupMenuItems.length > 0 ) {
-				menuItems = menuItems.concat( [ separator ] );
-			}
-
-			menuItems = menuItems.concat( anotherGroupMenuItems );
-
-			return menuItems;
-		},
-
-		_ownUserGroupMenuItems: function ( userId ) {
-
-			var userGroupsForCup = this._filterUserGroupsByCup( service.loadUserGroupsWhereUserIsOwner( userId ) );
-
-			if ( userGroupsForCup.length == 0 ) {
-				return [];
-			}
-
-			var menuItems = [];
-
-			var selectedUserGroupId = this.model.userGroupId;
-
-			_.each( userGroupsForCup, function( userGroup ) {
-				menuItems.push( {
-					selector: 'js-user-group'
-					, icon: 'fa fa-group'
-					, link: '#'
-					, text: userGroup.userGroupName
-					, entity_id: userGroup.userGroupId
-					, selected: selectedUserGroupId == userGroup.userGroupId
-				} );
-			});
-
-			return menuItems;
-		},
-
-		_anotherUserGroupMenuItems: function ( userId ) {
-
-			var userGroups = this._filterUserGroupsByCup( service.loadUserGroupsWhereUserIsMember( userId ) );
-
-			if ( userGroups.length == 0 ) {
-				return [];
-			}
-
-			var menuItems = [];
-
-			var selectedUserGroupId = this.model.userGroupId;
-
-			_.each( userGroups, function( userGroup ) {
-				var groupName = userGroup.userGroupName + ' ( ' + userGroup.userGroupOwner.userName + ' )';
-				menuItems.push( {
-					selector: 'js-user-group'
-					, icon: 'fa fa-group'
-					, link: '#'
-					, text: groupName
-					, entity_id: userGroup.userGroupId
-					, selected: selectedUserGroupId == userGroup.userGroupId
-				} );
-			});
-
-			return menuItems;
-		},
-
-		_filterUserGroupsByCup: function( userGroups ) {
-
-			var cupId = this.model.cup.cupId;
-
-			return _.filter( userGroups, function( userGroup ) {
-				return _.filter( userGroup.userGroupCups, function( cup ) {
-					return cup.cupId == cupId;
-				} ).length > 0;
-			} );
 		}
 	} );
 } );

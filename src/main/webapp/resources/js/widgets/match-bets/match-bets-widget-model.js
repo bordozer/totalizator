@@ -7,6 +7,8 @@ define( function ( require ) {
 
 	return Backbone.Model.extend( {
 
+		userGroupId: 0,
+
 		defaults: {
 			matchId: 0
 			, team1: {}
@@ -19,7 +21,7 @@ define( function ( require ) {
 		},
 
 		url: function() {
-			return '/rest/matches/' + this.matchId + '/bets/';
+			return '/rest/matches/' + this.matchId + '/bets/?userGroupId=' + this.userGroupId;
 		}
 	});
 } );

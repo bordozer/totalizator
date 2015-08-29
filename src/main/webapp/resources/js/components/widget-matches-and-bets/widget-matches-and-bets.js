@@ -7,13 +7,13 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var FilterView = require( './filter/matches-filter-view' );
-	var ConfigurableModel = require( './configurable-model' );
+	var ConfigurableModel = require( './widget-matches-and-bets-model' );
 
 	var DateTimePickerView = require( './matches-on-date-picker' );
 
 	var service = require( '/resources/js/services/service.js' );
 
-	var templateSettings = _.template( require( 'text!./templates/configurable-view-settings-template.html' ) );
+	var templateSettings = _.template( require( 'text!./templates/widget-matches-and-bets-settings-template.html' ) );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
@@ -44,7 +44,7 @@ define( function ( require ) {
 
 	return WidgetView.extend( {
 
-		configurableViewEvents: {
+		widgetMatchesAndBetsEvents: {
 			'click .js-settings-button': '_onSettingsClick'
 			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
@@ -64,7 +64,7 @@ define( function ( require ) {
 
 			this.on( 'view:render', this.render, this );
 
-			this.events = _.extend( this.configurableViewEvents, this.events );
+			this.events = _.extend( this.widgetMatchesAndBetsEvents, this.events );
 
 			this.render();
 		},
