@@ -227,6 +227,24 @@ define( function ( require ) {
 			} );
 		},
 
+		/*loadTeam: function( teamId ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/teams/' + teamId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},*/
+
 		loadCupActiveTeams: function( cupId ) {
 
 			var result = [];
@@ -234,6 +252,25 @@ define( function ( require ) {
 			$.ajax( {
 				method: 'GET',
 				url: '/rest/teams/cup/' + cupId + '/active/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
+		loadCupTeams: function( cupId ) {
+
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/teams/cup/' + cupId + '/',
 				async: false,
 				success: function ( data ) {
 					result = data;

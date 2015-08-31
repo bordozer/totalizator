@@ -10,7 +10,6 @@ define( function( require ) {
 	var FilterModel = require( 'js/components/widget-matches-and-bets/filter/matches-filter-model' );
 
 	var View = require( './matches-and-bets-widget-view' );
-	var ViewCompact = require( './matches-and-bets-widget-view-compact' );
 
 	function createView( model, container, filterModel, options ) {
 
@@ -19,11 +18,9 @@ define( function( require ) {
 			, filterModel: filterModel
 			, el: container
 			, currentUser: options.currentUser
+			, viewMode: options.viewMode
+			, initialViewMode: options.initialViewMode
 		};
-
-		if ( options.isCompactView ) {
-			return new ViewCompact( matchesAndBetOptions );
-		}
 
 		return new View( matchesAndBetOptions );
 	}
@@ -32,12 +29,15 @@ define( function( require ) {
 
 		var model = new Model.MatchesModel();
 		var filterModel = new FilterModel( options.filter );
+		var initialViewMode = options.viewMode;
 
 		var view = null;
 
-		var render = _.bind( function( filter ) {
+		var render = _.bind( function( renderOptions ) {
 
-			options.filter = filter;
+			options.filter = renderOptions.filter;
+			options.viewMode = renderOptions.viewMode;
+			options.initialViewMode = initialViewMode;
 
 			if ( view ) {
 				view.remove();
@@ -48,11 +48,9 @@ define( function( require ) {
 
 			view = createView( model, el, filterModel, options );
 
-			view.on( 'events:switch_views', render, this, filter );
-
-			options.isCompactView = ! options.isCompactView;
+			view.on( 'events:switch_view_mode', render, this, options );
 		}, this );
 
-		render( options.filter );
+		render( { filter: options.filter, viewMode: options.viewMode } );
 	}
 });

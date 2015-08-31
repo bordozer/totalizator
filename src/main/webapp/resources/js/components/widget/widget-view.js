@@ -30,6 +30,8 @@ define( function ( require ) {
 
 			this.events = _.extend( this.builtinEvents, this.events );
 
+			this.widgetTemplate = template;
+
 			this.on( 'view:render', this.render, this );
 			this.on( 'inner-view-rendered', this._onInnerViewRendered, this );
 
@@ -38,7 +40,7 @@ define( function ( require ) {
 
 		render: function() {
 
-			this.$el.html( template( {
+			this.$el.html( this.widgetTemplate( {
 				icon: this.getIcon()
 				, minHeight: this.widgetBodyMinHeight()
 				, translator: translator
@@ -123,6 +125,10 @@ define( function ( require ) {
 			panel.addClass( clazz )
 		},
 
+		getDefaultWidgetTemplate: function() {
+			return template;
+		},
+
 		_renderDropDownMenu: function() {
 
 			var menuItems =  [
@@ -139,7 +145,6 @@ define( function ( require ) {
 			var options = {
 				menus: menuItems
 				, menuButtonIcon: this.getIcon()
-				//, menuButtonImage: this.getPictureURL()
 				, menuButtonText: ''
 				, menuButtonHint: translator.widgetMenuHint
 				, cssClass: 'btn-default'

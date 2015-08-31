@@ -72,7 +72,7 @@ define( function ( require ) {
 						, showFinished: true
 						, showFutureMatches: false
 					}
-					, isCompactView: true
+					, viewMode: 2
 					, currentUser: currentUser
 				};
 				matchesAndBetsView( container, options );
@@ -91,7 +91,7 @@ define( function ( require ) {
 						, showFinished: false
 						, showFutureMatches: true
 					}
-					, isCompactView: true
+					, viewMode: 2
 					, currentUser: currentUser
 				};
 				matchesAndBetsView( container, options );
@@ -110,7 +110,7 @@ define( function ( require ) {
 					, showFinished: true
 					, userId: this.userId
 				}
-				, isCompactView: false
+				, viewMode: 1
 				, menuItems: []
 			};
 

@@ -13,7 +13,7 @@ define( function ( require ) {
 	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );
-	var MatchCompositeView = require( './admin-match-edit-view' );
+	var MatchCompositeView = require( './admin-match-composite-view' );
 
 	var templateList = _.template( require( 'text!./templates/admin-matches-template.html' ) );
 

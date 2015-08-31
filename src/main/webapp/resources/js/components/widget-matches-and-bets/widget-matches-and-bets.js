@@ -49,7 +49,9 @@ define( function ( require ) {
 			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
-			, 'click .js-switch-views': '_switchViews'
+			, 'click .js-view_mode_full': '_switchViewMode'
+			, 'click .js-view_mode_tabled': '_switchViewMode'
+			, 'click .js-view_mode_minimized': '_switchViewMode'
 			, 'click .js-menu-date-picker': '_showDatePickerView'
 		},
 
@@ -66,7 +68,13 @@ define( function ( require ) {
 
 			this.events = _.extend( this.widgetMatchesAndBetsEvents, this.events );
 
+			this.initializeInnerView();
+
 			this.render();
+		},
+
+		initializeInnerView: function() {
+
 		},
 
 		renderBody: function() {
@@ -104,7 +112,7 @@ define( function ( require ) {
 
 			var result = [
 				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
-				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel, button: true }
+				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel, button: false }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
 				, { selector: 'divider' }
@@ -221,8 +229,12 @@ define( function ( require ) {
 			this.render();
 		},
 
-		_switchViews: function() {
-			this.trigger( 'events:switch_views', this.settingsModel.toJSON() );
+		_switchViewMode: function( evt ) {
+
+			var menu = $( evt.target );
+			var viewMode = menu.data( 'entity_id' );
+
+			this.trigger( 'events:switch_view_mode', { filter: this.settingsModel.toJSON(), viewMode: viewMode } );
 		},
 
 		_showDatePickerView: function() {

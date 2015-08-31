@@ -68,7 +68,7 @@ define( function ( require ) {
 					, showFinished: true
 					, showFutureMatches: true
 				}
-				, isCompactView: true
+				, viewMode: 2
 				, currentUser: app.currentUser()
 			};
 

@@ -49,7 +49,7 @@
 			<small><%= matchBet.userMatchPointsHolder.matchBonus != 0 ? matchBet.userMatchPointsHolder.matchBonus : ''%></small>
 		</td>
 
-		<td class="text-center <%= matchBet.userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
+		<td class="text-right <%= matchBet.userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
 			<strong><%= matchBet.userMatchPointsHolder.summaryPoints != 0 ? matchBet.userMatchPointsHolder.summaryPoints : ''%></strong>
 		</td>
 	</tr>

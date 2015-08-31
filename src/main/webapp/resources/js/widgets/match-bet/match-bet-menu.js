@@ -25,13 +25,24 @@ define( function ( require ) {
 	var MODE_EDIT = 2;
 	var MODE_DESCRIPTION = 3;
 
+	var VIEW_MODE_BET = 1;
+	var VIEW_MODE_TABLE = 2;
+	var VIEW_MODE_MINIMIZED = 3;
+
+	function showButton( mode, viewMode ) {
+		return mode == MODE_EDIT
+				|| mode == MODE_DESCRIPTION
+				|| viewMode == VIEW_MODE_BET
+				;
+	}
+
 	return {
 
-		getMenuItems: function( matchBet, mode ) {
+		getMenuItems: function( matchBet, mode, viewMode ) {
 
 			var result = this.getCommonMenuItems( matchBet );
 
-			var modeDependantMenuItems = this._getModeDependantMenuItems( matchBet, mode );
+			var modeDependantMenuItems = this._getModeDependantMenuItems( matchBet, mode, viewMode );
 			if ( modeDependantMenuItems.length > 0 ) {
 				result.push( {selector: 'divider'} );
 			}
@@ -74,29 +85,30 @@ define( function ( require ) {
 			];
 		},
 
-		_getModeDependantMenuItems: function( matchBet, mode ) {
+		_getModeDependantMenuItems: function( matchBet, mode, viewMode ) {
 
 			if ( mode == MODE_INFO ) {
-				return this._getMatchInfoMenuItems( matchBet );
+				return this._getMatchInfoMenuItems( matchBet, mode, viewMode );
 			}
 
 			if ( mode == MODE_EDIT ) {
-				return this._getBetEditMenuItems( matchBet );
+				return this._getBetEditMenuItems( matchBet, mode, viewMode );
 			}
 
 			if ( mode == MODE_DESCRIPTION ) {
-				return this._getMatchDescriptionMenuItems( matchBet );
+				return this._getMatchDescriptionMenuItems( matchBet, mode, viewMode );
 			}
 		},
 
-		_getMatchInfoMenuItems: function( matchBet ) {
+		_getMatchInfoMenuItems: function( matchBet, mode, viewMode ) {
 
 			var match = matchBet.match;
 			var bet = matchBet.bet;
 			var isBettingAllowed = matchBet.bettingAllowed;
 
-			var menuItems = [];
+			var button = showButton( mode, viewMode );
 
+			var menuItems = [];
 			if ( isBettingAllowed ) {
 				if ( bet == null && isBettingAllowed ) {
 					menuItems.push( {
@@ -104,7 +116,7 @@ define( function ( require ) {
 						icon: 'fa fa-money',
 						link: '#',
 						text: translator.actionMatchBetAdd
-						, button: true
+						, button: button
 					} );
 				}
 
@@ -114,7 +126,7 @@ define( function ( require ) {
 						icon: 'fa fa-edit',
 						link: '#',
 						text: translator.actionMatchBetEdit
-						, button: true
+						, button: button
 					} );
 					menuItems.push( {
 						selector: 'js-menu-match-bet-delete',
@@ -127,17 +139,19 @@ define( function ( require ) {
 
 			if ( match.description ) {
 				menuItems.push( {selector: 'divider'} );
-				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info', link: '#', text: translator.matchDescription, button: true } );
+				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info', link: '#', text: translator.matchDescription, button: button } );
 			}
 
 			return menuItems;
 		},
 
-		_getBetEditMenuItems: function( matchBet ) {
+		_getBetEditMenuItems: function( matchBet, mode, viewMode ) {
 
 			var match = matchBet.match;
 			var bet = matchBet.bet;
 			var isBettingAllowed = matchBet.bettingAllowed;
+
+			var button = showButton( mode, viewMode );
 
 			var menuItems = [];
 			if ( isBettingAllowed ) {
@@ -146,7 +160,7 @@ define( function ( require ) {
 					, icon: 'fa fa-save'
 					, link: '#'
 					, text: translator.actionMatchBetSave + ' ( Enter )'
-					, button: true
+					, button: button
 					, cssClass: 'btn-primary'
 				} );
 				menuItems.push( {
@@ -154,26 +168,28 @@ define( function ( require ) {
 					, icon: 'fa fa-close'
 					, link: '#'
 					, text: translator.actionCancelBetEditing
-					, button: true
+					, button: button
 				} );
 			}
 
 			if ( match.description ) {
 				menuItems.push( {selector: 'divider'} );
-				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info', link: '#', text: translator.matchDescription, button: true } );
+				menuItems.push( { selector: 'js-menu-match-description', icon: 'fa fa-info', link: '#', text: translator.matchDescription, button: button } );
 			}
 
 			return menuItems;
 		},
 
-		_getMatchDescriptionMenuItems: function( matchBet ) {
+		_getMatchDescriptionMenuItems: function( matchBet, mode, viewMode ) {
+
+			var button = showButton( mode, viewMode );
 
 			return [
 				{ selector: 'js-close-match-description'
 					, icon: 'fa fa-close'
 					, link: '#'
 					, text: translator.closeMatchInfo
-					, button: true
+					, button: button
 				}
 			];
 		}

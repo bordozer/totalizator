@@ -1,0 +1,80 @@
+<% var matchResults = transformer.getMatchResults() %>
+<% var betScoreHighlights = transformer.getBetScoreHighlights() %>
+<div class="panel panel-default">
+
+	<div class="panel-body <%= colorCss %>">
+
+		<div class="col-xs-3 js-window-drop-down-menu">
+
+		</div>
+
+		<div class="row" style="font-size: 12px; margin-bottom: 5px; padding-bottom: 5px; border-bottom: 1px silver dotted;">
+			<div class="col-xs-5">
+				<strong><%=beginningDate%></strong> <sup><%=beginningTime%></sup>
+			</div>
+
+			<div class="col-xs-3">
+				<%=timeToMatchBeginningTime%>
+			</div>
+
+			<div class="col-xs-2 <%= userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%>">
+				<% if( userMatchPointsHolder.summaryPoints != 0 ) { %>
+					<strong><%-userMatchPointsHolder.summaryPoints%>
+						<sup><%= userMatchPointsHolder.matchBonus != 0 ? userMatchPointsHolder.matchBetPoints + '+' + userMatchPointsHolder.matchBonus : ''%></sup>
+					</strong>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-xs-9 text-right" style="font-size: 12px;">
+				<a href="/totalizator/teams/<%- transformer.team1().teamId %>/"><%= transformer.team1().teamName %></a>
+			</div>
+
+			<div class="col-xs-1">
+				<img src="<%= transformer.team1().teamLogo %>" height="16">
+			</div>
+
+			<div class="col-xs-2" style="font-size: 12px;">
+				<% if( match.matchFinished ) { %>
+					<span class="<%= matchResults.style1 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score1() %></span>
+				<% } %>
+
+				<% if( ! match.matchFinished ) { %>
+					<span class="text-muted"><strong>?</strong></span>
+				<% } %>
+
+				<sup class="<%=betScoreHighlights.style1%>" style="font-size: 10px;" title="<%=betScoreHighlights.title%>"><%= bet != null ? transformer.betScore1() : '-' %></sup>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-xs-9 text-right" style="font-size: 12px;">
+				<a href="/totalizator/teams/<%- transformer.team2().teamId %>/"><%= transformer.team2().teamName %></a>
+			</div>
+
+			<div class="col-xs-1">
+				<img src="<%= transformer.team2().teamLogo %>" height="16">
+			</div>
+
+			<div class="col-xs-2" style="font-size: 12px;">
+
+				<% if( match.matchFinished ) { %>
+					<span class="<%= matchResults.style2 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score2() %></span>
+				<% } %>
+
+				<% if( ! match.matchFinished ) { %>
+					<span class="text-muted"><strong>?</strong></span>
+				<% } %>
+
+				<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;" title="<%=betScoreHighlights.title%>"><%= bet != null ? transformer.betScore2() : '-' %></sup>
+			</div>
+
+		</div>
+
+	</div>
+</div>

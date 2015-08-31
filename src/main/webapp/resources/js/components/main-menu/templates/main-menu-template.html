@@ -1,7 +1,7 @@
 <% if( customButtons.length > 0 ) { %>
 	<div class="btn-group">
 		<% _.each( customButtons, function( menu ) { %>
-			<button class="btn btn-default fa <%=menu.icon%> <%=menu.selector%> <%=menu.cssClass%>" title="<%=menu.text%>"></button>
+			<button class="btn btn-default fa <%=menu.icon%> <%=menu.selector%> <%=menu.cssClass%>" data-entity_id="<%=menu.entity_id%>" title="<%=menu.text%>"></button>
 		<% }) %>
 	</div>
 <% } %>

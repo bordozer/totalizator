@@ -77,6 +77,7 @@ define( function ( require ) {
 		},
 
 		renderInfo: function () {
+
 			var model = this.model.toJSON();
 
 			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
@@ -112,9 +113,9 @@ define( function ( require ) {
 			var categoryId = model.categoryId;
 
 			var cups = service.filterCupsByCategory( this.cups, categoryId );
-			var selectedCupId = model.cupId; // ? model.cupId : ( cups.length == 1 ? cups[ 0 ].cupId : 0 );
+			var selectedCupId = model.cupId;
 
-			var teams = this.model.id == 0 ? service.loadCupActiveTeams( selectedCupId ) : service.filterTeamsByCategory( this.teams, categoryId );
+			var teams = this.model.id == 0 ? service.loadCupActiveTeams( selectedCupId ) : service.loadCupTeams( selectedCupId );
 
 			this.$el.html( templateEntryEdit( {
 				model: model

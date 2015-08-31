@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.TeamDTO;
+import totalizator.app.services.CupService;
 import totalizator.app.services.CupTeamService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
@@ -21,6 +22,9 @@ public class TeamsRestController {
 	private TeamService teamService;
 
 	@Autowired
+	private CupService cupService;
+
+	@Autowired
 	private DTOService dtoService;
 
 	@Autowired
@@ -35,8 +39,15 @@ public class TeamsRestController {
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/active/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/", produces = APPLICATION_JSON_VALUE )
 	public List<TeamDTO> cupTeams( final @PathVariable( "cupId" ) int cupId ) {
+		return dtoService.transformTeams( teamService.loadAll( cupService.load( cupId ).getCategory() ) );
+	}
+
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/active/", produces = APPLICATION_JSON_VALUE )
+	public List<TeamDTO> cupTeamsActive( final @PathVariable( "cupId" ) int cupId ) {
 		return dtoService.transformTeams( cupTeamService.loadActiveForCup( cupId ) );
 	}
 }

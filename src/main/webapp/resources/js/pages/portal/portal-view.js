@@ -54,7 +54,7 @@ define( function ( require ) {
 						, cupId: cup.cupId
 						, showFutureMatches: true
 					}
-					, isCompactView: false
+					, viewMode: 3
 					, currentUser: currentUser
 				};
 				matchesAndBetsView( container, options );

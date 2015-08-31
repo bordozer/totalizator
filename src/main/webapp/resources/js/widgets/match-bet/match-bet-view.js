@@ -7,9 +7,16 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 	var moment = require( 'moment' );
 
+	var widgetNoContainerTemplate = _.template( require( 'text!./templates/widget-no-container-template.html' ) );
+
+	var templateTable = _.template( require( 'text!./templates/match-and-bet-table-entry-template.html' ) );
+	var templateMinimized = _.template( require( 'text!./templates/match-and-bet-minimized-template.html' ) );
+
 	var MatchTeamsView = require( './teams/match-teams-view' );
 	var BetZoneView = require( './bet-zone/bet-zone-view' );
 	var MatchDescriptionView = require( './description/match-description-view' );
+
+	var MatchTransformer = require( './match-transformer' );
 
 	var matchBetMenu = require( './match-bet-menu' );
 
@@ -36,6 +43,10 @@ define( function ( require ) {
 	var MODE_EDIT = 2;
 	var MODE_DESCRIPTION = 3;
 
+	var VIEW_MODE_BET = 1;
+	var VIEW_MODE_TABLE = 2;
+	var VIEW_MODE_MINIMIZED = 3;
+
 	return WidgetView.extend( {
 
 		events: {
@@ -51,10 +62,12 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.currentUser = app.currentUser();
+			this.viewMode = options.options.viewMode;
+			this.filter = options.options.filter;
+
+			this._setWidgetModes( MODE_INFO );
 
 			this.menuItems = [];
-
-			this.mode = MODE_INFO;
 
 			this.model.on( 'sync', this._render, this );
 			this.render();
@@ -111,14 +124,26 @@ define( function ( require ) {
 				return;
 			}
 
-			this._renderMatchInfo();
+			this._renderMatchInfo( this.viewMode );
 
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		_renderMatchInfo: function () {
+		_renderMatchInfo: function ( viewMode ) {
 
 			var matchBet = this.model.toJSON();
+
+			if ( viewMode == VIEW_MODE_TABLE ) {
+				this.$( this.windowBodyContainerSelector ).html( this._renderTableEntry( this.model.toJSON() ) );
+				this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.viewMode ) );
+				return;
+			}
+
+			if ( viewMode == VIEW_MODE_MINIMIZED ) {
+				this.$( this.windowBodyContainerSelector ).html( this._renderMinimizedEntry( this.model.toJSON() ) );
+				this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.viewMode ) );
+				return;
+			}
 
 			this._renderMatchTeams();
 
@@ -130,7 +155,7 @@ define( function ( require ) {
 				, el: this.$( '.js-footer' )
 			} );
 
-			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO ) );
+			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.viewMode ) );
 
 			this._setMatchContainerClass( this._getPanelClass() );
 		},
@@ -150,7 +175,7 @@ define( function ( require ) {
 			} );
 			view.on( 'events:save_bet', this._saveBet, this );
 
-			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_EDIT ) );
+			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_EDIT, this.viewMode ) );
 
 			this._setMatchContainerClass( 'panel-danger' );
 		},
@@ -165,7 +190,58 @@ define( function ( require ) {
 				, footerEl: this.$( '.js-footer' )
 			} );
 
-			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_DESCRIPTION ) );
+			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_DESCRIPTION, this.viewMode ) );
+		},
+
+		_renderTableEntry: function ( model ) {
+
+			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id );
+
+			var data = _.extend( {}
+					, model
+					, {
+						transformer: matchTransformer
+						, timeToMatchBeginningTime: dateTimeService.fromNow( model.match.beginningTime )
+						, translator: translator
+					} );
+
+			return templateTable( data );
+		},
+
+		_renderMinimizedEntry: function ( model ) {
+
+			function __getBoxColor() {
+
+				if ( model.bet == null ) {
+					return '';
+				}
+
+				if ( ! model.match.matchFinished ) {
+					return 'bg-warning';
+				}
+
+				if ( model.userMatchPointsHolder.summaryPoints > 0 ) {
+					return 'bg-success';
+				}
+
+				if ( model.userMatchPointsHolder.summaryPoints < 0 ) {
+					return 'bg-danger';
+				}
+
+				return '';
+			}
+
+			var matchTransformer = new MatchTransformer( model.match, model.bet, this.filter.teamId, this.filter.team2Id );
+			var data = _.extend( {}, model, {
+				beginningDate: dateTimeService.formatDateDisplay( model.match.beginningTime )
+				, beginningTime: dateTimeService.formatTimeDisplay( model.match.beginningTime )
+				, transformer: matchTransformer
+				, timeToMatchBeginningTime: dateTimeService.fromNow( model.match.beginningTime )
+				, colorCss: __getBoxColor()
+				, translator: translator}
+			);
+
+			return templateMinimized( data );
 		},
 
 		_renderMatchTeams: function() {
@@ -219,7 +295,7 @@ define( function ( require ) {
 
 			this.model.set( { bet: bet } );
 
-			this.mode = MODE_INFO;
+			this._setWidgetModes( MODE_INFO );
 
 			this.render();
 
@@ -243,7 +319,7 @@ define( function ( require ) {
 
 			this.model.resetBet();
 
-			this.mode = MODE_INFO;
+			this._setWidgetModes( MODE_INFO );
 
 			this.render();
 
@@ -257,7 +333,7 @@ define( function ( require ) {
 				return;
 			}
 
-			this.mode = MODE_EDIT;
+			this._setWidgetModes( MODE_EDIT );
 
 			this.render();
 		},
@@ -277,7 +353,7 @@ define( function ( require ) {
 		_onDiscardButtonClick: function( evt ) {
 			evt.preventDefault();
 
-			this.mode = MODE_INFO;
+			this._setWidgetModes( MODE_INFO );
 
 			this.render();
 		},
@@ -289,21 +365,21 @@ define( function ( require ) {
 				return;
 			}
 
-			this.mode = MODE_EDIT;
+			this._setWidgetModes( MODE_EDIT );
 
 			this.render();
 		},
 
 		_onMatchDescriptionClick: function() {
 
-			this.mode = MODE_DESCRIPTION;
+			this._setWidgetModes( MODE_DESCRIPTION );
 
 			this.render();
 		},
 
 		_onCloseMatchDescriptionClick: function() {
 
-			this.mode = MODE_INFO;
+			this._setWidgetModes( MODE_INFO );
 
 			this.render();
 		},
@@ -316,6 +392,18 @@ define( function ( require ) {
 			}
 
 			return true;
+		},
+
+		_setWidgetModes: function( mode ) {
+
+			this.mode = mode;
+
+			if ( this.mode == MODE_INFO && ( this.viewMode == VIEW_MODE_TABLE || this.viewMode == VIEW_MODE_MINIMIZED ) ) {
+				this.widgetTemplate = widgetNoContainerTemplate;
+				return;
+			}
+
+			this.widgetTemplate = this.getDefaultWidgetTemplate();
 		}
 	});
 } );

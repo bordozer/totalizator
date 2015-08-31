@@ -122,10 +122,24 @@
 	</translation>
 
 	<translation>
-		<nerd>Switch match and bets to compact views</nerd>
+		<nerd>Switch match and bets to bet mode view</nerd>
+		<ru><![CDATA[Режим ставок]]></ru>
+		<ua><![CDATA[Рeжим ставок]]></ua>
+		<en><![CDATA[Bet mode view]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Switch match and bets to table view mode</nerd>
+		<ru><![CDATA[Табличный вид]]></ru>
+		<ua><![CDATA[Табличний вигляд]]></ua>
+		<en><![CDATA[Table view]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Switch match and bets to minimized</nerd>
 		<ru><![CDATA[Компактный вид]]></ru>
-		<en><![CDATA[Compact views]]></en>
 		<ua><![CDATA[Компактний вигляд]]></ua>
+		<en><![CDATA[Minimized view]]></en>
 	</translation>
 
 	<translation>

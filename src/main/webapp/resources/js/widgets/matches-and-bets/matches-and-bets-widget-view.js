@@ -15,10 +15,21 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		switchViewsLabel: 'Switch match and bets to compact views'
+		viewBetModeLabel: 'Switch match and bets to bet mode view'
+		, viewModeCompactLabel: 'Switch match and bets to table view mode'
+		, viewModeMinimizedLabel: 'Switch match and bets to minimized'
 	} );
 
+	var VIEW_MODE_BET = 1;
+	var VIEW_MODE_TABLE = 2;
+	var VIEW_MODE_MINIMIZED = 3;
+
 	return WidgetMatchesAndBets.extend( {
+
+		initializeInnerView: function() {
+			this.viewMode = this.options.viewMode;
+			this.initialViewMode = this.options.initialViewMode;
+		},
 
 		renderInnerView: function ( filter ) {
 			this.filter = filter;
@@ -38,7 +49,33 @@ define( function ( require ) {
 		},
 
 		innerViewMenuItems: function() {
-			return [ {selector: 'js-switch-views', icon: 'fa fa-server', link: '#', text: translator.switchViewsLabel } ];
+
+			return [
+				{ selector: 'js-view_mode_full'
+					, icon: 'fa fa-money'
+					, link: '#'
+					, entity_id: VIEW_MODE_BET
+					, selected: this.viewMode == VIEW_MODE_BET
+					, text: translator.viewBetModeLabel
+					, button: this.viewMode != VIEW_MODE_BET
+				}
+				, { selector: 'js-view_mode_tabled'
+					, icon: 'fa fa-server'
+					, link: '#'
+					, entity_id: VIEW_MODE_TABLE
+					, selected: this.viewMode == VIEW_MODE_TABLE
+					, text: translator.viewModeCompactLabel
+					, button: this.viewMode == VIEW_MODE_BET && this.initialViewMode == VIEW_MODE_TABLE
+				}
+				, { selector: 'js-view_mode_minimized'
+					, icon: 'fa fa-bars'
+					, link: '#'
+					, entity_id: VIEW_MODE_MINIMIZED
+					, selected: this.viewMode == VIEW_MODE_MINIMIZED
+					, text: translator.viewModeMinimizedLabel
+					, button: this.viewMode == VIEW_MODE_BET && this.initialViewMode == VIEW_MODE_MINIMIZED
+				}
+			];
 		},
 
 		_renderCupMatchesAndBets: function() {
@@ -63,6 +100,9 @@ define( function ( require ) {
 			container.append( dateEl );
 
 			var showBetForUserId = this.filter.userId;
+			var viewMode = this.viewMode;
+			var filter = this.filter;
+
 			_.each( matchBets, function( matchBet ) {
 
 				var el = $( "<div></div>" );
@@ -71,6 +111,8 @@ define( function ( require ) {
 				var options = {
 					matchId: matchBet.match.matchId
 					, showBetForUserId: showBetForUserId
+					, viewMode: viewMode
+					, filter: filter
 				};
 
 				var view = new MatchBetWidget( el, options );
