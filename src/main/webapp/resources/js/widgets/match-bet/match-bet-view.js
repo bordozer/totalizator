@@ -213,11 +213,11 @@ define( function ( require ) {
 			function __getBoxColor() {
 
 				if ( model.bet == null ) {
-					return '';
+					return 'bg-warning';
 				}
 
 				if ( ! model.match.matchFinished ) {
-					return 'bg-warning';
+					return 'bg-info';
 				}
 
 				if ( model.userMatchPointsHolder.summaryPoints > 0 ) {
