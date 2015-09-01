@@ -147,7 +147,7 @@ define( function ( require ) {
 				, menuButtonIcon: this.getIcon()
 				, menuButtonText: ''
 				, menuButtonHint: translator.widgetMenuHint
-				, cssClass: 'btn-default'
+				, cssClass: 'dropdown-menu-right btn-default'
 			};
 			mainMenu( options, this.$( '.js-window-drop-down-menu') );
 		},
