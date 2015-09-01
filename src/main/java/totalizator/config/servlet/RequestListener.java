@@ -46,8 +46,14 @@ public class RequestListener extends RequestContextListener {
 	}
 
 	private Language getLanguageFromCookie( final HttpServletRequest request ) {
+		final Cookie[] cookies = request.getCookies();
 
-		for ( final Cookie cookie : request.getCookies() ) {
+		// cookies can be null according to documentation. return null here to prevent NPE in foreach
+		if ( cookies == null ) {
+			return null;
+		}
+
+		for ( final Cookie cookie : cookies ) {
 			if ( cookie.getName().contentEquals( LANGUAGE_COOKIE_NAME ) ) {
 				return Language.getByCode( cookie.getValue() );
 			}
