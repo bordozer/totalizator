@@ -89,7 +89,7 @@ public class Match extends AbstractEntity {
 
 	private int homeTeamNumber;
 
-	@Column( columnDefinition = "TEXT" )
+	@Column( columnDefinition = "VARCHAR(255)" ) // TODO: is too small for real description, but hsqldb:mem:mydb does not have TEXT data type. Just a temporary solution
 	private String description;
 
 	public Cup getCup() {

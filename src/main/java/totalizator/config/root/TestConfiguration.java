@@ -53,6 +53,10 @@ public class TestConfiguration {
 		jpaProperties.put( "hibernate.show_sql", "true" );
 		jpaProperties.put( "hibernate.format_sql", "true" );
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
+		jpaProperties.put( "hibernate.connection.CharSet", "utf8" );
+		jpaProperties.put( "hibernate.connection.characterEncoding", "utf8" );
+		jpaProperties.put( "hibernate.connection.useUnicode", "true" );
+//		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLDialect" );
 
 		jpaProperties.put( "javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE );
 		jpaProperties.put( Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName() );
