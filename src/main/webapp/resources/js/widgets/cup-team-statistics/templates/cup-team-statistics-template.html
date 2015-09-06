@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12" style="min-height: 160px;">
 
-		<h6 style="border-bottom: 1px silver dotted;">
+		<h6 class="bottom-dotted">
 			<%= translator.teamPlayedMatches %>:
 			<strong>
 				<a href="/totalizator/cups/<%=cup.cupId%>/matches/teams/<%=team.teamId%>/">
@@ -11,7 +11,7 @@
 			<br />
 		</h6>
 
-		<h6 style="border-bottom: 1px silver dotted;">
+		<h6 class="bottom-dotted">
 			<%= translator.teamWonMatches %>: <strong><span class="clearfix pull-right"><%= wonMatchCount %></span></strong>
 		</h6>
 
@@ -22,7 +22,7 @@
 			</h2>
 		<% } %>
 
-		<h6 style="border-bottom: 1px silver dotted;">
+		<h6 class="bottom-dotted">
 			<%= translator.teamFutureMatches %>:
 			<strong>
 				<span class="clearfix pull-right"><%= futureMatchesCount %></span>

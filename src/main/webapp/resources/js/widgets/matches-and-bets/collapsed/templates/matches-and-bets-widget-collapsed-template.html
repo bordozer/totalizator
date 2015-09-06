@@ -1,35 +1,49 @@
 <div class="row">
 
-	<div class="col-xs-8 text-right">
-		<small><%=translator.matchesCount%></small>
+	<div class="col-xs-3 text-center">
+		<img src="<%=cup.logoUrl%>" title="<%=cup.cupName%>" width="64">
 	</div>
 
-	<div class="col-xs-4">
-		<strong><%=matchesCount%></strong>
+	<div class="col-xs-9">
+
+		<div class="row">
+
+			<div class="col-xs-9">
+				<small><%=translator.matchesCount%></small>
+			</div>
+
+			<div class="col-xs-3 text-right">
+				<strong><%=matchesCount%></strong>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-xs-9">
+				<small><%=translator.userBetsCount%> ( <a href="/totalizator/users/<%=user.userId%>/"><%=user.userName%></a> )</small>
+			</div>
+
+			<div class="col-xs-3 text-right">
+				<%=userBetsCount%></strong>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-xs-9">
+				<small><%=translator.matchesWithoutBetsCount%></small>
+			</div>
+
+			<div class="col-xs-3 text-right <%=matchesWithoutBetsCountStyle%>">
+				<%=matchesWithoutBetsCount%>
+			</div>
+
+		</div>
+
 	</div>
 
 </div>
 
-<div class="row">
 
-	<div class="col-xs-8 text-right">
-		<small><%=translator.userBetsCount%> ( <a href="/totalizator/users/<%=user.userId%>/"><%=user.userName%></a> )</small>
-	</div>
-
-	<div class="col-xs-4">
-		<%=userBetsCount%></strong>
-	</div>
-
-</div>
-
-<div class="row">
-
-	<div class="col-xs-8 text-right">
-		<small><%=translator.matchesWithoutBetsCount%></small>
-	</div>
-
-	<div class="col-xs-4 <%=matchesWithoutBetsCountStyle%>">
-		<%=matchesWithoutBetsCount%>
-	</div>
-
-</div>
