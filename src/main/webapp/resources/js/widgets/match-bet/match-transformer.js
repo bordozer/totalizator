@@ -8,6 +8,11 @@ define( function ( require ) {
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		securedBetHint: 'Bets of another users will be shown after the match start'
+	} );
+
 	return function ( match, bet, team1Id, team2Id ) {
 
 		function _transformMatch( match, team1Id, team2Id ) {
