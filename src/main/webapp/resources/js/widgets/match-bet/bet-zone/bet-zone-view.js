@@ -107,9 +107,9 @@ define( function ( require ) {
 				return;
 			}
 
-			if ( ! isMatchFinished ) {
+			/*if ( ! isMatchFinished ) {
 				this._doRenderIcon( 'fa-money', translator.yourBetLabel, false );
-			}
+			}*/
 		},
 
 		_renderBetPoints: function() {
