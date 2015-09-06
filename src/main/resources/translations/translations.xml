@@ -101,6 +101,20 @@
 	</translation>
 
 	<translation>
+		<nerd>Menu item: Expand widget</nerd>
+		<ru><![CDATA[Развернуть]]></ru>
+		<ua><![CDATA[Розгорнути]]></ua>
+		<en><![CDATA[Expand widget]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Menu item: Collapse widget</nerd>
+		<ru><![CDATA[Свернуть]]></ru>
+		<ua><![CDATA[Згорнути]]></ua>
+		<en><![CDATA[Collapse widget]]></en>
+	</translation>
+
+	<translation>
 		<nerd>User</nerd>
 		<ru><![CDATA[Пользователь]]></ru>
 		<en><![CDATA[User]]></en>

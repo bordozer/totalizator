@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.matches.bets;
+package totalizator.app.controllers.rest.matches.bets.match;
 
 import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.MatchDTO;

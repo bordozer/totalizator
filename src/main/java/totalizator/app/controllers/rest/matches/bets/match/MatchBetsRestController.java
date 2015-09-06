@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.matches.bets;
+package totalizator.app.controllers.rest.matches.bets.match;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

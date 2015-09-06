@@ -1,0 +1,35 @@
+<div class="row">
+
+	<div class="col-xs-8 text-right">
+		<small><%=translator.matchesCount%></small>
+	</div>
+
+	<div class="col-xs-4">
+		<strong><%=matchesCount%></strong>
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-xs-8 text-right">
+		<small><%=translator.userBetsCount%> ( <a href="/totalizator/users/<%=user.userId%>/"><%=user.userName%></a> )</small>
+	</div>
+
+	<div class="col-xs-4">
+		<%=userBetsCount%></strong>
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-xs-8 text-right">
+		<small><%=translator.matchesWithoutBetsCount%></small>
+	</div>
+
+	<div class="col-xs-4 <%=matchesWithoutBetsCountStyle%>">
+		<%=matchesWithoutBetsCount%>
+	</div>
+
+</div>

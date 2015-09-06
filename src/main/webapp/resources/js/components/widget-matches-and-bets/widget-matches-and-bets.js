@@ -7,7 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var FilterView = require( './filter/matches-filter-view' );
-	var ConfigurableModel = require( './widget-matches-and-bets-model' );
+	var WidgetMatchesAndBetsModel = require( './widget-matches-and-bets-model' );
 
 	var DateTimePickerView = require( './matches-on-date-picker' );
 
@@ -42,16 +42,24 @@ define( function ( require ) {
 		, noMatchesFound: "No matches found"
 	} );
 
+	var MATCHES_AND_BETS_MODE_MATCHES = 1;
+	var MATCHES_AND_BETS_MODE_STATISTICS = 2;
+
 	return WidgetView.extend( {
+
+		showSettingsButton: false,
+		matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_MATCHES,
 
 		widgetMatchesAndBetsEvents: {
 			'click .js-settings-button': '_onSettingsClick'
 			, 'click .js-reset-filter-button': '_onResetFilterClick'
 			, 'click .js-save-settings-button': '_onSaveSettingsClick'
 			, 'click .js-close-settings-button': '_onCloseSettingsClick'
-			, 'click .js-view_mode_full': '_switchViewMode'
-			, 'click .js-view_mode_tabled': '_switchViewMode'
-			, 'click .js-view_mode_minimized': '_switchViewMode'
+			, 'click .js-matches_and_bets_mode_matches': '_showMatchesAndBetsMatches'
+			, 'click .js-matches_and_bets_mode_statistics': '_showMatchesAndBetsStatistics'
+			, 'click .js-view_mode_bet': '_switchMatchViewMode'
+			, 'click .js-view_mode_tabled': '_switchMatchViewMode'
+			, 'click .js-view_mode_minimized': '_switchMatchViewMode'
 			, 'click .js-menu-date-picker': '_showDatePickerView'
 		},
 
@@ -61,8 +69,10 @@ define( function ( require ) {
 			this.initialFilter = options.filterModel.toJSON();
 			this.settingsModel = options.filterModel;
 
-			this.dataModel = new ConfigurableModel( { filter: this.initialFilter } );
-			this.dataModel.on( 'sync', this._runRender, this );
+			this.matchesAndBetsViewMode = options.matchesAndBetsViewMode != undefined ? options.matchesAndBetsViewMode : MATCHES_AND_BETS_MODE_MATCHES;
+
+			this.dataModel = new WidgetMatchesAndBetsModel( { filter: this.initialFilter } );
+			this.dataModel.on( 'sync', this._runInnerViewRender, this );
 
 			this.on( 'view:render', this.render, this );
 
@@ -84,7 +94,7 @@ define( function ( require ) {
 			return this;
 		},
 
-		_runRender: function() {
+		_runInnerViewRender: function() {
 
 			var matchFilterDataModel = this.dataModel.toJSON();
 
@@ -99,11 +109,20 @@ define( function ( require ) {
 				, cups: this.cups
 			} );
 
-			this.renderInnerView( this.settingsModel.toJSON() );
+			if ( this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_MATCHES ) {
+				this.renderInnerView( this.settingsModel.toJSON() );
+			} else {
+				// TODO: do not load all stuff below if widget is collapsed
+				this.renderInnerViewCollapsed( this.settingsModel.toJSON() );
+			}
 		},
 
 		renderInnerView: function( filter ) {
-			return $( "<div class='row'><div class='col-lg-12 text-center'>" + translator.noInnerViewLabel + "</div></div>" );
+			// override to render inner view
+		},
+
+		renderInnerViewCollapsed: function( filter ) {
+			// override to render inner view collapsed
 		},
 
 		getCustomMenuItems: function() {
@@ -112,11 +131,11 @@ define( function ( require ) {
 
 			var result = [
 				{ selector: 'js-reset-filter-button', icon: 'fa fa-filter', link: '#', text: translator.resetFilterButtonHint }
-				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel, button: false }
+				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel, button: this.showSettingsButton }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
 				, { selector: 'divider' }
-				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: true }
+				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: false }
 			];
 
 			var viewMenuItems = this.innerViewMenuItems();
@@ -140,7 +159,7 @@ define( function ( require ) {
 			return this.getCupTitle( cup, '' );
 		},
 
-		_render: function() {
+		_renderMatchesAndBetsOrNoMatchesFound: function() {
 
 			var container = this.$( this.windowBodyContainerSelector );
 			container.empty();
@@ -151,7 +170,7 @@ define( function ( require ) {
 				return;
 			}
 
-			this._renderCupMatchesAndBets();
+			this.renderFoundMatches();
 		},
 
 		_renderNoMatchesFound: function() {
@@ -229,12 +248,27 @@ define( function ( require ) {
 			this.render();
 		},
 
-		_switchViewMode: function( evt ) {
+		_showMatchesAndBetsMatches: function() {
+			this.matchesAndBetsViewMode = MATCHES_AND_BETS_MODE_MATCHES;
+			this.render();
+		},
+
+		_showMatchesAndBetsStatistics: function() {
+			this.matchesAndBetsViewMode = MATCHES_AND_BETS_MODE_STATISTICS;
+			this.render();
+		},
+
+		_switchMatchViewMode: function( evt ) {
 
 			var menu = $( evt.target );
-			var viewMode = menu.data( 'entity_id' );
+			var matchViewMode = menu.data( 'entity_id' );
 
-			this.trigger( 'events:switch_view_mode', { filter: this.settingsModel.toJSON(), viewMode: viewMode } );
+			this.trigger( 'events:switch_view_mode'
+					, {
+						filter: this.settingsModel.toJSON()
+						, matchViewMode: matchViewMode
+						, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_MATCHES
+					} );
 		},
 
 		_showDatePickerView: function() {

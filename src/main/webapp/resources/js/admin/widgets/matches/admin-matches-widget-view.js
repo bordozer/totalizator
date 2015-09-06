@@ -28,6 +28,8 @@ define( function ( require ) {
 
 	return WidgetMatchesAndBets.extend( {
 
+		showSettingsButton: true,
+
 		events: {
 			'click .js-add-entry-button': '_onAddClick'
 			, 'click .js-finish-selected-matches-button': '_onFinishSelectedMatchesClick'
@@ -37,9 +39,13 @@ define( function ( require ) {
 		renderInnerView: function ( filter ) {
 			this.filter = filter;
 
-			this.listenToOnce( this.model, 'sync', this._renderMatches );
+			this.listenToOnce( this.model, 'sync', this._renderMatchesAndBetsOrNoMatchesFound );
 
 			this.model.refresh( filter );
+		},
+
+		renderInnerViewCollapsed: function( filter ) {
+			this.trigger( 'inner-view-rendered' );
 		},
 
 		getIcon: function() {
@@ -62,7 +68,7 @@ define( function ( require ) {
 			]
 		},
 
-		_renderMatches: function() {
+		renderFoundMatches: function() {
 
 			var el = this.$( this.windowBodyContainerSelector );
 

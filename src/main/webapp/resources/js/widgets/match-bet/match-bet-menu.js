@@ -29,20 +29,20 @@ define( function ( require ) {
 	var VIEW_MODE_TABLE = 2;
 	var VIEW_MODE_MINIMIZED = 3;
 
-	function showButton( mode, viewMode ) {
+	function showButton( mode, matchViewMode ) {
 		return mode == MODE_EDIT
 				|| mode == MODE_DESCRIPTION
-				|| viewMode == VIEW_MODE_BET
+				|| matchViewMode == VIEW_MODE_BET
 				;
 	}
 
 	return {
 
-		getMenuItems: function( matchBet, mode, viewMode ) {
+		getMenuItems: function( matchBet, mode, matchViewMode ) {
 
 			var result = this.getCommonMenuItems( matchBet );
 
-			var modeDependantMenuItems = this._getModeDependantMenuItems( matchBet, mode, viewMode );
+			var modeDependantMenuItems = this._getModeDependantMenuItems( matchBet, mode, matchViewMode );
 			if ( modeDependantMenuItems.length > 0 ) {
 				result.push( {selector: 'divider'} );
 			}
@@ -85,28 +85,28 @@ define( function ( require ) {
 			];
 		},
 
-		_getModeDependantMenuItems: function( matchBet, mode, viewMode ) {
+		_getModeDependantMenuItems: function( matchBet, mode, matchViewMode ) {
 
 			if ( mode == MODE_INFO ) {
-				return this._getMatchInfoMenuItems( matchBet, mode, viewMode );
+				return this._getMatchInfoMenuItems( matchBet, mode, matchViewMode );
 			}
 
 			if ( mode == MODE_EDIT ) {
-				return this._getBetEditMenuItems( matchBet, mode, viewMode );
+				return this._getBetEditMenuItems( matchBet, mode, matchViewMode );
 			}
 
 			if ( mode == MODE_DESCRIPTION ) {
-				return this._getMatchDescriptionMenuItems( matchBet, mode, viewMode );
+				return this._getMatchDescriptionMenuItems( matchBet, mode, matchViewMode );
 			}
 		},
 
-		_getMatchInfoMenuItems: function( matchBet, mode, viewMode ) {
+		_getMatchInfoMenuItems: function( matchBet, mode, matchViewMode ) {
 
 			var match = matchBet.match;
 			var bet = matchBet.bet;
 			var isBettingAllowed = matchBet.bettingAllowed;
 
-			var button = showButton( mode, viewMode );
+			var button = showButton( mode, matchViewMode );
 
 			var menuItems = [];
 			if ( isBettingAllowed ) {
@@ -145,13 +145,13 @@ define( function ( require ) {
 			return menuItems;
 		},
 
-		_getBetEditMenuItems: function( matchBet, mode, viewMode ) {
+		_getBetEditMenuItems: function( matchBet, mode, matchViewMode ) {
 
 			var match = matchBet.match;
 			var bet = matchBet.bet;
 			var isBettingAllowed = matchBet.bettingAllowed;
 
-			var button = showButton( mode, viewMode );
+			var button = showButton( mode, matchViewMode );
 
 			var menuItems = [];
 			if ( isBettingAllowed ) {
@@ -180,9 +180,9 @@ define( function ( require ) {
 			return menuItems;
 		},
 
-		_getMatchDescriptionMenuItems: function( matchBet, mode, viewMode ) {
+		_getMatchDescriptionMenuItems: function( matchBet, mode, matchViewMode ) {
 
-			var button = showButton( mode, viewMode );
+			var button = showButton( mode, matchViewMode );
 
 			return [
 				{ selector: 'js-close-match-description'

@@ -74,7 +74,7 @@ define( function ( require ) {
 			var options = {
 				matchId: model.matchId
 				, showBetForUserId: this.currentUser.userId
-				, viewMode: 1
+				, matchViewMode: 1
 			};
 
 			var view = new MatchBetWidget( this.$( '.js-match-bet-widget' ), options ).view();

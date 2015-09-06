@@ -109,7 +109,7 @@ define( function ( require ) {
 		},
 
 		getCustomMenuItems: function () {
-			return [ { selector: 'js-new-cup-button', icon: 'fa fa-plus', link: '#', text: translator.newCupLabel } ]
+			return [ { selector: 'js-new-cup-button', icon: 'fa fa-plus', link: '#', text: translator.newCupLabel, button: true } ]
 		},
 
 		_triggerCupsChanged: function () {

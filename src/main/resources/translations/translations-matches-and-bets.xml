@@ -143,6 +143,20 @@
 	</translation>
 
 	<translation>
+		<nerd>Match and bets view mode: matches</nerd>
+		<ru><![CDATA[Показывать матчи]]></ru>
+		<ua><![CDATA[Показувати iгри]]></ua>
+		<en><![CDATA[Show matches]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Match and bets view mode: statistics</nerd>
+		<ru><![CDATA[Показывать статистиу]]></ru>
+		<ua><![CDATA[Показувати статистику]]></ua>
+		<en><![CDATA[Show statistics]]></en>
+	</translation>
+
+	<translation>
 		<nerd>Switch match and bets to full views</nerd>
 		<ru><![CDATA[Обычный вид]]></ru>
 		<en><![CDATA[Full views]]></en>

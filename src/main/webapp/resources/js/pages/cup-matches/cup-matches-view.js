@@ -56,7 +56,7 @@ define( function ( require ) {
 					, showFutureMatches: isFuture
 					, showFinished: ! isFuture
 				}
-				, viewMode: 2
+				, matchViewMode: 2
 				, currentUser: this.currentUser
 			};
 

@@ -62,7 +62,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.currentUser = app.currentUser();
-			this.viewMode = options.options.viewMode;
+			this.matchViewMode = options.options.matchViewMode;
 			this.filter = options.options.filter;
 
 			this._setWidgetModes( MODE_INFO );
@@ -124,24 +124,24 @@ define( function ( require ) {
 				return;
 			}
 
-			this._renderMatchInfo( this.viewMode );
+			this._renderMatchInfo( this.matchViewMode );
 
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		_renderMatchInfo: function ( viewMode ) {
+		_renderMatchInfo: function ( matchViewMode ) {
 
 			var matchBet = this.model.toJSON();
 
-			if ( viewMode == VIEW_MODE_TABLE ) {
+			if ( matchViewMode == VIEW_MODE_TABLE ) {
 				this.$( this.windowBodyContainerSelector ).html( this._renderTableEntry( this.model.toJSON() ) );
-				this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.viewMode ) );
+				this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.matchViewMode ) );
 				return;
 			}
 
-			if ( viewMode == VIEW_MODE_MINIMIZED ) {
+			if ( matchViewMode == VIEW_MODE_MINIMIZED ) {
 				this.$( this.windowBodyContainerSelector ).html( this._renderMinimizedEntry( this.model.toJSON() ) );
-				this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.viewMode ) );
+				this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.matchViewMode ) );
 				return;
 			}
 
@@ -155,7 +155,7 @@ define( function ( require ) {
 				, el: this.$( '.js-footer' )
 			} );
 
-			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.viewMode ) );
+			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_INFO, this.matchViewMode ) );
 
 			this._setMatchContainerClass( this._getPanelClass() );
 		},
@@ -175,7 +175,7 @@ define( function ( require ) {
 			} );
 			view.on( 'events:save_bet', this._saveBet, this );
 
-			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_EDIT, this.viewMode ) );
+			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_EDIT, this.matchViewMode ) );
 
 			this._setMatchContainerClass( 'panel-danger' );
 		},
@@ -190,7 +190,7 @@ define( function ( require ) {
 				, footerEl: this.$( '.js-footer' )
 			} );
 
-			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_DESCRIPTION, this.viewMode ) );
+			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_DESCRIPTION, this.matchViewMode ) );
 		},
 
 		_renderTableEntry: function ( model ) {
@@ -398,7 +398,7 @@ define( function ( require ) {
 
 			this.mode = mode;
 
-			if ( this.mode == MODE_INFO && ( this.viewMode == VIEW_MODE_TABLE || this.viewMode == VIEW_MODE_MINIMIZED ) ) {
+			if ( this.mode == MODE_INFO && ( this.matchViewMode == VIEW_MODE_TABLE || this.matchViewMode == VIEW_MODE_MINIMIZED ) ) {
 				this.widgetTemplate = widgetNoContainerTemplate;
 				return;
 			}

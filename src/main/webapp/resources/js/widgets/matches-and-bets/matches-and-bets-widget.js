@@ -6,7 +6,8 @@ define( function( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var Model = require( './matches-and-bets-widget-model' );
+	var ModelExpanded = require( './matches-and-bets-widget-model' );
+
 	var FilterModel = require( 'js/components/widget-matches-and-bets/filter/matches-filter-model' );
 
 	var View = require( './matches-and-bets-widget-view' );
@@ -18,8 +19,9 @@ define( function( require ) {
 			, filterModel: filterModel
 			, el: container
 			, currentUser: options.currentUser
-			, viewMode: options.viewMode
-			, initialViewMode: options.initialViewMode
+			, matchesAndBetsViewMode: options.matchesAndBetsViewMode
+			, matchViewMode: options.matchViewMode
+			, initialMatchViewMode: options.initialMatchViewMode
 		};
 
 		return new View( matchesAndBetOptions );
@@ -27,17 +29,18 @@ define( function( require ) {
 
 	return function( container, options ) {
 
-		var model = new Model.MatchesModel();
+		var model = new ModelExpanded.MatchesModel();
 		var filterModel = new FilterModel( options.filter );
-		var initialViewMode = options.viewMode;
+		var initialMatchViewMode = options.matchViewMode;
 
 		var view = null;
 
 		var render = _.bind( function( renderOptions ) {
 
 			options.filter = renderOptions.filter;
-			options.viewMode = renderOptions.viewMode;
-			options.initialViewMode = initialViewMode;
+			options.matchesAndBetsViewMode = renderOptions.matchesAndBetsViewMode;
+			options.matchViewMode = renderOptions.matchViewMode;
+			options.initialMatchViewMode = initialMatchViewMode;
 
 			if ( view ) {
 				view.remove();
@@ -51,6 +54,6 @@ define( function( require ) {
 			view.on( 'events:switch_view_mode', render, this, options );
 		}, this );
 
-		render( { filter: options.filter, viewMode: options.viewMode } );
+		render( { filter: options.filter, matchViewMode: options.matchViewMode, matchesAndBetsViewMode: options.matchesAndBetsViewMode } );
 	}
 });

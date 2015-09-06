@@ -14,6 +14,8 @@ define( function ( require ) {
 	var translator = new Translator( {
 		loadingLabel: 'Loading...'
 		, menuItemRefreshLabel: 'Menu item: Refresh'
+		, menuItemExpandLabel: 'Menu item: Expand widget'
+		, menuItemCollapseLabel: 'Menu item: Collapse widget'
 		, widgetMenuHint: 'Widget menu'
 	} );
 
@@ -46,7 +48,7 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.showProgress();
+			this._showProgress();
 
 			this.$( this.windowBodyContainerSelector ).fadeIn( 500, "swing" );
 
@@ -91,14 +93,14 @@ define( function ( require ) {
 			return '50px';
 		},
 
-		showProgress: function() {
+		_showProgress: function() {
 			var el = this._getIconEl();
 			el.html( '' );
 			el.removeClass( this.getIcon() );
 			el.addClass( this.progressIcon );
 		},
 
-		hideProgress: function() {
+		_hideProgress: function() {
 
 			var el = this._getIconEl();
 			el.html( '' );
@@ -149,11 +151,12 @@ define( function ( require ) {
 				, menuButtonHint: translator.widgetMenuHint
 				, cssClass: 'dropdown-menu-right btn-default'
 			};
+
 			mainMenu( options, this.$( '.js-window-drop-down-menu') );
 		},
 
 		_onInnerViewRendered: function() {
-			this.hideProgress();
+			this._hideProgress();
 
 			var title = this.$( '.js-widget-title' );
 

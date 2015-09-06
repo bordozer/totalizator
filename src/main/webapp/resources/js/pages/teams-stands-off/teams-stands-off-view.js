@@ -68,7 +68,7 @@ define( function ( require ) {
 					, showFinished: true
 					, showFutureMatches: true
 				}
-				, viewMode: 2
+				, matchViewMode: 2
 				, currentUser: app.currentUser()
 			};
 

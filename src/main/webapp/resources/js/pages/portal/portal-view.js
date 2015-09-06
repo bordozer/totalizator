@@ -16,6 +16,13 @@ define( function ( require ) {
 		, menuLogoutLabel: 'Menu: Logout'
 	} );
 
+	var VIEW_MODE_BET = 1;
+	var VIEW_MODE_TABLE = 2;
+	var VIEW_MODE_MINIMIZED = 3;
+
+	var MATCHES_AND_BETS_MODE_MATCHES = 1;
+	var MATCHES_AND_BETS_MODE_STATISTICS = 2;
+
 	var PortalPageView = Backbone.View.extend( {
 
 		initialize: function( options ) {
@@ -54,7 +61,8 @@ define( function ( require ) {
 						, cupId: cup.cupId
 						, showFutureMatches: true
 					}
-					, viewMode: 3
+					, matchViewMode: VIEW_MODE_MINIMIZED
+					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_STATISTICS
 					, currentUser: currentUser
 				};
 				matchesAndBetsView( container, options );

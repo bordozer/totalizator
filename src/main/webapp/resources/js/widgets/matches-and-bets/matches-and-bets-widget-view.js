@@ -8,6 +8,8 @@ define( function ( require ) {
 
 	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );
 
+	var CollapsedStateView = require( './collapsed/matches-and-bets-widget-collapsed-view' );
+
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
@@ -18,17 +20,22 @@ define( function ( require ) {
 		viewBetModeLabel: 'Switch match and bets to bet mode view'
 		, viewModeCompactLabel: 'Switch match and bets to table view mode'
 		, viewModeMinimizedLabel: 'Switch match and bets to minimized'
+		, matchesAndBetsViewMode_Matches_Label: 'Match and bets view mode: matches'
+		, matchesAndBetsViewMode_Statistics_Label: 'Match and bets view mode: statistics'
 	} );
 
 	var VIEW_MODE_BET = 1;
 	var VIEW_MODE_TABLE = 2;
 	var VIEW_MODE_MINIMIZED = 3;
 
+	var MATCHES_AND_BETS_MODE_MATCHES = 1;
+	var MATCHES_AND_BETS_MODE_STATISTICS = 2;
+
 	return WidgetMatchesAndBets.extend( {
 
 		initializeInnerView: function() {
-			this.viewMode = this.options.viewMode;
-			this.initialViewMode = this.options.initialViewMode;
+			this.matchViewMode = this.options.matchViewMode;
+			this.initialMatchViewMode = this.options.initialMatchViewMode;
 		},
 
 		renderInnerView: function ( filter ) {
@@ -36,8 +43,16 @@ define( function ( require ) {
 
 			this.currentUser = this.options.currentUser;
 
-			this.listenToOnce( this.model, 'sync', this._render );
+			this.listenToOnce( this.model, 'sync', this._renderMatchesAndBetsOrNoMatchesFound );
 			this.model.refresh( filter );
+		},
+
+		renderInnerViewCollapsed : function( filter ) {
+			this.filter = filter;
+
+			var view = new CollapsedStateView( { el: this.$( this.windowBodyContainerSelector ), filter: filter } );
+
+			this.trigger( 'inner-view-rendered' );
 		},
 
 		getIcon: function() {
@@ -50,35 +65,50 @@ define( function ( require ) {
 
 		innerViewMenuItems: function() {
 
+			var isStatisticsView = this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_STATISTICS;
+
 			return [
-				{ selector: 'js-view_mode_full'
+				{ selector: 'js-matches_and_bets_mode_matches'
+					, icon: 'fa fa-futbol-o'
+					, link: '#'
+					, selected: ! isStatisticsView
+					, text: translator.matchesAndBetsViewMode_Matches_Label
+				}
+				, { selector: 'js-matches_and_bets_mode_statistics'
+					, icon: 'fa fa-bar-chart'
+					, link: '#'
+					, selected: isStatisticsView
+					, text: translator.matchesAndBetsViewMode_Statistics_Label
+				}
+				, { selector: 'splitter' }
+				, { selector: 'js-view_mode_bet'
 					, icon: 'fa fa-money'
 					, link: '#'
 					, entity_id: VIEW_MODE_BET
-					, selected: this.viewMode == VIEW_MODE_BET
+					, selected: this.matchViewMode == VIEW_MODE_BET
 					, text: translator.viewBetModeLabel
-					, button: this.viewMode != VIEW_MODE_BET
+					, button: isStatisticsView || ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED )
 				}
 				, { selector: 'js-view_mode_tabled'
 					, icon: 'fa fa-server'
 					, link: '#'
 					, entity_id: VIEW_MODE_TABLE
-					, selected: this.viewMode == VIEW_MODE_TABLE
+					, selected: this.matchViewMode == VIEW_MODE_TABLE
 					, text: translator.viewModeCompactLabel
-					, button: this.viewMode == VIEW_MODE_BET && this.initialViewMode == VIEW_MODE_TABLE
+					, button: ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_TABLE
 				}
 				, { selector: 'js-view_mode_minimized'
 					, icon: 'fa fa-bars'
 					, link: '#'
 					, entity_id: VIEW_MODE_MINIMIZED
-					, selected: this.viewMode == VIEW_MODE_MINIMIZED
+					, selected: this.matchViewMode == VIEW_MODE_MINIMIZED
 					, text: translator.viewModeMinimizedLabel
-					, button: this.viewMode == VIEW_MODE_BET && this.initialViewMode == VIEW_MODE_MINIMIZED
+					, button: ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_MINIMIZED
 				}
 			];
 		},
 
-		_renderCupMatchesAndBets: function() {
+		renderFoundMatches: function() {
 
 			var container = this.$( this.windowBodyContainerSelector );
 			container.empty();
@@ -100,7 +130,7 @@ define( function ( require ) {
 			container.append( dateEl );
 
 			var showBetForUserId = this.filter.userId;
-			var viewMode = this.viewMode;
+			var matchViewMode = this.matchViewMode;
 			var filter = this.filter;
 
 			_.each( matchBets, function( matchBet ) {
@@ -111,7 +141,7 @@ define( function ( require ) {
 				var options = {
 					matchId: matchBet.match.matchId
 					, showBetForUserId: showBetForUserId
-					, viewMode: viewMode
+					, matchViewMode: matchViewMode
 					, filter: filter
 				};
 

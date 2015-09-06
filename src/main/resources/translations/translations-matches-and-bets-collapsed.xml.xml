@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Matches count</nerd>
+		<ru><![CDATA[К-во матчей]]></ru>
+		<ua><![CDATA[Кiлькiсть iгор]]></ua>
+		<en><![CDATA[Matches count]]></en>
+	</translation>
+
+	<translation>
+		<nerd>User bets count</nerd>
+		<ru><![CDATA[Сделано ставок]]></ru>
+		<ua><![CDATA[Зроблено ставок]]></ua>
+		<en><![CDATA[User bets count]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Matches without bets count</nerd>
+		<ru><![CDATA[Доступно игр для ставок]]></ru>
+		<ua><![CDATA[Доступно iгор для ставок]]></ua>
+		<en><![CDATA[Matches without bets count]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

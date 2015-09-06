@@ -52,7 +52,7 @@ define( function ( require ) {
 					, cupId: cup.cupId
 					, showFutureMatches: true
 				}
-				, viewMode: 1
+				, matchViewMode: 1
 				, menuItems: []
 				, currentUser: currentUser
 			};

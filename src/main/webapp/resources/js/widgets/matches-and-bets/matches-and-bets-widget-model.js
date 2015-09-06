@@ -15,7 +15,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 		}
-	});
+	} );
 
 	var MatchesModel = Backbone.Collection.extend( {
 
@@ -24,14 +24,14 @@ define( function ( require ) {
 		initialize: function ( options ) {
 		},
 
-		url: function() {
+		url: function () {
 			return '/rest/matches/bets/';
 		},
 
-		refresh: function( data ) {
-			this.fetch( { data: data, cache: false, reset: true} );
+		refresh: function ( data ) {
+			this.fetch( { data: data, cache: false, reset: true } );
 		}
-	});
+	} );
 
 	return { MatchModel: MatchModel, MatchesModel: MatchesModel };
 } );
