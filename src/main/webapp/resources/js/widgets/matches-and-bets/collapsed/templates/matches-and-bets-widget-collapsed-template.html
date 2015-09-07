@@ -45,5 +45,40 @@
 	</div>
 
 </div>
+<hr />
+<div class="row">
+
+	<div class="col-xs-12" style="font-size: 12px;">
+
+		<% if( firstMatchTime != 'Invalid date' ) {%>
+			<div class="row">
+
+				<div class="col-xs-5 text-right text-muted">
+					<small><%=translator.firstMatchTimeLabel%></small>
+				</div>
+
+				<div class="col-xs-7">
+					<small><%=firstMatchTime%> ( <%=firstMatchTimeHumanize%> )</small>
+				</div>
+
+			</div>
+		<% }%>
 
 
+		<% if( firstMatchNoBetTime != 'Invalid date' ) {%>
+			<div class="row">
+
+				<div class="col-xs-5 text-right text-muted">
+					<small><%=translator.firstMatchNoBetTimeLabel%></small>
+				</div>
+
+				<div class="col-xs-7">
+					<small><%=firstMatchNoBetTime%> ( <span class="text-danger"><%=firstMatchNoBetTimeHumanize%></span> )</small>
+				</div>
+
+			</div>
+		<% }%>
+
+	</div>
+
+</div>

@@ -13,9 +13,13 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchService;
+import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 @RestController
@@ -30,6 +34,9 @@ public class MatchesAndBetsCollapsedRestController {
 
 	@Autowired
 	private MatchService matchService;
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@Autowired
 	private DTOService dtoService;
@@ -59,7 +66,46 @@ public class MatchesAndBetsCollapsedRestController {
 				} ).count();
 		result.setUserBetsCount( userBetsCount );
 
-		result.setMatchesWithoutBetsCount( matchBetDTOs.size() - userBetsCount );
+		final int matchesWithoutBetsCount = ( int ) matchBetDTOs
+				.stream().filter( new Predicate<MatchBetDTO>() {
+					@Override
+					public boolean test( final MatchBetDTO match ) {
+						return match.getBet() == null && match.getMatch().getBeginningTime().isAfter( dateTimeService.getNow() );
+					}
+				} ).count();
+		result.setMatchesWithoutBetsCount( matchesWithoutBetsCount );
+
+		if ( matches.size() > 0 ) {
+			result.setFirstMatchTime( matches.get( 0 ).getBeginningTime() );
+		}
+
+		if ( matchBetDTOs.size() > 0 ) {
+
+			final Predicate<MatchBetDTO> noBetPredicate = new Predicate<MatchBetDTO>() {
+				@Override
+				public boolean test( final MatchBetDTO matchBetDTO ) {
+					return matchBetDTO.getBet() == null && matchBetDTO.getMatch().getBeginningTime().isAfter( dateTimeService.getNow() );
+				}
+			};
+
+			final Function<MatchBetDTO, LocalDateTime> function = new Function<MatchBetDTO, LocalDateTime>() {
+				@Override
+				public LocalDateTime apply( final MatchBetDTO matchBetDTO ) {
+					return matchBetDTO.getMatch().getBeginningTime();
+				}
+			};
+
+			final Optional<LocalDateTime> localDateTime = matchBetDTOs
+					.stream()
+					.filter( noBetPredicate )
+					.findFirst()
+					.map( function );
+
+			if ( localDateTime.isPresent() ) {
+				result.setFirstMatchNoBetTime( localDateTime.get() );
+			}
+
+		}
 
 		return result;
 	}

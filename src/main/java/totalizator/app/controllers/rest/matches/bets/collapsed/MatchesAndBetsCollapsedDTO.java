@@ -1,7 +1,11 @@
 package totalizator.app.controllers.rest.matches.bets.collapsed;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.dto.UserDTO;
+import totalizator.app.dto.serialization.DateTimeSerializer;
+
+import java.time.LocalDateTime;
 
 public class MatchesAndBetsCollapsedDTO {
 
@@ -11,6 +15,9 @@ public class MatchesAndBetsCollapsedDTO {
 	private int matchesCount;
 	private int userBetsCount;
 	private int matchesWithoutBetsCount;
+
+	private LocalDateTime firstMatchTime;
+	private LocalDateTime firstMatchNoBetTime;
 
 	public MatchesAndBetsCollapsedDTO( final CupDTO cupDTO, final UserDTO userDTO ) {
 		this.cup = cupDTO;
@@ -47,6 +54,24 @@ public class MatchesAndBetsCollapsedDTO {
 
 	public void setMatchesWithoutBetsCount( final int matchesWithoutBetsCount ) {
 		this.matchesWithoutBetsCount = matchesWithoutBetsCount;
+	}
+
+	@JsonSerialize( using = DateTimeSerializer.class )
+	public LocalDateTime getFirstMatchTime() {
+		return firstMatchTime;
+	}
+
+	public void setFirstMatchTime( final LocalDateTime firstMatchTime ) {
+		this.firstMatchTime = firstMatchTime;
+	}
+
+	@JsonSerialize( using = DateTimeSerializer.class )
+	public LocalDateTime getFirstMatchNoBetTime() {
+		return firstMatchNoBetTime;
+	}
+
+	public void setFirstMatchNoBetTime( final LocalDateTime firstMatchNoBetTime ) {
+		this.firstMatchNoBetTime = firstMatchNoBetTime;
 	}
 
 	@Override
