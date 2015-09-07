@@ -135,7 +135,7 @@ define( function ( require ) {
 			} ) );
 
 			if ( this.isSelected ) {
-				this.$( '.admin-entry-line' ).addClass( 'bg-success' );
+				this.$( '.js-category-entry' ).addClass( 'bg-success' );
 			}
 
 			return this;

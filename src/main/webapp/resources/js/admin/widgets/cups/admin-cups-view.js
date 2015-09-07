@@ -206,7 +206,7 @@ define( function ( require ) {
 			} ) );
 
 			if ( this.isSelected ) {
-				this.$( '.admin-entry-line' ).addClass( 'bg-success' );
+				this.$( '.js-cup-entry' ).addClass( 'bg-success' );
 			}
 
 			return this;
