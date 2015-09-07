@@ -9,6 +9,8 @@ define( function ( require ) {
 	var moment = require( 'moment' );
 	var chosen = require( 'chosen' );
 
+	var Model = require( './admin-matches-widget-model' );
+
 	var service = require( '/resources/js/services/service.js' );
 	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
@@ -41,7 +43,7 @@ define( function ( require ) {
 
 			this.listenToOnce( this.model, 'sync', this._renderMatchesAndBetsOrNoMatchesFound );
 
-			this.model.refresh( filter );
+			this.fetchMatches( filter );
 		},
 
 		renderInnerViewCollapsed: function( filter ) {
@@ -70,9 +72,9 @@ define( function ( require ) {
 
 		renderFoundMatches: function() {
 
-			var el = this.$( this.windowBodyContainerSelector );
+			var container = this.$( this.windowBodyContainerSelector );
 
-			el.html( templateList( {
+			container.html( templateList( {
 				model: this.model
 				, translator: translator
 			} ) );
@@ -81,13 +83,19 @@ define( function ( require ) {
 
 			var self = this;
 			this.model.forEach( function( match ) {
-				el.append( self._renderEntry( match ) );
+				self._renderEntry( match );
 			});
 
 			this.trigger( 'inner-view-rendered' );
 		},
 
+		fetchMatches: function( filter ) {
+			this.model.refresh( filter );
+		},
+
 		_renderEntry: function ( model ) {
+
+			var container = this.$( '.admin-match-list-container' );
 
 			var view = new MatchCompositeView( {
 				model: model
@@ -97,7 +105,7 @@ define( function ( require ) {
 			} );
 			view.on( 'matches:render', this._triggerRender, this );
 
-			return view.render().$el;
+			container.append( view.render().$el );
 		},
 
 		_loadCups: function() {
@@ -106,10 +114,6 @@ define( function ( require ) {
 
 		_triggerRender: function() {
 			this.trigger( 'view:render' );
-		},
-
-		_renderNewEntry: function( model ) {
-			this.$( '.admin-match-list-container' ).append( this._renderEntry( model ) );
 		},
 
 		_getSelectedMatchIds: function() {
@@ -123,8 +127,13 @@ define( function ( require ) {
 		},
 
 		_addEntry: function() {
-			this.listenToOnce( this.model, 'add', this._renderNewEntry );
-			this.model.add( { categoryId: this.filter.categoryId, cupId: this.filter.cupId } );
+
+			var container = this.$( '.admin-match-list-container' );
+			container.empty();
+
+			var newMatchModel = new Model.MatchModel( { categoryId: this.filter.categoryId, cupId: this.filter.cupId } );
+
+			this._renderEntry( newMatchModel );
 		},
 
 		_finishSelectedMatches: function() {

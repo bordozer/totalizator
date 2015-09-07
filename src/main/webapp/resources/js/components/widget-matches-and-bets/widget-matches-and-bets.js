@@ -175,7 +175,7 @@ define( function ( require ) {
 
 		_renderNoMatchesFound: function() {
 			var container = this.$( this.windowBodyContainerSelector );
-			container.html( "<span class='text-muted'>" + translator.noMatchesFound + "</span>" );
+			container.html( "<div class='admin-match-list-container'><span class='text-muted'>" + translator.noMatchesFound + "</span></div>" );
 
 			this.trigger( 'inner-view-rendered' );
 		},

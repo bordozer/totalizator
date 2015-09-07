@@ -164,6 +164,7 @@ define( function ( require ) {
 
 		_removeView: function() {
 			this.remove();
+			this.trigger( 'matches:render' );
 		},
 
 		_saveEntry: function () {
@@ -178,7 +179,10 @@ define( function ( require ) {
 				this.trigger( 'matches:render' );
 			}, this );
 
-			this.model.save().then( null, rend );
+			this.model
+					.save()
+					.then( rend )
+			;
 
 			this.model.saveAttributes();
 		},
