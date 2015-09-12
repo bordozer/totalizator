@@ -160,16 +160,16 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 		matchService.save( newMatch );
 	}
 
-	private Team getOrCreateTeam( final Cup cup, final String remoteTeam1Id, String remoteTeam1Name ) {
+	private Team getOrCreateTeam( final Cup cup, final String remoteTeamId, String remoteTeamName ) {
 
-		final Team existsTeam = teamService.findByImportId( cup.getCategory(), remoteTeam1Id );
+		final Team existsTeam = teamService.findByImportId( cup.getCategory(), remoteTeamId );
 		if ( existsTeam != null ) {
 			return existsTeam;
 		}
 
 		final Team team = new Team();
-		team.setTeamName( remoteTeam1Name );
-		team.setImportId( remoteTeam1Id );
+		team.setTeamName( remoteTeamName );
+		team.setImportId( remoteTeamId );
 		team.setCategory( cup.getCategory() );
 
 		final Team savedTeam = teamService.save( team );

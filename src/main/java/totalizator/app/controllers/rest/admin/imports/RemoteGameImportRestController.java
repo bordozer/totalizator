@@ -166,7 +166,7 @@ public class RemoteGameImportRestController {
 				remoteGame.setRemoteTeam1Name( remoteGameDTO.getTeam1Name() );
 
 				remoteGame.setRemoteTeam2Id( remoteGameDTO.getTeam2Name() );
-				remoteGame.setRemoteTeam2Name( remoteGame.getRemoteTeam1Name() );
+				remoteGame.setRemoteTeam2Name( remoteGameDTO.getTeam2Name() );
 
 				remoteGame.setBeginningTime( dateTimeService.parseDateTime( remoteGameDTO.getBeginningTime() ) );
 
