@@ -1,5 +1,6 @@
 package totalizator.app.services.matches.imports;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -133,7 +134,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 			return true;
 		};
 
-		final Match match = findMatchFor( cup, remoteGame.getRemoteTeam1Id(), remoteGame.getRemoteTeam2Id(), remoteGame.getBeginningTime() );
+		final Match match = StringUtils.isNoneEmpty( remoteGame.getRemoteGameId() ) ? findByRemoteGameId( remoteGame.getRemoteGameId() )  : findMatchFor( cup, remoteGame.getRemoteTeam1Id(), remoteGame.getRemoteTeam2Id(), remoteGame.getBeginningTime() );
 		if ( match != null ) {
 			match.setScore1( remoteGame.getScore1() );
 			match.setScore2( remoteGame.getScore2() );
