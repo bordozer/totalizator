@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
+import totalizator.app.services.CupTeamService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.matches.imports.strategies.NoStatisticsAPIService;
@@ -33,6 +34,9 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 	@Autowired
 	private DateTimeService dateTimeService;
+
+	@Autowired
+	private CupTeamService cupTeamService;
 
 	@Autowired
 	private ImportUtilsService importUtilsService;
@@ -117,22 +121,13 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	}
 
 	@Override
-	public boolean importGame( final Cup cup, final RemoteGame remoteGame ) {
+	public void importGame( final Cup cup, final RemoteGame remoteGame ) {
 
 		final String remoteTeam1Id = remoteGame.getRemoteTeam1Id();
 		final String remoteTeam2Id = remoteGame.getRemoteTeam2Id();
 
-		final Team team1 = teamService.findByImportId( cup.getCategory(), remoteTeam1Id );
-		if ( team1 == null ) {
-			LOGGER.warn( String.format( "Team '%s' not found. Game import skipped", remoteTeam1Id ) );
-			return true;
-		}
-
-		final Team team2 = teamService.findByImportId( cup.getCategory(), remoteTeam2Id );
-		if ( team2 == null ) {
-			LOGGER.warn( String.format( "Team '%s' not found. Game import skipped", remoteTeam2Id ) );
-			return true;
-		};
+		final Team team1 = getOrCreateTeam( cup, remoteTeam1Id, remoteGame.getRemoteTeam1Name() );
+		final Team team2 = getOrCreateTeam( cup, remoteTeam2Id, remoteGame.getRemoteTeam2Name() );
 
 		final Match match = StringUtils.isNoneEmpty( remoteGame.getRemoteGameId() ) ? findByRemoteGameId( remoteGame.getRemoteGameId() )  : findMatchFor( cup, remoteGame.getRemoteTeam1Id(), remoteGame.getRemoteTeam2Id(), remoteGame.getBeginningTime() );
 		if ( match != null ) {
@@ -143,7 +138,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 			matchService.save( match );
 
-			return true;
+			return;
 		}
 
 		final Match newMatch = new Match();
@@ -163,8 +158,25 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 		newMatch.setRemoteGameId( remoteGame.getRemoteGameId() );
 
 		matchService.save( newMatch );
+	}
 
-		return true;
+	private Team getOrCreateTeam( final Cup cup, final String remoteTeam1Id, String remoteTeam1Name ) {
+
+		final Team existsTeam = teamService.findByImportId( cup.getCategory(), remoteTeam1Id );
+		if ( existsTeam != null ) {
+			return existsTeam;
+		}
+
+		final Team team = new Team();
+		team.setTeamName( remoteTeam1Name );
+		team.setImportId( remoteTeam1Id );
+		team.setCategory( cup.getCategory() );
+
+		final Team savedTeam = teamService.save( team );
+
+		cupTeamService.saveCupTeam( cup.getId(), savedTeam.getId(), true );
+
+		return savedTeam;
 	}
 
 	private StatisticsServerService getStatisticsServerService( final Cup cup ) {

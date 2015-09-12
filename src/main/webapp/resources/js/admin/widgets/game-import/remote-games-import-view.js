@@ -170,11 +170,11 @@ define( function ( require ) {
 					return;
 				}
 
-				if ( ! model.remoteGameLocalData.team1 || ! model.remoteGameLocalData.team2 ) {
+				/*if ( ! model.remoteGameLocalData.team1 || ! model.remoteGameLocalData.team2 ) {
 					model.importStatus = { icon: 'fa fa-circle-thin', title: translator.importStatusTeamsDoNotExist };
 					model.trigger( 'events:remote_game_imported' );
 					return;
-				}
+				}*/
 
 				model.save();
 

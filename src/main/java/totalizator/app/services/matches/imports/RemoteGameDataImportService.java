@@ -20,5 +20,5 @@ public interface RemoteGameDataImportService {
 
 	Match findByRemoteGameId( final String remoteGameId );
 
-	boolean importGame( final Cup cup, final RemoteGame remoteGame );
+	void importGame( final Cup cup, final RemoteGame remoteGame );
 }

@@ -53,7 +53,7 @@ define( function ( require ) {
 			var team1 = remoteGameLocalData.team1;
 			var team2 = remoteGameLocalData.team2;
 
-			var importImpossible = ! team1 || ! team2;
+			var importImpossible = false; //! team1 || ! team2;
 
 			var matchResults = { style1: '', style2: '' };
 			if ( team1 && team2 ) {

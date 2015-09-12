@@ -163,7 +163,10 @@ public class RemoteGameImportRestController {
 				final RemoteGame remoteGame = new RemoteGame( remoteGameDTO.getRemoteGameId() );
 
 				remoteGame.setRemoteTeam1Id( remoteGameDTO.getTeam1Name() );
+				remoteGame.setRemoteTeam1Name( remoteGameDTO.getTeam1Name() );
+
 				remoteGame.setRemoteTeam2Id( remoteGameDTO.getTeam2Name() );
+				remoteGame.setRemoteTeam2Name( remoteGame.getRemoteTeam1Name() );
 
 				remoteGame.setBeginningTime( dateTimeService.parseDateTime( remoteGameDTO.getBeginningTime() ) );
 
