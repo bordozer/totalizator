@@ -36,6 +36,10 @@ import static totalizator.app.models.Match.*;
 				query = "select c from Match c where ( cupId= :cupId ) and ( team1Id= :teamId or team2Id= :teamId ) order by beginningTime desc"
 		),
 		@NamedQuery(
+				name = FIND_MATCH_BY_REMOTE_GAME_ID,
+				query = "select c from Match c where remoteGameId= :remoteGameId"
+		),
+		@NamedQuery(
 				name = LOAD_MATCH_COUNT_FOR_CUP,
 				query = "select count(m) from Match m where cupId= :cupId"
 		),
@@ -64,6 +68,7 @@ public class Match extends AbstractEntity {
 	public static final String FIND_BY_TEAMS = "matches.findByTeams";
 	public static final String FIND_BY_CUP_AND_TEAMS = "matches.findByCupAndTeams";
 	public static final String FIND_ALL_TEAM_MATCHES_FOR_CUP = "matches.findByCupAndTeam";
+	public static final String FIND_MATCH_BY_REMOTE_GAME_ID = "matches.findByRemoteGameId";
 	public static final String LOAD_MATCH_COUNT_FOR_CUP = "cups.loadCupMatchCount";
 	public static final String LOAD_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.loadTeamMatchCountForCup";
 	public static final String LOAD_MATCH_COUNT_FOR_TEAM = "cups.loadTeamMatchCount";
@@ -91,6 +96,9 @@ public class Match extends AbstractEntity {
 
 	@Column( columnDefinition = "VARCHAR(255)" ) // TODO: is too small for real description, but hsqldb:mem:mydb does not have TEXT data type. Just a temporary solution
 	private String description;
+
+	@Column( columnDefinition = "VARCHAR(100)" )
+	private String remoteGameId;
 
 	public Cup getCup() {
 		return cup;
@@ -162,6 +170,14 @@ public class Match extends AbstractEntity {
 
 	public void setDescription( final String description ) {
 		this.description = description;
+	}
+
+	public String getRemoteGameId() {
+		return remoteGameId;
+	}
+
+	public void setRemoteGameId( final String remoteGameId ) {
+		this.remoteGameId = remoteGameId;
 	}
 
 	@Override

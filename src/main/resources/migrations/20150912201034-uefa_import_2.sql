@@ -1,0 +1,1 @@
+ALTER TABLE matches ADD remoteGameId varchar(100) DEFAULT NULL;

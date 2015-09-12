@@ -243,6 +243,11 @@ public class MatchServiceImpl implements MatchService {
 		return matchRepository.getFutureMatchCount( cup, team );
 	}
 
+	@Override
+	public Match findByImportId( final String remoteGameId ) {
+		return matchRepository.findByImportId( remoteGameId );
+	}
+
 	private List<Match> sort( final List<Match> matches ) {
 
 		Collections.sort( matches, new Comparator<Match>() {

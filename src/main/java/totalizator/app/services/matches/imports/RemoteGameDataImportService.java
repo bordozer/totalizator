@@ -18,5 +18,7 @@ public interface RemoteGameDataImportService {
 
 	Match findMatchFor( final Cup category, final String team1Name, final String team2Name, final LocalDateTime gameDate );
 
+	Match findByRemoteGameId( final String remoteGameId );
+
 	boolean importGame( final Cup cup, final RemoteGame remoteGame );
 }

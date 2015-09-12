@@ -161,4 +161,13 @@ public class MatchRepository implements MatchDao {
 
 		return result != null && result.size() > 0 ? ( int ) ( long ) result.get( 0 ) : 0;
 	}
+
+	@Override
+	public Match findByImportId( final String remoteGameId ) {
+		final List<Match> bets = em.createNamedQuery( Match.FIND_MATCH_BY_REMOTE_GAME_ID, Match.class )
+				.setParameter( "remoteGameId", remoteGameId )
+				.getResultList();
+
+		return bets.size() == 1 ? bets.get( 0 ) : null;
+	}
 }

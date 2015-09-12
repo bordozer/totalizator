@@ -111,6 +111,11 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	}
 
 	@Override
+	public Match findByRemoteGameId( final String remoteGameId ) {
+		return matchService.findByImportId( remoteGameId );
+	}
+
+	@Override
 	public boolean importGame( final Cup cup, final RemoteGame remoteGame ) {
 
 		final String remoteTeam1Id = remoteGame.getRemoteTeam1Id();
@@ -153,6 +158,8 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 		newMatch.setMatchFinished( remoteGame.isFinished() );
 		newMatch.setHomeTeamNumber( remoteGame.getHomeTeamNumber() );
+
+		newMatch.setRemoteGameId( remoteGame.getRemoteGameId() );
 
 		matchService.save( newMatch );
 

@@ -9,7 +9,10 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-import totalizator.app.services.*;
+import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
+import totalizator.app.services.TeamService;
+import totalizator.app.services.UserService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameDataImportService;
 import totalizator.app.services.utils.DateTimeService;
@@ -82,27 +85,34 @@ public class RemoteGameImportRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/local-data/", produces = APPLICATION_JSON_VALUE )
 	public RemoteGameLocalData loadLocalDataForRemoteGame( final @RequestParam( value = "cupId" ) Integer cupId , final RemoteGameDTO remoteGameDTO, final Principal principal ) throws IOException {
 
+		final Match match = remoteGameDataImportService.findByRemoteGameId( remoteGameDTO.getRemoteGameId() );
+		if ( match == null ) {
+
+			final Cup cup = cupService.load( cupId );
+
+			final RemoteGameLocalData result = new RemoteGameLocalData();
+
+			final Team team1 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam1Id() );
+			if ( team1 != null ) {
+				result.setTeam1( dtoService.transformTeam( team1 ) );
+			}
+
+			final Team team2 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam2Id() );
+			if ( team2 != null ) {
+				result.setTeam2( dtoService.transformTeam( team2 ) );
+			}
+
+			return result;
+		}
+
 		final User currentUser = userService.findByName( principal.getName() );
-		final Cup cup = cupService.load( cupId );
 
 		final RemoteGameLocalData result = new RemoteGameLocalData();
 
-		final Team team1 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam1Id() );
-		if ( team1 != null ) {
-			result.setTeam1( dtoService.transformTeam( team1 ) );
-		}
+		result.setTeam1( dtoService.transformTeam( match.getTeam1() ) );
+		result.setTeam2( dtoService.transformTeam( match.getTeam2() ) );
 
-		final Team team2 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam2Id() );
-		if ( team2 != null ) {
-			result.setTeam2( dtoService.transformTeam( team2 ) );
-		}
-
-		if ( team1 != null && team2 != null ) {
-			final Match match = remoteGameDataImportService.findMatchFor( cup, team1.getTeamName(), team2.getTeamName(), dateTimeService.parseDateTime( remoteGameDTO.getBeginningTime() ) );
-			if ( match != null ) {
-				result.setMatch( dtoService.transformMatch( match, currentUser ) );
-			}
-		}
+		result.setMatch( dtoService.transformMatch( match, currentUser ) );
 
 		return result;
 	}
