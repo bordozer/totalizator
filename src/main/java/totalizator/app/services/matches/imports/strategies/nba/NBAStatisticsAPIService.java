@@ -3,7 +3,8 @@ package totalizator.app.services.matches.imports.strategies.nba;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import totalizator.app.services.RemoteContentService;
+import totalizator.app.models.Cup;
+import totalizator.app.services.remote.RemoteContentService;
 import totalizator.app.services.matches.imports.ImportedGamesDataStorageService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
@@ -26,11 +27,20 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 	private RemoteContentService remoteContentService;
 
 	@Autowired
-	private RemoteGameParsingService remoteGameParsingService;
+	private RemoteGameParsingService nbaGameParsingService;
 
 	@Autowired
 	private ImportedGamesDataStorageService importedGamesDataStorageService;
 
+	@Override
+	public List<String> loadRemoteGameIdsOnDate( final Cup cup, final LocalDate date ) throws IOException {
+		// import by date ( 05/01/2015 mm/dd/yyyy - first of may)
+		// http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=05/01/2015&DayOffset=0
+		final String url = String.format( "http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=%s/%s/%s&DayOffset=0", date.getMonthValue(), date.getDayOfMonth(), date.getYear() );
+		return nbaGameParsingService.extractRemoteGameIds( remoteContentService.getRemoteContent( url ) );
+	}
+
+	@Override
 	public RemoteGame loadRemoteGame( final String remoteGameId ) throws IOException {
 
 		final String remoteGameJSON = getRemoteGameJSON( remoteGameId );
@@ -39,20 +49,13 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 			return null;
 		}
 
-		final RemoteGame remoteGame = remoteGameParsingService.parseGame( remoteGameJSON );
+		final RemoteGame remoteGame = nbaGameParsingService.parseGame( remoteGameId, remoteGameJSON );
 
 		if ( remoteGame.isFinished() ) {
 			importedGamesDataStorageService.store( NBA, remoteGameId, remoteGameJSON );
 		}
 
 		return remoteGame;
-	}
-
-	public List<String> loadRemoteGameIdsOnDate( final LocalDate date ) throws IOException {
-		// import by date ( 05/01/2015 mm/dd/yyyy - first of may)
-		// http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=05/01/2015&DayOffset=0
-		final String url = String.format( "http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=%s/%s/%s&DayOffset=0", date.getMonthValue(), date.getDayOfMonth(), date.getYear() );
-		return remoteGameParsingService.extractRemoteGameIds( remoteContentService.getRemoteContent( url ) );
 	}
 
 	private String getRemoteGameJSON( final String remoteGameId ) throws IOException {

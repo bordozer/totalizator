@@ -82,6 +82,24 @@ define( function ( require ) {
 
 				}
 			} )
+		},
+
+		loadRemoteGameImportStrategyTypes: function() {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/admin/rest/remote-games-import/strategy-types/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( 'Error loading cups' ); // TODO: translate
+				}
+			} );
+
+			return result;
 		}
 	}
 } );

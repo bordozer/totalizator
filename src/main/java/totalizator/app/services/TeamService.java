@@ -9,5 +9,7 @@ public interface TeamService extends GenericService<Team> {
 
 	List<Team> loadAll( final Category category );
 
-	Team findByName( Category category, String name );
+	Team findByName( final Category category, final String name );
+
+	Team findByImportId( final Category category, final String teamImportId );
 }

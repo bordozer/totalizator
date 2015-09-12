@@ -213,6 +213,13 @@
 	</translation>
 
 	<translation>
+		<nerd>Import remote games inaccessible for this category</nerd>
+		<ru><![CDATA[Импорт недоступен]]></ru>
+		<ua><![CDATA[Iмпорт неможливий]]></ua>
+		<en><![CDATA[Import inaccessible]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

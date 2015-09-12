@@ -37,7 +37,11 @@
 				<% } %>
 
 				<% if( ! team1 ) { %>
-					<span class="text-danger" title="<%=translator.teamNotFoundInCategory%>"><%-team1Name%></span>
+					<span class="text-danger" title="<%=translator.teamNotFoundInCategory%>">
+						<%-team1Name%>
+						<br />
+						<small><%-team1Id%></small>
+					</span>
 				<% } %>
 			</div>
 
@@ -49,7 +53,11 @@
 				<% } %>
 
 				<% if( ! team2 ) { %>
-					<span class="text-danger" title="<%=translator.teamNotFoundInCategory%>"><%-team2Name%></span>
+					<span class="text-danger" title="<%=translator.teamNotFoundInCategory%>">
+						<%-team2Name%>
+						<br />
+						<small><%-team2Id%></small>
+					</span>
 				<% } %>
 
 				<% if( homeTeamNumber == 2 ) { %>

@@ -6,15 +6,16 @@ public class RemoteGame {
 
 	private final String remoteGameId;
 
-	private String team1Name;
-	private String team2Name;
+	private String remoteTeam1Id;
+	private String remoteTeam1Name;
+	private String remoteTeam2Id;
+	private String remoteTeam2Name;
 
 	private LocalDateTime beginningTime;
 
 	private int score1;
 	private int score2;
 
-	private String homeTeamName;
 	private boolean finished;
 
 	private int homeTeamNumber;
@@ -27,20 +28,36 @@ public class RemoteGame {
 		return remoteGameId;
 	}
 
-	public String getTeam1Name() {
-		return team1Name;
+	public String getRemoteTeam1Id() {
+		return remoteTeam1Id;
 	}
 
-	public void setTeam1Name( final String team1Name ) {
-		this.team1Name = team1Name;
+	public void setRemoteTeam1Id( final String remoteTeam1Id ) {
+		this.remoteTeam1Id = remoteTeam1Id;
 	}
 
-	public String getTeam2Name() {
-		return team2Name;
+	public String getRemoteTeam1Name() {
+		return remoteTeam1Name;
 	}
 
-	public void setTeam2Name( final String team2Name ) {
-		this.team2Name = team2Name;
+	public void setRemoteTeam1Name( final String remoteTeam1Name ) {
+		this.remoteTeam1Name = remoteTeam1Name;
+	}
+
+	public String getRemoteTeam2Id() {
+		return remoteTeam2Id;
+	}
+
+	public void setRemoteTeam2Id( final String remoteTeam2Id ) {
+		this.remoteTeam2Id = remoteTeam2Id;
+	}
+
+	public String getRemoteTeam2Name() {
+		return remoteTeam2Name;
+	}
+
+	public void setRemoteTeam2Name( final String remoteTeam2Name ) {
+		this.remoteTeam2Name = remoteTeam2Name;
 	}
 
 	public LocalDateTime getBeginningTime() {
@@ -67,14 +84,6 @@ public class RemoteGame {
 		return score2;
 	}
 
-	public void setHomeTeamName( final String homeTeamName ) {
-		this.homeTeamName = homeTeamName;
-	}
-
-	public String getHomeTeamName() {
-		return homeTeamName;
-	}
-
 	public void setFinished( final boolean finished ) {
 		this.finished = finished;
 	}
@@ -93,6 +102,6 @@ public class RemoteGame {
 
 	@Override
 	public String toString() {
-		return String.format( "#%s: %s vs %s ( %s )", remoteGameId, team1Name, team2Name, beginningTime );
+		return String.format( "#%s: %s vs %s ( %s )", remoteGameId, remoteTeam1Id, remoteTeam2Id, beginningTime );
 	}
 }

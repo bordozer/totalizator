@@ -22,9 +22,11 @@
 			</div>
 
 			<div class="col-xs-7">
-				<a href="/totalizator/teams/<%=model.teamId%>/"><%=model.teamName%></a>
+				<strong><a href="/totalizator/teams/<%=model.teamId%>/"><%=model.teamName%></a></strong>
 				<br />
-				<%= translator.totalMatchesLabel %>: <%=matchCount%>
+				<small><%= translator.teamImportIdLabel %>: <strong><%=model.teamImportId%></strong></small>
+				<br />
+				<small><%= translator.totalMatchesLabel %>: <strong><%=matchCount%></strong></small>
 			</div>
 
 		</div>

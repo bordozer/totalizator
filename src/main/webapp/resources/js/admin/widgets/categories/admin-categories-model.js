@@ -18,6 +18,8 @@ define( function ( require ) {
 			categoryId: 0
 			, categoryName: ''
 			, logoUrl: ''
+			, categoryImportId: ''
+			, remoteGameImportStrategyTypeId: 0
 		},
 
 		_snapshot: {},

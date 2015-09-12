@@ -42,6 +42,8 @@ public class AdminCategoriesController {
 
 				final CategoryEditDTO categoryEditDTO = new CategoryEditDTO( category.getId(), category.getCategoryName() );
 				categoryEditDTO.setLogoUrl( logoService.getLogoURL( category ) );
+				categoryEditDTO.setCategoryImportId( category.getImportId() );
+				categoryEditDTO.setRemoteGameImportStrategyTypeId( category.getRemoteGameImportStrategyTypeId() );
 
 				return categoryEditDTO;
 			}
@@ -53,9 +55,13 @@ public class AdminCategoriesController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public CategoryEditDTO create( final @RequestBody CategoryEditDTO categoryEditDTO ) {
 		// TODO: check if name exists
-		final Category category = categoryService.save( new Category( categoryEditDTO.getCategoryName() ) );
+		final Category category = new Category( categoryEditDTO.getCategoryName() );
+		category.setImportId( categoryEditDTO.getCategoryImportId() );
+		category.setRemoteGameImportStrategyTypeId( categoryEditDTO.getRemoteGameImportStrategyTypeId() );
 
-		categoryEditDTO.setCategoryId( category.getId() );
+		final Category saved = categoryService.save( category );
+
+		categoryEditDTO.setCategoryId( saved.getId() );
 
 		return categoryEditDTO;
 	}
@@ -67,6 +73,8 @@ public class AdminCategoriesController {
 		// TODO: check if name exists
 		final Category category = categoryService.load( categoryEditDTO.getCategoryId() );
 		category.setCategoryName( categoryEditDTO.getCategoryName() );
+		category.setImportId( categoryEditDTO.getCategoryImportId() );
+		category.setRemoteGameImportStrategyTypeId( categoryEditDTO.getRemoteGameImportStrategyTypeId() );
 
 		categoryService.save( category );
 

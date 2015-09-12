@@ -24,10 +24,31 @@
 	</translation>
 
 	<translation>
+		<nerd>Category import ID</nerd>
+		<ru><![CDATA[Импорт ID]]></ru>
+		<ua><![CDATA[Iмпорт ID]]></ua>
+		<en><![CDATA[Category import ID]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

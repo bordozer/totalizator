@@ -31,6 +31,11 @@ public class Category extends AbstractEntity {
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
 
+	@Column( columnDefinition = "VARCHAR(100)" )
+	private String importId;
+
+	private int remoteGameImportStrategyTypeId;
+
 	public Category() {
 	}
 
@@ -52,6 +57,22 @@ public class Category extends AbstractEntity {
 
 	public void setLogoFileName( final String logoFileName ) {
 		this.logoFileName = logoFileName;
+	}
+
+	public String getImportId() {
+		return importId;
+	}
+
+	public void setImportId( final String importId ) {
+		this.importId = importId;
+	}
+
+	public int getRemoteGameImportStrategyTypeId() {
+		return remoteGameImportStrategyTypeId;
+	}
+
+	public void setRemoteGameImportStrategyTypeId( final int remoteGameImportStrategyTypeId ) {
+		this.remoteGameImportStrategyTypeId = remoteGameImportStrategyTypeId;
 	}
 
 	@Override

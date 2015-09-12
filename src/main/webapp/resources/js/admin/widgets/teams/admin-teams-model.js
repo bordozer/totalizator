@@ -17,6 +17,7 @@ define( function ( require ) {
 			, isEditState: false
 			, teamChecked: true
 			, matchCount: 0
+			, teamImportId: ''
 		},
 
 		initialize: function ( options ) {

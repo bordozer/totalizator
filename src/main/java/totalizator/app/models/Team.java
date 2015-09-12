@@ -22,6 +22,10 @@ import static totalizator.app.models.Team.*;
 		@NamedQuery(
 				name = FIND_BY_NAME,
 				query = "select c from Team c where teamName= :teamName"
+		),
+		@NamedQuery(
+				name = FIND_BY_TEAM_IMPORT_ID,
+				query = "select c from Team c where importId= :teamImportId"
 		)
 } )
 public class Team extends AbstractEntity {
@@ -29,6 +33,7 @@ public class Team extends AbstractEntity {
 	public static final String LOAD_ALL = "teams.loadAll";
 	public static final String FIND_BY_CATEGORY = "matches.findByCategory";
 	public static final String FIND_BY_NAME = "teams.findByName";
+	public static final String FIND_BY_TEAM_IMPORT_ID = "teams.findByTeamImportId";
 
 	@Column( unique = false, columnDefinition = "VARCHAR(255)" )
 	private String teamName;
@@ -39,6 +44,9 @@ public class Team extends AbstractEntity {
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
+
+	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
+	private String importId;
 
 	public Team() {
 	}
@@ -70,6 +78,14 @@ public class Team extends AbstractEntity {
 
 	public void setLogoFileName( final String logoFileName ) {
 		this.logoFileName = logoFileName;
+	}
+
+	public String getImportId() {
+		return importId;
+	}
+
+	public void setImportId( final String importId ) {
+		this.importId = importId;
 	}
 
 	@Override

@@ -15,8 +15,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		importStep_CollectGamesData: "Collect games data"
-		, validation_SelectCup: "Select cup first!"
+		validation_SelectCup: "Select cup first!"
 		, cupLabel: "Cup"
 		, dateFromLabel: "Date from"
 		, dateToLabel: "Date to"
@@ -35,7 +34,6 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			var today = dateTimeService.dateNow();
-
 			this.model.set( {
 				cupId: 0
 				, dateFrom: today
@@ -51,12 +49,15 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
-			var data = _.extend( {}, model, {
-				cupId: model.cupId
-				, cups: cups
-				, showActiveCupsOnlyClick: this.showActiveCupsOnlyClick
-				, translator: translator
-			} );
+			var data = _.extend( {}
+				, model
+					, {
+						cupId: model.cupId
+						, cups: cups
+						, showActiveCupsOnlyClick: this.showActiveCupsOnlyClick
+						, translator: translator
+					}
+			);
 
 			this.$el.html( template( data ) );
 

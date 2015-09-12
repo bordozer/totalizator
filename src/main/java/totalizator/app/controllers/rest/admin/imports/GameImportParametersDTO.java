@@ -8,7 +8,15 @@ public class GameImportParametersDTO {
 	private String dateFrom;
 	private String dateTo;
 
-	private int gameImportStrategyTypeId;
+	private int cupId;
+
+	public int getCupId() {
+		return cupId;
+	}
+
+	public void setCupId( final int cupId ) {
+		this.cupId = cupId;
+	}
 
 	public String getDateFrom() {
 		return dateFrom;
@@ -24,13 +32,5 @@ public class GameImportParametersDTO {
 
 	public void setDateTo( final String dateTo ) {
 		this.dateTo = dateTo;
-	}
-
-	public int getGameImportStrategyTypeId() {
-		return gameImportStrategyTypeId;
-	}
-
-	public void setGameImportStrategyTypeId( final int gameImportStrategyTypeId ) {
-		this.gameImportStrategyTypeId = gameImportStrategyTypeId;
 	}
 }

@@ -18,6 +18,7 @@ define( function ( require ) {
 		, teamCategoryLabel: "Category"
 		, teamLogoLabel: "Logo"
 		, totalMatchesLabel: "Team total matches count"
+		, teamImportIdLabel: "Team import ID"
 	} );
 
 	return Backbone.View.extend( {
@@ -112,10 +113,12 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
-			var teamName = this._getTeamName();
-			var categoryId = this._getCategoryId();
 
-			this.model.set( { teamName: teamName, categoryId: categoryId } );
+			this.model.set( {
+				teamName: this._getTeamName()
+				, categoryId: this._getCategoryId()
+				, teamImportId: this._getTeamImportId()
+			} );
 		},
 
 		_validate: function() {
@@ -135,6 +138,10 @@ define( function ( require ) {
 
 		_getCategoryId: function() {
 			return this.$( '.entry-category-id' ).val();
+		},
+
+		_getTeamImportId: function() {
+			return this.$( '#team-import-id' ).val();
 		},
 
 		_isTeamChecked: function() {

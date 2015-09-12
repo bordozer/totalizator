@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -91,6 +92,11 @@ public class DateTimeServiceImpl implements DateTimeService {
 	@Override
 	public boolean hasTheSameDate( final LocalDateTime time, final LocalDate date ) {
 		return time.toLocalDate().isEqual( date );
+	}
+
+	@Override
+	public int diffInDays( final LocalDate date1, final LocalDate date2 ) {
+		return Period.between( date1, date2 ).getDays();
 	}
 
 	@Override

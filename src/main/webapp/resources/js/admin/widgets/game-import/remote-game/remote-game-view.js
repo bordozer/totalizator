@@ -18,7 +18,6 @@ define( function ( require ) {
 		, noLocalMatchFound: "Local match for the remote game not found"
 		, theMatchIsAlreadyImported: "The match is already imported"
 		, gettingGameData: "Getting game data"
-		//, matchBeginningTimeLabel: "Match beginning time"
 	} );
 
 	return Backbone.View.extend( {

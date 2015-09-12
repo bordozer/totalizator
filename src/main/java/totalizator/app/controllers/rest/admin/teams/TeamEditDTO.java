@@ -9,6 +9,8 @@ public class TeamEditDTO {
 	private boolean teamChecked;
 	private int matchCount;
 
+	private String teamImportId;
+
 	public TeamEditDTO() {
 	}
 
@@ -66,6 +68,14 @@ public class TeamEditDTO {
 
 	public void setMatchCount( int matchCount ) {
 		this.matchCount = matchCount;
+	}
+
+	public String getTeamImportId() {
+		return teamImportId;
+	}
+
+	public void setTeamImportId( final String teamImportId ) {
+		this.teamImportId = teamImportId;
 	}
 
 	@Override

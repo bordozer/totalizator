@@ -43,4 +43,6 @@ public interface DateTimeService {
 	boolean hasTheSameDate( final LocalDateTime time, final LocalDate date );
 
 	String dateTimeFormat();
+
+	int diffInDays( final LocalDate date1, final LocalDate date2 );
 }

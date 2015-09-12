@@ -9,15 +9,10 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-import totalizator.app.services.CupService;
-import totalizator.app.services.DTOService;
-import totalizator.app.services.TeamService;
-import totalizator.app.services.UserService;
-import totalizator.app.services.matches.MatchService;
+import totalizator.app.services.*;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameDataImportService;
 import totalizator.app.services.utils.DateTimeService;
-import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.io.IOException;
@@ -43,9 +38,6 @@ public class RemoteGameImportRestController {
 	private TeamService teamService;
 
 	@Autowired
-	private MatchService matchService;
-
-	@Autowired
 	private RemoteGameDataImportService remoteGameDataImportService;
 
 	@Autowired
@@ -67,7 +59,9 @@ public class RemoteGameImportRestController {
 		final LocalDate dateFrom = dateTimeService.parseDate( parametersDTO.getDateFrom() );
 		final LocalDate dateTo = dateTimeService.parseDate( parametersDTO.getDateTo() );
 
-		return remoteGameDataImportService.loadRemoteGameIds( dateFrom, dateTo ).stream().map( new Function<String, NotLoadedRemoteGameDTO>() {
+		final Cup cup = cupService.load( parametersDTO.getCupId() );
+
+		return remoteGameDataImportService.loadRemoteGameIds( dateFrom, dateTo, cup ).stream().map( new Function<String, NotLoadedRemoteGameDTO>() {
 
 			@Override
 			public NotLoadedRemoteGameDTO apply( final String remoteGameId ) {
@@ -79,8 +73,8 @@ public class RemoteGameImportRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
-	public RemoteGameDTO loadRemoteGameData( final @PathVariable( "remoteGameId" ) String remoteGameId ) throws IOException {
-		return getRemoteGameMapper().apply( remoteGameDataImportService.loadRemoteGame( remoteGameId ) );
+	public RemoteGameDTO loadRemoteGameData( final @PathVariable( "remoteGameId" ) String remoteGameId, final @RequestParam( value = "cupId" ) Integer cupId ) throws IOException {
+		return getRemoteGameMapper().apply( remoteGameDataImportService.loadRemoteGame( remoteGameId, cupService.load( cupId ) ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -93,19 +87,21 @@ public class RemoteGameImportRestController {
 
 		final RemoteGameLocalData result = new RemoteGameLocalData();
 
-		final Team team1 = teamService.findByName( cup.getCategory(), remoteGameDTO.getTeam1Name() );
+		final Team team1 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam1Id() );
 		if ( team1 != null ) {
 			result.setTeam1( dtoService.transformTeam( team1 ) );
 		}
 
-		final Team team2 = teamService.findByName( cup.getCategory(), remoteGameDTO.getTeam2Name() );
+		final Team team2 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam2Id() );
 		if ( team2 != null ) {
 			result.setTeam2( dtoService.transformTeam( team2 ) );
 		}
 
-		final Match match = remoteGameDataImportService.findMatchFor( cup, remoteGameDTO.getTeam1Name(), remoteGameDTO.getTeam2Name(), dateTimeService.parseDateTime( remoteGameDTO.getBeginningTime() ) );
-		if ( match != null ) {
-			result.setMatch( dtoService.transformMatch( match, currentUser ) );
+		if ( team1 != null && team2 != null ) {
+			final Match match = remoteGameDataImportService.findMatchFor( cup, team1.getTeamName(), team2.getTeamName(), dateTimeService.parseDateTime( remoteGameDTO.getBeginningTime() ) );
+			if ( match != null ) {
+				result.setMatch( dtoService.transformMatch( match, currentUser ) );
+			}
 		}
 
 		return result;
@@ -127,8 +123,10 @@ public class RemoteGameImportRestController {
 
 				final RemoteGameDTO remoteGameDTO = new RemoteGameDTO( remoteGame.getRemoteGameId() );
 
-				remoteGameDTO.setTeam1Name( remoteGame.getTeam1Name() );
-				remoteGameDTO.setTeam2Name( remoteGame.getTeam2Name() );
+				remoteGameDTO.setTeam1Id( remoteGame.getRemoteTeam1Id() );
+				remoteGameDTO.setTeam1Name( remoteGame.getRemoteTeam1Name() );
+				remoteGameDTO.setTeam2Id( remoteGame.getRemoteTeam2Id() );
+				remoteGameDTO.setTeam2Name( remoteGame.getRemoteTeam2Name() );
 
 				remoteGameDTO.setBeginningTime( dateTimeService.formatDateTime( remoteGame.getBeginningTime() ) );
 				remoteGameDTO.setScore1( remoteGame.getScore1() );
@@ -150,8 +148,8 @@ public class RemoteGameImportRestController {
 
 				final RemoteGame remoteGame = new RemoteGame( remoteGameDTO.getRemoteGameId() );
 
-				remoteGame.setTeam1Name( remoteGameDTO.getTeam1Name() );
-				remoteGame.setTeam2Name( remoteGameDTO.getTeam2Name() );
+				remoteGame.setRemoteTeam1Id( remoteGameDTO.getTeam1Name() );
+				remoteGame.setRemoteTeam2Id( remoteGameDTO.getTeam2Name() );
 
 				remoteGame.setBeginningTime( dateTimeService.parseDateTime( remoteGameDTO.getBeginningTime() ) );
 
@@ -164,100 +162,5 @@ public class RemoteGameImportRestController {
 				return remoteGame;
 			}
 		};
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-	/*@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/start/", produces = APPLICATION_JSON_VALUE )
-	public ImportStatusDTO startImport( final @RequestParam( "cupId" ) int cupId ) {
-
-		final Cup cup = cupService.load( cupId );
-		if ( cup == null ) {
-			throw new IllegalArgumentException( String.format( "Cup #%d not found", cupId ) );
-		}
-
-		if ( nbaGameDataImportService.isActive() ) {
-			final ImportStatusDTO result = new ImportStatusDTO();
-			result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
-			result.setImportActive( false );
-			result.setImportStatusMessage( translatorService.translate( "Import is already going", getLanguage() ) );
-
-			return result;
-		}
-
-		nbaGameDataImportService.start( cupId );
-
-		new NBAGameImportTask( cup, nbaGameDataImportService ).start();
-
-		final ImportStatusDTO result = new ImportStatusDTO();
-		result.setCupId( cupId );
-		result.setImportActive( true );
-		result.setImportStatusMessage( translatorService.translate( "Import started", getLanguage() ) );
-
-		return result;
-	}
-
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/stop/", produces = APPLICATION_JSON_VALUE )
-	public ImportStatusDTO stopImport() {
-
-		final ImportStatusDTO result = new ImportStatusDTO();
-
-		if ( !nbaGameDataImportService.isActive() ) {
-			result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
-			result.setImportActive( false );
-			result.setImportStatusMessage( translatorService.translate( "Import is not active", getLanguage() ) );
-
-			return result;
-		}
-
-		nbaGameDataImportService.stop();
-
-		result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
-		result.setImportActive( nbaGameDataImportService.isActive() );
-		result.setImportStatusMessage( translatorService.translate( "Import has been stopped", getLanguage() ) );
-
-		return result;
-	}
-
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/state/", produces = APPLICATION_JSON_VALUE )
-	public ImportStatusDTO importState() {
-
-		final ImportStatusDTO result = new ImportStatusDTO();
-
-		final boolean isActive = nbaGameDataImportService.isActive();
-
-		result.setCupId( nbaGameDataImportService.getActiveImportCupId() );
-		result.setImportActive( isActive );
-
-		final GamesDataImportMonitor monitor = nbaGameDataImportService.getMonitor();
-		final String error = StringUtils.isNotEmpty( monitor.getImportErrorMessage() ) ? String.format( " ( %s )", monitor.getImportErrorMessage() ) : "";
-
-		final String stateMessage = String.format( "%s ( %s )%s"
-				, translatorService.translate( monitor.getCurrentStatusMessage(), getLanguage() )
-				, translatorService.translate( "$1 games are imported", getLanguage(), String.valueOf( monitor.getProcessedGamesCount() ) )
-				, error
-		);
-		result.setImportStatusMessage( stateMessage );
-
-		return result;
-	}*/
-
-	private Language getLanguage() {
-		return translatorService.getDefaultLanguage();
 	}
 }

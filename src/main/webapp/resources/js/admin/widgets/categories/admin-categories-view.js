@@ -12,6 +12,7 @@ define( function ( require ) {
 	var TemplateEntryEdit = require( 'text!./templates/admin-categories-edit-template.html' );
 
 	var service = require( '/resources/js/services/service.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -19,6 +20,8 @@ define( function ( require ) {
 		, newCategoryLabel: "Admin / Categories: New category"
 		, categoryNameLabel: "Category name"
 		, logoLabel: "Logo"
+		, categoryImportIdLabel: "Category import ID"
+		, importServerLabel: "Import remote games from server"
 	} );
 
 	var CategoriesView = WidgetView.extend( {
@@ -29,7 +32,8 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			//this.model.on( 'sync', this.render, this );
+			this.remoteGameImportStrategyTypes = adminService.loadRemoteGameImportStrategyTypes();
+
 			this.listenToOnce( this.model, 'sync', this.render );
 			this.model.fetch( { cache: false } );
 		},
@@ -59,6 +63,7 @@ define( function ( require ) {
 			var view = new CategoryView( {
 				model: model
 				, isSelected: this.model.selectedCategoryId == model.get( 'categoryId' )
+				, remoteGameImportStrategyTypes: this.remoteGameImportStrategyTypes
 			} );
 			view.on( 'events:categories_changed', this._triggerCategoriesChanged, this );
 			view.on( 'events:filter_by_category', this._triggerFilterByCategory, this );
@@ -121,6 +126,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.isSelected = options.isSelected;
+			this.remoteGameImportStrategyTypes = options.remoteGameImportStrategyTypes;
 
 			//this.model.on( 'sync', this.render, this );
 			this.on( 'events:categories_changed', this.render, this );
@@ -146,8 +152,11 @@ define( function ( require ) {
 
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
+				, remoteGameImportStrategyTypes: this.remoteGameImportStrategyTypes
 				, translator: translator
 			} ) );
+
+			this.$( '#gameImportStrategyTypeId' ).chosen( { width: '100%' } );
 
 			return this;
 		},
@@ -161,7 +170,7 @@ define( function ( require ) {
 		},
 
 		_deleteEntry: function() {
-			if ( confirm( "Delete category '" + this.model.get( 'categoryName' ) + "'?" ) ) {
+			if ( confirm( "Delete category '" + this.model.get( 'categoryName' ) + "'?" ) ) { // TODO: translate
 				this.model.destroy();
 				this.remove();
 			}
@@ -189,8 +198,14 @@ define( function ( require ) {
 		},
 
 		_bind: function() {
+
+			this.model.set( {
+				categoryName: this.$( '.entry-name' ).val()
+				, categoryImportId: this.$( '#category-import-id' ).val()
+				, remoteGameImportStrategyTypeId: this.$( '#game-import-strategy-type-id' ).val()
+			} );
+
 			this.model.makeSnapshot();
-			this.model.set( { categoryName: this.$( '.entry-name' ).val() } );
 		},
 
 		_onCategoryEditClick: function( evt ) {
@@ -221,11 +236,15 @@ define( function ( require ) {
 
 		_onCategoryEditCancelClick: function( evt ) {
 			evt.preventDefault();
+
 			if ( this.model.get( 'categoryId' ) > 0 ) {
+
 				this.model.restoreSnapshot();
 				this.render();
+
 				return;
 			}
+
 			this.model.destroy();
 			this.remove();
 		}

@@ -6,6 +6,9 @@ public class CategoryEditDTO {
 	private String categoryName;
 	private String logoUrl;
 
+	private String categoryImportId;
+	private int remoteGameImportStrategyTypeId;
+
 	public CategoryEditDTO() {
 	}
 
@@ -36,6 +39,22 @@ public class CategoryEditDTO {
 
 	public void setLogoUrl( final String logoUrl ) {
 		this.logoUrl = logoUrl;
+	}
+
+	public String getCategoryImportId() {
+		return categoryImportId;
+	}
+
+	public void setCategoryImportId( final String categoryImportId ) {
+		this.categoryImportId = categoryImportId;
+	}
+
+	public int getRemoteGameImportStrategyTypeId() {
+		return remoteGameImportStrategyTypeId;
+	}
+
+	public void setRemoteGameImportStrategyTypeId( final int remoteGameImportStrategyTypeId ) {
+		this.remoteGameImportStrategyTypeId = remoteGameImportStrategyTypeId;
 	}
 
 	@Override

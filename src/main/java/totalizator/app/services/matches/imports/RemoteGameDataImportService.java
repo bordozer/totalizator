@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface RemoteGameDataImportService {
 
-	List<String> loadRemoteGameIds( final LocalDate dateFrom, final LocalDate dateTo ) throws IOException;
+	List<String> loadRemoteGameIds( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException;
 
-	RemoteGame loadRemoteGame( final String remoteGameId ) throws IOException;
+	RemoteGame loadRemoteGame( final String remoteGameId, final Cup cupId ) throws IOException;
 
 	List<RemoteGame> loadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException;
 

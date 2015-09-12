@@ -62,6 +62,7 @@ public class AdminTeamRestController {
 			public TeamEditDTO apply( final Team team ) {
 				final TeamEditDTO dto = new TeamEditDTO( team.getId(), team.getTeamName(), team.getCategory().getId(), cupTeamService.exists( cup, team ), logoService.getLogoURL( team ) );
 				dto.setMatchCount( matchService.getMatchCount( team ) );
+				dto.setTeamImportId( team.getImportId() );
 
 				return dto;
 			}
@@ -73,9 +74,12 @@ public class AdminTeamRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/cups/{cupId}/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamEditDTO create( final @RequestBody TeamEditDTO teamEditDTO, final @PathVariable( "cupId" ) int cupId ) {
 		// TODO: check if name exists
-		final Team team = teamService.save( new Team( teamEditDTO.getTeamName(), categoryService.load( teamEditDTO.getCategoryId() ) ) );
+		final Team team = new Team( teamEditDTO.getTeamName(), categoryService.load( teamEditDTO.getCategoryId() ) );
+		team.setImportId( teamEditDTO.getTeamImportId() );
 
-		final int teamId = team.getId();
+		final Team saved = teamService.save( team );
+
+		final int teamId = saved.getId();
 
 		teamActivity( teamId, cupId, true );
 
@@ -92,6 +96,7 @@ public class AdminTeamRestController {
 		final Team team = teamService.load( teamEditDTO.getTeamId() );
 		team.setTeamName( teamEditDTO.getTeamName() );
 		team.setCategory( categoryService.load( teamEditDTO.getCategoryId() ) );
+		team.setImportId( teamEditDTO.getTeamImportId() );
 
 		teamService.save( team );
 

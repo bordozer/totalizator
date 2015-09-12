@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-@Service
+@Service( value = "nbaGameParsingService" )
 public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 
 	@Override
@@ -41,47 +42,46 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 	}
 
 	@Override
-	public RemoteGame parseGame( final String remoteGameJSON ) {
+	public RemoteGame parseGame( final String remoteGameId, final String remoteGameJSON ) {
 
 		final Gson gson = new Gson();
 
 		final NBAGame nbaGame = gson.fromJson( remoteGameJSON, NBAGame.class );
 
-		final String remoteGameId = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get(2);
-
 		final LocalDateTime gameTime = getDate( nbaGame );
 
-		final String _team1City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 4 );
-		final String _team1 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 5 );
 		final Double score1 = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 0 ) ).get( 21 );
-
-		final String _team2City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 9 );
-		final String _team2 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 10 );
 		final Double score2 = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 1 ) ).get( 21 );
 
 		final boolean isFinal = ( ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 4 ) ).equals( "Final" );
 
-		final Double homeTeamId = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 6 );
-		final Double team1TeamId = ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 3 );
+		final String team1Id = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 3 ) ).toString();
+		final String team2Id = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 8 ) ).toString();
+		final String homeTeamId = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 6 ) ).toString();
 
-		final String _homeTeam = team1TeamId.doubleValue() == homeTeamId.doubleValue() ? _team1 : _team2;
-		final int homeTeamNumber = team1TeamId.doubleValue() == homeTeamId.doubleValue() ? 1 : 2;
+		final String _team1City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 4 );
+		final String _team1 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 5 );
+
+		final String _team2City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 9 );
+		final String _team2 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 10 );
+
+		final int homeTeamNumber = homeTeamId.equals( team1Id ) ? 1 : 2;
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 
 		remoteGame.setBeginningTime( gameTime );
 
-		remoteGame.setTeam1Name( String.format( "%s %s", _team1City, _team1 ) );
+		remoteGame.setRemoteTeam1Id( team1Id );
+		remoteGame.setRemoteTeam1Name( String.format( "%s %s", _team1City, _team1 ) );
 		if ( score1 != null ) {
 			remoteGame.setScore1( score1.intValue() );
 		}
 
-		remoteGame.setTeam2Name( String.format( "%s %s", _team2City, _team2 ) );
+		remoteGame.setRemoteTeam2Id( team2Id );
+		remoteGame.setRemoteTeam2Name( String.format( "%s %s", _team2City, _team2 ) );
 		if ( score2 != null ) {
 			remoteGame.setScore2( score2.intValue() );
 		}
-
-		remoteGame.setHomeTeamName( _homeTeam );
 
 		remoteGame.setFinished( isFinal );
 		remoteGame.setHomeTeamNumber( homeTeamNumber  );
@@ -90,6 +90,7 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 	}
 
 	private LocalDateTime getDate( final NBAGame nbaGame ) {
+		// 2015-04-15T00:00:00
 		final String _date = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 0 );
 
 		return LocalDateTime.parse( _date );

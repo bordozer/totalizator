@@ -55,4 +55,9 @@ public class TeamServiceImpl implements TeamService {
 	public Team findByName( final Category category, final String name ) {
 		return teamRepository.findByName( category, name );
 	}
+
+	@Override
+	public Team findByImportId( final Category category, final String teamImportId ) {
+		return teamRepository.findByImportId( category, teamImportId );
+	}
 }

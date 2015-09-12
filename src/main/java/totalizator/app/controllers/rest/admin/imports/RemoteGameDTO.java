@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class RemoteGameDTO extends NotLoadedRemoteGameDTO {
 
+	private String team1Id;
 	private String team1Name;
+	private String team2Id;
 	private String team2Name;
 
 //	private LocalDateTime beginningTime;
@@ -25,12 +27,28 @@ public class RemoteGameDTO extends NotLoadedRemoteGameDTO {
 		super( remoteGameId );
 	}
 
+	public String getTeam1Id() {
+		return team1Id;
+	}
+
+	public void setTeam1Id( final String team1Id ) {
+		this.team1Id = team1Id;
+	}
+
 	public String getTeam1Name() {
 		return team1Name;
 	}
 
 	public void setTeam1Name( String team1Name ) {
 		this.team1Name = team1Name;
+	}
+
+	public String getTeam2Id() {
+		return team2Id;
+	}
+
+	public void setTeam2Id( final String team2Id ) {
+		this.team2Id = team2Id;
 	}
 
 	public String getTeam2Name() {

@@ -65,8 +65,29 @@ public class TeamRepository implements TeamDao {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public Team findByName( final Category category, final String name ) {
+
 		final List<Team> teams = em.createNamedQuery( Team.FIND_BY_NAME, Team.class )
 				.setParameter( "teamName", name )
+				.getResultList();
+
+		if ( teams.size() == 0 ) {
+			return null;
+		}
+
+		for ( final Team team : teams ) {
+			if ( team.getCategory().equals( category ) ) {
+				return team;
+			}
+		}
+
+		return null;
+	}
+
+	@Override
+	public Team findByImportId( final Category category, final String teamImportId ) {
+
+		final List<Team> teams = em.createNamedQuery( Team.FIND_BY_TEAM_IMPORT_ID, Team.class )
+				.setParameter( "teamImportId", teamImportId )
 				.getResultList();
 
 		if ( teams.size() == 0 ) {

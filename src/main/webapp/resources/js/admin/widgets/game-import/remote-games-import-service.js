@@ -51,55 +51,5 @@ define( function ( require ) {
 
 			return result;
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		/*stopImport: function() {
-
-			var result = {};
-			$.ajax( {
-				method: 'get',
-				url: '/admin/rest/remote-games-import/nba/stop/',
-				async: false,
-				success: function ( response ) {
-					result = response;
-				},
-				error: function() {
-					alert( translator.error );
-				}
-			} );
-
-			return result;
-		}*/
-
-		/*getImportStatus: function() {
-			var result = {};
-			$.ajax( {
-				method: 'get',
-				url: '/admin/rest/remote-games-import/nba/state/',
-				async: false,
-				success: function ( response ) {
-					result = response;
-				},
-				error: function() {
-					alert( translator.error );
-				}
-			} );
-
-			return result;
-		}*/
 	}
 } );

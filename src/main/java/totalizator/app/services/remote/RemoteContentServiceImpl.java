@@ -1,4 +1,4 @@
-package totalizator.app.services;
+package totalizator.app.services.remote;
 
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -16,10 +16,16 @@ public class RemoteContentServiceImpl implements RemoteContentService {
 
 	@Override
 	public String getRemoteContent( final String url ) throws IOException {
+		return getRemoteContent( new RemoteServerRequest( url ) );
+	}
+
+	@Override
+	public String getRemoteContent( final RemoteServerRequest request ) throws IOException {
 
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
-		final HttpGet httpGet = new HttpGet( url );
+		final HttpGet httpGet = new HttpGet( request.getUrl() );
+		httpGet.setHeader( "X-Auth-Token", request.getxAuthToken() );
 
 		try {
 			final ResponseHandler<String> responseHandler = new BasicResponseHandler();

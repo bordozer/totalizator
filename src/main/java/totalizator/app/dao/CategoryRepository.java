@@ -36,6 +36,8 @@ public class CategoryRepository implements CategoryDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Category save( final Category entry ) {
 		return em.merge( entry );
@@ -45,6 +47,8 @@ public class CategoryRepository implements CategoryDao {
 	@Caching( evict = {
 		@CacheEvict( value = CACHE_ENTRY, key="#id" )
 		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+		, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
+		, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );

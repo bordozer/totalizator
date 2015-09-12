@@ -27,6 +27,32 @@
 				<div class="row">
 
 					<div class="col-lg-6">
+						<%- translator.categoryImportIdLabel %>
+					</div>
+
+					<div class="col-lg-6">
+						<input type="text" id="category-import-id" class="form-control" value="<%=model.categoryImportId%>">
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-6">
+						<%- translator.importServerLabel %>
+					</div>
+
+					<div class="col-lg-6">
+						<select id="game-import-strategy-type-id" class="form-control">
+							<% _.each( remoteGameImportStrategyTypes, function( remoteGameImportStrategyType ) { %>
+								<option value="<%=remoteGameImportStrategyType.id%>" <%= remoteGameImportStrategyType.id == model.remoteGameImportStrategyTypeId ? 'selected' : '' %> ><%=remoteGameImportStrategyType.name%></option>
+							<% }) %>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-6">
 						<%- translator.logoLabel %>
 					</div>
 

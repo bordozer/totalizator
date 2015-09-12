@@ -26,8 +26,6 @@ define( function ( require ) {
 
 			this.cup = adminService.loadCup( this.importParameters.cupId );
 
-			this.listenTo( this.model, 'add', this._onAddNewRemoteGame );
-
 			this.render();
 		},
 
@@ -41,13 +39,15 @@ define( function ( require ) {
 			}
 
 			var self = this;
-			_.each( this.emptyRemoteGames, function( remoteGame ) {
-				self._renderRemoteGame( remoteGame );
+			_.each( this.emptyRemoteGames, function( emptyRemoteGame ) {
+				//console.log( emptyRemoteGame );
+				self._renderRemoteGame( emptyRemoteGame );
 			});
 		},
 
 		_renderRemoteGame: function( emptyRemoteGame ) {
-			this.model.add( emptyRemoteGame );
+			var model = this.model.add( emptyRemoteGame );
+			this._onAddNewRemoteGame( model );
 		},
 
 		_onAddNewRemoteGame: function( model ) {
