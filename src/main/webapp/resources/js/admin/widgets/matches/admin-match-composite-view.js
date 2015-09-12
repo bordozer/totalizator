@@ -36,6 +36,7 @@ define( function ( require ) {
 		, deleteAllMatchesMessage: "Delete ALL selected matches?"
 		, betsCountLabel: "Bets count"
 		, teamsStandOffHistoryLabel: "Teams standoff history"
+		, remoteGameLabel: "Remote game"
 	} );
 
 	return Backbone.View.extend( {

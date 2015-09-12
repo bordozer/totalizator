@@ -65,6 +65,8 @@ public class AdminMatchesRestController {
 
 				matchEditDTO.setBetsCount( matchBetsService.betsCount( match ) );
 
+				matchEditDTO.setRemoteGameId( match.getRemoteGameId() );
+
 				return matchEditDTO;
 			}
 		} );

@@ -29,6 +29,8 @@ public class MatchEditDTO {
 
 	private int betsCount;
 
+	private String remoteGameId;
+
 	public int getMatchId() {
 		return matchId;
 	}
@@ -125,5 +127,13 @@ public class MatchEditDTO {
 
 	public void setBetsCount( final int betsCount ) {
 		this.betsCount = betsCount;
+	}
+
+	public String getRemoteGameId() {
+		return remoteGameId;
+	}
+
+	public void setRemoteGameId( final String remoteGameId ) {
+		this.remoteGameId = remoteGameId;
 	}
 }
