@@ -77,7 +77,8 @@ public class RemoteGameImportRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
 	public RemoteGameDTO loadRemoteGameData( final @PathVariable( "remoteGameId" ) String remoteGameId, final @RequestParam( value = "cupId" ) Integer cupId ) throws IOException {
-		return getRemoteGameMapper().apply( remoteGameDataImportService.loadRemoteGame( remoteGameId, cupService.load( cupId ) ) );
+		final Cup cup = cupService.load( cupId );
+		return getRemoteGameMapper( cup ).apply( remoteGameDataImportService.loadRemoteGame( remoteGameId, cup ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -124,7 +125,7 @@ public class RemoteGameImportRestController {
 		remoteGameDataImportService.importGame( cupService.load( cupId ), getRemoteGameDTOMapper().apply( remoteGameDTO ) );
 	}
 
-	private Function<RemoteGame, RemoteGameDTO> getRemoteGameMapper() {
+	private Function<RemoteGame, RemoteGameDTO> getRemoteGameMapper( final Cup cup ) {
 
 		return new Function<RemoteGame, RemoteGameDTO>() {
 
@@ -133,10 +134,13 @@ public class RemoteGameImportRestController {
 
 				final RemoteGameDTO remoteGameDTO = new RemoteGameDTO( remoteGame.getRemoteGameId() );
 
+				final Team team1 = teamService.findByImportId( cup.getCategory(), remoteGame.getRemoteTeam1Id() );
 				remoteGameDTO.setTeam1Id( remoteGame.getRemoteTeam1Id() );
-				remoteGameDTO.setTeam1Name( remoteGame.getRemoteTeam1Name() );
+				remoteGameDTO.setTeam1Name( team1 != null ? team1.getTeamName() : remoteGame.getRemoteTeam1Name() );
+
+				final Team team2 = teamService.findByImportId( cup.getCategory(), remoteGame.getRemoteTeam2Id() );
 				remoteGameDTO.setTeam2Id( remoteGame.getRemoteTeam2Id() );
-				remoteGameDTO.setTeam2Name( remoteGame.getRemoteTeam2Name() );
+				remoteGameDTO.setTeam2Name( team2 != null ? team2.getTeamName() : remoteGame.getRemoteTeam2Name() );
 
 				remoteGameDTO.setBeginningTime( dateTimeService.formatDateTime( remoteGame.getBeginningTime() ) );
 				remoteGameDTO.setScore1( remoteGame.getScore1() );
