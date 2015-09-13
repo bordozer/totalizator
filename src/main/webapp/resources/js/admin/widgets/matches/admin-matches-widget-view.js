@@ -11,7 +11,7 @@ define( function ( require ) {
 
 	var Model = require( './admin-matches-widget-model' );
 
-	var service = require( '/resources/js/services/service.js' );
+	//var service = require( '/resources/js/services/service.js' );
 	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );

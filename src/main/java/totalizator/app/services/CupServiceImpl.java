@@ -74,56 +74,72 @@ public class CupServiceImpl implements CupService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Cup> loadAllCurrent() {
-		return loadAll().stream()
+		return loadAll()
+				.stream()
 				.filter( isCupCurrent() )
 				.collect( Collectors.toList() );
 	}
 
 	@Override
 	public List<Cup> loadPublic() {
-		return loadAll().stream()
+		return loadAll()
+				.stream()
 				.filter( isCupPublic() )
 				.collect( Collectors.toList() );
 	}
 
 	@Override
 	public List<Cup> loadPublicCurrent() {
-		return loadPublic().stream()
+		return loadPublic()
+				.stream()
 				.filter( isCupCurrent() )
 				.collect( Collectors.toList() );
 	}
 
 	@Override
 	public List<Cup> loadPublicFinished() {
-		return loadPublic().stream()
+		return loadPublic()
+				.stream()
 				.filter( isCupFinished() )
 				.collect( Collectors.toList() );
 	}
 
 	@Override
+	public List<Cup> load( final Category category ) {
+		return loadAll()
+				.stream()
+				.filter( forCategory( category ) )
+				.collect( Collectors.toList() );
+	}
+
+	@Override
 	public List<Cup> loadPublic( final Category category ) {
-		return loadPublic().stream()
+		return loadPublic()
+				.stream()
 				.filter( forCategory( category ) )
 				.collect( Collectors.toList() );
 	}
 
 	@Override
 	public List<Cup> loadPublicFinished( final Category category ) {
-		return loadPublicFinished().stream()
+		return loadPublicFinished()
+				.stream()
 				.filter( forCategory( category ) )
 				.collect( Collectors.toList() );
 	}
 
 	@Override
 	public List<Cup> loadHidden() {
-		return loadAll().stream()
+		return loadAll()
+				.stream()
 				.filter( isCupHidden() )
 				.collect( Collectors.toList() );
 	}
 
 	@Override
 	public List<Cup> loadHiddenCurrent() {
-		return loadHidden().stream()
+		return loadHidden()
+				.stream()
 				.filter( isCupCurrent() )
 				.collect( Collectors.toList() );
 	}

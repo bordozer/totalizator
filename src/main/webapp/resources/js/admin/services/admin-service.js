@@ -5,6 +5,11 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 	var _ = require( 'underscore' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		serverError: 'Server error'
+	} );
+
 	return {
 
 		loadCups: function() {
@@ -19,7 +24,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( 'Error loading cups' ); // TODO: translate
+					alert( translator.serverError );
 				}
 			} );
 
@@ -38,7 +43,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( 'Error loading cups' ); // TODO: translate
+					alert( translator.serverError );
 				}
 			} );
 
@@ -56,7 +61,26 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( 'Error loading cups' ); // TODO: translate
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
+		loadCategoryCups: function( categoryId ) {
+
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/admin/rest/cups/for-category/' + categoryId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
 				}
 			} );
 
@@ -95,7 +119,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( 'Error loading cups' ); // TODO: translate
+					alert( translator.serverError );
 				}
 			} );
 

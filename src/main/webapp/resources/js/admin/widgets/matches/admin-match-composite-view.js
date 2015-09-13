@@ -11,6 +11,7 @@ define( function ( require ) {
 	var templateEntryEdit = _.template( require( 'text!./templates/admin-match-edit-template.html' ) );
 
 	var service = require( '/resources/js/services/service.js' );
+	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
@@ -88,7 +89,7 @@ define( function ( require ) {
 				model: model
 				, matchId: model.matchId
 				, categoryName: service.loadCategory( model.categoryId ).categoryName
-				, cupName: service.loadPublicCup( model.cupId ).cupName
+				, cupName: adminService.loadCup( model.cupId ).cupName
 				, team1: team1
 				, team2: team2
 				, score1: model.score1
@@ -111,7 +112,7 @@ define( function ( require ) {
 			var model = this.model.toJSON();
 			var categoryId = model.categoryId;
 
-			var cups = service.loadPublicCupsForCategory( categoryId );
+			var cups = adminService.loadCategoryCups( categoryId );
 			var selectedCupId = model.cupId;
 
 			var teams = this._loadCupTeams( selectedCupId );
@@ -242,7 +243,7 @@ define( function ( require ) {
 
 		_changeCategory: function( categoryId ) {
 
-			var cups = service.loadPublicCupsForCategory( categoryId );
+			var cups = adminService.loadCategoryCups( categoryId );
 			var selectedCupId = cups.length == 1 ? cups[ 0 ].cupId : 0;
 
 			this.model.set( { categoryId: categoryId, cupId: selectedCupId, team1Id: 0, team2Id: 0 } );

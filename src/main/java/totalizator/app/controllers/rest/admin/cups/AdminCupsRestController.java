@@ -80,6 +80,16 @@ public class AdminCupsRestController {
 				.collect( Collectors.toList() );
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/" )
+	public CupDTO getCup( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/for-category/{categoryId}/" )
+	public List<CupDTO> getCategoryCups( final @PathVariable( "categoryId" ) int categoryId, final Principal principal ) {
+		return dtoService.transformCups( cupService.loadPublic( categoryService.load( categoryId ) ), userService.findByLogin( principal.getName() ) );
+	}
+
 	private Predicate<CupDTO> getImportStrategiesPredicate() {
 
 		return new Predicate<CupDTO>() {
@@ -89,10 +99,5 @@ public class AdminCupsRestController {
 				return category.getRemoteGameImportStrategyTypeId() != 0; // && StringUtils.isNoneEmpty( category.getImportId() );
 			}
 		};
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/" )
-	public CupDTO getCup( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
-		return dtoService.transformCup( cupService.load( cupId ), userService.findByLogin( principal.getName() ) );
 	}
 }

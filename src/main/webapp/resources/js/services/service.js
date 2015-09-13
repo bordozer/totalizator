@@ -191,7 +191,7 @@ define( function ( require ) {
 			return cups.toJSON();
 		},
 
-		loadPublicCupsForCategory: function( categoryId ) {
+		loadCategoryPublicCups: function( categoryId ) {
 			var result = {};
 
 			$.ajax( {
