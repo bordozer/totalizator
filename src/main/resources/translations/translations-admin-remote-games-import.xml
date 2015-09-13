@@ -171,10 +171,10 @@
 	</translation>
 
 	<translation>
-		<nerd>Team not found for selected category</nerd>
-		<ru><![CDATA[Команда не найдена для выделенной категории]]></ru>
-		<ua><![CDATA[Команда не знайдена для видiленої категорiї]]></ua>
-		<en><![CDATA[Team not found for selected category]]></en>
+		<nerd>Teams not found for selected category - will be created automatically if remote game are checked</nerd>
+		<ru><![CDATA[Команды не найдена для выделенной категории - будут созданы автоматически при импорте игры]]></ru>
+		<ua><![CDATA[Команды не знайдена для видiленої категорiї - будуть стровенi автоматично при iмпортi гри]]></ua>
+		<en><![CDATA[Teams not found for selected category - will be created automatically if remote game are checked]]></en>
 	</translation>
 
 	<translation>

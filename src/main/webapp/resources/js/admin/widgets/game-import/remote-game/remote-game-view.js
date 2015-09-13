@@ -14,7 +14,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		teamNotFoundInCategory: "Team not found for selected category"
+		teamNotFoundInCategory: "Teams not found for selected category - will be created automatically if remote game are checked"
 		, noLocalMatchFound: "Local match for the remote game not found"
 		, theMatchIsAlreadyImported: "The match is already imported"
 		, gettingGameData: "Getting game data"
@@ -53,7 +53,7 @@ define( function ( require ) {
 			var team1 = remoteGameLocalData.team1;
 			var team2 = remoteGameLocalData.team2;
 
-			var importImpossible = false; //! team1 || ! team2;
+			var atLeastOneTeamNotFound = ! team1 || ! team2;
 
 			var matchResults = { style1: '', style2: '' };
 			if ( team1 && team2 ) {
@@ -67,17 +67,34 @@ define( function ( require ) {
 				, matchBeginningTime: model.beginningTime
 				, isReadyForImport: ! this.model.isProcessed
 				, import_status: this.model.importStatus
-				, importImpossible: importImpossible
+				, importImpossible: atLeastOneTeamNotFound
 				, matchResults: matchResults
-				, panelColor: match || this.model.importStatus.isRemoteGameImported ? 'panel-success' : 'panel-danger'
+				, panelColor: this._getPanelColor( match, atLeastOneTeamNotFound )
 				, translator: translator
 			} );
 
-			if ( importImpossible ) {
+			if ( atLeastOneTeamNotFound ) {
 				this.model.skipImport = true;
 			}
 
 			this.$el.html( template( data ) );
+		},
+
+		_getPanelColor: function( match, atLeastOneTeamNotFound ) {
+
+			if ( this.model.importStatus.isRemoteGameImported ) {
+				return 'panel-success';
+			}
+
+			if ( match ) {
+				return 'panel-info';
+			}
+
+			if ( atLeastOneTeamNotFound ) {
+				return 'panel-danger';
+			}
+
+			return 'panel-default'
 		},
 
 		_renderRemoteGame: function() {

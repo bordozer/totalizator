@@ -3,14 +3,7 @@
 	<div class="panel-heading">
 
 		<% if( isReadyForImport) { %>
-
-			<% if( ! importImpossible ) { %>
-				<input type="checkbox" id="gamesToImport" <%= team1 && team2 ? 'checked' : ''%>>
-			<% } %>
-
-			<% if( importImpossible ) { %>
-				<span class='fa fa-close' title="<%=translator.teamNotFoundInCategory%>"></span>
-			<% } %>
+			<input type="checkbox" id="gamesToImport" <%= team1 && team2 ? 'checked' : ''%>>
 		<% } %>
 
 		<% if( ! isReadyForImport ) { %>
@@ -101,7 +94,7 @@
 		<% } %>
 
 		<% if( importImpossible ) { %>
-			<%=translator.teamNotFoundInCategory%>
+			<small class="fa fa-exclamation-triangle text-danger"> <%=translator.teamNotFoundInCategory%></small>
 		<% } %>
 
 	</div>
