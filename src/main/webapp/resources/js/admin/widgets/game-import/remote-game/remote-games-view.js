@@ -13,6 +13,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		noMatchesForImportFound: "No matches for import found"
+		, error: 'Can not get data from server'
 	} );
 
 	return Backbone.View.extend( {
@@ -60,7 +61,7 @@ define( function ( require ) {
 			var view = new RemoteGameView( { model: model, el: el, options: { cup: this.cup } } );
 			view.render();
 			model.fetch( { cache: false, error: function( arg ) {
-				alert( arg );
+				alert( translator.error );
 			} } );
 		}
 	});
