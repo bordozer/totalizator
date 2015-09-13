@@ -4,7 +4,8 @@
 		<div class="panel panel-default">
 
 			<div class="panel-heading clearfix" title="">
-				<%=model.categoryName%>
+				<img src="<%=model.logoUrl%>" height="24" width="24">
+				<small><%=model.categoryName%></small>
 				<div class="btn-group pull-right">
 					<button type="button" class="btn btn-primary fa fa-save category-entry-save"></button>
 					<button type="button" class="btn btn-default fa fa-close category-entry-edit-cancel"></button>
@@ -16,7 +17,7 @@
 				<div class="row">
 
 					<div class="col-lg-6">
-						<%= translator.categoryNameLabel %>
+						<small><%= translator.categoryNameLabel %></small>
 					</div>
 
 					<div class="col-lg-6">
@@ -27,7 +28,7 @@
 				<div class="row">
 
 					<div class="col-lg-6">
-						<%- translator.categoryImportIdLabel %>
+						<small><%- translator.categoryImportIdLabel %></small>
 					</div>
 
 					<div class="col-lg-6">
@@ -38,7 +39,7 @@
 				<div class="row">
 
 					<div class="col-lg-6">
-						<%- translator.importServerLabel %>
+						<small><%- translator.importServerLabel %></small>
 					</div>
 
 					<div class="col-lg-6">
@@ -53,7 +54,7 @@
 				<div class="row">
 
 					<div class="col-lg-6">
-						<%- translator.logoLabel %>
+						<small><%- translator.logoLabel %></small>
 					</div>
 
 					<div class="col-lg-6">

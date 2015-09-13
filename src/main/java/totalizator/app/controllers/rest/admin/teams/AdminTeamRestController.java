@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.services.*;
@@ -42,6 +43,9 @@ public class AdminTeamRestController {
 
 	@Autowired
 	private LogoService logoService;
+
+	@Autowired
+	private DTOService dtoService;
 
 	private static final Logger LOGGER = Logger.getLogger( AdminTeamRestController.class );
 
@@ -93,9 +97,12 @@ public class AdminTeamRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/cups/{cupId}/{teamId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamEditDTO edit( final @PathVariable( "teamId" ) int teamId, final @RequestBody TeamEditDTO teamEditDTO ) {
 		// TODO: check if name exists
+		final Category category = categoryService.load( teamEditDTO.getCategoryId() );
+
 		final Team team = teamService.load( teamEditDTO.getTeamId() );
+
 		team.setTeamName( teamEditDTO.getTeamName() );
-		team.setCategory( categoryService.load( teamEditDTO.getCategoryId() ) );
+		team.setCategory( category );
 		team.setImportId( teamEditDTO.getTeamImportId() );
 
 		teamService.save( team );

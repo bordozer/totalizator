@@ -1,21 +1,37 @@
-<div class="row js-cup-entry">
+<div class="panel panel-default js-cup-entry">
 
-	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-default fa fa-edit cup-entry-edit"></button>
-		<button type="button" class="btn btn-default fa fa-recycle cup-entry-del"></button>
+	<div class="panel-heading clearfix" title="">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default fa fa-edit cup-entry-edit"></button>
+			<button type="button" class="btn btn-default fa fa-recycle cup-entry-del"></button>
+		</div>
+		<img src="<%=model.logoUrl%>" height="24" width="24">
+		<small><%=model.cupName%></small>
 	</div>
 
-	<div class="col-lg-8 js-cup-entry" title="#<%=model.cupId%>, <%=translator.entryEditCupStartDateLabel%>: <%=cupStartDate%>">
+	<div class="panel-body">
 
 		<div class="row">
-			<div class="col-xs-3">
-				<div class="admin-logo-icon"><img src="<%=model.logoUrl%>" height="32" width="32"></div>
+
+			<div class="col-xs-2">
+				<img src="<%=model.logoUrl%>" height="64">
+			</div>
+
+			<div class="col-xs-1">
+				<div class="admin-icon"><span class="<%=!model.publicCup ? 'fa fa-eye-slash' : ''%>" title="<%=translator.entryEditNonPublicCupPageLabel%>" ></span></div>
+				<div class="admin-icon"><span class="<%=model.publicCup ? 'fa fa-eye' : ''%>" title="<%=translator.entryEditPublicCupPageLabel%>" ></span></div>
+				<div class="admin-icon"><span class="<%=model.readyForCupBets ? 'fa fa-diamond' : ''%>" title="<%=translator.entryEditReadyForCupBetsLabel%>" ></span></div>
+				<div class="admin-icon"><span class="<%=model.readyForMatchBets ? 'fa fa-money' : ''%>" title="<%=translator.entryEditReadyForMatchBetsLabel%>" ></span></div>
+				<div class="admin-icon"><span class=" <%=model.finished ? 'fa fa-flag-checkered' : ''%>" title="<%=translator.entryEditCupIsFinishedLabel%>" ></span></div>
 			</div>
 
 			<div class="col-xs-9">
 
 				<div class="row">
-					<div class="col-lg-12 <%-cupCustomCSS%>">
+					<div class="col-xs-6 text-right">
+						<small><%=translator.entryEditCupNameLabel%></small>
+					</div>
+					<div class="col-xs-6">
 						<%= model.publicCup && ! model.finished ? '<strong>' : '' %>
 						<%= model.finished ? '<del>' : '' %>
 						<%=model.cupName%>
@@ -25,12 +41,20 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="admin-icon"><span class="<%=!model.publicCup ? 'fa fa-eye-slash' : ''%>" title="<%=translator.entryEditNonPublicCupPageLabel%>" ></span></div>
-						<div class="admin-icon"><span class="<%=model.publicCup ? 'fa fa-eye' : ''%>" title="<%=translator.entryEditPublicCupPageLabel%>" ></span></div>
-						<div class="admin-icon"><span class="<%=model.readyForCupBets ? 'fa fa-diamond' : ''%>" title="<%=translator.entryEditReadyForCupBetsLabel%>" ></span></div>
-						<div class="admin-icon"><span class="<%=model.readyForMatchBets ? 'fa fa-money' : ''%>" title="<%=translator.entryEditReadyForMatchBetsLabel%>" ></span></div>
-						<div class="admin-icon"><span class=" <%=model.finished ? 'fa fa-flag-checkered' : ''%>" title="<%=translator.entryEditCupIsFinishedLabel%>" ></span></div>
+					<div class="col-xs-6 text-right">
+						<small><%=translator.entryEditCupStartDateLabel%></small>
+					</div>
+					<div class="col-xs-6">
+						<%=cupStartDate%>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 text-right">
+						<small><%=translator.entryEditWinnersCountLabel%></small>
+					</div>
+					<div class="col-xs-6">
+						<%=model.winnersCount%>
 					</div>
 				</div>
 
@@ -39,9 +63,8 @@
 		</div>
 
 	</div>
-</div>
 
-<hr />
+</div>
 
 
 

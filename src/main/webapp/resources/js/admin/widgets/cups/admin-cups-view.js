@@ -65,6 +65,7 @@ define( function ( require ) {
 
 		renderBody: function () {
 
+			this.$( this.windowBodyContainerSelector ).addClass( 'nopadding' );
 			this.$( this.windowBodyContainerSelector ).empty();
 
 			var filterByCategory = this.model.filterByCategory;
@@ -206,7 +207,9 @@ define( function ( require ) {
 			} ) );
 
 			if ( this.isSelected ) {
-				this.$( '.js-cup-entry' ).addClass( 'bg-success' );
+				var container = this.$( '.js-cup-entry' );
+				container.removeClass( 'panel-default' );
+				container.addClass( 'panel-primary' );
 			}
 
 			return this;

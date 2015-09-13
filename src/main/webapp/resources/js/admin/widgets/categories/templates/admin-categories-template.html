@@ -1,11 +1,59 @@
-<div class="row js-category-entry">
-	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-default fa fa-edit category-entry-edit"></button>
-		<button type="button" class="btn btn-default fa fa-recycle category-entry-del"></button>
+<div class="panel panel-default js-category-entry">
+
+	<div class="panel-heading clearfix" title="">
+
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default fa fa-edit category-entry-edit"></button>
+			<button type="button" class="btn btn-default fa fa-recycle category-entry-del"></button>
+		</div>
+
+		<img src="<%=model.logoUrl%>" height="24" width="24">
+		<small class="js-category-entry-select"><%=model.categoryName%></small>
 	</div>
-	<div class="col-lg-9 category-entry-name">
-		<img src="<%=model.logoUrl%>" height="16" width="16">
-		<%=model.categoryName%>
+
+	<div class="panel-body js-category-entry-select">
+
+		<div class="row">
+
+			<div class="col-xs-2">
+				<img src="<%=model.logoUrl%>" height="64">
+			</div>
+
+			<div class="col-xs-10">
+
+				<div class="row">
+					<div class="col-xs-4 text-right">
+						<small><%=translator.categoryNameLabel%></small>
+					</div>
+					<div class="col-xs-8">
+						<strong><%=model.categoryName%></strong>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-4 text-right">
+						<small><%=translator.categoryImportIdLabel%></small>
+					</div>
+					<div class="col-xs-8">
+						<%=model.categoryImportId%>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-4 text-right">
+						<small><%=translator.importServerLabel%></small>
+					</div>
+					<div class="col-xs-8">
+						<%=remoteGameImportStrategyTypeName%>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
 	</div>
+
 </div>
+
 

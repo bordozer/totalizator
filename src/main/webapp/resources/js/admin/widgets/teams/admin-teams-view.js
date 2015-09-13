@@ -38,8 +38,6 @@ define( function ( require ) {
 			this.on( 'events:filter_by_category', this._filterByCategory, this );
 			this.on( 'events:admin:cup:selected', this._filterBySelectedCup, this );
 
-			this._loadCategories();
-
 			this.render();
 		},
 
@@ -69,6 +67,7 @@ define( function ( require ) {
 
 		_render: function() {
 			var container = this.$( this.windowBodyContainerSelector );
+			container.addClass( 'nopadding' );
 			container.empty();
 
 			if ( this.model.length > 0 ) {
@@ -114,7 +113,6 @@ define( function ( require ) {
 
 			var view = new TeamView( {
 				model: model
-				, categories: this.categories
 				, selectedCup: this.model.selectedCup
 			} );
 
@@ -141,12 +139,7 @@ define( function ( require ) {
 			this.$( '#teams-filter' ).focus();
 		},
 
-		_loadCategories: function() {
-			this.categories = service.loadCategories();
-		},
-
 		_updateCategories: function() {
-			this._loadCategories();
 			this._reRender();
 		},
 

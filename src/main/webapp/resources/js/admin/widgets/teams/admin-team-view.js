@@ -33,7 +33,6 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.categories = options.categories;
 			this.selectedCup = options.selectedCup;
 
 			this.on( 'events:team_saved', this.render, this )
@@ -45,7 +44,6 @@ define( function ( require ) {
 
 			this.$el.html( templateEntry( {
 				model: model
-				, categoryName: this._getCategoryName( model.categoryId )
 				, selectedCup: this.selectedCup
 				, matchCount: model.matchCount
 				, translator: translator
@@ -59,19 +57,13 @@ define( function ( require ) {
 
 			this.$el.html( templateEntryEdit( {
 				model: modelJSON
-				, categories: this.categories
+				, categories: service.loadCategories()
 				, translator: translator
 			} ) );
 
 			this.$( '.entry-category-id' ).chosen( { width: '100%' } );
 
 			return this;
-		},
-
-		_getCategoryName: function( categoryId ) {
-			return _.find( this.categories, function( category ) {
-				return category.categoryId == categoryId;
-			} ).categoryName;
 		},
 
 		_editEntry: function() {

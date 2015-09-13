@@ -21,7 +21,7 @@ define( function ( require ) {
 		, categoryNameLabel: "Category name"
 		, logoLabel: "Logo"
 		, categoryImportIdLabel: "Category import ID"
-		, importServerLabel: "Import remote games from server"
+		, importServerLabel: "Use remote games import strategy"
 	} );
 
 	var CategoriesView = WidgetView.extend( {
@@ -41,6 +41,7 @@ define( function ( require ) {
 		renderBody: function () {
 
 			this.$( this.windowBodyContainerSelector ).empty();
+			this.$( this.windowBodyContainerSelector ).addClass( 'nopadding' );
 
 			var self = this;
 			this.model.forEach( function( category ) {
@@ -118,7 +119,7 @@ define( function ( require ) {
 
 		events: {
 			'click .category-entry-edit': '_onCategoryEditClick'
-			, 'click .category-entry-name': '_onCategoryNameClick'
+			, 'click .js-category-entry-select': '_onCategoryNameClick'
 			, 'click .category-entry-save': '_onCategorySaveClick'
 			, 'click .category-entry-edit-cancel': '_onCategoryEditCancelClick'
 			, 'click .category-entry-del': '_onCategoryDelClick'
@@ -135,13 +136,21 @@ define( function ( require ) {
 		render: function () {
 			var modelJSON = this.model.toJSON();
 
+			var remoteGameImportStrategyTypeName = _.find( this.remoteGameImportStrategyTypes, function( remoteGameImportStrategyType ) {
+				return remoteGameImportStrategyType.id == modelJSON.remoteGameImportStrategyTypeId
+			} ).name;
+
 			this.$el.html( this.templateView( {
 				model: modelJSON
 				, isSelected: this.isSelected
+				, remoteGameImportStrategyTypeName: remoteGameImportStrategyTypeName
+				, translator: translator
 			} ) );
 
 			if ( this.isSelected ) {
-				this.$( '.js-category-entry' ).addClass( 'bg-success' );
+				var container = this.$( '.js-category-entry' );
+				container.removeClass( 'panel-default' );
+				container.addClass( 'panel-primary' );
 			}
 
 			return this;
