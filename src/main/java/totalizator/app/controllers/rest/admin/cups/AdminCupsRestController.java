@@ -1,6 +1,5 @@
 package totalizator.app.controllers.rest.admin.cups;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,7 +86,7 @@ public class AdminCupsRestController {
 			@Override
 			public boolean test( final CupDTO cupDTO ) {
 				final Category category = categoryService.load( cupDTO.getCategory().getCategoryId() );
-				return category.getRemoteGameImportStrategyTypeId() != 0 && StringUtils.isNoneEmpty( category.getImportId() );
+				return category.getRemoteGameImportStrategyTypeId() != 0; // && StringUtils.isNoneEmpty( category.getImportId() );
 			}
 		};
 	}
