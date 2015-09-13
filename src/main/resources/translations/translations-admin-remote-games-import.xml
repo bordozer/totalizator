@@ -222,7 +222,7 @@
 	<translation>
 		<nerd>Can not get data from server</nerd>
 		<ru><![CDATA[Ошибка получения данных]]></ru>
-		<ua><![CDATA[З отриманням даних з аервера трапилась якась халепа]]></ua>
+		<ua><![CDATA[З отриманням даних з сервера трапилась якась халепа]]></ua>
 		<en><![CDATA[Can not get data from server]]></en>
 	</translation>
 
