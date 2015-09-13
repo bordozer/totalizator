@@ -5,6 +5,7 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
+	var dialog = require( 'public/js/dialog' );
 
 	var templateEntry = _.template( require( 'text!./templates/admin-match-info-template.html' ) );
 	var templateEntryEdit = _.template( require( 'text!./templates/admin-match-edit-template.html' ) );
@@ -60,9 +61,6 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.categories = options.categories;
-			this.cups = options.cups;
-			this.teams = options.teams;
 
 			this.listenTo( this.model, 'destroy', this._removeView );
 			this.model.on( 'sync', this.render, this );
@@ -83,14 +81,14 @@ define( function ( require ) {
 
 			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
 
-			var team1 = service.getTeam( this.teams, model.team1Id );
-			var team2 = service.getTeam( this.teams, model.team2Id );
+			var team1 = service.loadTeam( model.team1Id );
+			var team2 = service.loadTeam( model.team2Id );
 
 			this.$el.html( templateEntry( {
 				model: model
 				, matchId: model.matchId
-				, categoryName: service.getCategory( this.categories, model.categoryId ).categoryName
-				, cupName: service.getCup( this.cups, model.cupId ).cupName
+				, categoryName: service.loadCategory( model.categoryId ).categoryName
+				, cupName: service.loadPublicCup( model.cupId ).cupName
 				, team1: team1
 				, team2: team2
 				, score1: model.score1
@@ -113,17 +111,17 @@ define( function ( require ) {
 			var model = this.model.toJSON();
 			var categoryId = model.categoryId;
 
-			var cups = service.filterCupsByCategory( this.cups, categoryId );
+			var cups = service.loadPublicCupsForCategory( categoryId );
 			var selectedCupId = model.cupId;
 
-			var teams = this.model.id == 0 ? service.loadCupActiveTeams( selectedCupId ) : service.loadCupTeams( selectedCupId );
+			var teams = this._loadCupTeams( selectedCupId );
 
 			this.$el.html( templateEntryEdit( {
 				model: model
 				, selectedCupId: selectedCupId
 				, title: this.editMatchTitle
 				, matchId: model.matchId
-				, categories: this.categories
+				, categories: service.loadCategories()
 				, categoryId: categoryId
 				, cups: cups
 				, teams: teams
@@ -150,9 +148,23 @@ define( function ( require ) {
 			return this;
 		},
 
+		_loadCupTeams: function( cupId ) {
+
+			if ( cupId == 0 ) {
+				return[];
+			}
+
+			var isNewMatch = this.model.id == 0;
+			if ( isNewMatch ) {
+				return service.loadCupActiveTeams( cupId );
+			}
+
+			return service.loadCupTeams( cupId );
+		},
+
 		_editEntry: function() {
 			var model = this.model.toJSON();
-			this.editMatchTitle = model.matchId == 0 ? translator.newEntryEditFormTitle : service.getTeam( this.teams, model.team1Id ).teamName + ' - ' + service.getTeam( this.teams, model.team2Id ).teamName;
+			this.editMatchTitle = model.matchId == 0 ? translator.newEntryEditFormTitle : service.loadTeam( model.team1Id ).teamName + ' - ' + service.loadTeam( model.team2Id ).teamName;
 
 			this.renderEdit();
 		},
@@ -172,7 +184,7 @@ define( function ( require ) {
 
 			this._bind();
 
-			if ( !this._validate() ) {
+			if ( ! this._validate() ) {
 				return;
 			}
 
@@ -206,22 +218,22 @@ define( function ( require ) {
 		_validate: function() {
 
 			if ( this.model.get( 'cupId' ) == 0 ) {
-				alert( translator.validation_SelectCup_Label );
+				dialog.dialogValidationError( translator.validation_SelectCup_Label );
 				return false;
 			}
 
 			if ( this.model.get( 'team1Id' ) == 0 ) {
-				alert( translator.validation_SelectTeam1_Label );
+				dialog.dialogValidationError( translator.validation_SelectTeam1_Label );
 				return false;
 			}
 
 			if ( this.model.get( 'team2Id' ) == 0 ) {
-				alert( translator.validation_SelectTeam2_Label );
+				dialog.dialogValidationError( translator.validation_SelectTeam2_Label );
 				return false;
 			}
 
 			if ( this.model.get( 'team1Id' ) == this.model.get( 'team2Id' ) ) {
-				alert( translator.validation_SelectDifferentTeams_Label );
+				dialog.dialogValidationError( translator.validation_SelectDifferentTeams_Label );
 				return false;
 			}
 
@@ -230,7 +242,7 @@ define( function ( require ) {
 
 		_changeCategory: function( categoryId ) {
 
-			var cups = service.filterCupsByCategory( this.cups, categoryId );
+			var cups = service.loadPublicCupsForCategory( categoryId );
 			var selectedCupId = cups.length == 1 ? cups[ 0 ].cupId : 0;
 
 			this.model.set( { categoryId: categoryId, cupId: selectedCupId, team1Id: 0, team2Id: 0 } );

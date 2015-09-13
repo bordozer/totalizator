@@ -69,7 +69,7 @@ define( function ( require ) {
 				, import_status: this.model.importStatus
 				, importImpossible: importImpossible
 				, matchResults: matchResults
-				, panelColor: match ? 'panel-success' : 'panel-danger'
+				, panelColor: match || this.model.importStatus.isRemoteGameImported ? 'panel-success' : 'panel-danger'
 				, translator: translator
 			} );
 

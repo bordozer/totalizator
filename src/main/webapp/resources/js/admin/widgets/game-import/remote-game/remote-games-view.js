@@ -59,7 +59,9 @@ define( function ( require ) {
 
 			var view = new RemoteGameView( { model: model, el: el, options: { cup: this.cup } } );
 			view.render();
-			model.fetch( { cache: false } ); //async: false
+			model.fetch( { cache: false, error: function( arg ) {
+				alert( arg );
+			} } );
 		}
 	});
 } );

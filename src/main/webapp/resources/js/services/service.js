@@ -147,6 +147,24 @@ define( function ( require ) {
 			return categories.toJSON();
 		},
 
+		loadCategory: function( categoryId ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/categories/' + categoryId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		loadPublicCup: function( cupId ) {
 			var result = {};
 
@@ -197,6 +215,25 @@ define( function ( require ) {
 			teams.fetch( { cache: false, async: false } );
 
 			return teams.toJSON();
+		},
+
+		loadTeam: function( teamId ) {
+
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/teams/' + teamId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
 		},
 
 		// TODO: rename to find user

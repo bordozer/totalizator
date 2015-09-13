@@ -1,9 +1,10 @@
 package totalizator.app.controllers.rest.teams;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.services.CupService;
 import totalizator.app.services.CupTeamService;
@@ -12,9 +13,7 @@ import totalizator.app.services.TeamService;
 
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
-@Controller
+@RestController
 @RequestMapping( "/rest/teams" )
 public class TeamsRestController {
 
@@ -30,23 +29,22 @@ public class TeamsRestController {
 	@Autowired
 	private CupTeamService cupTeamService;
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public List<TeamDTO> all() {
 		return dtoService.transformTeams( teamService.loadAll() );
 	}
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/{teamId}/" )
+	public TeamDTO team( final @PathVariable( "teamId" ) int teamId ) {
+		return dtoService.transformTeam( teamService.load( teamId ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/" )
 	public List<TeamDTO> cupTeams( final @PathVariable( "cupId" ) int cupId ) {
 		return dtoService.transformTeams( teamService.loadAll( cupService.load( cupId ).getCategory() ) );
 	}
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/active/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/active/" )
 	public List<TeamDTO> cupTeamsActive( final @PathVariable( "cupId" ) int cupId ) {
 		return dtoService.transformTeams( cupTeamService.loadActiveForCup( cupId ) );
 	}

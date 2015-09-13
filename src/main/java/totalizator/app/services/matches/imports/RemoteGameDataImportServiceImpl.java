@@ -78,7 +78,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 		return getStatisticsServerService( cup ).loadRemoteGame( remoteGameId );
 	}
 
-	@Override
+	/*@Override
 	public List<RemoteGame> loadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException {
 
 		final List<RemoteGame> result = newArrayList();
@@ -93,7 +93,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 		}
 
 		return result;
-	}
+	}*/
 
 	@Override
 	public Match findMatchFor( final Cup cup, final String remoteTeam1Id, final String remoteTeam2Id, final LocalDateTime gameDate ) {

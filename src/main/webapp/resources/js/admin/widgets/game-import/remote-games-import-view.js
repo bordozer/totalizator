@@ -147,6 +147,10 @@ define( function ( require ) {
 
 		_onRemoteGamesImportStartClick: function() {
 
+			if ( ! confirm( translator.startImport + '?' ) ) {
+				return;
+			}
+
 			this.mode = MODE_IMPORT_IN_PROGRESS;
 			this.isBrokenByUser = false;
 
@@ -157,28 +161,28 @@ define( function ( require ) {
 				model.isProcessed = true;
 
 				if ( self.isBrokenByUser ) {
-					model.importStatus = { icon: 'fa fa-stop', title: translator.importStatusBrokenByUser };
+					model.importStatus = { icon: 'fa fa-stop', title: translator.importStatusBrokenByUser, isRemoteGameImported: false };
 					model.trigger( 'events:remote_game_imported' );
 
 					return;
 				}
 
 				if ( model.skipImport ) {
-					model.importStatus = { icon: 'fa fa-ban', title: translator.importStatusMarkedAsSkipImport };
+					model.importStatus = { icon: 'fa fa-ban', title: translator.importStatusMarkedAsSkipImport, isRemoteGameImported: false };
 					model.trigger( 'events:remote_game_imported' );
 
 					return;
 				}
 
 				/*if ( ! model.remoteGameLocalData.team1 || ! model.remoteGameLocalData.team2 ) {
-					model.importStatus = { icon: 'fa fa-circle-thin', title: translator.importStatusTeamsDoNotExist };
+					model.importStatus = { icon: 'fa fa-circle-thin', title: translator.importStatusTeamsDoNotExist, isRemoteGameImported: false };
 					model.trigger( 'events:remote_game_imported' );
 					return;
 				}*/
 
 				model.save();
 
-				model.importStatus = { icon: 'fa fa-check-square-o', title: translator.importStatusImportedSuccessfully };
+				model.importStatus = { icon: 'fa fa-check-square-o', title: translator.importStatusImportedSuccessfully, isRemoteGameImported: true };
 
 				model.trigger( 'events:remote_game_imported' );
 			});

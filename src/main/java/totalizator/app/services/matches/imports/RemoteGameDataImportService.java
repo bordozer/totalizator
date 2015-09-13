@@ -14,7 +14,7 @@ public interface RemoteGameDataImportService {
 
 	RemoteGame loadRemoteGame( final String remoteGameId, final Cup cupId ) throws IOException;
 
-	List<RemoteGame> loadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException;
+//	List<RemoteGame> loadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException;
 
 	Match findMatchFor( final Cup category, final String team1Name, final String team2Name, final LocalDateTime gameDate );
 

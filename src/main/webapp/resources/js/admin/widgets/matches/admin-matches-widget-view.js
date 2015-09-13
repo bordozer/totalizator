@@ -66,7 +66,7 @@ define( function ( require ) {
 				{ selector: 'js-add-entry-button', icon: 'fa fa-plus', link: '#', text: translator.addMatchLabel, button: true }
 				, { selector: 'divider' }
 				, { selector: 'js-finish-selected-matches-button', icon: 'fa fa-flag-checkered', link: '#', text: translator.finishSelectedMatchesLabel }
-				, { selector: 'js-delete-selected-matches-button', icon: 'fa fa-close', link: '#', text: translator.deleteSelectedMatchesLabel }
+				, { selector: 'js-delete-selected-matches-button', icon: 'fa fa-recycle', link: '#', text: translator.deleteSelectedMatchesLabel }
 			]
 		},
 
@@ -78,8 +78,6 @@ define( function ( require ) {
 				model: this.model
 				, translator: translator
 			} ) );
-
-			this.cups = this._loadCups();
 
 			var self = this;
 			this.model.forEach( function( match ) {
@@ -99,9 +97,6 @@ define( function ( require ) {
 
 			var view = new MatchCompositeView( {
 				model: model
-				, categories: this.categories
-				, cups: this.cups
-				, teams: this.teams
 			} );
 			view.on( 'matches:render', this._triggerRender, this );
 

@@ -64,13 +64,15 @@ public class RemoteGameImportRestController {
 
 		final Cup cup = cupService.load( parametersDTO.getCupId() );
 
-		return remoteGameDataImportService.loadRemoteGameIds( dateFrom, dateTo, cup ).stream().map( new Function<String, NotLoadedRemoteGameDTO>() {
-
-			@Override
-			public NotLoadedRemoteGameDTO apply( final String remoteGameId ) {
-				return new NotLoadedRemoteGameDTO( remoteGameId );
-			}
-		} ).collect( Collectors.toList() );
+		return remoteGameDataImportService.loadRemoteGameIds( dateFrom, dateTo, cup )
+				.stream()
+				.map( new Function<String, NotLoadedRemoteGameDTO>() {
+					@Override
+					public NotLoadedRemoteGameDTO apply( final String remoteGameId ) {
+						return new NotLoadedRemoteGameDTO( remoteGameId );
+					}
+				} )
+				.collect( Collectors.toList() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -151,6 +153,13 @@ public class RemoteGameImportRestController {
 				return remoteGameDTO;
 			}
 		};
+	}
+
+	@ExceptionHandler
+	@ResponseBody
+	@ResponseStatus( value = HttpStatus.INTERNAL_SERVER_ERROR )
+	public Error handleException( final IOException exception ) {
+		return new Error( "Remote game import server error" );
 	}
 
 	private Function<RemoteGameDTO, RemoteGame> getRemoteGameDTOMapper() {

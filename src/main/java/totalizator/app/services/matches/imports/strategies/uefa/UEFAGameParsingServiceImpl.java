@@ -29,6 +29,11 @@ public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
 		final Gson gson = new Gson();
 
 		final LinkedTreeMap uefaGamesJSON = ( LinkedTreeMap ) gson.fromJson( remoteGameJSON, Object.class );
+
+		if ( uefaGamesJSON == null ) {
+			return newArrayList();
+		}
+
 		final List fixtures = ( ArrayList ) uefaGamesJSON.get( "fixtures" );
 		for ( final Object fixture : fixtures ) {
 			final LinkedTreeMap links = ( LinkedTreeMap ) ( ( LinkedTreeMap ) fixture ).get( "_links" );

@@ -7,7 +7,6 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var FilterView = require( './filter/matches-filter-view' );
-	var WidgetMatchesAndBetsModel = require( './widget-matches-and-bets-model' );
 
 	var DateTimePickerView = require( './matches-on-date-picker' );
 
@@ -40,15 +39,19 @@ define( function ( require ) {
 		, menuOpenCupCard: 'Open cup card'
 		, menuSelectDate: "Show matches on date"
 		, noMatchesFound: "No matches found"
+		, saveLabel: "Save"
+		, cancelLabel: "Cancel"
 	} );
 
 	var MATCHES_AND_BETS_MODE_MATCHES = 1;
 	var MATCHES_AND_BETS_MODE_STATISTICS = 2;
+	var MATCHES_AND_BETS_MODE_SETTINGS = 3;
 
 	return WidgetView.extend( {
 
 		showSettingsButton: false,
 		matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_MATCHES,
+		exMode: MATCHES_AND_BETS_MODE_MATCHES,
 
 		widgetMatchesAndBetsEvents: {
 			'click .js-settings-button': '_onSettingsClick'
@@ -71,9 +74,6 @@ define( function ( require ) {
 
 			this.matchesAndBetsViewMode = options.matchesAndBetsViewMode != undefined ? options.matchesAndBetsViewMode : MATCHES_AND_BETS_MODE_MATCHES;
 
-			this.dataModel = new WidgetMatchesAndBetsModel( { filter: this.initialFilter } );
-			this.dataModel.on( 'sync', this._runInnerViewRender, this );
-
 			this.on( 'view:render', this.render, this );
 
 			this.events = _.extend( this.widgetMatchesAndBetsEvents, this.events );
@@ -89,32 +89,24 @@ define( function ( require ) {
 
 		renderBody: function() {
 
-			this.dataModel.fetch( { cache: false } );
+			this._runInnerViewRender();
 
 			return this;
 		},
 
 		_runInnerViewRender: function() {
 
-			var matchFilterDataModel = this.dataModel.toJSON();
-
-			this.users = matchFilterDataModel.users;
-			this.categories = matchFilterDataModel.categories;
-			this.teams = matchFilterDataModel.teams;
-
-			this.cups = this._loadCups();
-
-			this.settingsView = new FilterView( {
-				model: this.settingsModel
-				, cups: this.cups
-			} );
-
 			if ( this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_MATCHES ) {
 				this.renderInnerView( this.settingsModel.toJSON() );
-			} else {
-				// TODO: do not load all stuff below if widget is collapsed
-				this.renderInnerViewCollapsed( this.settingsModel.toJSON() );
+				return;
 			}
+
+			if ( this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_SETTINGS ) {
+				this._renderSettings();
+				return;
+			}
+
+			this.renderInnerViewCollapsed( this.settingsModel.toJSON() );
 		},
 
 		renderInnerView: function( filter ) {
@@ -126,6 +118,14 @@ define( function ( require ) {
 		},
 
 		getCustomMenuItems: function() {
+
+			if ( this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_SETTINGS ) {
+
+				return [
+					{ selector: 'js-save-settings-button', icon: 'fa fa-save', link: '#', text: translator.saveLabel, cssClass: 'btn-primary', button: true }
+					, { selector: 'js-close-settings-button', icon: 'fa fa-close', link: '#', text: translator.cancelLabel, button: true }
+				];
+			}
 
 			var model = this.settingsModel.toJSON();
 
@@ -143,6 +143,7 @@ define( function ( require ) {
 			if ( viewMenuItems.length > 0 ) {
 				result = result.concat( [ { selector: 'divider' } ] );
 			}
+
 			result = result.concat( viewMenuItems );
 
 			return result;
@@ -154,7 +155,7 @@ define( function ( require ) {
 
 		getTitle: function() {
 			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
-			var cup = service.getCup( service.loadPublicCups(), cupId );
+			var cup = service.loadPublicCup( cupId );
 
 			return this.getCupTitle( cup, '' );
 		},
@@ -187,8 +188,12 @@ define( function ( require ) {
 				, translator: translator
 			} ) );
 
-			this.$( '.js-category-cup-team-filter' ).html( this.settingsView.render().$el );
-			this.settingsView.delegateEvents();
+			var settingsView = new FilterView( {
+				model: this.settingsModel
+				, cups: this._loadCups()
+			} );
+
+			this.$( '.js-category-cup-team-filter' ).html( settingsView.render().$el );
 
 			return this;
 		},
@@ -217,7 +222,10 @@ define( function ( require ) {
 		_onSettingsClick: function( evt ) {
 			evt.preventDefault();
 
-			this._renderSettings();
+			this.exMode = this.matchesAndBetsViewMode;
+			this.matchesAndBetsViewMode = MATCHES_AND_BETS_MODE_SETTINGS;
+
+			this.render();
 		},
 
 		_onResetFilterClick: function( evt ) {
@@ -237,6 +245,8 @@ define( function ( require ) {
 
 			this.settingsModel.saveAttributes();
 
+			this.matchesAndBetsViewMode = this.exMode;
+
 			this.render();
 		},
 
@@ -244,6 +254,7 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this.settingsModel.restoreAttributes();
+			this.matchesAndBetsViewMode = this.exMode;
 
 			this.render();
 		},

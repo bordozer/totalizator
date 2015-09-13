@@ -7,7 +7,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		error: 'Error' // TODO
+		error: 'Can not get data from server'
 	} );
 
 	return {
