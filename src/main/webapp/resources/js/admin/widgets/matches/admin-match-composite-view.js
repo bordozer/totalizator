@@ -35,7 +35,6 @@ define( function ( require ) {
 		, validation_SelectDifferentTeams_Label: "Admin / Teams / Validation: Select different teams"
 
 		, deleteMatchMessage: "Delete match?"
-		, deleteAllMatchesMessage: "Delete ALL selected matches?"
 		, betsCountLabel: "Bets count"
 		, teamsStandOffHistoryLabel: "Teams standoff history"
 		, remoteGameLabel: "Remote game"
@@ -178,7 +177,6 @@ define( function ( require ) {
 
 		_removeView: function() {
 			this.remove();
-			this.trigger( 'matches:render' );
 		},
 
 		_saveEntry: function () {

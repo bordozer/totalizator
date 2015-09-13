@@ -22,7 +22,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Matches"
-
+		, deleteAllMatchesMessage: "Delete ALL selected matches?"
 		, addMatchLabel: "New match"
 		, finishSelectedMatchesLabel: "Admin / Matches / Finish selected matches"
 		, deleteSelectedMatchesLabel: "Admin / Matches / Delete selected matches"
@@ -144,6 +144,7 @@ define( function ( require ) {
 			_.each( matches, function( match ) {
 				match.deleteMatch();
 			});
+			this._triggerRender();
 		},
 
 		_onAddClick: function( evt ) {

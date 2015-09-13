@@ -47,7 +47,7 @@ define( function ( require ) {
 		},
 
 		deleteMatch: function() {
-			this.destroy();
+			this.destroy( { async: false } );
 		},
 
 		saveAttributes: function() {
