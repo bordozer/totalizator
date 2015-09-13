@@ -13,7 +13,14 @@
 			</div>
 
 			<div class="col-xs-3 text-right">
-				<strong><%=matchesCount%></strong>
+				<strong>
+
+					<% if( nowPlayingMatchesCount > 0 ) { %>
+						<span class="text-success" title="<%=translator.nowPlayingMatchesCountLabel%>"><%=nowPlayingMatchesCount%></span> /
+					<% } %>
+
+					<%=matchesCount%>
+				</strong>
 			</div>
 
 		</div>

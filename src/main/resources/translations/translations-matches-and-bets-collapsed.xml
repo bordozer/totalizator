@@ -10,6 +10,13 @@
 	</translation>
 
 	<translation>
+		<nerd>Matches are playing now count</nerd>
+		<ru><![CDATA[К-во матчей которые ишраются с даннуй момент]]></ru>
+		<ua><![CDATA[Кiлькiсть iгор що граються зараз]]></ua>
+		<en><![CDATA[Matches are playing now count]]></en>
+	</translation>
+
+	<translation>
 		<nerd>User bets count</nerd>
 		<ru><![CDATA[Сделано ставок]]></ru>
 		<ua><![CDATA[Зроблено ставок]]></ua>

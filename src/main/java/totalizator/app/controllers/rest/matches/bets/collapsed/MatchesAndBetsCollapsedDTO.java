@@ -13,6 +13,7 @@ public class MatchesAndBetsCollapsedDTO {
 	private final UserDTO user;
 
 	private int matchesCount;
+	private int nowPlayingMatchesCount;
 	private int userBetsCount;
 	private int matchesWithoutBetsCount;
 
@@ -38,6 +39,14 @@ public class MatchesAndBetsCollapsedDTO {
 
 	public void setMatchesCount( final int matchesCount ) {
 		this.matchesCount = matchesCount;
+	}
+
+	public int getNowPlayingMatchesCount() {
+		return nowPlayingMatchesCount;
+	}
+
+	public void setNowPlayingMatchesCount( final int nowPlayingMatchesCount ) {
+		this.nowPlayingMatchesCount = nowPlayingMatchesCount;
 	}
 
 	public int getUserBetsCount() {

@@ -56,6 +56,13 @@ public class MatchesAndBetsCollapsedRestController {
 		final List<Match> matches = matchService.loadAll( filter );
 		result.setMatchesCount( matches.size() );
 
+		result.setNowPlayingMatchesCount( ( int ) matches.stream().filter( new Predicate<Match>() {
+			@Override
+			public boolean test( final Match match ) {
+				return matchService.isMatchStarted( match );
+			}
+		} ).count() );
+
 		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, showBetsOfUser, currentUser );
 		final int userBetsCount = ( int ) matchBetDTOs
 				.stream().filter( new Predicate<MatchBetDTO>() {
