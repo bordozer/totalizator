@@ -5,7 +5,7 @@
 		<% if( isReadyForImport) { %>
 
 			<% if( ! importImpossible ) { %>
-				<input type="checkbox" id="gamesToImport" checked="checked">
+				<input type="checkbox" id="gamesToImport" <%= team1 && team2 ? 'checked' : ''%>>
 			<% } %>
 
 			<% if( importImpossible ) { %>
