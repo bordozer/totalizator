@@ -50,6 +50,42 @@ define( function ( require ) {
 			} );
 
 			return result;
+		},
+
+		loadCupsConfiguredForRemoteGameImport : function() {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/admin/rest/cups/configured-for-remote-games-import/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.error );
+				}
+			} );
+
+			return result;
+		},
+
+		loadAllCurrentCupsConfiguredForRemoteGameImport : function() {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/admin/rest/cups/configured-for-remote-games-import/current/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.error );
+				}
+			} );
+
+			return result;
 		}
 	}
 } );

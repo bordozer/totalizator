@@ -8,7 +8,7 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/game-import-parameters-template.html' ) );
 
-	var adminService = require( '/resources/js/admin/services/admin-service.js' );
+	var remoteGamesImportService = require( 'js/admin/widgets/game-import/remote-games-import-service' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
@@ -45,7 +45,7 @@ define( function ( require ) {
 
 		render: function() {
 
-			var cups = this.showActiveCupsOnlyClick ? adminService.loadAllCurrentCups() : adminService.loadCups();
+			var cups = this.showActiveCupsOnlyClick ? remoteGamesImportService.loadAllCurrentCupsConfiguredForRemoteGameImport() : remoteGamesImportService.loadCupsConfiguredForRemoteGameImport();
 
 			var model = this.model.toJSON();
 

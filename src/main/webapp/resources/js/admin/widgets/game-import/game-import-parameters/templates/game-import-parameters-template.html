@@ -8,7 +8,7 @@
 		<select id="selectedCupId" class="form-control">
 			<option value="0"></option>
 			<% _.each( cups, function( cup ) { %>
-				<option value="<%=cup.cupId%>" <%= cup.cupId == cupId ? 'selected' : '' %> ><%=cup.category.categoryName%> <%=cup.cupName%></option>
+				<option value="<%=cup.cupId%>" <%= cup.cupId == cupId ? 'selected' : '' %> ><%=cup.category.categoryName%> - <%=cup.cupName%></option>
 			<% }) %>
 		</select>
 		<br />
