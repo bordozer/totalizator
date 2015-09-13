@@ -55,15 +55,13 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 
 		final boolean isFinal = ( ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 4 ) ).equals( "Final" );
 
-		final String team1Id = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 3 ) ).toString();
-		final String team2Id = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 8 ) ).toString();
+		final String team1Id = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 0 ) ).get( 3 ) ).toString();
+		final String team2Id = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 1 ) ).get( 3 ) ).toString();
 		final String homeTeamId = new BigDecimal( ( Double ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 6 ) ).toString();
 
-		final String _team1City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 4 );
-		final String _team1 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 5 );
+		final String _team1 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 0 ) ).get( 5 );
 
-		final String _team2City = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 9 );
-		final String _team2 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 3 ).get( "rowSet" ) ).get( 0 ) ).get( 10 );
+		final String _team2 = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 1 ).get( "rowSet" ) ).get( 1 ) ).get( 5 );
 
 		final int homeTeamNumber = homeTeamId.equals( team1Id ) ? 1 : 2;
 
@@ -72,13 +70,13 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 		remoteGame.setBeginningTime( gameTime );
 
 		remoteGame.setRemoteTeam1Id( team1Id );
-		remoteGame.setRemoteTeam1Name( String.format( "%s %s", _team1City, _team1 ) );
+		remoteGame.setRemoteTeam1Name( _team1 );
 		if ( score1 != null ) {
 			remoteGame.setScore1( score1.intValue() );
 		}
 
 		remoteGame.setRemoteTeam2Id( team2Id );
-		remoteGame.setRemoteTeam2Name( String.format( "%s %s", _team2City, _team2 ) );
+		remoteGame.setRemoteTeam2Name( _team2 );
 		if ( score2 != null ) {
 			remoteGame.setScore2( score2.intValue() );
 		}
