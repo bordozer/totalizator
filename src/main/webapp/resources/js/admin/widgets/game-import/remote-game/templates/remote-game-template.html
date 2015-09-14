@@ -77,20 +77,19 @@
 
 	<div class="panel-footer">
 
-		<% if( ! isProcessed ) { %>
+		<% if( match ) { %>
+			<a href="/totalizator/matches/<%=match.matchId%>/bets/" class="fa fa-soccer-ball-o text-success" title="#<%=match.matchId%>"></a> <%=translator.theMatchIsAlreadyImported%>
+			<br />
+		<% } %>
 
-			<% if( match ) { %>
-				<a href="/totalizator/matches/<%=match.matchId%>/bets/" class="fa fa-soccer-ball-o text-success" title="#<%=match.matchId%>"></a> <%=translator.theMatchIsAlreadyImported%>
-			<% } %>
-
-			<% if( ! match ) { %>
-				<span class="fa fa-soccer-ball-o text-danger" title="<%=translator.noLocalMatchFound%>"> <%=translator.noLocalMatchFound%></span>
-			<% } %>
-
+		<% if( ! match ) { %>
+			<span class="fa fa-soccer-ball-o text-danger" title="<%=translator.noLocalMatchFound%>"> <%=translator.noLocalMatchFound%></span>
+			<br />
 		<% } %>
 
 		<% if( import_status ) { %>
 			<%=import_status.title%>
+			<br />
 		<% } %>
 
 		<% if( importImpossible ) { %>
