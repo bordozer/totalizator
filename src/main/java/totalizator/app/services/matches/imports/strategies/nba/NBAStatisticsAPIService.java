@@ -4,15 +4,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.models.Cup;
-import totalizator.app.services.remote.RemoteContentService;
 import totalizator.app.services.matches.imports.ImportedGamesDataStorageService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
+import totalizator.app.services.remote.RemoteContentService;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class NBAStatisticsAPIService implements StatisticsServerService {
@@ -33,7 +33,11 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 	private ImportedGamesDataStorageService importedGamesDataStorageService;
 
 	@Override
-	public List<String> loadRemoteGameIdsOnDate( final Cup cup, final LocalDate date ) throws IOException {
+	public Set<String> loadRemoteGameIds( final Cup cup, final LocalDate date ) throws IOException {
+
+
+
+
 		// import by date ( 05/01/2015 mm/dd/yyyy - first of may)
 		// http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=05/01/2015&DayOffset=0
 		final String url = String.format( "http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=%s/%s/%s&DayOffset=0", date.getMonthValue(), date.getDayOfMonth(), date.getYear() );

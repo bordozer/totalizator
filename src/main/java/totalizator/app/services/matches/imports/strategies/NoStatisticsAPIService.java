@@ -6,14 +6,16 @@ import totalizator.app.services.matches.imports.RemoteGame;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Collection;
-import static com.google.common.collect.Lists.newArrayList;
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
 
 @Service
 public class NoStatisticsAPIService implements StatisticsServerService {
+
 	@Override
-	public Collection<String> loadRemoteGameIdsOnDate( final Cup cup, final LocalDate date ) throws IOException {
-		return newArrayList();
+	public Set<String> loadRemoteGameIds( final Cup cup, final LocalDate date ) throws IOException {
+		return newHashSet();
 	}
 
 	@Override

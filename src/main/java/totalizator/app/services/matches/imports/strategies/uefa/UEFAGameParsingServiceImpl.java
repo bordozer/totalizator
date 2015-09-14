@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newTreeSet;
 
 @Service( value = "uefaGameParsingService" )
 public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
@@ -22,17 +24,17 @@ public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
 	private RemoteContentService remoteContentService;
 
 	@Override
-	public List<String> extractRemoteGameIds( final String remoteGameJSON ) {
-
-		final List<String> result = newArrayList();
+	public Set<String> extractRemoteGameIds( final String remoteGameJSON ) {
 
 		final Gson gson = new Gson();
 
 		final LinkedTreeMap uefaGamesJSON = ( LinkedTreeMap ) gson.fromJson( remoteGameJSON, Object.class );
 
 		if ( uefaGamesJSON == null ) {
-			return newArrayList();
+			return newTreeSet();
 		}
+
+		final TreeSet<String> result = newTreeSet();
 
 		final List fixtures = ( ArrayList ) uefaGamesJSON.get( "fixtures" );
 		for ( final Object fixture : fixtures ) {

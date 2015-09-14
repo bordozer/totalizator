@@ -8,19 +8,19 @@ import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.TreeSet;
 
-import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newTreeSet;
 
 @Service( value = "nbaGameParsingService" )
 public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 
 	@Override
-	public List<String> extractRemoteGameIds( final String remoteGameJSON ) {
+	public Set<String> extractRemoteGameIds( final String remoteGameJSON ) {
 
-		final List<String> result = newArrayList();
+		final TreeSet<String> result = newTreeSet();
 
 		final Gson gson = new Gson();
 
@@ -32,13 +32,17 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 			result.add( remoteGameId );
 		}
 
-		return result.stream().sorted( new Comparator<String>() {
+		return result;
 
-			@Override
-			public int compare( final String o1, final String o2 ) {
-				return o1.compareTo( o2 );
-			}
-		} ).collect( Collectors.toList() );
+		/*return result
+				.stream()
+				.sorted( new Comparator<String>() {
+					@Override
+					public int compare( final String o1, final String o2 ) {
+						return o1.compareTo( o2 );
+					}
+				} )
+				.collect( Collectors.toSet() );*/
 	}
 
 	@Override
@@ -82,7 +86,7 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 		}
 
 		remoteGame.setFinished( isFinal );
-		remoteGame.setHomeTeamNumber( homeTeamNumber  );
+		remoteGame.setHomeTeamNumber( homeTeamNumber );
 
 		return remoteGame;
 	}

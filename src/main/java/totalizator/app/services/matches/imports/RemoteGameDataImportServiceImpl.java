@@ -19,9 +19,9 @@ import totalizator.app.services.utils.DateTimeService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
-import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newTreeSet;
 
 @Service
 public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportService {
@@ -53,16 +53,16 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	private final Logger LOGGER = Logger.getLogger( RemoteGameDataImportServiceImpl.class );
 
 	@Override
-	public List<String> loadRemoteGameIds( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException {
+	public Set<String> loadRemoteGameIds( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException {
 
-		final List<String> remoteGamesIds = newArrayList();
+		final Set<String> remoteGamesIds = newTreeSet();
 
 		final StatisticsServerService statisticsAPIService = getStatisticsServerService( cup );
 
 		LocalDate date = dateFrom;
 		while ( true ) {
 
-			remoteGamesIds.addAll( statisticsAPIService.loadRemoteGameIdsOnDate( cup, date ) );
+			remoteGamesIds.addAll( statisticsAPIService.loadRemoteGameIds( cup, date ) );
 
 			date = dateTimeService.plusDays( date, 1 );
 			if ( date.isAfter( dateTo ) ) {
@@ -77,23 +77,6 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	public RemoteGame loadRemoteGame( final String remoteGameId, final Cup cup ) throws IOException {
 		return getStatisticsServerService( cup ).loadRemoteGame( remoteGameId );
 	}
-
-	/*@Override
-	public List<RemoteGame> loadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException {
-
-		final List<RemoteGame> result = newArrayList();
-
-		for ( final String remoteGameId : loadRemoteGameIds( dateFrom, dateTo, cup ) ) {
-
-			final RemoteGame remoteGame = loadRemoteGame( remoteGameId, cup );
-
-			if ( remoteGame != null ) {
-				result.add( remoteGame );
-			}
-		}
-
-		return result;
-	}*/
 
 	@Override
 	public Match findMatchFor( final Cup cup, final String remoteTeam1Id, final String remoteTeam2Id, final LocalDateTime gameDate ) {

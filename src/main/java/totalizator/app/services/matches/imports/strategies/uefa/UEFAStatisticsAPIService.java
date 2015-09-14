@@ -5,16 +5,16 @@ import org.springframework.stereotype.Service;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.services.CategoryService;
-import totalizator.app.services.remote.RemoteContentService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
+import totalizator.app.services.remote.RemoteContentService;
 import totalizator.app.services.remote.RemoteServerRequest;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.Set;
 
 @Service
 public class UEFAStatisticsAPIService implements StatisticsServerService {
@@ -34,7 +34,7 @@ public class UEFAStatisticsAPIService implements StatisticsServerService {
 	private DateTimeService dateTimeService;
 
 	@Override
-	public Collection<String> loadRemoteGameIdsOnDate( final Cup cup, final LocalDate date ) throws IOException {
+	public Set<String> loadRemoteGameIds( final Cup cup, final LocalDate date ) throws IOException {
 
 		final Category category = categoryService.load( cup.getCategory().getId() );
 
