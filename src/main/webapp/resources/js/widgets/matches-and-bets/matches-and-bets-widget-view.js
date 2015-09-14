@@ -69,16 +69,17 @@ define( function ( require ) {
 
 			return [
 				{ selector: 'js-matches_and_bets_mode_matches'
-					, icon: 'fa fa-futbol-o'
+					, icon: 'fa fa-object-group'
 					, link: '#'
 					, selected: ! isStatisticsView
 					, text: translator.matchesAndBetsViewMode_Matches_Label
 				}
 				, { selector: 'js-matches_and_bets_mode_statistics'
-					, icon: 'fa fa-bar-chart'
+					, icon: 'fa fa-television'
 					, link: '#'
 					, selected: isStatisticsView
 					, text: translator.matchesAndBetsViewMode_Statistics_Label
+					, button: ! isStatisticsView
 				}
 				, { selector: 'splitter' }
 				, { selector: 'js-view_mode_bet'
