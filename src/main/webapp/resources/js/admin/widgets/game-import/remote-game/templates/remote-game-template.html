@@ -77,7 +77,7 @@
 
 	<div class="panel-footer">
 
-		<% if( ! import_status ) { %>
+		<% if( ! isProcessed ) { %>
 
 			<% if( match ) { %>
 				<a href="/totalizator/matches/<%=match.matchId%>/bets/" class="fa fa-soccer-ball-o text-success" title="#<%=match.matchId%>"></a> <%=translator.theMatchIsAlreadyImported%>

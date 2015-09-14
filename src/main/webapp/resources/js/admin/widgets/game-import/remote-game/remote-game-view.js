@@ -60,12 +60,15 @@ define( function ( require ) {
 				matchResults = service.matchResults( team1.teamId, model.score1, team2.teamId, model.score2 );
 			}
 
+			console.log( this.model.importStatus );
+
 			var data = _.extend( {}, model, {
 				match: match
 				, team1: team1
 				, team2: team2
 				, matchBeginningTime: model.beginningTime
 				, isReadyForImport: ! this.model.isProcessed
+				, isProcessed: this.model.isProcessed
 				, import_status: this.model.importStatus
 				, importImpossible: atLeastOneTeamNotFound
 				, matchResults: matchResults
