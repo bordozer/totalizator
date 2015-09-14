@@ -46,6 +46,14 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
+		getTitle: function () {
+			return translator.title;
+		},
+
+		getIcon: function () {
+			return 'fa-street-view';
+		},
+
 		getCustomMenuItems: function() {
 
 			return [
@@ -125,14 +133,6 @@ define( function ( require ) {
 			}
 
 			container.append( view.render().$el );
-		},
-
-		getTitle: function () {
-			return translator.title;
-		},
-
-		getIcon: function () {
-			return 'fa-street-view';
 		},
 
 		_searchFocus: function() {

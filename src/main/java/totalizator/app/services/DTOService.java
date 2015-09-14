@@ -56,4 +56,8 @@ public interface DTOService {
 	UserMatchPointsHolderDTO transformMatchPoints( final UserMatchPointsHolder userMatchPointsHolder );
 
 	UserCupPointsHolderDTO transformCupPoints( final UserCupPointsHolder userCupPointsHolder );
+
+	SportKindDTO transformSportKind( SportKind sportKind );
+
+	List<SportKindDTO> transformSportKinds( List<SportKind> sportKinds );
 }

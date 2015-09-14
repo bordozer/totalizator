@@ -9,6 +9,8 @@ public class CategoryDTO {
 	private String categoryName;
 	private String logoUrl;
 
+	private SportKindDTO sportKind;
+
 	public CategoryDTO() {
 	}
 
@@ -41,8 +43,16 @@ public class CategoryDTO {
 		this.logoUrl = logoUrl;
 	}
 
+	public SportKindDTO getSportKind() {
+		return sportKind;
+	}
+
+	public void setSportKind( final SportKindDTO sportKind ) {
+		this.sportKind = sportKind;
+	}
+
 	@Override
 	public String toString() {
-		return String.format( "#%d: %s", categoryId, categoryName );
+		return String.format( "#%d: %s ( %s )", categoryId, categoryName, sportKind );
 	}
 }

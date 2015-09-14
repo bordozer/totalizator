@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Sport kinds</nerd>
+		<ru><![CDATA[Виды спорта]]></ru>
+		<ua><![CDATA[Види спорту]]></ua>
+		<en><![CDATA[Sport kinds]]></en>
+	</translation>
+
+	<translation>
+		<nerd>New sport kind</nerd>
+		<ru><![CDATA[Новый вид спорта]]></ru>
+		<ua><![CDATA[Новий вид спорту]]></ua>
+		<en><![CDATA[New sport kind]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No sport kinds found</nerd>
+		<ru><![CDATA[Ни одного вида спотра еще не создано]]></ru>
+		<ua><![CDATA[Жодного виду спорту ще не створено]]></ua>
+		<en><![CDATA[No sport kinds found]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Sport kind name</nerd>
+		<ru><![CDATA[Название]]></ru>
+		<ua><![CDATA[Найменування]]></ua>
+		<en><![CDATA[Sport kind name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Enter a sport kind name!</nerd>
+		<ru><![CDATA[Введите название вида спорта]]></ru>
+		<ua><![CDATA[Введiть найменування виду спорту]]></ua>
+		<en><![CDATA[Enter a sport kind name!]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

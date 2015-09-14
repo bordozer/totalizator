@@ -45,6 +45,42 @@ define( function ( require ) {
 			return { winnerId: winnerId, style1: style1, style2: style2 };
 		},
 
+		loadSportKinds: function() {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/sport-kinds/',
+				async: false,
+				success: function ( response ) {
+					result = response;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
+		loadSportKind: function( sportKindId ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/sport-kinds/' + sportKindId + '/',
+				async: false,
+				success: function ( response ) {
+					result = response;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		getBetsCount: function( matchId ) {
 			var result = 0;
 			$.ajax( {

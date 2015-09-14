@@ -22,6 +22,11 @@ public class UEFA extends AbstractDataInitializer {
 	private static final String CUP_2 = "World cup 2018";
 
 	@Override
+	protected String getSportKindName() {
+		return "Football";
+	}
+
+	@Override
 	protected String getName() {
 		return CATEGORY;
 	}

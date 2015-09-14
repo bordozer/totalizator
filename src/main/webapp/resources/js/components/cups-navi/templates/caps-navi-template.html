@@ -2,9 +2,35 @@
 
 	<div class="col-xs-12 col-lg-12">
 
-		<ul class="nav nav-tabs js-cup-tabs">
+		<ul class="nav nav-tabs">
 
-			<li role="presentation" class="js-public-cups-menu"></li>
+			<% _.each( sportKindCups, function( entry ) { %>
+
+				<li role="presentation" class="dropdown <%= entry.sportKind.sportKindId == selectedSportKindId ? 'active' : '' %>">
+
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						<%=entry.sportKind.sportKindName%>
+						<span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu">
+
+						<li role="presentation">
+							<a href="/totalizator/sports/<%=entry.sportKind.sportKindId%>/"><%=translator.allCups%></a>
+						</li>
+
+						<% if( entry.cups.length > 0 ) { %>
+							<% _.each( entry.cups, function( cup ) { %>
+								<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>">
+									<a href="/totalizator/cups/<%=cup.cupId%>/"><%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></a>
+								</li>
+							<% }) %>
+						<% } %>
+
+					</ul>
+
+				</li>
+			<% }) %>
 
 		</ul>
 

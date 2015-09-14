@@ -20,6 +20,11 @@ public class NBA extends AbstractDataInitializer {
 	private static final String CUP_3 = "2014 - playoff";
 
 	@Override
+	protected String getSportKindName() {
+		return "Basketball";
+	}
+
+	@Override
 	protected String getName() {
 		return CATEGORY;
 	}

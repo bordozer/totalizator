@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 import static totalizator.app.models.Team.*;
 
-
 @Entity
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table( name = "teams" )

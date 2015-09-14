@@ -9,6 +9,8 @@ public class CategoryEditDTO {
 	private String categoryImportId;
 	private int remoteGameImportStrategyTypeId;
 
+	private int sportKindId;
+
 	public CategoryEditDTO() {
 	}
 
@@ -55,6 +57,14 @@ public class CategoryEditDTO {
 
 	public void setRemoteGameImportStrategyTypeId( final int remoteGameImportStrategyTypeId ) {
 		this.remoteGameImportStrategyTypeId = remoteGameImportStrategyTypeId;
+	}
+
+	public int getSportKindId() {
+		return sportKindId;
+	}
+
+	public void setSportKindId( final int sportKindId ) {
+		this.sportKindId = sportKindId;
 	}
 
 	@Override

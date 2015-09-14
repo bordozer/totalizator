@@ -33,9 +33,9 @@ define( function ( require ) {
 
 		render: function () {
 
-			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
-
 			var match = this.model.toJSON();
+
+			this.trigger( 'navigation:set:active:cup', { selectedCup: match.cup } );
 
 			var data = _.extend( {}, {
 				match: match

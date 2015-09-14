@@ -45,4 +45,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category findByName( final String categoryName ) {
 		return categoryRepository.findByName( categoryName );
 	}
+
+	@Override
+	public List<Category> loadAll( final int sportKindId ) {
+		return categoryRepository.loadAll( sportKindId );
+	}
 }

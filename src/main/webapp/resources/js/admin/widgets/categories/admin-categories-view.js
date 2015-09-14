@@ -22,6 +22,7 @@ define( function ( require ) {
 		, logoLabel: "Logo"
 		, categoryImportIdLabel: "Category import ID"
 		, importServerLabel: "Use remote games import strategy"
+		, sportKindLabel: "Sport kind"
 	} );
 
 	var CategoriesView = WidgetView.extend( {
@@ -144,6 +145,7 @@ define( function ( require ) {
 				model: modelJSON
 				, isSelected: this.isSelected
 				, remoteGameImportStrategyTypeName: remoteGameImportStrategyTypeName
+				, sportKindName: modelJSON.sportKindId > 0 ? service.loadSportKind( modelJSON.sportKindId ).sportKindName : ''
 				, translator: translator
 			} ) );
 
@@ -162,6 +164,7 @@ define( function ( require ) {
 			this.$el.html( this.templateEdit( {
 				model: modelJSON
 				, remoteGameImportStrategyTypes: this.remoteGameImportStrategyTypes
+				, sportKinds: service.loadSportKinds()
 				, translator: translator
 			} ) );
 
@@ -212,6 +215,7 @@ define( function ( require ) {
 				categoryName: this.$( '.entry-name' ).val()
 				, categoryImportId: this.$( '#category-import-id' ).val()
 				, remoteGameImportStrategyTypeId: this.$( '#game-import-strategy-type-id' ).val()
+				, sportKindId: this.$( '#sportKindId' ).val()
 			} );
 
 			this.model.makeSnapshot();

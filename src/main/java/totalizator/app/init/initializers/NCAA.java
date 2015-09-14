@@ -21,6 +21,11 @@ public class NCAA extends AbstractDataInitializer {
 	private static final String CUP_1 = "2015 - regular";
 
 	@Override
+	protected String getSportKindName() {
+		return "Basketball";
+	}
+
+	@Override
 	protected String getName() {
 		return CATEGORY;
 	}

@@ -61,7 +61,6 @@ public class TeamRepository implements TeamDao {
 		em.remove( load( id ) );
 	}
 
-
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public Team findByName( final Category category, final String name ) {

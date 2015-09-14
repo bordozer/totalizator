@@ -297,10 +297,31 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Server error</nerd>
+		<ru><![CDATA[Ошибка на вервере]]></ru>
+		<ua><![CDATA[Помилка на серверi]]></ua>
+		<en><![CDATA[Server error]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Edit</nerd>
+		<ru><![CDATA[Редактировать]]></ru>
+		<ua><![CDATA[Редагувати]]></ua>
+		<en><![CDATA[Edit]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete</nerd>
+		<ru><![CDATA[Удалить]]></ru>
+		<ua><![CDATA[Видатити]]></ua>
+		<en><![CDATA[Delete]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Sport kind</nerd>
+		<ru><![CDATA[Вид спорта]]></ru>
+		<ua><![CDATA[Вид спорту]]></ua>
+		<en><![CDATA[Sport kind]]></en>
 	</translation>
 
 	<translation>

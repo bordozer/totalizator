@@ -6,10 +6,10 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	return Backbone.Collection.extend( {
+	return Backbone.Model.extend( {
 
 		initialize: function ( options ) {
-			this.url = '/rest/cups/public/current/';
+			this.url = '/rest/sport-kinds/cups/active/';
 		},
 
 		refresh: function() {

@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import static totalizator.app.models.Category.FIND_BY_NAME;
+import static totalizator.app.models.Category.FIND_BY_SPORT_KIND;
 import static totalizator.app.models.Category.LOAD_ALL;
 
 @Entity
@@ -18,18 +19,27 @@ import static totalizator.app.models.Category.LOAD_ALL;
 		@NamedQuery(
 				name = FIND_BY_NAME,
 				query = "select c from Category c where categoryName= :categoryName"
+		),
+		@NamedQuery(
+				name = FIND_BY_SPORT_KIND,
+				query = "select c from Category c where sportKindId= :sportKindId"
 		)
 } )
 public class Category extends AbstractEntity {
 
 	public static final String LOAD_ALL = "categories.loadAll";
 	public static final String FIND_BY_NAME = "categories.findByName";
+	public static final String FIND_BY_SPORT_KIND = "categories.findBySportKind";
 
 	@Column( unique = true, columnDefinition = "VARCHAR(255)" )
 	private String categoryName;
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
+
+	@ManyToOne
+	@JoinColumn( name = "sportKindId" )
+	private SportKind sportKind;
 
 	@Column( columnDefinition = "VARCHAR(100)" )
 	private String importId;
@@ -57,6 +67,14 @@ public class Category extends AbstractEntity {
 
 	public void setLogoFileName( final String logoFileName ) {
 		this.logoFileName = logoFileName;
+	}
+
+	public SportKind getSportKind() {
+		return sportKind;
+	}
+
+	public void setSportKind( final SportKind sportKind ) {
+		this.sportKind = sportKind;
 	}
 
 	public String getImportId() {

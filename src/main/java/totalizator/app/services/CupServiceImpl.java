@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CupDao;
-import totalizator.app.models.Category;
-import totalizator.app.models.Cup;
-import totalizator.app.models.CupWinner;
-import totalizator.app.models.PointsCalculationStrategy;
+import totalizator.app.models.*;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.util.Comparator;
@@ -125,6 +122,19 @@ public class CupServiceImpl implements CupService {
 		return loadPublicFinished()
 				.stream()
 				.filter( forCategory( category ) )
+				.collect( Collectors.toList() );
+	}
+
+	@Override
+	public List<Cup> loadPublic( final SportKind sportKind ) {
+		return loadPublic()
+				.stream()
+				.filter( new Predicate<Cup>() {
+					@Override
+					public boolean test( final Cup cup ) {
+						return cup.getCategory().getSportKind().equals( sportKind );
+					}
+				} )
 				.collect( Collectors.toList() );
 	}
 

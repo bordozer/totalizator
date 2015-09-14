@@ -20,6 +20,7 @@ define( function ( require ) {
 			, logoUrl: ''
 			, categoryImportId: ''
 			, remoteGameImportStrategyTypeId: 0
+			, sportKindId: 0
 		},
 
 		_snapshot: {},

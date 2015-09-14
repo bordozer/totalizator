@@ -25,6 +25,23 @@
 					</div>
 				</div>
 
+
+				<div class="row">
+
+					<div class="col-lg-6">
+						<small><%- translator.sportKindLabel %></small>
+					</div>
+
+					<div class="col-lg-6">
+						<select id="sportKindId" class="form-control">
+							<% _.each( sportKinds, function( sportKind ) { %>
+								<option value="<%=sportKind.sportKindId%>" <%= sportKind.sportKindId == model.sportKindId ? 'selected' : '' %> ><%=sportKind.sportKindName%></option>
+							<% }) %>
+						</select>
+					</div>
+				</div>
+
+
 				<div class="row">
 
 					<div class="col-lg-6">

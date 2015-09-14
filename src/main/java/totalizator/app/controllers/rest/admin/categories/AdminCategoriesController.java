@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import totalizator.app.models.Category;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.LogoService;
+import totalizator.app.services.SportKindService;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -27,6 +28,9 @@ public class AdminCategoriesController {
 
 	@Autowired
 	private CategoryService categoryService;
+
+	@Autowired
+	private SportKindService sportKindService;
 
 	@Autowired
 	private LogoService logoService;
@@ -45,6 +49,10 @@ public class AdminCategoriesController {
 				categoryEditDTO.setCategoryImportId( category.getImportId() );
 				categoryEditDTO.setRemoteGameImportStrategyTypeId( category.getRemoteGameImportStrategyTypeId() );
 
+				if ( category.getSportKind() != null ) {
+					categoryEditDTO.setSportKindId( category.getSportKind().getId() );
+				}
+
 				return categoryEditDTO;
 			}
 		} );
@@ -58,6 +66,7 @@ public class AdminCategoriesController {
 		final Category category = new Category( categoryEditDTO.getCategoryName() );
 		category.setImportId( categoryEditDTO.getCategoryImportId() );
 		category.setRemoteGameImportStrategyTypeId( categoryEditDTO.getRemoteGameImportStrategyTypeId() );
+		category.setSportKind( sportKindService.load( categoryEditDTO.getSportKindId() ) );
 
 		final Category saved = categoryService.save( category );
 
@@ -75,6 +84,7 @@ public class AdminCategoriesController {
 		category.setCategoryName( categoryEditDTO.getCategoryName() );
 		category.setImportId( categoryEditDTO.getCategoryImportId() );
 		category.setRemoteGameImportStrategyTypeId( categoryEditDTO.getRemoteGameImportStrategyTypeId() );
+		category.setSportKind( sportKindService.load( categoryEditDTO.getSportKindId() ) );
 
 		categoryService.save( category );
 

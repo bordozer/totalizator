@@ -243,6 +243,19 @@ public class DTOServiceImpl implements DTOService {
 		return userCupPointsFunction().apply( userCupPointsHolder );
 	}
 
+	@Override
+	public SportKindDTO transformSportKind( final SportKind sportKind ) {
+		return sportKindsFunction().apply( sportKind );
+	}
+
+	@Override
+	public List<SportKindDTO> transformSportKinds( final List<SportKind> sportKinds ) {
+		return sportKinds
+				.stream()
+				.map( sportKindsFunction() )
+				.collect( Collectors.toList() );
+	}
+
 	private Function<UserMatchPointsHolder, UserMatchPointsHolderDTO> userMatchPointsFunction() {
 
 		return new Function<UserMatchPointsHolder, UserMatchPointsHolderDTO>() {
@@ -300,8 +313,14 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public CategoryDTO apply( final Category category ) {
+
 				final CategoryDTO categoryDTO = new CategoryDTO( category.getId(), category.getCategoryName() );
 				categoryDTO.setLogoUrl( logoService.getLogoURL( category ) );
+
+				if ( category.getSportKind() != null ) {
+					categoryDTO.setSportKind( transformSportKind( category.getSportKind() ) );
+				}
+
 				return categoryDTO;
 			}
 		};
@@ -480,6 +499,16 @@ public class DTOServiceImpl implements DTOService {
 				result.setStillActive( cupTeamService.exists( cup.getId(), team.getId() ) );
 
 				return result;
+			}
+		};
+	}
+
+	private java.util.function.Function<SportKind, SportKindDTO> sportKindsFunction() {
+		return new java.util.function.Function<SportKind, SportKindDTO>() {
+
+			@Override
+			public SportKindDTO apply( final SportKind sportKind ) {
+				return new SportKindDTO( sportKind.getId(), sportKind.getSportKindName() );
 			}
 		};
 	}

@@ -63,4 +63,11 @@ public class CategoryRepository implements CategoryDao {
 
 		return categories.size() == 1 ? categories.get( 0 ) : null;
 	}
+
+	@Override
+	public List<Category> loadAll( final int sportKindId ) {
+		return em.createNamedQuery( Category.FIND_BY_SPORT_KIND, Category.class )
+				.setParameter( "sportKindId", sportKindId )
+				.getResultList();
+	}
 }

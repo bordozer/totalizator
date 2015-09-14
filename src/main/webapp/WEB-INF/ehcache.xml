@@ -4,6 +4,18 @@
 
 	<defaultCache eternal="true" maxElementsInMemory="100" overflowToDisk="false"/>
 
+	<cache name="totalizator.app.cache.sportKind"
+		   maxElementsInMemory="100"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.sportKinds"
+		   maxElementsInMemory="100"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
 	<cache name="totalizator.app.cache.category"
 		   maxElementsInMemory="300"
 		   eternal="true"

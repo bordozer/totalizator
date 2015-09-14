@@ -21,6 +21,7 @@ define( function ( require ) {
 		, menuUntranslatedListLabel: 'Menu: Untranslated list'
 		, menuReloadTranslationsLabel: 'Menu: Reload translations'
 		, menuLogoutLabel: 'Menu: Logout'
+		, dictionariesLabel: 'Admin: Main dictionaries'
 	} );
 
 	return PageView.extend( {
@@ -38,7 +39,8 @@ define( function ( require ) {
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }
-				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/points-calculation-strategies/', text: translator.pointsCalculationStrategiesLabel }
+				, { selector: '', icon: 'fa fa-balance-scale', link: '/admin/points-calculation-strategies/', text: translator.pointsCalculationStrategiesLabel }
+				, { selector: '', icon: 'fa fa-map-o', link: '/admin/dictionaries/', text: translator.dictionariesLabel }
 				, { selector: 'divider' }
 
 				, { selector: '', icon: 'fa fa-exchange', link: '/admin/remote-games-import/', text: translator.gamesDataImportLabel }

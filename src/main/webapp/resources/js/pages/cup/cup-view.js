@@ -36,9 +36,9 @@ define( function ( require ) {
 
 		render: function() {
 
-			this.trigger( 'navigation:set:active:cup', { selectedCupId: this.cupId } );
-
 			var cup = this.model.toJSON();
+
+			this.trigger( 'navigation:set:active:cup', { selectedCup: cup } );
 
 			var data = _.extend( {}, { cup: cup, translator: translator } );
 

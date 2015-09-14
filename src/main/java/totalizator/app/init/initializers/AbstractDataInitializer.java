@@ -17,6 +17,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class AbstractDataInitializer {
 
+	protected abstract String getSportKindName();
+
 	protected abstract String getName();
 
 	protected abstract List<Cup> generateCups( final Category category, final List<Team> teams, final Session session );
@@ -38,7 +40,9 @@ public abstract class AbstractDataInitializer {
 
 	public void generate( final List<User> users, final Session session ) throws IOException, DocumentException {
 
-		final Category category = generateCategory( getName(), session );
+		final SportKind sportKind = generateSportKind( getSportKindName(), session );
+
+		final Category category = generateCategory( sportKind, getName(), session );
 		uploadLogo( category );
 
 		final List<Team> teams = loadTeamsData( category, session );
@@ -188,10 +192,21 @@ public abstract class AbstractDataInitializer {
 		return teams.get( rnd( 0, teams.size() - 1 ) );
 	}
 
-	private Category generateCategory( final String name, final Session session ) {
+	private SportKind generateSportKind( final String sportKindName, final Session session ) {
+
+		final SportKind sportKind = new SportKind();
+		sportKind.setSportKindName( sportKindName );
+
+		session.persist( sportKind );
+
+		return sportKind;
+	}
+
+	private Category generateCategory( final SportKind sportKind, final String name, final Session session ) {
 
 		final Category category = new Category( name );
 		category.setLogoFileName( getCategoryLogoFileName( category ) );
+		category.setSportKind( sportKind );
 
 		session.persist( category );
 

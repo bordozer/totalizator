@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading clearfix" title="">
+
+		<div class="btn-group pull-right">
+			<button class="btn btn-primary fa fa fa-save js-save-entry-button" data-entity_id="" title="<%= translator.saveLabel %>"></button>
+			<button class="btn btn-default fa fa fa-close js-cancel-entry-editing-button" data-entity_id="" title="<%= translator.cancelLabel %>"></button>
+		</div>
+
+		<%= title %>
+	</div>
+
+	<div class="panel-body">
+
+		<div class="row">
+			<div class="col-xs-6">
+				<%= translator.sportKindNameLabel %>
+			</div>
+			<div class="col-xs-6">
+				<input type="text" class="form-control" id="sportKindName" value="<%= sportKindName %>">
+			</div>
+		</div>
+
+	</div>
+
+</div>

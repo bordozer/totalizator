@@ -44,9 +44,6 @@ public class AdminTeamRestController {
 	@Autowired
 	private LogoService logoService;
 
-	@Autowired
-	private DTOService dtoService;
-
 	private static final Logger LOGGER = Logger.getLogger( AdminTeamRestController.class );
 
 	@ResponseStatus( HttpStatus.OK )

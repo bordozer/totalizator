@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.TeamService;
-import totalizator.app.services.UserService;
 
 @Controller
 @RequestMapping( "/totalizator/teams/{teamId}/" )
@@ -16,9 +15,6 @@ public class TeamCardController {
 	public static final String MODEL_NAME = "teamCardModel";
 
 	private static final String VIEW = "/TeamCard";
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private TeamService teamService;

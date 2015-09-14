@@ -26,7 +26,7 @@ define( function ( require ) {
 			this.$el.html( template( {
 			 } ) );
 
-			this.trigger( 'navigation:set:active:cup', { selectedCupId: this._getCup().cupId } );
+			this.trigger( 'navigation:set:active:cup', { selectedCup: this._getCup() } );
 
 			this._renderCupMatchesAndBets();
 
