@@ -23,7 +23,7 @@ define( function ( require ) {
 
 			var cup = this.model.toJSON();
 
-			this.trigger( 'navigation:set:active:cup', { selectedCup: cupId } );
+			this.trigger( 'navigation:set:active:cup', { selectedCup: cup } );
 
 			this.$el.html( template() );
 
