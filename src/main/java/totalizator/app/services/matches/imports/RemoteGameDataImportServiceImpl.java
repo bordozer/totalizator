@@ -39,9 +39,6 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	private CupTeamService cupTeamService;
 
 	@Autowired
-	private ImportUtilsService importUtilsService;
-
-	@Autowired
 	private NoStatisticsAPIService noStatisticsAPIService;
 
 	@Autowired
@@ -116,6 +113,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 		if ( match != null ) {
 			match.setScore1( remoteGame.getScore1() );
 			match.setScore2( remoteGame.getScore2() );
+			//match.setBeginningTime(  ); // Do not set beginning time - it can be updated
 			match.setMatchFinished( remoteGame.isFinished() );
 			match.setHomeTeamNumber( remoteGame.getHomeTeamNumber() );
 
@@ -164,7 +162,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 	private StatisticsServerService getStatisticsServerService( final Cup cup ) {
 
-		final GameImportStrategyType strategyType = importUtilsService.getGameImportStrategyType( cup );
+		final GameImportStrategyType strategyType = GameImportStrategyType.getById( cup.getCategory().getRemoteGameImportStrategyTypeId() );
 
 		switch ( strategyType ) {
 			case NO_IMPORT:
@@ -176,5 +174,33 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 			default:
 				throw new IllegalArgumentException( String.format( "Unsupported GameImportStrategyType: %s", strategyType ) );
 		}
+	}
+
+	public void setTeamService( final TeamService teamService ) {
+		this.teamService = teamService;
+	}
+
+	public void setMatchService( final MatchService matchService ) {
+		this.matchService = matchService;
+	}
+
+	public void setDateTimeService( final DateTimeService dateTimeService ) {
+		this.dateTimeService = dateTimeService;
+	}
+
+	public void setCupTeamService( final CupTeamService cupTeamService ) {
+		this.cupTeamService = cupTeamService;
+	}
+
+	public void setNoStatisticsAPIService( final NoStatisticsAPIService noStatisticsAPIService ) {
+		this.noStatisticsAPIService = noStatisticsAPIService;
+	}
+
+	public void setNbaStatisticsAPIService( final NBAStatisticsAPIService nbaStatisticsAPIService ) {
+		this.nbaStatisticsAPIService = nbaStatisticsAPIService;
+	}
+
+	public void setUefaStatisticsAPIService( final UEFAStatisticsAPIService uefaStatisticsAPIService ) {
+		this.uefaStatisticsAPIService = uefaStatisticsAPIService;
 	}
 }

@@ -8,7 +8,7 @@
 		</div>
 
 		<input type="checkbox" class="js-group-checkbox" value="true">
-		<small title="#<%=matchId%>"><%=beginningTime%> ( <%=translator.remoteGameLabel%>: <%=model.remoteGameId%> )</small>
+		<small title="#<%=matchId%>"><%=beginningTime%> ( <%=remainTime%> )</small>
 	</div>
 
 	<div class="panel-body">
@@ -47,11 +47,17 @@
 	</div>
 
 	<div class="panel-footer">
-		<%= model.matchFinished ? "<i class='fa fa-flag-checkered'></i>" : '' %> &nbsp;
-		<br />
-		<%= translator.betsCountLabel %>: <a href="/totalizator/matches/<%=matchId%>/bets/" title="<%=translator.betsCountLabel%>"><%= model.betsCount %></a>
-		<br />
-		<%=translator.teamsStandOffHistoryLabel%>: <a class="fa fa-futbol-o" href="/totalizator/teams/standoff/<%=team1.teamId%>/vs/<%=team2.teamId%>/" title="<%=translator.teamsStandOffHistoryLabel%>"></a>
+		<small>
+			<% if( model.remoteGameId ) { %>
+				<%=translator.remoteGameLabel%>: <%=model.remoteGameId%>
+			<% } %>
+
+			<%= model.matchFinished ? "<i class='fa fa-flag-checkered'></i> | " : '' %>
+			<a href="/totalizator/matches/<%=matchId%>/bets/" title="<%=translator.betsCountLabel%>"><%= translator.betsCountLabel %> - <%= model.betsCount %></a>
+			| <a href="/totalizator/teams/standoff/<%=team1.teamId%>/vs/<%=team2.teamId%>/" title="<%=translator.teamsStandOffHistoryLabel%>"><%=translator.teamsStandOffHistoryLabel%></a>
+			| <a href="/totalizator/cups/<%=model.cupId%>/matches/teams/<%=team1.teamId%>/" title="<%=translator.teamsStandOffHistoryLabel%>"><%=team1.teamName%> - <%=translator.matchesLabel%></a>
+			| <a href="/totalizator/cups/<%=model.cupId%>/matches/teams/<%=team2.teamId%>/" title="<%=translator.teamsStandOffHistoryLabel%>"><%=team2.teamName%> - <%=translator.matchesLabel%></a>
+		</small>
 	</div>
 
 </div>

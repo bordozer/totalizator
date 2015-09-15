@@ -57,6 +57,11 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
+	public LocalDateTime plusDays( final int days ) {
+		return plusDays( getNow(), days );
+	}
+
+	@Override
 	public String formatDateTimeUI( final LocalDateTime time ) {
 		return formatDateTime( time, formatUI() );
 	}

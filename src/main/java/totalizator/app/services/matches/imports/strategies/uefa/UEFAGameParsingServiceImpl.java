@@ -82,7 +82,7 @@ public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
 		result.setScore1( score1 < 0 ? 0 : ( int ) ( double ) score1 );
 		result.setScore2( score2 < 0 ? 0 : ( int ) ( double ) score2 );
 
-		result.setFinished( ! status.equals( "TIMED" ) );
+		result.setFinished( status.equals( "FINISHED" ) );
 
 		return result;
 	}

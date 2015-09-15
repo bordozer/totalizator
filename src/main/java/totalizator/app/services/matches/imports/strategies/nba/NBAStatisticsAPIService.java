@@ -7,6 +7,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.ImportedGamesDataStorageService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
+import totalizator.app.services.matches.imports.StatisticsServerURLService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
 import totalizator.app.services.remote.RemoteContentService;
 
@@ -32,16 +33,12 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 	@Autowired
 	private ImportedGamesDataStorageService importedGamesDataStorageService;
 
+	@Autowired
+	private StatisticsServerURLService nbaStatisticsServerURLService;
+
 	@Override
 	public Set<String> loadRemoteGameIds( final Cup cup, final LocalDate date ) throws IOException {
-
-
-
-
-		// import by date ( 05/01/2015 mm/dd/yyyy - first of may)
-		// http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=05/01/2015&DayOffset=0
-		final String url = String.format( "http://stats.nba.com/stats/scoreboard?LeagueID=00&gameDate=%s/%s/%s&DayOffset=0", date.getMonthValue(), date.getDayOfMonth(), date.getYear() );
-		return nbaGameParsingService.extractRemoteGameIds( remoteContentService.getRemoteContent( url ) );
+		return nbaGameParsingService.extractRemoteGameIds( remoteContentService.getRemoteContent( nbaStatisticsServerURLService.remoteGamesIdsURL( cup, date ) ) );
 	}
 
 	@Override
@@ -63,19 +60,12 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 	}
 
 	private String getRemoteGameJSON( final String remoteGameId ) throws IOException {
-		// Game ID format: 0021401217
-		// 0 		- ?
-		// 02 		- league code
-		// 14 		- years of cup
-		// 0		- ?
-		// 1217		- game ID
-		final String url = String.format( "http://stats.nba.com/stats/boxscore?GameID=%s&RangeType=0&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0", remoteGameId );
 
 		final String gameJSON = importedGamesDataStorageService.getGameData( NBA, remoteGameId );
 		if ( StringUtils.isNotEmpty( gameJSON ) ) {
 			return gameJSON;
 		}
 
-		return remoteContentService.getRemoteContent( url );
+		return remoteContentService.getRemoteContent( nbaStatisticsServerURLService.loadRemoteGameURL( remoteGameId ) );
 	}
 }

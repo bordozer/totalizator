@@ -28,6 +28,8 @@ public interface DateTimeService {
 
 	LocalDate plusDays( final LocalDate date, final int days );
 
+	LocalDateTime plusDays( final int days );
+
 
 	String formatDateTimeUI( final LocalDateTime time );
 

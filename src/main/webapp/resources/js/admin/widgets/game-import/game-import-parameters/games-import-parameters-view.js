@@ -36,8 +36,8 @@ define( function ( require ) {
 			var today = dateTimeService.dateNow();
 			this.model.set( {
 				cupId: 0
-				, dateFrom: today
-				, dateTo: today
+				//, dateFrom: today
+				//, dateTo: today
 			} );
 
 			this.render();

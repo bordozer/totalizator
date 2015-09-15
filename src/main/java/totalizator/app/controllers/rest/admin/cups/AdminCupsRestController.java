@@ -87,7 +87,7 @@ public class AdminCupsRestController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/for-category/{categoryId}/" )
 	public List<CupDTO> getCategoryCups( final @PathVariable( "categoryId" ) int categoryId, final Principal principal ) {
-		return dtoService.transformCups( cupService.loadPublic( categoryService.load( categoryId ) ), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.load( categoryService.load( categoryId ) ), userService.findByLogin( principal.getName() ) );
 	}
 
 	private Predicate<CupDTO> getImportStrategiesPredicate() {

@@ -38,6 +38,8 @@ define( function ( require ) {
 		, betsCountLabel: "Bets count"
 		, teamsStandOffHistoryLabel: "Teams standoff history"
 		, remoteGameLabel: "Remote game"
+
+		, matchesLabel: "matches"
 	} );
 
 	return Backbone.View.extend( {
@@ -95,6 +97,7 @@ define( function ( require ) {
 				, score2: model.score2
 				, matchResults: matchResults
 				, beginningTime: dateTimeService.formatDateTimeDisplay( model.beginningTime )
+				, remainTime: dateTimeService.fromNow( model.beginningTime )
 				, homeTeamNumber: model.homeTeamNumber
 				, translator: translator
 			} ) );
@@ -126,6 +129,7 @@ define( function ( require ) {
 				, cups: cups
 				, teams: teams
 				, beginningTime: dateTimeService.formatDateTimeDisplay( model.beginningTime )
+				, remainTime: dateTimeService.fromNow( model.beginningTime )
 				, homeTeamNumber: model.homeTeamNumber
 				, translator: translator
 			} ) );
@@ -280,6 +284,7 @@ define( function ( require ) {
 
 		_onMatchTimeChange: function( beginningTime ) {
 			this.model.set( { beginningTime: beginningTime } );
+			this.$( '.js-time-to-beginning-remains' ).text( "( " + dateTimeService.fromNow( beginningTime ) + " )" );
 		},
 
 		_onTeam1Change: function( evt ) {
