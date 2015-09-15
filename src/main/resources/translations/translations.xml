@@ -171,6 +171,13 @@
 	</translation>
 
 	<translation>
+		<nerd>Team matches in cup</nerd>
+		<ru><![CDATA[Матчи чемпионата]]></ru>
+		<ua><![CDATA[Iгри у чемпiонатi]]></ua>
+		<en><![CDATA[Team matches in the cup]]></en>
+	</translation>
+
+	<translation>
 		<nerd>Active teams</nerd>
 		<ru><![CDATA[Активные]]></ru>
 		<en><![CDATA[Active teams]]></en>

@@ -22,6 +22,8 @@
 				</td>
 				<td>
 					<a href="/totalizator/teams/<%=team.teamId%>/"><%-team.teamName%></a>
+					<br />
+					<small><a class="text-muted" href="/totalizator/cups/<%=cup.cupId%>/matches/teams/<%=team.teamId%>/"> <%= translator.teamMatchesInCipLabel %></a></small>
 				</td>
 			</tr>
 		<% })%>

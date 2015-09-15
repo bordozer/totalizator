@@ -15,6 +15,7 @@ define( function ( require ) {
 		title: "Teams"
 		, allTeamsLabel: "All teams"
 		, activeTeamsLabel: "Active teams"
+		, teamMatchesInCipLabel: "Team matches in cup"
 	} );
 
 	return WidgetView.extend( {
@@ -44,6 +45,7 @@ define( function ( require ) {
 
 			var data = _.extend( {}, {
 				teams: model.teams
+				, cup: this.cup
 				, letters: model.letters
 				, letter: this.model.letter
 				, active: this.model.active
