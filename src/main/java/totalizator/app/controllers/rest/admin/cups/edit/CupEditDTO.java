@@ -34,6 +34,8 @@ public class CupEditDTO {
 
 	private int cupPointsCalculationStrategyId;
 
+	private String cupImportId;
+
 	public int getCupId() {
 		return cupId;
 	}
@@ -130,6 +132,14 @@ public class CupEditDTO {
 
 	public void setCupPointsCalculationStrategyId( final int cupPointsCalculationStrategyId ) {
 		this.cupPointsCalculationStrategyId = cupPointsCalculationStrategyId;
+	}
+
+	public String getCupImportId() {
+		return cupImportId;
+	}
+
+	public void setCupImportId( final String cupImportId ) {
+		this.cupImportId = cupImportId;
 	}
 
 	@Override

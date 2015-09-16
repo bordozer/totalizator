@@ -83,16 +83,13 @@ define( function ( require ) {
 
 			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
 
-			var team1 = service.loadTeam( model.team1Id );
-			var team2 = service.loadTeam( model.team2Id );
-
 			this.$el.html( templateEntry( {
 				model: model
 				, matchId: model.matchId
 				, categoryName: service.loadCategory( model.categoryId ).categoryName
 				, cupName: adminService.loadCup( model.cupId ).cupName
-				, team1: team1
-				, team2: team2
+				, team1: model.team1
+				, team2: model.team2
 				, score1: model.score1
 				, score2: model.score2
 				, matchResults: matchResults

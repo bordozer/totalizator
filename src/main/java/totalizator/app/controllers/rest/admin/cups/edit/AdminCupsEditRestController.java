@@ -143,6 +143,8 @@ public class AdminCupsEditRestController {
 		cup.setPublicCup( dto.isPublicCup() );
 
 		cup.setPointsCalculationStrategy( pointsCalculationStrategyService.load( dto.getCupPointsCalculationStrategyId() ) );
+
+		cup.setCupImportId( dto.getCupImportId() );
 	}
 
 	private List<CupWinnerEditDTO> getCupWinners( final Cup cup ) {
@@ -177,6 +179,8 @@ public class AdminCupsEditRestController {
 
 				cupEditDTO.setFinished( cupService.isCupFinished( cup ) );
 				cupEditDTO.setCupPointsCalculationStrategyId( cup.getPointsCalculationStrategy().getId() );
+
+				cupEditDTO.setCupImportId( cup.getCupImportId() );
 
 				return cupEditDTO;
 			}

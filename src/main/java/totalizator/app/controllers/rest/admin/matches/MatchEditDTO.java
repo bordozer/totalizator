@@ -1,12 +1,17 @@
 package totalizator.app.controllers.rest.admin.matches;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.dto.TeamDTO;
 import totalizator.app.dto.serialization.DateTimeDeserializer;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
 import java.time.LocalDateTime;
 
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class MatchEditDTO {
 
 	private int matchId;
@@ -30,6 +35,12 @@ public class MatchEditDTO {
 	private int betsCount;
 
 	private String remoteGameId;
+
+	@JsonIgnore
+	private TeamDTO team1;
+
+	@JsonIgnore
+	private TeamDTO team2;
 
 	public int getMatchId() {
 		return matchId;
@@ -135,5 +146,25 @@ public class MatchEditDTO {
 
 	public void setRemoteGameId( final String remoteGameId ) {
 		this.remoteGameId = remoteGameId;
+	}
+
+	@JsonProperty
+	public TeamDTO getTeam1() {
+		return team1;
+	}
+
+	@JsonIgnore
+	public void setTeam1( final TeamDTO team1 ) {
+		this.team1 = team1;
+	}
+
+	@JsonProperty
+	public TeamDTO getTeam2() {
+		return team2;
+	}
+
+	@JsonIgnore
+	public void setTeam2( final TeamDTO team2 ) {
+		this.team2 = team2;
 	}
 }

@@ -42,6 +42,7 @@ define( function ( require ) {
 		, cupPositionLabel: "cup position"
 		, teamLogoLabel: "Logo"
 		, cupPointsCalculationStrategyLabel: "Points calculation strategy"
+		, cupImportIdLabel: "Import ID"
 	} );
 
 	var CupsView = WidgetView.extend( {
@@ -328,6 +329,7 @@ define( function ( require ) {
 				, cupStartDate: dateTimeService.formatDateTime( this.dateTimePickerView.getValue() )
 				, finished: finished
 				, cupPointsCalculationStrategyId: cupPointsCalculationStrategyId
+				, cupImportId: this.$( '#cup-import-id' ).val()
 			} );
 		},
 

@@ -46,7 +46,6 @@ public class AdminCategoriesController {
 
 				final CategoryEditDTO categoryEditDTO = new CategoryEditDTO( category.getId(), category.getCategoryName() );
 				categoryEditDTO.setLogoUrl( logoService.getLogoURL( category ) );
-				categoryEditDTO.setCategoryImportId( category.getImportId() );
 				categoryEditDTO.setRemoteGameImportStrategyTypeId( category.getRemoteGameImportStrategyTypeId() );
 
 				if ( category.getSportKind() != null ) {
@@ -64,7 +63,6 @@ public class AdminCategoriesController {
 	public CategoryEditDTO create( final @RequestBody CategoryEditDTO categoryEditDTO ) {
 		// TODO: check if name exists
 		final Category category = new Category( categoryEditDTO.getCategoryName() );
-		category.setImportId( categoryEditDTO.getCategoryImportId() );
 		category.setRemoteGameImportStrategyTypeId( categoryEditDTO.getRemoteGameImportStrategyTypeId() );
 		category.setSportKind( sportKindService.load( categoryEditDTO.getSportKindId() ) );
 
@@ -82,7 +80,6 @@ public class AdminCategoriesController {
 		// TODO: check if name exists
 		final Category category = categoryService.load( categoryEditDTO.getCategoryId() );
 		category.setCategoryName( categoryEditDTO.getCategoryName() );
-		category.setImportId( categoryEditDTO.getCategoryImportId() );
 		category.setRemoteGameImportStrategyTypeId( categoryEditDTO.getRemoteGameImportStrategyTypeId() );
 		category.setSportKind( sportKindService.load( categoryEditDTO.getSportKindId() ) );
 

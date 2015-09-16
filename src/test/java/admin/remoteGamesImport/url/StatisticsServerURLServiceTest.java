@@ -1,10 +1,7 @@
 package admin.remoteGamesImport.url;
 
-import org.easymock.EasyMock;
 import org.junit.Test;
-import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
-import totalizator.app.services.CategoryService;
 import totalizator.app.services.matches.imports.strategies.nba.NBAStatisticsServerURLService;
 import totalizator.app.services.matches.imports.strategies.uefa.UEFAStatisticsServerURLService;
 import totalizator.app.services.utils.DateTimeServiceImpl;
@@ -40,7 +37,6 @@ public class StatisticsServerURLServiceTest {
 
 		final UEFAStatisticsServerURLService urlService = new UEFAStatisticsServerURLService();
 		urlService.setDateTimeService( dateTimeService );
-		urlService.setCategoryService( categoryService() );
 
 		assertEquals( WRONG_URL, "http://api.football-data.org/alpha/soccerseasons/77777777/fixtures?timeFrame=p3", urlService.remoteGamesIdsURL( testData.cup, testData.date ) );
 	}
@@ -54,7 +50,6 @@ public class StatisticsServerURLServiceTest {
 
 		final UEFAStatisticsServerURLService urlService = new UEFAStatisticsServerURLService();
 		urlService.setDateTimeService( getDateTimeService() );
-		urlService.setCategoryService( categoryService() );
 
 		assertEquals( WRONG_URL, "http://api.football-data.org/alpha/soccerseasons/77777777/fixtures?timeFrame=n1", urlService.remoteGamesIdsURL( testData.cup, testData.date ) );
 	}
@@ -68,7 +63,6 @@ public class StatisticsServerURLServiceTest {
 
 		final UEFAStatisticsServerURLService urlService = new UEFAStatisticsServerURLService();
 		urlService.setDateTimeService( getDateTimeService() );
-		urlService.setCategoryService( categoryService() );
 
 		assertEquals( WRONG_URL, "http://api.football-data.org/alpha/soccerseasons/77777777/fixtures?timeFrame=n5", urlService.remoteGamesIdsURL( testData.cup, testData.date ) );
 	}
@@ -77,17 +71,6 @@ public class StatisticsServerURLServiceTest {
 	public void uefaLoadRemoteGameURL() {
 		final UEFAStatisticsServerURLService urlService = new UEFAStatisticsServerURLService();
 		assertEquals( WRONG_URL, "http://api.football-data.org/alpha/fixtures/00X12W34", urlService.loadRemoteGameURL( testData.remoteGameId ) );
-	}
-
-	private CategoryService categoryService() {
-
-		final CategoryService categoryService = EasyMock.createMock( CategoryService.class );
-		EasyMock.expect( categoryService.load( testData.cup.getCategory().getId() ) ).andReturn( testData.cup.getCategory() ).anyTimes();
-
-		EasyMock.expectLastCall();
-		EasyMock.replay( categoryService );
-
-		return categoryService;
 	}
 
 	private DateTimeServiceImpl getDateTimeService() {
@@ -102,13 +85,9 @@ public class StatisticsServerURLServiceTest {
 
 		public TestData() {
 
-			final Category category = new Category();
-			category.setId( 111 );
-			category.setImportId( "77777777" );
-
 			cup = new Cup();
 			cup.setId( 555 );
-			cup.setCategory( category );
+			cup.setCupImportId( "77777777" );
 
 			date = LocalDate.of( 2015, 11, 25 );
 

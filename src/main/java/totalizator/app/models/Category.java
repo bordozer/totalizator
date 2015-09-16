@@ -41,9 +41,6 @@ public class Category extends AbstractEntity {
 	@JoinColumn( name = "sportKindId" )
 	private SportKind sportKind;
 
-	@Column( columnDefinition = "VARCHAR(100)" )
-	private String importId;
-
 	private int remoteGameImportStrategyTypeId;
 
 	public Category() {
@@ -75,14 +72,6 @@ public class Category extends AbstractEntity {
 
 	public void setSportKind( final SportKind sportKind ) {
 		this.sportKind = sportKind;
-	}
-
-	public String getImportId() {
-		return importId;
-	}
-
-	public void setImportId( final String importId ) {
-		this.importId = importId;
 	}
 
 	public int getRemoteGameImportStrategyTypeId() {

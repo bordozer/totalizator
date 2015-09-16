@@ -50,14 +50,3 @@ public class UEFAStatisticsAPIService implements StatisticsServerService {
 		return uefaGameParsingService.parseGame( remoteGameId, remoteGameJSON );
 	}
 }
-
-// See http://api.football-data.org/documentation
-
-//http://api.football-data.org/alpha/soccerseasons/{soccerseasons}/teams
-//http://api.football-data.org/alpha/soccerseasons/{soccerseasons}/fixtures
-
-//http://api.football-data.org/alpha/soccerseasons/{soccerseasons}/fixtures?matchday=5
-//http://api.football-data.org/alpha/soccerseasons/{soccerseasons}/fixtures?timeFrame=p13
-//http://api.football-data.org/alpha/soccerseasons/{soccerseasons}/fixtures?timeFrame=n1
-
-//http://api.football-data.org/alpha/fixtures/{Game ID}

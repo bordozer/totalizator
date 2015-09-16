@@ -53,6 +53,9 @@ public class Cup extends AbstractEntity {
 	@JoinColumn( name = "pointsCalculationStrategyId" )
 	private PointsCalculationStrategy pointsCalculationStrategy;
 
+	@Column( columnDefinition = "VARCHAR(100)" )
+	private String cupImportId;
+
 	public Cup() {
 	}
 
@@ -99,6 +102,14 @@ public class Cup extends AbstractEntity {
 
 	public void setCupStartTime( final LocalDateTime cupStartTime ) {
 		this.cupStartTime = cupStartTime;
+	}
+
+	public String getCupImportId() {
+		return cupImportId;
+	}
+
+	public void setCupImportId( final String cupImportId ) {
+		this.cupImportId = cupImportId;
 	}
 
 	@Override

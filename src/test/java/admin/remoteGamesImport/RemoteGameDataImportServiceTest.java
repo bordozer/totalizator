@@ -2,7 +2,6 @@ package admin.remoteGamesImport;
 
 import org.easymock.EasyMock;
 import org.junit.Before;
-import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.GameImportStrategyType;
 import totalizator.app.services.matches.imports.RemoteGameDataImportServiceImpl;
@@ -106,14 +105,9 @@ public class RemoteGameDataImportServiceTest {
 
 		public TestData() {
 
-			final Category category = new Category();
-			category.setId( 111 );
-			category.setImportId( "77777777" );
-			category.setRemoteGameImportStrategyTypeId( gameImportStrategyType.getId() );
-
 			cup = new Cup();
 			cup.setId( 555 );
-			cup.setCategory( category );
+			cup.setCupImportId( "77777777" );
 		}
 	}
 }

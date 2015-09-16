@@ -20,7 +20,6 @@ define( function ( require ) {
 		, newCategoryLabel: "Admin / Categories: New category"
 		, categoryNameLabel: "Category name"
 		, logoLabel: "Logo"
-		, categoryImportIdLabel: "Category import ID"
 		, importServerLabel: "Use remote games import strategy"
 		, sportKindLabel: "Sport kind"
 	} );
@@ -213,7 +212,6 @@ define( function ( require ) {
 
 			this.model.set( {
 				categoryName: this.$( '.entry-name' ).val()
-				, categoryImportId: this.$( '#category-import-id' ).val()
 				, remoteGameImportStrategyTypeId: this.$( '#game-import-strategy-type-id' ).val()
 				, sportKindId: this.$( '#sportKindId' ).val()
 			} );

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 import totalizator.app.services.CupService;
+import totalizator.app.services.DTOService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.TeamService;
@@ -34,6 +35,9 @@ public class AdminMatchesRestController {
 	@Autowired
 	private MatchBetsService matchBetsService;
 
+	@Autowired
+	private DTOService dtoService;
+
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -42,6 +46,7 @@ public class AdminMatchesRestController {
 		final List<Match> matches = matchService.loadAll( dto );
 
 		return Lists.transform( matches, new Function<Match, MatchEditDTO>() {
+
 			@Override
 			public MatchEditDTO apply( final Match match ) {
 
@@ -67,6 +72,8 @@ public class AdminMatchesRestController {
 
 				matchEditDTO.setRemoteGameId( match.getRemoteGameId() );
 
+				initReadOnlyDTOProperties( matchEditDTO, match );
+
 				return matchEditDTO;
 			}
 		} );
@@ -85,6 +92,8 @@ public class AdminMatchesRestController {
 
 		matchEditDTO.setMatchId( saved.getId() );
 
+		initReadOnlyDTOProperties( matchEditDTO, match );
+
 		return matchEditDTO;
 	}
 
@@ -99,6 +108,8 @@ public class AdminMatchesRestController {
 
 		matchService.save( match );
 
+		initReadOnlyDTOProperties( matchEditDTO, match );
+
 		return matchEditDTO;
 	}
 
@@ -112,6 +123,11 @@ public class AdminMatchesRestController {
 		}
 
 		matchService.delete( matchId );
+	}
+
+	private void initReadOnlyDTOProperties( final @RequestBody MatchEditDTO dto, final Match match ) {
+		dto.setTeam1( dtoService.transformTeam( match.getTeam1() ) );
+		dto.setTeam2( dtoService.transformTeam( match.getTeam2() ) );
 	}
 
 	private void initMatchFromDTO( final MatchEditDTO matchEditDTO, final Match match ) {
