@@ -11,6 +11,8 @@ public class CategoryDTO {
 
 	private SportKindDTO sportKind;
 
+	private boolean favoriteCategory;
+
 	public CategoryDTO() {
 	}
 
@@ -49,6 +51,14 @@ public class CategoryDTO {
 
 	public void setSportKind( final SportKindDTO sportKind ) {
 		this.sportKind = sportKind;
+	}
+
+	public boolean isFavoriteCategory() {
+		return favoriteCategory;
+	}
+
+	public void setFavoriteCategory( final boolean favoriteCategory ) {
+		this.favoriteCategory = favoriteCategory;
 	}
 
 	@Override

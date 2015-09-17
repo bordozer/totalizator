@@ -9,7 +9,6 @@ import static totalizator.app.models.Cup.FIND_BY_NAME;
 import static totalizator.app.models.Cup.LOAD_ALL;
 import static totalizator.app.models.Cup.LOAD_ALL_USE_STRATEGY;
 
-
 @Entity
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
 @Table( name = "cups" )

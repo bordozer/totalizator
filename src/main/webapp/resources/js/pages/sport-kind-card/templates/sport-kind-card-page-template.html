@@ -2,8 +2,14 @@
 
 	<div class="col-xs-12">
 		<h4 class="well well-sm">
-			<img src="<%-category.logoUrl%>" height="16">
+
+			<button class="btn btn-default fa fa-star-o js-favorite-category-button-<%=category.categoryId%> <%=favoriteIconClasses%>" type="button" title="<%= translator.addOrRemoveHint %>"
+					data-category_id="<%=category.categoryId%>"></button>
+
+			<img src="<%-category.logoUrl%>" height="32">
+
 			<%=category.categoryName%>
+
 		</h4>
 	</div>
 

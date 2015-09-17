@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Add to favorites this category?</nerd>
+		<ru><![CDATA[Добавить категорию в избранные?]]></ru>
+		<ua><![CDATA[Додати категорiю в обранi?]]></ua>
+		<en><![CDATA[Add to favorites this category?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Remove from favorites this category?</nerd>
+		<ru><![CDATA[Удалить категорию из избранных?]]></ru>
+		<ua><![CDATA[Видалити категорiю з обраних?]]></ua>
+		<en><![CDATA[Remove from favorites this category?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Add/Remove the category to/from Favorites</nerd>
+		<ru><![CDATA[Добавить/удалить категорию из избранных]]></ru>
+		<ua><![CDATA[Додати чи видалити категорiю з обраних]]></ua>
+		<en><![CDATA[Add/Remove the category from Favorites]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Favorite categories cups</nerd>
+		<ru><![CDATA[Избранные]]></ru>
+		<ua><![CDATA[Обранi]]></ua>
+		<en><![CDATA[Favorites]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

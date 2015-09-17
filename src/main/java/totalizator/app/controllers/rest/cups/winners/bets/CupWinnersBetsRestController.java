@@ -10,10 +10,7 @@ import totalizator.app.beans.AppContext;
 import totalizator.app.dto.CupTeamBetDTO;
 import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.*;
-import totalizator.app.services.CupBetsService;
-import totalizator.app.services.CupService;
-import totalizator.app.services.CupWinnerService;
-import totalizator.app.services.DTOService;
+import totalizator.app.services.*;
 import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
@@ -32,6 +29,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 @RequestMapping( "/rest/cups/{cupId}" )
 public class CupWinnersBetsRestController {
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private CupService cupService;
@@ -56,6 +56,8 @@ public class CupWinnersBetsRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/winners/", produces = APPLICATION_JSON_VALUE )
 	public List<TeamDTO> winners( final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
 
+		final User currentUser = userService.findByLogin( principal.getName() );
+
 		final Cup cup = cupService.load( cupId );
 
 		return dtoService.transformTeams( Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, Team>() {
@@ -63,13 +65,15 @@ public class CupWinnersBetsRestController {
 			public Team apply( final CupWinner cupWinner ) {
 				return cupWinner.getTeam();
 			}
-		} ) );
+		} ), currentUser );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/winners/bets/", produces = APPLICATION_JSON_VALUE )
-	public CupWinnersBetsDTO all( final @PathVariable( "cupId" ) int cupId, final HttpServletRequest request ) {
+	public CupWinnersBetsDTO all( final @PathVariable( "cupId" ) int cupId, final HttpServletRequest request, final Principal principal ) {
+
+		final User currentUser = userService.findByLogin( principal.getName() );
 
 		final Cup cup = cupService.load( cupId );
 		final Language language = AppContext.read( request.getSession() ).getLanguage();
@@ -83,7 +87,7 @@ public class CupWinnersBetsRestController {
 			public Team apply( final CupWinner cupWinner ) {
 				return cupWinner.getTeam();
 			}
-		} ) ) );
+		} ), currentUser ) );
 
 		final boolean isCupBetsAreHiddenYet = !cupBetsService.isCupBettingFinished( cup );
 

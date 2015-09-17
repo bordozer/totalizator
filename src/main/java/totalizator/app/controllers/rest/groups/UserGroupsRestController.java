@@ -21,10 +21,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class UserGroupsRestController {
 
 	@Autowired
-	private UserGroupService userGroupService;
+	private UserService userService;
 
 	@Autowired
-	private UserService userService;
+	private UserGroupService userGroupService;
 
 	@Autowired
 	private DTOService dtoService;
@@ -33,7 +33,7 @@ public class UserGroupsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<UserGroupDTO> allUserGroups( final Principal principal ) {
-		return dtoService.transformUserGroups( userGroupService.loadAll(), getUser( principal ) );
+		return dtoService.transformUserGroups( userGroupService.loadAll(), getCurrentUser( principal ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -57,7 +57,7 @@ public class UserGroupsRestController {
 		userGroupService.removeMember( userGroupService.load( userGroupId ), userService.load( userId ) );
 	}
 
-	private User getUser( final Principal principal ) {
+	private User getCurrentUser( final Principal principal ) {
 		return userService.findByLogin( principal.getName() );
 	}
 }

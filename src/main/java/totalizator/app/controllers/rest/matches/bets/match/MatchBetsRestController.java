@@ -27,6 +27,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class MatchBetsRestController {
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private MatchService matchService;
 
 	@Autowired
@@ -34,9 +37,6 @@ public class MatchBetsRestController {
 
 	@Autowired
 	private DTOService dtoService;
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private UserGroupService userGroupService;
@@ -53,8 +53,8 @@ public class MatchBetsRestController {
 		final Team team1 = match.getTeam1();
 		final Team team2 = match.getTeam2();
 
-		final TeamDTO team1DTO = dtoService.transformTeam( team1 );
-		final TeamDTO team2DTO = dtoService.transformTeam( team2 );
+		final TeamDTO team1DTO = dtoService.transformTeam( team1, currentUser );
+		final TeamDTO team2DTO = dtoService.transformTeam( team2, currentUser );
 
 		final MatchBetsDTO result = new MatchBetsDTO();
 

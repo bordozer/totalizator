@@ -118,6 +118,22 @@ public class CupServiceImpl implements CupService {
 	}
 
 	@Override
+	public List<Cup> loadPublicCurrent( final Category category ) {
+		return loadPublicCurrent()
+				.stream()
+				.filter( forCategory( category ) )
+				.collect( Collectors.toList() );
+	}
+
+	@Override
+	public List<Cup> loadPublicCurrent( final SportKind sportKind ) {
+		return loadPublicCurrent()
+				.stream()
+				.filter( forSportKind( sportKind ) )
+				.collect( Collectors.toList() );
+	}
+
+	@Override
 	public List<Cup> loadPublicFinished( final Category category ) {
 		return loadPublicFinished()
 				.stream()
@@ -129,12 +145,7 @@ public class CupServiceImpl implements CupService {
 	public List<Cup> loadPublic( final SportKind sportKind ) {
 		return loadPublic()
 				.stream()
-				.filter( new Predicate<Cup>() {
-					@Override
-					public boolean test( final Cup cup ) {
-						return cup.getCategory().getSportKind().equals( sportKind );
-					}
-				} )
+				.filter( forSportKind( sportKind ) )
 				.collect( Collectors.toList() );
 	}
 
@@ -223,6 +234,15 @@ public class CupServiceImpl implements CupService {
 			@Override
 			public boolean test( final Cup cup ) {
 				return cup.getCategory().equals( category );
+			}
+		};
+	}
+
+	private Predicate<Cup> forSportKind( final SportKind sportKind ) {
+		return new Predicate<Cup>() {
+			@Override
+			public boolean test( final Cup cup ) {
+				return cup.getCategory().getSportKind().equals( sportKind );
 			}
 		};
 	}

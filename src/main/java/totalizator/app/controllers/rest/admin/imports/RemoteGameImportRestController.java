@@ -88,6 +88,8 @@ public class RemoteGameImportRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/local-data/", produces = APPLICATION_JSON_VALUE )
 	public RemoteGameLocalData loadLocalDataForRemoteGame( final @RequestParam( value = "cupId" ) Integer cupId , final RemoteGameDTO remoteGameDTO, final Principal principal ) throws IOException {
 
+		final User currentUser = userService.findByName( principal.getName() );
+
 		final Match match = remoteGameDataImportService.findByRemoteGameId( remoteGameDTO.getRemoteGameId() );
 		if ( match == null ) {
 
@@ -97,23 +99,21 @@ public class RemoteGameImportRestController {
 
 			final Team team1 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam1Id() );
 			if ( team1 != null ) {
-				result.setTeam1( dtoService.transformTeam( team1 ) );
+				result.setTeam1( dtoService.transformTeam( team1, currentUser ) );
 			}
 
 			final Team team2 = teamService.findByImportId( cup.getCategory(), remoteGameDTO.getTeam2Id() );
 			if ( team2 != null ) {
-				result.setTeam2( dtoService.transformTeam( team2 ) );
+				result.setTeam2( dtoService.transformTeam( team2, currentUser ) );
 			}
 
 			return result;
 		}
 
-		final User currentUser = userService.findByName( principal.getName() );
-
 		final RemoteGameLocalData result = new RemoteGameLocalData();
 
-		result.setTeam1( dtoService.transformTeam( match.getTeam1() ) );
-		result.setTeam2( dtoService.transformTeam( match.getTeam2() ) );
+		result.setTeam1( dtoService.transformTeam( match.getTeam1(), currentUser ) );
+		result.setTeam2( dtoService.transformTeam( match.getTeam2(), currentUser ) );
 
 		result.setMatch( dtoService.transformMatch( match, currentUser ) );
 

@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
+import totalizator.app.models.User;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
+import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.TeamService;
@@ -22,6 +24,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 @RequestMapping( "/admin/rest/matches" )
 public class AdminMatchesRestController {
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private MatchService matchService;
@@ -42,6 +47,8 @@ public class AdminMatchesRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchEditDTO> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
+
+		final User currentUser = getCurrentUser( principal );
 
 		final List<Match> matches = matchService.loadAll( dto );
 
@@ -72,7 +79,7 @@ public class AdminMatchesRestController {
 
 				matchEditDTO.setRemoteGameId( match.getRemoteGameId() );
 
-				initReadOnlyDTOProperties( matchEditDTO, match );
+				initReadOnlyDTOProperties( matchEditDTO, match, currentUser );
 
 				return matchEditDTO;
 			}
@@ -82,7 +89,9 @@ public class AdminMatchesRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	public MatchEditDTO create( final @RequestBody MatchEditDTO matchEditDTO ) {
+	public MatchEditDTO create( final @RequestBody MatchEditDTO matchEditDTO, final Principal principal ) {
+
+		final User currentUser = getCurrentUser( principal );
 
 		final Match match = new Match();
 
@@ -92,7 +101,7 @@ public class AdminMatchesRestController {
 
 		matchEditDTO.setMatchId( saved.getId() );
 
-		initReadOnlyDTOProperties( matchEditDTO, match );
+		initReadOnlyDTOProperties( matchEditDTO, match, currentUser );
 
 		return matchEditDTO;
 	}
@@ -102,13 +111,15 @@ public class AdminMatchesRestController {
 	@RequestMapping( method = RequestMethod.PUT, value = "/{matchId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchEditDTO save( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchEditDTO matchEditDTO, final Principal principal ) {
 
+		final User currentUser = getCurrentUser( principal );
+
 		final Match match = matchService.load( matchEditDTO.getMatchId() );
 
 		initMatchFromDTO( matchEditDTO, match );
 
 		matchService.save( match );
 
-		initReadOnlyDTOProperties( matchEditDTO, match );
+		initReadOnlyDTOProperties( matchEditDTO, match, currentUser );
 
 		return matchEditDTO;
 	}
@@ -125,9 +136,9 @@ public class AdminMatchesRestController {
 		matchService.delete( matchId );
 	}
 
-	private void initReadOnlyDTOProperties( final @RequestBody MatchEditDTO dto, final Match match ) {
-		dto.setTeam1( dtoService.transformTeam( match.getTeam1() ) );
-		dto.setTeam2( dtoService.transformTeam( match.getTeam2() ) );
+	private void initReadOnlyDTOProperties( final @RequestBody MatchEditDTO dto, final Match match, final User currentUser ) {
+		dto.setTeam1( dtoService.transformTeam( match.getTeam1(), currentUser ) );
+		dto.setTeam2( dtoService.transformTeam( match.getTeam2(), currentUser ) );
 	}
 
 	private void initMatchFromDTO( final MatchEditDTO matchEditDTO, final Match match ) {
@@ -148,4 +159,7 @@ public class AdminMatchesRestController {
 		match.setDescription( matchEditDTO.getMatchDescription() );
 	}
 
+	private User getCurrentUser( final Principal principal ) {
+		return userService.findByLogin( principal.getName() );
+	}
 }

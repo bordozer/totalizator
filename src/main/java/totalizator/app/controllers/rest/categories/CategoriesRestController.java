@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CategoryDTO;
 import totalizator.app.dto.CupDTO;
+import totalizator.app.models.User;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
@@ -35,21 +36,25 @@ public class CategoriesRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public List<CategoryDTO> entries() {
-		return dtoService.transformCategories( categoryService.loadAll() );
+	public List<CategoryDTO> entries( final Principal principal ) {
+		return dtoService.transformCategories( categoryService.loadAll(), geCurrentUser( principal ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{categoryId}/", produces = APPLICATION_JSON_VALUE )
-	public CategoryDTO entry( final @PathVariable( "categoryId" ) int categoryId ) {
-		return dtoService.transformCategory( categoryService.load( categoryId ) );
+	public CategoryDTO entry( final @PathVariable( "categoryId" ) int categoryId, final Principal principal ) {
+		return dtoService.transformCategory( categoryService.load( categoryId ), geCurrentUser( principal ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{categoryId}/cups/public/", produces = APPLICATION_JSON_VALUE )
 	public List<CupDTO> categoryCaps( final @PathVariable( "categoryId" ) int categoryId, final Principal principal ) {
-		return dtoService.transformCups( cupService.loadPublic( categoryService.load( categoryId ) ), userService.findByLogin( principal.getName() ) );
+		return dtoService.transformCups( cupService.loadPublic( categoryService.load( categoryId ) ), geCurrentUser( principal ) );
+	}
+
+	private User geCurrentUser( final Principal principal ) {
+		return userService.findByLogin( principal.getName() );
 	}
 }

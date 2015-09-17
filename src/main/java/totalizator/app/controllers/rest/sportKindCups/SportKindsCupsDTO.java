@@ -4,13 +4,13 @@ import java.util.List;
 
 public class SportKindsCupsDTO {
 
-	private List<SportKindCupsDTO> sportKindCups;
+	private final List<SportKindCupsDTO> sportKindCups;
+
+	public SportKindsCupsDTO( final List<SportKindCupsDTO> sportKindCups ) {
+		this.sportKindCups = sportKindCups;
+	}
 
 	public List<SportKindCupsDTO> getSportKindCups() {
 		return sportKindCups;
-	}
-
-	public void setSportKindCups( final List<SportKindCupsDTO> sportKindCups ) {
-		this.sportKindCups = sportKindCups;
 	}
 }

@@ -15,21 +15,21 @@ public interface DTOService {
 
 	List<UserDTO> transformUsers( final List<User> users );
 
-	CategoryDTO transformCategory( final Category category );
+	CategoryDTO transformCategory( final Category category, final User user );
 
-	List<CategoryDTO> transformCategories( final List<Category> users );
+	List<CategoryDTO> transformCategories( final List<Category> users, final User user );
 
-	CupDTO transformCup( final Cup cup, final User user );
+	CupDTO transformCup( final Cup cup, final User accessor );
 
-	List<CupDTO> transformCups( final List<Cup> cups, final User user );
+	List<CupDTO> transformCups( final List<Cup> cups, final User accessor );
 
-	TeamDTO transformTeam( final Team team );
+	TeamDTO transformTeam( final Team team, final User accessor );
 
-	List<TeamDTO> transformTeams( final List<Team> teams );
+	List<TeamDTO> transformTeams( final List<Team> teams, final User accessor );
 
-	MatchDTO transformMatch( final Match match, final User user );
+	MatchDTO transformMatch( final Match match, final User accessor );
 
-	List<MatchDTO> transformMatches( final List<Match> matches, final User user );
+	List<MatchDTO> transformMatches( final List<Match> matches, final User accessor );
 
 	BetDTO transformMatchBet( final MatchBet matchBet, final User user, final User accessor );
 

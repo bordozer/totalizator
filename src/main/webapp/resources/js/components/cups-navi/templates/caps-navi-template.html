@@ -15,14 +15,23 @@
 
 					<ul class="dropdown-menu">
 
-						<li role="presentation">
-							<a href="/totalizator/sports/<%=entry.sportKind.sportKindId%>/"><%=translator.allCups%></a>
-						</li>
+						<% if( entry.sportKind.sportKindId > 0 ) { %>
+							<li role="presentation">
+								<a href="/totalizator/sports/<%=entry.sportKind.sportKindId%>/"><strong class="text-primary"><%=translator.allCups%></strong></a>
+							</li>
+						<% } %>
 
 						<% if( entry.cups.length > 0 ) { %>
 							<% _.each( entry.cups, function( cup ) { %>
 								<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>">
-									<a href="/totalizator/cups/<%=cup.cupId%>/"><%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></a>
+									<a href="/totalizator/cups/<%=cup.cupId%>/">
+
+										<% if( entry.sportKind.sportKindId == 0 ) { %>
+											<span class="text-muted"><%= cup.category.sportKind.sportKindName %>:</span>
+										<% } %>
+
+										<%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong>
+									</a>
 								</li>
 							<% }) %>
 						<% } %>

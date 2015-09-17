@@ -9,13 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
-import totalizator.app.services.CupService;
-import totalizator.app.services.CupTeamService;
-import totalizator.app.services.DTOService;
-import totalizator.app.services.TeamService;
+import totalizator.app.models.User;
+import totalizator.app.services.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -27,6 +24,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 @RequestMapping( "/rest/cups/{cupId}/teams" )
 public class CupTeamsRestController {
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private CupService cupService;
@@ -48,6 +48,7 @@ public class CupTeamsRestController {
 			, @RequestParam(value = "active", required = false) final boolean active
 			, final Principal principal )
 	{
+		final User currentUser = userService.findByLogin( principal.getName() );
 		final Cup cup = cupService.load( cupId );
 
 		final List<Team> teams = teamService.loadAll( cup.getCategory() );
@@ -70,9 +71,9 @@ public class CupTeamsRestController {
 
 		if ( active ) {
 			final List<Team> activeTeams = cupTeamService.loadActiveForCup( cupId );
-			return new CupTeamsDTO( dtoService.transformTeams( activeTeams ), newHashSet( letters ) );
+			return new CupTeamsDTO( dtoService.transformTeams( activeTeams, currentUser ), newHashSet( letters ) );
 		}
 
-		return new CupTeamsDTO( dtoService.transformTeams( teams ), newHashSet( letters ) );
+		return new CupTeamsDTO( dtoService.transformTeams( teams, currentUser ), newHashSet( letters ) );
 	}
 }
