@@ -31,7 +31,6 @@ define( function ( require ) {
 		_renderTabs: function () {
 
 			var model = this.model.toJSON();
-			console.log( model );
 
 			this.$el.html( template( {
 				selectedSportKindId: this.selectedSportKindId

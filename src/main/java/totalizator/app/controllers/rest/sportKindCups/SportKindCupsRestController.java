@@ -63,6 +63,7 @@ public class SportKindCupsRestController {
 
 		final Map<SportKind, List<Cup>> sportKindCupsMap = getSportKindCupsMap( currentUser );
 		for ( final SportKind sportKind : sportKindCupsMap.keySet() ) {
+
 			final SportKindCupsDTO dto = new SportKindCupsDTO( dtoService.transformSportKind( sportKind ) );
 
 			final List<Cup> cups = sportKindCupsMap.get( sportKind )

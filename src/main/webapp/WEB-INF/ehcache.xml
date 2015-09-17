@@ -160,4 +160,16 @@
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
+	<cache name="totalizator.app.cache.favorite"
+		   maxElementsInMemory="3000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.favorites"
+		   maxElementsInMemory="3000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
 </ehcache>

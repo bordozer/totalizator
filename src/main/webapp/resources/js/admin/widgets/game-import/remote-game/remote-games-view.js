@@ -41,7 +41,6 @@ define( function ( require ) {
 
 			var self = this;
 			_.each( this.emptyRemoteGames, function( emptyRemoteGame ) {
-				//console.log( emptyRemoteGame );
 				self._renderRemoteGame( emptyRemoteGame );
 			});
 		},
