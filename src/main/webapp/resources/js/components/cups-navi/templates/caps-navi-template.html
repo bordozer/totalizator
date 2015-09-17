@@ -27,10 +27,18 @@
 									<a href="/totalizator/cups/<%=cup.cupId%>/">
 
 										<% if( entry.sportKind.sportKindId == 0 ) { %>
-											<span class="text-muted"><%= cup.category.sportKind.sportKindName %>:</span>
+											<span class="fa fa-star"><span class="text-muted"> <%= cup.category.sportKind.sportKindName %>:</span></span>
+											<%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
 										<% } %>
 
-										<%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong>
+										<% if( cup.category.favoriteCategory && entry.sportKind.sportKindId > 0 ) { %>
+											<span class="fa fa-star"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+										<% } %>
+
+										<% if( ! cup.category.favoriteCategory && entry.sportKind.sportKindId > 0 ) { %>
+											<span style="margin-left: 18px;"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+										<% } %>
+
 									</a>
 								</li>
 							<% }) %>
