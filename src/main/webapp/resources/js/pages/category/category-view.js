@@ -13,9 +13,12 @@ define( function ( require ) {
 
 	var cupWinners = require( 'js/widgets/cup-winners/cup-winners-widget' );
 
+	var FavoriteCategoryButtonView = require( 'js/components/favorite-category-button/favorite-category-button-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Category overview"
+		, addOrRemoveHint: "Add/Remove the category to/from Favorites"
 	} );
 
 	return Backbone.View.extend( {
@@ -37,6 +40,8 @@ define( function ( require ) {
 
 			this.$el.html( template( data ) );
 
+			this._renderFavoriteCategoryButton( category, this.$( '.js-favorite-category-button' ) );
+
 			this._renderCupsWinners( cups );
 
 			return this;
@@ -55,6 +60,10 @@ define( function ( require ) {
 
 				cupWinners( container, { cup: cup } );
 			});
+		},
+
+		_renderFavoriteCategoryButton: function ( category ) {
+			new FavoriteCategoryButtonView( { el: this.$( '.js-favorite-category-button' ), category: category } );
 		}
 	} );
 } );

@@ -12,9 +12,9 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		addToFavoritesConfirmation: "Add to favorites this category?"
+		addOrRemoveHint: "Add/Remove the category to/from Favorites"
+		, addToFavoritesConfirmation: "Add to favorites this category?"
 		, removeFromFavoritesConfirmation: "Remove from favorites this category?"
-		, addOrRemoveHint: "Add/Remove the category to/from Favorites"
 	} );
 
 	var CATEGORY_IS_IN_FAVORITE_CLASSES = 'btn-danger js-remove-from-favorites-button';

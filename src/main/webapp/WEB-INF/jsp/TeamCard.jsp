@@ -15,7 +15,8 @@
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/team-card/team-card' ], function ( $, Page, teamCard ) {
 
 			var breadcrumbs = [
-				{ link: '/totalizator/categories/${teamCategory.id}/', title: '${teamCategory.categoryName}' }
+				{ link: '/totalizator/sports/' + ${teamCategory.sportKind.id} + '/', title: "${teamCategory.sportKind.sportKindName}" }
+				, { link: '/totalizator/categories/${teamCategory.id}/', title: '${teamCategory.categoryName}' }
 				, { link: '#', title: '${team.teamName}' }
 			];
 

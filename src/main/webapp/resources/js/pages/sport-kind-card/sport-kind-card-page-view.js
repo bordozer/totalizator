@@ -73,7 +73,7 @@ define( function ( require ) {
 		},
 
 		_renderFavoriteCategoryButton: function ( category, el ) {
-			new FavoriteCategoryButtonView( { el: $( '.js-favorite-button', el ), category: category } );
+			new FavoriteCategoryButtonView( { el: $( '.js-favorite-category-button', el ), category: category } );
 		},
 
 		_renderActiveCup: function ( el, cup ) {

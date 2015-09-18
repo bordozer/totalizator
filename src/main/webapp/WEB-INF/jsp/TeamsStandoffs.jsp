@@ -5,6 +5,11 @@
 
 <tags:page>
 
+	<c:set var="team1" value="${teamsStandoffsModel.team1}" />
+	<c:set var="team2" value="${teamsStandoffsModel.team2}" />
+
+	<c:set var="category" value="${team1.category}" />
+
 	<div class="teams-stands-off-container"></div>
 
 	<script type="text/javascript">
@@ -16,7 +21,9 @@
 			} );
 
 			var breadcrumbs = [
-				{ link: '#', title: translator.title }
+				{ link: '/totalizator/sports/' + ${category.sportKind.id} + '/', title: "${category.sportKind.sportKindName}" }
+				, { link: '/totalizator/categories/${category.id}/', title: '${category.categoryName}' }
+				, { link: '#', title: translator.title }
 			];
 
 			var options = {

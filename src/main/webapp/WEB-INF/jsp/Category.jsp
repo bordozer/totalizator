@@ -16,7 +16,8 @@
 			var categoryId = ${category.id};
 
 			var breadcrumbs = [
-				{ link: '#', title: "${category.categoryName}" }
+				{ link: '#', title: "${category.sportKind.sportKindName}" }
+				, { link: '#', title: "${category.categoryName}" }
 			];
 
 			var pageView = new Page( { el: $( '.category-container' ), bodyRenderer: category, breadcrumbs: breadcrumbs, options: { categoryId: categoryId } } );

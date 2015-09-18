@@ -20,7 +20,8 @@
 			} );
 
 			var breadcrumbs = [
-				{ link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
+				{ link: '/totalizator/sports/' + ${cup.category.sportKind.id} + '/', title: "${cup.category.sportKind.sportKindName}" }
+				, { link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
 				, { link: '/totalizator/cups/${cup.id}/', title: "${cup.cupName}" }
 				, { link: '#', title: translator.title }
 			];
