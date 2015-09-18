@@ -45,7 +45,6 @@ define( function ( require ) {
 			this.cups = options.cups;
 
 			this.categories = service.loadCategories();
-			this.teams = service.loadTeams();
 			this.users = service.loadUsers();
 
 			if ( ! this.model.get( 'filterByDate' ) ) {
@@ -64,7 +63,7 @@ define( function ( require ) {
 				, users: this.users
 				, categories: this.categories
 				, cups: service.filterCupsByCategory( this.cups, categoryId )
-				, teams: service.filterTeamsByCategory( this.teams, categoryId )
+				, teams: service.loadTeams( categoryId )
 				, showFutureMatches: model.showFutureMatches
 				, showFinished: model.showFinished
 				, translator: translator

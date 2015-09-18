@@ -9,7 +9,6 @@ define( function ( require ) {
 
 	var Categories = require( 'js/models/categories-model' );
 	var Cups = require( 'js/models/cups-model' );
-	var Teams = require( 'js/models/teams-model' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -245,12 +244,22 @@ define( function ( require ) {
 			return result;
 		},
 
-		// TODO: limit by category
-		loadTeams: function() {
-			var teams = new Teams( [], {} );
-			teams.fetch( { cache: false, async: false } );
+		loadTeams: function( categoryId ) {
+			var result = [];
 
-			return teams.toJSON();
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/teams/categories/' + categoryId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
 		},
 
 		loadTeam: function( teamId ) {

@@ -18,7 +18,7 @@
 			var breadcrumbs = [
 				{ link: '/totalizator/sports/' + ${cup.category.sportKind.id} + '/', title: "${cup.category.sportKind.sportKindName}" }
 				, { link: '/totalizator/categories/' + ${cup.category.id} + '/', title: "${cup.category.categoryName}" }
-				, { link: '#', title: "${cup.category.categoryName}: ${cup.cupName}" }
+				, { link: '#', title: "${cup.cupName}" }
 			];
 
 			var pageView = new Page( { el: $( '.cup-container' ), bodyRenderer: cup, breadcrumbs: breadcrumbs, options: { cupId: cupId } } );

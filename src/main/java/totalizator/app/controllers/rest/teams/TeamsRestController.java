@@ -26,6 +26,9 @@ public class TeamsRestController {
 	private CupService cupService;
 
 	@Autowired
+	private CategoryService categoryService;
+
+	@Autowired
 	private DTOService dtoService;
 
 	@Autowired
@@ -39,6 +42,11 @@ public class TeamsRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{teamId}/" )
 	public TeamDTO team( final @PathVariable( "teamId" ) int teamId, final Principal principal ) {
 		return dtoService.transformTeam( teamService.load( teamId ), getCurrentUser( principal ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/categories/{categoryId}/" )
+	public List<TeamDTO> categoryTeams( final @PathVariable( "categoryId" ) int categoryId, final Principal principal ) {
+		return dtoService.transformTeams( teamService.loadAll( categoryService.load( categoryId ) ), getCurrentUser( principal ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/" )

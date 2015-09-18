@@ -27,6 +27,10 @@
 				<li><a href="/totalizator/"><%=projectName%></a></li>
 				<% _.each( breadcrumbs, function( crumb ){ %>
 					<li class="<%=crumb.link == '#' ? 'active' : ''%>">
+\
+						<% if( crumb.icon ) { %>
+							<span class="<%=crumb.icon%>"></span>
+						<% } %>
 
 						<% if( crumb.link == '#' ) { %>
 							<%=crumb.title%>
