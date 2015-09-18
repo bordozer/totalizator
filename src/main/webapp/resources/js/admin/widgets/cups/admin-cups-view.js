@@ -56,8 +56,6 @@ define( function ( require ) {
 			this.on( 'events:categories_changed', this._updateCategories, this );
 			this.on( 'events:filter_by_category', this._filterByCategory, this );
 
-			this.allTeams = service.loadTeams();
-
 			this._loadCategories();
 
 			this.listenToOnce( this.model, 'sync', this.render );
@@ -87,7 +85,6 @@ define( function ( require ) {
 			var view = new CupView( {
 				model: model
 				, categories: this.categories
-				, allTeams: this.allTeams
 				, isSelected: this.model.selectedCup.cupId == model.get( 'cupId' )
 			} );
 
@@ -175,9 +172,8 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.categories = options.categories;
-			this.allTeams = options.allTeams;
 
-			this.adminCupResultsView = new AdminCupResultsView( { el: this.$el, allTeams: this.allTeams } );
+			this.adminCupResultsView = new AdminCupResultsView( { el: this.$el } );
 			this.listenTo( this.adminCupResultsView, 'events:cup-data-edit-tab', this._switchEditTab );
 			this.listenTo( this.adminCupResultsView, 'events:cup-save', this._bindWinnersAndSave );
 

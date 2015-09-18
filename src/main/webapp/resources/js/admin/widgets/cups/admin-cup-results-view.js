@@ -27,7 +27,6 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-			this.allTeams = options.allTeams;
 		},
 
 		render: function ( options ) {
@@ -35,7 +34,7 @@ define( function ( require ) {
 			this.options = options;
 			this.winnersCount = options.winnersCount;
 
-			this.teams = service.filterTeamsByCategory( this.allTeams, options.categoryId );
+			this.teams = service.loadCupActiveTeams( this.cupId );
 
 			var data = _.extend( {}, {
 				teams: this.teams
