@@ -71,9 +71,9 @@ public class CupTeamsRestController {
 
 		if ( active ) {
 			final List<Team> activeTeams = cupTeamService.loadActiveForCup( cupId );
-			return new CupTeamsDTO( dtoService.transformTeams( activeTeams, currentUser ), newHashSet( letters ) );
+			return new CupTeamsDTO( dtoService.transformTeams( cup.getCategory(), activeTeams, currentUser ), newHashSet( letters ) );
 		}
 
-		return new CupTeamsDTO( dtoService.transformTeams( teams, currentUser ), newHashSet( letters ) );
+		return new CupTeamsDTO( dtoService.transformTeams( cup.getCategory(), teams, currentUser ), newHashSet( letters ) );
 	}
 }

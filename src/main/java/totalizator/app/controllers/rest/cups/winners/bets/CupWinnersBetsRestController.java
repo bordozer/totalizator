@@ -60,7 +60,7 @@ public class CupWinnersBetsRestController {
 
 		final Cup cup = cupService.load( cupId );
 
-		return dtoService.transformTeams( Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, Team>() {
+		return dtoService.transformTeams( cup.getCategory(), Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, Team>() {
 			@Override
 			public Team apply( final CupWinner cupWinner ) {
 				return cupWinner.getTeam();
@@ -82,7 +82,7 @@ public class CupWinnersBetsRestController {
 		result.setWinnersCount( cup.getWinnersCount() );
 
 		final List<CupWinner> cupWinners = cupWinnerService.loadAll( cup );
-		result.setWinners( dtoService.transformTeams( Lists.transform( cupWinners, new Function<CupWinner, Team>() {
+		result.setWinners( dtoService.transformTeams( cup.getCategory(), Lists.transform( cupWinners, new Function<CupWinner, Team>() {
 			@Override
 			public Team apply( final CupWinner cupWinner ) {
 				return cupWinner.getTeam();

@@ -23,7 +23,8 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	@Transactional( readOnly = true )
 	public List<Team> loadAll() {
-		return newArrayList( teamRepository.loadAll() );
+		throw new RuntimeException( "Loading all teams makes performance very slow. Limit team list by category" );
+//		return newArrayList( teamRepository.loadAll() );
 	}
 
 	@Override

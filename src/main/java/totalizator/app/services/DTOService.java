@@ -25,7 +25,7 @@ public interface DTOService {
 
 	TeamDTO transformTeam( final Team team, final User accessor );
 
-	List<TeamDTO> transformTeams( final List<Team> teams, final User accessor );
+	List<TeamDTO> transformTeams( final Category category, final List<Team> teams, final User accessor );
 
 	MatchDTO transformMatch( final Match match, final User accessor );
 

@@ -90,12 +90,12 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public TeamDTO transformTeam( final Team team, final User accessor ) {
-		return teamFunction( accessor ).apply( team );
+		return teamFunction( team.getCategory(), accessor ).apply( team );
 	}
 
 	@Override
-	public List<TeamDTO> transformTeams( final List<Team> teams, final User accessor ) {
-		return Lists.transform( teams, teamFunction( accessor ) );
+	public List<TeamDTO> transformTeams( final Category category, final List<Team> teams, final User accessor ) {
+		return Lists.transform( teams, teamFunction( category, accessor ) );
 	}
 
 	@Override
@@ -357,13 +357,15 @@ public class DTOServiceImpl implements DTOService {
 		};
 	}
 
-	private Function<Team, TeamDTO> teamFunction( final User accessor ) {
+	private Function<Team, TeamDTO> teamFunction( final Category category, final User accessor ) {
+
+		final CategoryDTO categoryDTO = transformCategory( category, accessor );
 
 		return new Function<Team, TeamDTO>() {
 
 			@Override
 			public TeamDTO apply( final Team team ) {
-				return new TeamDTO( team.getId(), team.getTeamName(), transformCategory( team.getCategory(), accessor ), logoService.getLogoURL( team ) );
+				return new TeamDTO( team.getId(), team.getTeamName(), categoryDTO, logoService.getLogoURL( team ) );
 			}
 		};
 	}
