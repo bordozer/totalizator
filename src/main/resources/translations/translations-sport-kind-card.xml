@@ -4,23 +4,23 @@
 
 	<translation>
 		<nerd>Add to favorites this category?</nerd>
-		<ru><![CDATA[Добавить категорию в избранные?]]></ru>
-		<ua><![CDATA[Додати категорiю в обранi?]]></ua>
-		<en><![CDATA[Add to favorites this category?]]></en>
+		<ru><![CDATA[Добавить лигу в избранные?]]></ru>
+		<ua><![CDATA[Додати лiгу в обранi?]]></ua>
+		<en><![CDATA[Add to favorites this league?]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Remove from favorites this category?</nerd>
-		<ru><![CDATA[Удалить категорию из избранных?]]></ru>
-		<ua><![CDATA[Видалити категорiю з обраних?]]></ua>
-		<en><![CDATA[Remove from favorites this category?]]></en>
+		<ru><![CDATA[Удалить лигу из избранных?]]></ru>
+		<ua><![CDATA[Видалити лiгу з обраних?]]></ua>
+		<en><![CDATA[Remove from favorites this league?]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Add/Remove the category to/from Favorites</nerd>
-		<ru><![CDATA[Добавить/удалить категорию из избранных]]></ru>
-		<ua><![CDATA[Додати чи видалити категорiю з обраних]]></ua>
-		<en><![CDATA[Add/Remove the category from Favorites]]></en>
+		<ru><![CDATA[Добавить/удалить лигу из избранных]]></ru>
+		<ua><![CDATA[Додати чи видалити лiгу з обраних]]></ua>
+		<en><![CDATA[Add/Remove the league from Favorites]]></en>
 	</translation>
 
 	<translation>

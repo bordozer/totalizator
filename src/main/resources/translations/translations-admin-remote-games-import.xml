@@ -172,9 +172,9 @@
 
 	<translation>
 		<nerd>Teams not found for selected category - will be created automatically if remote game are checked</nerd>
-		<ru><![CDATA[Команды не найдена для выделенной категории - будут созданы автоматически при импорте игры]]></ru>
-		<ua><![CDATA[Команды не знайдена для видiленої категорiї - будуть стровенi автоматично при iмпортi гри]]></ua>
-		<en><![CDATA[Teams not found for selected category - will be created automatically if remote game are checked]]></en>
+		<ru><![CDATA[Команды не найдена для выделенной лиги - будут созданы автоматически при импорте игры]]></ru>
+		<ua><![CDATA[Команды не знайдена для видiленої лiги - будуть стровенi автоматично при iмпортi гри]]></ua>
+		<en><![CDATA[Teams not found for selected league - will be created automatically if remote game are checked]]></en>
 	</translation>
 
 	<translation>

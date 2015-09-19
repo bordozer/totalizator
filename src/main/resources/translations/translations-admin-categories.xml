@@ -4,16 +4,16 @@
 
 	<translation>
 		<nerd>Admin / Categories: New category</nerd>
-		<ru><![CDATA[Новая категория]]></ru>
-		<en><![CDATA[New category]]></en>
-		<ua><![CDATA[Нова категорiя]]></ua>
+		<ru><![CDATA[Новая лига]]></ru>
+		<ua><![CDATA[Нова лiга]]></ua>
+		<en><![CDATA[New league]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Enter a category name!</nerd>
-		<ru><![CDATA[Введите название категории]]></ru>
-		<en><![CDATA[Enter a category name!]]></en>
-		<ua><![CDATA[Введiть назву категорiї]]></ua>
+		<ru><![CDATA[Введите название лиги]]></ru>
+		<ua><![CDATA[Введiть назву лiги]]></ua>
+		<en><![CDATA[Enter a league name!]]></en>
 	</translation>
 
 	<translation>
