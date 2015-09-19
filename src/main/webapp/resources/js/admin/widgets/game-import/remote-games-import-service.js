@@ -52,12 +52,12 @@ define( function ( require ) {
 			return result;
 		},
 
-		loadCupsConfiguredForRemoteGameImport : function() {
+		loadCupsConfiguredForRemoteGameImport : function( filteredBySportKindId ) {
 			var result = [];
 
 			$.ajax( {
 				method: 'GET',
-				url: '/admin/rest/cups/configured-for-remote-games-import/',
+				url: '/admin/rest/cups/configured-for-remote-games-import/?=filteredBySportKindId' + filteredBySportKindId,
 				async: false,
 				success: function ( data ) {
 					result = data;
@@ -70,12 +70,12 @@ define( function ( require ) {
 			return result;
 		},
 
-		loadAllCurrentCupsConfiguredForRemoteGameImport : function() {
+		loadAllCurrentCupsConfiguredForRemoteGameImport : function( filteredBySportKindId ) {
 			var result = [];
 
 			$.ajax( {
 				method: 'GET',
-				url: '/admin/rest/cups/configured-for-remote-games-import/current/',
+				url: '/admin/rest/cups/configured-for-remote-games-import/current/?filteredBySportKindId=' + filteredBySportKindId,
 				async: false,
 				success: function ( data ) {
 					result = data;

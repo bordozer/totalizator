@@ -11,6 +11,7 @@ define( function ( require ) {
 	var remoteGamesImportService = require( 'js/admin/widgets/game-import/remote-games-import-service' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
+	var service = require( '/resources/js/services/service.js' );
 	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
 
 	var Translator = require( 'translator' );
@@ -29,9 +30,13 @@ define( function ( require ) {
 		events: {
 			'change #selectedCupId': '_onCupSelect'
 			, 'change .js-show-active-cups-only': '_onShowActiveCupsOnlyClick'
+			, "change input[name='sportKindId']": '_onSportKindFilterChange'
 		},
 
 		initialize: function ( options ) {
+
+			this.sportKinds = service.loadSportKinds();
+			this.model.selectedSportKindId = this.sportKinds[ 0 ].sportKindId;
 
 			var today = dateTimeService.dateNow();
 			this.model.set( {
@@ -45,7 +50,8 @@ define( function ( require ) {
 
 		render: function() {
 
-			var cups = this.showActiveCupsOnlyClick ? remoteGamesImportService.loadAllCurrentCupsConfiguredForRemoteGameImport() : remoteGamesImportService.loadCupsConfiguredForRemoteGameImport();
+			var selectedSportKindId = this.model.selectedSportKindId;
+			var cups = this.showActiveCupsOnlyClick ? remoteGamesImportService.loadAllCurrentCupsConfiguredForRemoteGameImport( selectedSportKindId ) : remoteGamesImportService.loadCupsConfiguredForRemoteGameImport( selectedSportKindId );
 
 			var model = this.model.toJSON();
 
@@ -55,6 +61,8 @@ define( function ( require ) {
 						cupId: model.cupId
 						, cups: cups
 						, showActiveCupsOnlyClick: this.showActiveCupsOnlyClick
+						, sportKinds: this.sportKinds
+						, selectedSportKindId: selectedSportKindId
 						, translator: translator
 					}
 			);
@@ -98,6 +106,11 @@ define( function ( require ) {
 
 		_onShowActiveCupsOnlyClick: function() {
 			this.showActiveCupsOnlyClick = this.$( ".js-show-active-cups-only" ).is(':checked');
+			this.render();
+		},
+
+		_onSportKindFilterChange: function( evt ) {
+			this.model.selectedSportKindId = $( evt.target ).val();
 			this.render();
 		}
 	});

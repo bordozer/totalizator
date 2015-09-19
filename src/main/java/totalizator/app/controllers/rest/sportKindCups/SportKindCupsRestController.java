@@ -68,7 +68,7 @@ public class SportKindCupsRestController {
 
 			final List<Cup> cups = sportKindCupsMap.get( sportKind )
 					.stream()
-					.sorted( cupNameComparator() )
+					.sorted( cupService.categoryNameOrCupNameComparator() )
 					.collect( Collectors.toList() )
 					;
 
@@ -140,7 +140,7 @@ public class SportKindCupsRestController {
 		final SportKindDTO fakeSportKindFavorites = new SportKindDTO( 0, translatorService.translate( "Favorite categories cups", language ) );
 		final SportKindCupsDTO fakeSportKindDTOFavorites = new SportKindCupsDTO( fakeSportKindFavorites );
 		fakeSportKindDTOFavorites.setCups( dtoService.transformCups( favoriteCategoriesCups.stream()
-					.sorted( cupNameComparator() )
+					.sorted( cupService.categoryNameOrCupNameComparator() )
 					.collect( Collectors.toList() )
 				, currentUser
 		) );
@@ -159,25 +159,6 @@ public class SportKindCupsRestController {
 		}
 
 		return result;
-	}
-
-	private Comparator<Cup> cupNameComparator() {
-
-		return new Comparator<Cup>() {
-
-			@Override
-			public int compare( final Cup cup1, final Cup cup2 ) {
-
-				final Category category1 = cup1.getCategory();
-				final Category category2 = cup2.getCategory();
-
-				if ( category1.getSportKind().equals( category2.getSportKind() ) ) {
-					return category1.getCategoryName().compareToIgnoreCase( category2.getCategoryName() );
-				}
-
-				return category1.getSportKind().getSportKindName().compareToIgnoreCase( category2.getSportKind().getSportKindName() );
-			}
-		};
 	}
 
 	private User getCurrentUser( final Principal principal ) {

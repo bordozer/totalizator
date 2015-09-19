@@ -198,6 +198,26 @@ public class CupServiceImpl implements CupService {
 		return isCupPublic().test( cup );
 	}
 
+	@Override
+	public Comparator<Cup> categoryNameOrCupNameComparator() {
+
+		return new Comparator<Cup>() {
+
+			@Override
+			public int compare( final Cup cup1, final Cup cup2 ) {
+
+				final Category category1 = cup1.getCategory();
+				final Category category2 = cup2.getCategory();
+
+				if ( category1.getSportKind().equals( category2.getSportKind() ) ) {
+					return category1.getCategoryName().compareToIgnoreCase( category2.getCategoryName() );
+				}
+
+				return category1.getSportKind().getSportKindName().compareToIgnoreCase( category2.getSportKind().getSportKindName() );
+			}
+		};
+	}
+
 	private Predicate<Cup> isCupCurrent() {
 
 		return new Predicate<Cup>() {

@@ -5,16 +5,36 @@
 	</div>
 
 	<div class="col-lg-8">
-		<select id="selectedCupId" class="form-control">
-			<option value="0"></option>
-			<% _.each( cups, function( cup ) { %>
-				<option value="<%=cup.cupId%>" <%= cup.cupId == cupId ? 'selected' : '' %> ><%=cup.category.categoryName%> - <%=cup.cupName%></option>
-			<% }) %>
-		</select>
-		<br />
-		<span class="text-muted">
-			<input type="checkbox" id="js-show-active-cups-only" class="js-show-active-cups-only" <%=showActiveCupsOnlyClick ? "checked='checked'" : ''%> > <label for="js-show-active-cups-only"><%=translator.showActiveCupsOnly%></label>
-		</span>
+
+		<div class="row">
+			<div class="col-xs-12">
+
+				<select id="selectedCupId" class="form-control">
+					<option value="0"></option>
+					<% _.each( cups, function( cup ) { %>
+						<option value="<%=cup.cupId%>" <%= cup.cupId == cupId ? 'selected' : '' %> ><%=cup.category.categoryName%> - <%=cup.cupName%></option>
+					<% }) %>
+				</select>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<% _.each( sportKinds, function( sportKind ) { %>
+					<input type="radio" name="sportKindId" id="sportKindId-<%=sportKind.sportKindId%>" value="<%=sportKind.sportKindId%>" <%=sportKind.sportKindId == selectedSportKindId ? 'checked' : '' %> >
+					<label for="sportKindId-<%=sportKind.sportKindId%>"><%=sportKind.sportKindName%></label>
+					<br />
+				<% } ) %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 text-muted">
+				<input type="checkbox" id="js-show-active-cups-only" class="js-show-active-cups-only" <%=showActiveCupsOnlyClick ? "checked='checked'" : ''%> > <label for="js-show-active-cups-only"><%=translator.showActiveCupsOnly%></label>
+			</div>
+		</div>
+
 	</div>
 </div>
 

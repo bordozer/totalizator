@@ -2,10 +2,7 @@ package totalizator.app.controllers.rest.admin.cups;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CupDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.User;
@@ -49,20 +46,25 @@ public class AdminCupsRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/configured-for-remote-games-import/" )
-	public List<CupDTO> cupsWithImportStrategies( final Principal principal ) {
+	public List<CupDTO> cupsWithImportStrategies( final @RequestParam( "filteredBySportKindId" ) int filteredBySportKindId, final Principal principal ) {
 
-		return dtoService.transformCups( allCups()
+		return dtoService.transformCups(
+				allCups()
 				.stream()
 				.filter( getImportStrategiesPredicate() )
+				.filter( getSportKindPredicate( filteredBySportKindId ) )
+				.sorted( cupService.categoryNameOrCupNameComparator() )
 				.collect( Collectors.toList() ), getUser( principal ) );
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/configured-for-remote-games-import/current/" )
-	public List<CupDTO> currentCupsOnlyWithImportStrategies( final Principal principal ) {
+	public List<CupDTO> currentCupsOnlyWithImportStrategies( final @RequestParam( "filteredBySportKindId" ) int filteredBySportKindId, final Principal principal ) {
 
 		return dtoService.transformCups( currentCupsOnly()
 				.stream()
 				.filter( getImportStrategiesPredicate() )
+				.filter( getSportKindPredicate( filteredBySportKindId ) )
+				.sorted( cupService.categoryNameOrCupNameComparator() )
 				.collect( Collectors.toList() ), getUser( principal ) );
 	}
 
@@ -114,6 +116,17 @@ public class AdminCupsRestController {
 
 				return strategyTypeId == GameImportStrategyType.NBA.getId()
 						|| ( strategyTypeId == GameImportStrategyType.UEFA.getId() && StringUtils.isNotEmpty( cup.getCupImportId() ) );
+			}
+		};
+	}
+
+	private Predicate<Cup> getSportKindPredicate( final int filteredBySportKindId ) {
+
+		return new Predicate<Cup>() {
+
+			@Override
+			public boolean test( final Cup cup ) {
+				return cup.getCategory().getSportKind().getId() == filteredBySportKindId;
 			}
 		};
 	}

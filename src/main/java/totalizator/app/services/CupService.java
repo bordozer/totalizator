@@ -2,6 +2,7 @@ package totalizator.app.services;
 
 import totalizator.app.models.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 public interface CupService extends GenericService<Cup>, NamedEntityGenericService<Cup> {
@@ -39,4 +40,6 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
 	boolean isCupFinished( final Cup cup );
 
 	boolean isCupPublic( final Cup cup );
+
+	Comparator<Cup> categoryNameOrCupNameComparator();
 }
