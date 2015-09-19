@@ -15,6 +15,17 @@
 	<hr />
 
 	<div class="row">
+		<div class="col-xs-5 text-right"><%=translator.sportKindLabel%> *</div>
+		<div class="col-xs-6">
+			<% _.each( sportKinds, function( sportKind ) { %>
+				<input type="radio" name="sportKindId" id="sportKindId-<%=sportKind.sportKindId%>" value="<%=sportKind.sportKindId%>" <%=sportKind.sportKindId == selectedSportKindId ? 'checked' : '' %> >
+				<label for="sportKindId-<%=sportKind.sportKindId%>"><%=sportKind.sportKindName%></label>
+				<br />
+			<% } ) %>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-xs-5 text-right"><%=translator.categoryLabel%> *</div>
 		<div class="col-xs-6">
 			<select class="chosen-select form-control" id="settings-category-id">

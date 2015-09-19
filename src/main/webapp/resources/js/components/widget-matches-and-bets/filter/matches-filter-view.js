@@ -19,6 +19,7 @@ define( function ( require ) {
 		, buttonSaveSettingsLabel: 'Matches: Settings: save button'
 		, buttonCancelSettingsLabel: 'Matches: Settings: cancel button'
 		, userLabel: 'User'
+		, sportKindLabel: 'Sport kind'
 		, categoryLabel: 'Category'
 		, cupLabel: 'Cup'
 		, teamLabel: 'Team'
@@ -38,13 +39,16 @@ define( function ( require ) {
 			, 'click #filter-by-match-date-enabled': '_onFilterByDateCheckboxClick'
 			, 'change #settings-show-future-matches': '_onShowFutureChange'
 			, 'change #settings-show-finished': '_onShowFinishedChange'
+			, "change input[name='sportKindId']": '_onSportKindFilterChange'
 		},
 
 		initialize: function ( options ) {
 
 			this.cups = options.cups;
 
-			this.categories = service.loadCategories();
+			this.sportKinds = service.loadSportKinds();
+			this.selectedSportKindId = this.sportKinds[ 0 ].sportKindId;
+
 			this.users = service.loadUsers();
 
 			if ( ! this.model.get( 'filterByDate' ) ) {
@@ -54,6 +58,8 @@ define( function ( require ) {
 
 		render: function() {
 
+			this.categories = service.loadCategoriesForSportKind( this.selectedSportKindId );
+
 			var model = this.model.toJSON();
 
 			var categoryId = model.categoryId;
@@ -61,11 +67,13 @@ define( function ( require ) {
 			this.$el.html( template( {
 				model: model
 				, users: this.users
+				, sportKinds: this.sportKinds
 				, categories: this.categories
 				, cups: service.filterCupsByCategory( this.cups, categoryId )
 				, teams: service.loadTeams( categoryId )
 				, showFutureMatches: model.showFutureMatches
 				, showFinished: model.showFinished
+				, selectedSportKindId: this.selectedSportKindId
 				, translator: translator
 			} ) );
 
@@ -183,6 +191,11 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._showFinishedChange( this.$( '#settings-show-finished' ).is(':checked') );
+		},
+
+		_onSportKindFilterChange: function( evt ) {
+			this.selectedSportKindId = $( evt.target ).val();
+			this.render();
 		}
 	});
 } );

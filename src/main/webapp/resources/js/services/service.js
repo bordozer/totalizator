@@ -182,6 +182,24 @@ define( function ( require ) {
 			return categories.toJSON();
 		},
 
+		loadCategoriesForSportKind: function( sportKindId ) {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/categories/sportKind/' + sportKindId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		loadCategory: function( categoryId ) {
 			var result = {};
 

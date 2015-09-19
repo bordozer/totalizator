@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.CategoryDTO;
 import totalizator.app.dto.CupDTO;
+import totalizator.app.models.Category;
 import totalizator.app.models.User;
 import totalizator.app.services.CategoryService;
 import totalizator.app.services.CupService;
@@ -14,6 +15,8 @@ import totalizator.app.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -38,6 +41,17 @@ public class CategoriesRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<CategoryDTO> entries( final Principal principal ) {
 		return dtoService.transformCategories( categoryService.loadAll(), geCurrentUser( principal ) );
+	}
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/sportKind/{sportKindId}/", produces = APPLICATION_JSON_VALUE )
+	public List<CategoryDTO> sportKindsCategories( final @PathVariable( "sportKindId" ) int sportKindId, final Principal principal ) {
+
+		return dtoService.transformCategories( categoryService.loadAll().stream().filter( new Predicate<Category>() {
+			@Override
+			public boolean test( final Category category ) {
+				return category.getSportKind().getId() == sportKindId;
+			}
+		} ).collect( Collectors.toList() ), geCurrentUser( principal ) );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
