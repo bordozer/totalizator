@@ -47,7 +47,10 @@ define( function ( require ) {
 			this.cups = options.cups;
 
 			this.sportKinds = service.loadSportKinds();
-			this.selectedSportKindId = this.sportKinds[ 0 ].sportKindId;
+
+			if ( ! this.model.selectedSportKindId ) {
+				this.model.selectedSportKindId = this.sportKinds[ 0 ].sportKindId;
+			}
 
 			this.users = service.loadUsers();
 
@@ -58,7 +61,7 @@ define( function ( require ) {
 
 		render: function() {
 
-			this.categories = service.loadCategoriesForSportKind( this.selectedSportKindId );
+			this.categories = service.loadCategoriesForSportKind( this.model.selectedSportKindId );
 
 			var model = this.model.toJSON();
 
@@ -73,7 +76,7 @@ define( function ( require ) {
 				, teams: service.loadTeams( categoryId )
 				, showFutureMatches: model.showFutureMatches
 				, showFinished: model.showFinished
-				, selectedSportKindId: this.selectedSportKindId
+				, selectedSportKindId: this.model.selectedSportKindId
 				, translator: translator
 			} ) );
 
@@ -194,7 +197,7 @@ define( function ( require ) {
 		},
 
 		_onSportKindFilterChange: function( evt ) {
-			this.selectedSportKindId = $( evt.target ).val();
+			this.model.selectedSportKindId = $( evt.target ).val();
 			this.render();
 		}
 	});
