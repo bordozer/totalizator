@@ -19,6 +19,7 @@ public class MatchesAndBetsCollapsedDTO {
 
 	private LocalDateTime firstMatchTime;
 	private LocalDateTime firstMatchNoBetTime;
+	private int todayMatchesCount;
 
 	public MatchesAndBetsCollapsedDTO( final CupDTO cupDTO, final UserDTO userDTO ) {
 		this.cup = cupDTO;
@@ -81,10 +82,19 @@ public class MatchesAndBetsCollapsedDTO {
 
 	public void setFirstMatchNoBetTime( final LocalDateTime firstMatchNoBetTime ) {
 		this.firstMatchNoBetTime = firstMatchNoBetTime;
+
 	}
 
 	@Override
 	public String toString() {
 		return String.format( "%s: matches %d, %d / %d", cup, matchesCount, userBetsCount, matchesWithoutBetsCount );
+	}
+
+	public void setTodayMatchesCount( final int todayMatchesCount ) {
+		this.todayMatchesCount = todayMatchesCount;
+	}
+
+	public int getTodayMatchesCount() {
+		return todayMatchesCount;
 	}
 }

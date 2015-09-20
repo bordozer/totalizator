@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="height: 90px;">
 
 	<div class="col-xs-3 text-center">
 		<img src="<%=cup.logoUrl%>" title="<%=cup.cupName%>" width="64">
@@ -13,13 +13,25 @@
 			</div>
 
 			<div class="col-xs-3 text-right">
+				<%=matchesCount%>
+			</div>
+
+		</div>
+
+		<div class="row bottom-dotted">
+
+			<div class="col-xs-9">
+				<small><%=translator.todayMatchesCountLabel%></small>
+			</div>
+
+			<div class="col-xs-3 text-right">
 				<strong>
 
 					<% if( nowPlayingMatchesCount > 0 ) { %>
 						<span class="text-success" title="<%=translator.nowPlayingMatchesCountLabel%>"><%=nowPlayingMatchesCount%></span> /
 					<% } %>
 
-					<%=matchesCount%>
+					<%=todayMatchesCount%>
 				</strong>
 			</div>
 
@@ -53,7 +65,7 @@
 
 </div>
 <hr />
-<div class="row">
+<div class="row" style="height: 35px;">
 
 	<div class="col-xs-12" style="font-size: 12px;">
 

@@ -17,6 +17,13 @@
 	</translation>
 
 	<translation>
+		<nerd>Today matches</nerd>
+		<ru><![CDATA[К-во матчей сегодня]]></ru>
+		<ua><![CDATA[Кiлькiсть iгор сьогоднi]]></ua>
+		<en><![CDATA[Today matches]]></en>
+	</translation>
+
+	<translation>
 		<nerd>User bets count</nerd>
 		<ru><![CDATA[Сделано ставок]]></ru>
 		<ua><![CDATA[Зроблено ставок]]></ua>
