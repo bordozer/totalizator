@@ -43,10 +43,8 @@ public class Cup extends AbstractEntity {
 
 	private boolean publicCup;
 
-	private LocalDateTime cupStartTime;
-
 	@Convert( converter = LocalDateTimeConverter.class )
-	private LocalDateTime cupStartTime1;
+	private LocalDateTime cupStartTime;
 
 	@Column( unique = true, columnDefinition = "VARCHAR(100)" )
 	private String logoFileName;
@@ -104,14 +102,6 @@ public class Cup extends AbstractEntity {
 
 	public void setCupStartTime( final LocalDateTime cupStartTime ) {
 		this.cupStartTime = cupStartTime;
-	}
-
-	public LocalDateTime getCupStartTime1() {
-		return cupStartTime1;
-	}
-
-	public void setCupStartTime1( final LocalDateTime cupStartTime1 ) {
-		this.cupStartTime1 = cupStartTime1;
 	}
 
 	public String getCupImportId() {

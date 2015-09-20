@@ -51,17 +51,6 @@ public class PortalPageRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public PortalPageDTO getDefaultLogin( final Principal principal ) {
 
-		/* TODO: delete!!!*/
-		for ( final Match match : matchService.loadAll() ) {
-			match.setBeginningTime1( match.getBeginningTime() );
-			matchService.save( match );
-		}
-		/* TODO: delete!!!*/
-		for ( final Cup cup : cupService.loadAll() ) {
-			cup.setCupStartTime1( cup.getCupStartTime() );
-			cupService.save( cup );
-		}
-
 		final User currentUser = userService.findByLogin( principal.getName() );
 
 		final PortalPageDTO result = new PortalPageDTO();

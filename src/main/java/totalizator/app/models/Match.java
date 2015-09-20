@@ -95,11 +95,8 @@ public class Match extends AbstractEntity {
 	private Team team2;
 	private int score2;
 
-//	@Convert( converter = LocalDateTimeConverter.class )
-	private LocalDateTime beginningTime;
-
 	@Convert( converter = LocalDateTimeConverter.class )
-	private LocalDateTime beginningTime1;
+	private LocalDateTime beginningTime;
 
 	private boolean matchFinished;
 	private int homeTeamNumber;
@@ -157,14 +154,6 @@ public class Match extends AbstractEntity {
 
 	public void setBeginningTime( final LocalDateTime beginningTime ) {
 		this.beginningTime = beginningTime;
-	}
-
-	public LocalDateTime getBeginningTime1() {
-		return beginningTime1;
-	}
-
-	public void setBeginningTime1( final LocalDateTime beginningTime1 ) {
-		this.beginningTime1 = beginningTime1;
 	}
 
 	public boolean isMatchFinished() {
