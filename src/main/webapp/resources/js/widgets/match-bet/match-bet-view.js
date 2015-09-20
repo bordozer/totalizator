@@ -89,7 +89,21 @@ define( function ( require ) {
 		},
 
 		getIcon: function () {
-			return 'fa-futbol-o';
+			var match = this.model.toJSON().match;
+
+			if ( ! match ) {
+				return 'fa-hourglass-half';
+			}
+
+			if ( match.matchFinished ) {
+				return 'fa-flag-checkered';
+			}
+
+			if ( match.matchStarted ) {
+				return 'fa-flag-o';
+			}
+
+			return 'fa-clock-o';
 		},
 
 		getPictureURL: function() {
