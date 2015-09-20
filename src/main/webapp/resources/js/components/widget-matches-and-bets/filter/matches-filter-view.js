@@ -66,6 +66,12 @@ define( function ( require ) {
 			var model = this.model.toJSON();
 
 			var categoryId = model.categoryId;
+			if ( categoryId == 0 && this.categories.length > 0 ) {
+				this._preselectCategoryAndCup( this.categories[0 ].categoryId )
+			}
+
+			model = this.model.toJSON();
+			categoryId = model.categoryId;
 
 			this.$el.html( template( {
 				model: model
@@ -99,19 +105,20 @@ define( function ( require ) {
 			return this;
 		},
 
+		_preselectCategoryAndCup: function( categoryId ) {
+			var cups = service.filterCupsByCategory( this.cups, categoryId );
+			var selectedCupId = cups.length > 0 ? cups[ 0 ].cupId : 0;
+
+			this.model.set( { categoryId: categoryId, cupId: selectedCupId, teamId: 0, team2Id: 0 } );
+		},
+
 		_userChange: function( userId ) {
 			this.model.set( { userId: userId } );
 			this.render();
 		},
 
 		_categoryChange: function( categoryId ) {
-
-			var model = this.model.toJSON();
-
-			var cups = service.filterCupsByCategory( this.cups, categoryId );
-			var selectedCupId = cups.length > 0 ? cups[ 0 ].cupId : 0;
-
-			this.model.set( { categoryId: categoryId, cupId: selectedCupId, teamId: 0, team2Id: 0 } );
+			this._preselectCategoryAndCup( categoryId );
 			this.render();
 		},
 
@@ -197,7 +204,10 @@ define( function ( require ) {
 		},
 
 		_onSportKindFilterChange: function( evt ) {
+
 			this.model.selectedSportKindId = $( evt.target ).val();
+			this.model.set( { categoryId: 0, cupId: 0, teamId: 0, team2Id: 0 } );
+
 			this.render();
 		}
 	});
