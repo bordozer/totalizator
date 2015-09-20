@@ -67,13 +67,18 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
-	public String formatDate( final LocalDate date, final String format ) {
-		return date.format( DateTimeFormatter.ofPattern( format, Locale.getDefault() ) );
+	public String formatTime( final LocalDateTime time ) {
+		return time.format( DateTimeFormatter.ofPattern( getTimeFormat(), Locale.getDefault() ) );
 	}
 
 	@Override
 	public String formatDateTimeUI( final LocalDateTime time ) {
-		return formatDateTime( time, formatUI() );
+		return formatDateTime( time, getFormatDateTimeUI() );
+	}
+
+	@Override
+	public String formatDateUI( final LocalDateTime time ) {
+		return formatDate( time.toLocalDate(), getFormatDateUI() );
 	}
 
 	private String formatDateTime( final LocalDateTime time, final String pattern ) {
@@ -95,7 +100,7 @@ public class DateTimeServiceImpl implements DateTimeService {
 
 	@Override
 	public LocalDate parseDate( final String date ) {
-		return LocalDate.parse( date, DateTimeFormatter.ofPattern( dateFormat() ) );
+		return LocalDate.parse( date, DateTimeFormatter.ofPattern( getDateFormat() ) );
 	}
 
 	@Override
@@ -138,11 +143,23 @@ public class DateTimeServiceImpl implements DateTimeService {
 		return LocalDateTime.of( time.getYear(), time.getMonth(), time.getDayOfMonth(), time.getHour(), time.getMinute() );
 	}
 
-	private String dateFormat() {
+	private String formatDate( final LocalDate date, final String format ) {
+		return date.format( DateTimeFormatter.ofPattern( format, Locale.getDefault() ) );
+	}
+
+	private String getDateFormat() {
 		return DATE_FORMAT;
 	}
 
-	private String formatUI() {
-		return DATE_TIME_FORMAT_UI;
+	private String getTimeFormat() {
+		return TIME_FORMAT;
+	}
+
+	private String getFormatDateTimeUI() {
+		return String.format( "%s %s", DATE_FORMAT_UI, TIME_FORMAT_UI );
+	}
+
+	private String getFormatDateUI() {
+		return DATE_FORMAT_UI;
 	}
 }

@@ -7,7 +7,8 @@ public interface DateTimeService {
 
 	String DATE_FORMAT = "dd/MM/yyyy";
 	String TIME_FORMAT = "HH:mm";
-	String DATE_TIME_FORMAT_UI = "dd MMM yyyy HH:mm";
+	String DATE_FORMAT_UI = "dd MMM yyyy";
+	String TIME_FORMAT_UI = "HH:mm";
 
 	LocalDateTime getNow();
 
@@ -33,9 +34,11 @@ public interface DateTimeService {
 	LocalDateTime plusDays( final int days );
 
 
-	String formatDate( final LocalDate date, final String format );
+	String formatTime( final LocalDateTime time );
 
 	String formatDateTimeUI( final LocalDateTime time );
+
+	String formatDateUI( final LocalDateTime time );
 
 	String formatDateTime( final LocalDateTime time );
 

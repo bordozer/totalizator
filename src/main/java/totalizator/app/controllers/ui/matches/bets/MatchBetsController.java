@@ -39,7 +39,8 @@ public class MatchBetsController {
 		final Match match = matchService.load( matchId );
 
 		model.setMatch( match );
-		model.setMatchTime( dateTimeService.formatDateTimeUI( match.getBeginningTime() ) );
+		model.setMatchDate( dateTimeService.formatDateUI( match.getBeginningTime() ) );
+		model.setMatchTime( dateTimeService.formatTime( match.getBeginningTime() ) );
 
 		model.setCup( match.getCup() );
 

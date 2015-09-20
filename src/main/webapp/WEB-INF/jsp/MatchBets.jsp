@@ -20,7 +20,8 @@
 				title: 'Match bests'
 			} );
 
-			var teamsTitle = '#${match.id}, ${match.team1.teamName} vs ${match.team2.teamName}, ${matchBetsModel.matchTime}';
+			var teamsTitle = "<a href='/totalizator/teams/${match.team1.id}/'>${match.team1.teamName}</a> "
+					+ "vs <a href='/totalizator/teams/${match.team2.id}/'>${match.team2.teamName}</a>, ${matchBetsModel.matchDate} <sup>${matchBetsModel.matchTime}</sup>";
 
 			var breadcrumbs = [
 				{ link: '/totalizator/sports/' + ${cup.category.sportKind.id} + '/', title: "${cup.category.sportKind.sportKindName}" }

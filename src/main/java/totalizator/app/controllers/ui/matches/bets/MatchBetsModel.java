@@ -7,6 +7,7 @@ import totalizator.app.models.Match;
 public class MatchBetsModel extends AbstractPageModel {
 
 	private Match match;
+	private String matchDate;
 	private String matchTime;
 
 	private Cup cup;
@@ -17,6 +18,14 @@ public class MatchBetsModel extends AbstractPageModel {
 
 	public Match getMatch() {
 		return match;
+	}
+
+	public String getMatchDate() {
+		return matchDate;
+	}
+
+	public void setMatchDate( final String matchDate ) {
+		this.matchDate = matchDate;
 	}
 
 	public void setMatchTime( final String matchTime ) {
