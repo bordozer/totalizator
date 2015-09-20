@@ -8,13 +8,14 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.services.score.UserMatchPointsCalculationService;
+import totalizator.app.services.score.MatchBonusPointsCalculationService;
 import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
 import totalizator.app.services.score.UserMatchBetPointsCalculationService;
-import totalizator.app.services.score.MatchBonusPointsCalculationService;
+import totalizator.app.services.score.UserMatchPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -96,14 +97,14 @@ public class MatchRepository implements MatchDao {
 	}
 
 	@Override
-	public List<Match> loadAll( Team team ) {
+	public List<Match> loadAll( final Team team ) {
 		return em.createNamedQuery( Match.FIND_BY_TEAM, Match.class )
 				.setParameter( "teamId", team.getId() )
 				.getResultList();
 	}
 
 	@Override
-	public int getMatchCount( Team team ) {
+	public int getMatchCount( final Team team ) {
 		final List<Long> result = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_TEAM, Long.class )
 				.setParameter( "teamId", team.getId() )
 				.getResultList();
@@ -153,7 +154,7 @@ public class MatchRepository implements MatchDao {
 	}
 
 	@Override
-	public int getFutureMatchCount( Cup cup, Team team ) {
+	public int getFutureMatchCount( final Cup cup, final Team team ) {
 		final List<Long> result = em.createNamedQuery( Match.LOAD_FUTURE_MATCH_COUNT_FOR_CUP_AND_TEAM, Long.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "teamId", team.getId() )
@@ -169,5 +170,14 @@ public class MatchRepository implements MatchDao {
 				.getResultList();
 
 		return bets.size() == 1 ? bets.get( 0 ) : null;
+	}
+
+	@Override
+	public List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo ) {
+
+		return em.createNamedQuery( Match.FIND_MATCHES_BY_DATE, Match.class )
+				.setParameter( "timeFrom", timeFrom )
+				.setParameter( "timeTo", timeTo )
+				.getResultList();
 	}
 }

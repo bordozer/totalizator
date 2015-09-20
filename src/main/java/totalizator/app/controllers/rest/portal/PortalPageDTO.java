@@ -1,36 +1,29 @@
 package totalizator.app.controllers.rest.portal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import totalizator.app.dto.CupDTO;
+
+import java.util.List;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class PortalPageDTO {
 
-	private int id = 0;
+	private List<CupDTO> cupsToShow;
+	private List<CupDTO> cupsTodayToShow;
 
-	private int userId;
-	private String userName;
-
-	public int getId() {
-		return id;
+	public void setCupsToShow( final List<CupDTO> cupsToShow ) {
+		this.cupsToShow = cupsToShow;
 	}
 
-	public void setId( final int id ) {
-		this.id = id;
+	public List<CupDTO> getCupsToShow() {
+		return cupsToShow;
 	}
 
-	public int getUserId() {
-		return userId;
+	public List<CupDTO> getCupsTodayToShow() {
+		return cupsTodayToShow;
 	}
 
-	public void setUserId( final int userId ) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName( final String userName ) {
-		this.userName = userName;
+	public void setCupsTodayToShow( final List<CupDTO> cupsTodayToShow ) {
+		this.cupsTodayToShow = cupsTodayToShow;
 	}
 }

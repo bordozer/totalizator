@@ -5,6 +5,7 @@ import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.GenericService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MatchDao extends GenericService<Match> {
@@ -14,7 +15,7 @@ public interface MatchDao extends GenericService<Match> {
 
 	List<Match> loadAll( final Cup cup );
 
-	int getMatchCount( Team team );
+	int getMatchCount( final Team team );
 
 	List<Match> loadAll( final Cup cup, final Team team );
 
@@ -33,4 +34,6 @@ public interface MatchDao extends GenericService<Match> {
 	int getFutureMatchCount( final Cup cup, final Team team );
 
 	Match findByImportId( final String remoteGameId );
+
+	List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo );
 }

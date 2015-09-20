@@ -10,6 +10,8 @@ define( function ( require ) {
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
+	var app = require( 'app' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		menuAdminLabel: "Administration"
@@ -26,9 +28,6 @@ define( function ( require ) {
 	var PortalPageView = Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.cupsToShow = options.options.cupsToShow;
-			this.currentUser = options.options.currentUser;
-
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
 		},
@@ -39,21 +38,54 @@ define( function ( require ) {
 				translator: translator
 			 } ) );
 
+			this._renderMatchesOnDate();
+
 			this._renderMatches();
 
 			return this;
 		},
 
+		_renderMatchesOnDate: function () {
+
+			var model = this.model.toJSON();
+			console.log( model.cupsTodayToShow );
+
+			var currentUser = app.currentUser();
+
+			var container = this.$( '.portal-template.html' );
+
+			_.each( model.cupsTodayToShow, function( cup ) {
+
+				var el = $( '<div class="col-xs-12"></div>' );
+				container.append( el );
+
+				var options = {
+					filter: {
+						categoryId: cup.category.categoryId
+						, cupId: cup.cupId
+						, showFutureMatches: true
+						, showFinished: true
+					}
+					, matchViewMode: VIEW_MODE_MINIMIZED
+					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_MATCHES
+					, currentUser: currentUser
+				};
+				matchesAndBetsView( el, options );
+			} );
+		},
+
 		_renderMatches: function() {
 
-			var currentUser = this.currentUser;
+			var model = this.model.toJSON();
 
-			var el = this.$( '.js-portal-page-container' );
+			var currentUser = app.currentUser();
 
-			_.each( this.cupsToShow, function( cup ) {
+			var container = this.$( '.js-portal-page-container' );
 
-				var container = $( '<div class="col-xs-12 col-lg-4"></div>' );
-				el.append( container );
+			_.each( model.cupsToShow, function( cup ) {
+
+				var el = $( '<div class="col-xs-12 col-lg-6"></div>' );
+				container.append( el );
 
 				var options = {
 					filter: {
@@ -65,7 +97,7 @@ define( function ( require ) {
 					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_STATISTICS
 					, currentUser: currentUser
 				};
-				matchesAndBetsView( container, options );
+				matchesAndBetsView( el, options );
 			} );
 		}
 	} );

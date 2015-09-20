@@ -19,13 +19,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var cupsToShow = ${portalPageModel.cupsToShowJSON};
-
-			var options = {
-				cupsToShow: cupsToShow
-			};
-
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: options } );
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: {} } );
 			pageView.render();
 		} );
 	</script>

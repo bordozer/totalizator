@@ -17,6 +17,11 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
+	public LocalDate getToday() {
+		return LocalDate.now();
+	}
+
+	@Override
 	public LocalDateTime minusHours( final int hours ) {
 		return minusHours( getNow(), hours );
 	}
@@ -62,6 +67,11 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
+	public String formatDate( final LocalDate date, final String format ) {
+		return date.format( DateTimeFormatter.ofPattern( format, Locale.getDefault() ) );
+	}
+
+	@Override
 	public String formatDateTimeUI( final LocalDateTime time ) {
 		return formatDateTime( time, formatUI() );
 	}
@@ -102,6 +112,21 @@ public class DateTimeServiceImpl implements DateTimeService {
 	@Override
 	public int diffInDays( final LocalDate date1, final LocalDate date2 ) {
 		return Period.between( date1, date2 ).getDays();
+	}
+
+	@Override
+	public LocalDateTime getFirstSecondOf( final LocalDate date ) {
+		return LocalDateTime.of( date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0 );
+	}
+
+	@Override
+	public LocalDateTime getLastSecondOf( final LocalDate date ) {
+		return getFirstSecondOf( date.plusDays( 1 ).atStartOfDay().toLocalDate() );
+	}
+
+	@Override
+	public String dateDateFormat() {
+		return String.format( "%s", DATE_FORMAT );
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.GenericService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,4 +47,8 @@ public interface MatchService extends GenericService<Match> {
 	int getFutureMatchCount( final Cup cup, final Team team );
 
 	Match findByImportId( final String remoteGameId );
+
+	List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo );
+
+	List<Match> loadAllOnDate( final LocalDate date );
 }

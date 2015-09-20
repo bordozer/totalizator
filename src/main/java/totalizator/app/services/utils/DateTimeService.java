@@ -11,6 +11,8 @@ public interface DateTimeService {
 
 	LocalDateTime getNow();
 
+	LocalDate getToday();
+
 	LocalDateTime minusHours( final int hours );
 
 	LocalDateTime plusHours( int hours );
@@ -31,6 +33,8 @@ public interface DateTimeService {
 	LocalDateTime plusDays( final int days );
 
 
+	String formatDate( final LocalDate date, final String format );
+
 	String formatDateTimeUI( final LocalDateTime time );
 
 	String formatDateTime( final LocalDateTime time );
@@ -44,7 +48,13 @@ public interface DateTimeService {
 
 	boolean hasTheSameDate( final LocalDateTime time, final LocalDate date );
 
+	String dateDateFormat();
+
 	String dateTimeFormat();
 
 	int diffInDays( final LocalDate date1, final LocalDate date2 );
+
+	LocalDateTime getFirstSecondOf( final LocalDate date );
+
+	LocalDateTime getLastSecondOf( final LocalDate date );
 }

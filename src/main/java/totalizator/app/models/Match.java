@@ -1,6 +1,7 @@
 package totalizator.app.models;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -58,6 +59,10 @@ import static totalizator.app.models.Match.*;
 		@NamedQuery(
 				name = LOAD_FUTURE_MATCH_COUNT_FOR_CUP_AND_TEAM,
 				query = "select count(m) from Match m where ( cupId= :cupId ) and ( matchFinished = false ) and ( team1Id= :teamId or team2Id= :teamId )"
+		),
+		@NamedQuery(
+				name = FIND_MATCHES_BY_DATE,
+				query = "select m from Match m where beginningTime BETWEEN :timeFrom AND :timeTo"
 		)
 } )
 public class Match extends AbstractEntity {
@@ -74,6 +79,7 @@ public class Match extends AbstractEntity {
 	public static final String LOAD_MATCH_COUNT_FOR_TEAM = "cups.loadTeamMatchCount";
 	public static final String LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.finishedMatchCountForCupAndTeam";
 	public static final String LOAD_FUTURE_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.futureMatchCountForCupAndTeam";
+	public static final String FIND_MATCHES_BY_DATE = "cups.futureMatchByDate";
 
 	@ManyToOne
 	@JoinColumn(name="cupId")
@@ -90,8 +96,8 @@ public class Match extends AbstractEntity {
 	private int score2;
 
 	private LocalDateTime beginningTime;
-	private boolean matchFinished;
 
+	private boolean matchFinished;
 	private int homeTeamNumber;
 
 	@Column( columnDefinition = "VARCHAR(255)" ) // TODO: is too small for real description, but hsqldb:mem:mydb does not have TEXT data type. Just a temporary solution

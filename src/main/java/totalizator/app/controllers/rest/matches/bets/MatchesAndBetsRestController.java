@@ -53,11 +53,12 @@ public class MatchesAndBetsRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/bets/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetsOnDateDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
+		final List<Match> matches = matchService.loadAll( dto );
+
 		final int userId = dto.getUserId();
 
 		final User currentUser = userService.findByLogin( principal.getName() );
 		final User showBetsOfUser = userId > 0 ? userService.load( userId ) : currentUser;
-		final List<Match> matches = matchService.loadAll( dto );
 
 		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, showBetsOfUser, currentUser );
 

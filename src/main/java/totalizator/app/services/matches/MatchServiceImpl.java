@@ -248,6 +248,16 @@ public class MatchServiceImpl implements MatchService {
 		return matchRepository.findByImportId( remoteGameId );
 	}
 
+	@Override
+	public List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo ) {
+		return matchRepository.loadAllBetween( timeFrom, timeTo );
+	}
+
+	@Override
+	public List<Match> loadAllOnDate( final LocalDate date ) {
+		return loadAllBetween( dateTimeService.getFirstSecondOf( date ), dateTimeService.getLastSecondOf( date ) );
+	}
+
 	private List<Match> sort( final List<Match> matches ) {
 
 		Collections.sort( matches, new Comparator<Match>() {
