@@ -1,12 +1,13 @@
-package totalizator.app.dto.serialization;
+package totalizator.app.models;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
 
-//@Converter( autoApply = true )
+@Converter
 public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, Date> {
 
 	@Override

@@ -82,26 +82,30 @@ public class Match extends AbstractEntity {
 	public static final String FIND_MATCHES_BY_DATE = "cups.futureMatchByDate";
 
 	@ManyToOne
-	@JoinColumn(name="cupId")
+	@JoinColumn( name = "cupId" )
 	private Cup cup;
 
 	@ManyToOne
-	@JoinColumn(name="team1Id")
+	@JoinColumn( name = "team1Id" )
 	private Team team1;
 	private int score1;
 
 	@ManyToOne
-	@JoinColumn(name="team2Id")
+	@JoinColumn( name = "team2Id" )
 	private Team team2;
 	private int score2;
 
+//	@Convert( converter = LocalDateTimeConverter.class )
 	private LocalDateTime beginningTime;
+
+	@Convert( converter = LocalDateTimeConverter.class )
 	private LocalDateTime beginningTime1;
 
 	private boolean matchFinished;
 	private int homeTeamNumber;
 
-	@Column( columnDefinition = "VARCHAR(255)" ) // TODO: is too small for real description, but hsqldb:mem:mydb does not have TEXT data type. Just a temporary solution
+	@Column( columnDefinition = "VARCHAR(255)" )
+	// TODO: is too small for real description, but hsqldb:mem:mydb does not have TEXT data type. Just a temporary solution
 	private String description;
 
 	@Column( columnDefinition = "VARCHAR(100)" )
@@ -153,6 +157,14 @@ public class Match extends AbstractEntity {
 
 	public void setBeginningTime( final LocalDateTime beginningTime ) {
 		this.beginningTime = beginningTime;
+	}
+
+	public LocalDateTime getBeginningTime1() {
+		return beginningTime1;
+	}
+
+	public void setBeginningTime1( final LocalDateTime beginningTime1 ) {
+		this.beginningTime1 = beginningTime1;
 	}
 
 	public boolean isMatchFinished() {

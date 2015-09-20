@@ -1,0 +1,2 @@
+ALTER TABLE cups ADD cupStartTime1 DATETIME;
+ALTER TABLE matches ADD beginningTime1 DATETIME;
