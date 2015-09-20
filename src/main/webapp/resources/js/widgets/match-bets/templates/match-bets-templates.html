@@ -41,7 +41,7 @@
 			<% } %>
 		</td>
 
-		<td class="text-center">
+		<td class="text-center <%= matchBet.userMatchPointsHolder.matchBetPoints < 0 ? 'text-danger' : 'text-success'%>">
 			<small><%= matchBet.userMatchPointsHolder.matchBetPoints != 0 ? matchBet.userMatchPointsHolder.matchBetPoints : ''%></small>
 		</td>
 
