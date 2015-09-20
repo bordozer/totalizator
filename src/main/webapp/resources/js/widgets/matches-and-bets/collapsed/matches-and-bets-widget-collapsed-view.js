@@ -21,6 +21,7 @@ define( function ( require ) {
 		, matchesWithoutBetsCount: "Matches without bets count"
 		, firstMatchTimeLabel: "First match beginning time"
 		, firstMatchNoBetTimeLabel: "First match without bet beginning time"
+		, noMatchesFoundLabel: "No matches found"
 	} );
 
 	return Backbone.View.extend( {

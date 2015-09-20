@@ -8,23 +8,23 @@
 
 		<div class="row">
 
-			<div class="col-xs-9">
+			<div class="col-xs-9 text-right">
 				<small><%=translator.matchesCount%></small>
 			</div>
 
-			<div class="col-xs-3 text-right">
+			<div class="col-xs-3">
 				<%=matchesCount%>
 			</div>
 
 		</div>
 
-		<div class="row bottom-dotted">
+		<div class="row">
 
-			<div class="col-xs-9">
+			<div class="col-xs-9 text-right">
 				<small><%=translator.todayMatchesCountLabel%></small>
 			</div>
 
-			<div class="col-xs-3 text-right">
+			<div class="col-xs-3">
 				<strong>
 
 					<% if( nowPlayingMatchesCount > 0 ) { %>
@@ -39,23 +39,23 @@
 
 		<div class="row">
 
-			<div class="col-xs-9">
+			<div class="col-xs-9 text-right">
 				<small><%=translator.userBetsCount%> ( <a href="/totalizator/users/<%=user.userId%>/"><%=user.userName%></a> )</small>
 			</div>
 
-			<div class="col-xs-3 text-right">
-				<%=userBetsCount%></strong>
+			<div class="col-xs-3">
+				<%=userBetsCount%>
 			</div>
 
 		</div>
 
 		<div class="row">
 
-			<div class="col-xs-9">
+			<div class="col-xs-9 text-right">
 				<small><%=translator.matchesWithoutBetsCount%></small>
 			</div>
 
-			<div class="col-xs-3 text-right <%=matchesWithoutBetsCountStyle%>">
+			<div class="col-xs-3 <%=matchesWithoutBetsCountStyle%>">
 				<%=matchesWithoutBetsCount%>
 			</div>
 
@@ -96,6 +96,10 @@
 				</div>
 
 			</div>
+		<% }%>
+
+		<% if( firstMatchTime == 'Invalid date' ) {%>
+			<span class="text-muted"><%=translator.noMatchesFoundLabel%></span>
 		<% }%>
 
 	</div>
