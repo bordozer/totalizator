@@ -100,7 +100,7 @@ define( function ( require ) {
 			}
 
 			if ( match.matchStarted ) {
-				return 'fa-flag-o';
+				return 'fa-futbol-o';
 			}
 
 			return 'fa-clock-o';
