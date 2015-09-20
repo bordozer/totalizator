@@ -11,6 +11,7 @@ define( function ( require ) {
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
 	var app = require( 'app' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -48,11 +49,10 @@ define( function ( require ) {
 		_renderMatchesOnDate: function () {
 
 			var model = this.model.toJSON();
-			console.log( model.cupsTodayToShow );
-
 			var currentUser = app.currentUser();
+			var onDate = dateTimeService.dateNow();
 
-			var container = this.$( '.portal-template.html' );
+			var container = this.$( '.js-portal-page-matches-on-date' );
 
 			_.each( model.cupsTodayToShow, function( cup ) {
 
@@ -65,6 +65,8 @@ define( function ( require ) {
 						, cupId: cup.cupId
 						, showFutureMatches: true
 						, showFinished: true
+						, filterByDateEnable: true
+						, filterByDate: onDate
 					}
 					, matchViewMode: VIEW_MODE_MINIMIZED
 					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_MATCHES

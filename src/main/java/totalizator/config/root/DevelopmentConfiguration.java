@@ -14,7 +14,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import totalizator.app.init.TestDataInitializer;
 import totalizator.app.services.SystemVarsService;
 
 import javax.persistence.SharedCacheMode;
@@ -28,10 +27,10 @@ public class DevelopmentConfiguration {
 
 	private static final Logger LOGGER = Logger.getLogger( DevelopmentConfiguration.class );
 
-	@Bean( initMethod = "init" )
+	/*@Bean( initMethod = "init" )
 	public TestDataInitializer initTestData() {
 		return new TestDataInitializer();
-	}
+	}*/
 
 	@Autowired
 	private SystemVarsService systemVarsService;
@@ -60,7 +59,7 @@ public class DevelopmentConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter( new HibernateJpaVendorAdapter() );
 
 		final Map<String, Object> jpaProperties = new HashMap<String, Object>();
-		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" ); // TODO: for DB upgrade only
+//		jpaProperties.put( "hibernate.hbm2ddl.auto", "create" ); // TODO: for DB upgrade only
 		jpaProperties.put( "hibernate.connection.CharSet", "utf8" );
 		jpaProperties.put( "hibernate.connection.characterEncoding", "utf8" );
 		jpaProperties.put( "hibernate.connection.useUnicode", "true" );

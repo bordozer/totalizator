@@ -96,6 +96,7 @@ public class Match extends AbstractEntity {
 	private int score2;
 
 	private LocalDateTime beginningTime;
+	private LocalDateTime beginningTime1;
 
 	private boolean matchFinished;
 	private int homeTeamNumber;
