@@ -37,6 +37,8 @@ define( function ( require ) {
 		, validationNoCategory: 'Configurable view / Filter: Validation: Select category'
 		, validationNoCup: 'Configurable view / Filter: Validation: Select cup'
 		, menuOpenCupCard: 'Open cup card'
+		, menuOpenCupMatchesCard: 'Open cup matches'
+		, menuOpenCupBetsCard: 'Open cup bets'
 		, menuSelectDate: "Show matches on date"
 		, noMatchesFound: "No matches found"
 		, saveLabel: "Save"
@@ -134,6 +136,8 @@ define( function ( require ) {
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel, button: this.showSettingsButton }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
+				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/matches/' + model.cupId + '/', text: translator.menuOpenCupMatchesCard }
+				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/menuOpenCupBetsCard/' + model.cupId + '/', text: translator.menuOpenCupBetsCard }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: false }
 			];

@@ -17,6 +17,20 @@
 	</translation>
 
 	<translation>
+		<nerd>Open cup matches</nerd>
+		<ru><![CDATA[Перейти на страницу игр чемпионата]]></ru>
+		<ua><![CDATA[Вiдкрити сторiнку iгор чемпiонату]]></ua>
+		<en><![CDATA[Open cup matches]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Open cup bets</nerd>
+		<ru><![CDATA[Перейти на страницу ставок чемпионата]]></ru>
+		<ua><![CDATA[Вiдкрити сторiнку ставок чемпiонату]]></ua>
+		<en><![CDATA[Open cup bets]]></en>
+	</translation>
+
+	<translation>
 		<nerd>Show matches on date</nerd>
 		<ru><![CDATA[Матчи на дату]]></ru>
 		<ua><![CDATA[Iгри на дату]]></ua>
