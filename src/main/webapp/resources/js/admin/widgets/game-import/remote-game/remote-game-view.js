@@ -8,9 +8,9 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/remote-game-template.html' ) );
 	var templateLoading = _.template( require( 'text!./templates/remote-game-loading-template.html' ) );
+	var templateError = _.template( require( 'text!./templates/remote-game-error-template.html' ) );
 
 	var service = require( '/resources/js/services/service.js' );
-	var remoteGamesImportService = require( 'js/admin/widgets/game-import/remote-games-import-service' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -18,6 +18,7 @@ define( function ( require ) {
 		, noLocalMatchFound: "Local match for the remote game not found"
 		, theMatchIsAlreadyImported: "The match is already imported"
 		, gettingGameData: "Getting game data"
+		, error: 'Can not get data from server'
 	} );
 
 	return Backbone.View.extend( {
@@ -29,7 +30,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 			this.cup = options.options.cup;
 
-			this.model.on( 'sync', this._renderRemoteGame, this );
+			this.model.on( 'sync', this.render, this );
 			this.listenTo( this.model, 'events:remote_game_imported', this.render );
 		},
 
@@ -39,15 +40,22 @@ define( function ( require ) {
 
 			if ( ! model.loaded ) {
 
-				this.$el.html( templateLoading( {
+				var _data = {
 					remoteGameId: model.remoteGameId
 					, translator: translator
-				} ) );
+				};
+
+				this.$el.html( templateLoading( _data ) );
+
+				var self = this;
+				this.model.fetch( { cache: false, error: function( arg ) {
+					self.$el.html( templateError( _data ) );
+				} } );
 
 				return;
 			}
 
-			var remoteGameLocalData = this.model.remoteGameLocalData;
+			var remoteGameLocalData = model.remoteGameLocalData;
 
 			var match = remoteGameLocalData.match;
 			var team1 = remoteGameLocalData.team1;
@@ -95,11 +103,6 @@ define( function ( require ) {
 			}
 
 			return 'panel-default'
-		},
-
-		_renderRemoteGame: function() {
-			this.model.remoteGameLocalData = remoteGamesImportService.loadLocalDataForRemoteGame( this.model.toJSON(), this.cup.cupId );
-			this.render();
 		},
 
 		_onRemoteGameSelect: function() {

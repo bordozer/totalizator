@@ -1,9 +1,11 @@
 package admin.remoteGamesImport.parsing;
 
+import org.junit.Before;
 import org.junit.Test;
+import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
-import totalizator.app.services.matches.imports.strategies.nba.NBAGameParsingServiceImpl;
+import totalizator.app.services.matches.imports.strategies.nba.NBAGameParsingService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -17,21 +19,28 @@ public class NBAGameParsingService_Preseason_Test {
 
 	private static final List<String> PRESEASON_EXPECTED_REMOTE_GAME_IDS = newArrayList( "0011500004", "0011500005", "0011500006" );
 
+	private TestData testData;
+
+	@Before
+	public void setup() {
+		testData = new TestData();
+	}
+
 	@Test
 	public void extractRemoteGameIds() {
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingServiceImpl();
-		final Set<String> remoteGameIds = nbaGameParsingService.extractRemoteGameIds( PRESEASON_REMOTE_GAMES_IDS_JSON );
+		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		final Set<RemoteGame> remoteGameIds = nbaGameParsingService.loadGamesFromJSON( testData.cup, PRESEASON_REMOTE_GAMES_IDS_JSON );
 
 		assertEquals( remoteGameIds.size(), PRESEASON_EXPECTED_REMOTE_GAME_IDS.size() );
 
 		for ( final String remoteGameId : PRESEASON_EXPECTED_REMOTE_GAME_IDS ) {
-			assertTrue( remoteGameIds.contains( remoteGameId ) );
+			assertTrue( doesGameIdPresent( remoteGameIds, remoteGameId ) );
 		}
 
 		int i = 0;
-		for ( final String remoteGameId : remoteGameIds ) {
-			assertEquals( PRESEASON_EXPECTED_REMOTE_GAME_IDS.get( i ), remoteGameId );
+		for ( final RemoteGame remoteGame : remoteGameIds ) {
+			assertEquals( PRESEASON_EXPECTED_REMOTE_GAME_IDS.get( i ), remoteGame.getRemoteGameId() );
 
 			i++;
 		}
@@ -42,24 +51,27 @@ public class NBAGameParsingService_Preseason_Test {
 
 		final String remoteGameId = "0011400001";
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingServiceImpl();
-		final RemoteGame remoteGame = nbaGameParsingService.parseGame( remoteGameId, PRESEASON_FINISHED_REMOTE_GAME_JSON );
+		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
 
-		assertEquals( remoteGame.getRemoteGameId(), remoteGameId );
+		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
+		nbaGameParsingService.loadGameFromJSON( remoteGame, PRESEASON_FINISHED_REMOTE_GAME_JSON );
 
-		assertEquals( remoteGame.getRemoteTeam1Id(), "1610612748" );
-		assertEquals( remoteGame.getRemoteTeam1Name(), "Miami" );
+		assertEquals( remoteGameId, remoteGame.getRemoteGameId() );
 
-		assertEquals( remoteGame.getRemoteTeam2Id(), "1610612740" );
-		assertEquals( remoteGame.getRemoteTeam2Name(), "New Orleans" );
+		assertEquals( "1610612748", remoteGame.getRemoteTeam1Id() );
+		assertEquals( "Miami", remoteGame.getRemoteTeam1Name() );
 
-		assertEquals( remoteGame.getBeginningTime(), LocalDateTime.parse( "2014-10-04T00:00" ) );
-		assertEquals( remoteGame.getHomeTeamNumber(), 1 );
+		assertEquals( "1610612740", remoteGame.getRemoteTeam2Id() );
+		assertEquals( "New Orleans", remoteGame.getRemoteTeam2Name() );
 
-		assertEquals( remoteGame.getScore1(), 86 );
-		assertEquals( remoteGame.getScore2(), 98 );
+		assertEquals( LocalDateTime.parse( "2014-10-04T00:00" ), remoteGame.getBeginningTime() );
+		assertEquals( 1, remoteGame.getHomeTeamNumber() );
+
+		assertEquals( 86, remoteGame.getScore1() );
+		assertEquals( 98, remoteGame.getScore2() );
 
 		assertTrue( remoteGame.isFinished() );
+		assertFalse( remoteGame.isLoaded() );
 	}
 
 	@Test
@@ -67,24 +79,51 @@ public class NBAGameParsingService_Preseason_Test {
 
 		final String remoteGameId = "0011500006";
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingServiceImpl();
-		final RemoteGame remoteGame = nbaGameParsingService.parseGame( remoteGameId, PRESEASON_FUTURE_REMOTE_GAME_JSON );
+		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
 
-		assertEquals( remoteGame.getRemoteGameId(), remoteGameId );
+		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
+		nbaGameParsingService.loadGameFromJSON( remoteGame, PRESEASON_FUTURE_REMOTE_GAME_JSON );
 
-		assertEquals( remoteGame.getRemoteTeam1Id(), "1610612766" );
-		assertEquals( remoteGame.getRemoteTeam1Name(), "Charlotte" );
+		assertEquals( remoteGameId, remoteGame.getRemoteGameId() );
 
-		assertEquals( remoteGame.getRemoteTeam2Id(), "1610612748" );
-		assertEquals( remoteGame.getRemoteTeam2Name(), "Miami" );
+		assertEquals( "1610612766", remoteGame.getRemoteTeam1Id() );
+		assertEquals( "Charlotte", remoteGame.getRemoteTeam1Name() );
 
-		assertEquals( remoteGame.getBeginningTime(), LocalDateTime.parse( "2015-10-04T00:00" ) );
-		assertEquals( remoteGame.getHomeTeamNumber(), 2 );
+		assertEquals( "1610612748", remoteGame.getRemoteTeam2Id() );
+		assertEquals( "Miami", remoteGame.getRemoteTeam2Name() );
 
-		assertEquals( remoteGame.getScore1(), 0 );
-		assertEquals( remoteGame.getScore2(), 0 );
+		assertEquals( LocalDateTime.parse( "2015-10-04T00:00" ), remoteGame.getBeginningTime() );
+		assertEquals( 2, remoteGame.getHomeTeamNumber() );
+
+		assertEquals( 0, remoteGame.getScore1() );
+		assertEquals( 0, remoteGame.getScore2() );
 
 		assertFalse( remoteGame.isFinished() );
+
+		assertFalse( remoteGame.isLoaded() );
+	}
+
+	private boolean doesGameIdPresent( final Set<RemoteGame> remoteGameIds, final String remoteGameId ) {
+
+		for ( final RemoteGame gameId : remoteGameIds ) {
+			if ( gameId.getRemoteGameId().equals( remoteGameId ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private class TestData {
+
+		private Cup cup;
+
+		public TestData() {
+
+			cup = new Cup();
+			cup.setId( 555 );
+			cup.setCupImportId( "77777777" );
+		}
 	}
 
 	private static final String PRESEASON_REMOTE_GAMES_IDS_JSON = "{\"resource\":\"scoreboard\",\"parameters\":{\"GameDate\":\"10/4/2015\",\"LeagueID\":\"00\",\"DayOffset\":\"0\"},\"resultSets\":[{\"name\":\"GameHeader\",\"headers\":[\"GAME_DATE_EST\",\"GAME_SEQUENCE\",\"GAME_ID\",\"GAME_STATUS_ID\",\"GAME_STATUS_TEXT\",\"GAMECODE\",\"HOME_TEAM_ID\",\"VISITOR_TEAM_ID\",\"SEASON\",\"LIVE_PERIOD\",\"LIVE_PC_TIME\",\"NATL_TV_BROADCASTER_ABBREVIATION\",\"LIVE_PERIOD_TIME_BCAST\",\"WH_STATUS\"],\"rowSet\":[[\"2015-10-04T00:00:00\",1,\"0011500006\",1,\"6:00 pm ET\",\"20151004/CHAMIA\",1610612748,1610612766,\"2015\",0,\"     \",null,\"Q0       - \",0],[\"2015-10-04T00:00:00\",2,\"0011500005\",1,\"7:00 pm ET\",\"20151004/LACTOR\",1610612761,1610612746,\"2015\",0,\"     \",null,\"Q0       - \",0],[\"2015-10-04T00:00:00\",3,\"0011500004\",1,\"9:00 pm ET\",\"20151004/UTALAL\",1610612747,1610612762,\"2015\",0,\"     \",null,\"Q0       - \",0]]},{\"name\":\"LineScore\",\"headers\":[\"GAME_DATE_EST\",\"GAME_SEQUENCE\",\"GAME_ID\",\"TEAM_ID\",\"TEAM_ABBREVIATION\",\"TEAM_CITY_NAME\",\"TEAM_WINS_LOSSES\",\"PTS_QTR1\",\"PTS_QTR2\",\"PTS_QTR3\",\"PTS_QTR4\",\"PTS_OT1\",\"PTS_OT2\",\"PTS_OT3\",\"PTS_OT4\",\"PTS_OT5\",\"PTS_OT6\",\"PTS_OT7\",\"PTS_OT8\",\"PTS_OT9\",\"PTS_OT10\",\"PTS\",\"FG_PCT\",\"FT_PCT\",\"FG3_PCT\",\"AST\",\"REB\",\"TOV\"],\"rowSet\":[[\"2015-10-04T00:00:00\",1,\"0011500006\",1610612748,\"MIA\",\"Miami\",\"-\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[\"2015-10-04T00:00:00\",1,\"0011500006\",1610612766,\"CHA\",\"Charlotte\",\"-\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[\"2015-10-04T00:00:00\",2,\"0011500005\",1610612761,\"TOR\",\"Toronto\",\"-\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[\"2015-10-04T00:00:00\",2,\"0011500005\",1610612746,\"LAC\",\"Los Angeles\",\"-\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[\"2015-10-04T00:00:00\",3,\"0011500004\",1610612747,\"LAL\",\"Los Angeles\",\"-\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[\"2015-10-04T00:00:00\",3,\"0011500004\",1610612762,\"UTA\",\"Utah\",\"-\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]]},{\"name\":\"SeriesStandings\",\"headers\":[\"GAME_ID\",\"HOME_TEAM_ID\",\"VISITOR_TEAM_ID\",\"GAME_DATE_EST\",\"HOME_TEAM_WINS\",\"HOME_TEAM_LOSSES\",\"SERIES_LEADER\"],\"rowSet\":[]},{\"name\":\"LastMeeting\",\"headers\":[\"GAME_ID\",\"LAST_GAME_ID\",\"LAST_GAME_DATE_EST\",\"LAST_GAME_HOME_TEAM_ID\",\"LAST_GAME_HOME_TEAM_CITY\",\"LAST_GAME_HOME_TEAM_NAME\",\"LAST_GAME_HOME_TEAM_ABBREVIATION\",\"LAST_GAME_HOME_TEAM_POINTS\",\"LAST_GAME_VISITOR_TEAM_ID\",\"LAST_GAME_VISITOR_TEAM_CITY\",\"LAST_GAME_VISITOR_TEAM_NAME\",\"LAST_GAME_VISITOR_TEAM_CITY1\",\"LAST_GAME_VISITOR_TEAM_POINTS\"],\"rowSet\":[[\"0011500004\",\"0021401019\",\"2015-03-19T00:00:00\",1610612747,\"Los Angeles\",\"Lakers\",\"LAL\",73,1610612762,\"Utah\",\"Jazz\",\"UTA\",80],[\"0011500005\",\"0021400752\",\"2015-02-06T00:00:00\",1610612761,\"Toronto\",\"Raptors\",\"TOR\",123,1610612746,\"Los Angeles\",\"Clippers\",\"LAC\",107],[\"0011500006\",\"0021401155\",\"2015-04-07T00:00:00\",1610612748,\"Miami\",\"Heat\",\"MIA\",105,1610612766,\"Charlotte\",\"Hornets\",\"CHA\",100]]},{\"name\":\"EastConfStandingsByDay\",\"headers\":[\"TEAM_ID\",\"LEAGUE_ID\",\"SEASON_ID\",\"STANDINGSDATE\",\"CONFERENCE\",\"TEAM\",\"G\",\"W\",\"L\",\"W_PCT\",\"HOME_RECORD\",\"ROAD_RECORD\"],\"rowSet\":[[1610612737,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Atlanta\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612738,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Boston\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612751,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Brooklyn\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612766,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Charlotte\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612741,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Chicago\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612739,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Cleveland\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612765,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Detroit\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612754,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Indiana\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612748,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Miami\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612749,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Milwaukee\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612752,\"00\",\"12015\",\"10/04/2015\",\"East\",\"New York\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612753,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Orlando\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612755,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Philadelphia\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612761,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Toronto\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612764,\"00\",\"12015\",\"10/04/2015\",\"East\",\"Washington\",0,0,0,0.0,\"0-0\",\"0-0\"]]},{\"name\":\"WestConfStandingsByDay\",\"headers\":[\"TEAM_ID\",\"LEAGUE_ID\",\"SEASON_ID\",\"STANDINGSDATE\",\"CONFERENCE\",\"TEAM\",\"G\",\"W\",\"L\",\"W_PCT\",\"HOME_RECORD\",\"ROAD_RECORD\"],\"rowSet\":[[1610612742,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Dallas\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612743,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Denver\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612744,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Golden State\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612745,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Houston\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612746,\"00\",\"12015\",\"10/04/2015\",\"West\",\"L.A. Clippers\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612747,\"00\",\"12015\",\"10/04/2015\",\"West\",\"L.A. Lakers\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612763,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Memphis\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612750,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Minnesota\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612740,\"00\",\"12015\",\"10/04/2015\",\"West\",\"New Orleans\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612760,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Oklahoma City\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612756,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Phoenix\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612757,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Portland\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612758,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Sacramento\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612759,\"00\",\"12015\",\"10/04/2015\",\"West\",\"San Antonio\",0,0,0,0.0,\"0-0\",\"0-0\"],[1610612762,\"00\",\"12015\",\"10/04/2015\",\"West\",\"Utah\",0,0,0,0.0,\"0-0\",\"0-0\"]]},{\"name\":\"Available\",\"headers\":[\"GAME_ID\",\"PT_AVAILABLE\"],\"rowSet\":[[\"0011500004\",0],[\"0011500005\",0],[\"0011500006\",0]]}]}";

@@ -25,27 +25,7 @@ define( function ( require ) {
 					result = response;
 				},
 				error: function() {
-					alert( translator.error );
-				}
-			} );
-
-			return result;
-		},
-
-		loadLocalDataForRemoteGame: function( remoteGame, cupId ) {
-
-			var result = [];
-
-			$.ajax( {
-				method: 'get',
-				url: '/admin/rest/remote-games-import/remote-game/local-data/?cupId=' + cupId,
-				async: false,
-				data: remoteGame,
-				success: function ( response ) {
-					result = response;
-				},
-				error: function() {
-					alert( translator.error );
+					console.log( translator.error );
 				}
 			} );
 
@@ -57,13 +37,13 @@ define( function ( require ) {
 
 			$.ajax( {
 				method: 'GET',
-				url: '/admin/rest/cups/configured-for-remote-games-import/?=filteredBySportKindId' + filteredBySportKindId,
+				url: '/admin/rest/cups/configured-for-remote-games-import/?filteredBySportKindId=' + filteredBySportKindId,
 				async: false,
 				success: function ( data ) {
 					result = data;
 				},
 				error: function() {
-					alert( translator.error );
+					console.log( translator.error );
 				}
 			} );
 
@@ -81,7 +61,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					alert( translator.error );
+					console.log( translator.error );
 				}
 			} );
 

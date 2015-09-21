@@ -1,5 +1,6 @@
 package totalizator.app.services.matches.imports.strategies.uefa;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.models.Cup;
@@ -29,24 +30,28 @@ public class UEFAStatisticsAPIService implements StatisticsServerService {
 	private StatisticsServerURLService uefaStatisticsServerURLService;
 
 	@Override
-	public Set<String> loadRemoteGameIds( final Cup cup, final LocalDate date ) throws IOException {
+	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException {
 
-		final RemoteServerRequest request = new RemoteServerRequest( uefaStatisticsServerURLService.remoteGamesIdsURL( cup, date ) );
+		final RemoteServerRequest request = new RemoteServerRequest( uefaStatisticsServerURLService.remoteGamesIdsURL( cup, dateTo ) );
 		request.setxAuthToken( X_AUTH_TOKEN );
 
 		final String remoteContent = remoteContentService.getRemoteContent( request );
 
-		return uefaGameParsingService.extractRemoteGameIds( remoteContent );
+		return uefaGameParsingService.loadGamesFromJSON( cup, remoteContent );
 	}
 
 	@Override
-	public RemoteGame loadRemoteGame( final String remoteGameId ) throws IOException {
+	public void loadGameFromJSON( final Cup cup, final RemoteGame remoteGame ) throws IOException {
 
-		final RemoteServerRequest request = new RemoteServerRequest( uefaStatisticsServerURLService.loadRemoteGameURL( remoteGameId ) );
+		final RemoteServerRequest request = new RemoteServerRequest( uefaStatisticsServerURLService.loadRemoteGameURL( cup, remoteGame.getRemoteGameId() ) );
 		request.setxAuthToken( X_AUTH_TOKEN );
 
 		final String remoteGameJSON = remoteContentService.getRemoteContent( request );
 
-		return uefaGameParsingService.parseGame( remoteGameId, remoteGameJSON );
+		if ( StringUtils.isEmpty( remoteGameJSON ) ) {
+			return;
+		}
+
+		uefaGameParsingService.loadGameFromJSON( remoteGame, remoteGameJSON );
 	}
 }

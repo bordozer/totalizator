@@ -1,8 +1,10 @@
 package totalizator.app.controllers.rest.admin.imports;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.TeamDTO;
 
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class RemoteGameLocalData {
 
 	private TeamDTO team1;

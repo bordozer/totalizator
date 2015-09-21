@@ -10,9 +10,9 @@ import java.util.Set;
 
 public interface RemoteGameDataImportService {
 
-	Set<String> loadRemoteGameIds( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException;
+	Set<RemoteGame> loadGamesFromJSON( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException;
 
-	RemoteGame loadRemoteGame( final String remoteGameId, final Cup cupId ) throws IOException;
+	void loadGameFromJSON( final RemoteGame remoteGame, final Cup cupId ) throws IOException;
 
 	Match findMatchFor( final Cup category, final String team1Name, final String team2Name, final LocalDateTime gameDate );
 

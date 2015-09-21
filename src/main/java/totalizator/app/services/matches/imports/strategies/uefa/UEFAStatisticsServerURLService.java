@@ -30,7 +30,7 @@ public class UEFAStatisticsServerURLService implements StatisticsServerURLServic
 	}
 
 	@Override
-	public String loadRemoteGameURL( final String remoteGameId ) {
+	public String loadRemoteGameURL( Cup cup, final String remoteGameId ) {
 		return String.format( "http://api.football-data.org/alpha/fixtures/%s", remoteGameId );
 	}
 

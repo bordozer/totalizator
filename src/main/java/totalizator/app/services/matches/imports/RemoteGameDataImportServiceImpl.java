@@ -13,15 +13,13 @@ import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.matches.imports.strategies.NoStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
 import totalizator.app.services.matches.imports.strategies.nba.NBAStatisticsAPIService;
+import totalizator.app.services.matches.imports.strategies.nhl.NHLStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.uefa.UEFAStatisticsAPIService;
-import totalizator.app.services.utils.DateTimeService;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
-
-import static com.google.common.collect.Sets.newTreeSet;
 
 @Service
 public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportService {
@@ -31,9 +29,6 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 	@Autowired
 	private MatchService matchService;
-
-	@Autowired
-	private DateTimeService dateTimeService;
 
 	@Autowired
 	private CupTeamService cupTeamService;
@@ -47,32 +42,19 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	@Autowired
 	private UEFAStatisticsAPIService uefaStatisticsAPIService;
 
+	@Autowired
+	private NHLStatisticsAPIService nhlStatisticsAPIService;
+
 	private final Logger LOGGER = Logger.getLogger( RemoteGameDataImportServiceImpl.class );
 
 	@Override
-	public Set<String> loadRemoteGameIds( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException {
-
-		final Set<String> remoteGamesIds = newTreeSet();
-
-		final StatisticsServerService statisticsAPIService = getStatisticsServerService( cup );
-
-		LocalDate date = dateFrom;
-		while ( true ) {
-
-			remoteGamesIds.addAll( statisticsAPIService.loadRemoteGameIds( cup, date ) );
-
-			date = dateTimeService.plusDays( date, 1 );
-			if ( date.isAfter( dateTo ) ) {
-				break;
-			}
-		}
-
-		return remoteGamesIds;
+	public Set<RemoteGame> loadGamesFromJSON( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException {
+		return getStatisticsServerService( cup ).loadGamesFromJSON( cup, dateFrom, dateTo );
 	}
 
 	@Override
-	public RemoteGame loadRemoteGame( final String remoteGameId, final Cup cup ) throws IOException {
-		return getStatisticsServerService( cup ).loadRemoteGame( remoteGameId );
+	public void loadGameFromJSON( final RemoteGame remoteGame, final Cup cup ) throws IOException {
+		getStatisticsServerService( cup ).loadGameFromJSON( cup, remoteGame );
 	}
 
 	@Override
@@ -171,6 +153,8 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 				return nbaStatisticsAPIService;
 			case UEFA:
 				return uefaStatisticsAPIService;
+			case NHL:
+				return nhlStatisticsAPIService;
 			default:
 				throw new IllegalArgumentException( String.format( "Unsupported GameImportStrategyType: %s", strategyType ) );
 		}
@@ -182,10 +166,6 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 	public void setMatchService( final MatchService matchService ) {
 		this.matchService = matchService;
-	}
-
-	public void setDateTimeService( final DateTimeService dateTimeService ) {
-		this.dateTimeService = dateTimeService;
 	}
 
 	public void setCupTeamService( final CupTeamService cupTeamService ) {

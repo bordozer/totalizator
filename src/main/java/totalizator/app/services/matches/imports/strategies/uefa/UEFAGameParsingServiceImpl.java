@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.remote.RemoteContentService;
@@ -15,8 +16,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static com.google.common.collect.Sets.newTreeSet;
-
 @Service( value = "uefaGameParsingService" )
 public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
 
@@ -24,17 +23,17 @@ public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
 	private RemoteContentService remoteContentService;
 
 	@Override
-	public Set<String> extractRemoteGameIds( final String remoteGameJSON ) {
+	public Set<RemoteGame> loadGamesFromJSON( Cup cup, final String remoteGamesJSON ) {
 
 		final Gson gson = new Gson();
 
-		final LinkedTreeMap uefaGamesJSON = ( LinkedTreeMap ) gson.fromJson( remoteGameJSON, Object.class );
+		final LinkedTreeMap uefaGamesJSON = ( LinkedTreeMap ) gson.fromJson( remoteGamesJSON, Object.class );
 
 		if ( uefaGamesJSON == null ) {
-			return newTreeSet();
+			return new TreeSet<RemoteGame>();
 		}
 
-		final TreeSet<String> result = newTreeSet();
+		final Set<RemoteGame> result = new TreeSet<RemoteGame>();
 
 		final List fixtures = ( ArrayList ) uefaGamesJSON.get( "fixtures" );
 		for ( final Object fixture : fixtures ) {
@@ -44,14 +43,14 @@ public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
 
 			final String[] strings = href.split( "/" );
 			final String remoteGameId = strings[ strings.length - 1 ];
-			result.add( remoteGameId );
+			result.add( new RemoteGame( remoteGameId ) );
 		}
 
 		return result;
 	}
 
 	@Override
-	public RemoteGame parseGame( final String remoteGameId, final String remoteGameJSON ) throws IOException {
+	public void loadGameFromJSON( final RemoteGame remoteGame, final String remoteGameJSON ) throws IOException {
 
 		final Gson gson = new Gson();
 		final LinkedTreeMap fixture = ( LinkedTreeMap ) ( ( LinkedTreeMap ) gson.fromJson( remoteGameJSON, Object.class ) ).get( "fixture" );
@@ -68,23 +67,19 @@ public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
 
 		final String status = ( String ) ( ( LinkedTreeMap ) fixture ).get( "status" );
 
-		final RemoteGame result = new RemoteGame( remoteGameId );
+		remoteGame.setRemoteTeam1Id( team1Name );
+		remoteGame.setRemoteTeam1Name( team1Name );
 
-		result.setRemoteTeam1Id( team1Name );
-		result.setRemoteTeam1Name( team1Name );
+		remoteGame.setRemoteTeam2Id( team2Name );
+		remoteGame.setHomeTeamNumber( 1 );
+		remoteGame.setRemoteTeam2Name( team2Name );
 
-		result.setRemoteTeam2Id( team2Name );
-		result.setHomeTeamNumber( 1 );
-		result.setRemoteTeam2Name( team2Name );
+		remoteGame.setBeginningTime( beginningTime );
 
-		result.setBeginningTime( beginningTime );
+		remoteGame.setScore1( score1 < 0 ? 0 : ( int ) ( double ) score1 );
+		remoteGame.setScore2( score2 < 0 ? 0 : ( int ) ( double ) score2 );
 
-		result.setScore1( score1 < 0 ? 0 : ( int ) ( double ) score1 );
-		result.setScore2( score2 < 0 ? 0 : ( int ) ( double ) score2 );
-
-		result.setFinished( status.equals( "FINISHED" ) );
-
-		return result;
+		remoteGame.setFinished( status.equals( "FINISHED" ) );
 	}
 
 	/*private String getRemoteTeamIdByName( final String teamName, String categoryImportId ) throws IOException {

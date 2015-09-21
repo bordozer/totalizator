@@ -8,5 +8,5 @@ public interface StatisticsServerURLService {
 
 	String remoteGamesIdsURL( final Cup cup, final LocalDate date );
 
-	String loadRemoteGameURL( final String remoteGameId );
+	String loadRemoteGameURL( final Cup cup, final String remoteGameId );
 }

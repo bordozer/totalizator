@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface StatisticsServerService {
 
-	Set<String> loadRemoteGameIds( final Cup cup, final LocalDate date ) throws IOException;
+	Set<RemoteGame> loadGamesFromJSON( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException;
 
-	RemoteGame loadRemoteGame( final String remoteGameId ) throws IOException;
+	void loadGameFromJSON( final Cup cup, final RemoteGame remoteGame ) throws IOException;
 }

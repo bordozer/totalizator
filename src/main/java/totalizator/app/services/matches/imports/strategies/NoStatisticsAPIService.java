@@ -14,12 +14,11 @@ import static com.google.common.collect.Sets.newHashSet;
 public class NoStatisticsAPIService implements StatisticsServerService {
 
 	@Override
-	public Set<String> loadRemoteGameIds( final Cup cup, final LocalDate date ) throws IOException {
+	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException {
 		return newHashSet();
 	}
 
 	@Override
-	public RemoteGame loadRemoteGame( final String remoteGameId ) throws IOException {
-		return null;
+	public void loadGameFromJSON( Cup cup, final RemoteGame remoteGame ) throws IOException {
 	}
 }

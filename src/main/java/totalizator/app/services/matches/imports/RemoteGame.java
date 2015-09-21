@@ -2,7 +2,7 @@ package totalizator.app.services.matches.imports;
 
 import java.time.LocalDateTime;
 
-public class RemoteGame {
+public class RemoteGame implements Comparable {
 
 	private final String remoteGameId;
 
@@ -19,6 +19,8 @@ public class RemoteGame {
 	private boolean finished;
 
 	private int homeTeamNumber;
+
+	private boolean loaded;
 
 	public RemoteGame( final String remoteGameId ) {
 		this.remoteGameId = remoteGameId;
@@ -100,8 +102,22 @@ public class RemoteGame {
 		this.homeTeamNumber = homeTeamNumber;
 	}
 
+	public boolean isLoaded() {
+		return loaded;
+	}
+
+	public void setLoaded( final boolean loaded ) {
+		this.loaded = loaded;
+	}
+
 	@Override
 	public String toString() {
 		return String.format( "#%s: %s vs %s ( %s )", remoteGameId, remoteTeam1Id, remoteTeam2Id, beginningTime );
+	}
+
+	@Override
+	public int compareTo( final Object o ) {
+		final RemoteGame remoteGame = ( RemoteGame ) o;
+		return remoteGameId.compareTo( remoteGame.getRemoteGameId() );
 	}
 }

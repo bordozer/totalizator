@@ -16,7 +16,6 @@ import totalizator.app.services.UserService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameDataImportService;
 import totalizator.app.services.utils.DateTimeService;
-import totalizator.app.translator.TranslatorService;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -44,9 +43,6 @@ public class RemoteGameImportRestController {
 	private RemoteGameDataImportService remoteGameDataImportService;
 
 	@Autowired
-	private TranslatorService translatorService;
-
-	@Autowired
 	private DateTimeService dateTimeService;
 
 	@Autowired
@@ -57,43 +53,89 @@ public class RemoteGameImportRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/collect-game-data-ids/", produces = APPLICATION_JSON_VALUE )
-	public List<NotLoadedRemoteGameDTO> collectRemoteGamesIds( final GameImportParametersDTO parametersDTO ) throws IOException {
+	public List<RemoteGameDTO> collectRemoteGamesIds( final GameImportParametersDTO parametersDTO, final Principal principal ) throws IOException {
 
 		final LocalDate dateFrom = dateTimeService.parseDate( parametersDTO.getDateFrom() );
 		final LocalDate dateTo = dateTimeService.parseDate( parametersDTO.getDateTo() );
 
 		final Cup cup = cupService.load( parametersDTO.getCupId() );
 
-		return remoteGameDataImportService.loadRemoteGameIds( dateFrom, dateTo, cup )
+		return remoteGameDataImportService.loadGamesFromJSON( dateFrom, dateTo, cup )
 				.stream()
-				.map( new Function<String, NotLoadedRemoteGameDTO>() {
-					@Override
-					public NotLoadedRemoteGameDTO apply( final String remoteGameId ) {
-						return new NotLoadedRemoteGameDTO( remoteGameId );
-					}
-				} )
+				.map( getRemoteGameMapper( cup, principal ) )
 				.collect( Collectors.toList() );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
-	public RemoteGameDTO loadRemoteGameData( final @PathVariable( "remoteGameId" ) String remoteGameId, final @RequestParam( value = "cupId" ) Integer cupId ) throws IOException {
+	public RemoteGameDTO loadRemoteGameData( final @PathVariable( value = "remoteGameId" ) String remoteGameId, final @RequestParam( value = "cupId" ) Integer cupId, final Principal principal ) throws IOException {
+
 		final Cup cup = cupService.load( cupId );
-		return getRemoteGameMapper( cup ).apply( remoteGameDataImportService.loadRemoteGame( remoteGameId, cup ) );
+
+		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
+		remoteGame.setLoaded( true );
+
+		remoteGameDataImportService.loadGameFromJSON( remoteGame, cup );
+
+		return getRemoteGameMapper( cup, principal ).apply( remoteGame );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/local-data/", produces = APPLICATION_JSON_VALUE )
-	public RemoteGameLocalData loadLocalDataForRemoteGame( final @RequestParam( value = "cupId" ) Integer cupId , final RemoteGameDTO remoteGameDTO, final Principal principal ) throws IOException {
+	@RequestMapping( method = RequestMethod.PUT, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
+	public void saveRemoteGameData( final @RequestParam( value = "cupId" ) Integer cupId, final @RequestBody RemoteGameDTO remoteGameDTO ) {
+		remoteGameDataImportService.importGame( cupService.load( cupId ), getRemoteGameDTOMapper().apply( remoteGameDTO ) );
+	}
+
+	@ExceptionHandler
+	@ResponseBody
+	@ResponseStatus( value = HttpStatus.INTERNAL_SERVER_ERROR )
+	public Error handleException( final IOException exception ) {
+		return new Error( "Remote game import server error" );
+	}
+
+	private Function<RemoteGame, RemoteGameDTO> getRemoteGameMapper( final Cup cup, final Principal principal ) {
+
+		return new Function<RemoteGame, RemoteGameDTO>() {
+
+			@Override
+			public RemoteGameDTO apply( final RemoteGame remoteGame ) {
+
+				final RemoteGameDTO remoteGameDTO = new RemoteGameDTO( remoteGame.getRemoteGameId() );
+
+				if ( ! remoteGame.isLoaded() ) {
+					return remoteGameDTO;
+				}
+
+				final Team team1 = teamService.findByImportId( cup.getCategory(), remoteGame.getRemoteTeam1Id() );
+				remoteGameDTO.setTeam1Id( remoteGame.getRemoteTeam1Id() );
+				remoteGameDTO.setTeam1Name( team1 != null ? team1.getTeamName() : remoteGame.getRemoteTeam1Name() );
+
+				final Team team2 = teamService.findByImportId( cup.getCategory(), remoteGame.getRemoteTeam2Id() );
+				remoteGameDTO.setTeam2Id( remoteGame.getRemoteTeam2Id() );
+				remoteGameDTO.setTeam2Name( team2 != null ? team2.getTeamName() : remoteGame.getRemoteTeam2Name() );
+
+				remoteGameDTO.setBeginningTime( dateTimeService.formatDateTime( remoteGame.getBeginningTime() ) );
+				remoteGameDTO.setScore1( remoteGame.getScore1() );
+				remoteGameDTO.setScore2( remoteGame.getScore2() );
+				remoteGameDTO.setHomeTeamNumber( remoteGame.getHomeTeamNumber() );
+				remoteGameDTO.setFinished( remoteGame.isFinished() );
+				remoteGameDTO.setLoaded( remoteGame.isLoaded() );
+
+				remoteGameDTO.setRemoteGameLocalData( getRemoteGameLocalData( cup, remoteGameDTO, principal ) );
+
+				return remoteGameDTO;
+			}
+		};
+	}
+
+	private RemoteGameLocalData getRemoteGameLocalData( final Cup cup, final RemoteGameDTO remoteGameDTO, final Principal principal ) {
 
 		final User currentUser = userService.findByName( principal.getName() );
 
 		final Match match = remoteGameDataImportService.findByRemoteGameId( remoteGameDTO.getRemoteGameId() );
 		if ( match == null ) {
-
-			final Cup cup = cupService.load( cupId );
 
 			final RemoteGameLocalData result = new RemoteGameLocalData();
 
@@ -118,48 +160,6 @@ public class RemoteGameImportRestController {
 		result.setMatch( dtoService.transformMatch( match, currentUser ) );
 
 		return result;
-	}
-
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
-	public void saveRemoteGameData( final @RequestParam( value = "cupId" ) Integer cupId, final @RequestBody RemoteGameDTO remoteGameDTO ) {
-		remoteGameDataImportService.importGame( cupService.load( cupId ), getRemoteGameDTOMapper().apply( remoteGameDTO ) );
-	}
-
-	private Function<RemoteGame, RemoteGameDTO> getRemoteGameMapper( final Cup cup ) {
-
-		return new Function<RemoteGame, RemoteGameDTO>() {
-
-			@Override
-			public RemoteGameDTO apply( final RemoteGame remoteGame ) {
-
-				final RemoteGameDTO remoteGameDTO = new RemoteGameDTO( remoteGame.getRemoteGameId() );
-
-				final Team team1 = teamService.findByImportId( cup.getCategory(), remoteGame.getRemoteTeam1Id() );
-				remoteGameDTO.setTeam1Id( remoteGame.getRemoteTeam1Id() );
-				remoteGameDTO.setTeam1Name( team1 != null ? team1.getTeamName() : remoteGame.getRemoteTeam1Name() );
-
-				final Team team2 = teamService.findByImportId( cup.getCategory(), remoteGame.getRemoteTeam2Id() );
-				remoteGameDTO.setTeam2Id( remoteGame.getRemoteTeam2Id() );
-				remoteGameDTO.setTeam2Name( team2 != null ? team2.getTeamName() : remoteGame.getRemoteTeam2Name() );
-
-				remoteGameDTO.setBeginningTime( dateTimeService.formatDateTime( remoteGame.getBeginningTime() ) );
-				remoteGameDTO.setScore1( remoteGame.getScore1() );
-				remoteGameDTO.setScore2( remoteGame.getScore2() );
-				remoteGameDTO.setHomeTeamNumber( remoteGame.getHomeTeamNumber() );
-				remoteGameDTO.setFinished( remoteGame.isFinished() );
-
-				return remoteGameDTO;
-			}
-		};
-	}
-
-	@ExceptionHandler
-	@ResponseBody
-	@ResponseStatus( value = HttpStatus.INTERNAL_SERVER_ERROR )
-	public Error handleException( final IOException exception ) {
-		return new Error( "Remote game import server error" );
 	}
 
 	private Function<RemoteGameDTO, RemoteGame> getRemoteGameDTOMapper() {

@@ -13,14 +13,11 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		noMatchesForImportFound: "No matches for import found"
-		, error: 'Can not get data from server'
 	} );
 
 	return Backbone.View.extend( {
 
 		initialize: function ( options ) {
-
-			// model is RemoteGamesModel.RemoteGamesModel
 
 			this.importParameters = options.importParameters;
 			this.emptyRemoteGames = options.emptyRemoteGames;
@@ -41,13 +38,9 @@ define( function ( require ) {
 
 			var self = this;
 			_.each( this.emptyRemoteGames, function( emptyRemoteGame ) {
-				self._renderRemoteGame( emptyRemoteGame );
+				var model = self.model.add( emptyRemoteGame );
+				self._onAddNewRemoteGame( model );
 			});
-		},
-
-		_renderRemoteGame: function( emptyRemoteGame ) {
-			var model = this.model.add( emptyRemoteGame );
-			this._onAddNewRemoteGame( model );
 		},
 
 		_onAddNewRemoteGame: function( model ) {
@@ -59,9 +52,6 @@ define( function ( require ) {
 
 			var view = new RemoteGameView( { model: model, el: el, options: { cup: this.cup } } );
 			view.render();
-			model.fetch( { cache: false, error: function( arg ) {
-				alert( translator.error );
-			} } );
 		}
 	});
 } );

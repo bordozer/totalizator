@@ -2,7 +2,9 @@ package admin.remoteGamesImport.url;
 
 import org.junit.Test;
 import totalizator.app.models.Cup;
+import totalizator.app.models.Team;
 import totalizator.app.services.matches.imports.strategies.nba.NBAStatisticsServerURLService;
+import totalizator.app.services.matches.imports.strategies.nhl.NHLStatisticsServerURLService;
 import totalizator.app.services.matches.imports.strategies.uefa.UEFAStatisticsServerURLService;
 import totalizator.app.services.utils.DateTimeServiceImpl;
 
@@ -25,7 +27,7 @@ public class StatisticsServerURLServiceTest {
 	@Test
 	public void nbaLoadRemoteGameURL() {
 		final NBAStatisticsServerURLService urlService = new NBAStatisticsServerURLService();
-		assertEquals( WRONG_URL, "http://stats.nba.com/stats/boxscore?GameID=00X12W34&RangeType=0&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0", urlService.loadRemoteGameURL( testData.remoteGameId ) );
+		assertEquals( WRONG_URL, "http://stats.nba.com/stats/boxscore?GameID=00X12W34&RangeType=0&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0", urlService.loadRemoteGameURL( testData.cup, testData.remoteGameId ) );
 	}
 
 	@Test
@@ -70,7 +72,13 @@ public class StatisticsServerURLServiceTest {
 	@Test
 	public void uefaLoadRemoteGameURL() {
 		final UEFAStatisticsServerURLService urlService = new UEFAStatisticsServerURLService();
-		assertEquals( WRONG_URL, "http://api.football-data.org/alpha/fixtures/00X12W34", urlService.loadRemoteGameURL( testData.remoteGameId ) );
+		assertEquals( WRONG_URL, "http://api.football-data.org/alpha/fixtures/00X12W34", urlService.loadRemoteGameURL( testData.cup, testData.remoteGameId ) );
+	}
+
+	@Test
+	public void nhlLoadRemoteGameURL() {
+		final NHLStatisticsServerURLService urlService = new NHLStatisticsServerURLService();
+		assertEquals( WRONG_URL, "http://nhlwc.cdnak.neulion.com/fs1/nhl/league/clubschedule/ANA/2015/11/iphone/clubschedule.json", urlService.getURL( testData.team, testData.date ) );
 	}
 
 	private DateTimeServiceImpl getDateTimeService() {
@@ -80,6 +88,7 @@ public class StatisticsServerURLServiceTest {
 	private class TestData {
 
 		private Cup cup;
+		private Team team;
 		private LocalDate date;
 		private String remoteGameId;
 
@@ -88,6 +97,9 @@ public class StatisticsServerURLServiceTest {
 			cup = new Cup();
 			cup.setId( 555 );
 			cup.setCupImportId( "77777777" );
+
+			team = new Team();
+			team.setImportId( "ANA" );
 
 			date = LocalDate.of( 2015, 11, 25 );
 

@@ -17,7 +17,7 @@ public class NBAStatisticsServerURLService implements StatisticsServerURLService
 	}
 
 	@Override
-	public String loadRemoteGameURL( final String remoteGameId ) {
+	public String loadRemoteGameURL( Cup cup, final String remoteGameId ) {
 		// Game ID format: 0021401217
 		// 0 		- ?
 		// 02 		- league code

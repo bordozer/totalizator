@@ -2,6 +2,7 @@ package totalizator.app.services.matches.imports.strategies.nba;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
+import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 
@@ -12,41 +13,29 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static com.google.common.collect.Sets.newTreeSet;
-
 @Service( value = "nbaGameParsingService" )
-public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
+public class NBAGameParsingService implements RemoteGameParsingService {
 
 	@Override
-	public Set<String> extractRemoteGameIds( final String remoteGameJSON ) {
+	public Set<RemoteGame> loadGamesFromJSON( Cup cup, final String remoteGamesJSON ) {
 
-		final TreeSet<String> result = newTreeSet();
+		final Set<RemoteGame> result = new TreeSet<RemoteGame>();
 
 		final Gson gson = new Gson();
 
-		final NBAGame nbaGame = gson.fromJson( remoteGameJSON, NBAGame.class );
+		final NBAGame nbaGame = gson.fromJson( remoteGamesJSON, NBAGame.class );
 
 		for ( final Object rowSet : ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ) ) ) {
 			final List list = ( List ) rowSet;
 			final String remoteGameId = ( String ) list.get( 2 );
-			result.add( remoteGameId );
+			result.add( new RemoteGame( remoteGameId ) );
 		}
 
 		return result;
-
-		/*return result
-				.stream()
-				.sorted( new Comparator<String>() {
-					@Override
-					public int compare( final String o1, final String o2 ) {
-						return o1.compareTo( o2 );
-					}
-				} )
-				.collect( Collectors.toSet() );*/
 	}
 
 	@Override
-	public RemoteGame parseGame( final String remoteGameId, final String remoteGameJSON ) {
+	public void loadGameFromJSON( final RemoteGame remoteGame, final String remoteGameJSON ) {
 
 		final Gson gson = new Gson();
 
@@ -69,8 +58,6 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 
 		final int homeTeamNumber = homeTeamId.equals( team1Id ) ? 1 : 2;
 
-		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
-
 		remoteGame.setBeginningTime( gameTime );
 
 		remoteGame.setRemoteTeam1Id( team1Id );
@@ -87,8 +74,6 @@ public class NBAGameParsingServiceImpl implements RemoteGameParsingService {
 
 		remoteGame.setFinished( isFinal );
 		remoteGame.setHomeTeamNumber( homeTeamNumber );
-
-		return remoteGame;
 	}
 
 	private LocalDateTime getDate( final NBAGame nbaGame ) {

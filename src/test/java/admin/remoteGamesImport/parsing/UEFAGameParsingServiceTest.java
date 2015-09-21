@@ -1,6 +1,8 @@
 package admin.remoteGamesImport.parsing;
 
+import org.junit.Before;
 import org.junit.Test;
+import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.matches.imports.strategies.uefa.UEFAGameParsingServiceImpl;
@@ -11,9 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 public class UEFAGameParsingServiceTest {
 
@@ -23,21 +23,28 @@ public class UEFAGameParsingServiceTest {
 	private static final String FINISHED_REMOTE_GAME_JSON = "{\"fixture\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/147043\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/398\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2015-09-14T19:00:00Z\",\"status\":\"FINISHED\",\"matchday\":5,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},\"head2head\":{\"count\":10,\"timeFrameStart\":\"2009-01-10\",\"timeFrameEnd\":\"2015-09-14\",\"homeTeamWins\":3,\"awayTeamWins\":4,\"draws\":3,\"lastHomeWinHomeTeam\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/147043\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/398\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2015-09-14T19:00:00Z\",\"status\":\"FINISHED\",\"matchday\":5,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},\"lastWinHomeTeam\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/147043\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/398\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2015-09-14T19:00:00Z\",\"status\":\"FINISHED\",\"matchday\":5,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},\"lastAwayWinAwayTeam\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/132006\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/341\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2014-01-18T15:00:00Z\",\"status\":null,\"matchday\":22,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":1,\"goalsAwayTeam\":3}},\"lastWinAwayTeam\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136697\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2015-05-24T14:00:00Z\",\"status\":\"FINISHED\",\"matchday\":38,\"homeTeamName\":\"Newcastle United FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/147043\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/398\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2015-09-14T19:00:00Z\",\"status\":\"FINISHED\",\"matchday\":5,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136697\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2015-05-24T14:00:00Z\",\"status\":\"FINISHED\",\"matchday\":38,\"homeTeamName\":\"Newcastle United FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136922\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2014-11-29T15:00:00Z\",\"status\":\"FINISHED\",\"matchday\":13,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":1,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/132006\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/341\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2014-01-18T15:00:00Z\",\"status\":null,\"matchday\":22,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":1,\"goalsAwayTeam\":3}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/134685\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/341\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2013-08-23T22:00:00Z\",\"status\":null,\"matchday\":2,\"homeTeamName\":\"Newcastle United FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":0,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/128956\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/301\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2013-05-03T22:00:00Z\",\"status\":null,\"matchday\":36,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":0,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/123660\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/301\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2012-11-10T23:00:00Z\",\"status\":null,\"matchday\":11,\"homeTeamName\":\"Newcastle United FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":0,\"goalsAwayTeam\":1}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/64589\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/114\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2011-01-04T23:00:00Z\",\"status\":null,\"matchday\":21,\"homeTeamName\":\"Newcastle United FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":5,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/64466\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/114\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"}},\"date\":\"2010-10-23T13:30:00Z\",\"status\":null,\"matchday\":9,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Newcastle United FC\",\"result\":{\"goalsHomeTeam\":1,\"goalsAwayTeam\":2}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/68763\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/125\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/67\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2009-01-10T14:30:00Z\",\"status\":null,\"matchday\":21,\"homeTeamName\":\"Newcastle United FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":2}}]}}";
 	private static final String FUTURE_REMOTE_GAME_JSON   = "{\"fixture\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/147029\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/398\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2015-09-19T16:30:00Z\",\"status\":\"TIMED\",\"matchday\":6,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":-1,\"goalsAwayTeam\":-1}},\"head2head\":{\"count\":10,\"timeFrameStart\":\"2009-09-28\",\"timeFrameEnd\":\"2015-04-19\",\"homeTeamWins\":7,\"awayTeamWins\":1,\"draws\":2,\"lastHomeWinHomeTeam\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136741\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2015-04-19T12:30:00Z\",\"status\":\"FINISHED\",\"matchday\":33,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},\"lastWinHomeTeam\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136741\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2015-04-19T12:30:00Z\",\"status\":\"FINISHED\",\"matchday\":33,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},\"lastAwayWinAwayTeam\":null,\"lastWinAwayTeam\":{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136959\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"}},\"date\":\"2014-10-25T11:45:00Z\",\"status\":\"FINISHED\",\"matchday\":9,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Manchester City FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":1}},\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136741\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2015-04-19T12:30:00Z\",\"status\":\"FINISHED\",\"matchday\":33,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/136959\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/354\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"}},\"date\":\"2014-10-25T11:45:00Z\",\"status\":\"FINISHED\",\"matchday\":9,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Manchester City FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":1}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/131872\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/341\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2014-05-11T14:00:00Z\",\"status\":null,\"matchday\":38,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/132113\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/341\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"}},\"date\":\"2013-10-18T22:00:00Z\",\"status\":null,\"matchday\":8,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Manchester City FC\",\"result\":{\"goalsHomeTeam\":1,\"goalsAwayTeam\":3}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/129062\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/301\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2013-04-26T22:00:00Z\",\"status\":null,\"matchday\":35,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":1}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/123654\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/301\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"}},\"date\":\"2012-11-02T23:00:00Z\",\"status\":null,\"matchday\":10,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Manchester City FC\",\"result\":{\"goalsHomeTeam\":0,\"goalsAwayTeam\":0}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/64729\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/114\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2011-04-30T22:00:00Z\",\"status\":null,\"matchday\":35,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":1}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/64545\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/114\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"}},\"date\":\"2010-12-11T14:30:00Z\",\"status\":null,\"matchday\":17,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Manchester City FC\",\"result\":{\"goalsHomeTeam\":1,\"goalsAwayTeam\":3}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/64379\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/113\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"}},\"date\":\"2010-05-08T22:00:00Z\",\"status\":null,\"matchday\":38,\"homeTeamName\":\"West Ham United FC\",\"awayTeamName\":\"Manchester City FC\",\"result\":{\"goalsHomeTeam\":1,\"goalsAwayTeam\":1}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/64066\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/113\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/65\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/563\"}},\"date\":\"2009-09-27T22:00:00Z\",\"status\":null,\"matchday\":7,\"homeTeamName\":\"Manchester City FC\",\"awayTeamName\":\"West Ham United FC\",\"result\":{\"goalsHomeTeam\":3,\"goalsAwayTeam\":1}}]}}";
 
+	private TestData testData;
+
+	@Before
+	public void setup() {
+		testData = new TestData();
+	}
+
 	@Test
 	public void extractRemoteGameIds() {
 
 		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingServiceImpl();
-		final Set<String> remoteGameIds = uefaGameParsingService.extractRemoteGameIds( REMOTE_GAMES_IDS_JSON );
+		final Set<RemoteGame> remoteGameIds = uefaGameParsingService.loadGamesFromJSON( testData.cup, REMOTE_GAMES_IDS_JSON );
 
 		assertEquals( remoteGameIds.size(), EXPECTED_REMOTE_GAME_IDS.size() );
 
 		for ( final String remoteGameId : EXPECTED_REMOTE_GAME_IDS ) {
-			assertTrue( remoteGameIds.contains( remoteGameId ) );
+			assertTrue( doesGameIdPresent( remoteGameIds, remoteGameId ) );
 		}
 
 		int i = 0;
-		for ( final String remoteGameId : remoteGameIds ) {
-			assertEquals( remoteGameId, EXPECTED_REMOTE_GAME_IDS.get( i ) );
+		for ( final RemoteGame remoteGame : remoteGameIds ) {
+			assertEquals( EXPECTED_REMOTE_GAME_IDS.get( i ), remoteGame.getRemoteGameId() );
 
 			i++;
 		}
@@ -49,7 +56,9 @@ public class UEFAGameParsingServiceTest {
 		final String remoteGameId = "JSON DOES NOT CONTAIN IT";
 
 		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingServiceImpl();
-		final RemoteGame remoteGame = uefaGameParsingService.parseGame( remoteGameId, FINISHED_REMOTE_GAME_JSON );
+
+		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
+		uefaGameParsingService.loadGameFromJSON( remoteGame, FINISHED_REMOTE_GAME_JSON );
 
 		assertEquals( remoteGame.getRemoteGameId(), remoteGameId );
 
@@ -66,6 +75,8 @@ public class UEFAGameParsingServiceTest {
 		assertEquals( remoteGame.getScore2(), 0 );
 
 		assertTrue( remoteGame.isFinished() );
+
+		assertFalse( remoteGame.isLoaded() );
 	}
 
 	@Test
@@ -74,7 +85,9 @@ public class UEFAGameParsingServiceTest {
 		final String remoteGameId = "JSON DOES NOT CONTAIN IT";
 
 		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingServiceImpl();
-		final RemoteGame remoteGame = uefaGameParsingService.parseGame( remoteGameId, FUTURE_REMOTE_GAME_JSON );
+
+		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
+		uefaGameParsingService.loadGameFromJSON( remoteGame, FUTURE_REMOTE_GAME_JSON );
 
 		assertEquals( remoteGame.getRemoteGameId(), remoteGameId );
 
@@ -91,5 +104,30 @@ public class UEFAGameParsingServiceTest {
 		assertEquals( remoteGame.getScore2(), 0 );
 
 		assertFalse( remoteGame.isFinished() );
+
+		assertFalse( remoteGame.isLoaded() );
+	}
+
+	private boolean doesGameIdPresent( final Set<RemoteGame> remoteGameIds, final String remoteGameId ) {
+
+		for ( final RemoteGame gameId : remoteGameIds ) {
+			if ( gameId.getRemoteGameId().equals( remoteGameId ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private class TestData {
+
+		private Cup cup;
+
+		public TestData() {
+
+			cup = new Cup();
+			cup.setId( 555 );
+			cup.setCupImportId( "77777777" );
+		}
 	}
 }

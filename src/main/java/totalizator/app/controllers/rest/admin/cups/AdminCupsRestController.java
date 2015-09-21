@@ -112,10 +112,13 @@ public class AdminCupsRestController {
 			@Override
 			public boolean test( final Cup cup ) {
 
-				final int strategyTypeId = cup.getCategory().getRemoteGameImportStrategyTypeId();
+				final GameImportStrategyType strategyType = GameImportStrategyType.getById( cup.getCategory().getRemoteGameImportStrategyTypeId() );
 
-				return strategyTypeId == GameImportStrategyType.NBA.getId()
-						|| ( strategyTypeId == GameImportStrategyType.UEFA.getId() && StringUtils.isNotEmpty( cup.getCupImportId() ) );
+				if ( GameImportStrategyType.CUP_ID_NEEDED.contains( strategyType ) && StringUtils.isEmpty( cup.getCupImportId() ) ) {
+					return false;
+				}
+
+				return true;
 			}
 		};
 	}

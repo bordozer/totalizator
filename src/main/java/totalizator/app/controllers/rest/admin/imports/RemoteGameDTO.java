@@ -1,16 +1,19 @@
 package totalizator.app.controllers.rest.admin.imports;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class RemoteGameDTO extends NotLoadedRemoteGameDTO {
+public class RemoteGameDTO {
+
+	private String remoteGameId;
 
 	private String team1Id;
 	private String team1Name;
 	private String team2Id;
 	private String team2Name;
 
-//	private LocalDateTime beginningTime;
 	private String beginningTime;
 
 	private int score1;
@@ -19,12 +22,25 @@ public class RemoteGameDTO extends NotLoadedRemoteGameDTO {
 	private int homeTeamNumber;
 	private boolean finished;
 
+	private boolean loaded;
+
+	@JsonIgnore
+	private RemoteGameLocalData remoteGameLocalData;
+
 	public RemoteGameDTO() {
 
 	}
 
 	public RemoteGameDTO( final String remoteGameId ) {
-		super( remoteGameId );
+		this.remoteGameId = remoteGameId;
+	}
+
+	public String getRemoteGameId() {
+		return remoteGameId;
+	}
+
+	public void setRemoteGameId( final String remoteGameId ) {
+		this.remoteGameId = remoteGameId;
 	}
 
 	public String getTeam1Id() {
@@ -67,17 +83,6 @@ public class RemoteGameDTO extends NotLoadedRemoteGameDTO {
 		this.beginningTime = beginningTime;
 	}
 
-
-	/*@JsonSerialize( using = DateTimeSerializer.class )
-	public LocalDateTime getBeginningTime() {
-		return beginningTime;
-	}
-
-	@JsonDeserialize( using = DateTimeDeserializer.class )
-	public void setBeginningTime( LocalDateTime beginningTime ) {
-		this.beginningTime = beginningTime;
-	}*/
-
 	public int getScore1() {
 		return score1;
 	}
@@ -110,7 +115,21 @@ public class RemoteGameDTO extends NotLoadedRemoteGameDTO {
 		this.finished = finished;
 	}
 
-	public final boolean isLoaded() {
-		return true;
+	public boolean isLoaded() {
+		return loaded;
+	}
+
+	public void setLoaded( final boolean loaded ) {
+		this.loaded = loaded;
+	}
+
+	@JsonProperty
+	public RemoteGameLocalData getRemoteGameLocalData() {
+		return remoteGameLocalData;
+	}
+
+	@JsonIgnore
+	public void setRemoteGameLocalData( final RemoteGameLocalData remoteGameLocalData ) {
+		this.remoteGameLocalData = remoteGameLocalData;
 	}
 }

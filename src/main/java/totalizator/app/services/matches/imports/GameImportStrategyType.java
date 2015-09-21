@@ -1,11 +1,16 @@
 package totalizator.app.services.matches.imports;
 
+import java.util.EnumSet;
+
 public enum GameImportStrategyType {
 
 	NO_IMPORT( 0, "Inaccessible" )
 	, NBA( 1, "NBA" )
 	, UEFA( 2, "UEFA" )
+	, NHL( 3, "NHL" )
 	;
+
+	final public static EnumSet<GameImportStrategyType> CUP_ID_NEEDED = EnumSet.<GameImportStrategyType>of( UEFA, NHL );
 
 	private final int id;
 	private final String name;

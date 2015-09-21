@@ -78,11 +78,9 @@ define( function ( require ) {
 			container.addClass( 'nopadding' );
 			container.empty();
 
-			if ( this.model.length > 0 ) {
-				var data = _.extend( {}, { teamsFilter: this.teamsFilter, translator: translator } );
-				container.html( template( data ) );
-				this._searchFocus();
-			}
+			var data = _.extend( {}, { teamsFilter: this.teamsFilter, translator: translator } );
+			container.html( template( data ) );
+			this._searchFocus();
 
 			this._renderTeams();
 		},
