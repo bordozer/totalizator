@@ -1,10 +1,17 @@
 package totalizator.app.controllers.rest.admin.cups.edit;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import totalizator.app.dto.TeamDTO;
+
 class CupWinnerEditDTO {
 
 	private int cupId;
 	private int cupPosition;
 	private int teamId;
+
+	@JsonIgnore
+	private TeamDTO team;
 
 	public CupWinnerEditDTO() {
 	}
@@ -37,6 +44,16 @@ class CupWinnerEditDTO {
 
 	public void setTeamId( final int teamId ) {
 		this.teamId = teamId;
+	}
+
+	@JsonProperty
+	public TeamDTO getTeam() {
+		return team;
+	}
+
+	@JsonIgnore
+	public void setTeam( final TeamDTO team ) {
+		this.team = team;
 	}
 
 	@Override

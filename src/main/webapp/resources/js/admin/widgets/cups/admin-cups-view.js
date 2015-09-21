@@ -216,23 +216,12 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
-			var self = this;
-			var cupWinners = [];
-			_.each( model.cupWinners, function ( result ) {
-				var cupPosition = result.cupPosition;
-				var teamId = result.teamId;
-
-				var team = service.getTeam( self.allTeams, teamId );
-				cupWinners.push( { cupPosition: cupPosition, team: team } );
-			} );
-
 			var isCupFinished = this._isFinished();
 
 			this.$el.html( this.templateEdit( {
 				model: model
 				, categories: this.categories
 				, cupPointsCalculationStrategies: service.loadCupPointsCalculationStrategies()
-				, cupWinners: cupWinners
 				, isCupFinished: isCupFinished
 				, translator: translator
 			} ) );

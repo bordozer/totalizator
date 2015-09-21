@@ -13,6 +13,7 @@ import totalizator.app.models.Team;
 import totalizator.app.services.*;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/admin/rest/cups/edit")
 public class AdminCupsEditRestController {
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private CupService cupService;
@@ -51,12 +55,15 @@ public class AdminCupsEditRestController {
 	private static final Logger LOGGER = Logger.getLogger( AdminCupsEditRestController.class );
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public List<CupEditDTO> allCups() {
-		return cupService.loadAll().stream().map( transformer() ).collect( Collectors.toList() );
+	public List<CupEditDTO> allCups( final Principal principal ) {
+		return cupService.loadAll()
+				.stream()
+				.map( transformer( principal ) )
+				.collect( Collectors.toList() );
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/0" )
-	public CupEditDTO create( final @RequestBody CupEditDTO cupEditDTO ) {
+	public CupEditDTO create( final @RequestBody CupEditDTO cupEditDTO, final Principal principal ) {
 		// TODO: check if name exists, is CupImportID unique
 
 		final Cup cup = new Cup();
@@ -72,11 +79,11 @@ public class AdminCupsEditRestController {
 			cupTeamService.saveCupTeam( cupId, team.getId(), true );
 		}
 
-		return transformer().apply( saved );
+		return transformer( principal ).apply( saved );
 	}
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/{cupId}" )
-	public CupEditDTO edit( final @PathVariable( "cupId" ) int cupId, final @RequestBody CupEditDTO cupEditDTO ) {
+	public CupEditDTO edit( final @PathVariable( "cupId" ) int cupId, final @RequestBody CupEditDTO cupEditDTO, final Principal principal ) {
 		// TODO: check if name exists, is CupImportID unique
 
 		final Cup cup = cupService.load( cupEditDTO.getCupId() );
@@ -98,7 +105,7 @@ public class AdminCupsEditRestController {
 
 		final Cup saved = cupService.save( cup, winners );
 
-		return transformer().apply( saved );
+		return transformer( principal ).apply( saved );
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{cupId}" )
@@ -144,17 +151,22 @@ public class AdminCupsEditRestController {
 		cup.setCupImportId( dto.getCupImportId() );
 	}
 
-	private List<CupWinnerEditDTO> getCupWinners( final Cup cup ) {
+	private List<CupWinnerEditDTO> getCupWinners( final Cup cup, final Principal principal ) {
 
 		return Lists.transform( cupWinnerService.loadAll( cup ), new Function<CupWinner, CupWinnerEditDTO>() {
 			@Override
 			public CupWinnerEditDTO apply( final CupWinner cupWinner ) {
-				return new CupWinnerEditDTO( cupWinner.getCup().getId(), cupWinner.getCupPosition(), cupWinner.getTeam().getId() );
+
+				final CupWinnerEditDTO cupWinnerEditDTO = new CupWinnerEditDTO( cupWinner.getCup().getId(), cupWinner.getCupPosition(), cupWinner.getTeam().getId() );
+				cupWinnerEditDTO.setTeam( dtoService.transformTeam( cupWinner.getTeam(), userService.findByLogin( principal.getName() ) ) );
+
+				return cupWinnerEditDTO;
 			}
 		} );
 	}
 
-	private java.util.function.Function<? super Cup, CupEditDTO> transformer() {
+	private java.util.function.Function<? super Cup, CupEditDTO> transformer( final Principal principal ) {
+
 		return new java.util.function.Function<Cup, CupEditDTO>() {
 			@Override
 			public CupEditDTO apply( final Cup cup ) {
@@ -169,7 +181,7 @@ public class AdminCupsEditRestController {
 				cupEditDTO.setWinnersCount( cup.getWinnersCount() );
 				cupEditDTO.setCupStartDate( cup.getCupStartTime() );
 				cupEditDTO.setLogoUrl( logoService.getLogoURL( cup ) );
-				cupEditDTO.setCupWinners( getCupWinners( cup ) );
+				cupEditDTO.setCupWinners( getCupWinners( cup, principal ) );
 
 				cupEditDTO.setReadyForCupBets( !cupBetsService.isCupBettingFinished( cup ) );
 				cupEditDTO.setReadyForMatchBets( !cupBetsService.isMatchBettingFinished( cup ) );

@@ -58,7 +58,7 @@ define( function ( require ) {
 			for( var i = 1; i <= this.winnersCount; i++ ) {
 				var teamId = this.$( '#cup-team-position-' + i ).val();
 				if ( teamId > 0 ) {
-					data.push( { cup: this.cupId, cupPosition: i, teamId: teamId } );
+					data.push( { cup: this.cupId, cupPosition: i, teamId: teamId, team: service.getTeam( this.teams, teamId ) } );
 				}
 			}
 

@@ -86,7 +86,8 @@
 
 				<hr />
 
-				<% _.each( cupWinners, function( winner ) { %>
+				<% _.each( model.cupWinners, function( winner ) { %>
+
 				<div class="row">
 					<div class="col-lg-12">
 						<strong><%=winner.cupPosition%> <%= translator.cupPositionLabel %>:</strong>
