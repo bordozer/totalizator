@@ -10,7 +10,7 @@ public enum GameImportStrategyType {
 	, NHL( 3, "NHL" )
 	;
 
-	final public static EnumSet<GameImportStrategyType> CUP_ID_NEEDED = EnumSet.<GameImportStrategyType>of( UEFA, NHL );
+	final public static EnumSet<GameImportStrategyType> CUP_ID_NEEDED = EnumSet.<GameImportStrategyType>of( UEFA );
 
 	private final int id;
 	private final String name;
