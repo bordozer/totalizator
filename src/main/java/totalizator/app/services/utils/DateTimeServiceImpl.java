@@ -2,9 +2,9 @@ package totalizator.app.services.utils;
 
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -116,7 +116,7 @@ public class DateTimeServiceImpl implements DateTimeService {
 
 	@Override
 	public int diffInDays( final LocalDate date1, final LocalDate date2 ) {
-		return Period.between( date1, date2 ).getDays();
+		return ( int ) Duration.between( date1.atStartOfDay(), date2.atStartOfDay() ).toDays();
 	}
 
 	@Override
