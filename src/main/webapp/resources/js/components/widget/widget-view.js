@@ -144,15 +144,17 @@ define( function ( require ) {
 
 			menuItems = menuItems.concat( customMenuItems );
 
+			var menuEl = this.$( '.js-window-drop-down-menu' );
+
 			var options = {
 				menus: menuItems
 				, menuButtonIcon: this.getIcon()
 				, menuButtonText: ''
 				, menuButtonHint: translator.widgetMenuHint
-				, cssClass: 'dropdown-menu-right btn-default'
+				, cssClass: ( menuEl.offset() && menuEl.offset().left > 400 ? 'dropdown-menu-right ' : '' ) + 'btn-default'
 			};
 
-			mainMenu( options, this.$( '.js-window-drop-down-menu') );
+			mainMenu( options, menuEl );
 		},
 
 		_onInnerViewRendered: function() {
