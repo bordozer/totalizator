@@ -11,6 +11,8 @@ define( function( require ) {
 
 	var FilterModel = require( 'js/components/widget-matches-and-bets/filter/matches-filter-model' );
 
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
 	function init( container, options ) {
 
 		var matchesModel = new Model.MatchesModel( { options: options } );
@@ -19,6 +21,8 @@ define( function( require ) {
 			categoryId: options.categoryId
 				, cupId: options.cupId
 				, showFutureMatches: true
+				, filterByDate: dateTimeService.dateNow()
+				, filterByDateEnable: true
 		};
 		var filterModel = new FilterModel( filter );
 
