@@ -52,6 +52,8 @@ define( function ( require ) {
 	return WidgetView.extend( {
 
 		showSettingsButton: false,
+		showCalendarButton: false,
+
 		matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_MATCHES,
 		exMode: MATCHES_AND_BETS_MODE_MATCHES,
 
@@ -139,7 +141,7 @@ define( function ( require ) {
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/matches/' + model.cupId + '/', text: translator.menuOpenCupMatchesCard }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/menuOpenCupBetsCard/' + model.cupId + '/', text: translator.menuOpenCupBetsCard }
 				, { selector: 'divider' }
-				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: false }
+				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: this.showCalendarButton }
 			];
 
 			var viewMenuItems = this.innerViewMenuItems();

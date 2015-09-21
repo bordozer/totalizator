@@ -31,6 +31,7 @@ define( function ( require ) {
 	return WidgetMatchesAndBets.extend( {
 
 		showSettingsButton: true,
+		showCalendarButton: true,
 
 		events: {
 			'click .js-add-entry-button': '_onAddClick'
