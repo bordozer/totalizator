@@ -24,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
 @RequestMapping( "/admin/rest/teams" )
-public class AdminTeamRestController {
+public class AdminTeamEditRestController {
 
 	@Autowired
 	private TeamService teamService;
@@ -44,7 +44,7 @@ public class AdminTeamRestController {
 	@Autowired
 	private LogoService logoService;
 
-	private static final Logger LOGGER = Logger.getLogger( AdminTeamRestController.class );
+	private static final Logger LOGGER = Logger.getLogger( AdminTeamEditRestController.class );
 
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
@@ -74,7 +74,7 @@ public class AdminTeamRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/cups/{cupId}/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamEditDTO create( final @RequestBody TeamEditDTO teamEditDTO, final @PathVariable( "cupId" ) int cupId ) {
-		// TODO: check if name exists
+		// TODO: check if name exists, is teamImportID unique
 		final Team team = new Team( teamEditDTO.getTeamName(), categoryService.load( teamEditDTO.getCategoryId() ) );
 		team.setImportId( teamEditDTO.getTeamImportId() );
 
@@ -93,7 +93,8 @@ public class AdminTeamRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/cups/{cupId}/{teamId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public TeamEditDTO edit( final @PathVariable( "teamId" ) int teamId, final @RequestBody TeamEditDTO teamEditDTO ) {
-		// TODO: check if name exists
+		// TODO: check if name exists, is teamImportID unique
+
 		final Category category = categoryService.load( teamEditDTO.getCategoryId() );
 
 		final Team team = teamService.load( teamEditDTO.getTeamId() );

@@ -40,9 +40,6 @@ public class AdminCupsEditRestController {
 	private CupWinnerService cupWinnerService;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private PointsCalculationStrategyService pointsCalculationStrategyService;
 
 	@Autowired
@@ -58,9 +55,9 @@ public class AdminCupsEditRestController {
 		return cupService.loadAll().stream().map( transformer() ).collect( Collectors.toList() );
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/0" ) //@RequestMapping("/admin/rest/cups"), consumes = APPLICATION_JSON_VALUE
+	@RequestMapping(method = RequestMethod.PUT, value = "/0" )
 	public CupEditDTO create( final @RequestBody CupEditDTO cupEditDTO ) {
-		// TODO: check if name exists
+		// TODO: check if name exists, is CupImportID unique
 
 		final Cup cup = new Cup();
 
@@ -80,7 +77,7 @@ public class AdminCupsEditRestController {
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/{cupId}" )
 	public CupEditDTO edit( final @PathVariable( "cupId" ) int cupId, final @RequestBody CupEditDTO cupEditDTO ) {
-		// TODO: check if name exists
+		// TODO: check if name exists, is CupImportID unique
 
 		final Cup cup = cupService.load( cupEditDTO.getCupId() );
 
