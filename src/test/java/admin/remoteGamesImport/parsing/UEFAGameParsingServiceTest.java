@@ -5,7 +5,7 @@ import org.junit.Test;
 import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
-import totalizator.app.services.matches.imports.strategies.uefa.UEFAGameParsingServiceImpl;
+import totalizator.app.services.matches.imports.strategies.uefa.UEFAGameParsingService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -32,7 +32,7 @@ public class UEFAGameParsingServiceTest {
 	@Test
 	public void extractRemoteGameIds() {
 
-		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingServiceImpl();
+		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingService();
 		final List<RemoteGame> remoteGames = newArrayList( uefaGameParsingService.loadGamesFromJSON( testData.cup, REMOTE_GAMES_IDS_JSON ) );
 
 		assertEquals( remoteGames.size(), EXPECTED_REMOTE_GAME_IDS.size() );
@@ -73,7 +73,7 @@ public class UEFAGameParsingServiceTest {
 
 		final String remoteGameId = "JSON DOES NOT CONTAIN IT";
 
-		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingServiceImpl();
+		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingService();
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 		uefaGameParsingService.loadGameFromJSON( remoteGame, FINISHED_REMOTE_GAME_JSON );
@@ -102,7 +102,7 @@ public class UEFAGameParsingServiceTest {
 
 		final String remoteGameId = "JSON DOES NOT CONTAIN IT";
 
-		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingServiceImpl();
+		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingService();
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 		uefaGameParsingService.loadGameFromJSON( remoteGame, FUTURE_REMOTE_GAME_JSON );

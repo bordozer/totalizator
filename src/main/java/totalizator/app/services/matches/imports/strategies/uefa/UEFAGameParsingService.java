@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 @Service( value = "uefaGameParsingService" )
-public class UEFAGameParsingServiceImpl implements RemoteGameParsingService {
+public class UEFAGameParsingService implements RemoteGameParsingService {
 
 	@Override
 	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final String remoteGamesJSON ) {
