@@ -227,6 +227,55 @@
 	</translation>
 
 	<translation>
+		<nerd>All games</nerd>
+		<ru><![CDATA[Все игры]]></ru>
+		<ua><![CDATA[Усi iгри]]></ua>
+		<en><![CDATA[All games]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Already imported games only</nerd>
+		<ru><![CDATA[Только уже импортированные игры]]></ru>
+		<ua><![CDATA[Тiльки вже iмпортованi iгри]]></ua>
+		<en><![CDATA[Already imported games only]]></en>
+	</translation>
+
+	<translation>
+		<nerd>New games only</nerd>
+		<ru><![CDATA[Только новые игры]]></ru>
+		<ua><![CDATA[Тiльки новi iгри]]></ua>
+		<en><![CDATA[New games only]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No team(s) games</nerd>
+		<ru><![CDATA[Только игры с ненайденными командами]]></ru>
+		<ua><![CDATA[Тiльки iгри з не знайденеми командами]]></ua>
+		<en><![CDATA[No team(s) games]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Finished games</nerd>
+		<ru><![CDATA[Только завершенные игры]]></ru>
+		<ua><![CDATA[Тiльки завершенi iгри]]></ua>
+		<en><![CDATA[Finished games]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Not finished games</nerd>
+		<ru><![CDATA[Только незавершенные игры]]></ru>
+		<ua><![CDATA[Тiльки незавершенi iгри]]></ua>
+		<en><![CDATA[Not finished games]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

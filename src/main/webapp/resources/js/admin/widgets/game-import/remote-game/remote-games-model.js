@@ -19,10 +19,15 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
+			this.on( 'events:select_deselect', this._selectDeselect, this );
 		},
 
 		url: function () {
 			return '/admin/rest/remote-games-import/remote-game/' + this.get( 'remoteGameId' ) + '/?cupId=' + this.cupId;
+		},
+
+		_selectDeselect: function( isSelected ) {
+			this.skipImport = ! isSelected;
 		}
 	} );
 

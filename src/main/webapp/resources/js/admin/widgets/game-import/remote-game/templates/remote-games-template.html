@@ -1,0 +1,41 @@
+<div class="row">
+
+	<div class="col-xs-12 col-lg-8">
+
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-all" data-filter-by="1" <%= remoteGameFilter == 1 ? 'checked' : '' %> >
+		<label for="remote-games-filter-all"><%= translator.allGamesLabel %></label>
+
+		<br />
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-exist" data-filter-by="2" <%= remoteGameFilter == 2 ? 'checked' : '' %> >
+		<label for="remote-games-filter-exist"><%= translator.alreadyImportedGamesOnlyLabel %></label>
+
+		<br />
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-new" data-filter-by="3" <%= remoteGameFilter == 3 ? 'checked' : '' %> >
+		<label for="remote-games-filter-new"><%= translator.newGamesOnlyLabel %></label>
+
+		<br />
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-no-team" data-filter-by="4" <%= remoteGameFilter == 4 ? 'checked' : '' %> >
+		<label for="remote-games-filter-no-team"><%= translator.noTeamGamesLabel %></label>
+
+		<br />
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-finished" data-filter-by="5" <%= remoteGameFilter == 5 ? 'checked' : '' %> >
+		<label for="remote-games-filter-finished"><%= translator.finishedGamesLabel %></label>
+
+		<br />
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-тще-finished" data-filter-by="6" <%= remoteGameFilter == 6 ? 'checked' : '' %> >
+		<label for="remote-games-filter-тще-finished"><%= translator.notFinishedGamesLabel %></label>
+
+	</div>
+
+	<div class="col-xs-12 col-lg-4">
+
+		<a class="fa fa-check-square-o js-select-all"> Select all</a>
+
+		<br />
+
+		<a class="fa fa-square-o js-deselect-all"> Deselect all</a>
+
+	</div>
+
+</div>
+

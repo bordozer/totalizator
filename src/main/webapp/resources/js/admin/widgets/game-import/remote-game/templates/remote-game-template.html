@@ -3,7 +3,7 @@
 	<div class="panel-heading">
 
 		<% if( isReadyForImport) { %>
-			<input type="checkbox" id="gamesToImport" <%= team1 && team2 ? 'checked' : ''%>>
+			<input type="checkbox" id="gamesToImport" class="js-games-to-import" <%= ! skipImport ? 'checked' : ''%>>
 		<% } %>
 
 		<% if( ! isReadyForImport ) { %>
@@ -64,11 +64,11 @@
 		<div class="row">
 
 			<div class="col-lg-6 text-center <%=matchResults.style1%>">
-				<%=score1%>
+				<%=score1%> <%= match ? '( ' + match.score1 + ' )' : '' %>
 			</div>
 
 			<div class="col-lg-6 text-center <%=matchResults.style2%>">
-				<%=score2%>
+				<%=score2%> <%= match ? '( ' + match.score2 + ' )' : '' %>
 			</div>
 
 		</div>
@@ -79,6 +79,9 @@
 
 		<% if( match ) { %>
 			<a href="/totalizator/matches/<%=match.matchId%>/bets/" class="fa fa-soccer-ball-o text-success" title="#<%=match.matchId%>"></a> <%=translator.theMatchIsAlreadyImported%>
+			<% if( match.matchFinished ) { %>
+				<i class="fa fa-flag-checkered"></i>
+			<% } %>
 			<br />
 		<% } %>
 

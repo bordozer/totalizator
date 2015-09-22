@@ -68,6 +68,14 @@ define( function ( require ) {
 				matchResults = service.matchResults( team1.teamId, model.score1, team2.teamId, model.score2 );
 			}
 
+			if ( atLeastOneTeamNotFound ) {
+				this.model.skipImport = true;
+			}
+
+			if ( match && match.matchFinished && match.score1 == model.score1 && match.score2 == model.score2 ) {
+				this.model.skipImport = true;
+			}
+
 			var data = _.extend( {}, model, {
 				match: match
 				, team1: team1
@@ -78,12 +86,9 @@ define( function ( require ) {
 				, importImpossible: atLeastOneTeamNotFound
 				, matchResults: matchResults
 				, panelColor: this._getPanelColor( match, atLeastOneTeamNotFound )
+				, skipImport: this.model.skipImport
 				, translator: translator
 			} );
-
-			if ( atLeastOneTeamNotFound ) {
-				this.model.skipImport = true;
-			}
 
 			this.$el.html( template( data ) );
 		},
