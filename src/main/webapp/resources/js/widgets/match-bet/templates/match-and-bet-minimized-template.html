@@ -15,7 +15,7 @@
 				<strong><a href="/totalizator/teams/<%- transformer.team1().teamId %>/"><%= transformer.team1().teamName %></a></strong>
 			</td>
 
-			<td width="30">
+			<td width="30" style="font-size: 12px;">
 				<% if( match.matchFinished ) { %>
 					<span class="<%= matchResults.style1 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score1() %></span>
 				<% } %>
@@ -46,7 +46,7 @@
 				<strong><a href="/totalizator/teams/<%- transformer.team2().teamId %>/"><%= transformer.team2().teamName %></a></strong>
 			</td>
 
-			<td>
+			<td style="font-size: 12px;">
 
 				<% if( match.matchFinished ) { %>
 					<span class="<%= matchResults.style2 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score2() %></span>
