@@ -95,7 +95,7 @@ define( function ( require ) {
 						, cupId: cup.cupId
 						, showFutureMatches: true
 					}
-					, matchViewMode: VIEW_MODE_MINIMIZED
+					, matchViewMode: VIEW_MODE_BET
 					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_STATISTICS
 					, currentUser: currentUser
 				};

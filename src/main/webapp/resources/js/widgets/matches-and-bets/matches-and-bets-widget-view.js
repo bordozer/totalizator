@@ -66,6 +66,7 @@ define( function ( require ) {
 		innerViewMenuItems: function() {
 
 			var isStatisticsView = this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_STATISTICS;
+			var showButtons = isStatisticsView || this.matchViewMode != 3;
 
 			return [
 				{ selector: 'js-matches_and_bets_mode_matches'
@@ -79,7 +80,7 @@ define( function ( require ) {
 					, link: '#'
 					, selected: isStatisticsView
 					, text: translator.matchesAndBetsViewMode_Statistics_Label
-					, button: ! isStatisticsView
+					, button: showButtons  && ! isStatisticsView
 				}
 				, { selector: 'splitter' }
 				, { selector: 'js-view_mode_bet'
@@ -88,7 +89,7 @@ define( function ( require ) {
 					, entity_id: VIEW_MODE_BET
 					, selected: this.matchViewMode == VIEW_MODE_BET
 					, text: translator.viewBetModeLabel
-					, button: isStatisticsView || ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED )
+					, button: showButtons  && ( isStatisticsView || ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED ) )
 				}
 				, { selector: 'js-view_mode_tabled'
 					, icon: 'fa fa-server'
@@ -96,7 +97,7 @@ define( function ( require ) {
 					, entity_id: VIEW_MODE_TABLE
 					, selected: this.matchViewMode == VIEW_MODE_TABLE
 					, text: translator.viewModeCompactLabel
-					, button: ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_TABLE
+					, button: showButtons  && ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_TABLE
 				}
 				, { selector: 'js-view_mode_minimized'
 					, icon: 'fa fa-bars'
@@ -104,7 +105,7 @@ define( function ( require ) {
 					, entity_id: VIEW_MODE_MINIMIZED
 					, selected: this.matchViewMode == VIEW_MODE_MINIMIZED
 					, text: translator.viewModeMinimizedLabel
-					, button: ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_MINIMIZED
+					, button: showButtons  && ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_MINIMIZED
 				}
 			];
 		},
