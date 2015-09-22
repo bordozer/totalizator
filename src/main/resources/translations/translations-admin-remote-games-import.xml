@@ -283,6 +283,41 @@
 	</translation>
 
 	<translation>
+		<nerd>Games found</nerd>
+		<ru><![CDATA[Найдено игр]]></ru>
+		<ua><![CDATA[Знайдено iгор]]></ua>
+		<en><![CDATA[Games found]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Games shown</nerd>
+		<ru><![CDATA[Показано игр]]></ru>
+		<ua><![CDATA[Показано iгор]]></ua>
+		<en><![CDATA[Games shown]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Select all</nerd>
+		<ru><![CDATA[Выделить все]]></ru>
+		<ua><![CDATA[Видiлити всi]]></ua>
+		<en><![CDATA[Select all]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Deselect all</nerd>
+		<ru><![CDATA[Снять выделение]]></ru>
+		<ua><![CDATA[Зняти виделення]]></ua>
+		<en><![CDATA[Deselect all]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

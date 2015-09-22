@@ -23,6 +23,10 @@ define( function ( require ) {
 		, notFinishedGamesLabel: "Not finished games"
 		, selectedForImportGamesLabel: "Selected for import games"
 		, skippedForImportGamesLabel: "Skipped for import games"
+		, gamesFoundLabel: "Games found"
+		, gamesShownLabel: "Games shown"
+		, selectAllLabel: "Select all"
+		, deselectAllLabel: "Deselect all"
 	} );
 
 	return Backbone.View.extend( {
@@ -56,6 +60,7 @@ define( function ( require ) {
 			this.$el.html( template( { remoteGameFilter: this.remoteGameFilter, translator: translator } ) );
 
 			var self = this;
+			var gamesShown = 0;
 			this.model.forEach( function ( model ) {
 
 				if ( ! self._isModelInFilter( model ) ) {
@@ -63,7 +68,12 @@ define( function ( require ) {
 				}
 
 				self._renderRemoteGame( model );
+
+				gamesShown++;
 			} );
+
+			this.$( '.js-games-found' ).text( this.model.length );
+			this.$( '.js-games-shown' ).text( gamesShown );
 		},
 
 		_isModelInFilter: function( model ) {
