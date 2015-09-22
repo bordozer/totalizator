@@ -47,12 +47,7 @@
 }
 
 .bottom-dotted {
-	 border-bottom: 1px silver dotted;
-}
-
-.top-bottom-lined {
-	 border-top: 1px silver solid;
-	 border-bottom: 1px silver solid;
+	 border-bottom: 1px dotted gray;
 }
 
 .padding-top-bottom {
