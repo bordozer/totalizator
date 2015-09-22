@@ -1,0 +1,40 @@
+<div class="row <%=color%> bottom-dotted activity-stream">
+
+	<div class="col-xs-12">
+
+		<div class="row">
+
+			<div class="col-xs-4" title="<%= activityDate %> <%= activityTime %>, <%= activityTimeAgo %>">
+				<%= activityTime %>
+			</div>
+
+			<div class="col-xs-4">
+				<a href="/totalizator/sports/<%= match.category.sportKind.sportKindId %>/"><%= match.category.sportKind.sportKindName %></a>
+			</div>
+
+			<div class="col-xs-4 text-right">
+
+				<a href="/totalizator/matches/<%= match.matchId %>/bets/">
+					<img src="<%= match.team1.teamLogo %>" title="<%= match.team1.teamName %>" height="16" width="16">
+					<img src="<%= match.team2.teamLogo %>" title="<%= match.team2.teamName %>" height="16" width="16">
+				</a>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-xs-12">
+
+				<a href="/totalizator/users/<%= activityOfUser.userId %>/"><%= activityOfUser.userName %></a>
+
+				<span class="text-muted"><%= activityText %></span>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

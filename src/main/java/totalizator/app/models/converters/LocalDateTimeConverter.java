@@ -1,4 +1,4 @@
-package totalizator.app.models;
+package totalizator.app.models.converters;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

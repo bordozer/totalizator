@@ -50,6 +50,11 @@
 	 border-bottom: 1px dotted gray;
 }
 
+.activity-stream {
+	font-size: 11px;
+	line-height: 25px;
+}
+
 .padding-top-bottom {
 	padding-top: 5px;
 	padding-bottom: 5px;

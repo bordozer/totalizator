@@ -20,6 +20,7 @@ define( function ( require ) {
 		, userBetsCount: "User bets count"
 		, matchesWithoutBetsCount: "Matches without bets count"
 		, firstMatchTimeLabel: "First match beginning time"
+		, firstMatchNoBetTimeTitleLabel: "First match without bet beginning time title"
 		, firstMatchNoBetTimeLabel: "First match without bet beginning time"
 		, noMatchesFoundLabel: "No matches found"
 	} );

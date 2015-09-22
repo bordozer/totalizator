@@ -154,6 +154,7 @@ public class MatchesAndBetsRestController {
 
 			existingBet.setBetScore1( score1 );
 			existingBet.setBetScore2( score2 );
+			existingBet.setBetTime( dateTimeService.getNow() );
 			matchBetsService.save( existingBet );
 
 			return dtoService.transformMatchBet( existingBet, currentUser, currentUser );

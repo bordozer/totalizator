@@ -9,6 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/portal-template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
+	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 
 	var app = require( 'app' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -33,6 +34,7 @@ define( function ( require ) {
 			this.model.fetch( { cache: false } );
 		},
 
+
 		render: function () {
 
 			this.$el.html( template( {
@@ -43,9 +45,10 @@ define( function ( require ) {
 
 			this._renderMatches();
 
+			this._renderActivityStream();
+
 			return this;
 		},
-
 		_renderMatchesOnDate: function () {
 
 			var model = this.model.toJSON();
@@ -101,6 +104,10 @@ define( function ( require ) {
 				};
 				matchesAndBetsView( el, options );
 			} );
+		},
+
+		_renderActivityStream: function () {
+			activityStreamWidget( this.$( '.js-portal-page-activity-stream' ), {} );
 		}
 	} );
 

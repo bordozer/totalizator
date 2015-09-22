@@ -12,6 +12,7 @@ import totalizator.app.services.CupBetsService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.UserGroupService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.activiries.ActivityStreamService;
 import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
@@ -47,6 +48,9 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 	@Autowired
 	private UserGroupService userGroupService;
+
+	@Autowired
+	private ActivityStreamService activityStreamService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -114,13 +118,31 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	@Transactional
 	public MatchBet save( final MatchBet entry ) {
-		return matchBetRepository.save( entry );
+
+		final int entryId = entry.getId();
+
+		final MatchBet matchBet = matchBetRepository.save( entry );
+
+		if ( entryId == 0 ) {
+			activityStreamService.matchBetCreated( matchBet );
+		} else {
+			activityStreamService.matchBetChanged( matchBet );
+		}
+
+		return matchBet;
 	}
 
 	@Override
 	@Transactional
 	public void delete( final int id ) {
+
+		final MatchBet matchBet = load( id );
+		final Match match = matchBet.getMatch();
+		final User user = matchBet.getUser();
+
 		matchBetRepository.delete( id );
+
+		activityStreamService.matchBetDeleted( user, match.getId() );
 	}
 
 	@Override

@@ -70,6 +70,7 @@ public class CupRepository implements CupDao {
 	}
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public List<Cup> loadCups( final PointsCalculationStrategy strategy ) {
 		return em.createNamedQuery( Cup.LOAD_ALL_USE_STRATEGY, Cup.class )
 				.setParameter( "strategyId", strategy.getId() )

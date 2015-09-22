@@ -46,6 +46,13 @@
 
 	<translation>
 		<nerd>First match without bet beginning time</nerd>
+		<ru><![CDATA[Матч без ставки]]></ru>
+		<ua><![CDATA[Гра без ставки]]></ua>
+		<en><![CDATA[Match without a bet]]></en>
+	</translation>
+
+	<translation>
+		<nerd>First match without bet beginning time title</nerd>
 		<ru><![CDATA[Ближайший матч без ставки]]></ru>
 		<ua><![CDATA[Найближча гра без ставки]]></ua>
 		<en><![CDATA[First match without bet beginning time]]></en>

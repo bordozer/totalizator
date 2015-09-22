@@ -172,4 +172,16 @@
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
+	<cache name="totalizator.app.cache.activityStreamEntry"
+		   maxElementsInMemory="3000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.activityStreamEntries"
+		   maxElementsInMemory="3000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
 </ehcache>

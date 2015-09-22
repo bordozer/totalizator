@@ -1,7 +1,7 @@
 package totalizator.app.models;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
+import totalizator.app.models.converters.LocalDateTimeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

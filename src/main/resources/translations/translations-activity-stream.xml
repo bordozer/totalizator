@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>User created bet</nerd>
+		<ru><![CDATA[сделал(а) ставку]]></ru>
+		<ua><![CDATA[зробив ставку]]></ua>
+		<en><![CDATA[made a bet]]></en>
+	</translation>
+
+	<translation>
+		<nerd>User changed bet</nerd>
+		<ru><![CDATA[изменил(а) ставку]]></ru>
+		<ua><![CDATA[змiнив ставку]]></ua>
+		<en><![CDATA[changed a bet]]></en>
+	</translation>
+
+	<translation>
+		<nerd>User deleted bet</nerd>
+		<ru><![CDATA[отменил(а) ставку]]></ru>
+		<ua><![CDATA[вiдмiнив ставку]]></ua>
+		<en><![CDATA[deleted a bet]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>
