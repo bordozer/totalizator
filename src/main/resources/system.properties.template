@@ -4,3 +4,12 @@ system.admin.ids=1,2,3
 system.logos.path=/home/blu/dev/totalizator/logos/
 
 system.imports.path=/home/blu/dev/totalizator/imports/
+
+# User agent key for sport statistics API
+# Only 50 requests per day are allowed without the key
+# Can ge requested here: http://api.football-data.org/register
+footytube.com_useragent_string=
+
+# User agent key for sport statistics API
+# Can ge requested here: http://www.footytube.com/openfooty/signup.php
+api.football-data.org_useragent_string=
