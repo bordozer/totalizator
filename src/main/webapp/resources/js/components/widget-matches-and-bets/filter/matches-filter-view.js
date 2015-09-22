@@ -48,8 +48,9 @@ define( function ( require ) {
 
 			this.sportKinds = service.loadSportKinds();
 
+			var model = this.model.toJSON();
 			if ( ! this.model.selectedSportKindId ) {
-				this.model.selectedSportKindId = this.sportKinds[ 0 ].sportKindId;
+				this.model.selectedSportKindId = service.loadCategory( model.categoryId ).sportKind.sportKindId
 			}
 
 			this.users = service.loadUsers();
