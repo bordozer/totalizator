@@ -25,11 +25,15 @@ define( function ( require ) {
 		events: {},
 
 		initialize: function ( options ) {
-			this.model.on( 'sync', this.render, this );
-			this.model.refresh();
+			this.model.on( 'sync', this._renderActivityStream, this );
+			this.render();
 		},
 
 		renderBody: function () {
+			this.model.refresh();
+		},
+
+		_renderActivityStream: function () {
 
 			var container = this.$( this.windowBodyContainerSelector );
 			container.empty();
