@@ -10,7 +10,6 @@ import totalizator.app.services.matches.imports.strategies.uefa.UEFAGameParsingS
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.TestCase.*;
@@ -34,20 +33,39 @@ public class UEFAGameParsingServiceTest {
 	public void extractRemoteGameIds() {
 
 		final RemoteGameParsingService uefaGameParsingService = new UEFAGameParsingServiceImpl();
-		final Set<RemoteGame> remoteGameIds = uefaGameParsingService.loadGamesFromJSON( testData.cup, REMOTE_GAMES_IDS_JSON );
+		final List<RemoteGame> remoteGames = newArrayList( uefaGameParsingService.loadGamesFromJSON( testData.cup, REMOTE_GAMES_IDS_JSON ) );
 
-		assertEquals( remoteGameIds.size(), EXPECTED_REMOTE_GAME_IDS.size() );
+		assertEquals( remoteGames.size(), EXPECTED_REMOTE_GAME_IDS.size() );
 
 		for ( final String remoteGameId : EXPECTED_REMOTE_GAME_IDS ) {
-			assertTrue( doesGameIdPresent( remoteGameIds, remoteGameId ) );
+			assertTrue( doesGameIdPresent( remoteGames, remoteGameId ) );
 		}
 
 		int i = 0;
-		for ( final RemoteGame remoteGame : remoteGameIds ) {
+		for ( final RemoteGame remoteGame : remoteGames ) {
 			assertEquals( EXPECTED_REMOTE_GAME_IDS.get( i ), remoteGame.getRemoteGameId() );
 
 			i++;
 		}
+
+		final RemoteGame remoteGame = remoteGames.get( 2 );
+		assertEquals( "147463", remoteGame.getRemoteGameId() );
+
+		assertEquals( "Real Madrid CF", remoteGame.getRemoteTeam1Id() );
+		assertEquals( "Real Madrid CF", remoteGame.getRemoteTeam1Name() );
+
+		assertEquals( "Granada CF", remoteGame.getRemoteTeam2Id() );
+		assertEquals( "Granada CF", remoteGame.getRemoteTeam2Name() );
+
+		assertEquals( LocalDateTime.parse( "2015-09-19T14:00" ), remoteGame.getBeginningTime() );
+		assertEquals( 1, remoteGame.getHomeTeamNumber() );
+
+		assertEquals( 0, remoteGame.getScore1() );
+		assertEquals( 0, remoteGame.getScore2() );
+
+		assertFalse( remoteGame.isFinished() );
+
+		assertTrue( remoteGame.isLoaded() );
 	}
 
 	@Test
@@ -76,7 +94,7 @@ public class UEFAGameParsingServiceTest {
 
 		assertTrue( remoteGame.isFinished() );
 
-		assertFalse( remoteGame.isLoaded() );
+		assertTrue( remoteGame.isLoaded() );
 	}
 
 	@Test
@@ -105,12 +123,12 @@ public class UEFAGameParsingServiceTest {
 
 		assertFalse( remoteGame.isFinished() );
 
-		assertFalse( remoteGame.isLoaded() );
+		assertTrue( remoteGame.isLoaded() );
 	}
 
-	private boolean doesGameIdPresent( final Set<RemoteGame> remoteGameIds, final String remoteGameId ) {
+	private boolean doesGameIdPresent( final List<RemoteGame> remoteGames, final String remoteGameId ) {
 
-		for ( final RemoteGame gameId : remoteGameIds ) {
+		for ( final RemoteGame gameId : remoteGames ) {
 			if ( gameId.getRemoteGameId().equals( remoteGameId ) ) {
 				return true;
 			}
