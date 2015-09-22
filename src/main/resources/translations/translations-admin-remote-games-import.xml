@@ -269,10 +269,17 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Selected for import games</nerd>
+		<ru><![CDATA[Только отмеченные]]></ru>
+		<ua><![CDATA[Тiльки позначенi]]></ua>
+		<en><![CDATA[Selected for import games]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Skipped for import games</nerd>
+		<ru><![CDATA[Только не отмеченные]]></ru>
+		<ua><![CDATA[Тiльки не позначенi]]></ua>
+		<en><![CDATA[Skipped for import games]]></en>
 	</translation>
 
 	<translation>

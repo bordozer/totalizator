@@ -21,6 +21,8 @@ define( function ( require ) {
 		, noTeamGamesLabel: "No team(s) games"
 		, finishedGamesLabel: "Finished games"
 		, notFinishedGamesLabel: "Not finished games"
+		, selectedForImportGamesLabel: "Selected for import games"
+		, skippedForImportGamesLabel: "Skipped for import games"
 	} );
 
 	return Backbone.View.extend( {
@@ -75,6 +77,8 @@ define( function ( require ) {
 			var showOnlyGamesWithoutTeamsFound = this.remoteGameFilter == 4;
 			var showOnlFinishedGames = this.remoteGameFilter == 5;
 			var showOnlyNotFinishedGames = this.remoteGameFilter == 6;
+			var checkedForImportGames = this.remoteGameFilter == 7;
+			var notCheckedForImportGames = this.remoteGameFilter == 8;
 
 			var match = remoteGameLocalData.match;
 			var team1 = remoteGameLocalData.team1;
@@ -98,6 +102,14 @@ define( function ( require ) {
 			}
 
 			if ( showOnlyNotFinishedGames && json.finished ) {
+				return false;
+			}
+
+			if ( checkedForImportGames && model.skipImport ) {
+				return false;
+			}
+
+			if ( notCheckedForImportGames && ! model.skipImport ) {
 				return false;
 			}
 

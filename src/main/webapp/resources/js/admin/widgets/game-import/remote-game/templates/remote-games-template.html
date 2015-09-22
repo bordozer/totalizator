@@ -22,8 +22,16 @@
 		<label for="remote-games-filter-finished"><%= translator.finishedGamesLabel %></label>
 
 		<br />
-		<input type="radio" name="remote-games-filter" id="remote-games-filter-тще-finished" data-filter-by="6" <%= remoteGameFilter == 6 ? 'checked' : '' %> >
-		<label for="remote-games-filter-тще-finished"><%= translator.notFinishedGamesLabel %></label>
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-not-finished" data-filter-by="6" <%= remoteGameFilter == 6 ? 'checked' : '' %> >
+		<label for="remote-games-filter-not-finished"><%= translator.notFinishedGamesLabel %></label>
+
+		<br />
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-checked" data-filter-by="7" <%= remoteGameFilter == 7 ? 'checked' : '' %> >
+		<label for="remote-games-filter-checked"><%= translator.selectedForImportGamesLabel %></label>
+
+		<br />
+		<input type="radio" name="remote-games-filter" id="remote-games-filter-not-checked" data-filter-by="8" <%= remoteGameFilter == 8 ? 'checked' : '' %> >
+		<label for="remote-games-filter-not-checked"><%= translator.skippedForImportGamesLabel %></label>
 
 	</div>
 
