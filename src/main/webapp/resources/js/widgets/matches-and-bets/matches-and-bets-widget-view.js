@@ -113,7 +113,9 @@ define( function ( require ) {
 
 			var container = this.$( this.windowBodyContainerSelector );
 			container.empty();
-			container.addClass( 'nopadding' );
+			if ( this.matchViewMode == 3 ) {
+				container.addClass( 'nopadding' );
+			}
 
 			var self = this;
 			this.model.forEach( function( matchBet ) {

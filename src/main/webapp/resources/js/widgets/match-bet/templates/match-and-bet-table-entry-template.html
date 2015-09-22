@@ -4,11 +4,11 @@
 
 	<div class="col-xs-6 col-lg-1 text-center js-window-drop-down-menu" style="line-height: 30px;"></div>
 
-	<div class="col-xs-6 col-lg-1 nopadding text-center" title="#<%= matchId %>, <%= timeToMatchBeginningTime %>" style="line-height: 30px;">
+	<div class="col-xs-6 col-lg-1 text-center" title="#<%= matchId %>, <%= timeToMatchBeginningTime %>" style="line-height: 30px;">
 		<small><%= transformer.formatTime() %></small>
 	</div>
 
-	<div class="col-xs-3 nopadding text-right <%= matchResults.style1 %> ">
+	<div class="col-xs-3 text-right <%= matchResults.style1 %> ">
 		<% if( transformer.homeTeamNumber() == 1 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
@@ -63,7 +63,7 @@
 		<% } %>
 	</div>
 
-	<div class="col-xs-1 nopadding text-center <%= userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
+	<div class="col-xs-1 text-right <%= userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
 		<% if( userMatchPointsHolder.summaryPoints != 0 ) { %>
 			<%-userMatchPointsHolder.summaryPoints%> <sup><%= userMatchPointsHolder.matchBonus != 0 ? userMatchPointsHolder.matchBetPoints + '+' + userMatchPointsHolder.matchBonus : ''%></sup>
 		<% } %>
