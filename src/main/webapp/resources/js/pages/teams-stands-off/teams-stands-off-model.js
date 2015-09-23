@@ -9,7 +9,6 @@ define( function ( require ) {
 	return Backbone.Model.extend( {
 
 		defaults: {
-			cupsToShow: []
 		},
 
 		initialize: function ( options ) {

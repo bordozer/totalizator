@@ -6,7 +6,9 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	var template = _.template( require( 'text!./templates/teams-stands-off-template.html' ) );
+	var templateTeams = _.template( require( 'text!./templates/teams-template.html' ) );
+	var templateHistory = _.template( require( 'text!./templates/teams-stands-off-template.html' ) );
+	var templateNoHistory = _.template( require( 'text!./templates/no-history.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
@@ -16,6 +18,7 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Teams standoff history"
+		, teamsHaveNoMatchesYet: "The teams have no matches yet"
 	} );
 
 	return Backbone.View.extend( {
@@ -36,19 +39,29 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
+			var teamsData = _.extend( {}, {
+				team1: model.team1
+				, team2: model.team2
+				, translator: translator
+			} );
+			this.$el.html( templateTeams( teamsData ) );
+
+			if ( ! model.standoffsByCup ) {
+				this.$el.append( templateNoHistory( { translator: translator } ) );
+				return;
+			}
+
 			_.each( model.standoffsByCup, function( standoff ) {
 				standoff.style1 = standoff.score1 > standoff.score2 ? 'text-success' : ( standoff.score1 < standoff.score2 ? 'text-danger' : '' );
 				standoff.style2 = standoff.score2 > standoff.score1 ? 'text-success' : ( standoff.score2 < standoff.score1 ? 'text-danger' : '' );
 			});
 
 			var data = _.extend( {}, {
-				team1: model.team1
-				, team2: model.team2
-				, standoffsByCup: model.standoffsByCup
+				standoffsByCup: model.standoffsByCup
 				, selectedCup: model.cupToShow
 				, translator: translator
 			} );
-			this.$el.html( template( data ) );
+			this.$el.append( templateHistory( data ) );
 
 			this._renderMatches( model.cupToShow );
 		},

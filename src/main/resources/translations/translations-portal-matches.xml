@@ -31,6 +31,13 @@
 	</translation>
 
 	<translation>
+		<nerd>The teams have no matches yet</nerd>
+		<ru><![CDATA[Нет данных о предыдущих встречах команд]]></ru>
+		<ua><![CDATA[Даних про попереднi зустрiчання команд немає]]></ua>
+		<en><![CDATA[The teams have no matches yet]]></en>
+	</translation>
+
+	<translation>
 		<nerd>Portal page / Matches / Menu: All bets</nerd>
 		<ru><![CDATA[Все ставки на матч]]></ru>
 		<en><![CDATA[All bets]]></en>
