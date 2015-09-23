@@ -7,16 +7,29 @@ import java.time.LocalDateTime;
 
 public abstract class AbstractActivityStreamEntry {
 
+	private int id;
+
 	protected User activityOfUser;
 	protected LocalDateTime activityTime;
 	protected ActivityStreamEntryType activityStreamEntryType;
 	protected int activityEntryId;
 
 	public AbstractActivityStreamEntry( final ActivityStreamEntry activityStreamEntry ) {
+
+		this.id = activityStreamEntry.getId();
+
 		this.activityOfUser = activityStreamEntry.getActivityOfUser();
 		this.activityTime = activityStreamEntry.getActivityTime();
 		this.activityStreamEntryType = activityStreamEntry.getActivityStreamEntryType();
 		this.activityEntryId = activityStreamEntry.getActivityEntryId();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId( final int id ) {
+		this.id = id;
 	}
 
 	public User getActivityOfUser() {

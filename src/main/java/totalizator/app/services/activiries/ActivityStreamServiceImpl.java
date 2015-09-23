@@ -70,6 +70,12 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 		activityStreamRepository.save( getMatchBetEvent( null, matchId, score1, score2, ActivityStreamEntryType.MATCH_FINISHED ) );
 	}
 
+	@Override
+	@Transactional
+	public void delete( final int id ) {
+		activityStreamRepository.delete( id );
+	}
+
 	private List<AbstractActivityStreamEntry> transformEntries( List<ActivityStreamEntry> activityStreamEntries ) {
 
 		return activityStreamEntries

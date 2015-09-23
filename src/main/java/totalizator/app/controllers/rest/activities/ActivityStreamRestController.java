@@ -46,6 +46,11 @@ public class ActivityStreamRestController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/portal/" )
 	public List<ActivityStreamDTO> portalPageActivities( final Principal principal ) {
+
+		for ( final AbstractActivityStreamEntry entry : activityStreamService.loadAll() ) {
+			activityStreamService.delete( entry.getId() );
+		}
+
 		return transformActivities( activityStreamService.loadAllForLast( 24 ), userService.findByLogin( principal.getName() ) );
 	}
 

@@ -23,4 +23,6 @@ public interface ActivityStreamService {
 	void matchBetDeleted( final User user, final int matchId, final int score1, final int score2 );
 
 	void matchFinished( final int matchId, final int score1, final int score2 );
+
+	void delete( final int id );
 }
