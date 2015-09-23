@@ -3,6 +3,13 @@
 <translations>
 
 	<translation>
+		<nerd>Activity stream</nerd>
+		<ru><![CDATA[Лента событий]]></ru>
+		<ua><![CDATA[Що коїлося]]></ua>
+		<en><![CDATA[Activity stream]]></en>
+	</translation>
+
+	<translation>
 		<nerd>User created bet</nerd>
 		<ru><![CDATA[сделал(а) ставку]]></ru>
 		<ua><![CDATA[зробив ставку]]></ua>

@@ -12,7 +12,9 @@ public interface ActivityStreamService {
 
 	void matchBetCreated( final MatchBet matchBet );
 
-	void matchBetChanged( final MatchBet matchBet );
+	void matchBetChanged( final MatchBet matchBet, final int oldScore1, final int oldScore2 );
 
-	void matchBetDeleted( final User user, final int matchId );
+	void matchBetDeleted( final User user, final int matchId, final int score1, final int score2 );
+
+	void matchFinished( final int matchId, final int score1, final int score2 );
 }

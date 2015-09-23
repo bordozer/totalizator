@@ -4,7 +4,7 @@
 
 		<div class="row">
 
-			<div class="col-xs-4" title="<%= activityDate %> <%= activityTime %>, <%= activityTimeAgo %>">
+			<div class="col-xs-2" title="<%= activityDate %> <%= activityTime %>, <%= activityTimeAgo %>">
 				<%= activityTime %>
 			</div>
 
@@ -12,11 +12,11 @@
 				<a href="/totalizator/sports/<%= match.category.sportKind.sportKindId %>/"><%= match.category.sportKind.sportKindName %></a>
 			</div>
 
-			<div class="col-xs-4 text-right">
+			<div class="col-xs-6 text-right">
 
 				<a href="/totalizator/matches/<%= match.matchId %>/bets/">
-					<img src="<%= match.team1.teamLogo %>" title="<%= match.team1.teamName %>" height="16" width="16">
-					<img src="<%= match.team2.teamLogo %>" title="<%= match.team2.teamName %>" height="16" width="16">
+					<img src="<%= match.team1.teamLogo %>" title="<%= match.team1.teamName %>" height="24" width="24">
+					<img src="<%= match.team2.teamLogo %>" title="<%= match.team2.teamName %>" height="24" width="24">
 				</a>
 
 			</div>
@@ -30,6 +30,12 @@
 				<a href="/totalizator/users/<%= activityOfUser.userId %>/"><%= activityOfUser.userName %></a>
 
 				<span class="text-muted"><%= activityText %></span>
+
+				<% if( showBetData ) {%>
+					<span style="font-size: 12px;">
+						<%= score1 %> <sup><%= showOldScores ? oldScore1 : '' %></sup> - <%= score2 %> <sup><%= showOldScores ? oldScore2 : '' %></sup>
+					</span>
+				<% } %>
 
 			</div>
 

@@ -121,12 +121,17 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 		final int entryId = entry.getId();
 
+		final MatchBet savedBet = matchBetRepository.load( entryId );
+
 		final MatchBet matchBet = matchBetRepository.save( entry );
 
 		if ( entryId == 0 ) {
 			activityStreamService.matchBetCreated( matchBet );
 		} else {
-			activityStreamService.matchBetChanged( matchBet );
+			final int oldScore1 = savedBet.getBetScore1();
+			final int oldScore2 = savedBet.getBetScore2();
+
+			activityStreamService.matchBetChanged( matchBet, oldScore1, oldScore2 );
 		}
 
 		return matchBet;
@@ -142,7 +147,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 		matchBetRepository.delete( id );
 
-		activityStreamService.matchBetDeleted( user, match.getId() );
+		activityStreamService.matchBetDeleted( user, match.getId(), matchBet.getBetScore1(), matchBet.getBetScore2() );
 	}
 
 	@Override

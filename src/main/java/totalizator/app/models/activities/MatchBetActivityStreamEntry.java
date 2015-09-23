@@ -1,19 +1,21 @@
 package totalizator.app.models.activities;
 
+import com.google.gson.Gson;
 import totalizator.app.models.ActivityStreamEntry;
-import totalizator.app.models.MatchBet;
+import totalizator.app.models.activities.events.MatchBetEvent;
 
 public class MatchBetActivityStreamEntry extends AbstractActivityStreamEntry {
 
-	private final MatchBet matchBet;
+	private final MatchBetEvent matchBetEvent;
 
-	public MatchBetActivityStreamEntry( final ActivityStreamEntry activityStreamEntry, final MatchBet matchBet ) {
+	public MatchBetActivityStreamEntry( final ActivityStreamEntry activityStreamEntry ) {
+
 		super( activityStreamEntry );
 
-		this.matchBet = matchBet;
+		matchBetEvent = new Gson().fromJson( activityStreamEntry.getEventJson(), MatchBetEvent.class );
 	}
 
-	public MatchBet getMatchBet() {
-		return matchBet;
+	public MatchBetEvent getMatchBetEvent() {
+		return matchBetEvent;
 	}
 }

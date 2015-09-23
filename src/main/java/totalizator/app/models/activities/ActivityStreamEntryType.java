@@ -5,6 +5,7 @@ public enum ActivityStreamEntryType {
 	MATCH_BET_CREATED( 1 )
 	, MATCH_BET_CHANGED( 2 )
 	, MATCH_BET_DELETED( 3 )
+	, MATCH_FINISHED( 4 )
 	;
 
 	private final int id;

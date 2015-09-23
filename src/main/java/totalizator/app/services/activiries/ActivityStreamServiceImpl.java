@@ -13,8 +13,6 @@ import totalizator.app.models.activities.MatchActivityStreamEntry;
 import totalizator.app.models.activities.MatchBetActivityStreamEntry;
 import totalizator.app.models.activities.events.MatchBetEvent;
 import totalizator.app.models.activities.events.MatchEvent;
-import totalizator.app.services.matches.MatchBetsService;
-import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.util.List;
@@ -30,12 +28,6 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	@Autowired
 	private DateTimeService dateTimeService;
 
-	@Autowired
-	private MatchBetsService matchBetsService;
-
-	@Autowired
-	private MatchService matchService;
-
 	@Override
 	public List<AbstractActivityStreamEntry> loadAll() {
 
@@ -49,9 +41,10 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 						switch ( activityStreamEntry.getActivityStreamEntryType() ) {
 							case MATCH_BET_CREATED:
 							case MATCH_BET_CHANGED:
-								return new MatchBetActivityStreamEntry( activityStreamEntry, matchBetsService.load( activityStreamEntry.getActivityEntryId() ) );
+								return new MatchBetActivityStreamEntry( activityStreamEntry );
 							case MATCH_BET_DELETED:
-								return new MatchActivityStreamEntry( activityStreamEntry, matchService.load( activityStreamEntry.getActivityEntryId() ) );
+							case MATCH_FINISHED:
+								return new MatchActivityStreamEntry( activityStreamEntry );
 						}
 
 						throw new IllegalArgumentException( String.format( "Unsupported activity type: %s", activityStreamEntry.getActivityStreamEntryType() ) );
@@ -63,34 +56,43 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	@Override
 	@Transactional
 	public void matchBetCreated( final MatchBet matchBet ) {
-		activityStreamRepository.save( createFromMatchBet( matchBet, ActivityStreamEntryType.MATCH_BET_CREATED ) );
+		activityStreamRepository.save( createFromMatchBet( matchBet, ActivityStreamEntryType.MATCH_BET_CREATED, 0, 0 ) );
 	}
 
 	@Override
 	@Transactional
-	public void matchBetChanged( final MatchBet matchBet ) {
-		activityStreamRepository.save( createFromMatchBet( matchBet, ActivityStreamEntryType.MATCH_BET_CHANGED ) );
+	public void matchBetChanged( final MatchBet matchBet, final int oldScore1, final int oldScore2 ) {
+		activityStreamRepository.save( createFromMatchBet( matchBet, ActivityStreamEntryType.MATCH_BET_CHANGED, oldScore1, oldScore2 ) );
 	}
 
 	@Override
-	public void matchBetDeleted( final User user, final int matchId ) {
+	public void matchBetDeleted( final User user, final int matchId, final int score1, final int score2 ) {
+		activityStreamRepository.save( getMatchBetEvent( user, matchId, score1, score2, ActivityStreamEntryType.MATCH_BET_DELETED ) );
+	}
+
+	@Override
+	public void matchFinished( final int matchId, final int score1, final int score2 ) {
+		activityStreamRepository.save( getMatchBetEvent( null, matchId, score1, score2, ActivityStreamEntryType.MATCH_FINISHED ) );
+	}
+
+	private ActivityStreamEntry getMatchBetEvent( final User user, final int matchId, final int score1, final int score2, ActivityStreamEntryType activityStreamEntryType ) {
 
 		final ActivityStreamEntry activity = new ActivityStreamEntry( user, dateTimeService.getNow() );
 
 		activity.setActivityEntryId( matchId );
-		activity.setActivityStreamEntryType( ActivityStreamEntryType.MATCH_BET_DELETED );
-		activity.setEvent( new MatchEvent( matchId ) );
-
-		activityStreamRepository.save( activity );
+		activity.setActivityStreamEntryType( activityStreamEntryType );
+		activity.setEvent( new MatchEvent( matchId, score1, score2 ) );
+		return activity;
 	}
 
-	private ActivityStreamEntry createFromMatchBet( final MatchBet matchBet, final ActivityStreamEntryType activityStreamEntryType ) {
+	private ActivityStreamEntry createFromMatchBet( final MatchBet matchBet, final ActivityStreamEntryType activityStreamEntryType, final int oldScore1, final int oldScore2 ) {
 
 		final ActivityStreamEntry activity = new ActivityStreamEntry( matchBet.getUser(), matchBet.getBetTime() );
 
-		activity.setActivityEntryId( matchBet.getId() );
+		final int matchId = matchBet.getMatch().getId();
+		activity.setActivityEntryId( matchId );
 		activity.setActivityStreamEntryType( activityStreamEntryType );
-		activity.setEvent( new MatchBetEvent( matchBet.getId(), matchBet.getBetScore1(), matchBet.getBetScore2() ) );
+		activity.setEvent( new MatchBetEvent( matchId, matchBet.getBetScore1(), matchBet.getBetScore2(), oldScore1, oldScore2 ) );
 
 		return activity;
 	}

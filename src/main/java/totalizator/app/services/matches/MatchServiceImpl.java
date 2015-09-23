@@ -13,6 +13,7 @@ import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.services.CupService;
+import totalizator.app.services.activiries.ActivityStreamService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDate;
@@ -37,6 +38,9 @@ public class MatchServiceImpl implements MatchService {
 
 	@Autowired
 	private MatchBetsService matchBetsService;
+
+	@Autowired
+	private ActivityStreamService activityStreamService;
 
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
@@ -145,7 +149,14 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	@Transactional
 	public Match save( final Match entry ) {
-		return matchRepository.save( entry );
+
+		final Match match = matchRepository.save( entry );
+
+		if ( match.isMatchFinished() ) {
+			activityStreamService.matchFinished( match.getId(), match.getScore1(), match.getScore2() );
+		}
+
+		return match;
 	}
 
 	@Override

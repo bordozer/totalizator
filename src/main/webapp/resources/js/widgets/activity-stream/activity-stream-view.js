@@ -7,6 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/match-bet-template.html' ) );
+	var templateMatchFinished = _.template( require( 'text!./templates/match-finished.html' ) );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
@@ -18,6 +19,7 @@ define( function ( require ) {
 		, betCreated: "User created bet"
 		, betChanged: "User changed bet"
 		, betDeleted: "User deleted bet"
+		, matchFinished: "Match finished"
 	} );
 
 	return WidgetView.extend( {
@@ -45,15 +47,16 @@ define( function ( require ) {
 
 				var data = _.extend( {}, jmodel, {
 					activityText: self._getActivityText( jmodel.activityStreamEntryTypeId )
-					, match: self._getMatch( jmodel )
+					, match: jmodel.match
 					, color: self._getActivityColor( jmodel.activityStreamEntryTypeId )
 					, activityDate: dateTimeService.formatDate( dateTimeService.parseDate( jmodel.activityTime ) )
 					, activityTime: dateTimeService.formatTimeDisplay( jmodel.activityTime )
 					, activityTimeAgo: dateTimeService.fromNow( jmodel.activityTime )
+					, showBetData: jmodel.showBetData
 					, translator: translator
 				} );
 
-				container.append( template( data ) );
+				container.append( self._getRenderTemplate( data ) );
 			} );
 
 			this.trigger( 'inner-view-rendered' );
@@ -67,15 +70,13 @@ define( function ( require ) {
 			return 'fa-hand-peace-o';
 		},
 
-		_getMatch: function( jmodel ) {
+		_getRenderTemplate: function ( data ) {
 
-			if ( jmodel.activityStreamEntryTypeId == 1 || jmodel.activityStreamEntryTypeId == 2 ) {
-				return jmodel.matchBet.match;
+			if ( data.activityStreamEntryTypeId == 4  ) {
+				return templateMatchFinished( data );
 			}
 
-			if ( jmodel.activityStreamEntryTypeId == 3 ) {
-				return jmodel.match;
-			}
+			return template( data );
 		},
 
 		_getActivityText: function( activityStreamEntryTypeId ) {
@@ -91,20 +92,28 @@ define( function ( require ) {
 			if ( activityStreamEntryTypeId == 3 ) {
 				return translator.betDeleted;
 			}
+
+			if ( activityStreamEntryTypeId == 4 ) {
+				return translator.matchFinished;
+			}
 		},
 
 		_getActivityColor: function( activityStreamEntryTypeId ) {
 
 			if ( activityStreamEntryTypeId == 1 ) {
-				return 'bg-info';
+				return 'bg-success';
 			}
 
 			if ( activityStreamEntryTypeId == 2 ) {
-				return 'bg-success';
+				return 'bg-info';
 			}
 
 			if ( activityStreamEntryTypeId == 3 ) {
 				return 'bg-danger';
+			}
+
+			if ( activityStreamEntryTypeId == 4 ) {
+				return 'bg-warning';
 			}
 		}
 	} );
