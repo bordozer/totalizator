@@ -9,7 +9,9 @@
 			</div>
 
 			<div class="col-xs-4">
-				<a href="/totalizator/sports/<%= match.category.sportKind.sportKindId %>/"><%= match.category.sportKind.sportKindName %></a>
+				<a href="/totalizator/cups/<%= match.cup.cupId %>/" title="<%= match.category.sportKind.sportKindName %>: <%= match.cup.category.categoryName %> - <%= match.cup.cupName %>">
+					<img src="<%= match.cup.logoUrl %>" height="24" width="24">
+				</a>
 			</div>
 
 			<div class="col-xs-6 text-right">
