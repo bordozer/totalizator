@@ -30,27 +30,22 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 	@Override
 	public List<AbstractActivityStreamEntry> loadAll() {
+		return transformEntries( activityStreamRepository.loadAll() );
+	}
 
-		return activityStreamRepository.loadAll() // TODO: limit by page
-				.stream()
-				.map( new Function<ActivityStreamEntry, AbstractActivityStreamEntry>() {
+	@Override
+	public List<AbstractActivityStreamEntry> loadAllForLast( final int hours ) {
+		return transformEntries( activityStreamRepository.loadAllEarlierThen( dateTimeService.minusHours( hours ) ) );
+	}
 
-					@Override
-					public AbstractActivityStreamEntry apply( final ActivityStreamEntry activityStreamEntry ) {
+	@Override
+	public List<AbstractActivityStreamEntry> loadAllForMatch( final int matchId ) {
+		return transformEntries( activityStreamRepository.loadAllForMatch( matchId ) );
+	}
 
-						switch ( activityStreamEntry.getActivityStreamEntryType() ) {
-							case MATCH_BET_CREATED:
-							case MATCH_BET_CHANGED:
-								return new MatchBetActivityStreamEntry( activityStreamEntry );
-							case MATCH_BET_DELETED:
-							case MATCH_FINISHED:
-								return new MatchActivityStreamEntry( activityStreamEntry );
-						}
-
-						throw new IllegalArgumentException( String.format( "Unsupported activity type: %s", activityStreamEntry.getActivityStreamEntryType() ) );
-					}
-				} )
-				.collect( Collectors.toList() );
+	@Override
+	public List<AbstractActivityStreamEntry> loadAllForUser( final int userId ) {
+		return transformEntries( activityStreamRepository.loadAllForUser( userId ) );
 	}
 
 	@Override
@@ -73,6 +68,30 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	@Override
 	public void matchFinished( final int matchId, final int score1, final int score2 ) {
 		activityStreamRepository.save( getMatchBetEvent( null, matchId, score1, score2, ActivityStreamEntryType.MATCH_FINISHED ) );
+	}
+
+	private List<AbstractActivityStreamEntry> transformEntries( List<ActivityStreamEntry> activityStreamEntries ) {
+
+		return activityStreamEntries
+				.stream()
+				.map( new Function<ActivityStreamEntry, AbstractActivityStreamEntry>() {
+
+					@Override
+					public AbstractActivityStreamEntry apply( final ActivityStreamEntry activityStreamEntry ) {
+
+						switch ( activityStreamEntry.getActivityStreamEntryType() ) {
+							case MATCH_BET_CREATED:
+							case MATCH_BET_CHANGED:
+								return new MatchBetActivityStreamEntry( activityStreamEntry );
+							case MATCH_BET_DELETED:
+							case MATCH_FINISHED:
+								return new MatchActivityStreamEntry( activityStreamEntry );
+						}
+
+						throw new IllegalArgumentException( String.format( "Unsupported activity type: %s", activityStreamEntry.getActivityStreamEntryType() ) );
+					}
+				} )
+				.collect( Collectors.toList() );
 	}
 
 	private ActivityStreamEntry getMatchBetEvent( final User user, final int matchId, final int score1, final int score2, ActivityStreamEntryType activityStreamEntryType ) {

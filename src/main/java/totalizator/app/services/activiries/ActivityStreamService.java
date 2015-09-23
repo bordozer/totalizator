@@ -10,6 +10,12 @@ public interface ActivityStreamService {
 
 	List<AbstractActivityStreamEntry> loadAll();
 
+	List<AbstractActivityStreamEntry> loadAllForLast( final int hours );
+
+	List<AbstractActivityStreamEntry> loadAllForMatch( final int matchId );
+
+	List<AbstractActivityStreamEntry> loadAllForUser( final int userId );
+
 	void matchBetCreated( final MatchBet matchBet );
 
 	void matchBetChanged( final MatchBet matchBet, final int oldScore1, final int oldScore2 );

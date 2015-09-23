@@ -10,6 +10,7 @@ define( function ( require ) {
 
 	var MatchBetsWidget = require( 'js/widgets/match-bets/match-bets-widget' );
 	var MatchBetWidget = require( 'js/widgets/match-bet/match-bet-widget' );
+	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 
 	var service = require( '/resources/js/services/service.js' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -50,6 +51,8 @@ define( function ( require ) {
 
 			this._renderMatchBetWidget();
 
+			this._renderActivityStream();
+
 			return this;
 		},
 
@@ -83,6 +86,13 @@ define( function ( require ) {
 
 		_onUserChangeBet: function( bet ) {
 			this._renderMatchBetsWidget();
+		},
+
+		_renderActivityStream: function () {
+
+			var match = this.model.toJSON();
+			console.log( match );
+			activityStreamWidget( this.$( '.js-match-activity-stream' ), { matchId: match.matchId } );
 		}
 	} );
 } );

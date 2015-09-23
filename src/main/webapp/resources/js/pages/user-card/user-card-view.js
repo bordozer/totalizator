@@ -11,6 +11,7 @@ define( function ( require ) {
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var userStatisticsWidget = require( 'js/widgets/user-statistics/user-statistics-widget' );
+	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 
 	var service = require( '/resources/js/services/service.js' );
 
@@ -38,7 +39,7 @@ define( function ( require ) {
 				translator: translator
 			} ) );
 
-			this._renderUserStatistics();
+			this._renderActivityStream();
 
 			this._renderUserBets();
 		},
@@ -98,23 +99,9 @@ define( function ( require ) {
 			});
 		},
 
-		_renderUserStatistics: function() {
-
-			var categoryId = 1;		// TODO
-			var cupId = 1;			// TODO
-
-			var options = {
-				filter: {
-					categoryId: categoryId
-					, cupId: cupId
-					, showFinished: true
-					, userId: this.userId
-				}
-				, matchViewMode: 1
-				, menuItems: []
-			};
-
-			userStatisticsWidget( this.$( '.js-user-statistics' ), options );
+		_renderActivityStream: function () {
+			var model = this.model.toJSON();
+			activityStreamWidget( this.$( '.js-user-activity-stream' ), { userId: this.userId } );
 		}
 	});
 } );

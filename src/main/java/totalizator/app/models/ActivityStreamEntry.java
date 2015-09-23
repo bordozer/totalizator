@@ -10,9 +10,8 @@ import totalizator.app.models.converters.LocalDateTimeConverter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import static totalizator.app.models.ActivityStreamEntry.LOAD_ALL;
-import static totalizator.app.models.ActivityStreamEntry.LOAD_ALL_FOR_USER;
-import static totalizator.app.models.ActivityStreamEntry.LOAD_BY_ACTIVITY_ENTRY_ID;
+import static totalizator.app.models.ActivityStreamEntry.*;
+import static totalizator.app.models.ActivityStreamEntry.LOAD_ALL_FOR_MATCH;
 
 @Entity
 @org.hibernate.annotations.Cache( region = "common", usage = CacheConcurrencyStrategy.READ_WRITE )
@@ -29,6 +28,14 @@ import static totalizator.app.models.ActivityStreamEntry.LOAD_BY_ACTIVITY_ENTRY_
 		@NamedQuery(
 				name = LOAD_BY_ACTIVITY_ENTRY_ID,
 				query = "select c from ActivityStreamEntry c where activityEntryId= :activityEntryId order by activityTime desc"
+		),
+		@NamedQuery(
+				name = LOAD_ALL_EARLIER_THEN,
+				query = "select c from ActivityStreamEntry c where activityTime >= :activityTime order by activityTime desc"
+		),
+		@NamedQuery(
+				name = LOAD_ALL_FOR_MATCH,
+				query = "select c from ActivityStreamEntry c where activityEntryId = :activityEntryId and activityStreamEntryType in ( 1, 2, 3, 4 )  order by activityTime desc"
 		)
 } )
 public class ActivityStreamEntry extends AbstractEntity {
@@ -36,6 +43,8 @@ public class ActivityStreamEntry extends AbstractEntity {
 	public static final String LOAD_ALL = "activityStreamEntries.loadAll";
 	public static final String LOAD_ALL_FOR_USER = "activityStreamEntries.loadAllForUser";
 	public static final String LOAD_BY_ACTIVITY_ENTRY_ID = "activityStreamEntries.loadByActivityEntryId";
+	public static final String LOAD_ALL_EARLIER_THEN = "activityStreamEntries.loadAllEarlierThen";
+	public static final String LOAD_ALL_FOR_MATCH = "activityStreamEntries.loadAllForMatch";
 
 	@ManyToOne
 	@JoinColumn( name = "userId" )

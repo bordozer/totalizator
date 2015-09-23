@@ -8,6 +8,7 @@ import totalizator.app.models.ActivityStreamEntry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -48,15 +49,6 @@ public class ActivityStreamRepository implements ActivityStreamDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_QUERY )
-	public List<ActivityStreamEntry> loadAll( final int userId ) {
-
-		return em.createNamedQuery( ActivityStreamEntry.LOAD_ALL_FOR_USER, ActivityStreamEntry.class )
-				.setParameter( "userId", userId )
-				.getResultList();
-	}
-
-	@Override
 	public ActivityStreamEntry loadByActivityEntryId( final int activityEntryId ) {
 
 		final List<ActivityStreamEntry> list = em.createNamedQuery( ActivityStreamEntry.LOAD_ALL_FOR_USER, ActivityStreamEntry.class )
@@ -64,5 +56,31 @@ public class ActivityStreamRepository implements ActivityStreamDao {
 				.getResultList();
 
 		return list.size() == 1 ? list.get( 0 ) : null;
+	}
+
+	@Override
+	public List<ActivityStreamEntry> loadAllEarlierThen( final LocalDateTime time ) {
+
+		return em.createNamedQuery( ActivityStreamEntry.LOAD_ALL_EARLIER_THEN, ActivityStreamEntry.class )
+				.setParameter( "activityTime", time )
+				.getResultList();
+	}
+
+	@Override
+	@Cacheable( value = CACHE_QUERY )
+	public List<ActivityStreamEntry> loadAllForMatch( final int matchId ) {
+
+		return em.createNamedQuery( ActivityStreamEntry.LOAD_ALL_FOR_MATCH, ActivityStreamEntry.class )
+				.setParameter( "activityEntryId", matchId )
+				.getResultList();
+	}
+
+	@Override
+//	@Cacheable( value = CACHE_QUERY )
+	public List<ActivityStreamEntry> loadAllForUser( final int userId ) {
+
+		return em.createNamedQuery( ActivityStreamEntry.LOAD_ALL_FOR_USER, ActivityStreamEntry.class )
+				.setParameter( "userId", userId )
+				.getResultList();
 	}
 }

@@ -1,6 +1,7 @@
 package totalizator.app.controllers.rest.activities;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +22,11 @@ import totalizator.app.services.matches.MatchService;
 import java.security.Principal;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/rest/activity-stream")
+@RequestMapping( "/rest/activity-stream" )
 public class ActivityStreamRestController {
 
 	@Autowired
@@ -42,13 +44,31 @@ public class ActivityStreamRestController {
 	@Autowired
 	private DTOService dtoService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public List<ActivityStreamDTO > applicationData( final Principal principal ) {
+	@RequestMapping( method = RequestMethod.GET, value = "/portal/" )
+	public List<ActivityStreamDTO> portalPageActivities( final Principal principal ) {
+		return transformActivities( activityStreamService.loadAllForLast( 24 ), userService.findByLogin( principal.getName() ) );
+	}
 
-		final User currentUser = userService.findByLogin( principal.getName() );
+	@RequestMapping( method = RequestMethod.GET, value = "/matches/{matchId}/" )
+	public List<ActivityStreamDTO> matchActivities( final @PathVariable( "matchId" ) int matchId, final Principal principal ) {
+		return transformActivities( activityStreamService.loadAllForMatch( matchId ), userService.findByLogin( principal.getName() ) );
+	}
 
-		return activityStreamService.loadAll()
+	@RequestMapping( method = RequestMethod.GET, value = "/users/{userId}/" )
+	public List<ActivityStreamDTO> userActivities( final @PathVariable( "userId" ) int userId, final Principal principal ) {
+		return transformActivities( activityStreamService.loadAllForUser( userId ), userService.findByLogin( principal.getName() ) );
+	}
+
+	private List<ActivityStreamDTO> transformActivities( final List<AbstractActivityStreamEntry> entries, final User currentUser ) {
+
+		return entries
 				.stream()
+				.filter( new Predicate<AbstractActivityStreamEntry>() {
+					@Override
+					public boolean test( final AbstractActivityStreamEntry entry ) {
+						return entry.getActivityStreamEntryType() != ActivityStreamEntryType.MATCH_FINISHED;
+					}
+				} )
 				.map( new Function<AbstractActivityStreamEntry, ActivityStreamDTO>() {
 
 					@Override

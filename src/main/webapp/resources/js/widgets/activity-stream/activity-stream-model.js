@@ -8,11 +8,21 @@ define( function ( require ) {
 	return Backbone.Collection.extend( {
 
 		initialize: function ( options ) {
-
+			this.matchId = options.options.matchId;
+			this.userId = options.options.userId;
 		},
 
 		url: function () {
-			return '/rest/activity-stream/';
+
+			if ( this.matchId ) {
+				return '/rest/activity-stream/matches/' + this.matchId + '/';
+			}
+
+			if ( this.userId ) {
+				return '/rest/activity-stream/users/' + this.userId + '/';
+			}
+
+			return '/rest/activity-stream/portal/';
 		},
 
 		refresh: function() {
