@@ -59,7 +59,7 @@ define( function ( require ) {
 
 			_.each( model.cupsTodayToShow, function( cup ) {
 
-				var el = $( '<div class="col-xs-12"></div>' );
+				var el = $( '<div></div>' );
 				container.append( el );
 
 				var options = {
@@ -86,11 +86,13 @@ define( function ( require ) {
 			var currentUser = app.currentUser();
 
 			var container = this.$( '.js-portal-page-container' );
+			var row = $( "<div class='row'></div>" );
+			container.append( row );
 
 			_.each( model.cupsToShow, function( cup ) {
 
 				var el = $( '<div class="col-xs-12 col-lg-6"></div>' );
-				container.append( el );
+				row.append( el );
 
 				var options = {
 					filter: {
