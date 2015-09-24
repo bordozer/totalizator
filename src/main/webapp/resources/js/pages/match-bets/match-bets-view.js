@@ -91,7 +91,6 @@ define( function ( require ) {
 		_renderActivityStream: function () {
 
 			var match = this.model.toJSON();
-			console.log( match );
 			activityStreamWidget( this.$( '.js-match-activity-stream' ), { matchId: match.matchId } );
 		}
 	} );
