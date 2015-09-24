@@ -31,7 +31,7 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		remoteGameFilter: 1,
+		remoteGameFilter: 7, // checked only
 
 		events: {
 			'click .js-select-all': '_selectAllRemoteGames'
