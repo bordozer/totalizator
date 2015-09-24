@@ -118,7 +118,7 @@ public class AdminCupsRestController {
 					return false;
 				}
 
-				return true;
+				return strategyType != GameImportStrategyType.NO_IMPORT;
 			}
 		};
 	}
