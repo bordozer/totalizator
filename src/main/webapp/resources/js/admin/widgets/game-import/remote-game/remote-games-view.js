@@ -82,6 +82,10 @@ define( function ( require ) {
 
 			var remoteGameLocalData = json.remoteGameLocalData;
 
+			if ( ! remoteGameLocalData ) {
+				return true; // not loaded yet remote game - should to be shown
+			}
+
 			var showOnlyAlreadyImportedGames = this.remoteGameFilter == 2;
 			var showOnlyNewGames = this.remoteGameFilter == 3;
 			var showOnlyGamesWithoutTeamsFound = this.remoteGameFilter == 4;
