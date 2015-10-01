@@ -79,7 +79,7 @@ define( function ( require ) {
 			var selectedCup = _.find( this.cupsForGameImport, function ( cupForGameImport ) {
 				return cupForGameImport.cup.cupId == selectedCupId;
 			} );
-			this.model.set( { timePeriodType: selectedCup.timePeriodType } );
+			this.model.set( { timePeriod: { timePeriodType: selectedCup.timePeriodType } } );
 
 			this.render();
 

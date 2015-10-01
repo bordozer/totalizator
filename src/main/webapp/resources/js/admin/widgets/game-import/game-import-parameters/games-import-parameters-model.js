@@ -20,7 +20,9 @@ define( function ( require ) {
 
 			this.sportKinds = service.loadSportKinds();
 
-			var defaultSportKindId = this.sportKinds[ 0 ].sportKindId;
+			var cupId = this.get( 'cupId' );
+
+			var defaultSportKindId = cupId ? adminService.loadCup( cupId ).category.sportKind.sportKindId : this.sportKinds[ 0 ].sportKindId;
 			this.set( { selectedSportKindId: defaultSportKindId } );
 		}
 	} );
