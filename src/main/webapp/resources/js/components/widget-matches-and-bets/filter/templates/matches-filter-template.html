@@ -1,20 +1,6 @@
 <div class="row">
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.userLabel%></div>
-		<div class="col-xs-6">
-			<select class="chosen-select form-control" id="settings-user-id">
-				<option value="0">&nbsp;</option>
-				<% _.each( users, function( user ) { %>
-				<option value="<%=user.userId%>" <%= model.userId == user.userId ? 'selected' : '' %> ><%=user.userName%></option>
-				<% }) %>
-			</select>
-		</div>
-	</div>
-
-	<hr />
-
-	<div class="row">
 		<div class="col-xs-5 text-right"><%=translator.sportKindLabel%> *</div>
 		<div class="col-xs-6">
 			<% _.each( sportKinds, function( sportKind ) { %>
@@ -105,6 +91,20 @@
 		<div class="col-xs-5 text-right"><%=translator.showFinishedLabel%></div>
 		<div class="col-xs-6">
 			<input type="checkbox" id="settings-show-finished" name="settings-show-finished" value="true" <%= showFinished ? "checked='checked'" : ''%> >
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row">
+		<div class="col-xs-5 text-right"><%=translator.userLabel%></div>
+		<div class="col-xs-6">
+			<select class="chosen-select form-control" id="settings-user-id">
+				<option value="0">&nbsp;</option>
+				<% _.each( users, function( user ) { %>
+				<option value="<%=user.userId%>" <%= model.userId == user.userId ? 'selected' : '' %> ><%=user.userName%></option>
+				<% }) %>
+			</select>
 		</div>
 	</div>
 

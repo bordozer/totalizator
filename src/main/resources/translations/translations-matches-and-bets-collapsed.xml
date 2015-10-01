@@ -17,13 +17,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Matches are playing now count</nerd>
-		<ru><![CDATA[К-во матчей которые ишраются с даннуй момент]]></ru>
-		<ua><![CDATA[Кiлькiсть iгор що граються зараз]]></ua>
-		<en><![CDATA[Matches are playing now count]]></en>
-	</translation>
-
-	<translation>
 		<nerd>Today matches</nerd>
 		<ru><![CDATA[К-во матчей сегодня]]></ru>
 		<ua><![CDATA[Кiлькiсть iгор сьогоднi]]></ua>
@@ -46,16 +39,9 @@
 
 	<translation>
 		<nerd>First match beginning time</nerd>
-		<ru><![CDATA[Первый матч]]></ru>
-		<ua><![CDATA[Перша гра]]></ua>
+		<ru><![CDATA[Ближайший матч]]></ru>
+		<ua><![CDATA[Найближча гра]]></ua>
 		<en><![CDATA[First match beginning time]]></en>
-	</translation>
-
-	<translation>
-		<nerd>First match without bet beginning time</nerd>
-		<ru><![CDATA[Матч без ставки]]></ru>
-		<ua><![CDATA[Гра без ставки]]></ua>
-		<en><![CDATA[Match without a bet]]></en>
 	</translation>
 
 	<translation>
@@ -70,6 +56,27 @@
 		<ru><![CDATA[Игр нет]]></ru>
 		<ua><![CDATA[Iгог немає]]></ua>
 		<en><![CDATA[No matches found]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup winner bet is accessible</nerd>
+		<ru><![CDATA[Доступны ставки на победителей чемпионата]]></ru>
+		<ua><![CDATA[Доступнi ставки на переможцiв чемпiонату]]></ua>
+		<en><![CDATA[Cup winner bet is accessible]]></en>
+	</translation>
+
+	<translation>
+		<nerd>User has missed cup winner betting</nerd>
+		<ru><![CDATA[Вы не сделали ставки на победителей чемпионата вовремя]]></ru>
+		<ua><![CDATA[Ви не зробили ставки на переможцiв чемпiонату вчасно]]></ua>
+		<en><![CDATA[You has missed cup winner betting]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>

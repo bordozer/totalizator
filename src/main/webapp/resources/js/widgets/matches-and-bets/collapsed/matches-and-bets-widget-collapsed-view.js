@@ -16,14 +16,13 @@ define( function ( require ) {
 	var translator = new Translator( {
 		matchesCount: "Matches count total"
 		, futureMatchesCount: "Future matches count"
-		, nowPlayingMatchesCountLabel: "Matches are playing now count"
 		, todayMatchesCountLabel: "Today matches"
 		, userBetsCount: "User bets count"
 		, matchesWithoutBetsCount: "Matches without bets count"
 		, firstMatchTimeLabel: "First match beginning time"
 		, firstMatchNoBetTimeTitleLabel: "First match without bet beginning time title"
-		, firstMatchNoBetTimeLabel: "First match without bet beginning time"
-		, noMatchesFoundLabel: "No matches found"
+		, cupWinnerBetIsAccessibleLabel: "Cup winner bet is accessible"
+		, userHasMissedCupWinnerBettingLabel: "User has missed cup winner betting"
 	} );
 
 	return Backbone.View.extend( {
@@ -41,14 +40,15 @@ define( function ( require ) {
 		},
 
 		render: function () {
+
 			var model = this.model.toJSON();
 
 			var data = _.extend( {}, model, {
 				matchesWithoutBetsCountStyle: this._getMatchesWithoutBetsCountStyle()
-				, firstMatchTime: dateTimeService.formatDateTimeDisplay( model.firstMatchTime )
-				, firstMatchTimeHumanize: dateTimeService.fromNow( model.firstMatchTime )
-				, firstMatchNoBetTime: dateTimeService.formatDateTimeDisplay( model.firstMatchNoBetTime )
-				, firstMatchNoBetTimeHumanize: dateTimeService.fromNow( model.firstMatchNoBetTime )
+				, firstMatchTime: model.firstMatchTime == null ? '' : dateTimeService.formatDateTimeFullDisplay( model.firstMatchTime )
+				, firstMatchTimeHumanize: model.firstMatchTime == null ? '' : dateTimeService.fromNow( model.firstMatchTime )
+				, firstMatchNoBetTime: model.firstMatchNoBetTime == null ? '' : dateTimeService.formatDateTimeFullDisplay( model.firstMatchNoBetTime )
+				, firstMatchNoBetTimeHumanize: model.firstMatchNoBetTime == null ? '' : dateTimeService.fromNow( model.firstMatchNoBetTime )
 				, translator: translator
 			} );
 

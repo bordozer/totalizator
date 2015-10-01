@@ -41,7 +41,12 @@ define( function ( require ) {
 
 		// str => srt formatted for displaying
 		formatDateTimeDisplay: function ( time ) {
-			return this.formatMomentDateTimeDisplay( moment( this.parseDate( time ) ) );
+			return this.formatDateDisplay( time ) + " <sup>" + this.formatTimeDisplay( time ) + "</sup>";
+		},
+
+		// str => srt formatted for displaying
+		formatDateTimeFullDisplay: function ( time ) {
+			return this.formatDateFullDisplay( time ) + " <sup>" + this.formatTimeDisplay( time ) + "</sup>";
 		},
 
 		formatMomentDateTimeDisplay: function ( momentTime ) {

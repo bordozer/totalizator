@@ -2,10 +2,12 @@ package totalizator.app.controllers.rest.matches.bets.collapsed;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import totalizator.app.dto.CupDTO;
+import totalizator.app.dto.TeamDTO;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.dto.serialization.DateTimeSerializer;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MatchesAndBetsCollapsedDTO {
 
@@ -21,6 +23,9 @@ public class MatchesAndBetsCollapsedDTO {
 	private LocalDateTime firstMatchNoBetTime;
 	private int todayMatchesCount;
 	private int futureMatchesCount;
+	private boolean cupWinnersBetsIsAccessible;
+	private List<TeamDTO> userCupWinnersBets;
+	private boolean cupHasWinners;
 
 	public MatchesAndBetsCollapsedDTO( final CupDTO cupDTO, final UserDTO userDTO ) {
 		this.cup = cupDTO;
@@ -105,5 +110,29 @@ public class MatchesAndBetsCollapsedDTO {
 
 	public int getFutureMatchesCount() {
 		return futureMatchesCount;
+	}
+
+	public void setCupWinnersBetsIsAccessible( final boolean cupWinnersBetsIsAccessible ) {
+		this.cupWinnersBetsIsAccessible = cupWinnersBetsIsAccessible;
+	}
+
+	public boolean isCupWinnersBetsIsAccessible() {
+		return cupWinnersBetsIsAccessible;
+	}
+
+	public void setUserCupWinnersBets( final List<TeamDTO> userCupWinnersBets ) {
+		this.userCupWinnersBets = userCupWinnersBets;
+	}
+
+	public List<TeamDTO> getUserCupWinnersBets() {
+		return userCupWinnersBets;
+	}
+
+	public void setCupHasWinners( final boolean cupHasWinners ) {
+		this.cupHasWinners = cupHasWinners;
+	}
+
+	public boolean isCupHasWinners() {
+		return cupHasWinners;
 	}
 }

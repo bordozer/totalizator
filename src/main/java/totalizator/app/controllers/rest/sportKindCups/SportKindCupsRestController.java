@@ -17,7 +17,6 @@ import totalizator.app.translator.TranslatorService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,25 +88,7 @@ public class SportKindCupsRestController {
 
 		final List<Category> categories = categoryService.loadAll( sportKindId )
 				.stream()
-				.sorted( new Comparator<Category>() {
-					@Override
-					public int compare( final Category o1, final Category o2 ) {
-
-						if ( favoriteCategories.contains( o1 ) && favoriteCategories.contains( o2 ) ) {
-							return o1.getCategoryName().compareToIgnoreCase( o2.getCategoryName() );
-						}
-
-						if ( favoriteCategories.contains( o1 ) ) {
-							return -1;
-						}
-
-						if ( favoriteCategories.contains( o2 ) ) {
-							return 1;
-						}
-
-						return o1.getCategoryName().compareToIgnoreCase( o2.getCategoryName() );
-					}
-				} )
+				.sorted( categoryService.categoriesByFavoritesByName( favoriteCategories ) )
 				.collect( Collectors.toList() );
 
 

@@ -53,4 +53,10 @@ public interface MatchService extends GenericService<Match> {
 	List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo );
 
 	List<Match> loadAllOnDate( final LocalDate date );
+
+	List<Match> loadAllOnDate( final Cup cup, final LocalDate date );
+
+	List<Match> getMatchNotFinishedYetMatches( final Cup cup );
+
+	Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime );
 }

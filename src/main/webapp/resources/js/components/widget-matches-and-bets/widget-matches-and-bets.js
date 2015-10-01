@@ -29,7 +29,6 @@ define( function ( require ) {
 		, settingsLabel: 'Configurable view: Matches: settings'
 		, filteringSettingsButtonLabel: 'Configurable view: Filtering settings'
 		, resetFilterButtonHint: 'Configurable view: Reset filter to default'
-		, settingsFilterLabel: 'Configurable view / Settings: Filter'
 		, futureMatchesAreShownLabel: 'Configurable view / Future matches are shown'
 		, finishedMatchesAreShownLabel: 'Configurable view / Finished matches are shown'
 		, yes: 'yes'

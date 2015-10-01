@@ -8,16 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.User;
-import totalizator.app.services.CupService;
-import totalizator.app.services.DTOService;
-import totalizator.app.services.UserService;
+import totalizator.app.services.*;
+import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -35,6 +37,9 @@ public class PortalPageRestController {
 	private UserService userService;
 
 	@Autowired
+	private CategoryService categoryService;
+
+	@Autowired
 	private CupService cupService;
 
 	@Autowired
@@ -42,6 +47,12 @@ public class PortalPageRestController {
 
 	@Autowired
 	private DTOService dtoService;
+
+	@Autowired
+	private MatchBetsService matchBetsService;
+
+	@Autowired
+	private FavoriteCategoryService favoriteCategoryService;
 
 	@Autowired
 	private DateTimeService dateTimeService;
@@ -53,10 +64,40 @@ public class PortalPageRestController {
 
 		final User currentUser = userService.findByLogin( principal.getName() );
 
+		final Comparator<Category> categoryComparator = categoryService.categoriesByFavoritesByName( favoriteCategoryService.loadUserFavoriteCategories( currentUser ) );
+
 		final PortalPageDTO result = new PortalPageDTO();
 
-		result.setCupsToShow( dtoService.transformCups( cupService.loadPublicCurrent(), currentUser ) );
-		result.setCupsTodayToShow( dtoService.transformCups( getCupsHaveMatchesToday(), currentUser ) );
+		result.setCupsToShow( dtoService.transformCups( cupService.loadPublicCurrent()
+				.stream()
+				.sorted( new Comparator<Cup>() {
+					@Override
+					public int compare( final Cup o1, final Cup o2 ) {
+
+						final LocalDateTime withoutBetTime1 = matchBetsService.getFirstMatchWithoutBetTime( o1, currentUser );
+						final LocalDateTime withoutBetTime2 = matchBetsService.getFirstMatchWithoutBetTime( o2, currentUser );
+
+						if ( withoutBetTime1 != null && withoutBetTime2 != null ) {
+							return withoutBetTime1.compareTo( withoutBetTime2 );
+						}
+
+						if ( withoutBetTime1 != null ) {
+							return -1;
+						}
+
+						if ( withoutBetTime2 != null ) {
+							return 1;
+						}
+
+						return categoryComparator.compare( o1.getCategory(), o2.getCategory() );
+					}
+				} )
+				.collect( Collectors.toList() ), currentUser ) );
+
+		result.setCupsTodayToShow( dtoService.transformCups( getCupsHaveMatchesToday()
+				.stream()
+				.sorted( cupService.categoryNameOrCupNameComparator() )
+				.collect( Collectors.toList() ), currentUser ) );
 
 		return result;
 	}

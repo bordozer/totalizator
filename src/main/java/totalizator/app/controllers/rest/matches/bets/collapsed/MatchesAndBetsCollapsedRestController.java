@@ -4,23 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import totalizator.app.dto.MatchBetDTO;
 import totalizator.app.dto.MatchesBetSettingsDTO;
+import totalizator.app.dto.TeamDTO;
 import totalizator.app.models.Cup;
+import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Match;
 import totalizator.app.models.User;
+import totalizator.app.services.CupBetsService;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping( "/rest/matches/bets/collapsed" )
@@ -39,6 +39,12 @@ public class MatchesAndBetsCollapsedRestController {
 	private DateTimeService dateTimeService;
 
 	@Autowired
+	private CupBetsService cupBetsService;
+
+	@Autowired
+	private MatchBetsService matchBetsService;
+
+	@Autowired
 	private DTOService dtoService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
@@ -53,91 +59,36 @@ public class MatchesAndBetsCollapsedRestController {
 
 		final MatchesAndBetsCollapsedDTO result = new MatchesAndBetsCollapsedDTO( dtoService.transformCup( cup, showBetsOfUser ), dtoService.transformUser( showBetsOfUser ) );
 
-		result.setMatchesCount( matchService.getMatchCount( cup ) );
-		result.setFutureMatchesCount( matchService.getFutureMatchCount( cup ) );
+		result.setMatchesCount( matchService.getMatchCount( cup ) ); 				// totally in cup
+		result.setFutureMatchesCount( matchService.getFutureMatchCount( cup ) );	// not finished matches at all
 
-		final List<Match> matches = matchService.loadAll( filter );
+		result.setTodayMatchesCount( matchService.loadAllOnDate( cup, dateTimeService.getToday() ).size() );
+		result.setNowPlayingMatchesCount( matchService.getMatchNotFinishedYetMatches( cup ).size() );
 
-		result.setNowPlayingMatchesCount( getMatchesNowCount( matches ) );
-		result.setTodayMatchesCount( getTodayMatchesCount( matches ) );
+		final Match nearestFutureMatch = matchService.getNearestFutureMatch( cup, dateTimeService.getNow() );
+		result.setFirstMatchTime( nearestFutureMatch != null ? nearestFutureMatch.getBeginningTime() : null );
 
-		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, showBetsOfUser, currentUser );
-		final int userBetsCount = ( int ) matchBetDTOs
-				.stream().filter( new Predicate<MatchBetDTO>() {
+		result.setUserBetsCount( matchBetsService.betsCount( cup, currentUser ) );
+		result.setMatchesWithoutBetsCount( matchBetsService.getMatchesCountAccessibleBorBetting( cup, currentUser ) );
+		result.setFirstMatchNoBetTime( matchBetsService.getFirstMatchWithoutBetTime( cup, currentUser ) );
+
+		final boolean isCupBettingAllowed = cupBetsService.validateBettingAllowed( cup ).isPassed();
+		final boolean cupHasWinners = cup.getWinnersCount() > 0;
+		final boolean userMadeAllCupWinnersBets = cupBetsService.load( cup, currentUser ).size() == cup.getWinnersCount();
+		result.setCupWinnersBetsIsAccessible( isCupBettingAllowed && cupHasWinners && ! userMadeAllCupWinnersBets );
+
+		result.setCupHasWinners( cupHasWinners );
+
+		result.setUserCupWinnersBets( cupBetsService.load( cup, currentUser )
+				.stream()
+				.map( new Function<CupTeamBet, TeamDTO>() {
 					@Override
-					public boolean test( final MatchBetDTO match ) {
-						return match.getBet() != null;
+					public TeamDTO apply( final CupTeamBet cupTeamBet ) {
+						return dtoService.transformTeam( cupTeamBet.getTeam(), currentUser );
 					}
-				} ).count();
-		result.setUserBetsCount( userBetsCount );
-
-		final int matchesWithoutBetsCount = ( int ) matchBetDTOs
-				.stream().filter( new Predicate<MatchBetDTO>() {
-					@Override
-					public boolean test( final MatchBetDTO match ) {
-						return match.getBet() == null && match.getMatch().getBeginningTime().isAfter( dateTimeService.getNow() );
-					}
-				} ).count();
-		result.setMatchesWithoutBetsCount( matchesWithoutBetsCount );
-
-		if ( matches.size() > 0 ) {
-			result.setFirstMatchTime( matches.get( 0 ).getBeginningTime() );
-		}
-
-		if ( matchBetDTOs.size() > 0 ) {
-
-			final Predicate<MatchBetDTO> noBetPredicate = new Predicate<MatchBetDTO>() {
-				@Override
-				public boolean test( final MatchBetDTO matchBetDTO ) {
-					return matchBetDTO.getBet() == null && matchBetDTO.getMatch().getBeginningTime().isAfter( dateTimeService.getNow() );
-				}
-			};
-
-			final Function<MatchBetDTO, LocalDateTime> function = new Function<MatchBetDTO, LocalDateTime>() {
-				@Override
-				public LocalDateTime apply( final MatchBetDTO matchBetDTO ) {
-					return matchBetDTO.getMatch().getBeginningTime();
-				}
-			};
-
-			final Optional<LocalDateTime> localDateTime = matchBetDTOs
-					.stream()
-					.filter( noBetPredicate )
-					.findFirst()
-					.map( function );
-
-			if ( localDateTime.isPresent() ) {
-				result.setFirstMatchNoBetTime( localDateTime.get() );
-			}
-
-		}
+				} )
+				.collect( Collectors.toList() ) );
 
 		return result;
-	}
-
-	private int getTodayMatchesCount( final List<Match> matches ) {
-
-		return ( int ) matches
-				.stream()
-				.filter( new Predicate<Match>() {
-					@Override
-					public boolean test( final Match match ) {
-						return dateTimeService.hasTheSameDate( match.getBeginningTime(), dateTimeService.getNow() );
-					}
-				} )
-				.count();
-	}
-
-	private int getMatchesNowCount( final List<Match> matches ) {
-
-		return ( int ) matches
-				.stream()
-				.filter( new Predicate<Match>() {
-					@Override
-					public boolean test( final Match match ) {
-						return matchService.isMatchStarted( match );
-					}
-				} )
-				.count();
 	}
 }

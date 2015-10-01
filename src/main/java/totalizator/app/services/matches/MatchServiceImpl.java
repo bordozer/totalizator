@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.MatchDao;
 import totalizator.app.dto.MatchesBetSettingsDTO;
-import totalizator.app.models.Cup;
-import totalizator.app.models.Match;
-import totalizator.app.models.MatchBet;
-import totalizator.app.models.Team;
+import totalizator.app.models.*;
 import totalizator.app.services.CupService;
 import totalizator.app.services.activiries.ActivityStreamService;
 import totalizator.app.services.utils.DateTimeService;
@@ -21,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -272,6 +270,29 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public List<Match> loadAllOnDate( final LocalDate date ) {
 		return loadAllBetween( dateTimeService.getFirstSecondOf( date ), dateTimeService.getLastSecondOf( date ) );
+	}
+
+	@Override
+	public List<Match> loadAllOnDate( final Cup cup, final LocalDate date ) {
+		return loadAllOnDate( date )
+				.stream()
+				.filter( new java.util.function.Predicate<Match>() {
+					@Override
+					public boolean test( final Match match ) {
+						return match.getCup().equals( cup );
+					}
+				} )
+				.collect( Collectors.toList() );
+	}
+
+	@Override
+	public List<Match> getMatchNotFinishedYetMatches( final Cup cup ) {
+		return matchRepository.getStartedMatchCount( cup, dateTimeService.getNow() );
+	}
+
+	@Override
+	public Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime ) {
+		return matchRepository.getNearestFutureMatch( cup, onTime );
 	}
 
 	private List<Match> sort( final List<Match> matches ) {

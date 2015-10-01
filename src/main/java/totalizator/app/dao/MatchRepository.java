@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
-import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
 import totalizator.app.services.points.UserMatchPointsCalculationService;
+import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
+import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -109,7 +109,7 @@ public class MatchRepository implements MatchDao {
 				.setParameter( "teamId", team.getId() )
 				.getResultList();
 
-		return result != null && result.size() > 0  ? ( int ) ( long ) result.get( 0 ) : 0;
+		return result != null && result.size() > 0 ? ( int ) ( long ) result.get( 0 ) : 0;
 	}
 
 	@Override
@@ -122,13 +122,13 @@ public class MatchRepository implements MatchDao {
 	}
 
 	@Override
-	public int getMatchCount( final Cup cup ) {
+	public int  getMatchCount( final Cup cup ) {
 
 		final List<Long> result = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_CUP, Long.class )
 				.setParameter( "cupId", cup.getId() )
 				.getResultList();
 
-		return result != null && result.size() > 0  ? ( int ) ( long ) result.get( 0 ) : 0;
+		return result != null && result.size() > 0 ? ( int ) ( long ) result.get( 0 ) : 0;
 	}
 
 	@Override
@@ -188,5 +188,25 @@ public class MatchRepository implements MatchDao {
 				.setParameter( "timeFrom", timeFrom )
 				.setParameter( "timeTo", timeTo )
 				.getResultList();
+	}
+
+	@Override
+	public List<Match> getStartedMatchCount( final Cup cup, final LocalDateTime timeFrom ) {
+
+		return em.createNamedQuery( Match.FIND_NOT_FINISHED_MATCHES_STARTED_TILL, Match.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "time", timeFrom )
+				.getResultList();
+	}
+
+	@Override
+	public Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime ) {
+
+		final List<Match> bets = em.createNamedQuery( Match.FIND_NOT_FINISHED_MATCHES_STARTED_AFTER, Match.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "time", onTime )
+				.getResultList();
+
+		return bets.size() > 0 ? bets.get( 0 ) : null;
 	}
 }

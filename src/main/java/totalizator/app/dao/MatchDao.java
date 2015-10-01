@@ -38,4 +38,8 @@ public interface MatchDao extends GenericService<Match> {
 	Match findByImportId( final String remoteGameId );
 
 	List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo );
+
+	List<Match> getStartedMatchCount( final Cup cup, final LocalDateTime timeFrom );
+
+	Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime );
 }

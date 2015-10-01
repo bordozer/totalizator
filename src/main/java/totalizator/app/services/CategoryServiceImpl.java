@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CategoryDao;
 import totalizator.app.models.Category;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -49,5 +50,29 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> loadAll( final int sportKindId ) {
 		return categoryRepository.loadAll( sportKindId );
+	}
+
+	@Override
+	public Comparator<Category> categoriesByFavoritesByName( final List<Category> favoriteCategories ) {
+
+		return new Comparator<Category>() {
+			@Override
+			public int compare( final Category o1, final Category o2 ) {
+
+				if ( favoriteCategories.contains( o1 ) && favoriteCategories.contains( o2 ) ) {
+					return o1.getCategoryName().compareToIgnoreCase( o2.getCategoryName() );
+				}
+
+				if ( favoriteCategories.contains( o1 ) ) {
+					return -1;
+				}
+
+				if ( favoriteCategories.contains( o2 ) ) {
+					return 1;
+				}
+
+				return o1.getCategoryName().compareToIgnoreCase( o2.getCategoryName() );
+			}
+		};
 	}
 }

@@ -33,8 +33,16 @@ import static totalizator.app.models.MatchBet.*;
 				query = "select mb from MatchBet mb where userId= :userId and matchId= :matchId order by betTime desc"
 		),
 		@NamedQuery(
-				name = LOAD_MATCH_BETA_COUNT,
-				query = "select count(id) from MatchBet mb where matchId= :matchId"
+				name = LOAD_MATCH_BETS_COUNT,
+				query = "select count( id ) from MatchBet mb where matchId= :matchId"
+		),
+		@NamedQuery(
+				name = LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET,
+				query = "select count( mb.id ) from MatchBet as mb join mb.match as m where mb.user.id = :userId and m.cup.id = :cupId"
+		),
+		@NamedQuery(
+				name = LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER,
+				query = "select count( m.id ) from Match as m where m.cup.id = :cupId and m.beginningTime >= :time and m.id not in ( select mb.match.id from MatchBet mb where mb.user.id = :userId )"
 		)
 } )
 public class MatchBet extends AbstractEntity {
@@ -43,7 +51,11 @@ public class MatchBet extends AbstractEntity {
 	public static final String LOAD_FOR_USER = "matchBets.loadForUser";
 	public static final String LOAD_FOR_MATCH = "matchBets.loadForMatch";
 	public static final String LOAD_FOR_USER_AND_MATCH = "matchBets.loadForUserAndMatch";
-	public static final String LOAD_MATCH_BETA_COUNT = "matchBets.matchBetsCount";
+	public static final String LOAD_MATCH_BETS_COUNT = "matchBets.matchBetsCount";
+
+	public static final String LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET = "matchBets.LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET";
+	public static final String LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER = "matchBets.LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER";
+	public static final String LOAD_FIRST_MATCH_OF_CUP_WITHOUT_USER_BET = "matchBets.LOAD_FIRST_MATCH_OF_CUP_WITHOUT_USER_BET";
 
 	@ManyToOne
 	@JoinColumn(name="matchId")

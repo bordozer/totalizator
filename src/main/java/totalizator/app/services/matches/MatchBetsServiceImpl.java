@@ -17,6 +17,7 @@ import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -152,6 +153,11 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
+	public int betsCount( final Cup cup, final User user ) {
+		return matchBetRepository.betsCount( cup, user );
+	}
+
+	@Override
 	public ValidationResult validateBettingAllowed( final Match match, final User user ) {
 
 		final Language language = translatorService.getDefaultLanguage(); // TODO: read user language
@@ -209,5 +215,21 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 					}
 				} )
 				.collect( Collectors.toList() );
+	}
+
+	@Override
+	public int getMatchesCountAccessibleBorBetting( final Cup cup, final User user ) {
+		return matchBetRepository.getMatchesCountAccessibleBorBettingSince( cup, user, dateTimeService.getNow() );
+	}
+
+	@Override
+	public Match getFirstMatchWithoutBet( final Cup cup, final User user ) {
+		return matchBetRepository.getFirstMatchWithoutBetSince( cup, user, dateTimeService.getNow() );
+	}
+
+	@Override
+	public LocalDateTime getFirstMatchWithoutBetTime( final Cup cup, final User user ) {
+		final Match match = getFirstMatchWithoutBet( cup, user );
+		return match != null ? match.getBeginningTime() : null;
 	}
 }
