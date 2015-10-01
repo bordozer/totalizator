@@ -67,6 +67,11 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
+	public LocalDateTime plusMonths( final LocalDateTime time, final int months ) {
+		return time.plusMonths( months );
+	}
+
+	@Override
 	public String formatTime( final LocalDateTime time ) {
 		return time.format( DateTimeFormatter.ofPattern( getTimeFormat(), Locale.getDefault() ) );
 	}
@@ -137,6 +142,16 @@ public class DateTimeServiceImpl implements DateTimeService {
 	@Override
 	public String dateTimeFormat() {
 		return String.format( "%s %s", DATE_FORMAT, TIME_FORMAT );
+	}
+
+	@Override
+	public LocalDate firstDayOfMonth( final LocalDateTime time ) {
+		return time.withDayOfMonth( 1 ).toLocalDate();
+	}
+
+	@Override
+	public LocalDate lastDayOfMonth( final LocalDateTime time ) {
+		return time.withDayOfMonth( time.toLocalDate().lengthOfMonth() ).toLocalDate();
 	}
 
 	private LocalDateTime localDateTime( final LocalDateTime time ) {

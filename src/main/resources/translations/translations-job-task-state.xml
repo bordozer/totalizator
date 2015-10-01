@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Job task state: Started</nerd>
+		<ru><![CDATA[Начато]]></ru>
+		<ua><![CDATA[Почато]]></ua>
+		<en><![CDATA[Started]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task state: Idle</nerd>
+		<ru><![CDATA[Покой]]></ru>
+		<ua><![CDATA[Спокiй]]></ua>
+		<en><![CDATA[Idle]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task state: In progress</nerd>
+		<ru><![CDATA[В процессе]]></ru>
+		<ua><![CDATA[У процесi]]></ua>
+		<en><![CDATA[In progress]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task state: Broken by user</nerd>
+		<ru><![CDATA[Прервано пользователем]]></ru>
+		<ua><![CDATA[Перервано користувачем]]></ua>
+		<en><![CDATA[Broken by user]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task state: Finished</nerd>
+		<ru><![CDATA[Завершено успешно]]></ru>
+		<ua><![CDATA[Завершено успiшно]]></ua>
+		<en><![CDATA[Finished successfully]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task state: Error</nerd>
+		<ru><![CDATA[Ошибка]]></ru>
+		<ua><![CDATA[Помилка]]></ua>
+		<en><![CDATA[Error]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task state: preparing</nerd>
+		<ru><![CDATA[Подготовка к выполнению]]></ru>
+		<ua><![CDATA[Пiдготування до виконання]]></ua>
+		<en><![CDATA[Preparing]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

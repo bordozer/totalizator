@@ -56,7 +56,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.importParameters = new GamesImportParametersModel();
+			this.importParameters = new GamesImportParametersModel( { parameters: {} } );
 
 			this.remoteGames = new RemoteGamesModel.RemoteGamesModel();
 

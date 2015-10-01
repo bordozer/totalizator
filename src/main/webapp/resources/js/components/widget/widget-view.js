@@ -54,8 +54,6 @@ define( function ( require ) {
 
 			this.renderBody();
 
-			this._renderDropDownMenu();
-
 			this.delegateEvents();
 		},
 
@@ -168,6 +166,8 @@ define( function ( require ) {
 
 			title.html( this.getTitle() );
 			title.attr( 'title', this.getTitleHint() );
+
+			this._renderDropDownMenu();
 		},
 
 		_getIconEl: function() {

@@ -119,7 +119,7 @@
 	/>
 
 	<cache name="totalizator.app.cache.user-match-points-calculation.query"
-		   maxElementsInMemory="1000"
+		   maxElementsInMemory="10000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>
@@ -179,6 +179,18 @@
 	/>
 
 	<cache name="totalizator.app.cache.activityStreamEntries"
+		   maxElementsInMemory="3000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.jobLog"
+		   maxElementsInMemory="3000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.jobLogs"
 		   maxElementsInMemory="3000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"

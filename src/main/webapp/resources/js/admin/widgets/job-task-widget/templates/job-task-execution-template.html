@@ -1,0 +1,36 @@
+<div class="row">
+
+	<div class="col-xs-2">
+		<i class="<%=jobStateIcon%> fa-4x <%=jobStateCss%>" title="<%=jobStateText%>"></i>
+	</div>
+
+	<div class="col-xs-7">
+
+		<%= translator.jobTaskState_Started %> <%= startDate %> <sup><%= startTime %></sup>
+
+		<br />
+
+		<% if( jobExecuting ) { %>
+			<small class="text-muted"><%= timeSinceStart %></small>
+		<% } %>
+
+		<% if( ! jobExecuting ) { %>
+			<%=jobStateText%> <%= finishingDate %> <sup><%= finishingTime %></sup>
+		<% } %>
+	</div>
+
+	<div class="col-xs-3">
+
+		<% if( status.totalSteps > 0 ) { %>
+			<h4><strong><%= status.currentStep %> / <%= status.totalSteps %></strong></h4>
+		<% } %>
+
+		<% if( status.totalSteps == 0 ) { %>
+			<i class="fa fa-spinner fa-spin fa-2x"></i> / <i class="fa fa-spinner fa-spin fa-2x"></i>
+		<% } %>
+
+	</div>
+
+</div>
+
+<hr />

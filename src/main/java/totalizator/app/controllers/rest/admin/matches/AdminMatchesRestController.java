@@ -3,25 +3,23 @@ package totalizator.app.controllers.rest.admin.matches;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
 import totalizator.app.models.User;
 import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
+import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.TeamService;
 
 import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@Controller
+@RestController
 @RequestMapping( "/admin/rest/matches" )
 public class AdminMatchesRestController {
 
@@ -43,8 +41,6 @@ public class AdminMatchesRestController {
 	@Autowired
 	private DTOService dtoService;
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchEditDTO> entries( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
@@ -86,8 +82,6 @@ public class AdminMatchesRestController {
 		} );
 	}
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchEditDTO create( final @RequestBody MatchEditDTO matchEditDTO, final Principal principal ) {
 
@@ -106,8 +100,6 @@ public class AdminMatchesRestController {
 		return matchEditDTO;
 	}
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
 	@RequestMapping( method = RequestMethod.PUT, value = "/{matchId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchEditDTO save( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchEditDTO matchEditDTO, final Principal principal ) {
 
@@ -124,8 +116,6 @@ public class AdminMatchesRestController {
 		return matchEditDTO;
 	}
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{matchId}" )
 	public void delete( final @PathVariable( "matchId" ) int matchId ) {
 

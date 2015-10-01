@@ -17,7 +17,7 @@ import java.util.TreeSet;
 public class NBAGameParsingService implements RemoteGameParsingService {
 
 	@Override
-	public Set<RemoteGame> loadGamesFromJSON( Cup cup, final String remoteGamesJSON ) {
+	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final String remoteGamesJSON ) {
 
 		final Set<RemoteGame> result = new TreeSet<RemoteGame>();
 

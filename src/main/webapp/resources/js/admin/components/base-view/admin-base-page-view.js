@@ -22,6 +22,8 @@ define( function ( require ) {
 		, menuReloadTranslationsLabel: 'Menu: Reload translations'
 		, menuLogoutLabel: 'Menu: Logout'
 		, dictionariesLabel: 'Admin: Main dictionaries'
+		, jobsLabel: 'Jobs'
+		, schedulerLabel: 'Scheduler'
 	} );
 
 	return PageView.extend( {
@@ -44,6 +46,10 @@ define( function ( require ) {
 				, { selector: 'divider' }
 
 				, { selector: '', icon: 'fa fa-exchange', link: '/admin/remote-games-import/', text: translator.gamesDataImportLabel }
+				, { selector: 'divider' }
+
+				, { selector: '', icon: 'fa fa-caret-square-o-right', link: '/admin/jobs/', text: translator.jobsLabel }
+				, { selector: '', icon: 'fa fa-calendar-times-o', link: '/admin/scheduler/', text: translator.schedulerLabel }
 				, { selector: 'divider' }
 
 				, { selector: '', icon: 'fa fa-language', link: '/admin/translations/', text: translator.menuUntranslatedListLabel }

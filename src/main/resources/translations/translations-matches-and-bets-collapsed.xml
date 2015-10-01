@@ -3,10 +3,17 @@
 <translations>
 
 	<translation>
-		<nerd>Matches count</nerd>
-		<ru><![CDATA[К-во матчей]]></ru>
-		<ua><![CDATA[Кiлькiсть iгор]]></ua>
-		<en><![CDATA[Matches count]]></en>
+		<nerd>Matches count total</nerd>
+		<ru><![CDATA[К-во матчей всего]]></ru>
+		<ua><![CDATA[Кiлькiсть iгор всього]]></ua>
+		<en><![CDATA[Matches count total]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Future matches count</nerd>
+		<ru><![CDATA[Грядущие матчи]]></ru>
+		<ua><![CDATA[Майбутнi iгри]]></ua>
+		<en><![CDATA[Future matches count]]></en>
 	</translation>
 
 	<translation>

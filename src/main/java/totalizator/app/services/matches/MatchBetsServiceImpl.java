@@ -18,6 +18,7 @@ import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -102,11 +103,6 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Override
 	public MatchBet load( final User user, final Match match ) {
 		return matchBetRepository.load( user, match );
-	}
-
-	@Override
-	public MatchBet load( final int userId, final int matchId ) {
-		return load( userService.load( userId ), matchService.load( matchId ) );
 	}
 
 	@Override
@@ -199,5 +195,19 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 		}
 
 		return userCanSeeAnotherBets( matchBet.getMatch(), user );
+	}
+
+	@Override
+	public List<User> getUserWhoMadeBet( final Match match ) {
+
+		return loadAll( match )
+				.stream()
+				.map( new Function<MatchBet, User>() {
+					@Override
+					public User apply( final MatchBet matchBet ) {
+						return matchBet.getUser();
+					}
+				} )
+				.collect( Collectors.toList() );
 	}
 }

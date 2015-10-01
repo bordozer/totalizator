@@ -13,7 +13,7 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserGroupService;
 import totalizator.app.services.UserService;
-import totalizator.app.services.score.UserMatchPointsCalculationService;
+import totalizator.app.services.points.UserMatchPointsCalculationService;
 
 import java.security.Principal;
 import java.util.List;

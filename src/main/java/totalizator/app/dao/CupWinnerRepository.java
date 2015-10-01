@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
-import totalizator.app.services.score.UserMatchPointsCalculationService;
-import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.score.UserMatchBetPointsCalculationService;
-import totalizator.app.services.score.MatchBonusPointsCalculationService;
+import totalizator.app.services.points.UserMatchPointsCalculationService;
+import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
+import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

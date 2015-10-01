@@ -20,6 +20,7 @@ public class MatchesAndBetsCollapsedDTO {
 	private LocalDateTime firstMatchTime;
 	private LocalDateTime firstMatchNoBetTime;
 	private int todayMatchesCount;
+	private int futureMatchesCount;
 
 	public MatchesAndBetsCollapsedDTO( final CupDTO cupDTO, final UserDTO userDTO ) {
 		this.cup = cupDTO;
@@ -96,5 +97,13 @@ public class MatchesAndBetsCollapsedDTO {
 
 	public int getTodayMatchesCount() {
 		return todayMatchesCount;
+	}
+
+	public void setFutureMatchesCount( final int futureMatchesCount ) {
+		this.futureMatchesCount = futureMatchesCount;
+	}
+
+	public int getFutureMatchesCount() {
+		return futureMatchesCount;
 	}
 }

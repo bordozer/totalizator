@@ -1,0 +1,46 @@
+<div class="row">
+
+	<div class="col-xs-12 col-lg-6 text-muted text-right">
+		<%= translator.totalStepsLabel %>
+	</div>
+
+	<div class="col-xs-12 col-lg-6">
+		<%= totalSteps %>
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-xs-12 col-lg-6 text-muted text-right">
+		<%= translator.performedStepsLabel %>
+	</div>
+
+	<div class="col-xs-12 col-lg-6">
+		<%= performedSteps %>
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-xs-12 col-lg-6 text-muted text-right">
+		<%= translator.importedGamesLabel %>
+	</div>
+
+	<div class="col-xs-12 col-lg-6">
+		<%= importedGamesCount %>
+	</div>
+</div>
+
+<hr />
+
+<div class="row">
+
+	<div class="col-xs-12 js-imported-game-list">
+		<button class="btn btn-default fa fa-arrow-down js-show-imported-game-list" title="<%= translator.showImportedGamesLabel %>">
+			<small><%= translator.showImportedGamesLabel %> ( <%= importedGamesCount %> )</small>
+		</button>
+	</div>
+
+</div>

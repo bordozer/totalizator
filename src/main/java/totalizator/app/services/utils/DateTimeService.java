@@ -33,6 +33,8 @@ public interface DateTimeService {
 
 	LocalDateTime plusDays( final int days );
 
+	LocalDateTime plusMonths( final LocalDateTime time, final int months );
+
 
 	String formatTime( final LocalDateTime time );
 
@@ -60,4 +62,8 @@ public interface DateTimeService {
 	LocalDateTime getFirstSecondOf( final LocalDate date );
 
 	LocalDateTime getLastSecondOf( final LocalDate date );
+
+	LocalDate firstDayOfMonth( final LocalDateTime time );
+
+	LocalDate lastDayOfMonth( final LocalDateTime time );
 }

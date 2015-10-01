@@ -10,6 +10,7 @@ import totalizator.app.services.TeamService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.strategies.nhl.NHLStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.nhl.NHLStatisticsServerURLService;
+import totalizator.app.services.remote.RemoteContentNullException;
 import totalizator.app.services.remote.RemoteContentService;
 
 import java.io.IOException;
@@ -36,11 +37,11 @@ public class NHLStatisticsAPIServiceTest {
 	}
 
 	@Test
-	public void extractRemoteGameIds() throws IOException {
+	public void extractRemoteGameIds() throws IOException, RemoteContentNullException {
 
 		final NHLStatisticsAPIService statisticsAPIService = getNhlStatisticsAPIService( TEAM_1_FUTURE_GAMES_JSON, TEAM_2_FUTURE_GAMES_JSON );
 
-		final Set<RemoteGame> remoteGames = statisticsAPIService.loadGamesFromJSON( testData.cup, testData.date, testData.date );
+		final Set<RemoteGame> remoteGames = statisticsAPIService.preloadRemoteGames( testData.cup, testData.date, testData.date );
 
 		assertEquals( remoteGames.size(), EXPECTED_FUTURE_REMOTE_GAME_IDS.size() );
 
@@ -57,11 +58,11 @@ public class NHLStatisticsAPIServiceTest {
 	}
 
 	@Test
-	public void pastGames() throws IOException {
+	public void pastGames() throws IOException, RemoteContentNullException {
 
 		final NHLStatisticsAPIService statisticsAPIService = getNhlStatisticsAPIService( TEAM_1_PAST_GAMES_JSON, TEAM_2_PAST_GAMES_JSON );
 
-		final List<RemoteGame> remoteGames = newArrayList( statisticsAPIService.loadGamesFromJSON( testData.cup, testData.date, testData.date ) );
+		final List<RemoteGame> remoteGames = newArrayList( statisticsAPIService.preloadRemoteGames( testData.cup, testData.date, testData.date ) );
 
 		assertEquals( 11, remoteGames.size() );
 
@@ -128,11 +129,11 @@ public class NHLStatisticsAPIServiceTest {
 	}
 
 	@Test
-	public void futureGames() throws IOException {
+	public void futureGames() throws IOException, RemoteContentNullException {
 
 		final NHLStatisticsAPIService statisticsAPIService = getNhlStatisticsAPIService( TEAM_1_FUTURE_GAMES_JSON, TEAM_2_FUTURE_GAMES_JSON );
 
-		final List<RemoteGame> remoteGames = newArrayList( statisticsAPIService.loadGamesFromJSON( testData.cup, testData.date, testData.date ) );
+		final List<RemoteGame> remoteGames = newArrayList( statisticsAPIService.preloadRemoteGames( testData.cup, testData.date, testData.date ) );
 
 		assertEquals( 4, remoteGames.size() );
 
@@ -198,7 +199,7 @@ public class NHLStatisticsAPIServiceTest {
 		assertTrue( remoteGame3.isLoaded() );
 	}
 
-	private NHLStatisticsAPIService getNhlStatisticsAPIService( String team1GamesJson, String team2GamesJson ) throws IOException {
+	private NHLStatisticsAPIService getNhlStatisticsAPIService( String team1GamesJson, String team2GamesJson ) throws IOException, RemoteContentNullException {
 
 		final NHLStatisticsAPIService nbaGameParsingService = new NHLStatisticsAPIService();
 		nbaGameParsingService.setNhlStatisticsServerURLService( getNhlStatisticsServerURLService( testData ) );
@@ -221,7 +222,7 @@ public class NHLStatisticsAPIServiceTest {
 		return nhlStatisticsServerURLService;
 	}
 
-	private RemoteContentService getRemoteContentService( final TestData testData, final String team1GamesJson, final String team2GamesJson ) throws IOException {
+	private RemoteContentService getRemoteContentService( final TestData testData, final String team1GamesJson, final String team2GamesJson ) throws IOException, RemoteContentNullException {
 
 		final RemoteContentService remoteContentService = EasyMock.createMock( RemoteContentService.class );
 

@@ -2,7 +2,7 @@ package user.points;
 
 import org.junit.Test;
 import totalizator.app.models.*;
-import totalizator.app.services.score.UserMatchBetPointsCalculationServiceImpl;
+import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationServiceImpl;
 
 import static junit.framework.TestCase.assertEquals;
 

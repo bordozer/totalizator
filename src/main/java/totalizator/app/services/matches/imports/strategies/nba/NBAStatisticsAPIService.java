@@ -9,6 +9,7 @@ import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.matches.imports.StatisticsServerURLService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
+import totalizator.app.services.remote.RemoteContentNullException;
 import totalizator.app.services.remote.RemoteContentService;
 import totalizator.app.services.utils.DateTimeService;
 
@@ -42,14 +43,14 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 	private DateTimeService dateTimeService;
 
 	@Override
-	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException {
+	public Set<RemoteGame> preloadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException, RemoteContentNullException {
 
 		final Set<RemoteGame> result = new TreeSet<RemoteGame>();
 
 		LocalDate date = dateFrom;
 		while ( true ) {
 
-			result.addAll( nbaGameParsingService.loadGamesFromJSON( cup, remoteContentService.getRemoteContent( nbaStatisticsServerURLService.remoteGamesIdsURL( cup, dateFrom ) ) ) );
+			result.addAll( nbaGameParsingService.loadGamesFromJSON( cup, remoteContentService.getRemoteContent( nbaStatisticsServerURLService.remoteGamesIdsURL( cup, date ) ) ) );
 
 			date = dateTimeService.plusDays( date, 1 );
 			if ( date.isAfter( dateTo ) ) {
@@ -61,7 +62,7 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 	}
 
 	@Override
-	public void loadGameFromJSON( Cup cup, final RemoteGame remoteGame ) throws IOException {
+	public void loadRemoteGame( Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException {
 
 		final String remoteGameJSON = getRemoteGameJSON( cup, remoteGame.getRemoteGameId() );
 
@@ -74,9 +75,11 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 		if ( remoteGame.isFinished() ) {
 			importedGamesDataStorageService.store( NBA, remoteGame.getRemoteGameId(), remoteGameJSON );
 		}
+
+		remoteGame.setLoaded( true );
 	}
 
-	private String getRemoteGameJSON( final Cup cup, final String remoteGameId ) throws IOException {
+	private String getRemoteGameJSON( final Cup cup, final String remoteGameId ) throws IOException, RemoteContentNullException {
 
 		final String gameJSON = importedGamesDataStorageService.getGameData( NBA, remoteGameId );
 		if ( StringUtils.isNotEmpty( gameJSON ) ) {

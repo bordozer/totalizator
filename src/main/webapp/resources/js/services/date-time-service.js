@@ -17,15 +17,15 @@ define( function ( require ) {
 
 	return {
 
-		getDateTimeFormat: function() {
+		getDateTimeFormat: function () {
 			return DATE_FORMAT + ' ' + TIME_FORMAT;
 		},
 
-		getDateFormat: function() {
+		getDateFormat: function () {
 			return DATE_FORMAT;
 		},
 
-		getLocale: function() {
+		getLocale: function () {
 			return LOCALE;
 		},
 
@@ -61,24 +61,47 @@ define( function ( require ) {
 		},
 
 		// str => date
-		parseDate: function( time ) {
+		parseDate: function ( time ) {
 			return moment( time, this.getDateTimeFormat() ).toDate();
 		},
 
-		timeNow: function() {
+		daysOffset: function ( days ) {
+			return moment( app.timeNow() ).add( days, 'day' );
+		},
+
+		monthsOffset: function ( months ) {
+			return moment( app.timeNow() ).add( months, 'month' );
+		},
+
+		startOfMonth: function ( momentDate ) {
+			return moment( [ momentDate.get( 'year' ), momentDate.get( 'month' ) ] );
+		},
+
+		endOfMonth: function ( momentDate ) {
+			return momentDate.endOf( 'month' );
+		},
+
+		daysRemainsTo: function ( momentDate ) {
+			return momentDate.diff( this.timeNow(), 'days' );
+		},
+
+		monthAndYearDisplay: function( momentDate ) {
+			return moment.months( momentDate.get( 'month' ) ) + ' ' + momentDate.get( 'year' );
+		},
+
+		timeNow: function () {
 			return app.timeNow();
 		},
 
-		dateNow: function() {
+		dateNow: function () {
 			return moment( app.timeNow(), this.getDateFormat() ).format( this.getDateFormat() );
 		},
 
-		fromNow: function( time ) {
+		fromNow: function ( time ) {
 			return moment.duration( moment( time, this.getDateTimeFormat() ).diff( moment( this.timeNow(), this.getDateTimeFormat() ) ) ).humanize( {
 				suffix: true,
 				precise: true
 			} );
-			//return moment( time, DATE_TIME_FORMAT ).fromNow();
 		}
 	}
 } );

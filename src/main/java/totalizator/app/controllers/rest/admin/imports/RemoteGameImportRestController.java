@@ -15,6 +15,7 @@ import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameDataImportService;
+import totalizator.app.services.remote.RemoteContentNullException;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.io.IOException;
@@ -53,14 +54,14 @@ public class RemoteGameImportRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/collect-game-data-ids/", produces = APPLICATION_JSON_VALUE )
-	public List<RemoteGameDTO> collectRemoteGamesIds( final GameImportParametersDTO parametersDTO, final Principal principal ) throws IOException {
+	public List<RemoteGameDTO> collectRemoteGamesIds( final GameImportParametersDTO parametersDTO, final Principal principal ) throws IOException, RemoteContentNullException {
 
 		final LocalDate dateFrom = dateTimeService.parseDate( parametersDTO.getDateFrom() );
 		final LocalDate dateTo = dateTimeService.parseDate( parametersDTO.getDateTo() );
 
 		final Cup cup = cupService.load( parametersDTO.getCupId() );
 
-		return remoteGameDataImportService.loadGamesFromJSON( dateFrom, dateTo, cup )
+		return remoteGameDataImportService.preloadRemoteGames( dateFrom, dateTo, cup )
 				.stream()
 				.map( getRemoteGameMapper( cup, principal ) )
 				.collect( Collectors.toList() );
@@ -69,14 +70,14 @@ public class RemoteGameImportRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
-	public RemoteGameDTO loadRemoteGameData( final @PathVariable( value = "remoteGameId" ) String remoteGameId, final @RequestParam( value = "cupId" ) Integer cupId, final Principal principal ) throws IOException {
+	public RemoteGameDTO loadRemoteGameData( final @PathVariable( value = "remoteGameId" ) String remoteGameId, final @RequestParam( value = "cupId" ) Integer cupId, final Principal principal ) throws IOException, RemoteContentNullException {
 
 		final Cup cup = cupService.load( cupId );
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 		remoteGame.setLoaded( true );
 
-		remoteGameDataImportService.loadGameFromJSON( remoteGame, cup );
+		remoteGameDataImportService.loadRemoteGame( remoteGame, cup );
 
 		return getRemoteGameMapper( cup, principal ).apply( remoteGame );
 	}
@@ -92,7 +93,7 @@ public class RemoteGameImportRestController {
 	@ResponseBody
 	@ResponseStatus( value = HttpStatus.INTERNAL_SERVER_ERROR )
 	public Error handleException( final IOException exception ) {
-		return new Error( "Remote game import server error" );
+		return new Error( "Remote game import server error: " + exception.getMessage() );
 	}
 
 	private Function<RemoteGame, RemoteGameDTO> getRemoteGameMapper( final Cup cup, final Principal principal ) {

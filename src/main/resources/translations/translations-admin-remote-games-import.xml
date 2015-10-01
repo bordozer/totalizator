@@ -311,6 +311,34 @@
 	</translation>
 
 	<translation>
+		<nerd>Date range</nerd>
+		<ru><![CDATA[Диапазон дат]]></ru>
+		<ua><![CDATA[Дiапазон дат]]></ua>
+		<en><![CDATA[Date range]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Days offset</nerd>
+		<ru><![CDATA[Смещение в днях]]></ru>
+		<ua><![CDATA[Змiщення у днях]]></ua>
+		<en><![CDATA[Days offset]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Month offset</nerd>
+		<ru><![CDATA[Смещение в месяцах]]></ru>
+		<ua><![CDATA[Змiщення у мiсяцях]]></ua>
+		<en><![CDATA[Month offset]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

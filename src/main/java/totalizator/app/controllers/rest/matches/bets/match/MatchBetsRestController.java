@@ -80,7 +80,7 @@ public class MatchBetsRestController {
 
 		for ( final MatchBet matchBet : matchBets ) {
 
-			final MatchBetDTO matchBetDTO = dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser, userGroup );
+			final MatchBetDTO matchBetDTO = userGroup != null ? dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser, userGroup ) : dtoService.getMatchBetForMatch( match, matchBet.getUser(), currentUser );
 
 			if ( matchBetDTO.getBet().isSecuredBet() ) {
 				matchBetDTO.getBet().setScore1( 0 );

@@ -138,7 +138,7 @@ define( function ( require ) {
 				, { selector: 'js-settings-button', icon: 'fa fa-cog', link: '#', text: translator.filteringSettingsButtonLabel, button: this.showSettingsButton }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
-				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/matches/' + model.cupId + '/', text: translator.menuOpenCupMatchesCard }
+				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + 'matches/', text: translator.menuOpenCupMatchesCard }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/menuOpenCupBetsCard/' + model.cupId + '/', text: translator.menuOpenCupBetsCard }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: this.showCalendarButton }
@@ -200,6 +200,7 @@ define( function ( require ) {
 			} );
 
 			this.$( '.js-category-cup-team-filter' ).html( settingsView.render().$el );
+			this.trigger( 'inner-view-rendered' );
 
 			return this;
 		},

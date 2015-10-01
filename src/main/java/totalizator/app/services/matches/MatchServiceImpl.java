@@ -250,6 +250,11 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	public int getFutureMatchCount( final Cup cup ) {
+		return matchRepository.getFutureMatchCount( cup );
+	}
+
+	@Override
 	public int getFutureMatchCount( Cup cup, Team team ) {
 		return matchRepository.getFutureMatchCount( cup, team );
 	}

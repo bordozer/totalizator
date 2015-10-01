@@ -15,6 +15,7 @@ import totalizator.app.services.matches.imports.strategies.StatisticsServerServi
 import totalizator.app.services.matches.imports.strategies.nba.NBAStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.nhl.NHLStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.uefa.UEFAStatisticsAPIService;
+import totalizator.app.services.remote.RemoteContentNullException;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -48,13 +49,13 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	private final Logger LOGGER = Logger.getLogger( RemoteGameDataImportServiceImpl.class );
 
 	@Override
-	public Set<RemoteGame> loadGamesFromJSON( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException {
-		return getStatisticsServerService( cup ).loadGamesFromJSON( cup, dateFrom, dateTo );
+	public Set<RemoteGame> preloadRemoteGames( final LocalDate dateFrom, final LocalDate dateTo, final Cup cup ) throws IOException, RemoteContentNullException {
+		return getStatisticsServerService( cup ).preloadRemoteGames( cup, dateFrom, dateTo );
 	}
 
 	@Override
-	public void loadGameFromJSON( final RemoteGame remoteGame, final Cup cup ) throws IOException {
-		getStatisticsServerService( cup ).loadGameFromJSON( cup, remoteGame );
+	public void loadRemoteGame( final RemoteGame remoteGame, final Cup cup ) throws IOException, RemoteContentNullException {
+		getStatisticsServerService( cup ).loadRemoteGame( cup, remoteGame );
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	}
 
 	@Override
-	public void importGame( final Cup cup, final RemoteGame remoteGame ) {
+	public ImportGameResult importGame( final Cup cup, final RemoteGame remoteGame ) {
 
 		final String remoteTeam1Id = remoteGame.getRemoteTeam1Id();
 		final String remoteTeam2Id = remoteGame.getRemoteTeam2Id();
@@ -101,7 +102,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 			matchService.save( match );
 
-			return;
+			return new ImportGameResult( match.getId(), false );
 		}
 
 		final Match newMatch = new Match();
@@ -120,7 +121,9 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 		newMatch.setRemoteGameId( remoteGame.getRemoteGameId() );
 
-		matchService.save( newMatch );
+		final Match saved = matchService.save( newMatch );
+
+		return new ImportGameResult( saved.getId(), true );
 	}
 
 	private Team getOrCreateTeam( final Cup cup, final String remoteTeamId, String remoteTeamName ) {

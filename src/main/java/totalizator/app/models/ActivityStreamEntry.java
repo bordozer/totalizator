@@ -68,10 +68,6 @@ public class ActivityStreamEntry extends AbstractEntity {
 		this.activityTime = activityTime;
 	}
 
-	public void setEvent( final ActivityStreamEvent activityStreamEvent ) {
-		eventJson = new Gson().toJson( activityStreamEvent );
-	}
-
 	public User getActivityOfUser() {
 		return activityOfUser;
 	}

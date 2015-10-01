@@ -53,8 +53,10 @@ public class MatchesAndBetsCollapsedRestController {
 
 		final MatchesAndBetsCollapsedDTO result = new MatchesAndBetsCollapsedDTO( dtoService.transformCup( cup, showBetsOfUser ), dtoService.transformUser( showBetsOfUser ) );
 
+		result.setMatchesCount( matchService.getMatchCount( cup ) );
+		result.setFutureMatchesCount( matchService.getFutureMatchCount( cup ) );
+
 		final List<Match> matches = matchService.loadAll( filter );
-		result.setMatchesCount( matches.size() );
 
 		result.setNowPlayingMatchesCount( getMatchesNowCount( matches ) );
 		result.setTodayMatchesCount( getTodayMatchesCount( matches ) );

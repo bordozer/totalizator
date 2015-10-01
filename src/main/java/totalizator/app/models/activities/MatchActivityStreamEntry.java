@@ -1,6 +1,5 @@
 package totalizator.app.models.activities;
 
-import com.google.gson.Gson;
 import totalizator.app.models.ActivityStreamEntry;
 import totalizator.app.models.activities.events.MatchEvent;
 
@@ -8,11 +7,11 @@ public class MatchActivityStreamEntry extends AbstractActivityStreamEntry {
 
 	private final MatchEvent matchEvent;
 
-	public MatchActivityStreamEntry( final ActivityStreamEntry activityStreamEntry ) {
+	public MatchActivityStreamEntry( final ActivityStreamEntry activityStreamEntry, final MatchEvent matchEvent ) {
 
 		super( activityStreamEntry );
 
-		matchEvent = new Gson().fromJson( activityStreamEntry.getEventJson(), MatchEvent.class );
+		this.matchEvent = matchEvent;
 	}
 
 	public MatchEvent getMatchEvent() {

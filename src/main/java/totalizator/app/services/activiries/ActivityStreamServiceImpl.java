@@ -1,5 +1,6 @@
 package totalizator.app.services.activiries;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import totalizator.app.models.activities.MatchBetActivityStreamEntry;
 import totalizator.app.models.activities.events.MatchBetEvent;
 import totalizator.app.models.activities.events.MatchEvent;
 import totalizator.app.services.utils.DateTimeService;
+import totalizator.app.services.utils.JsonService;
 
 import java.util.List;
 import java.util.function.Function;
@@ -27,6 +29,9 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 	@Autowired
 	private DateTimeService dateTimeService;
+
+	@Autowired
+	private JsonService jsonService;
 
 	@Override
 	public List<AbstractActivityStreamEntry> loadAll() {
@@ -88,10 +93,10 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 						switch ( activityStreamEntry.getActivityStreamEntryType() ) {
 							case MATCH_BET_CREATED:
 							case MATCH_BET_CHANGED:
-								return new MatchBetActivityStreamEntry( activityStreamEntry );
+								return new MatchBetActivityStreamEntry( activityStreamEntry, jsonService.fromMatchBetEventJson( activityStreamEntry.getEventJson() ) );
 							case MATCH_BET_DELETED:
 							case MATCH_FINISHED:
-								return new MatchActivityStreamEntry( activityStreamEntry );
+								return new MatchActivityStreamEntry( activityStreamEntry, jsonService.fromMatchEventJson( activityStreamEntry.getEventJson() ) );
 						}
 
 						throw new IllegalArgumentException( String.format( "Unsupported activity type: %s", activityStreamEntry.getActivityStreamEntryType() ) );
@@ -106,7 +111,7 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 		activity.setActivityEntryId( matchId );
 		activity.setActivityStreamEntryType( activityStreamEntryType );
-		activity.setEvent( new MatchEvent( matchId, score1, score2 ) );
+		activity.setEventJson( jsonService.toJson( new MatchEvent( matchId, score1, score2 ) ) );
 		return activity;
 	}
 
@@ -117,7 +122,7 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 		final int matchId = matchBet.getMatch().getId();
 		activity.setActivityEntryId( matchId );
 		activity.setActivityStreamEntryType( activityStreamEntryType );
-		activity.setEvent( new MatchBetEvent( matchId, matchBet.getBetScore1(), matchBet.getBetScore2(), oldScore1, oldScore2 ) );
+		activity.setEventJson( jsonService.toJson( new MatchBetEvent( matchId, matchBet.getBetScore1(), matchBet.getBetScore2(), oldScore1, oldScore2 ) ) );
 
 		return activity;
 	}

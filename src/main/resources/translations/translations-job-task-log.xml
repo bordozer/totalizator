@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Job task log</nerd>
+		<ru><![CDATA[Лог выполнения]]></ru>
+		<ua><![CDATA[Лог виконання]]></ua>
+		<en><![CDATA[Job task log]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task: Total steps</nerd>
+		<ru><![CDATA[Всего шагов]]></ru>
+		<ua><![CDATA[Усього iтерацiй]]></ua>
+		<en><![CDATA[Total steps]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task: Performed steps</nerd>
+		<ru><![CDATA[Выполнено шагов]]></ru>
+		<ua><![CDATA[Виконано iтерацiй]]></ua>
+		<en><![CDATA[Performed steps]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task details</nerd>
+		<ru><![CDATA[подробности выполнения задачи]]></ru>
+		<ua><![CDATA[подробицi виконання]]></ua>
+		<en><![CDATA[job task details]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task: Imported games</nerd>
+		<ru><![CDATA[Импортировано игр]]></ru>
+		<ua><![CDATA[Iмпортовано iгр]]></ua>
+		<en><![CDATA[Games was Imported]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task: Imported match not found, it must have been deleted</nerd>
+		<ru><![CDATA[Импортированный матч не найден, должно быть, был удален]]></ru>
+		<ua><![CDATA[Iмпортована гра не знайдена. Мабудь, була видалена]]></ua>
+		<en><![CDATA[Imported match not found, it must have been deleted]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task: Show imported games</nerd>
+		<ru><![CDATA[Показать импортированные игры]]></ru>
+		<ua><![CDATA[Показати iмпортованi iгри]]></ua>
+		<en><![CDATA[Show me]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected job task log entries</nerd>
+		<ru><![CDATA[Удалить выделенные]]></ru>
+		<ua><![CDATA[Видалити помiченi]]></ua>
+		<en><![CDATA[Delete selected]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Select a job task log entries first</nerd>
+		<ru><![CDATA[Выделите сперва записи, которые надо удалить]]></ru>
+		<ua><![CDATA[Видiлить Спершу записи, якi треба видалити]]></ua>
+		<en><![CDATA[Select job task log entries first]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Select all job task log entries</nerd>
+		<ru><![CDATA[Выделить все]]></ru>
+		<ua><![CDATA[Видiлити усi]]></ua>
+		<en><![CDATA[Select all]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Deselect all job task log entries</nerd>
+		<ru><![CDATA[Снять выделение со всех]]></ru>
+		<ua><![CDATA[Зняти видiлиння зi всiх]]></ua>
+		<en><![CDATA[Deselect all]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

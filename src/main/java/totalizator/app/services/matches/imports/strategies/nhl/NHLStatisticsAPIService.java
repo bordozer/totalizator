@@ -10,6 +10,7 @@ import totalizator.app.models.Team;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
+import totalizator.app.services.remote.RemoteContentNullException;
 import totalizator.app.services.remote.RemoteContentService;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class NHLStatisticsAPIService implements StatisticsServerService {
 	private NHLStatisticsServerURLService nhlStatisticsServerURLService;
 
 	@Override
-	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException {
+	public Set<RemoteGame> preloadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException, RemoteContentNullException {
 
 		final Set<RemoteGame> result = new TreeSet<RemoteGame>();
 
@@ -46,10 +47,10 @@ public class NHLStatisticsAPIService implements StatisticsServerService {
 	}
 
 	@Override
-	public void loadGameFromJSON( final Cup cup, final RemoteGame remoteGame ) throws IOException {
+	public void loadRemoteGame( final Cup cup, final RemoteGame remoteGame ) throws IOException {
 	}
 
-	private Set<RemoteGame> loadRemoteGame( final Team team, final LocalDate dateFrom ) throws IOException {
+	private Set<RemoteGame> loadRemoteGame( final Team team, final LocalDate dateFrom ) throws IOException, RemoteContentNullException {
 
 		final String teamImportId = team.getImportId();
 

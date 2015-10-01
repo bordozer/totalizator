@@ -14,7 +14,8 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		matchesCount: "Matches count"
+		matchesCount: "Matches count total"
+		, futureMatchesCount: "Future matches count"
 		, nowPlayingMatchesCountLabel: "Matches are playing now count"
 		, todayMatchesCountLabel: "Today matches"
 		, userBetsCount: "User bets count"

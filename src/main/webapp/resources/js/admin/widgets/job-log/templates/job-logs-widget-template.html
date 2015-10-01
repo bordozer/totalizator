@@ -1,0 +1,46 @@
+<div class="row">
+
+	<div class="col-xs-12">
+
+		<table class="table table-striped table-hover" style="font-size: 12px;">
+
+			<tbody>
+
+			<% _.each( jobTaskLogs, function( jobTaskLog ) { %>
+
+				<% var jobTaskState = stateGetter( jobTaskLog.jobExecutionStateId ) %>
+				<% var jobTaskType = jobTaskTypeGetter( jobTaskLog.jobTaskTypeId ) %>
+
+				<tr class="<%= jobTaskState.css %>" title="<%= jobTaskType.name %> - <%= jobTaskState.text %>">
+
+					<td width="40">
+						<input type="checkbox" class="js-job-task-log-entry" value="<%= jobTaskLog.jobTaskLogId %>">
+					</td>
+
+					<td width="40">
+						<button class="btn btn-default fa fa-info js-show-job-task-parameters-button" data-job-task-log-id="<%= jobTaskLog.jobTaskLogId %>" title="<%= translator.jobTaskDetailsLabel %>"></button>
+					</td>
+
+					<td width="20"><i class="<%= jobTaskState.icon %> fa-2x"></i></td>
+					<td width="20"><i class="<%= jobTaskType.icon %> fa-2x" title="<%= jobTaskType.name %>"></i></td>
+
+					<td width="120"><%= dateFormatter( jobTaskLog.startTime ) %> <sup><%= timeFormatter( jobTaskLog.startTime ) %></sup> </td>
+					<td width="120"><%= dateFormatter( jobTaskLog.finishTime ) %> <sup><%= timeFormatter( jobTaskLog.finishTime ) %></sup> </td>
+
+					<td >
+						<span class="<%= jobTaskLog.jobLogResultJSON.performedSteps == jobTaskLog.jobLogResultJSON.totalSteps ? 'text-success' : 'text-danger' %>">
+							<strong><%= jobTaskLog.jobLogResultJSON.performedSteps %> / <%= jobTaskLog.jobLogResultJSON.totalSteps %></strong>
+						</span>
+					</td>
+
+					<td><%= jobTaskName %> <sup>#<%= jobTaskLog.jobTaskLogId %></sup></td>
+				</tr>
+			<% }) %>
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+</div>

@@ -78,9 +78,12 @@ define( function ( require ) {
 
 		_isModelInFilter: function( model ) {
 
-			var json = model.toJSON();
+			var jmodel = model.toJSON();
 
-			var remoteGameLocalData = json.remoteGameLocalData;
+			var remoteGameLocalData = jmodel.remoteGameLocalData;
+			if ( ! remoteGameLocalData ) {
+				return true; // not loaded yet remote game - should to be shown
+			}
 
 			if ( ! remoteGameLocalData ) {
 				return true; // not loaded yet remote game - should to be shown
@@ -111,11 +114,11 @@ define( function ( require ) {
 				return false;
 			}
 
-			if ( showOnlFinishedGames && ! json.finished ) {
+			if ( showOnlFinishedGames && ! jmodel.finished ) {
 				return false;
 			}
 
-			if ( showOnlyNotFinishedGames && json.finished ) {
+			if ( showOnlyNotFinishedGames && jmodel.finished ) {
 				return false;
 			}
 

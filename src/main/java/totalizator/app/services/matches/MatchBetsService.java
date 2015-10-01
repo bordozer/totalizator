@@ -18,8 +18,6 @@ public interface MatchBetsService extends GenericService<MatchBet> {
 
 	MatchBet load( final User user, final Match match );
 
-	MatchBet load( final int userId, final int matchId );
-
 	int betsCount( final Match match );
 
 	ValidationResult validateBettingAllowed( final Match match, final User user );
@@ -29,4 +27,6 @@ public interface MatchBetsService extends GenericService<MatchBet> {
 	boolean userCanSeeAnotherBets( final Match match, final User accessor );
 
 	boolean isAllowedToShowMatchBets( final MatchBet matchBet, final User user );
+
+	List<User> getUserWhoMadeBet( final Match match );
 }

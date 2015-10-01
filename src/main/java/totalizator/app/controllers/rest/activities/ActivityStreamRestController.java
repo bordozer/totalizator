@@ -44,6 +44,9 @@ public class ActivityStreamRestController {
 	@Autowired
 	private DTOService dtoService;
 
+	@Autowired
+	private ActivityStreamValidator activityStreamValidator;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/portal/" )
 	public List<ActivityStreamDTO> portalPageActivities( final Principal principal ) {
 
@@ -74,6 +77,12 @@ public class ActivityStreamRestController {
 					@Override
 					public boolean test( final AbstractActivityStreamEntry entry ) {
 						return entry.getActivityStreamEntryType() != ActivityStreamEntryType.MATCH_FINISHED;
+					}
+				} )
+				.filter( new Predicate<AbstractActivityStreamEntry>() {
+					@Override
+					public boolean test( final AbstractActivityStreamEntry activity ) {
+						return activityStreamValidator.validate( activity );
 					}
 				} )
 				.map( new Function<AbstractActivityStreamEntry, ActivityStreamDTO>() {
@@ -116,9 +125,14 @@ public class ActivityStreamRestController {
 
 		final MatchActivityStreamEntry matchBetActivity = ( MatchActivityStreamEntry ) activity;
 
-		dto.setMatch( dtoService.transformMatch( matchService.load( matchBetActivity.getActivityEntryId() ), currentUser ) );
-
 		final Match match = matchService.load( matchBetActivity.getActivityEntryId() );
+
+		if ( match == null ) {
+			return;
+		}
+
+		dto.setMatch( dtoService.transformMatch( match, currentUser ) );
+
 		final boolean showBetData = matchBetActivity.getActivityStreamEntryType() != ActivityStreamEntryType.MATCH_FINISHED && showBetData( currentUser, matchBetActivity, match );
 		dto.setShowBetData( showBetData );
 

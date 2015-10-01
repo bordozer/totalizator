@@ -13,9 +13,9 @@ import totalizator.app.dto.points.UserMatchPointsHolderDTO;
 import totalizator.app.models.*;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.score.UserMatchPointsCalculationService;
-import totalizator.app.services.score.UserMatchBetPointsCalculationService;
+import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.points.UserMatchPointsCalculationService;
+import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -115,12 +115,12 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public MatchBetDTO getMatchBetForMatch( final Match match, final User betOfUser, final User accessor ) {
-		return matchBetDTOFunction( betOfUser, accessor, null ).apply( match );
+		return matchBetDTOFunction( betOfUser, accessor ).apply( match );
 	}
 
 	@Override
 	public MatchBetDTO getMatchBetForMatch( final Match match, final User betOfUser, final User accessor, final UserGroup userGroup ) {
-		return matchBetDTOFunction( betOfUser, accessor, userGroup ).apply( match );
+		return matchBetDTOFunctionForUserGroup( betOfUser, accessor, userGroup ).apply( match );
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public class DTOServiceImpl implements DTOService {
 
 	@Override
 	public List<MatchBetDTO> getMatchBetForMatches( final List<Match> matches, final User betOfUser, final User accessor ) {
-		return newArrayList( Lists.transform( matches, matchBetDTOFunction( betOfUser, accessor, null ) ) );
+		return newArrayList( Lists.transform( matches, matchBetDTOFunction( betOfUser, accessor ) ) );
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public class DTOServiceImpl implements DTOService {
 
 				result.setCupPosition( cupTeamBet.getCupPosition() );
 
-				result.setPoints( userCupWinnersBonusCalculationService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
+				result.setPoints( userCupWinnersBonusCalculationService.getUserCupWinnerPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
 
 				result.setStillActive( cupTeamService.exists( cup.getId(), team.getId() ) );
 
@@ -427,60 +427,53 @@ public class DTOServiceImpl implements DTOService {
 		};
 	}
 
-	/*private Function<MatchBet, MatchBetDTO> matchBetFunction( final User betsOfUser, final User accessor, final UserGroup userGroup ) {
-
-		return new Function<MatchBet, MatchBetDTO>() {
-
-			@Override
-			public MatchBetDTO apply( final MatchBet matchBet ) {
-				final Match match = matchBet.getMatch();
-
-				final MatchDTO matchDTO = transformMatch( match, betsOfUser );
-
-				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-
-				final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, betsOfUser );
-				matchBetDTO.setBettingAllowed( validationResult.isPassed() );
-				matchBetDTO.setBettingValidationMessage( validationResult.getMessage() );
-
-				final BetDTO betDTO = transformMatchBet( matchBet, betsOfUser, accessor );
-
-				matchBetDTO.setBet( betDTO );
-				matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( userMatchPointsCalculationService.getUserMatchPoints( matchBet, userGroup ) ) );
-
-				return matchBetDTO;
-			}
-		};
-	}*/
-
-	private Function<Match, MatchBetDTO> matchBetDTOFunction( final User betsOfUser, final User accessor, final UserGroup userGroup ) {
+	private Function<Match, MatchBetDTO> matchBetDTOFunction( final User betsOfUser, final User accessor ) {
 
 		return new Function<Match, MatchBetDTO>() {
 
 			@Override
 			public MatchBetDTO apply( final Match match ) {
-				final MatchDTO matchDTO = transformMatch( match, betsOfUser );
-
-				final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
-
-				final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, betsOfUser );
-				matchBetDTO.setBettingAllowed( validationResult.isPassed() );
-				matchBetDTO.setBettingValidationMessage( validationResult.getMessage() );
-
-				final MatchBet matchBet = matchBetsService.load( betsOfUser, match );
-
-				if ( matchBet == null ) {
-					return matchBetDTO;
-				}
-
-				final BetDTO betDTO = transformMatchBet( matchBet, betsOfUser, accessor );
-
-				matchBetDTO.setBet( betDTO );
-				matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( userMatchPointsCalculationService.getUserMatchPoints( matchBet, userGroup ) ) );
-
-				return matchBetDTO;
+				final UserMatchPointsHolder points = userMatchPointsCalculationService.getUserMatchPoints( match, betsOfUser );
+				return getMatchBetDTO( match, betsOfUser, accessor, points );
 			}
 		};
+	}
+
+	private Function<Match, MatchBetDTO> matchBetDTOFunctionForUserGroup( final User betsOfUser, final User accessor, final UserGroup userGroup ) {
+
+		return new Function<Match, MatchBetDTO>() {
+
+			@Override
+			public MatchBetDTO apply( final Match match ) {
+				final UserMatchPointsHolder points = userMatchPointsCalculationService.getUserMatchPoints( match, betsOfUser, userGroup );
+				return getMatchBetDTO( match, betsOfUser, accessor, points );
+			}
+		};
+	}
+
+	private MatchBetDTO getMatchBetDTO( final Match match, final User betsOfUser, final User accessor, final UserMatchPointsHolder pointsHolder ) {
+
+		final MatchDTO matchDTO = transformMatch( match, betsOfUser );
+
+		final MatchBetDTO matchBetDTO = new MatchBetDTO( matchDTO );
+
+		final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, betsOfUser );
+		matchBetDTO.setBettingAllowed( validationResult.isPassed() );
+		matchBetDTO.setBettingValidationMessage( validationResult.getMessage() );
+
+		final MatchBet matchBet = matchBetsService.load( betsOfUser, match );
+
+		if ( matchBet == null ) {
+			return matchBetDTO;
+		}
+
+		final BetDTO betDTO = transformMatchBet( matchBet, betsOfUser, accessor );
+
+		matchBetDTO.setBet( betDTO );
+
+		matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( pointsHolder ) );
+
+		return matchBetDTO;
 	}
 
 	private Function<CupTeamBet, CupTeamBetDTO> cupTeamBetFunction( final User user ) {
@@ -500,7 +493,7 @@ public class DTOServiceImpl implements DTOService {
 
 				result.setCupPosition( cupTeamBet.getCupPosition() );
 
-				result.setPoints( userCupWinnersBonusCalculationService.getUserCupWinnersPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
+				result.setPoints( userCupWinnersBonusCalculationService.getUserCupWinnerPoints( cup, team, user, cupTeamBet.getCupPosition() ) );
 
 				result.setStillActive( cupTeamService.exists( cup.getId(), team.getId() ) );
 
@@ -510,6 +503,7 @@ public class DTOServiceImpl implements DTOService {
 	}
 
 	private java.util.function.Function<SportKind, SportKindDTO> sportKindsFunction() {
+
 		return new java.util.function.Function<SportKind, SportKindDTO>() {
 
 			@Override

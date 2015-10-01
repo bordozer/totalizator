@@ -5,21 +5,18 @@ define( function ( require ) {
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
+	var chosen = require( 'chosen' );
 
 	var template = _.template( require( 'text!./templates/game-import-parameters-template.html' ) );
 
 	var remoteGamesImportService = require( 'js/admin/widgets/game-import/remote-games-import-service' );
-	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
-	var service = require( '/resources/js/services/service.js' );
-	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
+	var DateRangePickerView = require( 'js/controls/date-range-picker/date-range-picker' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		validation_SelectCup: "Select cup first!"
 		, cupLabel: "Cup"
-		, dateFromLabel: "Date from"
-		, dateToLabel: "Date to"
 		, showActiveCupsOnly: "Show active cups only"
 	} );
 
@@ -34,34 +31,23 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-
-			this.sportKinds = service.loadSportKinds();
-			this.model.selectedSportKindId = this.sportKinds[ 0 ].sportKindId;
-
-			var today = dateTimeService.dateNow();
-			this.model.set( {
-				cupId: 0
-				//, dateFrom: today
-				//, dateTo: today
-			} );
-
 			this.render();
 		},
 
-		render: function() {
-
-			var selectedSportKindId = this.model.selectedSportKindId;
-			var cups = this.showActiveCupsOnlyClick ? remoteGamesImportService.loadAllCurrentCupsConfiguredForRemoteGameImport( selectedSportKindId ) : remoteGamesImportService.loadCupsConfiguredForRemoteGameImport( selectedSportKindId );
+		render: function () {
 
 			var model = this.model.toJSON();
 
+			var selectedSportKindId = model.selectedSportKindId;
+			this.cupsForGameImport = this.showActiveCupsOnlyClick ? remoteGamesImportService.loadAllCurrentCupsConfiguredForRemoteGameImport( selectedSportKindId ) : remoteGamesImportService.loadCupsConfiguredForRemoteGameImport( selectedSportKindId );
+
 			var data = _.extend( {}
-				, model
+					, model
 					, {
 						cupId: model.cupId
-						, cups: cups
+						, cupsForGameImport: this.cupsForGameImport
 						, showActiveCupsOnlyClick: this.showActiveCupsOnlyClick
-						, sportKinds: this.sportKinds
+						, sportKinds: this.model.sportKinds
 						, selectedSportKindId: selectedSportKindId
 						, translator: translator
 					}
@@ -71,48 +57,61 @@ define( function ( require ) {
 
 			this.$( '#selectedCupId' ).chosen( { width: '100%' } );
 
-			var onDateFromSelectCallback = this._onDateFromSelect.bind( this );
-			this.dateTimePickerFromView = new DateTimePickerView( {
-				el: this.$( '.js-date-from' )
-				, initialValue: this.model.get( 'dateFrom' )
-				, disableTime: true
-				, datTimeChangeCallback: onDateFromSelectCallback
-			} );
-
-			var onDateToSelectCallback = this._onDateToSelect.bind( this );
-			this.dateTimePickerToView = new DateTimePickerView( {
-				el: this.$( '.js-to-date' )
-				, initialValue: this.model.get( 'dateTo' )
-				, disableTime: true
-				, datTimeChangeCallback: onDateToSelectCallback
-			} );
+			if ( model.cupId ) {
+				this.dateRangePicker = new DateRangePickerView( {
+					parameters: this.model.get( 'timePeriod' )
+					, el: this.$( '.js-date-range-picker' )
+				} );
+				this.dateRangePicker.on( 'events:date_range_change', this._onDateRangeChange, this );
+			}
 		},
 
-		_getSelectedCupId: function() {
+		_getSelectedCupId: function () {
 			return this.$( '#selectedCupId' ).val();
 		},
 
-		_onCupSelect: function() {
-			this.model.set( { cupId: this._getSelectedCupId() } );
+		_onCupSelect: function () {
+
+			var selectedCupId = this._getSelectedCupId();
+
+			this.model.set( { cupId: selectedCupId } );
+
+			var selectedCup = _.find( this.cupsForGameImport, function ( cupForGameImport ) {
+				return cupForGameImport.cup.cupId == selectedCupId;
+			} );
+			this.model.set( { timePeriodType: selectedCup.timePeriodType } );
+
+			this.render();
+
+			this.trigger( 'events:games_import_parameters_change', this._getParameters() );
 		},
 
-		_onDateFromSelect: function( date ) {
-			this.model.set( { dateFrom: date } );
-		},
-
-		_onDateToSelect: function( date ) {
-			this.model.set( { dateTo: date } );
-		},
-
-		_onShowActiveCupsOnlyClick: function() {
-			this.showActiveCupsOnlyClick = this.$( ".js-show-active-cups-only" ).is(':checked');
+		_onShowActiveCupsOnlyClick: function () {
+			this.showActiveCupsOnlyClick = this.$( ".js-show-active-cups-only" ).is( ':checked' );
 			this.render();
 		},
 
-		_onSportKindFilterChange: function( evt ) {
-			this.model.selectedSportKindId = $( evt.target ).val();
+		_onSportKindFilterChange: function ( evt ) {
+			this.model.set( { selectedSportKindId: $( evt.target ).val(), cupId: 0 } );
 			this.render();
+		},
+
+		_onDateRangeChange: function( dateRangeParameters ) {
+			this.model.set( dateRangeParameters );
+
+			dateRangeParameters.cupId = this.model.get( 'cupId' );
+			this.trigger( 'events:games_import_parameters_change', this._getParameters() );
+		},
+
+		_getParameters: function() {
+
+			var parameters = {};
+
+			parameters.cupId = this.model.get( 'cupId' );
+			parameters.timePeriod = this.dateRangePicker.getParameters();
+
+			return parameters;
 		}
-	});
+	} );
 } );
 

@@ -82,7 +82,7 @@ define( function ( require ) {
 					, text: translator.matchesAndBetsViewMode_Statistics_Label
 					, button: showButtons  && ! isStatisticsView
 				}
-				, { selector: 'splitter' }
+				, { selector: 'divider' }
 				, { selector: 'js-view_mode_bet'
 					, icon: 'fa fa-money'
 					, link: '#'

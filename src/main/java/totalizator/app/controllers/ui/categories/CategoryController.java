@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.services.CategoryService;
-import totalizator.app.services.UserService;
 
 @Controller
 @RequestMapping( "/totalizator/categories" )
@@ -16,9 +15,6 @@ public class CategoryController {
 	public static final String MODEL_NAME = "categoryModel";
 
 	private static final String VIEW = "/Category";
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private CategoryService categoryService;

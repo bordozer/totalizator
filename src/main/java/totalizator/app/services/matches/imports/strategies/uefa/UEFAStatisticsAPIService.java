@@ -8,6 +8,7 @@ import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.matches.imports.StatisticsServerURLService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
+import totalizator.app.services.remote.RemoteContentNullException;
 import totalizator.app.services.remote.RemoteContentService;
 import totalizator.app.services.remote.RemoteServerRequest;
 
@@ -30,7 +31,7 @@ public class UEFAStatisticsAPIService implements StatisticsServerService {
 	private StatisticsServerURLService uefaStatisticsServerURLService;
 
 	@Override
-	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException {
+	public Set<RemoteGame> preloadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException, RemoteContentNullException {
 
 		final RemoteServerRequest request = new RemoteServerRequest( uefaStatisticsServerURLService.remoteGamesIdsURL( cup, dateTo ) );
 		request.setxAuthToken( X_AUTH_TOKEN );
@@ -41,7 +42,7 @@ public class UEFAStatisticsAPIService implements StatisticsServerService {
 	}
 
 	@Override
-	public void loadGameFromJSON( final Cup cup, final RemoteGame remoteGame ) throws IOException {
+	public void loadRemoteGame( final Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException {
 
 		final RemoteServerRequest request = new RemoteServerRequest( uefaStatisticsServerURLService.loadRemoteGameURL( cup, remoteGame.getRemoteGameId() ) );
 		request.setxAuthToken( X_AUTH_TOKEN );
@@ -53,5 +54,7 @@ public class UEFAStatisticsAPIService implements StatisticsServerService {
 		}
 
 		uefaGameParsingService.loadGameFromJSON( remoteGame, remoteGameJSON );
+
+		remoteGame.setLoaded( true );
 	}
 }

@@ -57,6 +57,10 @@ import static totalizator.app.models.Match.*;
 				query = "select count(m) from Match m where ( cupId= :cupId ) and ( matchFinished = true ) and ( team1Id= :teamId or team2Id= :teamId )"
 		),
 		@NamedQuery(
+				name = LOAD_FUTURE_MATCH_COUNT_FOR_CUP,
+				query = "select count(m) from Match m where cupId= :cupId and matchFinished = false"
+		),
+		@NamedQuery(
 				name = LOAD_FUTURE_MATCH_COUNT_FOR_CUP_AND_TEAM,
 				query = "select count(m) from Match m where ( cupId= :cupId ) and ( matchFinished = false ) and ( team1Id= :teamId or team2Id= :teamId )"
 		),
@@ -78,6 +82,7 @@ public class Match extends AbstractEntity {
 	public static final String LOAD_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.loadTeamMatchCountForCup";
 	public static final String LOAD_MATCH_COUNT_FOR_TEAM = "cups.loadTeamMatchCount";
 	public static final String LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.finishedMatchCountForCupAndTeam";
+	public static final String LOAD_FUTURE_MATCH_COUNT_FOR_CUP = "cups.futureMatchCountForCup";
 	public static final String LOAD_FUTURE_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.futureMatchCountForCupAndTeam";
 	public static final String FIND_MATCHES_BY_DATE = "cups.futureMatchByDate";
 

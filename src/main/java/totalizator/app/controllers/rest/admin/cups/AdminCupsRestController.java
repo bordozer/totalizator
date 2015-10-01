@@ -14,13 +14,14 @@ import totalizator.app.services.matches.imports.GameImportStrategyType;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 @RestController
-@RequestMapping("/admin/rest/cups")
+@RequestMapping( "/admin/rest/cups" )
 public class AdminCupsRestController {
 
 	@Autowired
@@ -35,37 +36,24 @@ public class AdminCupsRestController {
 	@Autowired
 	private DTOService dtoService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public List<CupDTO> allCupsDTOs( final Principal principal ) {
 		return dtoService.transformCups( allCups(), getUser( principal ) );
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/current/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/current/" )
 	public List<CupDTO> currentCupsOnlyDTOs( final Principal principal ) {
 		return dtoService.transformCups( currentCupsOnly(), getUser( principal ) );
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/configured-for-remote-games-import/" )
-	public List<CupDTO> cupsWithImportStrategies( final @RequestParam( "filteredBySportKindId" ) int filteredBySportKindId, final Principal principal ) {
-
-		return dtoService.transformCups(
-				allCups()
-				.stream()
-				.filter( getImportStrategiesPredicate() )
-				.filter( getSportKindPredicate( filteredBySportKindId ) )
-				.sorted( cupService.categoryNameOrCupNameComparator() )
-				.collect( Collectors.toList() ), getUser( principal ) );
+	@RequestMapping( method = RequestMethod.GET, value = "/configured-for-remote-games-import/" )
+	public List<CupForGameImportDTO> cupsWithImportStrategies( final @RequestParam( "filteredBySportKindId" ) int filteredBySportKindId, final Principal principal ) {
+		return getCupForGameImportDTOs( allCups(), filteredBySportKindId, principal );
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/configured-for-remote-games-import/current/" )
-	public List<CupDTO> currentCupsOnlyWithImportStrategies( final @RequestParam( "filteredBySportKindId" ) int filteredBySportKindId, final Principal principal ) {
-
-		return dtoService.transformCups( currentCupsOnly()
-				.stream()
-				.filter( getImportStrategiesPredicate() )
-				.filter( getSportKindPredicate( filteredBySportKindId ) )
-				.sorted( cupService.categoryNameOrCupNameComparator() )
-				.collect( Collectors.toList() ), getUser( principal ) );
+	@RequestMapping( method = RequestMethod.GET, value = "/configured-for-remote-games-import/current/" )
+	public List<CupForGameImportDTO> currentCupsOnlyWithImportStrategies( final @RequestParam( "filteredBySportKindId" ) int filteredBySportKindId, final Principal principal ) {
+		return getCupForGameImportDTOs( currentCupsOnly(), filteredBySportKindId, principal );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/" )
@@ -76,6 +64,27 @@ public class AdminCupsRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/for-category/{categoryId}/" )
 	public List<CupDTO> getCategoryCups( final @PathVariable( "categoryId" ) int categoryId, final Principal principal ) {
 		return dtoService.transformCups( cupService.load( categoryService.load( categoryId ) ), getUser( principal ) );
+	}
+
+	private List<CupForGameImportDTO> getCupForGameImportDTOs( final List<Cup> cups, final @RequestParam( "filteredBySportKindId" ) int filteredBySportKindId, final Principal principal ) {
+		return cups
+				.stream()
+				.filter( getImportStrategiesPredicate() )
+				.filter( getSportKindPredicate( filteredBySportKindId ) )
+				.sorted( cupService.categoryNameOrCupNameComparator() )
+				.map( cupForGameImportDTOMapper( getUser( principal ) ) )
+				.collect( Collectors.toList() )
+				;
+	}
+
+	private Function<Cup, CupForGameImportDTO> cupForGameImportDTOMapper( final User currentUser ) {
+
+		return new Function<Cup, CupForGameImportDTO>() {
+			@Override
+			public CupForGameImportDTO apply( final Cup cup ) {
+				return new CupForGameImportDTO( dtoService.transformCup( cup, currentUser ), GameImportStrategyType.getById( cup.getCategory().getRemoteGameImportStrategyTypeId() ).getTimePeriodType() );
+			}
+		};
 	}
 
 	private List<Cup> allCups() {

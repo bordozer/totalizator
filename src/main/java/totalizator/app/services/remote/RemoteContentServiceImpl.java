@@ -15,12 +15,12 @@ import java.io.IOException;
 public class RemoteContentServiceImpl implements RemoteContentService {
 
 	@Override
-	public String getRemoteContent( final String url ) throws IOException {
+	public String getRemoteContent( final String url ) throws IOException, RemoteContentNullException {
 		return getRemoteContent( new RemoteServerRequest( url ) );
 	}
 
 	@Override
-	public String getRemoteContent( final RemoteServerRequest request ) throws IOException {
+	public String getRemoteContent( final RemoteServerRequest request ) throws IOException, RemoteContentNullException {
 
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
@@ -36,11 +36,11 @@ public class RemoteContentServiceImpl implements RemoteContentService {
 			httpClient.getConnectionManager().shutdown();
 		}
 
-		return null;
+		throw new RemoteContentNullException( request.getUrl() );
 	}
 
 	@Override
-	public void storeRemoteContentAsFile( final String url, final File file ) throws IOException {
+	public void storeRemoteContentAsFile( final String url, final File file ) throws IOException, RemoteContentNullException {
 		final BufferedOutputStream bos = new BufferedOutputStream( new FileOutputStream( file ) );
 		bos.write( getRemoteContent( url ).getBytes( "ISO-8859-1" ) );
 		bos.flush();

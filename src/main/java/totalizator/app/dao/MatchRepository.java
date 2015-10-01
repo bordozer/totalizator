@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.services.score.MatchBonusPointsCalculationService;
-import totalizator.app.services.score.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.score.UserMatchBetPointsCalculationService;
-import totalizator.app.services.score.UserMatchPointsCalculationService;
+import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
+import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
+import totalizator.app.services.points.UserMatchPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -148,6 +148,15 @@ public class MatchRepository implements MatchDao {
 		final List<Long> result = em.createNamedQuery( Match.LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM, Long.class )
 				.setParameter( "cupId", cup.getId() )
 				.setParameter( "teamId", team.getId() )
+				.getResultList();
+
+		return result != null && result.size() > 0 ? ( int ) ( long ) result.get( 0 ) : 0;
+	}
+
+	@Override
+	public int getFutureMatchCount( final Cup cup ) {
+		final List<Long> result = em.createNamedQuery( Match.LOAD_FUTURE_MATCH_COUNT_FOR_CUP, Long.class )
+				.setParameter( "cupId", cup.getId() )
 				.getResultList();
 
 		return result != null && result.size() > 0 ? ( int ) ( long ) result.get( 0 ) : 0;

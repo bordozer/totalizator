@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Create new job task</nerd>
+		<ru><![CDATA[Новая задача]]></ru>
+		<ua><![CDATA[Нове завдання]]></ua>
+		<en><![CDATA[New job task]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Execute job</nerd>
+		<ru><![CDATA[Выполнить задачу]]></ru>
+		<ua><![CDATA[Виконати завдання]]></ua>
+		<en><![CDATA[Execute job]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task name</nerd>
+		<ru><![CDATA[Название задачи]]></ru>
+		<ua><![CDATA[Назва завдання]]></ua>
+		<en><![CDATA[Job task name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job task active</nerd>
+		<ru><![CDATA[Активна]]></ru>
+		<ua><![CDATA[Активна]]></ua>
+		<en><![CDATA[Active]]></en>
+	</translation>
+
+	<translation>
+		<nerd>New job</nerd>
+		<ru><![CDATA[Новая задача]]></ru>
+		<ua><![CDATA[Нове завдання]]></ua>
+		<en><![CDATA[New job]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Stop job executing</nerd>
+		<ru><![CDATA[Прервать выполнение задачи]]></ru>
+		<ua><![CDATA[Перервати виконання завдання]]></ua>
+		<en><![CDATA[Stop job executing]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Reset job execution results</nerd>
+		<ru><![CDATA[Принять результаты выполнения]]></ru>
+		<ua><![CDATA[Сприйняти результати виконання]]></ua>
+		<en><![CDATA[Reset job execution results]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

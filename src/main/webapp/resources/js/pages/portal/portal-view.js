@@ -82,6 +82,7 @@ define( function ( require ) {
 		_renderMatches: function() {
 
 			var model = this.model.toJSON();
+			var onDate = dateTimeService.dateNow();
 
 			var currentUser = app.currentUser();
 
@@ -99,6 +100,8 @@ define( function ( require ) {
 						categoryId: cup.category.categoryId
 						, cupId: cup.cupId
 						, showFutureMatches: true
+						, filterByDate: onDate
+						, filterByDateEnable: true
 					}
 					, matchViewMode: VIEW_MODE_BET
 					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_STATISTICS
