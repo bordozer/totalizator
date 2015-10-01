@@ -55,7 +55,6 @@ public class MatchBet extends AbstractEntity {
 
 	public static final String LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET = "matchBets.LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET";
 	public static final String LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER = "matchBets.LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER";
-	public static final String LOAD_FIRST_MATCH_OF_CUP_WITHOUT_USER_BET = "matchBets.LOAD_FIRST_MATCH_OF_CUP_WITHOUT_USER_BET";
 
 	@ManyToOne
 	@JoinColumn(name="matchId")

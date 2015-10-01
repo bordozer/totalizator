@@ -219,7 +219,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
 	@Override
 	public int getMatchesCountAccessibleBorBetting( final Cup cup, final User user ) {
-		return matchBetRepository.getMatchesCountAccessibleBorBettingSince( cup, user, dateTimeService.getNow() );
+		return matchBetRepository.getMatchesCountAccessibleForBettingSince( cup, user, dateTimeService.getNow() );
 	}
 
 	@Override
