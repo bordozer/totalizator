@@ -52,8 +52,7 @@ public class MatchesAndBetsCollapsedRestController {
 
 		final int userId = filter.getUserId();
 
-		final User currentUser = userService.findByLogin( principal.getName() );
-		final User showBetsOfUser = userId > 0 ? userService.load( userId ) : currentUser;
+		final User showBetsOfUser = userId > 0 ? userService.load( userId ) : userService.findByLogin( principal.getName() );
 
 		final Cup cup = cupService.load( filter.getCupId() );
 
@@ -68,23 +67,23 @@ public class MatchesAndBetsCollapsedRestController {
 		final Match nearestFutureMatch = matchService.getNearestFutureMatch( cup, dateTimeService.getNow() );
 		result.setFirstMatchTime( nearestFutureMatch != null ? nearestFutureMatch.getBeginningTime() : null );
 
-		result.setUserBetsCount( matchBetsService.betsCount( cup, currentUser ) );
-		result.setMatchesWithoutBetsCount( matchBetsService.getMatchesCountAccessibleBorBetting( cup, currentUser ) );
-		result.setFirstMatchNoBetTime( matchBetsService.getFirstMatchWithoutBetTime( cup, currentUser ) );
+		result.setUserBetsCount( matchBetsService.betsCount( cup, showBetsOfUser ) );
+		result.setMatchesWithoutBetsCount( matchBetsService.getMatchesCountAccessibleBorBetting( cup, showBetsOfUser ) );
+		result.setFirstMatchNoBetTime( matchBetsService.getFirstMatchWithoutBetTime( cup, showBetsOfUser ) );
 
 		final boolean isCupBettingAllowed = cupBetsService.validateBettingAllowed( cup ).isPassed();
 		final boolean cupHasWinners = cup.getWinnersCount() > 0;
-		final boolean userMadeAllCupWinnersBets = cupBetsService.load( cup, currentUser ).size() == cup.getWinnersCount();
+		final boolean userMadeAllCupWinnersBets = cupBetsService.load( cup, showBetsOfUser ).size() == cup.getWinnersCount();
 		result.setCupWinnersBetsIsAccessible( isCupBettingAllowed && cupHasWinners && ! userMadeAllCupWinnersBets );
 
 		result.setCupHasWinners( cupHasWinners );
 
-		result.setUserCupWinnersBets( cupBetsService.load( cup, currentUser )
+		result.setUserCupWinnersBets( cupBetsService.load( cup, showBetsOfUser )
 				.stream()
 				.map( new Function<CupTeamBet, TeamDTO>() {
 					@Override
 					public TeamDTO apply( final CupTeamBet cupTeamBet ) {
-						return dtoService.transformTeam( cupTeamBet.getTeam(), currentUser );
+						return dtoService.transformTeam( cupTeamBet.getTeam(), showBetsOfUser );
 					}
 				} )
 				.collect( Collectors.toList() ) );
