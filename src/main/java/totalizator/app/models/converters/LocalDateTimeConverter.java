@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Converter
 public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, Date> {
@@ -17,7 +18,10 @@ public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime,
 			return null;
 		}
 
-		return Date.from( localDateTime.toInstant( ZoneOffset.UTC ) );
+		final TimeZone timeZone = TimeZone.getDefault();
+		final int currentOffset = timeZone.getOffset( System.currentTimeMillis() );
+
+		return Date.from( localDateTime.toInstant( ZoneOffset.ofTotalSeconds( currentOffset / 1000 ) ) );
 	}
 
 	@Override
