@@ -94,6 +94,14 @@ define( function ( require ) {
 			return moment.months( momentDate.get( 'month' ) ) + ' ' + momentDate.get( 'year' );
 		},
 
+		minusDay: function( date ) {
+			return moment( this.parseDate( date ) ).subtract( 1, 'day' );
+		},
+
+		plusDay: function( date ) {
+			return moment( this.parseDate( date ) ).add( 1, 'day' );
+		},
+
 		timeNow: function () {
 			return app.timeNow();
 		},

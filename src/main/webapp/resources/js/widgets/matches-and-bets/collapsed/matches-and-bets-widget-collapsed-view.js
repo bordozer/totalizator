@@ -16,7 +16,7 @@ define( function ( require ) {
 	var translator = new Translator( {
 		matchesCount: "Matches count total"
 		, futureMatchesCount: "Future matches count"
-		, todayMatchesCountLabel: "Today matches"
+		, todayMatchesCountLabel: "Matches on date"
 		, userBetsCount: "User bets count"
 		, matchesWithoutBetsCount: "Matches without bets count"
 		, firstMatchTimeLabel: "First match beginning time"
@@ -49,6 +49,7 @@ define( function ( require ) {
 				, firstMatchTimeHumanize: model.firstMatchTime == null ? '' : dateTimeService.fromNow( model.firstMatchTime )
 				, firstMatchNoBetTime: model.firstMatchNoBetTime == null ? '' : dateTimeService.formatDateTimeFullDisplay( model.firstMatchNoBetTime )
 				, firstMatchNoBetTimeHumanize: model.firstMatchNoBetTime == null ? '' : dateTimeService.fromNow( model.firstMatchNoBetTime )
+				, theDate: dateTimeService.formatDateDisplay( this.filter.filterByDate )
 				, translator: translator
 			} );
 

@@ -11,8 +11,8 @@ define( function( require ) {
 
 	function init( container, options ) {
 
-		var model = new Model.PortalPageModel( { options: options } );
-		var view = new View.PortalPageView( { model: model, el: container, options: options } );
+		var model = new Model( { options: options } );
+		var view = new View( { model: model, el: container, options: options } );
 
 		return {
 			view: function() {

@@ -16,8 +16,7 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		menuAdminLabel: "Administration"
-		, menuLogoutLabel: 'Menu: Logout'
+		noMatchesOnDateLabel: 'No matches on date'
 	} );
 
 	var VIEW_MODE_BET = 1;
@@ -27,35 +26,47 @@ define( function ( require ) {
 	var MATCHES_AND_BETS_MODE_MATCHES = 1;
 	var MATCHES_AND_BETS_MODE_STATISTICS = 2;
 
-	var PortalPageView = Backbone.View.extend( {
+	return Backbone.View.extend( {
+
+		events: {
+			'click .js-date-before' : '_showPreviousDateMatches'
+			, 'click .js-date-after' : '_showNextDateMatches'
+		},
 
 		initialize: function( options ) {
 			this.model.on( 'sync', this.render, this );
-			this.model.fetch( { cache: false } );
+			this.model.refresh();
 		},
-
 
 		render: function () {
 
+			var portalPageDate = this.model.portalPageDate;
+
 			this.$el.html( template( {
-				translator: translator
+				prevDate: dateTimeService.formatDateFullDisplay( dateTimeService.minusDay( portalPageDate ) )
+				, currentDate: dateTimeService.formatDateFullDisplay( portalPageDate )
+				, nextDate: dateTimeService.formatDateFullDisplay( dateTimeService.plusDay( portalPageDate ) )
+				, translator: translator
 			 } ) );
 
-			this._renderMatchesOnDate();
+			this._renderMatchesOnDate( portalPageDate );
 
-			this._renderMatches();
+			this._renderMatches( portalPageDate );
 
 			this._renderActivityStream();
-
-			return this;
 		},
-		_renderMatchesOnDate: function () {
+
+		_renderMatchesOnDate: function ( onDate ) {
 
 			var model = this.model.toJSON();
 			var currentUser = app.currentUser();
-			var onDate = dateTimeService.dateNow();
 
 			var container = this.$( '.js-portal-page-matches-on-date' );
+
+			if ( model.cupsTodayToShow.length == 0 ) {
+				container.html( translator.noMatchesOnDateLabel );
+				return;
+			}
 
 			_.each( model.cupsTodayToShow, function( cup ) {
 
@@ -79,14 +90,14 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderMatches: function() {
+		_renderMatches: function( onDate ) {
 
 			var model = this.model.toJSON();
-			var onDate = dateTimeService.dateNow();
 
 			var currentUser = app.currentUser();
 
 			var container = this.$( '.js-portal-page-container' );
+
 			var row = $( "<div class='row'></div>" );
 			container.append( row );
 
@@ -113,9 +124,21 @@ define( function ( require ) {
 
 		_renderActivityStream: function () {
 			activityStreamWidget( this.$( '.js-portal-page-activity-stream' ), {} );
+		},
+
+		_showPreviousDateMatches: function() {
+
+			this.model.previousDay();
+
+			this.model.refresh();
+		},
+
+		_showNextDateMatches: function() {
+
+			this.model.nextDay();
+
+			this.model.refresh();
 		}
 	} );
-
-	return { PortalPageView: PortalPageView };
 } );
 

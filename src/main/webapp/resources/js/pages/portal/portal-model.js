@@ -4,19 +4,36 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 
-	var PortalPageModel = Backbone.Model.extend( {
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
+	return Backbone.Model.extend( {
+
+		portalPageDate: {},
 
 		defaults: {
-			id: 0
-			, userId: 0
-			, userName: ''
+			cupsToShow: []
+			, cupsTodayToShow: []
 		},
 
 		initialize: function ( options ) {
+
 			this.options = options.options;
+
 			this.url = '/rest/portal-page/';
+
+			this.portalPageDate = dateTimeService.dateNow();
+		},
+
+		refresh: function() {
+			this.fetch( { data: { portalPageDate: this.portalPageDate } }, { cache: false } );
+		},
+
+		previousDay: function() {
+			this.portalPageDate = dateTimeService.formatDate( dateTimeService.minusDay( this.portalPageDate ) );
+		},
+
+		nextDay: function() {
+			this.portalPageDate = dateTimeService.formatDate( dateTimeService.plusDay( this.portalPageDate ) );
 		}
 	});
-
-	return { PortalPageModel: PortalPageModel };
 } );

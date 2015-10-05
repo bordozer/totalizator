@@ -17,10 +17,10 @@
 	</translation>
 
 	<translation>
-		<nerd>Today matches</nerd>
-		<ru><![CDATA[К-во матчей сегодня]]></ru>
-		<ua><![CDATA[Кiлькiсть iгор сьогоднi]]></ua>
-		<en><![CDATA[Today matches]]></en>
+		<nerd>Matches on date</nerd>
+		<ru><![CDATA[К-во матчей]]></ru>
+		<ua><![CDATA[Кiлькiсть iгор]]></ua>
+		<en><![CDATA[Matches count]]></en>
 	</translation>
 
 	<translation>
@@ -39,9 +39,9 @@
 
 	<translation>
 		<nerd>First match beginning time</nerd>
-		<ru><![CDATA[Ближайший матч]]></ru>
+		<ru><![CDATA[Ближайший матч ]]></ru>
 		<ua><![CDATA[Найближча гра]]></ua>
-		<en><![CDATA[First match beginning time]]></en>
+		<en><![CDATA[The first match]]></en>
 	</translation>
 
 	<translation>

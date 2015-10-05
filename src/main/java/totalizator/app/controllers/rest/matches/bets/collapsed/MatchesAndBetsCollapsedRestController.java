@@ -61,7 +61,7 @@ public class MatchesAndBetsCollapsedRestController {
 		result.setMatchesCount( matchService.getMatchCount( cup ) ); 				// totally in cup
 		result.setFutureMatchesCount( matchService.getFutureMatchCount( cup ) );	// not finished matches at all
 
-		result.setTodayMatchesCount( matchService.loadAllOnDate( cup, dateTimeService.getToday() ).size() );
+		result.setTodayMatchesCount( matchService.loadAllOnDate( cup, dateTimeService.parseDate( filter.getFilterByDate() ) ).size() );
 		result.setNowPlayingMatchesCount( matchService.getMatchNotFinishedYetMatches( cup ).size() );
 
 		final Match nearestFutureMatch = matchService.getNearestFutureMatch( cup, dateTimeService.getNow() );

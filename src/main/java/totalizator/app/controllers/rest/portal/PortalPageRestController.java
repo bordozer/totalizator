@@ -4,10 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
@@ -18,6 +15,7 @@ import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -60,7 +58,9 @@ public class PortalPageRestController {
 	@ResponseStatus( HttpStatus.OK )
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
-	public PortalPageDTO getDefaultLogin( final Principal principal ) {
+	public PortalPageDTO getDefaultLogin( final PortalPageDTO dto, final Principal principal ) {
+
+		final LocalDate date = dateTimeService.parseDate( dto.getPortalPageDate() );
 
 		final User currentUser = userService.findByLogin( principal.getName() );
 
@@ -94,7 +94,7 @@ public class PortalPageRestController {
 				} )
 				.collect( Collectors.toList() ), currentUser ) );
 
-		result.setCupsTodayToShow( dtoService.transformCups( getCupsHaveMatchesToday()
+		result.setCupsTodayToShow( dtoService.transformCups( getCupsHaveMatchesToday( date )
 				.stream()
 				.sorted( cupService.categoryNameOrCupNameComparator() )
 				.collect( Collectors.toList() ), currentUser ) );
@@ -102,9 +102,9 @@ public class PortalPageRestController {
 		return result;
 	}
 
-	private List<Cup> getCupsHaveMatchesToday() {
+	private List<Cup> getCupsHaveMatchesToday( final LocalDate date ) {
 
-		final List<Match> matchesToday = matchService.loadAllOnDate( dateTimeService.getToday() );
+		final List<Match> matchesToday = matchService.loadAllOnDate( date );
 
 		return matchesToday
 				.stream()
