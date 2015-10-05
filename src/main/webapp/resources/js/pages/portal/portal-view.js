@@ -130,6 +130,8 @@ define( function ( require ) {
 
 			this.model.previousDay();
 
+			this.spinning();
+
 			this.model.refresh();
 		},
 
@@ -137,7 +139,14 @@ define( function ( require ) {
 
 			this.model.nextDay();
 
+			this.spinning();
+
 			this.model.refresh();
+		},
+
+		spinning: function () {
+			this.$( '.js-portal-page-matches-on-date' ).html( "<div class='text-center'><i class='fa fa-spinner fa-spin fa-5x'></i></div>" );
+			this.$( '.js-portal-page-container' ).html( "<div class='text-center'><i class='fa fa-spinner fa-spin fa-5x'></i></div>" );
 		}
 	} );
 } );
