@@ -14,9 +14,12 @@ define( function ( require ) {
 	var app = require( 'app' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
+	var menu = require( 'js/components/main-menu/main-menu' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		noMatchesOnDateLabel: 'No matches on date'
+		, todayLabel: 'Today'
 	} );
 
 	var VIEW_MODE_BET = 1;
@@ -31,6 +34,7 @@ define( function ( require ) {
 		events: {
 			'click .js-date-before' : '_showPreviousDateMatches'
 			, 'click .js-date-after' : '_showNextDateMatches'
+			, 'click .js-menu-go-to-date' : '_goToDate'
 		},
 
 		initialize: function( options ) {
@@ -44,16 +48,51 @@ define( function ( require ) {
 
 			this.$el.html( template( {
 				prevDate: dateTimeService.formatDateFullDisplay( dateTimeService.minusDay( portalPageDate ) )
-				, currentDate: dateTimeService.formatDateFullDisplay( portalPageDate )
 				, nextDate: dateTimeService.formatDateFullDisplay( dateTimeService.plusDay( portalPageDate ) )
 				, translator: translator
 			 } ) );
+
+			this._renderMenu( portalPageDate );
 
 			this._renderMatchesOnDate( portalPageDate );
 
 			this._renderMatches( portalPageDate );
 
 			this._renderActivityStream();
+		},
+
+		_renderMenu: function( portalPageDate ) {
+
+			var menuItems = [];
+
+			menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-times-o', link: '#', text: translator.todayLabel, entity_id: dateTimeService.formatDate( dateTimeService.dateNow() ) } );
+			menuItems.push( { selector: 'divider' } );
+
+			var halfRange = 5;
+			var startPeriod = dateTimeService.formatDate( dateTimeService.minusDays( portalPageDate, halfRange ) );
+			for( var i = 1; i <= halfRange - 1; i++ ) {
+				var date = dateTimeService.plusDays( startPeriod, i );
+				var entity_id = dateTimeService.formatDate( date  );
+				menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-o', link: '#', text: dateTimeService.formatDateFullDisplay( date ), entity_id: entity_id } );
+			}
+
+			menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-check-o', link: '#', selected: true, text: dateTimeService.formatDateFullDisplay( portalPageDate ), entity_id: portalPageDate } );
+
+			for( var j = 1; j <= halfRange; j++ ) {
+				var date = dateTimeService.plusDays( portalPageDate, j );
+				var entity_id = dateTimeService.formatDate( date  );
+				menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-o', link: '#', text: dateTimeService.formatDateFullDisplay( date ), entity_id: entity_id } );
+			}
+
+			var current = dateTimeService.formatDateFullDisplay( portalPageDate );
+			var options = {
+				menus: menuItems
+				, menuButtonIcon: 'fa-calendar'
+				, menuButtonText: current
+				, menuButtonHint: current
+				, cssClass: 'btn-default'
+			};
+			menu( options, this.$( '.js-date-current' ) );
 		},
 
 		_renderMatchesOnDate: function ( onDate ) {
@@ -130,14 +169,26 @@ define( function ( require ) {
 
 			this.model.previousDay();
 
-			this.spinning();
-
-			this.model.refresh();
+			this._loadDataForDate();
 		},
 
 		_showNextDateMatches: function() {
 
 			this.model.nextDay();
+
+			this._loadDataForDate();
+		},
+
+		_goToDate: function( evt ) {
+
+			this.model.portalPageDate = $( evt.target ).data( 'entity_id' );
+
+			this._loadDataForDate();
+		},
+
+		_loadDataForDate: function() {
+
+			this.$( '.js-date-current' ).html( '<h4>' + dateTimeService.formatDateFullDisplay( this.model.portalPageDate ) + '</h4>' );
 
 			this.spinning();
 

@@ -31,7 +31,7 @@ define( function ( require ) {
 
 		// date => str formatted
 		formatDate: function ( time ) {
-			return moment( time ).format( this.getDateFormat() );
+			return moment( this.parseDate( time ) ).format( this.getDateFormat() );
 		},
 
 		// date => str formatted
@@ -95,11 +95,19 @@ define( function ( require ) {
 		},
 
 		minusDay: function( date ) {
-			return moment( this.parseDate( date ) ).subtract( 1, 'day' );
+			return this.minusDays( date, 1 );
+		},
+
+		minusDays: function( date, days ) {
+			return moment( this.parseDate( date ) ).subtract( days, 'day' );
 		},
 
 		plusDay: function( date ) {
-			return moment( this.parseDate( date ) ).add( 1, 'day' );
+			return this.plusDays( date, 1 );
+		},
+
+		plusDays: function( date, days ) {
+			return moment( this.parseDate( date ) ).add( days, 'day' );
 		},
 
 		timeNow: function () {

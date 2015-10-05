@@ -332,6 +332,20 @@
 	</translation>
 
 	<translation>
+		<nerd>Today</nerd>
+		<ru><![CDATA[Сегодня]]></ru>
+		<ua><![CDATA[Сьогоднi]]></ua>
+		<en><![CDATA[Today]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
