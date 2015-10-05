@@ -1,16 +1,8 @@
 package time;
 
-import org.junit.Test;
-import totalizator.app.models.converters.LocalDateTimeConverter;
-
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import static junit.framework.TestCase.assertEquals;
-
 public class LocalDateTimeConverterTest {
 
-	@Test
+	/*@Test
 	public void convertToDatabaseColumn() {
 
 		final LocalDateTimeConverter converter = new LocalDateTimeConverter();
@@ -30,5 +22,5 @@ public class LocalDateTimeConverterTest {
 		final LocalDateTime localDateTime = converter.convertToEntityAttribute( time );
 
 		assertEquals( "Wrong local date time", "2015-10-05T03:00", localDateTime.toString() );
-	}
+	}*/
 }
