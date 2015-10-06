@@ -13,6 +13,7 @@ import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
+import totalizator.app.services.matches.MatchesAndBetsWidgetService;
 
 import java.security.Principal;
 import java.util.List;
@@ -28,6 +29,9 @@ public class AdminMatchesRestController {
 
 	@Autowired
 	private MatchService matchService;
+
+	@Autowired
+	private MatchesAndBetsWidgetService matchesAndBetsWidgetService;
 
 	@Autowired
 	private CupService cupService;
@@ -46,7 +50,7 @@ public class AdminMatchesRestController {
 
 		final User currentUser = getCurrentUser( principal );
 
-		final List<Match> matches = matchService.loadAll( dto );
+		final List<Match> matches = matchesAndBetsWidgetService.loadAll( dto );
 
 		return Lists.transform( matches, new Function<Match, MatchEditDTO>() {
 

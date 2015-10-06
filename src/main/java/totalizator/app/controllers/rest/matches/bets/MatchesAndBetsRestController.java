@@ -17,6 +17,7 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
+import totalizator.app.services.matches.MatchesAndBetsWidgetService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
@@ -37,6 +38,9 @@ public class MatchesAndBetsRestController {
 	private MatchService matchService;
 
 	@Autowired
+	private MatchesAndBetsWidgetService matchesAndBetsWidgetService;
+
+	@Autowired
 	private MatchBetsService matchBetsService;
 
 	@Autowired
@@ -53,7 +57,7 @@ public class MatchesAndBetsRestController {
 	@RequestMapping( method = RequestMethod.GET, value = "/bets/", produces = APPLICATION_JSON_VALUE )
 	public List<MatchBetsOnDateDTO> matchesAndBets( final MatchesBetSettingsDTO dto, final Principal principal ) {
 
-		final List<Match> matches = matchService.loadAll( dto );
+		final List<Match> matches = matchesAndBetsWidgetService.loadAll( dto );
 
 		final int userId = dto.getUserId();
 

@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.MatchDao;
-import totalizator.app.dto.MatchesBetSettingsDTO;
-import totalizator.app.models.*;
-import totalizator.app.services.CupService;
+import totalizator.app.models.Cup;
+import totalizator.app.models.Match;
+import totalizator.app.models.MatchBet;
+import totalizator.app.models.Team;
 import totalizator.app.services.activiries.ActivityStreamService;
 import totalizator.app.services.utils.DateTimeService;
 
@@ -29,9 +30,6 @@ public class MatchServiceImpl implements MatchService {
 	private MatchDao matchRepository;
 
 	@Autowired
-	private CupService cupService;
-
-	@Autowired
 	private DateTimeService dateTimeService;
 
 	@Autowired
@@ -41,67 +39,6 @@ public class MatchServiceImpl implements MatchService {
 	private ActivityStreamService activityStreamService;
 
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
-
-	@Override
-	public List<Match> loadAll( final MatchesBetSettingsDTO dto ) {
-
-		final List<Match> matches = loadAll( cupService.load( ( dto.getCupId() ) ) );
-
-		if ( dto.getTeamId() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return ( match.getTeam1().getId() == dto.getTeamId() ) || ( match.getTeam2().getId() == dto.getTeamId() );
-				}
-			} );
-		}
-
-		if ( dto.getTeam2Id() > 0 ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return match.getTeam1().getId() == dto.getTeam2Id() || match.getTeam2().getId() == dto.getTeam2Id();
-				}
-			} );
-		}
-
-		if ( ! dto.isShowFutureMatches() ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return isMatchFinished( match );
-				}
-			} );
-		}
-
-		if ( ! dto.isShowFinished() ) {
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return ! isMatchFinished( match );
-				}
-			} );
-		}
-
-		if ( dto.isFilterByDateEnable() ) {
-
-			final String _filterByDate = dto.getFilterByDate();
-			final LocalDate filterByDate = dateTimeService.parseDate( _filterByDate );
-
-			CollectionUtils.filter( matches, new Predicate<Match>() {
-				@Override
-				public boolean evaluate( final Match match ) {
-					return dateTimeService.hasTheSameDate( match.getBeginningTime(), filterByDate );
-				}
-			} );
-		}
-
-		if ( dto.isShowFutureMatches() ) {
-			Collections.reverse( matches );
-		}
-
-		return matches;
-	}
 
 	@Override
 	@Transactional( readOnly = true )

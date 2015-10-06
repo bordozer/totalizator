@@ -13,6 +13,7 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchService;
+import totalizator.app.services.matches.MatchesAndBetsWidgetService;
 
 import java.security.Principal;
 import java.util.List;
@@ -23,6 +24,9 @@ public class MatchesRestController {
 
 	@Autowired
 	private MatchService matchService;
+
+	@Autowired
+	private MatchesAndBetsWidgetService matchesAndBetsWidgetService;
 
 	@Autowired
 	private CupService cupService;
@@ -40,7 +44,7 @@ public class MatchesRestController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public List<MatchDTO> matches( final MatchesBetSettingsDTO dto, final Principal principal ) {
-		return dtoService.transformMatches( matchService.loadAll( dto ), getCurrentUser( principal ) );
+		return dtoService.transformMatches( matchesAndBetsWidgetService.loadAll( dto ), getCurrentUser( principal ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/" )

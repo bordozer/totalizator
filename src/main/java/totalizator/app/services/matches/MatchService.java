@@ -1,6 +1,5 @@
 package totalizator.app.services.matches;
 
-import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
@@ -11,8 +10,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MatchService extends GenericService<Match> {
-
-	List<Match> loadAll( final MatchesBetSettingsDTO dto );
 
 	List<Match> loadAll( final Cup cup );
 
