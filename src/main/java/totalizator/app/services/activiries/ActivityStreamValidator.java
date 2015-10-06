@@ -1,4 +1,4 @@
-package totalizator.app.controllers.rest.activities;
+package totalizator.app.services.activiries;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

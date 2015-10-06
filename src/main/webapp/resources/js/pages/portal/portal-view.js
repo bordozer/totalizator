@@ -7,6 +7,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/portal-template.html' ) );
+	var templateDateDependent = _.template( require( 'text!./templates/portal-date-dependant-part-template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
@@ -38,30 +39,37 @@ define( function ( require ) {
 		},
 
 		initialize: function( options ) {
-			this.model.on( 'sync', this.render, this );
-			this.model.refresh();
+			this.model.on( 'sync', this._renderDateDependant, this );
+			this.render();
 		},
 
 		render: function () {
 
+			this.$el.html( template() );
+
+			this.model.refresh();
+
+			this._renderActivityStream();
+		},
+
+		_renderDateDependant: function () {
+
 			var portalPageDate = this.model.portalPageDate;
 
-			this.$el.html( template( {
+			this.$( '.js-date-dependent-part' ).html( templateDateDependent( {
 				prevDate: dateTimeService.formatDateFullDisplay( dateTimeService.minusDay( portalPageDate ) )
 				, nextDate: dateTimeService.formatDateFullDisplay( dateTimeService.plusDay( portalPageDate ) )
 				, translator: translator
 			 } ) );
 
-			this._renderMenu( portalPageDate );
+			this._renderDatesMenu( portalPageDate );
 
 			this._renderMatchesOnDate( portalPageDate );
 
 			this._renderMatches( portalPageDate );
-
-			this._renderActivityStream();
 		},
 
-		_renderMenu: function( portalPageDate ) {
+		_renderDatesMenu: function( portalPageDate ) {
 
 			var menuItems = [];
 

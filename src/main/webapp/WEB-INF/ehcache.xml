@@ -196,4 +196,10 @@
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
+	<cache name="totalizator.app.cache.activityDTO"
+		   maxElementsInMemory="10000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
 </ehcache>
