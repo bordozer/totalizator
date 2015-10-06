@@ -75,6 +75,14 @@ import static totalizator.app.models.Match.*;
 		@NamedQuery(
 				name = FIND_NOT_FINISHED_MATCHES_STARTED_AFTER,
 				query = "select m from Match m where cupId = :cupId and ( matchFinished = false ) and beginningTime > :time"
+		),
+		@NamedQuery(
+				name = FIND_NOT_FINISHED_MATCHES,
+				query = "select m from Match m where cupId = :cupId and matchFinished = false order by beginningTime"
+		),
+		@NamedQuery(
+				name = FIND_FINISHED_MATCHES,
+				query = "select m from Match m where cupId = :cupId and matchFinished = true order by beginningTime desc"
 		)
 } )
 public class Match extends AbstractEntity {
@@ -95,6 +103,9 @@ public class Match extends AbstractEntity {
 	public static final String FIND_MATCHES_BY_DATE = "cups.futureMatchByDate";
 	public static final String FIND_NOT_FINISHED_MATCHES_STARTED_TILL = "cups.futureMatchesStartedSince";
 	public static final String FIND_NOT_FINISHED_MATCHES_STARTED_AFTER = "cups.futureNearestMatch";
+
+	public static final String FIND_NOT_FINISHED_MATCHES = "cups.FIND_NOT_FINISHED_MATCHES";
+	public static final String FIND_FINISHED_MATCHES = "cups.FIND_FINISHED_MATCHES";
 
 	@ManyToOne
 	@JoinColumn( name = "cupId" )

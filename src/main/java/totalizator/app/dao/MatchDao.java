@@ -17,11 +17,11 @@ public interface MatchDao extends GenericService<Match> {
 
 	int getMatchCount( final Team team );
 
-	List<Match> loadAll( final Cup cup, final Team team );
+	List<Match> loadAll( final int cupId, final int teamId );
 
 	List<Match> loadAll( final Team team1, final Team team2 );
 
-	List<Match> loadAll( final Cup cup, final Team team1, final Team team2 );
+	List<Match> loadAll( final int cupId, final int team1Id, final int team2Id );
 
 	List<Match> loadAll( final Team team );
 
@@ -42,4 +42,8 @@ public interface MatchDao extends GenericService<Match> {
 	List<Match> getStartedMatchCount( final Cup cup, final LocalDateTime timeFrom );
 
 	Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime );
+
+	List<Match> loadAllNotFinished( final int cupId );
+
+	List<Match> loadAllFinished( final int cupId );
 }

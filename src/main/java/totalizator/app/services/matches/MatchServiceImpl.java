@@ -52,21 +52,34 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<Match> loadAll( final Cup cup, final Team team ) {
-		return sort( newArrayList( matchRepository.loadAll( cup, team ) ) );
+	public List<Match> loadAllNotFinished( final int cupId ) {
+		return matchRepository.loadAllNotFinished( cupId );
 	}
 
 	@Override
-	public List<Match> loadAllFinished( final Cup cup, final Team team ) {
-		final List<Match> matches = matchRepository.loadAll( cup, team );
+	public List<Match> loadAllFinished( final int cupId ) {
+		return matchRepository.loadAllFinished( cupId );
+	}
 
-		matches.stream().filter( new java.util.function.Predicate<Match>() {
+	@Override
+	public List<Match> loadAll( final int cupId, final int teamId ) {
+		return sort( newArrayList( matchRepository.loadAll( cupId, teamId ) ) );
+	}
 
-			@Override
-			public boolean test( final Match match ) {
-				return isMatchFinished( match );
-			}
-		} );
+	@Override
+	public List<Match> loadAllFinished( final int cupId, final int teamId ) {
+
+		final List<Match> matches = matchRepository.loadAll( cupId, teamId );
+
+		matches
+				.stream()
+				.filter( new java.util.function.Predicate<Match>() {
+
+					@Override
+					public boolean test( final Match match ) {
+						return isMatchFinished( match );
+					}
+				} );
 
 		return sort( newArrayList( matches ) );
 	}
@@ -122,7 +135,7 @@ public class MatchServiceImpl implements MatchService {
 
 	@Override
 	public Match find( final Cup cup, final Team team1, final Team team2, final LocalDateTime localDateTime ) {
-		final List<Match> matches = loadAll( cup, team1, team2 );
+		final List<Match> matches = loadAll( cup.getId(), team1.getId(), team2.getId() );
 
 		CollectionUtils.filter( matches, new Predicate<Match>() {
 			@Override
@@ -140,8 +153,8 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<Match> loadAll( final Cup cup, final Team team1, final Team team2 ) {
-		return newArrayList( matchRepository.loadAll( cup, team1, team2 ) );
+	public List<Match> loadAll( final int cupId, final int team1Id, final int team2Id ) {
+		return newArrayList( matchRepository.loadAll( cupId, team1Id, team2Id ) );
 	}
 
 	@Override
@@ -173,7 +186,7 @@ public class MatchServiceImpl implements MatchService {
 	public int getWonMatchCount( final Cup cup, final Team team ) {
 		int result = 0;
 
-		final List<Match> matches = loadAllFinished( cup, team );
+		final List<Match> matches = loadAllFinished( cup.getId(), team.getId() );
 
 		for ( final Match match : matches ) {
 			if ( isWinner( match, team ) ) {
@@ -210,13 +223,14 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<Match> loadAllOnDate( final Cup cup, final LocalDate date ) {
+	public List<Match> loadAllOnDate( final int cupId, final LocalDate date ) {
+
 		return loadAllOnDate( date )
 				.stream()
 				.filter( new java.util.function.Predicate<Match>() {
 					@Override
 					public boolean test( final Match match ) {
-						return match.getCup().equals( cup );
+						return match.getCup().getId() == cupId;
 					}
 				} )
 				.collect( Collectors.toList() );

@@ -34,7 +34,7 @@ public class TeamsStandoffServiceImpl implements TeamsStandoffService {
 			return null;
 		}
 
-		final List<Match> matches = matchService.loadAll( cups.get( 0 ), team1, team2 );
+		final List<Match> matches = matchService.loadAll( cups.get( 0 ).getId(), team1.getId(), team2.getId() );
 
 		final List<Match> finishedMatches = matches
 				.stream()

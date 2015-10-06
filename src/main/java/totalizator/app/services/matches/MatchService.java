@@ -13,9 +13,13 @@ public interface MatchService extends GenericService<Match> {
 
 	List<Match> loadAll( final Cup cup );
 
-	List<Match> loadAll( final Cup cup, final Team team );
+	List<Match> loadAll( final int cupId, final int teamId );
 
-	List<Match> loadAllFinished( final Cup cup, final Team team );
+	List<Match> loadAllNotFinished( final int cupId );
+
+	List<Match> loadAllFinished( final int cupId );
+
+	List<Match> loadAllFinished( final int cupId, final int teamId );
 
 	List<Match> loadAll( final Team team );
 
@@ -29,7 +33,7 @@ public interface MatchService extends GenericService<Match> {
 
 	List<Match> loadAll( final Team team1, final Team team2 );
 
-	List<Match> loadAll( final Cup cup, final Team team1, final Team team2 );
+	List<Match> loadAll( final int cupId, final int team1Id, final int team2Id );
 
 	boolean isWinner( final Match match, final Team team );
 
@@ -51,7 +55,7 @@ public interface MatchService extends GenericService<Match> {
 
 	List<Match> loadAllOnDate( final LocalDate date );
 
-	List<Match> loadAllOnDate( final Cup cup, final LocalDate date );
+	List<Match> loadAllOnDate( final int cupId, final LocalDate date );
 
 	List<Match> getMatchNotFinishedYetMatches( final Cup cup );
 
