@@ -16,13 +16,6 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
 
-import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import static com.google.common.collect.Lists.newArrayList;
-
 @Service
 public class ActivityDTOServiceImpl implements ActivityDTOService {
 
@@ -39,74 +32,10 @@ public class ActivityDTOServiceImpl implements ActivityDTOService {
 	private ActivityStreamValidator activityStreamValidator;
 
 	@Override
-	public List<ActivityStreamDTO> transformActivities( final List<AbstractActivityStreamEntry> activities, final User currentUser ) {
-		return transformActivities( activities, currentUser, newArrayList() );
-	}
-
-	@Override
-	public List<ActivityStreamDTO> transformActivities( final List<AbstractActivityStreamEntry> activities, final User currentUser, final List<ActivityStreamEntryType> excludedTypes ) {
-
-		return activities
-				.stream()
-				.map( new Function<AbstractActivityStreamEntry, ActivityStreamDTO>() {
-					@Override
-					public ActivityStreamDTO apply( final AbstractActivityStreamEntry activity ) {
-
-						if ( excludedTypes.contains( activity.getActivityStreamEntryType() ) ) {
-							return null;
-						}
-
-						return transformActivity( activity, currentUser );
-					}
-				} )
-				.filter( new Predicate<ActivityStreamDTO>() {
-					@Override
-					public boolean test( final ActivityStreamDTO activityStreamDTO ) {
-						return activityStreamDTO != null;
-					}
-				} )
-				.collect( Collectors.toList() );
-
-		/*return activities
-				.stream()
-				.filter( new Predicate<AbstractActivityStreamEntry>() {
-					@Override
-					public boolean test( final AbstractActivityStreamEntry entry ) {
-						return !excludedTypes.contains( entry.getActivityStreamEntryType() );
-					}
-				} )
-				.filter( new Predicate<AbstractActivityStreamEntry>() {
-					@Override
-					public boolean test( final AbstractActivityStreamEntry activity ) {
-						return activityStreamValidator.validate( activity );
-					}
-				} )
-				.map( new Function<AbstractActivityStreamEntry, ActivityStreamDTO>() {
-
-					@Override
-					public ActivityStreamDTO apply( final AbstractActivityStreamEntry activity ) {
-
-						final ActivityStreamDTO dto = new ActivityStreamDTO();
-
-						dto.setActivityStreamEntryTypeId( activity.getActivityStreamEntryType().getId() );
-
-						if ( activity.getActivityOfUser() != null ) {
-							dto.setActivityOfUser( dtoService.transformUser( activity.getActivityOfUser() ) );
-						}
-						dto.setActivityTime( activity.getActivityTime() );
-
-						initActivitySpecific( activity, currentUser, dto );
-
-						return dto;
-					}
-				} )
-				.collect( Collectors.toList() );*/
-	}
-
 	@Cacheable( value = CACHE_ACTIVITY )
-	private ActivityStreamDTO transformActivity( final AbstractActivityStreamEntry activity, final User currentUser ) {
+	public ActivityStreamDTO transformActivity( final AbstractActivityStreamEntry activity, final User currentUser ) {
 
-		if ( !activityStreamValidator.validate( activity ) ) {
+		if ( ! activityStreamValidator.validate( activity ) ) {
 			return null;
 		}
 
@@ -191,4 +120,5 @@ public class ActivityDTOServiceImpl implements ActivityDTOService {
 	private boolean showBetData( final User currentUser, final AbstractActivityStreamEntry matchBetActivity, final Match match ) {
 		return matchBetActivity.getActivityOfUser().equals( currentUser ) || matchBetsService.userCanSeeAnotherBets( match, currentUser );
 	}
+
 }

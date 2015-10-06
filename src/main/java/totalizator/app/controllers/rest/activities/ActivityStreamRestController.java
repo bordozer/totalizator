@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import totalizator.app.models.User;
 import totalizator.app.models.activities.ActivityStreamEntryType;
 import totalizator.app.services.UserService;
-import totalizator.app.services.activiries.ActivityDTOService;
+import totalizator.app.services.activiries.ActivitiesDTOService;
 import totalizator.app.services.activiries.ActivityStreamService;
 
 import java.security.Principal;
@@ -27,21 +27,21 @@ public class ActivityStreamRestController {
 	private ActivityStreamService activityStreamService;
 
 	@Autowired
-	private ActivityDTOService activityDTOService;
+	private ActivitiesDTOService activitiesDTOService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/portal/" )
 	public List<ActivityStreamDTO> portalPageActivities( final Principal principal ) {
-		return activityDTOService.transformActivities( activityStreamService.loadAllForLast( 24 ), getCurrentUser( principal ), newArrayList( ActivityStreamEntryType.MATCH_FINISHED ) );
+		return activitiesDTOService.transformActivities( activityStreamService.loadAllForLast( 24 ), getCurrentUser( principal ), newArrayList( ActivityStreamEntryType.MATCH_FINISHED ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/matches/{matchId}/" )
 	public List<ActivityStreamDTO> matchActivities( final @PathVariable( "matchId" ) int matchId, final Principal principal ) {
-		return activityDTOService.transformActivities( activityStreamService.loadAllForMatch( matchId ), getCurrentUser( principal ) );
+		return activitiesDTOService.transformActivities( activityStreamService.loadAllForMatch( matchId ), getCurrentUser( principal ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/users/{userId}/" )
 	public List<ActivityStreamDTO> userActivities( final @PathVariable( "userId" ) int userId, final Principal principal ) {
-		return activityDTOService.transformActivities( activityStreamService.loadAllForUser( userId ), getCurrentUser( principal ) );
+		return activitiesDTOService.transformActivities( activityStreamService.loadAllForUser( userId ), getCurrentUser( principal ) );
 	}
 
 	private User getCurrentUser( final Principal principal ) {
