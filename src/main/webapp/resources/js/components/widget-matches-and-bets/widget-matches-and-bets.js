@@ -75,6 +75,8 @@ define( function ( require ) {
 			this.initialFilter = options.filterModel.toJSON();
 			this.settingsModel = options.filterModel;
 
+			this.cup = this._loadCup( this.initialFilter.cupId );
+
 			this.matchesAndBetsViewMode = options.matchesAndBetsViewMode != undefined ? options.matchesAndBetsViewMode : MATCHES_AND_BETS_MODE_MATCHES;
 
 			this.on( 'view:render', this.render, this );
@@ -99,8 +101,14 @@ define( function ( require ) {
 
 		_runInnerViewRender: function() {
 
+			var filter = this.settingsModel.toJSON();
+
+			if ( this.cup.cupId != filter.cupId ) {
+				this.cup = this._loadCup( filter.cupId );
+			}
+
 			if ( this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_MATCHES ) {
-				this.renderInnerView( this.settingsModel.toJSON() );
+				this.renderInnerView( filter );
 				return;
 			}
 
@@ -109,7 +117,7 @@ define( function ( require ) {
 				return;
 			}
 
-			this.renderInnerViewCollapsed( this.settingsModel.toJSON() );
+			this.renderInnerViewCollapsed( filter );
 		},
 
 		renderInnerView: function( filter ) {
@@ -159,10 +167,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
-			var cup = service.loadPublicCup( cupId );
-
-			return this.getCupTitle( cup, '' );
+			return this.getCupTitle( this.cup, '' );
 		},
 
 		_renderMatchesAndBetsOrNoMatchesFound: function() {
@@ -206,6 +211,10 @@ define( function ( require ) {
 
 		_loadCups: function() {
 			return service.loadPublicCups();
+		},
+
+		_loadCup: function( cupId ) {
+			return service.loadPublicCup( cupId );
 		},
 
 		_validateFilter: function() {

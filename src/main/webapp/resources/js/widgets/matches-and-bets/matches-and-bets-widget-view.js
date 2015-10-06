@@ -34,6 +34,8 @@ define( function ( require ) {
 	return WidgetMatchesAndBets.extend( {
 
 		initializeInnerView: function() {
+			var initialFilter = this.options.filterModel.toJSON();
+
 			this.matchViewMode = this.options.matchViewMode;
 			this.initialMatchViewMode = this.options.initialMatchViewMode;
 		},
@@ -60,7 +62,7 @@ define( function ( require ) {
 		},
 
 		getPictureURL: function() {
-			return service.loadPublicCup( this.filter.cupId ).logoUrl;
+			return this.cup.logoUrl;
 		},
 
 		innerViewMenuItems: function() {

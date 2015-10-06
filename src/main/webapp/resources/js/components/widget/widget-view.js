@@ -104,8 +104,9 @@ define( function ( require ) {
 			el.html( '' );
 			el.removeClass( this.progressIcon );
 
-			if ( this.getPictureURL() ) {
-				el.html( "<img src='" + this.getPictureURL() + "' width='32' height='32' style='margin-top: -5px;'>" );
+			var pictureURL = this.getPictureURL();
+			if ( pictureURL ) {
+				el.html( "<img src='" + pictureURL + "' width='32' height='32' style='margin-top: -5px;'>" );
 			} else {
 				el.addClass( this.getIcon() );
 			}
@@ -156,6 +157,7 @@ define( function ( require ) {
 		},
 
 		_onInnerViewRendered: function() {
+
 			this._hideProgress();
 
 			var title = this.$( '.js-widget-title' );

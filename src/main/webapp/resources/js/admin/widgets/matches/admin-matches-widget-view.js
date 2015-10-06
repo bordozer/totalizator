@@ -108,6 +108,10 @@ define( function ( require ) {
 			return adminService.loadCups();
 		},
 
+		_loadCup: function( cupId ) {
+			return adminService.loadCup( cupId );
+		},
+
 		_triggerRender: function() {
 			this.trigger( 'view:render' );
 		},
