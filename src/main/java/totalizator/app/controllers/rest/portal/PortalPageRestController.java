@@ -4,7 +4,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
@@ -16,13 +19,13 @@ import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -73,22 +76,6 @@ public class PortalPageRestController {
 				.sorted( new Comparator<Cup>() {
 					@Override
 					public int compare( final Cup o1, final Cup o2 ) {
-
-						final LocalDateTime withoutBetTime1 = matchBetsService.getFirstMatchWithoutBetTime( o1, currentUser );
-						final LocalDateTime withoutBetTime2 = matchBetsService.getFirstMatchWithoutBetTime( o2, currentUser );
-
-						if ( withoutBetTime1 != null && withoutBetTime2 != null ) {
-							return withoutBetTime1.compareTo( withoutBetTime2 );
-						}
-
-						if ( withoutBetTime1 != null ) {
-							return -1;
-						}
-
-						if ( withoutBetTime2 != null ) {
-							return 1;
-						}
-
 						return categoryComparator.compare( o1.getCategory(), o2.getCategory() );
 					}
 				} )
