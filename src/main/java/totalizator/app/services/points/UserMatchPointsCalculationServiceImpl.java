@@ -94,6 +94,7 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 	}
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public List<UserSummaryPointsHolder> getUsersRatingOnDate( final LocalDate date ) {
 
 		return userService.loadAll()
