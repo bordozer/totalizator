@@ -8,22 +8,16 @@
 			<a href="/totalizator/users/<%=holder.user.userId%>/"><%=holder.user.userName%></a>
 		</div>
 
-		<div class="col-xs-2 text-right">
-			<strong class="<%= points.summary.css %>" title="<%= points.summary.title %>">
-				<%= points.summary.text %>
-			</strong>
+		<div class="col-xs-2 <%= points.summary.css %> nopadding text-right" title="<%= points.summary.title %>">
+			<%= points.summary.text %>
 		</div>
 
-		<div class="col-xs-2 text-right">
-			<sup class="<%= points.betPoints.css %>" title="<%= points.betPoints.title %>">
-				<%= points.betPoints.text %>
-			</sup>
+		<div class="col-xs-2 <%= points.betPoints.css %> nopadding text-right" title="<%= points.betPoints.title %>">
+			<%= points.betPoints.text %>
 		</div>
 
-		<div class="col-xs-2 text-right">
-			<sup class="<%= points.matchBonus.css %>" title="<%= points.matchBonus.title %>">
-				<%= points.matchBonus.text %>
-			</sup>
+		<div class="col-xs-2 <%= points.matchBonus.css %> nopadding text-right" title="<%= points.matchBonus.title %>">
+			<%= points.matchBonus.text %> &nbsp;
 		</div>
 
 	</div>
