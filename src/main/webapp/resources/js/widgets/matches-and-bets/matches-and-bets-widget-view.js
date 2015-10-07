@@ -68,7 +68,7 @@ define( function ( require ) {
 		innerViewMenuItems: function() {
 
 			var isStatisticsView = this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_STATISTICS;
-			var showButtons = isStatisticsView || this.matchViewMode != 3;
+			var showButtons = isStatisticsView || this.matchViewMode != VIEW_MODE_MINIMIZED;
 
 			return [
 				{ selector: 'js-matches_and_bets_mode_matches'
@@ -82,7 +82,7 @@ define( function ( require ) {
 					, link: '#'
 					, selected: isStatisticsView
 					, text: translator.matchesAndBetsViewMode_Statistics_Label
-					, button: showButtons  && ! isStatisticsView
+					, button: showButtons  && ! isStatisticsView && this.initialMatchViewMode != VIEW_MODE_MINIMIZED
 				}
 				, { selector: 'divider' }
 				, { selector: 'js-view_mode_bet'
@@ -91,7 +91,7 @@ define( function ( require ) {
 					, entity_id: VIEW_MODE_BET
 					, selected: this.matchViewMode == VIEW_MODE_BET
 					, text: translator.viewBetModeLabel
-					, button: showButtons  && ( isStatisticsView || ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED ) )
+					, button: ( isStatisticsView || ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED ) )
 				}
 				, { selector: 'js-view_mode_tabled'
 					, icon: 'fa fa-server'
