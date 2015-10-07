@@ -173,7 +173,8 @@ define( function ( require ) {
 		},
 
 		_renderUserRating: function( portalPageDate ) {
-			usersRatingWidget( this.$( '.js-users-rating' ), { portalPageDate: portalPageDate } );
+			var prevDate = dateTimeService.formatDate( dateTimeService.minusDay( portalPageDate ) );
+			usersRatingWidget( this.$( '.js-users-rating' ), { portalPageDate: prevDate } );
 		},
 
 		_renderActivityStream: function () {
@@ -216,6 +217,7 @@ define( function ( require ) {
 
 			this.$( '.js-portal-page-matches-on-date' ).html( div );
 			this.$( '.js-portal-page-container' ).html( div );
+			this.$( '.js-users-rating' ).html( div );
 		}
 	} );
 } );

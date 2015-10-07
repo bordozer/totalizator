@@ -10,6 +10,8 @@ define( function ( require ) {
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		summaryPointsLabel: "Cup users scores: Summary points"
@@ -35,7 +37,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			return '';
+			return '<small>' + dateTimeService.formatDateFullDisplay( this.portalPageDate ) + '</small>';
 		},
 
 		getIcon: function () {
