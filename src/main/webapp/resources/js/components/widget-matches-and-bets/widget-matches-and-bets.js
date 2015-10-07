@@ -146,7 +146,7 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/matches/', text: translator.menuOpenCupMatchesCard }
-				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/menuOpenCupBetsCard/' + model.cupId + '/', text: translator.menuOpenCupBetsCard }
+				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/' + model.cupId + '/', text: translator.menuOpenCupBetsCard }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: this.showCalendarButton }
 			];
