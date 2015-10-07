@@ -50,22 +50,22 @@ define( function ( require ) {
 
 			return {
 				summary: this._getPoints( betPoints + matchBonus )
-				, betPoints: matchBonus > 0 ? this._getPoints( betPoints ) : {}
-				, matchBonus: matchBonus > 0 ? this._getPoints( matchBonus ) : {}
+				, betPoints: this._getPoints( betPoints )
+				, matchBonus: this._getPoints( matchBonus )
 			};
 		},
 
 		_getPoints: function ( points ) {
 
 			if ( points > 0 ) {
-				return { text: '+' + points, css: 'text-success' };
+				return { text: points, css: 'text-success' };
 			}
 
 			if ( points < 0 ) {
 				return { text: points, css: 'text-danger' };
 			}
 
-			return { text: '', css: '' };
+			return { text: '0', css: '' };
 		}
 	} );
 } );
