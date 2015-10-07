@@ -62,7 +62,7 @@ define( function ( require ) {
 			}
 
 			if ( points < 0 ) {
-				return { text: '-' + points, css: 'text-danger' };
+				return { text: points, css: 'text-danger' };
 			}
 
 			return { text: '', css: '' };
