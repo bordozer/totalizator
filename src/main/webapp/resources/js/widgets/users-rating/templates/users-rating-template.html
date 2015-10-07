@@ -1,30 +1,30 @@
 <% _.each( pointsHolders, function( holder ) { %>
 
+	<% var points = pointsTransformer( holder.betPoints, holder.matchBonus ) %>
+
 	<div class="row" style="font-size: 11px;">
 
-		<div class="col-xs-7">
+		<div class="col-xs-6">
 			<a href="/totalizator/users/<%=holder.user.userId%>/"><%=holder.user.userName%></a>
 		</div>
 
-		<div class="col-xs-5">
-
-			<% var points = pointsTransformer( holder.betPoints, holder.matchBonus ) %>
-
+		<div class="col-xs-2 text-right">
 			<strong class="<%= points.summary.css %>" title="<%= points.summary.title %>">
 				<%= points.summary.text %>
 			</strong>
+		</div>
 
-			<sup>
-
-				<span class="<%= points.betPoints.css %>" title="<%= points.betPoints.title %>">
-					<%= points.betPoints.text %>
-				</span>
-				/
-				<span class="<%= points.matchBonus.css %>" title="<%= points.matchBonus.title %>">
-					<%= points.matchBonus.text %>
-				</span>
-
+		<div class="col-xs-2 text-right">
+			<sup class="<%= points.betPoints.css %>" title="<%= points.betPoints.title %>">
+				<%= points.betPoints.text %>
 			</sup>
 		</div>
+
+		<div class="col-xs-2 text-right">
+			<sup class="<%= points.matchBonus.css %>" title="<%= points.matchBonus.title %>">
+				<%= points.matchBonus.text %>
+			</sup>
+		</div>
+
 	</div>
 <% }) %>
