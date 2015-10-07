@@ -69,7 +69,9 @@ define( function ( require ) {
 
 			this._renderMatches( portalPageDate );
 
-			this._renderUserRating( portalPageDate );
+			this._renderTodayUserRating( portalPageDate );
+
+			this._renderYesterdayUserRating( portalPageDate );
 		},
 
 		_renderDatesMenu: function( portalPageDate ) {
@@ -172,9 +174,13 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderUserRating: function( portalPageDate ) {
+		_renderTodayUserRating: function( portalPageDate ) {
+			usersRatingWidget( this.$( '.js-users-rating-today' ), { onDate: portalPageDate } );
+		},
+
+		_renderYesterdayUserRating: function( portalPageDate ) {
 			var prevDate = dateTimeService.formatDate( dateTimeService.minusDay( portalPageDate ) );
-			usersRatingWidget( this.$( '.js-users-rating' ), { portalPageDate: prevDate } );
+			usersRatingWidget( this.$( '.js-users-rating-yesterday' ), { onDate: prevDate } );
 		},
 
 		_renderActivityStream: function () {

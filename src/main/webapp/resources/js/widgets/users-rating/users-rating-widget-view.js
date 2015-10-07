@@ -26,7 +26,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.portalPageDate = options.options.portalPageDate;
+			this.onDate = options.options.onDate;
 
 			this.listenTo( this.model, 'sync', this._renderUsersRating );
 			this.render();
@@ -37,7 +37,7 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			return '<small>' + dateTimeService.formatDateFullDisplay( this.portalPageDate ) + '</small>';
+			return '<small>' + dateTimeService.formatDateFullDisplay( this.onDate ) + '</small>';
 		},
 
 		getIcon: function () {

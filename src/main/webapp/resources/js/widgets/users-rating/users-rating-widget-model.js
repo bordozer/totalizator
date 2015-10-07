@@ -10,7 +10,7 @@ define( function ( require ) {
 		defaults: {},
 
 		initialize: function ( options ) {
-			this.portalPageDate = options.options.portalPageDate;
+			this.onDate = options.options.onDate;
 		},
 
 		url: function () {
@@ -18,7 +18,7 @@ define( function ( require ) {
 		},
 
 		refresh: function() {
-			this.fetch( { data: { portalPageDate: this.portalPageDate } }, { cache: false } );
+			this.fetch( { data: { portalPageDate: this.onDate } }, { cache: false } );
 		}
 	} );
 } );
