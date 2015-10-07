@@ -65,7 +65,7 @@ define( function ( require ) {
 				return { text: points, css: 'text-danger' };
 			}
 
-			return { text: '0', css: '' };
+			return { text: '0', css: 'text-muted' };
 		}
 	} );
 } );
