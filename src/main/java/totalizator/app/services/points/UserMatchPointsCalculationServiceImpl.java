@@ -6,16 +6,21 @@ import org.springframework.stereotype.Service;
 import totalizator.app.beans.points.UserCupPointsHolder;
 import totalizator.app.beans.points.UserMatchBetPointsHolder;
 import totalizator.app.beans.points.UserMatchPointsHolder;
+import totalizator.app.beans.points.UserSummaryPointsHolder;
 import totalizator.app.models.*;
 import totalizator.app.services.UserGroupService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
 import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
 import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -32,6 +37,9 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 
 	@Autowired
 	private MatchBetsService matchBetsService;
+
+	@Autowired
+	private MatchService matchService;
 
 	@Autowired
 	private UserMatchBetPointsCalculationService userMatchBetPointsCalculationService;
@@ -62,20 +70,64 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 	}
 
 	@Override
+	public UserSummaryPointsHolder getUserMatchPoints( final User user, final LocalDate date ) {
+
+		int summaryBetPoints = 0;
+		float summaryMatchBonus = 0;
+
+		final List<Match> matches = matchService.loadAllOnDate( date );
+
+		for ( final Match match : matches ) {
+
+			final UserMatchPointsHolder userMatchPoints = getUserMatchPoints( match, user );
+
+			if ( userMatchPoints == null ) {
+				continue;
+			}
+
+			summaryBetPoints += userMatchPoints.getUserBetPoints();
+			summaryMatchBonus += userMatchPoints.getMatchBonus();
+		}
+
+		return new UserSummaryPointsHolder( user, summaryBetPoints, summaryMatchBonus );
+	}
+
+	@Override
+	public List<UserSummaryPointsHolder> getUsersRatingOnDate( final LocalDate date ) {
+
+		return userService.loadAll()
+				.stream()
+				.map( new Function<User, UserSummaryPointsHolder>() {
+					@Override
+					public UserSummaryPointsHolder apply( final User user ) {
+						final UserSummaryPointsHolder userSummaryPoints = getUserMatchPoints( user, date );
+						return new UserSummaryPointsHolder( user, userSummaryPoints.getBetPoints(), userSummaryPoints.getMatchBonus() );
+					}
+				} )
+				.filter( new Predicate<UserSummaryPointsHolder>() {
+					@Override
+					public boolean test( final UserSummaryPointsHolder pointsHolder ) {
+						return ( float ) pointsHolder.getBetPoints() + pointsHolder.getMatchBonus() != 0;
+					}
+				} )
+				.collect( Collectors.toList() );
+	}
+
+	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<UserCupPointsHolder> getUsersCupPoints( final Cup cup ) {
 		final List<User> users = userService.loadAll();
-		return sumPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, users ), users );
+		return cupPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, users ), users );
 	}
 
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<UserCupPointsHolder> getUsersCupPoints( final Cup cup, final UserGroup userGroup ) {
 		final List<User> users = userGroupService.loadUserGroupMembers( userGroup );
-		return sumPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, users ), users );
+		return cupPointsByUser( cup, userMatchBetPointsCalculationService.getUsersMatchBetsPointHolders( cup, users ), users );
 	}
 
-	private List<UserCupPointsHolder> sumPointsByUser( final Cup cup, final List<UserMatchBetPointsHolder> userMatchBetPointsHolders, final List<User> users ) {
+	private List<UserCupPointsHolder> cupPointsByUser( final Cup cup, final List<UserMatchBetPointsHolder> userMatchBetPointsHolders, final List<User> users ) {
 
 		final List<UserMatchPointsHolder> matchPoints = newArrayList();
 		matchPoints.addAll(

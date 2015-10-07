@@ -2,12 +2,10 @@ package totalizator.app.controllers.rest.portal;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import totalizator.app.beans.points.UserSummaryPointsHolder;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
@@ -15,6 +13,7 @@ import totalizator.app.models.User;
 import totalizator.app.services.*;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
+import totalizator.app.services.points.UserMatchPointsCalculationService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
@@ -26,9 +25,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
-@Controller
+@RestController
 @RequestMapping( "/rest/portal-page" )
 public class PortalPageRestController {
 
@@ -56,11 +53,12 @@ public class PortalPageRestController {
 	private FavoriteCategoryService favoriteCategoryService;
 
 	@Autowired
+	private UserMatchPointsCalculationService userMatchPointsCalculationService;
+
+	@Autowired
 	private DateTimeService dateTimeService;
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public PortalPageDTO getDefaultLogin( final PortalPageDTO dto, final Principal principal ) {
 
 		final LocalDate date = dateTimeService.parseDate( dto.getPortalPageDate() );
@@ -103,6 +101,23 @@ public class PortalPageRestController {
 				.collect( Collectors.toList() ), currentUser ) );
 
 		return result;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/users-rating-on-date/" )
+	public List<UsersRatingPositionDTO> getUsersRatingOnDate( final PortalPageDTO dto, final Principal principal ) {
+
+		final LocalDate date = dateTimeService.parseDate( dto.getPortalPageDate() );
+		final List<UserSummaryPointsHolder> usersRatingOnDate = userMatchPointsCalculationService.getUsersRatingOnDate( date );
+
+		return usersRatingOnDate
+				.stream()
+				.map( new Function<UserSummaryPointsHolder, UsersRatingPositionDTO>() {
+					@Override
+					public UsersRatingPositionDTO apply( final UserSummaryPointsHolder pointsHolder ) {
+						return new UsersRatingPositionDTO( dtoService.transformUser( pointsHolder.getUser() ), pointsHolder.getBetPoints(), pointsHolder.getMatchBonus() );
+					}
+				}  )
+				.collect( Collectors.toList() );
 	}
 
 	private List<Cup> getCupsHaveMatchesToday( final LocalDate date ) {

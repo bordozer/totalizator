@@ -1,0 +1,29 @@
+<% _.each( pointsHolders, function( holder ) { %>
+
+	<div class="row">
+		<div class="col-xs-7">
+			<a href="/totalizator/users/<%=holder.user.userId%>/"><%=holder.user.userName%></a>
+		</div>
+
+		<div class="col-xs-5">
+
+			<% var points = pointsTransformer( holder.betPoints, holder.matchBonus ) %>
+
+			<strong class="<%= points.summary.css %>">
+				<%= points.summary.text %>
+			</strong>
+
+			<sup>
+
+				<span class="<%= points.betPoints.css %>">
+					<%= points.betPoints.text %>
+				</span>
+
+				<span class="<%= points.matchBonus.css %>">
+					<%= points.matchBonus.text %>
+				</span>
+
+			</sup>
+		</div>
+	</div>
+<% }) %>

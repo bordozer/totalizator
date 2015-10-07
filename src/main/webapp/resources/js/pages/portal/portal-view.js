@@ -11,6 +11,7 @@ define( function ( require ) {
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
+	var usersRatingWidget = require( 'js/widgets/users-rating/users-rating-widget' );
 
 	var app = require( 'app' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -67,6 +68,8 @@ define( function ( require ) {
 			this._renderMatchesOnDate( portalPageDate );
 
 			this._renderMatches( portalPageDate );
+
+			this._renderUserRating( portalPageDate );
 		},
 
 		_renderDatesMenu: function( portalPageDate ) {
@@ -167,6 +170,10 @@ define( function ( require ) {
 				};
 				matchesAndBetsView( el, options );
 			} );
+		},
+
+		_renderUserRating: function( portalPageDate ) {
+			usersRatingWidget( this.$( '.js-users-rating' ), { portalPageDate: portalPageDate } );
 		},
 
 		_renderActivityStream: function () {
