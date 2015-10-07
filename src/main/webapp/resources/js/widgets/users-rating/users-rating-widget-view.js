@@ -10,6 +10,14 @@ define( function ( require ) {
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
+	var Translator = require( 'translator' );
+	var translator = new Translator( {
+		summaryPointsLabel: "Cup users scores: Summary points"
+		, matchBetLabel: "Cup users scores: Match bets points"
+		, matchBonusLabel: "Cup users scores: Match bonus points"
+
+	} );
+
 	return WidgetView.extend( {
 
 		events: {},
@@ -49,23 +57,23 @@ define( function ( require ) {
 		_pointsTransformer: function( betPoints, matchBonus ) {
 
 			return {
-				summary: this._getPoints( betPoints + matchBonus )
-				, betPoints: this._getPoints( betPoints )
-				, matchBonus: this._getPoints( matchBonus )
+				summary: this._getPoints( betPoints + matchBonus, translator.summaryPointsLabel )
+				, betPoints: this._getPoints( betPoints, translator.matchBetLabel )
+				, matchBonus: this._getPoints( matchBonus, translator.matchBonusLabel )
 			};
 		},
 
-		_getPoints: function ( points ) {
+		_getPoints: function ( points, title ) {
 
 			if ( points > 0 ) {
-				return { text: points, css: 'text-success' };
+				return { text: points, css: 'text-success', title: title };
 			}
 
 			if ( points < 0 ) {
-				return { text: points, css: 'text-danger' };
+				return { text: points, css: 'text-danger', title: title };
 			}
 
-			return { text: '0', css: 'text-muted' };
+			return { text: '0', css: 'text-muted', title: title };
 		}
 	} );
 } );

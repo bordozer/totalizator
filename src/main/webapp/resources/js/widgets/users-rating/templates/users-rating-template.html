@@ -9,17 +9,17 @@
 
 			<% var points = pointsTransformer( holder.betPoints, holder.matchBonus ) %>
 
-			<strong class="<%= points.summary.css %>">
+			<strong class="<%= points.summary.css %>" title="<%= points.summary.title %>">
 				<%= points.summary.text %>
 			</strong>
 
 			<sup>
 
-				<span class="<%= points.betPoints.css %>">
+				<span class="<%= points.betPoints.css %>" title="<%= points.betPoints.title %>">
 					<%= points.betPoints.text %>
 				</span>
 				/
-				<span class="<%= points.matchBonus.css %>">
+				<span class="<%= points.matchBonus.css %>" title="<%= points.matchBonus.title %>">
 					<%= points.matchBonus.text %>
 				</span>
 
