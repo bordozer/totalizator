@@ -45,11 +45,10 @@ public class MatchesAndBetsWidgetServiceImpl implements MatchesAndBetsWidgetServ
 			matches = filterByTeam( matches, dto.getTeam2Id() );
 		}
 
-		if ( dto.isShowFutureMatches() ) {
+		final boolean showOnlyFutureMatches = dto.isShowFutureMatches() && !dto.isShowFinished();
+		if ( showOnlyFutureMatches ) {
 			matches = sortByBeginningTimeAsc( matches );
-		}
-
-		if ( ! dto.isShowFutureMatches() ) {
+		} else {
 			matches = sortByBeginningTimeDesc( matches );
 		}
 
