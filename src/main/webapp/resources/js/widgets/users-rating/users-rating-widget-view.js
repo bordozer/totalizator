@@ -59,7 +59,7 @@ define( function ( require ) {
 		_pointsTransformer: function( betPoints, matchBonus ) {
 
 			return {
-				summary: this._getPoints( betPoints + matchBonus, translator.summaryPointsLabel )
+				summary: this._getPoints( +betPoints + +matchBonus, translator.summaryPointsLabel )
 				, betPoints: this._getPoints( betPoints, translator.matchBetLabel )
 				, matchBonus: this._getPoints( matchBonus, translator.matchBonusLabel )
 			};
@@ -68,7 +68,7 @@ define( function ( require ) {
 		_getPoints: function ( points, title ) {
 
 			if ( points > 0 ) {
-				return { text: '+' + points, css: 'text-success', title: title };
+				return { text: points, css: 'text-success', title: title };
 			}
 
 			if ( points < 0 ) {

@@ -17,6 +17,7 @@ import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationSe
 import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -110,6 +111,12 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 						return ( float ) pointsHolder.getBetPoints() + pointsHolder.getMatchBonus() != 0;
 					}
 				} )
+				.sorted( new Comparator<UserSummaryPointsHolder>() {
+					@Override
+					public int compare( final UserSummaryPointsHolder o1, final UserSummaryPointsHolder o2 ) {
+						return new Float( ( float ) o2.getBetPoints() + o2.getMatchBonus() ).compareTo( ( float ) o1.getBetPoints() + o1.getMatchBonus() );
+					}
+				}  )
 				.collect( Collectors.toList() );
 	}
 
