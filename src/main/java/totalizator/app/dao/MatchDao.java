@@ -39,6 +39,8 @@ public interface MatchDao extends GenericService<Match> {
 
 	List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo );
 
+	List<Match> loadAllBetween( final int cupId, final LocalDateTime timeFrom, final LocalDateTime timeTo );
+
 	List<Match> getStartedMatchCount( final Cup cup, final LocalDateTime timeFrom );
 
 	Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime );

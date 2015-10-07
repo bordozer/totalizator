@@ -131,7 +131,7 @@ public class DateTimeServiceImpl implements DateTimeService {
 
 	@Override
 	public LocalDateTime getLastSecondOf( final LocalDate date ) {
-		return getFirstSecondOf( date.plusDays( 1 ).atStartOfDay().toLocalDate() );
+		return getFirstSecondOf( date.plusDays( 1 ).atStartOfDay().toLocalDate() ).minusSeconds( 1 );
 	}
 
 	@Override

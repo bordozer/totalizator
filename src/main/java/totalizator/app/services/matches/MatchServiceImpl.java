@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -218,22 +217,18 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	public List<Match> loadAllBetween( final int cupId, final LocalDateTime timeFrom, final LocalDateTime timeTo ) {
+		return matchRepository.loadAllBetween( cupId, timeFrom, timeTo );
+	}
+
+	@Override
 	public List<Match> loadAllOnDate( final LocalDate date ) {
 		return loadAllBetween( dateTimeService.getFirstSecondOf( date ), dateTimeService.getLastSecondOf( date ) );
 	}
 
 	@Override
 	public List<Match> loadAllOnDate( final int cupId, final LocalDate date ) {
-
-		return loadAllOnDate( date )
-				.stream()
-				.filter( new java.util.function.Predicate<Match>() {
-					@Override
-					public boolean test( final Match match ) {
-						return match.getCup().getId() == cupId;
-					}
-				} )
-				.collect( Collectors.toList() );
+		return loadAllBetween( cupId, dateTimeService.getFirstSecondOf( date ), dateTimeService.getLastSecondOf( date ) );
 	}
 
 	@Override

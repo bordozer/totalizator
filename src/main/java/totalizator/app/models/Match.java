@@ -69,6 +69,10 @@ import static totalizator.app.models.Match.*;
 				query = "select m from Match m where beginningTime BETWEEN :timeFrom AND :timeTo"
 		),
 		@NamedQuery(
+				name = FIND_CUP_MATCHES_BY_DATE,
+				query = "select m from Match m where cupId = :cupId and beginningTime BETWEEN :timeFrom AND :timeTo"
+		),
+		@NamedQuery(
 				name = FIND_NOT_FINISHED_MATCHES_STARTED_TILL,
 				query = "select m from Match m where cupId = :cupId and ( matchFinished = false ) and beginningTime < :time"
 		),
@@ -100,7 +104,10 @@ public class Match extends AbstractEntity {
 	public static final String LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.finishedMatchCountForCupAndTeam";
 	public static final String LOAD_FUTURE_MATCH_COUNT_FOR_CUP = "cups.futureMatchCountForCup";
 	public static final String LOAD_FUTURE_MATCH_COUNT_FOR_CUP_AND_TEAM = "cups.futureMatchCountForCupAndTeam";
-	public static final String FIND_MATCHES_BY_DATE = "cups.futureMatchByDate";
+
+	public static final String FIND_MATCHES_BY_DATE = "cups.loadMatchesInPeriod";
+	public static final String FIND_CUP_MATCHES_BY_DATE = "cups.loadCupMatchesInPeriod";
+
 	public static final String FIND_NOT_FINISHED_MATCHES_STARTED_TILL = "cups.futureMatchesStartedSince";
 	public static final String FIND_NOT_FINISHED_MATCHES_STARTED_AFTER = "cups.futureNearestMatch";
 

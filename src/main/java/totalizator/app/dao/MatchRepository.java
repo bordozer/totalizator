@@ -122,7 +122,7 @@ public class MatchRepository implements MatchDao {
 	}
 
 	@Override
-	public int  getMatchCount( final Cup cup ) {
+	public int getMatchCount( final Cup cup ) {
 
 		final List<Long> result = em.createNamedQuery( Match.LOAD_MATCH_COUNT_FOR_CUP, Long.class )
 				.setParameter( "cupId", cup.getId() )
@@ -182,9 +182,20 @@ public class MatchRepository implements MatchDao {
 	}
 
 	@Override
+	@Cacheable( value = CACHE_QUERY )
 	public List<Match> loadAllBetween( final LocalDateTime timeFrom, final LocalDateTime timeTo ) {
 
 		return em.createNamedQuery( Match.FIND_MATCHES_BY_DATE, Match.class )
+				.setParameter( "timeFrom", timeFrom )
+				.setParameter( "timeTo", timeTo )
+				.getResultList();
+	}
+
+	@Override
+	public List<Match> loadAllBetween( final int cupId, final LocalDateTime timeFrom, final LocalDateTime timeTo ) {
+
+		return em.createNamedQuery( Match.FIND_CUP_MATCHES_BY_DATE, Match.class )
+				.setParameter( "cupId", cupId )
 				.setParameter( "timeFrom", timeFrom )
 				.setParameter( "timeTo", timeTo )
 				.getResultList();
