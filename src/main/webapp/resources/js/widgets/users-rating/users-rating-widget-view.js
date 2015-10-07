@@ -66,7 +66,7 @@ define( function ( require ) {
 		_getPoints: function ( points, title ) {
 
 			if ( points > 0 ) {
-				return { text: points, css: 'text-success', title: title };
+				return { text: '+' + points, css: 'text-success', title: title };
 			}
 
 			if ( points < 0 ) {
