@@ -133,7 +133,7 @@ define( function ( require ) {
 			var date = model.date;
 			var matchBets = model.matchBets;
 
-			var dateEl = $( "<h4 class='well well-sm text-danger'><strong>" + dateTimeService.formatDateFullDisplay( date ) + "</strong></h4>" );
+			var dateEl = $( "<div class='well well-sm text-danger' style='margin-bottom: 0;'><strong>" + dateTimeService.formatDateFullDisplay( date ) + "</strong></div>" );
 			container.append( dateEl );
 
 			var showBetForUserId = this.filter.userId;
