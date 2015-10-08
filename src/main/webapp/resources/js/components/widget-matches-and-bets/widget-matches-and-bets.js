@@ -38,6 +38,7 @@ define( function ( require ) {
 		, menuOpenCupCard: 'Open cup card'
 		, menuOpenCupMatchesCard: 'Open cup matches'
 		, menuOpenCupBetsCard: 'Open cup bets'
+		, menuCupWinnersBetsCard: 'All cup winners bets'
 		, menuSelectDate: "Show matches on date"
 		, noMatchesFound: "No matches found"
 		, saveLabel: "Save"
@@ -146,7 +147,8 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupCard }
 				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/matches/', text: translator.menuOpenCupMatchesCard }
-				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/', text: translator.menuOpenCupBetsCard }
+				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/bets/', text: translator.menuOpenCupBetsCard }
+				, { selector: 'js-menu-cup-card', icon: 'fa fa-external-link', link: '/totalizator/cups/' + model.cupId + '/winners/bets/', text: translator.menuCupWinnersBetsCard }
 				, { selector: 'divider' }
 				, { selector: 'js-menu-date-picker', icon: 'fa fa-calendar', link: '#', text: translator.menuSelectDate, button: this.showCalendarButton }
 			];
