@@ -28,6 +28,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 			this.render();
 		},
+
 		render: function () {
 
 			var model = this.model.toJSON();

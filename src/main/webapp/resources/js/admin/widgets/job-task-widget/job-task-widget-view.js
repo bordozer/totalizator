@@ -57,7 +57,6 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 
-			this.jobTaskId = options.options.jobTaskId;
 			this.jobTaskTypeId = options.options.jobTaskTypeId;
 			this.viewMode = options.options.viewMode || JOB_TASK_MODE_VIEW;
 
@@ -73,8 +72,8 @@ define( function ( require ) {
 
 			this.$( this.windowBodyContainerSelector ).empty();
 
-			var isNewTask = this.jobTaskId > 0;
-			if ( isNewTask ) {
+			var isSavedTask = this.model.id > 0;
+			if ( isSavedTask ) {
 				this.model.fetch( { cache: false } );
 
 				return;
