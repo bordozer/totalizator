@@ -56,6 +56,11 @@ public class AdminJobEditRestController {
 
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{jobTaskTypeId}/{jobTaskId}" )
 	public void delete( final @PathVariable int jobTaskTypeId, final @PathVariable int jobTaskId ) {
+
+		if ( jobTaskId == 0 ) {
+			return;
+		}
+
 		jobTaskService.delete( jobTaskId );
 	}
 
