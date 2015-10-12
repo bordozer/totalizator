@@ -13,6 +13,7 @@ define( function ( require ) {
 	var service = require( '/resources/js/services/service.js' );
 
 	var templateSettings = _.template( require( 'text!./templates/widget-matches-and-bets-settings-template.html' ) );
+	var templateNoMatches = _.template( require( 'text!./templates/no-matches-template.html' ) );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
@@ -27,7 +28,7 @@ define( function ( require ) {
 		, user: 'User'
 		, noInnerViewLabel: 'No inner view was supplied...'
 		, settingsLabel: 'Configurable view: Matches: settings'
-		, filteringSettingsButtonLabel: 'Configurable view: Filtering settings'
+		, filteringSettingsButtonLabel: 'Configurable view: Matches: settings'
 		, resetFilterButtonHint: 'Configurable view: Reset filter to default'
 		, futureMatchesAreShownLabel: 'Configurable view / Future matches are shown'
 		, finishedMatchesAreShownLabel: 'Configurable view / Finished matches are shown'
@@ -188,7 +189,10 @@ define( function ( require ) {
 
 		_renderNoMatchesFound: function() {
 			var container = this.$( this.windowBodyContainerSelector );
-			container.html( "<div class='admin-match-list-container'><span class='text-muted'>" + translator.noMatchesFound + "</span></div>" );
+			container.html( templateNoMatches( {
+				filter: this.settingsModel.toJSON()
+				, translator: translator
+			} ) );
 
 			this.trigger( 'inner-view-rendered' );
 		},

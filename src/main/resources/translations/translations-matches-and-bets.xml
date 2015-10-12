@@ -117,8 +117,8 @@
 	<translation>
 		<nerd>No matches found</nerd>
 		<ru><![CDATA[Соответствующих критериям матчей не найдено]]></ru>
-		<en><![CDATA[No matches found]]></en>
-		<ua><![CDATA[Iгри не знайденi]]></ua>
+		<ua><![CDATA[За зазначеними критеріями iгор не знайдено]]></ua>
+		<en><![CDATA[No matches found for the criteria]]></en>
 	</translation>
 
 	<translation>
