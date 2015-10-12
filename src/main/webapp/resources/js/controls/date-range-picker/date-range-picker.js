@@ -36,9 +36,8 @@ define( function ( require ) {
 
 			this.parameters = options.parameters;
 
-			this.parameters.timePeriodType = this.parameters.timePeriodType || TIME_PERIOD_TYPE_DATE_RANGE;
-
 			var today = dateTimeService.dateNow();
+
 			this.parameters.dateFrom = this.parameters.dateFrom || today;
 			this.parameters.dateTo = this.parameters.dateTo || today;
 
@@ -58,22 +57,20 @@ define( function ( require ) {
 
 			if ( this.parameters.timePeriodType == TIME_PERIOD_TYPE_DATE_RANGE ) {
 
-				this.dateTimePickerFromView = new DateTimePickerView( {
+				new DateTimePickerView( {
 					el: this.$( '.js-date-from' )
 					, initialValue: this.parameters.dateFrom
 					, disableTime: true
 					, datTimeChangeCallback: this._onDateFromSelect.bind( this )
 				} );
 
-				this.dateTimePickerToView = new DateTimePickerView( {
+				new DateTimePickerView( {
 					el: this.$( '.js-to-date' )
 					, initialValue: this.parameters.dateTo
 					, disableTime: true
 					, datTimeChangeCallback: this._onDateToSelect.bind( this )
 				} );
 			}
-
-			//js-date-range-picker
 
 			if ( this.parameters.timePeriodType == TIME_PERIOD_TYPE_DAYS_OFFSET ) {
 				this._onDaysOffsetChange();
@@ -113,8 +110,8 @@ define( function ( require ) {
 
 			this.parameters.dateFrom = dateTimeService.dateNow();
 			this._setDateTo( dateTo );
-			this.parameters.daysOffset = daysOffset;
 
+			this.parameters.daysOffset = daysOffset;
 			this.$( '.js-days-offset-date' ).text( dateTimeService.formatDateFullDisplay( dateTo ) );
 
 			this.trigger( 'events:date_range_change', this.parameters );

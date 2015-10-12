@@ -2,7 +2,6 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
@@ -18,6 +17,8 @@ define( function ( require ) {
 
 	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 	var remoteGamesImportService = require( 'js/admin/widgets/game-import/remote-games-import-service' );
+
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -81,7 +82,17 @@ define( function ( require ) {
 			var parameters = this.importParameters.toJSON();
 			var cup = adminService.loadCup( parameters.cupId );
 
-			return translator.title + ': ' + cup.cupName + ', ' + parameters.dateFrom + ' - ' + parameters.dateTo;
+			var title = '<small>' + cup.category.categoryName + ': <strong>' + cup.cupName + '</strong></small>';
+
+			if ( parameters.timePeriod.dateFrom === parameters.timePeriod.dateTo ) {
+				return title + ', <small>' + dateTimeService.formatDateFullDisplay( parameters.timePeriod.dateFrom ) + '</small>';
+			}
+
+			return title
+					+ '<br />'
+					+ '<small>'
+					+ dateTimeService.formatDateFullDisplay( parameters.timePeriod.dateFrom ) + ' - ' + dateTimeService.formatDateFullDisplay( parameters.timePeriod.dateTo )
+					+ '</small>';
 		},
 
 		getIcon: function () {
@@ -140,7 +151,14 @@ define( function ( require ) {
 			this.mode = MODE_READY_FOR_IMPORT;
 
 			this.remoteGames.reset();
-			this.emptyRemoteGames = remoteGamesImportService.loadRemoteGameIds( importParameters );
+
+			var gamesImportParameters = {
+				cupId: importParameters.cupId
+				, dateFrom: importParameters.timePeriod.dateFrom
+				, dateTo: importParameters.timePeriod.dateTo
+			};
+
+			this.emptyRemoteGames = remoteGamesImportService.loadRemoteGameIds( gamesImportParameters );
 
 			this.render();
 		},

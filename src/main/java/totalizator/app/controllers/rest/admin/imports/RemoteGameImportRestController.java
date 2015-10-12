@@ -3,7 +3,6 @@ package totalizator.app.controllers.rest.admin.imports;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
@@ -13,9 +12,11 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.jobs.jobDTO.JobDTOService;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameDataImportService;
 import totalizator.app.services.remote.RemoteContentNullException;
+import totalizator.app.services.utils.DateRangeService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.io.IOException;
@@ -25,9 +26,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
-@Controller
+@RestController
 @RequestMapping( "/admin/rest/remote-games-import" )
 public class RemoteGameImportRestController {
 
@@ -47,13 +46,17 @@ public class RemoteGameImportRestController {
 	private DateTimeService dateTimeService;
 
 	@Autowired
+	private DateRangeService dateRangeService;
+
+	@Autowired
+	private JobDTOService jobDTOService;
+
+	@Autowired
 	private DTOService dtoService;
 
 	private final Logger LOGGER = Logger.getLogger( RemoteGameImportRestController.class );
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/collect-game-data-ids/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/collect-game-data-ids/" )
 	public List<RemoteGameDTO> collectRemoteGamesIds( final GameImportParametersDTO parametersDTO, final Principal principal ) throws IOException, RemoteContentNullException {
 
 		final LocalDate dateFrom = dateTimeService.parseDate( parametersDTO.getDateFrom() );
@@ -67,9 +70,7 @@ public class RemoteGameImportRestController {
 				.collect( Collectors.toList() );
 	}
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/remote-game/{remoteGameId}/" )
 	public RemoteGameDTO loadRemoteGameData( final @PathVariable( value = "remoteGameId" ) String remoteGameId, final @RequestParam( value = "cupId" ) Integer cupId, final Principal principal ) throws IOException, RemoteContentNullException {
 
 		final Cup cup = cupService.load( cupId );
@@ -82,15 +83,12 @@ public class RemoteGameImportRestController {
 		return getRemoteGameMapper( cup, principal ).apply( remoteGame );
 	}
 
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody
-	@RequestMapping( method = RequestMethod.PUT, value = "/remote-game/{remoteGameId}/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.PUT, value = "/remote-game/{remoteGameId}/" )
 	public void saveRemoteGameData( final @RequestParam( value = "cupId" ) Integer cupId, final @RequestBody RemoteGameDTO remoteGameDTO ) {
 		remoteGameDataImportService.importGame( cupService.load( cupId ), getRemoteGameDTOMapper().apply( remoteGameDTO ) );
 	}
 
 	@ExceptionHandler
-	@ResponseBody
 	@ResponseStatus( value = HttpStatus.INTERNAL_SERVER_ERROR )
 	public Error handleException( final IOException exception ) {
 		return new Error( "Remote game import server error: " + exception.getMessage() );

@@ -37,6 +37,7 @@ define( function ( require ) {
 		render: function () {
 
 			var model = this.model.toJSON();
+			var cupId = model.cupId;
 
 			var selectedSportKindId = model.selectedSportKindId;
 			this.cupsForGameImport = this.showActiveCupsOnlyClick ? remoteGamesImportService.loadAllCurrentCupsConfiguredForRemoteGameImport( selectedSportKindId ) : remoteGamesImportService.loadCupsConfiguredForRemoteGameImport( selectedSportKindId );
@@ -44,7 +45,7 @@ define( function ( require ) {
 			var data = _.extend( {}
 					, model
 					, {
-						cupId: model.cupId
+						cupId: cupId
 						, cupsForGameImport: this.cupsForGameImport
 						, showActiveCupsOnlyClick: this.showActiveCupsOnlyClick
 						, sportKinds: this.model.sportKinds
@@ -57,7 +58,8 @@ define( function ( require ) {
 
 			this.$( '#selectedCupId' ).chosen( { width: '100%' } );
 
-			if ( model.cupId ) {
+			if ( cupId ) {
+
 				this.dateRangePicker = new DateRangePickerView( {
 					parameters: this.model.get( 'timePeriod' )
 					, el: this.$( '.js-date-range-picker' )
@@ -70,9 +72,23 @@ define( function ( require ) {
 			return this.$( '#selectedCupId' ).val();
 		},
 
+		_onShowActiveCupsOnlyClick: function () {
+			this.showActiveCupsOnlyClick = this.$( ".js-show-active-cups-only" ).is( ':checked' );
+			this.render();
+		},
+
+		_onSportKindFilterChange: function ( evt ) {
+			this.model.set( { selectedSportKindId: $( evt.target ).val(), cupId: 0 } );
+			this.render();
+		},
+
 		_onCupSelect: function () {
 
 			var selectedCupId = this._getSelectedCupId();
+
+			if ( selectedCupId == 0 ) {
+				return;
+			}
 
 			this.model.set( { cupId: selectedCupId } );
 
@@ -86,21 +102,11 @@ define( function ( require ) {
 			this.trigger( 'events:games_import_parameters_change', this._getParameters() );
 		},
 
-		_onShowActiveCupsOnlyClick: function () {
-			this.showActiveCupsOnlyClick = this.$( ".js-show-active-cups-only" ).is( ':checked' );
-			this.render();
-		},
-
-		_onSportKindFilterChange: function ( evt ) {
-			this.model.set( { selectedSportKindId: $( evt.target ).val(), cupId: 0 } );
-			this.render();
-		},
-
 		_onDateRangeChange: function( dateRangeParameters ) {
-			this.model.set( dateRangeParameters );
+			var parameters = this._getParameters();
 
-			dateRangeParameters.cupId = this.model.get( 'cupId' );
-			this.trigger( 'events:games_import_parameters_change', this._getParameters() );
+			this.model.set( parameters );
+			this.trigger( 'events:games_import_parameters_change', parameters );
 		},
 
 		_getParameters: function() {

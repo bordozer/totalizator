@@ -14,11 +14,11 @@ public interface JobDTOService {
 
 	AbstractJobTaskParameters transformParametersFromDTO( final JobTaskType jobTaskType, final AbstractJobTaskParametersDTO parametersDTO );
 
-	TimePeriod getTimePeriod( final TimePeriodDTO timePeriodDTO );
+	TimePeriod transformToTimePeriod( final TimePeriodDTO timePeriodDTO );
 
 	AbstractJobTaskParametersDTO transformParametersToDTO( final JobTaskType jobTaskType, final AbstractJobTaskParameters jobTaskParameters );
 
-	TimePeriodDTO getTimePeriodDTO( final TimePeriod timePeriod );
+	TimePeriodDTO transformToTimePeriodDTO( final TimePeriod timePeriod );
 
 	JobTaskDTO transformJobTask( final JobTask jobTask );
 

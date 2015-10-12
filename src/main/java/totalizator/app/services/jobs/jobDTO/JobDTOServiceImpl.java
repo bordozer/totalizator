@@ -28,7 +28,7 @@ public class JobDTOServiceImpl implements JobDTOService {
 				final RemoteGamesImportJobTaskParameters result = new RemoteGamesImportJobTaskParameters();
 
 				result.setCupId( gamesImportParametersDTO.getCupId() );
-				result.setTimePeriod( getTimePeriod( gamesImportParametersDTO.getTimePeriod() ) );
+				result.setTimePeriod( transformToTimePeriod( gamesImportParametersDTO.getTimePeriod() ) );
 
 				return result;
 		}
@@ -46,7 +46,7 @@ public class JobDTOServiceImpl implements JobDTOService {
 				final RemoteGamesImportJobTaskParametersDTO result = new RemoteGamesImportJobTaskParametersDTO();
 
 				result.setCupId( gamesImportJobTaskParameters.getCupId() );
-				result.setTimePeriod( getTimePeriodDTO( gamesImportJobTaskParameters.getTimePeriod() ) );
+				result.setTimePeriod( transformToTimePeriodDTO( gamesImportJobTaskParameters.getTimePeriod() ) );
 
 				return result;
 		}
@@ -55,7 +55,7 @@ public class JobDTOServiceImpl implements JobDTOService {
 	}
 
 	@Override
-	public TimePeriod getTimePeriod( final TimePeriodDTO timePeriodDTO ) {
+	public TimePeriod transformToTimePeriod( final TimePeriodDTO timePeriodDTO ) {
 
 		final TimePeriod result = new TimePeriod();
 
@@ -69,7 +69,7 @@ public class JobDTOServiceImpl implements JobDTOService {
 	}
 
 	@Override
-	public TimePeriodDTO getTimePeriodDTO( final TimePeriod timePeriod ) {
+	public TimePeriodDTO transformToTimePeriodDTO( final TimePeriod timePeriod ) {
 
 		final TimePeriodDTO timePeriodDTO = new TimePeriodDTO();
 
