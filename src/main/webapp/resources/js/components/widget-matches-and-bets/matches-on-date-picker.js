@@ -8,7 +8,6 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/date-picker-template.html' ) );
 
-	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 	var DateTimePickerView = require( 'js/controls/date-time-picker/date-time-picker' );
 
 	var Translator = require( 'translator' );

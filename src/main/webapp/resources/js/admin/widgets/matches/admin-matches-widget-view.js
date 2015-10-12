@@ -11,13 +11,14 @@ define( function ( require ) {
 
 	var Model = require( './admin-matches-widget-model' );
 
-	//var service = require( '/resources/js/services/service.js' );
 	var adminService = require( '/resources/js/admin/services/admin-service.js' );
 
 	var WidgetMatchesAndBets = require( 'js/components/widget-matches-and-bets/widget-matches-and-bets' );
 	var MatchCompositeView = require( './admin-match-composite-view' );
 
 	var templateList = _.template( require( 'text!./templates/admin-matches-template.html' ) );
+
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -56,10 +57,15 @@ define( function ( require ) {
 		},
 
 		getTitle: function() {
-			var cupId = this.settingsModel == undefined ? this.initialFilter.cupId : this.settingsModel.get( 'cupId' );
-			var cup = adminService.loadCup( cupId );
 
-			return this.getCupTitle( cup, translator.title );
+			var title = this.getCupTitle( this.cup, translator.title );
+
+			var settings = this.settingsModel.toJSON();
+			if ( settings.filterByDateEnable ) {
+				title += ' <br /><small class="text-muted">' + dateTimeService.formatDateFullDisplay( settings.filterByDate ) + '</small>';
+			}
+
+			return title;
 		},
 
 		innerViewMenuItems: function() {
