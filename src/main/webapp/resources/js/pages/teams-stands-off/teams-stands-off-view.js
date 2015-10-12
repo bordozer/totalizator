@@ -80,6 +80,7 @@ define( function ( require ) {
 					, team2Id: model.team2.teamId
 					, showFinished: true
 					, showFutureMatches: true
+					, sorting: 2
 				}
 				, matchViewMode: 2
 				, currentUser: app.currentUser()

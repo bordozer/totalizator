@@ -55,6 +55,7 @@ define( function ( require ) {
 					, team2Id: this.team2Id
 					, showFutureMatches: isFuture
 					, showFinished: ! isFuture
+					, sorting: isFuture ? 1 : 2
 				}
 				, matchViewMode: 2
 				, currentUser: this.currentUser

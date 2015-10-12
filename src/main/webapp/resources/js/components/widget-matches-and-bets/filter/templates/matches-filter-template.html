@@ -1,7 +1,7 @@
 <div class="row">
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.sportKindLabel%> *</div>
+		<div class="col-xs-5 text-right"><small><%=translator.sportKindLabel%> *</small></div>
 		<div class="col-xs-6">
 			<% _.each( sportKinds, function( sportKind ) { %>
 				<input type="radio" name="sportKindId" id="sportKindId-<%=sportKind.sportKindId%>" value="<%=sportKind.sportKindId%>" <%=sportKind.sportKindId == selectedSportKindId ? 'checked' : '' %> >
@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.categoryLabel%> *</div>
+		<div class="col-xs-5 text-right"><small><%=translator.categoryLabel%> *</small></div>
 		<div class="col-xs-6">
 			<select class="chosen-select form-control" id="settings-category-id">
 				<% _.each( categories, function( category ) { %>
@@ -23,7 +23,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.cupLabel%> *</div>
+		<div class="col-xs-5 text-right"><small><%=translator.cupLabel%> *</small></div>
 		<div class="col-xs-6">
 			<% if( model.categoryId > 0 ) { %>
 				<select class="chosen-select form-control" id="settings-cup-id">
@@ -38,7 +38,7 @@
 	<hr />
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.teamLabel%></div>
+		<div class="col-xs-5 text-right"><small><%=translator.teamLabel%></small></div>
 		<div class="col-xs-6">
 			<% if( model.categoryId > 0 ) { %>
 				<select class="chosen-select form-control" id="settings-team-id">
@@ -53,7 +53,7 @@
 
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.teamLabel%></div>
+		<div class="col-xs-5 text-right"><small><%=translator.teamLabel%></small></div>
 		<div class="col-xs-6">
 			<% if( model.categoryId > 0 ) { %>
 				<select class="chosen-select form-control" id="settings2-team-id">
@@ -70,7 +70,7 @@
 
 	<div class="row">
 		<div class="col-xs-5 text-right">
-			<%=translator.matchDateLabel%>
+			<small><%=translator.matchDateLabel%></small>
 			<input type="checkbox" id="filter-by-match-date-enabled" value="true" <%= model.filterByDateEnable ? 'checked' : '' %> >
 		</div>
 		<div class="col-xs-6">
@@ -81,14 +81,14 @@
 	<hr />
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.showFutureMatchesLabel%></div>
+		<div class="col-xs-5 text-right"><small><%=translator.showFutureMatchesLabel%></small></div>
 		<div class="col-xs-6">
 			<input type="checkbox" id="settings-show-future-matches" name="settings-show-future-matches" value="true" <%= showFutureMatches ? "checked='checked'" : ''%> >
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.showFinishedLabel%></div>
+		<div class="col-xs-5 text-right"><small><%=translator.showFinishedLabel%></small></div>
 		<div class="col-xs-6">
 			<input type="checkbox" id="settings-show-finished" name="settings-show-finished" value="true" <%= showFinished ? "checked='checked'" : ''%> >
 		</div>
@@ -97,7 +97,16 @@
 	<hr />
 
 	<div class="row">
-		<div class="col-xs-5 text-right"><%=translator.userLabel%></div>
+		<div class="col-xs-5 text-right"><small><%=translator.mnbSortingLabel%></small></div>
+		<div class="col-xs-6">
+			<input type="radio" id="sort-asc" name="sorting" value="1" <%= model.sorting == 1 ? 'checked' : '' %> > <label for="sort-asc"><%=translator.mnbSortingAscLabel%></label>
+			<br />
+			<input type="radio" id="sort-desc" name="sorting" value="2" <%= model.sorting == 2 ? 'checked' : '' %> > <label for="sort-desc"><%=translator.mnbSortingDescLabel%></label>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-5 text-right"><small><%=translator.userLabel%></small></div>
 		<div class="col-xs-6">
 			<select class="chosen-select form-control" id="settings-user-id">
 				<option value="0">&nbsp;</option>

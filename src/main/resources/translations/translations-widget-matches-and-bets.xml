@@ -59,13 +59,38 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Sort matches by beginning time</nerd>
+		<ru><![CDATA[Сортирвать по времени начала]]></ru>
+		<ua><![CDATA[Сортувати за часом початку]]></ua>
+		<en><![CDATA[Sort by beginning time]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Sort matches by beginning time asc</nerd>
+		<ru><![CDATA[По возрастанию]]></ru>
+		<ua><![CDATA[За зростанням]]></ua>
+		<en><![CDATA[Ascending]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Sort matches by beginning time desc</nerd>
+		<ru><![CDATA[По убыванию]]></ru>
+		<ua><![CDATA[За спаданням]]></ua>
+		<en><![CDATA[Descending]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

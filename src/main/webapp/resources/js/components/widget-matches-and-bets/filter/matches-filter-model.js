@@ -16,6 +16,7 @@ define( function ( require ) {
 			, filterByDateEnable: false
 			, showFutureMatches: false
 			, showFinished: false
+			, sorting: 1
 		},
 
 		initialize: function ( options ) {

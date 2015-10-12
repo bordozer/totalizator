@@ -10,7 +10,7 @@ define( function ( require ) {
 	var templateNoActivity = _.template( require( 'text!./templates/user-card-no-activity-template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
-	var userStatisticsWidget = require( 'js/widgets/user-statistics/user-statistics-widget' );
+	//var userStatisticsWidget = require( 'js/widgets/user-statistics/user-statistics-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 
 	var service = require( '/resources/js/services/service.js' );
@@ -41,27 +41,57 @@ define( function ( require ) {
 
 			this._renderActivityStream();
 
-			this._renderUserBets();
+			this._renderUserBetsFuture();
+
+			this._renderUserBetsPast();
 		},
 
-		_renderUserBets: function() {
+		_renderUserBetsFuture: function() {
 
 			var userId = this.userId;
 			var currentUser = this.currentUser;
-
-			var el = this.$( '.js-user-bets' );
-
 			var cupsToShow = this.model.get( 'cupsToShow' );
 
+			var container = this.$( '.js-user-bets-future' );
+
+			_.each( cupsToShow, function( cup ) {
+
+				var el = $( '<div></div>' );
+				container.append( el );
+
+				var options = {
+					filter: {
+						userId: userId
+						, categoryId: cup.category.categoryId
+						, cupId: cup.cupId
+						, showFinished: false
+						, showFutureMatches: true
+						, sorting: 2
+					}
+					, matchViewMode: 3
+					, currentUser: currentUser
+				};
+				matchesAndBetsView( el, options );
+			});
+		},
+
+		_renderUserBetsPast: function() {
+
+			var userId = this.userId;
+			var currentUser = this.currentUser;
+			var cupsToShow = this.model.get( 'cupsToShow' );
+
+			var container = this.$( '.js-user-bets-past' );
+
 			if ( cupsToShow.length == 0 ) {
-				this.$( '.js-user-bets' ).html( templateNoActivity( { translator: translator } ) );
+				this.$( '.js-user-bets-future' ).html( templateNoActivity( { translator: translator } ) );
 				return;
 			}
 
 			if ( this.filterByCupId ) {
 
-				var container = $( '<div class="col-xs-12"></div>' );
-				el.append( container );
+				var el = $( '<div></div>' );
+				container.append( el );
 
 				var cup = service.loadPublicCup( this.filterByCupId );
 
@@ -72,35 +102,17 @@ define( function ( require ) {
 						, cupId: cup.cupId
 						, showFinished: true
 						, showFutureMatches: false
+						, sorting: 2
 					}
-					, matchViewMode: 2
+					, matchViewMode: 3
 					, currentUser: currentUser
 				};
-				matchesAndBetsView( container, options );
+				matchesAndBetsView( el, options );
 			}
 
-			_.each( cupsToShow, function( cup ) {
-
-				var container = $( '<div class="col-xs-12"></div>' );
-				el.append( container );
-
-				var options = {
-					filter: {
-						userId: userId
-						, categoryId: cup.category.categoryId
-						, cupId: cup.cupId
-						, showFinished: false
-						, showFutureMatches: true
-					}
-					, matchViewMode: 2
-					, currentUser: currentUser
-				};
-				matchesAndBetsView( container, options );
-			});
 		},
 
 		_renderActivityStream: function () {
-			var model = this.model.toJSON();
 			activityStreamWidget( this.$( '.js-user-activity-stream' ), { userId: this.userId } );
 		}
 	});

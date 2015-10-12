@@ -17,6 +17,8 @@ public class MatchesBetSettingsDTO {
 	private boolean showFutureMatches;
 	private boolean showFinished;
 
+	private int sorting;
+
 	public int getUserId() {
 		return userId;
 	}
@@ -57,12 +59,10 @@ public class MatchesBetSettingsDTO {
 		this.team2Id = team2Id;
 	}
 
-//	@JsonSerialize( using = DateTimeSerializer.class )
 	public String getFilterByDate() {
 		return filterByDate;
 	}
 
-//	@JsonDeserialize( using = DateTimeDeserializer.class )
 	public void setFilterByDate( final String filterByDate ) {
 		this.filterByDate = filterByDate;
 	}
@@ -89,6 +89,14 @@ public class MatchesBetSettingsDTO {
 
 	public void setShowFinished( final boolean showFinished ) {
 		this.showFinished = showFinished;
+	}
+
+	public int getSorting() {
+		return sorting;
+	}
+
+	public void setSorting( final int sorting ) {
+		this.sorting = sorting;
 	}
 
 	@Override

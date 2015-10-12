@@ -15,6 +15,8 @@ define( function ( require ) {
 
 	var FavoriteCategoryButtonView = require( 'js/components/favorite-category-button/favorite-category-button-view' );
 
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
 	var VIEW_MODE_BET = 1;
 	var VIEW_MODE_TABLE = 2;
 	var VIEW_MODE_MINIMIZED = 3;
@@ -83,6 +85,8 @@ define( function ( require ) {
 					categoryId: cup.category.categoryId
 					, cupId: cup.cupId
 					, showFutureMatches: true
+					, filterByDate: dateTimeService.dateNow()
+					, sorting: 2
 				}
 				, matchViewMode: VIEW_MODE_MINIMIZED
 				, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_STATISTICS

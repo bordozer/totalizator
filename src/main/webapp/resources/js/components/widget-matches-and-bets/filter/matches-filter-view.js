@@ -26,6 +26,9 @@ define( function ( require ) {
 		, matchDateLabel: 'Match beginning time'
 		, showFutureMatchesLabel: 'Configurable view / Filter: Show future matches'
 		, showFinishedLabel: 'Configurable view / Filter: Show finished matches'
+		, mnbSortingLabel: 'Sort matches by beginning time'
+		, mnbSortingAscLabel: 'Sort matches by beginning time asc'
+		, mnbSortingDescLabel: 'Sort matches by beginning time desc'
 	} );
 
 	return Backbone.View.extend( {
@@ -36,6 +39,7 @@ define( function ( require ) {
 			, 'change #settings-cup-id': '_onCupChange'
 			, 'change #settings-team-id': '_onTeamChange'
 			, 'change #settings2-team-id': '_onTeam2Change'
+			, "change input[name='sorting']": '_onSortChange'
 			, 'click #filter-by-match-date-enabled': '_onFilterByDateCheckboxClick'
 			, 'change #settings-show-future-matches': '_onShowFutureChange'
 			, 'change #settings-show-finished': '_onShowFinishedChange'
@@ -174,6 +178,12 @@ define( function ( require ) {
 			evt.preventDefault();
 
 			this._team2Change( $( evt.target ).val() );
+		},
+
+		_onSortChange: function( evt ) {
+			evt.preventDefault();
+
+			this.model.set( { sorting: $( evt.target ).val() } );
 		},
 
 		_onFilterByDateCheckboxClick: function( evt ) {

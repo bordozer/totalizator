@@ -51,6 +51,7 @@ define( function ( require ) {
 					categoryId: cup.category.categoryId
 					, cupId: cup.cupId
 					, showFutureMatches: true
+					, sorting: 2
 				}
 				, matchViewMode: 1
 				, menuItems: []

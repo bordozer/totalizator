@@ -133,6 +133,7 @@ define( function ( require ) {
 						, showFinished: true
 						, filterByDateEnable: true
 						, filterByDate: onDate
+						, sorting: 1
 					}
 					, matchViewMode: VIEW_MODE_MINIMIZED
 					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_MATCHES
@@ -165,6 +166,7 @@ define( function ( require ) {
 						, showFutureMatches: true
 						, filterByDate: onDate
 						, filterByDateEnable: true
+						, sorting: 1
 					}
 					, matchViewMode: VIEW_MODE_BET
 					, matchesAndBetsViewMode: MATCHES_AND_BETS_MODE_STATISTICS
