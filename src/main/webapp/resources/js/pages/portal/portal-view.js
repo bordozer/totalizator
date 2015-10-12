@@ -67,7 +67,7 @@ define( function ( require ) {
 
 			this._renderMatchesOnDate( portalPageDate );
 
-			this._renderMatches( portalPageDate );
+			this._renderCupStatistics( portalPageDate );
 
 			this._renderTodayUserRating( portalPageDate );
 
@@ -142,7 +142,7 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderMatches: function( onDate ) {
+		_renderCupStatistics: function( onDate ) {
 
 			var model = this.model.toJSON();
 

@@ -59,7 +59,7 @@ public class PortalPageRestController {
 	private DateTimeService dateTimeService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public PortalPageDTO getDefaultLogin( final PortalPageDTO dto, final Principal principal ) {
+	public PortalPageDTO portalPage( final PortalPageDTO dto, final Principal principal ) {
 
 		final LocalDate date = dateTimeService.parseDate( dto.getPortalPageDate() );
 
