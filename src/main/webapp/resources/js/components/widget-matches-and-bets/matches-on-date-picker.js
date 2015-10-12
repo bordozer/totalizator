@@ -30,26 +30,19 @@ define( function ( require ) {
 			var data = _.extend( {}, { translator: translator } );
 			this.$el.html( template( data ) );
 
-			var callback = this._onDateSelect.bind( this );
-
-			this.dateTimePickerView = new DateTimePickerView( {
+			new DateTimePickerView( {
 				el: this.$( '.datetimepicker' )
 				, initialValue: this.matchesOnDate
 				, disableTime: true
 				, inline: true
-				, datTimeChangeCallback: callback
+				, datTimeChangeCallback: this._onDateSelect.bind( this )
 			} );
 
 			return this;
 		},
 
-		_onDateSelect: function() {
-
-			if ( ! this.dateTimePickerView ) { // TODO: hack bue to non silent set of setValue() inside datetime picker
-				return;
-			}
-
-			this.trigger( 'events:change_match_date', dateTimeService.formatDate( this.dateTimePickerView.getValue() ) );
+		_onDateSelect: function( date ) {
+			this.trigger( 'events:change_match_date', date );
 		}
 	} );
 } );

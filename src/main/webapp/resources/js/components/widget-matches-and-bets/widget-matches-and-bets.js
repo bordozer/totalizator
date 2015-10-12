@@ -312,6 +312,7 @@ define( function ( require ) {
 
 		_changeMatchDate: function( date ) {
 			this.settingsModel.set( { filterByDate: date, filterByDateEnable: true  } );
+			this.settingsModel.saveAttributes();
 
 			this.trigger( 'view:render' );
 		}
