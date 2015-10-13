@@ -56,10 +56,10 @@ define( function ( require ) {
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		_pointsTransformer: function( betPoints, matchBonus ) {
+		_pointsTransformer: function( betPoints, matchBonus, pointsSummary ) {
 
 			return {
-				summary: this._getPoints( +betPoints + +matchBonus, translator.summaryPointsLabel )
+				summary: this._getPoints( pointsSummary, translator.summaryPointsLabel )
 				, betPoints: this._getPoints( betPoints, translator.matchBetLabel )
 				, matchBonus: this._getPoints( matchBonus, translator.matchBonusLabel )
 			};

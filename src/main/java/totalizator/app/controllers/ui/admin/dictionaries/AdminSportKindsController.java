@@ -18,7 +18,7 @@ public class AdminSportKindsController {
 		return new DictionariesModel();
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "//" )
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String portalPage( final @ModelAttribute( MODEL_NAME ) DictionariesModel model ) {
 		return VIEW;
 	}
