@@ -24,6 +24,7 @@ define( function ( require ) {
 		, pointsLabel: "Points"
 		, menuUserRatingListLabel: "As list"
 		, menuUserRatingBarchartLabel: "As barchart"
+		, ratingIsEmptyLabel: "Users rating is empty"
 	} );
 
 	var MODE_LIST = 1;
@@ -79,6 +80,16 @@ define( function ( require ) {
 		},
 
 		_renderUsersRating: function () {
+
+			var model = this.model.toJSON();
+			if ( model.length == 0 ) {
+
+				this.$( this.windowBodyContainerSelector ).html( "<h5 class='text-muted " + this.getIcon() + "'> " + translator.ratingIsEmptyLabel + "</h5>" );
+
+				this.trigger( 'inner-view-rendered' );
+
+				return;
+			}
 
 			if ( this.viewMode == MODE_LIST ) {
 				this._renderUsersRatingList();
