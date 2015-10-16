@@ -8,6 +8,7 @@ import totalizator.app.dao.UserGroupCupDao;
 import totalizator.app.dao.UserGroupDao;
 import totalizator.app.dao.UserGroupMemberDao;
 import totalizator.app.models.*;
+import totalizator.app.services.points.MatchPointsService;
 
 import java.util.List;
 import java.util.function.Function;
@@ -30,6 +31,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 	@Autowired
 	private CupService cupService;
+
+	@Autowired
+	private MatchPointsService matchPointsService;
 
 	@Override
 	@Transactional( readOnly = true )
@@ -75,6 +79,8 @@ public class UserGroupServiceImpl implements UserGroupService {
 		userGroupCupRepository.deleteAll( userGroup );
 
 		userGroupRepository.delete( id );
+
+		matchPointsService.delete( load( id ) );
 	}
 
 	@Override

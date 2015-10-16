@@ -1,6 +1,10 @@
 package totalizator.app.dto.points;
 
+import totalizator.app.dto.UserDTO;
+
 public class UserMatchPointsHolderDTO {
+
+	private final UserDTO user;
 
 	private String matchBetPoints;
 	private String matchBonus;
@@ -8,14 +12,14 @@ public class UserMatchPointsHolderDTO {
 
 	private final float summary; // TODO: hack for sorting
 
-	public UserMatchPointsHolderDTO( final int matchBetPoints ) {
-		this.matchBetPoints = String.format( "%d", matchBetPoints );
-		this.summaryPoints = String.format( "%d", matchBetPoints );
-
-		this.summary = matchBetPoints;
+	public UserMatchPointsHolderDTO( final UserDTO user, final int matchBetPoints ) {
+		this( user, matchBetPoints, 0 );
 	}
 
-	public UserMatchPointsHolderDTO( final int matchBetPoints, final float matchBonus ) {
+	public UserMatchPointsHolderDTO( final UserDTO user, final int matchBetPoints, final float matchBonus ) {
+
+		this.user = user;
+
 		this.matchBetPoints = String.format( "%d", matchBetPoints );
 		this.matchBonus = String.format( "%.2f", matchBonus );
 		this.summaryPoints = String.format( "%.2f", matchBetPoints + matchBonus );
@@ -45,6 +49,10 @@ public class UserMatchPointsHolderDTO {
 
 	public float getSummary() {
 		return summary;
+	}
+
+	public UserDTO getUser() {
+		return user;
 	}
 
 	@Override

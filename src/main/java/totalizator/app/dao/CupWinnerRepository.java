@@ -8,10 +8,6 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.CupWinner;
 import totalizator.app.models.Team;
-import totalizator.app.services.points.UserMatchPointsCalculationService;
-import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
-import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,19 +37,15 @@ public class CupWinnerRepository implements CupWinnerDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_ENTRY, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key = "#id" )
 	public CupWinner load( final int id ) {
 		return em.find( CupWinner.class, id );
 	}
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 	} )
 	public CupWinner save( final CupWinner entry ) {
 		return em.merge( entry );
@@ -61,12 +53,8 @@ public class CupWinnerRepository implements CupWinnerDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
@@ -86,11 +74,7 @@ public class CupWinnerRepository implements CupWinnerDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_QUERY, allEntries = true )
 	} )
 	public void saveAll( final List<CupWinner> winners ) {
 

@@ -19,7 +19,7 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: {} } );
+			var pageView = new Page( { el: $( '.portal-page-container' ), bodyRenderer: portal, breadcrumbs: breadcrumbs, options: { onDate: '${portalPageModel.onDate}' } } );
 			pageView.render();
 		} );
 	</script>

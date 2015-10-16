@@ -155,6 +155,6 @@ public class Cup extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return String.format( "%s: #%d: '%s'", category, getId(), cupName );
+		return String.format( "#%d: '%s' ( %s )", getId(), cupName, category );
 	}
 }

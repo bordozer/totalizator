@@ -27,17 +27,17 @@ public class CategoryRepository implements CategoryDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_ENTRY, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key = "#id" )
 	public Category load( final int id ) {
 		return em.find( Category.class, id );
 	}
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
-		, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Category save( final Category entry ) {
 		return em.merge( entry );
@@ -45,10 +45,10 @@ public class CategoryRepository implements CategoryDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
-		, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = CupDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = CupDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );

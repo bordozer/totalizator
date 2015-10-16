@@ -9,10 +9,6 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
-import totalizator.app.services.points.UserMatchPointsCalculationService;
-import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
-import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -63,19 +59,15 @@ public class MatchBetRepository implements MatchBetDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_ENTRY, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key = "#id" )
 	public MatchBet load( final int id ) {
 		return em.find( MatchBet.class, id );
 	}
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 	} )
 	public MatchBet save( final MatchBet entry ) {
 		return em.merge( entry );
@@ -83,23 +75,19 @@ public class MatchBetRepository implements MatchBetDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
 	}
 
 	@Override
-	@Cacheable( value = CACHE_QUERY, key="#match.id" )
-	public int betsCount( final Match match ) {
+	@Cacheable( value = CACHE_QUERY, key = "#matchId" )
+	public int betsCount( final int matchId ) {
 
 		final List<Long> bets = em.createNamedQuery( MatchBet.LOAD_MATCH_BETS_COUNT, Long.class )
-				.setParameter( "matchId", match.getId() )
+				.setParameter( "matchId", matchId )
 				.getResultList();
 
 		return bets.size() == 1 ? bets.get( 0 ).intValue() : 0;

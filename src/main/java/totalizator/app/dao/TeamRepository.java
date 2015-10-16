@@ -36,16 +36,16 @@ public class TeamRepository implements TeamDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_ENTRY, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key = "#id" )
 	public Team load( final int id ) {
 		return em.find( Team.class, id );
 	}
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Team save( final Team entry ) {
 		return em.merge( entry );
@@ -53,9 +53,9 @@ public class TeamRepository implements TeamDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );

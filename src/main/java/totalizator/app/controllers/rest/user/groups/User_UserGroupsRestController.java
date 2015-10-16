@@ -114,7 +114,6 @@ public class User_UserGroupsRestController {
 
 		userGroup.setOwner( groupOwner );
 		userGroup.setGroupName( dto.getUserGroupName() );
-		userGroup.setCreationTime( dateTimeService.getNow() );
 
 		return userGroupService.save( userGroup, dto.getCupIds() );
 	}

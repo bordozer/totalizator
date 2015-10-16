@@ -6,10 +6,6 @@ define( function ( require ) {
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 
-	//var template = _.template( require( 'text!./templates/widget-configurable-template.html' ) );
-
-	//var ConfigurableWidgetSettingsView = require( './settings/widget-configurable-settings' );
-
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
 	var Translator = require( 'translator' );

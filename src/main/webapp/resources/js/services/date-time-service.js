@@ -35,6 +35,11 @@ define( function ( require ) {
 		},
 
 		// date => str formatted
+		formatDateDayAndMonthOnly: function ( time ) {
+			return moment( this.parseDate( time ) ).format( 'D MMM' );
+		},
+
+		// date => str formatted
 		formatDateTime: function ( time ) {
 			return moment( time ).format( this.getDateTimeFormat() );
 		},

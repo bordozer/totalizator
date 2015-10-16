@@ -149,6 +149,10 @@ define( function ( require ) {
 
 		_renderUserPoints: function() {
 
+			if ( ! this.matchBet.userMatchPointsHolder ) {
+				return;
+			}
+
 			var summaryPoints = this.matchBet.userMatchPointsHolder.summaryPoints;
 			if ( summaryPoints != 0 ) {
 

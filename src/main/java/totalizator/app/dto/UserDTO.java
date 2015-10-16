@@ -30,6 +30,30 @@ public class UserDTO {
 	}
 
 	@Override
+	public int hashCode() {
+		return 31 * getUserId();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+
+		if ( obj == null ) {
+			return false;
+		}
+
+		if ( obj == this ) {
+			return true;
+		}
+
+		if ( !( obj.getClass().equals( this.getClass() ) ) ) {
+			return false;
+		}
+
+		final UserDTO user = ( UserDTO ) obj;
+		return user.getUserId() == getUserId();
+	}
+
+	@Override
 	public String toString() {
 		return String.format( "#%d: %s", userId, userName );
 	}

@@ -60,7 +60,7 @@
 			</td>
 
 			<td>
-				<% if( userMatchPointsHolder.summaryPoints != 0 ) { %>
+				<% if( userMatchPointsHolder && userMatchPointsHolder.summaryPoints != 0 ) { %>
 					<strong><%-userMatchPointsHolder.summaryPoints%>
 						<sup><%= userMatchPointsHolder.matchBonus != 0 ? userMatchPointsHolder.matchBetPoints + '+' + userMatchPointsHolder.matchBonus : ''%></sup>
 					</strong>

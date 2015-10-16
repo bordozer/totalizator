@@ -12,6 +12,7 @@ import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
 import totalizator.app.services.activiries.ActivityStreamService;
+import totalizator.app.services.points.recalculation.MatchPointsRecalculationService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDate;
@@ -36,6 +37,9 @@ public class MatchServiceImpl implements MatchService {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private MatchPointsRecalculationService matchPointsRecalculationService;
 
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
@@ -98,6 +102,8 @@ public class MatchServiceImpl implements MatchService {
 	public Match save( final Match entry ) {
 
 		final Match match = matchRepository.save( entry );
+
+		matchPointsRecalculationService.recalculate( match );
 
 		if ( match.isMatchFinished() ) {
 			activityStreamService.matchFinished( match.getId(), match.getScore1(), match.getScore2() );
@@ -239,6 +245,11 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime ) {
 		return matchRepository.getNearestFutureMatch( cup, onTime );
+	}
+
+	@Override
+	public Match getFirstMatch( final Cup cup ) {
+		return matchRepository.getFirstMatch( cup );
 	}
 
 	private List<Match> sort( final List<Match> matches ) {

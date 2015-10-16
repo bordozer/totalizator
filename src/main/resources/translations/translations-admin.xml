@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Admin: Control panel</nerd>
+		<ru><![CDATA[Панель управления]]></ru>
+		<ua><![CDATA[Панель керування]]></ua>
+		<en><![CDATA[Control panel]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

@@ -6,7 +6,7 @@ import org.junit.Test;
 import totalizator.app.models.*;
 import totalizator.app.services.CupService;
 import totalizator.app.services.CupWinnerService;
-import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationServiceImpl;
+import totalizator.app.services.points.calculation.cup.UserCupWinnersBonusCalculationServiceImpl;
 
 import java.util.List;
 

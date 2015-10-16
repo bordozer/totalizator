@@ -339,6 +339,20 @@
 	</translation>
 
 	<translation>
+		<nerd>As list</nerd>
+		<ru><![CDATA[Список]]></ru>
+		<ua><![CDATA[Лист]]></ua>
+		<en><![CDATA[As list]]></en>
+	</translation>
+
+	<translation>
+		<nerd>As barchart</nerd>
+		<ru><![CDATA[Диаграмма]]></ru>
+		<ua><![CDATA[Дiаграма]]></ua>
+		<en><![CDATA[As barchart]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

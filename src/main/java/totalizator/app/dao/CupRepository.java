@@ -25,19 +25,19 @@ public class CupRepository implements CupDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_ENTRY, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key = "#id" )
 	public Cup load( final int id ) {
 		return em.find( Cup.class, id );
 	}
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
-		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
-		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public Cup save( final Cup entry ) {
 		return em.merge( entry );
@@ -45,12 +45,12 @@ public class CupRepository implements CupDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
-		, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
-		, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = MatchDao.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
@@ -69,6 +69,7 @@ public class CupRepository implements CupDao {
 	@Override
 	@Cacheable( value = CACHE_QUERY )
 	public List<Cup> loadCups( final PointsCalculationStrategy strategy ) {
+
 		return em.createNamedQuery( Cup.LOAD_ALL_USE_STRATEGY, Cup.class )
 				.setParameter( "strategyId", strategy.getId() )
 				.getResultList();

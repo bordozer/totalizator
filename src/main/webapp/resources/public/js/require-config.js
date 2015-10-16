@@ -18,6 +18,7 @@ var require = {
 		, datetimepicker: "bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min"
 		, moment: "bower_components/moment/min/moment-with-locales.min"
 		, bootbox: "bower_components/bootbox/bootbox"
+		, 'jqx-all': "bower_components/jqwidgets/jqwidgets/jqx-all"
 
 		, translator: "public/js/translator"
 		, app: "public/js/app"
@@ -48,6 +49,10 @@ var require = {
 		},
 		bootbox: {
 			deps: [ 'jquery', 'bootstrap' ]
+		},
+		'jqx-all': {
+			export: "$",
+			deps: [ 'jquery' ]
 		}
 	}
 

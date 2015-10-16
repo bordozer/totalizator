@@ -21,7 +21,7 @@ define( function ( require ) {
 
 			this.url = '/rest/portal-page/';
 
-			this.portalPageDate = dateTimeService.dateNow();
+			this.portalPageDate = options.options.onDate || dateTimeService.dateNow();
 		},
 
 		refresh: function() {

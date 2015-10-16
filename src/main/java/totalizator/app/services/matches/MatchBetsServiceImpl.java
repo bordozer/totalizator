@@ -102,6 +102,7 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
+	@Transactional( readOnly = true )
 	public MatchBet load( final User user, final Match match ) {
 		return matchBetRepository.load( user, match );
 	}
@@ -148,8 +149,8 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	}
 
 	@Override
-	public int betsCount( final Match match ) {
-		return matchBetRepository.betsCount( match );
+	public int betsCount( final int matchId ) {
+		return matchBetRepository.betsCount( matchId );
 	}
 
 	@Override

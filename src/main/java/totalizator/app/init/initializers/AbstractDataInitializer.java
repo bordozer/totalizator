@@ -161,7 +161,6 @@ public abstract class AbstractDataInitializer {
 				cupTeamBet.setUser( user );
 				cupTeamBet.setTeam( getRandomTeam( teams ) );
 				cupTeamBet.setCupPosition( i );
-				cupTeamBet.setBetTime( dateTimeService.minusDays( cup.getCupStartTime(), rnd( 1, 10 ) ) );
 
 				session.persist( cupTeamBet );
 			}

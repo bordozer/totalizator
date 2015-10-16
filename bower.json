@@ -22,5 +22,6 @@
 		, "knockout": "3.3.0"
 		, "bootbox": "4.4.0"
 		, "chosen": "~1.4.2"
+		, "jqwidgets": "latest"
 	}
 }

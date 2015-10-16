@@ -40,7 +40,7 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
 	public List<UserGroupMember> loadUserGroupMembers( final UserGroup userGroup ) {
 		return em.createNamedQuery( UserGroupMember.LOAD_USER_GROUP_MEMBERS, UserGroupMember.class )
 				.setParameter( "userGroupId", userGroup.getId() )
-				 .getResultList();
+				.getResultList();
 	}
 
 	@Override

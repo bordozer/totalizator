@@ -49,8 +49,8 @@
 			<small><%= matchBet.userMatchPointsHolder.matchBonus != 0 ? matchBet.userMatchPointsHolder.matchBonus : ''%></small>
 		</td>
 
-		<td class="text-right <%= matchBet.userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
-			<strong><%= matchBet.userMatchPointsHolder.summaryPoints != 0 ? matchBet.userMatchPointsHolder.summaryPoints : ''%></strong>
+		<td class="text-right <%= matchBet.userMatchPointsHolder && matchBet.userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
+			<strong><%= matchBet.userMatchPointsHolder && matchBet.userMatchPointsHolder.summaryPoints != 0 ? matchBet.userMatchPointsHolder.summaryPoints : ''%></strong>
 		</td>
 	</tr>
 	<% })%>

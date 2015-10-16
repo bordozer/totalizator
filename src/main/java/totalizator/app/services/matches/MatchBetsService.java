@@ -19,7 +19,7 @@ public interface MatchBetsService extends GenericService<MatchBet> {
 
 	MatchBet load( final User user, final Match match );
 
-	int betsCount( final Match match );
+	int betsCount( final int matchId );
 
 	int betsCount( final Cup cup, final User user );
 

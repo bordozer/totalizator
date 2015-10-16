@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Run matches points recalculation</nerd>
+		<ru><![CDATA[Пересчитать все очки]]></ru>
+		<ua><![CDATA[Перерахувати усi бали]]></ua>
+		<en><![CDATA[Run matches points recalculation]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Matches points recalculation in progress</nerd>
+		<ru><![CDATA[Пересчет выполняется]]></ru>
+		<ua><![CDATA[Перерахунок виконується]]></ua>
+		<en><![CDATA[Matches points recalculation in progress]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Matches points recalculation</nerd>
+		<ru><![CDATA[Пересчет очков пользователей за матчи]]></ru>
+		<ua><![CDATA[Перерахунок балiв користувачiв за iгри]]></ua>
+		<en><![CDATA[User's matches points recalculation]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Stop matches points recalculation</nerd>
+		<ru><![CDATA[Остановить пересчет баллов]]></ru>
+		<ua><![CDATA[Перервати перерахунок балiв]]></ua>
+		<en><![CDATA[Stop matches points recalculation]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Please, wait</nerd>
+		<ru><![CDATA[Ожидайте завершения, друг мой]]></ru>
+		<ua><![CDATA[Зачекайте будь ласка, шановний пане]]></ua>
+		<en><![CDATA[Please, wait]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Matches points recalculation is stopping</nerd>
+		<ru><![CDATA[Завершение пересчетаб ожидайте]]></ru>
+		<ua><![CDATA[Завершення перерахунку, зачекайте]]></ua>
+		<en><![CDATA[Matches points recalculation is stopping, please wait]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

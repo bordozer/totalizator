@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
-import totalizator.app.services.points.UserMatchPointsCalculationService;
-import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
-import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
+import totalizator.app.services.points.CupPointsService;
+import totalizator.app.services.points.MatchPointsService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -53,11 +53,12 @@ public class MatchRepository implements MatchDao {
 	@Caching( evict = {
 			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
 			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
 			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchPointsDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = MatchPointsDao.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchPointsService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = CupPointsService.CACHE_QUERY, allEntries = true )
 	} )
 	public Match save( final Match entry ) {
 		return em.merge( entry );
@@ -67,11 +68,12 @@ public class MatchRepository implements MatchDao {
 	@Caching( evict = {
 			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
 			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-			, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchBetDao.CACHE_ENTRY, allEntries = true )
 			, @CacheEvict( value = MatchBetDao.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchPointsDao.CACHE_ENTRY, allEntries = true )
+			, @CacheEvict( value = MatchPointsDao.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = MatchPointsService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = CupPointsService.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
@@ -233,5 +235,18 @@ public class MatchRepository implements MatchDao {
 		return em.createNamedQuery( Match.FIND_FINISHED_MATCHES, Match.class )
 				.setParameter( "cupId", cupId )
 				.getResultList();
+	}
+
+	@Override
+	public Match getFirstMatch( final Cup cup ) {
+
+		final TypedQuery<Match> query = em.createQuery(
+				"select m from Match as m where m.cup.id = :cupId order by m.beginningTime asc", Match.class )
+				.setParameter( "cupId", cup.getId() )
+				.setFirstResult( 0 )
+				.setMaxResults( 1 );
+		final List<Match> list = query.getResultList();
+
+		return list.size() == 1 ? list.get( 0 ) : null;
 	}
 }

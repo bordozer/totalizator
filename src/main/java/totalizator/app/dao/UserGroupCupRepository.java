@@ -29,7 +29,7 @@ public class UserGroupCupRepository implements UserGroupCupDao {
 	public List<UserGroupCup> loadCups( final UserGroup userGroup ) {
 		return em.createNamedQuery( UserGroupCup.LOAD_CUPS_FOR_USER_GROUP, UserGroupCup.class )
 				.setParameter( "userGroupId", userGroup.getId() )
-				 .getResultList();
+				.getResultList();
 	}
 
 	@Override

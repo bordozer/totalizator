@@ -8,7 +8,7 @@ public class MatchBetDTO {
 
 	private MatchDTO match;
 	private BetDTO bet;
-	private UserMatchPointsHolderDTO userMatchPointsHolder = new UserMatchPointsHolderDTO( 0 );
+	private UserMatchPointsHolderDTO userMatchPointsHolder;
 
 	private boolean bettingAllowed;
 	private String bettingValidationMessage;

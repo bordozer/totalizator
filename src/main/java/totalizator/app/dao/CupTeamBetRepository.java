@@ -9,10 +9,6 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.CupTeamBet;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
-import totalizator.app.services.points.UserMatchPointsCalculationService;
-import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
-import totalizator.app.services.points.match.bonus.MatchBonusPointsCalculationService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,19 +30,15 @@ public class CupTeamBetRepository implements CupTeamBetDao {
 	}
 
 	@Override
-	@Cacheable( value = CACHE_ENTRY, key="#id" )
+	@Cacheable( value = CACHE_ENTRY, key = "#id" )
 	public CupTeamBet load( final int id ) {
 		return em.find( CupTeamBet.class, id );
 	}
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#entry.id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchBetPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#entry.id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 	} )
 	public CupTeamBet save( final CupTeamBet entry ) {
 		return em.merge( entry );
@@ -54,11 +46,8 @@ public class CupTeamBetRepository implements CupTeamBetDao {
 
 	@Override
 	@Caching( evict = {
-		@CacheEvict( value = CACHE_ENTRY, key="#id" )
-		, @CacheEvict( value = CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserMatchPointsCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = UserCupWinnersBonusCalculationService.CACHE_QUERY, allEntries = true )
-		, @CacheEvict( value = MatchBonusPointsCalculationService.CACHE_QUERY, allEntries = true )
+			@CacheEvict( value = CACHE_ENTRY, key = "#id" )
+			, @CacheEvict( value = CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );

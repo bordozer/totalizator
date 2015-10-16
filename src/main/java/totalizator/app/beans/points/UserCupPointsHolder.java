@@ -19,7 +19,7 @@ public class UserCupPointsHolder extends AbstractUserPointsHolder {
 
 	@Override
 	public float getPoints() {
-		return matchBetPoints + matchBetPoints + cupWinnerBonus;
+		return ( float ) matchBetPoints + matchBonuses + ( float ) cupWinnerBonus;
 	}
 
 	public Cup getCup() {

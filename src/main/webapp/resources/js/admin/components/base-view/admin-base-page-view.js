@@ -15,6 +15,7 @@ define( function ( require ) {
 		menuPortalPageLabel: 'Portal page'
 		, menuUsersLabel: 'Users'
 		, menuAdminLabel: 'Administration'
+		, menuControlPanelLabel: 'Admin: Control panel'
 		, menuMatchesLabel: 'Matches'
 		, pointsCalculationStrategiesLabel: 'Points calculation strategies'
 		, gamesDataImportLabel: 'Games data import'
@@ -39,6 +40,7 @@ define( function ( require ) {
 				{ selector: '', icon: 'fa fa-home', link: '/totalizator/', text: translator.menuPortalPageLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
+				, { selector: '', icon: 'fa fa-cog', link: '/admin/control-panel/', text: translator.menuControlPanelLabel }
 				, { selector: 'divider' }
 				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }
 				, { selector: '', icon: 'fa fa-balance-scale', link: '/admin/points-calculation-strategies/', text: translator.pointsCalculationStrategiesLabel }

@@ -4,18 +4,18 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import totalizator.app.beans.ValidationResult;
 import totalizator.app.beans.points.UserCupPointsHolder;
 import totalizator.app.beans.points.UserMatchPointsHolder;
-import totalizator.app.beans.ValidationResult;
 import totalizator.app.dto.*;
 import totalizator.app.dto.points.UserCupPointsHolderDTO;
 import totalizator.app.dto.points.UserMatchPointsHolderDTO;
 import totalizator.app.models.*;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.points.cup.UserCupWinnersBonusCalculationService;
-import totalizator.app.services.points.UserMatchPointsCalculationService;
-import totalizator.app.services.points.match.points.UserMatchBetPointsCalculationService;
+import totalizator.app.services.points.MatchPointsService;
+import totalizator.app.services.points.calculation.cup.UserCupWinnersBonusCalculationService;
+import totalizator.app.services.points.calculation.match.points.UserMatchBetPointsCalculationService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +35,7 @@ public class DTOServiceImpl implements DTOService {
 	private MatchService matchService;
 
 	@Autowired
-	private UserMatchPointsCalculationService userMatchPointsCalculationService;
+	private MatchPointsService matchPointsService;
 
 	@Autowired
 	private UserMatchBetPointsCalculationService userMatchBetPointsCalculationService;
@@ -265,7 +265,7 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public UserMatchPointsHolderDTO apply( final UserMatchPointsHolder userMatchPoints ) {
-				return new UserMatchPointsHolderDTO( userMatchPoints.getUserMatchBetPointsHolder().getMatchBetPoints(), userMatchPoints.getMatchBonus() );
+				return new UserMatchPointsHolderDTO( transformUser( userMatchPoints.getUser() ), userMatchPoints.getUserMatchBetPointsHolder().getMatchBetPoints(), userMatchPoints.getMatchBonus() );
 			}
 		};
 	}
@@ -433,8 +433,7 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public MatchBetDTO apply( final Match match ) {
-				final UserMatchPointsHolder points = userMatchPointsCalculationService.getUserMatchPoints( match, betsOfUser );
-				return getMatchBetDTO( match, betsOfUser, accessor, points );
+				return getMatchBetDTO( match, betsOfUser, accessor, matchPointsService.load( betsOfUser, match ) );
 			}
 		};
 	}
@@ -445,13 +444,12 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public MatchBetDTO apply( final Match match ) {
-				final UserMatchPointsHolder points = userMatchPointsCalculationService.getUserMatchPoints( match, betsOfUser, userGroup );
-				return getMatchBetDTO( match, betsOfUser, accessor, points );
+				return getMatchBetDTO( match, betsOfUser, accessor, matchPointsService.load( betsOfUser, match, userGroup ) );
 			}
 		};
 	}
 
-	private MatchBetDTO getMatchBetDTO( final Match match, final User betsOfUser, final User accessor, final UserMatchPointsHolder pointsHolder ) {
+	private MatchBetDTO getMatchBetDTO( final Match match, final User betsOfUser, final User accessor, final MatchPoints pointsHolder ) {
 
 		final MatchDTO matchDTO = transformMatch( match, betsOfUser );
 
@@ -471,7 +469,11 @@ public class DTOServiceImpl implements DTOService {
 
 		matchBetDTO.setBet( betDTO );
 
-		matchBetDTO.setUserMatchPointsHolder( userMatchPointsFunction().apply( pointsHolder ) );
+		if ( pointsHolder != null ) {
+			matchBetDTO.setUserMatchPointsHolder( new UserMatchPointsHolderDTO( transformUser( pointsHolder.getUser() ), pointsHolder.getMatchPoints(), pointsHolder.getMatchBonus() ) );
+		} else {
+			matchBetDTO.setUserMatchPointsHolder( new UserMatchPointsHolderDTO( transformUser( betsOfUser ), 0, 0 ) );
+		}
 
 		return matchBetDTO;
 	}

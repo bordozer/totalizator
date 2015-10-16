@@ -1,6 +1,7 @@
 package totalizator.app.models;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import totalizator.app.models.converters.LocalDateTimeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -33,8 +34,6 @@ public class UserGroup extends AbstractEntity {
 	@JoinColumn( name = "userId" )
 	private User owner;
 
-	private LocalDateTime creationTime;
-
 	public String getGroupName() {
 		return groupName;
 	}
@@ -49,14 +48,6 @@ public class UserGroup extends AbstractEntity {
 
 	public void setOwner( final User owner ) {
 		this.owner = owner;
-	}
-
-	public LocalDateTime getCreationTime() {
-		return creationTime;
-	}
-
-	public void setCreationTime( final LocalDateTime creationTime ) {
-		this.creationTime = creationTime;
 	}
 
 	@Override

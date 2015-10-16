@@ -1,6 +1,7 @@
 package totalizator.app.models;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import totalizator.app.models.converters.LocalDateTimeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -67,6 +68,7 @@ public class MatchBet extends AbstractEntity {
 	private int betScore1;
 	private int betScore2;
 
+	@Convert( converter = LocalDateTimeConverter.class )
 	private LocalDateTime betTime;
 
 	public Match getMatch() {

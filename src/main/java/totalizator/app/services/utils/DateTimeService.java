@@ -38,6 +38,8 @@ public interface DateTimeService {
 
 	String formatTime( final LocalDateTime time );
 
+	String formatDate( final LocalDate date );
+
 	String formatDateTimeUI( final LocalDateTime time );
 
 	String formatDateUI( final LocalDateTime time );
@@ -52,8 +54,6 @@ public interface DateTimeService {
 	boolean hasTheSameDate( final LocalDateTime time1, final LocalDateTime time2 );
 
 	boolean hasTheSameDate( final LocalDateTime time, final LocalDate date );
-
-	String dateDateFormat();
 
 	String dateTimeFormat();
 

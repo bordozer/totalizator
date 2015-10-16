@@ -23,7 +23,7 @@ define( function ( require ) {
 		, categoryLabel: 'Category'
 		, cupLabel: 'Cup'
 		, teamLabel: 'Team'
-		, matchDateLabel: 'Match beginning time'
+		, matchDateLabel: 'Match on date'
 		, showFutureMatchesLabel: 'Configurable view / Filter: Show future matches'
 		, showFinishedLabel: 'Configurable view / Filter: Show finished matches'
 		, mnbSortingLabel: 'Sort matches by beginning time'

@@ -1,0 +1,22 @@
+CREATE TABLE `matchPoints` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `UUID` varchar(255) DEFAULT NULL,
+  `version` bigint(20) DEFAULT NULL,
+  `matchBonus` float NOT NULL,
+  `matchPoints` int(11) NOT NULL,
+  `cupId` int(11) DEFAULT NULL,
+  `matchId` int(11) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `userGroupId` int(11) DEFAULT NULL,
+  `matchTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `userId_matchId_groupId_idx` (`userId`,`matchId`,`userGroupId`),
+  KEY `matchId_userId_idx` (`matchId`,`userId`),
+  KEY `matchId_groupId_idx` (`matchId`,`userGroupId`),
+  KEY `FK_rv16vlxygwga89laditqngl1n` (`cupId`),
+  KEY `FK_91k1xyq07oloqls0c982ffqx1` (`userGroupId`),
+  CONSTRAINT `FK_91k1xyq07oloqls0c982ffqx1` FOREIGN KEY (`userGroupId`) REFERENCES `userGroups` (`id`),
+  CONSTRAINT `FK_qqf18yh1tk244rmkhjoo1jdxw` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
+  CONSTRAINT `FK_rv16vlxygwga89laditqngl1n` FOREIGN KEY (`cupId`) REFERENCES `cups` (`id`),
+  CONSTRAINT `FK_t01tcjmrs6jv8cru7wlu74anj` FOREIGN KEY (`matchId`) REFERENCES `matches` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

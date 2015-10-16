@@ -234,6 +234,10 @@ define( function ( require ) {
 					return 'bg-info';
 				}
 
+				if ( ! model.userMatchPointsHolder ) {
+					return '';
+				}
+
 				if ( model.userMatchPointsHolder.summaryPoints > 0 ) {
 					return 'bg-success';
 				}

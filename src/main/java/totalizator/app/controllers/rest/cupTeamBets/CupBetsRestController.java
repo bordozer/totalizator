@@ -89,8 +89,6 @@ public class CupBetsRestController {
 		entry.setTeam( team );
 		entry.setCupPosition( position );
 
-		entry.setBetTime( dateTimeService.getNow() );
-
 		cupBetsService.save( entry );
 	}
 

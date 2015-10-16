@@ -56,7 +56,7 @@ public class CupTeamsRestController {
 		final List<String> letters = Lists.transform( newArrayList( teams ), new Function<Team, String>() {
 			@Override
 			public String apply( final Team team ) {
-				return team.getTeamName().substring( 0, 1 );
+				return StringUtils.isNotEmpty( team.getTeamName() ) ? team.getTeamName().substring( 0, 1 ) : "?";
 			}
 		} );
 
@@ -64,7 +64,7 @@ public class CupTeamsRestController {
 			CollectionUtils.filter( teams, new Predicate<Team>() {
 				@Override
 				public boolean evaluate( final Team team ) {
-					return team.getTeamName().substring( 0, 1 ).equalsIgnoreCase( letter );
+					return StringUtils.isNotEmpty( team.getTeamName() ) && team.getTeamName().substring( 0, 1 ).equalsIgnoreCase( letter );
 				}
 			} );
 		}

@@ -1,6 +1,7 @@
 package totalizator.app.models;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import totalizator.app.models.converters.LocalDateTimeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,7 +39,6 @@ public class CupTeamBet extends AbstractEntity {
 
 	public static final String LOAD_ALL = "cupTeamBets.loadAll";
 	public static final String LOAD_ALL_FOR_CUP = "cupTeamBets.loadForCup";
-//	public static final String LOAD_ALL_FOR_CUP_AND_TEAM = "cupTeamBets.loadForCupAndTeam";
 	public static final String LOAD_ALL_FOR_CUP_AND_USER = "cupTeamBets.loadForCupAndUser";
 	public static final String LOAD_ALL_FOR_CUP_AND_TEAM_AND_USER = "cupTeamBets.loadForCupAndTeamAndUser";
 	public static final String LOAD_ALL_FOR_CUP_AND_USER_AND_POSITION = "cupTeamBets.loadForCupAndUserAndPosition";
@@ -56,8 +56,6 @@ public class CupTeamBet extends AbstractEntity {
 	private User user;
 
 	private int cupPosition;
-
-	private LocalDateTime betTime;
 
 	public Cup getCup() {
 		return cup;
@@ -89,14 +87,6 @@ public class CupTeamBet extends AbstractEntity {
 
 	public void setCupPosition( final int cupPosition ) {
 		this.cupPosition = cupPosition;
-	}
-
-	public LocalDateTime getBetTime() {
-		return betTime;
-	}
-
-	public void setBetTime( final LocalDateTime betTime ) {
-		this.betTime = betTime;
 	}
 
 	@Override

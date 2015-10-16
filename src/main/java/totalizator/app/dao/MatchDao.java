@@ -48,4 +48,6 @@ public interface MatchDao extends GenericService<Match> {
 	List<Match> loadAllNotFinished( final int cupId );
 
 	List<Match> loadAllFinished( final int cupId );
+
+	Match getFirstMatch( final Cup cup );
 }

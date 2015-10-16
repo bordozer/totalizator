@@ -13,7 +13,8 @@ import totalizator.app.models.User;
 import totalizator.app.services.*;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.points.UserMatchPointsCalculationService;
+import totalizator.app.services.points.MatchPointsService;
+import totalizator.app.services.points.calculation.match.UserMatchPointsCalculationService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
@@ -54,6 +55,9 @@ public class PortalPageRestController {
 
 	@Autowired
 	private UserMatchPointsCalculationService userMatchPointsCalculationService;
+
+	@Autowired
+	private MatchPointsService matchPointsService;
 
 	@Autowired
 	private DateTimeService dateTimeService;
@@ -107,7 +111,7 @@ public class PortalPageRestController {
 	public List<UsersRatingPositionDTO> getUsersRatingOnDate( final PortalPageDTO dto, final Principal principal ) {
 
 		final LocalDate date = dateTimeService.parseDate( dto.getPortalPageDate() );
-		final List<UserSummaryPointsHolder> usersRatingOnDate = userMatchPointsCalculationService.getUsersRatingOnDate( date );
+		final List<UserSummaryPointsHolder> usersRatingOnDate = matchPointsService.getUsersRating( date );
 
 		return usersRatingOnDate
 				.stream()

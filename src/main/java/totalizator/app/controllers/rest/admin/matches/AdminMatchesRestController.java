@@ -75,7 +75,7 @@ public class AdminMatchesRestController {
 				matchEditDTO.setHomeTeamNumber( match.getHomeTeamNumber() );
 				matchEditDTO.setMatchDescription( match.getDescription() );
 
-				matchEditDTO.setBetsCount( matchBetsService.betsCount( match ) );
+				matchEditDTO.setBetsCount( matchBetsService.betsCount( match.getId() ) );
 
 				matchEditDTO.setRemoteGameId( match.getRemoteGameId() );
 

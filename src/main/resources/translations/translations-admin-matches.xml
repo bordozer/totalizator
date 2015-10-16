@@ -39,9 +39,16 @@
 
 	<translation>
 		<nerd>Match beginning time</nerd>
-		<ru><![CDATA[Нначало матча]]></ru>
+		<ru><![CDATA[Начало матча]]></ru>
 		<ua><![CDATA[Початок гри]]></ua>
 		<en><![CDATA[Beginning time]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Match on date</nerd>
+		<ru><![CDATA[Матчи на дату]]></ru>
+		<ua><![CDATA[Iгри на дату]]></ua>
+		<en><![CDATA[Match on date]]></en>
 	</translation>
 
 	<translation>

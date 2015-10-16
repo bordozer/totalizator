@@ -7,7 +7,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.User;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.points.UserMatchPointsCalculationService;
+import totalizator.app.services.points.calculation.match.UserMatchPointsCalculationService;
 import totalizator.app.translator.TranslatorService;
 
 import java.util.List;

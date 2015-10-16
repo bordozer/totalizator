@@ -34,7 +34,9 @@
 				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.matchBonuses != 0 ? userRatingPosition.userCupPointsHolder.matchBonuses : ''%></small></td>
 				<td class="text-center"><small><%= userRatingPosition.userCupPointsHolder.cupWinnerBonus != 0 ? userRatingPosition.userCupPointsHolder.cupWinnerBonus : ''%></small></td>
 
-				<td class="text-center <%= userRatingPosition.userCupPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> "><%-userRatingPosition.userCupPointsHolder.summaryPoints%></td>
+				<td class="text-center <%= userRatingPosition.userCupPointsHolder && userRatingPosition.userCupPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
+					<%= userRatingPosition.userCupPointsHolder ? userRatingPosition.userCupPointsHolder.summaryPoints : '' %>
+				</td>
 			</tr>
 		<% })%>
 

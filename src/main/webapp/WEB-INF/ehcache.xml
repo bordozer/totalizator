@@ -112,30 +112,6 @@
 		   memoryStoreEvictionPolicy="LRU"
 	/>
 
-	<cache name="totalizator.app.cache.user-bet-points-calculation.query"
-		   maxElementsInMemory="1000"
-		   eternal="true"
-		   memoryStoreEvictionPolicy="LRU"
-	/>
-
-	<cache name="totalizator.app.cache.user-match-points-calculation.query"
-		   maxElementsInMemory="10000"
-		   eternal="true"
-		   memoryStoreEvictionPolicy="LRU"
-	/>
-
-	<cache name="totalizator.app.cache.user-match-bonus-points-calculation.query"
-		   maxElementsInMemory="1000"
-		   eternal="true"
-		   memoryStoreEvictionPolicy="LRU"
-	/>
-
-	<cache name="totalizator.app.cache.cup-bet-points-calculation.query"
-		   maxElementsInMemory="1000"
-		   eternal="true"
-		   memoryStoreEvictionPolicy="LRU"
-	/>
-
 	<cache name="totalizator.app.cache.user-group"
 		   maxElementsInMemory="300"
 		   eternal="true"
@@ -198,6 +174,30 @@
 
 	<cache name="totalizator.app.cache.activityDTO"
 		   maxElementsInMemory="10000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.matchPoint"
+		   maxElementsInMemory="10000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.matchPoints"
+		   maxElementsInMemory="10000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.matchPointsService"
+		   maxElementsInMemory="1000"
+		   eternal="true"
+		   memoryStoreEvictionPolicy="LRU"
+	/>
+
+	<cache name="totalizator.app.cache.cupPointsService"
+		   maxElementsInMemory="1000"
 		   eternal="true"
 		   memoryStoreEvictionPolicy="LRU"
 	/>

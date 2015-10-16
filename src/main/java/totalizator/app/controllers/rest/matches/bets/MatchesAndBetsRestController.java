@@ -31,7 +31,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping("/rest/matches")
+@RequestMapping( "/rest/matches" )
 public class MatchesAndBetsRestController {
 
 	@Autowired
@@ -90,7 +90,9 @@ public class MatchesAndBetsRestController {
 					public LocalDate apply( final MatchBetDTO matchBetDTO ) {
 						return matchBetDTO.getMatch().getBeginningTime().toLocalDate();
 					}
-				} ).distinct().collect( Collectors.toList() );
+				} )
+				.distinct()
+				.collect( Collectors.toList() );
 
 		final List<MatchBetsOnDateDTO> result = newArrayList();
 
@@ -132,7 +134,7 @@ public class MatchesAndBetsRestController {
 	@ResponseBody
 	@RequestMapping( method = RequestMethod.GET, value = "/{matchId}/bets/count/", produces = APPLICATION_JSON_VALUE )
 	public int matchBetsCount( final @PathVariable( "matchId" ) int matchId ) {
-		return matchBetsService.betsCount( matchService.load( matchId ) );
+		return matchBetsService.betsCount( matchId );
 	}
 
 	@ResponseStatus( HttpStatus.OK )
@@ -144,7 +146,7 @@ public class MatchesAndBetsRestController {
 		final Match match = matchService.load( matchId );
 
 		final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, currentUser );
-		if ( ! validationResult.isPassed() ) {
+		if ( !validationResult.isPassed() ) {
 			throw new IllegalArgumentException( validationResult.getMessage() ); // TODO: show the exception to user
 		}
 
@@ -152,7 +154,7 @@ public class MatchesAndBetsRestController {
 
 		if ( existingBet != null ) {
 
-			if ( ! existingBet.getUser().equals( currentUser ) ) {
+			if ( !existingBet.getUser().equals( currentUser ) ) {
 				throw new IllegalArgumentException( String.format( "Attempt to save bet of %s as %s", existingBet.getUser(), currentUser ) ); // TODO: show the exception to user
 			}
 

@@ -4,9 +4,9 @@
 
 	<translation>
 		<nerd>Cup users scores: Scores</nerd>
-		<ru><![CDATA[Рейтинг]]></ru>
-		<en><![CDATA[Scores]]></en>
-		<ua><![CDATA[Рейтинг]]></ua>
+		<ru><![CDATA[Рейтинг пользователей]]></ru>
+		<ua><![CDATA[Рейтинг користувачiв]]></ua>
+		<en><![CDATA[Users rating]]></en>
 	</translation>
 
 	<translation>
@@ -42,6 +42,62 @@
 		<ru><![CDATA[Всего]]></ru>
 		<ua><![CDATA[Всього]]></ua>
 		<en><![CDATA[Summary points]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: Show user list</nerd>
+		<ru><![CDATA[Текущий рейтинг пользователей - список]]></ru>
+		<ua><![CDATA[Поточний рейтiнг користувачiв - лист]]></ua>
+		<en><![CDATA[Users current rating - list]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: Show barchart current rating</nerd>
+		<ru><![CDATA[Текущий рейтинг пользователей - диаграмма]]></ru>
+		<ua><![CDATA[Поточний рейтiнг користувачiв - дiаграма]]></ua>
+		<en><![CDATA[Users current rating - barchart]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores: Barchart rating in time</nerd>
+		<ru><![CDATA[Изменение рейтингов во времени - диаграмма]]></ru>
+		<ua><![CDATA[Змiна рейтiнгу крiзь час - дiаграма]]></ua>
+		<en><![CDATA[Barchart - rating in time]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Users rating is empty</nerd>
+		<ru><![CDATA[Рейтинг пуст]]></ru>
+		<ua><![CDATA[Рейтiнг пустий]]></ua>
+		<en><![CDATA[Users rating is empty]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores barchart: Match bets points</nerd>
+		<ru><![CDATA[Баллы за ставки]]></ru>
+		<ua><![CDATA[Бали за ставки]]></ua>
+		<en><![CDATA[Matches bets points]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores barchart: Match bonus points</nerd>
+		<ru><![CDATA[Бонусы за матчи]]></ru>
+		<ua><![CDATA[Бонуси за iгри]]></ua>
+		<en><![CDATA[Matches bonuses points]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup users scores barchart: Winners bonus</nerd>
+		<ru><![CDATA[Бонусы за победителей]]></ru>
+		<ua><![CDATA[Бонуси за переможцiв]]></ua>
+		<en><![CDATA[Winners bonuses]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>

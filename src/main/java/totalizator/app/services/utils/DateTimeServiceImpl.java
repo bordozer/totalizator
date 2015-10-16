@@ -77,6 +77,11 @@ public class DateTimeServiceImpl implements DateTimeService {
 	}
 
 	@Override
+	public String formatDate( final LocalDate date ) {
+		return date.format( DateTimeFormatter.ofPattern( getDateFormat() ) );
+	}
+
+	@Override
 	public String formatDateTimeUI( final LocalDateTime time ) {
 		return formatDateTime( time, getFormatDateTimeUI() );
 	}
@@ -132,11 +137,6 @@ public class DateTimeServiceImpl implements DateTimeService {
 	@Override
 	public LocalDateTime getLastSecondOf( final LocalDate date ) {
 		return getFirstSecondOf( date.plusDays( 1 ).atStartOfDay().toLocalDate() ).minusSeconds( 1 );
-	}
-
-	@Override
-	public String dateDateFormat() {
-		return String.format( "%s", DATE_FORMAT );
 	}
 
 	@Override
