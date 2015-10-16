@@ -100,6 +100,7 @@ define( function ( require ) {
 					, lineWidth: isForCurrentUser ? 3 : 1
 					, labels: isForCurrentUser ? labels : { visible: false }
 				};
+
 				series.push( {
 					type: 'spline',
 					source: usersPoints,

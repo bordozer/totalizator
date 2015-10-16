@@ -10,6 +10,8 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/user-rating-barchart-template.html' ) );
 
+	var app = require( 'app' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: 'Cup users scores: Scores'
@@ -33,13 +35,14 @@ define( function ( require ) {
 
 			this.$el.html( template() );
 
+			var currentUser = app.currentUser();
 			var model = this.model.toJSON();
 
 			var userRatingPositions = _.sortBy( model.userRatingPositions, function ( urp ) {
 				return parseFloat( urp.userCupPointsHolder.summaryPoints );
 			} );
 
-			var userNameField = translator.userLabel;
+			var userField = translator.userLabel;
 			var matchBetField = translator.matchBetLabel;
 			var matchBonusesField = translator.matchBonusLabel;
 			var cupWinnerBonusField = translator.cupWinnerBonusLabel;
@@ -47,19 +50,26 @@ define( function ( require ) {
 
 			var chartData = [];
 
+			var currentUserIndex = -1;
+			var i = 0;
 			_.each( userRatingPositions, function ( urp ) {
 
 				var holder = urp.userCupPointsHolder;
 
 				var data = {};
 
-				data[ userNameField ] = urp.user.userName;
+				data[ userField ] = urp.user;
 				data[ matchBetField ] = holder.matchBetPoints;
 				data[ matchBonusesField ] = holder.matchBonuses;
 				data[ cupWinnerBonusField ] = holder.cupWinnerBonus;
 				data[ summaryPointsField ] = holder.summaryPoints;
 
 				chartData.push( data );
+
+				if ( currentUser.userId == urp.user.userId ) {
+					currentUserIndex = i;
+				}
+				i++;
 			} );
 
 			var maxHolder = userRatingPositions[ userRatingPositions.length - 1 ];
@@ -103,7 +113,7 @@ define( function ( require ) {
 				source: chartData,
 				colorScheme: 'scheme06',
 				xAxis: {
-					dataField: userNameField,
+					dataField: userField,
 					unitInterval: 1,
 					tickMarks: {
 						visible: true
@@ -113,7 +123,12 @@ define( function ( require ) {
 						visible: false
 						, interval: 1
 					},
-					axisSize: 'auto'
+					axisSize: 'auto',
+					labels: {
+						formatFunction: function ( user ) {
+							return user.userName
+						}
+					}
 				},
 				valueAxis: {
 					visible: true
@@ -146,6 +161,11 @@ define( function ( require ) {
 									return value != 0 ? value : '';
 								}
 								, colorFunction: function ( value, itemIndex, serie, group ) {
+
+									if ( itemIndex == currentUserIndex ) {
+										return '#006633';
+									}
+
 									return '#006666';
 								}
 							}
@@ -155,11 +175,16 @@ define( function ( require ) {
 								, labels: {
 									visible: true
 									, verticalAlignment: 'bottom'
-								},
-								formatFunction: function ( value ) {
+								}
+								, formatFunction: function ( value ) {
 									return value > 0 ? value : ''; // can't be negative
 								}
 								, colorFunction: function ( value, itemIndex, serie, group ) {
+
+									if ( itemIndex == currentUserIndex ) {
+										return '#669966';
+									}
+
 									return '#669999';
 								}
 							}
@@ -174,6 +199,11 @@ define( function ( require ) {
 									return value > 0 ? value : ''; // can't be negative
 								}
 								, colorFunction: function ( value, itemIndex, serie, group ) {
+
+									if ( itemIndex == currentUserIndex ) {
+										return '#663300';
+									}
+
 									return '#666699';
 								}
 							}
@@ -197,7 +227,7 @@ define( function ( require ) {
 						]
 					},
 					{
-						type: 'line'
+						type: 'spline'
 						, series: [
 							{
 								dataField: summaryPointsField
