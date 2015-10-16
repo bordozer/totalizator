@@ -47,28 +47,28 @@
 	<translation>
 		<nerd>Cup users scores: Show user list</nerd>
 		<ru><![CDATA[Текущий рейтинг пользователей - список]]></ru>
-		<ua><![CDATA[Поточний рейтiнг користувачiв - лист]]></ua>
+		<ua><![CDATA[Поточний рейтинг користувачiв - лист]]></ua>
 		<en><![CDATA[Users current rating - list]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Cup users scores: Show barchart current rating</nerd>
 		<ru><![CDATA[Текущий рейтинг пользователей - диаграмма]]></ru>
-		<ua><![CDATA[Поточний рейтiнг користувачiв - дiаграма]]></ua>
+		<ua><![CDATA[Поточний рейтинг користувачiв - дiаграма]]></ua>
 		<en><![CDATA[Users current rating - barchart]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Cup users scores: Barchart rating in time</nerd>
 		<ru><![CDATA[Изменение рейтингов во времени - диаграмма]]></ru>
-		<ua><![CDATA[Змiна рейтiнгу крiзь час - дiаграма]]></ua>
+		<ua><![CDATA[Змiна рейтингу крiзь час - дiаграма]]></ua>
 		<en><![CDATA[Barchart - rating in time]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Users rating is empty</nerd>
 		<ru><![CDATA[Рейтинг пуст]]></ru>
-		<ua><![CDATA[Рейтiнг пустий]]></ua>
+		<ua><![CDATA[Рейтинг пустий]]></ua>
 		<en><![CDATA[Users rating is empty]]></en>
 	</translation>
 
