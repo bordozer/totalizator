@@ -136,7 +136,8 @@ define( function ( require ) {
 				success: function ( data ) {
 
 				},
-				error: function() {
+				error: function( data ) {
+					console.error( translator.serverError, data );
 					alert( translator.serverError );
 				}
 			} );
