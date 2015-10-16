@@ -2,6 +2,7 @@ package totalizator.app.services.points.recalculation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.beans.points.UserMatchPointsHolder;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchPoints;
@@ -35,6 +36,7 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
 	private UserMatchPointsCalculationService userMatchPointsCalculationService;
 
 	@Override
+	@Transactional
 	public void recalculate( final Match match ) {
 
 		matchPointsService.delete( match );
