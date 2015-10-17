@@ -4,6 +4,8 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
 	return Backbone.Model.extend( {
 
 		defaults: {
@@ -12,7 +14,7 @@ define( function ( require ) {
 			, cupId: 0
 			, teamId: 0
 			, team2Id: 0
-			, filterByDate: new Date()
+			, filterByDate: dateTimeService.dateNow()
 			, filterByDateEnable: false
 			, showFutureMatches: false
 			, showFinished: false
