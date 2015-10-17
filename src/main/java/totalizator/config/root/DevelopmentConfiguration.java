@@ -68,6 +68,9 @@ public class DevelopmentConfiguration {
 		jpaProperties.put( "hibernate.use_sql_comments", "true" );
 		jpaProperties.put( "hibernate.dialect", "org.hibernate.dialect.MySQLDialect" );
 
+//		jpaProperties.put( "hibernate.order_updates", "true" );
+//		jpaProperties.put( "hibernate.order_inserts", "true" );
+
 		jpaProperties.put( "javax.persistence.sharedCache.mode", SharedCacheMode.ENABLE_SELECTIVE );
 		jpaProperties.put( Environment.CACHE_REGION_FACTORY, EhCacheRegionFactory.class.getName() );
 		jpaProperties.put( Environment.USE_SECOND_LEVEL_CACHE, true );

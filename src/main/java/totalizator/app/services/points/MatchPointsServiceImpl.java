@@ -39,11 +39,13 @@ public class MatchPointsServiceImpl implements MatchPointsService {
 	}
 
 	@Override
+	@Transactional
 	public MatchPoints save( final MatchPoints entry ) {
 		return matchPointsRepository.save( entry );
 	}
 
 	@Override
+	@Transactional
 	public void delete( final int id ) {
 		matchPointsRepository.delete( id );
 	}
