@@ -32,7 +32,7 @@ define( function ( require ) {
 
 	return WidgetView.extend( {
 
-		viewMode: MODE_BARCHART,
+		viewMode: MODE_LIST,
 
 		events: {
 			'click .js-user-rating-list': '_onShowAsListClick'
