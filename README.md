@@ -4,6 +4,10 @@ Github link
 
 https://github.com/bordozer/totalizator
 
+Live system instance ( no public part, easy registration is needed )
+
+http://totalizator.encoders.kiev.ua/
+
 # Requirement
 - linux
 - Java 8
