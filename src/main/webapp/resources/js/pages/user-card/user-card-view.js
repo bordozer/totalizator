@@ -100,7 +100,7 @@ define( function ( require ) {
 						, filterByDate: self.onDate
 						, showFinished: true
 						, showFutureMatches: true
-						, sorting: 2
+						, sorting: 1
 					}
 					, matchViewMode: 3
 					, currentUser: currentUser

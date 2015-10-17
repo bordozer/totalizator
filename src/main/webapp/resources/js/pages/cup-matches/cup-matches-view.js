@@ -78,7 +78,7 @@ define( function ( require ) {
 					, filterByDate: onDate
 					, showFutureMatches: true
 					, showFinished: true
-					, sorting: 2
+					, sorting: 1
 				}
 				, matchViewMode: 3
 				, currentUser: this.currentUser
