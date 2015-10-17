@@ -68,8 +68,6 @@ define( function ( require ) {
 
 		_renderPastMatchesOnDate: function( cup, onDate ) {
 
-			var isFuture = false;
-
 			var options = {
 				filter: {
 					categoryId: cup.category.categoryId
@@ -78,11 +76,11 @@ define( function ( require ) {
 					, team2Id: this.team2Id
 					, filterByDateEnable: true
 					, filterByDate: onDate
-					, showFutureMatches: isFuture
-					, showFinished: ! isFuture
-					, sorting: isFuture ? 1 : 2
+					, showFutureMatches: true
+					, showFinished: true
+					, sorting: 2
 				}
-				, matchViewMode: 2
+				, matchViewMode: 3
 				, currentUser: this.currentUser
 			};
 
@@ -91,19 +89,17 @@ define( function ( require ) {
 
 		_renderFutureMatches: function( cup ) {
 
-			var isFuture = true;
-
 			var options = {
 				filter: {
 					categoryId: cup.category.categoryId
 					, cupId: cup.cupId
 					, teamId: this.team1Id
 					, team2Id: this.team2Id
-					, showFutureMatches: isFuture
-					, showFinished: ! isFuture
-					, sorting: isFuture ? 1 : 2
+					, showFutureMatches: true
+					, showFinished: false
+					, sorting: 1
 				}
-				, matchViewMode: 2
+				, matchViewMode: 3
 				, currentUser: this.currentUser
 			};
 
