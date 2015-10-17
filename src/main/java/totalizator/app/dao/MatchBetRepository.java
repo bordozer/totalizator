@@ -13,6 +13,7 @@ import totalizator.app.models.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,6 +38,18 @@ public class MatchBetRepository implements MatchBetDao {
 		return em.createNamedQuery( MatchBet.LOAD_FOR_USER, MatchBet.class )
 				.setParameter( "userId", user.getId() )
 				.getResultList();
+	}
+
+	@Override
+	public List<MatchBet> loadAll( final User user, final LocalDateTime timeFrom, final LocalDateTime timeTo ) {
+
+		final List<MatchBet> resultList = em.createQuery(
+				"select mb from MatchBet as mb join mb.match as m where mb.user.id = :userId and m.beginningTime >= :timeFrom and m.beginningTime <= :timeTo order by m.beginningTime desc", MatchBet.class )
+				.setParameter( "userId", user.getId() )
+				.setParameter( "timeFrom", timeFrom )
+				.setParameter( "timeTo", timeTo )
+				.getResultList();
+		return resultList;
 	}
 
 	@Override

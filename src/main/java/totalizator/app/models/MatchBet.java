@@ -50,6 +50,7 @@ public class MatchBet extends AbstractEntity {
 
 	public static final String LOAD_ALL = "matchBets.loadAll";
 	public static final String LOAD_FOR_USER = "matchBets.loadForUser";
+	public static final String LOAD_FOR_USER_ON_DATE = "matchBets.LOAD_FOR_USER_ON_DATE";
 	public static final String LOAD_FOR_MATCH = "matchBets.loadForMatch";
 	public static final String LOAD_FOR_USER_AND_MATCH = "matchBets.loadForUserAndMatch";
 	public static final String LOAD_MATCH_BETS_COUNT = "matchBets.matchBetsCount";

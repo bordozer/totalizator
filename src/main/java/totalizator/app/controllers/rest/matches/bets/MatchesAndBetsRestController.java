@@ -1,7 +1,5 @@
 package totalizator.app.controllers.rest.matches.bets;
 
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -66,7 +64,7 @@ public class MatchesAndBetsRestController {
 
 		final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches( matches, showBetsOfUser, currentUser );
 
-		if ( userId > 0 ) {
+		/*if ( userId > 0 ) {
 
 			CollectionUtils.filter( matchBetDTOs, new Predicate<MatchBetDTO>() {
 
@@ -81,7 +79,7 @@ public class MatchesAndBetsRestController {
 					return bet.getUser().getUserId() == userId;
 				}
 			} );
-		}
+		}*/
 
 		final List<LocalDate> matchDates = matchBetDTOs
 				.stream()

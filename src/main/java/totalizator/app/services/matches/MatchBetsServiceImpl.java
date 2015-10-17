@@ -17,6 +17,7 @@ import totalizator.app.services.utils.DateTimeService;
 import totalizator.app.translator.Language;
 import totalizator.app.translator.TranslatorService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Function;
@@ -64,6 +65,12 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 	@Transactional( readOnly = true )
 	public List<MatchBet> loadAll( final User user ) {
 		return newArrayList( matchBetRepository.loadAll( user ) );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public List<MatchBet> loadAll( final User user, final LocalDate date ) {
+		return matchBetRepository.loadAll( user, dateTimeService.getFirstSecondOf( date ), dateTimeService.getLastSecondOf( date ) );
 	}
 
 	@Override

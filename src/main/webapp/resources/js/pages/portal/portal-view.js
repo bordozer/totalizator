@@ -16,7 +16,7 @@ define( function ( require ) {
 	var app = require( 'app' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
-	var menu = require( 'js/components/main-menu/main-menu' );
+	var DateChooser = require( 'js/controls/date-chooser/date-chooser-view' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -33,14 +33,14 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		events: {
-			'click .js-date-before' : '_showPreviousDateMatches'
-			, 'click .js-date-after' : '_showNextDateMatches'
-			, 'click .js-menu-go-to-date' : '_goToDate'
-		},
+		events: {},
 
 		initialize: function( options ) {
+
+			this.onDate = options.options.onDate;
+
 			this.model.on( 'sync', this._renderDateDependant, this );
+
 			this.render();
 		},
 
@@ -48,64 +48,38 @@ define( function ( require ) {
 
 			this.$el.html( template() );
 
-			this.model.refresh();
+			this.$( '.js-date-dependent-part' ).html( templateDateDependent( {
+				translator: translator
+			} ) );
+
+			this._renderDatesChooser();
 
 			this._renderActivityStream();
 		},
 
-		_renderDateDependant: function () {
+		_renderDatesChooser: function () {
 
-			var portalPageDate = this.model.portalPageDate;
+			var dateChooser = new DateChooser( {
+				el: this.$( '.js-date-chooser' )
+				, options: { onDate: this.onDate }
+			} );
 
-			this.$( '.js-date-dependent-part' ).html( templateDateDependent( {
-				prevDate: dateTimeService.formatDateFullDisplay( dateTimeService.minusDay( portalPageDate ) )
-				, nextDate: dateTimeService.formatDateFullDisplay( dateTimeService.plusDay( portalPageDate ) )
-				, translator: translator
-			 } ) );
+			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );
 
-			this._renderDatesMenu( portalPageDate );
-
-			this._renderMatchesOnDate( portalPageDate );
-
-			this._renderCupStatistics( portalPageDate );
-
-			this._renderTodayUserRating( portalPageDate );
-
-			this._renderYesterdayUserRating( portalPageDate );
+			dateChooser.render();
 		},
 
-		_renderDatesMenu: function( portalPageDate ) {
+		_renderDateDependant: function () {
 
-			var menuItems = [];
+			var onDate = this.onDate;
 
-			menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-times-o', link: '#', text: translator.todayLabel, entity_id: dateTimeService.formatDate( dateTimeService.dateNow() ) } );
-			menuItems.push( { selector: 'divider' } );
+			this._renderMatchesOnDate( onDate );
 
-			var halfRange = 5;
-			var startPeriod = dateTimeService.formatDate( dateTimeService.minusDays( portalPageDate, halfRange ) );
-			for( var i = 1; i <= halfRange - 1; i++ ) {
-				var date = dateTimeService.plusDays( startPeriod, i );
-				var entity_id = dateTimeService.formatDate( date  );
-				menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-o', link: '#', text: dateTimeService.formatDateFullDisplay( date ), entity_id: entity_id } );
-			}
+			this._renderCupStatistics( onDate );
 
-			menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-check-o', link: '#', selected: true, text: dateTimeService.formatDateFullDisplay( portalPageDate ), entity_id: portalPageDate } );
+			this._renderTodayUserRating( onDate );
 
-			for( var j = 1; j <= halfRange; j++ ) {
-				var date = dateTimeService.plusDays( portalPageDate, j );
-				var entity_id = dateTimeService.formatDate( date  );
-				menuItems.push( { selector: 'js-menu-go-to-date', icon: 'fa fa-calendar-o', link: '#', text: dateTimeService.formatDateFullDisplay( date ), entity_id: entity_id } );
-			}
-
-			var current = dateTimeService.formatDateFullDisplay( portalPageDate );
-			var options = {
-				menus: menuItems
-				, menuButtonIcon: 'fa-calendar'
-				, menuButtonText: current
-				, menuButtonHint: current
-				, cssClass: 'btn-default'
-			};
-			menu( options, this.$( '.js-date-current' ) );
+			this._renderYesterdayUserRating( onDate );
 		},
 
 		_renderMatchesOnDate: function ( onDate ) {
@@ -114,6 +88,7 @@ define( function ( require ) {
 			var currentUser = app.currentUser();
 
 			var container = this.$( '.js-portal-page-matches-on-date' );
+			container.empty();
 
 			if ( model.cupsTodayToShow.length == 0 ) {
 				container.html( translator.noMatchesOnDateLabel );
@@ -150,6 +125,7 @@ define( function ( require ) {
 			var currentUser = app.currentUser();
 
 			var container = this.$( '.js-portal-page-container' );
+			container.empty();
 
 			var row = $( "<div class='row'></div>" );
 			container.append( row );
@@ -176,12 +152,12 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderTodayUserRating: function( portalPageDate ) {
-			usersRatingWidget( this.$( '.js-users-rating-today' ), { onDate: portalPageDate } );
+		_renderTodayUserRating: function( onDate ) {
+			usersRatingWidget( this.$( '.js-users-rating-today' ), { onDate: onDate } );
 		},
 
-		_renderYesterdayUserRating: function( portalPageDate ) {
-			var prevDate = dateTimeService.formatDate( dateTimeService.minusDay( portalPageDate ) );
+		_renderYesterdayUserRating: function( onDate ) {
+			var prevDate = dateTimeService.formatDate( dateTimeService.minusDay( onDate ) );
 			usersRatingWidget( this.$( '.js-users-rating-yesterday' ), { onDate: prevDate } );
 		},
 
@@ -189,34 +165,13 @@ define( function ( require ) {
 			activityStreamWidget( this.$( '.js-portal-page-activity-stream' ), {} );
 		},
 
-		_showPreviousDateMatches: function() {
+		_loadDataForDate: function( onDate ) {
 
-			this.model.previousDay();
-
-			this._loadDataForDate();
-		},
-
-		_showNextDateMatches: function() {
-
-			this.model.nextDay();
-
-			this._loadDataForDate();
-		},
-
-		_goToDate: function( evt ) {
-
-			this.model.portalPageDate = $( evt.target ).data( 'entity_id' );
-
-			this._loadDataForDate();
-		},
-
-		_loadDataForDate: function() {
-
-			this.$( '.js-date-current' ).html( '<h4>' + dateTimeService.formatDateFullDisplay( this.model.portalPageDate ) + '</h4>' );
+			this.onDate = onDate;
 
 			this.spinning();
 
-			this.model.refresh();
+			this.model.refresh( onDate );
 		},
 
 		spinning: function () {
@@ -225,7 +180,8 @@ define( function ( require ) {
 
 			this.$( '.js-portal-page-matches-on-date' ).html( div );
 			this.$( '.js-portal-page-container' ).html( div );
-			this.$( '.js-users-rating' ).html( div );
+			this.$( '.js-users-rating-today' ).html( div );
+			this.$( '.js-users-rating-yesterday' ).html( div );
 		}
 	} );
 } );

@@ -10,27 +10,33 @@ define( function ( require ) {
 	var templateNoActivity = _.template( require( 'text!./templates/user-card-no-activity-template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
-	//var userStatisticsWidget = require( 'js/widgets/user-statistics/user-statistics-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 
+	var DateChooser = require( 'js/controls/date-chooser/date-chooser-view' );
+
 	var service = require( '/resources/js/services/service.js' );
+	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+
+	var app = require( 'app' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		userStatisticsLabel: "User card: Statistics"
 		, userBetsLabel: "User card: User bets"
-		, noUserBetsLabel: "The user has not made bets"
+		, noUserBetsLabel: "The user has not made bets at this date"
 	} );
 
 	return Backbone.View.extend( {
 
 		initialize: function( options ) {
-			this.userId = options.options.userId;
-			this.currentUser = options.options.currentUser;
-			this.filterByCupId = options.options.filterByCupId;
 
-			this.model.on( 'sync', this.render, this );
-			this.model.fetch( { cache: false } );
+			this.userId = options.options.userId;
+			this.filterByCupId = options.options.filterByCupId;
+			this.onDate = options.options.onDate;
+
+			this.model.on( 'sync', this._renderUserMatchesAndBets, this );
+
+			this.render();
 		},
 
 		render: function () {
@@ -39,20 +45,46 @@ define( function ( require ) {
 				translator: translator
 			} ) );
 
+			this._renderDatesChooser();
+
 			this._renderActivityStream();
-
-			this._renderUserBetsFuture();
-
-			this._renderUserBetsPast();
 		},
 
-		_renderUserBetsFuture: function() {
+		_renderDatesChooser: function () {
+
+			var dateChooser = new DateChooser( {
+				el: this.$( '.js-user-card-date-chooser' )
+				, options: { onDate: this.onDate }
+			} );
+
+			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );
+
+			dateChooser.render();
+		},
+
+		_loadDataForDate: function( onDate ) {
+			this.onDate = onDate;
+			this.model.fetch( { data: { onDate: onDate } }, { cache: false } );
+		},
+
+		_renderUserMatchesAndBets: function() {
 
 			var userId = this.userId;
-			var currentUser = this.currentUser;
+			var currentUser = app.currentUser();
 			var cupsToShow = this.model.get( 'cupsToShow' );
 
-			var container = this.$( '.js-user-bets-future' );
+			if ( cupsToShow.length == 0 ) {
+				this.$( '.js-user-matches-and-bets' ).html( templateNoActivity( {
+					onDate: dateTimeService.formatDateFullDisplay( this.onDate )
+					, translator: translator
+				} ) );
+				return;
+			}
+
+			var container = this.$( '.js-user-matches-and-bets' );
+			container.empty();
+
+			var self = this;
 
 			_.each( cupsToShow, function( cup ) {
 
@@ -64,7 +96,9 @@ define( function ( require ) {
 						userId: userId
 						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
-						, showFinished: false
+						, filterByDateEnable: true
+						, filterByDate: self.onDate
+						, showFinished: true
 						, showFutureMatches: true
 						, sorting: 2
 					}
@@ -75,7 +109,7 @@ define( function ( require ) {
 			});
 		},
 
-		_renderUserBetsPast: function() {
+		/*_renderUserBetsPast: function() {
 
 			var userId = this.userId;
 			var currentUser = this.currentUser;
@@ -110,7 +144,7 @@ define( function ( require ) {
 				matchesAndBetsView( el, options );
 			}
 
-		},
+		},*/
 
 		_renderActivityStream: function () {
 			activityStreamWidget( this.$( '.js-user-activity-stream' ), { userId: this.userId } );

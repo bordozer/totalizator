@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import totalizator.app.beans.points.UserSummaryPointsHolder;
 import totalizator.app.models.Category;
 import totalizator.app.models.Cup;
-import totalizator.app.models.Match;
 import totalizator.app.models.User;
 import totalizator.app.services.*;
 import totalizator.app.services.matches.MatchBetsService;
-import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.points.MatchPointsService;
-import totalizator.app.services.points.calculation.match.UserMatchPointsCalculationService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.security.Principal;
@@ -23,7 +20,6 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @RestController
@@ -42,9 +38,6 @@ public class PortalPageRestController {
 	private CupService cupService;
 
 	@Autowired
-	private MatchService matchService;
-
-	@Autowired
 	private DTOService dtoService;
 
 	@Autowired
@@ -54,13 +47,13 @@ public class PortalPageRestController {
 	private FavoriteCategoryService favoriteCategoryService;
 
 	@Autowired
-	private UserMatchPointsCalculationService userMatchPointsCalculationService;
-
-	@Autowired
 	private MatchPointsService matchPointsService;
 
 	@Autowired
 	private DateTimeService dateTimeService;
+
+	@Autowired
+	private CupsAndMatchesService cupsAndMatchesService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public PortalPageDTO portalPage( final PortalPageDTO dto, final Principal principal ) {
@@ -99,7 +92,7 @@ public class PortalPageRestController {
 				} )
 				.collect( Collectors.toList() ), currentUser ) );
 
-		result.setCupsTodayToShow( dtoService.transformCups( getCupsHaveMatchesToday( date )
+		result.setCupsTodayToShow( dtoService.transformCups( cupsAndMatchesService.getCupsHaveMatchesOnDate( date )
 				.stream()
 				.sorted( cupService.categoryNameOrCupNameComparator() )
 				.collect( Collectors.toList() ), currentUser ) );
@@ -120,29 +113,9 @@ public class PortalPageRestController {
 					public UsersRatingPositionDTO apply( final UserSummaryPointsHolder pointsHolder ) {
 						return new UsersRatingPositionDTO( dtoService.transformUser( pointsHolder.getUser() ), pointsHolder.getBetPoints(), pointsHolder.getMatchBonus() );
 					}
-				}  )
+				} )
 				.collect( Collectors.toList() );
 	}
 
-	private List<Cup> getCupsHaveMatchesToday( final LocalDate date ) {
 
-		final List<Match> matchesToday = matchService.loadAllOnDate( date );
-
-		return matchesToday
-				.stream()
-				.filter( new Predicate<Match>() {
-					@Override
-					public boolean test( final Match match ) {
-						return cupService.isCupPublic( match.getCup() );
-					}
-				} )
-				.map( new Function<Match, Cup>() {
-					@Override
-					public Cup apply( final Match match ) {
-						return match.getCup();
-					}
-				} )
-				.distinct()
-				.collect( Collectors.toList() );
-	}
 }

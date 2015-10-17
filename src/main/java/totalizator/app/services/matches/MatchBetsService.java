@@ -4,12 +4,15 @@ import totalizator.app.beans.ValidationResult;
 import totalizator.app.models.*;
 import totalizator.app.services.GenericService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MatchBetsService extends GenericService<MatchBet> {
 
 	List<MatchBet> loadAll( final User user );
+
+	List<MatchBet> loadAll( final User user, final LocalDate date );
 
 	List<MatchBet> loadAll( final Match match );
 

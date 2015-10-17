@@ -16,6 +16,8 @@ public interface MatchBetDao extends GenericService<MatchBet> {
 
 	List<MatchBet> loadAll( final User user );
 
+	List<MatchBet> loadAll( final User user, final LocalDateTime timeFrom, final LocalDateTime timeTo );
+
 	List<MatchBet> loadAll( final Match match );
 
 	MatchBet load( final User user, final Match match );

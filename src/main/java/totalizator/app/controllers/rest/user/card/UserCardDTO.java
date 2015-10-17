@@ -8,6 +8,10 @@ public class UserCardDTO {
 
 	private List<CupDTO> cupsToShow;
 
+	public UserCardDTO( final List<CupDTO> cupsToShow ) {
+		this.cupsToShow = cupsToShow;
+	}
+
 	public void setCupsToShow( final List<CupDTO> cupsToShow ) {
 		this.cupsToShow = cupsToShow;
 	}
