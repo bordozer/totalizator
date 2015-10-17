@@ -109,43 +109,6 @@ define( function ( require ) {
 			});
 		},
 
-		/*_renderUserBetsPast: function() {
-
-			var userId = this.userId;
-			var currentUser = this.currentUser;
-			var cupsToShow = this.model.get( 'cupsToShow' );
-
-			var container = this.$( '.js-user-bets-past' );
-
-			if ( cupsToShow.length == 0 ) {
-				this.$( '.js-user-bets-future' ).html( templateNoActivity( { translator: translator } ) );
-				return;
-			}
-
-			if ( this.filterByCupId ) {
-
-				var el = $( '<div></div>' );
-				container.append( el );
-
-				var cup = service.loadPublicCup( this.filterByCupId );
-
-				var options = {
-					filter: {
-						userId: userId
-						, categoryId: cup.category.categoryId
-						, cupId: cup.cupId
-						, showFinished: true
-						, showFutureMatches: false
-						, sorting: 2
-					}
-					, matchViewMode: 3
-					, currentUser: currentUser
-				};
-				matchesAndBetsView( el, options );
-			}
-
-		},*/
-
 		_renderActivityStream: function () {
 			activityStreamWidget( this.$( '.js-user-activity-stream' ), { userId: this.userId } );
 		}
