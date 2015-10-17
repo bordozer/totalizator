@@ -10,11 +10,11 @@ import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.points.CupPointsService;
 import totalizator.app.services.points.MatchPointsService;
+import totalizator.app.services.points.UserRatingService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -59,6 +59,7 @@ public class MatchRepository implements MatchDao {
 			, @CacheEvict( value = MatchPointsDao.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = MatchPointsService.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = CupPointsService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserRatingService.CACHE_QUERY, allEntries = true )
 	} )
 	public Match save( final Match entry ) {
 		return em.merge( entry );
@@ -74,6 +75,7 @@ public class MatchRepository implements MatchDao {
 			, @CacheEvict( value = MatchPointsDao.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = MatchPointsService.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = CupPointsService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = UserRatingService.CACHE_QUERY, allEntries = true )
 	} )
 	public void delete( final int id ) {
 		em.remove( load( id ) );
