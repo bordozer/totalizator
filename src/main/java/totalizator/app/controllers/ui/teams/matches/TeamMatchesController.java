@@ -1,4 +1,4 @@
-package totalizator.app.controllers.ui.cups.matches;
+package totalizator.app.controllers.ui.teams.matches;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +10,12 @@ import totalizator.app.services.CupService;
 import totalizator.app.services.TeamService;
 
 @Controller
-@RequestMapping( "/totalizator/cups" )
-public class CupMatchesController {
+@RequestMapping( "/totalizator/cups/{cupId}/matches/teams/{teamId}" )
+public class TeamMatchesController {
 
-	public static final String MODEL_NAME = "cupMatchesModel";
+	public static final String MODEL_NAME = "teamMatchesMode";
 
-	private static final String VIEW = "/CupMatches";
+	private static final String VIEW = "/TeamMatches";
 
 	@Autowired
 	private TeamService teamService;
@@ -24,15 +24,18 @@ public class CupMatchesController {
 	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
-	public CupMatchesModel preparePagingModel() {
-		return new CupMatchesModel();
+	public TeamMatchesModel preparePagingModel() {
+		return new TeamMatchesModel();
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/{cupId}/matches/" )
-	public String cupMatches( final @PathVariable( "cupId" ) int cupId
-			, final @ModelAttribute( MODEL_NAME ) CupMatchesModel model ) {
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
+	public String cupMatchesForTeam(
+			final @PathVariable( "cupId" ) int cupId
+			, final @PathVariable( "teamId" ) int teamId
+			, final @ModelAttribute( MODEL_NAME ) TeamMatchesModel model ) {
 
 		model.setCup( cupService.load( cupId ) );
+		model.setTeam( teamService.load( teamId ) );
 
 		return VIEW;
 	}
