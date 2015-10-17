@@ -10,6 +10,8 @@ define( function ( require ) {
 
 	var matchesAndBetsWidget = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
+	var DateChooser = require( 'js/controls/date-chooser/date-chooser-view' );
+
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		title: "Cup matches"
@@ -38,14 +40,58 @@ define( function ( require ) {
 
 			this.$el.html( template( data ) );
 
-			this._renderCupMatches( cup, true, '.js-cup-matches-future' );
+			this._renderDatesChooser();
 
-			this._renderCupMatches( cup, false, '.js-cup-matches-finished'  );
+			this._renderFutureMatches( cup );
 
 			return this;
 		},
 
-		_renderCupMatches: function( cup, isFuture, selector ) {
+		_renderDatesChooser: function () {
+
+			var dateChooser = new DateChooser( {
+				el: this.$( '.js-cup-card-date-chooser' )
+				, options: { onDate: this.onDate }
+			} );
+
+			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );
+
+			dateChooser.render();
+		},
+
+		_loadDataForDate: function( onDate ) {
+
+			var cup = this.model.toJSON();
+
+			this._renderPastMatchesOnDate( cup, onDate );
+		},
+
+		_renderPastMatchesOnDate: function( cup, onDate ) {
+
+			var isFuture = false;
+
+			var options = {
+				filter: {
+					categoryId: cup.category.categoryId
+					, cupId: cup.cupId
+					, teamId: this.team1Id
+					, team2Id: this.team2Id
+					, filterByDateEnable: true
+					, filterByDate: onDate
+					, showFutureMatches: isFuture
+					, showFinished: ! isFuture
+					, sorting: isFuture ? 1 : 2
+				}
+				, matchViewMode: 2
+				, currentUser: this.currentUser
+			};
+
+			matchesAndBetsWidget( this.$( '.js-user-past-matches-on-date' ), options );
+		},
+
+		_renderFutureMatches: function( cup ) {
+
+			var isFuture = true;
 
 			var options = {
 				filter: {
@@ -61,7 +107,7 @@ define( function ( require ) {
 				, currentUser: this.currentUser
 			};
 
-			matchesAndBetsWidget( this.$( selector ), options );
+			matchesAndBetsWidget( this.$( '.js-cup-matches-future' ), options );
 		}
 	} );
 } );
