@@ -87,9 +87,7 @@ define( function ( require ) {
 				return { style1: "", style2: "", title: '' };
 			}
 
-			var isMatchFinished = match.matchFinished;
-
-			if ( ! isMatchFinished ) {
+			if ( ! match.matchFinished ) {
 				return styleBetOnNotFinishedMatch( bet );
 			}
 
