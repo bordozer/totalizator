@@ -37,6 +37,7 @@ define( function ( require ) {
 		, deleteBetConfirmationLabel: 'Match and Bets: Delete bet confirmation: Delete bet?'
 
 		, matchBettingIsDenied: "Match betting is denied"
+		, pointsLabel: "Points"
 	} );
 
 	var MODE_INFO = 1;
