@@ -74,8 +74,12 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
 	}
 
 	private void saveFor( final User user, final Match match ) {
+		saveFor( user, match, null);
+	}
 
-		final UserMatchPointsHolder pointsHolder = userMatchPointsCalculationService.getUserMatchPoints( match, user );
+	private void saveFor( final User user, final Match match, final UserGroup userGroup ) {
+
+		final UserMatchPointsHolder pointsHolder = userGroup == null ? userMatchPointsCalculationService.getUserMatchPoints( match, user ) : userMatchPointsCalculationService.getUserMatchPoints( match, user, userGroup );
 
 		if ( pointsHolder == null ) {
 			return;
@@ -87,24 +91,9 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
 		matchPoints.setMatch( match );
 		matchPoints.setCup( match.getCup() );
 
-		matchPoints.setMatchPoints( pointsHolder.getUserMatchBetPointsHolder().getMatchBetPoints() );
-		matchPoints.setMatchBonus( pointsHolder.getMatchBonus() );
-
-		matchPoints.setMatchTime( match.getBeginningTime() );
-
-		matchPointsService.save( matchPoints );
-	}
-
-	private void saveFor( final User user, final Match match, final UserGroup userGroup ) {
-
-		final MatchPoints matchPoints = new MatchPoints();
-
-		matchPoints.setUser( user );
-		matchPoints.setMatch( match );
-		matchPoints.setCup( match.getCup() );
-		matchPoints.setUserGroup( userGroup );
-
-		final UserMatchPointsHolder pointsHolder = userMatchPointsCalculationService.getUserMatchPoints( match, user, userGroup );
+		if ( userGroup != null ) {
+			matchPoints.setUserGroup( userGroup );
+		}
 
 		matchPoints.setMatchPoints( pointsHolder.getUserMatchBetPointsHolder().getMatchBetPoints() );
 		matchPoints.setMatchBonus( pointsHolder.getMatchBonus() );

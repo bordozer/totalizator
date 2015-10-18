@@ -134,6 +134,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	@Transactional( readOnly = true )
 	public boolean isMatchFinished( final Match match ) {
 		return match.isMatchFinished();
 	}
