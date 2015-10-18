@@ -11,8 +11,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchBet;
 import totalizator.app.models.Team;
-import totalizator.app.services.activiries.ActivityStreamService;
-import totalizator.app.services.points.recalculation.MatchPointsRecalculationService;
+import totalizator.app.services.points.MatchPointsService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDate;
@@ -30,16 +29,13 @@ public class MatchServiceImpl implements MatchService {
 	private MatchDao matchRepository;
 
 	@Autowired
-	private DateTimeService dateTimeService;
-
-	@Autowired
 	private MatchBetsService matchBetsService;
 
 	@Autowired
-	private ActivityStreamService activityStreamService;
+	private MatchPointsService matchPointsService;
 
 	@Autowired
-	private MatchPointsRecalculationService matchPointsRecalculationService;
+	private DateTimeService dateTimeService;
 
 	private static final Logger LOGGER = Logger.getLogger( MatchServiceImpl.class );
 
@@ -100,16 +96,7 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	@Transactional
 	public Match save( final Match entry ) {
-
-		final Match match = matchRepository.save( entry );
-
-		matchPointsRecalculationService.recalculate( match );
-
-		if ( match.isMatchFinished() ) {
-			activityStreamService.matchFinished( match.getId(), match.getScore1(), match.getScore2() );
-		}
-
-		return match;
+		return matchRepository.save( entry );
 	}
 
 	@Override
@@ -121,10 +108,14 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	@Transactional
 	public void delete( final int id ) {
+
 		final List<MatchBet> bets = matchBetsService.loadAll( load( id ) );
 		for ( final MatchBet bet : bets ) {
 			matchBetsService.delete( bet.getId() );
 		}
+
+		matchPointsService.delete( load( id ) );
+
 		matchRepository.delete( id );
 	}
 
@@ -134,6 +125,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	@Transactional( readOnly = true )
 	public boolean isMatchFinished( final Match match ) {
 		return match.isMatchFinished();
 	}

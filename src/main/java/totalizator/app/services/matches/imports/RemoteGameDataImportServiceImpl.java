@@ -9,6 +9,7 @@ import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.services.CupTeamService;
 import totalizator.app.services.TeamService;
+import totalizator.app.services.matches.MatchUpdateService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.matches.imports.strategies.NoStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
@@ -45,6 +46,9 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 	@Autowired
 	private NHLStatisticsAPIService nhlStatisticsAPIService;
+
+	@Autowired
+	private MatchUpdateService matchUpdateService;
 
 	private final Logger LOGGER = Logger.getLogger( RemoteGameDataImportServiceImpl.class );
 
@@ -100,7 +104,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 			match.setMatchFinished( remoteGame.isFinished() );
 			match.setHomeTeamNumber( remoteGame.getHomeTeamNumber() );
 
-			matchService.save( match );
+			matchUpdateService.update( match );
 
 			return new ImportGameResult( match.getId(), false );
 		}

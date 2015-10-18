@@ -265,7 +265,7 @@ public class DTOServiceImpl implements DTOService {
 
 			@Override
 			public UserMatchPointsHolderDTO apply( final UserMatchPointsHolder userMatchPoints ) {
-				return new UserMatchPointsHolderDTO( transformUser( userMatchPoints.getUser() ), userMatchPoints.getUserMatchBetPointsHolder().getMatchBetPoints(), userMatchPoints.getMatchBonus() );
+				return new UserMatchPointsHolderDTO( transformUser( userMatchPoints.getUser() ), userMatchPoints.getMatchBetPoints(), userMatchPoints.getMatchBonus() );
 			}
 		};
 	}

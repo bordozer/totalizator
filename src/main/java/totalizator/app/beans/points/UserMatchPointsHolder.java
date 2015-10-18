@@ -31,6 +31,10 @@ public class UserMatchPointsHolder extends AbstractUserPointsHolder {
 		return userMatchBetPointsHolder.getPoints();
 	}
 
+	public int getMatchBetPoints() {
+		return userMatchBetPointsHolder.getMatchBetPoints();
+	}
+
 	public float getMatchBonus() {
 		return matchBonus;
 	}

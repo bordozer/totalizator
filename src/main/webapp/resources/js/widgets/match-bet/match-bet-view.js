@@ -227,15 +227,15 @@ define( function ( require ) {
 			function __getBoxColor() {
 
 				if ( model.bet == null ) {
-					return 'bg-warning';
+					return model.match.matchStarted ? 'bg-missed-bet' : '';
 				}
 
 				if ( ! model.match.matchFinished ) {
-					return 'bg-info';
+					return 'bg-warning';
 				}
 
 				if ( ! model.userMatchPointsHolder ) {
-					return '';
+					return 'bg-info';
 				}
 
 				if ( model.userMatchPointsHolder.summaryPoints > 0 ) {

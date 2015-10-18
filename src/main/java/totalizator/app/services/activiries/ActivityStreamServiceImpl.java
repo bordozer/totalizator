@@ -1,6 +1,5 @@
 package totalizator.app.services.activiries;
 
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,11 +65,13 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	}
 
 	@Override
+	@Transactional
 	public void matchBetDeleted( final User user, final int matchId, final int score1, final int score2 ) {
 		activityStreamRepository.save( getMatchBetEvent( user, matchId, score1, score2, ActivityStreamEntryType.MATCH_BET_DELETED ) );
 	}
 
 	@Override
+	@Transactional
 	public void matchFinished( final int matchId, final int score1, final int score2 ) {
 		activityStreamRepository.save( getMatchBetEvent( null, matchId, score1, score2, ActivityStreamEntryType.MATCH_FINISHED ) );
 	}

@@ -24,7 +24,7 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 	private MatchBonusPointsCalculationService matchBonusPointsCalculationService;
 
 	@Override
-	public UserMatchPointsHolder getUserMatchPoints( final Match match, final User user ) {
+	public UserMatchPointsHolder calculateUserMatchPoints( final Match match, final User user ) {
 
 		final MatchBet matchBet = matchBetsService.load( user, match );
 
@@ -36,7 +36,7 @@ public class UserMatchPointsCalculationServiceImpl implements UserMatchPointsCal
 	}
 
 	@Override
-	public UserMatchPointsHolder getUserMatchPoints( final Match match, final User user, final UserGroup userGroup ) {
+	public UserMatchPointsHolder calculateUserMatchPoints( final Match match, final User user, final UserGroup userGroup ) {
 		final MatchBet userMatchBet = matchBetsService.load( user, match );
 		return new UserMatchPointsHolder( userMatchBetPointsCalculationService.getUserMatchBetPoints( userMatchBet ), getUserMatchBonus( userMatchBet, userGroup ) );
 	}

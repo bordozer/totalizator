@@ -2,7 +2,6 @@ package totalizator.app.services.points.recalculation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.beans.points.UserMatchPointsHolder;
 import totalizator.app.models.Match;
 import totalizator.app.models.MatchPoints;
@@ -10,18 +9,16 @@ import totalizator.app.models.User;
 import totalizator.app.models.UserGroup;
 import totalizator.app.services.UserGroupService;
 import totalizator.app.services.matches.MatchBetsService;
-import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.points.MatchPointsService;
 import totalizator.app.services.points.calculation.match.UserMatchPointsCalculationService;
 
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Service
 public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalculationService {
-
-	@Autowired
-	private MatchService matchService;
 
 	@Autowired
 	private MatchPointsService matchPointsService;
@@ -36,14 +33,20 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
 	private UserMatchPointsCalculationService userMatchPointsCalculationService;
 
 	@Override
-	@Transactional
 	public void recalculate( final Match match ) {
 
-		matchPointsService.delete( match );
+		collectCalculatedPoints( match )
+				.stream()
+				.forEach( new Consumer<MatchPoints>() {
+					@Override
+					public void accept( final MatchPoints matchPoints ) {
+						matchPointsService.save( matchPoints );
+					}
+				} );
+	}
 
-		if ( ! matchService.isMatchFinished( match ) ) {
-			return;
-		}
+	private List<MatchPoints> collectCalculatedPoints( final Match match ) {
+		final List<MatchPoints> result = newArrayList();
 
 		matchBetsService.getUserWhoMadeBet( match )
 				.stream()
@@ -52,33 +55,42 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
 					@Override
 					public void accept( final User user ) {
 
-						saveFor( user, match );
+						result.add( getFor( user, match ) );
 
-						recalculateForUserGroup( user, userGroupService.loadUserGroupsWhereUserIsOwner( user ), match );
+						result.addAll( recalculateForUserGroup( user, userGroupService.loadUserGroupsWhereUserIsOwner( user ), match ) );
 
-						recalculateForUserGroup( user, userGroupService.loadUserGroupsWhereUserIsMember( user ), match );
+						result.addAll( recalculateForUserGroup( user, userGroupService.loadUserGroupsWhereUserIsMember( user ), match ) );
 					}
 				} );
+		return result;
 	}
 
-	private void recalculateForUserGroup( final User user, final List<UserGroup> userGroups, final Match match ) {
+	private List<MatchPoints> recalculateForUserGroup( final User user, final List<UserGroup> userGroups, final Match match ) {
+
+		final List<MatchPoints> result = newArrayList();
 
 		userGroups
 				.stream()
 				.forEach( new Consumer<UserGroup>() {
 					@Override
 					public void accept( final UserGroup userGroup ) {
-						saveFor( user, match, userGroup );
+						result.add( getFor( user, match, userGroup ) );
 					}
 				} );
+
+		return result;
 	}
 
-	private void saveFor( final User user, final Match match ) {
+	private MatchPoints getFor( final User user, final Match match ) {
+		return getFor( user, match, null );
+	}
 
-		final UserMatchPointsHolder pointsHolder = userMatchPointsCalculationService.getUserMatchPoints( match, user );
+	private MatchPoints getFor( final User user, final Match match, final UserGroup userGroup ) {
+
+		final UserMatchPointsHolder pointsHolder = getPointsHolder( user, match, userGroup );
 
 		if ( pointsHolder == null ) {
-			return;
+			return null;
 		}
 
 		final MatchPoints matchPoints = new MatchPoints();
@@ -87,30 +99,24 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
 		matchPoints.setMatch( match );
 		matchPoints.setCup( match.getCup() );
 
-		matchPoints.setMatchPoints( pointsHolder.getUserMatchBetPointsHolder().getMatchBetPoints() );
+		if ( userGroup != null ) {
+			matchPoints.setUserGroup( userGroup );
+		}
+
+		matchPoints.setMatchPoints( pointsHolder.getMatchBetPoints() );
 		matchPoints.setMatchBonus( pointsHolder.getMatchBonus() );
 
 		matchPoints.setMatchTime( match.getBeginningTime() );
 
-		matchPointsService.save( matchPoints );
+		return matchPoints;
 	}
 
-	private void saveFor( final User user, final Match match, final UserGroup userGroup ) {
+	private UserMatchPointsHolder getPointsHolder( final User user, final Match match, final UserGroup userGroup ) {
 
-		final MatchPoints matchPoints = new MatchPoints();
+		if ( userGroup == null ) {
+			return userMatchPointsCalculationService.calculateUserMatchPoints( match, user );
+		}
 
-		matchPoints.setUser( user );
-		matchPoints.setMatch( match );
-		matchPoints.setCup( match.getCup() );
-		matchPoints.setUserGroup( userGroup );
-
-		final UserMatchPointsHolder pointsHolder = userMatchPointsCalculationService.getUserMatchPoints( match, user, userGroup );
-
-		matchPoints.setMatchPoints( pointsHolder.getUserMatchBetPointsHolder().getMatchBetPoints() );
-		matchPoints.setMatchBonus( pointsHolder.getMatchBonus() );
-
-		matchPoints.setMatchTime( match.getBeginningTime() );
-
-		matchPointsService.save( matchPoints );
+		return userMatchPointsCalculationService.calculateUserMatchPoints( match, user, userGroup );
 	}
 }

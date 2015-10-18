@@ -7,7 +7,7 @@ import totalizator.app.models.UserGroup;
 
 public interface UserMatchPointsCalculationService {
 
-	UserMatchPointsHolder getUserMatchPoints( final Match match, final User user );
+	UserMatchPointsHolder calculateUserMatchPoints( final Match match, final User user );
 
-	UserMatchPointsHolder getUserMatchPoints( final Match match, final User user, final UserGroup userGroup );
+	UserMatchPointsHolder calculateUserMatchPoints( final Match match, final User user, final UserGroup userGroup );
 }

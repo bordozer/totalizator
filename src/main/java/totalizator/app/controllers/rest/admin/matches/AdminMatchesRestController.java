@@ -12,6 +12,7 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchBetsService;
+import totalizator.app.services.matches.MatchUpdateService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.matches.MatchesAndBetsWidgetService;
 
@@ -29,6 +30,9 @@ public class AdminMatchesRestController {
 
 	@Autowired
 	private MatchService matchService;
+
+	@Autowired
+	private MatchUpdateService matchUpdateService;
 
 	@Autowired
 	private MatchesAndBetsWidgetService matchesAndBetsWidgetService;
@@ -113,7 +117,7 @@ public class AdminMatchesRestController {
 
 		initMatchFromDTO( matchEditDTO, match );
 
-		matchService.save( match );
+		matchUpdateService.update( match );
 
 		initReadOnlyDTOProperties( matchEditDTO, match, currentUser );
 
