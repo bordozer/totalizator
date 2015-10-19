@@ -135,7 +135,7 @@ define( function ( require ) {
 			if ( this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_SETTINGS ) {
 
 				return [
-					{ selector: 'js-save-settings-button', icon: 'fa fa-save', link: '#', text: translator.saveLabel, cssClass: 'btn-primary', button: true }
+					{ selector: 'js-save-settings-button', icon: 'fa fa-check', link: '#', text: translator.saveLabel, cssClass: 'btn-primary', button: true }
 					, { selector: 'js-close-settings-button', icon: 'fa fa-close', link: '#', text: translator.cancelLabel, button: true }
 				];
 			}

@@ -30,7 +30,7 @@ define( function ( require ) {
 	return WidgetConfigurableView.extend( {
 
 		events: {
-			'click .js-user-group': '_filterByUserGroup'
+			'click .js-user-group': '_quickFilterByUserGroup'
 		},
 
 		initializeInnerView: function( options ) {
@@ -51,6 +51,7 @@ define( function ( require ) {
 		},
 
 		renderInnerView: function () {
+			this.model.userGroupId = this.userGroupsView.selectedUserGroupId;
 			this.model.fetch( { cache: false } );
 		},
 
@@ -91,17 +92,14 @@ define( function ( require ) {
 			this.trigger( 'inner-view-rendered' );
 		},
 
-		_filterByUserGroup: function( evt ) {
+		_quickFilterByUserGroup: function( evt ) {
 
 			var menu = $( evt.target );
 			var userGroupId = menu.data( 'entity_id' );
 
-			var selectedUserGroupId = userGroupId ? userGroupId : 0;
+			this.userGroupsView.selectedUserGroupId = userGroupId ? userGroupId : 0;
 
-			this.userGroupsView.selectedUserGroupId = selectedUserGroupId;
-			this.model.userGroupId = selectedUserGroupId;
-
-			this.model.fetch( { cache: false } );
+			this.render();
 		}
 	});
 } );

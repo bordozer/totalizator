@@ -22,7 +22,9 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		events: {},
+		events: {
+			'change #selectedUserGroupId': '_onUserGroupSelect'
+		},
 
 		initialize: function ( options ) {
 			this.selectedUserGroupId = options.selectedUserGroupId || 0;
@@ -38,7 +40,7 @@ define( function ( require ) {
 			var options = {
 				width: "100%"
 			};
-			this.$( '#userGroups' ).chosen( options );
+			this.$( '#selectedUserGroupId' ).chosen( options );
 
 			return this;
 		},
@@ -139,6 +141,10 @@ define( function ( require ) {
 					return cup.cupId == cupId;
 				} ).length > 0;
 			} );
+		},
+
+		_onUserGroupSelect: function() {
+			this.selectedUserGroupId = $( '#selectedUserGroupId' ).val();
 		}
 	} );
 } );

@@ -40,7 +40,7 @@ define( function ( require ) {
 		viewMode: MODE_BARCHART_CURRENT_RATING,
 
 		events: {
-			'click .js-user-group': '_filterByUserGroup'
+			'click .js-user-group': '_quickFilterByUserGroup'
 			, 'click .js-show-user-list': '_onShowUserListClick'
 			, 'click .js-show-chart-current-rating': '_onShowBarchartCurrentRatingClick'
 			, 'click .js-show-chart-rating-in-time': '_onShowBarchartRatingInTimeClick'
@@ -61,6 +61,7 @@ define( function ( require ) {
 		},
 
 		renderInnerView: function () {
+			this.model.userGroupId = this.userGroupsView.selectedUserGroupId;
 			this.model.fetch( { cache: false } );
 		},
 
@@ -126,16 +127,18 @@ define( function ( require ) {
 			return this;
 		},
 
-		_filterByUserGroup: function( evt ) {
+		_quickFilterByUserGroup: function( evt ) {
 
 			var menu = $( evt.target );
 			var userGroupId = menu.data( 'entity_id' );
 
-			var selectedUserGroupId = userGroupId ? userGroupId : 0;
+			this.userGroupsView.selectedUserGroupId = userGroupId ? userGroupId : 0;
 
+			this.render();
+		},
+
+		_onFilterByUserGroup: function( selectedUserGroupId ) {
 			this.userGroupsView.selectedUserGroupId = selectedUserGroupId;
-			this.model.userGroupId = selectedUserGroupId;
-
 			this.render();
 		},
 

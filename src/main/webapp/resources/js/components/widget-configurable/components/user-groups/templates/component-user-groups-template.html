@@ -5,7 +5,7 @@
 	</div>
 
 	<div class="col-xs-6">
-		<select id="userGroups" name="userGroups" class="form-control">
+		<select id="selectedUserGroupId" name="selectedUserGroupId" class="form-control">
 			<option value="0">[ <%=translator.noFilterByUserGroupsLabel%> ]</option>
 			<% _.each( userGroups, function( userGroup ) { %>
 				<option value="<%=userGroup.userGroupId%>" <%= userGroup.userGroupId == selectedUserGroupId ? 'selected' : '' %> ><%=userGroup.userGroupName%></option>

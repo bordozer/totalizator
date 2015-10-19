@@ -61,6 +61,7 @@ define( function ( require ) {
 
 			_.each( this.nestedSettingsViews, function( view ) {
 				container.append( view.render().$el );
+				view.delegateEvents();
 			});
 
 			this.trigger( 'inner-view-rendered' );
@@ -74,7 +75,7 @@ define( function ( require ) {
 
 			if ( this.mode == MODE_WIDGET_SETTINGS ) {
 				return [
-					{ selector: 'js-apply-settings-action', icon: 'fa fa-save', link: '#', cssClass: 'btn-primary', text: translator.applySettingsAction, button: true }
+					{ selector: 'js-apply-settings-action', icon: 'fa fa-check', link: '#', cssClass: 'btn-primary', text: translator.applySettingsAction, button: true }
 					, { selector: 'js-close-settings-action', icon: 'fa fa-close', link: '#', text: translator.closeSettingsAction, button: true }
 				];
 			}
