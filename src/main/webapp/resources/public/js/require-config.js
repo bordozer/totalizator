@@ -54,7 +54,9 @@ var require = {
 			export: "$",
 			deps: [ 'jquery' ]
 		}
-	}
+	},
+
+	waitTimeout: 0
 
 	, deps: [ "jquery", "backbone", "underscore", "text", 'bootstrap', 'translator' ],
 
