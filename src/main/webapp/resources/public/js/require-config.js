@@ -56,7 +56,7 @@ var require = {
 		}
 	},
 
-	waitTimeout: 0
+	waitSeconds: 0
 
 	, deps: [ "jquery", "backbone", "underscore", "text", 'bootstrap', 'translator' ],
 
