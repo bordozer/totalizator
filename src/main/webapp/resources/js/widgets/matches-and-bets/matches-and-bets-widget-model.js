@@ -6,8 +6,6 @@ define( function ( require ) {
 
 	var MatchModel = Backbone.Model.extend( {
 
-		//idAttribute: 'matchId',
-
 		defaults: {
 			date: 0
 			, matchIds: []

@@ -44,6 +44,7 @@ define( function ( require ) {
 		, noMatchesFound: "No matches found"
 		, saveLabel: "Save"
 		, cancelLabel: "Cancel"
+		, scrollToTopLabel: "Scroll to top"
 	} );
 
 	var MATCHES_AND_BETS_MODE_MATCHES = 1;
@@ -69,6 +70,7 @@ define( function ( require ) {
 			, 'click .js-view_mode_tabled': '_switchMatchViewMode'
 			, 'click .js-view_mode_minimized': '_switchMatchViewMode'
 			, 'click .js-menu-date-picker': '_showDatePickerView'
+			, 'click .js-scroll-to-top': '_onScrollToTopClick'
 		},
 
 		initialize: function ( options ) {
@@ -185,6 +187,8 @@ define( function ( require ) {
 			}
 
 			this.renderFoundMatches();
+
+			this.footerHtml(  "<span class='fa fa-arrow-circle-o-up fa-2x text-muted js-scroll-to-top' title='" + translator.scrollToTopLabel + "'></span>" );
 		},
 
 		_renderNoMatchesFound: function() {
@@ -319,6 +323,12 @@ define( function ( require ) {
 			this.settingsModel.saveAttributes();
 
 			this.trigger( 'view:render' );
+		},
+
+		_onScrollToTopClick: function() {
+			$( 'html, body' ).animate( {
+				scrollTop: this.$el.offset().top - 20
+			}, 500 );
 		}
 	});
 } );
