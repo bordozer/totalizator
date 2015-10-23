@@ -64,13 +64,6 @@ public class TeamsStandoffServiceImpl implements TeamsStandoffService {
 
 		final List<Cup> cups = matches
 				.stream()
-				/*.filter( new Predicate<Match>() {
-
-					@Override
-					public boolean test( final Match match ) {
-						return matchService.isMatchFinished( match );
-					}
-				} )*/
 				.map( new Function<Match, Cup>() {
 
 					@Override
@@ -79,13 +72,22 @@ public class TeamsStandoffServiceImpl implements TeamsStandoffService {
 					}
 				} )
 				.distinct()
+				.filter( new Predicate<Cup>() {
+
+					@Override
+					public boolean test( final Cup cup ) {
+
+						return cupService.isCupPublic( cup );
+					}
+				} )
 				.sorted( new Comparator<Cup>() {
 
 					@Override
 					public int compare( final Cup o1, final Cup o2 ) {
+
 						return o2.getCupStartTime().compareTo( o1.getCupStartTime() );
 					}
-				}  )
+				} )
 				.collect( Collectors.toList() );
 
 		final List<TeamsCupStandoff> result = newArrayList();

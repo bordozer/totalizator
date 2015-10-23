@@ -65,19 +65,21 @@ public class TeamsStandoffsRestController {
 
 	private List<TeamsCupStandoffDTO> getTeamsCupStandoffDTOs( final Team team1, final Team team2, final User currentUser ) {
 
-		return teamsStandoffService.getTeamsStandoffByCups( team1, team2 ).stream().map( new Function<TeamsCupStandoff, TeamsCupStandoffDTO>() {
+		return teamsStandoffService.getTeamsStandoffByCups( team1, team2 )
+				.stream()
+				.map( new Function<TeamsCupStandoff, TeamsCupStandoffDTO>() {
 
-			@Override
-			public TeamsCupStandoffDTO apply( final TeamsCupStandoff o ) {
+					@Override
+					public TeamsCupStandoffDTO apply( final TeamsCupStandoff o ) {
 
-				final TeamsCupStandoffDTO dto = new TeamsCupStandoffDTO();
+						final TeamsCupStandoffDTO dto = new TeamsCupStandoffDTO();
 
-				dto.setCup( dtoService.transformCup( o.getCup(), currentUser ) );
-				dto.setScore1( o.getScore1() );
-				dto.setScore2( o.getScore2() );
+						dto.setCup( dtoService.transformCup( o.getCup(), currentUser ) );
+						dto.setScore1( o.getScore1() );
+						dto.setScore2( o.getScore2() );
 
-				return dto;
-			}
-		} ).collect( Collectors.toList() );
+						return dto;
+					}
+				} ).collect( Collectors.toList() );
 	}
 }
