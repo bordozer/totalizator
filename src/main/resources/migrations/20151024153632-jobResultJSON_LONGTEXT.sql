@@ -1,0 +1,1 @@
+ALTER TABLE jobLog CHANGE jobResultJSON jobResultJSON longtext;

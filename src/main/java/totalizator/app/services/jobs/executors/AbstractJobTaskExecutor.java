@@ -6,7 +6,7 @@ import totalizator.app.services.utils.DateTimeService;
 
 import java.time.LocalDateTime;
 
-public abstract class AbstractJobTaskExecutor extends Thread {
+public abstract class AbstractJobTaskExecutor implements Runnable {
 
 	protected final JobTask jobTask;
 	protected final LocalDateTime jobTaskInternalTime;

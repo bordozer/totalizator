@@ -65,7 +65,7 @@ public class JobTaskExecutionServiceImpl implements JobTaskExecutionService {
 
 		activeJobs.put( jobTaskId, jobTaskExecutor );
 
-		jobTaskExecutor.start();
+		new Thread( jobTaskExecutor ).start();
 	}
 
 	@Override
