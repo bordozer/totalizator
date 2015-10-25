@@ -20,4 +20,6 @@ public interface CupTeamBetDao extends GenericService<CupTeamBet> {
 	CupTeamBet load( final Cup cup, final Team team, final User user );
 
 	List<CupTeamBet> load( final Cup cup );
+
+	void clearForCup( final Cup cup );
 }

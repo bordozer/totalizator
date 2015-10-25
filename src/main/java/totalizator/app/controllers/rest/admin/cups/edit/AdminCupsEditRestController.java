@@ -109,13 +109,15 @@ public class AdminCupsEditRestController {
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{cupId}" )
-	public void delete( final @PathVariable( "cupId" ) int cupId ) {
+	public boolean delete( final @PathVariable( "cupId" ) int cupId ) {
 
 		if ( cupId == 0 ) {
-			return;
+			return true;
 		}
 
 		cupService.delete( cupId );
+
+		return true;
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/{cupId}/logo/" )

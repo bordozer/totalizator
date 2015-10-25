@@ -43,6 +43,8 @@ define( function ( require ) {
 		, teamLogoLabel: "Logo"
 		, cupPointsCalculationStrategyLabel: "Points calculation strategy"
 		, cupImportIdLabel: "Import ID"
+		, deleteСupLabel: "Delete cup"
+		, cupIsBeingDeletedLabel: "Cup is being deleted"
 	} );
 
 	var CupsView = WidgetView.extend( {
@@ -267,9 +269,16 @@ define( function ( require ) {
 		},
 
 		_deleteEntry: function () {
-			if ( confirm( "Delete cup '" + this.model.get( 'cupName' ) + "'?" ) ) {
-				this.model.destroy();
-				this.remove();
+
+			if ( confirm( translator.deleteСupLabel + " '" + this.model.get( 'cupName' ) + "'?" ) ) {
+
+				var view = this;
+
+				this.$( '.js-cup-entry' ).html( "<div class='text-danger text-center'><span class='fa fa-spinner fa-spin fa-2x'></span> <h3>" + translator.cupIsBeingDeletedLabel + "</h3></span></div>" );
+				this.model.destroy()
+						.then( function() {
+							view.remove();
+						});
 			}
 		},
 

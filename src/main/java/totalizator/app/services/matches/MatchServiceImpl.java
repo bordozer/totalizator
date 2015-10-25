@@ -116,6 +116,8 @@ public class MatchServiceImpl implements MatchService {
 
 		matchPointsService.delete( load( id ) );
 
+		// TODO: delete activities
+
 		matchRepository.delete( id );
 	}
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import totalizator.app.dao.CupDao;
 import totalizator.app.models.*;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.utils.DateTimeService;
 
 import java.util.Comparator;
@@ -30,7 +31,13 @@ public class CupServiceImpl implements CupService {
 	private CupWinnerService cupWinnerService;
 
 	@Autowired
+	private MatchService matchService;
+
+	@Autowired
 	private CupTeamService cupTeamService;
+
+	@Autowired
+	private CupBetsService cupBetsService;
 
 	@Autowired
 	private DateTimeService dateTimeService;
@@ -58,8 +65,21 @@ public class CupServiceImpl implements CupService {
 	@Override
 	@Transactional
 	public void delete( final int id ) {
-		cupTeamService.clearForCup( id );
-		cupRepository.delete( id );
+
+		final Cup cup = load( id );
+
+		cupTeamService.clearForCup( id ); 							// delete assigned teams
+
+		cupWinnerService.deleteAllWinners( cup );					// delete all cup winners
+
+		cupBetsService.clearForCup( cup );							// delete all cup winners user's bets
+
+		final List<Match> matches = matchService.loadAll( cup );	// delete all matches ( and bets )
+		for ( final Match match : matches ) {
+			matchService.delete( match.getId() );
+		}
+
+		cupRepository.delete( id );									// delete the cup
 	}
 
 	@Override

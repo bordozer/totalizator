@@ -93,4 +93,12 @@ public class CupTeamBetRepository implements CupTeamBetDao {
 				.setParameter( "cupId", cup.getId() )
 				.getResultList();
 	}
+
+	@Override
+	public void clearForCup( final Cup cup ) {
+
+		em.createQuery( "delete from CupTeamBet where cupId= :cupId" )
+				.setParameter( "cupId", cup.getId() )
+				.executeUpdate();
+	}
 }

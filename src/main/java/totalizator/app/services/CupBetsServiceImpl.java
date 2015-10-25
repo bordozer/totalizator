@@ -108,4 +108,9 @@ public class CupBetsServiceImpl implements CupBetsService {
 	public boolean canCupBeBet( final Cup cup, final User user ) {
 		return validateBettingAllowed( cup ).isPassed();
 	}
+
+	@Override
+	public void clearForCup( final Cup cup ) {
+		cupTeamBetRepository.clearForCup( cup );
+	}
 }

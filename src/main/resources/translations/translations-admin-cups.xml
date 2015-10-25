@@ -130,6 +130,27 @@
 	</translation>
 
 	<translation>
+		<nerd>Delete cup</nerd>
+		<ru><![CDATA[Удалить чемпионат]]></ru>
+		<ua><![CDATA[Видалити чемпiонат]]></ua>
+		<en><![CDATA[Delete cup]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Cup is being deleted</nerd>
+		<ru><![CDATA[Чемпионат удаляется]]></ru>
+		<ua><![CDATA[Чемпiонат у процессi видалення]]></ua>
+		<en><![CDATA[Cup is being deleted]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
