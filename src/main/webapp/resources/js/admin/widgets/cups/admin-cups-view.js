@@ -206,7 +206,7 @@ define( function ( require ) {
 			} ) );
 
 			if ( this.isSelected ) {
-				var container = this.$( '.js-cup-entry' );
+				var container = this.$( '.js-cup-entry-header' );
 				container.removeClass( 'panel-default' );
 				container.addClass( 'panel-primary' );
 			}
