@@ -1,10 +1,12 @@
 package totalizator.app.services.matches.imports.strategies.nba;
 
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
+import totalizator.app.services.utils.DateTimeService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,6 +17,9 @@ import java.util.TreeSet;
 
 @Service( value = "nbaGameParsingService" )
 public class NBAGameParsingService implements RemoteGameParsingService {
+
+	@Autowired
+	private DateTimeService dateTimeService;
 
 	@Override
 	public Set<RemoteGame> loadGamesFromJSON( final Cup cup, final String remoteGamesJSON ) {
@@ -80,6 +85,8 @@ public class NBAGameParsingService implements RemoteGameParsingService {
 		// 2015-04-15T00:00:00
 		final String _date = ( String ) ( ( ArrayList ) ( ( ArrayList ) nbaGame.getResultSets().get( 0 ).get( "rowSet" ) ).get( 0 ) ).get( 0 );
 
-		return LocalDateTime.parse( _date );
+		final LocalDateTime time = LocalDateTime.parse( _date );
+
+		return dateTimeService.plusHours( time, 15 );
 	}
 }
