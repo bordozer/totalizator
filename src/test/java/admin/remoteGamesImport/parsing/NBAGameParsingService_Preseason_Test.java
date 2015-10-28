@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
-import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.matches.imports.strategies.nba.NBAGameParsingService;
+import totalizator.app.services.utils.DateTimeServiceImpl;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -29,7 +29,9 @@ public class NBAGameParsingService_Preseason_Test {
 	@Test
 	public void extractRemoteGameIds() {
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		final NBAGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		nbaGameParsingService.setDateTimeService( new DateTimeServiceImpl() );
+
 		final Set<RemoteGame> remoteGameIds = nbaGameParsingService.loadGamesFromJSON( testData.cup, PRESEASON_REMOTE_GAMES_IDS_JSON );
 
 		assertEquals( remoteGameIds.size(), PRESEASON_EXPECTED_REMOTE_GAME_IDS.size() );
@@ -51,7 +53,8 @@ public class NBAGameParsingService_Preseason_Test {
 
 		final String remoteGameId = "0011400001";
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		final NBAGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		nbaGameParsingService.setDateTimeService( new DateTimeServiceImpl() );
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 		nbaGameParsingService.loadGameFromJSON( remoteGame, PRESEASON_FINISHED_REMOTE_GAME_JSON );
@@ -64,7 +67,7 @@ public class NBAGameParsingService_Preseason_Test {
 		assertEquals( "1610612740", remoteGame.getRemoteTeam2Id() );
 		assertEquals( "New Orleans", remoteGame.getRemoteTeam2Name() );
 
-		assertEquals( LocalDateTime.parse( "2014-10-04T00:00" ), remoteGame.getBeginningTime() );
+		assertEquals( LocalDateTime.parse( "2014-10-04T15:00" ), remoteGame.getBeginningTime() );
 		assertEquals( 1, remoteGame.getHomeTeamNumber() );
 
 		assertEquals( 86, remoteGame.getScore1() );
@@ -79,7 +82,8 @@ public class NBAGameParsingService_Preseason_Test {
 
 		final String remoteGameId = "0011500006";
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		final NBAGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		nbaGameParsingService.setDateTimeService( new DateTimeServiceImpl() );
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 		nbaGameParsingService.loadGameFromJSON( remoteGame, PRESEASON_FUTURE_REMOTE_GAME_JSON );
@@ -92,7 +96,7 @@ public class NBAGameParsingService_Preseason_Test {
 		assertEquals( "1610612748", remoteGame.getRemoteTeam2Id() );
 		assertEquals( "Miami", remoteGame.getRemoteTeam2Name() );
 
-		assertEquals( LocalDateTime.parse( "2015-10-04T00:00" ), remoteGame.getBeginningTime() );
+		assertEquals( LocalDateTime.parse( "2015-10-04T15:00" ), remoteGame.getBeginningTime() );
 		assertEquals( 2, remoteGame.getHomeTeamNumber() );
 
 		assertEquals( 0, remoteGame.getScore1() );

@@ -6,6 +6,7 @@ import totalizator.app.models.Cup;
 import totalizator.app.services.matches.imports.RemoteGame;
 import totalizator.app.services.matches.imports.RemoteGameParsingService;
 import totalizator.app.services.matches.imports.strategies.nba.NBAGameParsingService;
+import totalizator.app.services.utils.DateTimeServiceImpl;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -49,7 +50,8 @@ public class NBAGameParsingService_Regular_Playoff_Test {
 
 		final String remoteGameId = "0021400032";
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		final NBAGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		nbaGameParsingService.setDateTimeService( new DateTimeServiceImpl() );
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 		nbaGameParsingService.loadGameFromJSON( remoteGame, FINISHED_REMOTE_GAME_JSON );
@@ -62,7 +64,7 @@ public class NBAGameParsingService_Regular_Playoff_Test {
 		assertEquals( remoteGame.getRemoteTeam2Id(), "1610612754" );
 		assertEquals( remoteGame.getRemoteTeam2Name(), "Indiana" );
 
-		assertEquals( remoteGame.getBeginningTime(), LocalDateTime.parse( "2014-11-01T00:00" ) );
+		assertEquals( remoteGame.getBeginningTime(), LocalDateTime.parse( "2014-11-01T15:00" ) );
 		assertEquals( remoteGame.getHomeTeamNumber(), 1 );
 
 		assertEquals( remoteGame.getScore1(), 102 );
@@ -78,7 +80,8 @@ public class NBAGameParsingService_Regular_Playoff_Test {
 
 		final String remoteGameId = "0021500040";
 
-		final RemoteGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		final NBAGameParsingService nbaGameParsingService = new NBAGameParsingService();
+		nbaGameParsingService.setDateTimeService( new DateTimeServiceImpl() );
 
 		final RemoteGame remoteGame = new RemoteGame( remoteGameId );
 		nbaGameParsingService.loadGameFromJSON( remoteGame, FUTURE_REMOTE_GAME_JSON );
@@ -91,7 +94,7 @@ public class NBAGameParsingService_Regular_Playoff_Test {
 		assertEquals( remoteGame.getRemoteTeam2Id(), "1610612759" );
 		assertEquals( remoteGame.getRemoteTeam2Name(), "San Antonio" );
 
-		assertEquals( remoteGame.getBeginningTime(), LocalDateTime.parse( "2015-11-01T00:00" ) );
+		assertEquals( remoteGame.getBeginningTime(), LocalDateTime.parse( "2015-11-01T15:00" ) );
 		assertEquals( remoteGame.getHomeTeamNumber(), 1 );
 
 		assertEquals( remoteGame.getScore1(), 0 );

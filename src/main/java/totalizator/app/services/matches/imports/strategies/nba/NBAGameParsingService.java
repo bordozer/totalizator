@@ -89,4 +89,8 @@ public class NBAGameParsingService implements RemoteGameParsingService {
 
 		return dateTimeService.plusHours( time, 15 );
 	}
+
+	public void setDateTimeService( final DateTimeService dateTimeService ) {
+		this.dateTimeService = dateTimeService;
+	}
 }
