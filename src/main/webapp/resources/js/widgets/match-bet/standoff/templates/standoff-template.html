@@ -1,17 +1,21 @@
 <div class="row js-match-container">
-	<div class="col-xs-12 text-muted" style="height: 105px; overflow-y: scroll; font-size: 12px;">
+	<div class="col-xs-12 text-muted" style="height: 115px; overflow-y: scroll; font-size: 12px;">
 
-		<div class="row">
-			<div class="col-xs-12 text-center">
-				<span style="font-size: 12px;">
-					<strong><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a></strong>
-					<img src="<%=team1.teamLogo%>" title="<%=team1.teamName%>" height="16">
-				</span>
+		<div class="row" style="font-size: 11px;">
 
-				<span style="font-size: 12px;">
-					<img src="<%=team2.teamLogo%>" title="<%=team2.teamName%>" height="16">
-					<strong><a href="/totalizator/teams/<%=team2.teamId%>/"><%=team2.teamName%></a></strong>
-				</span>
+			<div class="col-xs-5 text-right">
+				<strong><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a></strong>
+			</div>
+			<div class="col-xs-1 text-center">
+				<img src="<%=team1.teamLogo%>" title="<%=team1.teamName%>" height="16">
+			</div>
+
+			<div class="col-xs-1 text-center">
+				<img src="<%=team2.teamLogo%>" title="<%=team2.teamName%>" height="16">
+			</div>
+
+			<div class="col-xs-4">
+				<strong><a href="/totalizator/teams/<%=team2.teamId%>/"><%=team2.teamName%></a></strong>
 			</div>
 		</div>
 
