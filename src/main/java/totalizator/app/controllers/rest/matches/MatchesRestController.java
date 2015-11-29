@@ -53,6 +53,13 @@ public class MatchesRestController {
 		return dtoService.transformMatches( matchService.loadAll( cup ), getCurrentUser( principal ) );
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/cup/{cupId}/teams/{team1Id}/vs/{team2Id}/" )
+	public List<MatchDTO> cupTeamsMatches( final @PathVariable( "cupId" ) int cupId
+			, final @PathVariable( "team1Id" ) int team1Id, final @PathVariable( "team2Id" ) int team2Id
+			, final Principal principal ) {
+		return dtoService.transformMatches( matchService.loadAll( cupId, team1Id, team2Id ), getCurrentUser( principal ) );
+	}
+
 	private User getCurrentUser( final Principal principal ) {
 		return userService.findByLogin( principal.getName() );
 	}

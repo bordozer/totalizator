@@ -401,6 +401,26 @@ define( function ( require ) {
 			return result;
 		},
 
+
+
+		loadTeamsCupMatches: function( cupId, team1Id, team2Id ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/matches/cup/' + cupId + '/teams/' + team1Id + '/vs/' + team2Id + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
+		},
+
 		filterCupsByCategory: function( cups, categoryId ) {
 			return _.filter( cups, function( cup ) {
 				return cup.category.categoryId == categoryId;

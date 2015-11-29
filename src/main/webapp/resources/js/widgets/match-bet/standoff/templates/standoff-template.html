@@ -1,0 +1,77 @@
+<div class="row js-match-container">
+	<div class="col-xs-12 text-muted" style="height: 95px; overflow-y: scroll; font-size: 12px;">
+
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<span style="font-size: 12px;">
+					<strong><a href="/totalizator/teams/<%=team1.teamId%>/"><%=team1.teamName%></a></strong>
+					<img src="<%=team1.teamLogo%>" title="<%=team1.teamName%>" height="16">
+				</span>
+
+				<span style="font-size: 12px;">
+					<img src="<%=team2.teamLogo%>" title="<%=team2.teamName%>" height="16">
+					<strong><a href="/totalizator/teams/<%=team2.teamId%>/"><%=team2.teamName%></a></strong>
+				</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+
+				<% _.each( standoffsByCup, function( cupStandoff ) { %>
+
+					<div class="row bottom-dotted">
+
+						<div class="col-xs-8">
+							<a href="/totalizator/cups/<%=cupStandoff.cup.cupId%>/"><%=cupStandoff.cup.cupName%></a>
+						</div>
+
+						<div class="col-xs-4 text-right">
+							<strong>
+								<%=cupStandoff.score1%> : <%=cupStandoff.score2%>
+							</strong>
+						</div>
+					</div>
+
+					<% if( matchesMap[ cupStandoff.cup.cupId ] ) { %>
+						<% _.each( matchesMap[ cupStandoff.cup.cupId ], function( transformer ) { %>
+
+							<% var matchResults = transformer.getMatchResults() %>
+
+							<div class="row">
+								<div class="col-xs-2 text-right">
+									<% if( transformer.isFinished() ) { %>
+										<span class="fa fa-flag-checkered"></span>
+									<% } %>
+								</div>
+
+								<div class="col-xs-6 text-right">
+									<small><%= transformer.formatDate() %> <sup><%= transformer.formatTime() %></sup></small>
+								</div>
+								<div class="col-xs-4">
+									<small>
+										<% if( ! transformer.isFinished() ) { %>
+											<span class="text-muted"><strong>?</strong></span>
+										<% } %>
+										<% if( transformer.isFinished() ) { %>
+											<span class="<%= matchResults.style1 %>"><%= transformer.score1() %></span>
+										<% } %>
+										:
+										<% if( ! transformer.isFinished() ) { %>
+											<span class="text-muted"><strong>?</strong></span>
+										<% } %>
+										<% if( transformer.isFinished() ) { %>
+											<span class="<%= matchResults.style2 %>"><%= transformer.score2() %></span>
+										<% } %>
+									</small>
+								</div>
+							</div>
+						<% }) %>
+					<% } %>
+				<% }) %>
+
+			</div>
+		</div>
+
+	</div>
+</div>

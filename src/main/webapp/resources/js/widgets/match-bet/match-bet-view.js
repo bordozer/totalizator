@@ -15,6 +15,7 @@ define( function ( require ) {
 	var MatchTeamsView = require( './teams/match-teams-view' );
 	var BetZoneView = require( './bet-zone/bet-zone-view' );
 	var MatchDescriptionView = require( './description/match-description-view' );
+	var StandoffView = require( './standoff/standoff-view' );
 
 	var MatchTransformer = require( './match-transformer' );
 
@@ -179,7 +180,12 @@ define( function ( require ) {
 
 			var matchBet = this.model.toJSON();
 
-			this._renderMatchTeams();
+			new StandoffView( {
+				cup: matchBet.match.cup
+				, team1: matchBet.match.team1
+				, team2: matchBet.match.team2
+				, el: this.$( this.windowBodyContainerSelector )
+			} );
 
 			var view = new BetZoneView( {
 				matchBet: matchBet

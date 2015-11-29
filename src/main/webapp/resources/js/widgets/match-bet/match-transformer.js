@@ -15,6 +15,8 @@ define( function ( require ) {
 
 	return function ( match, bet, team1Id, team2Id ) {
 
+		var isMatchFinished = match.matchFinished;
+
 		function _transformMatch( match, team1Id, team2Id ) {
 
 			var result = {};
@@ -130,8 +132,16 @@ define( function ( require ) {
 				return pointsStylist.styleBetPoints( _matchTransformed, _betTransformed );
 			},
 
+			formatDate: function() {
+				return dateTimeService.formatDateDisplay( match.beginningTime );
+			},
+
 			formatTime: function() {
 				return dateTimeService.formatTimeDisplay( match.beginningTime );
+			},
+
+			isFinished: function() {
+				return isMatchFinished;
 			}
 		}
 	};
