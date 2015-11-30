@@ -24,17 +24,52 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
-		<ua><![CDATA[]]></ua>
+		<nerd>Won games</nerd>
+		<ru><![CDATA[W]]></ru>
+		<ua><![CDATA[W]]></ua>
+		<en><![CDATA[W]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Lost games</nerd>
+		<ru><![CDATA[L]]></ru>
+		<ua><![CDATA[L]]></ua>
+		<en><![CDATA[L]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Total games</nerd>
+		<ru><![CDATA[T]]></ru>
+		<ua><![CDATA[T]]></ua>
+		<en><![CDATA[T]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<en><![CDATA[]]></en>
 		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
+import totalizator.app.services.CupService;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
+import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.teams.TeamsCupStandoff;
 import totalizator.app.services.teams.TeamsStandoffService;
 
@@ -29,6 +31,12 @@ public class TeamsStandoffsRestController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private MatchService matchService;
+
+	@Autowired
+	private CupService cupService;
 
 	@Autowired
 	private TeamsStandoffService teamsStandoffService;
@@ -63,6 +71,33 @@ public class TeamsStandoffsRestController {
 		return dto;
 	}
 
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	@RequestMapping( method = RequestMethod.GET, value = "/team1/{team1Id}/team2/{team2Id}/statistics/cup/{cupId}/", produces = APPLICATION_JSON_VALUE )
+	public TeamsCupStatistics matchAndBetTeamsStatistics( final @PathVariable( "team1Id" ) int team1Id, final @PathVariable( "team2Id" ) int team2Id,
+														 final @PathVariable( "cupId" ) int cupId, final Principal principal ) {
+
+		final Cup cup = cupService.load( cupId );
+		final Team team1 = teamService.load( team1Id );
+		final Team team2 = teamService.load( team2Id );
+
+		final TeamsCupStatistics result = new TeamsCupStatistics();
+
+		final int team1MonMatchCount = matchService.getWonMatchCount( cup, team1 );
+		final int team1FinishedMatchCount = matchService.getFinishedMatchCount( cup, team1 );
+		result.setTeam1won( team1MonMatchCount );
+		result.setTeam1lost( team1FinishedMatchCount - team1MonMatchCount );
+		result.setTeam1Total( team1FinishedMatchCount );
+
+		final int team2MonMatchCount = matchService.getWonMatchCount( cup, team2 );
+		final int team2FinishedMatchCount = matchService.getFinishedMatchCount( cup, team2 );
+		result.setTeam2won( team2MonMatchCount );
+		result.setTeam2lost( team2FinishedMatchCount - team2MonMatchCount );
+		result.setTeam2Total( team2FinishedMatchCount );
+
+		return result;
+	}
+
 	private List<TeamsCupStandoffDTO> getTeamsCupStandoffDTOs( final Team team1, final Team team2, final User currentUser ) {
 
 		return teamsStandoffService.getTeamsStandoffByCups( team1, team2 )
@@ -81,5 +116,9 @@ public class TeamsStandoffsRestController {
 						return dto;
 					}
 				} ).collect( Collectors.toList() );
+	}
+
+	private User getCurrentUser( final Principal principal ) {
+		return userService.findByLogin( principal.getName() );
 	}
 }

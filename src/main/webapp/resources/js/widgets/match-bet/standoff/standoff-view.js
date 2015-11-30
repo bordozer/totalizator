@@ -15,7 +15,9 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		title: ""
+		won: "Won games"
+		, lost: "Lost games"
+		, total: "Total games"
 	} );
 
 	return Backbone.View.extend( {
@@ -47,6 +49,7 @@ define( function ( require ) {
 				team1: this.team1
 				, team2: this.team2
 				, matchesMap: matchesMap
+				, wonLost: this.loadTeamsLostWonStatistics( this.cup.cupId, this.team1.teamId, this.team2.teamId )
 				, translator: translator
 			} );
 
@@ -77,6 +80,24 @@ define( function ( require ) {
 			}
 
 			return ret;
+		},
+
+		loadTeamsLostWonStatistics: function( cupId, team1Id, team2Id ) {
+			var result = {};
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/teams/team1/' + team1Id + '/team2/' + team2Id + '/statistics/cup/' + cupId + '/',
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					alert( translator.serverError );
+				}
+			} );
+
+			return result;
 		}
 	} );
 } );
