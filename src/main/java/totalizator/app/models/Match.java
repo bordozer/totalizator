@@ -33,6 +33,10 @@ import static totalizator.app.models.Match.*;
 				query = "select c from Match c where ( cupId= :cupId ) and  ( ( team1Id= :team1Id and team2Id= :team2Id ) or ( team1Id= :team2Id and team2Id= :team1Id ) ) order by beginningTime desc"
 		),
 		@NamedQuery(
+				name = FIND_BY_CUP_AND_TEAMS_FINISHED,
+				query = "select c from Match c where ( cupId= :cupId ) and ( matchFinished = true ) and ( ( team1Id= :team1Id and team2Id= :team2Id ) or ( team1Id= :team2Id and team2Id= :team1Id ) ) order by beginningTime desc"
+		),
+		@NamedQuery(
 				name = FIND_ALL_TEAM_MATCHES_FOR_CUP,
 				query = "select c from Match c where ( cupId= :cupId ) and ( team1Id= :teamId or team2Id= :teamId ) order by beginningTime desc"
 		),
@@ -96,6 +100,7 @@ public class Match extends AbstractEntity {
 	public static final String FIND_BY_TEAM = "matches.findByTeam";
 	public static final String FIND_BY_TEAMS = "matches.findByTeams";
 	public static final String FIND_BY_CUP_AND_TEAMS = "matches.findByCupAndTeams";
+	public static final String FIND_BY_CUP_AND_TEAMS_FINISHED = "matches.FIND_BY_CUP_AND_TEAMS_FINISHED";
 	public static final String FIND_ALL_TEAM_MATCHES_FOR_CUP = "matches.findByCupAndTeam";
 	public static final String FIND_MATCH_BY_REMOTE_GAME_ID = "matches.findByRemoteGameId";
 	public static final String LOAD_MATCH_COUNT_FOR_CUP = "cups.loadCupMatchCount";

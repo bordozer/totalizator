@@ -408,7 +408,7 @@ define( function ( require ) {
 
 			$.ajax( {
 				method: 'GET',
-				url: '/rest/matches/cup/' + cupId + '/teams/' + team1Id + '/vs/' + team2Id + '/',
+				url: '/rest/matches/cup/' + cupId + '/teams/' + team1Id + '/vs/' + team2Id + '/finished/',
 				async: false,
 				success: function ( data ) {
 					result = data;

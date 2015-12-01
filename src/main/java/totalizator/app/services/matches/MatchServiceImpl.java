@@ -157,6 +157,11 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	public List<Match> loadAllFinished( final int cupId, final int team1Id, final int team2Id ) {
+		return newArrayList( matchRepository.loadAllFinished( cupId, team1Id, team2Id ) );
+	}
+
+	@Override
 	public boolean isWinner( final Match match, final Team team ) {
 
 		if ( match.getTeam1().equals( team ) ) {
