@@ -1,4 +1,4 @@
-define( function( require ) {
+define( function ( require ) {
 
 	'use strict';
 
@@ -9,22 +9,22 @@ define( function( require ) {
 	var Model = require( './admin-model' );
 	var View = require( './admin-view' );
 
-	function init( container ) {
+	function init( container, options ) {
 
-		var model = new Model.AdminModel();
-		var view = new View.AdminView( { model: model, el: container } );
+		var model = new Model.AdminModel( { options: options } );
+		var view = new View.AdminView( { model: model, el: container, options: options } );
 
 		return {
 
-			model: function() {
+			model: function () {
 				return model;
 			},
 
-			view: function() {
+			view: function () {
 				return view;
 			}
 		}
 	}
 
 	return init;
-});
+} );

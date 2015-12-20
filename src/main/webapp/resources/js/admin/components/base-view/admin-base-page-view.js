@@ -16,6 +16,7 @@ define( function ( require ) {
 		, menuUsersLabel: 'Users'
 		, menuAdminLabel: 'Administration'
 		, menuControlPanelLabel: 'Admin: Control panel'
+		, categoriesCupsTeamsLabel: 'Categories, cups, teams'
 		, menuMatchesLabel: 'Matches'
 		, pointsCalculationStrategiesLabel: 'Points calculation strategies'
 		, gamesDataImportLabel: 'Games data import'
@@ -42,6 +43,7 @@ define( function ( require ) {
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/', text: translator.menuAdminLabel }
 				, { selector: '', icon: 'fa fa-cog', link: '/admin/control-panel/', text: translator.menuControlPanelLabel }
 				, { selector: 'divider' }
+				, { selector: '', icon: 'fa fa-university', link: '/admin/categories-cups-teams/', text: translator.categoriesCupsTeamsLabel }
 				, { selector: '', icon: 'fa fa-futbol-o', link: '/admin/matches/', text: translator.menuMatchesLabel }
 				, { selector: '', icon: 'fa fa-balance-scale', link: '/admin/points-calculation-strategies/', text: translator.pointsCalculationStrategiesLabel }
 				, { selector: '', icon: 'fa fa-map-o', link: '/admin/dictionaries/', text: translator.dictionariesLabel }

@@ -21,7 +21,15 @@
 				{ link: '#', title: translator.title }
 			];
 
-			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs, options: {} } );
+			var categoryId = ${adminModel.categoryId};
+			var cupId = ${adminModel.cupId};
+
+			var options = {
+				categoryId: categoryId
+				, cupId: cupId
+			};
+
+			var adminView = new Admin( { el: $( '.admin-main-page' ), bodyRenderer: adminMainPage, breadcrumbs: breadcrumbs, options: options } );
 			adminView.render();
 		} );
 	</script>

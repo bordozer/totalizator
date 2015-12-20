@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import totalizator.app.services.UserService;
+import totalizator.app.models.Cup;
+import totalizator.app.services.CupService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping( "admin" )
@@ -17,7 +20,7 @@ public class AdminController {
 	private static final String VIEW_TRANSLATIONS = "/admin/Translations";
 
 	@Autowired
-	private UserService userService;
+	private CupService cupService;
 
 	@ModelAttribute( MODEL_NAME )
 	public AdminModel preparePagingModel() {
@@ -26,6 +29,17 @@ public class AdminController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String main( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
+
+		final List<Cup> currentCups = cupService.loadAllCurrent();
+		if ( currentCups.size() == 0 ) {
+			return VIEW_MAIN_PAGE;
+		}
+
+		final Cup cup = currentCups.get( 0 );
+
+		model.setCategoryId( cup.getCategory().getId() );
+		model.setCupId( cup.getId() );
+
 		return VIEW_MAIN_PAGE;
 	}
 
