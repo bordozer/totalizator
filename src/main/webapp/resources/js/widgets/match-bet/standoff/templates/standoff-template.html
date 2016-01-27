@@ -52,6 +52,18 @@
 						</div>
 					</div>
 
+					<% if( teamsLastGamesStat.cup.cupId == cupStandoff.cup.cupId ) { %>
+						<div class="row">
+							<div class="col-xs-6 text-center">
+								<%=translator.lastGamesWon%>: <%=teamsLastGamesStat.team1CurrentCupLastGamesWon%> / <%=teamsLastGamesStat.team1CurrentCupLastGames%>
+							</div>
+							<div class="col-xs-6 text-center">
+								<%=translator.lastGamesWon%>: <%=teamsLastGamesStat.team2CurrentCupLastGamesWon%> / <%=teamsLastGamesStat.team2CurrentCupLastGames%>
+							</div>
+						</div>
+
+					<% } %>
+
 					<% if( matchesMap[ cupStandoff.cup.cupId ] ) { %>
 
 						<% _.each( matchesMap[ cupStandoff.cup.cupId ], function( transformer ) { %>
@@ -70,6 +82,9 @@
 								</div>
 								<div class="col-xs-4">
 									<small>
+										<% if( transformer.homeTeamNumber() == 1 ) { %>
+											<span class="fa fa-home"></span>
+										<% } %>
 										<% if( ! transformer.isFinished() ) { %>
 											<span class="text-muted"><strong>?</strong></span>
 										<% } %>
@@ -82,6 +97,9 @@
 										<% } %>
 										<% if( transformer.isFinished() ) { %>
 											<span class="<%= matchResults.style2 %>"><%= transformer.score2() %></span>
+										<% } %>
+										<% if( transformer.homeTeamNumber() == 2 ) { %>
+											<span class="fa fa-home"></span>
 										<% } %>
 									</small>
 								</div>
