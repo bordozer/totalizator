@@ -68,7 +68,7 @@ public class TeamsStandoffsRestController {
 		final List<TeamsCupStandoffDTO> standoffByCup = getTeamsCupStandoffDTOs( cup, team1, team2, currentUser );
 		dto.setStandoffsByCup( standoffByCup );
 
-		dto.setTeamsLastGamesStat(getTeamsLastGamesStat(cup, team1, team2, currentUser));
+		dto.setTeamsLastGamesStat(getTeamsLastGamesStat(team1, team2, currentUser));
 
 		return dto;
 	}
@@ -118,7 +118,15 @@ public class TeamsStandoffsRestController {
                 }).collect( Collectors.toList() );
 	}
 
-	private TeamsLastGamesStat getTeamsLastGamesStat(final Cup cup, final Team team1, final Team team2, final User currentUser) {
+	private TeamsLastGamesStat getTeamsLastGamesStat(final Team team1, final Team team2, final User currentUser) {
+
+		List<Cup> cups = cupService.loadPublicCurrent(team1.getCategory());
+		if (cups == null || cups.size() == 0) {
+			return new TeamsLastGamesStat();
+		}
+
+		final Cup cup = cups.get(0);
+
 		TeamsLastGamesStat result = new TeamsLastGamesStat();
 
 		result.setCup(dtoService.transformCup(cup, currentUser));
