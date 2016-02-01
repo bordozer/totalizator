@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.models.Cup;
+import totalizator.app.models.Match;
 import totalizator.app.models.Team;
 import totalizator.app.models.User;
 import totalizator.app.services.CupService;
@@ -12,12 +13,11 @@ import totalizator.app.services.DTOService;
 import totalizator.app.services.TeamService;
 import totalizator.app.services.UserService;
 import totalizator.app.services.matches.MatchService;
-import totalizator.app.services.teams.TeamsCupStandoff;
 import totalizator.app.services.teams.TeamsStandoffService;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -65,8 +65,10 @@ public class TeamsStandoffsRestController {
 
 		dto.setCupToShow( dtoService.transformCup( cup, userService.findByLogin( principal.getName() ) ) );
 
-		final List<TeamsCupStandoffDTO> standoffByCup = getTeamsCupStandoffDTOs( team1, team2, currentUser );
+		final List<TeamsCupStandoffDTO> standoffByCup = getTeamsCupStandoffDTOs( cup, team1, team2, currentUser );
 		dto.setStandoffsByCup( standoffByCup );
+
+		dto.setTeamsLastGamesStat(getTeamsLastGamesStat(team1, team2, currentUser));
 
 		return dto;
 	}
@@ -98,24 +100,52 @@ public class TeamsStandoffsRestController {
 		return result;
 	}
 
-	private List<TeamsCupStandoffDTO> getTeamsCupStandoffDTOs( final Team team1, final Team team2, final User currentUser ) {
+	private List<TeamsCupStandoffDTO> getTeamsCupStandoffDTOs(final Cup lastStandoffCup, final Team team1, final Team team2, final User currentUser) {
 
 		return teamsStandoffService.getTeamsStandoffByCups( team1, team2 )
 				.stream()
-				.map( new Function<TeamsCupStandoff, TeamsCupStandoffDTO>() {
+				.map(cupStandoff -> {
 
-					@Override
-					public TeamsCupStandoffDTO apply( final TeamsCupStandoff o ) {
+					Cup cup = cupStandoff.getCup();
 
-						final TeamsCupStandoffDTO dto = new TeamsCupStandoffDTO();
+					final TeamsCupStandoffDTO dto = new TeamsCupStandoffDTO();
 
-						dto.setCup( dtoService.transformCup( o.getCup(), currentUser ) );
-						dto.setScore1( o.getScore1() );
-						dto.setScore2( o.getScore2() );
+					dto.setCup( dtoService.transformCup(cup, currentUser ) );
+                    dto.setScore1( cupStandoff.getScore1() );
+                    dto.setScore2( cupStandoff.getScore2() );
 
-						return dto;
-					}
-				} ).collect( Collectors.toList() );
+                    return dto;
+                }).collect( Collectors.toList() );
+	}
+
+	private TeamsLastGamesStat getTeamsLastGamesStat(final Team team1, final Team team2, final User currentUser) {
+
+		List<Cup> cups = cupService.loadPublicCurrent(team1.getCategory());
+		if (cups == null || cups.size() == 0) {
+			return new TeamsLastGamesStat();
+		}
+
+		final Cup cup = cups.get(0);
+
+		TeamsLastGamesStat result = new TeamsLastGamesStat();
+
+		result.setCup(dtoService.transformCup(cup, currentUser));
+
+		final List<Match> team1Matches = matchService.getLastNMatches(cup, team1, 3);
+		final List<Match> team2Matches = matchService.getLastNMatches(cup, team2, 3);
+
+		result.setTeam1CurrentCupLastGames(team1Matches.size());
+		result.setTeam1CurrentCupLastGamesWon(team1Matches.stream()
+				.filter(match -> matchService.isWinner(match, team1))
+				.count()
+		);
+
+		result.setTeam2CurrentCupLastGames(team2Matches.size());
+		result.setTeam2CurrentCupLastGamesWon(team2Matches.stream()
+				.filter(match -> matchService.isWinner(match, team2))
+				.count());
+
+		return result;
 	}
 
 	private User getCurrentUser( final Principal principal ) {

@@ -12,6 +12,8 @@ public class TeamsStandoffsDTO {
 	private CupDTO cupToShow;
 	private List<TeamsCupStandoffDTO> standoffsByCup;
 
+	private TeamsLastGamesStat teamsLastGamesStat;
+
 	public TeamDTO getTeam1() {
 		return team1;
 	}
@@ -42,5 +44,13 @@ public class TeamsStandoffsDTO {
 
 	public void setStandoffsByCup( final List<TeamsCupStandoffDTO> standoffsByCup ) {
 		this.standoffsByCup = standoffsByCup;
+	}
+
+	public TeamsLastGamesStat getTeamsLastGamesStat() {
+		return teamsLastGamesStat;
+	}
+
+	public void setTeamsLastGamesStat(final TeamsLastGamesStat teamsLastGamesStat) {
+		this.teamsLastGamesStat = teamsLastGamesStat;
 	}
 }

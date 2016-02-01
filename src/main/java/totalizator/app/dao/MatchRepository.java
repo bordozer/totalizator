@@ -1,5 +1,6 @@
 package totalizator.app.dao;
 
+import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -259,5 +260,16 @@ public class MatchRepository implements MatchDao {
 		final List<Match> list = query.getResultList();
 
 		return list.size() == 1 ? list.get( 0 ) : null;
+	}
+
+	@Override
+	public List<Match> getLastNMatches(final Cup cup, final Team team, final int n) {
+
+		return em.createNamedQuery( Match.LOAD_LAST_TEAM_MATCHES, Match.class )
+				.setParameter( "cupId", cup.getId() )
+				.setParameter( "teamId", team.getId() )
+				.setFirstResult( 0 )
+				.setMaxResults( n )
+				.getResultList();
 	}
 }

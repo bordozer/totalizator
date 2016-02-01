@@ -66,4 +66,6 @@ public interface MatchService extends GenericService<Match> {
 	Match getNearestFutureMatch( final Cup cup, final LocalDateTime onTime );
 
 	Match getFirstMatch( final Cup cup );
+
+	List<Match> getLastNMatches(final Cup cup, final Team team, final int n);
 }

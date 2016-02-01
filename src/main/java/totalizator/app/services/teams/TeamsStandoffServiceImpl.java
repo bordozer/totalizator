@@ -64,50 +64,21 @@ public class TeamsStandoffServiceImpl implements TeamsStandoffService {
 
 		final List<Cup> cups = matches
 				.stream()
-				.map( new Function<Match, Cup>() {
-
-					@Override
-					public Cup apply( final Match match ) {
-						return match.getCup();
-					}
-				} )
+				.map(Match::getCup)
 				.distinct()
-				.filter( new Predicate<Cup>() {
-
-					@Override
-					public boolean test( final Cup cup ) {
-
-						return cupService.isCupPublic( cup );
-					}
-				} )
-				.sorted( new Comparator<Cup>() {
-
-					@Override
-					public int compare( final Cup o1, final Cup o2 ) {
-
-						return o2.getCupStartTime().compareTo( o1.getCupStartTime() );
-					}
-				} )
+				.filter(cup -> cupService.isCupPublic( cup ))
+				.sorted((o1, o2) -> o2.getCupStartTime().compareTo( o1.getCupStartTime() ))
 				.collect( Collectors.toList() );
 
 		final List<TeamsCupStandoff> result = newArrayList();
 
-		cups.forEach( new Consumer<Cup>() {
+		cups.forEach(cup -> {
 
-			@Override
-			public void accept( final Cup cup ) {
+            final List<Match> cupMatches = matches.stream()
+					.filter(match -> match.getCup().equals( cup )).collect( Collectors.toList() );
 
-				final List<Match> cupMatches = matches.stream().filter( new Predicate<Match>() {
-
-					@Override
-					public boolean test( final Match match ) {
-						return match.getCup().equals( cup );
-					}
-				} ).collect( Collectors.toList() );
-
-				result.add( new TeamsCupStandoff( cup, getScore( cupMatches, team1 ), getScore( cupMatches, team2 ) ) );
-			}
-		} );
+            result.add( new TeamsCupStandoff( cup, getScore( cupMatches, team1 ), getScore( cupMatches, team2 ) ) );
+        });
 
 		return result;
 	}

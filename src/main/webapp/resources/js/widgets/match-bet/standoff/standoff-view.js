@@ -18,6 +18,7 @@ define( function ( require ) {
 		won: "Won games"
 		, lost: "Lost games"
 		, total: "Total games"
+		, lastGamesWon: "Last games won"
 	} );
 
 	return Backbone.View.extend( {
@@ -65,7 +66,6 @@ define( function ( require ) {
 			if ( standoffsByCup == null || standoffsByCup == undefined || standoffsByCup.length == 0 ) {
 				return {};
 			}
-
 
 			var mapper = function ( match ) {
 				return new MatchTransformer( match, null, team1.teamId, team2.teamId );

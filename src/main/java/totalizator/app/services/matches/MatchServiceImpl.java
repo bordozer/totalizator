@@ -251,7 +251,12 @@ public class MatchServiceImpl implements MatchService {
 		return matchRepository.getFirstMatch( cup );
 	}
 
-	private List<Match> sort( final List<Match> matches ) {
+	@Override
+	public List<Match> getLastNMatches(final Cup cup, final Team team, final int n) {
+		return matchRepository.getLastNMatches(cup, team, n);
+	}
+
+	private List<Match> sort(final List<Match> matches ) {
 
 		Collections.sort( matches, new Comparator<Match>() {
 			@Override
