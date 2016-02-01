@@ -182,6 +182,7 @@ define( function ( require ) {
 
 			new StandoffView( {
 				cup: matchBet.match.cup
+				, match: matchBet.match
 				, team1: matchBet.match.team1
 				, team2: matchBet.match.team2
 				, el: this.$( this.windowBodyContainerSelector )

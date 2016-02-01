@@ -26,6 +26,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.cup = options.cup;
+			this.match = options.match;
 			this.team1 = options.team1;
 			this.team2 = options.team2;
 
@@ -46,7 +47,8 @@ define( function ( require ) {
 			var matchesMap = this._getMatchesMap( jmodel.standoffsByCup, this.cup, this.team1, this.team2  );
 
 			var data = _.extend( {}, jmodel, {
-				team1: this.team1
+				match: this.match
+				, team1: this.team1
 				, team2: this.team2
 				, matchesMap: matchesMap
 				, wonLost: this.loadTeamsLostWonStatistics( this.cup.cupId, this.team1.teamId, this.team2.teamId )
