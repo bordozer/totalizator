@@ -1,7 +1,7 @@
 <div class="row js-match-container">
 	<div class="col-xs-12 text-muted" style="height: 110px; font-size: 12px;">
 
-		<div class="row" style="font-size: 11px;">
+		<div class="row bg-success" style="font-size: 11px;">
 
 			<div class="col-xs-5 text-right">
 				<% if( match.homeTeamNumber == 1 ) { %>
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 
-		<div class="row" style="font-size: 9px;">
+		<div class="row bg-success" style="font-size: 9px;">
 			<div class="col-xs-5 text-right">
 				<span class="fa text-success"><%=translator.won%><strong><%= wonLost.team1won %></strong></span> /
 				<span class="fa text-danger"><%=translator.lost%><strong><%= wonLost.team1lost %></strong></span> /
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 
-		<div class="row" style="height: 100px; overflow-y: scroll;">
+		<div class="row" style="height: 98px; overflow-y: scroll;">
 			<div class="col-xs-12">
 
 				<% _.each( standoffsByCup, function( cupStandoff ) { %>
