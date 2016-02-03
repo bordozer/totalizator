@@ -13,6 +13,8 @@ public class MatchBetDTO {
 	private boolean bettingAllowed;
 	private String bettingValidationMessage;
 
+	private int totalBets;
+
 	public MatchBetDTO() {
 	}
 
@@ -67,6 +69,14 @@ public class MatchBetDTO {
 
 	public void setUserMatchPointsHolder( final UserMatchPointsHolderDTO userMatchPointsHolder ) {
 		this.userMatchPointsHolder = userMatchPointsHolder;
+	}
+
+	public int getTotalBets() {
+		return totalBets;
+	}
+
+	public void setTotalBets(final int totalBets) {
+		this.totalBets = totalBets;
 	}
 
 	@Override

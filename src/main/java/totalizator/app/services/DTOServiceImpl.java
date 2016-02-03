@@ -458,6 +458,7 @@ public class DTOServiceImpl implements DTOService {
 		final ValidationResult validationResult = matchBetsService.validateBettingAllowed( match, betsOfUser );
 		matchBetDTO.setBettingAllowed( validationResult.isPassed() );
 		matchBetDTO.setBettingValidationMessage( validationResult.getMessage() );
+		matchBetDTO.setTotalBets(matchBetsService.betsCount(match.getId()));
 
 		final MatchBet matchBet = matchBetsService.load( betsOfUser, match );
 

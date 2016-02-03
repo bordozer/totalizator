@@ -39,6 +39,8 @@ define( function ( require ) {
 
 		, matchBettingIsDenied: "Match betting is denied"
 		, pointsLabel: "Points"
+		, betsLabel: "Bets count"
+		, anotherBetsAreHidden: "Bets of another users will be shown after the match start"
 	} );
 
 	var MODE_INFO = 1;
