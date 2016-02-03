@@ -63,11 +63,15 @@
 
 		<tr>
 			<td colspan="3" class="text-muted" style="font-size: 11px; padding-left: 5px;">
-				<%=beginningDate%> <sup><%=beginningTime%></sup> ( <%=timeToMatchBeginningTime%> ).
-				<a href="/totalizator/matches/<%=match.matchId%>/bets/"><%=translator.betsLabel%></a>: <strong><%=totalBets%></strong>
+				<%=beginningDate%> <sup><%=beginningTime%></sup> ( <%=timeToMatchBeginningTime%> )
+				&nbsp;&nbsp;
 				<% if( ! match.showAnotherBets ) { %>
-					<span class="fa fa-lock" title="<%=translator.anotherBetsAreHidden%>"></span>
+					<a class="fa fa-lock" href="/totalizator/matches/<%=match.matchId%>/bets/" title="<%=translator.betsLabel%>: <%=totalBets%>. <%=translator.anotherBetsAreHidden%>"></a>
 				<% } %>
+				<% if( match.showAnotherBets ) { %>
+					<a class="fa fa-money" href="/totalizator/matches/<%=match.matchId%>/bets/" title="<%=translator.betsLabel%>: <%=totalBets%>"></a>
+				<% } %>
+				<strong><%=totalBets%></strong>
 			</td>
 
 			<td colspan="2" class="text-center" title="<%= translator.pointsLabel %>">
