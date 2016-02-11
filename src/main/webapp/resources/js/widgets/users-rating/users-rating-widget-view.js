@@ -42,6 +42,7 @@ define( function ( require ) {
 		initialize: function ( options ) {
 
 			this.onDate = options.options.onDate;
+			this.onDateTo = options.options.onDateTo;
 
 			this.listenTo( this.model, 'sync', this._renderUsersRating );
 			this.render();
@@ -52,7 +53,15 @@ define( function ( require ) {
 		},
 
 		getTitle: function () {
-			return '<small>' + dateTimeService.formatDateFullDisplay( this.onDate ) + '</small>';
+
+			if (this.onDate == this.onDateTo) {
+				return '<small>' + dateTimeService.formatDateFullDisplay( this.onDate ) + '</small>';
+			}
+
+			return '<small>' + dateTimeService.formatDateDisplay( this.onDate )
+				+ ' - '
+				+ dateTimeService.formatDateDisplay( this.onDateTo )
+				+ '</small>';
 		},
 
 		getIcon: function () {
