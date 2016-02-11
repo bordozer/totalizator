@@ -100,11 +100,16 @@ public class PortalPageRestController {
 		return result;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/users-rating-on-date/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/users-rating/" )
 	public List<UsersRatingPositionDTO> getUsersRatingOnDate( final PortalPageDTO dto, final Principal principal ) {
 
-		final LocalDate date = dateTimeService.parseDate( dto.getPortalPageDate() );
-		final List<UserSummaryPointsHolder> usersRatingOnDate = matchPointsService.getUsersRating( date );
+		final String onDateFrom = dto.getPortalPageDate();
+		final String onDateTo = dto.getOnDateTo();
+
+		final LocalDate dateFrom = dateTimeService.parseDate(onDateFrom);
+		final LocalDate dateTo = dateTimeService.parseDate(onDateTo);
+
+		final List<UserSummaryPointsHolder> usersRatingOnDate = matchPointsService.getUsersRating( dateFrom, dateTo );
 
 		return usersRatingOnDate
 				.stream()
@@ -116,6 +121,4 @@ public class PortalPageRestController {
 				} )
 				.collect( Collectors.toList() );
 	}
-
-
 }

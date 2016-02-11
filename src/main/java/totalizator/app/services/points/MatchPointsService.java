@@ -31,6 +31,8 @@ public interface MatchPointsService extends GenericService<MatchPoints> {
 
 	List<UserSummaryPointsHolder> getUsersRating( final LocalDate date );
 
+	List<UserSummaryPointsHolder> getUsersRating(final LocalDate dateFrom, final LocalDate dateTo);
+
 	UserSummaryPointsHolder getUserRating( final User user, final Cup cup, final LocalDate date );
 
 	UserSummaryPointsHolder getUserRating( final User user, final Cup cup, final LocalDate dateFrom, final LocalDate dateTo );

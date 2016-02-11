@@ -131,6 +131,11 @@ public class MatchPointsServiceImpl implements MatchPointsService {
 	}
 
 	@Override
+	public List<UserSummaryPointsHolder> getUsersRating(final LocalDate dateFrom, final LocalDate dateTo) {
+		return getUserSummaryPointsHolders( matchPointsRepository.loadAll( dateTimeService.getFirstSecondOf( dateFrom ), dateTimeService.getLastSecondOf( dateTo ) ) );
+	}
+
+	@Override
 	public UserSummaryPointsHolder getUserRating( final User user, final Cup cup, final LocalDate date ) {
 
 		final MatchSummaryPoints matchSummaryPoints = matchPointsRepository.loadSummary( user, cup, dateTimeService.getFirstSecondOf( date ), dateTimeService.getLastSecondOf( date ) );

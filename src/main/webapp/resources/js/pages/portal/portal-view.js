@@ -80,6 +80,8 @@ define( function ( require ) {
 			this._renderTodayUserRating( onDate );
 
 			this._renderYesterdayUserRating( onDate );
+
+			this._renderMonthUserRating( onDate );
 		},
 
 		_renderMatchesOnDate: function ( onDate ) {
@@ -153,12 +155,21 @@ define( function ( require ) {
 		},
 
 		_renderTodayUserRating: function( onDate ) {
-			usersRatingWidget( this.$( '.js-users-rating-today' ), { onDate: onDate } );
+			usersRatingWidget( this.$( '.js-users-rating-today' ), { onDate: onDate, onDateTo: onDate } );
 		},
 
 		_renderYesterdayUserRating: function( onDate ) {
 			var prevDate = dateTimeService.formatDate( dateTimeService.minusDay( onDate ) );
-			usersRatingWidget( this.$( '.js-users-rating-yesterday' ), { onDate: prevDate } );
+			usersRatingWidget( this.$( '.js-users-rating-yesterday' ), { onDate: prevDate, onDateTo: prevDate } );
+		},
+
+		_renderMonthUserRating: function(onDate) {
+			var mm = dateTimeService.toMomentDate(onDate);
+
+			var onDateFrom = dateTimeService.formatDate(dateTimeService.startOfMonth(mm));
+			var onDateTo = dateTimeService.formatDate(dateTimeService.endOfMonth(mm));
+
+			usersRatingWidget( this.$( '.js-users-rating-month' ), { onDate: onDateFrom, onDateTo: onDateTo } );
 		},
 
 		_renderActivityStream: function () {

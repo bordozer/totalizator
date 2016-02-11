@@ -128,6 +128,10 @@ define( function ( require ) {
 				suffix: true,
 				precise: true
 			} );
+		},
+
+		toMomentDate: function(strDate ) {
+			return moment(strDate, this.getDateFormat());
 		}
 	}
 } );

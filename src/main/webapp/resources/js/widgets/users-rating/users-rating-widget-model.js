@@ -11,14 +11,19 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.onDate = options.options.onDate;
+			this.onDateTo = options.options.onDateTo;
 		},
 
 		url: function () {
-			return '/rest/portal-page/users-rating-on-date/';
+			return '/rest/portal-page/users-rating/';
 		},
 
 		refresh: function() {
-			this.fetch( { data: { portalPageDate: this.onDate } }, { cache: false } );
+			var data = {
+				portalPageDate: this.onDate,
+				onDateTo: this.onDateTo
+            };
+            this.fetch( { data: data }, { cache: false } );
 		}
 	} );
 } );

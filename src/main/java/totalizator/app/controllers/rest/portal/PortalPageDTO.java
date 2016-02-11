@@ -12,6 +12,7 @@ public class PortalPageDTO {
 	private List<CupDTO> cupsTodayToShow;
 
 	private String portalPageDate;
+	private String onDateTo;
 
 	public void setCupsToShow( final List<CupDTO> cupsToShow ) {
 		this.cupsToShow = cupsToShow;
@@ -35,5 +36,13 @@ public class PortalPageDTO {
 
 	public void setPortalPageDate( final String portalPageDate ) {
 		this.portalPageDate = portalPageDate;
+	}
+
+	public String getOnDateTo() {
+		return onDateTo;
+	}
+
+	public void setOnDateTo(final String onDateTo) {
+		this.onDateTo = onDateTo;
 	}
 }
