@@ -1,5 +1,6 @@
 package totalizator.app.services.matches.imports.strategies.nba;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @Service(value = "nbaStatisticsAPILimitedService")
 public class NBAStatisticsAPILimitedService implements StatisticsServerService {
 
+    private static final int DAYS_FORWARD = 1;
     private final Logger LOGGER = Logger.getLogger(NBAStatisticsAPILimitedService.class);
 
     @Autowired
@@ -40,11 +42,13 @@ public class NBAStatisticsAPILimitedService implements StatisticsServerService {
     @Override
     public Set<RemoteGame> preloadRemoteGames(final Cup cup, final LocalDate dateFrom, final LocalDate dateTo) throws IOException, RemoteContentNullException {
 
-        LocalDateTime week = LocalDateTime.of(dateTimeService.plusDays(dateTimeService.getToday(), 7), LocalTime.of(0, 0));
+        LocalDateTime week = LocalDateTime.of(dateTimeService.plusDays(dateTimeService.getToday(), DAYS_FORWARD), LocalTime.of(0, 0));
 
         List<Match> notFinishedMatches = matchService.loadAllNotFinished(cup.getId());
 
-        final List<RemoteGame> importedNotFinishedRemoteGames = getAlreadyImportedNotFinishedRemoteGames(cup, notFinishedMatches);
+        // TODO: switch on
+//        final List<RemoteGame> importedNotFinishedRemoteGames = getAlreadyImportedNotFinishedRemoteGames(cup, notFinishedMatches);
+        final List<RemoteGame> importedNotFinishedRemoteGames = Lists.newArrayList();
 
         String lastImportedRemoteGameId = getLastImportedRemoteGameId(cup);
         final int remoteGameIdForNewGames = Integer.parseInt(lastImportedRemoteGameId.substring(5, 10)) + 1;
