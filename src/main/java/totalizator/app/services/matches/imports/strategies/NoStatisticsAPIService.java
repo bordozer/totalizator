@@ -19,6 +19,6 @@ public class NoStatisticsAPIService implements StatisticsServerService {
 	}
 
 	@Override
-	public void loadRemoteGame( Cup cup, final RemoteGame remoteGame ) throws IOException {
+	public void populateRemoteGame(Cup cup, final RemoteGame remoteGame ) throws IOException {
 	}
 }

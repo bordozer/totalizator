@@ -73,6 +73,10 @@ import static totalizator.app.models.Match.*;
 				query = "select m from Match m where ( cupId= :cupId ) and ( matchFinished = true ) and ( team1Id= :teamId or team2Id= :teamId ) order by m.beginningTime DESC"
 		),
 		@NamedQuery(
+				name = LAST_IMPORTED_MATCH,
+				query = "select m from Match m where ( cupId = :cupId ) and ( remoteGameId IS NOT NULL ) order by m.beginningTime DESC, m.remoteGameId DESC"
+		),
+		@NamedQuery(
 				name = FIND_MATCHES_BY_DATE,
 				query = "select m from Match m where beginningTime BETWEEN :timeFrom AND :timeTo"
 		),
@@ -123,6 +127,7 @@ public class Match extends AbstractEntity {
 	public static final String FIND_NOT_FINISHED_MATCHES = "cups.FIND_NOT_FINISHED_MATCHES";
 	public static final String FIND_FINISHED_MATCHES = "cups.FIND_FINISHED_MATCHES";
 	public static final String LOAD_LAST_TEAM_MATCHES = "cups.LOAD_LAST_TEAM_MATCHES";
+	public static final String LAST_IMPORTED_MATCH = "cups.LAST_IMPORTED_MATCH";
 
 	@ManyToOne
 	@JoinColumn( name = "cupId" )

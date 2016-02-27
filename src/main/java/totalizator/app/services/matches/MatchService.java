@@ -68,4 +68,6 @@ public interface MatchService extends GenericService<Match> {
 	Match getFirstMatch( final Cup cup );
 
 	List<Match> getLastNMatches(final Cup cup, final Team team, final int n);
+
+	Match loadLastImportedMatch(final int cupId);
 }

@@ -13,6 +13,7 @@ import totalizator.app.services.matches.MatchUpdateService;
 import totalizator.app.services.matches.MatchService;
 import totalizator.app.services.matches.imports.strategies.NoStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.StatisticsServerService;
+import totalizator.app.services.matches.imports.strategies.nba.NBAStatisticsAPILimitedService;
 import totalizator.app.services.matches.imports.strategies.nba.NBAStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.nhl.NHLStatisticsAPIService;
 import totalizator.app.services.matches.imports.strategies.uefa.UEFAStatisticsAPIService;
@@ -50,6 +51,9 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 	@Autowired
 	private MatchUpdateService matchUpdateService;
 
+	@Autowired
+	private NBAStatisticsAPILimitedService nbaStatisticsAPILimitedService;
+
 	private final Logger LOGGER = Logger.getLogger( RemoteGameDataImportServiceImpl.class );
 
 	@Override
@@ -59,7 +63,7 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
 	@Override
 	public void loadRemoteGame( final RemoteGame remoteGame, final Cup cup ) throws IOException, RemoteContentNullException {
-		getStatisticsServerService( cup ).loadRemoteGame( cup, remoteGame );
+		getStatisticsServerService( cup ).populateRemoteGame( cup, remoteGame );
 	}
 
 	@Override
@@ -157,7 +161,8 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 			case NO_IMPORT:
 				return noStatisticsAPIService;
 			case NBA:
-				return nbaStatisticsAPIService;
+//				return nbaStatisticsAPIService;
+				return nbaStatisticsAPILimitedService; // TODO: hack singe NBA closed stat server :(
 			case UEFA:
 				return uefaStatisticsAPIService;
 			case NHL:

@@ -47,7 +47,7 @@ public class NHLStatisticsAPIService implements StatisticsServerService {
 	}
 
 	@Override
-	public void loadRemoteGame( final Cup cup, final RemoteGame remoteGame ) throws IOException {
+	public void populateRemoteGame(final Cup cup, final RemoteGame remoteGame ) throws IOException {
 	}
 
 	private Set<RemoteGame> loadRemoteGame( final Team team, final LocalDate dateFrom ) throws IOException, RemoteContentNullException {

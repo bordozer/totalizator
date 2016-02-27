@@ -62,7 +62,7 @@ public class NBAStatisticsAPIService implements StatisticsServerService {
 	}
 
 	@Override
-	public void loadRemoteGame( Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException {
+	public void populateRemoteGame(Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException {
 
 		final String remoteGameJSON = getRemoteGameJSON( cup, remoteGame.getRemoteGameId() );
 

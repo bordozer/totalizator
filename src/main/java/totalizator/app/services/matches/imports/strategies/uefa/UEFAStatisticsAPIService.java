@@ -42,7 +42,7 @@ public class UEFAStatisticsAPIService implements StatisticsServerService {
 	}
 
 	@Override
-	public void loadRemoteGame( final Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException {
+	public void populateRemoteGame(final Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException {
 
 		final RemoteServerRequest request = new RemoteServerRequest( uefaStatisticsServerURLService.loadRemoteGameURL( cup, remoteGame.getRemoteGameId() ) );
 		request.setxAuthToken( X_AUTH_TOKEN );

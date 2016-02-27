@@ -272,4 +272,16 @@ public class MatchRepository implements MatchDao {
 				.setMaxResults( n )
 				.getResultList();
 	}
+
+	@Override
+	public Match loadLastImportedMatch(final int cupId) {
+
+		List<Match> list = em.createNamedQuery(Match.LAST_IMPORTED_MATCH, Match.class)
+				.setParameter("cupId", cupId)
+				.setFirstResult(0)
+				.setMaxResults(1)
+				.getResultList();
+
+		return list.size() == 1 ? list.get( 0 ) : null;
+	}
 }

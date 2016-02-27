@@ -12,5 +12,5 @@ public interface StatisticsServerService {
 
 	Set<RemoteGame> preloadRemoteGames( final Cup cup, final LocalDate dateFrom, final LocalDate dateTo ) throws IOException, RemoteContentNullException;
 
-	void loadRemoteGame( final Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException;
+	void populateRemoteGame(final Cup cup, final RemoteGame remoteGame ) throws IOException, RemoteContentNullException;
 }
