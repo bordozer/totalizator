@@ -13,7 +13,8 @@ public class RemoteContentNullException extends Exception {
         this.url = url;
     }
 
-    public String getUrl() {
-        return url;
+    @Override
+    public String getMessage() {
+        return String.format("URL returns null content: %s", url);
     }
 }
