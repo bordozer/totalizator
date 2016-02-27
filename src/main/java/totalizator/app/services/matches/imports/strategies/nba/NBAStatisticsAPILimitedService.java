@@ -47,18 +47,26 @@ public class NBAStatisticsAPILimitedService implements StatisticsServerService {
         final List<RemoteGame> importedNotFinishedRemoteGames = getAlreadyImportedNotFinishedRemoteGames(cup, notFinishedMatches);
 
         String lastImportedRemoteGameId = getLastImportedRemoteGameId(cup);
-        int remoteGameIdForNewGames = Integer.parseInt(lastImportedRemoteGameId.substring(5, 10)) + 1;
+        final int remoteGameIdForNewGames = Integer.parseInt(lastImportedRemoteGameId.substring(5, 10)) + 1;
+        LOGGER.debug(String.format("New remote games are going to be imported since #%d", remoteGameIdForNewGames));
+
+        int curr = remoteGameIdForNewGames;
 
         List<RemoteGame> newRemoteGamesForImport = newArrayList();
         while (true) {
-            String remoteGameId = constructRemoteGameId(cup, remoteGameIdForNewGames);
+            String remoteGameId = constructRemoteGameId(cup, curr);
+
+            if (curr > 1231) {
+                break;
+            }
+
             RemoteGame remoteGame = new RemoteGame(remoteGameId);
             populateRemoteGame(cup, remoteGame);
             if (remoteGame.getBeginningTime().isAfter(week)) {
                 break;
             }
             newRemoteGamesForImport.add(remoteGame);
-            remoteGameIdForNewGames++;
+            curr++;
         }
 
         final Set<RemoteGame> result = new LinkedHashSet<>(importedNotFinishedRemoteGames);
