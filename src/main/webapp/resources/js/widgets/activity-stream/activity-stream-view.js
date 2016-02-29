@@ -20,6 +20,8 @@ define( function ( require ) {
 		, betChanged: "User changed bet"
 		, betDeleted: "User deleted bet"
 		, matchFinished: "Match finished"
+		, pointsLabel: "Points"
+		, pointsOfActivityLabel: "User gets this points if make bet like this"
 	} );
 
 	return WidgetView.extend( {

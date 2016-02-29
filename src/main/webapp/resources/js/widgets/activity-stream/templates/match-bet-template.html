@@ -43,7 +43,9 @@
 					<%= score1 %> <sup><%= showOldScores ? oldScore1 : '' %></sup> - <%= score2 %> <sup><%= showOldScores ? oldScore2 : '' %></sup>
 
 					<% if( activityBetPoints && activityBetPoints.pointsSummary != 0 ) { %>
-						( <%-activityBetPoints.pointsSummary%> <sup><%= activityBetPoints.matchBonus != 0 ? activityBetPoints.betPoints + '+' + activityBetPoints.matchBonus : ''%></sup> )
+						<span class="text-muted" title="<%=translator.pointsOfActivityLabel%>">
+							&nbsp;&nbsp;&nbsp; <%=translator.pointsLabel%>: <%-activityBetPoints.pointsSummary%> <sup><%= activityBetPoints.matchBonus != 0 ? activityBetPoints.betPoints + '+' + activityBetPoints.matchBonus : ''%></sup>
+						</span>
 					<% } %>
 				<% } %>
 			</div>
