@@ -33,7 +33,7 @@ public class PortalPageController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{day}/{month}/{year}/" )
 	public String portalPageOnDate( final @ModelAttribute( MODEL_NAME ) PortalPageModel model, final @PathVariable int day, final @PathVariable int month, final @PathVariable int year ) {
 
-		model.setOnDate( String.format( "%d/%d/%d", day, month, year ) );
+		model.setOnDate( String.format( "%02d/%02d/%d", day, month, year ) );
 
 		return VIEW;
 	}

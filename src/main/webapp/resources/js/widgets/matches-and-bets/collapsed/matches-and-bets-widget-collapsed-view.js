@@ -1,70 +1,75 @@
-define( function ( require ) {
+define(function (require) {
 
-	'use strict';
+    'use strict';
 
-	var Backbone = require( 'backbone' );
-	var _ = require( 'underscore' );
-	var $ = require( 'jquery' );
+    var Backbone = require('backbone');
+    var _ = require('underscore');
+    var $ = require('jquery');
 
-	var template = _.template( require( 'text!./templates/matches-and-bets-widget-collapsed-template.html' ) );
+    var template = _.template(require('text!./templates/matches-and-bets-widget-collapsed-template.html'));
 
-	var CollapsedStateModel = require( './matches-and-bets-widget-collapsed-model' );
+    var CollapsedStateModel = require('./matches-and-bets-widget-collapsed-model');
 
-	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
+    var dateTimeService = require('/resources/js/services/date-time-service.js');
 
-	var Translator = require( 'translator' );
-	var translator = new Translator( {
-		matchesCount: "Matches count total"
-		, futureMatchesCount: "Future matches count"
-		, todayMatchesCountLabel: "Matches on date"
-		, userBetsCount: "User bets count"
-		, matchesWithoutBetsCount: "Matches without bets count"
-		, firstMatchTimeLabel: "First match beginning time"
-		, firstMatchNoBetTimeTitleLabel: "First match without bet beginning time title"
-		, cupWinnerBetIsAccessibleLabel: "Cup winner bet is accessible"
-		, userHasMissedCupWinnerBettingLabel: "User has missed cup winner betting"
-	} );
+    var Translator = require('translator');
+    var translator = new Translator({
+        matchesCount: "Matches count total"
+        , futureMatchesCount: "Future matches count"
+        , todayMatchesCountLabel: "Matches on date"
+        , userBetsCount: "User bets count"
+        , matchesWithoutBetsCount: "Matches without bets count"
+        , firstMatchTimeLabel: "First match beginning time"
+        , firstMatchNoBetTimeTitleLabel: "First match without bet beginning time title"
+        , cupWinnerBetIsAccessibleLabel: "Cup winner bet is accessible"
+        , userHasMissedCupWinnerBettingLabel: "User has missed cup winner betting"
+    });
 
-	return Backbone.View.extend( {
+    return Backbone.View.extend({
 
-		events: {},
+        events: {},
 
-		initialize: function ( options ) {
+        initialize: function (options) {
 
-			this.filter = options.filter;
+            this.filter = options.filter;
 
-			this.model = new CollapsedStateModel();
-			this.listenToOnce( this.model, 'sync', this.render );
+            this.model = new CollapsedStateModel();
+            this.listenToOnce(this.model, 'sync', this.render);
 
-			this.model.refresh( this.filter );
-		},
+            this.model.refresh(this.filter);
+        },
 
-		render: function () {
+        render: function () {
 
-			var model = this.model.toJSON();
+            var model = this.model.toJSON();
+            var data = _.extend({}, model, {
+                matchesWithoutBetsCountStyle: this._getMatchesWithoutBetsCountStyle(),
+                firstMatchTime: model.firstMatchTime == null ? '' : dateTimeService.formatDateTimeFullDisplay(model.firstMatchTime),
+                firstMatchTimeHumanize: model.firstMatchTime == null ? '' : dateTimeService.fromNow(model.firstMatchTime),
+                firstMatchNoBetTime: model.firstMatchNoBetTime == null ? '' : dateTimeService.formatDateTimeFullDisplay(model.firstMatchNoBetTime),
+                firstMatchNoBetTimeHumanize: model.firstMatchNoBetTime == null ? '' : dateTimeService.fromNow(model.firstMatchNoBetTime),
+                theDate: dateTimeService.formatDateDisplay(this.filter.filterByDate),
+                firstMatchDateLink: this._getDateLink(model.firstMatchTime),
+                firstMatchNoBetDateYearLink: this._getDateLink(model.firstMatchNoBetTime),
+                translator: translator
+            });
 
-			var data = _.extend( {}, model, {
-				matchesWithoutBetsCountStyle: this._getMatchesWithoutBetsCountStyle()
-				, firstMatchTime: model.firstMatchTime == null ? '' : dateTimeService.formatDateTimeFullDisplay( model.firstMatchTime )
-				, firstMatchTimeHumanize: model.firstMatchTime == null ? '' : dateTimeService.fromNow( model.firstMatchTime )
-				, firstMatchNoBetTime: model.firstMatchNoBetTime == null ? '' : dateTimeService.formatDateTimeFullDisplay( model.firstMatchNoBetTime )
-				, firstMatchNoBetTimeHumanize: model.firstMatchNoBetTime == null ? '' : dateTimeService.fromNow( model.firstMatchNoBetTime )
-				, theDate: dateTimeService.formatDateDisplay( this.filter.filterByDate )
-				, translator: translator
-			} );
+            this.$el.html(template(data));
+        },
 
-			this.$el.html( template( data ) );
-		},
+        _getDateLink: function (date) {
+            return dateTimeService.day(date) + '/' + dateTimeService.month(date) + '/' + dateTimeService.year(date);
+        },
 
-		_getMatchesWithoutBetsCountStyle: function() {
+        _getMatchesWithoutBetsCountStyle: function () {
 
-			var model = this.model.toJSON();
+            var model = this.model.toJSON();
 
-			if ( model.matchesWithoutBetsCount > 0 ) {
-				return 'text-danger';
-			}
+            if (model.matchesWithoutBetsCount > 0) {
+                return 'text-danger';
+            }
 
-			return 'text-muted';
-		}
-	} );
-} );
+            return 'text-muted';
+        }
+    });
+});

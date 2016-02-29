@@ -130,6 +130,18 @@ define( function ( require ) {
 			} );
 		},
 
+		year: function(date) {
+			return moment(date, this.getDateFormat()).get('year');
+		},
+
+		month: function(date) {
+			return moment(date, this.getDateFormat()).get('month') + 1;
+		},
+
+		day: function(date) {
+			return moment(date, this.getDateFormat()).get('date');
+		},
+
 		toMomentDate: function(strDate ) {
 			return moment(strDate, this.getDateFormat());
 		}

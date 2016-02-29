@@ -56,7 +56,12 @@
 
 			<div class="row">
 				<div class="col-xs-12">
-					<small class="text-muted" style="font-size: 11px;"><%=firstMatchTime%> ( <%=firstMatchTimeHumanize%> ) </small>
+					<small class="text-muted" style="font-size: 11px;">
+						<a href="/totalizator/<%=firstMatchDateLink%>/">
+							<%=firstMatchTime%>
+						</a>
+						( <%=firstMatchTimeHumanize%> )
+					</small>
 				</div>
 			</div>
 		<% } %>
@@ -110,7 +115,12 @@
 
 		<div class="row">
 			<div class="col-xs-12 text-center text-muted">
-				<small><%=firstMatchNoBetTime%> ( <span class="text-danger"><%=firstMatchNoBetTimeHumanize%></span> )</small>
+				<small style="font-size: 11px;">
+					<a href="/totalizator/<%=firstMatchNoBetDateYearLink%>/">
+						<%=firstMatchNoBetTime%>
+					</a>
+					( <span class="text-danger"><%=firstMatchNoBetTimeHumanize%></span> )
+				</small>
 			</div>
 		</div>
 	<% } %>
