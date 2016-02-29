@@ -14,7 +14,7 @@ public interface ActivityStreamService {
 
 	List<AbstractActivityStreamEntry> loadAllForMatch( final int matchId );
 
-	List<AbstractActivityStreamEntry> loadAllForUser( final int userId );
+	List<AbstractActivityStreamEntry> loadAllForUser( final int userId, final int qty );
 
 	void matchBetCreated( final MatchBet matchBet );
 

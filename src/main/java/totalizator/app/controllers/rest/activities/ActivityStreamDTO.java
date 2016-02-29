@@ -1,8 +1,6 @@
 package totalizator.app.controllers.rest.activities;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import totalizator.app.beans.points.UserMatchBetPointsHolder;
-import totalizator.app.beans.points.UserMatchPointsHolder;
 import totalizator.app.controllers.rest.portal.UsersRatingPositionDTO;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.UserDTO;

@@ -77,10 +77,12 @@ public class ActivityStreamRepository implements ActivityStreamDao {
 
 	@Override
 //	@Cacheable( value = CACHE_QUERY )
-	public List<ActivityStreamEntry> loadAllForUser( final int userId ) {
+	public List<ActivityStreamEntry> loadAllForUser(final int userId, final int qty) {
 
 		return em.createNamedQuery( ActivityStreamEntry.LOAD_ALL_FOR_USER, ActivityStreamEntry.class )
 				.setParameter( "userId", userId )
+				.setFirstResult(0)
+				.setMaxResults(qty)
 				.getResultList();
 	}
 }

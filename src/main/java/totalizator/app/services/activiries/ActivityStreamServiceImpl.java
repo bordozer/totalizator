@@ -48,8 +48,8 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	}
 
 	@Override
-	public List<AbstractActivityStreamEntry> loadAllForUser( final int userId ) {
-		return transformEntries( activityStreamRepository.loadAllForUser( userId ) );
+	public List<AbstractActivityStreamEntry> loadAllForUser( final int userId, final int qty ) {
+		return transformEntries( activityStreamRepository.loadAllForUser( userId, qty ) );
 	}
 
 	@Override

@@ -17,5 +17,5 @@ public interface ActivityStreamDao extends GenericService<ActivityStreamEntry> {
 
 	List<ActivityStreamEntry> loadAllForMatch( final int matchId );
 
-	List<ActivityStreamEntry> loadAllForUser( final int userId );
+	List<ActivityStreamEntry> loadAllForUser(final int userId, final int qty);
 }

@@ -41,7 +41,7 @@ public class ActivityStreamRestController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/users/{userId}/" )
 	public List<ActivityStreamDTO> userActivities( final @PathVariable( "userId" ) int userId, final Principal principal ) {
-		return activitiesDTOService.transformActivities( activityStreamService.loadAllForUser( userId ), getCurrentUser( principal ) );
+		return activitiesDTOService.transformActivities( activityStreamService.loadAllForUser( userId, 20 ), getCurrentUser( principal ) );
 	}
 
 	private User getCurrentUser( final Principal principal ) {
