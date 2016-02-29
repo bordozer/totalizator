@@ -1,6 +1,9 @@
 package totalizator.app.controllers.rest.activities;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import totalizator.app.beans.points.UserMatchBetPointsHolder;
+import totalizator.app.beans.points.UserMatchPointsHolder;
+import totalizator.app.controllers.rest.portal.UsersRatingPositionDTO;
 import totalizator.app.dto.MatchDTO;
 import totalizator.app.dto.UserDTO;
 import totalizator.app.dto.serialization.DateTimeSerializer;
@@ -23,6 +26,7 @@ public class ActivityStreamDTO {
 
 	private boolean showBetData;
 	private boolean showOldScores;
+	private UsersRatingPositionDTO activityBetPoints;
 
 	public void setActivityStreamEntryTypeId( final int activityStreamEntryTypeId ) {
 		this.activityStreamEntryTypeId = activityStreamEntryTypeId;
@@ -103,5 +107,13 @@ public class ActivityStreamDTO {
 
 	public boolean isShowOldScores() {
 		return showOldScores;
+	}
+
+	public UsersRatingPositionDTO getActivityBetPoints() {
+		return activityBetPoints;
+	}
+
+	public void setActivityBetPoints(final UsersRatingPositionDTO activityBetPoints) {
+		this.activityBetPoints = activityBetPoints;
 	}
 }

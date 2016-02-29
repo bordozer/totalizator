@@ -53,6 +53,7 @@ define( function ( require ) {
 					, activityTime: dateTimeService.formatTimeDisplay( jmodel.activityTime )
 					, activityTimeAgo: dateTimeService.fromNow( jmodel.activityTime )
 					, showBetData: jmodel.showBetData
+					, activityBetPoints: jmodel.activityBetPoints
 					, translator: translator
 				} );
 

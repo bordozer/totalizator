@@ -30,23 +30,13 @@ public class ActivitiesDTOServiceImpl implements ActivitiesDTOService {
 
 		return activities
 				.stream()
-				.map( new Function<AbstractActivityStreamEntry, ActivityStreamDTO>() {
-					@Override
-					public ActivityStreamDTO apply( final AbstractActivityStreamEntry activity ) {
-
-						if ( excludedTypes.contains( activity.getActivityStreamEntryType() ) ) {
-							return null;
-						}
-
-						return activityDTOService.transformActivity( activity, currentUser );
-					}
-				} )
-				.filter( new Predicate<ActivityStreamDTO>() {
-					@Override
-					public boolean test( final ActivityStreamDTO activityStreamDTO ) {
-						return activityStreamDTO != null;
-					}
-				} )
+				.map(activity -> {
+                    if ( excludedTypes.contains( activity.getActivityStreamEntryType() ) ) {
+                        return null;
+                    }
+                    return activityDTOService.transformActivity( activity, currentUser );
+                })
+				.filter(activityStreamDTO -> activityStreamDTO != null)
 				.collect( Collectors.toList() );
 	}
 }

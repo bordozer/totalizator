@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
+import totalizator.app.services.activiries.ActivityDTOService;
 import totalizator.app.services.points.CupPointsService;
 import totalizator.app.services.points.MatchPointsService;
 import totalizator.app.services.points.UserRatingService;
@@ -61,6 +62,7 @@ public class MatchRepository implements MatchDao {
 			, @CacheEvict( value = MatchPointsService.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = CupPointsService.CACHE_QUERY, allEntries = true )
 			, @CacheEvict( value = UserRatingService.CACHE_QUERY, allEntries = true )
+			, @CacheEvict( value = ActivityDTOService.CACHE_ACTIVITY, allEntries = true )
 	} )
 	public Match save( final Match entry ) {
 		return em.merge( entry );

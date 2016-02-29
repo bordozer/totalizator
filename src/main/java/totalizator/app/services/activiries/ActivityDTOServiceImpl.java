@@ -3,8 +3,12 @@ package totalizator.app.services.activiries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import totalizator.app.beans.points.UserMatchBetPointsHolder;
+import totalizator.app.beans.points.UserMatchPointsHolder;
 import totalizator.app.controllers.rest.activities.ActivityStreamDTO;
+import totalizator.app.controllers.rest.portal.UsersRatingPositionDTO;
 import totalizator.app.models.Match;
+import totalizator.app.models.MatchBet;
 import totalizator.app.models.User;
 import totalizator.app.models.activities.AbstractActivityStreamEntry;
 import totalizator.app.models.activities.ActivityStreamEntryType;
@@ -15,6 +19,8 @@ import totalizator.app.models.activities.events.MatchEvent;
 import totalizator.app.services.DTOService;
 import totalizator.app.services.matches.MatchBetsService;
 import totalizator.app.services.matches.MatchService;
+import totalizator.app.services.points.calculation.match.bonus.MatchBonusPointsCalculationService;
+import totalizator.app.services.points.calculation.match.points.UserMatchBetPointsCalculationService;
 
 @Service
 public class ActivityDTOServiceImpl implements ActivityDTOService {
@@ -30,6 +36,12 @@ public class ActivityDTOServiceImpl implements ActivityDTOService {
 
 	@Autowired
 	private ActivityStreamValidator activityStreamValidator;
+
+	@Autowired
+	private UserMatchBetPointsCalculationService userMatchBetPointsCalculationService;
+
+	@Autowired
+	private MatchBonusPointsCalculationService matchBonusPointsCalculationService;
 
 	@Override
 	@Cacheable( value = CACHE_ACTIVITY )
@@ -114,6 +126,23 @@ public class ActivityDTOServiceImpl implements ActivityDTOService {
 			dto.setOldScore2( event.getOldScore2() );
 
 			dto.setShowOldScores( matchBetActivity.getActivityStreamEntryType() == ActivityStreamEntryType.MATCH_BET_CHANGED );
+
+			if (matchService.isMatchFinished(match)) {
+				User activityOfUser = matchBetActivity.getActivityOfUser();
+
+				MatchBet activityMatchBet = new MatchBet();
+				activityMatchBet.setMatch(match);
+				activityMatchBet.setUser(activityOfUser);
+				activityMatchBet.setBetScore1(matchBetActivity.getMatchBetEvent().getScore1());
+				activityMatchBet.setBetScore2(matchBetActivity.getMatchBetEvent().getScore2());
+
+				UserMatchBetPointsHolder userMatchBetPoints = userMatchBetPointsCalculationService.getUserMatchBetPoints(activityMatchBet);
+				int matchBetPoints = userMatchBetPoints.getMatchBetPoints();
+				float matchBonus = matchBetPoints > 0 ? matchBonusPointsCalculationService.calculateMatchBonus(match) : 0;
+				UserMatchPointsHolder matchPointsHolder = new UserMatchPointsHolder(new UserMatchBetPointsHolder(activityMatchBet, matchBetPoints), matchBonus);
+
+				dto.setActivityBetPoints(new UsersRatingPositionDTO(dtoService.transformUser(activityOfUser), matchBetPoints, matchBonus));
+			}
 		}
 	}
 
