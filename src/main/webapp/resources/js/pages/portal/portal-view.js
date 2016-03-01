@@ -193,6 +193,7 @@ define( function ( require ) {
 			this.$( '.js-portal-page-container' ).html( div );
 			this.$( '.js-users-rating-today' ).html( div );
 			this.$( '.js-users-rating-yesterday' ).html( div );
+			this.$( '.js-users-rating-month' ).html( div );
 		}
 	} );
 } );
