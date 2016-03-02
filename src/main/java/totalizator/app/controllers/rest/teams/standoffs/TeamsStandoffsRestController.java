@@ -3,7 +3,11 @@ package totalizator.app.controllers.rest.teams.standoffs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import totalizator.app.models.Cup;
 import totalizator.app.models.Match;
 import totalizator.app.models.Team;
@@ -17,7 +21,6 @@ import totalizator.app.services.teams.TeamsStandoffService;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -65,7 +68,7 @@ public class TeamsStandoffsRestController {
 
 		dto.setCupToShow( dtoService.transformCup( cup, userService.findByLogin( principal.getName() ) ) );
 
-		final List<TeamsCupStandoffDTO> standoffByCup = getTeamsCupStandoffDTOs( cup, team1, team2, currentUser );
+		final List<TeamsCupStandoffDTO> standoffByCup = getTeamsCupStandoffDTOs(team1, team2, currentUser );
 		dto.setStandoffsByCup( standoffByCup );
 
 		dto.setTeamsLastGamesStat(getTeamsLastGamesStat(team1, team2, currentUser));
@@ -100,7 +103,7 @@ public class TeamsStandoffsRestController {
 		return result;
 	}
 
-	private List<TeamsCupStandoffDTO> getTeamsCupStandoffDTOs(final Cup lastStandoffCup, final Team team1, final Team team2, final User currentUser) {
+	private List<TeamsCupStandoffDTO> getTeamsCupStandoffDTOs(final Team team1, final Team team2, final User currentUser) {
 
 		return teamsStandoffService.getTeamsStandoffByCups( team1, team2 )
 				.stream()
@@ -120,14 +123,14 @@ public class TeamsStandoffsRestController {
 
 	private TeamsLastGamesStat getTeamsLastGamesStat(final Team team1, final Team team2, final User currentUser) {
 
-		List<Cup> cups = cupService.loadPublicCurrent(team1.getCategory());
+		final List<Cup> cups = cupService.loadPublicCurrent(team1.getCategory());
 		if (cups == null || cups.size() == 0) {
 			return new TeamsLastGamesStat();
 		}
 
 		final Cup cup = cups.get(0);
 
-		TeamsLastGamesStat result = new TeamsLastGamesStat();
+		final TeamsLastGamesStat result = new TeamsLastGamesStat();
 
 		result.setCup(dtoService.transformCup(cup, currentUser));
 

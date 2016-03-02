@@ -68,6 +68,7 @@ public class TeamsStandoffServiceImpl implements TeamsStandoffService {
 				.distinct()
 				.filter(cup -> cupService.isCupPublic( cup ))
 				.sorted((o1, o2) -> o2.getCupStartTime().compareTo( o1.getCupStartTime() ))
+//				.limit(3)
 				.collect( Collectors.toList() );
 
 		final List<TeamsCupStandoff> result = newArrayList();
