@@ -56,7 +56,7 @@ define( function ( require ) {
 		},
 
 		_authenticate: function() {
-			var data = { login: this.model.get( 'login' ), password: this.model.get( 'password' ) };
+			var data = { login: this.model.get( 'login' ), password: this.model.get( 'password' ), language: this._getLanguage() };
 			this.trigger( 'events:authenticate', data );
 		},
 
@@ -65,8 +65,13 @@ define( function ( require ) {
 				login: this.$( '#login' ).val()
 				, name: this.$( '#name' ).val()
 				, password: this.$( '#password' ).val()
+				, language: this._getLanguage()
 			} );
 			this.model.password_confirmation = this.$( '#password_confirmation' ).val();
+		},
+
+		_getLanguage: function() {
+			return this.$( "input[name='language']:checked" ).val();
 		},
 
 		_validate: function() {
