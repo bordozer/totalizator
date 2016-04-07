@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.models.Cup;
+import totalizator.app.models.Match;
 import totalizator.app.services.CupService;
 import totalizator.app.services.matches.MatchService;
 
@@ -34,13 +35,9 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String main(final @ModelAttribute(MODEL_NAME) AdminModel model) {
 
-
-        matchService.loadAll().stream()
-                .filter(match -> match.getCup() == null)
-                .forEach(match -> {
-                    match.setCup(cupService.load(22));
-                });
-
+        Match match = matchService.load(22689);
+        match.setCup(cupService.load(22));
+        matchService.save(match);
 
         final List<Cup> currentCups = cupService.loadAllCurrent();
         if (currentCups.size() == 0) {

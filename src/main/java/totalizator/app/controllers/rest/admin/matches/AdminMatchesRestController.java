@@ -3,6 +3,7 @@ package totalizator.app.controllers.rest.admin.matches;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import totalizator.app.dto.MatchesBetSettingsDTO;
 import totalizator.app.models.Match;
@@ -92,6 +93,7 @@ public class AdminMatchesRestController {
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/0", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchEditDTO create( final @RequestBody MatchEditDTO matchEditDTO, final Principal principal ) {
+		assertData(matchEditDTO);
 
 		final User currentUser = getCurrentUser( principal );
 
@@ -110,6 +112,7 @@ public class AdminMatchesRestController {
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/{matchId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	public MatchEditDTO save( final @PathVariable( "matchId" ) int matchId, final @RequestBody MatchEditDTO matchEditDTO, final Principal principal ) {
+		assertData(matchEditDTO);
 
 		final User currentUser = getCurrentUser( principal );
 
@@ -122,6 +125,14 @@ public class AdminMatchesRestController {
 		initReadOnlyDTOProperties( matchEditDTO, match, currentUser );
 
 		return matchEditDTO;
+	}
+
+	private void assertData(final @RequestBody MatchEditDTO matchEditDTO) {
+		Assert.notNull(matchEditDTO);
+		Assert.isTrue(matchEditDTO.getCupId() > 0);
+		Assert.isTrue(matchEditDTO.getTeam1Id() > 0);
+		Assert.isTrue(matchEditDTO.getTeam1Id() > 0);
+		Assert.notNull(matchEditDTO.getBeginningTime());
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{matchId}" )
