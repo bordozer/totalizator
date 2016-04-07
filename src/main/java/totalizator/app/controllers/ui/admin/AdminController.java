@@ -7,44 +7,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.models.Cup;
 import totalizator.app.services.CupService;
+import totalizator.app.services.matches.MatchService;
 
 import java.util.List;
 
 @Controller
-@RequestMapping( "admin" )
+@RequestMapping("admin")
 public class AdminController {
 
-	public static final String MODEL_NAME = "adminModel";
+    public static final String MODEL_NAME = "adminModel";
 
-	private static final String VIEW_MAIN_PAGE = "/admin/AdminPage";
-	private static final String VIEW_TRANSLATIONS = "/admin/Translations";
+    private static final String VIEW_MAIN_PAGE = "/admin/AdminPage";
+    private static final String VIEW_TRANSLATIONS = "/admin/Translations";
 
-	@Autowired
-	private CupService cupService;
+    @Autowired
+    private CupService cupService;
 
-	@ModelAttribute( MODEL_NAME )
-	public AdminModel preparePagingModel() {
-		return new AdminModel();
-	}
+    @Autowired
+    private MatchService matchService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String main( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
+    @ModelAttribute(MODEL_NAME)
+    public AdminModel preparePagingModel() {
+        return new AdminModel();
+    }
 
-		final List<Cup> currentCups = cupService.loadAllCurrent();
-		if ( currentCups.size() == 0 ) {
-			return VIEW_MAIN_PAGE;
-		}
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public String main(final @ModelAttribute(MODEL_NAME) AdminModel model) {
 
-		final Cup cup = currentCups.get( 0 );
 
-		model.setCategoryId( cup.getCategory().getId() );
-		model.setCupId( cup.getId() );
+        matchService.loadAll().stream()
+                .filter(match -> match.getCup() == null)
+                .forEach(match -> {
+                    match.setCup(cupService.load(22));
+                });
 
-		return VIEW_MAIN_PAGE;
-	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/translations/" )
-	public String translations( final @ModelAttribute( MODEL_NAME ) AdminModel model ) {
-		return VIEW_TRANSLATIONS;
-	}
+        final List<Cup> currentCups = cupService.loadAllCurrent();
+        if (currentCups.size() == 0) {
+            return VIEW_MAIN_PAGE;
+        }
+
+        final Cup cup = currentCups.get(0);
+
+        model.setCategoryId(cup.getCategory().getId());
+        model.setCupId(cup.getId());
+
+        return VIEW_MAIN_PAGE;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/translations/")
+    public String translations(final @ModelAttribute(MODEL_NAME) AdminModel model) {
+        return VIEW_TRANSLATIONS;
+    }
 }
