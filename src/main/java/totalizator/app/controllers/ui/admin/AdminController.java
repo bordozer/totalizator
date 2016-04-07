@@ -1,14 +1,13 @@
 package totalizator.app.controllers.ui.admin;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import totalizator.app.models.Cup;
-import totalizator.app.models.Match;
 import totalizator.app.services.CupService;
-import totalizator.app.services.matches.MatchService;
 
 import java.util.List;
 
@@ -24,9 +23,6 @@ public class AdminController {
     @Autowired
     private CupService cupService;
 
-    @Autowired
-    private MatchService matchService;
-
     @ModelAttribute(MODEL_NAME)
     public AdminModel preparePagingModel() {
         return new AdminModel();
@@ -35,17 +31,12 @@ public class AdminController {
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String main(final @ModelAttribute(MODEL_NAME) AdminModel model) {
 
-        Match match = matchService.load(22689);
-        match.setCup(cupService.load(22));
-        matchService.save(match);
-
         final List<Cup> currentCups = cupService.loadAllCurrent();
-        if (currentCups.size() == 0) {
+        if (CollectionUtils.isEmpty(currentCups)) {
             return VIEW_MAIN_PAGE;
         }
 
         final Cup cup = currentCups.get(0);
-
         model.setCategoryId(cup.getCategory().getId());
         model.setCupId(cup.getId());
 
