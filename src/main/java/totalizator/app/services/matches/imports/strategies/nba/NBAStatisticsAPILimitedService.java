@@ -56,7 +56,7 @@ public class NBAStatisticsAPILimitedService implements StatisticsServerService {
         while (true) {
             String remoteGameId = constructRemoteGameId(cup, curr);
 
-            if (curr > 1231) {
+            if (curr > 1230) {
                 break;
             }
 
