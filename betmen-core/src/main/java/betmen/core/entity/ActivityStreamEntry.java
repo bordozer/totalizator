@@ -57,7 +57,7 @@ public class ActivityStreamEntry extends AbstractEntity {
     @JoinColumn(name = "userId")
     private User activityOfUser;
 
-    @Convert(converter = Jsr310JpaConverters.LocalTimeConverter.class)
+    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime activityTime;
 
     @Convert(converter = ActivityStreamEntryTypeConverter.class)
