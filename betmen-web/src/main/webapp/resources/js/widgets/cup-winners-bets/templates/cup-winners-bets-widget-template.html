@@ -1,0 +1,85 @@
+<table class="table table-striped table-hover">
+
+	<thead>
+		<tr>
+			<td class="text-center">
+				<h4><%= translator.userLabel %></h4>
+			</td>
+			<% for( i = 1; i <= winnersCount; i++ ) {%>
+				<td class="text-center">
+					<h4><%=i%> <%= translator.cupPositionLabel %></h4>
+				</td>
+			<% } %>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<% if( winners.length > 0 ) { %>
+			<tr>
+				<td class="bg-success">
+					<h4><%= translator.realCupWinnersLabel %></h4>
+				</td>
+				<% _.each( winners, function( team ) { %>
+					<td class="text-center bg-success">
+						<img src="<%= team.teamLogo %>" class="team-logo">
+						<h4><a href="/betmen/teams/<%- team.teamId %>/"><%- team.teamName %></a></h4>
+					</td>
+				<% } ) %>
+			</tr>
+		<% } %>
+
+		<% _.each( usersCupBets, function( userCupBet ) { %>
+
+			<tr>
+				<td>
+					<h4><a href="/betmen/users/<%- userCupBet.user.userId %>/"><%- userCupBet.user.userName %></a></h4>
+				</td>
+				<% for( i = 1; i <= winnersCount; i++ ) { %>
+
+					<td class="text-center <%= userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].stillActive ? 'text-info' : 'text-danger' %>">
+						<% if( userCupBet.userCupBets[ i - 1 ] && userCupBet.userCupBets[ i - 1 ].team ) { %>
+
+							<% if( userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
+								<div title="<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>">
+									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" class="team-logo" >
+									<h5>
+										<% if( userCupBet.userCupBets[ i - 1 ].team.teamId > 0 ) { %>
+										<a href="/betmen/teams/<%=userCupBet.userCupBets[ i - 1 ].team.teamId%>/"><%= userCupBet.userCupBets[ i - 1 ].team.teamName %></a>
+										<% } %>
+										<% if( userCupBet.userCupBets[ i - 1 ].team.teamId == 0 ) { %>
+											<%= userCupBet.userCupBets[ i - 1 ].team.teamName %>
+										<% } %>
+									</h5>
+								</div>
+
+								<% if( userCupBet.userCupBets[ i - 1 ].points > 0 ) { %>
+									<h4>+ <%= userCupBet.userCupBets[ i - 1 ].points %></h4>
+								<% } %>
+							<% } %>
+
+							<% if( ! userCupBet.userCupBets[ i - 1 ].stillActive ) { %>
+								<div class="team-out-of-cup" title="<%-translator.teamIsOutOfCupLabel%>">
+									<img src="<%= userCupBet.userCupBets[ i - 1 ].team.teamLogo %>" class="team-logo" >
+								</div>
+								<h5>
+									<i class='fa fa-close'></i>
+									<a href="/betmen/teams/<%=userCupBet.userCupBets[ i - 1 ].team.teamId%>/"><%= userCupBet.userCupBets[ i - 1 ].team.teamName %></a>
+								</h5>
+							<% } %>
+
+						<% } %>
+
+						<% if( ! userCupBet.userCupBets[ i - 1 ] || ! userCupBet.userCupBets[ i - 1 ].team ) { %>
+							<h3 class="fa fa-trophy fa-2x text-muted"></h3>
+							<h5 class="text-muted"><%= translator.noWinnerBetLabel %></h5>
+						<% } %>
+					</td>
+				<% } %>
+			</tr>
+
+		<% } ) %>
+
+	</tbody>
+
+</table>

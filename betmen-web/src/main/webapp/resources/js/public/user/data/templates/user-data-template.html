@@ -1,0 +1,78 @@
+<style type="text/css">
+	td {
+		height: 60px;
+	}
+</style>
+
+<div class="panel panel-info">
+
+	<div class="panel-heading text-left">
+		<span class="js-window-icon fa fa-user-plus"></span>
+		<%=translator.newUserDataTitleLabel%>
+ 	</div>
+
+	<div class="panel-body text-left">
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 150px;"><label for="login"><%=translator.userDataLoginLabel%></label></td>
+				<td>
+					<div class="form-group login">
+						<input type="text" id="login" name="login" class="form-control" value="">
+					</div>
+					<ul class="small login-errors" style="display: none;"></ul>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 150px;"><label for="name"><%=translator.userDataNameLabel%></label></td>
+				<td>
+					<div class="form-group name">
+						<input type="text" id="name" name="name" class="form-control" value="">
+					</div>
+					<ul class="small name-errors" style="display: none;"></ul>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="password"><%=translator.userDataPasswordLabel%></label></td>
+				<td>
+					<div class="form-group password">
+						<input type="password" id="password" name="password" class="form-control" value="">
+					</div>
+					<ul class="small password-errors" style="display: none;"></ul>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="password"><%=translator.userDataConfirmPasswordLabel%></label></td>
+				<td>
+					<div class="form-group password_confirmation">
+						<input type="password" id="password_confirmation" name="password_confirmation" class="form-control"  value="">
+					</div>
+					<ul class="small password_confirmation-errors" style="display: none;"></ul>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="row">
+						<div class="col-lg-3">
+							<input type="radio" name="language" value="ua" checked="checked" /> <img src="/resources/img/lang/ua.png">
+						</div>
+						<div class="col-lg-3">
+							<input type="radio" name="language" value="ru" /> <img src="/resources/img/lang/ru.png">
+						</div>
+						<div class="col-lg-3">
+							<input type="radio" name="language" value="en" /> <img src="/resources/img/lang/en.png">
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="panel-footer clearfix">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default fa fa-backward back-to-login-button"> <%=translator.userDataBackToLoginPageLabel%></button>
+			<button type="button" class="btn btn-primary fa fa-save save-button"> <%=translator.userDataSaveButtonLabel%></button>
+		</div>
+	</div>
+
+</div>

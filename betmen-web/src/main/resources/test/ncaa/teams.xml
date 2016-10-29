@@ -1,0 +1,1408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<teams>
+    <team>
+        <name>Cincinnati Bearcats</name>
+        <logo>Cincinnati_Bearcats.jpg</logo>
+    </team>
+    <team>
+        <name>Connecticut Huskies</name>
+        <logo>Connecticut_Huskies.jpg</logo>
+    </team>
+    <team>
+        <name>East Carolina Pirates</name>
+        <logo>East_Carolina_Pirates.jpg</logo>
+    </team>
+    <team>
+        <name>Houston Cougars</name>
+        <logo>Houston_Cougars.jpg</logo>
+    </team>
+    <team>
+        <name>Memphis Tigers</name>
+        <logo>Memphis_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>SMU Mustangs</name>
+        <logo>SMU_Mustangs.jpg</logo>
+    </team>
+    <team>
+        <name>South Florida Bulls</name>
+        <logo>South_Florida_Bulls.jpg</logo>
+    </team>
+    <team>
+        <name>Temple Owls</name>
+        <logo>Temple_Owls.jpg</logo>
+    </team>
+    <team>
+        <name>Tulane Green Wave</name>
+        <logo>Tulane_Green_Wave.jpg</logo>
+    </team>
+    <team>
+        <name>Tulsa Golden Hurricane</name>
+        <logo>Tulsa_Golden_Hurricane.jpg</logo>
+    </team>
+    <team>
+        <name>UCF Knights</name>
+        <logo>UCF_Knights.jpg</logo>
+    </team>
+    <team>
+        <name>Boston College Eagles</name>
+        <logo>Boston_College_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Clemson Tigers</name>
+        <logo>Clemson_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Duke Blue Devils</name>
+        <logo>Duke_Blue_Devils.jpg</logo>
+    </team>
+    <team>
+        <name>Florida State Seminoles</name>
+        <logo>Florida_State_Seminoles.jpg</logo>
+    </team>
+    <team>
+        <name>Georgia Tech Yellow Jackets</name>
+        <logo>Georgia_Tech_Yellow_Jackets.jpg</logo>
+    </team>
+    <team>
+        <name>Louisville Cardinals</name>
+        <logo>Louisville_Cardinals.jpg</logo>
+    </team>
+    <team>
+        <name>Miami (FL) Hurricanes</name>
+        <logo>Miami_(FL)_Hurricanes.jpg</logo>
+    </team>
+    <team>
+        <name>North Carolina Tar Heels</name>
+        <logo>North_Carolina_Tar_Heels.jpg</logo>
+    </team>
+    <team>
+        <name>North Carolina State Wolfpack</name>
+        <logo>North_Carolina_State_Wolfpack.jpg</logo>
+    </team>
+    <team>
+        <name>Notre Dame Fighting Irish</name>
+        <logo>Notre_Dame_Fighting_Irish.jpg</logo>
+    </team>
+    <team>
+        <name>Pittsburgh Panthers</name>
+        <logo>Pittsburgh_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Syracuse Orange</name>
+        <logo>Syracuse_Orange.jpg</logo>
+    </team>
+    <team>
+        <name>Virginia Cavaliers</name>
+        <logo>Virginia_Cavaliers.jpg</logo>
+    </team>
+    <team>
+        <name>Virginia Tech Hokies</name>
+        <logo>Virginia_Tech_Hokies.jpg</logo>
+    </team>
+    <team>
+        <name>Wake Forest Demon Deacons</name>
+        <logo>Wake_Forest_Demon_Deacons.jpg</logo>
+    </team>
+    <team>
+        <name>Albany Great Danes</name>
+        <logo>Albany_Great_Danes.jpg</logo>
+    </team>
+    <team>
+        <name>Binghamton Bearcats</name>
+        <logo>Binghamton_Bearcats.jpg</logo>
+    </team>
+    <team>
+        <name>Hartford Hawks</name>
+        <logo>Hartford_Hawks.jpg</logo>
+    </team>
+    <team>
+        <name>Maine Black Bears</name>
+        <logo>Maine_Black_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Massachusetts-Lowell River Hawks</name>
+        <logo>Massachusetts-Lowell_River_Hawks.jpg</logo>
+    </team>
+    <team>
+        <name>New Hampshire Wildcats</name>
+        <logo>New_Hampshire_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Stony Brook Seawolves</name>
+        <logo>Stony_Brook_Seawolves.jpg</logo>
+    </team>
+    <team>
+        <name>UMBC Retrievers</name>
+        <logo>UMBC_Retrievers.jpg</logo>
+    </team>
+    <team>
+        <name>Vermont Catamounts</name>
+        <logo>Vermont_Catamounts.jpg</logo>
+    </team>
+    <team>
+        <name>Davidson Wildcats</name>
+        <logo>Davidson_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Dayton Flyers</name>
+        <logo>Dayton_Flyers.jpg</logo>
+    </team>
+    <team>
+        <name>Duquesne Dukes</name>
+        <logo>Duquesne_Dukes.jpg</logo>
+    </team>
+    <team>
+        <name>Fordham Rams</name>
+        <logo>Fordham_Rams.jpg</logo>
+    </team>
+    <team>
+        <name>George Mason Patriots</name>
+        <logo>George_Mason_Patriots.jpg</logo>
+    </team>
+    <team>
+        <name>George Washington Colonials</name>
+        <logo>George_Washington_Colonials.jpg</logo>
+    </team>
+    <team>
+        <name>La Salle Explorers</name>
+        <logo>La_Salle_Explorers.jpg</logo>
+    </team>
+    <team>
+        <name>Massachusetts Minutemen</name>
+        <logo>Massachusetts_Minutemen.jpg</logo>
+    </team>
+    <team>
+        <name>Rhode Island Rams</name>
+        <logo>Rhode_Island_Rams.jpg</logo>
+    </team>
+    <team>
+        <name>Richmond Spiders</name>
+        <logo>Richmond_Spiders.jpg</logo>
+    </team>
+    <team>
+        <name>Saint Joseph's Hawks</name>
+        <logo>Saint_Josephs_Hawks.jpg</logo>
+    </team>
+    <team>
+        <name>Saint Louis Billikens</name>
+        <logo>Saint_Louis_Billikens.jpg</logo>
+    </team>
+    <team>
+        <name>St. Bonaventure Bonnies</name>
+        <logo>St._Bonaventure_Bonnies.jpg</logo>
+    </team>
+    <team>
+        <name>VCU Rams</name>
+        <logo>VCU_Rams.jpg</logo>
+    </team>
+    <team>
+        <name>FGCU Eagles</name>
+        <logo>FGCU_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Jacksonville Dolphins</name>
+        <logo>Jacksonville_Dolphins.jpg</logo>
+    </team>
+    <team>
+        <name>Kennesaw State Owls</name>
+        <logo>Kennesaw_State_Owls.jpg</logo>
+    </team>
+    <team>
+        <name>Lipscomb Bisons</name>
+        <logo>Lipscomb_Bisons.jpg</logo>
+    </team>
+    <team>
+        <name>North Florida Ospreys</name>
+        <logo>North_Florida_Ospreys.jpg</logo>
+    </team>
+    <team>
+        <name>Northern Kentucky Norse</name>
+        <logo>Northern_Kentucky_Norse.jpg</logo>
+    </team>
+    <team>
+        <name>Stetson Hatters</name>
+        <logo>Stetson_Hatters.jpg</logo>
+    </team>
+    <team>
+        <name>USC Upstate Spartans</name>
+        <logo>USC_Upstate_Spartans.jpg</logo>
+    </team>
+    <team>
+        <name>Baylor Bears</name>
+        <logo>Baylor_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Iowa State Cyclones</name>
+        <logo>Iowa_State_Cyclones.jpg</logo>
+    </team>
+    <team>
+        <name>Kansas Jayhawks</name>
+        <logo>Kansas_Jayhawks.jpg</logo>
+    </team>
+    <team>
+        <name>Kansas State Wildcats</name>
+        <logo>Kansas_State_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Oklahoma Sooners</name>
+        <logo>Oklahoma_Sooners.jpg</logo>
+    </team>
+    <team>
+        <name>Oklahoma State Cowboys</name>
+        <logo>Oklahoma_State_Cowboys.jpg</logo>
+    </team>
+    <team>
+        <name>TCU Horned Frogs</name>
+        <logo>TCU_Horned_Frogs.jpg</logo>
+    </team>
+    <team>
+        <name>Texas Longhorns</name>
+        <logo>Texas_Longhorns.jpg</logo>
+    </team>
+    <team>
+        <name>Texas Tech Red Raiders</name>
+        <logo>Texas_Tech_Red_Raiders.jpg</logo>
+    </team>
+    <team>
+        <name>West Virginia Mountaineers</name>
+        <logo>West_Virginia_Mountaineers.jpg</logo>
+    </team>
+    <team>
+        <name>Butler Bulldogs</name>
+        <logo>Butler_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Creighton Bluejays</name>
+        <logo>Creighton_Bluejays.jpg</logo>
+    </team>
+    <team>
+        <name>DePaul Blue Demons</name>
+        <logo>DePaul_Blue_Demons.jpg</logo>
+    </team>
+    <team>
+        <name>Georgetown Hoyas</name>
+        <logo>Georgetown_Hoyas.jpg</logo>
+    </team>
+    <team>
+        <name>Marquette Golden Eagles</name>
+        <logo>Marquette_Golden_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Providence Friars</name>
+        <logo>Providence_Friars.jpg</logo>
+    </team>
+    <team>
+        <name>Seton Hall Pirates</name>
+        <logo>Seton_Hall_Pirates.jpg</logo>
+    </team>
+    <team>
+        <name>St. John's Red Storm</name>
+        <logo>St._Johns_Red_Storm.jpg</logo>
+    </team>
+    <team>
+        <name>Villanova Wildcats</name>
+        <logo>Villanova_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Xavier Musketeers</name>
+        <logo>Xavier_Musketeers.jpg</logo>
+    </team>
+    <team>
+        <name>Eastern Washington Eagles</name>
+        <logo>Eastern_Washington_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Idaho Vandals</name>
+        <logo>Idaho_Vandals.jpg</logo>
+    </team>
+    <team>
+        <name>Idaho State Bengals</name>
+        <logo>Idaho_State_Bengals.jpg</logo>
+    </team>
+    <team>
+        <name>Montana Grizzlies</name>
+        <logo>Montana_Grizzlies.jpg</logo>
+    </team>
+    <team>
+        <name>Montana State Bobcats</name>
+        <logo>Montana_State_Bobcats.jpg</logo>
+    </team>
+    <team>
+        <name>North Dakota</name>
+        <logo>North_Dakota_.jpg</logo>
+    </team>
+    <team>
+        <name>Northern Arizona Lumberjacks</name>
+        <logo>Northern_Arizona_Lumberjacks.jpg</logo>
+    </team>
+    <team>
+        <name>Northern Colorado Bears</name>
+        <logo>Northern_Colorado_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Portland State Vikings</name>
+        <logo>Portland_State_Vikings.jpg</logo>
+    </team>
+    <team>
+        <name>Sacramento State Hornets</name>
+        <logo>Sacramento_State_Hornets.jpg</logo>
+    </team>
+    <team>
+        <name>Southern Utah Thunderbirds</name>
+        <logo>Southern_Utah_Thunderbirds.jpg</logo>
+    </team>
+    <team>
+        <name>Weber State Wildcats</name>
+        <logo>Weber_State_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Illinois Fighting Illini</name>
+        <logo>Illinois_Fighting_Illini.jpg</logo>
+    </team>
+    <team>
+        <name>Indiana Hoosiers</name>
+        <logo>Indiana_Hoosiers.jpg</logo>
+    </team>
+    <team>
+        <name>Iowa Hawkeyes</name>
+        <logo>Iowa_Hawkeyes.jpg</logo>
+    </team>
+    <team>
+        <name>Maryland Terrapins</name>
+        <logo>Maryland_Terrapins.jpg</logo>
+    </team>
+    <team>
+        <name>Michigan Wolverines</name>
+        <logo>Michigan_Wolverines.jpg</logo>
+    </team>
+    <team>
+        <name>Michigan State Spartans</name>
+        <logo>Michigan_State_Spartans.jpg</logo>
+    </team>
+    <team>
+        <name>Minnesota Golden Gophers</name>
+        <logo>Minnesota_Golden_Gophers.jpg</logo>
+    </team>
+    <team>
+        <name>Nebraska Cornhuskers</name>
+        <logo>Nebraska_Cornhuskers.jpg</logo>
+    </team>
+    <team>
+        <name>Northwestern Wildcats</name>
+        <logo>Northwestern_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Ohio State Buckeyes</name>
+        <logo>Ohio_State_Buckeyes.jpg</logo>
+    </team>
+    <team>
+        <name>Penn State Nittany Lions</name>
+        <logo>Penn_State_Nittany_Lions.jpg</logo>
+    </team>
+    <team>
+        <name>Purdue Boilermakers</name>
+        <logo>Purdue_Boilermakers.jpg</logo>
+    </team>
+    <team>
+        <name>Rutgers Scarlet Knights</name>
+        <logo>Rutgers_Scarlet_Knights.jpg</logo>
+    </team>
+    <team>
+        <name>Wisconsin Badgers</name>
+        <logo>Wisconsin_Badgers.jpg</logo>
+    </team>
+    <team>
+        <name>Cal Poly Mustangs</name>
+        <logo>Cal_Poly_Mustangs.jpg</logo>
+    </team>
+    <team>
+        <name>Cal State Fullerton Titans</name>
+        <logo>Cal_State_Fullerton_Titans.jpg</logo>
+    </team>
+    <team>
+        <name>CSUN Matadors</name>
+        <logo>CSUN_Matadors.jpg</logo>
+    </team>
+    <team>
+        <name>Hawaii Rainbow Warriors</name>
+        <logo>Hawaii_Rainbow_Warriors.jpg</logo>
+    </team>
+    <team>
+        <name>Long Beach State 49ers</name>
+        <logo>Long_Beach_State_49ers.jpg</logo>
+    </team>
+    <team>
+        <name>UC Davis Aggies</name>
+        <logo>UC_Davis_Aggies.jpg</logo>
+    </team>
+    <team>
+        <name>UC Irvine Anteaters</name>
+        <logo>UC_Irvine_Anteaters.jpg</logo>
+    </team>
+    <team>
+        <name>UC Riverside Highlanders</name>
+        <logo>UC_Riverside_Highlanders.jpg</logo>
+    </team>
+    <team>
+        <name>UC Santa Barbara Gauchos</name>
+        <logo>UC_Santa_Barbara_Gauchos.jpg</logo>
+    </team>
+    <team>
+        <name>Campbell Fighting Camels</name>
+        <logo>Campbell_Fighting_Camels.jpg</logo>
+    </team>
+    <team>
+        <name>Charleston Southern Buccaneers</name>
+        <logo>Charleston_Southern_Buccaneers.jpg</logo>
+    </team>
+    <team>
+        <name>Coastal Carolina Chanticleers</name>
+        <logo>Coastal_Carolina_Chanticleers.jpg</logo>
+    </team>
+    <team>
+        <name>Gardner-Webb Runnin' Bulldogs</name>
+        <logo>Gardner-Webb_Runnin_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>High Point Panthers</name>
+        <logo>High_Point_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Liberty Flames</name>
+        <logo>Liberty_Flames.jpg</logo>
+    </team>
+    <team>
+        <name>Longwood Lancers</name>
+        <logo>Longwood_Lancers.jpg</logo>
+    </team>
+    <team>
+        <name>Presbyterian Blue Hose</name>
+        <logo>Presbyterian_Blue_Hose.jpg</logo>
+    </team>
+    <team>
+        <name>Radford Highlanders</name>
+        <logo>Radford_Highlanders.jpg</logo>
+    </team>
+    <team>
+        <name>UNC Asheville Bulldogs</name>
+        <logo>UNC_Asheville_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Winthrop Eagles</name>
+        <logo>Winthrop_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Charleston Cougars</name>
+        <logo>Charleston_Cougars.jpg</logo>
+    </team>
+    <team>
+        <name>Delaware Fightin' Blue Hens</name>
+        <logo>Delaware_Fightin_Blue_Hens.jpg</logo>
+    </team>
+    <team>
+        <name>Drexel Dragons</name>
+        <logo>Drexel_Dragons.jpg</logo>
+    </team>
+    <team>
+        <name>Elon Phoenix</name>
+        <logo>Elon_Phoenix.jpg</logo>
+    </team>
+    <team>
+        <name>Hofstra Pride</name>
+        <logo>Hofstra_Pride.jpg</logo>
+    </team>
+    <team>
+        <name>James Madison Dukes</name>
+        <logo>James_Madison_Dukes.jpg</logo>
+    </team>
+    <team>
+        <name>Northeastern Huskies</name>
+        <logo>Northeastern_Huskies.jpg</logo>
+    </team>
+    <team>
+        <name>Towson Tigers</name>
+        <logo>Towson_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>UNCW Seahawks</name>
+        <logo>UNCW_Seahawks.jpg</logo>
+    </team>
+    <team>
+        <name>William &amp;amp; Mary Tribe</name>
+        <logo>William_&amp;amp;_Mary_Tribe.jpg</logo>
+    </team>
+    <team>
+        <name>Charlotte 49ers</name>
+        <logo>Charlotte_49ers.jpg</logo>
+    </team>
+    <team>
+        <name>FIU Golden Panthers</name>
+        <logo>FIU_Golden_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Florida Atlantic Owls</name>
+        <logo>Florida_Atlantic_Owls.jpg</logo>
+    </team>
+    <team>
+        <name>Louisiana Tech Bulldogs</name>
+        <logo>Louisiana_Tech_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Marshall Thundering Herd</name>
+        <logo>Marshall_Thundering_Herd.jpg</logo>
+    </team>
+    <team>
+        <name>Middle Tennessee Blue Raiders</name>
+        <logo>Middle_Tennessee_Blue_Raiders.jpg</logo>
+    </team>
+    <team>
+        <name>North Texas Mean Green</name>
+        <logo>North_Texas_Mean_Green.jpg</logo>
+    </team>
+    <team>
+        <name>Old Dominion Monarchs</name>
+        <logo>Old_Dominion_Monarchs.jpg</logo>
+    </team>
+    <team>
+        <name>Rice Owls</name>
+        <logo>Rice_Owls.jpg</logo>
+    </team>
+    <team>
+        <name>Southern Miss Golden Eagles</name>
+        <logo>Southern_Miss_Golden_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>UAB Blazers</name>
+        <logo>UAB_Blazers.jpg</logo>
+    </team>
+    <team>
+        <name>UTEP Miners</name>
+        <logo>UTEP_Miners.jpg</logo>
+    </team>
+    <team>
+        <name>UTSA Roadrunners</name>
+        <logo>UTSA_Roadrunners.jpg</logo>
+    </team>
+    <team>
+        <name>Western Kentucky Hilltoppers</name>
+        <logo>Western_Kentucky_Hilltoppers.jpg</logo>
+    </team>
+    <team>
+        <name>Cleveland State Vikings</name>
+        <logo>Cleveland_State_Vikings.jpg</logo>
+    </team>
+    <team>
+        <name>Detroit Titans</name>
+        <logo>Detroit_Titans.jpg</logo>
+    </team>
+    <team>
+        <name>Green Bay Phoenix</name>
+        <logo>Green_Bay_Phoenix.jpg</logo>
+    </team>
+    <team>
+        <name>Milwaukee Panthers</name>
+        <logo>Milwaukee_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Oakland Golden Grizzlies</name>
+        <logo>Oakland_Golden_Grizzlies.jpg</logo>
+    </team>
+    <team>
+        <name>UIC Flames</name>
+        <logo>UIC_Flames.jpg</logo>
+    </team>
+    <team>
+        <name>Valparaiso Crusaders</name>
+        <logo>Valparaiso_Crusaders.jpg</logo>
+    </team>
+    <team>
+        <name>Wright State Raiders</name>
+        <logo>Wright_State_Raiders.jpg</logo>
+    </team>
+    <team>
+        <name>Youngstown State Penguins</name>
+        <logo>Youngstown_State_Penguins.jpg</logo>
+    </team>
+    <team>
+        <name>NJIT Highlanders</name>
+        <logo>NJIT_Highlanders.jpg</logo>
+    </team>
+    <team>
+        <name>Brown Bears</name>
+        <logo>Brown_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Columbia Lions</name>
+        <logo>Columbia_Lions.jpg</logo>
+    </team>
+    <team>
+        <name>Cornell Big Red</name>
+        <logo>Cornell_Big_Red.jpg</logo>
+    </team>
+    <team>
+        <name>Dartmouth Big Green</name>
+        <logo>Dartmouth_Big_Green.jpg</logo>
+    </team>
+    <team>
+        <name>Harvard Crimson</name>
+        <logo>Harvard_Crimson.jpg</logo>
+    </team>
+    <team>
+        <name>Penn Quakers</name>
+        <logo>Penn_Quakers.jpg</logo>
+    </team>
+    <team>
+        <name>Princeton Tigers</name>
+        <logo>Princeton_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Yale Bulldogs</name>
+        <logo>Yale_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Canisius Golden Griffins</name>
+        <logo>Canisius_Golden_Griffins.jpg</logo>
+    </team>
+    <team>
+        <name>Fairfield Stags</name>
+        <logo>Fairfield_Stags.jpg</logo>
+    </team>
+    <team>
+        <name>Iona Gaels</name>
+        <logo>Iona_Gaels.jpg</logo>
+    </team>
+    <team>
+        <name>Manhattan Jaspers</name>
+        <logo>Manhattan_Jaspers.jpg</logo>
+    </team>
+    <team>
+        <name>Marist Red Foxes</name>
+        <logo>Marist_Red_Foxes.jpg</logo>
+    </team>
+    <team>
+        <name>Monmouth Hawks</name>
+        <logo>Monmouth_Hawks.jpg</logo>
+    </team>
+    <team>
+        <name>Niagara Purple Eagles</name>
+        <logo>Niagara_Purple_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Quinnipiac Bobcats</name>
+        <logo>Quinnipiac_Bobcats.jpg</logo>
+    </team>
+    <team>
+        <name>Rider Broncs</name>
+        <logo>Rider_Broncs.jpg</logo>
+    </team>
+    <team>
+        <name>Saint Peter's Peacocks</name>
+        <logo>Saint_Peters_Peacocks.jpg</logo>
+    </team>
+    <team>
+        <name>Siena Saints</name>
+        <logo>Siena_Saints.jpg</logo>
+    </team>
+    <team>
+        <name>Akron Zips</name>
+        <logo>Akron_Zips.jpg</logo>
+    </team>
+    <team>
+        <name>Ball State Cardinals</name>
+        <logo>Ball_State_Cardinals.jpg</logo>
+    </team>
+    <team>
+        <name>Bowling Green Falcons</name>
+        <logo>Bowling_Green_Falcons.jpg</logo>
+    </team>
+    <team>
+        <name>Buffalo Bulls</name>
+        <logo>Buffalo_Bulls.jpg</logo>
+    </team>
+    <team>
+        <name>Central Michigan Chippewas</name>
+        <logo>Central_Michigan_Chippewas.jpg</logo>
+    </team>
+    <team>
+        <name>Eastern Michigan Eagles</name>
+        <logo>Eastern_Michigan_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Kent State Golden Flashes</name>
+        <logo>Kent_State_Golden_Flashes.jpg</logo>
+    </team>
+    <team>
+        <name>Miami (OH) RedHawks</name>
+        <logo>Miami_(OH)_RedHawks.jpg</logo>
+    </team>
+    <team>
+        <name>Northern Illinois Huskies</name>
+        <logo>Northern_Illinois_Huskies.jpg</logo>
+    </team>
+    <team>
+        <name>Ohio Bobcats</name>
+        <logo>Ohio_Bobcats.jpg</logo>
+    </team>
+    <team>
+        <name>Toledo Rockets</name>
+        <logo>Toledo_Rockets.jpg</logo>
+    </team>
+    <team>
+        <name>Western Michigan Broncos</name>
+        <logo>Western_Michigan_Broncos.jpg</logo>
+    </team>
+    <team>
+        <name>Bethune-Cookman Wildcats</name>
+        <logo>Bethune-Cookman_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Coppin State Eagles</name>
+        <logo>Coppin_State_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Delaware State Hornets</name>
+        <logo>Delaware_State_Hornets.jpg</logo>
+    </team>
+    <team>
+        <name>Florida A&amp;amp;M Rattlers</name>
+        <logo>Florida_A&amp;amp;M_Rattlers.jpg</logo>
+    </team>
+    <team>
+        <name>Hampton Pirates</name>
+        <logo>Hampton_Pirates.jpg</logo>
+    </team>
+    <team>
+        <name>Howard Bison</name>
+        <logo>Howard_Bison.jpg</logo>
+    </team>
+    <team>
+        <name>Maryland Eastern Shore Hawks</name>
+        <logo>Maryland_Eastern_Shore_Hawks.jpg</logo>
+    </team>
+    <team>
+        <name>Morgan State Bears</name>
+        <logo>Morgan_State_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Norfolk State Spartans</name>
+        <logo>Norfolk_State_Spartans.jpg</logo>
+    </team>
+    <team>
+        <name>North Carolina A&amp;amp;T Aggies</name>
+        <logo>North_Carolina_A&amp;amp;T_Aggies.jpg</logo>
+    </team>
+    <team>
+        <name>North Carolina Central Eagles</name>
+        <logo>North_Carolina_Central_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Savannah State Tigers</name>
+        <logo>Savannah_State_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>South Carolina State Bulldogs</name>
+        <logo>South_Carolina_State_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Bradley Braves</name>
+        <logo>Bradley_Braves.jpg</logo>
+    </team>
+    <team>
+        <name>Drake Bulldogs</name>
+        <logo>Drake_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Evansville Aces</name>
+        <logo>Evansville_Aces.jpg</logo>
+    </team>
+    <team>
+        <name>Illinois State Redbirds</name>
+        <logo>Illinois_State_Redbirds.jpg</logo>
+    </team>
+    <team>
+        <name>Indiana State Sycamores</name>
+        <logo>Indiana_State_Sycamores.jpg</logo>
+    </team>
+    <team>
+        <name>Loyola Chicago Ramblers</name>
+        <logo>Loyola_Chicago_Ramblers.jpg</logo>
+    </team>
+    <team>
+        <name>Missouri State Bears</name>
+        <logo>Missouri_State_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Southern Illinois Salukis</name>
+        <logo>Southern_Illinois_Salukis.jpg</logo>
+    </team>
+    <team>
+        <name>UNI Panthers</name>
+        <logo>UNI_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Wichita State Shockers</name>
+        <logo>Wichita_State_Shockers.jpg</logo>
+    </team>
+    <team>
+        <name>Air Force Falcons</name>
+        <logo>Air_Force_Falcons.jpg</logo>
+    </team>
+    <team>
+        <name>Boise State Broncos</name>
+        <logo>Boise_State_Broncos.jpg</logo>
+    </team>
+    <team>
+        <name>Colorado State Rams</name>
+        <logo>Colorado_State_Rams.jpg</logo>
+    </team>
+    <team>
+        <name>Fresno State Bulldogs</name>
+        <logo>Fresno_State_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Nevada Wolf Pack</name>
+        <logo>Nevada_Wolf_Pack.jpg</logo>
+    </team>
+    <team>
+        <name>New Mexico Lobos</name>
+        <logo>New_Mexico_Lobos.jpg</logo>
+    </team>
+    <team>
+        <name>San Diego State Aztecs</name>
+        <logo>San_Diego_State_Aztecs.jpg</logo>
+    </team>
+    <team>
+        <name>San Jose State Spartans</name>
+        <logo>San_Jose_State_Spartans.jpg</logo>
+    </team>
+    <team>
+        <name>UNLV Runnin' Rebels</name>
+        <logo>UNLV_Runnin_Rebels.jpg</logo>
+    </team>
+    <team>
+        <name>Utah State Aggies</name>
+        <logo>Utah_State_Aggies.jpg</logo>
+    </team>
+    <team>
+        <name>Wyoming Cowboys</name>
+        <logo>Wyoming_Cowboys.jpg</logo>
+    </team>
+    <team>
+        <name>Bryant Bulldogs</name>
+        <logo>Bryant_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Central Connecticut State Blue Devils</name>
+        <logo>Central_Connecticut_State_Blue_Devils.jpg</logo>
+    </team>
+    <team>
+        <name>Fairleigh Dickinson Knights</name>
+        <logo>Fairleigh_Dickinson_Knights.jpg</logo>
+    </team>
+    <team>
+        <name>LIU Brooklyn Blackbirds</name>
+        <logo>LIU_Brooklyn_Blackbirds.jpg</logo>
+    </team>
+    <team>
+        <name>Mount St. Mary's Mountaineers</name>
+        <logo>Mount_St._Marys_Mountaineers.jpg</logo>
+    </team>
+    <team>
+        <name>Robert Morris Colonials</name>
+        <logo>Robert_Morris_Colonials.jpg</logo>
+    </team>
+    <team>
+        <name>Sacred Heart Pioneers</name>
+        <logo>Sacred_Heart_Pioneers.jpg</logo>
+    </team>
+    <team>
+        <name>Saint Francis U Red Flash</name>
+        <logo>Saint_Francis_U_Red_Flash.jpg</logo>
+    </team>
+    <team>
+        <name>St. Francis Brooklyn Terriers</name>
+        <logo>St._Francis_Brooklyn_Terriers.jpg</logo>
+    </team>
+    <team>
+        <name>Wagner Seahawks</name>
+        <logo>Wagner_Seahawks.jpg</logo>
+    </team>
+    <team>
+        <name>Austin Peay Governors</name>
+        <logo>Austin_Peay_Governors.jpg</logo>
+    </team>
+    <team>
+        <name>Belmont Bruins</name>
+        <logo>Belmont_Bruins.jpg</logo>
+    </team>
+    <team>
+        <name>Eastern Illinois Panthers</name>
+        <logo>Eastern_Illinois_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Eastern Kentucky Colonels</name>
+        <logo>Eastern_Kentucky_Colonels.jpg</logo>
+    </team>
+    <team>
+        <name>Jacksonville State Gamecocks</name>
+        <logo>Jacksonville_State_Gamecocks.jpg</logo>
+    </team>
+    <team>
+        <name>Morehead State Eagles</name>
+        <logo>Morehead_State_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Murray State Racers</name>
+        <logo>Murray_State_Racers.jpg</logo>
+    </team>
+    <team>
+        <name>SIUE Cougars</name>
+        <logo>SIUE_Cougars.jpg</logo>
+    </team>
+    <team>
+        <name>Southeast Missouri State Redhawks</name>
+        <logo>Southeast_Missouri_State_Redhawks.jpg</logo>
+    </team>
+    <team>
+        <name>Tennessee State Tigers</name>
+        <logo>Tennessee_State_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Tennessee Tech Golden Eagles</name>
+        <logo>Tennessee_Tech_Golden_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>UT Martin Skyhawks</name>
+        <logo>UT_Martin_Skyhawks.jpg</logo>
+    </team>
+    <team>
+        <name>Arizona Wildcats</name>
+        <logo>Arizona_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Arizona State Sun Devils</name>
+        <logo>Arizona_State_Sun_Devils.jpg</logo>
+    </team>
+    <team>
+        <name>California Golden Bears</name>
+        <logo>California_Golden_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Colorado Buffaloes</name>
+        <logo>Colorado_Buffaloes.jpg</logo>
+    </team>
+    <team>
+        <name>Oregon Ducks</name>
+        <logo>Oregon_Ducks.jpg</logo>
+    </team>
+    <team>
+        <name>Oregon State Beavers</name>
+        <logo>Oregon_State_Beavers.jpg</logo>
+    </team>
+    <team>
+        <name>Stanford Cardinal</name>
+        <logo>Stanford_Cardinal.jpg</logo>
+    </team>
+    <team>
+        <name>UCLA Bruins</name>
+        <logo>UCLA_Bruins.jpg</logo>
+    </team>
+    <team>
+        <name>USC Trojans</name>
+        <logo>USC_Trojans.jpg</logo>
+    </team>
+    <team>
+        <name>Utah Runnin' Utes</name>
+        <logo>Utah_Runnin_Utes.jpg</logo>
+    </team>
+    <team>
+        <name>Washington Huskies</name>
+        <logo>Washington_Huskies.jpg</logo>
+    </team>
+    <team>
+        <name>Washington State Cougars</name>
+        <logo>Washington_State_Cougars.jpg</logo>
+    </team>
+    <team>
+        <name>American University Eagles</name>
+        <logo>American_University_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Army Black Knights</name>
+        <logo>Army_Black_Knights.jpg</logo>
+    </team>
+    <team>
+        <name>Boston University Terriers</name>
+        <logo>Boston_University_Terriers.jpg</logo>
+    </team>
+    <team>
+        <name>Bucknell Bison</name>
+        <logo>Bucknell_Bison.jpg</logo>
+    </team>
+    <team>
+        <name>Colgate Raiders</name>
+        <logo>Colgate_Raiders.jpg</logo>
+    </team>
+    <team>
+        <name>Holy Cross Crusaders</name>
+        <logo>Holy_Cross_Crusaders.jpg</logo>
+    </team>
+    <team>
+        <name>Lafayette Leopards</name>
+        <logo>Lafayette_Leopards.jpg</logo>
+    </team>
+    <team>
+        <name>Lehigh Mountain Hawks</name>
+        <logo>Lehigh_Mountain_Hawks.jpg</logo>
+    </team>
+    <team>
+        <name>Loyola Maryland Greyhounds</name>
+        <logo>Loyola_Maryland_Greyhounds.jpg</logo>
+    </team>
+    <team>
+        <name>Navy Midshipmen</name>
+        <logo>Navy_Midshipmen.jpg</logo>
+    </team>
+    <team>
+        <name>Alabama Crimson Tide</name>
+        <logo>Alabama_Crimson_Tide.jpg</logo>
+    </team>
+    <team>
+        <name>Arkansas Razorbacks</name>
+        <logo>Arkansas_Razorbacks.jpg</logo>
+    </team>
+    <team>
+        <name>Auburn Tigers</name>
+        <logo>Auburn_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Florida Gators</name>
+        <logo>Florida_Gators.jpg</logo>
+    </team>
+    <team>
+        <name>Georgia Bulldogs</name>
+        <logo>Georgia_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Kentucky Wildcats</name>
+        <logo>Kentucky_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>LSU Tigers</name>
+        <logo>LSU_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Mississippi State Bulldogs</name>
+        <logo>Mississippi_State_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Missouri Tigers</name>
+        <logo>Missouri_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Ole Miss Rebels</name>
+        <logo>Ole_Miss_Rebels.jpg</logo>
+    </team>
+    <team>
+        <name>South Carolina Gamecocks</name>
+        <logo>South_Carolina_Gamecocks.jpg</logo>
+    </team>
+    <team>
+        <name>Tennessee Volunteers</name>
+        <logo>Tennessee_Volunteers.jpg</logo>
+    </team>
+    <team>
+        <name>Texas A&amp;amp;M Aggies</name>
+        <logo>Texas_A&amp;amp;M_Aggies.jpg</logo>
+    </team>
+    <team>
+        <name>Vanderbilt Commodores</name>
+        <logo>Vanderbilt_Commodores.jpg</logo>
+    </team>
+    <team>
+        <name>Chattanooga Mocs</name>
+        <logo>Chattanooga_Mocs.jpg</logo>
+    </team>
+    <team>
+        <name>Citadel Bulldogs</name>
+        <logo>Citadel_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>East Tennessee State Buccaneers</name>
+        <logo>East_Tennessee_State_Buccaneers.jpg</logo>
+    </team>
+    <team>
+        <name>Furman Paladins</name>
+        <logo>Furman_Paladins.jpg</logo>
+    </team>
+    <team>
+        <name>Mercer Bears</name>
+        <logo>Mercer_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Samford Bulldogs</name>
+        <logo>Samford_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>UNCG Spartans</name>
+        <logo>UNCG_Spartans.jpg</logo>
+    </team>
+    <team>
+        <name>VMI Keydets</name>
+        <logo>VMI_Keydets.jpg</logo>
+    </team>
+    <team>
+        <name>Western Carolina Catamounts</name>
+        <logo>Western_Carolina_Catamounts.jpg</logo>
+    </team>
+    <team>
+        <name>Wofford Terriers</name>
+        <logo>Wofford_Terriers.jpg</logo>
+    </team>
+    <team>
+        <name>Abilene Christian Wildcats</name>
+        <logo>Abilene_Christian_Wildcats.jpg</logo>
+    </team>
+    <team>
+        <name>Central Arkansas Bears</name>
+        <logo>Central_Arkansas_Bears.jpg</logo>
+    </team>
+    <team>
+        <name>Houston Baptist Huskies</name>
+        <logo>Houston_Baptist_Huskies.jpg</logo>
+    </team>
+    <team>
+        <name>Incarnate Word Cardinals</name>
+        <logo>Incarnate_Word_Cardinals.jpg</logo>
+    </team>
+    <team>
+        <name>Lamar Cardinals</name>
+        <logo>Lamar_Cardinals.jpg</logo>
+    </team>
+    <team>
+        <name>McNeese State Cowboys</name>
+        <logo>McNeese_State_Cowboys.jpg</logo>
+    </team>
+    <team>
+        <name>New Orleans Privateers</name>
+        <logo>New_Orleans_Privateers.jpg</logo>
+    </team>
+    <team>
+        <name>Nicholls Colonels</name>
+        <logo>Nicholls_Colonels.jpg</logo>
+    </team>
+    <team>
+        <name>Northwestern State Demons</name>
+        <logo>Northwestern_State_Demons.jpg</logo>
+    </team>
+    <team>
+        <name>Sam Houston State Bearkats</name>
+        <logo>Sam_Houston_State_Bearkats.jpg</logo>
+    </team>
+    <team>
+        <name>Southeastern Louisiana Lions</name>
+        <logo>Southeastern_Louisiana_Lions.jpg</logo>
+    </team>
+    <team>
+        <name>Stephen F. Austin Lumberjacks</name>
+        <logo>Stephen_F._Austin_Lumberjacks.jpg</logo>
+    </team>
+    <team>
+        <name>Texas A&amp;amp;M-Corpus Christi Islanders</name>
+        <logo>Texas_A&amp;amp;M-Corpus_Christi_Islanders.jpg</logo>
+    </team>
+    <team>
+        <name>Denver Pioneers</name>
+        <logo>Denver_Pioneers.jpg</logo>
+    </team>
+    <team>
+        <name>IPFW Mastodons</name>
+        <logo>IPFW_Mastodons.jpg</logo>
+    </team>
+    <team>
+        <name>IUPUI Jaguars</name>
+        <logo>IUPUI_Jaguars.jpg</logo>
+    </team>
+    <team>
+        <name>North Dakota State Bison</name>
+        <logo>North_Dakota_State_Bison.jpg</logo>
+    </team>
+    <team>
+        <name>Omaha Mavericks</name>
+        <logo>Omaha_Mavericks.jpg</logo>
+    </team>
+    <team>
+        <name>Oral Roberts Golden Eagles</name>
+        <logo>Oral_Roberts_Golden_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>South Dakota Coyotes</name>
+        <logo>South_Dakota_Coyotes.jpg</logo>
+    </team>
+    <team>
+        <name>South Dakota State Jackrabbits</name>
+        <logo>South_Dakota_State_Jackrabbits.jpg</logo>
+    </team>
+    <team>
+        <name>Western Illinois Leathernecks</name>
+        <logo>Western_Illinois_Leathernecks.jpg</logo>
+    </team>
+    <team>
+        <name>Appalachian State Mountaineers</name>
+        <logo>Appalachian_State_Mountaineers.jpg</logo>
+    </team>
+    <team>
+        <name>Arkansas State Red Wolves</name>
+        <logo>Arkansas_State_Red_Wolves.jpg</logo>
+    </team>
+    <team>
+        <name>Georgia Southern Eagles</name>
+        <logo>Georgia_Southern_Eagles.jpg</logo>
+    </team>
+    <team>
+        <name>Georgia State Panthers</name>
+        <logo>Georgia_State_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Louisiana-Lafayette Ragin' Cajuns</name>
+        <logo>Louisiana-Lafayette_Ragin_Cajuns.jpg</logo>
+    </team>
+    <team>
+        <name>Louisiana-Monroe Warhawks</name>
+        <logo>Louisiana-Monroe_Warhawks.jpg</logo>
+    </team>
+    <team>
+        <name>South Alabama Jaguars</name>
+        <logo>South_Alabama_Jaguars.jpg</logo>
+    </team>
+    <team>
+        <name>Texas State Bobcats</name>
+        <logo>Texas_State_Bobcats.jpg</logo>
+    </team>
+    <team>
+        <name>Troy Trojans</name>
+        <logo>Troy_Trojans.jpg</logo>
+    </team>
+    <team>
+        <name>UALR Trojans</name>
+        <logo>UALR_Trojans.jpg</logo>
+    </team>
+    <team>
+        <name>UT Arlington Mavericks</name>
+        <logo>UT_Arlington_Mavericks.jpg</logo>
+    </team>
+    <team>
+        <name>Alabama A&amp;amp;M Bulldogs</name>
+        <logo>Alabama_A&amp;amp;M_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Alabama State Hornets</name>
+        <logo>Alabama_State_Hornets.jpg</logo>
+    </team>
+    <team>
+        <name>Alcorn State Braves</name>
+        <logo>Alcorn_State_Braves.jpg</logo>
+    </team>
+    <team>
+        <name>Grambling State Tigers</name>
+        <logo>Grambling_State_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Jackson State Tigers</name>
+        <logo>Jackson_State_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Mississippi Valley State Delta Devils</name>
+        <logo>Mississippi_Valley_State_Delta_Devils.jpg</logo>
+    </team>
+    <team>
+        <name>Prairie View A&amp;amp;M Panthers</name>
+        <logo>Prairie_View_A&amp;amp;M_Panthers.jpg</logo>
+    </team>
+    <team>
+        <name>Southern University Jaguars</name>
+        <logo>Southern_University_Jaguars.jpg</logo>
+    </team>
+    <team>
+        <name>Texas Southern Tigers</name>
+        <logo>Texas_Southern_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>UAPB Golden Lions</name>
+        <logo>UAPB_Golden_Lions.jpg</logo>
+    </team>
+    <team>
+        <name>Bakersfield Roadrunners</name>
+        <logo>Bakersfield_Roadrunners.jpg</logo>
+    </team>
+    <team>
+        <name>Chicago State Cougars</name>
+        <logo>Chicago_State_Cougars.jpg</logo>
+    </team>
+    <team>
+        <name>Grand Canyon Antelopes</name>
+        <logo>Grand_Canyon_Antelopes.jpg</logo>
+    </team>
+    <team>
+        <name>New Mexico State Aggies</name>
+        <logo>New_Mexico_State_Aggies.jpg</logo>
+    </team>
+    <team>
+        <name>Seattle Redhawks</name>
+        <logo>Seattle_Redhawks.jpg</logo>
+    </team>
+    <team>
+        <name>Texas-Pan American Broncs</name>
+        <logo>Texas-Pan_American_Broncs.jpg</logo>
+    </team>
+    <team>
+        <name>UMKC Kangaroos</name>
+        <logo>UMKC_Kangaroos.jpg</logo>
+    </team>
+    <team>
+        <name>Utah Valley Wolverines</name>
+        <logo>Utah_Valley_Wolverines.jpg</logo>
+    </team>
+    <team>
+        <name>BYU Cougars</name>
+        <logo>BYU_Cougars.jpg</logo>
+    </team>
+    <team>
+        <name>Gonzaga Bulldogs</name>
+        <logo>Gonzaga_Bulldogs.jpg</logo>
+    </team>
+    <team>
+        <name>Loyola Marymount Lions</name>
+        <logo>Loyola_Marymount_Lions.jpg</logo>
+    </team>
+    <team>
+        <name>Pacific Tigers</name>
+        <logo>Pacific_Tigers.jpg</logo>
+    </team>
+    <team>
+        <name>Pepperdine Waves</name>
+        <logo>Pepperdine_Waves.jpg</logo>
+    </team>
+    <team>
+        <name>Portland Pilots</name>
+        <logo>Portland_Pilots.jpg</logo>
+    </team>
+    <team>
+        <name>Saint Mary's Gaels</name>
+        <logo>Saint_Marys_Gaels.jpg</logo>
+    </team>
+    <team>
+        <name>San Diego Toreros</name>
+        <logo>San_Diego_Toreros.jpg</logo>
+    </team>
+    <team>
+        <name>San Francisco Dons</name>
+        <logo>San_Francisco_Dons.jpg</logo>
+    </team>
+    <team>
+        <name>Santa Clara Broncos</name>
+        <logo>Santa_Clara_Broncos.jpg</logo>
+    </team>
+</teams>

@@ -1,0 +1,63 @@
+<div class="row">
+
+	<div class="col-xs-12">
+
+		<div class="col-xs-6 text-right <%=matchResults.style1%>">
+
+			<a href="/betmen/teams/<%=match.team1.teamId%>/"><%=match.team1.teamName%></a>
+
+			<img class="team-logo" src="<%=match.team1.teamLogo%>" title="<%=match.team1.teamName%>">
+
+			<% if( match.matchFinished ) { %>
+				<h3 class="<%=matchResults.style1%>"><%=match.score1%></h3>
+			<% } %>
+
+		</div>
+
+		<div class="col-xs-6 <%=matchResults.style2%>">
+
+			<img class="team-logo" src="<%=match.team2.teamLogo%>" title="<%=match.team2.teamName%>">
+
+			<a href="/betmen/teams/<%=match.team2.teamId%>/"><%=match.team2.teamName%></a>
+
+			<% if( match.matchFinished ) { %>
+				<h3 class="<%=matchResults.style2%>"><%=match.score2%></h3>
+			<% } %>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+<hr />
+
+
+<% if( ! match.showAnotherBets ) { %>
+	<div class="row">
+
+		<div class="col-xs-12">
+			<div class="row" style="padding-bottom: 20px;">
+				<div class="col-xs-12 text-center text-warning">
+					<%=translator.anotherBetsAreHidden%> <strong><%=matchBeginningTime%></strong> ( <%=timeToBetPublishing%> )
+				</div>
+			</div>
+		</div>
+
+	</div>
+<% } %>
+
+
+<div class="row">
+
+	<div class="col-xs-12 col-lg-4 js-match-bet-widget">
+	</div>
+
+	<div class="col-xs-12 col-lg-6 js-match-bets-widget">
+	</div>
+
+	<div class="col-xs-12 col-lg-2 js-match-activity-stream">
+	</div>
+
+</div>
