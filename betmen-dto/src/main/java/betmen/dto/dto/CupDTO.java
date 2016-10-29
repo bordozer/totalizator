@@ -24,6 +24,8 @@ public class CupDTO {
     private String cupName;
     private CategoryDTO category;
     private int winnersCount;
+    @JsonSerialize(using = DateTimeSerializer.class)
+    @JsonDeserialize(using = DateTimeDeserializer.class)
     private LocalDateTime cupStartDate;
     private boolean readyForCupBets;
     private boolean readyForMatchBets;
@@ -36,15 +38,5 @@ public class CupDTO {
         this.cupId = cupId;
         this.cupName = cupName;
         this.category = category;
-    }
-
-    @JsonSerialize(using = DateTimeSerializer.class)
-    public LocalDateTime getCupStartDate() {
-        return cupStartDate;
-    }
-
-    @JsonDeserialize(using = DateTimeDeserializer.class)
-    public void setCupStartDate(final LocalDateTime cupStartDate) {
-        this.cupStartDate = cupStartDate;
     }
 }

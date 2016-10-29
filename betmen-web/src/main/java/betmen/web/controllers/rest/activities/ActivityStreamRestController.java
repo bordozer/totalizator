@@ -4,6 +4,7 @@ import betmen.core.entity.User;
 import betmen.core.entity.activities.ActivityStreamEntryType;
 import betmen.core.service.UserService;
 import betmen.core.service.activiries.ActivityStreamService;
+import betmen.dto.dto.ActivityStreamDTO;
 import betmen.web.converters.ActivitiesDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

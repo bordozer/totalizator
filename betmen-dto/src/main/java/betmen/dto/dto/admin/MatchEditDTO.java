@@ -45,6 +45,8 @@ public class MatchEditDTO {
     private int score2;
 
     @NotNull(message = "errors.beginning_time_must_not_be_null")
+    @JsonSerialize(using = DateTimeSerializer.class)
+    @JsonDeserialize(using = DateTimeDeserializer.class)
     private LocalDateTime beginningTime;
 
     private boolean matchFinished;
@@ -64,16 +66,6 @@ public class MatchEditDTO {
 
     public int getMatchId() {
         return matchId;
-    }
-
-    @JsonSerialize(using = DateTimeSerializer.class)
-    public LocalDateTime getBeginningTime() {
-        return beginningTime;
-    }
-
-    @JsonDeserialize(using = DateTimeDeserializer.class)
-    public void setBeginningTime(final LocalDateTime beginningTime) {
-        this.beginningTime = beginningTime;
     }
 
     @JsonProperty

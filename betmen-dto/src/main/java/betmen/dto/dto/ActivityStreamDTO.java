@@ -1,9 +1,8 @@
-package betmen.web.controllers.rest.activities;
+package betmen.dto.dto;
 
-import betmen.dto.dto.UsersRatingPositionDTO;
-import betmen.dto.dto.MatchDTO;
-import betmen.dto.dto.UserDTO;
+import betmen.dto.serialization.DateTimeDeserializer;
 import betmen.dto.serialization.DateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +15,9 @@ public class ActivityStreamDTO {
 
     private int activityStreamEntryTypeId;
     private UserDTO activityOfUser;
+
+    @JsonSerialize(using = DateTimeSerializer.class)
+    @JsonDeserialize(using = DateTimeDeserializer.class)
     private LocalDateTime activityTime;
 
     private MatchDTO match;

@@ -43,6 +43,8 @@ public class CupEditDTO {
     private int cupPointsCalculationStrategyId;
 
     @NotNull(message = "errors.cup_start_date_should_not_be_null")
+    @JsonSerialize(using = DateTimeSerializer.class)
+    @JsonDeserialize(using = DateTimeDeserializer.class)
     private LocalDateTime cupStartDate;
 
     @Min(value = 1)
@@ -59,14 +61,4 @@ public class CupEditDTO {
     private String logoUrl;
     private boolean readyForCupBets;
     private boolean readyForMatchBets;
-
-    @JsonSerialize(using = DateTimeSerializer.class)
-    public LocalDateTime getCupStartDate() {
-        return cupStartDate;
-    }
-
-    @JsonDeserialize(using = DateTimeDeserializer.class)
-    public void setCupStartDate(final LocalDateTime cupStartDate) {
-        this.cupStartDate = cupStartDate;
-    }
 }

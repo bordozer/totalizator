@@ -4,7 +4,7 @@ import betmen.core.model.points.UserMatchBetPointsHolder;
 import betmen.core.model.points.UserMatchPointsHolder;
 import betmen.core.service.activiries.ActivityStreamValidator;
 import betmen.core.utils.Constants;
-import betmen.web.controllers.rest.activities.ActivityStreamDTO;
+import betmen.dto.dto.ActivityStreamDTO;
 import betmen.dto.dto.UsersRatingPositionDTO;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;

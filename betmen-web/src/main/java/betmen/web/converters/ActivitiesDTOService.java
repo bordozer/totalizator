@@ -1,6 +1,6 @@
 package betmen.web.converters;
 
-import betmen.web.controllers.rest.activities.ActivityStreamDTO;
+import betmen.dto.dto.ActivityStreamDTO;
 import betmen.core.entity.User;
 import betmen.core.entity.activities.AbstractActivityStreamEntry;
 import betmen.core.entity.activities.ActivityStreamEntryType;
