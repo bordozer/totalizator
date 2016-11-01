@@ -39,7 +39,7 @@ public class AdminCupsRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{cupId}/")
     public CupDTO getCup(final @PathVariable("cupId") int cupId, final Principal principal) {
-        return dtoService.transformCup(cupService.load(cupId), getUser(principal));
+        return dtoService.transformCup(cupService.loadAndAssertExists(cupId), getUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
