@@ -1,0 +1,1 @@
+ALTER TABLE matches ADD INDEX idx_beginningTime (beginningTime);
