@@ -57,7 +57,7 @@ public class MatchesAndBetsCollapsedRestController {
         final MatchesAndBetsCollapsedDTO result = new MatchesAndBetsCollapsedDTO(dtoService.transformCup(cup, showBetsOfUser), dtoService.transformUser(showBetsOfUser));
         result.setMatchesCount(matchService.getMatchCount(cup.getId()));                // totally in cup
         result.setFutureMatchesCount(matchService.getFutureMatchCount(cup));    // not finished matches at all
-        result.setTodayMatchesCount(matchService.loadAllOnDate(cup.getId(), dateTimeService.parseDate(filter.getFilterByDate())).size());
+        result.setTodayMatchesCount(matchService.loadAllOnDate(cup.getId(), filter.getFilterByDate()).size());
         result.setNowPlayingMatchesCount(matchService.getMatchNotFinishedYetMatches(cup).size());
 
         final Match nearestFutureMatch = matchService.getNearestFutureMatch(cup, dateTimeService.getNow());

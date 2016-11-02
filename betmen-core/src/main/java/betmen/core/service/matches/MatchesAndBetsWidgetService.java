@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MatchesAndBetsWidgetService {
 
-    List<Match> loadAll(final MatchSearchModel model);
+    List<Match> loadAll(final MatchSearchModel searchQuery);
 }

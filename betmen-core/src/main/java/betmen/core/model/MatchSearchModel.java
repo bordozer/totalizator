@@ -3,6 +3,8 @@ package betmen.core.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 public class MatchSearchModel {
@@ -12,7 +14,7 @@ public class MatchSearchModel {
     private int teamId;
     private int team2Id;
 
-    private String filterByDate;
+    private LocalDate filterByDate;
     private boolean filterByDateEnable;
 
     private boolean showFutureMatches;

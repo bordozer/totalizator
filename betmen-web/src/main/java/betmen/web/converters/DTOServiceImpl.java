@@ -1,5 +1,6 @@
 package betmen.web.converters;
 
+import betmen.core.exception.BadRequestException;
 import betmen.core.model.MatchSearchModel;
 import betmen.core.service.CupBetsService;
 import betmen.core.service.CupService;
@@ -10,6 +11,7 @@ import betmen.core.service.UserGroupService;
 import betmen.core.model.ValidationResult;
 import betmen.core.model.points.UserCupPointsHolder;
 import betmen.core.model.points.UserMatchPointsHolder;
+import betmen.core.service.utils.DateTimeService;
 import betmen.dto.dto.BetDTO;
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
@@ -89,6 +91,9 @@ public class DTOServiceImpl implements DTOService {
 
     @Autowired
     private FavoriteCategoryService favoriteCategoryService;
+
+    @Autowired
+    private DateTimeService dateTimeService;
 
     @Override
     public UserDTO transformUser(final User user) {
@@ -293,13 +298,16 @@ public class DTOServiceImpl implements DTOService {
 
     @Override
     public MatchSearchModel transformMatchSearchModel(MatchSearchModelDto dto) {
+        if (dto.isFilterByDateEnable() && !dateTimeService.isValidDate(dto.getFilterByDate())) {
+            throw new BadRequestException(String.format("Date '%s' is invalid", dto.getFilterByDate()));
+        }
         final MatchSearchModel model = new MatchSearchModel();
         model.setCategoryId(dto.getCategoryId());
         model.setCupId(dto.getCupId());
         model.setTeamId(dto.getTeamId());
         model.setTeam2Id(dto.getTeam2Id());
         model.setFilterByDateEnable(dto.isFilterByDateEnable());
-        model.setFilterByDate(dto.getFilterByDate());
+        model.setFilterByDate(dateTimeService.parseDate(dto.getFilterByDate()));
         model.setShowFutureMatches(dto.isShowFutureMatches());
         model.setShowFinished(dto.isShowFinished());
         model.setSorting(dto.getSorting());
