@@ -11,6 +11,7 @@ import betmen.core.service.UserService;
 import betmen.core.service.matches.MatchBetsService;
 import betmen.core.service.matches.MatchService;
 import betmen.core.service.utils.DateTimeService;
+import betmen.dto.dto.MatchSearchModelDto;
 import betmen.dto.dto.MatchesAndBetsCollapsedDTO;
 import betmen.web.converters.DTOService;
 import betmen.dto.dto.TeamDTO;
@@ -49,7 +50,9 @@ public class MatchesAndBetsCollapsedRestController {
     private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public MatchesAndBetsCollapsedDTO matchesAndBetsCollapsed(final MatchSearchModel filter, final Principal principal) {
+    public MatchesAndBetsCollapsedDTO matchesAndBetsCollapsed(final MatchSearchModelDto dto, final Principal principal) {
+
+        MatchSearchModel filter = dtoService.transformMatchSearchModel(dto);
         final int userId = filter.getUserId();
         final User showBetsOfUser = userId > 0 ? userService.load(userId) : userService.findByLogin(principal.getName());
         final Cup cup = cupService.load(filter.getCupId());
