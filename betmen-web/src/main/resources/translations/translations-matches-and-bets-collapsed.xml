@@ -60,9 +60,9 @@
 
 	<translation>
 		<nerd>User has missed cup winner betting</nerd>
-		<ru><![CDATA[Вы не сделали ставки на победителей чемпионата вовремя]]></ru>
-		<ua><![CDATA[Ви не зробили ставки на переможцiв чемпiонату вчасно]]></ua>
-		<en><![CDATA[You has missed cup winner betting]]></en>
+		<ru><![CDATA[Ставки на победителей чемпионата уже не доступны]]></ru>
+		<ua><![CDATA[Ставки на переможцiв чемпiонату все не доступнi]]></ua>
+		<en><![CDATA[It's too late to make cup winners bets]]></en>
 	</translation>
 
 	<translation>
