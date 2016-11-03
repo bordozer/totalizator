@@ -2,7 +2,6 @@ define( function ( require ) {
 
 	'use strict';
 
-	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
 	var $ = require( 'jquery' );
 	var moment = require( 'moment' );
@@ -296,7 +295,7 @@ define( function ( require ) {
 				return 'panel-warning';
 			}
 
-			var matchFinishedAndUserGotSomePoints = isMatchFinished && matchBet.userMatchPointsHolder.matchBetPoints > 0;
+			var matchFinishedAndUserGotSomePoints = isMatchFinished && matchBet.userMatchPointsHolder && matchBet.userMatchPointsHolder.matchBetPoints > 0;
 			if ( matchFinishedAndUserGotSomePoints ) {
 				return 'panel-success';
 			}
