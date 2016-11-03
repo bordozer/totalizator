@@ -5,6 +5,7 @@ import betmen.core.entity.User;
 import betmen.core.service.CategoryService;
 import betmen.core.service.CupService;
 import betmen.core.service.UserService;
+import betmen.core.service.admin.AdminMnBService;
 import betmen.core.service.matches.imports.GameImportStrategyType;
 import betmen.dto.dto.CupDTO;
 import betmen.dto.dto.admin.CupForGameImportDTO;
@@ -22,8 +23,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 @RestController
 @RequestMapping("/admin/rest/cups")
 public class AdminCupsRestController {
@@ -35,6 +34,8 @@ public class AdminCupsRestController {
     @Autowired
     private CupService cupService;
     @Autowired
+    private AdminMnBService adminMnBService;
+    @Autowired
     private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{cupId}/")
@@ -44,22 +45,22 @@ public class AdminCupsRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<CupDTO> allCups(final Principal principal) {
-        return dtoService.transformCups(allCups(), getUser(principal));
+        return dtoService.transformCups(adminMnBService.loadAllCups(), getUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/current/")
     public List<CupDTO> currentCupsOnly(final Principal principal) {
-        return dtoService.transformCups(currentCupsOnly(), getUser(principal));
+        return dtoService.transformCups(adminMnBService.loadAllCurrentCups(), getUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/configured-for-remote-games-import/")
     public List<CupForGameImportDTO> importableCups(final @RequestParam("sportKindId") int sportKindId, final Principal principal) {
-        return getCupForGameImportDTOs(allCups(), sportKindId, principal);
+        return getCupForGameImportDTOs(adminMnBService.loadAllCups(), sportKindId, principal);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/configured-for-remote-games-import/current/")
     public List<CupForGameImportDTO> importableCurrentCups(final @RequestParam("sportKindId") int sportKindId, final Principal principal) {
-        return getCupForGameImportDTOs(currentCupsOnly(), sportKindId, principal);
+        return getCupForGameImportDTOs(adminMnBService.loadAllCurrentCups(), sportKindId, principal);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/for-category/{categoryId}/")
@@ -81,20 +82,6 @@ public class AdminCupsRestController {
         CupDTO cupDto = dtoService.transformCup(cup, getUser(principal));
         GameImportStrategyType strategyType = GameImportStrategyType.getById(cup.getCategory().getRemoteGameImportStrategyTypeId());
         return new CupForGameImportDTO(cupDto, strategyType.getTimePeriodType());
-    }
-
-    private List<Cup> allCups() {
-        final List<Cup> result = newArrayList();
-        result.addAll(cupService.loadPublic());
-        result.addAll(cupService.loadHidden());
-        return result;
-    }
-
-    private List<Cup> currentCupsOnly() {
-        final List<Cup> result = newArrayList();
-        result.addAll(cupService.loadPublicCurrent());
-        result.addAll(cupService.loadHiddenCurrent());
-        return result;
     }
 
     // TODO: mode to service

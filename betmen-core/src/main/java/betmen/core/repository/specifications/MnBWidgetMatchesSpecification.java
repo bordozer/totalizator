@@ -1,4 +1,4 @@
-package betmen.core.service.matches;
+package betmen.core.repository.specifications;
 
 import betmen.core.entity.Match;
 import betmen.core.model.MatchSearchModel;
@@ -13,11 +13,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class MatchSpecification implements Specification<Match> {
+public class MnBWidgetMatchesSpecification implements Specification<Match> {
 
     private final MatchSearchModel searchQuery;
 
-    public MatchSpecification(final MatchSearchModel searchQuery) {
+    public MnBWidgetMatchesSpecification(final MatchSearchModel searchQuery) {
         this.searchQuery = searchQuery;
     }
 

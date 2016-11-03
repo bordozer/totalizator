@@ -3,6 +3,7 @@ package betmen.core.service.matches;
 import betmen.core.entity.Match;
 import betmen.core.model.MatchSearchModel;
 import betmen.core.repository.jpa.MatchJpaRepository;
+import betmen.core.repository.specifications.MnBWidgetMatchesSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -22,7 +23,7 @@ public class MatchesAndBetsWidgetServiceImpl implements MatchesAndBetsWidgetServ
     public List<Match> loadAll(final MatchSearchModel searchQuery) {
         Assert.assertTrue(searchQuery.getCupId() > 0, "Cup ID should be provided");
         Assert.assertTrue(searchQuery.isShowFinished() || searchQuery.isShowFutureMatches(), "Finished or future matches or both type should be selected");
-        return matchJpaRepository.findAll(new MatchSpecification(searchQuery), sort(searchQuery.getSorting()));
+        return matchJpaRepository.findAll(new MnBWidgetMatchesSpecification(searchQuery), sort(searchQuery.getSorting()));
     }
 
     private Sort sort(final int sorting) {
