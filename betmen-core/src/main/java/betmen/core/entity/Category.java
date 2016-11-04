@@ -33,7 +33,7 @@ import static betmen.core.entity.Category.LOAD_ALL;
         ),
         @NamedQuery(
                 name = FIND_BY_SPORT_KIND,
-                query = "select c from Category c where sportKindId= :sportKindId"
+                query = "select c from Category c where sportKindId= :sportKindId order by categoryName"
         )
 })
 @Getter

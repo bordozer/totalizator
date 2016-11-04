@@ -12,6 +12,7 @@ import betmen.core.service.SportKindService;
 import betmen.core.service.UserService;
 import betmen.core.translator.Language;
 import betmen.core.translator.TranslatorService;
+import betmen.dto.dto.CupDTO;
 import betmen.dto.dto.SportKindDTO;
 import betmen.web.converters.DTOService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,22 +61,16 @@ public class SportKindCupsRestController {
         final User currentUser = getCurrentUser(principal);
         final List<SportKindCupsDTO> list = newArrayList();
         list.addAll(getCupsOfFavoritesCategories(currentUser, AppContext.read(request.getSession()).getLanguage()));
-
         final Map<SportKind, List<Cup>> sportKindCupsMap = getSportKindCupsMap();
         for (final SportKind sportKind : sportKindCupsMap.keySet()) {
-
             final SportKindCupsDTO dto = new SportKindCupsDTO(dtoService.transformSportKind(sportKind));
-
             final List<Cup> cups = sportKindCupsMap.get(sportKind)
                     .stream()
                     .sorted(cupService.categoryNameOrCupNameComparator())
                     .collect(Collectors.toList());
-
-            dto.setCups(dtoService.transformCups(cups, currentUser));
-
+            dto.setCupAndCategoryFavorite(convert(currentUser, dtoService.transformCups(cups, currentUser)));
             list.add(dto);
         }
-
         return new SportKindsCupsDTO(list);
     }
 
@@ -90,7 +85,7 @@ public class SportKindCupsRestController {
         return categories.stream()
                 .map(category -> {
                     final CategoryCupsDTO dto = new CategoryCupsDTO();
-                    dto.setCategory(dtoService.transformCategory(category, currentUser));
+                    dto.setCategory(dtoService.transformFavoriteCategory(category, currentUser));
                     dto.setCups(dtoService.transformCups(cupService.loadPublic(category), currentUser));
                     return dto;
                 })
@@ -105,13 +100,20 @@ public class SportKindCupsRestController {
         }
         final SportKindDTO fakeSportKindFavorites = new SportKindDTO(0, translatorService.translate("Favorite categories cups", language));
         final SportKindCupsDTO fakeSportKindDTOFavorites = new SportKindCupsDTO(fakeSportKindFavorites);
-        fakeSportKindDTOFavorites.setCups(dtoService.transformCups(favoriteCategoriesCups.stream()
+        List<CupDTO> cupDTOs = dtoService.transformCups(favoriteCategoriesCups.stream()
                         .sorted(cupService.categoryNameOrCupNameComparator())
                         .collect(Collectors.toList())
                 , currentUser
-        ));
+        );
+        fakeSportKindDTOFavorites.setCupAndCategoryFavorite(convert(currentUser, cupDTOs));
         result.add(fakeSportKindDTOFavorites);
         return result;
+    }
+
+    private List<CupAndCategoryFavoriteDTO> convert(final User currentUser, final List<CupDTO> cupDTOs) {
+        return cupDTOs.stream()
+                .map(cup -> new CupAndCategoryFavoriteDTO(cup, favoriteCategoryService.isInFavorites(currentUser.getId(), cup.getCategory().getCategoryId())))
+                .collect(Collectors.toList());
     }
 
     private LinkedHashMap<SportKind, List<Cup>> getSportKindCupsMap() {

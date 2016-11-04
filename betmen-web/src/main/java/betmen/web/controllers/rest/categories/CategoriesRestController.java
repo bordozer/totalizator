@@ -6,6 +6,7 @@ import betmen.core.service.CupService;
 import betmen.core.service.UserService;
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
+import betmen.dto.dto.FavoriteCategoryDTO;
 import betmen.web.converters.DTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,20 +33,19 @@ public class CategoriesRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<CategoryDTO> entries(final Principal principal) {
-        return dtoService.transformCategories(categoryService.loadAll(), geCurrentUser(principal));
+        return dtoService.transformCategories(categoryService.loadAll());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/sportKind/{sportKindId}/")
     public List<CategoryDTO> sportKindsCategories(@PathVariable("sportKindId") final int sportKindId, final Principal principal) {
         return dtoService.transformCategories(categoryService.loadAll().stream()
                         .filter(category -> category.getSportKind().getId() == sportKindId)
-                        .collect(Collectors.toList())
-                , geCurrentUser(principal));
+                        .collect(Collectors.toList()));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{categoryId}/")
-    public CategoryDTO entry(@PathVariable("categoryId") final int categoryId, final Principal principal) {
-        return dtoService.transformCategory(categoryService.load(categoryId), geCurrentUser(principal));
+    public FavoriteCategoryDTO entry(@PathVariable("categoryId") final int categoryId, final Principal principal) {
+        return dtoService.transformFavoriteCategory(categoryService.load(categoryId), geCurrentUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{categoryId}/cups/public/")

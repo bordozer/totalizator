@@ -21,8 +21,9 @@
 							</li>
 						<% } %>
 
-						<% if( entry.cups.length > 0 ) { %>
-							<% _.each( entry.cups, function( cup ) { %>
+						<% if( entry.cupAndCategoryFavorite.length > 0 ) { %>
+							<% _.each( entry.cupAndCategoryFavorite, function( cupAndCategoryFavorite ) { %>
+								<% var cup = cupAndCategoryFavorite.cup; %>
 								<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>">
 									<a href="/betmen/cups/<%=cup.cupId%>/">
 
@@ -31,11 +32,11 @@
 											<%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
 										<% } %>
 
-										<% if( cup.category.favoriteCategory && entry.sportKind.sportKindId > 0 ) { %>
+										<% if( cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
 											<span class="fa fa-star"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
 										<% } %>
 
-										<% if( ! cup.category.favoriteCategory && entry.sportKind.sportKindId > 0 ) { %>
+										<% if( ! cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
 											<span style="margin-left: 18px;"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
 										<% } %>
 

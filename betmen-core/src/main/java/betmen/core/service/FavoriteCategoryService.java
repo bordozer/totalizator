@@ -11,6 +11,8 @@ public interface FavoriteCategoryService {
 
     void removeFromFavorites(final User user, final Category category);
 
+    boolean isInFavorites(final int userId, final int categoryId);
+
     boolean isInFavorites(final User user, final Category category);
 
     List<Category> loadUserFavoriteCategories(final User user);

@@ -43,7 +43,13 @@ public class FavoriteCategoryServiceImpl implements FavoriteCategoryService {
     @Override
     @Transactional(readOnly = true)
     public boolean isInFavorites(final User user, final Category category) {
-        return favoriteCategoryRepository.find(user.getId(), category.getId()) != null;
+        return isInFavorites(user.getId(), category.getId());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isInFavorites(final int userId, final int categoryId) {
+        return favoriteCategoryRepository.find(userId, categoryId) != null;
     }
 
     @Override

@@ -8,6 +8,7 @@ import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
 import betmen.dto.dto.CupTeamBetDTO;
 import betmen.dto.dto.CupWinnerDTO;
+import betmen.dto.dto.FavoriteCategoryDTO;
 import betmen.dto.dto.MatchBetDTO;
 import betmen.dto.dto.MatchDTO;
 import betmen.dto.dto.MatchSearchModelDto;
@@ -38,9 +39,13 @@ public interface DTOService {
 
     List<UserDTO> transformUsers(final List<User> users);
 
-    CategoryDTO transformCategory(final Category category, final User user);
+    CategoryDTO transformCategory(final Category category);
 
-    List<CategoryDTO> transformCategories(final List<Category> users, final User user);
+    List<CategoryDTO> transformCategories(final List<Category> categories);
+
+    FavoriteCategoryDTO transformFavoriteCategory(final Category category, final User user);
+
+    List<FavoriteCategoryDTO> transformFavoriteCategories(final List<Category> categories, final User user);
 
     CupDTO transformCup(final Cup cup, final User accessor);
 

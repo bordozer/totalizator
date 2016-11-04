@@ -26,7 +26,7 @@ public class CupServiceImpl implements CupService {
     private static final Logger LOGGER = Logger.getLogger(CupServiceImpl.class);
 
     public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_ASC = (o1, o2) -> o1.getCupStartTime().compareTo(o2.getCupStartTime());
-    public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_DESC = (o1, o2) -> o2.getCupStartTime().compareTo(o1.getCupStartTime());
+    public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_DESC = SORT_BY_CUP_BEGINNING_TIME_ASC.reversed();
 
     @Autowired
     private CupDao cupRepository;
@@ -63,7 +63,7 @@ public class CupServiceImpl implements CupService {
     @Transactional(readOnly = true)
     public List<Cup> loadAll() {
         return cupRepository.loadAll().stream()
-                .sorted(SORT_BY_CUP_BEGINNING_TIME_ASC)
+                .sorted(SORT_BY_CUP_BEGINNING_TIME_DESC)
                 .collect(Collectors.toList());
     }
 

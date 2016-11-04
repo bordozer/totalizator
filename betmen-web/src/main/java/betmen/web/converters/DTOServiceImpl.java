@@ -1,33 +1,5 @@
 package betmen.web.converters;
 
-import betmen.core.exception.BadRequestException;
-import betmen.core.model.MatchSearchModel;
-import betmen.core.service.CupBetsService;
-import betmen.core.service.CupService;
-import betmen.core.service.CupTeamService;
-import betmen.core.service.FavoriteCategoryService;
-import betmen.core.service.LogoService;
-import betmen.core.service.UserGroupService;
-import betmen.core.model.ValidationResult;
-import betmen.core.model.points.UserCupPointsHolder;
-import betmen.core.model.points.UserMatchPointsHolder;
-import betmen.core.service.utils.DateTimeService;
-import betmen.dto.dto.BetDTO;
-import betmen.dto.dto.CategoryDTO;
-import betmen.dto.dto.CupDTO;
-import betmen.dto.dto.CupTeamBetDTO;
-import betmen.dto.dto.CupWinnerDTO;
-import betmen.dto.dto.MatchBetDTO;
-import betmen.dto.dto.MatchDTO;
-import betmen.dto.dto.MatchSearchModelDto;
-import betmen.dto.dto.PointsCalculationStrategyDTO;
-import betmen.dto.dto.SportKindDTO;
-import betmen.dto.dto.TeamDTO;
-import betmen.dto.dto.UserDTO;
-import betmen.dto.dto.UserGroupDTO;
-import betmen.dto.dto.ValidationResultDto;
-import betmen.dto.dto.points.UserCupPointsHolderDTO;
-import betmen.dto.dto.points.UserMatchPointsHolderDTO;
 import betmen.core.entity.Category;
 import betmen.core.entity.Cup;
 import betmen.core.entity.CupTeamBet;
@@ -40,11 +12,40 @@ import betmen.core.entity.SportKind;
 import betmen.core.entity.Team;
 import betmen.core.entity.User;
 import betmen.core.entity.UserGroup;
+import betmen.core.exception.BadRequestException;
+import betmen.core.model.MatchSearchModel;
+import betmen.core.model.ValidationResult;
+import betmen.core.model.points.UserCupPointsHolder;
+import betmen.core.model.points.UserMatchPointsHolder;
+import betmen.core.service.CupBetsService;
+import betmen.core.service.CupService;
+import betmen.core.service.CupTeamService;
+import betmen.core.service.FavoriteCategoryService;
+import betmen.core.service.LogoService;
+import betmen.core.service.UserGroupService;
 import betmen.core.service.matches.MatchBetsService;
 import betmen.core.service.matches.MatchService;
 import betmen.core.service.points.MatchPointsService;
 import betmen.core.service.points.calculation.cup.UserCupWinnersBonusCalculationService;
 import betmen.core.service.points.calculation.match.points.UserMatchBetPointsCalculationService;
+import betmen.core.service.utils.DateTimeService;
+import betmen.dto.dto.BetDTO;
+import betmen.dto.dto.CategoryDTO;
+import betmen.dto.dto.CupDTO;
+import betmen.dto.dto.CupTeamBetDTO;
+import betmen.dto.dto.CupWinnerDTO;
+import betmen.dto.dto.FavoriteCategoryDTO;
+import betmen.dto.dto.MatchBetDTO;
+import betmen.dto.dto.MatchDTO;
+import betmen.dto.dto.MatchSearchModelDto;
+import betmen.dto.dto.PointsCalculationStrategyDTO;
+import betmen.dto.dto.SportKindDTO;
+import betmen.dto.dto.TeamDTO;
+import betmen.dto.dto.UserDTO;
+import betmen.dto.dto.UserGroupDTO;
+import betmen.dto.dto.ValidationResultDto;
+import betmen.dto.dto.points.UserCupPointsHolderDTO;
+import betmen.dto.dto.points.UserMatchPointsHolderDTO;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -106,13 +107,23 @@ public class DTOServiceImpl implements DTOService {
     }
 
     @Override
-    public CategoryDTO transformCategory(final Category category, final User user) {
-        return categoryFunction(user).apply(category);
+    public CategoryDTO transformCategory(final Category category) {
+        return convertToCategoryDTO(category);
     }
 
     @Override
-    public List<CategoryDTO> transformCategories(final List<Category> users, final User user) {
-        return Lists.transform(users, categoryFunction(user));
+    public List<CategoryDTO> transformCategories(final List<Category> categories) {
+        return categories.stream().map(category -> convertToCategoryDTO(category)).collect(Collectors.toList());
+    }
+
+    @Override
+    public FavoriteCategoryDTO transformFavoriteCategory(final Category category, final User user) {
+        return convertToFavoriteCategoryDTO(user, category);
+    }
+
+    @Override
+    public List<FavoriteCategoryDTO> transformFavoriteCategories(final List<Category> categories, final User user) {
+        return categories.stream().map(category -> convertToFavoriteCategoryDTO(user, category)).collect(Collectors.toList());
     }
 
     @Override
@@ -177,59 +188,39 @@ public class DTOServiceImpl implements DTOService {
 
     @Override
     public List<CupTeamBetDTO> transformCupTeamBets(final List<CupTeamBet> cupTeamBets, final User user) {
+        return cupTeamBets.stream().map(cupTeamBet -> {
 
-        final java.util.function.Function<CupTeamBet, CupTeamBetDTO> mapper = new java.util.function.Function<CupTeamBet, CupTeamBetDTO>() {
-            @Override
-            public CupTeamBetDTO apply(final CupTeamBet cupTeamBet) {
+            final Cup cup = cupTeamBet.getCup();
+            final Team team = cupTeamBet.getTeam();
 
-                final Cup cup = cupTeamBet.getCup();
-                final Team team = cupTeamBet.getTeam();
+            final CupTeamBetDTO result = new CupTeamBetDTO();
 
-                final CupTeamBetDTO result = new CupTeamBetDTO();
+            result.setCup(this.transformCup(cup, user));
+            result.setTeam(this.transformTeam(team, user));
+            result.setUser(this.transformUser(user));
 
-                result.setCup(DTOServiceImpl.this.transformCup(cup, user));
-                result.setTeam(DTOServiceImpl.this.transformTeam(team, user));
-                result.setUser(DTOServiceImpl.this.transformUser(user));
+            result.setCupPosition(cupTeamBet.getCupPosition());
 
-                result.setCupPosition(cupTeamBet.getCupPosition());
+            result.setPoints(userCupWinnersBonusCalculationService.getUserCupWinnerPoints(cup, team, user, cupTeamBet.getCupPosition()));
 
-                result.setPoints(userCupWinnersBonusCalculationService.getUserCupWinnerPoints(cup, team, user, cupTeamBet.getCupPosition()));
+            result.setStillActive(cupTeamService.exists(cup.getId(), team.getId()));
 
-                result.setStillActive(cupTeamService.exists(cup.getId(), team.getId()));
-
-                return result;
-            }
-        };
-        return cupTeamBets.stream().map(mapper).collect(Collectors.toList());
+            return result;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public List<UserGroupDTO> transformUserGroups(final List<UserGroup> userGroups, final User user) {
+        return userGroups.stream().map(userGroup -> {
+            final UserGroupDTO userGroupDTO = new UserGroupDTO();
+            userGroupDTO.setUserGroupId(userGroup.getId());
+            userGroupDTO.setUserGroupName(userGroup.getGroupName());
+            userGroupDTO.setUserGroupOwner(transformUser(userGroup.getOwner()));
 
-        final java.util.function.Function<Cup, Integer> cupMapper = new java.util.function.Function<Cup, Integer>() {
-            @Override
-            public Integer apply(final Cup cup) {
-                return cup.getId();
-            }
-        };
+            userGroupDTO.setUserGroupCups(transformCups(userGroupService.loadCups(userGroup), user));
 
-        final java.util.function.Function<? super UserGroup, UserGroupDTO> mapper = new java.util.function.Function<UserGroup, UserGroupDTO>() {
-
-            @Override
-            public UserGroupDTO apply(final UserGroup userGroup) {
-
-                final UserGroupDTO userGroupDTO = new UserGroupDTO();
-                userGroupDTO.setUserGroupId(userGroup.getId());
-                userGroupDTO.setUserGroupName(userGroup.getGroupName());
-                userGroupDTO.setUserGroupOwner(transformUser(userGroup.getOwner()));
-
-                userGroupDTO.setUserGroupCups(transformCups(userGroupService.loadCups(userGroup), user));
-
-                return userGroupDTO;
-            }
-        };
-
-        return userGroups.stream().map(mapper).collect(Collectors.toList());
+            return userGroupDTO;
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -239,38 +230,24 @@ public class DTOServiceImpl implements DTOService {
 
     @Override
     public List<CupWinnerDTO> transformCupWinners(final List<CupWinner> cupWinners, final User accessor) {
-
-        final java.util.function.Function<? super CupWinner, CupWinnerDTO> mapper = new java.util.function.Function<CupWinner, CupWinnerDTO>() {
-
-            @Override
-            public CupWinnerDTO apply(final CupWinner cupWinner) {
-                return cupWinnerFunction(accessor).apply(cupWinner);
-            }
-        };
-        return cupWinners.stream().map(mapper).collect(Collectors.toList());
+        return cupWinners.stream().map(cupWinner -> cupWinnerFunction(accessor).apply(cupWinner)).collect(Collectors.toList());
     }
 
     @Override
     public List<PointsCalculationStrategyDTO> transformPCStrategies(final List<PointsCalculationStrategy> strategies) {
 
-        final java.util.function.Function<PointsCalculationStrategy, PointsCalculationStrategyDTO> mapper = new java.util.function.Function<PointsCalculationStrategy, PointsCalculationStrategyDTO>() {
+        return strategies.stream()
+                .map(strategy -> {
+                    final PointsCalculationStrategyDTO dto = new PointsCalculationStrategyDTO();
+                    dto.setPcsId(strategy.getId());
+                    dto.setStrategyName(strategy.getStrategyName());
+                    dto.setPointsForMatchScore(strategy.getPointsForMatchScore());
+                    dto.setPointsForMatchWinner(strategy.getPointsForMatchWinner());
+                    dto.setPointsDelta(strategy.getPointsDelta());
+                    dto.setPointsForBetWithinDelta(strategy.getPointsForBetWithinDelta());
 
-            @Override
-            public PointsCalculationStrategyDTO apply(final PointsCalculationStrategy strategy) {
-
-                final PointsCalculationStrategyDTO dto = new PointsCalculationStrategyDTO();
-                dto.setPcsId(strategy.getId());
-                dto.setStrategyName(strategy.getStrategyName());
-                dto.setPointsForMatchScore(strategy.getPointsForMatchScore());
-                dto.setPointsForMatchWinner(strategy.getPointsForMatchWinner());
-                dto.setPointsDelta(strategy.getPointsDelta());
-                dto.setPointsForBetWithinDelta(strategy.getPointsForBetWithinDelta());
-
-                return dto;
-            }
-        };
-
-        return strategies.stream().map(mapper).collect(Collectors.toList());
+                    return dto;
+                }).collect(Collectors.toList());
     }
 
     @Override
@@ -317,43 +294,24 @@ public class DTOServiceImpl implements DTOService {
     }
 
     private Function<UserMatchPointsHolder, UserMatchPointsHolderDTO> userMatchPointsFunction() {
-
-        return new Function<UserMatchPointsHolder, UserMatchPointsHolderDTO>() {
-
-            @Override
-            public UserMatchPointsHolderDTO apply(final UserMatchPointsHolder userMatchPoints) {
-                return new UserMatchPointsHolderDTO(transformUser(userMatchPoints.getUser()), userMatchPoints.getMatchBetPoints(), userMatchPoints.getMatchBonus());
-            }
-        };
+        return userMatchPoints -> new UserMatchPointsHolderDTO(transformUser(userMatchPoints.getUser()), userMatchPoints.getMatchBetPoints(), userMatchPoints.getMatchBonus());
     }
 
     private Function<UserCupPointsHolder, UserCupPointsHolderDTO> userCupPointsFunction() {
+        return userCupPointsHolder -> {
+            final Cup cup = userCupPointsHolder.getCup();
+            final User user = userCupPointsHolder.getUser();
 
-        return new Function<UserCupPointsHolder, UserCupPointsHolderDTO>() {
+            final UserCupPointsHolderDTO dto = new UserCupPointsHolderDTO(transformUser(user), userCupPointsHolder.getMatchBetPoints(), userCupPointsHolder.getMatchBonuses(), userCupPointsHolder.getCupWinnerBonus());
+            dto.setMatchBetPointsNegative(userMatchBetPointsCalculationService.getUserMatchBetPointsNegative(cup, user));
+            dto.setMatchBetPointsPositive(userMatchBetPointsCalculationService.getUserMatchBetPointsPositive(cup, user));
 
-            @Override
-            public UserCupPointsHolderDTO apply(final UserCupPointsHolder userCupPointsHolder) {
-                final Cup cup = userCupPointsHolder.getCup();
-                final User user = userCupPointsHolder.getUser();
-
-                final UserCupPointsHolderDTO dto = new UserCupPointsHolderDTO(transformUser(user), userCupPointsHolder.getMatchBetPoints(), userCupPointsHolder.getMatchBonuses(), userCupPointsHolder.getCupWinnerBonus());
-                dto.setMatchBetPointsNegative(userMatchBetPointsCalculationService.getUserMatchBetPointsNegative(cup, user));
-                dto.setMatchBetPointsPositive(userMatchBetPointsCalculationService.getUserMatchBetPointsPositive(cup, user));
-
-                return dto;
-            }
+            return dto;
         };
     }
 
     private Function<CupWinner, CupWinnerDTO> cupWinnerFunction(final User accessor) {
-
-        return new Function<CupWinner, CupWinnerDTO>() {
-
-            @Override
-            public CupWinnerDTO apply(final CupWinner cupWinner) {
-                return new CupWinnerDTO(transformCup(cupWinner.getCup(), accessor), cupWinner.getCupPosition(), transformTeam(cupWinner.getTeam(), accessor));
-            }
-        };
+        return cupWinner -> new CupWinnerDTO(transformCup(cupWinner.getCup(), accessor), cupWinner.getCupPosition(), transformTeam(cupWinner.getTeam(), accessor));
     }
 
     private Function<User, UserDTO> userFunction() {
@@ -365,50 +323,43 @@ public class DTOServiceImpl implements DTOService {
         };
     }
 
-    private Function<Category, CategoryDTO> categoryFunction(final User user) {
+    private CategoryDTO convertToCategoryDTO(final Category category) {
+        final CategoryDTO categoryDTO = new CategoryDTO(category.getId(), category.getCategoryName());
+        categoryDTO.setLogoUrl(logoService.getLogoURL(category));
+        if (category.getSportKind() != null) {
+            categoryDTO.setSportKind(transformSportKind(category.getSportKind()));
+        }
+        return categoryDTO;
+    }
 
-        return new Function<Category, CategoryDTO>() {
-
-            @Override
-            public CategoryDTO apply(final Category category) {
-
-                final CategoryDTO categoryDTO = new CategoryDTO(category.getId(), category.getCategoryName());
-                categoryDTO.setLogoUrl(logoService.getLogoURL(category));
-                categoryDTO.setFavoriteCategory(favoriteCategoryService.isInFavorites(user, category));
-
-                if (category.getSportKind() != null) {
-                    categoryDTO.setSportKind(transformSportKind(category.getSportKind()));
-                }
-
-                return categoryDTO;
-            }
-        };
+    private FavoriteCategoryDTO convertToFavoriteCategoryDTO(final User user, final Category category) {
+        final FavoriteCategoryDTO categoryDTO = new FavoriteCategoryDTO(category.getId(), category.getCategoryName());
+        categoryDTO.setLogoUrl(logoService.getLogoURL(category));
+        categoryDTO.setFavoriteCategory(favoriteCategoryService.isInFavorites(user, category));
+        if (category.getSportKind() != null) {
+            categoryDTO.setSportKind(transformSportKind(category.getSportKind()));
+        }
+        return categoryDTO;
     }
 
     private Function<Cup, CupDTO> cupFunction(final User user) {
+        return cup -> {
+            final String cupName = cup.isPublicCup() ? cup.getCupName() : String.format("[ %s ]", cup.getCupName());
+            final CupDTO cupDTO = new CupDTO(cup.getId(), cupName, transformCategory(cup.getCategory()));
 
-        return new Function<Cup, CupDTO>() {
+            cupDTO.setWinnersCount(cup.getWinnersCount());
+            cupDTO.setCupStartDate(cup.getCupStartTime());
+            cupDTO.setLogoUrl(logoService.getLogoURL(cup));
 
-            @Override
-            public CupDTO apply(final Cup cup) {
+            cupDTO.setReadyForCupBets(!cupBetsService.isCupBettingFinished(cup));
+            cupDTO.setReadyForMatchBets(!cupBetsService.isMatchBettingFinished(cup));
 
-                final String cupName = cup.isPublicCup() ? cup.getCupName() : String.format("[ %s ]", cup.getCupName());
-                final CupDTO cupDTO = new CupDTO(cup.getId(), cupName, transformCategory(cup.getCategory(), user));
+            cupDTO.setCupStarted(cupService.isCupStarted(cup));
+            cupDTO.setFinished(cupService.isCupFinished(cup));
 
-                cupDTO.setWinnersCount(cup.getWinnersCount());
-                cupDTO.setCupStartDate(cup.getCupStartTime());
-                cupDTO.setLogoUrl(logoService.getLogoURL(cup));
+            cupDTO.setCupBetAllowance(convertValidationResult(cup));
 
-                cupDTO.setReadyForCupBets(!cupBetsService.isCupBettingFinished(cup));
-                cupDTO.setReadyForMatchBets(!cupBetsService.isMatchBettingFinished(cup));
-
-                cupDTO.setCupStarted(cupService.isCupStarted(cup));
-                cupDTO.setFinished(cupService.isCupFinished(cup));
-
-                cupDTO.setCupBetAllowance(convertValidationResult(cup));
-
-                return cupDTO;
-            }
+            return cupDTO;
         };
     }
 
@@ -418,95 +369,59 @@ public class DTOServiceImpl implements DTOService {
     }
 
     private Function<Team, TeamDTO> teamFunction(final Category category, final User accessor) {
-
-        final CategoryDTO categoryDTO = transformCategory(category, accessor);
-
-        return new Function<Team, TeamDTO>() {
-
-            @Override
-            public TeamDTO apply(final Team team) {
-                return new TeamDTO(team.getId(), team.getTeamName(), categoryDTO, logoService.getLogoURL(team));
-            }
-        };
+        final CategoryDTO categoryDTO = transformCategory(category);
+        return team -> new TeamDTO(team.getId(), team.getTeamName(), categoryDTO, logoService.getLogoURL(team));
     }
 
     private Function<Match, MatchDTO> matchFunction(final User accessor) {
+        return match -> {
+            final MatchDTO dto = new MatchDTO();
 
-        return new Function<Match, MatchDTO>() {
+            dto.setMatchId(match.getId());
+            dto.setCategory(transformCategory(match.getCup().getCategory()));
+            dto.setCup(transformCup(match.getCup(), accessor));
 
-            @Override
-            public MatchDTO apply(final Match match) {
-                final MatchDTO dto = new MatchDTO();
+            dto.setTeam1(transformTeam(match.getTeam1(), accessor));
+            dto.setScore1(match.getScore1());
 
-                dto.setMatchId(match.getId());
-                dto.setCategory(transformCategory(match.getCup().getCategory(), accessor));
-                dto.setCup(transformCup(match.getCup(), accessor));
+            dto.setTeam2(transformTeam(match.getTeam2(), accessor));
+            dto.setScore2(match.getScore2());
 
-                dto.setTeam1(transformTeam(match.getTeam1(), accessor));
-                dto.setScore1(match.getScore1());
+            dto.setBeginningTime(match.getBeginningTime());
 
-                dto.setTeam2(transformTeam(match.getTeam2(), accessor));
-                dto.setScore2(match.getScore2());
+            dto.setMatchFinished(match.isMatchFinished());
+            dto.setMatchStarted(matchService.isMatchStarted(match));
 
-                dto.setBeginningTime(match.getBeginningTime());
+            dto.setShowAnotherBets(matchBetsService.userCanSeeAnotherBets(match, accessor));
 
-                dto.setMatchFinished(match.isMatchFinished());
-                dto.setMatchStarted(matchService.isMatchStarted(match));
+            dto.setHomeTeamNumber(match.getHomeTeamNumber());
+            dto.setDescription(match.getDescription());
 
-                dto.setShowAnotherBets(matchBetsService.userCanSeeAnotherBets(match, accessor));
-
-                dto.setHomeTeamNumber(match.getHomeTeamNumber());
-                dto.setDescription(match.getDescription());
-
-                return dto;
-            }
+            return dto;
         };
     }
 
     private Function<MatchBet, BetDTO> betFunction(final User user, final User accessor) {
-
-        return new Function<MatchBet, BetDTO>() {
-
-            @Override
-            public BetDTO apply(final MatchBet matchBet) {
-
-                final MatchDTO matchDTO = transformMatch(matchBet.getMatch(), user);
-
-                final BetDTO betDTO = new BetDTO(matchDTO, transformUser(user));
-                betDTO.setMatchBetId(matchBet.getId());
-
-                final boolean isSecuredBet = !matchBetsService.isAllowedToShowMatchBets(matchBet, accessor);
-                if (!isSecuredBet) {
-                    betDTO.setScore1(matchBet.getBetScore1());
-                    betDTO.setScore2(matchBet.getBetScore2());
-                }
-                betDTO.setSecuredBet(isSecuredBet);
-
-                return betDTO;
+        return matchBet -> {
+            final MatchDTO matchDTO = transformMatch(matchBet.getMatch(), user);
+            final BetDTO betDTO = new BetDTO(matchDTO, transformUser(user));
+            betDTO.setMatchBetId(matchBet.getId());
+            final boolean isSecuredBet = !matchBetsService.isAllowedToShowMatchBets(matchBet, accessor);
+            if (!isSecuredBet) {
+                betDTO.setScore1(matchBet.getBetScore1());
+                betDTO.setScore2(matchBet.getBetScore2());
             }
+            betDTO.setSecuredBet(isSecuredBet);
+            return betDTO;
         };
     }
 
     private Function<Match, MatchBetDTO> matchBetDTOFunction(final User betsOfUser, final User accessor) {
-
-        return new Function<Match, MatchBetDTO>() {
-
-            @Override
-            public MatchBetDTO apply(final Match match) {
-                return getMatchBetDTO(match, betsOfUser, accessor, matchPointsService.load(betsOfUser, match));
-            }
-        };
+        return match -> getMatchBetDTO(match, betsOfUser, accessor, matchPointsService.load(betsOfUser, match));
     }
 
     private Function<Match, MatchBetDTO> matchBetDTOFunctionForUserGroup(final User betsOfUser, final User accessor, final UserGroup userGroup) {
-
-        return new Function<Match, MatchBetDTO>() {
-
-            @Override
-            public MatchBetDTO apply(final Match match) {
-                return getMatchBetDTO(match, betsOfUser, accessor, matchPointsService.load(betsOfUser, match, userGroup));
-            }
-        };
+        return match -> getMatchBetDTO(match, betsOfUser, accessor, matchPointsService.load(betsOfUser, match, userGroup));
     }
 
     private MatchBetDTO getMatchBetDTO(final Match match, final User betsOfUser, final User accessor, final MatchPoints pointsHolder) {
@@ -540,39 +455,27 @@ public class DTOServiceImpl implements DTOService {
     }
 
     private Function<CupTeamBet, CupTeamBetDTO> cupTeamBetFunction(final User user) {
+        return cupTeamBet -> {
+            final Cup cup = cupTeamBet.getCup();
+            final Team team = cupTeamBet.getTeam();
 
-        return new Function<CupTeamBet, CupTeamBetDTO>() {
-            @Override
-            public CupTeamBetDTO apply(final CupTeamBet cupTeamBet) {
+            final CupTeamBetDTO result = new CupTeamBetDTO();
 
-                final Cup cup = cupTeamBet.getCup();
-                final Team team = cupTeamBet.getTeam();
+            result.setCup(transformCup(cup, user));
+            result.setTeam(transformTeam(team, user));
+            result.setUser(transformUser(user));
 
-                final CupTeamBetDTO result = new CupTeamBetDTO();
+            result.setCupPosition(cupTeamBet.getCupPosition());
 
-                result.setCup(transformCup(cup, user));
-                result.setTeam(transformTeam(team, user));
-                result.setUser(transformUser(user));
+            result.setPoints(userCupWinnersBonusCalculationService.getUserCupWinnerPoints(cup, team, user, cupTeamBet.getCupPosition()));
 
-                result.setCupPosition(cupTeamBet.getCupPosition());
+            result.setStillActive(cupTeamService.exists(cup.getId(), team.getId()));
 
-                result.setPoints(userCupWinnersBonusCalculationService.getUserCupWinnerPoints(cup, team, user, cupTeamBet.getCupPosition()));
-
-                result.setStillActive(cupTeamService.exists(cup.getId(), team.getId()));
-
-                return result;
-            }
+            return result;
         };
     }
 
     private java.util.function.Function<SportKind, SportKindDTO> sportKindsFunction() {
-
-        return new java.util.function.Function<SportKind, SportKindDTO>() {
-
-            @Override
-            public SportKindDTO apply(final SportKind sportKind) {
-                return new SportKindDTO(sportKind.getId(), sportKind.getSportKindName());
-            }
-        };
+        return sportKind -> new SportKindDTO(sportKind.getId(), sportKind.getSportKindName());
     }
 }

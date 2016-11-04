@@ -13,13 +13,14 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CategoryDTO {
+public class FavoriteCategoryDTO {
     private int categoryId;
     private String categoryName;
     private String logoUrl;
     private SportKindDTO sportKind;
+    private boolean favoriteCategory;
 
-    public CategoryDTO(final int categoryId, final String categoryName) {
+    public FavoriteCategoryDTO(final int categoryId, final String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
