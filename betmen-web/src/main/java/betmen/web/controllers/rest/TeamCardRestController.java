@@ -9,7 +9,7 @@ import betmen.core.service.CupWinnerService;
 import betmen.core.service.TeamService;
 import betmen.core.service.UserService;
 import betmen.core.service.matches.MatchService;
-import betmen.dto.dto.CupDTO;
+import betmen.dto.dto.CupAndCategoryIdsPair;
 import betmen.dto.dto.TeamCardCupData;
 import betmen.dto.dto.TeamCardDTO;
 import betmen.web.converters.DTOService;
@@ -74,8 +74,10 @@ public class TeamCardRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/active-cups/")
-    public List<CupDTO> teamActiveCups(final @PathVariable("teamId") int teamId, final Principal principal) {
-        return dtoService.transformCups(cupService.loadAllTeamActiveCups(teamId), getCurrentUser(principal));
+    public List<CupAndCategoryIdsPair> getAllTeamActivePublicCups(final @PathVariable("teamId") int teamId) {
+        return cupService.loadAllTeamActivePublicCups(teamId).stream()
+                .map(cup -> new CupAndCategoryIdsPair(cup.getId(), cup.getCategory().getId()))
+                .collect(Collectors.toList());
     }
 
     private User getCurrentUser(Principal principal) {

@@ -63,12 +63,20 @@ define( function ( require ) {
 		_renderTeamGames: function() {
 			var currentUser = app.currentUser();
 			var model = this.model.toJSON();
-			console.log(model.team.teamId);
-			var options = {
+			var teamId = model.team.teamId;
+			var self = this;
+			var container  = $('.js-team-games');
+			var cups = service.loadAllTeamActivePublicCups(teamId);
+
+			_.each( cups, function( cupAndCategoryPair ) {
+				var el = $( '<div class="col-xs-12"></div>' );
+				container.append( el );
+
+				var options = {
 					filter: {
 						userId: currentUser.userId
-						, categoryId: 6
-						, cupId: 46
+						, categoryId: cupAndCategoryPair.categoryId
+						, cupId: cupAndCategoryPair.cupId
 						, teamId: model.team.teamId
 						, filterByDateEnable: false
 						, showFinished: true
@@ -78,7 +86,8 @@ define( function ( require ) {
 					, matchViewMode: 3
 					, currentUser: currentUser
 				};
-				matchesAndBetsView( $('.js-team-games'), options );
+				matchesAndBetsView( el, options );
+			});
 		}
 	});
 } );

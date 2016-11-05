@@ -262,12 +262,12 @@ define( function ( require ) {
 			return result;
 		},
 
-		loadTeams: function( categoryId ) {
-			var result = [];
+		loadAllTeamActivePublicCups: function( teamId ) {
+			var result = {};
 
 			$.ajax( {
 				method: 'GET',
-				url: '/rest/teams/categories/' + categoryId + '/',
+				url: '/rest/teams/' + teamId + '/active-cups/',
 				async: false,
 				success: function ( data ) {
 					result = data;
@@ -277,6 +277,22 @@ define( function ( require ) {
 				}
 			} );
 
+			return result;
+		},
+
+		loadTeams: function (categoryId) {
+			var result = [];
+			$.ajax({
+				method: 'GET',
+				url: '/rest/teams/categories/' + categoryId + '/',
+				async: false,
+				success: function (data) {
+					result = data;
+				},
+				error: function () {
+					console.log(translator.serverError);
+				}
+			});
 			return result;
 		},
 

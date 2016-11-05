@@ -254,8 +254,8 @@ public class CupServiceImpl implements CupService {
     }
 
     @Override
-    public List<Cup> loadAllTeamActiveCups(int teamId) {
-        return cupJpaRepository.loadAllTeamActiveCups(teamId);
+    public List<Cup> loadAllTeamActivePublicCups(int teamId) {
+        return cupJpaRepository.loadAllTeamActivePublicCups(teamId);
     }
 
     private Predicate<Cup> isCupCurrent() {
