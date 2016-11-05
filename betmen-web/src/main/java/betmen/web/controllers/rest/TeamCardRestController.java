@@ -9,6 +9,7 @@ import betmen.core.service.CupWinnerService;
 import betmen.core.service.TeamService;
 import betmen.core.service.UserService;
 import betmen.core.service.matches.MatchService;
+import betmen.dto.dto.CupDTO;
 import betmen.dto.dto.TeamCardCupData;
 import betmen.dto.dto.TeamCardDTO;
 import betmen.web.converters.DTOService;
@@ -48,7 +49,7 @@ public class TeamCardRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/cup/{cupId}/statistics/")
     public TeamCardCupData cupTeamStatistics(final @PathVariable("teamId") int teamId, final @PathVariable("cupId") int cupId, final Principal principal) {
-        final User currentUser = userService.findByLogin(principal.getName());
+        final User currentUser = getCurrentUser(principal);
         final Team team = teamService.loadAndAssertExists(teamId);
         final Cup cup = cupService.loadAndAssertExists(cupId);
         return getTeamCardCupData(currentUser, team, cup);
@@ -56,7 +57,7 @@ public class TeamCardRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/card/")
     public TeamCardDTO teamCard(final @PathVariable("teamId") int teamId, final Principal principal) {
-        final User currentUser = userService.findByLogin(principal.getName());
+        final User currentUser = getCurrentUser(principal);
         final Team team = teamService.loadAndAssertExists(teamId);
 
         final TeamCardDTO dto = new TeamCardDTO();
@@ -70,6 +71,15 @@ public class TeamCardRestController {
                 .filter(teamCardCupData -> teamCardCupData.getFutureMatchesCount() + teamCardCupData.getFinishedMatchCount() > 0)
                 .collect(Collectors.toList()));
         return dto;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/active-cups/")
+    public List<CupDTO> teamActiveCups(final @PathVariable("teamId") int teamId, final Principal principal) {
+        return dtoService.transformCups(cupService.loadAllTeamActiveCups(teamId), getCurrentUser(principal));
+    }
+
+    private User getCurrentUser(Principal principal) {
+        return userService.findByLogin(principal.getName());
     }
 
     private TeamCardCupData getTeamCardCupData(final User currentUser, final Team team, final Cup cup) {

@@ -14,7 +14,6 @@ define( function ( require ) {
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 
 	var service = require( '/resources/js/services/service.js' );
-	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -72,10 +71,9 @@ define( function ( require ) {
 						, cupId: 46
 						, teamId: model.team.teamId
 						, filterByDateEnable: false
-						//, filterByDate: dateTimeService.today()
 						, showFinished: true
-						, showFutureMatches: true
-						, sorting: 1
+						, showFutureMatches: false
+						, sorting: 2
 					}
 					, matchViewMode: 3
 					, currentUser: currentUser

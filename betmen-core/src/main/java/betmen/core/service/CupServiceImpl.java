@@ -253,6 +253,11 @@ public class CupServiceImpl implements CupService {
         return cupJpaRepository.exists(cupId);
     }
 
+    @Override
+    public List<Cup> loadAllTeamActiveCups(int teamId) {
+        return cupJpaRepository.loadAllTeamActiveCups(teamId);
+    }
+
     private Predicate<Cup> isCupCurrent() {
         return cup -> !isCupFinished(cup);
     }

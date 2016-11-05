@@ -51,4 +51,6 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
     int cupsCount(int categoryId);
 
     boolean exists(int cupId);
+
+    List<Cup> loadAllTeamActiveCups(int teamId);
 }
