@@ -17,7 +17,9 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		noCupLabel: "Team has not been a participant of any cup"
+		noCupLabel: "Team has not been a participant of any cup",
+		teamCupsLabel: "Cup where the team has been participated",
+		teamActiveCupsGamesLabel: "Games of the team's active cups"
 	} );
 
 	return Backbone.View.extend( {
@@ -31,7 +33,7 @@ define( function ( require ) {
 
 		render: function () {
 
-			var data = _.extend( {}, this.model.toJSON() );
+			var data = _.extend( {translator: translator}, this.model.toJSON() );
 			this.$el.html( template( data ) );
 
 			this._renderCupsStatistics();
