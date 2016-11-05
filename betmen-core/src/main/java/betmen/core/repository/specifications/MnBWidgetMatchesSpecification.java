@@ -58,8 +58,8 @@ public class MnBWidgetMatchesSpecification implements Specification<Match> {
             return cb.conjunction();
         }
         return cb.or(
-                cb.equal(root.get("team1"), searchQuery.getTeamId() == teamId),
-                cb.equal(root.get("team2"), searchQuery.getTeam2Id() == teamId)
+                cb.equal(root.get("team1"), teamId),
+                cb.equal(root.get("team2"), teamId)
         );
     }
 }
