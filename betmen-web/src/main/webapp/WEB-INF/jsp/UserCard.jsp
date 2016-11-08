@@ -27,11 +27,11 @@
 				, { link: '#', title: '${username}' }
 			];
 
-			var userId = ${userCardModel.user.id};
+			var userId = "${userCardModel.user.id}";
 
 			var options = {
 				userId: userId,
-				filterByCupId: ${userCardModel.filterByCupId},
+				filterByCupId: "${userCardModel.filterByCupId}"
 			};
 			var pageView = new Page( { el: $( '.js-user-card-container' ), bodyRenderer: userCard, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();

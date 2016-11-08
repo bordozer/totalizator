@@ -30,8 +30,8 @@
 				, bodyRenderer: render
 				, breadcrumbs: breadcrumbs
 				, options: {
-					cupId: ${cup.id}
-					, teamId: ${teamMatchesMode.team.id}
+					cupId: "${cup.id}"
+					, teamId: "${teamMatchesMode.team.id}"
 				}
 			} );
 

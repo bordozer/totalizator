@@ -14,7 +14,7 @@
 
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/match-bets/match-bets', 'translator' ], function ( $, Page, matchBet, Translator ) {
 
-			var cupId = ${matchBetsModel.match.cup.id};
+			var cupId = "${matchBetsModel.match.cup.id}";
 
 			var translator = new Translator( {
 				title: 'Match bests'

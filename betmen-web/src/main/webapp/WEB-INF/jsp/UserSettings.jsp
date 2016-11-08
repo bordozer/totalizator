@@ -26,7 +26,7 @@
 			];
 
 			var options = {
-				userId: ${userId}
+				userId: "${userId}"
 			};
 
 			var pageView = new Page( { el: $( '.js-user-data-container' ), bodyRenderer: userSettings, breadcrumbs: breadcrumbs, options: options } );

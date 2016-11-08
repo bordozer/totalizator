@@ -13,7 +13,7 @@
 
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup-winners-bets/cup-winners-bets', 'translator' ], function ( $, Page, cupWinnersBets, Translator ) {
 
-			var cupId = ${cup.id};
+			var cupId = "${cup.id}";
 
 			var translator = new Translator( {
 				title: 'All cup winners bets'

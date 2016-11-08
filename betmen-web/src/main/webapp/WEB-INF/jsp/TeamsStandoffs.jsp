@@ -27,8 +27,8 @@
 			];
 
 			var options = {
-				team1Id: ${teamsStandoffsModel.team1.id}
-				, team2Id: ${teamsStandoffsModel.team2.id}
+				team1Id: "${teamsStandoffsModel.team1.id}"
+				, team2Id: "${teamsStandoffsModel.team2.id}"
 			};
 
 			var pageView = new Page( { el: $( '.teams-stands-off-container' ), bodyRenderer: standsOff, breadcrumbs: breadcrumbs, options: options } );

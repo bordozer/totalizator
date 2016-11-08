@@ -13,7 +13,7 @@
 
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup' ], function ( $, Page, cup, Translator ) {
 
-			var cupId = ${cup.id};
+			var cupId = "${cup.id}";
 
 			var breadcrumbs = [
 				{ link: '/betmen/sports/' + ${cup.category.sportKind.id} + '/', title: "${cup.category.sportKind.sportKindName}" }

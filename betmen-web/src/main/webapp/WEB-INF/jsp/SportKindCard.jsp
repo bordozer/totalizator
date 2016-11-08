@@ -17,7 +17,7 @@
 				{ link: '#', title: '${sportKind.sportKindName}' }
 			];
 
-			var sportKindId = ${sportKind.id};
+			var sportKindId = "${sportKind.id}";
 
 			var options = { sportKindId: sportKindId };
 

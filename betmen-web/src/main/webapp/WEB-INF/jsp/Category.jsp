@@ -13,7 +13,7 @@
 
 		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/category/category' ], function ( $, Page, category ) {
 
-			var categoryId = ${category.id};
+			var categoryId = "${category.id}";
 
 			var breadcrumbs = [
 				{ link: '/betmen/sports/${category.sportKind.id}/', title: "${category.sportKind.sportKindName}" }

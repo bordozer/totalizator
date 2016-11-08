@@ -20,7 +20,7 @@
 				, { link: '#', title: '${team.teamName}' }
 			];
 
-			var teamId = ${teamCardModel.team.id};
+			var teamId = "${teamCardModel.team.id}";
 
 			var options = { teamId: teamId };
 
