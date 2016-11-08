@@ -284,7 +284,9 @@ public class DTOServiceImpl implements DTOService {
         model.setTeamId(dto.getTeamId());
         model.setTeam2Id(dto.getTeam2Id());
         model.setFilterByDateEnable(dto.isFilterByDateEnable());
-        model.setFilterByDate(dateTimeService.parseDate(dto.getFilterByDate()));
+        if (dto.getFilterByDate() != null && dateTimeService.isValidDate(dto.getFilterByDate())) {
+            model.setFilterByDate(dateTimeService.parseDate(dto.getFilterByDate()));
+        }
         model.setShowFutureMatches(dto.isShowFutureMatches());
         model.setShowFinished(dto.isShowFinished());
         model.setSorting(dto.getSorting());

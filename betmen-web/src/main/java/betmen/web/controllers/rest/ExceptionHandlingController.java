@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -65,7 +64,6 @@ public class ExceptionHandlingController {
     @ResponseStatus(value = HttpStatus.EXPECTATION_FAILED)
     @ExceptionHandler(value = BusinessException.class)
     public void businessException(final BusinessException e, final Writer writer) throws IOException {
-        String error = String.format("%s: %s", e.getClass().getName(), e.getMessage());
         writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(e.getErrorCode(), e.getTranslatedMessage()))));
     }
 

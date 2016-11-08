@@ -34,6 +34,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 public class MnBWidgetRestTest {
@@ -139,33 +140,20 @@ public class MnBWidgetRestTest {
     @Test
     public void shouldFailIfWrongCupId() {
         AuthEndPointsHandler.registerNewUserAndLogin();
-        MatchSearchModelDto model = new MatchSearchModelDto();
-        model.setCupId(102030);
-        MatchEndPointsHandler.searchMatches(model, ResponseStatus.UNPROCESSABLE_ENTITY);
+        MatchSearchModelDto searchModel = new MatchSearchModelDto();
+        searchModel.setCupId(102030);
+        searchModel.setShowFinished(true);
+        searchModel.setShowFutureMatches(true);
+        List<MatchBetsOnDateDTO> dtos = MatchEndPointsHandler.searchMatches(searchModel);
+        assertThat(dtos, hasSize(0));
     }
 
-    @Test(priority = 10)
-    public void shouldReturnEmptySearchResultIfOnlyCup1IdProvided() {
+    @Test
+    public void shouldFailIfFutureAndFinishedMatchesFlagsAreNotCheckedAtTheSameTime() {
         AuthEndPointsHandler.registerNewUserAndLogin();
-
         MatchSearchModelDto searchModel = new MatchSearchModelDto();
-        searchModel.setCupId(cup1.getCupId());
-
-        List<MatchBetsOnDateDTO> searchResult1 = MatchEndPointsHandler.searchMatches(searchModel);
-        assertThat(searchResult1, notNullValue());
-        assertThat(searchResult1.size(), is(0));
-    }
-
-    @Test(priority = 10)
-    public void shouldReturnEmptySearchResultIfOnlyCup2IdProvided() {
-        AuthEndPointsHandler.registerNewUserAndLogin();
-
-        MatchSearchModelDto searchModel = new MatchSearchModelDto();
-        searchModel.setCupId(cup2.getCupId());
-
-        List<MatchBetsOnDateDTO> searchResult2 = MatchEndPointsHandler.searchMatches(searchModel);
-        assertThat(searchResult2, notNullValue());
-        assertThat(searchResult2.size(), is(0));
+        searchModel.setCupId(102030);
+        MatchEndPointsHandler.searchMatches(searchModel, ResponseStatus.BAD_REQUEST);
     }
 
     @Test(priority = 10)

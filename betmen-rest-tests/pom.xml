@@ -16,6 +16,7 @@
     <properties>
         <kotlin.version>1.0.0-beta-2423</kotlin.version>
         <restassured.version>2.8.0</restassured.version>
+        <skipTests>false</skipTests>
     </properties>
 
     <dependencies>
@@ -151,6 +152,7 @@
                         <threadCountClasses>1</threadCountClasses>
                     </properties>
                     <workingDirectory>target/</workingDirectory>
+                    <skipTests>${skipTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>

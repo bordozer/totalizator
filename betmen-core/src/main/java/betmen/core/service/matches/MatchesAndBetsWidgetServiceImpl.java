@@ -1,6 +1,7 @@
 package betmen.core.service.matches;
 
 import betmen.core.entity.Match;
+import betmen.core.exception.BadRequestException;
 import betmen.core.model.MatchSearchModel;
 import betmen.core.repository.jpa.MatchJpaRepository;
 import betmen.core.repository.specifications.MnBWidgetMatchesSpecification;
@@ -21,8 +22,12 @@ public class MatchesAndBetsWidgetServiceImpl implements MatchesAndBetsWidgetServ
 
     @Override
     public List<Match> loadAll(final MatchSearchModel searchQuery) {
-        Assert.assertTrue(searchQuery.getCupId() > 0, "Cup ID should be provided");
-        Assert.assertTrue(searchQuery.isShowFinished() || searchQuery.isShowFutureMatches(), "Finished or future matches or both type should be selected");
+        if (searchQuery.getCupId() <= 0) {
+            throw new BadRequestException("Cup should be provided");
+        }
+        if (!(searchQuery.isShowFinished() || searchQuery.isShowFutureMatches())) {
+            throw new BadRequestException("Finished or future matches or both type should be selected");
+        }
         return matchJpaRepository.findAll(new MnBWidgetMatchesSpecification(searchQuery), sort(searchQuery.getSorting()));
     }
 

@@ -78,7 +78,7 @@ public class TeamCardRestTest {
     }
 
     @Test
-    public void shouldReturn422IfTEamDoesNotExist() {
+    public void shouldReturn422IfTeamDoesNotExist() {
         loginAsUser();
         CommonErrorResponse errorsResponse = TeamEndPointHandler.getTeamCard(WRONG_TEAM_ID, ResponseStatus.UNPROCESSABLE_ENTITY);
         assertThat(errorsResponse.containsError(ErrorCodes.TEAM_DOES_NOT_EXIST), is(true));
@@ -144,10 +144,10 @@ public class TeamCardRestTest {
 
     @Test(priority = 50)
     public void anotherPublicCupMatchIsAddedAndItAppearedInCard() {
-        ExpectedCardData team1Cup1Expected = new ExpectedCardData().cupsCount(2).cupIndex(0).finishedMatchCount(1).wonMatchCount(0).futureMatchesCount(1);
-        ExpectedCardData team1Cup2Expected = new ExpectedCardData().cupsCount(2).cupIndex(1).finishedMatchCount(1).wonMatchCount(1).futureMatchesCount(0);
-        ExpectedCardData team2Cup1Expected = new ExpectedCardData().cupsCount(2).cupIndex(0).finishedMatchCount(1).wonMatchCount(1).futureMatchesCount(1);
-        ExpectedCardData team2Cup2Expected = new ExpectedCardData().cupsCount(2).cupIndex(1).finishedMatchCount(1).wonMatchCount(0).futureMatchesCount(0);
+        ExpectedCardData team1Cup1Expected = new ExpectedCardData().cupsCount(2).cupIndex(1).finishedMatchCount(1).wonMatchCount(0).futureMatchesCount(1);
+        ExpectedCardData team1Cup2Expected = new ExpectedCardData().cupsCount(2).cupIndex(0).finishedMatchCount(1).wonMatchCount(1).futureMatchesCount(0);
+        ExpectedCardData team2Cup1Expected = new ExpectedCardData().cupsCount(2).cupIndex(1).finishedMatchCount(1).wonMatchCount(1).futureMatchesCount(1);
+        ExpectedCardData team2Cup2Expected = new ExpectedCardData().cupsCount(2).cupIndex(0).finishedMatchCount(1).wonMatchCount(0).futureMatchesCount(0);
 
         loginAsAdmin();
         AdminMatchEndPointsHandler.create(MatchTemplater.random(anotherPublicCup.getCupId(), team1.getTeamId(), team2.getTeamId()).finished(3, 2).build());

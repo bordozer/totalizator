@@ -120,8 +120,8 @@ public class PortalPageRestTest {
         List<CupDTO> cupsCupsToShow = responseDto.getCupsToShow();
         assertThat(cupsCupsToShow, notNullValue());
         assertThat(cupsCupsToShow, hasSize(2));
-        assertThat(cupsCupsToShow.get(0).getCupId(), is(currentPublicCup.getCupId()));
-        assertThat(cupsCupsToShow.get(1).getCupId(), is(futurePublicCup.getCupId()));
+        assertThat(cupsCupsToShow.get(0).getCupId(), is(futurePublicCup.getCupId()));
+        assertThat(cupsCupsToShow.get(1).getCupId(), is(currentPublicCup.getCupId()));
 
         assertThat(responseDto.getPortalPageDate(), is(TODAY));
     }
@@ -143,8 +143,8 @@ public class PortalPageRestTest {
         List<CupDTO> cupsCupsToShow = responseDto.getCupsToShow();
         assertThat(cupsCupsToShow, notNullValue());
         assertThat(cupsCupsToShow, hasSize(2));
-        assertThat(cupsCupsToShow.get(0).getCupId(), is(currentPublicCup.getCupId()));
-        assertThat(cupsCupsToShow.get(1).getCupId(), is(futurePublicCup.getCupId()));
+        assertThat(cupsCupsToShow.get(0).getCupId(), is(futurePublicCup.getCupId()));
+        assertThat(cupsCupsToShow.get(1).getCupId(), is(currentPublicCup.getCupId()));
 
         assertThat(responseDto.getPortalPageDate(), is(pageDate));
     }
@@ -165,8 +165,8 @@ public class PortalPageRestTest {
         List<CupDTO> cupsCupsToShow = responseDto.getCupsToShow();
         assertThat(cupsCupsToShow, notNullValue());
         assertThat(cupsCupsToShow, hasSize(2));
-        assertThat(cupsCupsToShow.get(0).getCupId(), is(currentPublicCup.getCupId()));
-        assertThat(cupsCupsToShow.get(1).getCupId(), is(futurePublicCup.getCupId()));
+        assertThat(cupsCupsToShow.get(0).getCupId(), is(futurePublicCup.getCupId()));
+        assertThat(cupsCupsToShow.get(1).getCupId(), is(currentPublicCup.getCupId()));
 
         assertThat(responseDto.getPortalPageDate(), is(pageDate));
     }

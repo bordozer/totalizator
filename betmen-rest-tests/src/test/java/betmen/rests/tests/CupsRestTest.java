@@ -14,6 +14,7 @@ import betmen.rests.utils.data.templater.CupTemplater;
 import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.CupsEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
+import org.junit.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -127,16 +128,16 @@ public class CupsRestTest {
 
         // then
         assertThat(allPublicCups, hasSize(3));
-        ComparisonUtils.assertTheSame(allPublicCups.get(0), created3);
+        ComparisonUtils.assertTheSame(allPublicCups.get(0), created2);
         ComparisonUtils.assertTheSame(allPublicCups.get(1), created1);
-        ComparisonUtils.assertTheSame(allPublicCups.get(2), created2);
+        ComparisonUtils.assertTheSame(allPublicCups.get(2), created3);
 
         // when
         List<CupDTO> allPublicCurrentCups = CupsEndPointsHandler.getAllPublicCurrentCups();
 
         // then
         assertThat(allPublicCurrentCups, hasSize(2));
-        ComparisonUtils.assertTheSame(allPublicCups.get(0), created3);
-        ComparisonUtils.assertTheSame(allPublicCups.get(1), created1);
+        ComparisonUtils.assertTheSame(allPublicCurrentCups.get(0), created1);
+        ComparisonUtils.assertTheSame(allPublicCurrentCups.get(1), created3);
     }
 }

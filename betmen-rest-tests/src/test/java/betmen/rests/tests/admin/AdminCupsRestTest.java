@@ -109,16 +109,16 @@ public class AdminCupsRestTest {
         List<CupDTO> cups = AdminCupEndPointsHandler.getAllCups();
         assertThat(cups, notNullValue());
         assertThat(cups, hasSize(9));
-        assertThat(cups.get(0).getCupId(), is(publicFinishedCup.getCupId()));
-        assertThat(cups.get(1).getCupId(), is(publicCurrentCup.getCupId()));
-        assertThat(cups.get(2).getCupId(), is(publicCurrentImportableCup.getCupId()));
-        assertThat(cups.get(3).getCupId(), is(publicFutureCup.getCupId()));
-        assertThat(cups.get(4).getCupId(), is(publicFutureImportableCup.getCupId()));
-        assertThat(cups.get(5).getCupId(), is(publicFutureImportableCup2.getCupId()));
+        assertThat(cups.get(0).getCupId(), is(publicFutureImportableCup2.getCupId()));
+        assertThat(cups.get(1).getCupId(), is(publicFutureImportableCup.getCupId()));
+        assertThat(cups.get(2).getCupId(), is(publicFutureCup.getCupId()));
+        assertThat(cups.get(3).getCupId(), is(publicCurrentImportableCup.getCupId()));
+        assertThat(cups.get(4).getCupId(), is(publicCurrentCup.getCupId()));
+        assertThat(cups.get(5).getCupId(), is(publicFinishedCup.getCupId()));
 
-        assertThat(cups.get(6).getCupId(), is(privateFinishedCup.getCupId()));
+        assertThat(cups.get(6).getCupId(), is(privateFutureCup.getCupId()));
         assertThat(cups.get(7).getCupId(), is(privateCurrentCup.getCupId()));
-        assertThat(cups.get(8).getCupId(), is(privateFutureCup.getCupId()));
+        assertThat(cups.get(8).getCupId(), is(privateFinishedCup.getCupId()));
     }
 
     @Test
@@ -126,13 +126,15 @@ public class AdminCupsRestTest {
         List<CupDTO> cups = AdminCupEndPointsHandler.getAllCurrentCups();
         assertThat(cups, notNullValue());
         assertThat(cups, hasSize(7));
-        assertThat(cups.get(0).getCupId(), is(publicCurrentCup.getCupId()));
-        assertThat(cups.get(1).getCupId(), is(publicCurrentImportableCup.getCupId()));
+
+        assertThat(cups.get(0).getCupId(), is(publicFutureImportableCup2.getCupId()));
+        assertThat(cups.get(1).getCupId(), is(publicFutureImportableCup.getCupId()));
         assertThat(cups.get(2).getCupId(), is(publicFutureCup.getCupId()));
-        assertThat(cups.get(3).getCupId(), is(publicFutureImportableCup.getCupId()));
-        assertThat(cups.get(4).getCupId(), is(publicFutureImportableCup2.getCupId()));
-        assertThat(cups.get(5).getCupId(), is(privateCurrentCup.getCupId()));
-        assertThat(cups.get(6).getCupId(), is(privateFutureCup.getCupId()));
+        assertThat(cups.get(3).getCupId(), is(publicCurrentImportableCup.getCupId()));
+        assertThat(cups.get(4).getCupId(), is(publicCurrentCup.getCupId()));
+
+        assertThat(cups.get(5).getCupId(), is(privateFutureCup.getCupId()));
+        assertThat(cups.get(6).getCupId(), is(privateCurrentCup.getCupId()));
     }
 
     @Test
@@ -154,9 +156,9 @@ public class AdminCupsRestTest {
         List<CupForGameImportDTO> cups = AdminCupEndPointsHandler.getAllImportableCups(sport2.getSportKindId());
         assertThat(cups, notNullValue());
         assertThat(cups, hasSize(3));
-        assertThat(cups.get(0).getCup().getCupId(), is(publicCurrentImportableCup.getCupId()));
+        assertThat(cups.get(0).getCup().getCupId(), is(publicFutureImportableCup2.getCupId()));
         assertThat(cups.get(1).getCup().getCupId(), is(publicFutureImportableCup.getCupId()));
-        assertThat(cups.get(2).getCup().getCupId(), is(publicFutureImportableCup2.getCupId()));
+        assertThat(cups.get(2).getCup().getCupId(), is(publicCurrentImportableCup.getCupId()));
     }
 
     @Test
@@ -164,9 +166,9 @@ public class AdminCupsRestTest {
         List<CupDTO> cups = AdminCupEndPointsHandler.getAllCategoryCups(ncaa.getCategoryId());
         assertThat(cups, notNullValue());
         assertThat(cups, hasSize(3));
-        assertThat(cups.get(0).getCupId(), is(publicCurrentImportableCup.getCupId()));
+        assertThat(cups.get(0).getCupId(), is(publicFutureImportableCup2.getCupId()));
         assertThat(cups.get(1).getCupId(), is(publicFutureImportableCup.getCupId()));
-        assertThat(cups.get(2).getCupId(), is(publicFutureImportableCup2.getCupId()));
+        assertThat(cups.get(2).getCupId(), is(publicCurrentImportableCup.getCupId()));
     }
 
     private CupTemplater cupTemplater(final CategoryEditDTO category, final PointsCalculationStrategyEditDTO ps) {
