@@ -34,8 +34,6 @@ define( function ( require ) {
 	return WidgetMatchesAndBets.extend( {
 
 		initializeInnerView: function() {
-			var initialFilter = this.options.filterModel.toJSON();
-
 			this.matchViewMode = this.options.matchViewMode;
 			this.initialMatchViewMode = this.options.initialMatchViewMode;
 		},
@@ -91,7 +89,7 @@ define( function ( require ) {
 					, entity_id: VIEW_MODE_BET
 					, selected: this.matchViewMode == VIEW_MODE_BET
 					, text: translator.viewBetModeLabel
-					, button: ( isStatisticsView || ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED ) )
+					, button: ( ! isStatisticsView && ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED ) )
 				}
 				, { selector: 'js-view_mode_tabled'
 					, icon: 'fa fa-server'

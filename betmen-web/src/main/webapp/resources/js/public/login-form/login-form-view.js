@@ -47,7 +47,13 @@ define( function ( require ) {
 		},
 
 		_authenticate: function() {
-			this.trigger( 'events:authenticate', this.$( '#login-form' ).serializeArray() );
+			var data = this.$( '#login-form' ).serializeArray();
+            this.trigger( 'events:authenticate', {
+				login: data[0].value,
+				password: data[1].value,
+				language: (data[2] ? data[2].value : ''),
+				remember_me: (data[3] ? data[3].value : '')
+			} );
 		},
 
 		_onCreateNewUserButtonClick: function( evt ) {

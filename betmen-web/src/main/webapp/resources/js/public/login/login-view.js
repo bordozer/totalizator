@@ -44,10 +44,10 @@ define( function ( require ) {
 
 		_authenticate: function( options ) {
 
-			var url = '/authenticate?login=' + options[0].value
-				+ '&password=' + options[1].value
-				+ "&language=" + (options[2] ? options[2].value : '')
-				+ "&remember-me=" + (options[3] ? options[3].value : '');
+			var url = '/authenticate?login=' + options.login
+				+ '&password=' + options.password
+				+ "&language=" + (options.language ? options.language : '')
+				+ "&remember-me=" + (options.rememberme ? options.remember_me : '');
 
 			$.ajax( {
 				method: 'POST',

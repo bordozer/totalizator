@@ -49,6 +49,9 @@ public class UserDataRestController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/create/")
     public UserRegResponse create(final @Validated @RequestBody NewUserDTO newUserDTO) {
+        if (userService.findByLogin(newUserDTO.getLogin()) != null) {
+            throw new UnprocessableEntityException("errors.login_already_exists");
+        }
         User user = userService.createUser(newUserDTO.getLogin(), newUserDTO.getName(), newUserDTO.getPassword());
         UserDTO userDTO = dtoService.transformUser(user);
         UserRegResponse userRegResponse = new UserRegResponse(true);
