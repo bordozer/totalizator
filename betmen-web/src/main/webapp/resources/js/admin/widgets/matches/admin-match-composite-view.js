@@ -63,26 +63,22 @@ define( function ( require ) {
 		},
 
 		initialize: function ( options ) {
-
+			this.filterByDate = options.filterByDate;
 			this.listenTo( this.model, 'destroy', this._removeView );
 			this.model.on( 'sync', this.render, this );
 		},
 
 		render: function() {
-
 			if ( this.model.get( 'matchId' ) == 0 ) {
+				this.model.set({beginningTime: this.filterByDate});
 				return this.renderEdit();
 			}
-
 			return this.renderInfo();
 		},
 
 		renderInfo: function () {
-
 			var model = this.model.toJSON();
-
 			var matchResults = service.matchResults( model.team1Id, model.score1, model.team2Id, model.score2 );
-
 			this.$el.html( templateEntry( {
 				model: model
 				, matchId: model.matchId

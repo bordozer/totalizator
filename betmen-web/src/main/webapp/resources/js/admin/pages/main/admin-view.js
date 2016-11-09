@@ -8,7 +8,6 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/admin-template.html' ) );
 
-	var RemoteGamesImportWidget = require( 'js/admin/pages/games-data-import/games-data-import' );
 	var RemoteGamesImportView = require( 'js/admin/widgets/game-import/remote-games-import-view' );
 	var AdminMatchesWidget = require( 'js/admin/widgets/matches/admin-matches-widget' );
 
@@ -26,7 +25,6 @@ define( function ( require ) {
 		},
 
 		_renderGamesImport: function() {
-			//new RemoteGamesImportWidget( this.$( '.js-admin-page-games-import' ), {} );
 			new RemoteGamesImportView( { el: this.$( '.js-admin-page-games-import' ) } );
 		},
 

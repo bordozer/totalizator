@@ -42,9 +42,7 @@ define( function ( require ) {
 
 		renderInnerView: function ( filter ) {
 			this.filter = filter;
-
 			this.listenToOnce( this.model, 'sync', this._renderMatchesAndBetsOrNoMatchesFound );
-
 			this.fetchMatches( filter );
 		},
 
@@ -103,7 +101,8 @@ define( function ( require ) {
 			var container = this.$( '.admin-match-list-container' );
 
 			var view = new MatchCompositeView( {
-				model: model
+				model: model,
+				filterByDate: this.filter.filterByDate
 			} );
 			view.on( 'matches:render', this._triggerRender, this );
 
