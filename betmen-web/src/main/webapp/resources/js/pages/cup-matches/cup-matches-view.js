@@ -51,7 +51,7 @@ define( function ( require ) {
 
 			var dateChooser = new DateChooser( {
 				el: this.$( '.js-cup-card-date-chooser' )
-				, options: { onDate: this.onDate }
+				, options: { onDate: this.onDate, baseUrl: '' }
 			} );
 
 			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );

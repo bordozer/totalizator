@@ -31,7 +31,8 @@
 
 			var options = {
 				userId: userId,
-				filterByCupId: "${userCardModel.filterByCupId}"
+				filterByCupId: "${userCardModel.filterByCupId}",
+				onDate: '${userCardModel.onDate}'
 			};
 			var pageView = new Page( { el: $( '.js-user-card-container' ), bodyRenderer: userCard, breadcrumbs: breadcrumbs, options: options } );
 			pageView.render();

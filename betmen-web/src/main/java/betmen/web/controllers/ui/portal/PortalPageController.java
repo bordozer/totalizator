@@ -26,15 +26,13 @@ public class PortalPageController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "")
-    public String portalPage(final @ModelAttribute(MODEL_NAME) PortalPageModel model) {
+    public String portalPage(@ModelAttribute(MODEL_NAME) final PortalPageModel model) {
         return VIEW;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{day}/{month}/{year}/")
-    public String portalPageOnDate(final @ModelAttribute(MODEL_NAME) PortalPageModel model, final @PathVariable int day, final @PathVariable int month, final @PathVariable int year) {
-
+    public String portalPageOnDate(@ModelAttribute(MODEL_NAME) final PortalPageModel model, @PathVariable final int day, @PathVariable final int month, @PathVariable final int year) {
         model.setOnDate(String.format("%02d/%02d/%d", day, month, year));
-
         return VIEW;
     }
 }

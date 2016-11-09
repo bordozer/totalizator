@@ -61,7 +61,7 @@ define( function ( require ) {
 
 			var dateChooser = new DateChooser( {
 				el: this.$( '.js-date-chooser' )
-				, options: { onDate: this.onDate }
+				, options: { onDate: this.onDate, baseUrl: /betmen/ }
 			} );
 
 			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );
@@ -177,12 +177,10 @@ define( function ( require ) {
 		},
 
 		_loadDataForDate: function( onDate ) {
-
 			this.onDate = onDate;
-
 			this.spinning();
-
 			this.model.refresh( onDate );
+			//history.replaceState('', '', '/betmen/' + onDate + '/');
 		},
 
 		spinning: function () {

@@ -54,7 +54,7 @@ define( function ( require ) {
 
 			var dateChooser = new DateChooser( {
 				el: this.$( '.js-user-card-date-chooser' )
-				, options: { onDate: this.onDate }
+				, options: { onDate: this.onDate, baseUrl: '/betmen/users/' + this.userId + '/' }
 			} );
 
 			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );

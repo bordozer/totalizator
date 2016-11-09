@@ -26,6 +26,7 @@ define( function ( require ) {
 
 		initialize: function ( options ) {
 			this.onDate = options.options.onDate || dateTimeService.dateNow();
+			this.baseUrl = options.options.baseUrl;
 		},
 
 		render: function () {
@@ -36,6 +37,7 @@ define( function ( require ) {
 			} ) );
 
 			this._renderDatesMenu( this.onDate );
+			history.replaceState('', '', this.baseUrl + this.onDate + '/');
 
 			this.trigger( 'events:change_date', this.onDate );
 		},
