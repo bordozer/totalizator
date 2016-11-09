@@ -48,6 +48,7 @@
 					, team1Id: team1Id
 					, team2Id: team2Id
 					, currentUser: app.currentUser()
+					, onDate: '${cupMatchesModel.onDate}'
 				}
 			} );
 

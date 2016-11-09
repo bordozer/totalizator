@@ -4,8 +4,6 @@ import betmen.core.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 public class UserCardModel {

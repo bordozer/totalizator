@@ -11,4 +11,5 @@ public class CupMatchesModel {
     private Cup cup;
     private Team team1;
     private Team team2;
+    private String onDate;
 }

@@ -33,7 +33,7 @@ public class UserCardController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String portalPage(@ModelAttribute(MODEL_NAME) final UserCardModel model, @RequestParam(value = "cupId", required = false) final Integer cupId) {
+    public String userPage(@ModelAttribute(MODEL_NAME) final UserCardModel model, @RequestParam(value = "cupId", required = false) final Integer cupId) {
         model.setFilterByCupId(cupId != null ? cupId : 0);
         LocalDate today = dateTimeService.getToday();
         model.setOnDate(String.format("%02d/%02d/%d", today.getDayOfMonth(), today.getMonthValue(), today.getYear()));

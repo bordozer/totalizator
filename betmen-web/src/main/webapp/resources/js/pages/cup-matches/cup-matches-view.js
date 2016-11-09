@@ -4,7 +4,6 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
-	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/cup-matches-template.html' ) );
 
@@ -25,6 +24,7 @@ define( function ( require ) {
 			this.team1Id = options.options.team1Id;
 			this.team2Id = options.options.team2Id;
 			this.currentUser = options.options.currentUser;
+			this.onDate = options.options.onDate;
 
 			this.model.on( 'sync', this.render, this );
 			this.model.fetch( { cache: false } );
@@ -51,7 +51,7 @@ define( function ( require ) {
 
 			var dateChooser = new DateChooser( {
 				el: this.$( '.js-cup-card-date-chooser' )
-				, options: { onDate: this.onDate, baseUrl: '' }
+				, options: { onDate: this.onDate, todayUrl: '/betmen/cups/' + this.cupId + '/matches/' }
 			} );
 
 			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );

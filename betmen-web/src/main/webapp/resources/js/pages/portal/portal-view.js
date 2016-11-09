@@ -61,7 +61,7 @@ define( function ( require ) {
 
 			var dateChooser = new DateChooser( {
 				el: this.$( '.js-date-chooser' )
-				, options: { onDate: this.onDate, baseUrl: /betmen/ }
+				, options: { onDate: this.onDate, todayUrl: /betmen/ }
 			} );
 
 			dateChooser.on( 'events:change_date', this._loadDataForDate, this  );
