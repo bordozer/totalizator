@@ -142,6 +142,16 @@ define( function ( require ) {
 				, datTimeChangeCallback: this._onMatchTimeChange.bind( this )
 			} );
 
+			var self = this;
+			this.$('#score1').on('keydown', function (e) {
+				if (e.which == 9) { // tab
+					e.preventDefault();
+					var score2 = self.$('#score2');
+                    score2.focus();
+					score2.select();
+				}
+			});
+
 			return this;
 		},
 
