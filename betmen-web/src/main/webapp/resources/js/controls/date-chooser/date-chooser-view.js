@@ -37,7 +37,12 @@ define( function ( require ) {
 			} ) );
 
 			this._renderDatesMenu( this.onDate );
-			history.replaceState('', '', this.todayUrl + this.onDate + '/');
+
+			if (!dateTimeService.isToday(this.onDate)) {
+				history.replaceState('', '', this.todayUrl + this.onDate + '/');
+			} else {
+				history.replaceState('', '', this.todayUrl);
+			}
 
 			this.trigger( 'events:change_date', this.onDate );
 		},

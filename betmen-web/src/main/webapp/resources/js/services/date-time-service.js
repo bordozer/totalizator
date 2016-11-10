@@ -144,6 +144,11 @@ define( function ( require ) {
 
 		toMomentDate: function(strDate ) {
 			return moment(strDate, this.getDateFormat());
+		},
+
+		isToday: function(strDate) {
+			var currentDate = moment().format(DATE_FORMAT);
+			return currentDate === strDate;
 		}
 	}
 } );
