@@ -20,6 +20,6 @@ import java.util.List;
 public class UserGroupDTO {
     private int userGroupId;
     private String userGroupName;
-    private List<CupDTO> userGroupCups;
+    private List<CupItemDTO> userGroupCups;
     private UserDTO userGroupOwner;
 }

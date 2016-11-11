@@ -6,6 +6,7 @@ import betmen.core.model.points.UserMatchPointsHolder;
 import betmen.dto.dto.BetDTO;
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
+import betmen.dto.dto.CupItemDTO;
 import betmen.dto.dto.CupTeamBetDTO;
 import betmen.dto.dto.CupWinnerDTO;
 import betmen.dto.dto.FavoriteCategoryDTO;
@@ -50,6 +51,10 @@ public interface DTOService {
     CupDTO transformCup(final Cup cup, final User accessor);
 
     List<CupDTO> transformCups(final List<Cup> cups, final User accessor);
+
+    CupItemDTO transformCupItem(final Cup cup);
+
+    List<CupItemDTO> transformCupItems(final List<Cup> cups);
 
     TeamDTO transformTeam(final Team team, final User accessor);
 

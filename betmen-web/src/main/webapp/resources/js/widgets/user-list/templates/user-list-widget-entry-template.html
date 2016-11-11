@@ -5,7 +5,7 @@
 	</div>
 
 	<% _.each( currentUserGroups, function( userGroup ) { %>
-		<div class="col-xs-12 col-lg-1">
+		<div class="col-xs-12 col-lg-2 text-center">
 			<% if( user.userId != currentUser.userId ) { %>
 
 				<% if( ! isMember( userGroup.userGroupId ) ) { %>
@@ -17,8 +17,6 @@
 					<button type="button" class="btn btn-info fa fa-user-times js-remove-user-from-group" data-user-id="<%=user.userId%>" data-group-id="<%=userGroup.userGroupId%>"
 							title="<%=translator.removeUserFromGroup%> <%=userGroup.userGroupName%>" onclick="return false;" ></button>
 				<% } %>
-
-				<small class="text-muted"><%=userGroup.userGroupName%></small>
 
 			<% } %>
 		</div>

@@ -47,7 +47,7 @@ public class User_UserGroupsRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public List<UserGroupEditDTO> userGroupList(final @PathVariable("userId") int userId) {
+    public List<UserGroupEditDTO> userGroupList(@PathVariable("userId") final int userId) {
         final List<UserGroup> userGroups = userGroupService.loadUserGroupsWhereUserIsOwner(userService.load(userId));
         final Function<UserGroup, UserGroupEditDTO> mapper = userGroup -> {
             final UserGroupEditDTO dto = new UserGroupEditDTO();

@@ -32,6 +32,7 @@ import betmen.core.service.utils.DateTimeService;
 import betmen.dto.dto.BetDTO;
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
+import betmen.dto.dto.CupItemDTO;
 import betmen.dto.dto.CupTeamBetDTO;
 import betmen.dto.dto.CupWinnerDTO;
 import betmen.dto.dto.FavoriteCategoryDTO;
@@ -137,6 +138,16 @@ public class DTOServiceImpl implements DTOService {
     }
 
     @Override
+    public CupItemDTO transformCupItem(final Cup cup) {
+        return cupItemTransformer().apply(cup);
+    }
+
+    @Override
+    public List<CupItemDTO> transformCupItems(final List<Cup> cups) {
+        return cups.stream().map(cupItemTransformer()).collect(Collectors.toList());
+    }
+
+    @Override
     public TeamDTO transformTeam(final Team team, final User accessor) {
         return teamFunction(team.getCategory(), accessor).apply(team);
     }
@@ -217,7 +228,7 @@ public class DTOServiceImpl implements DTOService {
             userGroupDTO.setUserGroupName(userGroup.getGroupName());
             userGroupDTO.setUserGroupOwner(transformUser(userGroup.getOwner()));
 
-            userGroupDTO.setUserGroupCups(transformCups(userGroupService.loadCups(userGroup), user));
+            userGroupDTO.setUserGroupCups(transformCupItems(userGroupService.loadCups(userGroup)));
 
             return userGroupDTO;
         }).collect(Collectors.toList());
@@ -363,6 +374,10 @@ public class DTOServiceImpl implements DTOService {
 
             return cupDTO;
         };
+    }
+
+    private java.util.function.Function<Cup, CupItemDTO> cupItemTransformer() {
+        return cup -> new CupItemDTO(cup.getId(), cup.getCupName());
     }
 
     private ValidationResultDto convertValidationResult(final Cup cup) {

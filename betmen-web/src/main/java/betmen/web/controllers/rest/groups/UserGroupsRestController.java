@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/rest/user-groups/")
+@RequestMapping("/rest/user-groups")
 public class UserGroupsRestController {
 
     @Autowired
     private UserService userService;
     @Autowired
     private UserGroupService userGroupService;
-
     @Autowired
     private DTOService dtoService;
 
@@ -35,6 +36,17 @@ public class UserGroupsRestController {
     @RequestMapping(method = RequestMethod.GET, value = "/{userGroupId}/members/")
     public List<UserDTO> allMembersOfUserGroup(@PathVariable("userGroupId") final int userGroupId) {
         return dtoService.transformUsers(userGroupService.loadUserGroupMembers(userGroupService.load(userGroupId)));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/all-members-of-all-my-groups/")
+    public List<UserDTO> allMembersOfAllUserGroup(final Principal principal) {
+        User currentUser = getCurrentUser(principal);
+        return userGroupService.loadUserGroupsWhereUserIsOwner(currentUser).stream()
+                .map(userGroup -> dtoService.transformUsers(userGroupService.loadUserGroupMembers(userGroupService.load(userGroup.getId()))))
+                .flatMap(List::stream)
+                .filter(user -> user.getUserId() != currentUser.getId())
+                .sorted((o1, o2) -> o1.getUserName().compareToIgnoreCase(o2.getUserName()))
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{userGroupId}/members/{userId}/add/")
