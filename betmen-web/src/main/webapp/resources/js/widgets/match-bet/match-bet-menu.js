@@ -19,6 +19,7 @@ define( function ( require ) {
 		, menuHint: "Match menu"
 		, closeMatchInfo: "Close match info"
 		, matchDescription: 'Match description'
+		, betsCount: 'Bets count'
 	} );
 
 	var MODE_INFO = 1;
@@ -80,7 +81,7 @@ define( function ( require ) {
 					selector: 'js-menu-all-match-bets',
 					icon: match.showAnotherBets ? 'fa fa-life-ring' : 'fa fa-lock',
 					link: '/betmen/matches/' + match.matchId + '/bets/',
-					text: translator.actionAllMatchBet + ' ( ' + betsCount + ' )'
+					text: translator.actionAllMatchBet + ' ( ' + translator.betsCount + ': ' + betsCount + ' )'
 				}
 			];
 		},
