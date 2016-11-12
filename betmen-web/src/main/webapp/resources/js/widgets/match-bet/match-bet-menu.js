@@ -13,7 +13,7 @@ define( function ( require ) {
 		, actionMatchBetSave: 'Match and Bets: save bet'
 		, actionCancelBetEditing: 'Match and Bets: Cancel bet editing'
 		, actionMatchBetDelete: 'Match and Bets: Delete bet'
-		, actionAllMatchBet: 'Portal page / Matches / Menu: All bets'
+		, actionAllMatchBet: 'MnB widget / Menu: All bets'
 		, actionStandOffHistory: 'Teams standoff history'
 		, teamMatchesLabel: 'matches'
 		, menuHint: "Match menu"
@@ -78,7 +78,7 @@ define( function ( require ) {
 				, { selector: 'divider' }
 				, {
 					selector: 'js-menu-all-match-bets',
-					icon: match.showAnotherBets ? 'fa fa-money' : 'fa fa-lock',
+					icon: match.showAnotherBets ? 'fa fa-life-ring' : 'fa fa-lock',
 					link: '/betmen/matches/' + match.matchId + '/bets/',
 					text: translator.actionAllMatchBet + ' ( ' + betsCount + ' )'
 				}

@@ -241,6 +241,13 @@
 	</translation>
 
 	<translation>
+		<nerd>Team lost matches</nerd>
+		<ru><![CDATA[Проиграно матчей]]></ru>
+		<ua><![CDATA[Програно iгор]]></ua>
+		<en><![CDATA[Lost matches]]></en>
+	</translation>
+
+	<translation>
 		<nerd>Team played matches</nerd>
 		<ru><![CDATA[Сыграно матчей]]></ru>
 		<ua><![CDATA[Зiгрнанi iгри]]></ua>
