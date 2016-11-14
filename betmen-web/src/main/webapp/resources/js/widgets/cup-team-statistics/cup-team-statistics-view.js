@@ -16,6 +16,7 @@ define( function ( require ) {
 		, teamPlayedMatches: "Team played matches"
 		, teamFutureMatches: "Team future matches"
 		, teamWonMatches: "Team won matches"
+		, teamLostMatches: "Team lost matches"
 		, menuOpenCupCard: 'Open cup card'
 		, matches: 'matches'
 	} );
@@ -48,7 +49,7 @@ define( function ( require ) {
 				{
 					selector: 'js-menu-team1-matches',
 					icon: 'fa fa-futbol-o',
-					link: '/betmen/cups/15/matches/teams/' + this.model.team.teamId + '/',
+					link: '/betmen/cups/' + this.model.cup.cupId + '/matches/teams/' + this.model.team.teamId + '/',
 					text:  this.model.cup.cupName + ' / ' + this.model.team.teamName + ' - ' + translator.matches
 				}
 				, {selector: 'divider'}

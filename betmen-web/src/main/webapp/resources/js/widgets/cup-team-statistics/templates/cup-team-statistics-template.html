@@ -11,8 +11,12 @@
 			<br />
 		</h6>
 
-		<h6 class="bottom-dotted">
+		<h6 class="bottom-dotted text-success">
 			<%= translator.teamWonMatches %>: <strong><span class="clearfix pull-right"><%= wonMatchCount %></span></strong>
+		</h6>
+
+		<h6 class="bottom-dotted text-warning">
+			<%= translator.teamLostMatches %>: <strong><span class="clearfix pull-right"><%= finishedMatchCount - wonMatchCount %></span></strong>
 		</h6>
 
 		<h6 class="bottom-dotted">
