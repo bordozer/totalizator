@@ -15,6 +15,8 @@ define( function ( require ) {
 		groupParameters: 'User group parameters'
 		, groupOwner: 'Group owner'
 		, groupName: 'Group name'
+		, saveButton: 'Save'
+		, cancelButton: 'Discard'
 	} );
 
 	return Backbone.View.extend( {

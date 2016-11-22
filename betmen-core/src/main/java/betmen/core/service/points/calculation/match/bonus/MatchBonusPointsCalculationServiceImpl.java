@@ -1,10 +1,10 @@
 package betmen.core.service.points.calculation.match.bonus;
 
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.model.points.UserMatchBetPointsHolder;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
 import betmen.core.service.UserGroupService;
 import betmen.core.service.matches.MatchBetsService;
 import betmen.core.service.points.calculation.match.points.UserMatchBetPointsCalculationService;
@@ -31,8 +31,8 @@ public class MatchBonusPointsCalculationServiceImpl implements MatchBonusPointsC
     }
 
     @Override
-    public float calculateMatchBonus(final Match match, final UserGroup userGroup) {
-        return calculateMatchBonus(match, userGroupService.loadUserGroupMembers(userGroup));
+    public float calculateMatchBonus(final Match match, final UserGroupEntity userGroupEntity) {
+        return calculateMatchBonus(match, userGroupService.loadUserGroupMembers(userGroupEntity));
     }
 
     private float calculateMatchBonus(final Match match, final List<User> users) {

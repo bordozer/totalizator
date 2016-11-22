@@ -1,16 +1,23 @@
 package betmen.core.repository;
 
-import betmen.core.entity.UserGroup;
-import betmen.core.entity.UserGroupCup;
-import betmen.core.service.GenericService;
+import betmen.core.entity.UserGroupEntity;
+import betmen.core.entity.UserGroupCupEntity;
 
 import java.util.List;
 
-public interface UserGroupCupDao extends GenericService<UserGroupCup> {
+public interface UserGroupCupDao {
 
-    List<UserGroupCup> loadCups(final UserGroup userGroup);
+    List<UserGroupCupEntity> loadAll();
 
-    void delete(final UserGroupCup userGroupCup);
+    UserGroupCupEntity load(final int id);
 
-    void deleteAll(final UserGroup userGroup);
+    UserGroupCupEntity save(UserGroupCupEntity entry);
+
+    void delete(final int id);
+
+    List<UserGroupCupEntity> loadCups(final UserGroupEntity userGroupEntity);
+
+    void delete(final UserGroupCupEntity userGroupCupEntity);
+
+    void deleteAll(final UserGroupEntity userGroupEntity);
 }

@@ -4,7 +4,7 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchPoints;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.service.points.CupPointsService;
 import betmen.core.service.points.MatchPointsService;
 import org.springframework.cache.annotation.CacheEvict;
@@ -76,10 +76,10 @@ public class MatchPointsRepository implements MatchPointsDao {
     }
 
     @Override
-    public void delete(final UserGroup userGroup) {
+    public void delete(final UserGroupEntity userGroupEntity) {
 
         em.createQuery("delete from MatchPoints where userGroupId = :userGroupId")
-                .setParameter("userGroupId", userGroup.getId())
+                .setParameter("userGroupId", userGroupEntity.getId())
                 .executeUpdate();
     }
 
@@ -94,11 +94,11 @@ public class MatchPointsRepository implements MatchPointsDao {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public List<MatchPoints> loadAll(final Match match, final UserGroup userGroup) {
+    public List<MatchPoints> loadAll(final Match match, final UserGroupEntity userGroupEntity) {
 
         return em.createNamedQuery(MatchPoints.LOAD_ALL_FOR_MATCH_AND_USER, MatchPoints.class)
                 .setParameter("matchId", match.getId())
-                .setParameter("userGroupId", userGroup.getId())
+                .setParameter("userGroupId", userGroupEntity.getId())
                 .getResultList();
     }
 
@@ -116,12 +116,12 @@ public class MatchPointsRepository implements MatchPointsDao {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public MatchPoints load(final User user, final Match match, final UserGroup userGroup) {
+    public MatchPoints load(final User user, final Match match, final UserGroupEntity userGroupEntity) {
 
         final List<MatchPoints> list = em.createNamedQuery(MatchPoints.LOAD_ALL_FOR_USER_AND_MATCH_AND_GROUP, MatchPoints.class)
                 .setParameter("userId", user.getId())
                 .setParameter("matchId", match.getId())
-                .setParameter("userGroupId", userGroup.getId())
+                .setParameter("userGroupId", userGroupEntity.getId())
                 .getResultList();
 
         return list.size() == 1 ? list.get(0) : null;
@@ -150,12 +150,12 @@ public class MatchPointsRepository implements MatchPointsDao {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public MatchSummaryPoints loadSummary(final User user, final Cup cup, final UserGroup userGroup) {
+    public MatchSummaryPoints loadSummary(final User user, final Cup cup, final UserGroupEntity userGroupEntity) {
 
         final List list = em.createNamedQuery(MatchPoints.LOAD_SUMMARY_FOR_USER_AND_CUP_AND_GROUP)
                 .setParameter("userId", user.getId())
                 .setParameter("cupId", cup.getId())
-                .setParameter("userGroupId", userGroup.getId())
+                .setParameter("userGroupId", userGroupEntity.getId())
                 .getResultList();
 
         return getMatchSummaryPoints(list);

@@ -1,7 +1,7 @@
 package betmen.core.repository;
 
-import betmen.core.entity.UserGroup;
-import betmen.core.entity.UserGroupCup;
+import betmen.core.entity.UserGroupEntity;
+import betmen.core.entity.UserGroupCupEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,25 +15,25 @@ public class UserGroupCupRepository implements UserGroupCupDao {
     private EntityManager em;
 
     @Override
-    public List<UserGroupCup> loadAll() {
-        return em.createNamedQuery(UserGroupCup.LOAD_ALL_USER_GROUP_CUPS, UserGroupCup.class)
+    public List<UserGroupCupEntity> loadAll() {
+        return em.createNamedQuery(UserGroupCupEntity.LOAD_ALL_USER_GROUP_CUPS, UserGroupCupEntity.class)
                 .getResultList();
     }
 
     @Override
-    public UserGroupCup load(final int id) {
-        return em.find(UserGroupCup.class, id);
+    public UserGroupCupEntity load(final int id) {
+        return em.find(UserGroupCupEntity.class, id);
     }
 
     @Override
-    public List<UserGroupCup> loadCups(final UserGroup userGroup) {
-        return em.createNamedQuery(UserGroupCup.LOAD_CUPS_FOR_USER_GROUP, UserGroupCup.class)
-                .setParameter("userGroupId", userGroup.getId())
+    public List<UserGroupCupEntity> loadCups(final UserGroupEntity userGroupEntity) {
+        return em.createNamedQuery(UserGroupCupEntity.LOAD_CUPS_FOR_USER_GROUP, UserGroupCupEntity.class)
+                .setParameter("userGroupId", userGroupEntity.getId())
                 .getResultList();
     }
 
     @Override
-    public UserGroupCup save(final UserGroupCup entry) {
+    public UserGroupCupEntity save(final UserGroupCupEntity entry) {
         return em.merge(entry);
     }
 
@@ -43,14 +43,14 @@ public class UserGroupCupRepository implements UserGroupCupDao {
     }
 
     @Override
-    public void delete(final UserGroupCup userGroupCup) {
-        em.remove(userGroupCup);
+    public void delete(final UserGroupCupEntity userGroupCupEntity) {
+        em.remove(userGroupCupEntity);
     }
 
     @Override
-    public void deleteAll(final UserGroup userGroup) {
-        for (final UserGroupCup userGroupCup : loadCups(userGroup)) {
-            this.delete(userGroupCup);
+    public void deleteAll(final UserGroupEntity userGroupEntity) {
+        for (final UserGroupCupEntity userGroupCupEntity : loadCups(userGroupEntity)) {
+            this.delete(userGroupCupEntity);
         }
     }
 }

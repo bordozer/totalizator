@@ -18,27 +18,27 @@ import static com.google.common.collect.Lists.newArrayList;
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private SecurityService securityService;
+    @Autowired
+    private SecurityService securityService;
 
-	@Override
-	public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
 
-		final User user = userService.findByLogin(login);
+        final User user = userService.findByLogin(login);
 
-		if (user == null) {
-			throw new UsernameNotFoundException(String.format("Username not found: %s", login));
-		}
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("Username not found: %s", login));
+        }
 
-		final boolean isAdmin = securityService.isAdmin(user);
-		final String role = isAdmin ? "ROLE_ADMIN" : "ROLE_USER";
+        final boolean isAdmin = securityService.isAdmin(user);
+        final String role = isAdmin ? "ROLE_ADMIN" : "ROLE_USER";
 
-		final List<GrantedAuthority> authorities = newArrayList();
-		authorities.add(new SimpleGrantedAuthority(role));
+        final List<GrantedAuthority> authorities = newArrayList();
+        authorities.add(new SimpleGrantedAuthority(role));
 
-		return new org.springframework.security.core.userdetails.User(login, user.getPassword(), authorities);
-	}
+        return new org.springframework.security.core.userdetails.User(login, user.getPassword(), authorities);
+    }
 }

@@ -8,26 +8,20 @@ import betmen.core.service.CupBetsService;
 import betmen.core.service.CupService;
 import betmen.core.service.TeamService;
 import betmen.core.service.UserService;
-import betmen.core.service.utils.DateTimeService;
-import betmen.web.converters.DTOService;
 import betmen.dto.dto.CupDTO;
 import betmen.dto.dto.CupTeamBetDTO;
 import betmen.dto.dto.UserDTO;
+import betmen.web.converters.DTOService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/rest/cups/{cupId}/bets")

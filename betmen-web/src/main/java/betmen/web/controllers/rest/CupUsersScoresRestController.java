@@ -1,8 +1,8 @@
 package betmen.web.controllers.rest;
 
-import betmen.core.model.points.UserCupPointsHolder;
 import betmen.core.entity.Cup;
 import betmen.core.entity.User;
+import betmen.core.model.points.UserCupPointsHolder;
 import betmen.core.service.CupService;
 import betmen.core.service.UserGroupService;
 import betmen.core.service.UserService;

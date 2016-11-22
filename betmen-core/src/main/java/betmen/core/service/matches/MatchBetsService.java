@@ -1,11 +1,11 @@
 package betmen.core.service.matches;
 
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.model.ValidationResult;
 import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
 import betmen.core.service.GenericService;
 
 import java.time.LocalDate;
@@ -20,7 +20,7 @@ public interface MatchBetsService extends GenericService<MatchBet> {
 
     List<MatchBet> loadAll(final Match match);
 
-    List<MatchBet> loadAll(final Match match, final UserGroup userGroup);
+    List<MatchBet> loadAll(final Match match, final UserGroupEntity userGroupEntity);
 
     List<MatchBet> loadAll(final Cup cup, final User user);
 

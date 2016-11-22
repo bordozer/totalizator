@@ -3,7 +3,7 @@ package betmen.web.controllers.rest.matches.card;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.service.UserGroupService;
 import betmen.core.service.UserService;
 import betmen.core.service.matches.MatchBetsService;
@@ -59,11 +59,11 @@ public class MatchCardRestController {
     }
 
     private List<MatchBetDTO> getMatchBetDTOs(final Match match, final User currentUser, final int userGroupId) {
-        final UserGroup userGroup = userGroupId > 0 ? userGroupService.load(userGroupId) : null;
-        final List<MatchBet> matchBets = matchBetsService.loadAll(match, userGroup);
+        final UserGroupEntity userGroupEntity = userGroupId > 0 ? userGroupService.load(userGroupId) : null;
+        final List<MatchBet> matchBets = matchBetsService.loadAll(match, userGroupEntity);
         final List<MatchBetDTO> matchBetsDTOs = newArrayList();
         for (final MatchBet matchBet : matchBets) {
-            final MatchBetDTO matchBetDTO = userGroup != null ? dtoService.getMatchBetForMatch(match, matchBet.getUser(), currentUser, userGroup) : dtoService.getMatchBetForMatch(match, matchBet.getUser(), currentUser);
+            final MatchBetDTO matchBetDTO = userGroupEntity != null ? dtoService.getMatchBetForMatch(match, matchBet.getUser(), currentUser, userGroupEntity) : dtoService.getMatchBetForMatch(match, matchBet.getUser(), currentUser);
             if (matchBetDTO.getBet().isSecuredBet()) {
                 matchBetDTO.getBet().setScore1(0);
                 matchBetDTO.getBet().setScore2(0);

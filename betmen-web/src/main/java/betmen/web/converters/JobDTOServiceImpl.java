@@ -1,9 +1,5 @@
 package betmen.web.converters;
 
-import betmen.web.controllers.rest.admin.jobs.logs.JobTaskDTO;
-import betmen.web.controllers.rest.admin.jobs.parameters.AbstractJobTaskParametersDTO;
-import betmen.web.controllers.rest.admin.jobs.parameters.RemoteGamesImportJobTaskParametersDTO;
-import betmen.web.controllers.rest.admin.jobs.parameters.TimePeriodDTO;
 import betmen.core.entity.JobLog;
 import betmen.core.service.jobs.JobTask;
 import betmen.core.service.jobs.JobTaskType;
@@ -12,6 +8,10 @@ import betmen.core.service.jobs.parameters.RemoteGamesImportJobTaskParameters;
 import betmen.core.service.jobs.results.GamesImportJobLogResultJSON;
 import betmen.core.service.utils.TimePeriod;
 import betmen.core.service.utils.TimePeriodType;
+import betmen.web.controllers.rest.admin.jobs.logs.JobTaskDTO;
+import betmen.web.controllers.rest.admin.jobs.parameters.AbstractJobTaskParametersDTO;
+import betmen.web.controllers.rest.admin.jobs.parameters.RemoteGamesImportJobTaskParametersDTO;
+import betmen.web.controllers.rest.admin.jobs.parameters.TimePeriodDTO;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 

@@ -4,7 +4,7 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.model.ErrorCodes;
 import betmen.core.model.ValidationResult;
 import betmen.core.repository.MatchBetDao;
@@ -82,8 +82,8 @@ public class MatchBetsServiceImpl implements MatchBetsService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MatchBet> loadAll(final Match match, final UserGroup userGroup) {
-        return loadAll(match).stream().filter(matchBet -> userGroupService.isUserMemberOfGroup(userGroup, matchBet.getUser())).collect(Collectors.toList());
+    public List<MatchBet> loadAll(final Match match, final UserGroupEntity userGroupEntity) {
+        return loadAll(match).stream().filter(matchBet -> userGroupService.isUserMemberOfGroup(userGroupEntity, matchBet.getUser())).collect(Collectors.toList());
     }
 
     @Override

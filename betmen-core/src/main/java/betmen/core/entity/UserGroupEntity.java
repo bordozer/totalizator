@@ -1,18 +1,23 @@
 package betmen.core.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
-import static betmen.core.entity.UserGroup.LOAD_ALL;
-import static betmen.core.entity.UserGroup.LOAD_ALL_WHERE_USER_IS_OWNER;
-import static betmen.core.entity.UserGroup.LOAD_FOR_CUP_WHERE_USER_IS_OWNER;
+import static betmen.core.entity.UserGroupEntity.LOAD_ALL;
 
 @Entity
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -20,41 +25,29 @@ import static betmen.core.entity.UserGroup.LOAD_FOR_CUP_WHERE_USER_IS_OWNER;
 @NamedQueries({
         @NamedQuery(
                 name = LOAD_ALL,
-                query = "select g from UserGroup g order by groupName"
-        ),
-        @NamedQuery(
-                name = LOAD_ALL_WHERE_USER_IS_OWNER,
-                query = "select g from UserGroup g where userId= :userId order by groupName"
+                query = "select g from UserGroupEntity g order by groupName"
         )
 })
-public class UserGroup extends AbstractEntity {
+@Getter
+@Setter
+public class UserGroupEntity extends AbstractEntity {
 
     public static final String LOAD_ALL = "userGroup.loadAll";
     public static final String LOAD_ALL_WHERE_USER_IS_OWNER = "userGroup.loadAllWhereUserIsOwner";
     public static final String LOAD_FOR_CUP_WHERE_USER_IS_OWNER = "SELECT g.* FROM userGroups g JOIN userGroupCups gc ON (g.id = gc.userGroupId ) WHERE g.userId = :userId AND gc.cupId = :cupId ORDER BY g.groupName";
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String groupName;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = false, updatable = false)
     private User owner;
 
-    public String getGroupName() {
-        return groupName;
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userGroup", orphanRemoval = true)
+    private List<UserGroupCupEntity> userGroupCups = new ArrayList<>();
 
-    public void setGroupName(final String groupName) {
-        this.groupName = groupName;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(final User owner) {
-        this.owner = owner;
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userGroup", orphanRemoval = true)
+    private List<UserGroupMemberEntity> userGroupMembers = new ArrayList<>();
 
     @Override
     public int hashCode() {
@@ -72,11 +65,11 @@ public class UserGroup extends AbstractEntity {
             return true;
         }
 
-        if (!(obj instanceof UserGroup)) {
+        if (!(obj instanceof UserGroupEntity)) {
             return false;
         }
 
-        final UserGroup group = (UserGroup) obj;
+        final UserGroupEntity group = (UserGroupEntity) obj;
         return group.getId() == getId();
     }
 

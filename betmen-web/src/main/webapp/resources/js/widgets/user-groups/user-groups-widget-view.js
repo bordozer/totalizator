@@ -19,6 +19,8 @@ define( function ( require ) {
 
 	return WidgetView.extend( {
 
+		//isEditMode: false,
+
 		events: {
 			'click .js-create-user-group': '_onNewGroupClick'
 		},
@@ -45,6 +47,12 @@ define( function ( require ) {
 		},
 
 		getCustomMenuItems: function() {
+			/*if (this.isEditMode) {
+				return [
+					{ selector: 'js-save-user-group-button', icon: 'fa fa-save', link: '#', text: translator.saveButton, button: true }
+					, { selector: 'js-close-user-group-button', icon: 'fa fa-close', link: '#', text: translator.cancelButton, button: true }
+				];
+			}*/
 			return [ { selector: 'js-create-user-group', icon: 'fa fa-plus', link: '#', text: translator.createNewGroupLabel, button: false } ];
 		},
 

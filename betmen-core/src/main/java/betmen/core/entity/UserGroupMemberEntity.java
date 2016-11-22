@@ -1,5 +1,8 @@
 package betmen.core.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Entity;
@@ -7,12 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import static betmen.core.entity.UserGroupMember.LOAD_ALL;
-import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUPS_MEMBERS;
-import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUPS_MEMBER_ENTRY;
-import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER;
+import static betmen.core.entity.UserGroupMemberEntity.LOAD_ALL;
+import static betmen.core.entity.UserGroupMemberEntity.LOAD_USER_GROUPS_MEMBERS;
+import static betmen.core.entity.UserGroupMemberEntity.LOAD_USER_GROUPS_MEMBER_ENTRY;
+import static betmen.core.entity.UserGroupMemberEntity.LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER;
 
 @Entity
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -20,22 +24,25 @@ import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUPS_WHERE_USER_IS_
 @NamedQueries({
         @NamedQuery(
                 name = LOAD_ALL,
-                query = "select g from UserGroupMember g order by groupName"
+                query = "select g from UserGroupMemberEntity g order by groupName"
         ),
         @NamedQuery(
                 name = LOAD_USER_GROUPS_MEMBERS,
-                query = "select g from UserGroupMember g where userGroupId= :userGroupId"
+                query = "select g from UserGroupMemberEntity g where userGroupId= :userGroupId"
         ),
         @NamedQuery(
                 name = LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER,
-                query = "select g from UserGroupMember g where userId= :userId"
+                query = "select g from UserGroupMemberEntity g where userId= :userId"
         ),
         @NamedQuery(
                 name = LOAD_USER_GROUPS_MEMBER_ENTRY,
-                query = "select g from UserGroupMember g where userId= :userId and userGroupId= :userGroupId"
+                query = "select g from UserGroupMemberEntity g where userId= :userId and userGroupId= :userGroupId"
         )
 })
-public class UserGroupMember extends AbstractEntity {
+@Getter
+@Setter
+@NoArgsConstructor
+public class UserGroupMemberEntity extends AbstractEntity {
 
     public static final String LOAD_ALL = "userGroupMembers.loadAll";
     public static final String LOAD_USER_GROUPS_MEMBERS = "userGroupMembers.loadMembers";
@@ -50,34 +57,15 @@ public class UserGroupMember extends AbstractEntity {
             " ORDER BY g.groupName";
 
     @ManyToOne
-    @JoinColumn(name = "userGroupId")
-    private UserGroup userGroup;
+    @JoinColumn(name = "userGroupId", nullable = false)
+    private UserGroupEntity userGroup;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @OneToOne
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    public UserGroupMember() {
-    }
-
-    public UserGroupMember(final UserGroup userGroup, final User user) {
-        this.userGroup = userGroup;
-        this.user = user;
-    }
-
-    public UserGroup getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(final UserGroup userGroup) {
-        this.userGroup = userGroup;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(final User user) {
+    public UserGroupMemberEntity(final UserGroupEntity userGroupEntity, final User user) {
+        this.userGroup = userGroupEntity;
         this.user = user;
     }
 
@@ -97,12 +85,12 @@ public class UserGroupMember extends AbstractEntity {
             return true;
         }
 
-        if (!(obj instanceof UserGroupMember)) {
+        if (!(obj instanceof UserGroupMemberEntity)) {
             return false;
         }
 
-        final UserGroupMember userGroupMember = (UserGroupMember) obj;
-        return userGroupMember.getId() == getId();
+        final UserGroupMemberEntity userGroupMemberEntity = (UserGroupMemberEntity) obj;
+        return userGroupMemberEntity.getId() == getId();
     }
 
     @Override

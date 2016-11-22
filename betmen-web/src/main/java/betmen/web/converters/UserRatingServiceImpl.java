@@ -1,20 +1,20 @@
 package betmen.web.converters;
 
-import betmen.core.service.points.MatchPointsService;
-import betmen.core.model.points.UserSummaryPointsHolder;
-import betmen.core.utils.Constants;
-import betmen.dto.dto.points.scores.CupUsersScoresInTimeDTO;
-import betmen.dto.dto.points.scores.UserMatchesPointsDTO;
-import betmen.dto.dto.UserDTO;
-import betmen.dto.dto.points.UserMatchPointsHolderDTO;
 import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.User;
+import betmen.core.model.points.UserSummaryPointsHolder;
 import betmen.core.service.CupService;
 import betmen.core.service.UserGroupService;
 import betmen.core.service.UserService;
 import betmen.core.service.matches.MatchService;
+import betmen.core.service.points.MatchPointsService;
 import betmen.core.service.utils.DateTimeService;
+import betmen.core.utils.Constants;
+import betmen.dto.dto.UserDTO;
+import betmen.dto.dto.points.UserMatchPointsHolderDTO;
+import betmen.dto.dto.points.scores.CupUsersScoresInTimeDTO;
+import betmen.dto.dto.points.scores.UserMatchesPointsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

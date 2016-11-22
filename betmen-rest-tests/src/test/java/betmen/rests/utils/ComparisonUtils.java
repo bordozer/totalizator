@@ -8,6 +8,7 @@ import betmen.dto.dto.MatchDTO;
 import betmen.dto.dto.SportKindDTO;
 import betmen.dto.dto.TeamDTO;
 import betmen.dto.dto.UserDTO;
+import betmen.dto.dto.UserGroupEditDTO;
 import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
@@ -17,6 +18,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 public class ComparisonUtils {
 
@@ -192,5 +194,14 @@ public class ComparisonUtils {
 
         assertEqual(actual.getMatch(), actual.getMatch());
         assertEqual(actual.getUser(), actual.getUser());
+    }
+
+    public static void assertEqual(final UserGroupEditDTO expected, final UserGroupEditDTO actual) {
+        assertThat(expected, notNullValue());
+        assertThat(actual, notNullValue());
+
+        assertThat(actual.getUserGroupId(), is(actual.getUserGroupId()));
+        assertThat(actual.getUserGroupName(), is(actual.getUserGroupName()));
+        assertThat(actual.getCupIds(), containsInAnyOrder(actual.getCupIds().toArray()));
     }
 }

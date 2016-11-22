@@ -33,6 +33,10 @@ public class MatchTemplater {
         return builder.withBeginningTime(LocalDateTime.now().plusHours(1).plusMinutes(31)).withScore1(0).withScore2(0).finished(false);
     }
 
+    public MatchEditDtoBuilder future(final int hours) {
+        return builder.withBeginningTime(LocalDateTime.now().plusHours(hours).plusMinutes(17)).withScore1(0).withScore2(0).finished(false);
+    }
+
     public MatchEditDtoBuilder current() {
         return builder.withBeginningTime(LocalDateTime.now().minusMinutes(19)).finished(false);
     }

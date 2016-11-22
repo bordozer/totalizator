@@ -1,11 +1,5 @@
 package betmen.web.converters;
 
-import betmen.core.model.points.UserMatchBetPointsHolder;
-import betmen.core.model.points.UserMatchPointsHolder;
-import betmen.core.service.activiries.ActivityStreamValidator;
-import betmen.core.utils.Constants;
-import betmen.dto.dto.ActivityStreamDTO;
-import betmen.dto.dto.UsersRatingPositionDTO;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
@@ -15,10 +9,15 @@ import betmen.core.entity.activities.MatchActivityStreamEntry;
 import betmen.core.entity.activities.MatchBetActivityStreamEntry;
 import betmen.core.entity.activities.events.MatchBetEvent;
 import betmen.core.entity.activities.events.MatchEvent;
+import betmen.core.model.points.UserMatchBetPointsHolder;
+import betmen.core.service.activiries.ActivityStreamValidator;
 import betmen.core.service.matches.MatchBetsService;
 import betmen.core.service.matches.MatchService;
 import betmen.core.service.points.calculation.match.bonus.MatchBonusPointsCalculationService;
 import betmen.core.service.points.calculation.match.points.UserMatchBetPointsCalculationService;
+import betmen.core.utils.Constants;
+import betmen.dto.dto.ActivityStreamDTO;
+import betmen.dto.dto.UsersRatingPositionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -140,7 +139,6 @@ public class ActivityDTOServiceImpl implements ActivityDTOService {
                 UserMatchBetPointsHolder userMatchBetPoints = userMatchBetPointsCalculationService.getUserMatchBetPoints(activityMatchBet);
                 int matchBetPoints = userMatchBetPoints.getMatchBetPoints();
                 float matchBonus = matchBetPoints > 0 ? matchBonusPointsCalculationService.calculateMatchBonus(match) : 0;
-                UserMatchPointsHolder matchPointsHolder = new UserMatchPointsHolder(new UserMatchBetPointsHolder(activityMatchBet, matchBetPoints), matchBonus);
 
                 dto.setActivityBetPoints(new UsersRatingPositionDTO(dtoService.transformUser(activityOfUser), matchBetPoints, matchBonus));
             }

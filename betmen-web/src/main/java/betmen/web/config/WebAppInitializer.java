@@ -1,10 +1,10 @@
 package betmen.web.config;
 
 import betmen.web.config.root.DevelopmentConfiguration;
-import betmen.web.config.root.TestDataConfiguration;
 import betmen.web.config.root.RootContextConfig;
 import betmen.web.config.root.SecurityConfig;
 import betmen.web.config.root.TestConfiguration;
+import betmen.web.config.root.TestDataConfiguration;
 import betmen.web.config.servlet.RequestListener;
 import betmen.web.config.servlet.ServletContextConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;

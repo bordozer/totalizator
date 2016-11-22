@@ -1,17 +1,21 @@
 package betmen.core.repository;
 
-import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
-import betmen.core.service.GenericService;
+import betmen.core.entity.UserGroupEntity;
 
 import java.util.List;
 
-public interface UserGroupDao extends GenericService<UserGroup> {
+public interface UserGroupDao {
 
     String CACHE_ENTRY = "totalizator.app.cache.user-group";
     String CACHE_QUERY = "totalizator.app.cache.user-group.query";
 
-    List<UserGroup> loadUserGroupsWhereUserIsOwner(final int userId);
+    List<UserGroupEntity> loadAll();
 
-    List<UserGroup> loadUserGroupsWhereUserIsOwner(final int userId, final int cupId);
+    UserGroupEntity load(final int id);
+
+    UserGroupEntity save(UserGroupEntity entry);
+
+    void delete(final int id);
+
+    List<UserGroupEntity> loadUserGroupsWhereUserIsOwner(final int userId, final int cupId);
 }

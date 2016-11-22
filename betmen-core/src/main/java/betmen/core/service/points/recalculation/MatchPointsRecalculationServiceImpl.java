@@ -3,7 +3,7 @@ package betmen.core.service.points.recalculation;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchPoints;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.model.points.UserMatchPointsHolder;
 import betmen.core.service.UserGroupService;
 import betmen.core.service.matches.MatchBetsService;
@@ -51,16 +51,16 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
         return result;
     }
 
-    private List<MatchPoints> recalculateForUserGroup(final User user, final List<UserGroup> userGroups, final Match match) {
-        return userGroups.stream().map(userGroup -> getFor(user, match, userGroup)).collect(Collectors.toList());
+    private List<MatchPoints> recalculateForUserGroup(final User user, final List<UserGroupEntity> userGroupEntities, final Match match) {
+        return userGroupEntities.stream().map(userGroup -> getFor(user, match, userGroup)).collect(Collectors.toList());
     }
 
     private MatchPoints getFor(final User user, final Match match) {
         return getFor(user, match, null);
     }
 
-    private MatchPoints getFor(final User user, final Match match, final UserGroup userGroup) {
-        final UserMatchPointsHolder pointsHolder = getPointsHolder(user, match, userGroup);
+    private MatchPoints getFor(final User user, final Match match, final UserGroupEntity userGroupEntity) {
+        final UserMatchPointsHolder pointsHolder = getPointsHolder(user, match, userGroupEntity);
         if (pointsHolder == null) {
             return null;
         }
@@ -69,8 +69,8 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
         matchPoints.setUser(user);
         matchPoints.setMatch(match);
         matchPoints.setCup(match.getCup());
-        if (userGroup != null) {
-            matchPoints.setUserGroup(userGroup);
+        if (userGroupEntity != null) {
+            matchPoints.setUserGroup(userGroupEntity);
         }
         matchPoints.setMatchPoints(pointsHolder.getMatchBetPoints());
         matchPoints.setMatchBonus(pointsHolder.getMatchBonus());
@@ -79,10 +79,10 @@ public class MatchPointsRecalculationServiceImpl implements MatchPointsRecalcula
         return matchPoints;
     }
 
-    private UserMatchPointsHolder getPointsHolder(final User user, final Match match, final UserGroup userGroup) {
-        if (userGroup == null) {
+    private UserMatchPointsHolder getPointsHolder(final User user, final Match match, final UserGroupEntity userGroupEntity) {
+        if (userGroupEntity == null) {
             return userMatchPointsCalculationService.calculateUserMatchPoints(match, user);
         }
-        return userMatchPointsCalculationService.calculateUserMatchPoints(match, user, userGroup);
+        return userMatchPointsCalculationService.calculateUserMatchPoints(match, user, userGroupEntity);
     }
 }

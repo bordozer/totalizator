@@ -11,7 +11,7 @@ import betmen.core.entity.PointsCalculationStrategy;
 import betmen.core.entity.SportKind;
 import betmen.core.entity.Team;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.exception.BadRequestException;
 import betmen.core.model.MatchSearchModel;
 import betmen.core.model.ValidationResult;
@@ -178,8 +178,8 @@ public class DTOServiceImpl implements DTOService {
     }
 
     @Override
-    public MatchBetDTO getMatchBetForMatch(final Match match, final User betOfUser, final User accessor, final UserGroup userGroup) {
-        return matchBetDTOFunctionForUserGroup(betOfUser, accessor, userGroup).apply(match);
+    public MatchBetDTO getMatchBetForMatch(final Match match, final User betOfUser, final User accessor, final UserGroupEntity userGroupEntity) {
+        return matchBetDTOFunctionForUserGroup(betOfUser, accessor, userGroupEntity).apply(match);
     }
 
     @Override
@@ -221,8 +221,8 @@ public class DTOServiceImpl implements DTOService {
     }
 
     @Override
-    public List<UserGroupDTO> transformUserGroups(final List<UserGroup> userGroups, final User user) {
-        return userGroups.stream().map(userGroup -> {
+    public List<UserGroupDTO> transformUserGroups(final List<UserGroupEntity> userGroupEntities, final User user) {
+        return userGroupEntities.stream().map(userGroup -> {
             final UserGroupDTO userGroupDTO = new UserGroupDTO();
             userGroupDTO.setUserGroupId(userGroup.getId());
             userGroupDTO.setUserGroupName(userGroup.getGroupName());
@@ -434,8 +434,8 @@ public class DTOServiceImpl implements DTOService {
         return match -> getMatchBetDTO(match, betsOfUser, accessor, matchPointsService.load(betsOfUser, match));
     }
 
-    private Function<Match, MatchBetDTO> matchBetDTOFunctionForUserGroup(final User betsOfUser, final User accessor, final UserGroup userGroup) {
-        return match -> getMatchBetDTO(match, betsOfUser, accessor, matchPointsService.load(betsOfUser, match, userGroup));
+    private Function<Match, MatchBetDTO> matchBetDTOFunctionForUserGroup(final User betsOfUser, final User accessor, final UserGroupEntity userGroupEntity) {
+        return match -> getMatchBetDTO(match, betsOfUser, accessor, matchPointsService.load(betsOfUser, match, userGroupEntity));
     }
 
     private MatchBetDTO getMatchBetDTO(final Match match, final User betsOfUser, final User accessor, final MatchPoints pointsHolder) {

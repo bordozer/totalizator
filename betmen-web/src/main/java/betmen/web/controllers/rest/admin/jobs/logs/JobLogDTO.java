@@ -1,9 +1,9 @@
 package betmen.web.controllers.rest.admin.jobs.logs;
 
 import betmen.core.service.jobs.results.JobLogResultJSON;
-import betmen.web.controllers.rest.admin.jobs.parameters.AbstractJobTaskParametersDTO;
 import betmen.dto.serialization.DateTimeDeserializer;
 import betmen.dto.serialization.DateTimeSerializer;
+import betmen.web.controllers.rest.admin.jobs.parameters.AbstractJobTaskParametersDTO;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;

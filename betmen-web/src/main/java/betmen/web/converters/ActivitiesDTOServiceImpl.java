@@ -1,9 +1,9 @@
 package betmen.web.converters;
 
-import betmen.dto.dto.ActivityStreamDTO;
 import betmen.core.entity.User;
 import betmen.core.entity.activities.AbstractActivityStreamEntry;
 import betmen.core.entity.activities.ActivityStreamEntryType;
+import betmen.dto.dto.ActivityStreamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

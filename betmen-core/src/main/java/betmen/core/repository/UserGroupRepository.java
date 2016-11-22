@@ -1,6 +1,6 @@
 package betmen.core.repository;
 
-import betmen.core.entity.UserGroup;
+import betmen.core.entity.UserGroupEntity;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -18,15 +18,15 @@ public class UserGroupRepository implements UserGroupDao {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public List<UserGroup> loadAll() {
-        return em.createNamedQuery(UserGroup.LOAD_ALL, UserGroup.class)
+    public List<UserGroupEntity> loadAll() {
+        return em.createNamedQuery(UserGroupEntity.LOAD_ALL, UserGroupEntity.class)
                 .getResultList();
     }
 
     @Override
     @Cacheable(value = CACHE_ENTRY, key = "#id")
-    public UserGroup load(final int id) {
-        return em.find(UserGroup.class, id);
+    public UserGroupEntity load(final int id) {
+        return em.find(UserGroupEntity.class, id);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class UserGroupRepository implements UserGroupDao {
             @CacheEvict(value = CACHE_ENTRY, key = "#entry.id")
             , @CacheEvict(value = CACHE_QUERY, allEntries = true)
     })
-    public UserGroup save(final UserGroup entry) {
+    public UserGroupEntity save(final UserGroupEntity entry) {
         return em.merge(entry);
     }
 
@@ -48,16 +48,8 @@ public class UserGroupRepository implements UserGroupDao {
     }
 
     @Override
-    @Cacheable(value = CACHE_QUERY)
-    public List<UserGroup> loadUserGroupsWhereUserIsOwner(final int userId) {
-        return em.createNamedQuery(UserGroup.LOAD_ALL_WHERE_USER_IS_OWNER, UserGroup.class)
-                .setParameter("userId", userId)
-                .getResultList();
-    }
-
-    @Override
-    public List<UserGroup> loadUserGroupsWhereUserIsOwner(final int userId, final int cupId) {
-        return em.createNativeQuery(UserGroup.LOAD_FOR_CUP_WHERE_USER_IS_OWNER, UserGroup.class)
+    public List<UserGroupEntity> loadUserGroupsWhereUserIsOwner(final int userId, final int cupId) {
+        return em.createNativeQuery(UserGroupEntity.LOAD_FOR_CUP_WHERE_USER_IS_OWNER, UserGroupEntity.class)
                 .setParameter("userId", userId)
                 .setParameter("cupId", cupId)
                 .getResultList();

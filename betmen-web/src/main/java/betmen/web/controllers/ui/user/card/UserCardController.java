@@ -2,7 +2,6 @@ package betmen.web.controllers.ui.user.card;
 
 import betmen.core.service.UserService;
 import betmen.core.service.utils.DateTimeService;
-import betmen.web.controllers.ui.portal.PortalPageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

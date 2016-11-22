@@ -2,7 +2,17 @@ package betmen.core.service;
 
 import betmen.core.entity.User;
 
-public interface UserService extends GenericService<User>, NamedEntityGenericService<User> {
+import java.util.List;
+
+public interface UserService extends NamedEntityGenericService<User> {
+
+    List<User> loadAll();
+
+    User load(final int id);
+
+    User save(User entry);
+
+    void delete(final int id);
 
     User createUser(final String login, final String name, final String password);
 

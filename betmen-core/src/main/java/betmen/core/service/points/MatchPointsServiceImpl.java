@@ -1,5 +1,6 @@
 package betmen.core.service.points;
 
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.model.points.UserSummaryPointsHolder;
 import betmen.core.repository.MatchPointsDao;
 import betmen.core.repository.MatchSummaryPoints;
@@ -7,7 +8,6 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchPoints;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
 import betmen.core.service.utils.DateTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -68,8 +68,8 @@ public class MatchPointsServiceImpl implements MatchPointsService {
 
     @Override
     @Transactional
-    public void delete(final UserGroup userGroup) {
-        matchPointsRepository.delete(userGroup);
+    public void delete(final UserGroupEntity userGroupEntity) {
+        matchPointsRepository.delete(userGroupEntity);
     }
 
     @Override
@@ -80,8 +80,8 @@ public class MatchPointsServiceImpl implements MatchPointsService {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public List<MatchPoints> loadAll(final Match match, final UserGroup userGroup) {
-        return matchPointsRepository.loadAll(match, userGroup);
+    public List<MatchPoints> loadAll(final Match match, final UserGroupEntity userGroupEntity) {
+        return matchPointsRepository.loadAll(match, userGroupEntity);
     }
 
     @Override
@@ -92,8 +92,8 @@ public class MatchPointsServiceImpl implements MatchPointsService {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public MatchPoints load(final User user, final Match match, final UserGroup userGroup) {
-        return matchPointsRepository.load(user, match, userGroup);
+    public MatchPoints load(final User user, final Match match, final UserGroupEntity userGroupEntity) {
+        return matchPointsRepository.load(user, match, userGroupEntity);
     }
 
     @Override
@@ -114,9 +114,9 @@ public class MatchPointsServiceImpl implements MatchPointsService {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public UserSummaryPointsHolder load(final User user, final Cup cup, final UserGroup userGroup) {
+    public UserSummaryPointsHolder load(final User user, final Cup cup, final UserGroupEntity userGroupEntity) {
 
-        final MatchSummaryPoints summaryPoints = matchPointsRepository.loadSummary(user, cup, userGroup);
+        final MatchSummaryPoints summaryPoints = matchPointsRepository.loadSummary(user, cup, userGroupEntity);
 
         if (summaryPoints == null) {
             return null;

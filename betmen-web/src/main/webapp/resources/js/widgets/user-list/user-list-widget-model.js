@@ -6,7 +6,7 @@ define( function ( require ) {
 
 	var UserModel = Backbone.Model.extend( {
 
-		idAttribute: 'userId',
+		idAttribute: 'user.userId',
 
 		defaults: {
 			userId: 0

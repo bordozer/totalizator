@@ -2,31 +2,37 @@ package betmen.core.service;
 
 import betmen.core.entity.Cup;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
+import betmen.core.entity.UserGroupEntity;
 
 import java.util.List;
 
-public interface UserGroupService extends GenericService<UserGroup> {
+public interface UserGroupService {
 
-    List<UserGroup> loadUserGroupsWhereUserIsOwner(final User user);
+    List<UserGroupEntity> loadAll();
 
-    List<UserGroup> loadUserGroupsWhereUserIsOwner(final User user, final int cupId);
+    UserGroupEntity load(final int id);
 
-    List<UserGroup> loadUserGroupsWhereUserIsMember(final User user);
+    UserGroupEntity save(UserGroupEntity entry);
 
-    List<UserGroup> loadUserGroupsWhereUserIsMember(final User user, final int cupId);
+    void delete(final int id);
 
-    List<User> loadUserGroupMembers(final UserGroup userGroup);
+    List<UserGroupEntity> loadUserGroupsWhereUserIsOwner(final User user);
 
-    List<Cup> loadCups(final UserGroup userGroup);
+    List<UserGroupEntity> loadUserGroupsWhereUserIsOwner(final User user, final int cupId);
 
-    UserGroup save(final UserGroup userGroup, final List<Integer> cupIds);
+    List<UserGroupEntity> loadUserGroupsWhereUserIsMember(final User user);
 
-    boolean isUserOwnerOfGroup(final UserGroup userGroup, final User user);
+    List<UserGroupEntity> loadUserGroupsWhereUserIsMember(final User user, final int cupId);
 
-    boolean isUserMemberOfGroup(final UserGroup userGroup, final User user);
+    List<User> loadUserGroupMembers(final UserGroupEntity userGroupEntity);
 
-    void addMember(final UserGroup userGroup, final User user);
+    List<Cup> loadCups(final UserGroupEntity userGroupEntity);
 
-    void removeMember(final UserGroup userGroup, final User user);
+    boolean isUserOwnerOfGroup(final UserGroupEntity userGroupEntity, final User user);
+
+    boolean isUserMemberOfGroup(final UserGroupEntity userGroupEntity, final User user);
+
+    void addMember(final UserGroupEntity userGroupEntity, final User user);
+
+    void removeMember(final UserGroupEntity userGroupEntity, final User user);
 }

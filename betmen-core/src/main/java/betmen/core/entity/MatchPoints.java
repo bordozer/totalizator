@@ -101,7 +101,7 @@ public class MatchPoints extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "userGroupId")
-    private UserGroup userGroup;
+    private UserGroupEntity userGroup;
 
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime matchTime;
@@ -133,12 +133,12 @@ public class MatchPoints extends AbstractEntity {
         this.match = match;
     }
 
-    public UserGroup getUserGroup() {
+    public UserGroupEntity getUserGroup() {
         return userGroup;
     }
 
-    public void setUserGroup(final UserGroup userGroup) {
-        this.userGroup = userGroup;
+    public void setUserGroup(final UserGroupEntity userGroupEntity) {
+        this.userGroup = userGroupEntity;
     }
 
     public LocalDateTime getMatchTime() {

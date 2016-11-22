@@ -1,6 +1,5 @@
 package betmen.web.init;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter

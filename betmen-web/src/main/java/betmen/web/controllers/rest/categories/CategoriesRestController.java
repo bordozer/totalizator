@@ -39,8 +39,8 @@ public class CategoriesRestController {
     @RequestMapping(method = RequestMethod.GET, value = "/sportKind/{sportKindId}/")
     public List<CategoryDTO> sportKindsCategories(@PathVariable("sportKindId") final int sportKindId, final Principal principal) {
         return dtoService.transformCategories(categoryService.loadAll().stream()
-                        .filter(category -> category.getSportKind().getId() == sportKindId)
-                        .collect(Collectors.toList()));
+                .filter(category -> category.getSportKind().getId() == sportKindId)
+                .collect(Collectors.toList()));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{categoryId}/")

@@ -1,10 +1,10 @@
 package betmen.core.service.points;
 
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.model.points.UserCupPointsHolder;
 import betmen.core.model.points.UserSummaryPointsHolder;
 import betmen.core.entity.Cup;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
 import betmen.core.service.UserGroupService;
 import betmen.core.service.UserService;
 import betmen.core.service.points.calculation.cup.UserCupWinnersBonusCalculationService;
@@ -43,11 +43,11 @@ public class CupPointsServiceImpl implements CupPointsService {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public List<UserCupPointsHolder> getUsersCupPoints(final Cup cup, final UserGroup userGroup) {
-        return cupPointsByUser(cup, userGroupService.loadUserGroupMembers(userGroup), userGroup);
+    public List<UserCupPointsHolder> getUsersCupPoints(final Cup cup, final UserGroupEntity userGroupEntity) {
+        return cupPointsByUser(cup, userGroupService.loadUserGroupMembers(userGroupEntity), userGroupEntity);
     }
 
-    private List<UserCupPointsHolder> cupPointsByUser(final Cup cup, final List<User> users, final UserGroup userGroup) {
+    private List<UserCupPointsHolder> cupPointsByUser(final Cup cup, final List<User> users, final UserGroupEntity userGroupEntity) {
 
         final List<UserCupPointsHolder> result = newArrayList();
 
@@ -57,7 +57,7 @@ public class CupPointsServiceImpl implements CupPointsService {
                     @Override
                     public UserCupPointsHolder apply(final User user) {
 
-                        final UserSummaryPointsHolder pointsHolder = userGroup == null ? matchPointsService.load(user, cup) : matchPointsService.load(user, cup, userGroup);
+                        final UserSummaryPointsHolder pointsHolder = userGroupEntity == null ? matchPointsService.load(user, cup) : matchPointsService.load(user, cup, userGroupEntity);
 
                         if (pointsHolder == null) {
                             return null;

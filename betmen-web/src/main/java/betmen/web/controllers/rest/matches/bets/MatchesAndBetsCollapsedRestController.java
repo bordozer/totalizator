@@ -1,10 +1,9 @@
 package betmen.web.controllers.rest.matches.bets;
 
-import betmen.core.model.MatchSearchModel;
 import betmen.core.entity.Cup;
-import betmen.core.entity.CupTeamBet;
 import betmen.core.entity.Match;
 import betmen.core.entity.User;
+import betmen.core.model.MatchSearchModel;
 import betmen.core.service.CupBetsService;
 import betmen.core.service.CupService;
 import betmen.core.service.UserService;
@@ -14,14 +13,12 @@ import betmen.core.service.utils.DateTimeService;
 import betmen.dto.dto.MatchSearchModelDto;
 import betmen.dto.dto.MatchesAndBetsCollapsedDTO;
 import betmen.web.converters.DTOService;
-import betmen.dto.dto.TeamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RestController

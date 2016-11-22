@@ -1,5 +1,16 @@
 package betmen.web.converters;
 
+import betmen.core.entity.Category;
+import betmen.core.entity.Cup;
+import betmen.core.entity.CupTeamBet;
+import betmen.core.entity.CupWinner;
+import betmen.core.entity.Match;
+import betmen.core.entity.MatchBet;
+import betmen.core.entity.PointsCalculationStrategy;
+import betmen.core.entity.SportKind;
+import betmen.core.entity.Team;
+import betmen.core.entity.User;
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.model.MatchSearchModel;
 import betmen.core.model.points.UserCupPointsHolder;
 import betmen.core.model.points.UserMatchPointsHolder;
@@ -20,17 +31,6 @@ import betmen.dto.dto.UserDTO;
 import betmen.dto.dto.UserGroupDTO;
 import betmen.dto.dto.points.UserCupPointsHolderDTO;
 import betmen.dto.dto.points.UserMatchPointsHolderDTO;
-import betmen.core.entity.Category;
-import betmen.core.entity.Cup;
-import betmen.core.entity.CupTeamBet;
-import betmen.core.entity.CupWinner;
-import betmen.core.entity.Match;
-import betmen.core.entity.MatchBet;
-import betmen.core.entity.PointsCalculationStrategy;
-import betmen.core.entity.SportKind;
-import betmen.core.entity.Team;
-import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public interface DTOService {
 
     MatchBetDTO getMatchBetForMatch(final Match match, final User betOfUser, final User accessor);
 
-    MatchBetDTO getMatchBetForMatch(final Match match, final User betOfUser, final User accessor, final UserGroup userGroup);
+    MatchBetDTO getMatchBetForMatch(final Match match, final User betOfUser, final User accessor, final UserGroupEntity userGroupEntity);
 
     List<MatchBetDTO> getMatchBetForMatches(final List<Match> matches, final User betOfUser, final User accessor);
 
@@ -78,7 +78,7 @@ public interface DTOService {
 
     List<CupTeamBetDTO> transformCupTeamBets(final List<CupTeamBet> cupTeamBets, final User user);
 
-    List<UserGroupDTO> transformUserGroups(final List<UserGroup> userGroups, final User user);
+    List<UserGroupDTO> transformUserGroups(final List<UserGroupEntity> userGroupEntities, final User user);
 
     CupWinnerDTO transformCupWinner(final CupWinner cupWinner, final User accessor);
 

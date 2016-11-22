@@ -1,8 +1,8 @@
 package betmen.core.repository;
 
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
-import betmen.core.entity.UserGroupMember;
+import betmen.core.entity.UserGroupEntity;
+import betmen.core.entity.UserGroupMemberEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,18 +16,18 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
     private EntityManager em;
 
     @Override
-    public List<UserGroupMember> loadAll() {
-        return em.createNamedQuery(UserGroupMember.LOAD_ALL, UserGroupMember.class)
+    public List<UserGroupMemberEntity> loadAll() {
+        return em.createNamedQuery(UserGroupMemberEntity.LOAD_ALL, UserGroupMemberEntity.class)
                 .getResultList();
     }
 
     @Override
-    public UserGroupMember load(final int id) {
-        return em.find(UserGroupMember.class, id);
+    public UserGroupMemberEntity load(final int id) {
+        return em.find(UserGroupMemberEntity.class, id);
     }
 
     @Override
-    public UserGroupMember save(final UserGroupMember entry) {
+    public UserGroupMemberEntity save(final UserGroupMemberEntity entry) {
         return em.merge(entry);
     }
 
@@ -37,31 +37,31 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
     }
 
     @Override
-    public List<UserGroupMember> loadUserGroupMembers(final UserGroup userGroup) {
-        return em.createNamedQuery(UserGroupMember.LOAD_USER_GROUPS_MEMBERS, UserGroupMember.class)
-                .setParameter("userGroupId", userGroup.getId())
+    public List<UserGroupMemberEntity> loadUserGroupMembers(final UserGroupEntity userGroupEntity) {
+        return em.createNamedQuery(UserGroupMemberEntity.LOAD_USER_GROUPS_MEMBERS, UserGroupMemberEntity.class)
+                .setParameter("userGroupId", userGroupEntity.getId())
                 .getResultList();
     }
 
     @Override
-    public List<UserGroupMember> loadUserGroupsWhereUserIsMember(final int userId) {
-        return em.createNamedQuery(UserGroupMember.LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER, UserGroupMember.class)
+    public List<UserGroupMemberEntity> loadUserGroupsWhereUserIsMember(final int userId) {
+        return em.createNamedQuery(UserGroupMemberEntity.LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER, UserGroupMemberEntity.class)
                 .setParameter("userId", userId)
                 .getResultList();
     }
 
     @Override
-    public List<UserGroupMember> loadUserGroupsWhereUserIsMember(final int userId, final int cupId) {
-        return em.createNativeQuery(UserGroupMember.LOAD_USER_GROUPS_FOR_CUP_WHERE_WHERE_USER_IS_MEMBER_SQL, UserGroupMember.class)
+    public List<UserGroupMemberEntity> loadUserGroupsWhereUserIsMember(final int userId, final int cupId) {
+        return em.createNativeQuery(UserGroupMemberEntity.LOAD_USER_GROUPS_FOR_CUP_WHERE_WHERE_USER_IS_MEMBER_SQL, UserGroupMemberEntity.class)
                 .setParameter("userId", userId)
                 .setParameter("cupId", cupId)
                 .getResultList();
     }
 
     @Override
-    public UserGroupMember load(final UserGroup userGroup, final User user) {
-        final List<UserGroupMember> resultList = em.createNamedQuery(UserGroupMember.LOAD_USER_GROUPS_MEMBER_ENTRY, UserGroupMember.class)
-                .setParameter("userGroupId", userGroup.getId())
+    public UserGroupMemberEntity load(final UserGroupEntity userGroupEntity, final User user) {
+        final List<UserGroupMemberEntity> resultList = em.createNamedQuery(UserGroupMemberEntity.LOAD_USER_GROUPS_MEMBER_ENTRY, UserGroupMemberEntity.class)
+                .setParameter("userGroupId", userGroupEntity.getId())
                 .setParameter("userId", user.getId())
                 .getResultList();
 
@@ -69,18 +69,18 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
     }
 
     @Override
-    public void delete(final UserGroup userGroup, final User user) {
-        final UserGroupMember userGroupMember = load(userGroup, user);
+    public void delete(final UserGroupEntity userGroupEntity, final User user) {
+        final UserGroupMemberEntity userGroupMemberEntity = load(userGroupEntity, user);
 
-        if (userGroupMember != null) {
-            em.remove(userGroupMember);
+        if (userGroupMemberEntity != null) {
+            em.remove(userGroupMemberEntity);
         }
     }
 
     @Override
-    public void deleteAll(final UserGroup userGroup) {
-        for (final UserGroupMember userGroupMember : loadUserGroupMembers(userGroup)) {
-            delete(userGroup, userGroupMember.getUser());
+    public void deleteAll(final UserGroupEntity userGroupEntity) {
+        for (final UserGroupMemberEntity userGroupMemberEntity : loadUserGroupMembers(userGroupEntity)) {
+            delete(userGroupEntity, userGroupMemberEntity.getUser());
         }
     }
 }

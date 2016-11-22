@@ -7,7 +7,9 @@ public enum UserRoutes implements Route {
     USER_CREATE("/rest/users/create/"),
     USER_UPDATE("/rest/users/{userId}/"),
     USER_IS_ADMIN("/rest/users/{userId}/is-admin/"),
-    USERS_LIST("/rest/users/");
+    ALL_USERS("/rest/users/"),
+    USER_LIST("/rest/users/list/")
+    ;
 
     private final String route;
 

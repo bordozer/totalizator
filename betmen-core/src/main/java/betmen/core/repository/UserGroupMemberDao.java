@@ -1,23 +1,30 @@
 package betmen.core.repository;
 
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroup;
-import betmen.core.entity.UserGroupMember;
-import betmen.core.service.GenericService;
+import betmen.core.entity.UserGroupEntity;
+import betmen.core.entity.UserGroupMemberEntity;
 
 import java.util.List;
 
-public interface UserGroupMemberDao extends GenericService<UserGroupMember> {
+public interface UserGroupMemberDao {
 
-    List<UserGroupMember> loadUserGroupMembers(final UserGroup userGroup);
+    List<UserGroupMemberEntity> loadAll();
 
-    List<UserGroupMember> loadUserGroupsWhereUserIsMember(final int userId);
+    UserGroupMemberEntity load(final int id);
 
-    List<UserGroupMember> loadUserGroupsWhereUserIsMember(final int userId, final int cupId);
+    UserGroupMemberEntity save(UserGroupMemberEntity entry);
 
-    UserGroupMember load(final UserGroup userGroup, final User user);
+    void delete(final int id);
 
-    void delete(final UserGroup userGroup, final User user);
+    List<UserGroupMemberEntity> loadUserGroupMembers(final UserGroupEntity userGroupEntity);
 
-    void deleteAll(UserGroup userGroup);
+    List<UserGroupMemberEntity> loadUserGroupsWhereUserIsMember(final int userId);
+
+    List<UserGroupMemberEntity> loadUserGroupsWhereUserIsMember(final int userId, final int cupId);
+
+    UserGroupMemberEntity load(final UserGroupEntity userGroupEntity, final User user);
+
+    void delete(final UserGroupEntity userGroupEntity, final User user);
+
+    void deleteAll(UserGroupEntity userGroupEntity);
 }
