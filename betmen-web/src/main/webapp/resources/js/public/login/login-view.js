@@ -47,7 +47,7 @@ define( function ( require ) {
 			var url = '/authenticate?login=' + options.login
 				+ '&password=' + options.password
 				+ "&language=" + (options.language ? options.language : '')
-				+ "&remember-me=" + (options.rememberme ? options.remember_me : '');
+				+ "&remember-me=" + (options.remember_me ? options.remember_me : '');
 
 			$.ajax( {
 				method: 'POST',
