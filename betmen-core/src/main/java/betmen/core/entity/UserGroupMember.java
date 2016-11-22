@@ -10,9 +10,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import static betmen.core.entity.UserGroupMember.LOAD_ALL;
-import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUP_MEMBERS;
-import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUP_MEMBER_ENTRY;
-import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUP_WHERE_USER_IS_MEMBER;
+import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUPS_MEMBERS;
+import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUPS_MEMBER_ENTRY;
+import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER;
 
 @Entity
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -23,24 +23,31 @@ import static betmen.core.entity.UserGroupMember.LOAD_USER_GROUP_WHERE_USER_IS_M
                 query = "select g from UserGroupMember g order by groupName"
         ),
         @NamedQuery(
-                name = LOAD_USER_GROUP_MEMBERS,
+                name = LOAD_USER_GROUPS_MEMBERS,
                 query = "select g from UserGroupMember g where userGroupId= :userGroupId"
         ),
         @NamedQuery(
-                name = LOAD_USER_GROUP_WHERE_USER_IS_MEMBER,
+                name = LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER,
                 query = "select g from UserGroupMember g where userId= :userId"
         ),
         @NamedQuery(
-                name = LOAD_USER_GROUP_MEMBER_ENTRY,
+                name = LOAD_USER_GROUPS_MEMBER_ENTRY,
                 query = "select g from UserGroupMember g where userId= :userId and userGroupId= :userGroupId"
         )
 })
 public class UserGroupMember extends AbstractEntity {
 
     public static final String LOAD_ALL = "userGroupMembers.loadAll";
-    public static final String LOAD_USER_GROUP_MEMBERS = "userGroupMembers.loadMembers";
-    public static final String LOAD_USER_GROUP_WHERE_USER_IS_MEMBER = "userGroupMembers.loadWhereUserIsMembers";
-    public static final String LOAD_USER_GROUP_MEMBER_ENTRY = "userGroupMembers.loadUserGroupMemberEntry";
+    public static final String LOAD_USER_GROUPS_MEMBERS = "userGroupMembers.loadMembers";
+    public static final String LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER = "userGroupMembers.loadWhereUserIsMembers";
+    public static final String LOAD_USER_GROUPS_MEMBER_ENTRY = "userGroupMembers.loadUserGroupMemberEntry";
+    public static final String LOAD_USER_GROUPS_FOR_CUP_WHERE_WHERE_USER_IS_MEMBER_SQL = "select g.* " +
+            " FROM userGroupMembers gm " +
+            "  JOIN userGroups g ON (gm.userGroupId = g.id) " +
+            "  JOIN userGroupCups gc ON (g.id = gc.userGroupId) " +
+            " WHERE g.userId = :userId " +
+            "      AND gc.cupId = :cupId" +
+            " ORDER BY g.groupName";
 
     @ManyToOne
     @JoinColumn(name = "userGroupId")

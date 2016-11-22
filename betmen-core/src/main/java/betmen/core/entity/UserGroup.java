@@ -11,7 +11,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import static betmen.core.entity.UserGroup.LOAD_ALL;
-import static betmen.core.entity.UserGroup.LOAD_ALL_USER_IS_OWNER;
+import static betmen.core.entity.UserGroup.LOAD_ALL_WHERE_USER_IS_OWNER;
+import static betmen.core.entity.UserGroup.LOAD_FOR_CUP_WHERE_USER_IS_OWNER;
 
 @Entity
 @org.hibernate.annotations.Cache(region = "common", usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -22,14 +23,15 @@ import static betmen.core.entity.UserGroup.LOAD_ALL_USER_IS_OWNER;
                 query = "select g from UserGroup g order by groupName"
         ),
         @NamedQuery(
-                name = LOAD_ALL_USER_IS_OWNER,
+                name = LOAD_ALL_WHERE_USER_IS_OWNER,
                 query = "select g from UserGroup g where userId= :userId order by groupName"
         )
 })
 public class UserGroup extends AbstractEntity {
 
     public static final String LOAD_ALL = "userGroup.loadAll";
-    public static final String LOAD_ALL_USER_IS_OWNER = "userGroup.loadAllWhereUserIsOwner";
+    public static final String LOAD_ALL_WHERE_USER_IS_OWNER = "userGroup.loadAllWhereUserIsOwner";
+    public static final String LOAD_FOR_CUP_WHERE_USER_IS_OWNER = "SELECT g.* FROM userGroups g JOIN userGroupCups gc ON (g.id = gc.userGroupId ) WHERE g.userId = :userId AND gc.cupId = :cupId ORDER BY g.groupName";
 
     @Column(length = 100)
     private String groupName;

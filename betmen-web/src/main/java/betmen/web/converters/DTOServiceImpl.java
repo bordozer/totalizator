@@ -227,9 +227,6 @@ public class DTOServiceImpl implements DTOService {
             userGroupDTO.setUserGroupId(userGroup.getId());
             userGroupDTO.setUserGroupName(userGroup.getGroupName());
             userGroupDTO.setUserGroupOwner(transformUser(userGroup.getOwner()));
-
-            userGroupDTO.setUserGroupCups(transformCupItems(userGroupService.loadCups(userGroup)));
-
             return userGroupDTO;
         }).collect(Collectors.toList());
     }

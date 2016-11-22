@@ -38,21 +38,29 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
 
     @Override
     public List<UserGroupMember> loadUserGroupMembers(final UserGroup userGroup) {
-        return em.createNamedQuery(UserGroupMember.LOAD_USER_GROUP_MEMBERS, UserGroupMember.class)
+        return em.createNamedQuery(UserGroupMember.LOAD_USER_GROUPS_MEMBERS, UserGroupMember.class)
                 .setParameter("userGroupId", userGroup.getId())
                 .getResultList();
     }
 
     @Override
-    public List<UserGroupMember> loadUserGroupsWhereUserIsMember(final User user) {
-        return em.createNamedQuery(UserGroupMember.LOAD_USER_GROUP_WHERE_USER_IS_MEMBER, UserGroupMember.class)
-                .setParameter("userId", user.getId())
+    public List<UserGroupMember> loadUserGroupsWhereUserIsMember(final int userId) {
+        return em.createNamedQuery(UserGroupMember.LOAD_USER_GROUPS_WHERE_USER_IS_MEMBER, UserGroupMember.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
+    @Override
+    public List<UserGroupMember> loadUserGroupsWhereUserIsMember(final int userId, final int cupId) {
+        return em.createNativeQuery(UserGroupMember.LOAD_USER_GROUPS_FOR_CUP_WHERE_WHERE_USER_IS_MEMBER_SQL, UserGroupMember.class)
+                .setParameter("userId", userId)
+                .setParameter("cupId", cupId)
                 .getResultList();
     }
 
     @Override
     public UserGroupMember load(final UserGroup userGroup, final User user) {
-        final List<UserGroupMember> resultList = em.createNamedQuery(UserGroupMember.LOAD_USER_GROUP_MEMBER_ENTRY, UserGroupMember.class)
+        final List<UserGroupMember> resultList = em.createNamedQuery(UserGroupMember.LOAD_USER_GROUPS_MEMBER_ENTRY, UserGroupMember.class)
                 .setParameter("userGroupId", userGroup.getId())
                 .setParameter("userId", user.getId())
                 .getResultList();

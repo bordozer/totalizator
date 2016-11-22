@@ -26,6 +26,8 @@ public interface MatchBetDao extends GenericService<MatchBet> {
 
     int betsCount(final Cup cup, final User user);
 
+    int userBetsCount(final int userId);
+
     int getMatchesCountAccessibleForBettingSince(final Cup cup, final User user, final LocalDateTime sinceTime);
 
     Match getFirstMatchWithoutBetSince(final Cup cup, final User user, final LocalDateTime sinceTime);

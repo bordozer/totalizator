@@ -25,7 +25,7 @@ define( function ( require ) {
 		},
 
 		url: function() {
-			return '/rest/user-groups/all-members-of-all-my-groups/';
+			return '/rest/users/list/';
 		}
 	});
 } );

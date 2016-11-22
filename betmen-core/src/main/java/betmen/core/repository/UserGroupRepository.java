@@ -1,6 +1,5 @@
 package betmen.core.repository;
 
-import betmen.core.entity.User;
 import betmen.core.entity.UserGroup;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -50,9 +49,17 @@ public class UserGroupRepository implements UserGroupDao {
 
     @Override
     @Cacheable(value = CACHE_QUERY)
-    public List<UserGroup> loadUserGroupsWhereUserIsOwner(final User user) {
-        return em.createNamedQuery(UserGroup.LOAD_ALL_USER_IS_OWNER, UserGroup.class)
-                .setParameter("userId", user.getId())
+    public List<UserGroup> loadUserGroupsWhereUserIsOwner(final int userId) {
+        return em.createNamedQuery(UserGroup.LOAD_ALL_WHERE_USER_IS_OWNER, UserGroup.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
+    @Override
+    public List<UserGroup> loadUserGroupsWhereUserIsOwner(final int userId, final int cupId) {
+        return em.createNativeQuery(UserGroup.LOAD_FOR_CUP_WHERE_USER_IS_OWNER, UserGroup.class)
+                .setParameter("userId", userId)
+                .setParameter("cupId", cupId)
                 .getResultList();
     }
 }

@@ -10,7 +10,11 @@ public interface UserGroupService extends GenericService<UserGroup> {
 
     List<UserGroup> loadUserGroupsWhereUserIsOwner(final User user);
 
+    List<UserGroup> loadUserGroupsWhereUserIsOwner(final User user, final int cupId);
+
     List<UserGroup> loadUserGroupsWhereUserIsMember(final User user);
+
+    List<UserGroup> loadUserGroupsWhereUserIsMember(final User user, final int cupId);
 
     List<User> loadUserGroupMembers(final UserGroup userGroup);
 

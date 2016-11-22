@@ -80,8 +80,7 @@ define( function ( require ) {
 		},
 
 		_ownUserGroupMenuItems: function ( userId ) {
-
-			var userGroupsForCup = this._filterUserGroupsByCup( service.loadUserGroupsWhereUserIsOwner( userId ) );
+			var userGroupsForCup = service.loadUserGroupsForCupWhereUserIsOwner( userId, this.cup.cupId );
 
 			if ( userGroupsForCup.length == 0 ) {
 				return [];
@@ -107,7 +106,7 @@ define( function ( require ) {
 
 		_anotherUserGroupMenuItems: function ( userId ) {
 
-			var userGroups = this._filterUserGroupsByCup( service.loadUserGroupsWhereUserIsMember( userId ) );
+			var userGroups = service.loadUserGroupsForCupWhereUserIsMember( userId, this.cup.cupId );
 
 			if ( userGroups.length == 0 ) {
 				return [];

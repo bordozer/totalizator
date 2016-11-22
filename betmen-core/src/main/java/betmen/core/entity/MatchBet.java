@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import static betmen.core.entity.MatchBet.LOAD_ALL;
 import static betmen.core.entity.MatchBet.LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER;
 import static betmen.core.entity.MatchBet.LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET;
+import static betmen.core.entity.MatchBet.LOAD_COUNT_OF_MATCHES_WITH_USER_BET;
 import static betmen.core.entity.MatchBet.LOAD_FOR_MATCH;
 import static betmen.core.entity.MatchBet.LOAD_FOR_USER;
 import static betmen.core.entity.MatchBet.LOAD_FOR_USER_AND_MATCH;
@@ -61,6 +62,10 @@ import static betmen.core.entity.MatchBet.LOAD_MATCH_BETS_COUNT;
                 query = "select count( mb.id ) from MatchBet as mb join mb.match as m where mb.user.id = :userId and m.cup.id = :cupId"
         ),
         @NamedQuery(
+                name = LOAD_COUNT_OF_MATCHES_WITH_USER_BET,
+                query = "select count( mb.id ) from MatchBet as mb join mb.match as m where mb.user.id = :userId"
+        ),
+        @NamedQuery(
                 name = LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER,
                 query = "select count( m.id ) from Match as m where m.cup.id = :cupId and m.beginningTime >= :time and m.id not in ( select mb.match.id from MatchBet mb where mb.user.id = :userId )"
         )
@@ -81,6 +86,7 @@ public class MatchBet extends AbstractEntity {
     public static final String LOAD_MATCH_BETS_COUNT = "matchBets.matchBetsCount";
 
     public static final String LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET = "matchBets.LOAD_COUNT_OF_CUP_MATCHES_WITH_USER_BET";
+    public static final String LOAD_COUNT_OF_MATCHES_WITH_USER_BET = "matchBets.LOAD_COUNT_OF_MATCHES_WITH_USER_BET";
     public static final String LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER = "matchBets.LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER";
 
     @ManyToOne

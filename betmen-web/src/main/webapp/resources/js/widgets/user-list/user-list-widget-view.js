@@ -6,7 +6,7 @@ define( function ( require ) {
 	var $ = require( 'jquery' );
 
 	var template = _.template( require( 'text!./templates/user-list-widget-template.html' ) );
-	var EntryView = require( './user-list-widget-entry-view' );
+	var UserListItemView = require( './user-list-widget-item-view' );
 
 	var WidgetView = require( 'js/components/widget/widget-view' );
 
@@ -40,32 +40,28 @@ define( function ( require ) {
 		},
 
 		_renderUserList: function() {
-
-			var users = this.model.toJSON();
-
 			var currentUser = this.currentUser;
-			var currentUserGroups = service.loadUserGroupsWhereUserIsOwner( this.currentUser.userId );
-
+			var userListItems = this.model.toJSON();
 			var data = _.extend( {}, {
-				currentUserGroups: currentUserGroups
-				, translator: translator
+				translator: translator
 			} );
 
 			this.setBody( template( data ) );
 			var container = this.$( '.js-users-container' );
 
-			_.each( users, function( user ) {
+			var count = 1;
+			_.each( userListItems, function( userListItem ) {
 
 				var el = $( '<div class="user-list-entry"></div>' );
 				container.append( el );
 
-				var view = new EntryView( {
+				var view = new UserListItemView( {
 					el: el
-					, user: user
+					, count: count
+					, userListItem: userListItem
 					, currentUser: currentUser
-					, currentUserGroups: currentUserGroups
-					, users: users
 				} );
+				count++;
 			});
 
 			this.trigger( 'inner-view-rendered' );

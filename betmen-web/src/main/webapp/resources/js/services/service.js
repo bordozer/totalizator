@@ -460,7 +460,7 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					//alert( translator.serverError );
+					console.log(translator.serverError);
 				}
 			} );
 
@@ -478,7 +478,25 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					//alert( translator.serverError );
+					console.log(translator.serverError);
+				}
+			} );
+
+			return result;
+		},
+
+		loadUserGroupsForCupWhereUserIsOwner: function( userId, cupId ) {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/users/' + userId + '/groups/owner/?cup=' + cupId,
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					console.log(translator.serverError);
 				}
 			} );
 
@@ -496,7 +514,25 @@ define( function ( require ) {
 					result = data;
 				},
 				error: function() {
-					//alert( translator.serverError );
+					console.log(translator.serverError);
+				}
+			} );
+
+			return result;
+		},
+
+		loadUserGroupsForCupWhereUserIsMember: function( userId, cupId ) {
+			var result = [];
+
+			$.ajax( {
+				method: 'GET',
+				url: '/rest/users/' + userId + '/groups/member/?cupId=' + cupId,
+				async: false,
+				success: function ( data ) {
+					result = data;
+				},
+				error: function() {
+					console.log(translator.serverError);
 				}
 			} );
 

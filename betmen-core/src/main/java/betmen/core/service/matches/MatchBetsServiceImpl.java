@@ -151,6 +151,11 @@ public class MatchBetsServiceImpl implements MatchBetsService {
     }
 
     @Override
+    public int userBetsCount(final User user) {
+        return matchBetRepository.userBetsCount(user.getId());
+    }
+
+    @Override
     public ValidationResult validateBettingAllowed(final Match match, final User user) {
         final Language language = translatorService.getDefaultLanguage(); // TODO: read user language
         final Cup cup = match.getCup();

@@ -110,6 +110,14 @@ public class MatchBetRepository implements MatchBetDao {
     }
 
     @Override
+    public int userBetsCount(final int userId) {
+        final List<Long> bets = em.createNamedQuery(MatchBet.LOAD_COUNT_OF_MATCHES_WITH_USER_BET, Long.class)
+                .setParameter("userId", userId)
+                .getResultList();
+        return bets.size() == 1 ? bets.get(0).intValue() : 0;
+    }
+
+    @Override
     public int getMatchesCountAccessibleForBettingSince(final Cup cup, final User user, final LocalDateTime sinceTime) {
         final List<Long> bets = em.createNamedQuery(MatchBet.LOAD_COUNT_OF_CUP_MATCHES_ACCESSIBLE_FOR_BETTING_FOR_USER, Long.class)
                 .setParameter("cupId", cup.getId())

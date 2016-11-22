@@ -1,13 +1,13 @@
 package betmen.core.service;
 
-import betmen.core.repository.UserGroupCupDao;
-import betmen.core.repository.UserGroupDao;
-import betmen.core.repository.UserGroupMemberDao;
 import betmen.core.entity.Cup;
 import betmen.core.entity.User;
 import betmen.core.entity.UserGroup;
 import betmen.core.entity.UserGroupCup;
 import betmen.core.entity.UserGroupMember;
+import betmen.core.repository.UserGroupCupDao;
+import betmen.core.repository.UserGroupDao;
+import betmen.core.repository.UserGroupMemberDao;
 import betmen.core.service.points.MatchPointsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -90,66 +88,52 @@ public class UserGroupServiceImpl implements UserGroupService {
     @Override
     @Transactional(readOnly = true)
     public List<UserGroup> loadUserGroupsWhereUserIsOwner(final User user) {
-        return userGroupRepository.loadUserGroupsWhereUserIsOwner(user);
+        return userGroupRepository.loadUserGroupsWhereUserIsOwner(user.getId());
+    }
+
+    @Override
+    public List<UserGroup> loadUserGroupsWhereUserIsOwner(final User user, final int cupId) {
+        return userGroupRepository.loadUserGroupsWhereUserIsOwner(user.getId(), cupId);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<UserGroup> loadUserGroupsWhereUserIsMember(final User user) {
-
-        return userGroupMemberRepository.loadUserGroupsWhereUserIsMember(user)
+        return userGroupMemberRepository.loadUserGroupsWhereUserIsMember(user.getId())
                 .stream()
-                .map(new Function<UserGroupMember, UserGroup>() {
-                    @Override
-                    public UserGroup apply(final UserGroupMember userGroupMember) {
-                        return userGroupMember.getUserGroup();
-                    }
-                })
+                .map(UserGroupMember::getUserGroup)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserGroup> loadUserGroupsWhereUserIsMember(final User user, final int cupId) {
+        return userGroupMemberRepository.loadUserGroupsWhereUserIsMember(user.getId(), cupId)
+                .stream()
+                .map(UserGroupMember::getUserGroup)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<User> loadUserGroupMembers(final UserGroup userGroup) {
-
-        final Function<UserGroupMember, User> mapper = new Function<UserGroupMember, User>() {
-
-            @Override
-            public User apply(final UserGroupMember userGroupMember) {
-                return userGroupMember.getUser();
-            }
-        };
-
         final List<UserGroupMember> userGroupMembers = newArrayList();
         userGroupMembers.add(new UserGroupMember(userGroup, userGroup.getOwner()));
         userGroupMembers.addAll(userGroupMemberRepository.loadUserGroupMembers(userGroup));
-
-        return userGroupMembers.stream().map(mapper).collect(Collectors.toList());
+        return userGroupMembers.stream().map(UserGroupMember::getUser).collect(Collectors.toList());
     }
 
     @Override
     public List<Cup> loadCups(final UserGroup userGroup) {
-
-        final Function<UserGroupCup, Cup> mapper = new Function<UserGroupCup, Cup>() {
-            @Override
-            public Cup apply(final UserGroupCup userGroupCup) {
-                return userGroupCup.getCup();
-            }
-        };
-
-        final List<UserGroupCup> userGroupCups = userGroupCupRepository.loadCups(userGroup);
-
-        return userGroupCups.stream().map(mapper).collect(Collectors.toList());
+        return userGroupCupRepository.loadCups(userGroup).stream().map(UserGroupCup::getCup).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional(readOnly = true)
     @Cacheable(value = GenericService.CACHE_PERMANENT)
     public boolean isUserOwnerOfGroup(final UserGroup userGroup, final User user) {
-
         if (userGroup == null) {
             return true;
         }
-
         for (final UserGroup group : loadUserGroupsWhereUserIsOwner(user)) {
             if (userGroup.equals(group) && group.getOwner().equals(user)) {
                 return true;
@@ -168,12 +152,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 
         return loadUserGroupsWhereUserIsMember(user)
                 .stream()
-                .anyMatch(new Predicate<UserGroup>() {
-                    @Override
-                    public boolean test(final UserGroup memberOfGroup) {
-                        return memberOfGroup.equals(userGroup);
-                    }
-                });
+                .anyMatch(memberOfGroup -> memberOfGroup.equals(userGroup));
     }
 
     @Override

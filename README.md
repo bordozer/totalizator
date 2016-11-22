@@ -105,8 +105,14 @@ Use with ID=1 ( system.admin.ids=1 in system.properties ) Hakeem Olajuwon ( logi
 # Development
 IDE IDEA configuration (with JRebel)
 
+#JRebel 6.*, IDEA 15
 ```
-jetty:run -Djetty.port=*9091* -Dspring.profiles.active=development -Djavaagent:/home/blu/.IntelliJIdea13/config/plugins/jr-ide-idea/lib/jrebel/jrebel.jar
+jetty:run -Djetty.port=*9091* -Dspring.profiles.active=development -Djavaagent:/home/blu/.IntelliJIdea15/config/plugins/jr-ide-idea/lib/jrebel/jrebel.jar
 ```
+#JRebel 7.*, IDEA 15
+```
+jetty:run -Djetty.port=*9091* -Dspring.profiles.active=development -Djavaagent:/home/blu/.IntelliJIdea15/config/plugins/jr-ide-idea/lib/jrebel.jar
+```
+#-agentpath:~/.IntelliJIdea15/config/plugins/jr-ide-idea/lib/jrebel6/lib/jrebel64.dll
 
 
