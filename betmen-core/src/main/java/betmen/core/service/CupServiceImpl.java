@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -281,8 +280,10 @@ public class CupServiceImpl implements CupService {
     }
 
     @Override
-    public List<Cup> getUserCupsOnDate(final LocalDate date, final User user) {
-        List<Cup> currentCupsOfFavoriteCategories = getCurrentPublicCupsOfUserFavoritesCategories(user);
+    public List<Cup> getUserCupsOnDate(final User user, final LocalDate date) {
+        String fromTime = dateTimeService.formatDateTimeSQL(dateTimeService.getFirstSecondOf(date));
+        String toTime = dateTimeService.formatDateTimeSQL(dateTimeService.getLastSecondOf(date));
+        List<Cup> currentCupsOfFavoriteCategories = cupJpaRepository.findAllPublicCupsOfUserFavoritesCategoriesWithMatchesOnDate(user.getId(), fromTime, toTime);
         List<Cup> publicCupsWhereUserMadeBetsOnDate = getPublicCupsWhereUserMadeBetsOnDate(user, date);
 
         List<Cup> matchesOfCupsToShow = new ArrayList<>();

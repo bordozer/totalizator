@@ -35,13 +35,21 @@ public interface CupJpaRepository extends JpaRepository<Cup, Integer>, JpaSpecif
             , nativeQuery = true)
     List<Cup> findAllCurrentPublicCupsOfUserFavoritesCategories(@Param("userId") int userId);
 
+    @Query(value = "SELECT cup.* " +
+            " FROM cups cup JOIN categories cat ON (cup.categoryId = cat.id) " +
+            " WHERE cup.publicCup = true " +
+            "   AND cat.id IN (SELECT categoryId FROM favorites WHERE userId = :userId) " +
+            "   AND cup.id IN (SELECT DISTINCT m.cupId FROM matches m WHERE (m.beginningTime BETWEEN :fromTime AND :toTime)) "
+            , nativeQuery = true)
+    List<Cup> findAllPublicCupsOfUserFavoritesCategoriesWithMatchesOnDate(@Param("userId") int userId, @Param("fromTime") String fromTime, @Param("toTime") String toTime);
+
     @Query(value = "SELECT cup.*" +
             "  FROM cups cup " +
             " WHERE cup.publicCup = true " +
             "   AND cup.id IN ( " +
-            "                     SELECT m.cupId " +
+            "                     SELECT DISTINCT m.cupId " +
             "                     FROM matches m " +
-            "                     WHERE (m.beginningTime BETWEEN :fromTime AND :toTime)" +
+            "                     WHERE (m.beginningTime BETWEEN :fromTime AND :toTime) " +
             "                       AND m.id IN ( " +
             "                                     SELECT mb.matchId FROM matchBets mb WHERE mb.userId = :userId " +
             "                                    ) " +

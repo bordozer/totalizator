@@ -56,7 +56,7 @@ public class UserCardRestController {
         if (cupId != null && cupId > 0) {
             return Lists.newArrayList(cupService.load(cupId));
         }
-        return cupService.getUserCupsOnDate(date, user)
+        return cupService.getUserCupsOnDate(user, date)
                 .stream()
                 .filter(cup -> cupIdsWhereUserHasBets.contains(cup.getId()))
                 .collect(Collectors.toList());
