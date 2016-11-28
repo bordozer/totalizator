@@ -4,9 +4,12 @@ import betmen.core.entity.Category;
 import betmen.core.entity.Cup;
 import betmen.core.entity.PointsCalculationStrategy;
 import betmen.core.entity.SportKind;
+import betmen.core.entity.User;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 public interface CupService extends GenericService<Cup>, NamedEntityGenericService<Cup> {
 
@@ -53,4 +56,10 @@ public interface CupService extends GenericService<Cup>, NamedEntityGenericServi
     boolean exists(int cupId);
 
     List<Cup> loadAllTeamActivePublicCups(int teamId);
+
+    List<Cup> getPublicCupsWhereUserMadeBetsOnDate(User user, LocalDate date);
+
+    List<Cup> getCurrentPublicCupsOfUserFavoritesCategories(final User user);
+
+    List<Cup> getUserCupsOnDate(LocalDate date, User user);
 }

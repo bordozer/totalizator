@@ -8,10 +8,12 @@ define( function ( require ) {
 
 	var template = _.template( require( 'text!./templates/portal-template.html' ) );
 	var templateDateDependent = _.template( require( 'text!./templates/portal-date-dependant-part-template.html' ) );
+	var templateNoMatchesOnDate = _.template( require( 'text!./templates/no-games-on-date.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 	var usersRatingWidget = require( 'js/widgets/users-rating/users-rating-widget' );
+	var DefineFavoriteCategoriesView = require( './select-favorite-categories-view' );
 
 	var app = require( 'app' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -21,6 +23,10 @@ define( function ( require ) {
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
 		noMatchesOnDateLabel: 'No matches on date'
+		, noMatchesOnDatePossibleReasonsLabel: 'No matches on date possible reasons'
+		, noGamesOnDateLabel: 'No games on date'
+		, noFavoritesCategoriesLabel: 'No favorite leagues'
+		, noBetsOnDateLabel: 'No your bets on date'
 		, todayLabel: 'Today'
 	} );
 
@@ -93,7 +99,7 @@ define( function ( require ) {
 			container.empty();
 
 			if ( model.cupsTodayToShow.length == 0 ) {
-				container.html( translator.noMatchesOnDateLabel );
+				container.html(templateNoMatchesOnDate({translator: translator}));
 				return;
 			}
 
@@ -131,6 +137,12 @@ define( function ( require ) {
 
 			var row = $( "<div class='row'></div>" );
 			container.append( row );
+
+			var hasFavoriteCategories = model.cupsToShow.length > 0;
+			if (!hasFavoriteCategories) {
+				new DefineFavoriteCategoriesView({el: row});
+				return;
+			}
 
 			_.each( model.cupsToShow, function( cup ) {
 
@@ -180,7 +192,6 @@ define( function ( require ) {
 			this.onDate = onDate;
 			this.spinning();
 			this.model.refresh( onDate );
-			//history.replaceState('', '', '/betmen/' + onDate + '/');
 		},
 
 		spinning: function () {

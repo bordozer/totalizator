@@ -66,10 +66,52 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>You do not have favorite categories track to</nerd>
+		<ru><![CDATA[Вы не определили избранные лиги для отслеживания игр]]></ru>
+		<ua><![CDATA[Ви не обрали жодну лiгу для отслiдковування iгор]]></ua>
+		<en><![CDATA[You do not have favorite leagues track to]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Define favorite categories</nerd>
+		<ru><![CDATA[Добавьте лиги в избранное прямо сейчас]]></ru>
+		<ua><![CDATA[Додайте обранi лiги прямо зараз]]></ua>
+		<en><![CDATA[Define favorite leagues]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Favorite categories defined</nerd>
+		<ru><![CDATA[Избранные лиги выбраны]]></ru>
+		<ua><![CDATA[Обранi лiги визначенi]]></ua>
+		<en><![CDATA[Favorite leagues are defined]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No matches on date possible reasons</nerd>
+		<ru><![CDATA[Возможные причины]]></ru>
+		<ua><![CDATA[Можливi причини]]></ua>
+		<en><![CDATA[Possible reasons]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No favorite leagues</nerd>
+		<ru><![CDATA[Не выбраны избранные лиги]]></ru>
+		<ua><![CDATA[Не визначенi обранi лiги ]]></ua>
+		<en><![CDATA[No favorite leagues]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No your bets on date</nerd>
+		<ru><![CDATA[Нет ваших ставок на сегодня в неизбранных лигах]]></ru>
+		<ua><![CDATA[Немає ваших ставок на необранi лiги]]></ua>
+		<en><![CDATA[No your bets on date in non-favorites leagues]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No games on date</nerd>
+		<ru><![CDATA[Нет игр на дату]]></ru>
+		<ua><![CDATA[Немає iгор на дату]]></ua>
+		<en><![CDATA[No games on date]]></en>
 	</translation>
 
 	<translation>

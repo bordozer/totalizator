@@ -1,7 +1,5 @@
 package betmen.rests.utils;
 
-import betmen.rests.utils.RestTestConstants;
-
 import java.util.Collections;
 import java.util.Map;
 
@@ -13,5 +11,9 @@ public class ParameterUtils {
 
     public static Map<String, Object> matchParam(final int matchId) {
         return Collections.singletonMap(RestTestConstants.MATCH_ID, matchId);
+    }
+
+    public static Map<String, Object> categoryParams(final int id) {
+        return Collections.singletonMap(RestTestConstants.CATEGORY_ID, id);
     }
 }

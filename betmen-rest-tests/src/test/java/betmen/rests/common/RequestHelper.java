@@ -35,6 +35,14 @@ public class RequestHelper {
         return doGet(route, Collections.emptyMap(), expectedStatusCode);
     }
 
+    public static Response doPlainPost(final Route route, final Map<String, Object> params) {
+        return doPlainPost(route, params, HttpServletResponse.SC_OK);
+    }
+
+    public static Response doPlainPost(final Route route, final Map<String, Object> params, final int expectedStatusCode) {
+        return doJsonPost(route, null, params, expectedStatusCode);
+    }
+
     public static Response doJsonPost(final Route route, final Object dto) {
         return doJsonPost(route, dto, Collections.emptyMap(), HttpServletResponse.SC_OK);
     }

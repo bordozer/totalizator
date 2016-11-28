@@ -4,6 +4,7 @@ import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.CategoryDao;
 import betmen.core.entity.Category;
 import betmen.core.repository.jpa.CategoryJpaRepository;
+import betmen.core.repository.jpa.FavoriteCategoryJpaRepository;
 import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryDao categoryRepository;
-
     @Autowired
     private CategoryJpaRepository categoryJpaRepository;
+    @Autowired
+    private FavoriteCategoryJpaRepository favoriteCategoryJpaRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -48,6 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (!categoryJpaRepository.exists(id)) {
             throw new UnprocessableEntityException("Category does not exist");
         }
+        favoriteCategoryJpaRepository.deleteAllByCategoryId(id);
         categoryRepository.delete(id);
     }
 

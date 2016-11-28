@@ -46,6 +46,7 @@ public interface DateTimeService {
 
     String formatDateTime(final LocalDateTime time);
 
+    String formatDateTimeSQL(final LocalDateTime time);
 
     LocalDateTime parseDateTime(final String time);
 

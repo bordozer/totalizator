@@ -26,4 +26,26 @@ public interface CupJpaRepository extends JpaRepository<Cup, Integer>, JpaSpecif
             " ORDER BY c.cupStartTime DESC "
             , nativeQuery = true)
     List<Cup> loadAllTeamActivePublicCups(@Param("teamId") int teamId);
+
+    @Query(value = "SELECT cup.* " +
+            " FROM cups cup JOIN categories cat ON (cup.categoryId = cat.id)" +
+            " WHERE cup.publicCup = true" +
+            "   AND cat.id IN (SELECT categoryId FROM favorites WHERE userId = :userId)" +
+            "   AND cup.id NOT IN (SELECT cupId FROM cupWinners)"
+            , nativeQuery = true)
+    List<Cup> findAllCurrentPublicCupsOfUserFavoritesCategories(@Param("userId") int userId);
+
+    @Query(value = "SELECT cup.*" +
+            "  FROM cups cup " +
+            " WHERE cup.publicCup = true " +
+            "   AND cup.id IN ( " +
+            "                     SELECT m.cupId " +
+            "                     FROM matches m " +
+            "                     WHERE (m.beginningTime BETWEEN :fromTime AND :toTime)" +
+            "                       AND m.id IN ( " +
+            "                                     SELECT mb.matchId FROM matchBets mb WHERE mb.userId = :userId " +
+            "                                    ) " +
+            "                     ) "
+            , nativeQuery = true)
+    List<Cup> findAllPublicCupsWhereUserMadeBetsOnDate(@Param("userId") int userId, @Param("fromTime") String fromTime, @Param("toTime") String toTime);
 }

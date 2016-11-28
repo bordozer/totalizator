@@ -37,11 +37,11 @@ public class FavoriteCategory extends AbstractEntity {
     public static final String LOAD_FOR_USER_AND_CATEGORY = "favorites.loadForUserAndCategory";
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = false, updatable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "categoryId", nullable = false, updatable = false)
     private Category category;
 
     public FavoriteCategory() {

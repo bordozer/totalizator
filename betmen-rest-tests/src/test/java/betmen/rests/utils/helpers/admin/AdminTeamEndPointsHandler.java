@@ -4,6 +4,7 @@ import betmen.dto.dto.admin.TeamEditDTO;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.AdminRoutes;
+import betmen.rests.utils.ParameterUtils;
 import betmen.rests.utils.RestTestConstants;
 import com.jayway.restassured.response.Response;
 import org.springframework.util.Assert;
@@ -20,7 +21,7 @@ public class AdminTeamEndPointsHandler {
     private static final int SC_OK = HttpServletResponse.SC_OK;
 
     public static List<TeamEditDTO> getTeamOfCategory(final int categoryId) {
-        return Arrays.asList(RequestHelper.doGet(AdminRoutes.TEAMS_OF_CATEGORY, Collections.singletonMap(RestTestConstants.CATEGORY_ID, categoryId), SC_OK).as(TeamEditDTO[].class));
+        return Arrays.asList(RequestHelper.doGet(AdminRoutes.TEAMS_OF_CATEGORY, ParameterUtils.categoryParams(categoryId), SC_OK).as(TeamEditDTO[].class));
     }
 
     public static TeamEditDTO get(final int teamId) {

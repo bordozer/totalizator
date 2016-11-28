@@ -102,6 +102,11 @@ public class DateTimeServiceImpl implements DateTimeService {
     }
 
     @Override
+    public String formatDateTimeSQL(final LocalDateTime time) {
+        return formatDateTime(time, "yyyy-MM-dd HH:mm:ss");
+    }
+
+    @Override
     public LocalDateTime parseDateTime(final String time) {
         return LocalDateTime.parse(time, DateTimeFormatter.ofPattern(dateTimeFormat()));
     }

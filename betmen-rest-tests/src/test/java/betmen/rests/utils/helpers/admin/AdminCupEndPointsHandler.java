@@ -52,7 +52,7 @@ public class AdminCupEndPointsHandler {
     }
 
     public static List<CupDTO> getAllCategoryCups(final int categoryId) {
-        return Arrays.asList(RequestHelper.doGet(AdminRoutes.CUPS_OF_CATEGORY, Collections.singletonMap(RestTestConstants.CATEGORY_ID, categoryId), SC_OK).as(CupDTO[].class));
+        return Arrays.asList(RequestHelper.doGet(AdminRoutes.CUPS_OF_CATEGORY, ParameterUtils.categoryParams(categoryId), SC_OK).as(CupDTO[].class));
     }
 
     public static Response create(final CupEditDTO dto, final ResponseStatus expectedResponseStatus) {

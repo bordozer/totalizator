@@ -5,6 +5,7 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.PointsCalculationStrategy;
 import betmen.core.entity.SportKind;
+import betmen.core.entity.User;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.CupDao;
 import betmen.core.repository.jpa.CupJpaRepository;
@@ -15,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -256,6 +260,36 @@ public class CupServiceImpl implements CupService {
     @Override
     public List<Cup> loadAllTeamActivePublicCups(int teamId) {
         return cupJpaRepository.loadAllTeamActivePublicCups(teamId);
+    }
+
+    @Override
+    public List<Cup> getPublicCupsWhereUserMadeBetsOnDate(final User user, final LocalDate date) {
+        String fromTime = dateTimeService.formatDateTimeSQL(dateTimeService.getFirstSecondOf(date));
+        String toTime = dateTimeService.formatDateTimeSQL(dateTimeService.getLastSecondOf(date));
+        return cupJpaRepository.findAllPublicCupsWhereUserMadeBetsOnDate(user.getId(), fromTime, toTime)
+                .stream()
+                .sorted(categoryNameOrCupNameComparator())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Cup> getCurrentPublicCupsOfUserFavoritesCategories(final User user) {
+        return cupJpaRepository.findAllCurrentPublicCupsOfUserFavoritesCategories(user.getId())
+                .stream()
+                .sorted(categoryNameOrCupNameComparator())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Cup> getUserCupsOnDate(final LocalDate date, final User user) {
+        List<Cup> currentCupsOfFavoriteCategories = getCurrentPublicCupsOfUserFavoritesCategories(user);
+        List<Cup> publicCupsWhereUserMadeBetsOnDate = getPublicCupsWhereUserMadeBetsOnDate(user, date);
+
+        List<Cup> matchesOfCupsToShow = new ArrayList<>();
+        matchesOfCupsToShow.addAll(currentCupsOfFavoriteCategories);
+        matchesOfCupsToShow.addAll(publicCupsWhereUserMadeBetsOnDate);
+
+        return matchesOfCupsToShow.stream().distinct().collect(Collectors.toList());
     }
 
     private Predicate<Cup> isCupCurrent() {
