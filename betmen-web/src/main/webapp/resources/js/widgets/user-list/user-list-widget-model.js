@@ -1,31 +1,34 @@
-define( function ( require ) {
+define(function (require) {
 
-	'use strict';
+    'use strict';
 
-	var Backbone = require( 'backbone' );
+    var Backbone = require('backbone');
 
-	var UserModel = Backbone.Model.extend( {
+    var UserModel = Backbone.Model.extend({
 
-		idAttribute: 'user.userId',
+        defaults: {
+            userId: 0
+            , userName: ''
+        },
 
-		defaults: {
-			userId: 0
-			, userName: ''
-		},
+        initialize: function (options) {
+        },
 
-		initialize: function ( options ) {
-		}
-	});
+        parse: function (response) {
+            response.id = response.user.id;
+            return response;
+        }
+    });
 
-	return Backbone.Collection.extend( {
+    return Backbone.Collection.extend({
 
-		model: UserModel,
+        model: UserModel,
 
-		initialize: function ( options ) {
-		},
+        initialize: function (options) {
+        },
 
-		url: function() {
-			return '/rest/users/list/';
-		}
-	});
-} );
+        url: function () {
+            return '/rest/users/list/';
+        }
+    });
+});
