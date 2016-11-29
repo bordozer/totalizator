@@ -4,7 +4,7 @@ import betmen.core.entity.User;
 
 import java.util.List;
 
-public interface UserService extends NamedEntityGenericService<User> {
+public interface UserService {
 
     List<User> loadAll();
 
@@ -13,6 +13,8 @@ public interface UserService extends NamedEntityGenericService<User> {
     User save(User entry);
 
     void delete(final int id);
+
+    User findByName(final String name);
 
     User createUser(final String login, final String name, final String password);
 

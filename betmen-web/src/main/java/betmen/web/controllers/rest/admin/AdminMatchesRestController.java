@@ -102,14 +102,14 @@ public class AdminMatchesRestController {
         dto.setHomeTeamNumber(match.getHomeTeamNumber());
         dto.setMatchDescription(match.getDescription());
         dto.setRemoteGameId(match.getRemoteGameId());
-        populateReadOnlyProperties(dto, match, currentUser);
+        populateReadOnlyProperties(dto, match);
         return dto;
     }
 
-    private void populateReadOnlyProperties(final MatchEditDTO dto, final Match match, final User currentUser) {
+    private void populateReadOnlyProperties(final MatchEditDTO dto, final Match match) {
         dto.setCategoryId(match.getCup().getCategory().getId());
-        dto.setTeam1(dtoService.transformTeam(match.getTeam1(), currentUser));
-        dto.setTeam2(dtoService.transformTeam(match.getTeam2(), currentUser));
+        dto.setTeam1(dtoService.transformTeam(match.getTeam1()));
+        dto.setTeam2(dtoService.transformTeam(match.getTeam2()));
         dto.setBetsCount(matchBetsService.betsCount(match.getId()));
     }
 

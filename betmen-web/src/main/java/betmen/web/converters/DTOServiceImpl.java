@@ -148,13 +148,13 @@ public class DTOServiceImpl implements DTOService {
     }
 
     @Override
-    public TeamDTO transformTeam(final Team team, final User accessor) {
-        return teamFunction(team.getCategory(), accessor).apply(team);
+    public TeamDTO transformTeam(final Team team) {
+        return teamFunction(team.getCategory()).apply(team);
     }
 
     @Override
     public List<TeamDTO> transformTeams(final Category category, final List<Team> teams, final User accessor) {
-        return Lists.transform(teams, teamFunction(category, accessor));
+        return Lists.transform(teams, teamFunction(category));
     }
 
     @Override
@@ -207,7 +207,7 @@ public class DTOServiceImpl implements DTOService {
             final CupTeamBetDTO result = new CupTeamBetDTO();
 
             result.setCup(this.transformCup(cup, user));
-            result.setTeam(this.transformTeam(team, user));
+            result.setTeam(this.transformTeam(team));
             result.setUser(this.transformUser(user));
 
             result.setCupPosition(cupTeamBet.getCupPosition());
@@ -321,7 +321,7 @@ public class DTOServiceImpl implements DTOService {
     }
 
     private Function<CupWinner, CupWinnerDTO> cupWinnerFunction(final User accessor) {
-        return cupWinner -> new CupWinnerDTO(transformCup(cupWinner.getCup(), accessor), cupWinner.getCupPosition(), transformTeam(cupWinner.getTeam(), accessor));
+        return cupWinner -> new CupWinnerDTO(transformCup(cupWinner.getCup(), accessor), cupWinner.getCupPosition(), transformTeam(cupWinner.getTeam()));
     }
 
     private Function<User, UserDTO> userFunction() {
@@ -382,7 +382,7 @@ public class DTOServiceImpl implements DTOService {
         return new ValidationResultDto(validationResult.isPassed(), validationResult.getErrorCode());
     }
 
-    private Function<Team, TeamDTO> teamFunction(final Category category, final User accessor) {
+    private Function<Team, TeamDTO> teamFunction(final Category category) {
         final CategoryDTO categoryDTO = transformCategory(category);
         return team -> new TeamDTO(team.getId(), team.getTeamName(), categoryDTO, logoService.getLogoURL(team));
     }
@@ -395,10 +395,10 @@ public class DTOServiceImpl implements DTOService {
             dto.setCategory(transformCategory(match.getCup().getCategory()));
             dto.setCup(transformCup(match.getCup(), accessor));
 
-            dto.setTeam1(transformTeam(match.getTeam1(), accessor));
+            dto.setTeam1(transformTeam(match.getTeam1()));
             dto.setScore1(match.getScore1());
 
-            dto.setTeam2(transformTeam(match.getTeam2(), accessor));
+            dto.setTeam2(transformTeam(match.getTeam2()));
             dto.setScore2(match.getScore2());
 
             dto.setBeginningTime(match.getBeginningTime());
@@ -476,7 +476,7 @@ public class DTOServiceImpl implements DTOService {
             final CupTeamBetDTO result = new CupTeamBetDTO();
 
             result.setCup(transformCup(cup, user));
-            result.setTeam(transformTeam(team, user));
+            result.setTeam(transformTeam(team));
             result.setUser(transformUser(user));
 
             result.setCupPosition(cupTeamBet.getCupPosition());

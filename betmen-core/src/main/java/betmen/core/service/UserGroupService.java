@@ -14,7 +14,7 @@ public interface UserGroupService {
 
     UserGroupEntity save(UserGroupEntity entry);
 
-    void delete(final int id);
+    void delete(final int userGroupId);
 
     List<UserGroupEntity> loadUserGroupsWhereUserIsOwner(final User user);
 
@@ -35,4 +35,6 @@ public interface UserGroupService {
     void addMember(final UserGroupEntity userGroupEntity, final User user);
 
     void removeMember(final UserGroupEntity userGroupEntity, final User user);
+
+    List<UserGroupEntity> loadAllHaveCup(final int cupId);
 }

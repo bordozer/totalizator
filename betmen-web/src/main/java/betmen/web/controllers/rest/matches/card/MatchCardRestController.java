@@ -46,8 +46,8 @@ public class MatchCardRestController {
                                   final Principal principal) {
         final User currentUser = userService.findByLogin(principal.getName());
         final Match match = matchService.load(matchId);
-        final TeamDTO team1DTO = dtoService.transformTeam(match.getTeam1(), currentUser);
-        final TeamDTO team2DTO = dtoService.transformTeam(match.getTeam2(), currentUser);
+        final TeamDTO team1DTO = dtoService.transformTeam(match.getTeam1());
+        final TeamDTO team2DTO = dtoService.transformTeam(match.getTeam2());
 
         final MatchBetsDTO result = new MatchBetsDTO();
         result.setMatchId(matchId);

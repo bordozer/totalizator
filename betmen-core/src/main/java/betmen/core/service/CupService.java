@@ -1,12 +1,26 @@
 package betmen.core.service;
 
-import betmen.core.entity.*;
+import betmen.core.entity.Category;
+import betmen.core.entity.Cup;
+import betmen.core.entity.PointsCalculationStrategy;
+import betmen.core.entity.SportKind;
+import betmen.core.entity.User;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
-public interface CupService extends GenericService<Cup>, NamedEntityGenericService<Cup> {
+public interface CupService {
+
+    List<Cup> loadAll();
+
+    Cup load(final int cupId);
+
+    Cup save(Cup entry);
+
+    void delete(final int cupId);
+
+    Cup findByName(final String name);
 
     Cup loadAndAssertExists(int cupId);
 

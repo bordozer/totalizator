@@ -1,6 +1,7 @@
 package betmen.core.repository;
 
 import betmen.core.entity.User;
+import betmen.core.entity.UserGroupCupEntity;
 import betmen.core.entity.UserGroupEntity;
 import betmen.core.entity.UserGroupMemberEntity;
 
@@ -27,4 +28,6 @@ public interface UserGroupMemberDao {
     void delete(final UserGroupEntity userGroupEntity, final User user);
 
     void deleteAll(UserGroupEntity userGroupEntity);
+
+    List<UserGroupCupEntity> loadAllHaveCup(int cupId);
 }

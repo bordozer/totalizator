@@ -61,7 +61,7 @@ public class TeamCardRestController {
         final Team team = teamService.loadAndAssertExists(teamId);
 
         final TeamCardDTO dto = new TeamCardDTO();
-        dto.setTeam(dtoService.transformTeam(team, currentUser));
+        dto.setTeam(dtoService.transformTeam(team));
 
         final List<TeamCardCupData> cupDataMap = newArrayList();
         cupDataMap.addAll(cupService.loadPublic(team.getCategory()).stream()

@@ -12,11 +12,14 @@ import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminPointsStrategyEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminSportEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminTeamEndPointsHandler;
+import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 public class DataCleanUpUtils {
+
+    private static final Logger LOGGER = Logger.getLogger(DataCleanUpUtils.class);
 
     public static final MatchSearchModelDto SEARCH_MODEL = new MatchSearchModelDto();
 
@@ -26,19 +29,16 @@ public class DataCleanUpUtils {
     }
 
     public static void cleanupAll() {
-        log("======================= CLEANUP =======================");
         cleanupMatches();
         cleanupCups();
         cleanupTeams();
         cleanupCategories();
         cleanupSports();
         cleanupPointsCalculationStrategies();
-        log("====================== / CLEANUP ======================");
     }
 
     public static void cleanupMatches() {
         Counter counter = new Counter();
-        log("cleanupMatches()");
         AuthEndPointsHandler.loginAsAdmin();
         AdminCupEndPointsHandler.getAllCups().stream()
                 .forEach(cup -> {
@@ -52,11 +52,9 @@ public class DataCleanUpUtils {
                             });
                 });
         AuthEndPointsHandler.logout();
-        log(String.format("/ cleanupMatches(). Deleted %d of %d", counter.getCount(), counter.getTotal()));
     }
 
     public static void cleanupTeams() {
-        log("cleanupTeams()");
         AuthEndPointsHandler.loginAsAdmin();
         AdminCategoryEndPointsHandler.getItems().stream()
                 .forEach(DataCleanUpUtils::cleanupTeams);
@@ -64,12 +62,10 @@ public class DataCleanUpUtils {
     }
 
     public static void cleanupTeams(final CategoryEditDTO category) {
-        log("cleanupTeams(final CategoryEditDTO category)");
         AdminTeamEndPointsHandler.getTeamOfCategory(category.getCategoryId()).stream().forEach(team -> AdminTeamEndPointsHandler.delete(team.getTeamId()));
     }
 
     public static void cleanupCups() {
-        log("cleanupCups()");
         AuthEndPointsHandler.loginAsAdmin();
         AdminCupEndPointsHandler.getCups().stream()
                 .forEach(cup -> {
@@ -82,7 +78,6 @@ public class DataCleanUpUtils {
     }
 
     public static void cleanupCategories() {
-        log("cleanupCategories()");
         AuthEndPointsHandler.loginAsAdmin();
         AdminCategoryEndPointsHandler.getItems().stream().forEach(category -> AdminCategoryEndPointsHandler.delete(category.getCategoryId()));
         AuthEndPointsHandler.logout();
@@ -90,7 +85,6 @@ public class DataCleanUpUtils {
 
     public static void cleanupSports() {
         Counter counter = new Counter();
-        log("cleanupSports()");
         AuthEndPointsHandler.loginAsAdmin();
         List<SportKindEditDTO> items = AdminSportEndPointsHandler.getItems();
         counter.setTotal(items.size());
@@ -99,12 +93,10 @@ public class DataCleanUpUtils {
             AdminSportEndPointsHandler.delete(sport.getSportKindId());
         });
         AuthEndPointsHandler.logout();
-        log(String.format("/ cleanupSports(). Deleted %d of %d", counter.getCount(), counter.getTotal()));
     }
 
     public static void cleanupPointsCalculationStrategies() {
         Counter counter = new Counter();
-        log("cleanupPointsCalculationStrategies()");
         AuthEndPointsHandler.loginAsAdmin();
         List<PointsCalculationStrategyEditDTO> items = AdminPointsStrategyEndPointsHandler.getItems();
         counter.setTotal(items.size());
@@ -113,11 +105,10 @@ public class DataCleanUpUtils {
             AdminPointsStrategyEndPointsHandler.delete(sport.getPcsId());
         });
         AuthEndPointsHandler.logout();
-        log(String.format("/ cleanupPointsCalculationStrategies(). Deleted %d of %d", counter.getCount(), counter.getTotal()));
     }
 
     private static void log(final String x) {
-        System.out.println(x);
+        LOGGER.debug(x);
     }
 
     private static class Counter {

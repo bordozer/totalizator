@@ -4,11 +4,13 @@ import betmen.core.entity.Team;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.TeamDao;
 import betmen.core.repository.jpa.TeamJpaRepository;
+import betmen.core.service.matches.MatchService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -18,19 +20,16 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private TeamDao teamRepository;
-
     @Autowired
     private TeamJpaRepository teamJpaRepository;
-
     @Autowired
     private CupTeamService cupTeamService;
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Team> loadAll() {
-        throw new RuntimeException("Loading all teams makes performance very slow. Limit team list by category");
-//		return newArrayList( teamRepository.loadAll() );
-    }
+    @Autowired
+    private MatchService matchService;
+    @Autowired
+    private CupWinnerService cupWinnerService;
+    @Autowired
+    private LogoService logoService;
 
     @Override
     public List<Team> loadAll(final int categoryId) {
@@ -62,8 +61,24 @@ public class TeamServiceImpl implements TeamService {
     @Override
     @Transactional
     public void delete(final int teamId) {
+        Team team = loadAndAssertExists(teamId);
+
+        if (matchService.getMatchCount(teamId) > 0) {
+            throw new UnprocessableEntityException(String.format("Team #%s is assigned to at least one match", teamId));
+        }
+        if (!cupWinnerService.loadAll(team).isEmpty()) {
+            throw new UnprocessableEntityException(String.format("Team #%s presents as a winner of at least one cup", teamId));
+        }
+
+        LOGGER.debug(String.format("About to delete team #%d", teamId));
         cupTeamService.clearFor(teamId);
         teamRepository.delete(teamId);
+        try {
+            logoService.deleteLogo(team);
+        } catch (IOException e) {
+            LOGGER.error(String.format("Team #%s logo does not exist", team), e);
+        }
+        LOGGER.info(String.format("Team %s has been deleted", team));
     }
 
     @Override

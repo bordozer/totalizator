@@ -1,6 +1,5 @@
 package betmen.web.controllers.rest;
 
-import betmen.core.entity.Cup;
 import betmen.core.entity.User;
 import betmen.core.service.CupService;
 import betmen.core.service.FavoriteCategoryService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/rest/portal-page")
@@ -37,11 +35,9 @@ public class PortalPageRestController {
         final LocalDate date = dateTimeService.parseDate(dto.getPortalPageDate());
         final User currentUser = userService.findByLogin(principal.getName());
 
-        List<Cup> currentPublicCupsOfFavoriteCategories = cupService.getCurrentPublicCupsOfUserFavoritesCategories(currentUser);
-
         final PortalPageDTO result = new PortalPageDTO();
         result.setPortalPageDate(dto.getPortalPageDate());
-        result.setCupsToShow(dtoService.transformCups(currentPublicCupsOfFavoriteCategories, currentUser));
+        result.setCupsToShow(dtoService.transformCups(cupService.getCurrentPublicCupsOfUserFavoritesCategories(currentUser), currentUser));
         result.setCupsTodayToShow(dtoService.transformCups(cupService.getUserCupsOnDate(currentUser, date), currentUser));
         return result;
     }

@@ -36,8 +36,8 @@ public class TeamsRestController {
     private CupTeamService cupTeamService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{teamId}/")
-    public TeamDTO team(final @PathVariable("teamId") int teamId, final Principal principal) {
-        return dtoService.transformTeam(teamService.load(teamId), getCurrentUser(principal));
+    public TeamDTO team(final @PathVariable("teamId") int teamId) {
+        return dtoService.transformTeam(teamService.load(teamId));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/categories/{categoryId}/")

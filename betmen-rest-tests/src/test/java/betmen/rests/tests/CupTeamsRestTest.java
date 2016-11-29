@@ -8,6 +8,7 @@ import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.dto.dto.admin.TeamEditDTO;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.utils.ComparisonUtils;
+import betmen.rests.utils.data.DataCleanUpUtils;
 import betmen.rests.utils.data.builders.TeamEditDtoBuilder;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
 import betmen.rests.utils.data.templater.CupTemplater;
@@ -16,6 +17,7 @@ import betmen.rests.utils.helpers.CupTeamsEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminTeamEndPointsHandler;
 import com.google.common.collect.Lists;
+import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -30,6 +32,8 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 public class CupTeamsRestTest {
 
+    private static final Logger LOGGER = Logger.getLogger(CupTeamsRestTest.class);
+
     private TeamEditDTO team1;
     private TeamEditDTO team2;
     private TeamEditDTO team3;
@@ -43,6 +47,8 @@ public class CupTeamsRestTest {
 
     @BeforeTest
     public void testsInit() {
+        LOGGER.debug(this.getClass().getName());
+        DataCleanUpUtils.cleanupAll();
         AuthEndPointsHandler.loginAsAdmin();
 
         CategoryEditDTO category1 = AdminTestDataGenerator.createCategory();

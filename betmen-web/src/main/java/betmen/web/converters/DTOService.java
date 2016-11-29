@@ -56,7 +56,7 @@ public interface DTOService {
 
     List<CupItemDTO> transformCupItems(final List<Cup> cups);
 
-    TeamDTO transformTeam(final Team team, final User accessor);
+    TeamDTO transformTeam(final Team team);
 
     List<TeamDTO> transformTeams(final Category category, final List<Team> teams, final User accessor);
 

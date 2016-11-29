@@ -36,6 +36,7 @@ public class UserGroupCupEntity extends AbstractEntity {
 
     public static final String LOAD_ALL_USER_GROUP_CUPS = "userGroupCup.loadAllUserGroupCups";
     public static final String LOAD_CUPS_FOR_USER_GROUP = "userGroupCup.loadCupsForUserGroups";
+    public static final String LOAD_USER_GROUP_CUPS_FOR_CUP = "select ugc.* FROM userGroupCups ugc WHERE ugc.cupId = :cupId";
 
     @ManyToOne
     @JoinColumn(name = "userGroupId", nullable = false)

@@ -106,18 +106,18 @@ public class RemoteGameImportRestController {
             final RemoteGameLocalData result = new RemoteGameLocalData();
             final Team team1 = teamService.findByImportId(cup.getCategory().getId(), remoteGameDTO.getTeam1Id());
             if (team1 != null) {
-                result.setTeam1(dtoService.transformTeam(team1, currentUser));
+                result.setTeam1(dtoService.transformTeam(team1));
             }
             final Team team2 = teamService.findByImportId(cup.getCategory().getId(), remoteGameDTO.getTeam2Id());
             if (team2 != null) {
-                result.setTeam2(dtoService.transformTeam(team2, currentUser));
+                result.setTeam2(dtoService.transformTeam(team2));
             }
             return result;
         }
 
         final RemoteGameLocalData result = new RemoteGameLocalData();
-        result.setTeam1(dtoService.transformTeam(match.getTeam1(), currentUser));
-        result.setTeam2(dtoService.transformTeam(match.getTeam2(), currentUser));
+        result.setTeam1(dtoService.transformTeam(match.getTeam1()));
+        result.setTeam2(dtoService.transformTeam(match.getTeam2()));
         result.setMatch(dtoService.transformMatch(match, currentUser));
 
         return result;

@@ -74,7 +74,7 @@ public class MatchesAndBetsCollapsedRestController {
         result.setCupHasWinners(cupHasWinners);
         result.setUserCupWinnersBets(cupBetsService.load(cup, showBetsOfUser)
                 .stream()
-                .map(cupTeamBet -> dtoService.transformTeam(cupTeamBet.getTeam(), showBetsOfUser))
+                .map(cupTeamBet -> dtoService.transformTeam(cupTeamBet.getTeam()))
                 .collect(Collectors.toList()));
         return result;
     }

@@ -9,7 +9,6 @@ import betmen.core.service.CategoryService;
 import betmen.core.service.CupBetsService;
 import betmen.core.service.CupService;
 import betmen.core.service.CupTeamService;
-import betmen.core.service.CupWinnerService;
 import betmen.core.service.LogoService;
 import betmen.core.service.PointsCalculationStrategyService;
 import betmen.core.service.TeamService;
@@ -18,7 +17,6 @@ import betmen.core.service.matches.MatchService;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.CupWinnerEditDTO;
 import betmen.web.converters.DTOService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -31,7 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -58,28 +55,24 @@ public class AdminCupsEditRestController {
     @Autowired
     private LogoService logoService;
     @Autowired
-    private CupWinnerService cupWinnerService;
-    @Autowired
     private PointsCalculationStrategyService pointsCalculationStrategyService;
     @Autowired
     private CupTeamService cupTeamService;
     @Autowired
     private DTOService dtoService;
 
-    private static final Logger LOGGER = Logger.getLogger(AdminCupsEditRestController.class);
-
     @RequestMapping(method = RequestMethod.GET, value = "/{cupId}")
-    public CupEditDTO getItem(final @PathVariable("cupId") int cupId, final Principal principal) {
-        return convertToEditDto(cupService.loadAndAssertExists(cupId), principal.getName());
+    public CupEditDTO getItem(@PathVariable("cupId") final int cupId) {
+        return convertToEditDto(cupService.loadAndAssertExists(cupId));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public List<CupEditDTO> getAllItems(final Principal principal) {
-        return cupService.loadAll().stream().map(cup -> convertToEditDto(cup, principal.getName())).collect(Collectors.toList());
+    public List<CupEditDTO> getAllItems() {
+        return cupService.loadAll().stream().map(cup -> convertToEditDto(cup)).collect(Collectors.toList());
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0")
-    public CupEditDTO createCup(final @Validated @RequestBody CupEditDTO dto, final Principal principal) {
+    public CupEditDTO createCup(@Validated @RequestBody final CupEditDTO dto) {
         validateDto(dto.getWinnersCount(), dto.getCupWinners(), dto.getCategoryId());
 
         final Cup cup = new Cup();
@@ -91,19 +84,19 @@ public class AdminCupsEditRestController {
             cupTeamService.saveCupTeam(saved.getId(), team.getId(), true);
         }
 
-        return convertToEditDto(saved, principal.getName());
+        return convertToEditDto(saved);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{cupId}")
-    public CupEditDTO updateItem(final @PathVariable("cupId") int cupId, final @Validated @RequestBody CupEditDTO dto, final Principal principal) {
+    public CupEditDTO updateItem(@PathVariable("cupId") final int cupId, @Validated @RequestBody final CupEditDTO dto) {
         validateDto(dto.getWinnersCount(), dto.getCupWinners(), dto.getCategoryId());
         Cup cup = cupService.loadAndAssertExists(dto.getCupId());
         populateEntityFromDto(cup, dto);
-        return convertToEditDto(cupService.save(cup), principal.getName());
+        return convertToEditDto(cupService.save(cup));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{cupId}")
-    public boolean delete(final @PathVariable("cupId") int cupId) throws IOException {
+    public boolean delete(@PathVariable("cupId") final int cupId) {
         if (cupId == 0) {
             return true;
         }
@@ -115,12 +108,11 @@ public class AdminCupsEditRestController {
             throw new UnprocessableEntityException("Cup does not exist");
         }
         cupService.delete(cupId);
-        logoService.deleteLogo(cup);
         return true;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{cupId}/logo/")
-    public void uploadLogo(final @PathVariable("cupId") int cupId, final MultipartHttpServletRequest request) throws IOException {
+    public void uploadLogo(@PathVariable("cupId") final int cupId, final MultipartHttpServletRequest request) throws IOException {
         final Iterator<String> itr = request.getFileNames();
         if (!itr.hasNext()) {
             return;
@@ -151,7 +143,7 @@ public class AdminCupsEditRestController {
         return winner;
     }
 
-    private CupEditDTO convertToEditDto(final Cup cup, final String login) {
+    private CupEditDTO convertToEditDto(final Cup cup) {
         final CupEditDTO cupEditDTO = new CupEditDTO();
 
         cupEditDTO.setCupId(cup.getId());
@@ -161,7 +153,7 @@ public class AdminCupsEditRestController {
 
         cupEditDTO.setCupStartDate(cup.getCupStartTime());
         cupEditDTO.setWinnersCount(cup.getWinnersCount());
-        cupEditDTO.setCupWinners(getCupWinners(cup, login));
+        cupEditDTO.setCupWinners(convertToCupWinnersDtos(cup.getCupWinners()));
         cupEditDTO.setPublicCup(cup.isPublicCup());
         cupEditDTO.setCupImportId(cup.getCupImportId());
 
@@ -171,6 +163,10 @@ public class AdminCupsEditRestController {
         cupEditDTO.setFinished(cupService.isCupFinished(cup));
 
         return cupEditDTO;
+    }
+
+    private List<CupWinnerEditDTO> convertToCupWinnersDtos(final List<CupWinner> cupWinners) {
+        return cupWinners.stream().map(this::convertCupWinnerEntityToEditDTO).collect(Collectors.toList());
     }
 
     private void populateEntityFromDto(final Cup cup, final CupEditDTO dto) {
@@ -184,16 +180,13 @@ public class AdminCupsEditRestController {
         cup.setCupWinners(convertToCupWinners(cup, dto.getCupWinners()));
     }
 
-    private List<CupWinnerEditDTO> getCupWinners(final Cup cup, final String login) {
-        return cupWinnerService.loadAll(cup).stream()
-                .map(cupWinner -> {
-                    final CupWinnerEditDTO cupWinnerEditDTO = new CupWinnerEditDTO();
-                    cupWinnerEditDTO.setCupId(cupWinner.getCup().getId());
-                    cupWinnerEditDTO.setCupPosition(cupWinner.getCupPosition());
-                    cupWinnerEditDTO.setTeamId(cupWinner.getTeam().getId());
-                    cupWinnerEditDTO.setTeam(dtoService.transformTeam(cupWinner.getTeam(), userService.findByLogin(login)));
-                    return cupWinnerEditDTO;
-                }).collect(Collectors.toList());
+    private CupWinnerEditDTO convertCupWinnerEntityToEditDTO(final CupWinner cupWinner) {
+        final CupWinnerEditDTO cupWinnerEditDTO = new CupWinnerEditDTO();
+        cupWinnerEditDTO.setCupId(cupWinner.getCup().getId());
+        cupWinnerEditDTO.setCupPosition(cupWinner.getCupPosition());
+        cupWinnerEditDTO.setTeamId(cupWinner.getTeam().getId());
+        cupWinnerEditDTO.setTeam(dtoService.transformTeam(cupWinner.getTeam()));
+        return cupWinnerEditDTO;
     }
 
     private void validateDto(final int winnersCount, final List<CupWinnerEditDTO> cupWinners, final int categoryId) {

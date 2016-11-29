@@ -45,8 +45,8 @@ public class TeamsStandoffsRestController {
         final Team team1 = teamService.load(team1Id);
         final Team team2 = teamService.load(team2Id);
         final TeamsStandoffsDTO dto = new TeamsStandoffsDTO();
-        dto.setTeam1(dtoService.transformTeam(team1, currentUser));
-        dto.setTeam2(dtoService.transformTeam(team2, currentUser));
+        dto.setTeam1(dtoService.transformTeam(team1));
+        dto.setTeam2(dtoService.transformTeam(team2));
         final Cup cup = teamsStandoffService.getLastStandoffCup(team1, team2);
         if (cup == null) {
             return dto;

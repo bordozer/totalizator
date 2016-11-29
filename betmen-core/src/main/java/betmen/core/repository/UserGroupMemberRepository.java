@@ -1,6 +1,7 @@
 package betmen.core.repository;
 
 import betmen.core.entity.User;
+import betmen.core.entity.UserGroupCupEntity;
 import betmen.core.entity.UserGroupEntity;
 import betmen.core.entity.UserGroupMemberEntity;
 import org.springframework.stereotype.Repository;
@@ -82,5 +83,12 @@ public class UserGroupMemberRepository implements UserGroupMemberDao {
         for (final UserGroupMemberEntity userGroupMemberEntity : loadUserGroupMembers(userGroupEntity)) {
             delete(userGroupEntity, userGroupMemberEntity.getUser());
         }
+    }
+
+    @Override
+    public List<UserGroupCupEntity> loadAllHaveCup(final int cupId) {
+        return em.createNativeQuery(UserGroupCupEntity.LOAD_USER_GROUP_CUPS_FOR_CUP, UserGroupCupEntity.class)
+                .setParameter("cupId", cupId)
+                .getResultList();
     }
 }

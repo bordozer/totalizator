@@ -78,21 +78,7 @@ public class AdminTeamEditRestController {
         if (teamId == 0) {
             return true;
         }
-
-        LOGGER.debug(String.format("About to delete team #%d", teamId));
-        if (matchService.getMatchCount(teamId) > 0) {
-            throw new UnprocessableEntityException("Team is assigned to at least one match.");
-        }
-
-        Team team = teamService.loadAndAssertExists(teamId);
         teamService.delete(teamId);
-        LOGGER.info(String.format("Team %s has been deleted", team));
-
-        try {
-            logoService.deleteLogo(team);
-        } catch (IOException e) {
-            LOGGER.debug(String.format("Team #%s logo does not exist", team));
-        }
         return true;
     }
 

@@ -26,6 +26,7 @@ import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
 import com.google.common.collect.Lists;
 import com.jayway.restassured.response.Response;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -38,6 +39,8 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 public class MatchBetsFlowRestTest {
+
+    private static final Logger LOGGER = Logger.getLogger(AuthEndPointsHandler.class);
 
     private static final int BUSINESS_EXCEPTION = ResponseStatus.BUSINESS_EXCEPTION.getCode();
     private static final int UNPROCESSABLE_ENTITY = ResponseStatus.UNPROCESSABLE_ENTITY.getCode();
@@ -72,9 +75,11 @@ public class MatchBetsFlowRestTest {
         DataCleanUpUtils.cleanupAll();
 
         userData = RandomUtils.randomUser();
+        LOGGER.debug(String.format("USER_DATA: %s / %s", userData.getLogin(), userData.getPassword()));
         user = AuthEndPointsHandler.registerNewUserAndLogin(userData);
 
         anotherUserData = RandomUtils.randomUser();
+        LOGGER.debug(String.format("ANOTHER_USER_DATA: %s / %s", anotherUserData.getLogin(), anotherUserData.getPassword()));
         anotherUser = AuthEndPointsHandler.registerNewUserAndLogin(anotherUserData);
 
         AuthEndPointsHandler.loginAsAdmin();

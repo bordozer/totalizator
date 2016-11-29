@@ -27,7 +27,7 @@ public interface CupJpaRepository extends JpaRepository<Cup, Integer>, JpaSpecif
             , nativeQuery = true)
     List<Cup> loadAllTeamActivePublicCups(@Param("teamId") int teamId);
 
-    @Query(value = "SELECT cup.* " +
+    @Query(value = "SELECT DISTINCT cup.* " +
             " FROM cups cup JOIN categories cat ON (cup.categoryId = cat.id)" +
             " WHERE cup.publicCup = true" +
             "   AND cat.id IN (SELECT categoryId FROM favorites WHERE userId = :userId)" +
@@ -35,7 +35,7 @@ public interface CupJpaRepository extends JpaRepository<Cup, Integer>, JpaSpecif
             , nativeQuery = true)
     List<Cup> findAllCurrentPublicCupsOfUserFavoritesCategories(@Param("userId") int userId);
 
-    @Query(value = "SELECT cup.* " +
+    @Query(value = "SELECT DISTINCT cup.* " +
             " FROM cups cup JOIN categories cat ON (cup.categoryId = cat.id) " +
             " WHERE cup.publicCup = true " +
             "   AND cat.id IN (SELECT categoryId FROM favorites WHERE userId = :userId) " +

@@ -4,7 +4,13 @@ import betmen.core.entity.Team;
 
 import java.util.List;
 
-public interface TeamService extends GenericService<Team> {
+public interface TeamService {
+
+    Team load(final int id);
+
+    Team save(Team entry);
+
+    void delete(final int id);
 
     List<Team> loadAll(final int categoryId);
 

@@ -17,10 +17,13 @@ import com.jayway.restassured.response.Response;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 
 public class AuthEndPointsHandler {
+
+    private static final Logger LOGGER = Logger.getLogger(AuthEndPointsHandler.class);
 
     public static UserDTO registerNewUserAndLogin() {
         return registerNewUserAndLogin(RandomUtils.randomUser());
@@ -37,14 +40,17 @@ public class AuthEndPointsHandler {
     }
 
     public static UserDTO registerNewUser(final UserRegData userData) {
+        LOGGER.debug(String.format("Register new user: '%s' (name: %s), password '%s'", userData.getLogin(), userData.getName(), userData.getPassword()));
         return register(userData.getLogin(), userData.getName(), userData.getPassword()).as(UserRegResponse.class).getUser();
     }
 
     public static AuthResponse login(final String login, final String password) {
+        LOGGER.debug(String.format("Login as '%s', password '%s'", login, password));
         return login(login, password, HttpStatus.SC_OK).as(AuthResponse.class);
     }
 
     public static AuthResponse login(final UserRegData userData) {
+        LOGGER.debug(String.format("Login as '%s' (name: %s), password '%s'", userData.getLogin(), userData.getName(), userData.getPassword()));
         return login(userData.getLogin(), userData.getPassword());
     }
 

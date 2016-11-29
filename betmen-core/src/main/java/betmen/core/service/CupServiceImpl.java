@@ -6,23 +6,28 @@ import betmen.core.entity.Match;
 import betmen.core.entity.PointsCalculationStrategy;
 import betmen.core.entity.SportKind;
 import betmen.core.entity.User;
+import betmen.core.entity.UserGroupEntity;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.CupDao;
 import betmen.core.repository.jpa.CupJpaRepository;
 import betmen.core.service.matches.MatchService;
 import betmen.core.service.utils.DateTimeService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class CupServiceImpl implements CupService {
 
@@ -33,24 +38,22 @@ public class CupServiceImpl implements CupService {
 
     @Autowired
     private CupDao cupRepository;
-
     @Autowired
     private CupJpaRepository cupJpaRepository;
-
     @Autowired
     private CupWinnerService cupWinnerService;
-
     @Autowired
     private MatchService matchService;
-
     @Autowired
     private CupTeamService cupTeamService;
-
     @Autowired
     private CupBetsService cupBetsService;
-
     @Autowired
     private DateTimeService dateTimeService;
+    @Autowired
+    private UserGroupService userGroupService;
+    @Autowired
+    private LogoService logoService;
 
     @Override
     public Cup loadAndAssertExists(final int cupId) {
@@ -72,29 +75,23 @@ public class CupServiceImpl implements CupService {
 
     @Override
     @Transactional(readOnly = true)
-    public Cup load(final int id) {
-        return cupRepository.load(id);
+    public Cup load(final int cupId) {
+        return cupRepository.load(cupId);
     }
 
     @Override
     @Transactional
-    public void delete(final int id) {
-        if (!cupJpaRepository.exists(id)) {
-            throw new UnprocessableEntityException("Cup does not exist");
+    public void delete(final int cupId) {
+        final Cup cup = loadAndAssertExists(cupId);
+        cupTeamService.clearForCup(cupId);
+        matchService.loadAll(cup).stream().forEach(match -> matchService.delete(match.getId()));
+        userGroupService.loadAllHaveCup(cupId).stream().forEach(userGroupEntity -> userGroupService.delete(userGroupEntity.getId()));
+        cupRepository.delete(cupId);
+        try {
+            logoService.deleteLogo(cup);
+        } catch (IOException e) {
+            LOGGER.error(String.format("Cannot delete logo of cup #%d", cupId), e);
         }
-
-        final Cup cup = load(id);
-
-        cupTeamService.clearForCup(id);                            // delete assigned teams
-
-        cupBetsService.clearForCup(cup);                            // delete all cup winners user's bets
-
-        final List<Match> matches = matchService.loadAll(cup);    // delete all matches ( and bets )
-        for (final Match match : matches) {
-            matchService.delete(match.getId());
-        }
-
-        cupRepository.delete(id);                                    // delete the cup
     }
 
     @Override
@@ -275,6 +272,7 @@ public class CupServiceImpl implements CupService {
     public List<Cup> getCurrentPublicCupsOfUserFavoritesCategories(final User user) {
         return cupJpaRepository.findAllCurrentPublicCupsOfUserFavoritesCategories(user.getId())
                 .stream()
+                .distinct()
                 .sorted(categoryNameOrCupNameComparator())
                 .collect(Collectors.toList());
     }

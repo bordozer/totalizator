@@ -5,7 +5,6 @@ import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.service.CategoryService;
 import betmen.core.service.SportKindService;
 import betmen.dto.dto.admin.SportKindEditDTO;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +25,8 @@ public class AdminSportKindRestController {
     @Autowired
     private CategoryService categoryService;
 
-    private static final Logger LOGGER = Logger.getLogger(AdminSportKindRestController.class);
-
     @RequestMapping(method = RequestMethod.GET, value = "/{sportKindId}")
-    public SportKindEditDTO getItem(final @PathVariable("sportKindId") int sportKindId) {
+    public SportKindEditDTO getItem(@PathVariable("sportKindId") final int sportKindId) {
         return convertToEditDto(sportKindService.loadAndAssertExists(sportKindId));
     }
 
@@ -39,7 +36,7 @@ public class AdminSportKindRestController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0")
-    public SportKindEditDTO createItem(final @Validated @RequestBody SportKindEditDTO dto) {
+    public SportKindEditDTO createItem(@Validated @RequestBody final SportKindEditDTO dto) {
         assertNameDoesNotExist(dto);
         final SportKind sportKind = new SportKind();
         populateEntity(sportKind, dto);
@@ -47,7 +44,7 @@ public class AdminSportKindRestController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{sportKindId}")
-    public SportKindEditDTO updateItem(final @PathVariable("sportKindId") int sportKindId, final @Validated @RequestBody SportKindEditDTO dto) {
+    public SportKindEditDTO updateItem(@PathVariable("sportKindId") final int sportKindId, @Validated @RequestBody final SportKindEditDTO dto) {
         assertNameDoesNotExist(dto);
         final SportKind sportKind = sportKindService.loadAndAssertExists(dto.getSportKindId());
         populateEntity(sportKind, dto);
@@ -55,14 +52,13 @@ public class AdminSportKindRestController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{sportKindId}")
-    public boolean delete(final @PathVariable("sportKindId") int sportKindId) {
+    public boolean delete(@PathVariable("sportKindId") final int sportKindId) {
         if (sportKindId == 0) {
             return true;
         }
         if (categoryService.categoriesCount(sportKindId) > 0) {
             throw new UnprocessableEntityException("Sport is assigned to at least one category.");
         }
-        // TODO: check id some category has it assigned
         sportKindService.delete(sportKindId);
         return true;
     }

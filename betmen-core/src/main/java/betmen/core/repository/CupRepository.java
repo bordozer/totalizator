@@ -38,6 +38,7 @@ public class CupRepository implements CupDao {
             , @CacheEvict(value = MatchBetDao.CACHE_QUERY, allEntries = true)
             , @CacheEvict(value = MatchDao.CACHE_ENTRY, allEntries = true)
             , @CacheEvict(value = MatchDao.CACHE_QUERY, allEntries = true)
+            , @CacheEvict(value = CupWinnerDao.CACHE_QUERY, allEntries = true)
     })
     public Cup save(final Cup entry) {
         return em.merge(entry);
@@ -51,6 +52,7 @@ public class CupRepository implements CupDao {
             , @CacheEvict(value = MatchBetDao.CACHE_QUERY, allEntries = true)
             , @CacheEvict(value = MatchDao.CACHE_ENTRY, allEntries = true)
             , @CacheEvict(value = MatchDao.CACHE_QUERY, allEntries = true)
+            , @CacheEvict(value = CupWinnerDao.CACHE_QUERY, allEntries = true)
     })
     public void delete(final int id) {
         em.remove(load(id));
@@ -62,14 +64,12 @@ public class CupRepository implements CupDao {
         final List<Cup> cups = em.createNamedQuery(Cup.FIND_BY_NAME, Cup.class)
                 .setParameter("cupName", name)
                 .getResultList();
-
         return cups.size() == 1 ? cups.get(0) : null;
     }
 
     @Override
     @Cacheable(value = CACHE_QUERY)
     public List<Cup> loadCups(final PointsCalculationStrategy strategy) {
-
         return em.createNamedQuery(Cup.LOAD_ALL_USE_STRATEGY, Cup.class)
                 .setParameter("strategyId", strategy.getId())
                 .getResultList();

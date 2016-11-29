@@ -265,8 +265,8 @@ public class BetsPointsCalculationRestTest {
         UserRatingPositionDTO ratingPosition1 = ratingPositions.get(0);
         assertThat(ratingPosition1, notNullValue());
         assertThat(eq(ratingPosition1.getUser()), is(eq(user3)));
-        assertThat(ratingPosition1.getUserCupPointsHolder().getMatchBetPointsPositive(), is("0"));
-        assertThat(ratingPosition1.getUserCupPointsHolder().getMatchBetPointsNegative(), is("0"));
+        assertThat(ratingPosition1.getUserCupPointsHolder().getMatchBetPointsPositive(), is("9"));
+        assertThat(ratingPosition1.getUserCupPointsHolder().getMatchBetPointsNegative(), is("-1"));
         assertThat(ratingPosition1.getUserCupPointsHolder().getMatchBetPoints(), is("8"));
         assertThat(ratingPosition1.getUserCupPointsHolder().getMatchBonuses(), is("3.33"));
         assertThat(ratingPosition1.getUserCupPointsHolder().getCupWinnerBonus(), is("0"));
@@ -275,8 +275,8 @@ public class BetsPointsCalculationRestTest {
         UserRatingPositionDTO ratingPosition2 = ratingPositions.get(1);
         assertThat(ratingPosition2, notNullValue());
         assertThat(eq(ratingPosition2.getUser()), is(eq(user1)));
-        assertThat(ratingPosition2.getUserCupPointsHolder().getMatchBetPointsPositive(), is("0"));
-        assertThat(ratingPosition2.getUserCupPointsHolder().getMatchBetPointsNegative(), is("0"));
+        assertThat(ratingPosition2.getUserCupPointsHolder().getMatchBetPointsPositive(), is("12"));
+        assertThat(ratingPosition2.getUserCupPointsHolder().getMatchBetPointsNegative(), is("-2"));
         assertThat(ratingPosition2.getUserCupPointsHolder().getMatchBetPoints(), is("10"));
         assertThat(ratingPosition2.getUserCupPointsHolder().getMatchBonuses(), is("0.33"));
         assertThat(ratingPosition2.getUserCupPointsHolder().getCupWinnerBonus(), is("0"));
@@ -285,8 +285,8 @@ public class BetsPointsCalculationRestTest {
         UserRatingPositionDTO ratingPosition3 = ratingPositions.get(2);
         assertThat(ratingPosition3, notNullValue());
         assertThat(eq(ratingPosition3.getUser()), is(eq(user2)));
-        assertThat(ratingPosition3.getUserCupPointsHolder().getMatchBetPointsPositive(), is("0"));
-        assertThat(ratingPosition3.getUserCupPointsHolder().getMatchBetPointsNegative(), is("0"));
+        assertThat(ratingPosition3.getUserCupPointsHolder().getMatchBetPointsPositive(), is("8"));
+        assertThat(ratingPosition3.getUserCupPointsHolder().getMatchBetPointsNegative(), is("-2"));
         assertThat(ratingPosition3.getUserCupPointsHolder().getMatchBetPoints(), is("6"));
         assertThat(ratingPosition3.getUserCupPointsHolder().getMatchBonuses(), is("0.33"));
         assertThat(ratingPosition3.getUserCupPointsHolder().getCupWinnerBonus(), is("0"));
@@ -295,8 +295,8 @@ public class BetsPointsCalculationRestTest {
         UserRatingPositionDTO ratingPosition4 = ratingPositions.get(3);
         assertThat(ratingPosition4, notNullValue());
         assertThat(eq(ratingPosition4.getUser()), is(eq(user4)));
-        assertThat(ratingPosition4.getUserCupPointsHolder().getMatchBetPointsPositive(), is("0"));
-        assertThat(ratingPosition4.getUserCupPointsHolder().getMatchBetPointsNegative(), is("0"));
+        assertThat(ratingPosition4.getUserCupPointsHolder().getMatchBetPointsPositive(), is("6"));
+        assertThat(ratingPosition4.getUserCupPointsHolder().getMatchBetPointsNegative(), is("-3"));
         assertThat(ratingPosition4.getUserCupPointsHolder().getMatchBetPoints(), is("3"));
         assertThat(ratingPosition4.getUserCupPointsHolder().getMatchBonuses(), is("0.00"));
         assertThat(ratingPosition4.getUserCupPointsHolder().getCupWinnerBonus(), is("0"));

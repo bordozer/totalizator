@@ -55,10 +55,10 @@ public class PointsCalculationStrategyEditDtoBuilder {
     public static PointsCalculationStrategyEditDTO construct() {
         return new PointsCalculationStrategyEditDtoBuilder()
                 .withName(RandomUtils.pointsStrategyName())
-                .withPointsDelta(3)
-                .withPointsForBetWithinDelta(2)
                 .withPointsForMatchScore(6)
                 .withPointsForMatchWinner(1)
+                .withPointsDelta(3)
+                .withPointsForBetWithinDelta(2)
                 .build();
     }
 }

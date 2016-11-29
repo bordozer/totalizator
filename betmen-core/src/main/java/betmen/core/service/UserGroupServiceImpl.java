@@ -52,9 +52,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Override
     @Transactional
-    public void delete(final int id) {
-        UserGroupEntity userGroupEntity = load(id);
-        userGroupRepository.delete(id);
+    public void delete(final int userGroupId) {
+        UserGroupEntity userGroupEntity = load(userGroupId);
+        userGroupRepository.delete(userGroupId);
         matchPointsService.delete(userGroupEntity);
     }
 
@@ -133,5 +133,10 @@ public class UserGroupServiceImpl implements UserGroupService {
     @Transactional
     public void removeMember(final UserGroupEntity userGroupEntity, final User user) {
         userGroupMemberRepository.delete(userGroupEntity, user);
+    }
+
+    @Override
+    public List<UserGroupEntity> loadAllHaveCup(final int cupId) {
+        return userGroupMemberRepository.loadAllHaveCup(cupId).stream().map(UserGroupCupEntity::getUserGroup).collect(Collectors.toList());
     }
 }

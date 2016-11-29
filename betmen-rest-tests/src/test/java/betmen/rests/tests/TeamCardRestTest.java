@@ -13,6 +13,7 @@ import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.UserRegData;
 import betmen.rests.utils.ComparisonUtils;
 import betmen.rests.utils.RandomUtils;
+import betmen.rests.utils.data.DataCleanUpUtils;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
 import betmen.rests.utils.data.templater.CupTemplater;
 import betmen.rests.utils.data.templater.MatchTemplater;
@@ -20,6 +21,7 @@ import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.TeamEndPointHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
+import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -34,6 +36,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 public class TeamCardRestTest {
 
+    private static final Logger LOGGER = Logger.getLogger(TeamCardRestTest.class);
     private static final int WRONG_TEAM_ID = 125690;
 
     private UserRegData userData;
@@ -48,6 +51,8 @@ public class TeamCardRestTest {
 
     @BeforeClass
     public void initClass() {
+        LOGGER.debug(this.getClass().getName());
+        DataCleanUpUtils.cleanupAll();
         loginAsAdmin();
 
         PointsCalculationStrategyEditDTO sp = AdminTestDataGenerator.createPointsStrategy();

@@ -47,7 +47,7 @@ import static betmen.core.entity.Cup.LOAD_ALL_USE_STRATEGY;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = {}, callSuper = true)
 @ToString(of = {"cupName", "category"}, callSuper = true)
 public class Cup extends AbstractEntity {
 
@@ -82,7 +82,7 @@ public class Cup extends AbstractEntity {
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "cup",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             orphanRemoval = true)
     private List<CupWinner> cupWinners = new ArrayList<>();
 
