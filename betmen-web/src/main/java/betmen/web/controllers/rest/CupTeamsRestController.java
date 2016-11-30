@@ -43,7 +43,7 @@ public class CupTeamsRestController {
     public CupTeamsDTO all(@PathVariable("cupId") final int cupId, @RequestParam(value = "letter", required = false) final String letter,
                            @RequestParam(value = "active", required = false) final boolean active, final Principal principal) {
         final User currentUser = userService.findByLogin(principal.getName());
-        final Cup cup = cupService.load(cupId);
+        final Cup cup = cupService.loadAndAssertExists(cupId);
         final List<Team> teams = teamService.loadAll(cup.getCategory().getId()); // I need first letters of all teams
         final List<String> letters = teams.stream().map(this::getFirstLetter).collect(Collectors.toList());
         if (!active && StringUtils.isNotEmpty(letter)) {

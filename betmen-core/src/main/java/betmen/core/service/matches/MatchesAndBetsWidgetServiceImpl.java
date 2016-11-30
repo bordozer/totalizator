@@ -5,6 +5,7 @@ import betmen.core.exception.BadRequestException;
 import betmen.core.model.MatchSearchModel;
 import betmen.core.repository.jpa.MatchJpaRepository;
 import betmen.core.repository.specifications.MnBWidgetMatchesSpecification;
+import betmen.core.service.utils.DateTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -18,6 +19,8 @@ public class MatchesAndBetsWidgetServiceImpl implements MatchesAndBetsWidgetServ
 
     @Autowired
     private MatchJpaRepository matchJpaRepository;
+    @Autowired
+    private DateTimeService dateTimeService;
 
     @Override
     public List<Match> loadAll(final MatchSearchModel searchQuery) {
@@ -27,7 +30,7 @@ public class MatchesAndBetsWidgetServiceImpl implements MatchesAndBetsWidgetServ
         if (!(searchQuery.isShowFinished() || searchQuery.isShowFutureMatches())) {
             throw new BadRequestException("Finished or future matches or both type should be selected");
         }
-        return matchJpaRepository.findAll(new MnBWidgetMatchesSpecification(searchQuery), sort(searchQuery.getSorting()));
+        return matchJpaRepository.findAll(new MnBWidgetMatchesSpecification(searchQuery, dateTimeService), sort(searchQuery.getSorting()));
     }
 
     private Sort sort(final int sorting) {

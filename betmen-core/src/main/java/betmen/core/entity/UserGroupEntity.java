@@ -3,11 +3,12 @@ package betmen.core.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -43,10 +44,12 @@ public class UserGroupEntity extends AbstractEntity {
     @JoinColumn(name = "userId", nullable = false, updatable = false)
     private User owner;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userGroup", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userGroup", orphanRemoval = true)
     private List<UserGroupCupEntity> userGroupCups = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userGroup", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userGroup", orphanRemoval = true)
     private List<UserGroupMemberEntity> userGroupMembers = new ArrayList<>();
 
     @Override

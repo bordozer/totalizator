@@ -6,10 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -175,7 +173,6 @@ public class Match extends AbstractEntity {
     private Team team2;
     private int score2;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     @Column(nullable = false)
     private LocalDateTime beginningTime;
 

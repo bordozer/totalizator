@@ -6,11 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -66,7 +64,6 @@ public class Cup extends AbstractEntity {
 
     private boolean publicCup;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     @Column(nullable = false)
     private LocalDateTime cupStartTime;
 

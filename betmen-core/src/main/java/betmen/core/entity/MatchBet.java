@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -100,6 +98,5 @@ public class MatchBet extends AbstractEntity {
     private int betScore1;
     private int betScore2;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime betTime;
 }

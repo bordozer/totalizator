@@ -5,7 +5,6 @@ import betmen.core.entity.converters.JobTaskTypeConverter;
 import betmen.core.service.jobs.JobTaskType;
 import betmen.core.service.jobs.executors.JobExecutionState;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -38,13 +37,10 @@ public class JobLog extends AbstractEntity {
 
     private int jobTaskId;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime startTime;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime finishTime;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime jobTaskInternalTime;
 
     @Column(length = 255)

@@ -1,9 +1,7 @@
 package betmen.core.entity;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -103,7 +101,6 @@ public class MatchPoints extends AbstractEntity {
     @JoinColumn(name = "userGroupId")
     private UserGroupEntity userGroup;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime matchTime;
 
     private int matchPoints;

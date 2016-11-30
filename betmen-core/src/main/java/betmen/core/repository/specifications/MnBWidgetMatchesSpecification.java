@@ -2,23 +2,23 @@ package betmen.core.repository.specifications;
 
 import betmen.core.entity.Match;
 import betmen.core.model.MatchSearchModel;
+import betmen.core.service.utils.DateTimeService;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class MnBWidgetMatchesSpecification implements Specification<Match> {
 
     private final MatchSearchModel searchQuery;
+    private DateTimeService dateTimeService;
 
-    public MnBWidgetMatchesSpecification(final MatchSearchModel searchQuery) {
+    public MnBWidgetMatchesSpecification(final MatchSearchModel searchQuery, final DateTimeService dateTimeService) {
         this.searchQuery = searchQuery;
+        this.dateTimeService = dateTimeService;
     }
 
     @Override
@@ -37,9 +37,7 @@ public class MnBWidgetMatchesSpecification implements Specification<Match> {
         if (!searchQuery.isFilterByDateEnable() || filterByDate == null) {
             return cb.conjunction();
         }
-        Timestamp fromTimeStamp = Timestamp.valueOf(LocalDateTime.of(filterByDate, LocalTime.of(0, 0, 0)));
-        Timestamp toTimeStamp = Timestamp.valueOf(LocalDateTime.of(filterByDate, LocalTime.of(23, 59, 59)));
-        return cb.between(root.get("beginningTime"), fromTimeStamp, toTimeStamp);
+        return cb.between(root.get("beginningTime"), dateTimeService.getFirstSecondOf(filterByDate), dateTimeService.getLastSecondOf(filterByDate));
     }
 
     private Predicate buildCupCriteria(final Root<Match> root, final CriteriaBuilder cb) {

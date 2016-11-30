@@ -103,6 +103,7 @@ public class CupTeamsRestTest {
 
         // then CUP 1
         // when
+        LOGGER.debug(String.format("shouldReturnCupTeamsWithoutAnyFilters 1: cup #%s teams", cup1.getCupId()));
         CupTeamsDTO cup1Teams = CupTeamsEndPointsHandler.getCupTeams(cup1.getCupId());
 
         // then
@@ -120,6 +121,7 @@ public class CupTeamsRestTest {
 
         // then CUP 2
         // when
+        LOGGER.debug(String.format("shouldReturnCupTeamsWithoutAnyFilters 2: cup #%s teams", cup2.getCupId()));
         CupTeamsDTO cup2Teams = CupTeamsEndPointsHandler.getCupTeams(cup2.getCupId());
 
         // then

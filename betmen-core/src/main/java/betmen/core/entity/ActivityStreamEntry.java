@@ -3,7 +3,6 @@ package betmen.core.entity;
 import betmen.core.entity.activities.ActivityStreamEntryType;
 import betmen.core.entity.converters.ActivityStreamEntryTypeConverter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -57,7 +56,6 @@ public class ActivityStreamEntry extends AbstractEntity {
     @JoinColumn(name = "userId")
     private User activityOfUser;
 
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime activityTime;
 
     @Convert(converter = ActivityStreamEntryTypeConverter.class)
