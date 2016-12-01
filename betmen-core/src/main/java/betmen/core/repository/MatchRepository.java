@@ -22,6 +22,7 @@ import java.util.List;
 public class MatchRepository implements MatchDao {
 
     private static final Logger LOGGER = Logger.getLogger(MatchRepository.class);
+    private static final String CUP_ID = "cupId";
 
     @PersistenceContext
     private EntityManager em;
@@ -39,19 +40,19 @@ public class MatchRepository implements MatchDao {
     public List<Match> loadAll(final Cup cup) {
 
         return em.createNamedQuery(Match.FIND_BY_CUP, Match.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .getResultList();
     }
 
     @Override
-    @Cacheable(value = CACHE_ENTRY, key = "#id")
-    public Match load(final int id) {
-        return em.find(Match.class, id);
+    @Cacheable(value = CACHE_ENTRY, key = "#matchId")
+    public Match load(final int matchId) {
+        return em.find(Match.class, matchId);
     }
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value = CACHE_ENTRY, key = "#entry.id")
+            @CacheEvict(value = CACHE_ENTRY, key = "#match.id")
             , @CacheEvict(value = CACHE_QUERY, allEntries = true)
             , @CacheEvict(value = MatchBetDao.CACHE_ENTRY, allEntries = true)
             , @CacheEvict(value = MatchBetDao.CACHE_QUERY, allEntries = true)
@@ -62,13 +63,13 @@ public class MatchRepository implements MatchDao {
             , @CacheEvict(value = Constants.USER_RATING_SERVICE_CACHE_QUERY, allEntries = true)
             , @CacheEvict(value = Constants.ACTIVITY_DTO_SERVICE_CACHE_ACTIVITY, allEntries = true)
     })
-    public Match save(final Match entry) {
-        return em.merge(entry);
+    public Match save(final Match match) {
+        return em.merge(match);
     }
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value = CACHE_ENTRY, key = "#id")
+            @CacheEvict(value = CACHE_ENTRY, key = "#matchId")
             , @CacheEvict(value = CACHE_QUERY, allEntries = true)
             , @CacheEvict(value = MatchBetDao.CACHE_ENTRY, allEntries = true)
             , @CacheEvict(value = MatchBetDao.CACHE_QUERY, allEntries = true)
@@ -78,8 +79,8 @@ public class MatchRepository implements MatchDao {
             , @CacheEvict(value = CupPointsService.CACHE_QUERY, allEntries = true)
             , @CacheEvict(value = Constants.USER_RATING_SERVICE_CACHE_QUERY, allEntries = true)
     })
-    public void delete(final int id) {
-        em.remove(load(id));
+    public void delete(final int matchId) {
+        em.remove(load(matchId));
     }
 
     @Override
@@ -95,7 +96,7 @@ public class MatchRepository implements MatchDao {
     @Override
     public List<Match> loadAll(final int cupId, final int team1Id, final int team2Id) {
         return em.createNamedQuery(Match.FIND_BY_CUP_AND_TEAMS, Match.class)
-                .setParameter("cupId", cupId)
+                .setParameter(CUP_ID, cupId)
                 .setParameter("team1Id", team1Id)
                 .setParameter("team2Id", team2Id)
                 .getResultList();
@@ -104,7 +105,7 @@ public class MatchRepository implements MatchDao {
     @Override
     public List<Match> loadAllFinished(final int cupId, final int team1Id, final int team2Id) {
         return em.createNamedQuery(Match.FIND_BY_CUP_AND_TEAMS_FINISHED, Match.class)
-                .setParameter("cupId", cupId)
+                .setParameter(CUP_ID, cupId)
                 .setParameter("team1Id", team1Id)
                 .setParameter("team2Id", team2Id)
                 .getResultList();
@@ -123,14 +124,14 @@ public class MatchRepository implements MatchDao {
                 .setParameter("teamId", teamId)
                 .getResultList();
 
-        return result != null && result.size() > 0 ? (int) (long) result.get(0) : 0;
+        return result != null && !result.isEmpty() ? (int) (long) result.get(0) : 0;
     }
 
     @Override
     public List<Match> loadAll(final int cupId, final int teamId) {
 
         return em.createNamedQuery(Match.FIND_ALL_TEAM_MATCHES_FOR_CUP, Match.class)
-                .setParameter("cupId", cupId)
+                .setParameter(CUP_ID, cupId)
                 .setParameter("teamId", teamId)
                 .getResultList();
     }
@@ -139,41 +140,41 @@ public class MatchRepository implements MatchDao {
     public int getMatchCount(final Cup cup, final Team team) {
 
         final List<Long> result = em.createNamedQuery(Match.LOAD_MATCH_COUNT_FOR_CUP_AND_TEAM, Long.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .setParameter("teamId", team.getId())
                 .getResultList();
 
-        return result != null && result.size() > 0 ? (int) (long) result.get(0) : 0;
+        return result != null && !result.isEmpty() ? (int) (long) result.get(0) : 0;
     }
 
     @Override
     public int getFinishedMatchCount(final Cup cup, final Team team) {
 
         final List<Long> result = em.createNamedQuery(Match.LOAD_FINISHED_MATCH_COUNT_FOR_CUP_AND_TEAM, Long.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .setParameter("teamId", team.getId())
                 .getResultList();
 
-        return result != null && result.size() > 0 ? (int) (long) result.get(0) : 0;
+        return result != null && !result.isEmpty() ? (int) (long) result.get(0) : 0;
     }
 
     @Override
     public int getFutureMatchCount(final Cup cup) {
         final List<Long> result = em.createNamedQuery(Match.LOAD_FUTURE_MATCH_COUNT_FOR_CUP, Long.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .getResultList();
 
-        return result != null && result.size() > 0 ? (int) (long) result.get(0) : 0;
+        return result != null && !result.isEmpty() ? (int) (long) result.get(0) : 0;
     }
 
     @Override
     public int getFutureMatchCount(final Cup cup, final Team team) {
         final List<Long> result = em.createNamedQuery(Match.LOAD_FUTURE_MATCH_COUNT_FOR_CUP_AND_TEAM, Long.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .setParameter("teamId", team.getId())
                 .getResultList();
 
-        return result != null && result.size() > 0 ? (int) (long) result.get(0) : 0;
+        return result != null && !result.isEmpty() ? (int) (long) result.get(0) : 0;
     }
 
     @Override
@@ -199,7 +200,7 @@ public class MatchRepository implements MatchDao {
     public List<Match> loadAllBetween(final int cupId, final LocalDateTime timeFrom, final LocalDateTime timeTo) {
 
         return em.createNamedQuery(Match.FIND_CUP_MATCHES_BY_DATE, Match.class)
-                .setParameter("cupId", cupId)
+                .setParameter(CUP_ID, cupId)
                 .setParameter("timeFrom", timeFrom)
                 .setParameter("timeTo", timeTo)
                 .getResultList();
@@ -209,33 +210,31 @@ public class MatchRepository implements MatchDao {
     public List<Match> getStartedMatchCount(final Cup cup, final LocalDateTime timeFrom) {
 
         return em.createNamedQuery(Match.FIND_NOT_FINISHED_MATCHES_STARTED_TILL, Match.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .setParameter("time", timeFrom)
                 .getResultList();
     }
 
     @Override
     public Match getNearestFutureMatch(final Cup cup, final LocalDateTime onTime) {
-
-        final List<Match> bets = em.createNamedQuery(Match.FIND_NOT_FINISHED_MATCHES_STARTED_AFTER, Match.class)
-                .setParameter("cupId", cup.getId())
+        final List<Match> result = em.createNamedQuery(Match.FIND_NOT_FINISHED_MATCHES_STARTED_AFTER, Match.class)
+                .setParameter(CUP_ID, cup.getId())
                 .setParameter("time", onTime)
                 .getResultList();
-
-        return bets.size() > 0 ? bets.get(0) : null;
+        return !result.isEmpty() ? result.get(0) : null;
     }
 
     @Override
     public List<Match> loadAllNotFinished(final int cupId) {
         return em.createNamedQuery(Match.FIND_NOT_FINISHED_MATCHES, Match.class)
-                .setParameter("cupId", cupId)
+                .setParameter(CUP_ID, cupId)
                 .getResultList();
     }
 
     @Override
     public List<Match> loadAllFinished(final int cupId) {
         return em.createNamedQuery(Match.FIND_FINISHED_MATCHES, Match.class)
-                .setParameter("cupId", cupId)
+                .setParameter(CUP_ID, cupId)
                 .getResultList();
     }
 
@@ -244,19 +243,17 @@ public class MatchRepository implements MatchDao {
 
         final TypedQuery<Match> query = em.createQuery(
                 "select m from Match as m where m.cup.id = :cupId order by m.beginningTime asc", Match.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .setFirstResult(0)
                 .setMaxResults(1);
         final List<Match> list = query.getResultList();
-
         return list.size() == 1 ? list.get(0) : null;
     }
 
     @Override
     public List<Match> getLastNMatches(final Cup cup, final Team team, final int n) {
-
         return em.createNamedQuery(Match.LOAD_LAST_TEAM_MATCHES, Match.class)
-                .setParameter("cupId", cup.getId())
+                .setParameter(CUP_ID, cup.getId())
                 .setParameter("teamId", team.getId())
                 .setFirstResult(0)
                 .setMaxResults(n)
@@ -265,13 +262,11 @@ public class MatchRepository implements MatchDao {
 
     @Override
     public Match loadLastImportedMatch(final int cupId) {
-
         List<Match> list = em.createNamedQuery(Match.LAST_IMPORTED_MATCH, Match.class)
-                .setParameter("cupId", cupId)
+                .setParameter(CUP_ID, cupId)
                 .setFirstResult(0)
                 .setMaxResults(1)
                 .getResultList();
-
         return list.size() == 1 ? list.get(0) : null;
     }
 }

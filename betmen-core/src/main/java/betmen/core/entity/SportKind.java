@@ -27,7 +27,7 @@ import static betmen.core.entity.SportKind.LOAD_ALL;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = {}, callSuper = true)
 @ToString
 public class SportKind extends AbstractEntity {
 

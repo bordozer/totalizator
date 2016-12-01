@@ -29,7 +29,7 @@ import static betmen.core.entity.Team.LOAD_ALL;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = {}, callSuper = true)
 @ToString(of = {"teamName", "category"}, callSuper = true)
 public class Team extends AbstractEntity {
 

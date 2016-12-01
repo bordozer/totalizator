@@ -1,6 +1,6 @@
 package betmen.rests.utils.helpers;
 
-import betmen.dto.dto.PortalPageDTO;
+import betmen.dto.dto.portal.PortalPageDTO;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.SystemRoutes;

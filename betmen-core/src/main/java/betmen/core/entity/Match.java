@@ -130,7 +130,7 @@ import static betmen.core.entity.Match.LOAD_MATCH_COUNT_FOR_TEAM;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = {}, callSuper = true)
 @ToString(of = {"cup", "beginningTime", "team1", "team2"}, callSuper = true)
 public class Match extends AbstractEntity {
 

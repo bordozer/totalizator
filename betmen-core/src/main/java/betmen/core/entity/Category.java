@@ -39,7 +39,7 @@ import static betmen.core.entity.Category.LOAD_ALL;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(of = {}, callSuper = true)
 @ToString
 public class Category extends AbstractEntity {
 

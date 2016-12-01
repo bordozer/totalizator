@@ -3,15 +3,22 @@ package betmen.core.repository;
 import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.Team;
-import betmen.core.service.GenericService;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface MatchDao extends GenericService<Match> {
+public interface MatchDao {
 
     String CACHE_ENTRY = "totalizator.app.cache.match";
     String CACHE_QUERY = "totalizator.app.cache.matches";
+
+    List<Match> loadAll();
+
+    Match load(final int matchId);
+
+    Match save(Match match);
+
+    void delete(final int matchId);
 
     List<Match> loadAll(final Cup cup);
 

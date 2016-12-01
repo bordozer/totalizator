@@ -24,8 +24,6 @@ import static com.google.common.collect.Lists.newArrayList;
 @Service
 public class MatchServiceImpl implements MatchService {
 
-//    private static final Comparator<Match> MATCH_BEGINNING_TIME_DESC_COMPARATOR = (o1, o2) -> o2.getBeginningTime().compareTo(o1.getBeginningTime());
-
     @Autowired
     private MatchDao matchRepository;
 
@@ -94,26 +92,26 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     @Transactional
-    public Match save(final Match entry) {
-        return matchRepository.save(entry);
+    public Match save(final Match match) {
+        return matchRepository.save(match);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Match load(final int id) {
-        return matchRepository.load(id);
+    public Match load(final int matchId) {
+        return matchRepository.load(matchId);
     }
 
     @Override
     @Transactional
-    public void delete(final int id) {
-        final List<MatchBet> bets = matchBetsService.loadAll(load(id));
+    public void delete(final int matchId) {
+        final List<MatchBet> bets = matchBetsService.loadAll(load(matchId));
         for (final MatchBet bet : bets) {
             matchBetsService.delete(bet.getId());
         }
-        matchPointsService.delete(load(id));
+        matchPointsService.delete(load(matchId));
         // TODO: delete activities
-        matchRepository.delete(id);
+        matchRepository.delete(matchId);
     }
 
     @Override

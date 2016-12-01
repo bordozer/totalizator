@@ -3,7 +3,6 @@ package betmen.web.controllers.rest.admin;
 import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.Team;
-import betmen.core.entity.User;
 import betmen.core.exception.BadRequestException;
 import betmen.core.service.CupService;
 import betmen.core.service.TeamService;
@@ -49,38 +48,35 @@ public class AdminMatchesRestController {
     private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{matchId}")
-    public MatchEditDTO getItem(final @PathVariable("matchId") int matchId, final Principal principal) {
-        return convertToEditDto(matchService.loadAndAssertExists(matchId), getCurrentUser(principal));
+    public MatchEditDTO getItem(@PathVariable("matchId") final int matchId) {
+        return convertToEditDto(matchService.loadAndAssertExists(matchId));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public List<MatchEditDTO> getAllItems(final @Validated MatchSearchModelDto searchModel, final Principal principal) {
-        final User currentUser = getCurrentUser(principal);
+    public List<MatchEditDTO> getAllItems(@Validated final MatchSearchModelDto searchModel, final Principal principal) {
         return matchesAndBetsWidgetService.loadAll(dtoService.transformMatchSearchModel(searchModel)).stream()
-                .map(match -> convertToEditDto(match, currentUser))
+                .map(this::convertToEditDto)
                 .collect(Collectors.toList());
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0")
-    public MatchEditDTO createItem(final @Validated @RequestBody MatchEditDTO dto, final Principal principal) {
+    public MatchEditDTO createItem(@Validated @RequestBody final MatchEditDTO dto, final Principal principal) {
         validateDto(dto);
-        final User currentUser = getCurrentUser(principal);
         final Match match = new Match();
         populateEntity(match, dto);
-        return convertToEditDto(matchService.save(match), currentUser);
+        return convertToEditDto(matchService.save(match));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{matchId}")
-    public MatchEditDTO save(final @PathVariable("matchId") int matchId, final @Validated @RequestBody MatchEditDTO dto, final Principal principal) {
+    public MatchEditDTO save(@PathVariable("matchId") final int matchId, @Validated @RequestBody final MatchEditDTO dto, final Principal principal) {
         validateDto(dto);
-        final User currentUser = getCurrentUser(principal);
         final Match match = matchService.loadAndAssertExists(dto.getMatchId());
         populateEntity(match, dto);
-        return convertToEditDto(matchUpdateService.update(match), currentUser);
+        return convertToEditDto(matchUpdateService.update(match));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{matchId}")
-    public boolean delete(final @PathVariable("matchId") int matchId) {
+    public boolean delete(@PathVariable("matchId") final int matchId) {
         if (matchId == 0) {
             return true;
         }
@@ -89,7 +85,7 @@ public class AdminMatchesRestController {
         return true;
     }
 
-    private MatchEditDTO convertToEditDto(final Match match, final User currentUser) {
+    private MatchEditDTO convertToEditDto(final Match match) {
         final MatchEditDTO dto = new MatchEditDTO();
         dto.setMatchId(match.getId());
         dto.setCupId(match.getCup().getId());
@@ -126,7 +122,6 @@ public class AdminMatchesRestController {
     }
 
     private void validateDto(final MatchEditDTO match) {
-        int categoryId = match.getCategoryId();
         int cupId = match.getCupId();
         int team1Id = match.getTeam1Id();
         int team2Id = match.getTeam2Id();
@@ -142,9 +137,5 @@ public class AdminMatchesRestController {
         if (!team2.getCategory().equals(cup.getCategory())) {
             throw new BadRequestException(String.format("Team %s has category %s, but cup has %s", team2, team2.getCategory(), cup.getCategory()));
         }
-    }
-
-    private User getCurrentUser(final Principal principal) {
-        return userService.findByLogin(principal.getName());
     }
 }

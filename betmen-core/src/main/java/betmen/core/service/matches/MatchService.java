@@ -3,13 +3,20 @@ package betmen.core.service.matches;
 import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.Team;
-import betmen.core.service.GenericService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface MatchService extends GenericService<Match> {
+public interface MatchService {
+
+    List<Match> loadAll();
+
+    Match load(final int matchId);
+
+    Match save(Match match);
+
+    void delete(final int matchId);
 
     Match loadAndAssertExists(int matchId);
 

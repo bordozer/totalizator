@@ -1,7 +1,7 @@
 package betmen.rests.tests;
 
 import betmen.dto.dto.CupDTO;
-import betmen.dto.dto.PortalPageDTO;
+import betmen.dto.dto.portal.PortalPageDTO;
 import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
