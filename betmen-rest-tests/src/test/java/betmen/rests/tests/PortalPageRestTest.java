@@ -35,6 +35,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 public class PortalPageRestTest {
 
     private static final Logger LOGGER = Logger.getLogger(PortalPageRestTest.class);
+
     private static final LocalDateTime NOW = LocalDateTime.now();
     private static final String TODAY = DateTimeUtils.formatDate(NOW.toLocalDate());
 
@@ -44,7 +45,9 @@ public class PortalPageRestTest {
     @BeforeClass
     public void initClass() {
         LOGGER.debug(this.getClass().getName());
+
         DataCleanUpUtils.cleanupAll();
+
         AuthEndPointsHandler.loginAsAdmin();
         sport = AdminTestDataGenerator.createSport();
         pointsStrategy = AdminTestDataGenerator.createPointsStrategy();
@@ -94,8 +97,7 @@ public class PortalPageRestTest {
 
         UserFavoritesEndPointsHandler.addCategoryToFavorites(category.getCategoryId());
 
-        PortalPageDTO dto = getPortalPageDTO();
-        PortalPageDTO responseDto = PortalPageEndPointHandler.getPortalPageCups(dto);
+        PortalPageDTO responseDto = PortalPageEndPointHandler.getPortalPageCups(getPortalPageDTO());
 
         // Games of cups of user's favorites categories + games where user made a bet on today's games
         List<CupDTO> cupsTodayToShow = responseDto.getCupsTodayToShow();

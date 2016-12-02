@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PortalAnotherMatchesSport {
+public class PortalAnotherMatchesSportDTO {
     private SportKindDTO sport;
-    private List<PortalAnotherMatchesCategory> categories;
+    private List<PortalAnotherMatchesCategoryDTO> categories;
 }

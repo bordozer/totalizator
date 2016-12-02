@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PortalAnotherMatchesCup {
+public class PortalAnotherMatchesCupDTO {
     private CupItemDTO cup;
     private int matchesCount;
 }

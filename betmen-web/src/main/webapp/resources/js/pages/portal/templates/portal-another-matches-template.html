@@ -1,0 +1,29 @@
+<div class='row'>
+    <div class='col-xs-12 text-center text-muted'>
+        <h3><%=translator.matchesOfNonFavoriteCategoriesOnDateLabel%></h3>
+    </div>
+</div>
+
+<%_.each(anotherMatches, function(anotherSport) {%>
+    <div class="row">
+        <div class="col-xs-12">
+            <h5><a href="/betmen/sports/<%=anotherSport.sport.sportKindId%>/"><%=anotherSport.sport.sportKindName%></a></h5>
+        </div>
+    </div>
+    <%_.each(anotherSport.categories, function(anotherCategory) {%>
+        <%_.each(anotherCategory.cups, function(anotherCup) {%>
+            <div class="row">
+                <div class="col-xs-1">
+                    <img src="<%=anotherCategory.category.logoUrl%>" height="16px">
+                </div>
+                <div class="col-xs-11 text-muted">
+                    <h6>
+                        <a href="/betmen/categories/<%=anotherCategory.category.categoryId%>/"><%=anotherCategory.category.categoryName%></a> /
+                        <a href="/betmen/cups/<%=anotherCup.cup.cupId%>/"><%=anotherCup.cup.cupName%></a>
+                        (<span title="<%=translator.matchesOnDateLabel%>: <%=anotherCup.matchesCount%>"> <%=anotherCup.matchesCount%> </span>)
+                    </h6>
+                </div>
+            </div>
+        <%})%>
+    <%})%>
+<%})%>

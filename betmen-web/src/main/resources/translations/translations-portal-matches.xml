@@ -59,10 +59,10 @@
 	</translation>
 
 	<translation>
-		<nerd>No matches on date</nerd>
-		<ru><![CDATA[Матчей нет]]></ru>
-		<ua><![CDATA[Iгор немає]]></ua>
-		<en><![CDATA[No matches on date]]></en>
+		<nerd>No matches of favorite leagues on date</nerd>
+		<ru><![CDATA[Матчей в избранных лигах нет]]></ru>
+		<ua><![CDATA[Iгор в обраних лiгах немає]]></ua>
+		<en><![CDATA[No matches of favorite leagues on date]]></en>
 	</translation>
 
 	<translation>
@@ -109,9 +109,16 @@
 
 	<translation>
 		<nerd>No games on date</nerd>
-		<ru><![CDATA[Нет игр на дату]]></ru>
-		<ua><![CDATA[Немає iгор на дату]]></ua>
-		<en><![CDATA[No games on date]]></en>
+		<ru><![CDATA[Нет игр в избранных лигах на дату]]></ru>
+		<ua><![CDATA[Немає iгор в обраних лiгах на дату]]></ua>
+		<en><![CDATA[No games of favorite leagues on date]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Another matches (not favorite categories)</nerd>
+		<ru><![CDATA[Матчи других (неизбранных) лиг]]></ru>
+		<ua><![CDATA[Iгри iнших (необраних) лiг]]></ua>
+		<en><![CDATA[Another matches of not favorite leagues]]></en>
 	</translation>
 
 	<translation>

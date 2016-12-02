@@ -14,5 +14,5 @@ public class PortalPageDTO {
     private List<CupDTO> cupsToShow;
     private List<CupDTO> cupsTodayToShow;
     private String portalPageDate;
-    private List<PortalAnotherMatchesSport> anotherMatchesOnDate;
+    private List<PortalAnotherMatchesSportDTO> anotherMatchesOnDate;
 }

@@ -10,11 +10,16 @@
 
     <div class='row'>
         <div class='col-xs-12'>
-            <% _.each(categories, function(category) { %>
+            <% _.each(items, function(item) { %>
             <div class='row'>
-                <div class='col-xs-1 well-sm js-pp-category-<%=category.categoryId%>'></div>
-                <div class='col-xs-11 well-sm'><%=category.categoryName%></div>
+                <div class='col-xs-11 well-sm'><h4><%=item.sport.sportKindName%></h4></div>
             </div>
+                <% _.each(item.categories, function(category) { %>
+                <div class='row'>
+                    <div class='col-xs-1 js-pp-category-<%=category.categoryId%>'></div>
+                    <div class='col-xs-11'><%=category.categoryName%></div>
+                </div>
+                <% }) %>
             <% }) %>
         </div>
     </div>

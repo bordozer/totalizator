@@ -29,16 +29,18 @@ define(function (require) {
         },
 
         render: function () {
-            var categories = service.loadCategories();
+            var items = service.loadCategoriesBySport();
             this.$el.html(templateNoFavCategories({
-                categories: categories
+                items: items
                 , translator: translator
             }));
 
             var container = this;
-            _.each(categories, function (category) {
-                var el = container.$(".js-pp-category-" + category.categoryId);
-                new FavoriteCategoryButtonView({el: el, category: category});
+            _.each(items, function (sportItem) {
+                _.each(sportItem.categories, function (category) {
+                    var el = container.$(".js-pp-category-" + category.categoryId);
+                    new FavoriteCategoryButtonView({el: el, category: category});
+                });
             });
         },
 

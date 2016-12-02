@@ -9,6 +9,7 @@ define( function ( require ) {
 	var template = _.template( require( 'text!./templates/portal-template.html' ) );
 	var templateDateDependent = _.template( require( 'text!./templates/portal-date-dependant-part-template.html' ) );
 	var templateNoMatchesOnDate = _.template( require( 'text!./templates/no-games-on-date.html' ) );
+	var templateAnotherMatches = _.template( require( 'text!./templates/portal-another-matches-template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
@@ -22,12 +23,14 @@ define( function ( require ) {
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
-		noMatchesOnDateLabel: 'No matches on date'
+		noMatchesOnDateLabel: 'No matches of favorite leagues on date'
 		, noMatchesOnDatePossibleReasonsLabel: 'No matches on date possible reasons'
 		, noGamesOnDateLabel: 'No games on date'
 		, noFavoritesCategoriesLabel: 'No favorite leagues'
 		, noBetsOnDateLabel: 'No your bets on date'
 		, todayLabel: 'Today'
+		, matchesOfNonFavoriteCategoriesOnDateLabel: 'Another matches (not favorite categories)'
+		, matchesOnDateLabel: 'Matches on date'
 	} );
 
 	var VIEW_MODE_BET = 1;
@@ -81,6 +84,8 @@ define( function ( require ) {
 
 			this._renderMatchesOnDate( onDate );
 
+			this._renderAnotherMatchesOnDate();
+
 			this._renderCupStatistics( onDate );
 
 			this._renderTodayUserRating( onDate );
@@ -95,7 +100,7 @@ define( function ( require ) {
 			var model = this.model.toJSON();
 			var currentUser = app.currentUser();
 
-			var container = this.$( '.js-portal-page-matches-on-date' );
+			var container = this.$( '.js-portal-page-favorite-categories-matches-on-date' );
 			container.empty();
 
 			if ( model.cupsTodayToShow.length == 0 ) {
@@ -124,6 +129,13 @@ define( function ( require ) {
 				};
 				matchesAndBetsView( el, options );
 			} );
+		},
+
+		_renderAnotherMatchesOnDate: function() {
+			var model = this.model.toJSON();
+			var container = this.$( '.js-portal-page-another-matches-on-date' );
+			container.empty();
+			container.html(templateAnotherMatches({anotherMatches: model.anotherMatchesOnDate, translator: translator}));
 		},
 
 		_renderCupStatistics: function( onDate ) {
@@ -198,7 +210,8 @@ define( function ( require ) {
 
 			var div = "<div class='text-center text-muted'><i class='fa fa-spinner fa-spin fa-5x'></i></div>";
 
-			this.$( '.js-portal-page-matches-on-date' ).html( div );
+			this.$( '.js-portal-page-favorite-categories-matches-on-date' ).html( div );
+			this.$( '.js-portal-page-another-matches-on-date' ).html( div );
 			this.$( '.js-portal-page-container' ).html( div );
 			this.$( '.js-users-rating-today' ).html( div );
 			this.$( '.js-users-rating-yesterday' ).html( div );
