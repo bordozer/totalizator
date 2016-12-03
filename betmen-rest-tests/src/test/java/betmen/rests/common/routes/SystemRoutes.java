@@ -2,7 +2,8 @@ package betmen.rests.common.routes;
 
 public enum SystemRoutes implements Route {
     PORTAL_PAGE("/rest/portal-page/?portalPageDate={portalPageDate}"),
-    TRANSLATOR("/rest/translator/?{translations}")
+    TRANSLATOR("/rest/translator/?{translations}"),
+    WHO_AM_I("/rest/app/who-am-i/"),
     ;
 
     private final String route;

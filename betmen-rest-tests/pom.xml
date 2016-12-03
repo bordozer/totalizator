@@ -16,6 +16,7 @@
     <properties>
         <kotlin.version>1.0.5-2</kotlin.version>
         <restassured.version>2.9.0</restassured.version>
+        <jbehave.core.version>4.1</jbehave.core.version>
         <skipTests>false</skipTests>
     </properties>
 
@@ -74,7 +75,13 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.9.13.6</version>
+            <version>6.8.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <version>${jbehave.core.version}</version>
         </dependency>
 
         <dependency>
