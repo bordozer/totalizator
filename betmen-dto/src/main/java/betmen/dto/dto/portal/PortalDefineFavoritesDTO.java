@@ -1,6 +1,7 @@
 package betmen.dto.dto.portal;
 
 import betmen.dto.dto.CategoryDTO;
+import betmen.dto.dto.FavoriteCategoryDTO;
 import betmen.dto.dto.SportKindDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,5 +14,5 @@ import java.util.List;
 @AllArgsConstructor
 public class PortalDefineFavoritesDTO {
     private SportKindDTO sport;
-    private List<CategoryDTO> categories;
+    private List<FavoriteCategoryDTO> categories;
 }

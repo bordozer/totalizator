@@ -1,16 +1,12 @@
 package betmen.web.controllers.rest.categories;
 
-import betmen.core.entity.SportKind;
 import betmen.core.entity.User;
 import betmen.core.service.CategoryService;
 import betmen.core.service.CupService;
-import betmen.core.service.SportKindService;
 import betmen.core.service.UserService;
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
 import betmen.dto.dto.FavoriteCategoryDTO;
-import betmen.dto.dto.SportKindDTO;
-import betmen.dto.dto.portal.PortalDefineFavoritesDTO;
 import betmen.web.converters.DTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +29,6 @@ public class CategoriesRestController {
     @Autowired
     private CupService cupService;
     @Autowired
-    private SportKindService sportKindService;
-    @Autowired
     private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
@@ -51,27 +45,15 @@ public class CategoriesRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{categoryId}/")
     public FavoriteCategoryDTO entry(@PathVariable("categoryId") final int categoryId, final Principal principal) {
-        return dtoService.transformFavoriteCategory(categoryService.load(categoryId), geCurrentUser(principal));
+        return dtoService.transformFavoriteCategory(categoryService.load(categoryId), getCurrentUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{categoryId}/cups/public/")
     public List<CupDTO> categoryCaps(@PathVariable("categoryId") final int categoryId, final Principal principal) {
-        return dtoService.transformCups(cupService.loadPublic(categoryService.load(categoryId)), geCurrentUser(principal));
+        return dtoService.transformCups(cupService.loadPublic(categoryService.load(categoryId)), getCurrentUser(principal));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/by-sports/")
-    public List<PortalDefineFavoritesDTO> getCategoriesBySport() {
-        List<SportKind> sportKinds = sportKindService.loadAll();
-        return sportKinds.stream()
-                .map(sport -> {
-                    SportKindDTO sportDto = dtoService.transformSportKind(sport);
-                    List<CategoryDTO> categoryDTOs = dtoService.transformCategories(categoryService.loadAll(sport.getId()));
-                    return new PortalDefineFavoritesDTO(sportDto, categoryDTOs);
-                })
-                .collect(Collectors.toList());
-    }
-
-    private User geCurrentUser(final Principal principal) {
+    private User getCurrentUser(final Principal principal) {
         return userService.findByLogin(principal.getName());
     }
 }

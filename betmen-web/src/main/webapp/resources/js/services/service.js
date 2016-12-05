@@ -186,7 +186,7 @@ define( function ( require ) {
 			var result = [];
 			$.ajax({
 				method: 'GET',
-				url: '/rest/categories/by-sports/',
+				url: '/rest/favorites/define/',
 				async: false,
 				success: function (data) {
 					result = data;

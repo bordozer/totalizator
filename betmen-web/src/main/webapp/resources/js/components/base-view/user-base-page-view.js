@@ -20,6 +20,7 @@ define( function ( require ) {
 		, menuYourGroupsLabel: 'Your groups'
 		, menuPersonalDataLabel: 'User settings'
 		, menuLogoutLabel: 'Menu: Logout'
+		, favoritesLabel: 'Favorites'
 	} );
 
 	return PageView.extend( {
@@ -51,6 +52,7 @@ define( function ( require ) {
 				menus.push( { selector: 'divider' } );
 			}
 
+			menus.push( { selector: '', icon: 'fa fa-star', link: '/betmen/favorites/', text: translator.favoritesLabel } );
 			menus.push( { selector: '', icon: 'fa fa-users', link: '/betmen/users/' + currentUser.userId + '/groups/', text: translator.menuYourGroupsLabel } );
 			menus.push( { selector: '', icon: 'fa fa-database', link: '/betmen/users/' + currentUser.userId + '/settings/', text: translator.menuPersonalDataLabel } );
 			menus.push( { selector: 'divider' } );

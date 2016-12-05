@@ -10,11 +10,12 @@ define( function ( require ) {
 	var templateDateDependent = _.template( require( 'text!./templates/portal-date-dependant-part-template.html' ) );
 	var templateNoMatchesOnDate = _.template( require( 'text!./templates/no-games-on-date.html' ) );
 	var templateAnotherMatches = _.template( require( 'text!./templates/portal-another-matches-template.html' ) );
+	var templateNoFavoriteCategories = _.template( require( 'text!./templates/portal-no-favorite-categories.template.html' ) );
 
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 	var usersRatingWidget = require( 'js/widgets/users-rating/users-rating-widget' );
-	var DefineFavoriteCategoriesView = require( './select-favorite-categories-view' );
+	var DefineFavoriteCategoriesView = require( 'js/components/favorites/define-favorite-categories-view' );
 
 	var app = require( 'app' );
 	var dateTimeService = require( '/resources/js/services/date-time-service.js' );
@@ -31,6 +32,9 @@ define( function ( require ) {
 		, todayLabel: 'Today'
 		, matchesOfNonFavoriteCategoriesOnDateLabel: 'Another matches (not favorite categories)'
 		, matchesOnDateLabel: 'Matches on date'
+		, noFavoriteCategoriesLabel: 'You do not have favorite categories track to'
+		, goAndCreateFavoriteCategoriesLabel: 'Define favorite categories'
+		, favoriteCategoriesDefinedLabel: 'Favorite categories defined'
 	} );
 
 	var VIEW_MODE_BET = 1;
@@ -42,7 +46,9 @@ define( function ( require ) {
 
 	return Backbone.View.extend( {
 
-		events: {},
+		events: {
+			'click .js-favorite-categories-defined': '_favoriteCategoriesDefined'
+		},
 
 		initialize: function( options ) {
 
@@ -84,7 +90,7 @@ define( function ( require ) {
 
 			this._renderMatchesOnDate( onDate );
 
-			this._renderAnotherMatchesOnDate();
+			this._renderAnotherMatchesOnDate(onDate);
 
 			this._renderCupStatistics( onDate );
 
@@ -131,11 +137,15 @@ define( function ( require ) {
 			} );
 		},
 
-		_renderAnotherMatchesOnDate: function() {
+		_renderAnotherMatchesOnDate: function(onDate) {
 			var model = this.model.toJSON();
 			var container = this.$( '.js-portal-page-another-matches-on-date' );
 			container.empty();
-			container.html(templateAnotherMatches({anotherMatches: model.anotherMatchesOnDate, translator: translator}));
+			container.html(templateAnotherMatches({
+				anotherMatches: model.anotherMatchesOnDate
+				, onDate: onDate
+				, translator: translator
+			}));
 		},
 
 		_renderCupStatistics: function( onDate ) {
@@ -152,7 +162,8 @@ define( function ( require ) {
 
 			var hasFavoriteCategories = model.cupsToShow.length > 0;
 			if (!hasFavoriteCategories) {
-				new DefineFavoriteCategoriesView({el: row});
+				row.html(templateNoFavoriteCategories({translator: translator}));
+				new DefineFavoriteCategoriesView({el: $('.js-define-favorite-categories', row)});
 				return;
 			}
 
@@ -216,6 +227,10 @@ define( function ( require ) {
 			this.$( '.js-users-rating-today' ).html( div );
 			this.$( '.js-users-rating-yesterday' ).html( div );
 			this.$( '.js-users-rating-month' ).html( div );
+		},
+
+		_favoriteCategoriesDefined: function () {
+			window.location.reload();
 		}
 	} );
 } );

@@ -132,8 +132,9 @@
 <div class="row">
 
 	<% if( cupWinnersBetsIsAccessible ) {%>
-		<div class="col-xs-12 text-center" style="font-size: 12px;">
-			<a href="/betmen/cups/<%=cup.cupId%>/bets/" class="text-danger"><%=translator.cupWinnerBetIsAccessibleLabel%></a>
+		<div class="col-xs-12 text-center">
+			<i class="fa fa-info-circle fa-lg"></i>
+			<a href="/betmen/cups/<%=cup.cupId%>/bets/" class="text-success" style="font-size: 12px;"> <%=translator.cupWinnerBetIsAccessibleLabel%></a>
 		</div>
 	<% } %>
 
