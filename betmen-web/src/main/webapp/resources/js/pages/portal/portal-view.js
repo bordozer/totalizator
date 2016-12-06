@@ -141,6 +141,9 @@ define( function ( require ) {
 			var model = this.model.toJSON();
 			var container = this.$( '.js-portal-page-another-matches-on-date' );
 			container.empty();
+			if (model.anotherMatchesOnDate.length == 0) {
+				return;
+			}
 			container.html(templateAnotherMatches({
 				anotherMatches: model.anotherMatchesOnDate
 				, onDate: onDate

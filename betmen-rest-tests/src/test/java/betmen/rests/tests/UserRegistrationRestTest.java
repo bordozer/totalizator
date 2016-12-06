@@ -33,13 +33,13 @@ public class UserRegistrationRestTest {
         assertThat(6, is(registrationResponse.errorsCount()));
 
         assertThat(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_must_not_be_empty"), notNullValue());
-        assertThat(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_too_long"), notNullValue());
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_has_incorrect_length"), notNullValue());
 
         assertThat(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.username_must_not_be_empty"), notNullValue());
         assertThat(registrationResponse.getFieldErrorResource(FIELD_NAME, "errors.name_too_long"), notNullValue());
 
         assertThat(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.password_must_not_be_empty"), notNullValue());
-        assertThat(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.password_too_long"), notNullValue());
+        assertThat(registrationResponse.getFieldErrorResource(FIELD_PASSWORD, "errors.password_has_incorrect_length"), notNullValue());
     }
 
     @Test

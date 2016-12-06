@@ -28,6 +28,7 @@ public class RestTestConstants {
 
     public static final String DATE_FROM = "dateFrom";
     public static final String DATE_TO = "dateTo";
+    public static final String ON_DATE = "onDate";
     public static final String PORTAL_PAGE_DATE = "portalPageDate";
     public static final String TRANSLATIONS = "translations";
 

@@ -29,8 +29,8 @@ public class UserRatingRestController {
     private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public List<UsersRatingPositionDTO> getUsersRatingOnDate(final @RequestParam(value = "dateFrom") String onDateFrom,
-                                                             final @RequestParam(value = "dateTo") String onDateTo) {
+    public List<UsersRatingPositionDTO> getUsersRatingOnDate(@RequestParam(value = "dateFrom") final String onDateFrom,
+                                                             @RequestParam(value = "dateTo") final String onDateTo) {
         final LocalDate dateFrom = dateTimeService.parseDate(onDateFrom);
         final LocalDate dateTo = dateTimeService.parseDate(onDateTo);
         final List<UserSummaryPointsHolder> usersRatingOnDate = matchPointsService.getUsersRating(dateFrom, dateTo);

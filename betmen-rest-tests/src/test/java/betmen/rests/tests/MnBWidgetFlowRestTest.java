@@ -37,7 +37,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-public class MnBWidgetRestTest {
+public class MnBWidgetFlowRestTest {
 
     private static final int ASC_SORTING = 1;
 

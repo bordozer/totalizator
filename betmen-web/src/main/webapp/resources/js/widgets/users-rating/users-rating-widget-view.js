@@ -79,9 +79,10 @@ define( function ( require ) {
 		},
 
 		_renderUsersRatingList: function () {
-
+			var dateLink = this.onDateTo == this.onDate ? this.onDate + '/' : '';
 			var data = _.extend( {}, {
 				pointsHolders: this.model.toJSON()
+				, dateLink: dateLink
 				, pointsTransformer: this._pointsTransformer.bind( this )
 			} );
 

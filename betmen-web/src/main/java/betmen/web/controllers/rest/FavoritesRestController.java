@@ -61,6 +61,7 @@ public class FavoritesRestController {
                     List<FavoriteCategoryDTO> categoryDTOs = dtoService.transformFavoriteCategories(categoryService.loadAll(sport.getId()), user);
                     return new PortalDefineFavoritesDTO(sportDto, categoryDTOs);
                 })
+                .filter(dto -> !dto.getCategories().isEmpty())
                 .collect(Collectors.toList());
     }
 

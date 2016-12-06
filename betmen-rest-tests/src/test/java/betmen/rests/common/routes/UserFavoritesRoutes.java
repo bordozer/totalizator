@@ -4,6 +4,7 @@ public enum UserFavoritesRoutes implements Route {
     GET_ALL_FAVORITE_CATEGORIES("/rest/favorites/categories/"),
     ADD_CATEGORY_TO_FAVORITES("/rest/favorites/categories/{categoryId}/"),
     REMOVE_CATEGORY_FROM_FAVORITES("/rest/favorites/categories/{categoryId}/"),
+    DEFINE_FAVORITES("/rest/favorites/define/"),
     ;
 
     private final String route;

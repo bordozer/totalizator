@@ -16,12 +16,12 @@ public abstract class AbstractStory extends JUnitStory {
     public AbstractStory() {
         configuredEmbedder()
                 .embedderControls()
-                .doGenerateViewAfterStories(true)
+                .doGenerateViewAfterStories(false)
                 .doIgnoreFailureInStories(false)
                 .doIgnoreFailureInView(false)
+                .doFailOnStoryTimeout(true)
                 .useThreads(1);
     }
-
 
     @Override
     public Configuration configuration() {

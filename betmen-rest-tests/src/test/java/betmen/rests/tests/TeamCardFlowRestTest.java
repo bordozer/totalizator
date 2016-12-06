@@ -34,9 +34,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-public class TeamCardRestTest {
+public class TeamCardFlowRestTest {
 
-    private static final Logger LOGGER = Logger.getLogger(TeamCardRestTest.class);
+    private static final Logger LOGGER = Logger.getLogger(TeamCardFlowRestTest.class);
     private static final int WRONG_TEAM_ID = 125690;
 
     private UserRegData userData;

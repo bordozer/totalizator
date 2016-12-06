@@ -33,6 +33,7 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final int TOKEN_VALIDITY_SECONDS = 60 * 60 * 24 * 14; // 14 days
+    private static final int MAXIMUM_SESSIONS = 1024;
 
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
@@ -51,9 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DriverManagerDataSource dataSource;
-
-//    @Autowired
-//    private PersistentTokenRepository persistentTokenRepository;
 
     @Bean
     @Override
@@ -125,13 +123,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .and()
                 .rememberMe()
-//                .rememberMeParameter("_spring_security_remember_me")
                 .tokenRepository(rememberMeTokenRepository())
                 .rememberMeServices(rememberMeServices())
                 .key(Parameters.REMEMBER_ME_KEY)
                 .and()
                 .sessionManagement()
-                .maximumSessions(1)
+                .maximumSessions(MAXIMUM_SESSIONS)
         ;
     }
 

@@ -1,6 +1,5 @@
-package betmen.web.controllers.rest.user.card;
+package betmen.dto.dto;
 
-import betmen.dto.dto.CupDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class UserCardDTO {
-    private List<CupDTO> cupsToShow;
+    private List<CupItemDTO> cupsToShow;
 }

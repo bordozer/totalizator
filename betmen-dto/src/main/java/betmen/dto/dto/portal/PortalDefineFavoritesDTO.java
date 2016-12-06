@@ -1,6 +1,5 @@
 package betmen.dto.dto.portal;
 
-import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.FavoriteCategoryDTO;
 import betmen.dto.dto.SportKindDTO;
 import lombok.AllArgsConstructor;

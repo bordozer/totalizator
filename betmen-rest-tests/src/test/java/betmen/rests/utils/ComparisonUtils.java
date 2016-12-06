@@ -3,6 +3,7 @@ package betmen.rests.utils;
 import betmen.dto.dto.BetDTO;
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
+import betmen.dto.dto.FavoriteCategoryDTO;
 import betmen.dto.dto.MatchBetDTO;
 import betmen.dto.dto.MatchDTO;
 import betmen.dto.dto.SportKindDTO;
@@ -12,6 +13,7 @@ import betmen.dto.dto.UserGroupEditDTO;
 import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
+import betmen.dto.dto.admin.SportKindEditDTO;
 import betmen.dto.dto.admin.TeamEditDTO;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -203,5 +205,22 @@ public class ComparisonUtils {
         assertThat(actual.getUserGroupId(), is(actual.getUserGroupId()));
         assertThat(actual.getUserGroupName(), is(actual.getUserGroupName()));
         assertThat(actual.getCupIds(), containsInAnyOrder(actual.getCupIds().toArray()));
+    }
+
+    public static void assertTheSame(final SportKindDTO expected, final SportKindEditDTO actual) {
+        assertThat(expected, notNullValue());
+        assertThat(actual, notNullValue());
+
+        assertThat(expected.getSportKindId(), is(actual.getSportKindId()));
+        assertThat(expected.getSportKindName(), is(actual.getSportKindName()));
+    }
+
+    public static void assertTheSame(final FavoriteCategoryDTO expected, final CategoryEditDTO actual) {
+        assertThat(expected, notNullValue());
+        assertThat(actual, notNullValue());
+
+        assertThat(expected.getCategoryId(), is(actual.getCategoryId()));
+        assertThat(expected.getCategoryName(), is(actual.getCategoryName()));
+        assertThat(expected.getLogoUrl(), is(actual.getLogoUrl()));
     }
 }

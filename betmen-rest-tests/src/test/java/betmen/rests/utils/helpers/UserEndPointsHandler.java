@@ -51,6 +51,5 @@ public class UserEndPointsHandler {
 
     public static Response getUserList(final ResponseStatus responseStatus) {
         return RequestHelper.doGet(UserRoutes.USER_LIST, responseStatus.getCode());
-
     }
 }

@@ -1,6 +1,7 @@
 package betmen.rests.utils.helpers;
 
 import betmen.dto.dto.CategoryDTO;
+import betmen.dto.dto.portal.PortalDefineFavoritesDTO;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.UserFavoritesRoutes;
@@ -34,5 +35,9 @@ public class UserFavoritesEndPointsHandler {
 
     public static Response removeCategoryFromFavorites(final int categoryId, final ResponseStatus responseStatus) {
         return RequestHelper.doDelete(UserFavoritesRoutes.REMOVE_CATEGORY_FROM_FAVORITES, ParameterUtils.categoryParams(categoryId), responseStatus.getCode());
+    }
+
+    public static List<PortalDefineFavoritesDTO> defineFavorites() {
+        return Arrays.asList(RequestHelper.doGet(UserFavoritesRoutes.DEFINE_FAVORITES, ResponseStatus.OK.getCode()).as(PortalDefineFavoritesDTO[].class));
     }
 }

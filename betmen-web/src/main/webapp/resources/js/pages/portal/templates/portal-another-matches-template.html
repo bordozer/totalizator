@@ -13,19 +13,15 @@
         </div>
     </div>
     <%_.each(anotherSport.categories, function(anotherCategory) {%>
-        <ul>
         <%_.each(anotherCategory.cups, function(anotherCup) {%>
             <div class="row">
-                <div class="col-xs-11 text-muted">
-                    <li>
-                        <a href="/betmen/categories/<%=anotherCategory.category.categoryId%>/"><%=anotherCategory.category.categoryName%></a>
-                        &nbsp; - &nbsp;
-                        <a href="/betmen/cups/<%=anotherCup.cup.cupId%>/matches/<%=onDate%>/"><%=anotherCup.cup.cupName%></a>
-                        (<span title="<%=translator.matchesOnDateLabel%>: <%=anotherCup.matchesCount%>"> <%=anotherCup.matchesCount%> </span>)
-                    </li>
+                <div class="col-xs-11 text-muted col-xs-offset-1">
+                    <a href="/betmen/categories/<%=anotherCategory.category.categoryId%>/"><%=anotherCategory.category.categoryName%></a>
+                    &nbsp; - &nbsp;
+                    <a href="/betmen/cups/<%=anotherCup.cup.cupId%>/matches/<%=onDate%>/"><%=anotherCup.cup.cupName%></a>
+                    (<span title="<%=translator.matchesOnDateLabel%>: <%=anotherCup.matchesCount%>"> <%=anotherCup.matchesCount%> </span>)
                 </div>
             </div>
         <%})%>
     <%})%>
-    </ul>
 <%})%>

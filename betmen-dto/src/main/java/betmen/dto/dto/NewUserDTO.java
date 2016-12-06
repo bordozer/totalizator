@@ -19,15 +19,15 @@ import javax.validation.constraints.Size;
 @ToString(of = {"login", "name"})
 public class NewUserDTO {
 
-    @Size(min = 5, max = 16, message = "errors.login_too_long")
+    @Size(min = 5, max = 16, message = "errors.login_has_incorrect_length")
     @NotBlank(message = "errors.login_must_not_be_empty")
     private String login;
 
-    @Size(min = 5, max = 100, message = "errors.name_too_long")
+    @Size(min = 5, max = 100, message = "errors.name_has_incorrect_length")
     @NotBlank(message = "errors.username_must_not_be_empty")
     private String name;
 
-    @Size(min = 8, max = 16, message = "errors.password_too_long")
+    @Size(min = 8, max = 16, message = "errors.password_has_incorrect_length")
     @NotBlank(message = "errors.password_must_not_be_empty")
     private String password;
 }

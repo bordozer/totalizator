@@ -2,7 +2,6 @@ package betmen.rests.tests;
 
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.admin.CategoryEditDTO;
-import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.utils.ComparisonUtils;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
@@ -16,7 +15,6 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 public class FavoritesRestControllerRestTest {
@@ -29,8 +27,6 @@ public class FavoritesRestControllerRestTest {
     @BeforeClass
     public void classInit() {
         AuthEndPointsHandler.loginAsAdmin();
-        PointsCalculationStrategyEditDTO pcs = AdminTestDataGenerator.createPointsStrategy();
-
         category1 = AdminTestDataGenerator.createCategory();
         category2 = AdminTestDataGenerator.createCategory();
         category3 = AdminTestDataGenerator.createCategory();
