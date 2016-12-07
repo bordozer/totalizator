@@ -1,18 +1,24 @@
 package betmen.rests.tests.admin;
 
 import betmen.dto.dto.MatchSearchModelDto;
+import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.CupWinnerEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
+import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.dto.dto.admin.TeamEditDTO;
+import betmen.dto.dto.error.CommonErrorResponse;
 import betmen.dto.dto.error.FieldErrorsResponse;
+import betmen.rests.common.ResponseStatus;
 import betmen.rests.utils.ComparisonUtils;
+import betmen.rests.utils.data.DataCleanUpUtils;
 import betmen.rests.utils.data.builders.MatchEditDtoBuilder;
 import betmen.rests.utils.data.builders.TeamEditDtoBuilder;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
 import betmen.rests.utils.data.templater.CupTemplater;
 import betmen.rests.utils.data.templater.MatchTemplater;
 import betmen.rests.utils.helpers.AuthEndPointsHandler;
+import betmen.rests.utils.helpers.BetEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
 import com.jayway.restassured.response.Response;
@@ -86,7 +92,7 @@ public class AdminMatchRestTest {
     public void shouldResponseWithBadRequestIfDtoValidationOnCreateFailed() {
         MatchEditDTO dto = new MatchEditDTO();
         dto.setBeginningTime(LocalDateTime.now());
-        Response response = AdminMatchEndPointsHandler.create(dto, HttpStatus.SC_BAD_REQUEST);
+        Response response = AdminMatchEndPointsHandler.create(dto, ResponseStatus.BAD_REQUEST);
         FieldErrorsResponse errors = response.as(FieldErrorsResponse.class);
         assertThat(errors.containsError("cupId", "errors.cup_should_be_provided"), Matchers.is(Boolean.TRUE));
         assertThat(errors.containsError("team1Id", "errors.team1_should_be_provided"), Matchers.is(Boolean.TRUE));
@@ -95,17 +101,17 @@ public class AdminMatchRestTest {
 
     @Test
     public void shouldResponseWithBadRequestIfCupDoesNotExistWhenCreate() {
-        AdminMatchEndPointsHandler.create(construct().withCupId(9999).build(), HttpStatus.SC_UNPROCESSABLE_ENTITY);
+        AdminMatchEndPointsHandler.create(construct().withCupId(9999).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Test
     public void shouldResponseWithBadRequestIfTeam1DoesNotExistWhenCreate() {
-        AdminMatchEndPointsHandler.create(construct().withTeam1Id(88888).build(), HttpStatus.SC_UNPROCESSABLE_ENTITY);
+        AdminMatchEndPointsHandler.create(construct().withTeam1Id(88888).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Test
     public void shouldResponseWithBadRequestIfTeam2DoesNotExistWhenCreate() {
-        AdminMatchEndPointsHandler.create(construct().withTeam2Id(101010).build(), HttpStatus.SC_UNPROCESSABLE_ENTITY);
+        AdminMatchEndPointsHandler.create(construct().withTeam2Id(101010).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Test
@@ -139,9 +145,32 @@ public class AdminMatchRestTest {
         AdminMatchEndPointsHandler.delete(createMatch().getMatchId());
     }
 
-    @Test(enabled = false) // TODO: come back after bet rest-test functionality is implemented
+    @Test
     public void shouldDeleteEvenIfBetsOnTheMatchExist() {
-//        AdminMatchEndPointsHandler.delete(createFutureMatch().getMatchId());
+        MatchEditDTO match = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build());
+        BetEndPointsHandler.make(match.getMatchId(), 1, 4);
+        AdminMatchEndPointsHandler.delete(match.getMatchId());
+    }
+
+    @Test
+    public void shouldNotAllowToAddTeamIfItHasGameInTheSameDate() {
+        PointsCalculationStrategyEditDTO strategy = AdminTestDataGenerator.createPointsStrategy();
+        CategoryEditDTO category = AdminTestDataGenerator.createCategory();
+        CupEditDTO randomCup1 = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), strategy.getPcsId());
+        CupEditDTO randomCup2 = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), strategy.getPcsId());
+
+        TeamEditDTO team1 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        TeamEditDTO team2 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        TeamEditDTO team3 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        TeamEditDTO team4 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team3.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team3.getTeamId(), team1.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team3.getTeamId(), team4.getTeamId()).future().finished(false).build());
+
+        Response response = AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup2.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
+        CommonErrorResponse errorResponse = response.as(CommonErrorResponse.class);
+        assertThat(errorResponse.containsError("errors.team_already_has_match_on_date"), is(true));
     }
 
     @Test

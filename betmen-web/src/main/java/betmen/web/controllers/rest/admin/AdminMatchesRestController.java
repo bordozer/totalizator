@@ -147,7 +147,7 @@ public class AdminMatchesRestController {
     private void assertTeamHasNoMatchesOnDate(final Team team, final LocalDate date, final int matchId) {
         List<Match> matches = matchService.loadAll(team, date);
         if (matches.stream().filter(match -> match.getId() != matchId).findAny().isPresent()) {
-            throw new UnprocessableEntityException(String.format("Team %s already has match on %s", team, date));
+            throw new UnprocessableEntityException("errors.team_already_has_match_on_date");
         }
     }
 }

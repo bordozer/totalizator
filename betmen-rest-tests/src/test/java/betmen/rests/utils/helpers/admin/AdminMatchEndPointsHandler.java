@@ -31,9 +31,9 @@ public class AdminMatchEndPointsHandler {
         return RequestHelper.doGet(AdminRoutes.MATCH_GET, ParameterUtils.matchParam(matchId), expectedStatusCode);
     }
 
-    public static Response create(final MatchEditDTO dto, final int expectedStatusCode) {
+    public static Response create(final MatchEditDTO dto, final ResponseStatus expectedStatusCode) {
         Assert.isTrue(dto.getMatchId() == 0, ID_SHOULD_BE_ZERO);
-        return RequestHelper.doJsonPut(AdminRoutes.MATCH_CREATE, dto, expectedStatusCode);
+        return RequestHelper.doJsonPut(AdminRoutes.MATCH_CREATE, dto, expectedStatusCode.getCode());
     }
 
     public static MatchEditDTO create(final MatchEditDTO dto) {

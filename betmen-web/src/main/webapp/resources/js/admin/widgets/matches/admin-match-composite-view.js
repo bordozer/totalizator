@@ -198,12 +198,23 @@ define( function ( require ) {
 				this.trigger( 'matches:render' );
 			}, this );
 
+			var self = this;
 			this.model
-					.save()
-					.then( rend )
-			;
+				.save({}, {
+					error: function(model, response) {
+						var errors = self._readErrors(response);
+						_.each(errors, function(error) {
+							dialog.dialogValidationError(error.errorCode);
+						});
+					}
+				})
+				.then(rend);
 
 			this.model.saveAttributes();
+		},
+
+		_readErrors: function(err) {
+			return JSON.parse(err.responseText).errors;
 		},
 
 		_bind: function() {
