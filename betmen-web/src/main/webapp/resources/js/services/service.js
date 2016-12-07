@@ -98,16 +98,23 @@ define( function ( require ) {
 		},
 
 		saveBet: function( matchId, score1, score2 ) {
-			var result = {};
+			var result = {
+				bet: null
+				, errors: []
+			};
+			var self = this;
 			$.ajax( {
 				method: 'POST',
 				url: '/rest/matches/' + matchId + '/bets/' + score1 + '/' + score2 + '/',
 				async: false,
 				success: function ( response ) {
-					result = response;
+					result.bet = response;
 				},
-				error: function() {
-					alert( translator.matchBetSavingError );
+				error: function(err) {
+					result.errors = self._readErrors(err);
+					_.each(result.errors, function(error) {
+						alert(error.errorCode);
+					});
 				}
 			} );
 
@@ -683,6 +690,10 @@ define( function ( require ) {
 			} );
 
 			return result;
+		},
+
+		_readErrors: function(err) {
+			return JSON.parse(err.responseText).errors;
 		}
 	}
 } );

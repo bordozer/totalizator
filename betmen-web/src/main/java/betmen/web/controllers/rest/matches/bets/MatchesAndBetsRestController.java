@@ -3,6 +3,7 @@ package betmen.web.controllers.rest.matches.bets;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
+import betmen.core.exception.BadRequestException;
 import betmen.core.exception.BusinessException;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.model.ValidationResult;
@@ -58,23 +59,6 @@ public class MatchesAndBetsRestController {
 
         final List<MatchBetDTO> matchBetDTOs = dtoService.getMatchBetForMatches(matches, showBetsOfUser, currentUser);
 
-		/*if ( userId > 0 ) {
-
-			CollectionUtils.filter( matchBetDTOs, new Predicate<MatchBetDTO>() {
-
-				@Override
-				public boolean evaluate( final MatchBetDTO matchBetDTO ) {
-					final BetDTO bet = matchBetDTO.getBet();
-
-					if ( bet == null ) {
-						return false;
-					}
-
-					return bet.getUser().getUserId() == userId;
-				}
-			} );
-		}*/
-
         final List<LocalDate> matchDates = matchBetDTOs
                 .stream()
                 .map(matchBetDTO -> matchBetDTO.getMatch().getBeginningTime().toLocalDate())
@@ -107,8 +91,13 @@ public class MatchesAndBetsRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{matchId}/bets/{score1}/{score2}/")
-    public BetDTO makeBet(final Principal principal, @PathVariable("matchId") final int matchId, @PathVariable("score1") final int score1,
+    public BetDTO makeBet(final Principal principal,
+                          @PathVariable("matchId") final int matchId,
+                          @PathVariable("score1") final int score1,
                           @PathVariable("score2") final int score2) {
+        if (score1 < 0 || score2 < 0) {
+            throw new BadRequestException("errors.points_cannot_be_negative");
+        }
 
         final User currentUser = userService.findByLogin(principal.getName());
         final Match match = matchService.loadAndAssertExists(matchId);

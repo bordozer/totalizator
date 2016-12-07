@@ -3,6 +3,7 @@ package betmen.rests.utils.helpers;
 import betmen.dto.dto.BetDTO;
 import betmen.dto.dto.MatchBetDTO;
 import betmen.rests.common.RequestHelper;
+import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.MatchRoutes;
 import betmen.rests.utils.RestTestConstants;
 import com.jayway.restassured.response.Response;
@@ -26,8 +27,8 @@ public class BetEndPointsHandler {
         return RequestHelper.doGet(MatchRoutes.GET_MATCH_BET, userMatchBetParams(matchId, userId), SC_OK).as(MatchBetDTO.class);
     }
 
-    public static Response make(final int matchId, final int score1, final int score2, final int expectedStatusCode) {
-        return RequestHelper.doJsonPost(MatchRoutes.MAKE_MATCH_BET, EMPTY_JSON_BODY, makeBetParams(matchId, score1, score2), expectedStatusCode);
+    public static Response make(final int matchId, final int score1, final int score2, final ResponseStatus expectedStatusCode) {
+        return RequestHelper.doJsonPost(MatchRoutes.MAKE_MATCH_BET, EMPTY_JSON_BODY, makeBetParams(matchId, score1, score2), expectedStatusCode.getCode());
     }
 
     public static BetDTO make(final int matchId, final int score1, final int score2) {

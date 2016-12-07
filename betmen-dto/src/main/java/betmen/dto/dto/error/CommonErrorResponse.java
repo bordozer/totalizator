@@ -33,7 +33,9 @@ public class CommonErrorResponse {
 
     public boolean containsError(final String errorCode) {
         return Optional.ofNullable(errors)
-                .map(errors1 -> errors1.stream().filter(error -> error.getErrorCode().equals(errorCode)).findFirst())
+                .map(errors1 -> errors1.stream()
+                        .filter(error -> error.getErrorCode().equals(errorCode))
+                        .findFirst())
                 .orElse(Optional.empty()).isPresent();
     }
 }

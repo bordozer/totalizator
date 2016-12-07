@@ -51,8 +51,7 @@ public class ExceptionHandlingController {
     @ExceptionHandler(value = BadRequestException.class)
     public void badRequestException(final Exception e, final Writer writer) throws IOException {
         log.error(EXCEPTION_HAS_HAPPENED, e);
-        String error = String.format("%s: %s", e.getClass().getName(), e.getMessage());
-        writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(error, ""))));
+        writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(e.getMessage(), ""))));
     }
 
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
@@ -66,8 +65,7 @@ public class ExceptionHandlingController {
     @ExceptionHandler(value = Exception.class)
     public void internalServerError(final Exception e, final Writer writer) throws IOException {
         log.error(EXCEPTION_HAS_HAPPENED, e);
-        String error = String.format("%s: %s", e.getClass().getName(), e.getMessage());
-        writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(error, ""))));
+        writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(e.getMessage(), ""))));
     }
 
     @ResponseStatus(value = HttpStatus.EXPECTATION_FAILED)

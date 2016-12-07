@@ -318,15 +318,18 @@ define( function ( require ) {
 			var score1 = this.$( '#score1' ).val();
 			var score2 = this.$( '#score2' ).val();
 
-			var bet = service.saveBet( match.matchId, score1, score2 );
+			var betResult = service.saveBet( match.matchId, score1, score2 );
+			if (betResult.errors.length > 0) {
+				return;
+			}
 
-			this.model.set( { bet: bet } );
+			this.model.set( { bet: betResult.bet } );
 
 			this._setWidgetModes( MODE_INFO );
 
 			this.render();
 
-			this.trigger( 'events:match_bet_is_changed', bet );
+			this.trigger( 'events:match_bet_is_changed', betResult.bet );
 		},
 
 		_deleteBet: function() {

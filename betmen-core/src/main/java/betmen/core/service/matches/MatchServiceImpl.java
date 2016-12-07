@@ -134,6 +134,13 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public List<Match> loadAll(final Team team, final LocalDate onDate) {
+        LocalDateTime from = dateTimeService.getFirstSecondOf(onDate);
+        LocalDateTime to = dateTimeService.getLastSecondOf(onDate);
+        return matchJpaRepository.loadAllTeamMatchesForPeriod(team.getId(), from, to);
+    }
+
+    @Override
     public List<Match> loadAll(final Team team1, final Team team2) {
         return newArrayList(matchRepository.loadAll(team1, team2));
     }

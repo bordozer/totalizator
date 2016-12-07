@@ -116,7 +116,7 @@ public class MatchBetsFlowRestTest {
 
     @Test(priority = 20)
     public void shouldNotMakeBetForAnonymous() {
-        BetEndPointsHandler.make(match.getMatchId(), 0, 2, UNAUTHORIZED);
+        BetEndPointsHandler.make(match.getMatchId(), 0, 2, ResponseStatus.UNAUTHORIZED);
     }
 
     @Test(priority = 30)
@@ -232,7 +232,7 @@ public class MatchBetsFlowRestTest {
     @Test(priority = 130)
     public void userCanNotChangeHisBetAfterMatchStart() {
         loginAsUser();
-        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, BUSINESS_EXCEPTION);
+        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, ResponseStatus.BUSINESS_EXCEPTION);
         CommonErrorResponse errorsResponse = response.as(CommonErrorResponse.class);
         assertThat(errorsResponse.containsError(ErrorCodes.MATCH_HAS_ALREADY_STARTED), is(true));
     }
@@ -248,7 +248,7 @@ public class MatchBetsFlowRestTest {
     @Test(priority = 150)
     public void anotherUserCanNotCreateNewBetAfterMatchStarted() {
         loginAsAnotherUser();
-        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, BUSINESS_EXCEPTION);
+        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, ResponseStatus.BUSINESS_EXCEPTION);
         CommonErrorResponse errorsResponse = response.as(CommonErrorResponse.class);
         assertThat(errorsResponse.containsError(ErrorCodes.MATCH_HAS_ALREADY_STARTED), is(true));
     }
@@ -263,7 +263,7 @@ public class MatchBetsFlowRestTest {
     @Test(priority = 230)
     public void userCanNotChangeHisBetAfterMatchIsClosed() {
         loginAsUser();
-        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, BUSINESS_EXCEPTION);
+        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, ResponseStatus.BUSINESS_EXCEPTION);
         CommonErrorResponse errorsResponse = response.as(CommonErrorResponse.class);
         assertThat(errorsResponse.containsError(ErrorCodes.MATCH_FINISHED), is(true));
     }
@@ -279,7 +279,7 @@ public class MatchBetsFlowRestTest {
     @Test(priority = 250)
     public void anotherUserCanNotCreateNewBetAfterMatchIsClosed() {
         loginAsAnotherUser();
-        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, BUSINESS_EXCEPTION);
+        Response response = BetEndPointsHandler.make(match.getMatchId(), 1, 1, ResponseStatus.BUSINESS_EXCEPTION);
         CommonErrorResponse errorsResponse = response.as(CommonErrorResponse.class);
         assertThat(errorsResponse.containsError(ErrorCodes.MATCH_FINISHED), is(true));
     }
@@ -326,7 +326,7 @@ public class MatchBetsFlowRestTest {
     @Test(priority = 370)
     public void userCanNotChangeHisBetAfterCupIsClosedEvenIfMatchHasNotFinished() {
         loginAsUser();
-        Response response = BetEndPointsHandler.make(anotherMatch.getMatchId(), 1, 1, BUSINESS_EXCEPTION);
+        Response response = BetEndPointsHandler.make(anotherMatch.getMatchId(), 1, 1, ResponseStatus.BUSINESS_EXCEPTION);
         CommonErrorResponse errorsResponse = response.as(CommonErrorResponse.class);
         assertThat(errorsResponse.containsError(ErrorCodes.CUP_FINISHED), is(true));
     }
@@ -342,7 +342,7 @@ public class MatchBetsFlowRestTest {
     @Test(priority = 390)
     public void anotherUserCanNotCreateNewBetAfterCupIsClosedEvenIfMatchHasNotFinished() {
         loginAsAnotherUser();
-        Response response = BetEndPointsHandler.make(anotherMatch.getMatchId(), 1, 1, BUSINESS_EXCEPTION);
+        Response response = BetEndPointsHandler.make(anotherMatch.getMatchId(), 1, 1, ResponseStatus.BUSINESS_EXCEPTION);
         CommonErrorResponse errorsResponse = response.as(CommonErrorResponse.class);
         assertThat(errorsResponse.containsError(ErrorCodes.CUP_FINISHED), is(true));
     }
@@ -398,7 +398,7 @@ public class MatchBetsFlowRestTest {
         // login as user - he cannot change his bet but can read own bet and bets of another user
         login(userData);
 
-        BetEndPointsHandler.make(match.getMatchId(), 0, 0, UNPROCESSABLE_ENTITY); // cannot make bet
+        BetEndPointsHandler.make(match.getMatchId(), 0, 0, ResponseStatus.UNPROCESSABLE_ENTITY); // cannot make bet
 
         MatchBetDTO matchBet = BetEndPointsHandler.get(match.getMatchId(), user.getUserId()); // can get
         assertThat(matchBet, notNullValue());

@@ -8,6 +8,8 @@ import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
 import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.dto.dto.admin.TeamEditDTO;
+import betmen.dto.dto.error.CommonErrorResponse;
+import betmen.rests.common.ResponseStatus;
 import betmen.rests.utils.ComparisonUtils;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
 import betmen.rests.utils.data.templater.CupTemplater;
@@ -16,6 +18,7 @@ import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.BetEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
+import com.jayway.restassured.response.Response;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -105,5 +108,13 @@ public class MatchBetsAndUserPublicFutureCupRestTest {
         assertThat(theSameMatchBet.getBet().isSecuredBet(), is(true));  // user can see bet of not started match
         assertThat(theSameMatchBet.getBet().getScore1(), is(0)); // user can see bet of not started match
         assertThat(theSameMatchBet.getBet().getScore2(), is(0)); // user can see bet of not started match
+    }
+
+    @Test
+    public void shouldNotAllowNegativeBetPoints() {
+        AuthEndPointsHandler.registerNewUserAndLogin();
+        Response response = BetEndPointsHandler.make(matchId, -1, 0, ResponseStatus.BAD_REQUEST);
+        CommonErrorResponse errorResponse = response.as(CommonErrorResponse.class);
+        assertThat(errorResponse.containsError("errors.points_cannot_be_negative"), is(true));
     }
 }

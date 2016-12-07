@@ -4,13 +4,14 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.Team;
 import betmen.core.exception.BadRequestException;
+import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.service.CupService;
 import betmen.core.service.TeamService;
-import betmen.core.service.UserService;
 import betmen.core.service.matches.MatchBetsService;
 import betmen.core.service.matches.MatchService;
 import betmen.core.service.matches.MatchUpdateService;
 import betmen.core.service.matches.MatchesAndBetsWidgetService;
+import betmen.core.service.utils.DateTimeService;
 import betmen.dto.dto.MatchSearchModelDto;
 import betmen.dto.dto.admin.MatchEditDTO;
 import betmen.web.converters.DTOService;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,8 +32,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/admin/rest/matches")
 public class AdminMatchesRestController {
 
-    @Autowired
-    private UserService userService;
     @Autowired
     private MatchService matchService;
     @Autowired
@@ -44,6 +44,8 @@ public class AdminMatchesRestController {
     private TeamService teamService;
     @Autowired
     private MatchBetsService matchBetsService;
+    @Autowired
+    private DateTimeService dateTimeService;
     @Autowired
     private DTOService dtoService;
 
@@ -60,7 +62,7 @@ public class AdminMatchesRestController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0")
-    public MatchEditDTO createItem(@Validated @RequestBody final MatchEditDTO dto, final Principal principal) {
+    public MatchEditDTO createMatch(@Validated @RequestBody final MatchEditDTO dto, final Principal principal) {
         validateDto(dto);
         final Match match = new Match();
         populateEntity(match, dto);
@@ -68,7 +70,7 @@ public class AdminMatchesRestController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{matchId}")
-    public MatchEditDTO save(@PathVariable("matchId") final int matchId, @Validated @RequestBody final MatchEditDTO dto, final Principal principal) {
+    public MatchEditDTO saveMatch(@PathVariable("matchId") final int matchId, @Validated @RequestBody final MatchEditDTO dto, final Principal principal) {
         validateDto(dto);
         final Match match = matchService.loadAndAssertExists(dto.getMatchId());
         populateEntity(match, dto);
@@ -76,7 +78,7 @@ public class AdminMatchesRestController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{matchId}")
-    public boolean delete(@PathVariable("matchId") final int matchId) {
+    public boolean deleteMatch(@PathVariable("matchId") final int matchId) {
         if (matchId == 0) {
             return true;
         }
@@ -131,11 +133,21 @@ public class AdminMatchesRestController {
         Team team2 = teamService.loadAndAssertExists(team2Id);
 
         if (!team1.getCategory().equals(cup.getCategory())) {
-            throw new BadRequestException(String.format("Team %s has category %s, but cup has %s", team1, team1.getCategory(), cup.getCategory()));
+            throw new BadRequestException(String.format("Team %s has category %s, but cup has %s", team1.getTeamName(), team1.getCategory().getCategoryName(), cup.getCategory().getCategoryName()));
         }
 
         if (!team2.getCategory().equals(cup.getCategory())) {
-            throw new BadRequestException(String.format("Team %s has category %s, but cup has %s", team2, team2.getCategory(), cup.getCategory()));
+            throw new BadRequestException(String.format("Team %s has category %s, but cup has %s", team2.getTeamName(), team2.getCategory().getCategoryName(), cup.getCategory().getCategoryName()));
+        }
+
+        assertTeamHasNoMatchesOnDate(team1, dateTimeService.getToday(), match.getMatchId());
+        assertTeamHasNoMatchesOnDate(team2, dateTimeService.getToday(), match.getMatchId());
+    }
+
+    private void assertTeamHasNoMatchesOnDate(final Team team, final LocalDate date, final int matchId) {
+        List<Match> matches = matchService.loadAll(team, date);
+        if (matches.stream().filter(match -> match.getId() != matchId).findAny().isPresent()) {
+            throw new UnprocessableEntityException(String.format("Team %s already has match on %s", team, date));
         }
     }
 }

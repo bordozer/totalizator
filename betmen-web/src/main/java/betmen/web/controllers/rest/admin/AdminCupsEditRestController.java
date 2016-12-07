@@ -201,7 +201,7 @@ public class AdminCupsEditRestController {
         cupWinners.stream().forEach(winner -> {
             Team team = teamService.loadAndAssertExists(winner.getTeamId());
             if (team.getCategory().getId() != categoryId) {
-                throw new BadRequestException(String.format("Cup winner %s and have different categories (Team: %d; cup: %d)", team, team.getCategory().getId(), categoryId));
+                throw new BadRequestException(String.format("Cup winner %s and his category have different categories (Team: %d; cup: %d)", team.getTeamName(), team.getCategory().getId(), categoryId));
             }
         });
 

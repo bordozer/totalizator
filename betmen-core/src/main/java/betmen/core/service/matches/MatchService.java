@@ -40,6 +40,8 @@ public interface MatchService {
 
     Match find(final Cup cup, final Team team1, final Team team2, final LocalDateTime localDateTime);
 
+    List<Match> loadAll(final Team team, final LocalDate onDate);
+
     List<Match> loadAll(final Team team1, final Team team2);
 
     List<Match> loadAll(final int cupId, final int team1Id, final int team2Id);
