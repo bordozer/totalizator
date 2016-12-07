@@ -187,11 +187,15 @@ define( function ( require ) {
 
 			this.renderFoundMatches();
 
+			var betsPoints = 0;
+			var bonusesPoints = 0;
 			var summaryPoints = 0;
 			this.model.forEach(function(matchBet) {
 				var bets = matchBet.toJSON().matchBets;
 				_.each(bets, function(bet) {
 					if (bet && bet.userMatchPointsHolder) {
+						betsPoints += parseFloat(bet.userMatchPointsHolder.matchBetPoints);
+						bonusesPoints += parseFloat(bet.userMatchPointsHolder.matchBonus);
 						summaryPoints += bet.userMatchPointsHolder.summary;
 					}
 				});
@@ -199,7 +203,10 @@ define( function ( require ) {
 			var pointsFormat = summaryPoints > 0 ? 'text-success' : summaryPoints < 0 ? 'text-danger' : 'text-muted';
 
             this.footerHtml(  "<span class='fa fa-arrow-circle-o-up fa-2x text-muted js-scroll-to-top' title='" + translator.scrollToTopLabel + "'></span>"
-				+ "<span class='pull-right " + pointsFormat + "'><h4>" + parseFloat(summaryPoints).toFixed(2) + "</h4></span>");
+				+ "<span class='pull-right " + pointsFormat + "'><h4>"
+				+ parseFloat(summaryPoints).toFixed(2)
+				+ ' <sup>' + betsPoints + ' + ' + parseFloat(bonusesPoints).toFixed(2) + '</sup>'
+				+ "</h4></span>");
 		},
 
 		_renderNoMatchesFound: function() {
