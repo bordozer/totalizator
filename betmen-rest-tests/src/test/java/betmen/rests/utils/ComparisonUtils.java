@@ -3,6 +3,7 @@ package betmen.rests.utils;
 import betmen.dto.dto.BetDTO;
 import betmen.dto.dto.CategoryDTO;
 import betmen.dto.dto.CupDTO;
+import betmen.dto.dto.CupItemDTO;
 import betmen.dto.dto.FavoriteCategoryDTO;
 import betmen.dto.dto.MatchBetDTO;
 import betmen.dto.dto.MatchDTO;
@@ -222,5 +223,13 @@ public class ComparisonUtils {
         assertThat(expected.getCategoryId(), is(actual.getCategoryId()));
         assertThat(expected.getCategoryName(), is(actual.getCategoryName()));
         assertThat(expected.getLogoUrl(), is(actual.getLogoUrl()));
+    }
+
+    public static void assertTheSame(final CupEditDTO expected, final CupItemDTO actual) {
+        assertThat(expected, notNullValue());
+        assertThat(actual, notNullValue());
+
+        assertThat(expected.getCupId(), is(actual.getCupId()));
+        assertThat(expected.getCupName(), is(actual.getCupName()));
     }
 }

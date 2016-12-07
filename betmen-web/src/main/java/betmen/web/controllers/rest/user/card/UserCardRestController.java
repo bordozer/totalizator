@@ -38,9 +38,9 @@ public class UserCardRestController {
     public UserCardDTO userCard(@PathVariable("userId") final int userId,
                                 @RequestParam(value = "cupId", required = false) final Integer cupId,
                                 @Validated final UserCardParametersDTO parameters) {
-        final User currentUser = userService.loadAndAssertExists(userId);
+        final User user = userService.loadAndAssertExists(userId);
         final LocalDate date = dateTimeService.parseDate(parameters.getOnDate());
-        final List<Cup> cupsToShow = getCupsToShow(currentUser, cupId, date);
+        final List<Cup> cupsToShow = getCupsToShow(user, cupId, date);
         return new UserCardDTO(dtoService.transformCupItems(cupsToShow));
     }
 

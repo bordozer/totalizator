@@ -245,17 +245,17 @@ public class PortalPageRestTest {
         ComparisonUtils.assertTheSame(cupsTodayToShow1.get(0), cup);
     }
 
-    private PortalPageDTO getPortalPageDTO() {
+    private static PortalPageDTO getPortalPageDTO() {
         PortalPageDTO dto = new PortalPageDTO();
         dto.setPortalPageDate(TODAY);
         return dto;
     }
 
-    private CupTemplater cupTemplater(final CategoryEditDTO category, final PointsCalculationStrategyEditDTO ps) {
+    private static CupTemplater cupTemplater(final CategoryEditDTO category, final PointsCalculationStrategyEditDTO ps) {
         return CupTemplater.random(category.getCategoryId(), ps.getPcsId());
     }
 
-    private CupEditDTO createCup(final CupEditDTO cup) {
+    private static CupEditDTO createCup(final CupEditDTO cup) {
         return AdminCupEndPointsHandler.create(cup);
     }
 

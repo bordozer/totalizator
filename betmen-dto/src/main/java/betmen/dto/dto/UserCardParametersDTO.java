@@ -9,6 +9,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Setter
 @ToString
 public class UserCardParametersDTO {
-    @NotBlank
+    @NotBlank(message = "errors.user_card_date_should_be_provided")
     private String onDate;
 }

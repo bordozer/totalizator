@@ -93,7 +93,6 @@ define( function ( require ) {
 				var options = {
 					filter: {
 						userId: userId
-						, categoryId: cup.category.categoryId
 						, cupId: cup.cupId
 						, filterByDateEnable: true
 						, filterByDate: self.onDate
