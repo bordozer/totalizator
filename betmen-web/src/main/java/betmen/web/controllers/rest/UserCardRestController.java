@@ -1,4 +1,4 @@
-package betmen.web.controllers.rest.user.card;
+package betmen.web.controllers.rest;
 
 import betmen.core.entity.Cup;
 import betmen.core.entity.User;
