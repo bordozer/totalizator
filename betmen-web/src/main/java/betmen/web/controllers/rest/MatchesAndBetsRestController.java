@@ -1,4 +1,4 @@
-package betmen.web.controllers.rest.matches.bets;
+package betmen.web.controllers.rest;
 
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;

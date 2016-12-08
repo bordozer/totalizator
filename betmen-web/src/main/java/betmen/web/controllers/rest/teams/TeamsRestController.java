@@ -36,24 +36,24 @@ public class TeamsRestController {
     private CupTeamService cupTeamService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{teamId}/")
-    public TeamDTO team(final @PathVariable("teamId") int teamId) {
+    public TeamDTO team(@PathVariable("teamId") final int teamId) {
         return dtoService.transformTeam(teamService.load(teamId));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/categories/{categoryId}/")
-    public List<TeamDTO> categoryTeams(final @PathVariable("categoryId") int categoryId, final Principal principal) {
+    public List<TeamDTO> categoryTeams(@PathVariable("categoryId") final int categoryId, final Principal principal) {
         final Category category = categoryService.load(categoryId);
         return dtoService.transformTeams(category, teamService.loadAll(category.getId()), getCurrentUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/cup/{cupId}/")
-    public List<TeamDTO> cupTeams(final @PathVariable("cupId") int cupId, final Principal principal) {
+    public List<TeamDTO> cupTeams(@PathVariable("cupId") final int cupId, final Principal principal) {
         final Category category = cupService.load(cupId).getCategory();
         return dtoService.transformTeams(category, teamService.loadAll(category.getId()), getCurrentUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/cup/{cupId}/active/")
-    public List<TeamDTO> cupTeamsActive(final @PathVariable("cupId") int cupId, final Principal principal) {
+    public List<TeamDTO> cupTeamsActive(@PathVariable("cupId") final int cupId, final Principal principal) {
         return dtoService.transformTeams(cupService.load(cupId).getCategory(), cupTeamService.loadActiveForCup(cupId), getCurrentUser(principal));
     }
 
