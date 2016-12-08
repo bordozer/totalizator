@@ -1,4 +1,4 @@
-package betmen.web.controllers.rest.app;
+package betmen.web.controllers.rest;
 
 import betmen.core.entity.User;
 import betmen.core.model.AppContext;
@@ -8,6 +8,9 @@ import betmen.core.service.UserService;
 import betmen.core.service.utils.DateTimeService;
 import betmen.core.translator.Language;
 import betmen.core.translator.TranslatorService;
+import betmen.dto.dto.AppDTO;
+import betmen.dto.dto.ClientDataDTO;
+import betmen.dto.dto.LanguageDTO;
 import betmen.dto.dto.UserDTO;
 import betmen.web.converters.DTOService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,19 +39,20 @@ public class AppRestController {
     private TranslatorService translatorService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public AppDTO applicationData(final ClientData clientData, final Principal principal, final HttpServletRequest request) {
-        final String projectName = systemVarsService.getProjectName();
+    public AppDTO applicationData(final ClientDataDTO clientData, final Principal principal, final HttpServletRequest request) {
         final AppContext appContext = AppContext.read(request.getSession());
         appContext.setTimeZone(clientData.getTimezone());
-        final Language lang = appContext.getLanguage();
-        final LanguageDTO language = new LanguageDTO(translatorService.translate(lang.getName(), lang), lang.getCountry());
-        final AppDTO dto = new AppDTO(projectName, language);
-        final LocalDateTime now = dateTimeService.getNow();
-        dto.setServerNow(now);
+        final AppDTO dto = new AppDTO(systemVarsService.getProjectName(), buildLanguageDTO(appContext));
+        dto.setServerNow(dateTimeService.getNow());
         if (principal != null) {
             dto.setCurrentUser(dtoService.transformUser(userService.findByLogin(principal.getName())));
         }
         return dto;
+    }
+
+    private LanguageDTO buildLanguageDTO(final AppContext appContext) {
+        final Language lang = appContext.getLanguage();
+        return new LanguageDTO(translatorService.translate(lang.getName(), lang), lang.getCountry());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/who-am-i/")

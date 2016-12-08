@@ -3,8 +3,6 @@ package betmen.rests.common;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-//@Getter
-//@AllArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class UserRegData {

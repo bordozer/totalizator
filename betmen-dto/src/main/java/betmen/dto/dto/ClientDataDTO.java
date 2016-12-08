@@ -1,10 +1,10 @@
-package betmen.web.controllers.rest.app;
+package betmen.dto.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ClientData {
+public class ClientDataDTO {
     private int timezone;
 }

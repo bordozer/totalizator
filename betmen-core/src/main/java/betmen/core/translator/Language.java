@@ -6,7 +6,10 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public enum Language {
 
-    NERD(1, "nerd", "Language: Nerd", "nerd.png", ""), RU(3, "ru", "Language: Russian", "ru.png", "ru"), UA(4, "ua", "Language: Ukrainian", "ua.png", "uk"), EN(2, "en", "Language: English", "en.png", "en");
+    NERD(1, "nerd", "Language: Nerd", "nerd.png", ""),
+    RU(3, "ru", "Language: Russian", "ru.png", "ru"),
+    UA(4, "ua", "Language: Ukrainian", "ua.png", "uk"),
+    EN(2, "en", "Language: English", "en.png", "en");
 
     private final int id;
     private final String code;
@@ -20,26 +23,6 @@ public enum Language {
         this.name = name;
         this.icon = icon;
         this.country = country;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public static Language getById(final int id) {
@@ -75,5 +58,25 @@ public enum Language {
         }
 
         return languages;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public String getCountry() {
+        return country;
     }
 }
