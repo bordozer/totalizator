@@ -4,25 +4,24 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.CupTeam;
 import betmen.core.entity.Team;
 import betmen.core.repository.CupTeamDao;
-import com.google.common.base.Function;
+import betmen.core.repository.jpa.CupTeamJpaRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CupTeamServiceImpl implements CupTeamService {
 
     @Autowired
     private CupTeamDao cupTeamRepository;
-
+    @Autowired
+    private CupTeamJpaRepository cupTeamJpaRepository;
     @Autowired
     private CupService cupService;
-
     @Autowired
     private TeamService teamService;
 
@@ -34,16 +33,12 @@ public class CupTeamServiceImpl implements CupTeamService {
     @Override
     @Transactional
     public void saveCupTeam(final int cupId, final int teamId, final boolean isActive) {
-
         final CupTeam cupTeam = cupTeamRepository.load(cupId, teamId);
-
         final boolean exists = cupTeam != null;
-
         if (isActive && !exists) {
             createNewEntry(cupId, teamId);
             return;
         }
-
         if (!isActive && exists) {
             deleteExistingEntry(cupTeam);
             return;
@@ -51,7 +46,6 @@ public class CupTeamServiceImpl implements CupTeamService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public boolean exists(final Cup cup, final Team team) {
         return exists(cup.getId(), team.getId());
     }
@@ -63,36 +57,22 @@ public class CupTeamServiceImpl implements CupTeamService {
 
     @Override
     public List<Team> loadActiveForCup(final int cupId) {
-
-        final List<CupTeam> cupTeams = loadAll(cupId);
-        Collections.sort(cupTeams, new Comparator<CupTeam>() {
-            @Override
-            public int compare(final CupTeam o1, final CupTeam o2) {
-                return o1.getTeam().getTeamName().compareToIgnoreCase(o2.getTeam().getTeamName());
-            }
-        });
-
-        return Lists.transform(cupTeams, new Function<CupTeam, Team>() {
-            @Override
-            public Team apply(final CupTeam cupTeam) {
-                return cupTeam.getTeam();
-            }
-        });
+        return loadAll(cupId).stream()
+                .sorted((o1, o2) -> o1.getTeam().getTeamName().compareToIgnoreCase(o2.getTeam().getTeamName()))
+                .map(CupTeam::getTeam)
+                .collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public void clearFor(int teamId) {
-        cupService.loadAll().stream()
-                .filter(cup -> exists(cup.getId(), teamId))
-                .forEach(cup -> clearFor(cup.getId(), teamId));
+        cupTeamJpaRepository.deleteAllByTeamId(teamId);
     }
 
     @Override
+    @Transactional
     public void clearForCup(final int cupId) {
-        loadAll(cupId).stream()
-                .forEach(cupTeam -> {
-                    clearFor(cupId, cupTeam.getTeam().getId());
-                });
+        cupTeamJpaRepository.delete(loadAll(cupId));
     }
 
     @Override

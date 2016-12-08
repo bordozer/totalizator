@@ -20,4 +20,8 @@ public class ParameterUtils {
     public static Map<String, Object> categoryParams(final int id) {
         return Collections.singletonMap(RestTestConstants.CATEGORY_ID, id);
     }
+
+    public static Map<String, Object> teamParams(final int teamId) {
+        return Collections.singletonMap(RestTestConstants.TEAM_ID, teamId);
+    }
 }

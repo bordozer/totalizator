@@ -2,11 +2,9 @@ package betmen.core.service;
 
 import betmen.core.entity.Category;
 import betmen.core.entity.Cup;
-import betmen.core.entity.Match;
 import betmen.core.entity.PointsCalculationStrategy;
 import betmen.core.entity.SportKind;
 import betmen.core.entity.User;
-import betmen.core.entity.UserGroupEntity;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.CupDao;
 import betmen.core.repository.jpa.CupJpaRepository;
@@ -23,7 +21,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -31,11 +28,9 @@ import java.util.stream.Collectors;
 @Service
 public class CupServiceImpl implements CupService {
 
-    private static final Logger LOGGER = Logger.getLogger(CupServiceImpl.class);
-
     public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_ASC = (o1, o2) -> o1.getCupStartTime().compareTo(o2.getCupStartTime());
     public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_DESC = SORT_BY_CUP_BEGINNING_TIME_ASC.reversed();
-
+    private static final Logger LOGGER = Logger.getLogger(CupServiceImpl.class);
     @Autowired
     private CupDao cupRepository;
     @Autowired

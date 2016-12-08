@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/admin/rest/teams")
 public class AdminTeamEditRestController {
 
+    private static final Logger LOGGER = Logger.getLogger(AdminTeamEditRestController.class);
     @Autowired
     private TeamService teamService;
     @Autowired
@@ -40,8 +41,6 @@ public class AdminTeamEditRestController {
     private MatchService matchService;
     @Autowired
     private LogoService logoService;
-
-    private static final Logger LOGGER = Logger.getLogger(AdminTeamEditRestController.class);
 
     @RequestMapping(method = RequestMethod.GET, value = "/{teamId}/")
     public TeamEditDTO getItem(@PathVariable("teamId") final int teamId) {
@@ -105,7 +104,7 @@ public class AdminTeamEditRestController {
         logoFile.transferTo(logoService.getLogoFile(saved));
     }
 
-    private void populateEntity(final Team team, final @RequestBody TeamEditDTO dto) {
+    private void populateEntity(final Team team, final TeamEditDTO dto) {
         team.setTeamName(dto.getTeamName());
         team.setCategory(categoryService.loadAndAssertExists(dto.getCategoryId()));
         team.setImportId(dto.getTeamImportId());

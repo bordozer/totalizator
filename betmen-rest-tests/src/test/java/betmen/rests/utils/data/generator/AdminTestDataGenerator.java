@@ -51,9 +51,9 @@ public class AdminTestDataGenerator {
         return AdminTeamEndPointsHandler.create(dto);
     }
 
-    public static TeamEditDTO createTeamAndActivateForCup(final int categoryId, final int makeActiveForCupId) {
+    public static TeamEditDTO createTeamAndActivateForCup(final int categoryId, final int cupId) {
         TeamEditDTO dto = TeamEditDtoBuilder.construct(RandomUtils.teamName(), categoryId);
-        return AdminTeamEndPointsHandler.create(makeActiveForCupId, dto);
+        return AdminTeamEndPointsHandler.create(cupId, dto);
     }
 
     public static MatchEditDTO createRandomMatch() {

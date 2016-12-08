@@ -1,4 +1,4 @@
-package betmen.web.controllers.rest.teams;
+package betmen.web.controllers.rest;
 
 import betmen.core.entity.Category;
 import betmen.core.entity.User;
@@ -37,24 +37,24 @@ public class TeamsRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{teamId}/")
     public TeamDTO team(@PathVariable("teamId") final int teamId) {
-        return dtoService.transformTeam(teamService.load(teamId));
+        return dtoService.transformTeam(teamService.loadAndAssertExists(teamId));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/categories/{categoryId}/")
     public List<TeamDTO> categoryTeams(@PathVariable("categoryId") final int categoryId, final Principal principal) {
-        final Category category = categoryService.load(categoryId);
+        final Category category = categoryService.loadAndAssertExists(categoryId);
         return dtoService.transformTeams(category, teamService.loadAll(category.getId()), getCurrentUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/cup/{cupId}/")
     public List<TeamDTO> cupTeams(@PathVariable("cupId") final int cupId, final Principal principal) {
-        final Category category = cupService.load(cupId).getCategory();
+        final Category category = cupService.loadAndAssertExists(cupId).getCategory();
         return dtoService.transformTeams(category, teamService.loadAll(category.getId()), getCurrentUser(principal));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/cup/{cupId}/active/")
     public List<TeamDTO> cupTeamsActive(@PathVariable("cupId") final int cupId, final Principal principal) {
-        return dtoService.transformTeams(cupService.load(cupId).getCategory(), cupTeamService.loadActiveForCup(cupId), getCurrentUser(principal));
+        return dtoService.transformTeams(cupService.loadAndAssertExists(cupId).getCategory(), cupTeamService.loadActiveForCup(cupId), getCurrentUser(principal));
     }
 
     private User getCurrentUser(final Principal principal) {
