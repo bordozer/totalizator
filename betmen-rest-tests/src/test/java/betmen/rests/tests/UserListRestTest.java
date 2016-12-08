@@ -85,11 +85,13 @@ public class UserListRestTest {
         CategoryEditDTO category = AdminTestDataGenerator.createCategory();
         TeamEditDTO team1 = AdminTestDataGenerator.createTeam(category.getCategoryId());
         TeamEditDTO team2 = AdminTestDataGenerator.createTeam(category.getCategoryId());
+        TeamEditDTO team3 = AdminTestDataGenerator.createTeam(category.getCategoryId());
+        TeamEditDTO team4 = AdminTestDataGenerator.createTeam(category.getCategoryId());
         CupEditDTO cup = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), pcs.getPcsId());
 
         MatchEditDTO matchEdit1 = MatchTemplater.random(cup.getCupId(), team1.getTeamId(), team2.getTeamId()).future(2).build();
         MatchEditDTO match1 = AdminMatchEndPointsHandler.create(matchEdit1);
-        MatchEditDTO matchEdit2 = MatchTemplater.random(cup.getCupId(), team1.getTeamId(), team2.getTeamId()).future(3).build();
+        MatchEditDTO matchEdit2 = MatchTemplater.random(cup.getCupId(), team3.getTeamId(), team4.getTeamId()).future(3).build();
         MatchEditDTO match2 = AdminMatchEndPointsHandler.create(matchEdit2);
 
         UserDTO noBetUse = AuthEndPointsHandler.registerNewUserAndLogin();

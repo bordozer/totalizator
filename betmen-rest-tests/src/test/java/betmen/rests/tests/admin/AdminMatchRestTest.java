@@ -11,7 +11,6 @@ import betmen.dto.dto.error.CommonErrorResponse;
 import betmen.dto.dto.error.FieldErrorsResponse;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.utils.ComparisonUtils;
-import betmen.rests.utils.data.DataCleanUpUtils;
 import betmen.rests.utils.data.builders.MatchEditDtoBuilder;
 import betmen.rests.utils.data.builders.TeamEditDtoBuilder;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
@@ -153,27 +152,6 @@ public class AdminMatchRestTest {
     }
 
     @Test
-    public void shouldNotAllowToAddTeamIfItHasGameInTheSameDate() {
-        PointsCalculationStrategyEditDTO strategy = AdminTestDataGenerator.createPointsStrategy();
-        CategoryEditDTO category = AdminTestDataGenerator.createCategory();
-        CupEditDTO randomCup1 = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), strategy.getPcsId());
-        CupEditDTO randomCup2 = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), strategy.getPcsId());
-
-        TeamEditDTO team1 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
-        TeamEditDTO team2 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
-        TeamEditDTO team3 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
-        TeamEditDTO team4 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build());
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team3.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team3.getTeamId(), team1.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team3.getTeamId(), team4.getTeamId()).future().finished(false).build());
-
-        Response response = AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup2.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
-        CommonErrorResponse errorResponse = response.as(CommonErrorResponse.class);
-        assertThat(errorResponse.containsError("errors.team_already_has_match_on_date"), is(true));
-    }
-
-    @Test
     public void shouldCreateMatchIfCupIsFinished() {
         TeamEditDTO team = AdminTestDataGenerator.createTeam(cup.getCategoryId());
         CupWinnerEditDTO cupWinner = TeamEditDtoBuilder.convertTeamToCupWinner(1, team.getTeamId());
@@ -188,6 +166,41 @@ public class AdminMatchRestTest {
         MatchEditDTO update = AdminMatchEndPointsHandler.update(match);
         assertThat(update, notNullValue());
         assertThat(update.getMatchId(), is(match.getMatchId()));
+    }
+
+    @Test
+    public void shouldNotAllowToAddTeamIfItHasGameInTheSameDate() {
+        PointsCalculationStrategyEditDTO strategy = AdminTestDataGenerator.createPointsStrategy();
+        CategoryEditDTO category = AdminTestDataGenerator.createCategory();
+        CupEditDTO randomCup1 = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), strategy.getPcsId());
+        CupEditDTO randomCup2 = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), strategy.getPcsId());
+
+        TeamEditDTO team1 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        TeamEditDTO team2 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        TeamEditDTO team3 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        TeamEditDTO team4 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team3.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team3.getTeamId(), team1.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team2.getTeamId()).future().withBeginningTime(LocalDateTime.now().plusDays(1)).finished(false).build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team3.getTeamId(), team4.getTeamId()).future().finished(false).build());
+
+        Response response = AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup2.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build(), ResponseStatus.UNPROCESSABLE_ENTITY);
+        CommonErrorResponse errorResponse = response.as(CommonErrorResponse.class);
+        assertThat(errorResponse.containsError("errors.team_already_has_match_on_date"), is(true));
+    }
+
+    @Test
+    public void temp() {
+        PointsCalculationStrategyEditDTO strategy = AdminTestDataGenerator.createPointsStrategy();
+        CategoryEditDTO category = AdminTestDataGenerator.createCategory();
+        CupEditDTO randomCup1 = AdminTestDataGenerator.createRandomCup(category.getCategoryId(), strategy.getPcsId());
+
+        TeamEditDTO team1 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+        TeamEditDTO team2 = AdminTestDataGenerator.createTeam(randomCup1.getCategoryId());
+
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(randomCup1.getCupId(), team1.getTeamId(), team2.getTeamId()).future().withBeginningTime(LocalDateTime.now().plusDays(1)).finished(false).build());
     }
 
     private MatchEditDTO createMatch() {

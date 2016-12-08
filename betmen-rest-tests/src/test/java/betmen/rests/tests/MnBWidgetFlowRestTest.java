@@ -75,6 +75,7 @@ public class MnBWidgetFlowRestTest {
     private TeamEditDTO team22;
     private TeamEditDTO team23;
     private TeamEditDTO team24;
+    private TeamEditDTO team25;
     private MatchEditDTO cup2LateMatch;
     private MatchEditDTO cup2MiddleMatch;
     private MatchEditDTO cup2EarlyMatch;
@@ -110,8 +111,10 @@ public class MnBWidgetFlowRestTest {
         team22 = AdminTestDataGenerator.createTeamAndActivateForCup(cup2.getCategoryId(), cup2.getCupId());
         team23 = AdminTestDataGenerator.createTeamAndActivateForCup(cup2.getCategoryId(), cup2.getCupId());
         team24 = AdminTestDataGenerator.createTeamAndActivateForCup(cup2.getCategoryId(), cup2.getCupId());
+        team25 = AdminTestDataGenerator.createTeamAndActivateForCup(cup2.getCategoryId(), cup2.getCupId());
+
         cup2EarlyMatch = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup2.getCupId(), team23.getTeamId(), team24.getTeamId()).future().build());
-        cup2MiddleMatch = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup2.getCupId(), team21.getTeamId(), team24.getTeamId()).future().withBeginningTime(LocalDateTime.now().plusDays(3)).build());
+        cup2MiddleMatch = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup2.getCupId(), team21.getTeamId(), team25.getTeamId()).future().withBeginningTime(LocalDateTime.now().plusDays(3)).build());
         cup2LateMatch = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup2.getCupId(), team21.getTeamId(), team22.getTeamId()).future().withBeginningTime(LocalDateTime.now().plusDays(4)).build());
 
         AuthEndPointsHandler.logout();

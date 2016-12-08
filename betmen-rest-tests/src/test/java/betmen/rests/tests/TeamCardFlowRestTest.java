@@ -106,7 +106,12 @@ public class TeamCardFlowRestTest {
         ExpectedCardData emptyData = new ExpectedCardData();
 
         loginAsAdmin();
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(privateCup.getCupId(), team1.getTeamId(), team2.getTeamId()).future().finished(false).build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(privateCup.getCupId(), team1.getTeamId(), team2.getTeamId())
+                .builder()
+                .withBeginningTime(LocalDateTime.now().plusDays(1))
+                .finished(false)
+                .build()
+        );
 
         loginAsUser();
         checkCupTeamData(team1, publicCup, emptyData);
@@ -121,7 +126,12 @@ public class TeamCardFlowRestTest {
         ExpectedCardData expectedCardData = new ExpectedCardData().cupsCount(1).cupIndex(0).finishedMatchCount(0).wonMatchCount(0).futureMatchesCount(1);
 
         loginAsAdmin();
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(publicCup.getCupId(), team1.getTeamId(), team2.getTeamId()).future().build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(publicCup.getCupId(), team1.getTeamId(), team2.getTeamId())
+                .builder()
+                .withBeginningTime(LocalDateTime.now().minusDays(3))
+                .finished(false)
+                .build()
+        );
 
         loginAsUser();
         checkCupTeamData(team1, publicCup, expectedCardData);
@@ -137,7 +147,14 @@ public class TeamCardFlowRestTest {
         ExpectedCardData team2ExpectedData = new ExpectedCardData().cupsCount(1).cupIndex(0).finishedMatchCount(1).wonMatchCount(1).futureMatchesCount(1);
 
         loginAsAdmin();
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(publicCup.getCupId(), team1.getTeamId(), team2.getTeamId()).finished(1, 2).build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(publicCup.getCupId(), team1.getTeamId(), team2.getTeamId())
+                .builder()
+                .withBeginningTime(LocalDateTime.now().minusDays(1))
+                .withScore1(1)
+                .withScore2(2)
+                .finished(true)
+                .build()
+        );
 
         loginAsUser();
         checkCupTeamData(team1, publicCup, team1ExpectedData);
@@ -155,7 +172,14 @@ public class TeamCardFlowRestTest {
         ExpectedCardData team2Cup2Expected = new ExpectedCardData().cupsCount(2).cupIndex(0).finishedMatchCount(1).wonMatchCount(0).futureMatchesCount(0);
 
         loginAsAdmin();
-        AdminMatchEndPointsHandler.create(MatchTemplater.random(anotherPublicCup.getCupId(), team1.getTeamId(), team2.getTeamId()).finished(3, 2).build());
+        AdminMatchEndPointsHandler.create(MatchTemplater.random(anotherPublicCup.getCupId(), team1.getTeamId(), team2.getTeamId())
+                .builder()
+                .withBeginningTime(LocalDateTime.now().minusDays(2))
+                .withScore1(3)
+                .withScore2(2)
+                .finished(true)
+                .build()
+        );
         loginAsUser();
         checkCupTeamData(team1, publicCup, team1Cup1Expected);
         checkCupTeamData(team1, anotherPublicCup, team1Cup2Expected);

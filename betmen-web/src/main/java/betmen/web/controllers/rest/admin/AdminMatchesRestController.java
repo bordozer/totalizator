@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -140,12 +140,12 @@ public class AdminMatchesRestController {
             throw new BadRequestException(String.format("Team %s has category %s, but cup has %s", team2.getTeamName(), team2.getCategory().getCategoryName(), cup.getCategory().getCategoryName()));
         }
 
-        assertTeamHasNoMatchesOnDate(team1, dateTimeService.getToday(), match.getMatchId());
-        assertTeamHasNoMatchesOnDate(team2, dateTimeService.getToday(), match.getMatchId());
+        assertTeamHasNoMatchesOnDate(team1, match.getBeginningTime(), match.getMatchId());
+        assertTeamHasNoMatchesOnDate(team2, match.getBeginningTime(), match.getMatchId());
     }
 
-    private void assertTeamHasNoMatchesOnDate(final Team team, final LocalDate date, final int matchId) {
-        List<Match> matches = matchService.loadAll(team, date);
+    private void assertTeamHasNoMatchesOnDate(final Team team, final LocalDateTime matchBeginningTime, final int matchId) {
+        List<Match> matches = matchService.loadAll(team, matchBeginningTime.toLocalDate());
         if (matches.stream().filter(match -> match.getId() != matchId).findAny().isPresent()) {
             throw new UnprocessableEntityException("errors.team_already_has_match_on_date");
         }
