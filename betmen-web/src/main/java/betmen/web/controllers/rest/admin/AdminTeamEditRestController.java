@@ -2,14 +2,12 @@ package betmen.web.controllers.rest.admin;
 
 import betmen.core.entity.Cup;
 import betmen.core.entity.Team;
-import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.service.CategoryService;
 import betmen.core.service.CupTeamService;
 import betmen.core.service.LogoService;
 import betmen.core.service.TeamService;
 import betmen.core.service.matches.MatchService;
 import betmen.dto.dto.admin.TeamEditDTO;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +28,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/admin/rest/teams")
 public class AdminTeamEditRestController {
 
-    private static final Logger LOGGER = Logger.getLogger(AdminTeamEditRestController.class);
     @Autowired
     private TeamService teamService;
     @Autowired

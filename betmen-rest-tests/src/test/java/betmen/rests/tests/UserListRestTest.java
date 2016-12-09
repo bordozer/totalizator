@@ -9,10 +9,8 @@ import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.dto.dto.admin.TeamEditDTO;
 import betmen.dto.edit.UserEditDTO;
 import betmen.rests.common.ResponseStatus;
-import betmen.rests.common.UserRegData;
 import betmen.rests.utils.ComparisonUtils;
 import betmen.rests.utils.RandomUtils;
-import betmen.rests.utils.data.DataCleanUpUtils;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
 import betmen.rests.utils.data.templater.MatchTemplater;
 import betmen.rests.utils.helpers.AuthEndPointsHandler;
@@ -23,7 +21,6 @@ import com.google.common.collect.Lists;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,7 +64,7 @@ public class UserListRestTest {
         dto.setUserId(loggedUser.getUserId());
         dto.setUserName(newName);
 
-        UserEndPointsHandler.updateUserData(dto);
+        UserEndPointsHandler.modifyCurrentUserSettings(dto);
 
         // getMatch user's data again
         List<UserDTO> userList1 = UserEndPointsHandler.getAllUsers();

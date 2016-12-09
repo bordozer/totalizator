@@ -1,9 +1,7 @@
 package betmen.core.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -35,10 +33,8 @@ import static betmen.core.entity.User.LOAD_ALL;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@ToString
+@EqualsAndHashCode(of = {}, callSuper = true)
+@ToString(of = {"login", "username"}, callSuper = true)
 public class User extends AbstractEntity {
 
     public static final String LOAD_ALL = "user.loadAll";

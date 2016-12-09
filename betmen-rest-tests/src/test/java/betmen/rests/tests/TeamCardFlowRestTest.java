@@ -21,7 +21,6 @@ import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.TeamEndPointHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
-import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -36,7 +35,6 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 public class TeamCardFlowRestTest {
 
-    private static final Logger LOGGER = Logger.getLogger(TeamCardFlowRestTest.class);
     private static final int WRONG_TEAM_ID = 125690;
 
     private UserRegData userData;
@@ -51,7 +49,6 @@ public class TeamCardFlowRestTest {
 
     @BeforeClass
     public void initClass() {
-        LOGGER.debug(this.getClass().getName());
         DataCleanUpUtils.cleanupAll();
         loginAsAdmin();
 

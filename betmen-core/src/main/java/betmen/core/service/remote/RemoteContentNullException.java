@@ -1,10 +1,9 @@
 package betmen.core.service.remote;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class RemoteContentNullException extends Exception {
-
-    private static final Logger LOGGER = Logger.getLogger(RemoteContentNullException.class);
 
     private String url;
 

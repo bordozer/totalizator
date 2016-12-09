@@ -2,6 +2,7 @@ package betmen.rests.tests;
 
 import betmen.dto.dto.BetDTO;
 import betmen.dto.dto.UserDTO;
+import betmen.dto.dto.UsersRatingPositionDTO;
 import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
@@ -13,7 +14,6 @@ import betmen.dto.dto.points.scores.CupUsersScoresDTO;
 import betmen.dto.dto.points.scores.CupUsersScoresInTimeDTO;
 import betmen.dto.dto.points.scores.UserMatchesPointsDTO;
 import betmen.dto.dto.points.scores.UserRatingPositionDTO;
-import betmen.dto.dto.UsersRatingPositionDTO;
 import betmen.rests.common.UserRegData;
 import betmen.rests.utils.RandomUtils;
 import betmen.rests.utils.data.DataCleanUpUtils;

@@ -1,12 +1,12 @@
 package betmen.core.service;
 
+import betmen.core.entity.Category;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.CategoryDao;
-import betmen.core.entity.Category;
 import betmen.core.repository.jpa.CategoryJpaRepository;
 import betmen.core.repository.jpa.FavoriteCategoryJpaRepository;
 import com.google.common.collect.Lists;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Comparator;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
-    private static final Logger LOGGER = Logger.getLogger(CategoryServiceImpl.class);
 
     @Autowired
     private CategoryDao categoryRepository;

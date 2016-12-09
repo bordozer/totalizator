@@ -4,7 +4,6 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.Match;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
-import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -18,8 +17,6 @@ import java.util.List;
 
 @Repository
 public class MatchBetRepository implements MatchBetDao {
-
-    private static final Logger LOGGER = Logger.getLogger(MatchBetRepository.class);
 
     @PersistenceContext
     private EntityManager em;

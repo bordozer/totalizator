@@ -1,11 +1,19 @@
 package betmen.dto.edit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Size;
 
+@Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
+@EqualsAndHashCode(of = {"userId"})
+@ToString(of = {"userId", "login", "userName"})
 public class UserEditDTO {
 
     private int userId;
@@ -14,28 +22,4 @@ public class UserEditDTO {
     @NotBlank
     @Size(min = 3)
     private String userName;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(final int userId) {
-        this.userId = userId;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(final String login) {
-        this.login = login;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(final String userName) {
-        this.userName = userName;
-    }
 }

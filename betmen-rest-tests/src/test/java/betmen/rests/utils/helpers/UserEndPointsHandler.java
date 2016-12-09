@@ -17,20 +17,16 @@ import java.util.Map;
 
 public class UserEndPointsHandler {
 
-    public static UserEditDTO getUserEditData(final int userId) {
-        return RequestHelper.doGet(UserRoutes.USER_GET, getParams(userId), HttpStatus.SC_OK).as(UserEditDTO.class);
+    public static UserEditDTO getCurrentUserSettings() {
+        return getCurrentUserSettings(ResponseStatus.OK).as(UserEditDTO.class);
     }
 
-    public static UserEditDTO getCurrentUserEditData() {
-        return RequestHelper.doGet(UserRoutes.USER_CURRENT, HttpStatus.SC_OK).as(UserEditDTO.class);
+    public static Response getCurrentUserSettings(final ResponseStatus expectedStatusCode) {
+        return RequestHelper.doGet(UserRoutes.USER_SETTINGS_GET, expectedStatusCode.getCode());
     }
 
-    public static UserEditDTO updateUserData(final UserEditDTO dto) {
-        return RequestHelper.doJsonPost(UserRoutes.USER_UPDATE, dto, getParams(dto.getUserId()), HttpStatus.SC_OK).as(UserEditDTO.class);
-    }
-
-    public static boolean isUserAdmin(final int userId) {
-        return RequestHelper.doGet(UserRoutes.USER_IS_ADMIN, getParams(userId), HttpStatus.SC_OK).as(Boolean.class);
+    public static UserEditDTO modifyCurrentUserSettings(final UserEditDTO dto) {
+        return RequestHelper.doJsonPost(UserRoutes.USER_SETTINGS_MODIFY, dto, HttpStatus.SC_OK).as(UserEditDTO.class);
     }
 
     public static Map<String, Object> getParams(final int userId) {

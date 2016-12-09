@@ -13,13 +13,13 @@ public class SessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(final HttpSessionEvent event) {
-        log.debug("==== Session created ====");
+        LOGGER.debug("==== Session created ====");
         final HttpSession session = event.getSession();
         session.setMaxInactiveInterval(SESSION_TIMEOUT_SECONDS);
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent event) {
-        log.debug("==== Session destroyed ====");
+        LOGGER.debug("==== Session destroyed ====");
     }
 }

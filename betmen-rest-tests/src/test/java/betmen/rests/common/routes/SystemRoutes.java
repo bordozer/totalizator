@@ -6,6 +6,7 @@ public enum SystemRoutes implements Route {
     WHO_AM_I("/rest/app/who-am-i/"),
     AUTHENTICATED("/rest/app/authenticated/"),
     APP_CONTEXT("/rest/app/"),
+    IS_CURRENT_USER_ADMIN("/rest/app/who-am-i/is-admin/"),
     ;
 
     private final String route;

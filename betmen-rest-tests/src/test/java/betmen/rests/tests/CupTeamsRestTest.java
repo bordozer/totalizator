@@ -17,7 +17,6 @@ import betmen.rests.utils.helpers.CupTeamsEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminTeamEndPointsHandler;
 import com.google.common.collect.Lists;
-import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -32,8 +31,6 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 public class CupTeamsRestTest {
 
-    private static final Logger LOGGER = Logger.getLogger(CupTeamsRestTest.class);
-
     private TeamEditDTO team1;
     private TeamEditDTO team2;
     private TeamEditDTO team3;
@@ -47,7 +44,6 @@ public class CupTeamsRestTest {
 
     @BeforeTest
     public void testsInit() {
-        LOGGER.debug(this.getClass().getName());
         DataCleanUpUtils.cleanupAll();
         AuthEndPointsHandler.loginAsAdmin();
 
@@ -103,7 +99,6 @@ public class CupTeamsRestTest {
 
         // then CUP 1
         // when
-        LOGGER.debug(String.format("shouldReturnCupTeamsWithoutAnyFilters 1: cup #%s teams", cup1.getCupId()));
         CupTeamsDTO cup1Teams = CupTeamsEndPointsHandler.getCupTeams(cup1.getCupId());
 
         // then
@@ -121,7 +116,6 @@ public class CupTeamsRestTest {
 
         // then CUP 2
         // when
-        LOGGER.debug(String.format("shouldReturnCupTeamsWithoutAnyFilters 2: cup #%s teams", cup2.getCupId()));
         CupTeamsDTO cup2Teams = CupTeamsEndPointsHandler.getCupTeams(cup2.getCupId());
 
         // then

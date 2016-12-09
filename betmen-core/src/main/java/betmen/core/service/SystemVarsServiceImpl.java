@@ -1,9 +1,9 @@
 package betmen.core.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -12,10 +12,9 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+@Slf4j
 @Service
 public class SystemVarsServiceImpl implements SystemVarsService {
-
-    private static final Logger LOGGER = Logger.getLogger(SystemVarsServiceImpl.class);
 
     private final CompositeConfiguration config = new CompositeConfiguration();
 
@@ -45,7 +44,7 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
         final List<Object> _ids = config.getList("system.admin.ids");
         for (final Object _id : _ids) {
-            adminIds.add(Integer.valueOf(((String)_id).trim()));
+            adminIds.add(Integer.valueOf(((String) _id).trim()));
         }
 
         LOGGER.debug("Configurations have been loaded");

@@ -14,7 +14,6 @@ import betmen.rests.utils.data.templater.CupTemplater;
 import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.CupsEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
-import org.junit.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

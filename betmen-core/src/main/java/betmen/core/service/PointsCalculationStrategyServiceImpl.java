@@ -4,17 +4,16 @@ import betmen.core.entity.PointsCalculationStrategy;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.PointsCalculationStrategyDao;
 import betmen.core.repository.jpa.PointsCalculationStrategyJpaRepository;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class PointsCalculationStrategyServiceImpl implements PointsCalculationStrategyService {
-
-    private static final Logger LOGGER = Logger.getLogger(PointsCalculationStrategyServiceImpl.class);
 
     @Autowired
     private PointsCalculationStrategyDao pointsCalculationStrategyRepository;

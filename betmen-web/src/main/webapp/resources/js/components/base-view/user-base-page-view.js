@@ -47,7 +47,7 @@ define( function ( require ) {
 
 			var currentUser = app.currentUser();
 
-			if ( service.isAdmin( currentUser ) ) {
+			if ( service.isAdmin() ) {
 				menus.push( { selector: '', icon: 'fa fa-cogs', link: '/admin/', text: translator.menuAdminLabel } );
 				menus.push( { selector: 'divider' } );
 			}

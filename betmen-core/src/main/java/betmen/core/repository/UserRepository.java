@@ -1,7 +1,6 @@
 package betmen.core.repository;
 
 import betmen.core.entity.User;
-import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -13,8 +12,6 @@ import java.util.List;
 
 @Repository
 public class UserRepository implements UserDao {
-
-    private static final Logger LOGGER = Logger.getLogger(UserRepository.class);
 
     @PersistenceContext
     private EntityManager em;

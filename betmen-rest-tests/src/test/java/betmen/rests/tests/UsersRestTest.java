@@ -18,25 +18,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class UsersRestTest {
 
     @Test
-    public void shouldHaveAccessToOwnData() {
-        UserDTO loggedUser = AuthEndPointsHandler.registerNewUserAndLogin();
-
-        UserEditDTO editData = UserEndPointsHandler.getUserEditData(loggedUser.getUserId());
-
-        assertThat(editData.getUserId(), is(loggedUser.getUserId()));
-        assertThat(editData.getUserName(), is(loggedUser.getUserName()));
-    }
-
-    @Test
     public void shouldReturnCurrentUserData() {
         UserDTO user = AuthEndPointsHandler.registerNewUserAndLogin();
-        UserEditDTO editDTO = UserEndPointsHandler.getCurrentUserEditData();
+        UserEditDTO editDTO = UserEndPointsHandler.getCurrentUserSettings();
         assertThat(editDTO.getUserId(), is(user.getUserId()));
         assertThat(editDTO.getUserName(), is(user.getUserName()));
     }
 
     @Test
-    public void shouldUpdateUserData() {
+    public void shouldModifyUserSettings() {
         UserRegData userRegData = RandomUtils.randomUser();
         String oldUserName = userRegData.getName();
         String oldUserLogin = userRegData.getLogin();
@@ -51,37 +41,12 @@ public class UsersRestTest {
         dto.setUserName(newUserName);
         dto.setLogin(newUserLogin);
 
-        UserEndPointsHandler.updateUserData(dto);
+        UserEndPointsHandler.modifyCurrentUserSettings(dto);
 
-        UserEditDTO loadedUserData = UserEndPointsHandler.getCurrentUserEditData();
+        UserEditDTO loadedUserData = UserEndPointsHandler.getCurrentUserSettings();
         assertThat(loadedUserData.getUserId(), is(loggedUser.getUserId()));
         assertThat(loadedUserData.getUserName(), is(newUserName));
         assertThat(loadedUserData.getLogin(), is(oldUserLogin));
-    }
-
-    @Test
-    public void shouldCheckIfUserAdmin() {
-        UserDTO user = AuthEndPointsHandler.registerNewUserAndLogin();
-        boolean userIsAdmin = UserEndPointsHandler.isUserAdmin(user.getUserId());
-        assertThat(userIsAdmin, is(Boolean.FALSE));
-    }
-
-    @Test
-    public void shouldNotUpdateAnotherUserData() {
-        UserDTO anotherUser = AuthEndPointsHandler.registerNewUser();
-
-        // register new user
-        UserDTO loggedUser = AuthEndPointsHandler.registerNewUserAndLogin();
-
-        String newUserName = RandomUtils.generate();
-        String newUserLogin = RandomUtils.generate();
-
-        UserEditDTO dto = new UserEditDTO();
-        dto.setUserId(anotherUser.getUserId());
-        dto.setUserName(newUserName);
-        dto.setLogin(newUserLogin);
-
-        RequestHelper.doJsonPost(UserRoutes.USER_UPDATE, dto, UserEndPointsHandler.getParams(dto.getUserId()), HttpStatus.SC_UNPROCESSABLE_ENTITY);
     }
 
     @Test
@@ -94,6 +59,6 @@ public class UsersRestTest {
         dto.setUserName(StringUtils.EMPTY);
         dto.setLogin(StringUtils.EMPTY);
 
-        RequestHelper.doJsonPost(UserRoutes.USER_UPDATE, dto, UserEndPointsHandler.getParams(dto.getUserId()), HttpStatus.SC_BAD_REQUEST);
+        RequestHelper.doJsonPost(UserRoutes.USER_SETTINGS_MODIFY, dto, HttpStatus.SC_BAD_REQUEST);
     }
 }

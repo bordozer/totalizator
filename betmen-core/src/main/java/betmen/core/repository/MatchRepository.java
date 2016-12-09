@@ -6,7 +6,6 @@ import betmen.core.entity.Team;
 import betmen.core.service.points.CupPointsService;
 import betmen.core.service.points.MatchPointsService;
 import betmen.core.utils.Constants;
-import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -21,7 +20,6 @@ import java.util.List;
 @Repository
 public class MatchRepository implements MatchDao {
 
-    private static final Logger LOGGER = Logger.getLogger(MatchRepository.class);
     private static final String CUP_ID = "cupId";
 
     @PersistenceContext

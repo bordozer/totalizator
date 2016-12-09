@@ -1,9 +1,9 @@
 package betmen.rests.tests;
 
-import betmen.dto.dto.error.FieldErrorsResponse;
 import betmen.dto.dto.NewUserDTO;
 import betmen.dto.dto.UserDTO;
 import betmen.dto.dto.UserRegResponse;
+import betmen.dto.dto.error.FieldErrorsResponse;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.UserRegData;
 import betmen.rests.common.routes.UserRoutes;
@@ -29,7 +29,6 @@ public class UserRegistrationRestTest {
 
         FieldErrorsResponse registrationResponse = response.as(FieldErrorsResponse.class);
 
-        // TODO
         assertThat(6, is(registrationResponse.errorsCount()));
 
         assertThat(registrationResponse.getFieldErrorResource(FIELD_LOGIN, "errors.login_must_not_be_empty"), notNullValue());

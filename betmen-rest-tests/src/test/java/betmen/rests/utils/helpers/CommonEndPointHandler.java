@@ -5,6 +5,7 @@ import betmen.dto.dto.UserDTO;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.SystemRoutes;
+import com.jayway.restassured.response.Response;
 
 public class CommonEndPointHandler {
 
@@ -20,5 +21,13 @@ public class CommonEndPointHandler {
 
     public static AppDTO getAppContext() {
         return RequestHelper.doGet(SystemRoutes.APP_CONTEXT, ResponseStatus.OK.getCode()).as(AppDTO.class);
+    }
+
+    public static boolean isCurrentUserAdmin() {
+        return isCurrentUserAdmin(ResponseStatus.OK).as(Boolean.class);
+    }
+
+    public static Response isCurrentUserAdmin(final ResponseStatus responseStatus) {
+        return RequestHelper.doGet(SystemRoutes.IS_CURRENT_USER_ADMIN, responseStatus.getCode());
     }
 }

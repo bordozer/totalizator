@@ -9,7 +9,7 @@ import betmen.core.repository.MatchDao;
 import betmen.core.repository.jpa.MatchJpaRepository;
 import betmen.core.service.points.MatchPointsService;
 import betmen.core.service.utils.DateTimeService;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+@Slf4j
 @Service
 public class MatchServiceImpl implements MatchService {
 
@@ -38,8 +39,6 @@ public class MatchServiceImpl implements MatchService {
 
     @Autowired
     private DateTimeService dateTimeService;
-
-    private static final Logger LOGGER = Logger.getLogger(MatchServiceImpl.class);
 
     @Override
     public Match loadAndAssertExists(final int matchId) {

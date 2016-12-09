@@ -1,13 +1,13 @@
 package betmen.rests.tests;
 
 import betmen.dto.dto.CupDTO;
-import betmen.dto.dto.portal.PortalPageDTO;
 import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
 import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.dto.dto.admin.SportKindEditDTO;
 import betmen.dto.dto.admin.TeamEditDTO;
+import betmen.dto.dto.portal.PortalPageDTO;
 import betmen.rests.utils.ComparisonUtils;
 import betmen.rests.utils.DateTimeUtils;
 import betmen.rests.utils.data.DataCleanUpUtils;
@@ -20,7 +20,6 @@ import betmen.rests.utils.helpers.PortalPageEndPointHandler;
 import betmen.rests.utils.helpers.UserFavoritesEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
-import org.apache.log4j.Logger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,8 +33,6 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 public class PortalPageRestTest {
 
-    private static final Logger LOGGER = Logger.getLogger(PortalPageRestTest.class);
-
     private static final LocalDateTime NOW = LocalDateTime.now();
     private static final String TODAY = DateTimeUtils.formatDate(NOW.toLocalDate());
 
@@ -44,8 +41,6 @@ public class PortalPageRestTest {
 
     @BeforeClass
     public void initClass() {
-        LOGGER.debug(this.getClass().getName());
-
         DataCleanUpUtils.cleanupAll();
 
         AuthEndPointsHandler.loginAsAdmin();

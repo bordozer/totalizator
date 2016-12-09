@@ -1,12 +1,12 @@
 package betmen.rests.tests.admin;
 
-import betmen.dto.dto.error.FieldErrorsResponse;
 import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.CupWinnerEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
 import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.dto.dto.admin.TeamEditDTO;
+import betmen.dto.dto.error.FieldErrorsResponse;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.utils.RandomUtils;
 import betmen.rests.utils.data.builders.TeamEditDtoBuilder;

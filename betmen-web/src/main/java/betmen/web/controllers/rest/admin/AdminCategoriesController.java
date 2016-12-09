@@ -8,7 +8,7 @@ import betmen.core.service.LogoService;
 import betmen.core.service.SportKindService;
 import betmen.core.service.TeamService;
 import betmen.dto.dto.admin.CategoryEditDTO;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -25,11 +25,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/admin/rest/categories")
 public class AdminCategoriesController {
-
-    private static final Logger LOGGER = Logger.getLogger(AdminCategoriesController.class);
 
     @Autowired
     private CategoryService categoryService;

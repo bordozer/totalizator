@@ -34,6 +34,23 @@ public class AppRestControllerRestTest {
     }
 
     @Test
+    public void shouldGetIsAdminForAnonymous() {
+        assertThat(CommonEndPointHandler.isCurrentUserAdmin(), is(false));
+    }
+
+    @Test
+    public void shouldGetIsAdminForLoggedUser() {
+        AuthEndPointsHandler.registerNewUserAndLogin();
+        assertThat(CommonEndPointHandler.isCurrentUserAdmin(), is(false));
+    }
+
+    @Test
+    public void shouldGetIsAdminForAdmin() {
+        AuthEndPointsHandler.loginAsAdmin();
+        assertThat(CommonEndPointHandler.isCurrentUserAdmin(), is(true));
+    }
+
+    @Test
     public void shouldReturnWhomIForAnonymous() {
         // given
 

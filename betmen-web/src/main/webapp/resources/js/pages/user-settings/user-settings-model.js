@@ -1,19 +1,18 @@
-define( function ( require ) {
+define(function (require) {
 
-	'use strict';
+    'use strict';
 
-	var Backbone = require( 'backbone' );
-	var _ = require( 'underscore' );
+    var Backbone = require('backbone');
 
-	return Backbone.Model.extend( {
+    return Backbone.Model.extend({
 
-		initialize: function ( options ) {
-			this.userId = options.options.userId;
-		},
+        initialize: function (options) {
+            this.userId = options.options.userId;
+        },
 
-		url: function() {
-			return '/rest/users/' + this.userId + '/';
-		}
-	});
-} );
+        url: function () {
+            return '/rest/users/settings/';
+        }
+    });
+});
 

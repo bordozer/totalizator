@@ -4,7 +4,7 @@ import betmen.core.entity.User;
 import betmen.core.service.LogoService;
 import betmen.core.service.points.recalculation.MatchPointsTotalRecalculationService;
 import betmen.web.init.initializers.AbstractDataInitializer;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,11 +20,13 @@ import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+@Slf4j
 @Component
 public class TestDataInitializer {
 
-    private static final Logger LOGGER = Logger.getLogger(TestDataInitializer.class);
-
+    private final List<UserData> userDatas = newArrayList();
+    @Autowired
+    private final List<AbstractDataInitializer> initializations = newArrayList();
     @Autowired
     private EntityManagerFactory entityManagerFactory;
     @Autowired
@@ -34,8 +36,6 @@ public class TestDataInitializer {
     @Autowired
     private UserInitializerImpl userInitializer;
 
-    private final List<UserData> userDatas = newArrayList();
-
     {
         userDatas.add(new UserData("Kareem", "Abdul", "Jabbar"));
         userDatas.add(new UserData("Patrick", "Aloysius", "Ewing"));
@@ -44,9 +44,6 @@ public class TestDataInitializer {
         userDatas.add(new UserData("Michael", "Jeffrey", "Jordan"));
         userDatas.add(new UserData("Dennis", "Keith", "Rodman"));
     }
-
-    @Autowired
-    private final List<AbstractDataInitializer> initializations = newArrayList();
 
     public void init() throws Exception {
         logoService.deleteLogosDir();

@@ -23,7 +23,7 @@ import betmen.rests.utils.helpers.UserFavoritesEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
 import com.google.common.collect.Lists;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.jbehave.core.annotations.Aliases;
 import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.Given;
@@ -39,9 +39,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
+@Slf4j
 public class PortalPageCupsStory extends AbstractCommonStepsStory {
-
-    private static final Logger LOGGER = Logger.getLogger(PortalPageCupsStory.class);
 
     private static final LocalDateTime PORTAL_PAGE_TIME = LocalDateTime.of(2016, 11, 30, 12, 13, 14);
     private static final String PORTAL_PAGE_DATE = DateTimeUtils.formatDate(PORTAL_PAGE_TIME.toLocalDate());

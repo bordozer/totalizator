@@ -9,7 +9,6 @@ import betmen.rests.utils.data.DataCleanUpUtils;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
 import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.UserFavoritesEndPointsHandler;
-import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;

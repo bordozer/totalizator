@@ -1,7 +1,7 @@
 package betmen.web.config.root;
 
 import betmen.core.service.SystemVarsService;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cache.ehcache.EhCacheRegionFactory;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,11 @@ import javax.persistence.SharedCacheMode;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Configuration
 @Profile("development")
 @EnableTransactionManagement
 public class DevelopmentConfiguration {
-
-    private static final Logger LOGGER = Logger.getLogger(DevelopmentConfiguration.class);
 
 	/*@Bean( initMethod = "init" )
     public TestDataInitializer initTestData() {

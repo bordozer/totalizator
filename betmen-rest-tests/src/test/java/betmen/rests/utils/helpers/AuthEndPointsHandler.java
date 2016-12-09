@@ -14,16 +14,15 @@ import betmen.rests.utils.RandomUtils;
 import betmen.rests.utils.RestTestConstants;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
-import org.apache.log4j.Logger;
 
 import java.util.Map;
 
+@Slf4j
 public class AuthEndPointsHandler {
-
-    private static final Logger LOGGER = Logger.getLogger(AuthEndPointsHandler.class);
 
     public static UserDTO registerNewUserAndLogin() {
         return registerNewUserAndLogin(RandomUtils.randomUser());

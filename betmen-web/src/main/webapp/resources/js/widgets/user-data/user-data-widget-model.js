@@ -27,7 +27,7 @@ define( function ( require ) {
 		},
 
 		url: function() {
-			return '/rest/users/' + this.userId + '/';
+			return '/rest/users/settings/';
 		},
 
 		validate: function ( attrs, options ) {

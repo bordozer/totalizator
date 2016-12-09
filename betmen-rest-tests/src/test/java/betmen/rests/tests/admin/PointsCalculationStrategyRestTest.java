@@ -1,15 +1,15 @@
 package betmen.rests.tests.admin;
 
-import betmen.dto.dto.error.FieldErrorsResponse;
 import betmen.dto.dto.admin.CupEditDTO;
 import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
+import betmen.dto.dto.error.FieldErrorsResponse;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.utils.RandomUtils;
 import betmen.rests.utils.data.DataCleanUpUtils;
-import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.data.builders.PointsCalculationStrategyEditDtoBuilder;
-import betmen.rests.utils.helpers.admin.AdminPointsStrategyEndPointsHandler;
 import betmen.rests.utils.data.generator.AdminTestDataGenerator;
+import betmen.rests.utils.helpers.AuthEndPointsHandler;
+import betmen.rests.utils.helpers.admin.AdminPointsStrategyEndPointsHandler;
 import com.jayway.restassured.response.Response;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;

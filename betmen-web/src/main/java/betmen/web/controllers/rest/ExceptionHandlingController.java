@@ -34,7 +34,7 @@ public class ExceptionHandlingController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public void dtoValidationException(final Exception e, final Writer writer) throws IOException {
-        log.error(EXCEPTION_HAS_HAPPENED, e);
+        LOGGER.error(EXCEPTION_HAS_HAPPENED, e);
         List<FieldError> fieldErrors = ((MethodArgumentNotValidException) e).getBindingResult().getFieldErrors();
         writer.write(new Gson().toJson(new FieldErrorsResponse(wrapFieldErrors(fieldErrors))));
     }
@@ -42,7 +42,7 @@ public class ExceptionHandlingController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = BindException.class)
     public void dtoBindException(final Exception e, final Writer writer) throws IOException {
-        log.error(EXCEPTION_HAS_HAPPENED, e);
+        LOGGER.error(EXCEPTION_HAS_HAPPENED, e);
         List<FieldError> fieldErrors = ((BindException) e).getBindingResult().getFieldErrors();
         writer.write(new Gson().toJson(new FieldErrorsResponse(wrapFieldErrors(fieldErrors))));
     }
@@ -50,28 +50,28 @@ public class ExceptionHandlingController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = BadRequestException.class)
     public void badRequestException(final Exception e, final Writer writer) throws IOException {
-        log.error(EXCEPTION_HAS_HAPPENED, e);
+        LOGGER.error(EXCEPTION_HAS_HAPPENED, e);
         writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(e.getMessage(), ""))));
     }
 
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     @ExceptionHandler(value = UnprocessableEntityException.class)
     public void unprocessableEntityException(final Exception e, final Writer writer) throws IOException {
-        log.error(EXCEPTION_HAS_HAPPENED, e);
+        LOGGER.error(EXCEPTION_HAS_HAPPENED, e);
         writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(e.getMessage(), ""))));
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
     public void internalServerError(final Exception e, final Writer writer) throws IOException {
-        log.error(EXCEPTION_HAS_HAPPENED, e);
+        LOGGER.error(EXCEPTION_HAS_HAPPENED, e);
         writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(e.getMessage(), ""))));
     }
 
     @ResponseStatus(value = HttpStatus.EXPECTATION_FAILED)
     @ExceptionHandler(value = BusinessException.class)
     public void businessException(final BusinessException e, final Writer writer) throws IOException {
-        log.error(EXCEPTION_HAS_HAPPENED, e);
+        LOGGER.error(EXCEPTION_HAS_HAPPENED, e);
         writer.write(new Gson().toJson(new CommonErrorResponse(new CommonErrorResource(e.getErrorCode(), e.getTranslatedMessage()))));
     }
 

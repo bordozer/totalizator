@@ -12,14 +12,13 @@ import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminPointsStrategyEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminSportEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminTeamEndPointsHandler;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
+@Slf4j
 public class DataCleanUpUtils {
-
-    private static final Logger LOGGER = Logger.getLogger(DataCleanUpUtils.class);
 
     public static final MatchSearchModelDto SEARCH_MODEL = new MatchSearchModelDto();
 
@@ -29,6 +28,7 @@ public class DataCleanUpUtils {
     }
 
     public static void cleanupAll() {
+        LOGGER.debug("-= Cleanup All Data =-");
         cleanupMatches();
         cleanupCups();
         cleanupTeams();

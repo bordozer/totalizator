@@ -5,7 +5,6 @@ import betmen.dto.dto.admin.CupWinnerEditDTO;
 import betmen.rests.utils.RandomUtils;
 import betmen.rests.utils.data.builders.CupEditDtoBuilder;
 import com.google.common.collect.Lists;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;

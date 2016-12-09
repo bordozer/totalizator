@@ -673,13 +673,13 @@ define( function ( require ) {
 			} )
 		},
 
-		isAdmin: function( user ) {
+		isAdmin: function() {
 
 			var result = false;
 
 			$.ajax( {
 				method: 'GET',
-				url: '/rest/users/' + user.userId + '/is-admin/',
+				url: '/rest/app/who-am-i/is-admin/',
 				async: false,
 				success: function ( response ) {
 					result = response;

@@ -18,6 +18,10 @@ public class UserInitializerImpl {
     @Autowired
     private UserService userService;
 
+    private static String constructUserName(final UserData userData) {
+        return String.format("%s %s %s", userData.getFirstName(), userData.getLastName(), userData.getThirdName());
+    }
+
     public User generateAdmin() {
         return generateUser(new UserData("Hakeem", "Olajuwon"));
     }
@@ -29,15 +33,14 @@ public class UserInitializerImpl {
         final Transaction transaction = session.beginTransaction();
 
         final String login = userData.getFirstName().toLowerCase();
-        final User user = new User(login, constructUserName(userData), userService.encodePassword(login));
+        final User user = new User();
+        user.setLogin(login);
+        user.setUsername(constructUserName(userData));
+        user.setPassword(userService.encodePassword(login));
         session.persist(user);
 
         transaction.commit();
 
         return user;
-    }
-
-    private static String constructUserName(final UserData userData) {
-        return String.format("%s %s %s", userData.getFirstName(), userData.getLastName(), userData.getThirdName());
     }
 }

@@ -11,7 +11,6 @@ import betmen.core.repository.jpa.CupJpaRepository;
 import betmen.core.service.matches.MatchService;
 import betmen.core.service.utils.DateTimeService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +29,7 @@ public class CupServiceImpl implements CupService {
 
     public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_ASC = (o1, o2) -> o1.getCupStartTime().compareTo(o2.getCupStartTime());
     public static final Comparator<Cup> SORT_BY_CUP_BEGINNING_TIME_DESC = SORT_BY_CUP_BEGINNING_TIME_ASC.reversed();
-    private static final Logger LOGGER = Logger.getLogger(CupServiceImpl.class);
+
     @Autowired
     private CupDao cupRepository;
     @Autowired

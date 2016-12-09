@@ -5,8 +5,8 @@ import betmen.dto.dto.admin.MatchEditDTO;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.AdminRoutes;
-import betmen.rests.utils.helpers.MatchEndPointsHandler;
 import betmen.rests.utils.ParameterUtils;
+import betmen.rests.utils.helpers.MatchEndPointsHandler;
 import com.jayway.restassured.response.Response;
 import org.springframework.util.Assert;
 

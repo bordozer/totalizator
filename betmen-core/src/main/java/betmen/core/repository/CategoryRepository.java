@@ -1,7 +1,6 @@
 package betmen.core.repository;
 
 import betmen.core.entity.Category;
-import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -13,8 +12,6 @@ import java.util.List;
 
 @Repository
 public class CategoryRepository implements CategoryDao {
-
-    private static final Logger LOGGER = Logger.getLogger(CategoryRepository.class);
 
     @PersistenceContext
     private EntityManager em;

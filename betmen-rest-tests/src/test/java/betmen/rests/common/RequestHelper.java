@@ -7,9 +7,9 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
@@ -23,9 +23,8 @@ import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
+@Slf4j
 public class RequestHelper {
-
-    private static final Logger LOGGER = Logger.getLogger(RequestHelper.class);
 
     public static Response doGet(final Route route) {
         return doGet(route, HttpStatus.SC_OK);
@@ -49,6 +48,10 @@ public class RequestHelper {
 
     public static Response doJsonPost(final Route route, final Object dto, final Map<String, Object> params) {
         return doJsonPost(route, dto, params, HttpServletResponse.SC_OK);
+    }
+
+    public static Response doJsonPost(final Route route, final Object dto, final int expectedStatusCode) {
+        return doJsonPost(route, dto, Collections.emptyMap(), expectedStatusCode);
     }
 
     public static Response doJsonPut(final Route route, final Object dto) {

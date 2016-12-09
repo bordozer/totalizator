@@ -1,6 +1,6 @@
 package betmen.core.translator;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.dom4j.DocumentException;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,7 @@ import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
 
+@Slf4j
 @Service
 public class TranslatorServiceImpl implements TranslatorService {
 
@@ -19,8 +20,6 @@ public class TranslatorServiceImpl implements TranslatorService {
     public static final Language DEFAULT_LANGUAGE = Language.EN;
 
     private Translator translator;
-
-    private static final Logger LOGGER = Logger.getLogger(TranslatorServiceImpl.class);
 
     @Override
     public String translate(final String nerd, final Language language, final String... params) {

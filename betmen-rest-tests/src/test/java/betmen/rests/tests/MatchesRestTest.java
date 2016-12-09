@@ -23,12 +23,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-public class MatchesRestTest {
+public class MatchesRestTest extends AbstractCleanableRestTest {
 
     private static final int NOT_EXISTING_CUP_ID = -23;
 
     @BeforeMethod
-    public void testInit() {
+    @Override
+    public void beforeEachMethod() {
         AuthEndPointsHandler.logout();
     }
 
@@ -84,7 +85,7 @@ public class MatchesRestTest {
 
         MatchEditDTO cup1Match1 = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup1.getCupId(), team1.getTeamId(), team2.getTeamId())
                 .builder()
-                .startingAt(LocalDateTime.of(2016, 5, 22, 19, 0))
+                .startingAt(LocalDateTime.of(2016, 5, 21, 19, 0))
                 .build());
         MatchEditDTO cup1Match2 = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup1.getCupId(), team1.getTeamId(), team2.getTeamId())
                 .builder()
@@ -96,7 +97,7 @@ public class MatchesRestTest {
                 .build());
         MatchEditDTO cup2Match1 = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup2.getCupId(), team1.getTeamId(), team2.getTeamId())
                 .builder()
-                .startingAt(LocalDateTime.of(2016, 5, 22, 19, 0))
+                .startingAt(LocalDateTime.of(2016, 5, 23, 19, 0))
                 .build());
 
         List<MatchDTO> cup1Matches = MatchEndPointsHandler.getCupMatches(cup1.getCupId());
@@ -154,16 +155,16 @@ public class MatchesRestTest {
                 .build());
         MatchEditDTO cup1Match3 = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup1.getCupId(), team1.getTeamId(), team3.getTeamId())
                 .finished(4, 3)
-                .startingAt(LocalDateTime.of(2016, 5, 22, 15, 0))
+                .startingAt(LocalDateTime.of(2016, 5, 23, 15, 0))
                 .build());
         MatchEditDTO cup2Match1 = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup2.getCupId(), team3.getTeamId(), team1.getTeamId())
                 .finished(1, 2)
-                .startingAt(LocalDateTime.of(2016, 5, 22, 0, 0))
+                .startingAt(LocalDateTime.of(2016, 5, 24, 0, 0))
                 .build());
         MatchEditDTO cup2Match2 = AdminMatchEndPointsHandler.create(MatchTemplater.random(cup2.getCupId(), team1.getTeamId(), team2.getTeamId())
                 .builder()
                 .finished(false)
-                .startingAt(LocalDateTime.of(2016, 5, 22, 13, 0))
+                .startingAt(LocalDateTime.of(2016, 5, 25, 13, 0))
                 .build());
 
         List<MatchDTO> matches1 = MatchEndPointsHandler.getCupTeamsMatches(cup1.getCupId(), team1.getTeamId(), team2.getTeamId());

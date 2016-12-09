@@ -6,8 +6,8 @@ import betmen.dto.dto.admin.CupForGameImportDTO;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.AdminRoutes;
-import betmen.rests.utils.RestTestConstants;
 import betmen.rests.utils.ParameterUtils;
+import betmen.rests.utils.RestTestConstants;
 import com.jayway.restassured.response.Response;
 import org.springframework.util.Assert;
 

@@ -1,8 +1,8 @@
 package betmen.rests.utils.helpers;
 
+import betmen.dto.dto.UsersRatingPositionDTO;
 import betmen.dto.dto.points.scores.CupUsersScoresDTO;
 import betmen.dto.dto.points.scores.CupUsersScoresInTimeDTO;
-import betmen.dto.dto.UsersRatingPositionDTO;
 import betmen.rests.common.RequestHelper;
 import betmen.rests.common.ResponseStatus;
 import betmen.rests.common.routes.UserPointsRoutes;

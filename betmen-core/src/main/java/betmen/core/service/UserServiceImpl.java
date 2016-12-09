@@ -1,10 +1,10 @@
 package betmen.core.service;
 
+import betmen.core.entity.User;
 import betmen.core.exception.UnprocessableEntityException;
 import betmen.core.repository.UserDao;
-import betmen.core.entity.User;
 import com.google.common.collect.Lists;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-
-    private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserDao userRepository;
@@ -23,8 +22,17 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User createUser(final String login, final String name, final String password) {
-        // TODO: validation
-        final User user = new User(login, name, encodePassword(password));
+        if (findByLogin(login) != null) {
+            throw new UnprocessableEntityException("errors.login_already_exists");
+        }
+        if (findByName(name) != null) {
+            throw new UnprocessableEntityException("errors.username_already_exists");
+        }
+        // TODO: login/name/password validation (correct symbols etc.)
+        final User user = new User();
+        user.setLogin(login);
+        user.setUsername(name);
+        user.setPassword(encodePassword(password));
         LOGGER.debug(String.format("New user: %s, ( name: %s, password: %s )", login, name, password));
         return userRepository.save(user);
     }
