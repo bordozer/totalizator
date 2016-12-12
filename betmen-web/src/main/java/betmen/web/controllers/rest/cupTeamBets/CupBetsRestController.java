@@ -4,15 +4,19 @@ import betmen.core.entity.Cup;
 import betmen.core.entity.CupTeamBet;
 import betmen.core.entity.Team;
 import betmen.core.entity.User;
+import betmen.core.exception.UnprocessableEntityException;
+import betmen.core.model.ErrorCodes;
 import betmen.core.service.CupBetsService;
 import betmen.core.service.CupService;
 import betmen.core.service.TeamService;
 import betmen.core.service.UserService;
 import betmen.dto.dto.CupDTO;
 import betmen.dto.dto.CupTeamBetDTO;
+import betmen.dto.dto.CupTeamBetsDTO;
 import betmen.dto.dto.UserDTO;
 import betmen.web.converters.DTOService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,25 +43,23 @@ public class CupBetsRestController {
     private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}/")
-    public CupTeamBetsDTO show(final @PathVariable("cupId") int cupId, final @PathVariable("userId") int userId) {
+    public CupTeamBetsDTO show(@PathVariable("cupId") final int cupId, @PathVariable("userId") final int userId) {
         return getCupTeamBetsDTO(cupId, userId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{position}/{teamId}/")
-    public void save(@PathVariable("cupId") final int cupId, @PathVariable("position") final int position, @PathVariable("teamId") final int teamId,
-                     final Principal principal) {
-        // TODO: server validation
-
-        final Cup cup = cupService.load(cupId);
+    public void saveCupResultBet(@PathVariable("cupId") final int cupId, @PathVariable("teamId") final int teamId, @PathVariable("position") final int position, final Principal principal) {
+        Assert.isTrue(position >= 0, ErrorCodes.CUP_WINNER_POSITION_SHOULD_NOT_BE_NEGATIVE);
+        final Cup cup = cupService.loadAndAssertExists(cupId);
         if (cupBetsService.isCupBettingFinished(cup)) {
-            throw new IllegalArgumentException(String.format("Match betting for cup %s is finished", cup));
+            throw new UnprocessableEntityException(ErrorCodes.BETTING_ON_CUP_RESULTS_IS_NOT_ACCESSIBLE);
         }
 
         final User user = userService.findByLogin(principal.getName());
 
-        final CupTeamBet existingTupTeamBet = cupBetsService.load(cup, user, position);
-        if (cupId > 0 && position > 0 && teamId == 0 && existingTupTeamBet != null) {
-            cupBetsService.delete(existingTupTeamBet.getId());
+        final CupTeamBet existingCupTeamBet = cupBetsService.load(cup, user, position);
+        if (cupId > 0 && position > 0 && teamId == 0 && existingCupTeamBet != null) {
+            cupBetsService.delete(existingCupTeamBet.getId());
             return;
         }
 
@@ -65,11 +67,11 @@ public class CupBetsRestController {
             return; // no error, just return
         }
 
-        final Team team = teamService.load(teamId);
+        final Team team = teamService.loadAndAssertExists(teamId);
 
-        if (existingTupTeamBet != null) {
-            existingTupTeamBet.setTeam(team);
-            cupBetsService.save(existingTupTeamBet);
+        if (existingCupTeamBet != null) {
+            existingCupTeamBet.setTeam(team);
+            cupBetsService.save(existingCupTeamBet);
 
             return;
         }
@@ -86,8 +88,8 @@ public class CupBetsRestController {
 
     private CupTeamBetsDTO getCupTeamBetsDTO(final int cupId, final int userId) {
 
-        final User user = userService.load(userId);
-        final Cup cup = cupService.load(cupId);
+        final User user = userService.loadAndAssertExists(userId);
+        final Cup cup = cupService.loadAndAssertExists(cupId);
 
         final UserDTO userDTO = dtoService.transformUser(user);
         final CupDTO cupDTO = dtoService.transformCup(cup, user);

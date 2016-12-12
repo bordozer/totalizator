@@ -1,6 +1,5 @@
 package betmen.core.service.activiries;
 
-import betmen.core.repository.ActivityStreamDao;
 import betmen.core.entity.ActivityStreamEntry;
 import betmen.core.entity.MatchBet;
 import betmen.core.entity.User;
@@ -10,6 +9,8 @@ import betmen.core.entity.activities.MatchActivityStreamEntry;
 import betmen.core.entity.activities.MatchBetActivityStreamEntry;
 import betmen.core.entity.activities.events.MatchBetEvent;
 import betmen.core.entity.activities.events.MatchEvent;
+import betmen.core.repository.ActivityStreamDao;
+import betmen.core.repository.jpa.ActivityStreamJpaRepository;
 import betmen.core.service.utils.DateTimeService;
 import betmen.core.service.utils.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,17 +25,12 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
     @Autowired
     private ActivityStreamDao activityStreamRepository;
-
     @Autowired
     private DateTimeService dateTimeService;
-
+    @Autowired
+    private ActivityStreamJpaRepository activityStreamJpaRepository;
     @Autowired
     private JsonService jsonService;
-
-    @Override
-    public List<AbstractActivityStreamEntry> loadAll() {
-        return transformEntries(activityStreamRepository.loadAll());
-    }
 
     @Override
     public List<AbstractActivityStreamEntry> loadAllForLast(final int hours) {
@@ -82,34 +77,30 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
         activityStreamRepository.delete(id);
     }
 
-    private List<AbstractActivityStreamEntry> transformEntries(List<ActivityStreamEntry> activityStreamEntries) {
+    @Override
+    public void deleteAll() {
+        activityStreamJpaRepository.deleteAll();
+    }
 
+    private List<AbstractActivityStreamEntry> transformEntries(List<ActivityStreamEntry> activityStreamEntries) {
         return activityStreamEntries
                 .stream()
-                .map(new Function<ActivityStreamEntry, AbstractActivityStreamEntry>() {
-
-                    @Override
-                    public AbstractActivityStreamEntry apply(final ActivityStreamEntry activityStreamEntry) {
-
-                        switch (activityStreamEntry.getActivityStreamEntryType()) {
-                            case MATCH_BET_CREATED:
-                            case MATCH_BET_CHANGED:
-                                return new MatchBetActivityStreamEntry(activityStreamEntry, jsonService.fromMatchBetEventJson(activityStreamEntry.getEventJson()));
-                            case MATCH_BET_DELETED:
-                            case MATCH_FINISHED:
-                                return new MatchActivityStreamEntry(activityStreamEntry, jsonService.fromMatchEventJson(activityStreamEntry.getEventJson()));
-                        }
-
-                        throw new IllegalArgumentException(String.format("Unsupported activity type: %s", activityStreamEntry.getActivityStreamEntryType()));
+                .map(activityStreamEntry -> {
+                    switch (activityStreamEntry.getActivityStreamEntryType()) {
+                        case MATCH_BET_CREATED:
+                        case MATCH_BET_CHANGED:
+                            return new MatchBetActivityStreamEntry(activityStreamEntry, jsonService.fromMatchBetEventJson(activityStreamEntry.getEventJson()));
+                        case MATCH_BET_DELETED:
+                        case MATCH_FINISHED:
+                            return new MatchActivityStreamEntry(activityStreamEntry, jsonService.fromMatchEventJson(activityStreamEntry.getEventJson()));
                     }
+                    throw new IllegalArgumentException(String.format("Unsupported activity type: %s", activityStreamEntry.getActivityStreamEntryType()));
                 })
                 .collect(Collectors.toList());
     }
 
     private ActivityStreamEntry getMatchBetEvent(final User user, final int matchId, final int score1, final int score2, ActivityStreamEntryType activityStreamEntryType) {
-
         final ActivityStreamEntry activity = new ActivityStreamEntry(user, dateTimeService.getNow());
-
         activity.setActivityEntryId(matchId);
         activity.setActivityStreamEntryType(activityStreamEntryType);
         activity.setEventJson(jsonService.toJson(new MatchEvent(matchId, score1, score2)));
@@ -117,14 +108,11 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
     }
 
     private ActivityStreamEntry createFromMatchBet(final MatchBet matchBet, final ActivityStreamEntryType activityStreamEntryType, final int oldScore1, final int oldScore2) {
-
         final ActivityStreamEntry activity = new ActivityStreamEntry(matchBet.getUser(), matchBet.getBetTime());
-
         final int matchId = matchBet.getMatch().getId();
         activity.setActivityEntryId(matchId);
         activity.setActivityStreamEntryType(activityStreamEntryType);
         activity.setEventJson(jsonService.toJson(new MatchBetEvent(matchId, matchBet.getBetScore1(), matchBet.getBetScore2(), oldScore1, oldScore2)));
-
         return activity;
     }
 }

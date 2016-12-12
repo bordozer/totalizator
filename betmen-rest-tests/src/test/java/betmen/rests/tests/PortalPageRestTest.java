@@ -20,6 +20,7 @@ import betmen.rests.utils.helpers.PortalPageEndPointHandler;
 import betmen.rests.utils.helpers.UserFavoritesEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
+import net.jcip.annotations.NotThreadSafe;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,6 +32,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
+@NotThreadSafe
 public class PortalPageRestTest {
 
     private static final LocalDateTime NOW = LocalDateTime.now();

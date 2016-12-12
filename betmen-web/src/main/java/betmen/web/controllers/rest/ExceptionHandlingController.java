@@ -79,7 +79,7 @@ public class ExceptionHandlingController {
         List<FieldErrorResource> response = fieldErrors.stream()
                 .map(fieldError -> new FieldErrorResource(
                         fieldError.getField(),
-                        fieldError.getRejectedValue().toString(),
+                        fieldError.getRejectedValue() != null ? fieldError.getRejectedValue().toString() : "null",
                         fieldError.getDefaultMessage()))
                 .collect(Collectors.toList()
                 );

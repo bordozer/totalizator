@@ -42,7 +42,7 @@ public class AdminCategoriesController {
     private CupService cupService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{categoryId}")
-    public CategoryEditDTO getItem(final @PathVariable("categoryId") int categoryId) {
+    public CategoryEditDTO getItem(@PathVariable("categoryId") final int categoryId) {
         return convertToEditDto(categoryService.loadAndAssertExists(categoryId));
     }
 
@@ -52,7 +52,7 @@ public class AdminCategoriesController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0")
-    public CategoryEditDTO createItem(final @Validated @RequestBody CategoryEditDTO dto) {
+    public CategoryEditDTO createItem(@Validated @RequestBody final CategoryEditDTO dto) {
         assertNameDoesNotExist(dto);
         final Category category = new Category();
         populateEntity(category, dto);
@@ -60,7 +60,7 @@ public class AdminCategoriesController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{categoryId}")
-    public CategoryEditDTO updateItem(final @PathVariable("categoryId") int categoryId, final @Validated @RequestBody CategoryEditDTO dto) {
+    public CategoryEditDTO updateItem(@PathVariable("categoryId") final int categoryId, @Validated @RequestBody final CategoryEditDTO dto) {
         assertNameDoesNotExist(dto);
         Category category = categoryService.loadAndAssertExists(dto.getCategoryId());
         populateEntity(category, dto);
@@ -68,7 +68,7 @@ public class AdminCategoriesController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{categoryId}")
-    public boolean delete(final @PathVariable("categoryId") int categoryId) {
+    public boolean delete(@PathVariable("categoryId") final int categoryId) {
         if (categoryId == 0) {
             return true;
         }
@@ -92,13 +92,13 @@ public class AdminCategoriesController {
         try {
             logoService.deleteLogo(category);
         } catch (IOException e) {
-            LOGGER.debug(String.format("Category #%s logo does not exist", category));
+            LOGGER.error(String.format("Category #%s logo does not exist", category), e);
         }
         return true;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{categoryId}/logo/")
-    public void uploadLogo(final @PathVariable("categoryId") int categoryId, final MultipartHttpServletRequest request) throws IOException {
+    public void uploadLogo(@PathVariable("categoryId") final int categoryId, final MultipartHttpServletRequest request) throws IOException {
         Category category = categoryService.loadAndAssertExists(categoryId);
         final Iterator<String> itr = request.getFileNames();
         if (!itr.hasNext()) {

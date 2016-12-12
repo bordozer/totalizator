@@ -28,7 +28,6 @@ public class MatchesRestTest extends AbstractCleanableRestTest {
     private static final int NOT_EXISTING_CUP_ID = -23;
 
     @BeforeMethod
-    @Override
     public void beforeEachMethod() {
         AuthEndPointsHandler.logout();
     }

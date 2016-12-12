@@ -9,8 +9,12 @@ public abstract class AbstractCleanableRestTest extends AbstractRestTest {
 
     @BeforeClass
     @Override
-    public void beforeClass() {
-        DataCleanUpUtils.cleanupAll();
+    public final void beforeClass() {
+        cleanupAll();
         super.beforeClass();
+    }
+
+    protected void cleanupAll() {
+        DataCleanUpUtils.cleanupAll();
     }
 }

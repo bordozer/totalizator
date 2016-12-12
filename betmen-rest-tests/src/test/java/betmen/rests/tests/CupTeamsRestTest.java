@@ -17,6 +17,7 @@ import betmen.rests.utils.helpers.CupTeamsEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminTeamEndPointsHandler;
 import com.google.common.collect.Lists;
+import net.jcip.annotations.NotThreadSafe;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -29,6 +30,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
+@NotThreadSafe
 public class CupTeamsRestTest {
 
     private TeamEditDTO team1;

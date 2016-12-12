@@ -1,4 +1,4 @@
-package betmen.web.controllers.rest.cupTeamBets;
+package betmen.dto.dto;
 
 import betmen.dto.dto.CupTeamBetDTO;
 import lombok.AllArgsConstructor;

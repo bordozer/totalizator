@@ -4,13 +4,17 @@ import betmen.dto.serialization.DateTimeDeserializer;
 import betmen.dto.serialization.DateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = "activityStreamEntryTypeId")
+@ToString
 public class ActivityStreamDTO {
 
     private int activityStreamEntryTypeId;

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin/rest/points-calculation-strategies")
-public class PointsCalculationStrategyEditRestController {
+public class AdminPointsCalculationStrategyEditRestController {
 
     @Autowired
     private PointsCalculationStrategyService pointsCalculationStrategyService;
@@ -26,7 +26,7 @@ public class PointsCalculationStrategyEditRestController {
     private CupService cupService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{pcsId}")
-    public PointsCalculationStrategyEditDTO getItem(final @PathVariable(value = "pcsId") int pcsId) {
+    public PointsCalculationStrategyEditDTO getItem(@PathVariable(value = "pcsId") final int pcsId) {
         return convertToEditDto(pointsCalculationStrategyService.loadAndAssertExists(pcsId));
     }
 
@@ -36,7 +36,7 @@ public class PointsCalculationStrategyEditRestController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/0")
-    public PointsCalculationStrategyEditDTO createItem(final @Validated @RequestBody PointsCalculationStrategyEditDTO dto) {
+    public PointsCalculationStrategyEditDTO createItem(@Validated @RequestBody final PointsCalculationStrategyEditDTO dto) {
         assertNameDoesNotExist(dto);
 
         final PointsCalculationStrategy strategy = new PointsCalculationStrategy();
@@ -46,7 +46,7 @@ public class PointsCalculationStrategyEditRestController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{pcsId}")
-    public PointsCalculationStrategyEditDTO updateItem(final @PathVariable(value = "pcsId") int pcsId, final @Validated @RequestBody PointsCalculationStrategyEditDTO dto) {
+    public PointsCalculationStrategyEditDTO updateItem(@PathVariable(value = "pcsId") final int pcsId, @Validated @RequestBody final PointsCalculationStrategyEditDTO dto) {
         assertNameDoesNotExist(dto);
 
         final PointsCalculationStrategy strategy = pointsCalculationStrategyService.loadAndAssertExists(dto.getPcsId());
@@ -56,7 +56,7 @@ public class PointsCalculationStrategyEditRestController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{pcsId}")
-    public boolean delete(final @PathVariable(value = "pcsId") int pcsId) {
+    public boolean delete(@PathVariable(value = "pcsId") final int pcsId) {
         if (pcsId == 0) {
             return true;
         }

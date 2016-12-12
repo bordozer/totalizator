@@ -7,8 +7,8 @@ import betmen.core.service.matches.imports.RemoteGame;
 import betmen.core.service.matches.imports.strategies.StatisticsServerService;
 import betmen.core.service.remote.RemoteContentNullException;
 import betmen.core.service.utils.DateTimeService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +23,9 @@ import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+@Slf4j
 @Service(value = "nbaStatisticsAPILimitedService")
 public class NBAStatisticsAPILimitedService implements StatisticsServerService {
-
-    private final Logger LOGGER = Logger.getLogger(NBAStatisticsAPILimitedService.class);
 
     @Autowired
     private MatchService matchService;

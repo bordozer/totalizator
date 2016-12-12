@@ -129,6 +129,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -147,9 +153,12 @@
                             <name>listener</name>
                             <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
                         </property>
-                        <parallel>suitesAndClasses</parallel>
-                        <useUnlimitedThreads>true</useUnlimitedThreads>
+                        <parallel>classes</parallel>
+                        <useUnlimitedThreads>false</useUnlimitedThreads>
                         <threadCountClasses>1</threadCountClasses>
+                        <threadCount>1</threadCount>
+                        <forkMode>always</forkMode>
+                        <reuseForks>false</reuseForks>
                     </properties>
                     <workingDirectory>target/</workingDirectory>
                     <skipTests>${skipTests}</skipTests>

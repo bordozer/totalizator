@@ -5,6 +5,7 @@ import betmen.dto.dto.admin.CategoryEditDTO;
 import betmen.dto.dto.admin.MatchEditDTO;
 import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
 import betmen.dto.dto.admin.SportKindEditDTO;
+import betmen.rests.utils.helpers.ActivityEndPointsHandler;
 import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCategoryEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
@@ -35,6 +36,7 @@ public class DataCleanUpUtils {
         cleanupCategories();
         cleanupSports();
         cleanupPointsCalculationStrategies();
+        cleanupActivities();
     }
 
     public static void cleanupMatches() {
@@ -104,6 +106,12 @@ public class DataCleanUpUtils {
             counter.increase();
             AdminPointsStrategyEndPointsHandler.delete(sport.getPcsId());
         });
+        AuthEndPointsHandler.logout();
+    }
+
+    public static void cleanupActivities() {
+        AuthEndPointsHandler.loginAsAdmin();
+        ActivityEndPointsHandler.adminActivityStreamCleanup();
         AuthEndPointsHandler.logout();
     }
 

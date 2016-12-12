@@ -1,4 +1,4 @@
-package betmen.web.controllers.rest.login;
+package betmen.dto.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

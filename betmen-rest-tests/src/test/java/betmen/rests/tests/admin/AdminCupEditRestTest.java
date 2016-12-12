@@ -18,6 +18,7 @@ import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
 import com.google.common.collect.Lists;
 import com.jayway.restassured.response.Response;
+import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.Matchers;
 import org.testng.annotations.AfterMethod;
@@ -31,6 +32,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+@NotThreadSafe
 public class AdminCupEditRestTest {
 
     private CategoryEditDTO category;

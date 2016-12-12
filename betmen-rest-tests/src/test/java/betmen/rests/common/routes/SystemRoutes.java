@@ -7,6 +7,10 @@ public enum SystemRoutes implements Route {
     AUTHENTICATED("/rest/app/authenticated/"),
     APP_CONTEXT("/rest/app/"),
     IS_CURRENT_USER_ADMIN("/rest/app/who-am-i/is-admin/"),
+    PORTAL_PAGE_ACTIVITIES("/rest/activity-stream/portal/"),
+    MATCH_ACTIVITIES("/rest/activity-stream/matches/{matchId}/"),
+    USER_ACTIVITIES("/rest/activity-stream/users/{userId}/"),
+    ACTIVITY_STREAM_CLEANUP("/admin/rest/common/activities/cleanup/"),
     ;
 
     private final String route;

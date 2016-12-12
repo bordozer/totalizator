@@ -1,4 +1,4 @@
-package betmen.web.controllers.rest.activities;
+package betmen.web.controllers.rest;
 
 import betmen.core.entity.User;
 import betmen.core.entity.activities.ActivityStreamEntryType;

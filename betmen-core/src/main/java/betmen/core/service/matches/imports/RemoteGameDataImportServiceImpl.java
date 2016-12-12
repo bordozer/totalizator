@@ -14,6 +14,7 @@ import betmen.core.service.matches.imports.strategies.nba.NBAStatisticsAPIServic
 import betmen.core.service.matches.imports.strategies.nhl.NHLStatisticsAPIService;
 import betmen.core.service.matches.imports.strategies.uefa.UEFAStatisticsAPIService;
 import betmen.core.service.remote.RemoteContentNullException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportService {
 
@@ -53,8 +55,6 @@ public class RemoteGameDataImportServiceImpl implements RemoteGameDataImportServ
 
     @Autowired
     private NBAStatisticsAPILimitedService nbaStatisticsAPILimitedService;
-
-    private final Logger LOGGER = Logger.getLogger(RemoteGameDataImportServiceImpl.class);
 
     @Override
     public Set<RemoteGame> preloadRemoteGames(final LocalDate dateFrom, final LocalDate dateTo, final Cup cup) throws IOException, RemoteContentNullException {

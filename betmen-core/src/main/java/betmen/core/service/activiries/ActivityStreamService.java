@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface ActivityStreamService {
 
-    List<AbstractActivityStreamEntry> loadAll();
-
     List<AbstractActivityStreamEntry> loadAllForLast(final int hours);
 
     List<AbstractActivityStreamEntry> loadAllForMatch(final int matchId);
@@ -25,4 +23,6 @@ public interface ActivityStreamService {
     void matchFinished(final int matchId, final int score1, final int score2);
 
     void delete(final int id);
+
+    void deleteAll();
 }

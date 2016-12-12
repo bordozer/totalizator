@@ -109,11 +109,13 @@ public class MatchBetsServiceImpl implements MatchBetsService {
     public MatchBet save(final MatchBet entry) {
         final int entryId = entry.getId();
         final MatchBet savedBet = matchBetRepository.load(entryId);
+        int oldScore1 = savedBet != null ? savedBet.getBetScore1() : 0; // do not inline!
+        int betScore2 = savedBet != null ? savedBet.getBetScore2() : 0; // do not inline!
         final MatchBet matchBet = matchBetRepository.save(entry);
         if (entryId == 0) {
             activityStreamService.matchBetCreated(matchBet);
         } else {
-            activityStreamService.matchBetChanged(matchBet, savedBet.getBetScore1(), savedBet.getBetScore2());
+            activityStreamService.matchBetChanged(matchBet, oldScore1, betScore2);
         }
         return matchBet;
     }

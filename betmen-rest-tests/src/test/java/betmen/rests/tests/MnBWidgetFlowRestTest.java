@@ -24,6 +24,7 @@ import betmen.rests.utils.helpers.AuthEndPointsHandler;
 import betmen.rests.utils.helpers.BetEndPointsHandler;
 import betmen.rests.utils.helpers.MatchEndPointsHandler;
 import betmen.rests.utils.helpers.admin.AdminMatchEndPointsHandler;
+import net.jcip.annotations.NotThreadSafe;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -37,6 +38,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
+@NotThreadSafe
 public class MnBWidgetFlowRestTest {
 
     private static final int ASC_SORTING = 1;

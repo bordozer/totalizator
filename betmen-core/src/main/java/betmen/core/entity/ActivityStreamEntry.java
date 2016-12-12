@@ -13,7 +13,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
-import static betmen.core.entity.ActivityStreamEntry.LOAD_ALL;
 import static betmen.core.entity.ActivityStreamEntry.LOAD_ALL_EARLIER_THEN;
 import static betmen.core.entity.ActivityStreamEntry.LOAD_ALL_FOR_MATCH;
 import static betmen.core.entity.ActivityStreamEntry.LOAD_ALL_FOR_USER;
@@ -24,29 +23,24 @@ import static betmen.core.entity.ActivityStreamEntry.LOAD_BY_ACTIVITY_ENTRY_ID;
 @Table(name = "activities")
 @NamedQueries({
         @NamedQuery(
-                name = LOAD_ALL,
-                query = "select c from ActivityStreamEntry c order by activityTime desc"
-        ),
-        @NamedQuery(
                 name = LOAD_ALL_FOR_USER,
-                query = "select c from ActivityStreamEntry c where userId= :userId order by activityTime desc"
+                query = "select c from ActivityStreamEntry c where userId= :userId order by activityTime desc, id desc"
         ),
         @NamedQuery(
                 name = LOAD_BY_ACTIVITY_ENTRY_ID,
-                query = "select c from ActivityStreamEntry c where activityEntryId= :activityEntryId order by activityTime desc"
+                query = "select c from ActivityStreamEntry c where activityEntryId= :activityEntryId order by activityTime desc, id desc"
         ),
         @NamedQuery(
                 name = LOAD_ALL_EARLIER_THEN,
-                query = "select c from ActivityStreamEntry c where activityTime >= :activityTime order by activityTime desc"
+                query = "select c from ActivityStreamEntry c where activityTime >= :activityTime order by activityTime desc, id desc"
         ),
         @NamedQuery(
                 name = LOAD_ALL_FOR_MATCH,
-                query = "select c from ActivityStreamEntry c where activityEntryId = :activityEntryId and activityStreamEntryType in ( 1, 2, 3, 4 )  order by activityTime desc"
+                query = "select c from ActivityStreamEntry c where activityEntryId = :activityEntryId and activityStreamEntryType in ( 1, 2, 3, 4 )  order by activityTime desc, id desc"
         )
 })
 public class ActivityStreamEntry extends AbstractEntity {
 
-    public static final String LOAD_ALL = "activityStreamEntries.loadAll";
     public static final String LOAD_ALL_FOR_USER = "activityStreamEntries.loadAllForUser";
     public static final String LOAD_BY_ACTIVITY_ENTRY_ID = "activityStreamEntries.loadByActivityEntryId";
     public static final String LOAD_ALL_EARLIER_THEN = "activityStreamEntries.loadAllEarlierThen";

@@ -18,13 +18,6 @@ public class ActivityStreamRepository implements ActivityStreamDao {
     private EntityManager em;
 
     @Override
-    @Cacheable(value = CACHE_QUERY)
-    public List<ActivityStreamEntry> loadAll() {
-        return em.createNamedQuery(ActivityStreamEntry.LOAD_ALL, ActivityStreamEntry.class)
-                .getResultList();
-    }
-
-    @Override
     @Cacheable(value = CACHE_ENTRY, key = "#id")
     public ActivityStreamEntry load(final int id) {
         return em.find(ActivityStreamEntry.class, id);
