@@ -15,6 +15,7 @@ define( function ( require ) {
 	var matchesAndBetsView = require( 'js/widgets/matches-and-bets/matches-and-bets-widget' );
 	var activityStreamWidget = require( 'js/widgets/activity-stream/activity-stream-widget' );
 	var usersRatingWidget = require( 'js/widgets/users-rating/users-rating-widget' );
+	var favoritesCategoriesStatisticsWidget = require( 'js/widgets/fav-cat-stat/fav-cat-stat-widget' );
 	var DefineFavoriteCategoriesView = require( 'js/components/favorites/define-favorite-categories-view' );
 
 	var app = require( 'app' );
@@ -93,6 +94,8 @@ define( function ( require ) {
 			this._renderAnotherMatchesOnDate(onDate);
 
 			this._renderCupStatistics( onDate );
+
+			this._renderFavoritesCategoriesStatisticsWidget(onDate);
 
 			this._renderTodayUserRating( onDate );
 
@@ -190,6 +193,11 @@ define( function ( require ) {
 				};
 				matchesAndBetsView( el, options );
 			} );
+		},
+
+		_renderFavoritesCategoriesStatisticsWidget: function (onDate) {
+			var nestDate = dateTimeService.formatDate(dateTimeService.plusDay(onDate));
+			favoritesCategoriesStatisticsWidget(this.$('.js-favorites-categories-statistics'), {onDate: nestDate});
 		},
 
 		_renderTodayUserRating: function( onDate ) {

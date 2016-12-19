@@ -1,23 +1,19 @@
 package betmen.web.controllers.rest;
 
-import betmen.core.entity.Category;
-import betmen.core.entity.Cup;
-import betmen.core.entity.Match;
-import betmen.core.entity.SportKind;
-import betmen.core.entity.User;
+import betmen.core.entity.*;
 import betmen.core.service.CupService;
 import betmen.core.service.FavoriteCategoryService;
 import betmen.core.service.UserService;
+import betmen.core.service.matches.MatchBetsService;
 import betmen.core.service.matches.MatchService;
 import betmen.core.service.utils.DateTimeService;
-import betmen.dto.dto.portal.PortalAnotherMatchesCategoryDTO;
-import betmen.dto.dto.portal.PortalAnotherMatchesCupDTO;
-import betmen.dto.dto.portal.PortalAnotherMatchesSportDTO;
-import betmen.dto.dto.portal.PortalPageDTO;
+import betmen.dto.dto.CategoryDTO;
+import betmen.dto.dto.portal.*;
 import betmen.web.converters.DTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -41,6 +37,8 @@ public class PortalPageRestController {
     @Autowired
     private FavoriteCategoryService favoriteCategoryService;
     @Autowired
+    private MatchBetsService matchBetsService;
+    @Autowired
     private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
@@ -54,6 +52,29 @@ public class PortalPageRestController {
         result.setCupsTodayToShow(dtoService.transformCups(cupService.getUserCupsOnDate(currentUser, date), currentUser));
         result.setAnotherMatchesOnDate(getAnotherMatchesOnDate(currentUser, date));
         return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/favorites/statistics/")
+    public FavoriteCategoriesBetStatisticsDTO portalPageFavoriteCategoriesBetStatistics(@RequestParam(value = "onDate") final String onDate,
+                                                                                        final Principal principal) {
+        final User currentUser = userService.findByLogin(principal.getName());
+        final LocalDate date = dateTimeService.parseDate(onDate);
+        final FavoriteCategoriesBetStatisticsDTO dto = new FavoriteCategoriesBetStatisticsDTO();
+        dto.setOnDate(date);
+        dto.setCategoryBetStatistics(favoriteCategoryService.loadUserFavoriteCategories(currentUser).stream()
+                .map(category -> {
+                    final CategoryDTO categoryDTO = dtoService.transformCategory(category);
+                    final int matchesCount = matchService.getMatchCount(category.getId(), date);
+                    if (matchesCount == 0) {
+                        return null;
+                    }
+                    int betsCount = matchBetsService.userBetsCount(currentUser, category, date);
+                    return new FavoriteCategoryBetStatisticsDTO(categoryDTO, matchesCount, betsCount);
+                })
+                .filter(res -> res != null)
+                .collect(Collectors.toList())
+        );
+        return dto;
     }
 
     private List<PortalAnotherMatchesSportDTO> getAnotherMatchesOnDate(final User user, final LocalDate date) {

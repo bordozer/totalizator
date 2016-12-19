@@ -1,0 +1,9 @@
+<% _.each(categoryBetStatistics, function(statistic) { %>
+    <div class="row">
+        <div class="col-xs-8"><small><a href="/betmen/categories/<%=statistic.category.categoryId%>/"><%=statistic.category.categoryName%></a></small></div>
+        <div class="col-xs-2"><small title="<%=translator.matchesCount%>"><%=statistic.matchesCount%></small></div>
+        <div class="col-xs-2 <%=statistic.matchesCount > statistic.betsCount ? 'text-danger' : 'text-success'%>">
+            <strong><small title="<%=translator.betsCount%>"><%=statistic.betsCount%></small></strong>
+        </div>
+    </div>
+<% }) %>

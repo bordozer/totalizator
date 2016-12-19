@@ -34,6 +34,8 @@ public interface MatchService {
 
     int getMatchCount(final int teamId);
 
+    int getMatchCount(final int categoryId, final LocalDate onDate);
+
     boolean isMatchStarted(final Match match);
 
     boolean isMatchFinished(final Match match);

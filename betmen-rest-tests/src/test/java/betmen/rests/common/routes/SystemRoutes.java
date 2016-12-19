@@ -11,6 +11,7 @@ public enum SystemRoutes implements Route {
     MATCH_ACTIVITIES("/rest/activity-stream/matches/{matchId}/"),
     USER_ACTIVITIES("/rest/activity-stream/users/{userId}/"),
     ACTIVITY_STREAM_CLEANUP("/admin/rest/common/activities/cleanup/"),
+    FAVORITE_CATEGORIES_BETS_STATISTICS("/rest/portal-page/favorites/statistics/?onDate={onDate}"),
     ;
 
     private final String route;

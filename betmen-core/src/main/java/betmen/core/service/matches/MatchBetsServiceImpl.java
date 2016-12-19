@@ -1,10 +1,6 @@
 package betmen.core.service.matches;
 
-import betmen.core.entity.Cup;
-import betmen.core.entity.Match;
-import betmen.core.entity.MatchBet;
-import betmen.core.entity.User;
-import betmen.core.entity.UserGroupEntity;
+import betmen.core.entity.*;
 import betmen.core.model.ErrorCodes;
 import betmen.core.model.ValidationResult;
 import betmen.core.repository.MatchBetDao;
@@ -155,6 +151,13 @@ public class MatchBetsServiceImpl implements MatchBetsService {
     @Override
     public int userBetsCount(final User user) {
         return matchBetRepository.userBetsCount(user.getId());
+    }
+
+    @Override
+    public int userBetsCount(User user, Category category, LocalDate onDate) {
+        final String fromTime = dateTimeService.formatDateTimeSQL(dateTimeService.getFirstSecondOf(onDate));
+        final String toTime = dateTimeService.formatDateTimeSQL(dateTimeService.getLastSecondOf(onDate));
+        return matchBetJpaRepository.getBetsCount(user.getId(), category.getId(), fromTime, toTime);
     }
 
     @Override

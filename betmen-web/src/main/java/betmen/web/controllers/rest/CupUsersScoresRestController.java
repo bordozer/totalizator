@@ -69,7 +69,7 @@ public class CupUsersScoresRestController {
         return userRatingService.cupUsersScoresInTime(cupId, getUserGroupId(userGroupId));
     }
 
-    private Integer getUserGroupId(final @RequestParam(value = "userGroupId", required = false) Integer userGroupId) {
+    private Integer getUserGroupId(final Integer userGroupId) {
         return Optional.ofNullable(userGroupId).map(groupId -> groupId).orElse(0);
     }
 

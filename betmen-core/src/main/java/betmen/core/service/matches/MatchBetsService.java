@@ -1,10 +1,6 @@
 package betmen.core.service.matches;
 
-import betmen.core.entity.Cup;
-import betmen.core.entity.Match;
-import betmen.core.entity.MatchBet;
-import betmen.core.entity.User;
-import betmen.core.entity.UserGroupEntity;
+import betmen.core.entity.*;
 import betmen.core.model.ValidationResult;
 
 import java.time.LocalDate;
@@ -38,6 +34,8 @@ public interface MatchBetsService {
     int betsCount(final Cup cup, final User user);
 
     int userBetsCount(final User user);
+
+    int userBetsCount(final User user, final Category category, final LocalDate onDate);
 
     ValidationResult validateBettingAllowed(final Match match, final User user);
 

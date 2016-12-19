@@ -232,4 +232,13 @@ public class ComparisonUtils {
         assertThat(expected.getCupId(), is(actual.getCupId()));
         assertThat(expected.getCupName(), is(actual.getCupName()));
     }
+
+    public static void assertTheSame(CategoryDTO expected, CategoryEditDTO actual) {
+        assertThat(expected, notNullValue());
+        assertThat(actual, notNullValue());
+
+        assertThat(expected.getCategoryId(), is(actual.getCategoryId()));
+        assertThat(expected.getCategoryName(), is(actual.getCategoryName()));
+        assertThat(expected.getLogoUrl(), is(actual.getLogoUrl()));
+    }
 }

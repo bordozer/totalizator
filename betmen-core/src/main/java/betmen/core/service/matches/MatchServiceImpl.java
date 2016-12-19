@@ -168,6 +168,13 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public int getMatchCount(final int categoryId, final LocalDate onDate) {
+        final LocalDateTime fromTime = dateTimeService.getFirstSecondOf(onDate);
+        final LocalDateTime toTime = dateTimeService.getLastSecondOf(onDate);
+        return matchJpaRepository.getMatchCount(categoryId, fromTime, toTime);
+    }
+
+    @Override
     public int getMatchCount(final Cup cup, final Team team) {
         return matchRepository.getMatchCount(cup, team);
     }

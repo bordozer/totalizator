@@ -18,4 +18,11 @@ public interface MatchJpaRepository extends JpaRepository<Match, Integer>, JpaSp
 
     @Query(value = "select m from Match m where (m.team1.id = :teamId or m.team2.id = :teamId) and m.beginningTime >= :from and m.beginningTime <= :to")
     List<Match> loadAllTeamMatchesForPeriod(@Param("teamId") int teamId, @Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
+
+    @Query(value = "select count(m) from Match m join Category cat on (m.cup.category.id = cat.id)" +
+            " where cat.id = :categoryId " +
+            "   and m.cup.publicCup = true " +
+            "   and m.beginningTime between :fromTime and :toTime "
+    )
+    int getMatchCount(@Param("categoryId") int categoryId, @Param("fromTime") LocalDateTime fromTime, @Param("toTime") LocalDateTime toTime);
 }
