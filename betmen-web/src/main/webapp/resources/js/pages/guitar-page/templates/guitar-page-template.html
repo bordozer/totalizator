@@ -1,0 +1,140 @@
+<style>
+    .fretNote {
+        width: 55px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .bordered {
+        border: solid 1px black;
+    }
+
+    .border12 {
+        border-left: solid 3px navy;
+    }
+
+    .stringLine {
+        height: 40px;
+    }
+
+    .border-radius {
+        border-radius: 25px;
+    }
+
+    .highlighted-note {
+        font-size: 14px;
+        font-family: Georgia;
+        font-weight: bold;
+        border-radius: 15px;
+        border: 1px solid gray;
+        padding: 7px !important;
+        margin: 2px !important;
+    }
+
+    .full-tone {
+        background-color: #f1f1f1;
+    }
+
+    .half-tone {
+        font-size: 12px;
+    }
+
+    .tonic-note {
+        color: #FFFFFF;
+        background-color: #ce8483;
+        border: 2px solid #0b3e6f;
+    }
+
+    .key-note {
+        background-color: #9acfea;
+    }
+
+    .blues-note {
+        color: #902e00;
+    }
+
+    .full-band-note {
+        color: #FF0000;
+        border: 2px dashed #FF0000;
+    }
+
+    .another-band-note {
+        color: #F838D8;
+        border: 2px dashed #F838D8;
+    }
+
+    .half-band-note {
+        color: #37006e;
+        border: 2px dashed #37006e;
+    }
+</style>
+
+<!-- notes -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+        <% for(var note = 0; note < notes.length; note++) { %>
+            <div class="col-xs-1 text-center">
+                <h4 class="<%= notes[note].full ? 'text-info strong' : 'text-muted' %>">
+                    <input type="radio" name="notes" id="<%= notes[note].note %>" value="<%= notes[note].note %>" <%= tonic == notes[note].note ? "checked='checked'" : '' %> >
+                    <label for="<%= notes[note].note %>"></label> <%= notes[note].note %>
+                </h4>
+            </div>
+        <% } %>
+        </div>
+    </div>
+</div>
+<!-- / notes -->
+
+<!-- sequence -->
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <input type="radio" name="sequenceType" id="minor" value="minor" <%= sequenceType == 'minor' ? "checked='checked'" : '' %> ><label for="minor"></label> Minor
+        <input type="radio" name="sequenceType" id="blues" value="blues" <%= sequenceType == 'blues' ? "checked='checked'" : '' %> ><label for="blues"></label> Blues
+        <input type="radio" name="sequenceType" id="both" value="both" <%= sequenceType == 'both' ? "checked='checked'" : '' %> ><label for="blues"></label> Both
+    </div>
+</div>
+<!-- / sequence -->
+
+<!-- frets -->
+<% var string = 1; %>
+<% _.each(neckModel, function(stringModel){ %>
+    <div class="row">
+        <div class="col-xs-1 fretNote nopadding text-muted">
+            <h4><%=string%></h4>
+        </div>
+        <% var fret = 0; %>
+        <% _.each(stringModel, function(note) { %>
+            <div class="col-xs-1 fretNote stringLine nopadding bordered <%= (fret == 1 || fret == 12 || fret == 24) ? 'border12' : '' %>">
+                <h4 class="<%= note.noteStyle %>" title="<%=note.note%> <%=note.customTitle%> (<%=note.full ? 'Full tone' : 'Half tone'%>)" >
+                    <span class="<%= note.customIcon %>"></span>
+                    <%= note.note %> </h4>
+            </div>
+            <% fret++; %>
+        <% }) %>
+    </div>
+    <% string++ %>
+<% }) %>
+<!-- / frets -->
+
+<!-- fret number -->
+<div class="row">
+    <div class="col-xs-1 fretNote nopadding text-muted"></div>
+    <% for(var fret = 0; fret <= fretsCount; fret++) { %>
+        <div class="col-xs-1 fretNote nopadding">
+            <%= fret %>
+        </div>
+    <% } %>
+</div>
+<!-- / fret number -->
+
+<!-- frets markers -->
+<div class="row">
+    <% for(var fret = -1; fret <= fretsCount + 1; fret++) { %>
+        <div class="col-xs-1 fretNote nopadding text-muted">
+            <% var needMarkFret = _.contains(markedFrets, fret); %>
+            <h4 class="<%= needMarkFret ? 'border-radius bg-success' : ''%>" ><%= needMarkFret ? fret : '' %></h4>
+        </div>
+    <% } %>
+</div>
+<!-- / frets markers -->
