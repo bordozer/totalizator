@@ -7,10 +7,14 @@
 
     <script type="text/javascript">
 
-        require(['jquery', 'js/components/base-view/user-base-page-view', 'js/pages/guitar-page/guitar-page'], function ($, Page, guitar) {
+        require(['jquery', 'js/components/base-view/user-base-page-view', 'js/pages/guitar-page/guitar-page', 'translator'], function ($, Page, guitar, Translator) {
+
+            var translator = new Translator( {
+				title: 'Guitar neck'
+			} );
 
             var breadcrumbs = [
-                {link: '#', title: "Guitar"}
+                {link: '#', title: translator.title}
             ];
 
             var pageView = new Page({

@@ -11,7 +11,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup' ], function ( $, Page, cup, Translator ) {
+		require( [ 'jquery', 'js/components/base-view/user-base-page-view', 'js/pages/cup/cup' ], function ( $, Page, cup ) {
 
 			var cupId = "${cup.id}";
 

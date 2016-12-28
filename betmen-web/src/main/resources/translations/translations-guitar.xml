@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Guitar neck</nerd>
+		<ru><![CDATA[Ноты на грифе гитары]]></ru>
+		<ua><![CDATA[Ноти на грифi гiтари]]></ua>
+		<en><![CDATA[Guitar neck]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Neck pointers</nerd>
+		<ru><![CDATA[Метки грифа]]></ru>
+		<ua><![CDATA[Цяточки грифа]]></ua>
+		<en><![CDATA[Neck pointers]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Minor gamma</nerd>
+		<ru><![CDATA[Минор]]></ru>
+		<ua><![CDATA[Мiнор]]></ua>
+		<en><![CDATA[Minor]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Blues gamma</nerd>
+		<ru><![CDATA[Блюз]]></ru>
+		<ua><![CDATA[Блюз]]></ua>
+		<en><![CDATA[Blues]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Both gamma</nerd>
+		<ru><![CDATA[Минор и блюз совмещенные]]></ru>
+		<ua><![CDATA[Мiнор и блюз зхрещеннi]]></ua>
+		<en><![CDATA[Minor and blues united]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Band note</nerd>
+		<ru><![CDATA[(Бэндовая нота)]]></ru>
+		<ua><![CDATA[(Бендова нота)]]></ua>
+		<en><![CDATA[(Band note)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Blues note</nerd>
+		<ru><![CDATA[(Блюзовая нота)]]></ru>
+		<ua><![CDATA[(Блюзова нота)]]></ua>
+		<en><![CDATA[(Blues note)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Tonic note</nerd>
+		<ru><![CDATA[(Тоника)]]></ru>
+		<ua><![CDATA[(Тонiка)]]></ua>
+		<en><![CDATA[(Tonic)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note E</nerd>
+		<ru><![CDATA[Ми]]></ru>
+		<ua><![CDATA[Мi]]></ua>
+		<en><![CDATA[E]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note F</nerd>
+		<ru><![CDATA[Фа]]></ru>
+		<ua><![CDATA[Фа]]></ua>
+		<en><![CDATA[F]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note F#/Gb</nerd>
+		<ru><![CDATA[Фа#/Соль бемоль]]></ru>
+		<ua><![CDATA[Фа#/Соль бемоль]]></ua>
+		<en><![CDATA[F#/Gb]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note G</nerd>
+		<ru><![CDATA[Соль]]></ru>
+		<ua><![CDATA[Соль]]></ua>
+		<en><![CDATA[G]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note G#/Ab</nerd>
+		<ru><![CDATA[Соль#/Ля бемоль]]></ru>
+		<ua><![CDATA[Соль#/Ля бемоль]]></ua>
+		<en><![CDATA[G#/Ab]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note A</nerd>
+		<ru><![CDATA[Ля]]></ru>
+		<ua><![CDATA[Ля]]></ua>
+		<en><![CDATA[A]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note A#/B</nerd>
+		<ru><![CDATA[Ля#/Си бемоль]]></ru>
+		<ua><![CDATA[Ля#/Си бемоль]]></ua>
+		<en><![CDATA[A#/B]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note H</nerd>
+		<ru><![CDATA[Си]]></ru>
+		<ua><![CDATA[Си]]></ua>
+		<en><![CDATA[H]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note C</nerd>
+		<ru><![CDATA[До]]></ru>
+		<ua><![CDATA[До]]></ua>
+		<en><![CDATA[C]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note C#/Db</nerd>
+		<ru><![CDATA[До#/Рэ бемоль]]></ru>
+		<ua><![CDATA[До#/Ре бемоль]]></ua>
+		<en><![CDATA[C#/Db]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note D</nerd>
+		<ru><![CDATA[Рэ]]></ru>
+		<ua><![CDATA[Ре]]></ua>
+		<en><![CDATA[D]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Note D#/Eb</nerd>
+		<ru><![CDATA[Рэ#/Ми бемоль]]></ru>
+		<ua><![CDATA[Ре#/Мi бемоль]]></ua>
+		<en><![CDATA[D#/Eb]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>

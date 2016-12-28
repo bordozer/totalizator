@@ -10,26 +10,45 @@ define(function (require) {
 
     var Translator = require('translator');
     var translator = new Translator({
-        title: ""
+        title: "Guitar neck"
+        , neckPointersLabel: "Neck pointers"
+        , minorLabel: "Minor gamma"
+        , bluesLabel: "Blues gamma"
+        , bothLabel: "Both gamma"
+        , bandNoteLabel: "Band note"
+        , bluesNoteLabel: "Blues note"
+        , tonicNote: "Tonic note"
+        , noteE: "Note E"
+        , noteF: "Note F"
+        , noteFd: "Note F#/Gb"
+        , noteG: "Note G"
+        , noteGd: "Note G#/Ab"
+        , noteA: "Note A"
+        , noteAd: "Note A#/B"
+        , noteH: "Note H"
+        , noteC: "Note C"
+        , noteCd: "Note C#/Db"
+        , noteD: "Note D"
+        , noteDd: "Note D#/Eb"
     });
 
     var notes = [
-        {note: 'E', full: true}
-        , {note: 'F', full: true}
-        , {note: 'F#/Gb', full: false}
-        , {note: 'G', full: true}
-        , {note: 'G#/Ab', full: false}
-        , {note: 'A', full: true}
-        , {note: 'A#/B', full: false}
-        , {note: 'H', full: true}
-        , {note: 'C', full: true}
-        , {note: 'C#/Db', full: false}
-        , {note: 'D', full: true}
-        , {note: 'D#/Eb', full: false}
+        {note: 'E', full: true, translation: translator.noteE}
+        , {note: 'F', full: true, translation: translator.noteF}
+        , {note: 'F#/Gb', full: false, translation: translator.noteFd}
+        , {note: 'G', full: true, translation: translator.noteG}
+        , {note: 'G#/Ab', full: false, translation: translator.noteGd}
+        , {note: 'A', full: true, translation: translator.noteA}
+        , {note: 'A#/B', full: false, translation: translator.noteAd}
+        , {note: 'H', full: true, translation: translator.noteH}
+        , {note: 'C', full: true, translation: translator.noteC}
+        , {note: 'C#/Db', full: false, translation: translator.noteCd}
+        , {note: 'D', full: true, translation: translator.noteD}
+        , {note: 'D#/Eb', full: false, translation: translator.noteDd}
     ];
 
     var minorGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: 'Tonic'},
+        {offset: 0, customCss: '', customTitle: translator.tonicNote},
         {offset: 2, customCss: '', customTitle: ''},
         {offset: 3, customCss: '', customTitle: ''},
         {offset: 5, customCss: '', customTitle: ''},
@@ -38,12 +57,12 @@ define(function (require) {
         {offset: 10, customCss: '', customTitle: ''}
     ];
     var bluesGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: 'Tonic'},
-        {offset: 3, customCss: 'half-band-note', customTitle: 'Half band note', customIcon: 'fa fa-arrow-up'},
-        {offset: 5, customCss: 'full-band-note', customTitle: 'Full band note', customIcon: 'fa fa-long-arrow-up'},
-        {offset: 6, customCss: 'blues-note', customTitle: 'Blues note'},
+        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 3, customCss: 'half-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-arrow-up'},
+        {offset: 5, customCss: 'full-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'},
+        {offset: 6, customCss: 'blues-note', customTitle: translator.bluesNoteLabel},
         {offset: 7, customCss: '', customTitle: ''},
-        {offset: 10, customCss: 'another-band-note', customTitle: 'Another band note', customIcon: 'fa fa-angle-double-up'}
+        {offset: 10, customCss: 'another-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-angle-double-up'}
     ];
 
     return Backbone.View.extend({
