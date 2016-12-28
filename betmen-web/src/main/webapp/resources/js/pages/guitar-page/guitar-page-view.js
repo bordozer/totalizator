@@ -16,6 +16,7 @@ define(function (require) {
         , bluesLabel: "Blues gamma"
         , bothLabel: "Both gamma"
         , bandNoteLabel: "Band note"
+        , halfBandNoteLabel: "Half band note"
         , bluesNoteLabel: "Blues note"
         , tonicNote: "Tonic note"
         , noteE: "Note E"
@@ -49,7 +50,8 @@ define(function (require) {
 
     var minorGammaOffsets = [
         {offset: 0, customCss: '', customTitle: translator.tonicNote},
-        {offset: 2, customCss: '', customTitle: ''},
+        {offset: 2, customCss: 'minor-half-band-note', customTitle: translator.halfBandNoteLabel, customIcon: 'fa fa-caret-up'},
+        //{offset: 2, customCss: '', customTitle: ''},
         {offset: 3, customCss: '', customTitle: ''},
         {offset: 5, customCss: '', customTitle: ''},
         {offset: 7, customCss: '', customTitle: ''},
@@ -58,11 +60,11 @@ define(function (require) {
     ];
     var bluesGammaOffsets = [
         {offset: 0, customCss: '', customTitle: translator.tonicNote},
-        {offset: 3, customCss: 'half-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-arrow-up'},
+        {offset: 3, customCss: 'half-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'},
         {offset: 5, customCss: 'full-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'},
         {offset: 6, customCss: 'blues-note', customTitle: translator.bluesNoteLabel},
         {offset: 7, customCss: '', customTitle: ''},
-        {offset: 10, customCss: 'another-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-angle-double-up'}
+        {offset: 10, customCss: 'another-band-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'}
     ];
 
     return Backbone.View.extend({
