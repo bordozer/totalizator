@@ -40,7 +40,7 @@ define(function (require) {
     var bluesGammaOffsets = [
         {offset: 0, customCss: '', customTitle: 'Tonic'},
         {offset: 3, customCss: 'half-band-note', customTitle: 'Half band note', customIcon: 'fa fa-arrow-up'},
-        {offset: 5, customCss: 'full-band-note', customTitle: 'Full and note', customIcon: 'fa fa-long-arrow-up'},
+        {offset: 5, customCss: 'full-band-note', customTitle: 'Full band note', customIcon: 'fa fa-long-arrow-up'},
         {offset: 6, customCss: 'blues-note', customTitle: 'Blues note'},
         {offset: 7, customCss: '', customTitle: ''},
         {offset: 10, customCss: 'another-band-note', customTitle: 'Another band note', customIcon: 'fa fa-angle-double-up'}
