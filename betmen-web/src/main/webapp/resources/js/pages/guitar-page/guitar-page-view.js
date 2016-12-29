@@ -41,6 +41,8 @@ define(function (require) {
         , noteDd: "Note D#/Eb"
     });
 
+    var BAND_ICON = ''; //fa fa-long-arrow-up
+
     var notes = [
         {note: 'E', full: true, translation: translator.noteE}
         , {note: 'F', full: true, translation: translator.noteF}
@@ -67,19 +69,19 @@ define(function (require) {
     ];
     var minorBluesGammaOffsets = [
         {offset: 0, customCss: '', customTitle: translator.tonicNote},
-        {offset: 3, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'},   // half-band-note
-        {offset: 5, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'},   // full-band-note
+        {offset: 3, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // half-band-note
+        {offset: 5, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // full-band-note
         {offset: 6, customCss: 'minor-blues-gamma-note', customTitle: translator.bluesNoteLabel},                                     // blues-note
         {offset: 7, customCss: 'minor-blues-gamma-note', customTitle: ''},
-        {offset: 10, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'}   // another-band-note
+        {offset: 10, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON}   // another-band-note
     ];
     var majorBluesGammaOffsets = [
         {offset: 0, customCss: '', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'},
-        {offset: 3, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'},
+        {offset: 2, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},
+        {offset: 3, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},
         {offset: 4, customCss: 'major-blues-gamma-note', customTitle: translator.bluesNoteLabel},
         {offset: 7, customCss: 'major-blues-gamma-note', customTitle: ''},
-        {offset: 9, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: 'fa fa-long-arrow-up'}
+        {offset: 9, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON}
     ];
     var arabianGammaOffsets = [
         {offset: 0, customCss: '', customTitle: translator.tonicNote},
