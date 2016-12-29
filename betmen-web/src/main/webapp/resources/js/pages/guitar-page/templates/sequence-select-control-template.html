@@ -1,8 +1,15 @@
-<select id="selectedSequenceType">
-    <option value="0">-</option>
-    <option value="minor" <%= selectedSequenceType == 'minor' ? "selected='selected'" : '' %> ><%= translator.minorLabel %></option>
-    <option value="minor-blues" <%= selectedSequenceType == 'minor-blues' ? "selected='selected'" : '' %> ><%= translator.minorBluesLabel %></option>
-    <option value="major-blues" <%= selectedSequenceType == 'major-blues' ? "selected='selected'" : '' %> > <%= translator.majorBluesLabel %></option>
-    <option value="japanese" <%= selectedSequenceType == 'japanese' ? "selected='selected'" : '' %> > <%= translator.japaneseLabel %></option>
-    <option value="arabian" <%= selectedSequenceType == 'arabian' ? "selected='selected'" : '' %> > <%= translator.arabianLabel %></option>
-</select>
+<div class="row">
+    <div class="col-xs-2">
+        <select id="selectedSequenceType" class="form-control">
+            <option value="0">-</option>
+            <option value="minor" <%= selectedSequenceType == 'minor' ? "selected='selected'" : '' %> ><%= translator.minorLabel %></option>
+            <option value="minor-blues" <%= selectedSequenceType == 'minor-blues' ? "selected='selected'" : '' %> ><%= translator.minorBluesLabel %></option>
+            <option value="major-blues" <%= selectedSequenceType == 'major-blues' ? "selected='selected'" : '' %> > <%= translator.majorBluesLabel %></option>
+            <option value="japanese" <%= selectedSequenceType == 'japanese' ? "selected='selected'" : '' %> > <%= translator.japaneseLabel %></option>
+            <option value="arabian" <%= selectedSequenceType == 'arabian' ? "selected='selected'" : '' %> > <%= translator.arabianLabel %></option>
+        </select>
+    </div>
+    <div class="col-xs-1">
+        <button class="btn btn-default fa fa-remove js-remove-button" type="button" />
+    </div>
+</div>

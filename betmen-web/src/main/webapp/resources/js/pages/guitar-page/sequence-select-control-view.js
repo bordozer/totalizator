@@ -23,7 +23,8 @@ define(function (require) {
         selectedSequenceType: '',
 
         events: {
-            "change #selectedSequenceType": '_onSelectedSequenceTypeChange'
+            "change #selectedSequenceType": '_onSelectedSequenceTypeChange',
+            "click .js-remove-button": '_onRemoveClick'
         },
 
         initialize: function (options) {
@@ -44,10 +45,20 @@ define(function (require) {
             return this.selectedSequenceType;
         },
 
+        _triggerChanged: function () {
+            this.trigger('events:selected-sequence-type-changed', {index: this.index, value: this.selectedSequenceType});
+        },
+
         _onSelectedSequenceTypeChange: function(evt) {
             var target = $(evt.target);
             this.selectedSequenceType = target.val();
-            this.trigger('events:selected-sequence-type-changed', {index: this.index, value: this.selectedSequenceType});
+            this._triggerChanged();
+        },
+
+        _onRemoveClick: function() {
+            this.$("#selectedSequenceType").val(0);
+            this.selectedSequenceType = 0;
+            this._triggerChanged();
         }
     });
 });
