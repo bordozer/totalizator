@@ -23,6 +23,10 @@ define(function (require) {
         , bluesNoteLabel: "Blues note"
         , tonicNote: "Tonic note"
         , clickNoteHint: "Click notes to highlight them"
+        , fullNoteNotInSequence: "Full note not in sequence"
+        , halfNoteNotInSequence: "Half-tone note not in sequence"
+        , fullNoteInSequence: "Full note in sequence"
+        , halfToneNoteInSequence: "Half-tone note in sequence"
         , noteE: "Note E"
         , noteF: "Note F"
         , noteFd: "Note F#/Gb"
@@ -179,7 +183,16 @@ define(function (require) {
                             + ' '
                             + (_.contains(self.selectedNotes, note) ? 'selected-note' : '')
                     ;
-                    stringNote['customTitle'] = sequenceNote != undefined ? sequenceNote.customTitle : '';
+                    if (tonicNote || isSequenceNote) {
+                        var customNoteTitle = sequenceNote != undefined ? sequenceNote.customTitle : (stringNote.full ? translator.fullNoteInSequence : '');
+                        stringNote['customTitle'] = customNoteTitle + (stringNote.full ? ' ' + translator.fullNoteInSequence : translator.halfToneNoteInSequence);
+                    } else {
+                        if (stringNote.full) {
+                            stringNote['customTitle'] = translator.fullNoteNotInSequence;
+                        } else {
+                            stringNote['customTitle'] = translator.halfNoteNotInSequence;
+                        }
+                    }
                     stringNote['customIcon'] = sequenceNote != undefined ? sequenceNote.customIcon : '';
                 })
             });

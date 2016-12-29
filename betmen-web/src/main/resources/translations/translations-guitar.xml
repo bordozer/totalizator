@@ -178,6 +178,34 @@
 	</translation>
 
 	<translation>
+		<nerd>Full note not in sequence</nerd>
+		<ru><![CDATA[Целая нота не из гаммы]]></ru>
+		<ua><![CDATA[Цiла нота не з гамми]]></ua>
+		<en><![CDATA[Full note not in a sequence]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Half-tone note not in sequence</nerd>
+		<ru><![CDATA[Полутон не из гаммы]]></ru>
+		<ua><![CDATA[Полутон не з гамми]]></ua>
+		<en><![CDATA[Half-tone note not in a sequence]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Full note in sequence</nerd>
+		<ru><![CDATA[Целая нота из гаммы]]></ru>
+		<ua><![CDATA[Цiла нота з гамми]]></ua>
+		<en><![CDATA[Full note in a sequence]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Half-tone note in sequence</nerd>
+		<ru><![CDATA[Полутон из гаммы]]></ru>
+		<ua><![CDATA[Полутон з гамми]]></ua>
+		<en><![CDATA[Half-tone note in a sequence]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
