@@ -45,32 +45,30 @@
         border: 2px solid #0b3e6f;
     }
 
-    .key-note {
+    .minor-gamma-note {
         background-color: #9acfea;
     }
 
-    .blues-note {
-        color: #902e00;
+    .minor-blues-gamma-note {
+        background-color: #86bfa0;
     }
 
-    .full-band-note {
-        color: #FF0000;
-        border: 2px dashed #FF0000;
+    .major-blues-gamma-note {
+        background-color: #46b8da;
     }
 
-    .another-band-note {
-        color: #F838D8;
-        border: 2px dashed #F838D8;
+    .japanese-gamma-note {
+        background-color: #efec9f;
     }
 
-    .half-band-note {
-        color: #37006e;
-        border: 2px dashed #37006e;
+
+    .arabian-gamma-note {
+        background-color: #baaa5a;
     }
 
-    .minor-half-band-note {
-        color: #3f7506;
-        border: 2px dashed #3f7506;
+    .selected-note {
+        background-color: #ccd232;
+        border: 2px dashed #0b3e6f;
     }
 </style>
 
@@ -91,16 +89,6 @@
 </div>
 <!-- / notes -->
 
-<!-- sequence -->
-<div class="row">
-    <div class="col-xs-12 text-center">
-        <input type="radio" name="sequenceType" id="minor" value="minor" <%= sequenceType == 'minor' ? "checked='checked'" : '' %> ><label for="minor"></label> <%= translator.minorLabel %>
-        <input type="radio" name="sequenceType" id="blues" value="blues" <%= sequenceType == 'blues' ? "checked='checked'" : '' %> ><label for="blues"></label> <%= translator.bluesLabel %>
-        <input type="radio" name="sequenceType" id="both" value="both" <%= sequenceType == 'both' ? "checked='checked'" : '' %> ><label for="blues"></label> <%= translator.bothLabel %>
-    </div>
-</div>
-<!-- / sequence -->
-
 <!-- frets -->
 <% var string = 1; %>
 <% _.each(neckModel, function(stringModel){ %>
@@ -111,8 +99,8 @@
         <% var fret = 0; %>
         <% _.each(stringModel, function(note) { %>
             <div class="col-xs-1 fretNote stringLine nopadding bordered <%= (fret == 1 || fret == 12 || fret == 24) ? 'border12' : '' %>">
-                <h4 class="<%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>" >
-                    <span class="<%= note.customIcon %>"></span>
+                <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>"  data-fret-note="<%= note.note %>">
+                    <span class="text-muted <%= note.customIcon %>"></span>
                     <%= note.note %>
                 </h4>
             </div>
@@ -144,3 +132,19 @@
     <% } %>
 </div>
 <!-- / frets markers -->
+
+
+<!-- sequence -->
+<% for(var k = 0; k <= gammasCount; k++) { %>
+    <div class="row">
+        <div class="col-xs-12 js-sequence-select-control-<%= k %>"></div>
+    </div>
+<% }%>
+
+<!-- / sequence -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <h5 class="text-muted">* <%= translator.clickNoteHint %></h5>
+    </div>
+</div>

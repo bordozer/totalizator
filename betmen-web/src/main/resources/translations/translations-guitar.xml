@@ -24,10 +24,17 @@
 	</translation>
 
 	<translation>
-		<nerd>Blues gamma</nerd>
-		<ru><![CDATA[Блюз]]></ru>
-		<ua><![CDATA[Блюз]]></ua>
-		<en><![CDATA[Blues]]></en>
+		<nerd>Minor blues gamma</nerd>
+		<ru><![CDATA[Минорная блюзовая]]></ru>
+		<ua><![CDATA[Мiнорна блюзова]]></ua>
+		<en><![CDATA[Minor blues]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Major blues gamma</nerd>
+		<ru><![CDATA[Мажорная блюзовая]]></ru>
+		<ua><![CDATA[Мажорна блюзова]]></ua>
+		<en><![CDATA[Major blues]]></en>
 	</translation>
 
 	<translation>
@@ -147,6 +154,34 @@
 		<ru><![CDATA[Рэ#/Ми бемоль]]></ru>
 		<ua><![CDATA[Ре#/Мi бемоль]]></ua>
 		<en><![CDATA[D#/Eb]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Click notes to highlight them</nerd>
+		<ru><![CDATA[Кликните на ноты, чтобы подсветить их]]></ru>
+		<ua><![CDATA[Клiкнiть на ноти щоб подвiтити їх]]></ua>
+		<en><![CDATA[Click notes to highlight them]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Arabian gamma</nerd>
+		<ru><![CDATA[Арабский лад]]></ru>
+		<ua><![CDATA[Арабський лад]]></ua>
+		<en><![CDATA[Arabian gamma]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Japanese gamma</nerd>
+		<ru><![CDATA[Японский лад]]></ru>
+		<ua><![CDATA[Японський лад]]></ua>
+		<en><![CDATA[Japanese gamma]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
