@@ -159,7 +159,7 @@
 	<translation>
 		<nerd>Click notes to highlight them</nerd>
 		<ru><![CDATA[Кликните на ноты, чтобы подсветить их]]></ru>
-		<ua><![CDATA[Клiкнiть на ноти щоб подвiтити їх]]></ua>
+		<ua><![CDATA[Клiкнiть на ноти щоб подсвiтити їх]]></ua>
 		<en><![CDATA[Click notes to highlight them]]></en>
 	</translation>
 
@@ -203,6 +203,20 @@
 		<ru><![CDATA[Полутон из гаммы]]></ru>
 		<ua><![CDATA[Полутон з гамми]]></ua>
 		<en><![CDATA[Half-tone note in a sequence]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Base Gamma</nerd>
+		<ru><![CDATA[Базовая гамма]]></ru>
+		<ua><![CDATA[Базова гамма]]></ua>
+		<en><![CDATA[Base Gamma]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Additional Gamma</nerd>
+		<ru><![CDATA[Добавить ноты с]]></ru>
+		<ua><![CDATA[Додаи ноти з]]></ua>
+		<en><![CDATA[Add notes from]]></en>
 	</translation>
 
 	<translation>

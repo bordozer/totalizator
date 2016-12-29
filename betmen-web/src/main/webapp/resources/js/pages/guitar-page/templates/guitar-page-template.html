@@ -138,9 +138,16 @@
 
 
 <!-- sequence -->
-<% for(var k = 0; k <= gammasCount; k++) { %>
+<% for(var k = 0; k < gammasCount; k++) { %>
     <div class="row">
-        <div class="col-xs-12 js-sequence-select-control-<%= k %>"></div>
+        <div class="col-xs-1 small">
+            <% if(k == 0) { %>
+                <%= translator.baseGamma %>
+            <% } else {%>
+            <%= translator.additionalGamma %>
+            <% }%>
+        </div>
+        <div class="col-xs-11 js-sequence-select-control-<%= k %>"></div>
     </div>
 <% }%>
 

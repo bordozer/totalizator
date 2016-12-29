@@ -39,6 +39,8 @@ define(function (require) {
         , noteCd: "Note C#/Db"
         , noteD: "Note D"
         , noteDd: "Note D#/Eb"
+        , baseGamma: "Base Gamma"
+        , additionalGamma: "Additional Gamma"
     });
 
     var BAND_ICON = ''; //fa fa-long-arrow-up
