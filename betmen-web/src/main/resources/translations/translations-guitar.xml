@@ -165,23 +165,30 @@
 
 	<translation>
 		<nerd>Arabian gamma</nerd>
-		<ru><![CDATA[Арабский лад]]></ru>
-		<ua><![CDATA[Арабський лад]]></ua>
-		<en><![CDATA[Arabian gamma]]></en>
+		<ru><![CDATA[Арабский минорный лад]]></ru>
+		<ua><![CDATA[Арабський мiнорний лад]]></ua>
+		<en><![CDATA[Arabian minor gamma]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Japanese gamma</nerd>
-		<ru><![CDATA[Японский лад]]></ru>
-		<ua><![CDATA[Японський лад]]></ua>
-		<en><![CDATA[Japanese gamma]]></en>
+		<ru><![CDATA[Японский нейтральный лад]]></ru>
+		<ua><![CDATA[Японський нейтральный лад]]></ua>
+		<en><![CDATA[Japanese neutral gamma]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Judas gamma</nerd>
+		<ru><![CDATA[Еврейский доминантный лад]]></ru>
+		<ua><![CDATA[Єврейскiй домiнантний лад]]></ua>
+		<en><![CDATA[Judas dominant gamma]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Gypsy gamma</nerd>
-		<ru><![CDATA[Цыганский лад]]></ru>
-		<ua><![CDATA[Циганський лад]]></ua>
-		<en><![CDATA[Gypsy gamma]]></en>
+		<ru><![CDATA[Цыганский минорный лад]]></ru>
+		<ua><![CDATA[Циганський мiнорний лад]]></ua>
+		<en><![CDATA[Gypsy minor gamma]]></en>
 	</translation>
 
 	<translation>
