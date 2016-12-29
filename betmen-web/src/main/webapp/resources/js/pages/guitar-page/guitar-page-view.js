@@ -17,7 +17,8 @@ define(function (require) {
         , minorLabel: "Minor gamma"
         , minorBluesLabel: "Minor blues gamma"
         , majorBluesLabel: "Major blues gamma"
-        , bothLabel: "Both gamma"
+        , japaneseLabel: "Japanese gamma"
+        , arabianLabel: "Arabian gamma"
         , bandNoteLabel: "Band note"
         , halfBandNoteLabel: "Half band note"
         , bluesNoteLabel: "Blues note"
@@ -104,11 +105,11 @@ define(function (require) {
     ];
 
     var gammaOffsets = [
-        {sequenceType: 'minor', offsets: minorGammaOffsets}
-        , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets}
-        , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets}
-        , {sequenceType: 'arabian', offsets: arabianGammaOffsets}
-        , {sequenceType: 'japanese', offsets: japaneseGammaOffsets}
+        {sequenceType: 'minor', offsets: minorGammaOffsets, nameTranslated: translator.minorLabel}
+        , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, nameTranslated: translator.minorBluesLabel}
+        , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, nameTranslated: translator.majorBluesLabel}
+        , {sequenceType: 'arabian', offsets: arabianGammaOffsets, nameTranslated: translator.japaneseLabel}
+        , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, nameTranslated: translator.arabianLabel}
     ];
 
     return Backbone.View.extend({
@@ -154,7 +155,12 @@ define(function (require) {
             this.$el.html(template(data));
 
             for (var i = 0; i < gammaOffsets.length; i++) {
-                var selectedSequenceTypeView1 = new SequenceSelectControlView({el: this.$('.js-sequence-select-control-' + i), options: {index: i, selectedSequenceType: this.selectedSequences[i]}});
+                var options = {
+                    index: i,
+                    gammaOffsets: gammaOffsets,
+                    selectedSequenceType: this.selectedSequences[i]
+                };
+                var selectedSequenceTypeView1 = new SequenceSelectControlView({el: this.$('.js-sequence-select-control-' + i), options: options});
                 selectedSequenceTypeView1.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
             }
         },

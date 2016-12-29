@@ -2,11 +2,9 @@
     <div class="col-xs-2">
         <select id="selectedSequenceType" class="form-control">
             <option value="0">-</option>
-            <option value="minor" <%= selectedSequenceType == 'minor' ? "selected='selected'" : '' %> ><%= translator.minorLabel %></option>
-            <option value="minor-blues" <%= selectedSequenceType == 'minor-blues' ? "selected='selected'" : '' %> ><%= translator.minorBluesLabel %></option>
-            <option value="major-blues" <%= selectedSequenceType == 'major-blues' ? "selected='selected'" : '' %> > <%= translator.majorBluesLabel %></option>
-            <option value="japanese" <%= selectedSequenceType == 'japanese' ? "selected='selected'" : '' %> > <%= translator.japaneseLabel %></option>
-            <option value="arabian" <%= selectedSequenceType == 'arabian' ? "selected='selected'" : '' %> > <%= translator.arabianLabel %></option>
+            <% _.each(gammaOffsets, function(offset) { %>
+            <option value="<%= offset.sequenceType %>" <%= selectedSequenceType == offset.sequenceType ? "selected='selected'" : '' %> ><%= offset.nameTranslated %></option>
+            <% }) %>
         </select>
     </div>
     <div class="col-xs-1">

@@ -10,11 +10,7 @@ define(function (require) {
 
     var Translator = require('translator');
     var translator = new Translator({
-        minorLabel: "Minor gamma"
-        , minorBluesLabel: "Minor blues gamma"
-        , majorBluesLabel: "Major blues gamma"
-        , japaneseLabel: "Japanese gamma"
-        , arabianLabel: "Arabian gamma"
+        title: ''
     });
 
     return Backbone.View.extend({
@@ -29,6 +25,7 @@ define(function (require) {
 
         initialize: function (options) {
             this.index = options.options.index;
+            this.gammaOffsets = options.options.gammaOffsets;
             this.selectedSequenceType = options.options.selectedSequenceType;
             this.render();
         },
@@ -36,6 +33,7 @@ define(function (require) {
         render: function() {
             var data = _.extend({}, {
                 selectedSequenceType: this.selectedSequenceType
+                , gammaOffsets: this.gammaOffsets
                 , translator: translator
             });
             this.$el.html(template(data));
