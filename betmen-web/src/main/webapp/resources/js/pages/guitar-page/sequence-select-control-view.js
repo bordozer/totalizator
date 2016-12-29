@@ -37,6 +37,13 @@ define(function (require) {
                 , translator: translator
             });
             this.$el.html(template(data));
+
+            var self = this;
+            _.each(this.gammaOffsets, function(gammaOffset) {
+                if (gammaOffset.sequenceType == self.selectedSequenceType) {
+                    self.$('.js-sequence-color').addClass(gammaOffset.customCss);
+                }
+            });
         },
 
         getSelectedSequenceType: function() {
@@ -50,6 +57,7 @@ define(function (require) {
         _onSelectedSequenceTypeChange: function(evt) {
             var target = $(evt.target);
             this.selectedSequenceType = target.val();
+
             this._triggerChanged();
         },
 

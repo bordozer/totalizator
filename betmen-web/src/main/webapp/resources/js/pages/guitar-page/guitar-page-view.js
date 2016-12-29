@@ -135,14 +135,14 @@ define(function (require) {
     ];
 
     var gammaOffsets = [
-        {sequenceType: 'minor', offsets: minorGammaOffsets, nameTranslated: translator.minorLabel}
-        , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, nameTranslated: translator.minorBluesLabel}
-        , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, nameTranslated: translator.majorBluesLabel}
-        , {sequenceType: 'arabian', offsets: arabianGammaOffsets, nameTranslated: translator.japaneseLabel}
-        , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, nameTranslated: translator.arabianLabel}
-        , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, nameTranslated: translator.gypsyLabel}
-        , {sequenceType: 'judas', offsets: judasGammaOffsets, nameTranslated: translator.judasLabel}
-        , {sequenceType: 'east', offsets: eastGammaOffsets, nameTranslated: translator.eastLabel}
+        {sequenceType: 'minor', offsets: minorGammaOffsets, customCss: 'minor-gamma-note', nameTranslated: translator.minorLabel}
+        , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, customCss: 'minor-blues-gamma-note', nameTranslated: translator.minorBluesLabel}
+        , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, customCss: 'major-blues-gamma-note', nameTranslated: translator.majorBluesLabel}
+        , {sequenceType: 'arabian', offsets: arabianGammaOffsets, customCss: 'arabian-gamma-note', nameTranslated: translator.japaneseLabel}
+        , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, customCss: 'japanese-gamma-note', nameTranslated: translator.arabianLabel}
+        , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, customCss: 'gypsy-gamma-note', nameTranslated: translator.gypsyLabel}
+        , {sequenceType: 'judas', offsets: judasGammaOffsets, customCss: 'judas-gamma-note', nameTranslated: translator.judasLabel}
+        , {sequenceType: 'east', offsets: eastGammaOffsets, customCss: 'east-gamma-note', nameTranslated: translator.eastLabel}
     ];
 
     return Backbone.View.extend({
