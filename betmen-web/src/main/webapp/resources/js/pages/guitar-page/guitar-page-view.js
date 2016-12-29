@@ -66,7 +66,7 @@ define(function (require) {
 
     var minorGammaOffsets = [
         {offset: 0, customCss: '', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'minor-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: 'fa fa-caret-up'},
+        {offset: 2, customCss: 'minor-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
         {offset: 3, customCss: 'minor-gamma-note', customTitle: ''},
         {offset: 5, customCss: 'minor-gamma-note', customTitle: ''},
         {offset: 7, customCss: 'minor-gamma-note', customTitle: ''},
