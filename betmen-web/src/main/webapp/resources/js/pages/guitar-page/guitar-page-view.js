@@ -19,6 +19,7 @@ define(function (require) {
         , majorBluesLabel: "Major blues gamma"
         , japaneseLabel: "Japanese gamma"
         , arabianLabel: "Arabian gamma"
+        , gypsyLabel: "Gypsy gamma"
         , bandNoteLabel: "Band note"
         , halfBandNoteLabel: "Half band note"
         , bluesNoteLabel: "Blues note"
@@ -103,6 +104,15 @@ define(function (require) {
         {offset: 6, customCss: 'japanese-gamma-note', customTitle: ''},
         {offset: 8, customCss: 'japanese-gamma-note', customTitle: ''}
     ];
+    var gypsyGammaOffsets = [
+        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 2, customCss: 'gypsy-gamma-note', customTitle: ''},
+        {offset: 3, customCss: 'gypsy-gamma-note', customTitle: ''},
+        {offset: 6, customCss: 'gypsy-gamma-note', customTitle: ''},
+        {offset: 7, customCss: 'gypsy-gamma-note', customTitle: ''},
+        {offset: 8, customCss: 'gypsy-gamma-note', customTitle: ''},
+        {offset: 11, customCss: 'gypsy-gamma-note', customTitle: ''}
+    ];
 
     var gammaOffsets = [
         {sequenceType: 'minor', offsets: minorGammaOffsets, nameTranslated: translator.minorLabel}
@@ -110,6 +120,7 @@ define(function (require) {
         , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, nameTranslated: translator.majorBluesLabel}
         , {sequenceType: 'arabian', offsets: arabianGammaOffsets, nameTranslated: translator.japaneseLabel}
         , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, nameTranslated: translator.arabianLabel}
+        , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, nameTranslated: translator.gypsyLabel}
     ];
 
     return Backbone.View.extend({
