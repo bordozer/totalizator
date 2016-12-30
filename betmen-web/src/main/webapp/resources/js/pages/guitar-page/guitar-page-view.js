@@ -49,6 +49,8 @@ define(function (require) {
 
     var BAND_ICON = ''; //fa fa-long-arrow-up
 
+    var markedFrets = [3, 5, 7, 9, 12, 15, 17, 19, 21];
+
     var notes = [
         {note: 'E', full: true, translation: translator.noteE}
         , {note: 'F', full: true, translation: translator.noteF}
@@ -147,7 +149,6 @@ define(function (require) {
 
     return Backbone.View.extend({
 
-        stringsCount: 6,
         fretsCount: 24,
         stringsTune: [
             {stringNumber: 1, note: 'E'}
@@ -157,7 +158,6 @@ define(function (require) {
             , {stringNumber: 5, note: 'A'}
             , {stringNumber: 6, note: 'E'}
         ],
-        markedFrets: [3, 5, 7, 9, 12, 15, 17, 19, 21],
 
         tonic: 'A',
         selectedNotes: [],
@@ -176,12 +176,12 @@ define(function (require) {
             var neckModel = this._initNeckModel();
             var data = _.extend({}, {
                 notes: notes
-                , stringsCount: this.stringsCount
+                , stringsTune: this.stringsTune
                 , fretsCount: this.fretsCount
                 , neckModel: neckModel
                 , tonic: this.tonic
                 , selectedSequences: this.selectedSequences
-                , markedFrets: this.markedFrets
+                , markedFrets: markedFrets
                 , gammasCount: gammaOffsets.length
                 , translator: translator
             });
@@ -200,7 +200,7 @@ define(function (require) {
 
         _initNeckModel: function () {
             var neckModel = [];
-            for (var string = 0; string < this.stringsCount; string++) {
+            for (var string = 0; string < this.stringsTune.length; string++) {
                 var nts = this._rebuildNotesForString(notes, string + 1);
                 neckModel[string] = nts.concat(nts).concat(nts.slice(0, 1));
             }
