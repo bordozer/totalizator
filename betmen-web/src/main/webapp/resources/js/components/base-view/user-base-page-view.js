@@ -21,6 +21,7 @@ define( function ( require ) {
 		, menuPersonalDataLabel: 'User settings'
 		, menuLogoutLabel: 'Menu: Logout'
 		, favoritesLabel: 'Favorites'
+		, guitarNeckLabel: 'Guitar neck'
 	} );
 
 	return PageView.extend( {
@@ -58,6 +59,9 @@ define( function ( require ) {
 			menus.push( { selector: 'divider' } );
 
 			menus.push( { selector: '', icon: 'fa fa-user', link: '/betmen/users/', text: translator.menuUsersLabel } );
+
+			menus.push( { selector: 'divider' } );
+			menus.push( { selector: '', icon: 'fa fa-music', link: '/betmen/guitar/', text: translator.guitarNeckLabel } );
 
 			menus.push( { selector: 'divider' } );
 			menus.push( { selector: 'logout-link', icon: 'fa fa-sign-out', link: '#', text: translator.menuLogoutLabel } );

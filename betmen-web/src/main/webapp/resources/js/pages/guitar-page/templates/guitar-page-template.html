@@ -131,7 +131,7 @@
 
 <!-- fret number -->
 <div class="row">
-    <div class="col-xs-1 fretNote nopadding text-muted"></div>
+    <div class="col-xs-1 zeroFretNote nopadding text-muted"></div>
     <% for(var fret = 0; fret <= fretsCount; fret++) { %>
         <div class="col-xs-1 fretNote nopadding">
             <%= fret %>
@@ -142,7 +142,8 @@
 
 <!-- frets markers -->
 <div class="row">
-    <% for(var fret = -1; fret <= fretsCount + 1; fret++) { %>
+    <div class="col-xs-1 zeroFretNote nopadding"></div>
+    <% for(var fret = 0; fret <= fretsCount + 1; fret++) { %>
         <div class="col-xs-1 fretNote nopadding text-muted" title="<%= translator.neckPointersLabel %>">
             <% var needMarkFret = _.contains(markedFrets, fret); %>
             <h4 class="<%= needMarkFret ? 'border-radius bg-success' : ''%>" ><%= needMarkFret ? fret : '' %></h4>
