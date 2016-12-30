@@ -1,4 +1,10 @@
 <style>
+    .zeroFretNote {
+        width: 75px;
+        font-size: 10px;
+        text-align: center;
+    }
+
     .fretNote {
         width: 55px;
         font-size: 10px;
@@ -107,15 +113,7 @@
 <% var stringNumber = 1; %>
 <% _.each(neckModel, function(stringModel){ %>
     <div class="row">
-        <div class="col-xs-1 fretNote nopadding text-muted">
-            <h4>
-                <select class="form-control js-string-tuning" data-string-number="<%= stringNumber %>" >
-                    <% _.each(notes, function(note) { %>
-                        <option value="<%=note.note%>" <%= note.note == stringsTuning[stringNumber] ? "selected='selected'" : '' %> ><%=note.note%></option>
-                    <% }) %>
-                </select>
-            </h4>
-        </div>
+        <div class="col-xs-1 zeroFretNote nopadding js-string-tuning-<%=stringNumber%>"></div>
         <% var fret = 0; %>
         <% _.each(stringModel, function(note) { %>
             <div class="col-xs-1 fretNote stringLine nopadding bordered <%= (fret == 1 || fret == 12 || fret == 24) ? 'border12' : '' %>">

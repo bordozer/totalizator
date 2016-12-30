@@ -9,6 +9,7 @@ define(function (require) {
     var template = _.template(require('text!./templates/guitar-page-template.html'));
 
     var SequenceSelectControlView = require( './sequence-select-control-view' );
+    var menu = require( 'js/components/main-menu/main-menu' );
 
     var Translator = require('translator');
     var translator = new Translator({
@@ -166,7 +167,7 @@ define(function (require) {
         events: {
             "click [name='notes']": '_onNoteClick',
             "click .js-fret-note": '_fretNoteClick',
-            "change .js-string-tuning": '_changeStringTune'
+            "click .js-menu-string-tune": '_changeStringTune'
         },
 
         initialize: function (options) {
@@ -176,13 +177,8 @@ define(function (require) {
         render: function () {
             var neckModel = this._initNeckModel();
 
-            var stringsTuning = [];
-            _.each(this.stringsTune, function (tune) {
-                stringsTuning[tune.stringNumber] = tune.note;
-            });
             var data = _.extend({}, {
                 notes: notes
-                , stringsTuning: stringsTuning
                 , fretsCount: this.fretsCount
                 , neckModel: neckModel
                 , tonic: this.tonic
@@ -193,6 +189,9 @@ define(function (require) {
             });
             this.$el.html(template(data));
 
+            this._renderStringTuneMenus();
+
+            // accessible gammas
             for (var i = 0; i < gammaOffsets.length; i++) {
                 var options = {
                     index: i,
@@ -202,6 +201,35 @@ define(function (require) {
                 var selectedSequenceTypeView1 = new SequenceSelectControlView({el: this.$('.js-sequence-select-control-' + i), options: options});
                 selectedSequenceTypeView1.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
             }
+            this.delegateEvents();
+        },
+
+        _renderStringTuneMenus: function() {
+            var stringsTuning = [];
+            _.each(this.stringsTune, function (tune) {
+                stringsTuning[tune.stringNumber] = tune.note;
+            });
+            var self = this;
+            _.each(this.stringsTune, function (tune) {
+
+                var menuItems = [];
+                _.each(notes, function(note) {
+                    var selected = note.note === stringsTuning[tune.stringNumber];
+                    var text = selected ? '[ ' + note.note + ' ]' : note.note;
+                    var tuneKey = tune.stringNumber + '_' + note.note;
+                    menuItems.push({selector: 'js-menu-string-tune fa fa-lg', icon: '', link: '#', text: text, entity_id: tuneKey, selected: selected});
+                });
+
+                var menuEl = self.$('.js-string-tuning-' + tune.stringNumber);
+                var menuOptions = {
+                    menus: menuItems
+                    , menuButtonIcon: ''
+                    , menuButtonText: stringsTuning[tune.stringNumber]
+                    , menuButtonHint: stringsTuning[tune.stringNumber]
+                    , cssClass: 'btn-default'
+                };
+                menu(menuOptions, menuEl);
+            });
         },
 
         _initNeckModel: function () {
@@ -333,8 +361,12 @@ define(function (require) {
 
         _changeStringTune: function(evt) {
             var target = $(evt.target);
-            var stringNumber = target.data('string-number');
-            var note = target.val();
+            var tuneKey = target.data('entity_id');
+
+            var ar = tuneKey.split("_");
+            var stringNumber = ar[0];
+            var note = ar[1];
+
             var stringTune = _.find(this.stringsTune, function(tune) {
                 return tune.stringNumber == stringNumber;
             });
