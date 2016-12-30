@@ -165,7 +165,8 @@ define(function (require) {
 
         events: {
             "click [name='notes']": '_onNoteClick',
-            "click .js-fret-note": '_fretNoteClick'
+            "click .js-fret-note": '_fretNoteClick',
+            "change .js-string-tuning": '_changeStringTune'
         },
 
         initialize: function (options) {
@@ -174,9 +175,14 @@ define(function (require) {
 
         render: function () {
             var neckModel = this._initNeckModel();
+
+            var stringsTuning = [];
+            _.each(this.stringsTune, function (tune) {
+                stringsTuning[tune.stringNumber] = tune.note;
+            });
             var data = _.extend({}, {
                 notes: notes
-                , stringsTune: this.stringsTune
+                , stringsTuning: stringsTuning
                 , fretsCount: this.fretsCount
                 , neckModel: neckModel
                 , tonic: this.tonic
@@ -322,6 +328,17 @@ define(function (require) {
             } else {
                 this.selectedNotes.push(clickedNote);
             }
+            this.render();
+        },
+
+        _changeStringTune: function(evt) {
+            var target = $(evt.target);
+            var stringNumber = target.data('string-number');
+            var note = target.val();
+            var stringTune = _.find(this.stringsTune, function(tune) {
+                return tune.stringNumber == stringNumber;
+            });
+            stringTune.note = note;
             this.render();
         }
     });

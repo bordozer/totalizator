@@ -104,11 +104,17 @@
 <!-- / notes -->
 
 <!-- frets -->
-<% var string = 1; %>
+<% var stringNumber = 1; %>
 <% _.each(neckModel, function(stringModel){ %>
     <div class="row">
         <div class="col-xs-1 fretNote nopadding text-muted">
-            <h4><%=string%></h4>
+            <h4>
+                <select class="form-control js-string-tuning" data-string-number="<%= stringNumber %>" >
+                    <% _.each(notes, function(note) { %>
+                        <option value="<%=note.note%>" <%= note.note == stringsTuning[stringNumber] ? "selected='selected'" : '' %> ><%=note.note%></option>
+                    <% }) %>
+                </select>
+            </h4>
         </div>
         <% var fret = 0; %>
         <% _.each(stringModel, function(note) { %>
@@ -121,7 +127,7 @@
             <% fret++; %>
         <% }) %>
     </div>
-    <% string++ %>
+    <% stringNumber++ %>
 <% }) %>
 <!-- / frets -->
 
