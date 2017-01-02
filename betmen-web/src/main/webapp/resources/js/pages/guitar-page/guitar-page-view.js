@@ -165,7 +165,7 @@ define(function (require) {
         selectedSequences: ['minor'],
 
         events: {
-            "click [name='notes']": '_onNoteClick',
+            "click [name='notes']": '_onTonicChange',
             "click .js-fret-note": '_fretNoteClick',
             "click .js-menu-string-tune": '_changeStringTune'
         },
@@ -341,7 +341,7 @@ define(function (require) {
             this.render();
         },
 
-        _onNoteClick: function (evt) {
+        _onTonicChange: function (evt) {
             var target = $(evt.target);
             this.tonic = target.val();
             this.render();
