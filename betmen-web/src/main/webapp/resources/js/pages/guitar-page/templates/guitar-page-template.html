@@ -117,7 +117,7 @@
         <% var fret = 0; %>
         <% _.each(stringModel, function(note) { %>
             <div class="col-xs-1 fretNote stringLine nopadding bordered <%= (fret == 1 || fret == 12 || fret == 24) ? 'border12' : '' %>">
-                <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>"  data-fret-note="<%= note.note %>">
+                <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>"  data-fret-note="<%= note.noteId %>_<%= note.note %>">
                     <span class="text-muted <%= note.customIcon %>"></span>
                     <%= note.note %>
                 </h4>
@@ -155,18 +155,31 @@
 <hr />
 
 <!-- sequence -->
-<% for(var k = 0; k < gammasCount; k++) { %>
-    <div class="row">
-        <div class="col-xs-1 small">
-            <% if(k == 0) { %>
-                <%= translator.baseGamma %>
-            <% } else {%>
-            <%= translator.additionalGamma %>
-            <% }%>
-        </div>
-        <div class="col-xs-11 js-sequence-select-control-<%= k %>"></div>
+<div class="row">
+    <div class="col-xs-10">
+        <% for(var k = 0; k < gammasCount; k++) { %>
+            <div class="row">
+                <div class="col-xs-2 small">
+                    <% if(k == 0) { %>
+                        <%= translator.baseGamma %>
+                    <% } else {%>
+                        <%= translator.additionalGamma %>
+                    <% }%>
+                </div>
+                <div class="col-xs-10 js-sequence-select-control-<%= k %>"></div>
+            </div>
+        <% }%>
     </div>
-<% }%>
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-12"><%= translator.noteSelectionType %></div>
+            <div class="col-xs-12">
+                <input type="radio" name="noteSelectionType" id="noteSelectionType1" value="1" <%= noteSelectionType == 1 ? "checked='checked'" : '' %> > <label for="noteSelectionType1"><%= translator.noteSelectionTypeOne %></label>
+                <input type="radio" name="noteSelectionType" id="noteSelectionType2" value="2" <%= noteSelectionType == 2 ? "checked='checked'" : '' %> > <label for="noteSelectionType1"><%= translator.noteSelectionTypeAll %></label>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- / sequence -->
 

@@ -46,6 +46,9 @@ define(function (require) {
         , noteDd: "Note D#/Eb"
         , baseGamma: "Base Gamma"
         , additionalGamma: "Additional Gamma"
+        , noteSelectionType: "Selection type"
+        , noteSelectionTypeOne: "One note"
+        , noteSelectionTypeAll: "All notes"
     });
 
     var BAND_ICON = ''; //fa fa-long-arrow-up
@@ -160,13 +163,16 @@ define(function (require) {
             , {stringNumber: 6, note: 'E'}
         ],
 
+        neckModel: {},
         tonic: 'A',
+        noteSelectionType: 2,
         selectedNotes: [],
         selectedSequences: ['minor'],
 
         events: {
             "click [name='notes']": '_onTonicChange',
             "click .js-fret-note": '_fretNoteClick',
+            "change [name='noteSelectionType']": '_onNoteSelectionTypeChange',
             "click .js-menu-string-tune": '_changeStringTune'
         },
 
@@ -175,16 +181,17 @@ define(function (require) {
         },
 
         render: function () {
-            var neckModel = this._initNeckModel();
+            this.neckModel = this._initNeckModel();
 
             var data = _.extend({}, {
                 notes: notes
                 , fretsCount: this.fretsCount
-                , neckModel: neckModel
+                , neckModel: this.neckModel
                 , tonic: this.tonic
                 , selectedSequences: this.selectedSequences
                 , markedFrets: markedFrets
                 , gammasCount: gammaOffsets.length
+                , noteSelectionType: this.noteSelectionType
                 , translator: translator
             });
             this.$el.html(template(data));
@@ -236,31 +243,42 @@ define(function (require) {
             var neckModel = [];
             for (var string = 0; string < this.stringsTune.length; string++) {
                 var nts = this._rebuildNotesForString(notes, string + 1);
-                neckModel[string] = nts.concat(nts).concat(nts.slice(0, 1));
+
+                var stringNotesArray = [];
+                var stringNotes = nts.concat(nts).concat(nts.slice(0, 1));
+                _.each(stringNotes, function(stringNote) {
+                    stringNotesArray.push({
+                        full: stringNote.full,
+                        note: stringNote.note,
+                        translation: stringNote.translation
+                    });
+                });
+                neckModel[string] = stringNotesArray;
             }
+            var noteId = 0;
             var self = this;
             var keyNotes = this._collectKeyNotes(this.tonic);
             _.each(neckModel, function(stringModel) {
                 _.each(stringModel, function(stringNote) {
                     var note = stringNote.note;
-                    var tonicNote = self.tonic == note;
+                    var isTonicNote = self.tonic == note;
 
                     var sequenceNote = _.find(keyNotes, function(keyNote) {
                         return keyNote.note == note;
                     });
                     var isSequenceNote = sequenceNote != null;
 
-                    stringNote['noteStyle'] = (stringNote.full && !tonicNote && !isSequenceNote ? 'full-tone highlighted-note' : 'half-tone')
+                    stringNote['noteStyle'] = (stringNote.full && !isTonicNote && !isSequenceNote ? 'full-tone highlighted-note' : 'half-tone')
                             + ' '
-                            + (!tonicNote && isSequenceNote ? 'highlighted-note' : '')
+                            + (!isTonicNote && isSequenceNote ? 'highlighted-note' : '')
                             + ' '
-                            + (tonicNote ? 'tonic-note highlighted-note' : '')
+                            + (isTonicNote ? 'tonic-note highlighted-note' : '')
                             + ' '
                             + (sequenceNote != undefined ? sequenceNote.customCss : '')
                             + ' '
-                            + (_.contains(self.selectedNotes, note) ? 'selected-note' : '')
+                            + (_.contains(self.selectedNotes, noteId) ? 'selected-note' : '')
                     ;
-                    if (tonicNote || isSequenceNote) {
+                    if (isTonicNote || isSequenceNote) {
                         var customNoteTitle = sequenceNote != undefined ? sequenceNote.customTitle : (stringNote.full ? translator.fullNoteInSequence : '');
                         stringNote['customTitle'] = customNoteTitle + (stringNote.full ? ' ' + translator.fullNoteInSequence : translator.halfToneNoteInSequence);
                     } else {
@@ -271,6 +289,7 @@ define(function (require) {
                         }
                     }
                     stringNote['customIcon'] = sequenceNote != undefined ? sequenceNote.customIcon : '';
+                    stringNote['noteId'] = noteId++;
                 })
             });
             return neckModel;
@@ -349,14 +368,59 @@ define(function (require) {
 
         _fretNoteClick: function (evt) {
             var target = $(evt.target);
-            var clickedNote = target.data('fret-note');
-            if (_.contains(this.selectedNotes, clickedNote)) {
-                var noteIndex = this.selectedNotes.indexOf(clickedNote);
-                delete this.selectedNotes[noteIndex];
+            var noteKey = target.data('fret-note');
+            var ar = noteKey.split("_");
+            var clickedNoteNumber = parseInt(ar[0]);
+            var clickedNote = ar[1];
+
+            if (this.noteSelectionType == 1) {
+                this._singleNotesHighlighting(clickedNoteNumber);
             } else {
-                this.selectedNotes.push(clickedNote);
+                this._allNotesHighlighting(clickedNote, clickedNoteNumber);
             }
             this.render();
+        },
+
+        _singleNotesHighlighting: function (noteNumber) {
+            if (_.contains(this.selectedNotes, noteNumber)) {
+                var noteIndex = this.selectedNotes.indexOf(noteNumber);
+                delete this.selectedNotes[noteIndex];
+            } else {
+                this.selectedNotes.push(noteNumber);
+            }
+        },
+
+        _allNotesHighlighting: function (note, noteNumber) {
+            var self = this;
+            console.log(self.selectedNotes);
+            var atLeastOneNoteSelected = false;
+            _.each(self.neckModel, function (stringModel) {
+                _.each(stringModel, function (fretNote) {
+                    if (!atLeastOneNoteSelected) {
+                        atLeastOneNoteSelected = fretNote.note == note && _.contains(self.selectedNotes, fretNote.noteId);
+                    }
+                });
+            });
+            console.log(atLeastOneNoteSelected);
+
+            _.each(self.neckModel, function (stringModel) {
+                _.each(stringModel, function (fretNote) {
+                    if (fretNote.note != note) {
+                        return;
+                    }
+                    if (atLeastOneNoteSelected) {
+                        var noteIndex = self.selectedNotes.indexOf(fretNote.noteId);
+                        delete self.selectedNotes[noteIndex];
+                    } else {
+                        self.selectedNotes.push(fretNote.noteId);
+                    }
+                });
+            });
+        },
+
+        _onNoteSelectionTypeChange: function (evt) {
+            var target = $(evt.target);
+            this.noteSelectionType = target.val();
         },
 
         _changeStringTune: function(evt) {
