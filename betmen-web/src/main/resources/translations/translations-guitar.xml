@@ -18,8 +18,8 @@
 
 	<translation>
 		<nerd>Minor gamma</nerd>
-		<ru><![CDATA[Минор]]></ru>
-		<ua><![CDATA[Мiнор]]></ua>
+		<ru><![CDATA[Минорная]]></ru>
+		<ua><![CDATA[Мiнорна]]></ua>
 		<en><![CDATA[Minor]]></en>
 	</translation>
 
@@ -257,7 +257,7 @@
 	<translation>
 		<nerd>Clear all selected notes</nerd>
 		<ru><![CDATA[Сбросить все выделения нот]]></ru>
-		<ua><![CDATA[Скасувати усi виделення]]></ua>
+		<ua><![CDATA[Скасувати усi виділяння]]></ua>
 		<en><![CDATA[Clear all selected notes]]></en>
 	</translation>
 
