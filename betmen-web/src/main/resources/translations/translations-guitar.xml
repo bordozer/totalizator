@@ -234,6 +234,34 @@
 	</translation>
 
 	<translation>
+		<nerd>Selection type</nerd>
+		<ru><![CDATA[Тип выделения нот]]></ru>
+		<ua><![CDATA[Тип виделення нот]]></ua>
+		<en><![CDATA[Notes selection type]]></en>
+	</translation>
+
+	<translation>
+		<nerd>One note</nerd>
+		<ru><![CDATA[Одна нота]]></ru>
+		<ua><![CDATA[Одна нота]]></ua>
+		<en><![CDATA[One note]]></en>
+	</translation>
+
+	<translation>
+		<nerd>All notes</nerd>
+		<ru><![CDATA[Все ноты]]></ru>
+		<ua><![CDATA[Усi ноти]]></ua>
+		<en><![CDATA[All notes]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Clear all selected notes</nerd>
+		<ru><![CDATA[Сбросить все выделения нот]]></ru>
+		<ua><![CDATA[Скасувати усi виделення]]></ua>
+		<en><![CDATA[Clear all selected notes]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

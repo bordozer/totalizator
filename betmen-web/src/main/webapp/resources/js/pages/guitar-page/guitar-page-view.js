@@ -49,6 +49,7 @@ define(function (require) {
         , noteSelectionType: "Selection type"
         , noteSelectionTypeOne: "One note"
         , noteSelectionTypeAll: "All notes"
+        , clearAllSelectedNotes: "Clear all selected notes"
     });
 
     var BAND_ICON = ''; //fa fa-long-arrow-up
@@ -173,7 +174,8 @@ define(function (require) {
             "click [name='notes']": '_onTonicChange',
             "click .js-fret-note": '_fretNoteClick',
             "change [name='noteSelectionType']": '_onNoteSelectionTypeChange',
-            "click .js-menu-string-tune": '_changeStringTune'
+            "click .js-menu-string-tune": '_changeStringTune',
+            "click .js-clear-all-selected-notes": '_onClearAllSelectedNotesClick'
         },
 
         initialize: function (options) {
@@ -392,7 +394,6 @@ define(function (require) {
 
         _allNotesHighlighting: function (note, noteNumber) {
             var self = this;
-            console.log(self.selectedNotes);
             var atLeastOneNoteSelected = false;
             _.each(self.neckModel, function (stringModel) {
                 _.each(stringModel, function (fretNote) {
@@ -401,7 +402,6 @@ define(function (require) {
                     }
                 });
             });
-            console.log(atLeastOneNoteSelected);
 
             _.each(self.neckModel, function (stringModel) {
                 _.each(stringModel, function (fretNote) {
@@ -421,6 +421,11 @@ define(function (require) {
         _onNoteSelectionTypeChange: function (evt) {
             var target = $(evt.target);
             this.noteSelectionType = target.val();
+        },
+
+        _onClearAllSelectedNotesClick: function (evt) {
+            this.selectedNotes = [];
+            this.render();
         },
 
         _changeStringTune: function(evt) {

@@ -175,7 +175,10 @@
             <div class="col-xs-12"><%= translator.noteSelectionType %></div>
             <div class="col-xs-12">
                 <input type="radio" name="noteSelectionType" id="noteSelectionType1" value="1" <%= noteSelectionType == 1 ? "checked='checked'" : '' %> > <label for="noteSelectionType1"><%= translator.noteSelectionTypeOne %></label>
-                <input type="radio" name="noteSelectionType" id="noteSelectionType2" value="2" <%= noteSelectionType == 2 ? "checked='checked'" : '' %> > <label for="noteSelectionType1"><%= translator.noteSelectionTypeAll %></label>
+                <input type="radio" name="noteSelectionType" id="noteSelectionType2" value="2" <%= noteSelectionType == 2 ? "checked='checked'" : '' %> > <label for="noteSelectionType2"><%= translator.noteSelectionTypeAll %></label>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-default fa fa-eraser js-clear-all-selected-notes" type="button" > <%= translator.clearAllSelectedNotes %></button>
             </div>
         </div>
     </div>
