@@ -1,26 +1,40 @@
 <style>
-    .zeroFretNote {
+    .zero-fret-note {
         width: 75px;
         font-size: 10px;
         text-align: center;
+        height: 40px;
+        padding-top: 7px;
     }
 
-    .fretNote {
+    .fret-note {
         width: 55px;
         font-size: 10px;
         text-align: center;
     }
 
-    .bordered {
-        border: solid 1px black;
+    .guitar-fret {
+        border-right: solid 1px gray;
     }
 
-    .border12 {
+    .fret-highlighted {
         border-left: solid 3px navy;
     }
 
-    .stringLine {
+    .string-tune {
+        border-right: 1px solid gray;
+    }
+
+    .string-line {
         height: 40px;
+    }
+
+    .guitar-string {
+        background: rgb(245,246,246);
+        background: -moz-linear-gradient(top,  rgba(245,246,246,1) 25%, rgba(219,220,226,1) 36%, rgba(170,174,183,1) 42%, rgba(199,210,214,1) 49%, rgba(182,183,196,1) 56%, rgba(221,223,227,1) 63%, rgba(245,246,246,1) 73%);
+        background: -webkit-linear-gradient(top,  rgba(245,246,246,1) 25%,rgba(219,220,226,1) 36%,rgba(170,174,183,1) 42%,rgba(199,210,214,1) 49%,rgba(182,183,196,1) 56%,rgba(221,223,227,1) 63%,rgba(245,246,246,1) 73%);
+        background: linear-gradient(to bottom,  rgba(245,246,246,1) 25%,rgba(219,220,226,1) 36%,rgba(170,174,183,1) 42%,rgba(199,210,214,1) 49%,rgba(182,183,196,1) 56%,rgba(221,223,227,1) 63%,rgba(245,246,246,1) 73%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 );
     }
 
     .border-radius {
@@ -37,11 +51,20 @@
         margin: 2px !important;
     }
 
+    .fret-markers {
+        width: 75px;
+        font-size: 10px;
+        text-align: center;
+        height: 10px;
+        padding-top: 7px;
+    }
+
     .full-tone {
         background-color: #f1f1f1;
     }
 
     .half-tone {
+        padding-top: 4px;
         font-size: 12px;
     }
 
@@ -92,7 +115,7 @@
     }
 </style>
 
-<!-- notes -->
+<!-- tonic -->
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
@@ -107,16 +130,29 @@
         </div>
     </div>
 </div>
-<!-- / notes -->
+<!-- / tonic -->
+
+<!-- fret numbers -->
+<div class="row">
+    <div class="col-xs-1 fret-markers nopadding text-muted"></div>
+    <% for(var fret = 0; fret <= fretsCount; fret++) { %>
+        <div class="col-xs-1 fret-note nopadding">
+            <%= fret %>
+        </div>
+    <% } %>
+</div>
+<!-- / fret numbers -->
 
 <!-- frets -->
 <% var stringNumber = 1; %>
 <% _.each(neckModel, function(stringModel){ %>
-    <div class="row">
-        <div class="col-xs-1 zeroFretNote nopadding js-string-tuning-<%=stringNumber%>"></div>
+    <div class="row ">
+        <div class="col-xs-1 zero-fret-note string-tune js-string-tuning-<%=stringNumber%>" title="#<%=stringNumber%>">
+            <%=stringNumber%>
+        </div>
         <% var fret = 0; %>
         <% _.each(stringModel, function(note) { %>
-            <div class="col-xs-1 fretNote stringLine nopadding bordered <%= (fret == 1 || fret == 12 || fret == 24) ? 'border12' : '' %>">
+            <div class="col-xs-1 fret-note string-line nopadding guitar-string guitar-fret <%= (fret == 1 || fret == 12 || fret == 24) ? 'fret-highlighted' : '' %>">
                 <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>"  data-fret-note="<%= note.noteId %>_<%= note.note %>">
                     <span class="text-muted <%= note.customIcon %>"></span>
                     <%= note.note %>
@@ -129,22 +165,22 @@
 <% }) %>
 <!-- / frets -->
 
-<!-- fret number -->
+<!-- fret numbers -->
 <div class="row">
-    <div class="col-xs-1 zeroFretNote nopadding text-muted"></div>
+    <div class="col-xs-1 fret-markers nopadding text-muted"></div>
     <% for(var fret = 0; fret <= fretsCount; fret++) { %>
-        <div class="col-xs-1 fretNote nopadding">
+        <div class="col-xs-1 fret-note nopadding">
             <%= fret %>
         </div>
     <% } %>
 </div>
-<!-- / fret number -->
+<!-- / fret numbers -->
 
 <!-- frets markers -->
 <div class="row">
-    <div class="col-xs-1 zeroFretNote nopadding"></div>
+    <div class="col-xs-1 fret-markers nopadding"></div>
     <% for(var fret = 0; fret <= fretsCount + 1; fret++) { %>
-        <div class="col-xs-1 fretNote nopadding text-muted" title="<%= translator.neckPointersLabel %>">
+        <div class="col-xs-1 fret-note nopadding text-muted" title="<%= translator.neckPointersLabel %>">
             <% var needMarkFret = _.contains(markedFrets, fret); %>
             <h4 class="<%= needMarkFret ? 'border-radius bg-success' : ''%>" ><%= needMarkFret ? fret : '' %></h4>
         </div>
