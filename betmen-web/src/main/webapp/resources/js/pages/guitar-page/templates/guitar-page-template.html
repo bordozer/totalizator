@@ -37,9 +37,19 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 );
     }
 
-    .border-radius {
+    .fret-markers {
+        width: 75px;
+        font-size: 10px;
+        text-align: center;
+        height: 10px;
+        padding-top: 7px;
+    }
+
+    .marked-fret {
         border-radius: 25px;
     }
+
+    /* notes styles */
 
     .highlighted-note {
         font-size: 14px;
@@ -51,28 +61,20 @@
         margin: 2px !important;
     }
 
-    .fret-markers {
-        width: 75px;
-        font-size: 10px;
-        text-align: center;
-        height: 10px;
-        padding-top: 7px;
+    .full-tone-note {
     }
 
-    .full-tone {
-        background-color: #f1f1f1;
-    }
-
-    .half-tone {
+    .half-tone-note {
         padding-top: 4px;
         font-size: 12px;
     }
 
     .tonic-note {
-        color: #FFFFFF;
-        background-color: #ce8483;
+        padding: 8px !important;
         border: 2px solid #0b3e6f;
     }
+
+    /* /notes styles */
 
     .minor-gamma-note {
         background-color: #9acfea;
@@ -107,6 +109,7 @@
     }
 
     .selected-note {
+        color: navy;
         background-color: #ccd232;
         border: 2px solid #0b3e6f;
         padding: 8px !important;
@@ -182,7 +185,7 @@
     <% for(var fret = 0; fret <= fretsCount + 1; fret++) { %>
         <div class="col-xs-1 fret-note nopadding text-muted" title="<%= translator.neckPointersLabel %>">
             <% var needMarkFret = _.contains(markedFrets, fret); %>
-            <h4 class="<%= needMarkFret ? 'border-radius bg-success' : ''%>" ><%= needMarkFret ? fret : '' %></h4>
+            <h4 class="<%= needMarkFret ? 'marked-fret bg-success' : ''%>" ><%= needMarkFret ? fret : '' %></h4>
         </div>
     <% } %>
 </div>

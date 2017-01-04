@@ -72,7 +72,7 @@ define(function (require) {
     ];
 
     var minorGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'minor-gamma-note', customTitle: translator.tonicNote},
         {offset: 2, customCss: 'minor-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
         {offset: 3, customCss: 'minor-gamma-note', customTitle: ''},
         {offset: 5, customCss: 'minor-gamma-note', customTitle: ''},
@@ -81,7 +81,7 @@ define(function (require) {
         {offset: 10, customCss: 'minor-gamma-note', customTitle: ''}
     ];
     var minorBluesGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'minor-blues-gamma-note', customTitle: translator.tonicNote},
         {offset: 3, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // half-band-note
         {offset: 5, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // full-band-note
         {offset: 6, customCss: 'minor-blues-gamma-note', customTitle: translator.bluesNoteLabel},                                     // blues-note
@@ -89,7 +89,7 @@ define(function (require) {
         {offset: 10, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON}   // another-band-note
     ];
     var majorBluesGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'major-blues-gamma-note', customTitle: translator.tonicNote},
         {offset: 2, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},
         {offset: 3, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},
         {offset: 4, customCss: 'major-blues-gamma-note', customTitle: translator.bluesNoteLabel},
@@ -97,7 +97,7 @@ define(function (require) {
         {offset: 9, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON}
     ];
     var arabianGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'arabian-gamma-note', customTitle: translator.tonicNote},
         {offset: 2, customCss: 'arabian-gamma-note', customTitle: ''},
         {offset: 3, customCss: 'arabian-gamma-note', customTitle: ''},
         {offset: 5, customCss: 'arabian-gamma-note', customTitle: ''},
@@ -107,14 +107,14 @@ define(function (require) {
         {offset: 11, customCss: 'arabian-gamma-note', customTitle: ''}
     ];
     var japaneseGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'japanese-gamma-note', customTitle: translator.tonicNote},
         {offset: 2, customCss: 'japanese-gamma-note', customTitle: ''},
         {offset: 5, customCss: 'japanese-gamma-note', customTitle: ''},
         {offset: 6, customCss: 'japanese-gamma-note', customTitle: ''},
         {offset: 8, customCss: 'japanese-gamma-note', customTitle: ''}
     ];
     var gypsyGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'gypsy-gamma-note', customTitle: translator.tonicNote},
         {offset: 2, customCss: 'gypsy-gamma-note', customTitle: ''},
         {offset: 3, customCss: 'gypsy-gamma-note', customTitle: ''},
         {offset: 6, customCss: 'gypsy-gamma-note', customTitle: ''},
@@ -123,7 +123,7 @@ define(function (require) {
         {offset: 11, customCss: 'gypsy-gamma-note', customTitle: ''}
     ];
     var judasGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'judas-gamma-note', customTitle: translator.tonicNote},
         {offset: 1, customCss: 'judas-gamma-note', customTitle: ''},
         {offset: 4, customCss: 'judas-gamma-note', customTitle: ''},
         {offset: 5, customCss: 'judas-gamma-note', customTitle: ''},
@@ -132,7 +132,7 @@ define(function (require) {
         {offset: 10, customCss: 'judas-gamma-note', customTitle: ''}
     ];
     var eastGammaOffsets = [
-        {offset: 0, customCss: '', customTitle: translator.tonicNote},
+        {offset: 0, customCss: 'east-gamma-note', customTitle: translator.tonicNote},
         {offset: 1, customCss: 'east-gamma-note', customTitle: ''},
         {offset: 4, customCss: 'east-gamma-note', customTitle: ''},
         {offset: 5, customCss: 'east-gamma-note', customTitle: ''},
@@ -142,14 +142,14 @@ define(function (require) {
     ];
 
     var gammaOffsets = [
-        {sequenceType: 'minor', offsets: minorGammaOffsets, customCss: 'minor-gamma-note', nameTranslated: translator.minorLabel}
-        , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, customCss: 'minor-blues-gamma-note', nameTranslated: translator.minorBluesLabel}
-        , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, customCss: 'major-blues-gamma-note', nameTranslated: translator.majorBluesLabel}
-        , {sequenceType: 'arabian', offsets: arabianGammaOffsets, customCss: 'arabian-gamma-note', nameTranslated: translator.japaneseLabel}
-        , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, customCss: 'japanese-gamma-note', nameTranslated: translator.arabianLabel}
-        , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, customCss: 'gypsy-gamma-note', nameTranslated: translator.gypsyLabel}
-        , {sequenceType: 'judas', offsets: judasGammaOffsets, customCss: 'judas-gamma-note', nameTranslated: translator.judasLabel}
-        , {sequenceType: 'east', offsets: eastGammaOffsets, customCss: 'east-gamma-note', nameTranslated: translator.eastLabel}
+        {sequenceType: 'minor', offsets: minorGammaOffsets, sequenceCustomCss: 'minor-gamma-note', nameTranslated: translator.minorLabel}
+        , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, sequenceCustomCss: 'minor-blues-gamma-note', nameTranslated: translator.minorBluesLabel}
+        , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, sequenceCustomCss: 'major-blues-gamma-note', nameTranslated: translator.majorBluesLabel}
+        , {sequenceType: 'arabian', offsets: arabianGammaOffsets, sequenceCustomCss: 'arabian-gamma-note', nameTranslated: translator.japaneseLabel}
+        , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, sequenceCustomCss: 'japanese-gamma-note', nameTranslated: translator.arabianLabel}
+        , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, sequenceCustomCss: 'gypsy-gamma-note', nameTranslated: translator.gypsyLabel}
+        , {sequenceType: 'judas', offsets: judasGammaOffsets, sequenceCustomCss: 'judas-gamma-note', nameTranslated: translator.judasLabel}
+        , {sequenceType: 'east', offsets: eastGammaOffsets, sequenceCustomCss: 'east-gamma-note', nameTranslated: translator.eastLabel}
     ];
 
     return Backbone.View.extend({
@@ -270,16 +270,28 @@ define(function (require) {
                     });
                     var isSequenceNote = sequenceNote != null;
 
-                    stringNote['noteStyle'] = (stringNote.full && !isTonicNote && !isSequenceNote ? 'full-tone highlighted-note' : 'half-tone')
-                            + ' '
-                            + (!isTonicNote && isSequenceNote ? 'highlighted-note' : '')
-                            + ' '
-                            + (isTonicNote ? 'tonic-note highlighted-note' : '')
-                            + ' '
-                            + (sequenceNote != undefined ? sequenceNote.customCss : '')
-                            + ' '
-                            + (_.contains(self.selectedNotes, noteId) ? 'selected-note' : '')
-                    ;
+                    stringNote['noteStyle'] = '';
+                    var isSelectedNote = _.contains(self.selectedNotes, noteId);
+                    if (stringNote.full || isSequenceNote || isTonicNote || isSelectedNote) {
+                        stringNote['noteStyle'] += ' highlighted-note ';
+                    }
+                    if (stringNote.full) {
+                        stringNote['noteStyle'] += ' full-tone-note ';
+                    }
+                    if (!stringNote.full) {
+                        stringNote['noteStyle'] += ' half-tone-note ';
+                    }
+                    if (isSequenceNote) {
+                        stringNote['noteStyle'] += ' ' + sequenceNote.customCss + ' ';
+                        stringNote['customIcon'] = sequenceNote.customIcon ? sequenceNote.customIcon : '';
+                    }
+                    if (isTonicNote) {
+                        stringNote['noteStyle'] += ' tonic-note';
+                    }
+                    if (isSelectedNote) {
+                        stringNote['noteStyle'] += ' selected-note '
+                    }
+
                     if (isTonicNote || isSequenceNote) {
                         var customNoteTitle = sequenceNote != undefined ? sequenceNote.customTitle : (stringNote.full ? translator.fullNoteInSequence : '');
                         stringNote['customTitle'] = customNoteTitle + (stringNote.full ? ' ' + translator.fullNoteInSequence : translator.halfToneNoteInSequence);
@@ -290,7 +302,6 @@ define(function (require) {
                             stringNote['customTitle'] = translator.halfNoteNotInSequence;
                         }
                     }
-                    stringNote['customIcon'] = sequenceNote != undefined ? sequenceNote.customIcon : '';
                     stringNote['noteId'] = noteId++;
                 })
             });

@@ -41,7 +41,7 @@ define(function (require) {
             var self = this;
             _.each(this.gammaOffsets, function(gammaOffset) {
                 if (gammaOffset.sequenceType == self.selectedSequenceType) {
-                    self.$('.js-sequence-color').addClass(gammaOffset.customCss);
+                    self.$('.js-sequence-color').addClass(gammaOffset.sequenceCustomCss);
                 }
             });
         },
