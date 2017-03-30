@@ -20,6 +20,11 @@ public enum MatchRoutes implements Route {
     , GET_MATCH_BET("/rest/matches/{matchId}/bet-of-user/{userId}/")
     , MAKE_MATCH_BET("/rest/matches/{matchId}/bets/{score1}/{score2}/")
     , DELETE_MATCH_BET("/rest/matches/{matchId}/bets/")
+    , MATCH_MESSAGES("/rest/messages/matches/{matchId}/")
+    , USER_MESSAGES("/rest/messages/users/{userId}/")
+    , CREATE_MATCH_MESSAGES("/rest/messages/matches/0")
+    , UPDATE_MATCH_MESSAGES("/rest/messages/matches/{matchId}")
+    , DELETE_MATCH_MESSAGES("/rest/messages/matches/{matchId}")
     ;
 
     private final String route;

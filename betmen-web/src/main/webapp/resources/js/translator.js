@@ -1,30 +1,30 @@
-define( function ( require ) {
+define(function (require) {
 
-	'use strict';
+    'use strict';
 
-	var Backbone = require( 'backbone' );
-	var _ = require('underscore');
+    var Backbone = require('backbone');
+    var _ = require('underscore');
 
-	return Backbone.Model.extend( {
+    return Backbone.Model.extend({
 
-		initialize: function ( nerds ) {
-			this._loadTranslations( nerds );
-		},
+        initialize: function (nerds) {
+            this._loadTranslations(nerds);
+        },
 
-		url: '/rest/translator/',
+        url: '/rest/translator/',
 
-		defaults: {
-			translations: {}
-		},
+        defaults: {
+            translations: {}
+        },
 
-		parse: function ( data ) {
-			_.each( data.translations, function ( value, key) {
-				this[key] = value;
-			}, this );
-		},
+        parse: function (data) {
+            _.each(data.translations, function (value, key) {
+                this[key] = value;
+            }, this);
+        },
 
-		_loadTranslations: function( nerds ) {
-			this.fetch( { data: { translations: nerds }, cache: false, async: false } );
-		}
-	});
+        _loadTranslations: function (nerds) {
+            this.fetch({data: {translations: nerds}, cache: false, async: false});
+        }
+    });
 });

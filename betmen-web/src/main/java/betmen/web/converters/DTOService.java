@@ -90,9 +90,9 @@ public interface DTOService {
 
     UserCupPointsHolderDTO transformCupPoints(final UserCupPointsHolder userCupPointsHolder);
 
-    SportKindDTO transformSportKind(SportKind sportKind);
+    SportKindDTO transformSportKind(final SportKind sportKind);
 
-    List<SportKindDTO> transformSportKinds(List<SportKind> sportKinds);
+    List<SportKindDTO> transformSportKinds(final List<SportKind> sportKinds);
 
-    MatchSearchModel transformMatchSearchModel(MatchSearchModelDto dto);
+    MatchSearchModel transformMatchSearchModel(final MatchSearchModelDto dto);
 }

@@ -60,8 +60,8 @@ define( function ( require ) {
 				},
 				error: function() {
 					bootbox.dialog( {
-						title: t.loginFailedLabel
-						, message: t.loginFailedMessage
+						title: translator.loginFailedLabel
+						, message: translator.loginFailedMessage
 					} );
 				}
 			} )

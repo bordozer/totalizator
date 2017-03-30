@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 well well-sm">
+                <strong class=""><a href="/betmen/users/<%=matchMessage.user.userId%>/"><%=matchMessage.user.userName%></a></strong> &nbsp;
+                <small><%=dateTimeService.formatDateFullDisplay(matchMessage.messageTime)%></small>
+                <small class="text-muted">(<%=dateTimeService.fromNow(matchMessage.messageTime)%>)</small>
+
+                <% if(currentUser.userId == matchMessage.user.userId) { %>
+                    <button class="btn btn-default fa fa-remove pull-right js-delete-match-message" title="<%=translator.deleteMatchMessageLabel%>"></button>
+                <% } %>
+
+                <span class="pull-right js-menu-smiles"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <blockquote class="text-muted">
+                    <%=matchMessage.messageText%>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Match messages</nerd>
+		<ru><![CDATA[Комментари к игре]]></ru>
+		<ua><![CDATA[Коментарi до гри]]></ua>
+		<en><![CDATA[Match comments]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Add match message</nerd>
+		<ru><![CDATA[Добавить комментарий к игре]]></ru>
+		<ua><![CDATA[Додати кометар до гри]]></ua>
+		<en><![CDATA[Add match comment]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Please, define your message first</nerd>
+		<ru><![CDATA[Введите сперва сообщение]]></ru>
+		<ua><![CDATA[Будьласка, наберiть спочатку ваше повiдомлення]]></ua>
+		<en><![CDATA[Please, define your comment first]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>
