@@ -16,6 +16,7 @@ define(function (require) {
         title: "Guitar neck"
         , neckPointersLabel: "Neck pointers"
         , minorLabel: "Minor gamma"
+        , harmonicMinorLabel: "Harmonic minor gamma"
         , minorBluesLabel: "Minor blues gamma"
         , majorBluesLabel: "Major blues gamma"
         , japaneseLabel: "Japanese gamma"
@@ -80,6 +81,16 @@ define(function (require) {
         {offset: 8, customCss: 'minor-gamma-note', customTitle: ''},
         {offset: 10, customCss: 'minor-gamma-note', customTitle: ''}
     ];
+
+    var harmonicMinorGammaOffsets = [
+        {offset: 0, customCss: 'harmonic-minor-gamma-note', customTitle: translator.tonicNote},
+        {offset: 2, customCss: 'harmonic-minor-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
+        {offset: 3, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
+        {offset: 5, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
+        {offset: 7, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
+        {offset: 9, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
+        {offset: 11, customCss: 'harmonic-minor-gamma-note', customTitle: ''}
+    ];
     var minorBluesGammaOffsets = [
         {offset: 0, customCss: 'minor-blues-gamma-note', customTitle: translator.tonicNote},
         {offset: 3, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // half-band-note
@@ -143,6 +154,7 @@ define(function (require) {
 
     var gammaOffsets = [
         {sequenceType: 'minor', offsets: minorGammaOffsets, sequenceCustomCss: 'minor-gamma-note', nameTranslated: translator.minorLabel}
+        , {sequenceType: 'harmonic-minor', offsets: harmonicMinorGammaOffsets, sequenceCustomCss: 'harmonic-minor-gamma-note', nameTranslated: translator.harmonicMinorLabel}
         , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, sequenceCustomCss: 'minor-blues-gamma-note', nameTranslated: translator.minorBluesLabel}
         , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, sequenceCustomCss: 'major-blues-gamma-note', nameTranslated: translator.majorBluesLabel}
         , {sequenceType: 'arabian', offsets: arabianGammaOffsets, sequenceCustomCss: 'arabian-gamma-note', nameTranslated: translator.japaneseLabel}
