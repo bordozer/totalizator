@@ -30,18 +30,12 @@
 		<en><![CDATA[Harmonic minor]]></en>
 	</translation>
 
-	<translation>
-		<nerd>Harmonic note</nerd>
-		<ru><![CDATA[Гармоническая нота]]></ru>
-		<ua><![CDATA[Гармонiчна нота]]></ua>
-		<en><![CDATA[Harmonic note]]></en>
-	</translation>
 
 	<translation>
-		<nerd>Melodic note</nerd>
-		<ru><![CDATA[Мелодическая нота]]></ru>
-		<ua><![CDATA[Мелодична нота]]></ua>
-		<en><![CDATA[Melodic note]]></en>
+		<nerd>Harmonic major gamma</nerd>
+		<ru><![CDATA[Гармонический мажор]]></ru>
+		<ua><![CDATA[Гармонiчний мажор]]></ua>
+		<en><![CDATA[Harmonic major]]></en>
 	</translation>
 
 	<translation>
@@ -85,6 +79,20 @@
 		<ua><![CDATA[(Тонiка)]]></ua>
 		<en><![CDATA[(Tonic)]]></en>
 	</translation>
+
+    <translation>
+        <nerd>Harmonic note</nerd>
+        <ru><![CDATA[(Гармоническая нота)]]></ru>
+        <ua><![CDATA[(Гармонiчна нота)]]></ua>
+        <en><![CDATA[(Harmonic note)]]></en>
+    </translation>
+
+    <translation>
+        <nerd>Melodic note</nerd>
+        <ru><![CDATA[(Мелодическая нота)]]></ru>
+        <ua><![CDATA[(Мелодична нота)]]></ua>
+        <en><![CDATA[(Melodic note)]]></en>
+    </translation>
 
 	<translation>
 		<nerd>Note E</nerd>

@@ -17,6 +17,7 @@ define(function (require) {
         , neckPointersLabel: "Neck pointers"
         , minorLabel: "Minor gamma"
         , harmonicMinorLabel: "Harmonic minor gamma"
+        , harmonicMajorLabel: "Harmonic major gamma"
         , minorBluesLabel: "Minor blues gamma"
         , majorBluesLabel: "Major blues gamma"
         , japaneseLabel: "Japanese gamma"
@@ -94,6 +95,16 @@ define(function (require) {
         {offset: 11, customCss: 'harmonic-minor-gamma-note', customTitle: translator.melodicNoteLabel}
     ];
 
+    var harmonicMajorGammaOffsets = [
+        {offset: 0, customCss: 'harmonic-major-gamma-note', customTitle: translator.tonicNote},
+        {offset: 2, customCss: 'harmonic-major-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
+        {offset: 3, customCss: 'harmonic-major-gamma-note', customTitle: ''},
+        {offset: 5, customCss: 'harmonic-major-gamma-note', customTitle: ''},
+        // {offset: 7, customCss: 'harmonic-major-gamma-note', customTitle: ''},
+        {offset: 7, customCss: 'harmonic-major-gamma-note', customTitle: translator.harmonicNoteLabel},
+        {offset: 9, customCss: 'harmonic-major-gamma-note', customTitle: translator.melodicNoteLabel}
+    ];
+
     var minorBluesGammaOffsets = [
         {offset: 0, customCss: 'minor-blues-gamma-note', customTitle: translator.tonicNote},
         {offset: 3, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // half-band-note
@@ -157,9 +168,10 @@ define(function (require) {
 
     var gammaOffsets = [
         {sequenceType: 'minor', offsets: minorGammaOffsets, sequenceCustomCss: 'minor-gamma-note', nameTranslated: translator.minorLabel}
-        , {sequenceType: 'harmonic-minor', offsets: harmonicMinorGammaOffsets, sequenceCustomCss: 'harmonic-minor-gamma-note', nameTranslated: translator.harmonicMinorLabel}
         , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, sequenceCustomCss: 'minor-blues-gamma-note', nameTranslated: translator.minorBluesLabel}
         , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, sequenceCustomCss: 'major-blues-gamma-note', nameTranslated: translator.majorBluesLabel}
+        , {sequenceType: 'harmonic-minor', offsets: harmonicMinorGammaOffsets, sequenceCustomCss: 'harmonic-minor-gamma-note', nameTranslated: translator.harmonicMinorLabel}
+        , {sequenceType: 'harmonic-major', offsets: harmonicMajorGammaOffsets, sequenceCustomCss: 'harmonic-major-gamma-note', nameTranslated: translator.harmonicMajorLabel}
         , {sequenceType: 'arabian', offsets: arabianGammaOffsets, sequenceCustomCss: 'arabian-gamma-note', nameTranslated: translator.japaneseLabel}
         , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, sequenceCustomCss: 'japanese-gamma-note', nameTranslated: translator.arabianLabel}
         , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, sequenceCustomCss: 'gypsy-gamma-note', nameTranslated: translator.gypsyLabel}
@@ -308,8 +320,8 @@ define(function (require) {
                     }
 
                     if (isTonicNote || isSequenceNote) {
-                        var customNoteTitle = sequenceNote != undefined ? sequenceNote.customTitle : (stringNote.full ? translator.fullNoteInSequence : '');
-                        stringNote['customTitle'] = customNoteTitle + (stringNote.full ? ' ' + translator.fullNoteInSequence : translator.halfToneNoteInSequence);
+                        var customNoteTitle = sequenceNote != undefined ? sequenceNote.customTitle : (stringNote.full ? translator.fullNoteInSequence : '') + ' ';
+                        stringNote['customTitle'] = customNoteTitle + ' ' + (stringNote.full ? translator.fullNoteInSequence : translator.halfToneNoteInSequence);
                     } else {
                         if (stringNote.full) {
                             stringNote['customTitle'] = translator.fullNoteNotInSequence;
