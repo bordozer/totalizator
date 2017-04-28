@@ -51,6 +51,8 @@ define(function (require) {
         , noteSelectionTypeOne: "One note"
         , noteSelectionTypeAll: "All notes"
         , clearAllSelectedNotes: "Clear all selected notes"
+        , harmonicNoteLabel: "Harmonic note"
+        , melodicNoteLabel: "Melodic note"
     });
 
     var BAND_ICON = ''; //fa fa-long-arrow-up
@@ -88,9 +90,10 @@ define(function (require) {
         {offset: 3, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
         {offset: 5, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
         {offset: 7, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
-        {offset: 9, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
-        {offset: 11, customCss: 'harmonic-minor-gamma-note', customTitle: ''}
+        {offset: 9, customCss: 'harmonic-minor-gamma-note', customTitle: translator.harmonicNoteLabel},
+        {offset: 11, customCss: 'harmonic-minor-gamma-note', customTitle: translator.melodicNoteLabel}
     ];
+
     var minorBluesGammaOffsets = [
         {offset: 0, customCss: 'minor-blues-gamma-note', customTitle: translator.tonicNote},
         {offset: 3, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // half-band-note
