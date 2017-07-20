@@ -25,6 +25,7 @@ define(function (require) {
         , gypsyLabel: "Gypsy gamma"
         , judasLabel: "Judas gamma"
         , eastLabel: "East gamma"
+        , customIndianLabel: "Custom Indian gamma"
         , bandNoteLabel: "Band note"
         , halfBandNoteLabel: "Half band note"
         , bluesNoteLabel: "Blues note"
@@ -166,6 +167,16 @@ define(function (require) {
         {offset: 10, customCss: 'east-gamma-note', customTitle: ''}
     ];
 
+    var customIndianOffsets = [
+        {offset: 0, customCss: 'custom-indian-gamma-note', customTitle: translator.tonicNote},
+        {offset: 2, customCss: 'custom-indian-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
+        {offset: 3, customCss: 'custom-indian-gamma-note', customTitle: ''},
+        {offset: 6, customCss: 'custom-indian-gamma-note', customTitle: ''},
+        {offset: 7, customCss: 'custom-indian-gamma-note', customTitle: ''},
+        {offset: 9, customCss: 'custom-indian-gamma-note', customTitle: ''},
+        {offset: 10, customCss: 'custom-indian-gamma-note', customTitle: ''}
+    ];
+
     var gammaOffsets = [
         {sequenceType: 'minor', offsets: minorGammaOffsets, sequenceCustomCss: 'minor-gamma-note', nameTranslated: translator.minorLabel}
         , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, sequenceCustomCss: 'minor-blues-gamma-note', nameTranslated: translator.minorBluesLabel}
@@ -177,6 +188,7 @@ define(function (require) {
         , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, sequenceCustomCss: 'gypsy-gamma-note', nameTranslated: translator.gypsyLabel}
         , {sequenceType: 'judas', offsets: judasGammaOffsets, sequenceCustomCss: 'judas-gamma-note', nameTranslated: translator.judasLabel}
         , {sequenceType: 'east', offsets: eastGammaOffsets, sequenceCustomCss: 'east-gamma-note', nameTranslated: translator.eastLabel}
+        , {sequenceType: 'custom-indian', offsets: customIndianOffsets, sequenceCustomCss: 'custom-indian-gamma-note', nameTranslated: translator.customIndianLabel}
     ];
 
     return Backbone.View.extend({
