@@ -171,10 +171,10 @@ define(function (require) {
         {offset: 0, customCss: 'custom-indian-gamma-note', customTitle: translator.tonicNote},
         {offset: 2, customCss: 'custom-indian-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
         {offset: 3, customCss: 'custom-indian-gamma-note', customTitle: ''},
-        {offset: 6, customCss: 'custom-indian-gamma-note', customTitle: ''},
+        {offset: 5, customCss: 'custom-indian-gamma-note', customTitle: ''},
         {offset: 7, customCss: 'custom-indian-gamma-note', customTitle: ''},
-        {offset: 9, customCss: 'custom-indian-gamma-note', customTitle: ''},
-        {offset: 10, customCss: 'custom-indian-gamma-note', customTitle: ''}
+        {offset: 8, customCss: 'custom-indian-gamma-note', customTitle: ''},
+        {offset: 11, customCss: 'custom-indian-gamma-note', customTitle: ''}
     ];
 
     var gammaOffsets = [
