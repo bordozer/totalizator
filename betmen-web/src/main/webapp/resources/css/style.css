@@ -68,6 +68,14 @@
 	margin-bottom: 10px !important;
 }
 
+.sport-tab {
+	margin-left:5px !important;
+	border-left: 2px solid gray;
+	border-right: 2px solid gray;
+	line-height: 17px;
+	border-radius: 15px;
+}
+
 .m-n-b-badge {
 	font-size: 12px;
 	line-height: 14px;

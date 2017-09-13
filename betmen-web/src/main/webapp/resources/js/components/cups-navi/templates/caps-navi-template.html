@@ -6,15 +6,15 @@
 
 			<% _.each( sportKindCups, function( entry ) { %>
 
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				<li class="nav-item dropdown sport-tab">
+					<a class="nav-link badge badge-light dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						<%=entry.sportKind.sportKindName%>
 					</a>
 					<div class="dropdown-menu">
 
 						<% if( entry.sportKind.sportKindId > 0 ) { %>
 							<a class="dropdown-item" href="/betmen/sports/<%=entry.sportKind.sportKindId%>/">
-								<strong class="text-primary"><%=translator.allCups%></strong>
+								<small class="text-primary"><%=translator.allCups%></small>
 							</a>
 						<% } %>
 
@@ -23,17 +23,22 @@
 							<% var cup = cupAndCategoryFavorite.cup; %>
 								<a class="dropdown-item <%= cup.cupId == selectedCupId ? 'active' : '' %>" href="/betmen/cups/<%=cup.cupId%>/">
 
-								<% if( entry.sportKind.sportKindId == 0 ) { %>
-									<span class="fa fa-star"><span class="text-muted"> <%= cup.category.sportKind.sportKindName %>:</span></span>
-									<%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+									<% if( entry.sportKind.sportKindId == 0 ) { %>
+										<small class="fa fa-star"></small>
+										<small class="badge badge-info"> <%= cup.category.sportKind.sportKindName %></small>
+										<small class="badge badge-secondary"><%=cup.category.categoryName%></small>
+										<small class="badge badge-light"><%=cup.cupName%></small>
 									<% } %>
 
 									<% if( cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
-									<span class="fa fa-star"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+										<small class="fa fa-star"></small>
+										<small class="badge badge-secondary"><%=cup.category.categoryName%></small>
+										<small class="badge badge-light"><%=cup.cupName%></small>
 									<% } %>
 
 									<% if( ! cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
-									<span style="margin-left: 18px;"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+										<small class="badge badge-secondary"><%=cup.category.categoryName%></small>
+										<small class="badge badge-light"><%=cup.cupName%></small>
 									<% } %>
 
 								</a>
