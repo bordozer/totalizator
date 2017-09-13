@@ -265,7 +265,7 @@
 	<translation>
 		<nerd>Additional Gamma</nerd>
 		<ru><![CDATA[Добавить ноты с]]></ru>
-		<ua><![CDATA[Додаи ноти з]]></ua>
+		<ua><![CDATA[Додати ноти з]]></ua>
 		<en><![CDATA[Add notes from]]></en>
 	</translation>
 
@@ -298,10 +298,17 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Frets count a on neck</nerd>
+		<ru><![CDATA[Количество ладов]]></ru>
+		<ua><![CDATA[Кiлькiсть ладiв]]></ua>
+		<en><![CDATA[Frets count]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Selected notes will be cleared after frets count change</nerd>
+		<ru><![CDATA[Выдененные ноты будут сброшены после смены к-ва ладов]]></ru>
+		<ua><![CDATA[Виделеннi ноти будуть скасованi пiсля змiни кiлькостi ладiв]]></ua>
+		<en><![CDATA[Selected notes will be cleared after frets count change]]></en>
 	</translation>
 
 	<translation>

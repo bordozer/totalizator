@@ -200,7 +200,7 @@ define( function ( require ) {
 
 			this._renderDropDownMenuItems( matchBetMenu.getMenuItems( matchBet, MODE_EDIT, this.matchViewMode ) );
 
-			this._setMatchContainerClass( 'panel-danger' );
+			this._setMatchContainerClass( 'alert-danger' );
 		},
 
 		_renderMatchDescription: function () {
@@ -236,23 +236,23 @@ define( function ( require ) {
 			function __getBoxColor() {
 
 				if ( model.bet == null ) {
-					return model.match.matchStarted ? 'bg-missed-bet' : '';
+					return model.match.matchStarted ? 'alert-light' : '';
 				}
 
 				if ( ! model.match.matchFinished ) {
-					return 'bg-warning';
+					return 'alert-warning'; // alert-info?
 				}
 
 				if ( ! model.userMatchPointsHolder ) {
-					return 'bg-info';
+					return 'alert-info';
 				}
 
 				if ( model.userMatchPointsHolder.summaryPoints > 0 ) {
-					return 'bg-success';
+					return 'alert-success';
 				}
 
 				if ( model.userMatchPointsHolder.summaryPoints < 0 ) {
-					return 'bg-danger';
+					return 'alert-danger';
 				}
 
 				return '';
@@ -288,19 +288,19 @@ define( function ( require ) {
 			var match = matchBet.match;
 			var isMatchFinished = match.matchFinished;
 			var bet = matchBet.bet;
-			var isBet = bet != null;
+			var isBet = bet !== null;
 
 			var userMadeBetButMatchNotFinishedYet = isBet && ! isMatchFinished;
 			if ( userMadeBetButMatchNotFinishedYet ) {
-				return 'panel-warning';
+				return 'alert-warning';
 			}
 
 			var matchFinishedAndUserGotSomePoints = isMatchFinished && matchBet.userMatchPointsHolder && matchBet.userMatchPointsHolder.matchBetPoints > 0;
 			if ( matchFinishedAndUserGotSomePoints ) {
-				return 'panel-success';
+				return 'alert-success';
 			}
 
-			return 'panel-default';
+			return 'alert-default';
 		},
 
 		_renderDropDownMenuItems: function( menuItems ) {

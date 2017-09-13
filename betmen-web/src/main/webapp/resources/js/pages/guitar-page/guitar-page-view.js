@@ -55,6 +55,8 @@ define(function (require) {
         , clearAllSelectedNotes: "Clear all selected notes"
         , harmonicNoteLabel: "Harmonic note"
         , melodicNoteLabel: "Melodic note"
+        , fretsCountLabel: "Frets count a on neck"
+        , fretsCountChangeHint: "Selected notes will be cleared after frets count change"
     });
 
     var BAND_ICON = ''; //fa fa-long-arrow-up
@@ -193,7 +195,7 @@ define(function (require) {
 
     return Backbone.View.extend({
 
-        fretsCount: 24,
+        fretsCount: 22, // I play Fender Stratocaster :)
         stringsTune: [
             {stringNumber: 1, note: 'E'}
             , {stringNumber: 2, note: 'H'}
@@ -207,14 +209,19 @@ define(function (require) {
         tonic: 'A',
         noteSelectionType: 2,
         selectedNotes: [],
-        selectedSequences: ['minor'],
+        selectedSequences: [{
+            gammaCode: 'minor',
+            selectedSequenceEnabled: true
+        }],
 
         events: {
             "click [name='notes']": '_onTonicChange',
+            "click .js-tonics": '_onTonicChange',
             "click .js-fret-note": '_fretNoteClick',
             "change [name='noteSelectionType']": '_onNoteSelectionTypeChange',
             "click .js-menu-string-tune": '_changeStringTune',
-            "click .js-clear-all-selected-notes": '_onClearAllSelectedNotesClick'
+            "click .js-clear-all-selected-notes": '_onClearAllSelectedNotesClick',
+            "click .js-frets-count-item": '_onFretsCountChanged'
         },
 
         initialize: function (options) {
@@ -229,7 +236,7 @@ define(function (require) {
                 , fretsCount: this.fretsCount
                 , neckModel: this.neckModel
                 , tonic: this.tonic
-                , selectedSequences: this.selectedSequences
+                // , selectedSequences: this.selectedSequences
                 , markedFrets: markedFrets
                 , gammasCount: gammaOffsets.length
                 , noteSelectionType: this.noteSelectionType
@@ -238,17 +245,22 @@ define(function (require) {
             this.$el.html(template(data));
 
             this._renderStringTuneMenus();
+            this._renderFretsCountMenus();
 
             // accessible gammas
             for (var i = 0; i < gammaOffsets.length; i++) {
+                var iSequence = this.selectedSequences[i];
+
                 var options = {
                     index: i,
                     gammaOffsets: gammaOffsets,
-                    selectedSequenceType: this.selectedSequences[i]
+                    selectedSequenceType: iSequence ? iSequence.gammaCode : '',
+                    selectedSequenceEnabled: iSequence ? iSequence.selectedSequenceEnabled : ''
                 };
                 var selectedSequenceTypeView1 = new SequenceSelectControlView({el: this.$('.js-sequence-select-control-' + i), options: options});
                 selectedSequenceTypeView1.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
             }
+
             this.delegateEvents();
         },
 
@@ -280,13 +292,34 @@ define(function (require) {
             });
         },
 
+        _renderFretsCountMenus: function () {
+            var menuEl = this.$('.js-frets-count');
+
+            var selectedFretsCount = this.fretsCount;
+            var menuItems = [];
+            var necTypes = [22, 24];
+            _.each(necTypes, function (fretsCount) {
+                var selected = fretsCount === selectedFretsCount;
+                menuItems.push({selector: 'js-frets-count-item', icon: '', link: '#', text: fretsCount, entity_id: fretsCount, selected: selected});
+            });
+
+            var menuOptions = {
+                menus: menuItems
+                , menuButtonIcon: ''
+                , menuButtonText: selectedFretsCount
+                , menuButtonHint: selectedFretsCount
+                , cssClass: 'btn-default'
+            };
+            menu(menuOptions, menuEl);
+        },
+
         _initNeckModel: function () {
             var neckModel = [];
             for (var string = 0; string < this.stringsTune.length; string++) {
-                var nts = this._rebuildNotesForString(notes, string + 1);
+                var nts = this._rebuildNotesForString(string + 1);
 
                 var stringNotesArray = [];
-                var stringNotes = nts.concat(nts).concat(nts.slice(0, 1));
+                var stringNotes = nts.concat(nts).concat(nts).slice(0, this.fretsCount + 1);
                 _.each(stringNotes, function(stringNote) {
                     stringNotesArray.push({
                         full: stringNote.full,
@@ -350,7 +383,10 @@ define(function (require) {
         _getGammaOffsets: function () {
             var res = [];
             for (var i = 0; i < this.selectedSequences.length; i++) {
-                res = res.concat(this._findOffset(this.selectedSequences[i]));
+                var iSequence = this.selectedSequences[i];
+                if (iSequence && iSequence.selectedSequenceEnabled) {
+                    res = res.concat(this._findOffset(iSequence ? iSequence.gammaCode : ''));
+                }
             }
             return res;
         },
@@ -379,7 +415,7 @@ define(function (require) {
             return keyNotes;
         },
 
-        _rebuildNotesForString: function(notes, stringNumber) {
+        _rebuildNotesForString: function(stringNumber) {
             var openNote = _.find(this.stringsTune, function(tune) {
                 if (tune.stringNumber == stringNumber) {
                     return true;
@@ -407,14 +443,17 @@ define(function (require) {
             if (evt.value == 0) {
                 delete this.selectedSequences[evt.index];
             } else {
-                this.selectedSequences[evt.index] = evt.value;
+                this.selectedSequences[evt.index] = {
+                    gammaCode: evt.value,
+                    selectedSequenceEnabled: evt.enabled
+                };
             }
             this.render();
         },
 
         _onTonicChange: function (evt) {
             var target = $(evt.target);
-            this.tonic = target.val();
+            this.tonic = target.val() || target.data('js_tonic');
             this.render();
         },
 
@@ -473,8 +512,19 @@ define(function (require) {
             this.noteSelectionType = target.val();
         },
 
-        _onClearAllSelectedNotesClick: function (evt) {
+        _clearAllSelectedNotes: function () {
             this.selectedNotes = [];
+        },
+
+        _onClearAllSelectedNotesClick: function (evt) {
+            this._clearAllSelectedNotes();
+            this.render();
+        },
+
+        _onFretsCountChanged: function (evt) {
+            var target = $(evt.target);
+            this.fretsCount = target.data('entity_id');
+            this._clearAllSelectedNotes();
             this.render();
         },
 

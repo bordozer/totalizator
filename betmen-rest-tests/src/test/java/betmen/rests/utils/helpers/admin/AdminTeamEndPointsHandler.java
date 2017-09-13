@@ -18,7 +18,7 @@ public class AdminTeamEndPointsHandler {
 
     private static final int SC_OK = HttpServletResponse.SC_OK;
 
-    public static List<TeamEditDTO> getTeamOfCategory(final int categoryId) {
+    public static List<TeamEditDTO> getTeamsOfCategory(final int categoryId) {
         return Arrays.asList(RequestHelper.doGet(AdminRoutes.TEAMS_OF_CATEGORY, ParameterUtils.categoryParams(categoryId), SC_OK).as(TeamEditDTO[].class));
     }
 

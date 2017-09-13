@@ -1,6 +1,6 @@
-<div class="panel <%= model.matchFinished ? 'panel-default' : 'panel-success' %>">
+<div class="card">
 
-	<div class="panel-heading clearfix">
+	<div class="card-header <%= model.matchFinished ? 'bg-secondary' : 'bg-success' %>">
 
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default fa fa-edit entry-edit" title="<%=translator.matchEditLabel%>"></button>
@@ -11,11 +11,11 @@
 		<small title="#<%=matchId%>"><%=beginningTime%> ( <%=remainTime%> )</small>
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body">
 
 		<div class="row">
 
-			<div class="col-xs-6 text-center <%=matchResults.style1%>">
+			<div class="col-6 text-center <%=matchResults.style1%>">
 				<% if( homeTeamNumber == 1 ) { %>
 					<i class="fa fa-home"></i>
 				<% } %>
@@ -24,7 +24,7 @@
 				<img class="team-logo" src="<%=team1.teamLogo%>" height="32">
 			</div>
 
-			<div class="col-xs-6 text-center <%=matchResults.style2%>">
+			<div class="col-6 text-center <%=matchResults.style2%>">
 				<a href="/betmen/teams/<%=team2.teamId%>/"><%=team2.teamName%></a>
 				<br />
 				<img class="team-logo" src="<%=team2.teamLogo%>" height="32">
@@ -36,17 +36,17 @@
 		</div>
 
 		<div class="row">
-			<div class="col-xs-6 text-center <%=matchResults.style1%>">
+			<div class="col-6 text-center <%=matchResults.style1%>">
 				<span class="<%=matchResults.style1%>"><h4><%=score1%></h4></span>
 			</div>
-			<div class="col-xs-6 text-center <%=matchResults.style2%>">
+			<div class="col-6 text-center <%=matchResults.style2%>">
 				<span class="<%=matchResults.style2%>"><h4><%=score2%></h4></span>
 			</div>
 		</div>
 
 	</div>
 
-	<div class="panel-footer">
+	<div class="card-footer">
 		<small>
 			<% if( model.remoteGameId ) { %>
 				<%=translator.remoteGameLabel%>: <%=model.remoteGameId%>

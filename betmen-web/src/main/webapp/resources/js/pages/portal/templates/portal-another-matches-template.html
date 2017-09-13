@@ -1,27 +1,27 @@
-<div class='row'>
-    <div class='col-xs-12 text-center text-muted'>
-        <h3><%=translator.matchesOfNonFavoriteCategoriesOnDateLabel%></h3>
+<div class="card mb-10">
+
+    <div class="card-header">
+        <%=translator.matchesOfNonFavoriteCategoriesOnDateLabel%>
+    </div>
+
+    <div class="card-body">
+
+        <%_.each(anotherMatches, function(anotherSport) {%>
+
+            <h6 class="card-title">
+                <a href="/betmen/sports/<%=anotherSport.sport.sportKindId%>/"><%=anotherSport.sport.sportKindName%></a>
+            </h6>
+
+            <ul>
+            <%_.each(anotherSport.categories, function(anotherCategory) {%>
+                <%_.each(anotherCategory.cups, function(anotherCup) {%>
+                    <li><a href="/betmen/categories/<%=anotherCategory.category.categoryId%>/"><%=anotherCategory.category.categoryName%></a>:
+                    <a href="/betmen/cups/<%=anotherCup.cup.cupId%>/matches/<%=onDate%>/"><%=anotherCup.cup.cupName%></a>
+                        - <span title="<%=translator.matchesOnDateLabel%>: <%=anotherCup.matchesCount%>"> <%=anotherCup.matchesCount%> </span>
+                    </li>
+                <%})%>
+            <%})%>
+            </ul>
+        <%})%>
     </div>
 </div>
-
-<%_.each(anotherMatches, function(anotherSport) {%>
-    <div class="row">
-        <div class="col-xs-12">
-            <h4 class="col-xs-offset-1">
-                <a href="/betmen/sports/<%=anotherSport.sport.sportKindId%>/"><%=anotherSport.sport.sportKindName%></a>
-            </h4>
-        </div>
-    </div>
-    <%_.each(anotherSport.categories, function(anotherCategory) {%>
-        <%_.each(anotherCategory.cups, function(anotherCup) {%>
-            <div class="row">
-                <div class="col-xs-11 text-muted col-xs-offset-1">
-                    <a href="/betmen/categories/<%=anotherCategory.category.categoryId%>/"><%=anotherCategory.category.categoryName%></a>
-                    &nbsp; - &nbsp;
-                    <a href="/betmen/cups/<%=anotherCup.cup.cupId%>/matches/<%=onDate%>/"><%=anotherCup.cup.cupName%></a>
-                    (<span title="<%=translator.matchesOnDateLabel%>: <%=anotherCup.matchesCount%>"> <%=anotherCup.matchesCount%> </span>)
-                </div>
-            </div>
-        <%})%>
-    <%})%>
-<%})%>

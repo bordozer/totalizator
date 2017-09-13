@@ -2,9 +2,7 @@ define(function (require) {
 
     'use strict';
 
-    var Backbone = require('backbone');
     var _ = require('underscore');
-    var $ = require('jquery');
 
     var template = _.template(require('text!./templates/match-bet-template.html'));
     var templateMatchFinished = _.template(require('text!./templates/match-finished.html'));
@@ -78,7 +76,7 @@ define(function (require) {
 
         _getRenderTemplate: function (data) {
 
-            if (data.activityStreamEntryTypeId == 4) {
+            if (data.activityStreamEntryTypeId === 4) {
                 return templateMatchFinished(data);
             }
 
@@ -87,39 +85,39 @@ define(function (require) {
 
         _getActivityText: function (activityStreamEntryTypeId) {
 
-            if (activityStreamEntryTypeId == 1) {
+            if (activityStreamEntryTypeId === 1) {
                 return translator.betCreated;
             }
 
-            if (activityStreamEntryTypeId == 2) {
+            if (activityStreamEntryTypeId === 2) {
                 return translator.betChanged;
             }
 
-            if (activityStreamEntryTypeId == 3) {
+            if (activityStreamEntryTypeId === 3) {
                 return translator.betDeleted;
             }
 
-            if (activityStreamEntryTypeId == 4) {
+            if (activityStreamEntryTypeId === 4) {
                 return translator.matchFinished;
             }
         },
 
         _getActivityColor: function (activityStreamEntryTypeId) {
 
-            if (activityStreamEntryTypeId == 1) {
-                return 'bg-success';
+            if (activityStreamEntryTypeId === 1) {
+                return 'alert-success';
             }
 
-            if (activityStreamEntryTypeId == 2) {
-                return 'bg-info';
+            if (activityStreamEntryTypeId === 2) {
+                return 'alert-info';
             }
 
-            if (activityStreamEntryTypeId == 3) {
-                return 'bg-danger';
+            if (activityStreamEntryTypeId === 3) {
+                return 'alert-danger';
             }
 
-            if (activityStreamEntryTypeId == 4) {
-                return 'bg-warning';
+            if (activityStreamEntryTypeId === 4) {
+                return 'alert-warning';
             }
         }
     });

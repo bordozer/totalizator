@@ -17,11 +17,11 @@
 
 		<% if( winners.length > 0 ) { %>
 			<tr>
-				<td class="bg-success">
+				<td class="alert-success">
 					<h4><%= translator.realCupWinnersLabel %></h4>
 				</td>
 				<% _.each( winners, function( team ) { %>
-					<td class="text-center bg-success">
+					<td class="text-center alert-success">
 						<img src="<%= team.teamLogo %>" class="team-logo">
 						<h4><a href="/betmen/teams/<%- team.teamId %>/"><%- team.teamName %></a></h4>
 					</td>

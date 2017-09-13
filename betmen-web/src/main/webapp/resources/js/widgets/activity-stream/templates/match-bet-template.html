@@ -1,20 +1,20 @@
 <div class="row <%=color%> bottom-dotted activity-stream">
 
-	<div class="col-xs-12">
+	<div class="col-12">
 
 		<div class="row">
 
-			<div class="col-xs-2" title="<%= activityDate %> <%= activityTime %>, <%= activityTimeAgo %>">
+			<div class="col-2 nopadding" title="<%= activityDate %> <%= activityTime %>, <%= activityTimeAgo %>">
 				<%= activityTime %>
 			</div>
 
-			<div class="col-xs-4">
+			<div class="col-4 nopadding">
 				<a href="/betmen/cups/<%= match.cup.cupId %>/" title="<%= match.category.sportKind.sportKindName %>: <%= match.cup.category.categoryName %> - <%= match.cup.cupName %>">
 					<img src="<%= match.cup.logoUrl %>" height="24" width="24">
 				</a>
 			</div>
 
-			<div class="col-xs-6 text-right">
+			<div class="col-6 text-right">
 
 				<a href="/betmen/matches/<%= match.matchId %>/bets/">
 					<img src="<%= match.team1.teamLogo %>" title="<%= match.team1.teamName %>" height="24" width="24">
@@ -27,7 +27,7 @@
 
 		<div class="row">
 
-			<div class="col-xs-12">
+			<div class="col-12">
 				<a href="/betmen/users/<%= activityOfUser.userId %>/"><%= activityOfUser.userName %></a>
 				<span class="text-muted"><%= activityText %></span>
 				<% if( ! showBetData ) {%>
@@ -38,9 +38,11 @@
 		</div>
 
 		<div class="row">
-			<div class="col-xs-12" style="font-size: 12px;">
+			<div class="col-12">
 				<% if( showBetData ) {%>
-					<%= score1 %> <sup><%= showOldScores ? oldScore1 : '' %></sup> - <%= score2 %> <sup><%= showOldScores ? oldScore2 : '' %></sup>
+					<span class="badge badge-light"><%= score1 %></span>
+					<sup><%= showOldScores ? oldScore1 : '' %></sup> -
+					<span class="badge badge-light"><%= score2 %></span> <sup><%= showOldScores ? oldScore2 : '' %></sup>
 
 					<% if( activityBetPoints && activityBetPoints.pointsSummary != 0 ) { %>
 						<span class="text-muted" title="<%=translator.pointsOfActivityLabel%>">

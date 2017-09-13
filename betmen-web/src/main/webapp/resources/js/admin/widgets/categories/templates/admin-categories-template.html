@@ -1,6 +1,6 @@
-<div class="panel panel-default js-category-entry">
+<div class="card bg-light mb-10 js-category-entry mb-10">
 
-	<div class="panel-heading clearfix" title="">
+	<div class="card-header bg-secondary" title="">
 
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default fa fa-edit category-entry-edit"></button>
@@ -11,39 +11,39 @@
 		<small class="js-category-entry-select"><%=model.categoryName%></small>
 	</div>
 
-	<div class="panel-body js-category-entry-select">
+	<div class="card-body js-category-entry-select">
 
 		<div class="row">
 
-			<div class="col-xs-2">
+			<div class="col-2">
 				<img src="<%=model.logoUrl%>" height="64">
 			</div>
 
-			<div class="col-xs-10">
+			<div class="col-10">
 
 				<div class="row">
-					<div class="col-xs-4 text-right">
+					<div class="col-4 text-right">
 						<small><%=translator.categoryNameLabel%></small>
 					</div>
-					<div class="col-xs-8">
+					<div class="col-8">
 						<strong><%=model.categoryName%></strong>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-4 text-right">
+					<div class="col-4 text-right">
 						<small><%=translator.sportKindLabel%></small>
 					</div>
-					<div class="col-xs-8">
+					<div class="col-8">
 						<%=sportKindName%>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-4 text-right">
+					<div class="col-4 text-right">
 						<small><%=translator.importServerLabel%></small>
 					</div>
-					<div class="col-xs-8">
+					<div class="col-8">
 						<%=remoteGameImportStrategyTypeName%>
 					</div>
 				</div>

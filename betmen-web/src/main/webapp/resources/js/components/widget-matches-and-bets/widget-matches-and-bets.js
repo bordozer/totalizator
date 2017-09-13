@@ -203,10 +203,10 @@ define( function ( require ) {
 			var pointsFormat = summaryPoints > 0 ? 'text-success' : summaryPoints < 0 ? 'text-danger' : 'text-muted';
 
             this.footerHtml(  "<span class='fa fa-arrow-circle-o-up fa-2x text-muted js-scroll-to-top' title='" + translator.scrollToTopLabel + "'></span>"
-				+ "<span class='pull-right " + pointsFormat + "'><h4>"
+				+ "<span class='pull-right " + pointsFormat + "'><strong>"
 				+ parseFloat(summaryPoints).toFixed(2)
 				+ ' <sup>' + betsPoints + ' + ' + parseFloat(bonusesPoints).toFixed(2) + '</sup>'
-				+ "</h4></span>");
+				+ "</strong></span>");
 		},
 
 		_renderNoMatchesFound: function() {

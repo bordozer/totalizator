@@ -1,6 +1,6 @@
-<div class="panel panel-default js-cup-entry-header">
+<div class="card bg-light js-cup-entry-header mb-10">
 
-	<div class="panel-heading clearfix" title="">
+	<div class="card-header bg-secondary" title="">
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default fa fa-edit cup-entry-edit"></button>
 			<button type="button" class="btn btn-default fa fa-recycle cup-entry-del"></button>
@@ -9,15 +9,15 @@
 		<small><%=model.cupName%></small>
 	</div>
 
-	<div class="panel-body js-cup-entry">
+	<div class="card-body js-cup-entry">
 
 		<div class="row">
 
-			<div class="col-xs-2">
+			<div class="col-2">
 				<img src="<%=model.logoUrl%>" height="64">
 			</div>
 
-			<div class="col-xs-1">
+			<div class="col-1">
 				<div class="admin-icon"><span class="<%=!model.publicCup ? 'fa fa-eye-slash text-danger fa-2x' : ''%>" title="<%=translator.entryEditNonPublicCupPageLabel%>" ></span></div>
 				<div class="admin-icon"><span class="<%=model.publicCup ? 'fa fa-eye' : ''%>" title="<%=translator.entryEditPublicCupPageLabel%>" ></span></div>
 				<div class="admin-icon"><span class="<%=model.readyForCupBets ? 'fa fa-diamond' : ''%>" title="<%=translator.entryEditReadyForCupBetsLabel%>" ></span></div>
@@ -25,13 +25,13 @@
 				<div class="admin-icon"><span class=" <%=model.finished ? 'fa fa-flag-checkered' : ''%>" title="<%=translator.entryEditCupIsFinishedLabel%>" ></span></div>
 			</div>
 
-			<div class="col-xs-9">
+			<div class="col-9">
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<small><%=translator.entryEditCupNameLabel%></small>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<%= model.publicCup && ! model.finished ? '<strong>' : '' %>
 						<%= model.finished ? '<del>' : '' %>
 						<%=model.cupName%>
@@ -41,28 +41,28 @@
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<small><%=translator.entryEditCupStartDateLabel%></small>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<%=cupStartDate%>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<small><%=translator.entryEditWinnersCountLabel%></small>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<%=model.winnersCount%>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<small><%=translator.cupImportIdLabel%></small>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<%=model.cupImportId%>
 					</div>
 				</div>

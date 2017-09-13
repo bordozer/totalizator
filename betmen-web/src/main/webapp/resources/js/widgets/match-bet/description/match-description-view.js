@@ -38,7 +38,7 @@ define( function ( require ) {
 		},
 
 		_renderFooter: function() {
-			this.footerEl.html( "<div class='col-xs-12 fa fa-info-circle fa-2x text-muted'></div>" );
+			this.footerEl.html( "<div class='col-12 fa fa-info-circle fa-2x text-muted'></div>" );
 		}
 	} );
 } );

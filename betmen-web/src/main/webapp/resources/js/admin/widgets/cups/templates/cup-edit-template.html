@@ -1,6 +1,6 @@
-<div class="panel panel-success admin-entry-line">
+<div class="card admin-entry-line mb-10">
 
-	<div class="panel-heading clearfix">
+	<div class="card-header bg-info">
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default fa fa-flag-checkered js-finish-cup" title="<%=translator.cupResultsTab%>"></button>
 			<button type="button" class="btn btn-primary fa fa-save cup-entry-save"></button>
@@ -10,8 +10,8 @@
 		<%=model.cupName%>
 	</div>
 
-	<div class="panel-body">
-		<div class="col-lg-12">
+	<div class="card-body">
+		<div class="col-12">
 			<table class="js-cup-data-form">
 				<tr>
 					<td class="admin-form-text"><%=translator.entryEditCategoryLabel%></td>
@@ -89,7 +89,7 @@
 				<% _.each( model.cupWinners, function( winner ) { %>
 
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-12">
 						<strong><%=winner.cupPosition%> <%= translator.cupPositionLabel %>:</strong>
 						<img src="<%=winner.team.teamLogo%>" class="team-logo" />
 						<%=winner.team.teamName%>

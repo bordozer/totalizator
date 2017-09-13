@@ -1,32 +1,32 @@
 <div class="row" style="padding-left: 15px; padding-bottom: 10px;">
 
-	<div class="col-sm-2 col-md-2 col-lg-2 text-center">
+	<div class="col-2 text-center">
 		<a href="/betmen/" title="<%=projectName%>"><img src="/resources/img/logo.png" height="128px"></a>
-		<h4>
+		<h6>
 			<span class="fa fa-user text-muted">
 				<a href="/betmen/users/<%- currentUser.userId %>/"><%- currentUser.userName %></a>
 			</span>
-		</h4>
+		</h6>
 	</div>
 
-	<div class="col-sm-9 col-md-9 col-lg-9">
+	<div class="col-10">
 
-		<div class="row">
-			<div class="col-sm-1 col-md-1 col-lg-1 js-main-menu-container" style="margin-top: 22px;"></div>
-			<div class="col-sm-11 col-md-11 col-lg-11">
-				<h3>
+		<div class="row"  style="margin-top: 6px;">
+			<div class="col-1 js-main-menu-container"></div>
+			<div class="col-11">
+				<h5>
 					<%=title%>
-					<br />
+					<br/>
 					<small class="js-time-now" style="font-size: 12px;"><%=timeNowFormatted%></small>
-				</h3>
+				</h5>
 			</div>
 		</div>
 
-		<div class="row">
-			<ul class="breadcrumb">
-				<li><a href="/betmen/"><%=projectName%></a></li>
+		<!--<div class="row">-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/betmen/"><%=projectName%></a></li>
 				<% _.each( breadcrumbs, function( crumb ){ %>
-					<li class="<%=crumb.link == '#' ? 'active' : ''%>">
+					<li class="breadcrumb-item <%=crumb.link == '#' ? 'active' : ''%>">
 
 						<% if( crumb.icon ) { %>
 							<span class="<%=crumb.icon%>"></span>
@@ -42,11 +42,11 @@
 
 					</li>
 				<% }) %>
-			</ul>
-		</div>
+			</ol>
+		<!--</div>-->
 
 		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12 js-cups-navi"></div>
+			<div class="col-12 js-cups-navi"></div>
 		</div>
 
 	</div>

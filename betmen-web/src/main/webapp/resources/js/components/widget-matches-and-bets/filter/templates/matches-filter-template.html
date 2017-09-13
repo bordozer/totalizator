@@ -1,120 +1,120 @@
 <div class="row">
+	<div class="col-12">
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.sportKindLabel%> *</small></div>
+			<div class="col-6">
+				<% _.each( sportKinds, function( sportKind ) { %>
+					<input type="radio" name="sportKindId" id="sportKindId-<%=sportKind.sportKindId%>" value="<%=sportKind.sportKindId%>" <%=sportKind.sportKindId == selectedSportKindId ? 'checked' : '' %> >
+					<label for="sportKindId-<%=sportKind.sportKindId%>"><%=sportKind.sportKindName%></label>
+					<br />
+				<% } ) %>
+			</div>
+		</div>
 
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.sportKindLabel%> *</small></div>
-		<div class="col-xs-6">
-			<% _.each( sportKinds, function( sportKind ) { %>
-				<input type="radio" name="sportKindId" id="sportKindId-<%=sportKind.sportKindId%>" value="<%=sportKind.sportKindId%>" <%=sportKind.sportKindId == selectedSportKindId ? 'checked' : '' %> >
-				<label for="sportKindId-<%=sportKind.sportKindId%>"><%=sportKind.sportKindName%></label>
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.categoryLabel%> *</small></div>
+			<div class="col-6">
+				<select class="chosen-select form-control" id="settings-category-id">
+					<% _.each( categories, function( category ) { %>
+					<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
+					<% }) %>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.cupLabel%> *</small></div>
+			<div class="col-6">
+				<% if( model.categoryId > 0 ) { %>
+					<select class="chosen-select form-control" id="settings-cup-id">
+						<% _.each( cups, function( cup ) { %>
+							<option value="<%=cup.cupId%>" <%= cup.cupId == model.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
+						<% }) %>
+					</select>
+				<% } %>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.teamLabel%></small></div>
+			<div class="col-6">
+				<% if( model.categoryId > 0 ) { %>
+					<select class="chosen-select form-control" id="settings-team-id">
+						<option value="0">&nbsp;</option>
+						<% _.each( teams, function( team ) { %>
+						<option value="<%=team.teamId%>" <%= model.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+						<% }) %>
+					</select>
+				<% } %>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.teamLabel%></small></div>
+			<div class="col-6">
+				<% if( model.categoryId > 0 ) { %>
+					<select class="chosen-select form-control" id="settings2-team-id">
+						<option value="0">&nbsp;</option>
+						<% _.each( teams, function( team ) { %>
+						<option value="<%=team.teamId%>" <%= model.team2Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+						<% }) %>
+					</select>
+				<% } %>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-5 text-right">
+				<small><%=translator.matchDateLabel%></small>
+				<input type="checkbox" id="filter-by-match-date-enabled" value="true" <%= model.filterByDateEnable ? 'checked' : '' %> >
+			</div>
+			<div class="col-6">
+				<div class="js-filter-by-match-date"></div>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.showFutureMatchesLabel%></small></div>
+			<div class="col-6">
+				<input type="checkbox" id="settings-show-future-matches" name="settings-show-future-matches" value="true" <%= showFutureMatches ? "checked='checked'" : ''%> >
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.showFinishedLabel%></small></div>
+			<div class="col-6">
+				<input type="checkbox" id="settings-show-finished" name="settings-show-finished" value="true" <%= showFinished ? "checked='checked'" : ''%> >
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.mnbSortingLabel%></small></div>
+			<div class="col-6">
+				<input type="radio" id="sort-asc" name="sorting" value="1" <%= model.sorting == 1 ? 'checked' : '' %> > <label for="sort-asc"><%=translator.mnbSortingAscLabel%></label>
 				<br />
-			<% } ) %>
+				<input type="radio" id="sort-desc" name="sorting" value="2" <%= model.sorting == 2 ? 'checked' : '' %> > <label for="sort-desc"><%=translator.mnbSortingDescLabel%></label>
+			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.categoryLabel%> *</small></div>
-		<div class="col-xs-6">
-			<select class="chosen-select form-control" id="settings-category-id">
-				<% _.each( categories, function( category ) { %>
-				<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : '' %> ><%=category.categoryName%></option>
-				<% }) %>
-			</select>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.cupLabel%> *</small></div>
-		<div class="col-xs-6">
-			<% if( model.categoryId > 0 ) { %>
-				<select class="chosen-select form-control" id="settings-cup-id">
-					<% _.each( cups, function( cup ) { %>
-						<option value="<%=cup.cupId%>" <%= cup.cupId == model.cupId ? 'selected' : '' %> ><%=cup.cupName%></option>
-					<% }) %>
-				</select>
-			<% } %>
-		</div>
-	</div>
-
-	<hr />
-
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.teamLabel%></small></div>
-		<div class="col-xs-6">
-			<% if( model.categoryId > 0 ) { %>
-				<select class="chosen-select form-control" id="settings-team-id">
+		<div class="row">
+			<div class="col-5 text-right"><small><%=translator.userLabel%></small></div>
+			<div class="col-6">
+				<select class="chosen-select form-control" id="settings-user-id">
 					<option value="0">&nbsp;</option>
-					<% _.each( teams, function( team ) { %>
-					<option value="<%=team.teamId%>" <%= model.teamId == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
+					<% _.each( users, function( user ) { %>
+					<option value="<%=user.userId%>" <%= model.userId == user.userId ? 'selected' : '' %> ><%=user.userName%></option>
 					<% }) %>
 				</select>
-			<% } %>
+			</div>
 		</div>
 	</div>
-
-
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.teamLabel%></small></div>
-		<div class="col-xs-6">
-			<% if( model.categoryId > 0 ) { %>
-				<select class="chosen-select form-control" id="settings2-team-id">
-					<option value="0">&nbsp;</option>
-					<% _.each( teams, function( team ) { %>
-					<option value="<%=team.teamId%>" <%= model.team2Id == team.teamId ? 'selected' : '' %> ><%=team.teamName%></option>
-					<% }) %>
-				</select>
-			<% } %>
-		</div>
-	</div>
-
-	<hr />
-
-	<div class="row">
-		<div class="col-xs-5 text-right">
-			<small><%=translator.matchDateLabel%></small>
-			<input type="checkbox" id="filter-by-match-date-enabled" value="true" <%= model.filterByDateEnable ? 'checked' : '' %> >
-		</div>
-		<div class="col-xs-6">
-			<div class="js-filter-by-match-date"></div>
-		</div>
-	</div>
-
-	<hr />
-
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.showFutureMatchesLabel%></small></div>
-		<div class="col-xs-6">
-			<input type="checkbox" id="settings-show-future-matches" name="settings-show-future-matches" value="true" <%= showFutureMatches ? "checked='checked'" : ''%> >
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.showFinishedLabel%></small></div>
-		<div class="col-xs-6">
-			<input type="checkbox" id="settings-show-finished" name="settings-show-finished" value="true" <%= showFinished ? "checked='checked'" : ''%> >
-		</div>
-	</div>
-
-	<hr />
-
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.mnbSortingLabel%></small></div>
-		<div class="col-xs-6">
-			<input type="radio" id="sort-asc" name="sorting" value="1" <%= model.sorting == 1 ? 'checked' : '' %> > <label for="sort-asc"><%=translator.mnbSortingAscLabel%></label>
-			<br />
-			<input type="radio" id="sort-desc" name="sorting" value="2" <%= model.sorting == 2 ? 'checked' : '' %> > <label for="sort-desc"><%=translator.mnbSortingDescLabel%></label>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-5 text-right"><small><%=translator.userLabel%></small></div>
-		<div class="col-xs-6">
-			<select class="chosen-select form-control" id="settings-user-id">
-				<option value="0">&nbsp;</option>
-				<% _.each( users, function( user ) { %>
-				<option value="<%=user.userId%>" <%= model.userId == user.userId ? 'selected' : '' %> ><%=user.userName%></option>
-				<% }) %>
-			</select>
-		</div>
-	</div>
-
 </div>

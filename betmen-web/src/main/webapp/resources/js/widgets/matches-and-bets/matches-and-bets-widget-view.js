@@ -36,6 +36,7 @@ define( function ( require ) {
 		initializeInnerView: function() {
 			this.matchViewMode = this.options.matchViewMode;
 			this.initialMatchViewMode = this.options.initialMatchViewMode;
+            // this.setPanelClass('alert-primary');
 		},
 
 		renderInnerView: function ( filter ) {
@@ -65,8 +66,8 @@ define( function ( require ) {
 
 		innerViewMenuItems: function() {
 
-			var isStatisticsView = this.matchesAndBetsViewMode == MATCHES_AND_BETS_MODE_STATISTICS;
-			var showButtons = isStatisticsView || this.matchViewMode != VIEW_MODE_MINIMIZED;
+			var isStatisticsView = this.matchesAndBetsViewMode === MATCHES_AND_BETS_MODE_STATISTICS;
+			var showButtons = isStatisticsView || this.matchViewMode !== VIEW_MODE_MINIMIZED;
 
 			return [
 				{ selector: 'js-matches_and_bets_mode_matches'
@@ -80,32 +81,32 @@ define( function ( require ) {
 					, link: '#'
 					, selected: isStatisticsView
 					, text: translator.matchesAndBetsViewMode_Statistics_Label
-					, button: showButtons  && ! isStatisticsView && this.initialMatchViewMode != VIEW_MODE_MINIMIZED
+					, button: showButtons  && ! isStatisticsView && this.initialMatchViewMode !== VIEW_MODE_MINIMIZED
 				}
 				, { selector: 'divider' }
 				, { selector: 'js-view_mode_bet'
 					, icon: 'fa fa-money'
 					, link: '#'
 					, entity_id: VIEW_MODE_BET
-					, selected: this.matchViewMode == VIEW_MODE_BET
+					, selected: this.matchViewMode === VIEW_MODE_BET
 					, text: translator.viewBetModeLabel
-					, button: ( ! isStatisticsView && ( this.matchViewMode == VIEW_MODE_TABLE ) || ( this.matchViewMode == VIEW_MODE_MINIMIZED ) )
+					, button: ( ! isStatisticsView && ( this.matchViewMode === VIEW_MODE_TABLE ) || ( this.matchViewMode === VIEW_MODE_MINIMIZED ) )
 				}
 				, { selector: 'js-view_mode_tabled'
 					, icon: 'fa fa-server'
 					, link: '#'
 					, entity_id: VIEW_MODE_TABLE
-					, selected: this.matchViewMode == VIEW_MODE_TABLE
+					, selected: this.matchViewMode === VIEW_MODE_TABLE
 					, text: translator.viewModeCompactLabel
-					, button: showButtons  && ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_TABLE
+					, button: showButtons  && ! isStatisticsView && this.matchViewMode === VIEW_MODE_BET && this.initialMatchViewMode === VIEW_MODE_TABLE
 				}
 				, { selector: 'js-view_mode_minimized'
 					, icon: 'fa fa-bars'
 					, link: '#'
 					, entity_id: VIEW_MODE_MINIMIZED
-					, selected: this.matchViewMode == VIEW_MODE_MINIMIZED
+					, selected: this.matchViewMode === VIEW_MODE_MINIMIZED
 					, text: translator.viewModeMinimizedLabel
-					, button: showButtons  && ! isStatisticsView && this.matchViewMode == VIEW_MODE_BET && this.initialMatchViewMode == VIEW_MODE_MINIMIZED
+					, button: showButtons  && ! isStatisticsView && this.matchViewMode === VIEW_MODE_BET && this.initialMatchViewMode === VIEW_MODE_MINIMIZED
 				}
 			];
 		},
@@ -114,7 +115,7 @@ define( function ( require ) {
 
 			var container = this.$( this.windowBodyContainerSelector );
 			container.empty();
-			if ( this.matchViewMode == 3 ) {
+			if ( this.matchViewMode === 1 || this.matchViewMode === 3 ) {
 				container.addClass( 'nopadding' );
 			}
 
@@ -131,7 +132,7 @@ define( function ( require ) {
 			var date = model.date;
 			var matchBets = model.matchBets;
 
-			var dateEl = $( "<div class='well well-sm text-danger' style='margin-bottom: 0;'><strong>" + dateTimeService.formatDateFullDisplay( date ) + "</strong></div>" );
+			var dateEl = $( "<div class='alert-secondary text-muted text-center' style='margin-bottom: 0;'><strong>" + dateTimeService.formatDateFullDisplay( date ) + "</strong></div>" );
 			container.append( dateEl );
 
 			var showBetForUserId = this.filter.userId;

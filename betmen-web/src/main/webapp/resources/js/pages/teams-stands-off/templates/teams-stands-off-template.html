@@ -1,23 +1,23 @@
 <div class="row">
 
-	<div class="col-xs-12 col-lg-4 js-teams-stands-off-by-cups">
+	<div class="col-xs-12 col-4 js-teams-stands-off-by-cups">
 
 		<% _.each( standoffsByCup, function( standoff ) { %>
-			<div class="row js-cups js-cup-<%= standoff.cup.cupId %> <%= selectedCup.cupId == standoff.cup.cupId ? 'bg-warning' : '' %>">
+			<div class="row js-cups js-cup-<%= standoff.cup.cupId %> <%= selectedCup.cupId == standoff.cup.cupId ? 'alert-warning' : '' %>">
 
-				<div class="col-xs-6 text-right">
+				<div class="col-6 text-right">
 					<h4><a href="/betmen/cups/<%= standoff.cup.cupId %>/"><%= standoff.cup.cupName %></a></h4>
 				</div>
 
-				<div class="col-xs-2">
+				<div class="col-2">
 					<h4><strong class="<%= standoff.style1 %>"><%= standoff.score1 %></strong></h4>
 				</div>
 
-				<div class="col-xs-2">
+				<div class="col-2">
 					<h4><strong class="<%= standoff.style2 %>"><%= standoff.score2 %></strong></h4>
 				</div>
 
-				<div class="col-xs-1">
+				<div class="col-1">
 					<i class="fa fa-info-circle fa-2x js-show-cup" data-cupid="<%= standoff.cup.cupId %>" style="cursor: hand;"></i>
 				</div>
 			</div>
@@ -26,6 +26,6 @@
 
 	</div>
 
-	<div class="col-xs-12 col-lg-8 js-teams-stands-off-matches"></div>
+	<div class="col-xs-12 col-8 js-teams-stands-off-matches"></div>
 
 </div>

@@ -123,7 +123,7 @@ define( function ( require ) {
 				this.listenTo( view, 'events:job_task_execution_finished', this.render.bind( this ) );
 			}
 
-			this.setPanelClass( model.jobTaskActive ? 'panel-info' : 'panel-default' );
+			this.setPanelClass( model.jobTaskActive ? 'alert-info' : 'alert-default' );
 			var data = _.extend( {}, model, { translator: translator } );
 			container.append( templateInfo( data ) );
 
@@ -138,7 +138,7 @@ define( function ( require ) {
 
 			var model = this.model.toJSON();
 
-			this.setPanelClass( 'panel-warning' );
+			this.setPanelClass( 'alert-warning' );
 
 			var data = _.extend( {}, model, { translator: translator } );
 			this.$( this.windowBodyContainerSelector ).html( templateEdit( data ) );
@@ -215,7 +215,7 @@ define( function ( require ) {
 			this.model.save( {}, {
 				cache: false
 				, error: function () {
-					self.setPanelClass( 'panel-danger' );
+					self.setPanelClass( 'alert-danger' );
 					console.error( 'Server error' );
 				}
 			} ).then( function () {

@@ -1,9 +1,9 @@
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-12">
 
-		<div class="panel panel-default">
+		<div class="card">
 
-			<div class="panel-heading clearfix" title="">
+			<div class="card-header bg-info" title="">
 				<img src="<%=model.logoUrl%>" height="24" width="24">
 				<small><%=model.categoryName%></small>
 				<div class="btn-group pull-right">
@@ -12,15 +12,15 @@
 				</div>
 			</div>
 
-			<div class="panel-body">
+			<div class="card-body">
 
 				<div class="row">
 
-					<div class="col-lg-6">
+					<div class="col-6">
 						<small><%= translator.categoryNameLabel %></small>
 					</div>
 
-					<div class="col-lg-6">
+					<div class="col-6">
 						<input class="form-control entry-name" id="" name="" value="<%=model.categoryName%>">
 					</div>
 				</div>
@@ -28,11 +28,11 @@
 
 				<div class="row">
 
-					<div class="col-lg-6">
+					<div class="col-6">
 						<small><%- translator.sportKindLabel %></small>
 					</div>
 
-					<div class="col-lg-6">
+					<div class="col-6">
 						<select id="sportKindId" class="form-control">
 							<% _.each( sportKinds, function( sportKind ) { %>
 								<option value="<%=sportKind.sportKindId%>" <%= sportKind.sportKindId == model.sportKindId ? 'selected' : '' %> ><%=sportKind.sportKindName%></option>
@@ -43,11 +43,11 @@
 
 				<div class="row">
 
-					<div class="col-lg-6">
+					<div class="col-6">
 						<small><%- translator.importServerLabel %></small>
 					</div>
 
-					<div class="col-lg-6">
+					<div class="col-6">
 						<select id="game-import-strategy-type-id" class="form-control">
 							<% _.each( remoteGameImportStrategyTypes, function( remoteGameImportStrategyType ) { %>
 								<option value="<%=remoteGameImportStrategyType.id%>" <%= remoteGameImportStrategyType.id == model.remoteGameImportStrategyTypeId ? 'selected' : '' %> ><%=remoteGameImportStrategyType.name%></option>
@@ -58,11 +58,11 @@
 
 				<div class="row">
 
-					<div class="col-lg-6">
+					<div class="col-6">
 						<small><%- translator.logoLabel %></small>
 					</div>
 
-					<div class="col-lg-6">
+					<div class="col-6">
 
 						<form method="POST" id='category_form' enctype="multipart/form-data">
 							<input type="file" id="categoryLogoFile" name="categoryLogoFile">
@@ -73,7 +73,7 @@
 
 			</div>
 
-			<div class="panel-footer js-footer">
+			<div class="card-footer js-footer">
 
 			</div>
 

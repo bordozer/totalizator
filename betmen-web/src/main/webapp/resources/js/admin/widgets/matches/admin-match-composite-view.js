@@ -96,7 +96,7 @@ define( function ( require ) {
 			} ) );
 
 			if ( this.isSelected ) {
-				this.$( '.admin-entry-line' ).addClass( 'bg-success' );
+				this.$( '.admin-entry-line' ).addClass( 'alert-success' );
 			}
 
 			return this;

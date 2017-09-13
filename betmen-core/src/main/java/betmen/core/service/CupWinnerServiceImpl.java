@@ -63,7 +63,10 @@ public class CupWinnerServiceImpl implements CupWinnerService {
         final List<CupWinner> result = newArrayList();
 
         for (final Cup cup : cupService.loadPublicFinished()) {
-            result.add(load(cup, team));
+            final CupWinner cupWinner = load(cup, team);
+            if (cupWinner != null) {
+                result.add(cupWinner);
+            }
         }
 
         return result;

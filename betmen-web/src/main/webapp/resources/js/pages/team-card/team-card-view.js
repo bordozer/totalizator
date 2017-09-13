@@ -55,7 +55,7 @@ define( function ( require ) {
 
 				var cup = cupData.cup;
 
-				var el = $( '<div class="col-xs-4"></div>' );
+				var el = $( '<div class="col-4"></div>' );
 				container.append( el );
 
 				new CupTeamStatistics( el, { team: model.team, cup: cup } );
@@ -71,7 +71,7 @@ define( function ( require ) {
 			var cups = service.loadAllTeamActivePublicCups(teamId);
 
 			_.each( cups, function( cupAndCategoryPair ) {
-				var el = $( '<div class="col-xs-12"></div>' );
+				var el = $( '<div class="col-12"></div>' );
 				container.append( el );
 
 				var options = {

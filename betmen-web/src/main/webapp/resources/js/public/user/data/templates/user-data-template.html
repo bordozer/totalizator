@@ -4,14 +4,14 @@
 	}
 </style>
 
-<div class="panel panel-info">
+<div class="card">
 
-	<div class="panel-heading text-left">
+	<div class="card-header bg-info text-left">
 		<span class="js-window-icon fa fa-user-plus"></span>
 		<%=translator.newUserDataTitleLabel%>
  	</div>
 
-	<div class="panel-body text-left">
+	<div class="card-body text-left">
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 150px;"><label for="login"><%=translator.userDataLoginLabel%></label></td>
@@ -53,13 +53,13 @@
 				<td></td>
 				<td>
 					<div class="row">
-						<div class="col-lg-3">
+						<div class="col-3">
 							<input type="radio" name="language" value="ua" checked="checked" /> <img src="/resources/img/lang/ua.png">
 						</div>
-						<div class="col-lg-3">
+						<div class="col-3">
 							<input type="radio" name="language" value="ru" /> <img src="/resources/img/lang/ru.png">
 						</div>
-						<div class="col-lg-3">
+						<div class="col-3">
 							<input type="radio" name="language" value="en" /> <img src="/resources/img/lang/en.png">
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 		</table>
 	</div>
 
-	<div class="panel-footer clearfix">
+	<div class="card-footer clearfix">
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default fa fa-backward back-to-login-button"> <%=translator.userDataBackToLoginPageLabel%></button>
 			<button type="button" class="btn btn-primary fa fa-save save-button"> <%=translator.userDataSaveButtonLabel%></button>

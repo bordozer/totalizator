@@ -1,37 +1,33 @@
 <% if( customButtons.length > 0 ) { %>
 	<div class="btn-group">
 		<% _.each( customButtons, function( menu ) { %>
-			<button class="btn btn-default fa <%=menu.icon%> <%=menu.selector%> <%=menu.cssClass%>" data-entity_id="<%=menu.entity_id%>" title="<%=menu.text%>"></button>
+			<button class="btn btn-outline-dark fa <%=menu.icon%> <%=menu.selector%> <%=menu.cssClass%>" data-entity_id="<%=menu.entity_id%>" title="<%=menu.text%>"></button>
 		<% }) %>
 	</div>
 <% } %>
 
-<div class="dropdown btn-group">
+<div class="btn-group">
 
-	<button class="btn <%=cssClass%> dropdown-toggle fa <%=menuButtonIcon%>" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" title="<%-menuButtonHint%>">
-
+	<button class="btn btn-outline-dark dropdown-toggle <%=cssClass%> fa <%=menuButtonIcon%>" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<%-menuButtonHint%>">
 		<% if( menuButtonImage ) { %>
 			<img src="<%=menuButtonImage%>" height="24" width="24" style="margin-top: -5px;">
 		<% } %>
 		<%-menuButtonText%>
-		<span class="caret"></span>
 	</button>
 
-	<ul class="dropdown-menu <%=cssClass%>" role="menu" aria-labelledby="dropdownMenu1">
+	<div class="dropdown-menu <%=cssClass%>" role="menu" aria-labelledby="dropdownMenuButton">
 		<% _.each( menus, function( menu ) { %>
 
 			<% if( menu.selector != 'divider' ) { %>
-				<li role="presentation" style="height: 30px;" class="">
-					<a class="<%=menu.icon%> <%=menu.selector%>" role="menuitem" data-entity_id="<%=menu.entity_id%>" tabindex="-1" href="<%=menu.link%>" <%= menu.link == '#' ? "onclick='return false;'" : ''%> >
-						<span class="<%= menu.selected ? 'text-info' : ''%>" data-entity_id="<%=menu.entity_id%>"><%=menu.text%></span>
-					</a>
-				</li>
+				<a class="dropdown-item <%=menu.icon%> <%=menu.selector%>" data-entity_id="<%=menu.entity_id%>" tabindex="-1" href="<%=menu.link%>" <%= menu.link == '#' ? "onclick='return false;'" : ''%> >
+					<span class="<%= menu.selected ? 'text-info' : ''%>" data-entity_id="<%=menu.entity_id%>"><%=menu.text%></span>
+				</a>
 			<% } %>
 
 			<% if( menu.selector == 'divider' ) { %>
-				<li role="presentation" class="divider"></li>
+				<div class="dropdown-divider"></div>
 			<% } %>
 
 		<% }) %>
-	</ul>
+	</div>
 </div>

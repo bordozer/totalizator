@@ -23,7 +23,8 @@ import java.util.Map;
 @EnableTransactionManagement
 public class TestConfiguration {
 
-    @Bean(initMethod = "generateAdmin")
+    @Bean //should be like this to run test_data
+//    @Bean(initMethod = "generateAdmin")
     public UserInitializerImpl initAdminUser() {
         return new UserInitializerImpl();
     }

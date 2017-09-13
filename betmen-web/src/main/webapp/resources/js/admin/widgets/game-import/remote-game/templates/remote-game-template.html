@@ -1,6 +1,6 @@
-<div class="panel <%=panelColor%>">
+<div class="card">
 
-	<div class="panel-heading">
+	<div class="card-header <%=panelColor%>">
 
 		<% if( isReadyForImport) { %>
 			<input type="checkbox" id="gamesToImport" class="js-games-to-import" <%= ! skipImport ? 'checked' : ''%>>
@@ -14,11 +14,11 @@
 
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body">
 
 		<div class="row">
 
-			<div class="col-lg-6 text-center">
+			<div class="col-6 text-center">
 
 				<% if( homeTeamNumber == 1 ) { %>
 					<i class="fa fa-home text-danger"></i>
@@ -38,7 +38,7 @@
 				<% } %>
 			</div>
 
-			<div class="col-lg-6 text-center">
+			<div class="col-6 text-center">
 
 				<% if( team2 ) { %>
 					<img class="team-logo" src="<%=team2.teamLogo%>">
@@ -63,11 +63,11 @@
 
 		<div class="row">
 
-			<div class="col-lg-6 text-center <%=matchResults.style1%>">
+			<div class="col-6 text-center <%=matchResults.style1%>">
 				<%=score1%> <%= match ? '( ' + match.score1 + ' )' : '' %>
 			</div>
 
-			<div class="col-lg-6 text-center <%=matchResults.style2%>">
+			<div class="col-6 text-center <%=matchResults.style2%>">
 				<%=score2%> <%= match ? '( ' + match.score2 + ' )' : '' %>
 			</div>
 
@@ -75,7 +75,7 @@
 
 	</div>
 
-	<div class="panel-footer">
+	<div class="card-footer">
 
 		<% if( match ) { %>
 			<a href="/betmen/matches/<%=match.matchId%>/bets/" class="fa fa-soccer-ball-o text-success" title="#<%=match.matchId%>"></a> <%=translator.theMatchIsAlreadyImported%>

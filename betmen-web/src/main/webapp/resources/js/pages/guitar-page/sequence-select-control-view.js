@@ -20,19 +20,24 @@ define(function (require) {
 
         events: {
             "change #selectedSequenceType": '_onSelectedSequenceTypeChange',
-            "click .js-remove-button": '_onRemoveClick'
+            "click .js-remove-button": '_onRemoveClick',
+            "click .js-gamma-enabled": '_onSelectedSequenceEnablingChange'
         },
 
         initialize: function (options) {
             this.index = options.options.index;
             this.gammaOffsets = options.options.gammaOffsets;
             this.selectedSequenceType = options.options.selectedSequenceType;
+            this.selectedSequenceEnabled = options.options.selectedSequenceEnabled;
+
             this.render();
         },
 
         render: function() {
+
             var data = _.extend({}, {
                 selectedSequenceType: this.selectedSequenceType
+                , selectedSequenceEnabled: this.selectedSequenceEnabled
                 , gammaOffsets: this.gammaOffsets
                 , translator: translator
             });
@@ -51,12 +56,19 @@ define(function (require) {
         },
 
         _triggerChanged: function () {
-            this.trigger('events:selected-sequence-type-changed', {index: this.index, value: this.selectedSequenceType});
+            var options = {
+                index: this.index,
+                value: this.selectedSequenceType,
+                enabled: this.selectedSequenceEnabled
+            };
+
+            this.trigger('events:selected-sequence-type-changed', options);
         },
 
         _onSelectedSequenceTypeChange: function(evt) {
             var target = $(evt.target);
             this.selectedSequenceType = target.val();
+            this.selectedSequenceEnabled = true;
 
             this._triggerChanged();
         },
@@ -64,6 +76,14 @@ define(function (require) {
         _onRemoveClick: function() {
             this.$("#selectedSequenceType").val(0);
             this.selectedSequenceType = 0;
+            this.selectedSequenceEnabled = false;
+
+            this._triggerChanged();
+        },
+
+        _onSelectedSequenceEnablingChange: function() {
+            this.selectedSequenceEnabled = this.$('.js-gamma-enabled').prop('checked');
+
             this._triggerChanged();
         }
     });

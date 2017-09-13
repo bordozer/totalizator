@@ -60,6 +60,15 @@
 	padding-bottom: 5px;
 }
 
-.bg-missed-bet {
-	background-color: #F0F0F0;
+.mt-10 {
+	margin-top: 10px !important;
+}
+
+.mb-10 {
+	margin-bottom: 10px !important;
+}
+
+.m-n-b-badge {
+	font-size: 12px;
+	line-height: 14px;
 }

@@ -28,8 +28,8 @@ define( function ( require ) {
 		matchResults: function( team1Id, score1, team2Id, score2 ) {
 			var winnerId = score1 > score2 ? team1Id : score1 < score2 ? team2Id : 0;
 
-			var style1 = winnerId == team1Id ? 'text-info match-bet-score' : winnerId == team2Id ? 'text-muted' : '';
-			var style2 = winnerId == team2Id ? 'text-info match-bet-score' : winnerId == team1Id ? 'text-muted' : '';
+			var style1 = winnerId === team1Id ? 'text-info match-bet-score' : winnerId === team2Id ? 'text-muted' : '';
+			var style2 = winnerId === team2Id ? 'text-info match-bet-score' : winnerId === team1Id ? 'text-muted' : '';
 
 			return { winnerId: winnerId, style1: style1, style2: style2 };
 		},
@@ -38,8 +38,8 @@ define( function ( require ) {
 		getBetScoreHighlights: function( team1Id, score1, team2Id, score2 ) {
 			var winnerId = score1 > score2 ? team1Id : score1 < score2 ? team2Id : 0;
 
-			var style1 = winnerId == team1Id ? 'text-success match-bet-score' : winnerId == team2Id ? 'text-muted' : '';
-			var style2 = winnerId == team2Id ? 'text-success match-bet-score' : winnerId == team1Id ? 'text-muted' : '';
+			var style1 = winnerId === team1Id ? 'text-success match-bet-score' : winnerId === team2Id ? 'text-muted' : '';
+			var style2 = winnerId === team2Id ? 'text-success match-bet-score' : winnerId === team1Id ? 'text-muted' : '';
 
 			return { winnerId: winnerId, style1: style1, style2: style2 };
 		},

@@ -1,20 +1,17 @@
-<div class="col-lg-5">
+<div class="col-5">
 
 	<% _.each( untranslatedList, function( entry ) { %>
 
-	<div class="panel panel-info">
-		<div class="panel-heading">
-			<h3 class="panel-title text-center"><%=entry.nerd%></h3>
+	<div class="card mb-10">
+		<div class="card-header bg-light">
+			<strong><%=entry.nerd%></strong>
 		</div>
-		<div class="panel-body text-left">
+		<div class="card-body text-left">
 			<% _.each( entry.translationEntries, function( translationEntry ) { %>
-			<div class="row">
-				<strong><%=translationEntry.language%></strong>:
-				<small><%=translationEntry.nerd%></small>
-			</div>
+				<%=translationEntry.language%>
 			<% }) %>
 		</div>
-		<div class="panel-footer"></div>
+		<div class="card-footer"></div>
 	</div>
 
 	<% }) %>

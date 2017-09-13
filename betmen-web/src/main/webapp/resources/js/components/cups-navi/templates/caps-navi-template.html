@@ -1,53 +1,48 @@
 <div class="row">
 
-	<div class="col-xs-12 col-lg-12">
+	<div class="col-12">
 
 		<ul class="nav nav-tabs">
 
 			<% _.each( sportKindCups, function( entry ) { %>
 
-				<li role="presentation" class="dropdown <%= entry.sportKind.sportKindId == selectedSportKindId ? 'active' : '' %>">
-
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						<%=entry.sportKind.sportKindName%>
-						<span class="caret"></span>
 					</a>
-
-					<ul class="dropdown-menu">
+					<div class="dropdown-menu">
 
 						<% if( entry.sportKind.sportKindId > 0 ) { %>
-							<li role="presentation">
-								<a href="/betmen/sports/<%=entry.sportKind.sportKindId%>/"><strong class="text-primary"><%=translator.allCups%></strong></a>
-							</li>
+							<a class="dropdown-item" href="/betmen/sports/<%=entry.sportKind.sportKindId%>/">
+								<strong class="text-primary"><%=translator.allCups%></strong>
+							</a>
 						<% } %>
 
 						<% if( entry.cupAndCategoryFavorite.length > 0 ) { %>
 							<% _.each( entry.cupAndCategoryFavorite, function( cupAndCategoryFavorite ) { %>
-								<% var cup = cupAndCategoryFavorite.cup; %>
-								<li role="presentation" class="<%= cup.cupId == selectedCupId ? 'active' : '' %>">
-									<a href="/betmen/cups/<%=cup.cupId%>/">
+							<% var cup = cupAndCategoryFavorite.cup; %>
+								<a class="dropdown-item <%= cup.cupId == selectedCupId ? 'active' : '' %>" href="/betmen/cups/<%=cup.cupId%>/">
 
-										<% if( entry.sportKind.sportKindId == 0 ) { %>
-											<span class="fa fa-star"><span class="text-muted"> <%= cup.category.sportKind.sportKindName %>:</span></span>
-											<%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
-										<% } %>
+								<% if( entry.sportKind.sportKindId == 0 ) { %>
+									<span class="fa fa-star"><span class="text-muted"> <%= cup.category.sportKind.sportKindName %>:</span></span>
+									<%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+									<% } %>
 
-										<% if( cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
-											<span class="fa fa-star"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
-										<% } %>
+									<% if( cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
+									<span class="fa fa-star"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+									<% } %>
 
-										<% if( ! cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
-											<span style="margin-left: 18px;"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
-										<% } %>
+									<% if( ! cupAndCategoryFavorite.categoryInFavorite && entry.sportKind.sportKindId > 0 ) { %>
+									<span style="margin-left: 18px;"> <%=cup.category.categoryName%> - <strong><%=cup.cupName%></strong></span>
+									<% } %>
 
-									</a>
-								</li>
+								</a>
 							<% }) %>
 						<% } %>
 
-					</ul>
-
+					</div>
 				</li>
+
 			<% }) %>
 
 		</ul>

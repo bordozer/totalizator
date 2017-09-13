@@ -64,9 +64,11 @@ define( function ( require ) {
 		_renderUsersRating: function () {
 
 			var model = this.model.toJSON();
-			if ( model.length == 0 ) {
+			if ( model.length === 0 ) {
 
-				this.$( this.windowBodyContainerSelector ).html( "<h5 class='text-muted " + this.getIcon() + "'> " + translator.ratingIsEmptyLabel + "</h5>" );
+				this.$( this.windowBodyContainerSelector )
+                    .html("<small class='text-muted " + this.getIcon() + "'></small>" +
+						" <small class='text-muted'>" + translator.ratingIsEmptyLabel + "</small>");
 
 				this.trigger( 'inner-view-rendered' );
 

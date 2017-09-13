@@ -1,23 +1,23 @@
 <div class="row js-match-container">
-	<div class="col-xs-12 text-muted" style="height: 155px; font-size: 12px;">
+	<div class="col-12 text-muted" style="height: 155px; font-size: 12px;">
 
-		<div class="row bg-success" style="font-size: 11px;">
+		<div class="row alert-success" style="font-size: 11px;">
 
-			<div class="col-xs-5 text-right">
+			<div class="col-5 text-right">
 				<% if( match.homeTeamNumber == 1 ) { %>
 					<span class="fa fa-home"></span>
 				<% } %>
 				<strong><a href="/betmen/teams/<%=team1.teamId%>/"><%=team1.teamName%></a></strong>
 			</div>
-			<div class="col-xs-1 text-center">
+			<div class="col-1 text-center">
 				<img src="<%=team1.teamLogo%>" title="<%=team1.teamName%>" height="16">
 			</div>
 
-			<div class="col-xs-1 text-center">
+			<div class="col-1 text-center">
 				<img src="<%=team2.teamLogo%>" title="<%=team2.teamName%>" height="16">
 			</div>
 
-			<div class="col-xs-4">
+			<div class="col-4">
 				<strong><a href="/betmen/teams/<%=team2.teamId%>/"><%=team2.teamName%></a></strong>
 				<% if( match.homeTeamNumber == 2 ) { %>
 					<span class="fa fa-home"></span>
@@ -25,15 +25,15 @@
 			</div>
 		</div>
 
-		<div class="row bg-success" style="font-size: 9px;">
-			<div class="col-xs-5 text-right">
+		<div class="row alert-success" style="font-size: 9px;">
+			<div class="col-5 text-right">
 				<span class="fa text-success"><%=translator.won%><strong><%= wonLost.team1won %></strong></span> /
 				<span class="fa text-danger"><%=translator.lost%><strong><%= wonLost.team1lost %></strong></span> /
 				<span class="fa text-info"><%=translator.total%><strong><%= wonLost.team1Total %></strong></span>
 			</div>
-			<div class="col-xs-1"></div>
-			<div class="col-xs-1"></div>
-			<div class="col-xs-4">
+			<div class="col-1"></div>
+			<div class="col-1"></div>
+			<div class="col-4">
 				<span class="fa text-success"><%=translator.won%><strong><%= wonLost.team2won %></strong></span> /
 				<span class="fa text-danger"><%=translator.lost%><strong><%= wonLost.team2lost %></strong></span> /
 				<span class="fa text-info"><%=translator.total%><strong><%= wonLost.team2Total %></strong></span>
@@ -41,17 +41,17 @@
 		</div>
 
 		<div class="row" style="height: 124px; overflow-y: scroll;">
-			<div class="col-xs-12">
+			<div class="col-12">
 
 				<% _.each( standoffsByCup, function( cupStandoff ) { %>
 
 					<div class="row bottom-dotted">
 
-						<div class="col-xs-8">
+						<div class="col-8">
 							<a href="/betmen/cups/<%=cupStandoff.cup.cupId%>/"><%=cupStandoff.cup.cupName%></a>
 						</div>
 
-						<div class="col-xs-4 text-right">
+						<div class="col-4 text-right">
 							<strong>
 								<%=cupStandoff.score1%> : <%=cupStandoff.score2%>
 							</strong>
@@ -60,10 +60,10 @@
 
 					<% if( teamsLastGamesStat.cup.cupId == cupStandoff.cup.cupId ) { %>
 						<div class="row">
-							<div class="col-xs-6 text-center">
+							<div class="col-6 text-center">
 								<%=translator.lastGamesWon%>: <%=teamsLastGamesStat.team1CurrentCupLastGamesWon%>/<%=teamsLastGamesStat.team1CurrentCupLastGames%>
 							</div>
-							<div class="col-xs-6 text-center">
+							<div class="col-6 text-center">
 								<%=translator.lastGamesWon%>: <%=teamsLastGamesStat.team2CurrentCupLastGamesWon%>/<%=teamsLastGamesStat.team2CurrentCupLastGames%>
 							</div>
 						</div>
@@ -76,7 +76,7 @@
 							<% var matchResults = transformer.getMatchResults() %>
 
 							<div class="row">
-								<div class="col-xs-2 text-right text-nowrap">
+								<div class="col-2 text-right text-nowrap">
 									<% if( transformer.homeTeamNumber() == 1 ) { %>
 										<span class="fa fa-home text-info"></span>
 									<% } %>
@@ -88,10 +88,10 @@
 									<% } %>
 								</div>
 
-								<div class="col-xs-6 text-right">
+								<div class="col-6 text-right">
 									<small><%= transformer.formatDate() %></small>
 								</div>
-								<div class="col-xs-4 text-center">
+								<div class="col-4 text-center">
 									<small>
 										<% if( ! transformer.isFinished() ) { %>
 											<span class="text-muted"><strong>?</strong></span>

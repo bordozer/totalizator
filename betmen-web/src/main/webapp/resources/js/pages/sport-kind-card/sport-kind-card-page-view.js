@@ -47,7 +47,7 @@ define( function ( require ) {
 				var model = _model.toJSON();
 				var category = model.category;
 
-				var el = $( "<div></div>" );
+				var el = $( "<div class='row'><div class='col-12'></div></div>" );
 				container.append( el );
 
 				var data = _.extend( {}, {
@@ -60,7 +60,8 @@ define( function ( require ) {
 
 					var isCupFinished = cup.finished;
 
-					var el_w = $( "<div class='col-xs-" + ( isCupFinished ? '3' : '4' ) + "'></div>" );
+					// var el_w = $( "<div class='col-" + ( isCupFinished ? '3' : '4' ) + "'></div>" );
+					var el_w = $( "<div class='col-4'></div>" );
 					el.append( el_w );
 
 					if ( isCupFinished ) {

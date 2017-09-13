@@ -52,10 +52,10 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>errors.match_finished</nerd>
+		<ru><![CDATA[Матч завершился]]></ru>
+		<ua><![CDATA[Гра завершена]]></ua>
+		<en><![CDATA[Game over]]></en>
 	</translation>
 
 	<translation>

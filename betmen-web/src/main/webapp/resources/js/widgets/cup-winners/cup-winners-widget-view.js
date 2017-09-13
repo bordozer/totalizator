@@ -53,12 +53,12 @@ define( function ( require ) {
 
 		_renderWinners: function () {
 
-			var cup = this.model.cup;
-			if ( ! cup.finished ) {
-				this.setBody( "<span class='text-center'><small>" + translator.cupIsNotFinished + "</small></span>" );
-				this.trigger( 'inner-view-rendered' );
-				return;
-			}
+            var cup = this.model.cup;
+            if (!cup.finished) {
+                this.setBody("<small class='text-center text-muted'>" + translator.cupIsNotFinished + "</small>");
+                this.trigger('inner-view-rendered');
+                return;
+            }
 
 			var data = _.extend( {}, { winners: this.model.toJSON(), translator: translator } );
 

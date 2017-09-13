@@ -96,18 +96,18 @@ define( function ( require ) {
 		_getPanelColor: function( match, atLeastOneTeamNotFound ) {
 
 			if ( this.model.importStatus.isRemoteGameImported ) {
-				return 'panel-success';
+				return 'alert-success';
 			}
 
 			if ( match ) {
-				return 'panel-info';
+				return 'alert-info';
 			}
 
 			if ( atLeastOneTeamNotFound ) {
-				return 'panel-danger';
+				return 'alert-danger';
 			}
 
-			return 'panel-default'
+			return 'alert-secondary'
 		},
 
 		_onRemoteGameSelect: function() {

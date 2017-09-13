@@ -1,17 +1,17 @@
-<div class='col-xs-12'>
+<div class='col-12'>
 
     <div class='row'>
-        <div class='col-xs-12'>
+        <div class='col-12'>
             <% _.each(items, function(item) { %>
             <div class='row'>
-                <div class='col-xs-11 well-sm'><h4><%=item.sport.sportKindName%></h4></div>
+                <div class='col-11'><h4><%=item.sport.sportKindName%></h4></div>
             </div>
                 <% _.each(item.categories, function(category) { %>
                 <div class='row'>
-                    <div class='col-xs-2 js-pp-category-<%=category.categoryId%>'>
+                    <div class='col-2 js-pp-category-<%=category.categoryId%>'>
                         <span class="js-favorite-category-button"></span>
                     </div>
-                    <div class='col-xs-10'><a href="/betmen/categories/<%=category.categoryId%>/"> <%=category.categoryName%></a></div>
+                    <div class='col-10'><a href="/betmen/categories/<%=category.categoryId%>/"> <%=category.categoryName%></a></div>
                 </div>
                 <% }) %>
             <% }) %>

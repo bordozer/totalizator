@@ -64,7 +64,7 @@ public class DataCleanUpUtils {
     }
 
     public static void cleanupTeams(final CategoryEditDTO category) {
-        AdminTeamEndPointsHandler.getTeamOfCategory(category.getCategoryId()).stream().forEach(team -> AdminTeamEndPointsHandler.delete(team.getTeamId()));
+        AdminTeamEndPointsHandler.getTeamsOfCategory(category.getCategoryId()).stream().forEach(team -> AdminTeamEndPointsHandler.delete(team.getTeamId()));
     }
 
     public static void cleanupCups() {

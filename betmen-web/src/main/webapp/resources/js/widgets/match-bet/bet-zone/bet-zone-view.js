@@ -4,13 +4,11 @@ define( function ( require ) {
 
 	var Backbone = require( 'backbone' );
 	var _ = require( 'underscore' );
-	var $ = require( 'jquery' );
 
 	var templateInfo = _.template( require( 'text!./templates/bet-zone-template.html' ) );
 	var templateEdit = _.template( require( 'text!./templates/bet-zone-edit-template.html' ) );
 
 	var pointsStylist = require( 'js/services/points-stylist' );
-	var service = require( '/resources/js/services/service.js' );
 
 	var Translator = require( 'translator' );
 	var translator = new Translator( {
@@ -58,7 +56,7 @@ define( function ( require ) {
 		_renderEdit: function() {
 
 			var bet = this.matchBet.bet;
-			var isBet = bet != null;
+			var isBet = bet !== null;
 
 			var betScore1 = isBet ? bet.score1 : 0;
 			var betScore2 = isBet ? bet.score2 : 0;
@@ -69,7 +67,7 @@ define( function ( require ) {
 
 			var self = this;
 			this.$( 'input' ).keypress( function ( e ) {
-				if ( e.which == 13 ) {
+				if ( e.which === 13 ) {
 					self.trigger( 'events:save_bet' );
 				}
 			} );
@@ -83,7 +81,7 @@ define( function ( require ) {
 			var isMatchFinished = match.matchFinished;
 
 			var bet = this.matchBet.bet;
-			var noBet = bet == null;
+			var noBet = bet === null;
 			var isBettingAllowed = this.matchBet.bettingAllowed;
 
 			if ( isMatchFinished ) {
@@ -91,7 +89,7 @@ define( function ( require ) {
 				return;
 			}
 
-			var isFilterByAnotherUserBets = this.showBetForUserId && this.currentUser.userId != this.showBetForUserId;
+			var isFilterByAnotherUserBets = this.showBetForUserId && this.currentUser.userId !== this.showBetForUserId;
 			if ( isFilterByAnotherUserBets ) {
 				this._doRenderIcon( 'fa-user', translator.betOfAnotherUserLabel, false );
 				return;
@@ -117,7 +115,7 @@ define( function ( require ) {
 			var match = this.matchBet.match;
 			var bet = this.matchBet.bet;
 
-			var noBet = bet == null;
+			var noBet = bet === null;
 			if ( noBet ) {
 				return;
 			}
@@ -125,7 +123,7 @@ define( function ( require ) {
 			var score1El = this.$( '.js-bet-zone-bet-points-1' );
 			var score2El = this.$( '.js-bet-zone-bet-points-2' );
 
-			var isFilterByAnotherUserBets = this.showBetForUserId && this.currentUser.userId != this.showBetForUserId;
+			var isFilterByAnotherUserBets = this.showBetForUserId && this.currentUser.userId !== this.showBetForUserId;
 			if ( isFilterByAnotherUserBets && bet.securedBet ) {
 
 				var hiddenScore = "<span class='fa fa-lock fa-2x text-muted' title='" + translator.anotherBetsAreHidden + "'></span>";
@@ -154,11 +152,20 @@ define( function ( require ) {
 			}
 
 			var summaryPoints = this.matchBet.userMatchPointsHolder.summaryPoints;
-			if ( summaryPoints != 0 ) {
+			if ( summaryPoints !== 0 ) {
 
-				var pointsEl = this.$( '.js-bet-zone-points' );
-				pointsEl.html( summaryPoints );
-				pointsEl.addClass( summaryPoints > 0 ? 'text-success' : 'text-danger' );
+                var pointsEl = this.$('.js-bet-zone-points');
+                pointsEl.html(summaryPoints);
+                pointsEl.addClass('m-n-b-badge');
+                if (summaryPoints > 0) {
+                    pointsEl.addClass('badge badge-success');
+                }
+                if (summaryPoints < 0) {
+                    pointsEl.addClass('badge badge-danger');
+                }
+                if (summaryPoints == 0) {
+                    pointsEl.addClass('badge badge-secondary');
+                }
 
 				if ( this.matchBet.userMatchPointsHolder.matchBonus != 0 ) {
 					pointsEl.append( ' <sup> ' + this.matchBet.userMatchPointsHolder.matchBetPoints + '+' + this.matchBet.userMatchPointsHolder.matchBonus + '</sup>' );
@@ -167,7 +174,7 @@ define( function ( require ) {
 		},
 
 		_doRenderIcon: function( icon, title, disabled ) {
-			this.$( '.js-bet-zone-icon' ).html( "<div class='col-xs-3 fa " + icon + " fa-2x' title='" + title + "' " + ( disabled ? "style='opacity: 0.2;'" : "") + " ></div>" );
+			this.$( '.js-bet-zone-icon' ).html( "<div class='col-3 fa " + icon + " fa-2x' title='" + title + "' " + ( disabled ? "style='opacity: 0.2;'" : "") + " ></div>" );
 		}
 	} );
 } );

@@ -1,12 +1,12 @@
-<div class="col-xs-12" style="min-height: 85px;">
+<div class="col-12" style="min-height: 85px;">
 
 	<div class="row">
 
-		<div class="col-xs-6">
+		<div class="col-6">
 
 			<div class="row">
 
-				<div class="col-xs-12 match-team-name text-right">
+				<div class="col-12 match-team-name text-right">
 
 					<% if( match.homeTeamNumber == 1 ) { %>
 						<i class="fa fa-home text-danger"></i>
@@ -21,13 +21,13 @@
 
 			<div class="row">
 
-				<div class="col-xs-8 text-right">
+				<div class="col-8 text-right">
 					<a href="/betmen/teams/<%=match.team1.teamId%>/">
 						<img src="<%=match.team1.teamLogo%>" title="<%=match.team1.teamName%>" height="64">
 					</a>
 				</div>
 
-				<div class="col-xs-4 text-right match-score" style="padding-top: 20px;">
+				<div class="col-4 text-right match-score" style="padding-top: 20px;">
 					<%=matchPoints.score1%>
 				</div>
 
@@ -35,11 +35,11 @@
 
 		</div>
 
-		<div class="col-xs-6">
+		<div class="col-6">
 
 			<div class="row">
 
-				<div class="col-xs-12 match-team-name">
+				<div class="col-12 match-team-name">
 
 					<span style="font-size: 12px;">
 						<a href="/betmen/teams/<%=match.team2.teamId%>/"><%=match.team2.teamName%></a>
@@ -54,11 +54,11 @@
 
 			<div class="row">
 
-				<div class="col-xs-2 match-score" style="padding-top: 20px;">
+				<div class="col-2 match-score" style="padding-top: 20px;">
 					<%=matchPoints.score2%>
 				</div>
 
-				<div class="col-xs-8 text-right">
+				<div class="col-8 text-right">
 					<a href="/betmen/teams/<%=match.team2.teamId%>/">
 						<img src="<%=match.team2.teamLogo%>" title="<%=match.team2.teamName%>" height="64">
 					</a>

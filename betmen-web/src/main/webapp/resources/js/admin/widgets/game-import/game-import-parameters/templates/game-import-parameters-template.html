@@ -1,13 +1,13 @@
 <div class="row">
 
-	<div class="col-xs-12 col-lg-4">
+	<div class="col-xs-12 col-4">
 		<%= translator.cupLabel %>
 	</div>
 
-	<div class="col-xs-12 col-lg-8">
+	<div class="col-xs-12 col-8">
 
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-12">
 
 				<select id="selectedCupId" class="form-control">
 					<option value="0"></option>
@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-12">
 				<% _.each( sportKinds, function( sportKind ) { %>
 					<input type="radio" name="sportKindId" id="sportKindId-<%=sportKind.sportKindId%>" value="<%=sportKind.sportKindId%>" <%=sportKind.sportKindId == selectedSportKindId ? 'checked' : '' %> >
 					<label for="sportKindId-<%=sportKind.sportKindId%>"><%=sportKind.sportKindName%></label>
@@ -30,7 +30,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-xs-12 text-muted">
+			<div class="col-12 text-muted">
 				<input type="checkbox" id="js-show-active-cups-only" class="js-show-active-cups-only" <%=showActiveCupsOnlyClick ? "checked='checked'" : ''%> > <label for="js-show-active-cups-only"><%=translator.showActiveCupsOnly%></label>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-12 js-date-range-picker">
+	<div class="col-12 js-date-range-picker">
 
 	</div>
 </div>

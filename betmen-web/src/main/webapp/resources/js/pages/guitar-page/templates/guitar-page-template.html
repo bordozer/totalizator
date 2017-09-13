@@ -11,6 +11,8 @@
         width: 55px;
         font-size: 10px;
         text-align: center;
+        /*width: 100%;*/
+        /*border: 1px dotted red;*/
     }
 
     .guitar-fret {
@@ -47,9 +49,19 @@
 
     .marked-fret {
         border-radius: 25px;
+        width: 100%;
     }
 
     /* notes styles */
+
+    .note-box {
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 5px;
+        border: 1px solid gray;
+        padding-top: 13px;
+        /*padding: 9px !important;*/
+    }
 
     .highlighted-note {
         font-size: 14px;
@@ -58,14 +70,15 @@
         border-radius: 15px;
         border: 1px solid gray;
         padding: 9px !important;
-        margin: 2px !important;
+        /*margin: 2px !important;*/
+        width: 100%;
     }
 
     .full-tone-note {
     }
 
     .half-tone-note {
-        padding-top: 4px;
+        padding-top: 10px;
         font-size: 12px;
     }
 
@@ -125,21 +138,29 @@
         background-color: #ccd232;
         border: 2px solid #0b3e6f;
         padding: 8px !important;
-        margin: 2px !important;
+        /*margin: 2px !important;*/
         border-radius: 5px;
+    }
+
+    .guitar-neck{
+        overflow:auto;
+        white-space:nowrap;
+    }
+
+    .guitar-fret{
+        display:inline-block;
     }
 </style>
 
 <!-- tonic -->
-<div class="row">
-    <div class="col-xs-12">
+<div class="row mb-10">
+    <div class="col-12">
         <div class="row">
         <% for(var note = 0; note < notes.length; note++) { %>
-            <div class="col-xs-1 text-center well well-sm" >
-                <h4 class="<%= notes[note].full ? 'text-info strong' : 'text-muted' %> <%= tonic == notes[note].note ? 'bg-info highlighted-note' : '' %>">
-                    <input type="radio" name="notes" id="<%= notes[note].note %>" value="<%= notes[note].note %>" <%= tonic == notes[note].note ? "checked='checked'" : '' %> >
-                    <label for="<%= notes[note].note %>"></label> <%= notes[note].note %>
-                </h4>
+            <div class="col-1 note-box text-center js-tonics <%= tonic == notes[note].note ? 'badge badge-info' : notes[note].full ? 'text-info strong' : 'text-muted' %>"
+                    data-js_tonic='<%= notes[note].note %>'>
+                <input type="radio" name="notes" id="<%= notes[note].note %>" value="<%= notes[note].note %>" <%= tonic == notes[note].note ? "checked='checked'" : '' %> >
+                <label for="<%= notes[note].note %>"><%= notes[note].note %></label>
             </div>
         <% } %>
         </div>
@@ -148,12 +169,17 @@
 <!-- / tonic -->
 
 <!-- fret numbers -->
-<div class="row">
-    <div class="col-xs-1 fret-markers nopadding text-muted"></div>
+<div class="row flex-nowrap">
+    <div class="nopadding fret-markers text-muted"></div>
     <% for(var fret = 0; fret <= fretsCount; fret++) { %>
-        <div class="col-xs-1 fret-note nopadding">
+    <div class="nopadding fret-note">
+        <% var needMarkFret = _.contains(markedFrets, fret); %>
+        <% if(needMarkFret) {%>
+            <h6 class="<%= needMarkFret ? 'marked-fret badge-success text-white' : ''%>" ><%= fret %></h6>
+        <% } else {%>
             <%= fret %>
-        </div>
+        <% }%>
+    </div>
     <% } %>
 </div>
 <!-- / fret numbers -->
@@ -161,13 +187,13 @@
 <!-- frets -->
 <% var stringNumber = 1; %>
 <% _.each(neckModel, function(stringModel){ %>
-    <div class="row ">
-        <div class="col-xs-1 zero-fret-note string-tune js-string-tuning-<%=stringNumber%>" title="#<%=stringNumber%>">
+    <div class="row flex-nowrap">
+        <div class="zero-fret-note string-tune js-string-tuning-<%=stringNumber%>" title="#<%=stringNumber%>">
             <%=stringNumber%>
         </div>
         <% var fret = 0; %>
         <% _.each(stringModel, function(note) { %>
-            <div class="col-xs-1 fret-note string-line nopadding guitar-string guitar-fret <%= (fret == 1 || fret == 12 || fret == 24) ? 'fret-highlighted' : '' %>">
+            <div class="nopadding fret-note string-line guitar-string guitar-fret <%= (fret == 1 || fret == 12 || fret == 24) ? 'fret-highlighted' : '' %>">
                 <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>"  data-fret-note="<%= note.noteId %>_<%= note.note %>">
                     <span class="text-muted <%= note.customIcon %>"></span>
                     <%= note.note %>
@@ -181,55 +207,65 @@
 <!-- / frets -->
 
 <!-- fret numbers -->
-<div class="row">
-    <div class="col-xs-1 fret-markers nopadding text-muted"></div>
+<div class="row flex-nowrap mt-10">
+    <div class="nopadding fret-markers text-muted"></div>
     <% for(var fret = 0; fret <= fretsCount; fret++) { %>
-        <div class="col-xs-1 fret-note nopadding">
-            <%= fret %>
+        <div class="nopadding fret-note">
+            <% var needMarkFret = _.contains(markedFrets, fret); %>
+            <% if(needMarkFret) {%>
+                <h6 class="<%= needMarkFret ? 'marked-fret badge-success text-white' : ''%>" ><%= fret %></h6>
+            <% } else {%>
+                <%= fret %>
+            <% }%>
         </div>
     <% } %>
 </div>
 <!-- / fret numbers -->
 
-<!-- frets markers -->
-<div class="row">
-    <div class="col-xs-1 fret-markers nopadding"></div>
-    <% for(var fret = 0; fret <= fretsCount + 1; fret++) { %>
-        <div class="col-xs-1 fret-note nopadding text-muted" title="<%= translator.neckPointersLabel %>">
-            <% var needMarkFret = _.contains(markedFrets, fret); %>
-            <h4 class="<%= needMarkFret ? 'marked-fret bg-success' : ''%>" ><%= needMarkFret ? fret : '' %></h4>
-        </div>
-    <% } %>
-</div>
-<!-- / frets markers -->
-
 <hr />
 
 <!-- sequence -->
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-6">
         <% for(var k = 0; k < gammasCount; k++) { %>
             <div class="row">
-                <div class="col-xs-4 small">
+                <div class="col-2 small">
                     <% if(k == 0) { %>
                         <%= translator.baseGamma %>
                     <% } else {%>
                         <%= translator.additionalGamma %>
                     <% }%>
                 </div>
-                <div class="col-xs-6 js-sequence-select-control-<%= k %>"></div>
+                <div class="col-8 js-sequence-select-control-<%= k %>"></div>
             </div>
         <% }%>
     </div>
-    <div class="col-xs-6">
+    <div class="col-6">
+
         <div class="row">
-            <div class="col-xs-12"><%= translator.noteSelectionType %></div>
-            <div class="col-xs-12">
+            <div class="col-12"><h5><%= translator.noteSelectionType %></h5></div>
+            <div class="col-12">
                 <input type="radio" name="noteSelectionType" id="noteSelectionType1" value="1" <%= noteSelectionType == 1 ? "checked='checked'" : '' %> > <label for="noteSelectionType1"><%= translator.noteSelectionTypeOne %></label>
                 <input type="radio" name="noteSelectionType" id="noteSelectionType2" value="2" <%= noteSelectionType == 2 ? "checked='checked'" : '' %> > <label for="noteSelectionType2"><%= translator.noteSelectionTypeAll %></label>
             </div>
-            <div class="col-xs-12">
+        </div>
+
+        <div class="row">
+            <div class="col-12">
                 <button class="btn btn-default fa fa-eraser js-clear-all-selected-notes" type="button" > <%= translator.clearAllSelectedNotes %></button>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-12"><h5><%= translator.fretsCountLabel %></h5></div>
+            <div class="col-12 js-frets-count"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <small class="text-muted">* <%= translator.fretsCountChangeHint %></small>
             </div>
         </div>
     </div>
@@ -241,8 +277,8 @@
 
 <!-- comment -->
 <div class="row">
-    <div class="col-xs-12">
-        <h5 class="text-muted">* <%= translator.clickNoteHint %></h5>
+    <div class="col-12">
+        <small class="text-muted">* <%= translator.clickNoteHint %></small>
     </div>
 </div>
 <!-- /comment -->

@@ -71,10 +71,9 @@ public class AdminTeamEditRestController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{teamId}")
     public boolean delete(@PathVariable("teamId") final int teamId) {
-        if (teamId == 0) {
-            return true;
+        if (teamId != 0) {
+            teamService.delete(teamId);
         }
-        teamService.delete(teamId);
         return true;
     }
 

@@ -1,10 +1,10 @@
 <div class="row">
 
-	<div class="col-xs-12">
+	<div class="col-12">
 
-		<div class="panel panel-default">
+		<div class="card">
 
-			<div class="panel-heading clearfix">
+			<div class="card-header">
 
 				<div class="btn-group pull-right">
 					<button class="btn btn-primary fa fa-save entry-save" title="<%=translator.buttonSaveLabel%>"></button>
@@ -14,14 +14,14 @@
 				<small title="#<%=matchId%>"><%=beginningTime%></small> <%=title%> <small class="js-time-to-beginning-remains">( <%=remainTime%> )</small>
 			</div>
 
-			<div class="panel-body">
+			<div class="card-body">
 
 				<div class="row">
 
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<%=translator.matchEdit_Category%>
 					</div>
-					<div class="col-xs-6 categories-container">
+					<div class="col-6 categories-container">
 						<select id="category-select-box" class="form-control chosen-select categories-select-box">
 							<option value="0"></option>
 						<% _.each( categories, function( category ) { %>
@@ -34,10 +34,10 @@
 
 				<% if( cups.length > 0 ) { %>
 					<div class="row">
-						<div class="col-xs-6 text-right">
+						<div class="col-6 text-right">
 							<%=translator.matchEdit_Cup%>
 						</div>
-						<div class="col-xs-6 cups-container">
+						<div class="col-6 cups-container">
 
 							<select id="cup-select-box" class="form-control chosen-select cups-select-box">
 								<option value="0"></option>
@@ -51,17 +51,17 @@
 
 				<div class="row">
 
-					<div class="col-xs-6">
+					<div class="col-6">
 
 						<% if( teams.length > 0 && selectedCupId > 0 ) { %>
 							<div class="row">
-								<div class="col-xs-12 text-right text-muted">
+								<div class="col-12 text-right text-muted">
 									<%=translator.matchEdit_Team%> 1
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-xs-12 text-right">
+								<div class="col-12 text-right">
 									<select id="team1-select-box" class="form-control chosen-select team1-select-box">
 										<option value="0">&nbsp;</option>
 									<% _.each( teams, function( team ) { %>
@@ -72,32 +72,33 @@
 							</div>
 
 							<div class="row">
-								<div class="col-xs-12 text-right">
+								<div class="col-12 text-right">
 									<input type="radio" name="homeTeamNumber" value="1" <%= homeTeamNumber == 1 ? 'checked': ''%> >
 									<i class="fa fa-home"></i>
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-xs-8 col-lg-5 pull-right">
-									<input type="number" class="form-control col-xs-1 js-score" id="score1" name="score1" value="<%=model.score1%>" >
+								<div class="col-xs-4 col-7"></div>
+								<div class="col-xs-8 col-5">
+									<input type="number" class="form-control js-score" id="score1" name="score1" value="<%=model.score1%>" >
 								</div>
 							</div>
 						<% } %>
 
 					</div>
 
-					<div class="col-xs-6">
+					<div class="col-6">
 
 						<% if( teams.length > 0 && selectedCupId > 0 ) { %>
 							<div class="row">
-								<div class="col-xs-12 text-muted">
+								<div class="col-12 text-muted">
 									<%=translator.matchEdit_Team%> 2
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-xs-12">
+								<div class="col-12">
 									<select id="team2-select-box" class="form-control team2-select-box">
 										<option value="0">&nbsp;</option>
 									<% _.each( teams, function( team ) { %>
@@ -108,15 +109,15 @@
 							</div>
 
 							<div class="row">
-								<div class="col-xs-12">
+								<div class="col-12">
 									<i class="fa fa-home"></i>
 									<input type="radio" name="homeTeamNumber" value="2" <%= homeTeamNumber == 2 ? 'checked': ''%> >
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-xs-8 col-lg-5">
-									<input type="number" class="form-control col-xs-1 js-score" id="score2" name="score2" value="<%=model.score2%>" >
+								<div class="col-xs-8 col-5">
+									<input type="number" class="form-control js-score" id="score2" name="score2" value="<%=model.score2%>" >
 								</div>
 							</div>
 						<% } %>
@@ -126,37 +127,37 @@
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<%=translator.matchEdit_BeginningTime%>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<div class="match-beginning-time"></div>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<%=translator.matchEdit_MatchFinished%>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<input type="checkbox" class="js-match-finished" value="true" <%=model.matchFinished ? 'checked' : ''%> >
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-2">
 						<%=translator.matchEdit_MatchDescription%>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-12">
 						<textarea class="form-control" id="matchDescription"><%=model.matchDescription%></textarea>
 					</div>
 				</div>
 
 		</div>
 
-			<div class="panel-footer">
+			<div class="card-footer">
 
 			</div>
 

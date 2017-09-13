@@ -46,8 +46,8 @@ define(function (require) {
 
         _renderStatistics: function () {
             var jmodel = this.model.toJSON();
-            if (jmodel.categoryBetStatistics.length == 0) {
-                var noGames = "<span class='text-muted'>" + translator.noGames + ' <br /><strong>' + dateTimeService.formatDateFullDisplay(this.model.onDate) + "</strong></span>";
+            if (jmodel.categoryBetStatistics.length === 0) {
+                var noGames = "<small class='text-muted'>" + translator.noGames + ' <br /><strong>' + dateTimeService.formatDateFullDisplay(this.model.onDate) + "</strong></small>";
                 this.setBody(noGames);
                 this.trigger('inner-view-rendered');
                 return;

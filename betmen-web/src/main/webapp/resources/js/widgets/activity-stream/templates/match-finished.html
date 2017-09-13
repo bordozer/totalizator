@@ -1,14 +1,14 @@
 <div class="row <%=color%> bottom-dotted activity-stream">
 
-	<div class="col-xs-12">
+	<div class="col-12">
 
 		<div class="row">
 
-			<div class="col-xs-4" title="<%= activityDate %> <%= activityTime %>, <%= activityTimeAgo %>">
+			<div class="col-4" title="<%= activityDate %> <%= activityTime %>, <%= activityTimeAgo %>">
 				<%= activityTime %>
 			</div>
 
-			<div class="col-xs-4">
+			<div class="col-4">
 				<a href="/betmen/sports/<%= match.category.sportKind.sportKindId %>/"><%= match.category.sportKind.sportKindName %></a>
 			</div>
 
@@ -16,7 +16,7 @@
 
 		<div class="row">
 
-			<div class="col-xs-10">
+			<div class="col-10">
 
 				<img src="<%= match.team1.teamLogo %>" title="<%= match.team1.teamName %>" height="24" width="24">
 
@@ -26,15 +26,15 @@
 
 			</div>
 
-			<div class="col-xs-2 text-right">
-				<strong><%= match.score1 %></strong>
+			<div class="col-2 text-right">
+				<span class="badge badge-info"><%= match.score1 %></span>
 			</div>
 
 		</div>
 
 		<div class="row">
 
-			<div class="col-xs-10">
+			<div class="col-10">
 
 				<img src="<%= match.team2.teamLogo %>" title="<%= match.team2.teamName %>" height="24" width="24">
 
@@ -44,8 +44,8 @@
 
 			</div>
 
-			<div class="col-xs-2 text-right">
-				<strong><%= match.score2 %></strong>
+			<div class="col-2 text-right">
+				<span class="badge badge-info"><%= match.score2 %></span>
 			</div>
 
 		</div>

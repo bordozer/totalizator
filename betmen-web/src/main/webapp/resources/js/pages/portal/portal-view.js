@@ -175,7 +175,7 @@ define( function ( require ) {
 
 			_.each( model.cupsToShow, function( cup ) {
 
-				var el = $( '<div class="col-xs-12"></div>' );
+				var el = $( '<div class="col-12"></div>' );
 				row.append( el );
 
 				var options = {

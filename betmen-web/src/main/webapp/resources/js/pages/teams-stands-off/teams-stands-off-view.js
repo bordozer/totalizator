@@ -93,8 +93,8 @@ define( function ( require ) {
 
 			var cupId = $( evt.target ).data( 'cupid' );
 
-			this.$( '.js-cups' ).removeClass( 'bg-warning' );
-			this.$( '.js-cup-' + cupId ).addClass( 'bg-warning' );
+			this.$( '.js-cups' ).removeClass( 'alert-warning' );
+			this.$( '.js-cup-' + cupId ).addClass( 'alert-warning' );
 
 			this._renderMatches( service.loadPublicCup( cupId ) );
 		}

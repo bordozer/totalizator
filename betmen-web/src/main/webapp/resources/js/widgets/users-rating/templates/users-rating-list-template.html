@@ -4,19 +4,19 @@
 
 	<div class="row" style="font-size: 11px;">
 
-		<div class="col-xs-6">
+		<div class="col-6">
 			<a href="/betmen/users/<%=holder.user.userId%>/<%=dateLink%>"><%=holder.user.userName%></a>
 		</div>
 
-		<div class="col-xs-2 <%= points.summary.css %> nopadding text-right" title="<%= points.summary.title %>">
+		<div class="col-2 <%= points.summary.css %> nopadding text-right" title="<%= points.summary.title %>">
 			<strong><%= points.summary.text %></strong>
 		</div>
 
-		<div class="col-xs-2 <%= points.betPoints.css %> nopadding text-right" title="<%= points.betPoints.title %>">
+		<div class="col-2 <%= points.betPoints.css %> nopadding text-right" title="<%= points.betPoints.title %>">
 			<%= points.betPoints.text %>
 		</div>
 
-		<div class="col-xs-2 <%= points.matchBonus.css %> nopadding text-right" title="<%= points.matchBonus.title %>">
+		<div class="col-2 <%= points.matchBonus.css %> nopadding text-right" title="<%= points.matchBonus.title %>">
 			<%= points.matchBonus.text %> &nbsp;
 		</div>
 

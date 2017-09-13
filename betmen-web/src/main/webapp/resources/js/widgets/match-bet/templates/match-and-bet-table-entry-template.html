@@ -2,13 +2,13 @@
 <% var betScoreHighlights = transformer.getBetScoreHighlights() %>
 <div class="row">
 
-	<div class="col-xs-6 col-lg-1 text-center js-window-drop-down-menu" style="line-height: 30px;"></div>
+	<div class="col-xs-6 col-1 text-center js-window-drop-down-menu" style="line-height: 30px;"></div>
 
-	<div class="col-xs-6 col-lg-1 text-center" title="#<%= matchId %>, <%= timeToMatchBeginningTime %>" style="line-height: 30px;">
+	<div class="col-xs-6 col-1 text-center" title="#<%= matchId %>, <%= timeToMatchBeginningTime %>" style="line-height: 30px;">
 		<small><%= transformer.formatTime() %></small>
 	</div>
 
-	<div class="col-xs-3 text-right <%= matchResults.style1 %> ">
+	<div class="col-3 text-right <%= matchResults.style1 %> ">
 		<% if( transformer.homeTeamNumber() == 1 ) { %>
 			<i class="fa fa-home"></i>
 		<% } %>
@@ -17,13 +17,13 @@
 		</small>
 	</div>
 
-	<div class="col-xs-1 nopadding text-center ">
+	<div class="col-1 nopadding text-center ">
 		<a href="/betmen/teams/<%- transformer.team1().teamId %>/" title="<%= transformer.team1().teamName %>">
 			<img src="<%= transformer.team1().teamLogo %>" height="32">
 		</a>
 	</div>
 
-	<div class="col-xs-2 nopadding text-center text-nowrap">
+	<div class="col-2 nopadding text-center text-nowrap">
 
 		<% if( match.matchFinished ) { %>
 			<span class="<%= matchResults.style1 %>" title="<%-translator.teamPointsLabel%>"><%= transformer.score1() %></span>
@@ -47,13 +47,13 @@
 		<sup class="<%=betScoreHighlights.style2%>" style="font-size: 10px;" title="<%=betScoreHighlights.title%>"><%= bet != null ? transformer.betScore2() : '-' %></sup>
 	</div>
 
-	<div class="col-xs-1 nopadding text-center">
+	<div class="col-1 nopadding text-center">
 		<a href="/betmen/teams/<%- transformer.team2().teamId %>/" title="<%= transformer.team2().teamName %>">
 			<img src="<%= transformer.team2().teamLogo %>" height="32">
 		</a>
 	</div>
 
-	<div class="col-xs-2 nopadding <%= matchResults.style2 %>">
+	<div class="col-2 nopadding <%= matchResults.style2 %>">
 
 		<small>
 			<a href="/betmen/teams/<%- transformer.team2().teamId %>/"><%= transformer.team2().teamName %></a>
@@ -63,7 +63,7 @@
 		<% } %>
 	</div>
 
-	<div class="col-xs-1 text-right <%= userMatchPointsHolder && userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%> ">
+	<div class="col-1 text-right <%= userMatchPointsHolder && userMatchPointsHolder.summaryPoints < 0 ? 'text-danger' : 'text-success'%>">
 		<% if( userMatchPointsHolder && userMatchPointsHolder.summaryPoints != 0 ) { %>
 			<%-userMatchPointsHolder.summaryPoints%> <sup><%= userMatchPointsHolder.matchBonus != 0 ? userMatchPointsHolder.matchBetPoints + '+' + userMatchPointsHolder.matchBonus : ''%></sup>
 		<% } %>

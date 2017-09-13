@@ -121,8 +121,8 @@ define( function ( require ) {
 		},
 
 		setPanelClass: function( clazz ) {
-			var panel = this.$( '.panel' );
-			panel.removeClass( 'panel-default panel-info panel-success panel-warning panel-danger' );
+			var panel = this.$( '.card-header' );
+			panel.removeClass( 'alert-secondary alert-info alert-success alert-warning alert-danger' );
 			panel.addClass( clazz )
 		},
 

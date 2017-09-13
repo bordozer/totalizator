@@ -1,15 +1,13 @@
 package betmen.rests.tests.admin;
 
-import betmen.dto.dto.admin.CategoryEditDTO;
-import betmen.dto.dto.admin.CupEditDTO;
-import betmen.dto.dto.admin.TeamEditDTO;
-import betmen.dto.dto.error.FieldErrorsResponse;
-import betmen.rests.utils.RandomUtils;
-import betmen.rests.utils.data.builders.TeamEditDtoBuilder;
-import betmen.rests.utils.data.generator.AdminTestDataGenerator;
-import betmen.rests.utils.helpers.AuthEndPointsHandler;
-import betmen.rests.utils.helpers.admin.AdminTeamEndPointsHandler;
-import com.jayway.restassured.response.Response;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
@@ -17,12 +15,25 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import com.jayway.restassured.response.Response;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import betmen.dto.dto.TeamDTO;
+import betmen.dto.dto.admin.CategoryEditDTO;
+import betmen.dto.dto.admin.CupEditDTO;
+import betmen.dto.dto.admin.CupWinnerEditDTO;
+import betmen.dto.dto.admin.PointsCalculationStrategyEditDTO;
+import betmen.dto.dto.admin.SportKindEditDTO;
+import betmen.dto.dto.admin.TeamEditDTO;
+import betmen.dto.dto.error.FieldErrorsResponse;
+import betmen.rests.common.ResponseStatus;
+import betmen.rests.utils.RandomUtils;
+import betmen.rests.utils.data.builders.TeamEditDtoBuilder;
+import betmen.rests.utils.data.generator.AdminTestDataGenerator;
+import betmen.rests.utils.data.templater.CupTemplater;
+import betmen.rests.utils.helpers.AuthEndPointsHandler;
+import betmen.rests.utils.helpers.TeamEndPointHandler;
+import betmen.rests.utils.helpers.admin.AdminCupEndPointsHandler;
+import betmen.rests.utils.helpers.admin.AdminTeamEndPointsHandler;
 
 public class AdminTeamRestTest {
 
@@ -139,9 +150,74 @@ public class AdminTeamRestTest {
     }
 
     @Test
-    public void shouldNotDeleteIfWrongEntityId() {
+    public void shouldDeleteTeamWithoutCups() {
         TeamEditDTO dto = createTeam();
+
+        final TeamDTO team = TeamEndPointHandler.getTeam(dto.getTeamId());
+        assertThat(team, is(notNullValue()));
+        assertThat(team.getTeamId(), is(dto.getTeamId()));
+
         assertThat(AdminTeamEndPointsHandler.delete(dto.getTeamId()), is(true));
+
+        TeamEndPointHandler.getTeam(dto.getTeamId(), ResponseStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Test
+    public void shouldDeleteTeamHasPlayedInFinishedPublicCupButIsNotWinner() {
+        final SportKindEditDTO sport = AdminTestDataGenerator.createSport();
+        final CategoryEditDTO category = AdminTestDataGenerator.createCategory(sport.getSportKindId());
+        final PointsCalculationStrategyEditDTO pointsStrategy = AdminTestDataGenerator.createPointsStrategy();
+
+        final TeamEditDTO cupWinnerTeamEditDTO = AdminTestDataGenerator.createTeam(category.getCategoryId());
+        final TeamEditDTO spareTeamEditDTO = AdminTestDataGenerator.createTeam(category.getCategoryId());
+
+        final CupEditDTO cupEditDTO = AdminCupEndPointsHandler.create(
+            CupTemplater.random(
+                category.getCategoryId(),
+                pointsStrategy.getPcsId()
+            )
+                .publicCup()
+                .finished(TeamEditDtoBuilder.convertTeamToCupWinner(1, cupWinnerTeamEditDTO.getTeamId()))
+                .build()
+        );
+
+        final TeamDTO team = TeamEndPointHandler.getTeam(spareTeamEditDTO.getTeamId());
+        assertThat(team, is(notNullValue()));
+        assertThat(team.getTeamId(), is(spareTeamEditDTO.getTeamId()));
+
+        assertThat(AdminTeamEndPointsHandler.delete(spareTeamEditDTO.getTeamId()), is(true));
+
+        TeamEndPointHandler.getTeam(spareTeamEditDTO.getTeamId(), ResponseStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Test
+    public void shouldNotDeleteTeamIfItIsWinnerOfFinishedPublicCup() {
+        final SportKindEditDTO sport = AdminTestDataGenerator.createSport();
+        final CategoryEditDTO category = AdminTestDataGenerator.createCategory(sport.getSportKindId());
+        final PointsCalculationStrategyEditDTO pointsStrategy = AdminTestDataGenerator.createPointsStrategy();
+
+        final TeamEditDTO cupWinnerTeamEditDTO = AdminTestDataGenerator.createTeam(category.getCategoryId());
+
+        final CupEditDTO cupEditDTO = AdminCupEndPointsHandler.create(
+            CupTemplater.random(
+                category.getCategoryId(),
+                pointsStrategy.getPcsId()
+            )
+                .publicCup()
+                .finished(TeamEditDtoBuilder.convertTeamToCupWinner(1, cupWinnerTeamEditDTO.getTeamId()))
+                .build()
+        );
+
+        final TeamDTO team = TeamEndPointHandler.getTeam(cupWinnerTeamEditDTO.getTeamId());
+        assertThat(team, is(notNullValue()));
+        assertThat(team.getTeamId(), is(cupWinnerTeamEditDTO.getTeamId()));
+
+        AdminTeamEndPointsHandler.delete(cupWinnerTeamEditDTO.getTeamId(), ResponseStatus.UNPROCESSABLE_ENTITY.getCode());
+    }
+
+    @Test
+    public void shouldNotDeleteIfWrongEntityId() {
+        AdminTeamEndPointsHandler.delete(45455656, ResponseStatus.UNPROCESSABLE_ENTITY.getCode());
     }
 
     @Test(enabled = false) // TODO: Disabled
@@ -183,7 +259,7 @@ public class AdminTeamRestTest {
     }
 
     private List<TeamEditDTO> getItems(final int categoryId) {
-        return AdminTeamEndPointsHandler.getTeamOfCategory(categoryId);
+        return AdminTeamEndPointsHandler.getTeamsOfCategory(categoryId);
     }
 
     private TeamEditDTO createTeam() {

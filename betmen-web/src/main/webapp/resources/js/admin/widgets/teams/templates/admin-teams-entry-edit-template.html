@@ -1,8 +1,8 @@
 <hr />
 
-<div class="panel panel-default">
+<div class="card mb-10">
 
-	<div class="panel-heading clearfix" title="<%=model.teamName%>">
+	<div class="card-header bg-info" title="<%=model.teamName%>">
 
 		<% if ( model.teamLogo ) { %>
 			<span>
@@ -18,26 +18,26 @@
 		</div>
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body">
 
 		<div class="row">
 
-			<div class="col-lg-6">
+			<div class="col-6">
 				<%= translator.teamNameLabel %>
 			</div>
 
-			<div class="col-lg-6">
+			<div class="col-6">
 				<input class="form-control entry-name" id="teamNme" name="teamNme" value="<%=model.teamName%>">
 			</div>
 		</div>
 
 		<div class="row">
 
-			<div class="col-lg-6">
+			<div class="col-6">
 				<%- translator.teamCategoryLabel %>
 			</div>
 
-			<div class="col-lg-6">
+			<div class="col-6">
 				<select class="chosen-select entry-category-id" id="teamCategory" name="teamCategory">
 					<% _.each( categories, function( category ) { %>
 					<option value="<%=category.categoryId%>" <%= model.categoryId == category.categoryId ? 'selected' : ''%>><%=category.categoryName%></option>
@@ -48,22 +48,22 @@
 
 		<div class="row">
 
-			<div class="col-lg-6">
+			<div class="col-6">
 				<%= translator.teamImportIdLabel %>
 			</div>
 
-			<div class="col-lg-6">
+			<div class="col-6">
 				<input type="text" id="team-import-id" class="form-control" value="<%=model.teamImportId%>">
 			</div>
 		</div>
 
 		<div class="row">
 
-			<div class="col-lg-6">
+			<div class="col-6">
 				<%- translator.teamLogoLabel %>
 			</div>
 
-			<div class="col-lg-6">
+			<div class="col-6">
 
 				<form method="POST" id='team_form' enctype="multipart/form-data">
 					<input type="file" id="teamLogoFile" name="teamLogoFile">
@@ -74,7 +74,7 @@
 
 	</div>
 
-	<div class="panel-footer js-footer">
+	<div class="card-footer js-footer">
 
 	</div>
 

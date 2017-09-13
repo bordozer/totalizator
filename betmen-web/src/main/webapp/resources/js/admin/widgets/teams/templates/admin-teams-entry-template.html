@@ -1,6 +1,6 @@
-<div class="panel <%= model.teamChecked ? 'panel-info' : 'panel-default' %>">
+<div class="card <%= model.teamChecked ? 'bg-info' : 'bg-light' %> mb-10">
 
-	<div class="panel-heading clearfix" title="">
+	<div class="card-header bg-secondary" title="">
 
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-default fa fa-edit team-entry-edit"></button>
@@ -14,45 +14,45 @@
 
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body">
 
 		<div class="row">
 
-			<div class="col-xs-1">
+			<div class="col-1">
 				<% if( selectedCup.cupId > 0 && ! selectedCup.finished ) { %>
 					<input type="checkbox" class="js-team-checkbox" value="<%=model.teamId%>" <%= model.teamChecked ? 'checked' : '' %> >
 				<% } %>
 			</div>
 
-			<div class="col-xs-2">
+			<div class="col-2">
 				<img src="<%=model.teamLogo%>" height="64">
 			</div>
 
-			<div class="col-xs-9">
+			<div class="col-9">
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<small><%=translator.teamNameLabel%></small>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<strong><a href="/betmen/teams/<%=model.teamId%>/"><%=model.teamName%></a></strong>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<small><%=translator.teamImportIdLabel%></small>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<%=model.teamImportId%>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 text-right">
+					<div class="col-6 text-right">
 						<small><%=translator.totalMatchesLabel%></small>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<%=model.matchCount%>
 					</div>
 				</div>
@@ -66,19 +66,19 @@
 
 </div>
 
-<!--<div class="row admin-entry-line <%= model.teamChecked ? 'bg-success' : '' %>">
+<!--<div class="row admin-entry-line <%= model.teamChecked ? 'alert-success' : '' %>">
 
 	<div class="btn-group pull-right">
 
 	</div>
 
-	<div class="col-xs-9">
+	<div class="col-9">
 
 		<div class="row">
 
 
 
-			<div class="col-xs-7">
+			<div class="col-7">
 				<strong><a href="/betmen/teams/<%=model.teamId%>/"><%=model.teamName%></a></strong>
 				<br />
 				<small><%= translator.teamImportIdLabel %>: <strong><%=model.teamImportId%></strong></small>

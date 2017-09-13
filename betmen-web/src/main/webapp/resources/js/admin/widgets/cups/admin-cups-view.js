@@ -207,8 +207,8 @@ define( function ( require ) {
 
 			if ( this.isSelected ) {
 				var container = this.$( '.js-cup-entry-header' );
-				container.removeClass( 'panel-default' );
-				container.addClass( 'panel-primary' );
+				container.removeClass( 'alert-secondary' );
+				container.addClass( 'alert-primary' );
 			}
 
 			return this;
