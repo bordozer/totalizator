@@ -61,7 +61,7 @@ define( function ( require ) {
 					var isCupFinished = cup.finished;
 
 					// var el_w = $( "<div class='col-" + ( isCupFinished ? '3' : '4' ) + "'></div>" );
-					var el_w = $( "<div class='col-4'></div>" );
+					var el_w = $( "<div class='col-12 col-xl-4'></div>" );
 					el.append( el_w );
 
 					if ( isCupFinished ) {

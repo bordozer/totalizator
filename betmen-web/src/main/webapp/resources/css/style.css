@@ -70,10 +70,10 @@
 
 .sport-tab {
 	margin-left:5px !important;
-	border-left: 2px solid gray;
-	border-right: 2px solid gray;
+	border-left: 2px solid silver;
+	border-right: 2px solid silver;
 	line-height: 17px;
-	border-radius: 15px;
+	border-radius: 5px;
 }
 
 .m-n-b-badge {

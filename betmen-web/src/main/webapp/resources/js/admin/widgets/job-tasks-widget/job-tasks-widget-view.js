@@ -91,7 +91,7 @@ define( function ( require ) {
 
 			var container = $( this.$( this.windowBodyContainerSelector ).length == 1 ? this.$( this.windowBodyContainerSelector ) : this.$( this.windowBodyContainerSelector )[0] );
 
-			var el = $( "<div class='col-xs-12 col-4'></div>" );
+			var el = $( "<div class='col-12 col-xl-4'></div>" );
 			container.append( el );
 
 			var jmodel = model.toJSON();

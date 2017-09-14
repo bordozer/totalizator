@@ -214,10 +214,24 @@
 	</translation>
 
 	<translation>
+		<nerd>Persian gamma</nerd>
+		<ru><![CDATA[Персидский мажорный лад]]></ru>
+		<ua><![CDATA[Персидський мажорный лад]]></ua>
+		<en><![CDATA[Persian major gamma]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Byzantium gamma</nerd>
+		<ru><![CDATA[Византийский мажорный лад]]></ru>
+		<ua><![CDATA[Візантійський мажорный лад]]></ua>
+		<en><![CDATA[Byzantium major gamma]]></en>
+	</translation>
+
+	<translation>
 		<nerd>Custom Indian gamma</nerd>
-		<ru><![CDATA[Кастомна индийская гамма]]></ru>
-		<ua><![CDATA[Кастомна Iндийска гама]]></ua>
-		<en><![CDATA[Custom Indian gamma]]></en>
+		<ru><![CDATA[- Моя а ля восточная гамма -]]></ru>
+		<ua><![CDATA[- Моя а ля схiдна гама -]]></ua>
+		<en><![CDATA[- My custom east gamma -]]></en>
 	</translation>
 
 	<translation>
