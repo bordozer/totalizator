@@ -55,6 +55,7 @@
     /* notes styles */
 
     .note-box {
+        /*position: relative;*/
         font-size: 14px;
         font-weight: bold;
         border-radius: 5px;
@@ -159,6 +160,66 @@
     .guitar-fret{
         display:inline-block;
     }
+
+    .band-note {
+        position: relative;
+    }
+
+    .band-note:after {
+        position: absolute;
+        font-family: FontAwesome;
+        z-index: 10;
+        top: -24px;
+        right: 12px;
+        height: 12px;
+        font-size: 14px;
+        color: white;
+        content: "\f112";
+    }
+
+    .half-band-note {
+        position: relative;
+    }
+
+    .half-band-note:after {
+        position: absolute;
+        font-family: FontAwesome;
+        z-index: 10;
+        top: 1px;
+        right: 10px;
+        height: 12px;
+        font-size: 10px;
+        color: white;
+        content: "\f148";
+    }
+
+    .specific-note {
+        position: relative;
+    }
+
+    .specific-note:after {
+        position: absolute;
+        top: -3px;
+        left: 8px;
+        height: 10px;
+        color: white;
+        font-size: 12px;
+        font-family: FontAwesome;
+        z-index: 10;
+    }
+
+    .blues-note:after {
+        content: "\f185";
+    }
+
+    .harmonic-note:after {
+        content: "\f099";
+    }
+
+    .melodic-note:after {
+        content: "\f001";
+    }
+
 </style>
 
 <!-- tonic -->
@@ -169,7 +230,7 @@
             <div class="col-1 note-box text-center js-tonics <%= tonic == notes[note].note ? 'badge badge-info' : notes[note].full ? 'text-info strong' : 'text-muted' %>"
                     data-js_tonic='<%= notes[note].note %>'>
                 <input type="radio" name="notes" id="<%= notes[note].note %>" value="<%= notes[note].note %>" <%= tonic == notes[note].note ? "checked='checked'" : '' %> >
-                <label for="<%= notes[note].note %>"><%= notes[note].note %></label>
+                <label for="<%= notes[note].note %>" data-js_tonic='<%= notes[note].note %>'><%= notes[note].note %></label>
             </div>
         <% } %>
         </div>
@@ -203,8 +264,12 @@
         <% var fret = 0; %>
         <% _.each(stringModel, function(note) { %>
             <div class="nopadding fret-note string-line guitar-string guitar-fret <%= (fret == 1 || fret == 12 || fret == 24) ? 'fret-highlighted' : '' %>">
-                <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>"  data-fret-note="<%= note.noteId %>_<%= note.note %>">
-                    <span class="text-muted <%= note.customIcon %>"></span>
+
+                <% _.each(note.customIcons, function(customIcon) { %>
+                    <div class="js-fret-note text-muted <%= customIcon %>" data-fret-note="<%= note.noteId %>_<%= note.note %>"></div>
+                <% }) %>
+
+                <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>" data-fret-note="<%= note.noteId %>_<%= note.note %>">
                     <%= note.note %>
                 </h4>
             </div>

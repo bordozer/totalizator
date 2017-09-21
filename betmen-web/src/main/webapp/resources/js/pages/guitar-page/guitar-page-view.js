@@ -61,7 +61,34 @@ define(function (require) {
         , fretsCountChangeHint: "Selected notes will be cleared after frets count change"
     });
 
-    var BAND_ICON = ''; //fa fa-long-arrow-up
+    var TONIC_NOTE = {
+        title: translator.tonicNote
+    };
+
+    var BAND_NOTE = {
+        icon: 'band-note fa-rotate-90',
+        title: translator.bandNoteLabel
+    };
+
+    var HALF_BAND_NOTE = {
+        icon: 'half-band-note',
+        title: translator.halfBandNoteLabel
+    };
+
+    var HARMONIC_NOTE = {
+        icon: 'specific-note harmonic-note',
+        title: translator.harmonicNoteLabel
+    };
+
+    var MELODIC_NOTE = {
+        icon: 'specific-note melodic-note',
+        title: translator.melodicNoteLabel
+    };
+
+    var BLUES_NOTE = {
+        icon: 'specific-note blues-note',
+        title: translator.bluesNoteLabel
+    };
 
     var markedFrets = [3, 5, 7, 9, 12, 15, 17, 19, 21];
 
@@ -81,124 +108,126 @@ define(function (require) {
     ];
 
     var minorGammaOffsets = [
-        {offset: 0, customCss: 'minor-gamma-note', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'minor-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
-        {offset: 3, customCss: 'minor-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'minor-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'minor-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'minor-gamma-note', customTitle: ''},
-        {offset: 10, customCss: 'minor-gamma-note', customTitle: ''}
-    ];
-
-    var harmonicMinorGammaOffsets = [
-        {offset: 0, customCss: 'harmonic-minor-gamma-note', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'harmonic-minor-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
-        {offset: 3, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'harmonic-minor-gamma-note', customTitle: ''},
-        {offset: 9, customCss: 'harmonic-minor-gamma-note', customTitle: translator.harmonicNoteLabel},
-        {offset: 11, customCss: 'harmonic-minor-gamma-note', customTitle: translator.melodicNoteLabel}
-    ];
-
-    var harmonicMajorGammaOffsets = [
-        {offset: 0, customCss: 'harmonic-major-gamma-note', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'harmonic-major-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
-        {offset: 3, customCss: 'harmonic-major-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'harmonic-major-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'harmonic-major-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'harmonic-major-gamma-note', customTitle: translator.harmonicNoteLabel},
-        {offset: 11, customCss: 'harmonic-major-gamma-note', customTitle: translator.melodicNoteLabel}
+        {offset: 0, customCss: 'minor-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'minor-gamma-note'},
+        {offset: 3, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 5, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 7, customCss: 'minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
+        {offset: 8, customCss: 'minor-gamma-note'},
+        {offset: 10, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]}
     ];
 
     var minorBluesGammaOffsets = [
-        {offset: 0, customCss: 'minor-blues-gamma-note', customTitle: translator.tonicNote},
-        {offset: 3, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // half-band-note
-        {offset: 5, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},   // full-band-note
-        {offset: 6, customCss: 'minor-blues-gamma-note', customTitle: translator.bluesNoteLabel},                                     // blues-note
-        {offset: 7, customCss: 'minor-blues-gamma-note', customTitle: ''},
-        {offset: 10, customCss: 'minor-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON}   // another-band-note
+        {offset: 0, customCss: 'minor-blues-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 3, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 5, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 6, customCss: 'minor-blues-gamma-note', customProperties: [BLUES_NOTE]},
+        {offset: 7, customCss: 'minor-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
+        {offset: 10, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]}
+    ];
+
+    // TODO: bent notes in customProperties
+    var harmonicMinorGammaOffsets = [
+        {offset: 0, customCss: 'harmonic-minor-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'harmonic-minor-gamma-note'},
+        {offset: 3, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 5, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 7, customCss: 'harmonic-minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
+        {offset: 9, customCss: 'harmonic-minor-gamma-note', customProperties: [HARMONIC_NOTE]},
+        {offset: 11, customCss: 'harmonic-minor-gamma-note', customProperties: [MELODIC_NOTE]}
+    ];
+
+    var harmonicMajorGammaOffsets = [
+        {offset: 0, customCss: 'harmonic-major-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'harmonic-major-gamma-note', customProperties: []},
+        {offset: 3, customCss: 'harmonic-major-gamma-note'},
+        {offset: 5, customCss: 'harmonic-major-gamma-note'},
+        {offset: 7, customCss: 'harmonic-major-gamma-note'},
+        {offset: 8, customCss: 'harmonic-major-gamma-note', customProperties: [HARMONIC_NOTE]},
+        {offset: 11, customCss: 'harmonic-major-gamma-note', customProperties: [MELODIC_NOTE]}
     ];
     var majorBluesGammaOffsets = [
-        {offset: 0, customCss: 'major-blues-gamma-note', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},
-        {offset: 3, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON},
-        {offset: 4, customCss: 'major-blues-gamma-note', customTitle: translator.bluesNoteLabel},
-        {offset: 7, customCss: 'major-blues-gamma-note', customTitle: ''},
-        {offset: 9, customCss: 'major-blues-gamma-note', customTitle: translator.bandNoteLabel, customIcon: BAND_ICON}
+        {offset: 0, customCss: 'major-blues-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]},
+        {offset: 2, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 3, customCss: 'major-blues-gamma-note', customProperties: [BLUES_NOTE]},
+        {offset: 4, customCss: 'major-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
+        {offset: 7, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 9, customCss: 'major-blues-gamma-note'}
     ];
+
     var arabianGammaOffsets = [
-        {offset: 0, customCss: 'arabian-gamma-note', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'arabian-gamma-note', customTitle: ''},
-        {offset: 3, customCss: 'arabian-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'arabian-gamma-note', customTitle: ''},
-        {offset: 6, customCss: 'arabian-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'arabian-gamma-note', customTitle: ''},
-        {offset: 9, customCss: 'arabian-gamma-note', customTitle: ''},
-        {offset: 11, customCss: 'arabian-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'arabian-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'arabian-gamma-note'},
+        {offset: 3, customCss: 'arabian-gamma-note'},
+        {offset: 5, customCss: 'arabian-gamma-note'},
+        {offset: 6, customCss: 'arabian-gamma-note'},
+        {offset: 8, customCss: 'arabian-gamma-note'},
+        {offset: 9, customCss: 'arabian-gamma-note'},
+        {offset: 11, customCss: 'arabian-gamma-note'}
     ];
     var gypsyGammaOffsets = [
-        {offset: 0, customCss: 'gypsy-gamma-note', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'gypsy-gamma-note', customTitle: ''},
-        {offset: 3, customCss: 'gypsy-gamma-note', customTitle: ''},
-        {offset: 6, customCss: 'gypsy-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'gypsy-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'gypsy-gamma-note', customTitle: ''},
-        {offset: 11, customCss: 'gypsy-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'gypsy-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'gypsy-gamma-note'},
+        {offset: 3, customCss: 'gypsy-gamma-note'},
+        {offset: 6, customCss: 'gypsy-gamma-note'},
+        {offset: 7, customCss: 'gypsy-gamma-note'},
+        {offset: 8, customCss: 'gypsy-gamma-note'},
+        {offset: 11, customCss: 'gypsy-gamma-note'}
     ];
     var judasGammaOffsets = [
-        {offset: 0, customCss: 'judas-gamma-note', customTitle: translator.tonicNote},
-        {offset: 1, customCss: 'judas-gamma-note', customTitle: ''},
-        {offset: 4, customCss: 'judas-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'judas-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'judas-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'judas-gamma-note', customTitle: ''},
-        {offset: 10, customCss: 'judas-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'judas-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 1, customCss: 'judas-gamma-note'},
+        {offset: 4, customCss: 'judas-gamma-note'},
+        {offset: 5, customCss: 'judas-gamma-note'},
+        {offset: 7, customCss: 'judas-gamma-note'},
+        {offset: 8, customCss: 'judas-gamma-note'},
+        {offset: 10, customCss: 'judas-gamma-note'}
     ];
     var eastGammaOffsets = [
-        {offset: 0, customCss: 'east-gamma-note', customTitle: translator.tonicNote},
-        {offset: 1, customCss: 'east-gamma-note', customTitle: ''},
-        {offset: 4, customCss: 'east-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'east-gamma-note', customTitle: ''},
-        {offset: 6, customCss: 'east-gamma-note', customTitle: ''},
-        {offset: 9, customCss: 'east-gamma-note', customTitle: ''},
-        {offset: 10, customCss: 'east-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'east-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 1, customCss: 'east-gamma-note'},
+        {offset: 4, customCss: 'east-gamma-note'},
+        {offset: 5, customCss: 'east-gamma-note'},
+        {offset: 6, customCss: 'east-gamma-note'},
+        {offset: 9, customCss: 'east-gamma-note'},
+        {offset: 10, customCss: 'east-gamma-note'}
     ];
     var byzantiumGammaOffsets = [
-        {offset: 0, customCss: 'byzantium-gamma-note', customTitle: translator.tonicNote},
-        {offset: 1, customCss: 'byzantium-gamma-note', customTitle: ''},
-        {offset: 4, customCss: 'byzantium-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'byzantium-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'byzantium-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'byzantium-gamma-note', customTitle: ''},
-        {offset: 11, customCss: 'byzantium-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'byzantium-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 1, customCss: 'byzantium-gamma-note'},
+        {offset: 4, customCss: 'byzantium-gamma-note'},
+        {offset: 5, customCss: 'byzantium-gamma-note'},
+        {offset: 7, customCss: 'byzantium-gamma-note'},
+        {offset: 8, customCss: 'byzantium-gamma-note'},
+        {offset: 11, customCss: 'byzantium-gamma-note'}
     ];
     var persianGammaOffsets = [
-        {offset: 0, customCss: 'persian-gamma-note', customTitle: translator.tonicNote},
-        {offset: 1, customCss: 'persian-gamma-note', customTitle: ''},
-        {offset: 4, customCss: 'persian-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'persian-gamma-note', customTitle: ''},
-        {offset: 6, customCss: 'persian-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'persian-gamma-note', customTitle: ''},
-        {offset: 11, customCss: 'persian-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'persian-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 1, customCss: 'persian-gamma-note'},
+        {offset: 4, customCss: 'persian-gamma-note'},
+        {offset: 5, customCss: 'persian-gamma-note'},
+        {offset: 6, customCss: 'persian-gamma-note'},
+        {offset: 8, customCss: 'persian-gamma-note'},
+        {offset: 11, customCss: 'persian-gamma-note'}
     ];
     var japaneseGammaOffsets = [
-        {offset: 0, customCss: 'japanese-gamma-note', customTitle: translator.tonicNote},
-        {offset: 1, customCss: 'japanese-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'japanese-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'japanese-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'japanese-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'japanese-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 1, customCss: 'japanese-gamma-note'},
+        {offset: 5, customCss: 'japanese-gamma-note'},
+        {offset: 7, customCss: 'japanese-gamma-note'},
+        {offset: 8, customCss: 'japanese-gamma-note'}
     ];
 
 
     // ---- my custom gammas ----
     var myCustomEastOffsets = [
-        {offset: 0, customCss: 'my-custom-east-gamma-note', customTitle: translator.tonicNote},
-        {offset: 2, customCss: 'my-custom-east-gamma-note', customTitle: translator.halfBandNoteLabel, customIcon: ''}, //fa fa-caret-up
-        {offset: 3, customCss: 'my-custom-east-gamma-note', customTitle: ''},
-        {offset: 5, customCss: 'my-custom-east-gamma-note', customTitle: ''},
-        {offset: 7, customCss: 'my-custom-east-gamma-note', customTitle: ''},
-        {offset: 8, customCss: 'my-custom-east-gamma-note', customTitle: ''},
-        {offset: 11, customCss: 'my-custom-east-gamma-note', customTitle: ''}
+        {offset: 0, customCss: 'my-custom-east-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'my-custom-east-gamma-note', customProperties: [HALF_BAND_NOTE]},
+        {offset: 3, customCss: 'my-custom-east-gamma-note'},
+        {offset: 5, customCss: 'my-custom-east-gamma-note'},
+        {offset: 7, customCss: 'my-custom-east-gamma-note'},
+        {offset: 8, customCss: 'my-custom-east-gamma-note'},
+        {offset: 11, customCss: 'my-custom-east-gamma-note'}
     ];
 
     var gammaOffsets = [
@@ -394,7 +423,9 @@ define(function (require) {
                     }
                     if (isSequenceNote) {
                         stringNote['noteStyle'] += ' ' + sequenceNote.customCss + ' ';
-                        stringNote['customIcon'] = sequenceNote.customIcon ? sequenceNote.customIcon : '';
+                        if (!isNoteBelongMoreThenToOneGamma) {
+                            stringNote['customIcons'] = sequenceNote.customIcons ? sequenceNote.customIcons : [];
+                        }
                     }
                     if (isTonicNote) {
                         stringNote['noteStyle'] += ' tonic-note';
@@ -449,11 +480,19 @@ define(function (require) {
             var gammaOffsets = this._getGammaOffsets();
 
             _.each(gammaOffsets, function(offset) {
+
+                var titles = [];
+                var icons = [];
+                _.each(offset.customProperties, function (properties) {
+                    titles.push(properties.title);
+                    icons.push(properties.icon);
+                });
+
                 keyNotes.push({
                     note: arrayStartsTonic[offset.offset].note,
                     customCss: offset.customCss,
-                    customTitle: offset.customTitle,
-                    customIcon: offset.customIcon
+                    customTitle: titles.join(' '),
+                    customIcons: icons
                 });
             });
             return keyNotes;
