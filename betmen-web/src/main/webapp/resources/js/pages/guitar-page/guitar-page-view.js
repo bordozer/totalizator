@@ -424,7 +424,7 @@ define(function (require) {
             for (var i = 0; i < this.selectedSequences.length; i++) {
                 var iSequence = this.selectedSequences[i];
                 if (iSequence && iSequence.selectedSequenceEnabled) {
-                    res = res.concat(this._findOffset(iSequence ? iSequence.gammaCode : ''));
+                    res = res.concat(this._findOffset(iSequence.gammaCode));
                 }
             }
             return res;
