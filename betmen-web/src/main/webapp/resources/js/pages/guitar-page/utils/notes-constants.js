@@ -86,7 +86,7 @@ define(function (require) {
 
     var naturalMinorGammaNotes = [
         {offset: 0, customCss: 'minor-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'minor-gamma-note'},
+        {offset: 2, customCss: 'minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
         {offset: 3, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 5, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 7, customCss: 'minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
