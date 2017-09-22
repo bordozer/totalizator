@@ -128,16 +128,17 @@ define(function (require) {
         {offset: 3, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 5, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 7, customCss: 'harmonic-minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 8, customCss: 'harmonic-minor-gamma-note', customProperties: [HARMONIC_NOTE]},
+        {offset: 8, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE, HARMONIC_NOTE]},
         {offset: 11, customCss: 'harmonic-minor-gamma-note', customProperties: [MELODIC_NOTE]}
     ];
 
-    // TODO: check this gamma
+    // TODO: check notes of this gamma
+    // TODO: bent notes in customProperties
     var harmonicMajorGammaNotes = [
         {offset: 0, customCss: 'harmonic-major-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 2, customCss: 'harmonic-major-gamma-note', customProperties: []},
         {offset: 4, customCss: 'harmonic-major-gamma-note'},
-        {offset: 5, customCss: 'harmonic-major-gamma-note'},
+        {offset: 5, customCss: 'harmonic-major-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 8, customCss: 'harmonic-major-gamma-note'},
         {offset: 9, customCss: 'harmonic-major-gamma-note', customProperties: [HARMONIC_NOTE]},
         {offset: 11, customCss: 'harmonic-major-gamma-note', customProperties: [MELODIC_NOTE]}
