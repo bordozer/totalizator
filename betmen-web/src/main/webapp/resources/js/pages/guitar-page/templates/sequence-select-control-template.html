@@ -12,8 +12,8 @@
     <div class="col-7">
         <select id="selectedSequenceType" class="form-control">
             <option value="0">-</option>
-            <% _.each(gammaOffsets, function(offset) { %>
-            <option value="<%= offset.sequenceType %>" <%= selectedSequenceType == offset.sequenceType ? "selected='selected'" : '' %> ><%= offset.nameTranslated %></option>
+            <% _.each(sequences, function(offset) { %>
+            <option value="<%= offset.sequenceCode %>" <%= selectedSequenceType == offset.sequenceCode ? "selected='selected'" : '' %> ><%= offset.nameTranslated %></option>
             <% }) %>
         </select>
     </div>

@@ -137,28 +137,31 @@
 
     /* gammas styles <-- */
 
-    .selected-note {
-        color: navy;
-        background-color: #ccd232;
-        border: 2px solid #0b3e6f;
-        padding: 8px !important;
-        border-radius: 5px;
-    }
-
     .multiple-gammas-note {
         box-shadow: 2px 2px 4px #000000;
         border: 2px solid black;
+        background: linear-gradient(silver, white, gray);
     }
 
-    .tonic-note {
-        padding: 8px !important;
+    .selected-note {
         border: 2px solid #0b3e6f;
-        color: lightyellow;
-        text-shadow: 2px 2px 15px black, 0 0 15px blue, 0 0 15px darkblue;
+        padding: 8px !important;
+        border-radius: 5px;
+        color: navy;
+        background: linear-gradient(to bottom, #fab396, tomato);
     }
 
     .guitar-fret{
         display:inline-block;
+    }
+
+    /* custom note properties */
+
+    .tonic-note {
+        padding: 7px !important;
+        border: 3px solid #ac2925;
+        color: white;
+        text-shadow: -4px -0px 10px black, 4px 0 10px black, 0 -4px 10px black, 0 4px 10px black;
     }
 
     .band-note {
@@ -270,7 +273,7 @@
                     <div class="js-fret-note text-muted <%= customIcon %>" data-fret-note="<%= note.noteId %>_<%= note.note %>"></div>
                 <% }) %>
 
-                <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%> <%=note.customTitle%>" data-fret-note="<%= note.noteId %>_<%= note.note %>">
+                <h4 class="js-fret-note <%= note.noteStyle %>" title="<%=note.translation%>: <%=note.customTitle%>" data-fret-note="<%= note.noteId %>_<%= note.note %>">
                     <%= note.note %>
                 </h4>
             </div>

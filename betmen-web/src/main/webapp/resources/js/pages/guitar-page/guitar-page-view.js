@@ -11,240 +11,29 @@ define(function (require) {
     var SequenceSelectControlView = require( './sequence-select-control-view' );
     var menu = require( 'js/components/main-menu/main-menu' );
 
+    var notesConstants = require( './utils/notes-constants' );
+    var commonUtils = require('./utils/common-utils');
+    var FretNoteHandler = require( './utils/fret-note' );
+
     var Translator = require('translator');
     var translator = new Translator({
         title: "Guitar neck"
         , neckPointersLabel: "Neck pointers"
-        , minorLabel: "Minor gamma"
-        , harmonicMinorLabel: "Harmonic minor gamma"
-        , harmonicMajorLabel: "Harmonic major gamma"
-        , minorBluesLabel: "Minor blues gamma"
-        , majorBluesLabel: "Major blues gamma"
-        , japaneseLabel: "Japanese gamma"
-        , arabianLabel: "Arabian gamma"
-        , gypsyLabel: "Gypsy gamma"
-        , judasLabel: "Judas gamma"
-        , eastLabel: "East gamma"
-        , persianGammaLabel: "Persian gamma"
-        , byzantiumGammaLabel: "Byzantium gamma"
-        , customIndianLabel: "Custom Indian gamma"
-        , bandNoteLabel: "Band note"
-        , halfBandNoteLabel: "Half band note"
-        , bluesNoteLabel: "Blues note"
-        , tonicNote: "Tonic note"
         , clickNoteHint: "Click notes to highlight them"
-        , fullNoteNotInSequence: "Full note not in sequence"
-        , halfNoteNotInSequence: "Half-tone note not in sequence"
-        , fullNoteInSequence: "Full note in sequence"
-        , halfToneNoteInSequence: "Half-tone note in sequence"
-        , noteE: "Note E"
-        , noteF: "Note F"
-        , noteFd: "Note F#/Gb"
-        , noteG: "Note G"
-        , noteGd: "Note G#/Ab"
-        , noteA: "Note A"
-        , noteAd: "Note A#/B"
-        , noteH: "Note H"
-        , noteC: "Note C"
-        , noteCd: "Note C#/Db"
-        , noteD: "Note D"
-        , noteDd: "Note D#/Eb"
         , baseGamma: "Base Gamma"
         , additionalGamma: "Additional Gamma"
         , noteSelectionType: "Selection type"
         , noteSelectionTypeOne: "One note"
         , noteSelectionTypeAll: "All notes"
         , clearAllSelectedNotes: "Clear all selected notes"
-        , harmonicNoteLabel: "Harmonic note"
-        , melodicNoteLabel: "Melodic note"
         , fretsCountLabel: "Frets count a on neck"
         , fretsCountChangeHint: "Selected notes will be cleared after frets count change"
     });
 
-    var TONIC_NOTE = {
-        title: translator.tonicNote
-    };
-
-    var BAND_NOTE = {
-        icon: 'band-note fa-rotate-90',
-        title: translator.bandNoteLabel
-    };
-
-    var HALF_BAND_NOTE = {
-        icon: 'half-band-note',
-        title: translator.halfBandNoteLabel
-    };
-
-    var HARMONIC_NOTE = {
-        icon: 'specific-note harmonic-note',
-        title: translator.harmonicNoteLabel
-    };
-
-    var MELODIC_NOTE = {
-        icon: 'specific-note melodic-note',
-        title: translator.melodicNoteLabel
-    };
-
-    var BLUES_NOTE = {
-        icon: 'specific-note blues-note',
-        title: translator.bluesNoteLabel
-    };
-
     var markedFrets = [3, 5, 7, 9, 12, 15, 17, 19, 21];
 
-    var notes = [
-        {note: 'E', full: true, translation: translator.noteE}
-        , {note: 'F', full: true, translation: translator.noteF}
-        , {note: 'F#/Gb', full: false, translation: translator.noteFd}
-        , {note: 'G', full: true, translation: translator.noteG}
-        , {note: 'G#/Ab', full: false, translation: translator.noteGd}
-        , {note: 'A', full: true, translation: translator.noteA}
-        , {note: 'A#/B', full: false, translation: translator.noteAd}
-        , {note: 'H', full: true, translation: translator.noteH}
-        , {note: 'C', full: true, translation: translator.noteC}
-        , {note: 'C#/Db', full: false, translation: translator.noteCd}
-        , {note: 'D', full: true, translation: translator.noteD}
-        , {note: 'D#/Eb', full: false, translation: translator.noteDd}
-    ];
-
-    var minorGammaOffsets = [
-        {offset: 0, customCss: 'minor-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'minor-gamma-note'},
-        {offset: 3, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 5, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 7, customCss: 'minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 8, customCss: 'minor-gamma-note'},
-        {offset: 10, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]}
-    ];
-
-    var minorBluesGammaOffsets = [
-        {offset: 0, customCss: 'minor-blues-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 3, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 5, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 6, customCss: 'minor-blues-gamma-note', customProperties: [BLUES_NOTE]},
-        {offset: 7, customCss: 'minor-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 10, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]}
-    ];
-
-    // TODO: bent notes in customProperties
-    var harmonicMinorGammaOffsets = [
-        {offset: 0, customCss: 'harmonic-minor-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'harmonic-minor-gamma-note'},
-        {offset: 3, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 5, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 7, customCss: 'harmonic-minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 9, customCss: 'harmonic-minor-gamma-note', customProperties: [HARMONIC_NOTE]},
-        {offset: 11, customCss: 'harmonic-minor-gamma-note', customProperties: [MELODIC_NOTE]}
-    ];
-
-    var harmonicMajorGammaOffsets = [
-        {offset: 0, customCss: 'harmonic-major-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'harmonic-major-gamma-note', customProperties: []},
-        {offset: 3, customCss: 'harmonic-major-gamma-note'},
-        {offset: 5, customCss: 'harmonic-major-gamma-note'},
-        {offset: 7, customCss: 'harmonic-major-gamma-note'},
-        {offset: 8, customCss: 'harmonic-major-gamma-note', customProperties: [HARMONIC_NOTE]},
-        {offset: 11, customCss: 'harmonic-major-gamma-note', customProperties: [MELODIC_NOTE]}
-    ];
-    var majorBluesGammaOffsets = [
-        {offset: 0, customCss: 'major-blues-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]},
-        {offset: 2, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 3, customCss: 'major-blues-gamma-note', customProperties: [BLUES_NOTE]},
-        {offset: 4, customCss: 'major-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 7, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 9, customCss: 'major-blues-gamma-note'}
-    ];
-
-    var arabianGammaOffsets = [
-        {offset: 0, customCss: 'arabian-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'arabian-gamma-note'},
-        {offset: 3, customCss: 'arabian-gamma-note'},
-        {offset: 5, customCss: 'arabian-gamma-note'},
-        {offset: 6, customCss: 'arabian-gamma-note'},
-        {offset: 8, customCss: 'arabian-gamma-note'},
-        {offset: 9, customCss: 'arabian-gamma-note'},
-        {offset: 11, customCss: 'arabian-gamma-note'}
-    ];
-    var gypsyGammaOffsets = [
-        {offset: 0, customCss: 'gypsy-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'gypsy-gamma-note'},
-        {offset: 3, customCss: 'gypsy-gamma-note'},
-        {offset: 6, customCss: 'gypsy-gamma-note'},
-        {offset: 7, customCss: 'gypsy-gamma-note'},
-        {offset: 8, customCss: 'gypsy-gamma-note'},
-        {offset: 11, customCss: 'gypsy-gamma-note'}
-    ];
-    var judasGammaOffsets = [
-        {offset: 0, customCss: 'judas-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'judas-gamma-note'},
-        {offset: 4, customCss: 'judas-gamma-note'},
-        {offset: 5, customCss: 'judas-gamma-note'},
-        {offset: 7, customCss: 'judas-gamma-note'},
-        {offset: 8, customCss: 'judas-gamma-note'},
-        {offset: 10, customCss: 'judas-gamma-note'}
-    ];
-    var eastGammaOffsets = [
-        {offset: 0, customCss: 'east-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'east-gamma-note'},
-        {offset: 4, customCss: 'east-gamma-note'},
-        {offset: 5, customCss: 'east-gamma-note'},
-        {offset: 6, customCss: 'east-gamma-note'},
-        {offset: 9, customCss: 'east-gamma-note'},
-        {offset: 10, customCss: 'east-gamma-note'}
-    ];
-    var byzantiumGammaOffsets = [
-        {offset: 0, customCss: 'byzantium-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'byzantium-gamma-note'},
-        {offset: 4, customCss: 'byzantium-gamma-note'},
-        {offset: 5, customCss: 'byzantium-gamma-note'},
-        {offset: 7, customCss: 'byzantium-gamma-note'},
-        {offset: 8, customCss: 'byzantium-gamma-note'},
-        {offset: 11, customCss: 'byzantium-gamma-note'}
-    ];
-    var persianGammaOffsets = [
-        {offset: 0, customCss: 'persian-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'persian-gamma-note'},
-        {offset: 4, customCss: 'persian-gamma-note'},
-        {offset: 5, customCss: 'persian-gamma-note'},
-        {offset: 6, customCss: 'persian-gamma-note'},
-        {offset: 8, customCss: 'persian-gamma-note'},
-        {offset: 11, customCss: 'persian-gamma-note'}
-    ];
-    var japaneseGammaOffsets = [
-        {offset: 0, customCss: 'japanese-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'japanese-gamma-note'},
-        {offset: 5, customCss: 'japanese-gamma-note'},
-        {offset: 7, customCss: 'japanese-gamma-note'},
-        {offset: 8, customCss: 'japanese-gamma-note'}
-    ];
-
-
-    // ---- my custom gammas ----
-    var myCustomEastOffsets = [
-        {offset: 0, customCss: 'my-custom-east-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'my-custom-east-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 3, customCss: 'my-custom-east-gamma-note'},
-        {offset: 5, customCss: 'my-custom-east-gamma-note'},
-        {offset: 7, customCss: 'my-custom-east-gamma-note'},
-        {offset: 8, customCss: 'my-custom-east-gamma-note'},
-        {offset: 11, customCss: 'my-custom-east-gamma-note'}
-    ];
-
-    var gammaOffsets = [
-        {sequenceType: 'minor', offsets: minorGammaOffsets, sequenceCustomCss: 'minor-gamma-note', nameTranslated: translator.minorLabel}
-        , {sequenceType: 'minor-blues', offsets: minorBluesGammaOffsets, sequenceCustomCss: 'minor-blues-gamma-note', nameTranslated: translator.minorBluesLabel}
-        , {sequenceType: 'major-blues', offsets: majorBluesGammaOffsets, sequenceCustomCss: 'major-blues-gamma-note', nameTranslated: translator.majorBluesLabel}
-        , {sequenceType: 'harmonic-minor', offsets: harmonicMinorGammaOffsets, sequenceCustomCss: 'harmonic-minor-gamma-note', nameTranslated: translator.harmonicMinorLabel}
-        , {sequenceType: 'harmonic-major', offsets: harmonicMajorGammaOffsets, sequenceCustomCss: 'harmonic-major-gamma-note', nameTranslated: translator.harmonicMajorLabel}
-        , {sequenceType: 'gypsy', offsets: gypsyGammaOffsets, sequenceCustomCss: 'gypsy-gamma-note', nameTranslated: translator.gypsyLabel}
-        , {sequenceType: 'judas', offsets: judasGammaOffsets, sequenceCustomCss: 'judas-gamma-note', nameTranslated: translator.judasLabel}
-        , {sequenceType: 'arabian', offsets: arabianGammaOffsets, sequenceCustomCss: 'arabian-gamma-note', nameTranslated: translator.japaneseLabel}
-        , {sequenceType: 'east', offsets: eastGammaOffsets, sequenceCustomCss: 'east-gamma-note', nameTranslated: translator.eastLabel}
-        , {sequenceType: 'byzantium-major', offsets: byzantiumGammaOffsets, sequenceCustomCss: 'byzantium-gamma-note', nameTranslated: translator.byzantiumGammaLabel}
-        , {sequenceType: 'japanese', offsets: japaneseGammaOffsets, sequenceCustomCss: 'japanese-gamma-note', nameTranslated: translator.arabianLabel}
-        , {sequenceType: 'persian-major', offsets: persianGammaOffsets, sequenceCustomCss: 'persian-gamma-note', nameTranslated: translator.persianGammaLabel}
-        , {sequenceType: 'my-custom-east', offsets: myCustomEastOffsets, sequenceCustomCss: 'my-custom-east-gamma-note', nameTranslated: translator.customIndianLabel}
-    ];
+    var NOTES = notesConstants.notes();
+    var SEQUENCES = notesConstants.sequences();
 
     return Backbone.View.extend({
 
@@ -264,13 +53,13 @@ define(function (require) {
         selectedNotes: [],
         selectedSequences: [
             {
-                gammaCode: 'minor',
+                sequenceCode: 'minor',
                 selectedSequenceEnabled: true
-            }/*, // TODO: delete this selection
+            }, // TODO: delete this selection
             {
-                gammaCode: 'minor-blues',
+                sequenceCode: 'minor-blues',
                 selectedSequenceEnabled: true
-            }*/
+            }
         ],
 
         events: {
@@ -291,13 +80,12 @@ define(function (require) {
             this.neckModel = this._initNeckModel();
 
             var data = _.extend({}, {
-                notes: notes
+                notes: NOTES
                 , fretsCount: this.fretsCount
                 , neckModel: this.neckModel
                 , tonic: this.tonic
-                // , selectedSequences: this.selectedSequences
                 , markedFrets: markedFrets
-                , gammasCount: gammaOffsets.length
+                , gammasCount: SEQUENCES.length
                 , noteSelectionType: this.noteSelectionType
                 , translator: translator
             });
@@ -307,14 +95,14 @@ define(function (require) {
             this._renderFretsCountMenus();
 
             // accessible gammas
-            for (var i = 0; i < gammaOffsets.length; i++) {
-                var iSequence = this.selectedSequences[i];
+            for (var i = 0; i < SEQUENCES.length; i++) {
+                var sequence = this.selectedSequences[i];
 
                 var options = {
                     index: i,
-                    gammaOffsets: gammaOffsets,
-                    selectedSequenceType: iSequence ? iSequence.gammaCode : '',
-                    selectedSequenceEnabled: iSequence ? iSequence.selectedSequenceEnabled : ''
+                    sequences: SEQUENCES,
+                    selectedSequenceType: sequence ? sequence.sequenceCode : '',
+                    selectedSequenceEnabled: sequence ? sequence.selectedSequenceEnabled : ''
                 };
                 var selectedSequenceTypeView1 = new SequenceSelectControlView({el: this.$('.js-sequence-select-control-' + i), options: options});
                 selectedSequenceTypeView1.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
@@ -332,7 +120,7 @@ define(function (require) {
             _.each(this.stringsTune, function (tune) {
 
                 var menuItems = [];
-                _.each(notes, function(note) {
+                _.each(NOTES, function(note) {
                     var selected = note.note === stringsTuning[tune.stringNumber];
                     var text = selected ? '[ ' + note.note + ' ]' : note.note;
                     var tuneKey = tune.stringNumber + '_' + note.note;
@@ -391,111 +179,25 @@ define(function (require) {
             var noteId = 0;
             var self = this;
 
-            var keyNotes = this._collectKeyNotes(this.tonic);
-            _.each(neckModel, function(stringModel) {
-                _.each(stringModel, function(stringNote) {
-                    var note = stringNote.note;
-                    var isTonicNote = self.tonic === note;
+            // all notes models of all selected sequences
+            var selectedEnabledSequencesNoteModels = commonUtils.collectEnabledSequencesNoteModels(this.tonic, this.selectedSequences);
 
-                    var sequenceNote = _.find(keyNotes, function(keyNote) {
-                        return keyNote.note === note;
-                    });
-
-                    var isNoteBelongMoreThenToOneGamma = _.filter(keyNotes, function(keyNote) {
-                        return keyNote.note === note;
-                    }).length > 1;
-
-                    var isSequenceNote = sequenceNote !== undefined;
-
-                    stringNote['noteStyle'] = '';
-                    if (isNoteBelongMoreThenToOneGamma) {
-                        stringNote['noteStyle'] += ' multiple-gammas-note ';
-                    }
-                    var isSelectedNote = _.contains(self.selectedNotes, noteId);
-                    if (stringNote.full || isSequenceNote || isTonicNote || isSelectedNote) {
-                        stringNote['noteStyle'] += ' highlighted-note ';
-                    }
-                    if (stringNote.full) {
-                        stringNote['noteStyle'] += ' full-tone-note ';
-                    }
-                    if (!stringNote.full) {
-                        stringNote['noteStyle'] += ' half-tone-note ';
-                    }
-                    if (isSequenceNote) {
-                        stringNote['noteStyle'] += ' ' + sequenceNote.customCss + ' ';
-                        if (!isNoteBelongMoreThenToOneGamma) {
-                            stringNote['customIcons'] = sequenceNote.customIcons ? sequenceNote.customIcons : [];
-                        }
-                    }
-                    if (isTonicNote) {
-                        stringNote['noteStyle'] += ' tonic-note';
-                    }
-                    if (isSelectedNote) {
-                        stringNote['noteStyle'] += ' selected-note '
-                    }
-
-                    if (isTonicNote || isSequenceNote) {
-                        var customNoteTitle = sequenceNote !== undefined ? sequenceNote.customTitle : '';
-                        stringNote['customTitle'] = customNoteTitle + ' ' + (stringNote.full ? translator.fullNoteInSequence : translator.halfToneNoteInSequence);
-                    } else {
-                        if (stringNote.full) {
-                            stringNote['customTitle'] = translator.fullNoteNotInSequence;
-                        } else {
-                            stringNote['customTitle'] = translator.halfNoteNotInSequence;
-                        }
-                    }
-                    stringNote['noteId'] = noteId++;
+            _.each(neckModel, function(stringNotes) {
+                _.each(stringNotes, function(fretNote) {
+                    fretNote['noteId'] = noteId++;
+                    var noteHandler = new FretNoteHandler(
+                        self.tonic,
+                        fretNote,
+                        self.selectedSequences,
+                        self.selectedNotes,
+                        selectedEnabledSequencesNoteModels
+                    );
+                    fretNote['noteStyle'] = noteHandler.getNoteStyles().join(' ');
+                    fretNote['customTitle'] = noteHandler.getNoteHints().join(', ');
+                    fretNote['customIcons'] = noteHandler.getCustomIcons();
                 })
             });
             return neckModel;
-        },
-
-        _getGammaOffsets: function () {
-            var res = [];
-            for (var i = 0; i < this.selectedSequences.length; i++) {
-                var iSequence = this.selectedSequences[i];
-                if (iSequence && iSequence.selectedSequenceEnabled) {
-                    res = res.concat(this._findOffset(iSequence.gammaCode));
-                }
-            }
-            return res;
-        },
-
-        _findOffset: function( sequenceType ) {
-            var found = _.find(gammaOffsets, function(item) {
-                return item.sequenceType == sequenceType;
-            });
-            if (found) {
-                return found.offsets;
-            }
-            return [];
-        },
-
-        _collectKeyNotes: function(tonic) {
-            var stringNotes = notes.concat(notes).concat(notes);
-            var tonicIndex = this._getNoteIndex(notes, tonic);
-            var arrayStartsTonic = stringNotes.slice(tonicIndex, stringNotes.length);
-            var keyNotes = [];
-
-            var gammaOffsets = this._getGammaOffsets();
-
-            _.each(gammaOffsets, function(offset) {
-
-                var titles = [];
-                var icons = [];
-                _.each(offset.customProperties, function (properties) {
-                    titles.push(properties.title);
-                    icons.push(properties.icon);
-                });
-
-                keyNotes.push({
-                    note: arrayStartsTonic[offset.offset].note,
-                    customCss: offset.customCss,
-                    customTitle: titles.join(' '),
-                    customIcons: icons
-                });
-            });
-            return keyNotes;
         },
 
         _rebuildNotesForString: function(stringNumber) {
@@ -504,22 +206,11 @@ define(function (require) {
                     return true;
                 }
             });
-            var noteIndex = this._getNoteIndex(notes, openNote.note);
-            var ar1 = notes.slice(0, noteIndex);
-            var ar2 = notes.slice(noteIndex, notes.length);
+            var noteIndex = notesConstants.getNoteIndexInMusicalStaff(openNote.note);
+            var ar1 = NOTES.slice(0, noteIndex);
+            var ar2 = NOTES.slice(noteIndex, NOTES.length);
 
             return ar2.concat(ar1);
-        },
-
-        _getNoteIndex: function(notes, note) {
-            var noteIndex = -1;
-            for(var i = 0; i < notes.length; i++) {
-                if (notes[i].note == note) {
-                    noteIndex = i;
-                    break;
-                }
-            }
-            return noteIndex;
         },
 
         _onSelectedSequenceTypeChange: function(evt) {
@@ -527,7 +218,7 @@ define(function (require) {
                 delete this.selectedSequences[evt.index];
             } else {
                 this.selectedSequences[evt.index] = {
-                    gammaCode: evt.value,
+                    sequenceCode: evt.value,
                     selectedSequenceEnabled: evt.enabled
                 };
             }
@@ -550,7 +241,7 @@ define(function (require) {
             if (this.noteSelectionType == 1) {
                 this._singleNotesHighlighting(clickedNoteNumber);
             } else {
-                this._allNotesHighlighting(clickedNote, clickedNoteNumber);
+                this._allNotesHighlighting(clickedNote);
             }
             this.render();
         },
@@ -564,13 +255,13 @@ define(function (require) {
             }
         },
 
-        _allNotesHighlighting: function (note, noteNumber) {
+        _allNotesHighlighting: function (note) {
             var self = this;
             var atLeastOneNoteSelected = false;
             _.each(self.neckModel, function (stringModel) {
                 _.each(stringModel, function (fretNote) {
                     if (!atLeastOneNoteSelected) {
-                        atLeastOneNoteSelected = fretNote.note == note && _.contains(self.selectedNotes, fretNote.noteId);
+                        atLeastOneNoteSelected = fretNote.note === note && _.contains(self.selectedNotes, fretNote.noteId);
                     }
                 });
             });

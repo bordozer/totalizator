@@ -26,7 +26,7 @@ define(function (require) {
 
         initialize: function (options) {
             this.index = options.options.index;
-            this.gammaOffsets = options.options.gammaOffsets;
+            this.sequences = options.options.sequences;
             this.selectedSequenceType = options.options.selectedSequenceType;
             this.selectedSequenceEnabled = options.options.selectedSequenceEnabled;
 
@@ -38,14 +38,14 @@ define(function (require) {
             var data = _.extend({}, {
                 selectedSequenceType: this.selectedSequenceType
                 , selectedSequenceEnabled: this.selectedSequenceEnabled
-                , gammaOffsets: this.gammaOffsets
+                , sequences: this.sequences
                 , translator: translator
             });
             this.$el.html(template(data));
 
             var self = this;
-            _.each(this.gammaOffsets, function(gammaOffset) {
-                if (gammaOffset.sequenceType == self.selectedSequenceType) {
+            _.each(this.sequences, function(gammaOffset) {
+                if (gammaOffset.sequenceCode == self.selectedSequenceType) {
                     self.$('.js-sequence-color').addClass(gammaOffset.sequenceCustomCss);
                 }
             });

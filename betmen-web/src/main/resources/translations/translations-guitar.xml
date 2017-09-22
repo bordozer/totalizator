@@ -30,7 +30,6 @@
 		<en><![CDATA[Harmonic minor]]></en>
 	</translation>
 
-
 	<translation>
 		<nerd>Harmonic major gamma</nerd>
 		<ru><![CDATA[Гармонический мажор]]></ru>
@@ -54,44 +53,44 @@
 
 	<translation>
 		<nerd>Band note</nerd>
-		<ru><![CDATA[(Бэндовая нота)]]></ru>
-		<ua><![CDATA[(Бендова нота)]]></ua>
-		<en><![CDATA[(Band note)]]></en>
+		<ru><![CDATA[Бэндовая нота]]></ru>
+		<ua><![CDATA[Бендова нота]]></ua>
+		<en><![CDATA[Band note]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Half band note</nerd>
-		<ru><![CDATA[(Полу-бэндовая нота)]]></ru>
-		<ua><![CDATA[(Полу-бендова нота)]]></ua>
-		<en><![CDATA[(Half band note)]]></en>
+		<ru><![CDATA[Полу-бэндовая нота]]></ru>
+		<ua><![CDATA[Полу-бендова нота]]></ua>
+		<en><![CDATA[Half band note]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Blues note</nerd>
-		<ru><![CDATA[(Блюзовая нота)]]></ru>
-		<ua><![CDATA[(Блюзова нота)]]></ua>
-		<en><![CDATA[(Blues note)]]></en>
+		<ru><![CDATA[Блюзовая нота]]></ru>
+		<ua><![CDATA[Блюзова нота]]></ua>
+		<en><![CDATA[Blues note]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Tonic note</nerd>
-		<ru><![CDATA[(Тоника)]]></ru>
-		<ua><![CDATA[(Тонiка)]]></ua>
-		<en><![CDATA[(Tonic)]]></en>
+		<ru><![CDATA[Тоника]]></ru>
+		<ua><![CDATA[Тонiка]]></ua>
+		<en><![CDATA[Tonic]]></en>
 	</translation>
 
     <translation>
         <nerd>Harmonic note</nerd>
-        <ru><![CDATA[(Гармоническая нота)]]></ru>
-        <ua><![CDATA[(Гармонiчна нота)]]></ua>
-        <en><![CDATA[(Harmonic note)]]></en>
+        <ru><![CDATA[Гармоническая нота]]></ru>
+        <ua><![CDATA[Гармонiчна нота]]></ua>
+        <en><![CDATA[Harmonic note]]></en>
     </translation>
 
     <translation>
         <nerd>Melodic note</nerd>
-        <ru><![CDATA[(Мелодическая нота)]]></ru>
-        <ua><![CDATA[(Мелодична нота)]]></ua>
-        <en><![CDATA[(Melodic note)]]></en>
+        <ru><![CDATA[Мелодическая нота]]></ru>
+        <ua><![CDATA[Мелодична нота]]></ua>
+        <en><![CDATA[Melodic note]]></en>
     </translation>
 
 	<translation>
@@ -323,6 +322,13 @@
 		<ru><![CDATA[Выдененные ноты будут сброшены после смены к-ва ладов]]></ru>
 		<ua><![CDATA[Виделеннi ноти будуть скасованi пiсля змiни кiлькостi ладiв]]></ua>
 		<en><![CDATA[Selected notes will be cleared after frets count change]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Multiple gamma note</nerd>
+		<ru><![CDATA[Нота из нескольких гамм]]></ru>
+		<ua><![CDATA[Нота з кiлькох гамм]]></ua>
+		<en><![CDATA[Multiple gamma note]]></en>
 	</translation>
 
 	<translation>
