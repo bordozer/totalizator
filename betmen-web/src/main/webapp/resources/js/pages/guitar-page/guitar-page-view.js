@@ -55,11 +55,11 @@ define(function (require) {
             {
                 sequenceCode: 'minor',
                 selectedSequenceEnabled: true
-            }, // TODO: delete this selection
+            }/*, // TODO: delete this selection
             {
                 sequenceCode: 'minor-blues',
                 selectedSequenceEnabled: true
-            }
+            }*/
         ],
 
         events: {
