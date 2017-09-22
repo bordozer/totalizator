@@ -18,9 +18,16 @@
 
 	<translation>
 		<nerd>Minor gamma</nerd>
-		<ru><![CDATA[Минорная]]></ru>
-		<ua><![CDATA[Мiнорна]]></ua>
-		<en><![CDATA[Minor]]></en>
+		<ru><![CDATA[Натуральный минор]]></ru>
+		<ua><![CDATA[Натуральный мiнор]]></ua>
+		<en><![CDATA[Natural minor]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Natural major gamma</nerd>
+		<ru><![CDATA[Натуральный мажор]]></ru>
+		<ua><![CDATA[Натуральный мажор]]></ua>
+		<en><![CDATA[Natural major]]></en>
 	</translation>
 
 	<translation>
@@ -39,16 +46,16 @@
 
 	<translation>
 		<nerd>Minor blues gamma</nerd>
-		<ru><![CDATA[Минорная блюзовая]]></ru>
-		<ua><![CDATA[Мiнорна блюзова]]></ua>
-		<en><![CDATA[Minor blues]]></en>
+		<ru><![CDATA[Блюзовая минорная]]></ru>
+		<ua><![CDATA[Блюзова минорна]]></ua>
+		<en><![CDATA[Blues minor]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Major blues gamma</nerd>
-		<ru><![CDATA[Мажорная блюзовая]]></ru>
-		<ua><![CDATA[Мажорна блюзова]]></ua>
-		<en><![CDATA[Major blues]]></en>
+		<ru><![CDATA[Блюзовая мажорная]]></ru>
+		<ua><![CDATA[Блюзова мажорна]]></ua>
+		<en><![CDATA[Blues major]]></en>
 	</translation>
 
 	<translation>
@@ -224,13 +231,6 @@
 		<ru><![CDATA[Византийский мажорный лад]]></ru>
 		<ua><![CDATA[Візантійський мажорный лад]]></ua>
 		<en><![CDATA[Byzantium major gamma]]></en>
-	</translation>
-
-	<translation>
-		<nerd>Custom Indian gamma</nerd>
-		<ru><![CDATA[- Моя а ля восточная гамма -]]></ru>
-		<ua><![CDATA[- Моя а ля схiдна гама -]]></ua>
-		<en><![CDATA[- My custom east gamma -]]></en>
 	</translation>
 
 	<translation>

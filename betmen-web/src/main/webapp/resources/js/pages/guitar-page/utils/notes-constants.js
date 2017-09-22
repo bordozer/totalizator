@@ -18,6 +18,7 @@ define(function (require) {
         , noteDd: "Note D#/Eb"
 
         , minorLabel: "Minor gamma"
+        , naturalMajorGammaLabel: "Natural major gamma"
         , harmonicMinorLabel: "Harmonic minor gamma"
         , harmonicMajorLabel: "Harmonic major gamma"
         , minorBluesLabel: "Minor blues gamma"
@@ -29,7 +30,6 @@ define(function (require) {
         , eastLabel: "East gamma"
         , persianGammaLabel: "Persian gamma"
         , byzantiumGammaLabel: "Byzantium gamma"
-        , customIndianLabel: "Custom Indian gamma"
 
         , bandNoteLabel: "Band note"
         , halfBandNoteLabel: "Half band note"
@@ -84,7 +84,7 @@ define(function (require) {
         {note: 'D#/Eb', full: false, translation: translator.noteDd}
     ];
 
-    var minorGammaNotes = [
+    var naturalMinorGammaNotes = [
         {offset: 0, customCss: 'minor-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 2, customCss: 'minor-gamma-note'},
         {offset: 3, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
@@ -94,13 +94,31 @@ define(function (require) {
         {offset: 10, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]}
     ];
 
-    var minorBluesGammaNotes = [
+    var naturalMajorGammaNotes = [
+        {offset: 0, customCss: 'natural-major-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]},
+        {offset: 2, customCss: 'natural-major-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 4, customCss: 'natural-major-gamma-note', customProperties: [HALF_BAND_NOTE]},
+        {offset: 5, customCss: 'natural-major-gamma-note', customProperties: []},
+        {offset: 7, customCss: 'natural-major-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 9, customCss: 'natural-major-gamma-note', customProperties: []},
+        {offset: 11, customCss: 'natural-major-gamma-note', customProperties: [HALF_BAND_NOTE]}
+    ];
+
+    var bluesMinorGammaNotes = [
         {offset: 0, customCss: 'minor-blues-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 3, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 5, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 6, customCss: 'minor-blues-gamma-note', customProperties: [BLUES_NOTE]},
         {offset: 7, customCss: 'minor-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
         {offset: 10, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]}
+    ];
+    var bluesMajorGammaNotes = [
+        {offset: 0, customCss: 'major-blues-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]},
+        {offset: 2, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 3, customCss: 'major-blues-gamma-note', customProperties: [BLUES_NOTE]},
+        {offset: 4, customCss: 'major-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
+        {offset: 7, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
+        {offset: 9, customCss: 'major-blues-gamma-note'}
     ];
 
     // TODO: bent notes in customProperties
@@ -110,7 +128,7 @@ define(function (require) {
         {offset: 3, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 5, customCss: 'harmonic-minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 7, customCss: 'harmonic-minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 9, customCss: 'harmonic-minor-gamma-note', customProperties: [HARMONIC_NOTE]},
+        {offset: 8, customCss: 'harmonic-minor-gamma-note', customProperties: [HARMONIC_NOTE]},
         {offset: 11, customCss: 'harmonic-minor-gamma-note', customProperties: [MELODIC_NOTE]}
     ];
 
@@ -122,14 +140,6 @@ define(function (require) {
         {offset: 7, customCss: 'harmonic-major-gamma-note'},
         {offset: 8, customCss: 'harmonic-major-gamma-note', customProperties: [HARMONIC_NOTE]},
         {offset: 11, customCss: 'harmonic-major-gamma-note', customProperties: [MELODIC_NOTE]}
-    ];
-    var majorBluesGammaNotes = [
-        {offset: 0, customCss: 'major-blues-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]},
-        {offset: 2, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 3, customCss: 'major-blues-gamma-note', customProperties: [BLUES_NOTE]},
-        {offset: 4, customCss: 'major-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 7, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
-        {offset: 9, customCss: 'major-blues-gamma-note'}
     ];
 
     var arabianGammaNotes = [
@@ -195,33 +205,28 @@ define(function (require) {
         {offset: 8, customCss: 'japanese-gamma-note'}
     ];
 
-    // ---- my custom gammas ----
-    var myCustomEastGammaNotes = [
-        {offset: 0, customCss: 'my-custom-east-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'my-custom-east-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 3, customCss: 'my-custom-east-gamma-note'},
-        {offset: 5, customCss: 'my-custom-east-gamma-note'},
-        {offset: 7, customCss: 'my-custom-east-gamma-note'},
-        {offset: 8, customCss: 'my-custom-east-gamma-note'},
-        {offset: 11, customCss: 'my-custom-east-gamma-note'}
-    ];
-
     var SEQUENCES = [
         {
-            sequenceCode: 'minor',
-            sequenceNotes: minorGammaNotes,
+            sequenceCode: 'natural-minor',
+            sequenceNotes: naturalMinorGammaNotes,
             sequenceCustomCss: 'minor-gamma-note',
             nameTranslated: translator.minorLabel
         }
         , {
+            sequenceCode: 'natural-major',
+            sequenceNotes: naturalMajorGammaNotes,
+            sequenceCustomCss: 'natural-major-gamma-note',
+            nameTranslated: translator.naturalMajorGammaLabel
+        }
+        , {
             sequenceCode: 'minor-blues',
-            sequenceNotes: minorBluesGammaNotes,
+            sequenceNotes: bluesMinorGammaNotes,
             sequenceCustomCss: 'minor-blues-gamma-note',
             nameTranslated: translator.minorBluesLabel
         }
         , {
             sequenceCode: 'major-blues',
-            sequenceNotes: majorBluesGammaNotes,
+            sequenceNotes: bluesMajorGammaNotes,
             sequenceCustomCss: 'major-blues-gamma-note',
             nameTranslated: translator.majorBluesLabel
         }
@@ -278,12 +283,6 @@ define(function (require) {
             sequenceNotes: persianGammaNotes,
             sequenceCustomCss: 'persian-gamma-note',
             nameTranslated: translator.persianGammaLabel
-        }
-        , {
-            sequenceCode: 'my-custom-east',
-            sequenceNotes: myCustomEastGammaNotes,
-            sequenceCustomCss: 'my-custom-east-gamma-note',
-            nameTranslated: translator.customIndianLabel
         }
     ];
 

@@ -53,7 +53,7 @@ define(function (require) {
         selectedNotes: [],
         selectedSequences: [
             {
-                sequenceCode: 'minor',
+                sequenceCode: 'natural-minor',
                 selectedSequenceEnabled: true
             }/*, // TODO: delete this selection
             {
