@@ -90,18 +90,18 @@ define(function (require) {
         {offset: 3, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 5, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 7, customCss: 'minor-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 8, customCss: 'minor-gamma-note'},
+        {offset: 8, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 10, customCss: 'minor-gamma-note', customProperties: [BAND_NOTE]}
     ];
 
     var naturalMajorGammaNotes = [
-        {offset: 0, customCss: 'natural-major-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]},
+        {offset: 0, customCss: 'natural-major-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]}, // TODO: BAND_NOTE?
         {offset: 2, customCss: 'natural-major-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 4, customCss: 'natural-major-gamma-note', customProperties: [HALF_BAND_NOTE]},
-        {offset: 5, customCss: 'natural-major-gamma-note', customProperties: []},
+        {offset: 5, customCss: 'natural-major-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 7, customCss: 'natural-major-gamma-note', customProperties: [BAND_NOTE]},
         {offset: 9, customCss: 'natural-major-gamma-note', customProperties: []},
-        {offset: 11, customCss: 'natural-major-gamma-note', customProperties: [HALF_BAND_NOTE]}
+        {offset: 11, customCss: 'natural-major-gamma-note', customProperties: [HALF_BAND_NOTE]} // TODO: HALF_BAND_NOTE?
     ];
 
     var bluesMinorGammaNotes = [
