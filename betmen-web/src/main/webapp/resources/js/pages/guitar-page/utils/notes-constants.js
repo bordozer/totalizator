@@ -199,10 +199,10 @@ define(function (require) {
         {offset: 8, customCss: 'persian-gamma-note'},
         {offset: 11, customCss: 'persian-gamma-note'}
     ];
-    var japaneseGammaNotes = [
+    var japaneseHirajoshiGammaNotes = [
         {offset: 0, customCss: 'japanese-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'japanese-gamma-note'},
-        {offset: 5, customCss: 'japanese-gamma-note'},
+        {offset: 2, customCss: 'japanese-gamma-note'},
+        {offset: 3, customCss: 'japanese-gamma-note'},
         {offset: 7, customCss: 'japanese-gamma-note'},
         {offset: 8, customCss: 'japanese-gamma-note'}
     ];
@@ -260,7 +260,7 @@ define(function (require) {
             sequenceCode: 'arabian',
             sequenceNotes: arabianGammaNotes,
             sequenceCustomCss: 'arabian-gamma-note',
-            nameTranslated: translator.japaneseLabel
+            nameTranslated: translator.arabianLabel
         }
         , {
             sequenceCode: 'east',
@@ -275,16 +275,16 @@ define(function (require) {
             nameTranslated: translator.byzantiumGammaLabel
         }
         , {
-            sequenceCode: 'japanese',
-            sequenceNotes: japaneseGammaNotes,
-            sequenceCustomCss: 'japanese-gamma-note',
-            nameTranslated: translator.arabianLabel
-        }
-        , {
             sequenceCode: 'persian-major',
             sequenceNotes: persianGammaNotes,
             sequenceCustomCss: 'persian-gamma-note',
             nameTranslated: translator.persianGammaLabel
+        }
+        , {
+            sequenceCode: 'japanese',
+            sequenceNotes: japaneseHirajoshiGammaNotes,
+            sequenceCustomCss: 'japanese-gamma-note',
+            nameTranslated: translator.japaneseLabel
         }
     ];
 
