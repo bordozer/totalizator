@@ -199,16 +199,23 @@
 	</translation>
 
 	<translation>
-		<nerd>Japanese gamma</nerd>
-		<ru><![CDATA[Японский нейтральный лад]]></ru>
-		<ua><![CDATA[Японський нейтральный лад]]></ua>
-		<en><![CDATA[Japanese neutral gamma]]></en>
+		<nerd>Japanese Hirajoshi gamma</nerd>
+		<ru><![CDATA[Японский нейтральный (Хирайоши)]]></ru>
+		<ua><![CDATA[Японський нейтральный (Хiрайошi)]]></ua>
+		<en><![CDATA[Japanese neutral gamma (Hirajoshi)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Japanese Hon Kumoi gamma</nerd>
+		<ru><![CDATA[Японский нейтральный (Хон Кумои)]]></ru>
+		<ua><![CDATA[Японський нейтральный (Хон Кумої)]]></ua>
+		<en><![CDATA[Japanese neutral gamma (Hon Kumoi)]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Judas gamma</nerd>
-		<ru><![CDATA[Еврейский доминантный лад]]></ru>
-		<ua><![CDATA[Єврейскiй домiнантний лад]]></ua>
+		<ru><![CDATA[Еврейский доминантный]]></ru>
+		<ua><![CDATA[Єврейскiй домiнантний]]></ua>
 		<en><![CDATA[Judas dominant gamma]]></en>
 	</translation>
 

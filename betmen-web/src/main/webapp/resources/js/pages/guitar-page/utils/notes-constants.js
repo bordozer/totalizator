@@ -23,7 +23,8 @@ define(function (require) {
         , harmonicMajorLabel: "Harmonic major gamma"
         , minorBluesLabel: "Minor blues gamma"
         , majorBluesLabel: "Major blues gamma"
-        , japaneseLabel: "Japanese gamma"
+        , japaneseHirajoshiLabel: "Japanese Hirajoshi gamma"
+        , japaneseHonKumoiLabel: "Japanese Hon Kumoi gamma"
         , arabianLabel: "Arabian gamma"
         , gypsyLabel: "Gypsy gamma"
         , judasLabel: "Judas gamma"
@@ -112,6 +113,7 @@ define(function (require) {
         {offset: 7, customCss: 'minor-blues-gamma-note', customProperties: [HALF_BAND_NOTE]},
         {offset: 10, customCss: 'minor-blues-gamma-note', customProperties: [BAND_NOTE]}
     ];
+
     var bluesMajorGammaNotes = [
         {offset: 0, customCss: 'major-blues-gamma-note', customProperties: [TONIC_NOTE, BAND_NOTE]},
         {offset: 2, customCss: 'major-blues-gamma-note', customProperties: [BAND_NOTE]},
@@ -143,14 +145,25 @@ define(function (require) {
         {offset: 9, customCss: 'harmonic-major-gamma-note', customProperties: [HARMONIC_NOTE]},
         {offset: 11, customCss: 'harmonic-major-gamma-note', customProperties: [MELODIC_NOTE]}
     ];
+
     // TODO: bent notes in customProperties
     var japaneseHirajoshiGammaNotes = [
-        {offset: 0, customCss: 'japanese-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'japanese-gamma-note'},
-        {offset: 3, customCss: 'japanese-gamma-note'},
-        {offset: 7, customCss: 'japanese-gamma-note'},
-        {offset: 8, customCss: 'japanese-gamma-note'}
+        {offset: 0, customCss: 'japanese-hirajoshi-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'japanese-hirajoshi-gamma-note'},
+        {offset: 3, customCss: 'japanese-hirajoshi-gamma-note'},
+        {offset: 7, customCss: 'japanese-hirajoshi-gamma-note'},
+        {offset: 8, customCss: 'japanese-hirajoshi-gamma-note'}
     ];
+
+    // TODO: bent notes in customProperties
+    var japaneseHonKumoiGammaNotes = [
+        {offset: 0, customCss: 'japanese-hon-kumoi-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 1, customCss: 'japanese-hon-kumoi-gamma-note'},
+        {offset: 5, customCss: 'japanese-hon-kumoi-gamma-note'},
+        {offset: 7, customCss: 'japanese-hon-kumoi-gamma-note'},
+        {offset: 8, customCss: 'japanese-hon-kumoi-gamma-note'}
+    ];
+
     // TODO: bent notes in customProperties
     var persianGammaNotes = [
         {offset: 0, customCss: 'persian-gamma-note', customProperties: [TONIC_NOTE]},
@@ -173,6 +186,7 @@ define(function (require) {
         {offset: 8, customCss: 'byzantium-gamma-note'},
         {offset: 11, customCss: 'byzantium-gamma-note'}
     ];
+
     // TODO: the same as byzantiumGammaNotes???
     // TODO: bent notes in customProperties
     var gypsyGammaNotes = [
@@ -197,6 +211,7 @@ define(function (require) {
         {offset: 9, customCss: 'arabian-gamma-note'},
         {offset: 11, customCss: 'arabian-gamma-note'}
     ];
+
     // TODO: check notes of this gamma
     // TODO: bent notes in customProperties
     var judasGammaNotes = [
@@ -208,6 +223,7 @@ define(function (require) {
         {offset: 8, customCss: 'judas-gamma-note'},
         {offset: 10, customCss: 'judas-gamma-note'}
     ];
+
     // TODO: check notes of this gamma
     // TODO: bent notes in customProperties
     var eastGammaNotes = [
@@ -258,10 +274,16 @@ define(function (require) {
             nameTranslated: translator.harmonicMajorLabel
         }
         , {
-            sequenceCode: 'japanese-neutral',
+            sequenceCode: 'japanese-neutral-hirajoshi',
             sequenceNotes: japaneseHirajoshiGammaNotes,
-            sequenceCustomCss: 'japanese-gamma-note',
-            nameTranslated: translator.japaneseLabel
+            sequenceCustomCss: 'japanese-hirajoshi-gamma-note',
+            nameTranslated: translator.japaneseHirajoshiLabel
+        }
+        , {
+            sequenceCode: 'japanese-neutral-hon-kumoi',
+            sequenceNotes: japaneseHonKumoiGammaNotes,
+            sequenceCustomCss: 'japanese-hon-kumoi-gamma-note',
+            nameTranslated: translator.japaneseHonKumoiLabel
         }
         , {
             sequenceCode: 'persian-major',
