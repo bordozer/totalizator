@@ -25,6 +25,7 @@ define(function (require) {
         , majorBluesLabel: "Major blues gamma"
         , japaneseHirajoshiLabel: "Japanese Hirajoshi gamma"
         , japaneseHonKumoiLabel: "Japanese Hon Kumoi gamma"
+        , japaneseKumoiLabel: "Japanese Kumoi gamma"
         , japaneseIwatoLabel: "Japanese Iwato gamma"
         , arabianLabel: "Arabian gamma"
         , gypsyLabel: "Gypsy gamma"
@@ -175,6 +176,15 @@ define(function (require) {
     ];
 
     // TODO: bent notes in customProperties
+    var japaneseKumoiGammaNotes = [
+        {offset: 0, customCss: 'japanese-kumoi-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 4, customCss: 'japanese-kumoi-gamma-note'},
+        {offset: 5, customCss: 'japanese-kumoi-gamma-note'},
+        {offset: 9, customCss: 'japanese-kumoi-gamma-note'},
+        {offset: 11, customCss: 'japanese-kumoi-gamma-note'}
+    ];
+
+    // TODO: bent notes in customProperties
     var persianGammaNotes = [
         {offset: 0, customCss: 'persian-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 2, customCss: 'persian-gamma-note'},
@@ -300,6 +310,12 @@ define(function (require) {
             sequenceNotes: japaneseIwatoGammaNotes,
             sequenceCustomCss: 'japanese-iwato-gamma-note',
             nameTranslated: translator.japaneseIwatoLabel
+        }
+        , {
+            sequenceCode: 'japanese-neutral-kumoi',
+            sequenceNotes: japaneseKumoiGammaNotes,
+            sequenceCustomCss: 'japanese-kumoi-gamma-note',
+            nameTranslated: translator.japaneseKumoiLabel
         }
         , {
             sequenceCode: 'persian-major',
