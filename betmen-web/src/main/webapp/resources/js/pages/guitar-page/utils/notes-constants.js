@@ -27,6 +27,7 @@ define(function (require) {
         , japaneseHonKumoiLabel: "Japanese Hon Kumoi gamma"
         , japaneseKumoiLabel: "Japanese Kumoi gamma"
         , japaneseIwatoLabel: "Japanese Iwato gamma"
+        , japaneseChineseScaleLabel: "Japanese Chinese Scale gamma"
         , arabianLabel: "Arabian gamma"
         , gypsyLabel: "Gypsy gamma"
         , judasLabel: "Judas gamma"
@@ -185,6 +186,15 @@ define(function (require) {
     ];
 
     // TODO: bent notes in customProperties
+    var japaneseChineseScaleGammaNotes = [
+        {offset: 0, customCss: 'japanese-chinese-scale-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 4, customCss: 'japanese-chinese-scale-gamma-note'},
+        {offset: 6, customCss: 'japanese-chinese-scale-gamma-note'},
+        {offset: 7, customCss: 'japanese-chinese-scale-gamma-note'},
+        {offset: 11, customCss: 'japanese-chinese-scale-gamma-note'}
+    ];
+
+    // TODO: bent notes in customProperties
     var persianGammaNotes = [
         {offset: 0, customCss: 'persian-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 2, customCss: 'persian-gamma-note'},
@@ -316,6 +326,12 @@ define(function (require) {
             sequenceNotes: japaneseKumoiGammaNotes,
             sequenceCustomCss: 'japanese-kumoi-gamma-note',
             nameTranslated: translator.japaneseKumoiLabel
+        }
+        , {
+            sequenceCode: 'japanese-neutral-chinese-scale',
+            sequenceNotes: japaneseChineseScaleGammaNotes,
+            sequenceCustomCss: 'japanese-chinese-scale-gamma-note',
+            nameTranslated: translator.japaneseChineseScaleLabel
         }
         , {
             sequenceCode: 'persian-major',

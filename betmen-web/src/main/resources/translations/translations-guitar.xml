@@ -200,30 +200,37 @@
 
 	<translation>
 		<nerd>Japanese Hirajoshi gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Хирайоши)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Хiрайошi)]]></ua>
+		<ru><![CDATA[Японский нейтральный (Hirajoshi)]]></ru>
+		<ua><![CDATA[Японський нейтральный (Hirajoshi)]]></ua>
 		<en><![CDATA[Japanese neutral gamma (Hirajoshi)]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Japanese Hon Kumoi gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Хон Кумои)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Хон Кумої)]]></ua>
+		<ru><![CDATA[Японский нейтральный (Hon Kumoi)]]></ru>
+		<ua><![CDATA[Японський нейтральный (Hon Kumoi)]]></ua>
 		<en><![CDATA[Japanese neutral gamma (Hon Kumoi)]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Japanese Kumoi gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Кумои)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Кумої)]]></ua>
+		<ru><![CDATA[Японский нейтральный (Kumoi)]]></ru>
+		<ua><![CDATA[Японський нейтральный (Kumoi)]]></ua>
 		<en><![CDATA[Japanese neutral gamma (Kumoi)]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Japanese Iwato gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Ивато)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Iвато)]]></ua>
+		<ru><![CDATA[Японский нейтральный (Iwato)]]></ru>
+		<ua><![CDATA[Японський нейтральный (Iwato)]]></ua>
 		<en><![CDATA[Japanese neutral gamma (Iwato)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Japanese Chinese Scale gamma</nerd>
+		<ru><![CDATA[Японский нейтральный (Chinese Scale)]]></ru>
+		<ua><![CDATA[Японський нейтральный (Chinese Scale)]]></ua>
+		<en><![CDATA[Japanese neutral gamma (Chinese Scale)]]></en>
 	</translation>
 
 	<translation>
