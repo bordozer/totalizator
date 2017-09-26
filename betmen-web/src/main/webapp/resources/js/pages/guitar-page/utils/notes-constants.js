@@ -143,7 +143,50 @@ define(function (require) {
         {offset: 9, customCss: 'harmonic-major-gamma-note', customProperties: [HARMONIC_NOTE]},
         {offset: 11, customCss: 'harmonic-major-gamma-note', customProperties: [MELODIC_NOTE]}
     ];
+    // TODO: bent notes in customProperties
+    var japaneseHirajoshiGammaNotes = [
+        {offset: 0, customCss: 'japanese-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'japanese-gamma-note'},
+        {offset: 3, customCss: 'japanese-gamma-note'},
+        {offset: 7, customCss: 'japanese-gamma-note'},
+        {offset: 8, customCss: 'japanese-gamma-note'}
+    ];
+    // TODO: bent notes in customProperties
+    var persianGammaNotes = [
+        {offset: 0, customCss: 'persian-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'persian-gamma-note'},
+        {offset: 3, customCss: 'persian-gamma-note'},
+        {offset: 5, customCss: 'persian-gamma-note'},
+        {offset: 7, customCss: 'persian-gamma-note'},
+        {offset: 8, customCss: 'persian-gamma-note'},
+        {offset: 11, customCss: 'persian-gamma-note'}
+    ];
 
+    // TODO: the same as gypsyGammaNotes???
+    // TODO: bent notes in customProperties
+    var byzantiumGammaNotes = [
+        {offset: 0, customCss: 'byzantium-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'byzantium-gamma-note'},
+        {offset: 3, customCss: 'byzantium-gamma-note'},
+        {offset: 6, customCss: 'byzantium-gamma-note'},
+        {offset: 7, customCss: 'byzantium-gamma-note'},
+        {offset: 8, customCss: 'byzantium-gamma-note'},
+        {offset: 11, customCss: 'byzantium-gamma-note'}
+    ];
+    // TODO: the same as byzantiumGammaNotes???
+    // TODO: bent notes in customProperties
+    var gypsyGammaNotes = [
+        {offset: 0, customCss: 'gypsy-gamma-note', customProperties: [TONIC_NOTE]},
+        {offset: 2, customCss: 'gypsy-gamma-note'},
+        {offset: 3, customCss: 'gypsy-gamma-note'},
+        {offset: 6, customCss: 'gypsy-gamma-note'},
+        {offset: 7, customCss: 'gypsy-gamma-note'},
+        {offset: 8, customCss: 'gypsy-gamma-note'},
+        {offset: 11, customCss: 'gypsy-gamma-note'}
+    ];
+
+    // TODO: check notes of this gamma
+    // TODO: bent notes in customProperties
     var arabianGammaNotes = [
         {offset: 0, customCss: 'arabian-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 2, customCss: 'arabian-gamma-note'},
@@ -154,15 +197,8 @@ define(function (require) {
         {offset: 9, customCss: 'arabian-gamma-note'},
         {offset: 11, customCss: 'arabian-gamma-note'}
     ];
-    var gypsyGammaNotes = [
-        {offset: 0, customCss: 'gypsy-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'gypsy-gamma-note'},
-        {offset: 3, customCss: 'gypsy-gamma-note'},
-        {offset: 6, customCss: 'gypsy-gamma-note'},
-        {offset: 7, customCss: 'gypsy-gamma-note'},
-        {offset: 8, customCss: 'gypsy-gamma-note'},
-        {offset: 11, customCss: 'gypsy-gamma-note'}
-    ];
+    // TODO: check notes of this gamma
+    // TODO: bent notes in customProperties
     var judasGammaNotes = [
         {offset: 0, customCss: 'judas-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 1, customCss: 'judas-gamma-note'},
@@ -172,6 +208,8 @@ define(function (require) {
         {offset: 8, customCss: 'judas-gamma-note'},
         {offset: 10, customCss: 'judas-gamma-note'}
     ];
+    // TODO: check notes of this gamma
+    // TODO: bent notes in customProperties
     var eastGammaNotes = [
         {offset: 0, customCss: 'east-gamma-note', customProperties: [TONIC_NOTE]},
         {offset: 1, customCss: 'east-gamma-note'},
@@ -180,31 +218,6 @@ define(function (require) {
         {offset: 6, customCss: 'east-gamma-note'},
         {offset: 9, customCss: 'east-gamma-note'},
         {offset: 10, customCss: 'east-gamma-note'}
-    ];
-    var byzantiumGammaNotes = [
-        {offset: 0, customCss: 'byzantium-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'byzantium-gamma-note'},
-        {offset: 4, customCss: 'byzantium-gamma-note'},
-        {offset: 5, customCss: 'byzantium-gamma-note'},
-        {offset: 7, customCss: 'byzantium-gamma-note'},
-        {offset: 8, customCss: 'byzantium-gamma-note'},
-        {offset: 11, customCss: 'byzantium-gamma-note'}
-    ];
-    var persianGammaNotes = [
-        {offset: 0, customCss: 'persian-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 1, customCss: 'persian-gamma-note'},
-        {offset: 4, customCss: 'persian-gamma-note'},
-        {offset: 5, customCss: 'persian-gamma-note'},
-        {offset: 6, customCss: 'persian-gamma-note'},
-        {offset: 8, customCss: 'persian-gamma-note'},
-        {offset: 11, customCss: 'persian-gamma-note'}
-    ];
-    var japaneseHirajoshiGammaNotes = [
-        {offset: 0, customCss: 'japanese-gamma-note', customProperties: [TONIC_NOTE]},
-        {offset: 2, customCss: 'japanese-gamma-note'},
-        {offset: 3, customCss: 'japanese-gamma-note'},
-        {offset: 7, customCss: 'japanese-gamma-note'},
-        {offset: 8, customCss: 'japanese-gamma-note'}
     ];
 
     var SEQUENCES = [
@@ -245,10 +258,34 @@ define(function (require) {
             nameTranslated: translator.harmonicMajorLabel
         }
         , {
+            sequenceCode: 'japanese',
+            sequenceNotes: japaneseHirajoshiGammaNotes,
+            sequenceCustomCss: 'japanese-gamma-note',
+            nameTranslated: translator.japaneseLabel
+        }
+        , {
+            sequenceCode: 'persian-major',
+            sequenceNotes: persianGammaNotes,
+            sequenceCustomCss: 'persian-gamma-note',
+            nameTranslated: translator.persianGammaLabel
+        }
+        , {
+            sequenceCode: 'byzantium-major',
+            sequenceNotes: byzantiumGammaNotes,
+            sequenceCustomCss: 'byzantium-gamma-note',
+            nameTranslated: translator.byzantiumGammaLabel
+        }
+        , {
             sequenceCode: 'gypsy',
             sequenceNotes: gypsyGammaNotes,
             sequenceCustomCss: 'gypsy-gamma-note',
             nameTranslated: translator.gypsyLabel
+        }
+        , {
+            sequenceCode: 'east',
+            sequenceNotes: eastGammaNotes,
+            sequenceCustomCss: 'east-gamma-note',
+            nameTranslated: translator.eastLabel
         }
         , {
             sequenceCode: 'judas',
@@ -261,30 +298,6 @@ define(function (require) {
             sequenceNotes: arabianGammaNotes,
             sequenceCustomCss: 'arabian-gamma-note',
             nameTranslated: translator.arabianLabel
-        }
-        , {
-            sequenceCode: 'east',
-            sequenceNotes: eastGammaNotes,
-            sequenceCustomCss: 'east-gamma-note',
-            nameTranslated: translator.eastLabel
-        }
-        , {
-            sequenceCode: 'byzantium-major',
-            sequenceNotes: byzantiumGammaNotes,
-            sequenceCustomCss: 'byzantium-gamma-note',
-            nameTranslated: translator.byzantiumGammaLabel
-        }
-        , {
-            sequenceCode: 'persian-major',
-            sequenceNotes: persianGammaNotes,
-            sequenceCustomCss: 'persian-gamma-note',
-            nameTranslated: translator.persianGammaLabel
-        }
-        , {
-            sequenceCode: 'japanese',
-            sequenceNotes: japaneseHirajoshiGammaNotes,
-            sequenceCustomCss: 'japanese-gamma-note',
-            nameTranslated: translator.japaneseLabel
         }
     ];
 
