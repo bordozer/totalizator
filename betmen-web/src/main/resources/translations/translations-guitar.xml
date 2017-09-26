@@ -200,37 +200,37 @@
 
 	<translation>
 		<nerd>Japanese Hirajoshi gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Hirajoshi)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Hirajoshi)]]></ua>
-		<en><![CDATA[Japanese neutral gamma (Hirajoshi)]]></en>
+		<ru><![CDATA[Японский минор (Hirajoshi)]]></ru>
+		<ua><![CDATA[Японський мiнор (Hirajoshi)]]></ua>
+		<en><![CDATA[Japanese minor gamma (Hirajoshi)]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Japanese Hon Kumoi gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Hon Kumoi)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Hon Kumoi)]]></ua>
-		<en><![CDATA[Japanese neutral gamma (Hon Kumoi)]]></en>
-	</translation>
-
-	<translation>
-		<nerd>Japanese Kumoi gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Kumoi)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Kumoi)]]></ua>
-		<en><![CDATA[Japanese neutral gamma (Kumoi)]]></en>
+		<ru><![CDATA[Японский минор (Hon Kumoi)]]></ru>
+		<ua><![CDATA[Японський мiнор (Hon Kumoi)]]></ua>
+		<en><![CDATA[Japanese minor gamma (Hon Kumoi)]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Japanese Iwato gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Iwato)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Iwato)]]></ua>
-		<en><![CDATA[Japanese neutral gamma (Iwato)]]></en>
+		<ru><![CDATA[Японский минор (Iwato)]]></ru>
+		<ua><![CDATA[Японський мiнор (Iwato)]]></ua>
+		<en><![CDATA[Japanese minor gamma (Iwato)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Japanese Kumoi gamma</nerd>
+		<ru><![CDATA[Японский мажор (Kumoi)]]></ru>
+		<ua><![CDATA[Японський мажор (Kumoi)]]></ua>
+		<en><![CDATA[Japanese major gamma (Kumoi)]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Japanese Chinese Scale gamma</nerd>
-		<ru><![CDATA[Японский нейтральный (Chinese Scale)]]></ru>
-		<ua><![CDATA[Японський нейтральный (Chinese Scale)]]></ua>
-		<en><![CDATA[Japanese neutral gamma (Chinese Scale)]]></en>
+		<ru><![CDATA[Японский мажор (Chinese Scale)]]></ru>
+		<ua><![CDATA[Японський мажор (Chinese Scale)]]></ua>
+		<en><![CDATA[Japanese major gamma (Chinese Scale)]]></en>
 	</translation>
 
 	<translation>
