@@ -234,13 +234,13 @@ define(function (require) {
             nameTranslated: translator.naturalMajorGammaLabel
         }
         , {
-            sequenceCode: 'minor-blues',
+            sequenceCode: 'blues-minor',
             sequenceNotes: bluesMinorGammaNotes,
             sequenceCustomCss: 'minor-blues-gamma-note',
             nameTranslated: translator.minorBluesLabel
         }
         , {
-            sequenceCode: 'major-blues',
+            sequenceCode: 'blues-major',
             sequenceNotes: bluesMajorGammaNotes,
             sequenceCustomCss: 'major-blues-gamma-note',
             nameTranslated: translator.majorBluesLabel
@@ -258,7 +258,7 @@ define(function (require) {
             nameTranslated: translator.harmonicMajorLabel
         }
         , {
-            sequenceCode: 'japanese',
+            sequenceCode: 'japanese-neutral',
             sequenceNotes: japaneseHirajoshiGammaNotes,
             sequenceCustomCss: 'japanese-gamma-note',
             nameTranslated: translator.japaneseLabel
@@ -276,25 +276,25 @@ define(function (require) {
             nameTranslated: translator.byzantiumGammaLabel
         }
         , {
-            sequenceCode: 'gypsy',
+            sequenceCode: 'gypsy-minor',
             sequenceNotes: gypsyGammaNotes,
             sequenceCustomCss: 'gypsy-gamma-note',
             nameTranslated: translator.gypsyLabel
         }
         , {
-            sequenceCode: 'east',
+            sequenceCode: 'east-dominant',
             sequenceNotes: eastGammaNotes,
             sequenceCustomCss: 'east-gamma-note',
             nameTranslated: translator.eastLabel
         }
         , {
-            sequenceCode: 'judas',
+            sequenceCode: 'judas-dominant',
             sequenceNotes: judasGammaNotes,
             sequenceCustomCss: 'judas-gamma-note',
             nameTranslated: translator.judasLabel
         }
         , {
-            sequenceCode: 'arabian',
+            sequenceCode: 'arabian-minor',
             sequenceNotes: arabianGammaNotes,
             sequenceCustomCss: 'arabian-gamma-note',
             nameTranslated: translator.arabianLabel
