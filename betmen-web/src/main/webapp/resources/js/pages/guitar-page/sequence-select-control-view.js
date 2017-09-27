@@ -29,24 +29,34 @@ define(function (require) {
             this.sequences = options.options.sequences;
             this.selectedSequenceType = options.options.selectedSequenceType;
             this.selectedSequenceEnabled = options.options.selectedSequenceEnabled;
+            this.selectedSequences = options.options.selectedSequences;
 
             this.render();
         },
 
         render: function() {
+            var selectedSequenceCode = this.selectedSequenceType;
+            var selectedSequencesCodes = _.map(this.selectedSequences, function (sequence) {
+                return sequence.sequenceCode;
+            });
+            var sequencesToRender = _.filter(this.sequences, function (sequence) {
+                return selectedSequenceCode === sequence.sequenceCode
+                    || !_.contains(selectedSequencesCodes, sequence.sequenceCode);
+            });
 
             var data = _.extend({}, {
                 selectedSequenceType: this.selectedSequenceType
                 , selectedSequenceEnabled: this.selectedSequenceEnabled
-                , sequences: this.sequences
+                , sequences: sequencesToRender
                 , translator: translator
             });
             this.$el.html(template(data));
 
+
             var self = this;
-            _.each(this.sequences, function(gammaOffset) {
-                if (gammaOffset.sequenceCode == self.selectedSequenceType) {
-                    self.$('.js-sequence-color').addClass(gammaOffset.sequenceCustomCss);
+            _.each(sequencesToRender, function(sequence) {
+                if (sequence.sequenceCode === self.selectedSequenceType) {
+                    self.$('.js-sequence-color').addClass(sequence.sequenceCustomCss);
                 }
             });
         },

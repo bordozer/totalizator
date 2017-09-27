@@ -104,7 +104,7 @@ define(function (require) {
                     sequences: SEQUENCES,
                     selectedSequenceType: sequence ? sequence.sequenceCode : '',
                     selectedSequenceEnabled: sequence ? sequence.selectedSequenceEnabled : '',
-                    selectedSequence: this.selectedSequences
+                    selectedSequences: this.selectedSequences
                 };
                 var selectedSequenceTypeView1 = new SequenceSelectControlView({el: this.$('.js-sequence-select-control-' + i), options: options});
                 selectedSequenceTypeView1.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
@@ -114,7 +114,8 @@ define(function (require) {
                 index: selectedSequencesCount,
                 sequences: SEQUENCES,
                 selectedSequenceType: '',
-                selectedSequenceEnabled: ''
+                selectedSequenceEnabled: '',
+                selectedSequences: this.selectedSequences
             };
             var selectedSequenceTypeView2 = new SequenceSelectControlView({
                 el: this.$('.js-sequence-select-control-' + selectedSequencesCount),
