@@ -78,6 +78,7 @@ define(function (require) {
 
         render: function () {
             this.neckModel = this._initNeckModel();
+            var selectedSequencesCount = this.selectedSequences.length;
 
             var data = _.extend({}, {
                 notes: NOTES
@@ -85,7 +86,7 @@ define(function (require) {
                 , neckModel: this.neckModel
                 , tonic: this.tonic
                 , markedFrets: markedFrets
-                , gammasCount: SEQUENCES.length
+                , gammasCount: selectedSequencesCount + 1
                 , noteSelectionType: this.noteSelectionType
                 , translator: translator
             });
@@ -95,18 +96,32 @@ define(function (require) {
             this._renderFretsCountMenus();
 
             // accessible gammas
-            for (var i = 0; i < SEQUENCES.length; i++) {
+            for (var i = 0; i < selectedSequencesCount; i++) {
                 var sequence = this.selectedSequences[i];
 
                 var options = {
                     index: i,
                     sequences: SEQUENCES,
                     selectedSequenceType: sequence ? sequence.sequenceCode : '',
-                    selectedSequenceEnabled: sequence ? sequence.selectedSequenceEnabled : ''
+                    selectedSequenceEnabled: sequence ? sequence.selectedSequenceEnabled : '',
+                    selectedSequence: this.selectedSequences
                 };
                 var selectedSequenceTypeView1 = new SequenceSelectControlView({el: this.$('.js-sequence-select-control-' + i), options: options});
                 selectedSequenceTypeView1.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
             }
+            // add notes from (empty option)...
+            var options = {
+                index: selectedSequencesCount,
+                sequences: SEQUENCES,
+                selectedSequenceType: '',
+                selectedSequenceEnabled: ''
+            };
+            var selectedSequenceTypeView2 = new SequenceSelectControlView({
+                el: this.$('.js-sequence-select-control-' + selectedSequencesCount),
+                options: options
+            });
+            selectedSequenceTypeView2.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
+            selectedSequenceTypeView2.on('events:selected-sequence-type-changed', this._onSelectedSequenceTypeChange, this);
 
             this.delegateEvents();
         },
@@ -216,6 +231,10 @@ define(function (require) {
         _onSelectedSequenceTypeChange: function(evt) {
             if (evt.value == 0) {
                 delete this.selectedSequences[evt.index];
+                // reindex array
+                this.selectedSequences = _.filter(this.selectedSequences, function (sequence) {
+                    return sequence !== undefined;
+                });
             } else {
                 this.selectedSequences[evt.index] = {
                     sequenceCode: evt.value,

@@ -13,12 +13,14 @@
         <select id="selectedSequenceType" class="form-control">
             <option value="0">-</option>
             <% _.each(sequences, function(offset) { %>
-            <option value="<%= offset.sequenceCode %>" <%= selectedSequenceType == offset.sequenceCode ? "selected='selected'" : '' %> ><%= offset.nameTranslated %></option>
+                <option value="<%= offset.sequenceCode %>" <%= selectedSequenceType == offset.sequenceCode ? "selected='selected'" : '' %> ><%= offset.nameTranslated %></option>
             <% }) %>
         </select>
     </div>
     <div class="col-2">
-        <button class="btn btn-default fa fa-remove js-remove-button" type="button" ></button>
+        <% if(selectedSequenceType) { %>
+            <button class="btn btn-default fa fa-remove js-remove-button" type="button" ></button>
+        <% } %>
     </div>
     <div class="col-2">
         <div class="js-sequence-color" style="width: 30px; border: 1px solid gray; border-radius: 15px; padding-top: 5px;">&nbsp;</div>

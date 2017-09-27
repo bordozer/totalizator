@@ -94,7 +94,7 @@ define(function (require) {
 
                         for (var i = 0; i < selectedSequences.length; i++) {
                             var selectedSequence = selectedSequences[i];
-                            if (selectedSequence.selectedSequenceEnabled) {
+                            if (selectedSequence && selectedSequence.selectedSequenceEnabled) {
                                 var sequenceNoteModels = commonUtils.collectNoteModels(tonic, selectedSequence);
                                 var foundSequenceNoteModel = _.find(sequenceNoteModels, function (sequenceNoteModel) {
                                     return sequenceNoteModel.note === note;
