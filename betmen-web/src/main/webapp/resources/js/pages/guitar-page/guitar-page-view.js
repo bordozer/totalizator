@@ -250,18 +250,17 @@ define(function (require) {
         },
 
         _onTonicChange: function (evt) {
-            var self = this;
-            var previousTonic = this.tonic;
             var target = $(evt.target);
             this.tonic = target.val() || target.data('js_tonic');
 
-            /*var interval = commonUtils.getIntervalBetweenNotes(previousTonic, this.tonic);
+            /*var self = this;
+            var previousTonic = this.tonic;
+            var interval = commonUtils.getIntervalBetweenNotes(previousTonic, this.tonic);
             this.selectedNotes = _.map(this.selectedNotes, function (selectedNoteId) {
                 var fretNote = self._getFretNote(selectedNoteId);
                 console.log(fretNote);
                 return selectedNoteId;
             });*/
-            // console.log(this.selectedNotes);
             this.render();
         },
         
