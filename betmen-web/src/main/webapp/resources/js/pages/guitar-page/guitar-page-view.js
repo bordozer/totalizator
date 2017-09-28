@@ -233,9 +233,7 @@ define(function (require) {
             if (evt.value == 0) {
                 delete this.selectedSequences[evt.index];
                 // reindex array
-                this.selectedSequences = _.filter(this.selectedSequences, function (sequence) {
-                    return sequence !== undefined;
-                });
+                this.selectedSequences = this._reindexArray(this.selectedSequences);
             } else {
                 this.selectedSequences[evt.index] = {
                     sequenceCode: evt.value,
@@ -245,11 +243,39 @@ define(function (require) {
             this.render();
         },
 
+        _reindexArray: function (array) {
+            return _.filter(array, function (element) {
+                return element !== undefined;
+            });
+        },
+
         _onTonicChange: function (evt) {
+            var self = this;
+            var previousTonic = this.tonic;
             var target = $(evt.target);
             this.tonic = target.val() || target.data('js_tonic');
+
+            /*var interval = commonUtils.getIntervalBetweenNotes(previousTonic, this.tonic);
+            this.selectedNotes = _.map(this.selectedNotes, function (selectedNoteId) {
+                var fretNote = self._getFretNote(selectedNoteId);
+                console.log(fretNote);
+                return selectedNoteId;
+            });*/
+            // console.log(this.selectedNotes);
             this.render();
         },
+        
+        /*_getFretNote: function (noteId) {
+            var fretNote = {};
+            _.each(this.neckModel, function (string) {
+                _.each(string, function (fret) {
+                    if (fret.noteId === noteId) {
+                        fretNote = fret;
+                    }
+                })
+            });
+            return fretNote;
+        },*/
 
         _fretNoteClick: function (evt) {
             var target = $(evt.target);
@@ -263,6 +289,8 @@ define(function (require) {
             } else {
                 this._allNotesHighlighting(clickedNote);
             }
+            this.selectedNotes = this._reindexArray(this.selectedNotes);
+            // console.log(this.selectedNotes);
             this.render();
         },
 

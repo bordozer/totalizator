@@ -57,6 +57,10 @@ define(function (require) {
                 result.push(noteModel);
             });
             return result;
-        }
+        }/*,
+
+        getIntervalBetweenNotes: function (note1, note2) {
+            return 1;
+        }*/
     }
 });
